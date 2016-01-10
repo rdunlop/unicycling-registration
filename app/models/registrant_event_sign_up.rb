@@ -105,7 +105,11 @@ class RegistrantEventSignUp < ActiveRecord::Base
   # Create a registrantExpenseItem to pay for this event sign up
   def create_reg_item
     return unless event.expense_item.present?
-    registrant.build_registration_item(event.expense_item)
+    if signed_up?
+      registrant.build_registration_item(event.expense_item)
+    else
+      registrant.remove_registration_item(event.expense_item)
+    end
     registrant.save!
   end
 

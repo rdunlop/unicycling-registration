@@ -37,6 +37,10 @@ class RegistrantExpenseItem < ActiveRecord::Base
 
   delegate :has_details?, :details_label, to: :expense_item
 
+  def self.system_managed
+    where(system_managed: true)
+  end
+
   def self.free
     where(free: true)
   end

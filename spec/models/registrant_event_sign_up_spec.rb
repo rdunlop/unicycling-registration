@@ -41,11 +41,22 @@ describe RegistrantEventSignUp do
     let!(:event) { FactoryGirl.create(:event, expense_item: expense_item) }
     let!(:reg) { FactoryGirl.create(:competitor) }
 
+    def sign_up
+      @registrant_event_sign_up = FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: event.event_categories.first)
+    end
     it "creates a registrant_expense_item" do
-      expect do
-        FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: event.event_categories.first)
-      end.to change(RegistrantExpenseItem, :count).by(1)
+      expect { sign_up }.to change(RegistrantExpenseItem, :count).by(1)
       expect(reg).to have_expense_item(expense_item)
+    end
+
+    describe "when I have already signed-up for that event" do
+      before { sign_up }
+
+      it "when I un-sign-up, it removes the registrant_expense_item" do
+        expect do
+          @registrant_event_sign_up.update(signed_up: false)
+        end.to change(RegistrantExpenseItem, :count).by(-1)
+      end
     end
   end
 

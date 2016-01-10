@@ -48,7 +48,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   has_many :registrant_choices, dependent: :destroy, inverse_of: :registrant
   has_many :registrant_event_sign_ups, dependent: :destroy, inverse_of: :registrant
   has_many :signed_up_events, -> { where ["signed_up = ?", true] }, class_name: 'RegistrantEventSignUp'
-  has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, dependent: :destroy
+  has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, dependent: :destroy, autosave: true
   has_many :volunteer_choices, dependent: :destroy, inverse_of: :registrant
   has_many :volunteer_opportunities, through: :volunteer_choices
 
@@ -239,9 +239,20 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     started.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
+  # Add a system-managed RegistrantExpenseItem, if it doesn't already exist
   def build_registration_item(reg_item)
     unless reg_item.nil? || has_expense_item?(reg_item)
-      registrant_expense_items.build(expense_item: reg_item, system_managed: true)
+      registrant_expense_items.system_managed.build(expense_item: reg_item)
+    end
+  end
+
+  # Remove a system-managed RegistrantExpenseItem, if it exists
+  def remove_registration_item(reg_item)
+    unless reg_item.nil? || !has_expense_item?(reg_item)
+      # registrant_expense_items.system_managed.find_by(expense_item_id: reg_item.id).destroy
+      # use `.to_a` here so that we can use `mark_for_destruction` and it will be destroy on save
+      item_to_remove = registrant_expense_items.to_a.find { |rei| rei.system_managed? && rei.expense_item == reg_item}
+      item_to_remove.mark_for_destruction
     end
   end
 
@@ -260,7 +271,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
 
   def registration_item
     all_reg_items = RegistrationCost.all_registration_expense_items
-    registrant_expense_items.find_by(system_managed: true, expense_item_id: all_reg_items)
+    registrant_expense_items.system_managed.find_by(expense_item_id: all_reg_items)
   end
 
   # for use when overriding the default system-managed reg_item
