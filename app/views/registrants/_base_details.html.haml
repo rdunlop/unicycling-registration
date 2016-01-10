@@ -11,7 +11,8 @@
       .row
         = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true}, class: "small-4 columns"
   .competitor_show.noncompetitor_show.row
-    = f.radio_button :gender, 'Male'
-    = f.label :gender_male, t('.male'), :class => "required"
-    = f.radio_button :gender, 'Female'
-    = f.label :gender_female, t('.female'), :class => "required"
+    .small-12.columns
+      = f.radio_button :gender, 'Male'
+      = f.label :gender_male, t('.male'), :class => "required"
+      = f.radio_button :gender, 'Female'
+      = f.label :gender_female, t('.female'), :class => "required"
