@@ -11,7 +11,9 @@
       %th.sign_up Age
       %th.sign_up Gender
       %th Age Group
+      %th Age Group order
       %th Best Time
+      %th Best Time value
   %tbody
     - @competitors.each do |competitor|
       %tr
@@ -22,7 +24,9 @@
         %td= competitor.age
         %td= competitor.gender
         %td= competitor.age_group_entry_description
+        %th= competitor.age_group_entry.try(:position)
         %td= competitor.best_time
+        %td= competitor.best_time.try(:value)
 %br
 
 = link_to "set heats/lanes", new_competition_heat_path(@competition)

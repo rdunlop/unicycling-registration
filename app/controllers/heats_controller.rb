@@ -18,29 +18,29 @@ class HeatsController < ApplicationController
     add_breadcrumb "Create Track Lane Assignments"
   end
 
-  # process a form submission which includes HEAT&Lane for each candidate, creating the nocessary lane assignment
+  # process a form submission which includes HEAT&Lane for each candidate, creating the necessary lane assignment
   # It creates heats for each age group
   # parameters:
   #  - Lanes - maximum number of lanes for each heat
   def create
     max_lane_number = params[:lanes].to_i
-    begin
-      raise "invalid settings" if max_lane_number == 0
-      raise "Existing Lane Assignments" if @competition.lane_assignments.any?
-      current_heat = 1
-      LaneAssignment.transaction do
-        @competition.age_group_entries.each do |ag_entry|
-          age_group_entries = @competition.competitors.includes(members: [registrant: :registrant_choices]).select {|competitor| competitor.age_group_entry == ag_entry }
-          current_heat = create_heats_from(age_group_entries, current_heat, max_lane_number)
-        end
+    if max_lane_number <= 0
+      flash[:alert] = "Error: Invalid number of lanes"
+    elsif @competition.lane_assignments.any?
+      flash[:alert] = "Error: Cannot auto-assign with existing Lane Assignments"
+    else
+      creator = HeatAssignmentCreator.new(@competition, max_lane_number)
+      if creator.perform
+        flash[:notice] = "Created Heats/Lanes from Competitors"
+      else
+        flash[:alert] = "error: #{creator.error}"
       end
-      flash[:notice] = "Created Heats/Lanes from Competitors"
-    rescue Exception => ex
-      flash[:alert] = "Error creating lane assignments/competitors #{ex}"
     end
+
     redirect_to competition_heats_path(@competition)
   end
 
+  # manually re-sort the lane assignments
   def sort
     @lane_assignments = LaneAssignment.where(id: params[:age_group_entry]).order(:heat, :lane)
 
@@ -100,21 +100,6 @@ class HeatsController < ApplicationController
   end
 
   private
-
-  def create_heats_from(competitors, current_heat, max_lane_number)
-    next_lane_number = 1
-    heat_number = current_heat
-    competitors.sort{|a, b| b.best_time <=> a.best_time}.each do |competitor|
-      if next_lane_number > max_lane_number
-        heat_number += 1
-        next_lane_number = 1
-      end
-      LaneAssignment.create!(competitor: competitor, lane: next_lane_number, heat: heat_number, competition: competitor.competition)
-      next_lane_number += 1
-    end
-    return heat_number if next_lane_number == 1
-    heat_number + 1
-  end
 
   def authorize_competition
     authorize @competition, :heat_recording?

@@ -152,7 +152,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def best_time
-    registrants.first.registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time", event: event)).first.try(:describe_value)
+    registrants.first.best_time(event)
   end
 
   def standard_skill_routine

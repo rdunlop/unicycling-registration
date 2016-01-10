@@ -1,6 +1,17 @@
 %h1= "#{@competition} - Heat/Lane Assignment"
 
-%p This form can be used to automatically assign competitors to heats/lanes. This system will prevent assigning competitors from multiple age groups to the same heat.
+%p
+  This form can be used to automatically assign competitors to heats/lanes. This system will prevent assigning competitors from multiple age groups to the same heat.
+
+%p
+  The competitors will be ordered as follows
+
+%ul
+  %li Age Groups By position order (defined during Age Group creation)
+  %li Competitors without a specified best time
+  %li Competitors with the slowest best time
+  %li Competitors with the fastest best time
+
 
 = form_tag competition_heats_path(@competition), method: :post do
   .row

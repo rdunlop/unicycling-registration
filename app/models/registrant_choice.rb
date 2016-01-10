@@ -50,4 +50,8 @@ class RegistrantChoice < ActiveRecord::Base
       value
     end
   end
+
+  def to_s
+    describe_value
+  end
 end

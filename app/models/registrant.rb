@@ -429,6 +429,11 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
+  # return an object describing the best time entered by this registrant
+  def best_time(event)
+    registrant_best_times.find_by(event: event) || registrant_choices.joins(:event_choice).merge(EventChoice.where(cell_type: "best_time", event: event)).first
+  end
+
   def to_s
     name + (deleted ? " (deleted)" : "")
   end
