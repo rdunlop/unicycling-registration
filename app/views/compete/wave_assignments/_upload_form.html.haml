@@ -1,9 +1,0 @@
-%h1= "#{@competition} - Upload Wave Assignment"
-
-Upload a Spreadsheet containing at least 2 columns. ID and Wave. (with an (ignored) header row).
-%br
-Each row must contain a valid Registrant ID and Wave.
-
-= form_tag competition_wave_assignments_path(@competition), method: :put, multipart: true do
-  = file_field_tag :file
-  = submit_tag "Upload Wave assignments", class: "button"

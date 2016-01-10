@@ -28,10 +28,19 @@ require 'rspec/mocks/standalone'
 FactoryGirl.define do
   factory :event_competitor, class: Competitor do
     competition # FactoryGirl
-    after(:create) do |comp|
-      FactoryGirl.create(:member, competitor: comp)
+
+    transient do
+      bib_number nil
+    end
+
+    after(:create) do |comp, evaluator|
+      member = FactoryGirl.create(:member, competitor: comp)
+      reg = member.registrant
+      reg.update(bib_number: evaluator.bib_number) if evaluator.bib_number.present?
+      reg.reload.touch_members # propagate bib_number to competitor
       comp.reload
     end
+
     after(:stub) do |competitor|
       competitor.stub(:members).and_return([FactoryGirl.build_stubbed(:member, competitor: competitor)])
     end
