@@ -10,4 +10,10 @@ module CostItem
   def has_cost?
     expense_item.present?
   end
+
+  # Set up the necessary RegistrantExpenseItems for all registrants
+  # which are affected by this CostItem
+  def create_for_all_registrants
+    raise "Not Implemented"
+  end
 end

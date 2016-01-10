@@ -46,6 +46,7 @@ class ExpenseItem < ActiveRecord::Base
   before_destroy :check_for_payment_details
 
   after_create :create_reg_items
+  after_create :create_cost_item_registrant_items
 
   def self.ordered
     order(:expense_group_id, :position)
@@ -106,6 +107,9 @@ class ExpenseItem < ActiveRecord::Base
     unpaid_items.count # free.select{|rei| !rei.registrant.reg_paid? }.count + unpaid_items.where(free: false).count
   end
 
+  # If this expense_item is part of a "Required" expense group
+  # update any existing Registrant records to properly include the
+  # newly-required items
   def create_reg_items
     if expense_group.competitor_required?
       Registrant.competitor.each do |reg|
@@ -118,6 +122,15 @@ class ExpenseItem < ActiveRecord::Base
         reg.build_registration_item(self)
         reg.save
       end
+    end
+  end
+
+  # if this expense_item is associated with a "CostElement" (e.g. Event)
+  # (and soon to be RegistrationCost)
+  # inform that element that it should create necessary RegistrantExpenseItems
+  def create_cost_item_registrant_items
+    if cost_element.present?
+      cost_element.create_for_all_registrants
     end
   end
 

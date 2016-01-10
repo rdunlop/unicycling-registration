@@ -125,4 +125,12 @@ class Event < ActiveRecord::Base
     end
     total + event_choices.size
   end
+
+  # Creates RegistrantExpenseItems for any registrant
+  # who has signed up for this event
+  def create_for_all_registrants
+    signed_up_registrants.each do|registrant_sign_up|
+      registrant_sign_up.create_reg_item
+    end
+  end
 end

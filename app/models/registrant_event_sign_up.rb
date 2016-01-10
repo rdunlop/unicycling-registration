@@ -36,6 +36,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
 
   after_save :auto_create_competitor
   after_save :mark_member_as_dropped
+  after_save :create_reg_item
 
   def self.signed_up
     includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)
@@ -99,6 +100,13 @@ class RegistrantEventSignUp < ActiveRecord::Base
         years old to select #{event_category.name} for #{event.name} in #{event.category}"
       end
     end
+  end
+
+  # Create a registrantExpenseItem to pay for this event sign up
+  def create_reg_item
+    return unless event.expense_item.present?
+    registrant.build_registration_item(event.expense_item)
+    registrant.save!
   end
 
   delegate :to_s, to: :event_category

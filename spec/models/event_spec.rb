@@ -135,6 +135,16 @@ describe Event do
       event = FactoryGirl.create(:event)
       expect(event.num_signed_up_registrants).to eq(0)
     end
+
+    describe "when we try to create associated expense items" do
+      it "creates the registrant_expense_item" do
+        expect do
+          FactoryGirl.create(:expense_item, cost_element: @ev)
+        end.to change(RegistrantExpenseItem, :count).by(1)
+
+        expect(@ec.registrant.reload.registrant_expense_items.count).to eq(1)
+      end
+    end
   end
   describe "when there is a director" do
     before(:each) do

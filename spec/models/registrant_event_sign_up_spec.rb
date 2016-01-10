@@ -36,6 +36,19 @@ describe RegistrantEventSignUp do
     expect(re.valid?).to eq(false)
   end
 
+  describe "when I sign up for an event which has an expense_item" do
+    let(:expense_item) { FactoryGirl.create(:expense_item) }
+    let!(:event) { FactoryGirl.create(:event, expense_item: expense_item) }
+    let!(:reg) { FactoryGirl.create(:competitor) }
+
+    it "creates a registrant_expense_item" do
+      expect do
+        FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: event.event_categories.first)
+      end.to change(RegistrantExpenseItem, :count).by(1)
+      expect(reg).to have_expense_item(expense_item)
+    end
+  end
+
   describe "when an auto-competitor event exists" do
     before :each do
       @competition = FactoryGirl.create(:competition)
