@@ -4,10 +4,10 @@ require 'coveralls'
 # save to Coveralls when on CI
 if ENV['CI']
   SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-end
 
-SimpleCov.start 'rails' do
-  add_filter '/spec/'
+  SimpleCov.start 'rails' do
+    add_filter '/spec/'
+  end
 end
 
 require 'rubygems'
