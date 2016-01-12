@@ -1,6 +1,7 @@
 - content_for :content do
   #side_nav
-    %h2= Competitor.model_name.human(count: 2)
+    %h3 Manage #{@competition}
+    %h4= Competitor.model_name.human(count: 2)
     %ul.sideNav__list
       - # Duplicated in _show_competitors_selected
       %li= link_to "Choose Competitors", competition_competitors_path(@competition)
@@ -14,7 +15,7 @@
 
       %li= link_to "View List", announcer_printing_competition_path(@competition)
 
-    %h2 Data Entry
+    %h4 Data Entry
     %ul.sideNav__list
       - if @competition.uses_judges
         %li= link_to Judge.model_name.human(count: 2), competition_judges_path(@competition)
@@ -22,7 +23,7 @@
         %li= link_to "Volunteers", competition_volunteers_path(@competition)
       = render "/competitions/data_entry_links", competition: @competition
 
-    %h2= Result.model_name.human(count: 2)
+    %h4= Result.model_name.human(count: 2)
     %ul.sideNav__list
       %li= link_to "Monitor", result_competition_path(@competition)
       -# %li= link_to "Approve", '#'
