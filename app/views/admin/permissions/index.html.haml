@@ -1,6 +1,27 @@
 %h1 User Management
 
+%p
+  The Registration System is separated into many different sections for use by many different people.
+  %br
+  %b
+    You currently have the role(s) of:
+    #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
+  %br
+
+%p
+  Each role enables the user to see/use different parts of the system.
+
+%p
+  If there is a feature which you think that you should have access to, you may need to grant yourself a different role.
+
+%b Examples:
+%ul
+  %li To see the list of Registrants signed up for each event, you should enable the "Event Planner" role
+  %li To see/manage the Payments having been received (and provide Refunds), enable the "Payment Admin" role.
+
+
 %p Listed on this page are all of the roles which you have the permission to see.
+
 %p
   %b Note
   There may be additional roles which you
@@ -13,7 +34,7 @@
     %tr
       %th User
       - @available_roles.each do |role|
-        %th= role
+        %th= role.to_s.humanize
   %tbody
     - User.with_any_role(*@available_roles).each do |user|
       %tr
@@ -57,5 +78,5 @@
 %hr
 %h3 Role Descriptions:
 - @available_roles.each do |role|
-  %h4= role
+  %h4= role.to_s.humanize
   %pre= User.role_description(role)

@@ -1,9 +1,12 @@
 
 %h1 Copy Event Settings from #{@source_tenant}
 
+%p
+  These are all of the events which you are about to copy.
+
 = form_tag(migrate_create_events_path(tenant: @source_tenant.subdomain), method: :post) do
   %ul
     - @events.each do |event|
       %li= event
 
-  = submit_tag
+  = submit_tag "Copy Events", class: "button"

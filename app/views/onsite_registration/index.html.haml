@@ -1,9 +1,18 @@
 %h1 Onsite Registration
 
+%p
+  Some conventions may choose to allow registration to occur on-site (though not online from normal computers).
+
+%p
+  In order to enable a laptop to register new competitors after online registration has closed, you must enter the
+  = link_to 'Current Auth code', display_acl_permissions_path
+  on each laptop's
+  = link_to 'Authorized Laptop Management', acl_permissions_path
+  page
+
+%p
+
 %p Before Enabling On-Site Registration, you may want to disable the sale of certain items.
 %small Example: you may want to only sell T-Shirts at the T-Shirt table.
 
 = link_to "View Items for Sale", onsite_registration_expense_groups_path
-%br
-= link_to 'Authorized Laptop Management', acl_permissions_path
-= link_to 'Get Auth code', display_acl_permissions_path
