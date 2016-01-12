@@ -1,4 +1,4 @@
-class CompetitionSetup::EventConfigurationsController < CompetitionSetupController
+class CompetitionSetup::EventConfigurationsController < CompetitionSetup::BaseCompetitionSetupController
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :set_breadcrumb
@@ -23,7 +23,6 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetupControll
   end
 
   def set_breadcrumb
-    add_breadcrumb "Competition Setup", competition_setup_path
     add_breadcrumb "Edit Competition Settings"
   end
 

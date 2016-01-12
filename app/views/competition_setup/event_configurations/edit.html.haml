@@ -1,4 +1,7 @@
-%h1 Competition Management Settings
+%h1 Global Competition Settings
+
+%p
+  These settings affect all events within the competition.
 
 = simple_form_for(@event_configuration, url: competition_setup_event_configuration_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration

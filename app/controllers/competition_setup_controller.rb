@@ -1,4 +1,4 @@
-class CompetitionSetupController < ApplicationController
+class CompetitionSetupController < CompetitionSetup::BaseCompetitionSetupController
   before_action :authenticate_user!
   before_action :set_breadcrumb
 
@@ -6,11 +6,5 @@ class CompetitionSetupController < ApplicationController
     authorize @config, :setup_competition?
 
     @categories = Category.includes(:translations).includes(:events)
-  end
-
-  private
-
-  def set_breadcrumb
-    add_breadcrumb "Competition Setup", competition_setup_path
   end
 end

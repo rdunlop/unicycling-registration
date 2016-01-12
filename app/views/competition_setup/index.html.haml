@@ -4,11 +4,6 @@
 
 %p Please create Director(s) for each event. You (or the director) can create Competition(s) for each event, which will dictate how the data gathering occurs for that event.
 
-= link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
-- if policy(@config).setup_competition?
-  %br
-  = link_to "Manage Ineligible Registrants", ineligible_registrants_path
-
 %h2 Events by Category
 %table
   %thead
@@ -36,16 +31,3 @@
             %ul.categoryList__eventList
               - if policy(Competition.new).create?
                 %li= link_to "Create New Competition", new_event_competition_path(event)
-
-- if policy(@config).setup_competition?
-  = link_to 'Manage Directors', directors_path
-- if policy(@config).setup_competition?
-  %hr
-  %h2 Age Groups
-  %li= link_to  'Age Group Type', age_group_types_path
-
-
-%hr
-%h2 Competition Types
-- if policy(@config).setup_competition?
-  %li= link_to 'Overall Champion Calculators', combined_competitions_path

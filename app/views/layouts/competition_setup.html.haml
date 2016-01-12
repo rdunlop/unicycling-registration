@@ -1,0 +1,18 @@
+- content_for :content do
+  #side_nav
+    %h3 Competition Setup
+
+    %ul.sideNav__list
+      %li= link_to 'Manage Directors', directors_path
+      %li= link_to  'Age Group Type', age_group_types_path
+      %li Three
+      %li
+        Advanced
+        %ul
+          %li= link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
+          %li= link_to "Manage Ineligible Registrants", ineligible_registrants_path
+          %li= link_to 'Overall Champion Calculators', combined_competitions_path
+  #side_content
+    = yield
+
+= render template: "layouts/application"

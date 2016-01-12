@@ -1,4 +1,4 @@
-class Compete::IneligibleRegistrantsController < ApplicationController
+class Compete::IneligibleRegistrantsController < CompetitionSetup::BaseCompetitionSetupController
   before_action :authenticate_user!
   before_action :authenticate_ability
 

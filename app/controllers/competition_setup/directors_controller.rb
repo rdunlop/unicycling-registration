@@ -1,4 +1,4 @@
-class CompetitionSetup::DirectorsController < ApplicationController
+class CompetitionSetup::DirectorsController < CompetitionSetup::BaseCompetitionSetupController
   before_action :authenticate_user!
   before_action :authorize_director_management
 

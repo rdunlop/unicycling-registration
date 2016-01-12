@@ -133,6 +133,7 @@ class User < ActiveRecord::Base
       Can create judges, volunteers
       Can reset user passwords
       "
+      # Note: Cannot currently reset passwords.
     when :super_admin
       "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
     when :payment_admin
