@@ -15,4 +15,9 @@
 = link_to t(".add_songs_for_others"), my_songs_user_songs_path(current_user)
 
 %hr
+%p
+  If you are done uploading songs, please proceed to the "#{@registrant} Summary"
+  %br
+  %b Note
+  you can return to upload/update songs later.
 = link_to "#{@registrant} Summary", registrant_path(@registrant), class: "button secondary"

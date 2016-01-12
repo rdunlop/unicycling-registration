@@ -110,6 +110,7 @@ en:
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
         artistic: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
         cost: Specify the registration cost for this event (optional).
+        best_time_format: Do you want the user to input a "Best Time" for this event. (This can be useful for determining the start order for some competitions)
       registrant:
         wheel_size_id: Used to choose Age Groups when applicable.
           (track, Standard-class events)

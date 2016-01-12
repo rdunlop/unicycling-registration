@@ -23,6 +23,7 @@
 
       .competitor_show
         = render :partial => "registration_costs/list", locals: { registrant_type: "competitor" }
+        = render partial: "registration_costs/events"
       .noncompetitor_show
         = render :partial => "registration_costs/list", locals: {registrant_type: "noncompetitor" }
 

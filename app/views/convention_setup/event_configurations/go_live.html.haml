@@ -2,7 +2,10 @@
 
 %p The Current system is #{EventConfiguration.singleton.under_construction? ? "Under Construction" : "Live" }
 
-%p Setting "Under Construction" to False will enable users to create registrations (assuming that there is a current Registration Period)
+%p Setting "Under Construction" to False will enable users to create registrations.
+%p
+  %b Note
+  You should be sure to set up Registration Costs or Event Costs before any user registers.
 
 %fieldset.form__fieldset
   = simple_form_for(@event_configuration, url: update_go_live_event_configuration_path, method: :put) do |f|
