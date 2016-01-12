@@ -31,7 +31,7 @@ class EventChoice < ActiveRecord::Base
   accepts_nested_attributes_for :translations
 
   def self.cell_types
-    ["boolean", "text", "multiple", "best_time"]
+    ["boolean", "text"] # , "multiple", "best_time"]
   end
 
   validates :cell_type, inclusion: {in: cell_types }

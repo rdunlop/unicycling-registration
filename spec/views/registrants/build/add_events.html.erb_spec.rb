@@ -124,32 +124,32 @@ describe "registrants/build/add_events" do
       end
     end
 
-    describe "for multiple choice" do
-      before(:each) do
-        @ec1 = FactoryGirl.create(:event_choice, event: @ev1, cell_type: "multiple", multiple_values: "one, two, three", position: 2)
-      end
+    # describe "for multiple choice" do
+    #   before(:each) do
+    #     @ec1 = FactoryGirl.create(:event_choice, event: @ev1, cell_type: "multiple", multiple_values: "one, two, three", position: 2)
+    #   end
 
-      it "presents me with a select box" do
-        render
+    #   it "presents me with a select box" do
+    #     render
 
-        assert_select "#tabs" do
-          assert_select "select", 1
-        end
-      end
+    #     assert_select "#tabs" do
+    #       assert_select "select", 1
+    #     end
+    #   end
 
-      it "has the 3+1(blank) values as options" do
-        render
+    #   it "has the 3+1(blank) values as options" do
+    #     render
 
-        assert_select "#tabs" do
-          assert_select "select" do
-            assert_select "option", 4
-            assert_select "option[value='one']"
-            assert_select "option[value='two']"
-            assert_select "option[value='three']"
-          end
-        end
-      end
-    end
+    #     assert_select "#tabs" do
+    #       assert_select "select" do
+    #         assert_select "option", 4
+    #         assert_select "option[value='one']"
+    #         assert_select "option[value='two']"
+    #         assert_select "option[value='three']"
+    #       end
+    #     end
+    #   end
+    # end
 
     describe "for a best_time_format" do
       before do

@@ -84,10 +84,10 @@ describe EventChoice do
     expect(@ec.valid?).to eq(true)
   end
 
-  it "can have a cell_type of 'multiple'" do
-    @ec.cell_type = "multiple"
-    expect(@ec.valid?).to eq(true)
-  end
+  # it "can have a cell_type of 'multiple'" do
+  #   @ec.cell_type = "multiple"
+  #   expect(@ec.valid?).to eq(true)
+  # end
 
   it "cannot have an arbitrary cell_type" do
     @ec.cell_type = "robin"

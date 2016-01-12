@@ -23,19 +23,20 @@ describe ChoicesValidator do
         expect(@reg.describe_event(@event)).to eq("#{@event.name} - #{@ec2.label}: #{@rc2.value}")
       end
     end
-    describe "and a select field" do
-      before(:each) do
-        @ec2 = FactoryGirl.create(:event_choice, event: @event, label: "Category", cell_type: "multiple")
-        @rc2 = FactoryGirl.create(:registrant_choice, registrant: @reg, event_choice: @ec2, value: "Advanced")
-      end
-      it "can describe the event" do
-        expect(@reg.describe_event(@event)).to eq("#{@event.name} - #{@ec2.label}: #{@rc2.value}")
-      end
-      it "doesn't break without a registrant choice" do
-        @rc2.destroy
-        expect(@reg.describe_event(@event)).to eq("#{@event.name}")
-      end
-    end
+    # DISABLED because 'multiple' is a deprecated type
+    # describe "and a select field" do
+    #   before(:each) do
+    #     @ec2 = FactoryGirl.create(:event_choice, event: @event, label: "Category", cell_type: "multiple")
+    #     @rc2 = FactoryGirl.create(:registrant_choice, registrant: @reg, event_choice: @ec2, value: "Advanced")
+    #   end
+    #   it "can describe the event" do
+    #     expect(@reg.describe_event(@event)).to eq("#{@event.name} - #{@ec2.label}: #{@rc2.value}")
+    #   end
+    #   it "doesn't break without a registrant choice" do
+    #     @rc2.destroy
+    #     expect(@reg.describe_event(@event)).to eq("#{@event.name}")
+    #   end
+    # end
   end
 
   describe "with a single event_choices for an event" do
