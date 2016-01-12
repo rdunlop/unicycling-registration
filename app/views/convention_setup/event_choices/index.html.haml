@@ -1,24 +1,38 @@
 %h1
   Listing event choices for #{@event}
-%table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_choices_path(@event) } }
-  %thead
-    %tr
-      %th Label
-      %th Cell type
-      %th
-      %th
-  %tbody
-    - @event_choices.each do |event_choice|
-      - next if event_choice.new_record?
-      %tr.item{ data: { item_id: event_choice.id } }
-        %td= event_choice.label
-        %td= event_choice.cell_type
-        %td= link_to 'Edit', edit_convention_setup_event_choice_path(event_choice)
-        %td= link_to 'Delete', [:convention_setup, event_choice], method: :delete, data: { confirm: 'Are you sure?' }
 
-= render :partial => "/attending/preview"
+%p
+  Event Choices are additional questions which you can present to your competitors in order to
+  gather more information from them.
+
+%h4 Examples
+%ul
+  %li Geared?
+  %li Team Name
+  %li Team Captain
+  %li Pairs Partner Name
+
+- if @event_choices.any?
+  %h3 Existing #{@event} Event Choices
+
+  %table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_choices_path(@event) } }
+    %thead
+      %tr
+        %th Label
+        %th Cell type
+        %th
+        %th
+    %tbody
+      - @event_choices.each do |event_choice|
+        - next if event_choice.new_record?
+        %tr.item{ data: { item_id: event_choice.id } }
+          %td= event_choice.label
+          %td= event_choice.cell_type
+          %td= link_to 'Edit', edit_convention_setup_event_choice_path(event_choice)
+          %td= link_to 'Delete', [:convention_setup, event_choice], method: :delete, data: { confirm: 'Are you sure?' }
 
 %fieldset.form__fieldset
   %h3 New event choice
   = render 'form'
-= link_to 'Back', convention_setup_category_events_path(@event.category)
+
+= render :partial => "/attending/preview"
