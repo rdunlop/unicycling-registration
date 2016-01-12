@@ -10,7 +10,8 @@
 
 %p
   The URL for the IPN should be
-  = "http://#{@tenant.permanent_url}/payments/notification"
+  - if @tenant.present?
+    = "http://#{@tenant.permanent_url}/payments/notification"
 
 
 %fieldset.form__fieldset
