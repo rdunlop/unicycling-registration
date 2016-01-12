@@ -4,3 +4,5 @@ en:
     event:
       category: Category
       best_time: Best Time
+      paid_for: Paid For
+      paid_for_tooltip: To withdraw from this event, please contact the event organizers.

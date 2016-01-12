@@ -10,9 +10,16 @@
       - if disabled_event && resu.object.signed_up?
         = link_to "Drop Out", drop_event_registrant_build_index_path(@registrant, event_id: event.id), data: { confirm: "If you drop out, you cannot sign back up without admin approval. Continue?" }, class: "button alert tiny", method: :delete
       = resu.hidden_field :event_id
-      = resu.input :signed_up, :class => "primary_checkbox", label: event.to_s
+
+      - if event.has_cost? && @registrant.paid_expense_items.include?(event.expense_item)
+        %span.label{ title: t(".paid_for_tooltip") }
+          = t(".paid_for")
+      - else
+        = resu.input :signed_up, :class => "primary_checkbox", label: event.to_s
+
       - if event.event_categories.size == 1
         = resu.hidden_field :event_category_id, :value => event.event_categories.first.id
+
     - if !(event.event_categories.size == 1)
       %td.event_choice
         = resu.label :event_category_id, t('.category')
@@ -23,8 +30,12 @@
           - if !cat.age_is_in_range(registrant.age)
             - disabled_list << cat.id
         = resu.select :event_category_id, list, :disabled => disabled_list, :include_blank => true
+
+  - # Padding before EventChoices
   - if event.category.max_number_of_event_choices != event.num_choices
     %td{:colspan => category.max_number_of_event_choices - event.num_choices}
+
+  -# Event Choices
   - event.event_choices.each do |choice|
     %td.event_choice
       - found_rc = nil
