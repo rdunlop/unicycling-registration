@@ -79,9 +79,13 @@ en:
         info_url: This link appears on the expenses page, useful if the expenses need further explanation, or to show pictures
         competitor_required: An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
         noncompetitor_required: An element of this expense group MUST be selected by the registrant (if there is only 1 item in the group, it will automatically be chosen)
+      expense_item:
+        has_details: Ask the user for additional details when they purchase this item
+        has_custom_cost: Allows the registrant to choose how much to pay for this item
       coupon_code:
         inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
         price: The price to be charged when using this coupon.
+        expense_items: Choose the Expense Items which will be discounted by this Coupon Code.
       volunteer_opportunity:
         inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
       event_configuration:

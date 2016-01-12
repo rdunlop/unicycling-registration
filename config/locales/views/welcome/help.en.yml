@@ -9,11 +9,11 @@ en:
         Check all spam filters. Choose "Resend Confirmation E-mail" if you cannot find
         the e-mail
       translations: Translations
-      translation_help: I found a missing/mistake in a translation. Submit the translatio
+      translation_help: I found a missing/mistake in a translation. Submit the translation
         details here in the 'feedback', or apply to be a translator, and help do more of
         the translations for a language.
       registration: How do I Register
-      registration_help: Once you have signed in, choose "Create New Competitor" or =
+      registration_help: Once you have signed in, choose "Create New Competitor" or
         "Create New Non-Competitor" and fill out the fields.
 
         Pay for the registration in order to secure your registration

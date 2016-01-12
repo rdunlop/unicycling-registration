@@ -1,5 +1,12 @@
 %h1 Name & Logo
 
+%p
+  The Short Name will be used in places where the space is limited (e.g. many PDFs)
+
+%p
+  The Long Name, Location, and Dates Description will be used on the main webpage header.
+
+
 = simple_form_for(@event_configuration, url: update_name_logo_event_configuration_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
   %fieldset.form__fieldset

@@ -50,6 +50,13 @@ describe ConventionSetup::EventConfigurationsController do
     sign_in @user
   end
 
+  ConventionSetup::EventConfigurationsController::EVENT_CONFIG_PAGES.each do |page|
+    it "can render the #{page} page" do
+      get page
+      expect(response).to be_success
+    end
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # EventConfiguration. As you add validations to EventConfiguration, be sure to
   # update the return value of this method accordingly.

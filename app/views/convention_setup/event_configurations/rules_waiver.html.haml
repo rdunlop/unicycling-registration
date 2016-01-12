@@ -1,5 +1,11 @@
 %h1 Waiver and Rules
 
+%p
+  Specify the type of waiver which you want to provide to the registrants.
+
+%p
+  Optionally specify additional rules which you want to provide to the registrants. (e.g. Convention-specific adjustments to the IUF Rulebook)
+
 = simple_form_for(@event_configuration, url: update_rules_waiver_event_configuration_path, method: :put, multipart: true) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
