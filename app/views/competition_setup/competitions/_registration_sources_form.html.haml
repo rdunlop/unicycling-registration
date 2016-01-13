@@ -10,9 +10,13 @@
         = cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true
         %br
         Age Range
-        = cs.number_field :min_age, {min: 0, placeholder: "min"}
-        \-
-        = cs.number_field :max_age, {min: 0, placeholder: "max"}
+        .row
+          .small-5.columns
+            = cs.number_field :min_age, {min: 0, placeholder: "min"}
+          .small-2.columns
+            \-
+          .small-5.columns
+            = cs.number_field :max_age, {min: 0, placeholder: "max"}
         .remove_label
           %a{href: '#', class: 'remove'} remove
           = cs.hidden_field :id

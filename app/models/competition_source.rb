@@ -28,7 +28,7 @@ class CompetitionSource < ActiveRecord::Base
   def self.gender_filters
     ["Both", "Male", "Female"]
   end
-  validates :gender_filter, inclusion: { in: gender_filters, allow_nil: false }
+  validates :gender_filter, inclusion: { in: gender_filters, allow_nil: false }, presence: true
   validates :target_competition, presence: true
   validate :source_present
   validate :max_place_with_competition

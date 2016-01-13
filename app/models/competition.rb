@@ -92,7 +92,7 @@ class Competition < ActiveRecord::Base
     ]
   end
 
-  validates :scoring_class, inclusion: { in: scoring_classes, allow_nil: false }
+  validates :scoring_class, inclusion: { in: scoring_classes, allow_nil: false }, presence: true
 
   def self.num_member_options
     ["One", "Two", "Three or more"]
@@ -374,10 +374,6 @@ class Competition < ActiveRecord::Base
 
   def expert_results_list(gender)
     competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
-  end
-
-  def ungeared_expert_results_list(_gender)
-    competitors_with_results.reject(&:geared?).sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
   def results_list_for(ag_entry)

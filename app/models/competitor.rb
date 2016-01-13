@@ -87,10 +87,6 @@ class Competitor < ActiveRecord::Base
     reorder(lowest_member_bib_number: :asc)
   end
 
-  def self.ungeared
-    where(geared: false)
-  end
-
   def active?
     status == "active"
   end

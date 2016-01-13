@@ -4,10 +4,22 @@
   These are all of the competitors configured for this competition
 
 %p
+  The Geared, Wheel Size, Crank Size, and Notes fields will all be displayed
+  on the Printed Results PDFs, but are not used for any calculations.
+
+%p
   %b Note
   If you want to specify the wave assignments for multiple competitors at once, see the
   = link_to "Import Wave Assignments", competition_wave_assignments_path(@competition)
   page.
+
+- if policy(@competition).view_result_data?
+  %p
+    %b Note
+    If each wave starts at different times, but they are all being timed by a single clock at the finish line,
+    use the
+    = link_to "Set Competition Wave Times", competition_wave_times_path(competition)
+    page to specify the start time for each wave.
 
 = render partial: "shared/error_messages", object: @competition
 = simple_form_for @competition, url: competition_sign_ins_path(@competition), method: :put do |f|
