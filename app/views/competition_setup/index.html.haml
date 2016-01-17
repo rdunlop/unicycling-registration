@@ -30,4 +30,4 @@
           %td
             %ul.categoryList__eventList
               - if policy(Competition.new).create?
-                %li= link_to "Create New Competition", new_event_competition_path(event)
+                %li= link_to "Create New Competition", event_competition_choices_path(event)

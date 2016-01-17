@@ -4,10 +4,12 @@
   = f.input :name
   = f.input :scheduled_completion_at, as: :datetime_picker, include_blank: true
 
+  = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true
+  %hr
+
   = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
   = link_to "Manage Age Groups", age_group_types_path, target: "_blank"
 
-  = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true
   = f.input :num_members_per_competitor, collection: Competition.num_member_options, include_blank: true
 
   %b Penalties
@@ -41,7 +43,8 @@
 
   %br
   = f.label :automatic_competitor_creation
-  = f.check_box :automatic_competitor_creation
+  = f.check_box :automatic_competitor_creation, disabled: "disabled"
+  %p DISABLED automatic creation because I think that it's more trouble than it's worth
 
   %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
 

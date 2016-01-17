@@ -1,0 +1,35 @@
+%h1 Freestyle Competitions
+
+%p
+  A Freestyle Competition provides the following features:
+  %ul
+    %li Online Electronic Judging data entry
+    %li Scoring of the results according to the IUF rules (IUF 2015 Freestyle, or < 2015 rules)
+
+%p
+  Please create a separate Competition for each class of Competitors.
+  %br
+  Examples
+  %ul
+    %li Individual Female Intermediate 11-12
+    %li Individual Male Jr Expert
+    %li Pairs 19-22
+    %li Small Group
+    %li Big Group
+
+%p
+  Example Judge Scoring Data Entry view:
+  = image_tag "freestyle_judging_example.png"
+
+%p
+  Example Calculation Results
+  = image_tag "freestyle_judging_results_example.png"
+
+%hr
+
+%p
+  What type of Freestyle Competition are you creating?
+  %ul
+    %li= link_to "Individual", individual_event_competition_choices_path(@event)
+    %li= link_to "Pairs", pairs_event_competition_choices_path(@event)
+    %li= link_to "Group", group_event_competition_choices_path(@event)

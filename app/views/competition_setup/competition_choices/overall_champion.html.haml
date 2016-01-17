@@ -1,0 +1,6 @@
+%h1 Overall Champion Competition
+
+%p
+  - params = { "competition[scoring_class]" => "Overall Champion", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Competition

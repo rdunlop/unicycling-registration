@@ -1,0 +1,44 @@
+%h1 HigH Jump / Long Jump Competitions
+
+%p
+  A High Jump or Long Jump Competition provides the following features:
+  %ul
+    %li Online Electronic Judging data entry
+    %li Scoring of the results according to the IUF rules
+
+%p
+  Please create a separate Competition for ????
+  %br
+  Examples
+  %ul
+    %li ?
+    %li ?
+    %li ?
+
+%p
+  Example Judge Scoring Data Entry view:
+  = image_tag "high_long_judging_example.png"
+
+%p
+  Example Calculation Results
+  = image_tag "high_long_judging_results_example.png"
+
+%hr
+
+%p
+  There are 3 different types of High/Long scoring rules available:
+
+%p
+  - params = { "competition[scoring_class]" => "High/Long", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your High jump according to the old rules.
+
+%p
+  - params = { "competition[scoring_class]" => "High/Long Preliminary IUF 2015", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your High jump according to the IUF 2015 High/Long Preliminary Rules.
+
+%p
+  - params = { "competition[scoring_class]" => "High/Long Final IUF 2015", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your High jump according to the IUF 2015 High/Long Finals Rules.

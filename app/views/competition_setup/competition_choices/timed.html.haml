@@ -1,0 +1,47 @@
+%h1 Timed Competitions
+
+%p
+  If creating Competitions for use in the Track, you should create a single Competition, and specify an "Age Group Type" in order to subdivide the competitors into separate results groups.
+
+%p
+  If the Competition should also calculate the "Top results" across all age groups. (e.g. Fastest Male Muni Cross Country), choose "Experts"
+  %br
+  You should NOT choose this option if there will be a separate competition to determine the Expert. (e.g. 100m Expert)
+
+
+If the competitors all start at the same time, but you want to be able to mark down "Did Not Start" or other details (like crank size, or geared Y/N?) you may want to choose "Sign in List Enabled".
+
+If the competitors don't all start at the same time, you will probably have one of the following situations:
+%ul
+  %li
+    Pre-configured Heats/Lanes by age group/best Time. (e.g. 100m)
+  %li
+    Pre-configured Waves, based on seed time, or registration order. (e.g. 10k)
+    %br
+    If each wave starts at a different time on a common stopwatch, the Event Director will be able to set the Wave Start Times.
+  %li
+    Start at will when the competitor arrives at the start line. (e.g. Muni Downhill)
+
+?? Describe how the above settings should be configured.
+
+If there is any chip/camera timing, then you should configure that as well, so that you can export the competitor list, and import the results from the e-timer system.
+
+%p
+  Examples with pictures here ????
+
+%hr
+
+%p
+  - params = { "competition[scoring_class]" => "Shortest Time", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Faster-is-better Timed Competition
+
+%p
+  - params = { "competition[scoring_class]" => "Longest Time", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Slower-is-better Timed Competition
+
+%p
+  - params = { "competition[scoring_class]" => "Timed Multi-Lap", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Multi-Lap Timed Competition

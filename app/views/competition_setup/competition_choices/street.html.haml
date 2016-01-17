@@ -1,0 +1,13 @@
+%h1 Street Comp
+
+There are a number of Street Comp scoring options
+
+%p
+  - params = { "competition[scoring_class]" => "Street", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Street Competition.
+
+%p
+  - params = { "competition[scoring_class]" => "Street Final", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Street <b>Final</b> Competition.

@@ -1,0 +1,40 @@
+%h1 New Competition
+
+%p
+  There is a separation between Event Registration and Competitions.
+  %ul
+    %li
+      %b Event Registration
+      is what the registrant desires to compete in
+    %li
+      %b Competition
+      is the actual competition in which they compete.
+  %b Note
+  For Pairs, Group, Team sports, each Competitor will include many registrants.
+  %br
+  %b Note
+  Registering for an Event doesn't guarantee that the registrant will be in the Competition,
+  and neither does it prevent them from being included in the Competitor List.
+  It is up to the Event Director to manage the Competitor List and deal with discrepancies.
+
+%p
+  Competition Creation/Configuration can be very difficult, depending on whether your particular
+  event is running the competition differently than tradition.
+  This system allows for many different configuration options, which should be able
+  to support your competition no matter how you choose to run it.
+
+%p
+  Please choose from an option below in order to see the implications and options
+  for that option
+
+%hr
+%ul
+  %li= link_to "Freestyle", freestyle_event_competition_choices_path(@event)
+  %li= link_to "Standard Skill", standard_skill_event_competition_choices_path(@event)
+  %li= link_to "High Jump/Long Jump", high_long_event_competition_choices_path(@event)
+  %li= link_to "Timed Races", timed_event_competition_choices_path(@event)
+  %li= link_to "Points", points_event_competition_choices_path(@event)
+  %li= link_to "Flatland", flatland_event_competition_choices_path(@event)
+  %li= link_to "Street", street_event_competition_choices_path(@event)
+  %li= link_to "Overall Champion", overall_champion_event_competition_choices_path(@event)
+  %li= link_to "Custom", custom_event_competition_choices_path(@event)

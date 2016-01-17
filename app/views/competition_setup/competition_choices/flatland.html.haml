@@ -1,0 +1,6 @@
+%h1 Flatland Competition
+
+%p
+  - params = { "competition[scoring_class]" => "Flatland", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your Flatland Competition.

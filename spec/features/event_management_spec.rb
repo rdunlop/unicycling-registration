@@ -15,6 +15,9 @@ describe 'Creating a Competition from an Event' do
       within("tbody tr:first") do
         click_link "Create New Competition"
       end
+      click_link "Freestyle"
+      click_link "Individual"
+      click_link "Click here"
     end
 
     it "has the new page" do
@@ -24,7 +27,6 @@ describe 'Creating a Competition from an Event' do
     it "can create a new competition" do
       fill_in :competition_name, with: "The only competition"
       fill_in :competition_award_title_name, with: "The Best Competition"
-      select "Freestyle", from: "Scoring Type"
       expect do
         click_button "Create Competition"
       end.to change(Competition, :count).by(1)

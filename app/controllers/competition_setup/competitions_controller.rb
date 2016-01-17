@@ -2,11 +2,11 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   layout "competition_management", except: [:new, :create]
 
   before_action :authenticate_user!
-  before_action :load_new_competition, only: [:create]
+  before_action :load_event, only: [:create, :new]
+  before_action :load_new_competition, only: [:create, :new]
   before_action :load_competition, except: [:create, :new]
 
   before_action :load_event_from_competition, only: [:edit]
-  before_action :load_event, only: [:create, :new]
 
   before_action :authorize_competition
 
@@ -63,6 +63,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   end
 
   def competition_params
+    return {} unless params[:competition].present?
     params.require(:competition).permit(:name, :uses_lane_assignments, :start_data_type, :end_data_type,
                                         :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
@@ -77,7 +78,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
 
   def load_new_competition
     @competition = Competition.new(competition_params)
-    params[:id] = 1 if params[:id].nil? # necessary due to bug in the way that cancan does authorization check
+    @competition.event = @event unless @competition.nil?
   end
 
   def load_event_from_competition
@@ -86,8 +87,5 @@ class CompetitionSetup::CompetitionsController < ApplicationController
 
   def load_event
     @event = Event.find(params[:event_id])
-    # required in order to set up the 'new' element
-    @competition = Competition.new if @competition.nil?
-    @competition.event = @event unless @competition.nil?
   end
 end

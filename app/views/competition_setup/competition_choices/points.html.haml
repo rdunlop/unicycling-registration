@@ -1,0 +1,40 @@
+%h1 Points Competitions
+
+%p
+  Externally scored competition results are entered, in which the points
+  of competitors is entered, and a 'details' column, which is a description of the result
+  (for use on the awards/results sheets). Whether (Higher or Lower) points are better can be chosen
+
+%p
+  Some competitions (e.g. Trials) are scored on paper, and the resulting point value is entered for ranking.
+  %br
+  %b Note
+  If you have a competition which has a judging system which is not supported by this online judging system, you should use a "Points" Competition in order to be able to import the results for Awards Printing and official record keeping.
+
+%p
+  Example Competitions:
+  %ul
+    %li Street Comp (when not using the Street Comp judging system)
+    %li Flatland (when not using the Flatland judging system)
+    %li X-Style
+    %li Slopestyle Street
+    %li Basketball
+    %li Hockey
+
+%p
+  If the results of the competition are determined through other means (e.g. Elimination Rounds, etc), you may choose to enter only the resulting rankings and an optional "Detail" description to be printed on the results/awards.
+
+%p
+  Examples with pictures here ????
+
+%hr
+
+%p
+  - params = { "competition[scoring_class]" => "Points Low to High", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your "Lower points are better" Competition.
+
+%p
+  - params = { "competition[scoring_class]" => "Points High to Low", "competition[num_members_per_competitor]" => "One" }
+  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+  to continue setting up your "Higher Points are Better" Competition.

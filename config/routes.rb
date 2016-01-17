@@ -219,6 +219,29 @@ Workspace::Application.routes.draw do
 
     resources :coupon_code_summaries, only: [:show]
 
+    # This concern will probably also be exposed somewhere public for describing the system
+    # to new users
+    concern :competition_choosable do
+      resources :competition_choices, only: [:index] do
+        collection do
+          get :freestyle
+          get :individual
+          get :pairs
+          get :group
+          get :standard_skill
+          get :high_long
+          get :timed
+          get :multi_lap
+          get :slow
+          get :points
+          get :flatland
+          get :street
+          get :overall_champion
+          get :custom
+        end
+      end
+    end
+
     resources :events, only: [] do
       collection do
         get :summary
@@ -230,6 +253,7 @@ Workspace::Application.routes.draw do
       end
       scope module: "competition_setup" do
         resources :competitions, only: [:new, :create]
+        concerns :competition_choosable
       end
     end
     resources :event_categories, only: [] do
