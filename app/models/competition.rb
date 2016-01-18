@@ -108,7 +108,7 @@ class Competition < ActiveRecord::Base
   validate :award_label_title_checks
   validate :no_competition_sources_when_overall_calculation
   validates :combined_competition, presence: true, if: proc{ |f| f.scoring_class == "Overall Champion" }
-  validates :combined_competition, absence: true, unless: proc{ |f| f.scoring_class = "Overall Champion" }
+  validates :combined_competition, absence: true, unless: proc{ |f| f.scoring_class == "Overall Champion" }
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
