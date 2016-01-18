@@ -109,6 +109,10 @@ group :test do
   gem 'delorean'
 end
 
+group :development, :test do
+  gem 'teaspoon-jasmine'
+end
+
 group :unicon, :naucc, :development, :test, :cucumber, :caching do
   gem 'annotate'
   gem 'bullet'

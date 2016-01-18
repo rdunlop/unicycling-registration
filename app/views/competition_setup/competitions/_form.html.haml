@@ -1,10 +1,43 @@
+:coffeescript
+  $ ->
+    new BlockVisibleBasedOnSelect($(".js--blockVisibleSource"), $(".js--blockVisibleTarget"), "is--hidden")
+
+/ Age Group Type:
+/ Hide for Freestyle, Freestyle2, Street, Street Final
+
+/ Penalties:
+/ Show for: Longest Time
+
+/ LanesQ:
+/ Show for Shortest Time
+
+/ CompetitionSources:
+/ Hide for Overall Champion
+
+/ Start Line:
+/ Show for:  Points, Timed Multi-Lap, Shortest Time,
+/ Hide for: Freestyle, Freestyle2,  Flatland,  High/Long, Longest Time, Street, Street Final, Overall Champion, Standard Skill
+
+/ Finish Line:
+/ Show for: Longest Time, Points, Shortest Time, Timed Multi-Lap
+/ Hide for: Freestyle, Freestyle, Flatland, High/Long, Overall Champion, Street, Street Final, Standard Skill
+
+/ Sign in List:
+/ Hide for Freestyle
+
+/ Overall Champion:
+/ Show for Overall Champion
+
+/ Calculate Experts Too:
+/ Hide for Freestyle
+
 = simple_form_for(@competition.new_record? ? [@event, @competition] : [@competition], html: {class: 'multiple_nested'}) do |f|
   = render partial: "/shared/error_messages", object: @competition
 
   = f.input :name
   = f.input :scheduled_completion_at, as: :datetime_picker, include_blank: true
 
-  = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true
+  = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true, input_html: { class: "js--blockVisibleSource" }
   %hr
 
   = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
@@ -12,13 +45,15 @@
 
   = f.input :num_members_per_competitor, collection: Competition.num_member_options, include_blank: true
 
-  %b Penalties
-  %p Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
-  = f.input :penalty_seconds
-  %hr
-  = f.input :uses_lane_assignments
+  .js--blockVisibleTarget{ data: { show: ["Longest Time"] } }
+    %b Penalties
+    %p Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
+    = f.input :penalty_seconds
+    %hr
 
-  %hr
+  .js--blockVisibleTarget{ data: { show: ["Shortest Time"] } }
+    = f.input :uses_lane_assignments
+    %hr
 
   %h3 Competition Sources
   .field
@@ -35,8 +70,11 @@
 
   %h3 Data Entry Setup
 
-  = f.input :start_data_type, collection: Competition.data_recording_types, :include_blank => true
-  = f.input :end_data_type, collection: Competition.data_recording_types, :include_blank => true
+  .js--blockVisibleTarget{ data: { show: ["Points High to Low", "Points Low to High", "Timed Multi-Lap", "Shortest Time"] } }
+    = f.input :start_data_type, collection: Competition.data_recording_types, :include_blank => true
+
+  .js--blockVisibleTarget{ data: { show: ["Longest Time", "Points High to Low", "Points Low to High", "Shortest Time", "Timed Multi-Lap"] } }
+    = f.input :end_data_type, collection: Competition.data_recording_types, :include_blank => true
 
   %br
   = f.input :sign_in_list_enabled
@@ -48,9 +86,10 @@
 
   %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
 
-  %p If creating an "Overall" competition for aggregate scoring, choose the scoring class
-  = f.input :combined_competition_id, collection: CombinedCompetition.all, include_blank: true
-  = link_to "Manage Scoring Classes", combined_competitions_path, target: "_blank"
+  .js--blockVisibleTarget{ data: { show: ["Overall Champion"] } }
+    %p If creating an "Overall" competition for aggregate scoring, choose the scoring class
+    = f.input :combined_competition_id, collection: CombinedCompetition.all, include_blank: true
+    = link_to "Manage Scoring Classes", combined_competitions_path, target: "_blank"
 
   %h3 Settings for printing the awards
   = f.input :award_title_name
