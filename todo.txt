@@ -1,3 +1,16 @@
+"Judging Session"
+"Large Group freestyle"
+
+Scott's new feature:
+- Chief judge - scoring overview.
+  - Styling of the background of the numbers, based on standard deviation
+  - Mastery would be colored based on how different it is from the Mean
+  - 
+
+- Use Policy instead of _start_data_entry.html.haml conditionals
+- Create a Seed of data, which shows each of the scenarios and examples of configurations
+- 
+- Allow Image uploads to the Information Pages
 - Self-serve fully-explained "create test account" page
 - Self-serve create-new tenant page, with explanation.
 - Error saving standing skill doesn't say which field failed.

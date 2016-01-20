@@ -1,0 +1,9 @@
+%h1 Create Sample Registrant data
+
+= form_tag url: sample_data_registrants_path, method: :post do
+  .row
+    .small-12.medium-6.column
+      = label_tag :number, "Number of Registrants"
+      = text_field_tag :number
+    .small-12.medium-6.columns
+      = submit_tag "Create Sample Registrants", class: "button"

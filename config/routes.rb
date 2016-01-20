@@ -621,6 +621,11 @@ Workspace::Application.routes.draw do
 
   resources :admin_upgrades, only: [:new, :create]
   resources :tenants, only: [:index, :create]
+
+  namespace :sample_data do
+    resources :registrants, only: [:index, :create]
+  end
+
   resources :styles, only: :index
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'

@@ -78,6 +78,8 @@ gem 'globalize', '~> 5.0.0'
 gem 'virtus'
 gem "wicked"
 
+gem 'faker' # to support 'sample_data'
+
 gem 'pg'
 
 # deployment

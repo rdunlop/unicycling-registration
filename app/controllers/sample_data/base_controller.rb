@@ -1,0 +1,10 @@
+class SampleData::BaseController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authorize_access
+
+  private
+
+  def authorize_access
+    authorize :sample_data, :create?
+  end
+end

@@ -34,3 +34,5 @@
     %li= link_to t('.standard_skill_routines_view'), standard_skill_routines_path
   - if policy(current_user).under_development?
     %li= link_to t('.standard_skill_routines_export'), download_file_standard_skill_routines_path
+- if policy(:sample_data).create?
+  %li= link_to "Create Sample Data", sample_data_registrants_path
