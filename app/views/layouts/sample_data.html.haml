@@ -1,0 +1,11 @@
+- content_for :content do
+  #side_nav
+    %h3 Sample Data
+
+    %ul.sideNav__list
+      %li= link_to 'Registrants', sample_data_registrants_path
+      %li= link_to  'Competitions', sample_data_competitions_path
+  #side_content
+    = yield
+
+= render template: "layouts/application"

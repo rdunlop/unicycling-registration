@@ -24,7 +24,7 @@ class SampleData::RegistrantsController < SampleData::BaseController
         online_waiver_acceptance: true,
         user: User.first,
       )
-      contact_detail = ContactDetail.create!(
+      ContactDetail.create!(
         registrant: registrant,
         address: Faker::Address.street_name,
         city: Faker::Address.city,
