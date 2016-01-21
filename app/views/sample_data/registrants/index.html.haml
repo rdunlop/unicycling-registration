@@ -6,4 +6,8 @@
       = label_tag :number, "Number of Registrants"
       = text_field_tag :number
     .small-12.medium-6.columns
+      = label_tag :sign_up_for_all_events, "Sign up for all Events"
+      = check_box_tag :sign_up_for_all_events
+  .row
+    .small-12.medium-6.columns
       = submit_tag "Create Sample Registrants", class: "button"

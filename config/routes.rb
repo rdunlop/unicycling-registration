@@ -624,6 +624,7 @@ Workspace::Application.routes.draw do
 
   namespace :sample_data do
     resources :registrants, only: [:index, :create]
+    resources :competitions, only: [:index, :create]
   end
 
   resources :styles, only: :index
