@@ -18,7 +18,7 @@
     %b Note
     If each wave starts at different times, but they are all being timed by a single clock at the finish line,
     use the
-    = link_to "Set Competition Wave Times", competition_wave_times_path(competition)
+    = link_to "Set Competition Wave Times", competition_wave_times_path(@competition)
     page to specify the start time for each wave.
 
 = render partial: "shared/error_messages", object: @competition
