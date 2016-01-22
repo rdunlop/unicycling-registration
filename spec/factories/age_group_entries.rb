@@ -29,5 +29,9 @@ FactoryGirl.define do
     start_age 1
     end_age 100
     gender "Male"
+
+    trait :female do
+      gender "Female"
+    end
   end
 end
