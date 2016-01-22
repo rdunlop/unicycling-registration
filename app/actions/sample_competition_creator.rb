@@ -46,9 +46,9 @@ class SampleCompetitionCreator
     if AgeGroupType.any?
       AgeGroupType.first
     else
-      agt = FactoryGirl.create(:age_group_type)
-      FactoryGirl.create(:age_group_entry, age_group_type: agt)
-      FactoryGirl.create(:age_group_entry, :female, age_group_type: agt)
+      agt = AgeGroupType.create!(name: "Sample Age Group", description: "For testing")
+      AgeGroupEntry.create!(age_group_type: agt, short_description: "Men", start_age: 0, end_age: 100, gender: "Male", position: 1)
+      AgeGroupEntry.create!(age_group_type: agt, short_description: "Women", start_age: 0, end_age: 100, gender: "Female", position: 2)
       agt
     end
   end
