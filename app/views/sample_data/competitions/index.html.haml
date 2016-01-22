@@ -4,7 +4,7 @@
   This controller will create a competition of the specified type in the <b>First event</b>
   found.
 
-- if Event.exists?
+- if Event.count == 0
   %b Please create an Event using the normal method before using this sample data generator
 
 - else
