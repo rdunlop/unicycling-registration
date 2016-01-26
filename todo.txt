@@ -1,6 +1,8 @@
 "Judging Session"
 "Large Group freestyle"
 
+make the "RegistrationCost" Expense Items get their names from the Registration Cost elements (confusion from UNICON 2016 stuffs)
+
 Scott's new feature:
 - Chief judge - scoring overview.
   - Styling of the background of the numbers, based on standard deviation
