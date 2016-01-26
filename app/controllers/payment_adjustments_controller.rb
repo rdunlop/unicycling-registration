@@ -57,7 +57,7 @@ class PaymentAdjustmentsController < ApplicationController
           note: note,
           registrant: registrant,
           details: refunded_pd.details,
-          amount: refunded_pd.amount,
+          amount: new_item.total_cost,
           item: new_item)
         Refund.transaction do
           refund.user = current_user
