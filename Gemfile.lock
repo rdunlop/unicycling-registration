@@ -649,7 +649,7 @@ GEM
       chronic (>= 0.6.3)
     wicked (1.2.1)
       railties (>= 3.0.7)
-    wicked_pdf (1.0.1)
+    wicked_pdf (1.0.4)
     wkhtmltopdf-binary (0.9.9.3)
     xml-simple (1.1.5)
     xpath (2.0.0)
