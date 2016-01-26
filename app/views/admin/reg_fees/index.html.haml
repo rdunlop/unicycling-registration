@@ -13,5 +13,5 @@
 %fieldset.form__fieldset
   = simple_form_for(@reg_fee, url: update_reg_fee_path, method: :post) do |f|
     = f.input :registrant_id, collection: Registrant.active, label_method: :with_id_to_s, input_html: { class: "chosen-select" }
-    = f.input :registration_cost_id, collection: RegistrationCost.all, label_method: :name, input_html: { class: "chosen-select" }
+    = f.input :registration_cost_id, collection: RegistrationCost.all, label_method: :to_s_with_type, input_html: { class: "chosen-select" }
     = f.button :submit, "Set Reg Fee"

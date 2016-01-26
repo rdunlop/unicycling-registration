@@ -150,6 +150,10 @@ class RegistrationCost < ActiveRecord::Base
     self == RegistrationCost.for_type(registrant_type).last_online_period
   end
 
+  def to_s_with_type
+    [registrant_type, to_s].join(" - ")
+  end
+
   private
 
   def clear_cache
