@@ -255,6 +255,32 @@ describe PaymentsController do
           expect(PaymentDetail.count).to eq(1)
           expect(PaymentDetail.last.refunded?).to eq(false)
         end
+
+        it "doesn't create an entry when it is set to _destroy" do
+          @ei = FactoryGirl.create(:expense_item)
+          @ei2 = FactoryGirl.create(:expense_item)
+          @reg = FactoryGirl.create(:competitor)
+          post :create, payment: {
+            payment_details_attributes: [
+              {
+                registrant_id: @reg.id,
+                expense_item_id: @ei.id,
+                details: "Additional Details",
+                free: true,
+                amount: 100
+              },
+              {
+                registrant_id: @reg.id,
+                expense_item_id: @ei2.id,
+                details: "Additional Details",
+                free: true,
+                amount: 100,
+                _destroy: "1"
+              }]
+          }
+          expect(PaymentDetail.count).to eq(1)
+          expect(PaymentDetail.last.refunded?).to eq(false)
+        end
       end
     end
 

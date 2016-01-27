@@ -32,7 +32,7 @@ class Payment < ActiveRecord::Base
 
   belongs_to :user
   has_many :payment_details, inverse_of: :payment, dependent: :destroy
-  accepts_nested_attributes_for :payment_details, reject_if: proc { |attributes| attributes['registrant_id'].blank? }
+  accepts_nested_attributes_for :payment_details, reject_if: proc { |attributes| attributes['registrant_id'].blank? }, allow_destroy: true
 
   before_validation :set_invoice_id
   validates :invoice_id, presence: true, uniqueness: true
