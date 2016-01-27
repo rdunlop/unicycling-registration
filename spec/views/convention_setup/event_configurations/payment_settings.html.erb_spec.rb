@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "convention_setup/event_configurations/payment_settings" do
   before(:each) do
+    assign(:tenant, FactoryGirl.build(:tenant))
     assign(:event_configuration,
            FactoryGirl.create(:event_configuration))
   end
