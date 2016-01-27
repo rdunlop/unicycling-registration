@@ -1,15 +1,15 @@
-%h1 Important Dates
+%h1= t(".header")
 
-%p If you do not specify a date, access will end when registration closes.
+%p= t(".description")
 
 = simple_form_for(@event_configuration, url: update_important_dates_event_configuration_path, method: :put) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
   .row
     .small-6.columns
-      %b Important Date Type
+      %b= t(".type_of_important_date")
     .small-6.columns
-      %b Effective Final Date
+      %b= t(".effective_final_date")
   .row
     .small-6.columns
       = f.input :artistic_closed_date, as: :date_picker

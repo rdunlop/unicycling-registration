@@ -89,6 +89,7 @@ en:
       volunteer_opportunity:
         inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
       event_configuration:
+        accept_rules: "Force all registrants to accept the rules attached in PDF"
         spectators: Spectators are not charged "Registration Fees", and can buy items without paying for registration
         competitor_benefits: "Appears on the Registration Homepage, describing the benefits of Competitor Registration"
         noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"

@@ -1,0 +1,10 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      go_live:
+        header: Go Live
+        system_under_construction: The Current system is Under Construction
+        system_live: The Current system is Live
+        under_construction_description: "Setting 'Under Construction' to False will enable users to create registrations."
+        set_costs_warning: You should be sure to set up Registration Costs or Event Costs before any user registers.

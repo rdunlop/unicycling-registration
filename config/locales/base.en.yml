@@ -17,6 +17,7 @@ en:
     - :year
   language_name: English
   'no': 'No'
+  note: Note
   noncompetitor: Non-Competitor
   prices_increase_at_date: Prices Increase in %{end_date}
   prices_increase_soon: Prices Increase in less than 1 day

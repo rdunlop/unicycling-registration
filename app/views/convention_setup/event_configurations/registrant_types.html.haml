@@ -1,11 +1,11 @@
-%h1 Registrant Types
+%h1= t(".header")
 
 = simple_form_for(@event_configuration, url: update_registrant_types_event_configuration_path, method: :put, multipart: true) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
 
   %fieldset.form__fieldset
-    %h3 Registrant Types
-    %h4 Registration Types Available
+    %h3= t(".subheader")
+    %h4= t(".offered_types")
 
     .field
       = check_box_tag :competitor, true, true, disabled: true
@@ -13,7 +13,7 @@
     .field
       = check_box_tag :noncompetitor, true, true, disabled: true
       = label_tag :noncompetitor, nil, class: 'label--checkbox'
-      .help_bubble{ title: "Non-Competitors cannot sign up for events" }
+      .help_bubble{ title: t(".noncompetitor_description") }
     = f.input :spectators
 
     = f.input :comp_noncomp_url, input_html: { class: "js--fancyboxUrl" }

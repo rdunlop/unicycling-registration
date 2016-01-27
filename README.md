@@ -53,7 +53,7 @@ If you would like to contribute language translations, the first step is to ask 
 
 Once you have a translator account, a "Translation" menu item will appear, which will allow you to see/adjust/improve the translations for any language (except English).
 
-- If you find that there is any text which only appears in English, or where the english is incorrect, please use the "Feedback" form to let me know, and I'll enable it in the translation system.
+- If you find that there is any text which only appears in English, or where the English is incorrect, please use the "Feedback" form to let me know, and I'll enable it in the translation system.
 
 
 If we want to add a new language to the list of possible translations:
@@ -77,13 +77,13 @@ Technical Details
 -----------------
 Each time that a deployment occurs, the translation files in /config/locales will be loaded into the database.
 
-Since the English translatios are considered the "base locale", changes to those entris have specific impacts.
+Since the English translations are considered the "base locale", changes to those entries have specific impacts.
 
 * If an English phrase is _added_, the db will have a new entry added, and marked so that non-English translations can be provided.
 
-* If an English phrase is _updated_, the db will be marked so that the non-encglish phrases can be reviewed to ensure that they still make sense.
+* If an English phrase is _updated_, the db will be marked so that the non-English phrases can be reviewed to ensure that they still make sense.
 
-* If an English phraes is _deleted_, the db ...I don't know, I haven't done this yet.
+* If an English phrase is _deleted_, the db ...I don't know, I haven't done this yet.
 
 
 Deploying code with new translations needed
@@ -226,7 +226,7 @@ Configure your paypal account to send out IPN notifications;
   The <notification url> will be the hosted website URL, with /payments/notification at the end.
   Example: http://registrationtest.unicycling-software.com/payments/notification
 
-. New Paypal UI: Login to the PayPal merchang account -> Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Getting paid and managing my risk -> Instant Payment Notifications -> ...
+. New Paypal UI: Login to the PayPal merchant account -> Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Getting paid and managing my risk -> Instant Payment Notifications -> ...
 
 . Old Paypal UI: Login to the PayPal merchant account -> Profile -> Instant Payment Notification Preferences -> ...
 
@@ -236,7 +236,7 @@ Enable Auto Return:
   <return_url> will be http://registrationtest.unicycling-software.com/payments/
 
 
- New UI: Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Selling Online -> Website prefernces -> ...
+ New UI: Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Selling Online -> Website preferences -> ...
 
  Old UI:  "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> ...
 
@@ -276,14 +276,14 @@ optional.
 NewRelic Account
 ----------------
 
-NewRelic is a performance monitoring tool, install it via the addons page, or commmand line.
+NewRelic is a performance monitoring tool.
 
 Set the following settings
 
     NEW_RELIC_LICENSE_KEY=<key>
     NEW_RELIC_APP_NAME=<name you would like to appear in NewRelic panel>
 
-To View the local NewRelic Inforamtion
+To View the local NewRelic Information
 
     `http://localhost:9292/newrelic` (when in development or caching modes)
 
@@ -334,7 +334,7 @@ Administrators will have access to the key necessary to enable this feature.
 
 
 
-Code Contribututions
+Code Contributions
 --------------------
 
 If you would like to contribute any work to the project, please:
@@ -578,7 +578,7 @@ The Base Schema (used for all other data)
 * EventConfiguration: Site-wide configuration table.
 * Registrant: Holds Details on an individual registrant. They may be
   competitors, or non-competitors
-* User: a log-in-able account email/passwordt
+* User: a log-in-able account email/password
 
 The Event-Registration Schema (for registration details)
 --------------------------------------------------------
@@ -614,7 +614,7 @@ The Competition Results Data (for judging)
 ------------------------------------------
 * AgeGroupType: A defined set of age ranges.
 * AgeGroupEntries: Each age entry has a start-age and end-age.
-* WheelSize: The wheel size that the age enty must use, and the competitor must
+* WheelSize: The wheel size that the age entry must use, and the competitor must
   use.
 * Competitor: A grouping concept which associates registrants and
   EventCategories

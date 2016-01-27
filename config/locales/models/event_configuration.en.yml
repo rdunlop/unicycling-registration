@@ -4,16 +4,32 @@ en:
     attributes:
       event_configuration:
         competitor_benefits: Competitor Benefits
+        contact_email: Convention Email Contact
         dates_description: Dates Description
         event_url: Main Website
         location: Location
         long_name: Long Name
+        logo_file: Logo
         noncompetitor_benefits: NonCompetitor Benefits
         offline_payment: Provide details about offline payment
         offline_payment_description: Details for Offline Payment
         short_name: Short Name
         spectator_benefits: Spectator Benefits
         start_date: First Day of Competition
+        style_name: Webpage Style
+        under_construction: Under Construction
+        artistic_closed_date: Last day to accept new Artistic Registration
+        currency_code: Currency Code
+        paypal_mode: Paypal Mode
+        competitor: Competitor
+        noncompetitor: Non-Competitor
+        spectator: Spectator
+        comp_noncomp_page_id: "Competitor vs Non-Competitor description Page"
+        rules_file_name: Rules File PDF
+        accept_rules: Must Accept Rules
+        music_submission_end_date: Last day to accept Music Uploads
+        event_sign_up_closed_date: Last day to sign up for Events
+        custom_waiver_text: Custom Waiver Text
   helpers:
     submit:
       event_configuration:

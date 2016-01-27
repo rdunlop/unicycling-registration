@@ -1,10 +1,9 @@
-%h1 Waiver and Rules
+%h1= t(".header")
 
-%p
-  Specify the type of waiver which you want to provide to the registrants.
+%p= t(".description")
 
-%p
-  Optionally specify additional rules which you want to provide to the registrants. (e.g. Convention-specific adjustments to the IUF Rulebook)
+
+%p= t(".sub_description")
 
 = simple_form_for(@event_configuration, url: update_rules_waiver_event_configuration_path, method: :put, multipart: true) do |f|
   = render partial: "/shared/error_messages", object: @event_configuration
@@ -13,23 +12,23 @@
     %h3 Waiver
 
     = f.input :waiver, as: :radio_buttons, collection: [:none, :online, :print]
-    .help_bubble{ title: "Online: User is required to sign the waiver" }
-    .help_bubble{ title: "Print: We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)" }
+    .help_bubble{ title: t(".online_waiver_description") }
+    .help_bubble{ title: t(".print_waiver_description") }
 
     = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text
 
-    %h3 Rules
+    %h3= t(".rules")
 
     = f.input :rules_file_name
-    = f.input :accept_rules, hint: "Enable this to force all registrants to accept the rules attached in PDF"
+    = f.input :accept_rules
 
 
-    %h3 Rulebook
+    %h3= t(".rulebook")
 
     = f.input :rulebook_url
 
     %p
-      The current IUF Rulebook can be found at:
-      = link_to "https://unicycling.org/files/current-iuf-rulebook.pdf", "https://unicycling.org/files/current-iuf-rulebook.pdf"
+      = t(".current_iuf_rulebook_link")
+      = link_to("https://unicycling.org/files/current-iuf-rulebook.pdf", "https://unicycling.org/files/current-iuf-rulebook.pdf")
 
     = f.button :submit

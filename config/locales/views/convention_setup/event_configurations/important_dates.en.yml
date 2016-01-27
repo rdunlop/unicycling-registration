@@ -1,0 +1,9 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      important_dates:
+        header: Important Dates
+        description: If you do not specify a date, access will end when registration closes.
+        type_of_important_date: Important Date Type
+        effective_final_date: Effective Final Date

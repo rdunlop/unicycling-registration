@@ -1,0 +1,9 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      registrant_types:
+        header: Registrant Types
+        subheader: Registrant Types
+        offered_types: Registration Types Available
+        noncompetitor_description: "Non-Competitors cannot sign up for events"

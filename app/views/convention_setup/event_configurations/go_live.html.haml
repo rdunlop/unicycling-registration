@@ -1,11 +1,14 @@
-%h1 Go Live
+%h1= t(".header")
 
-%p The Current system is #{EventConfiguration.singleton.under_construction? ? "Under Construction" : "Live" }
+- if EventConfiguration.singleton.under_construction?
+  %p= t(".system_under_construction")
+- else
+  %p= t(".system_live")
 
-%p Setting "Under Construction" to False will enable users to create registrations.
+%p= t(".under_construction_description")
 %p
-  %b Note
-  You should be sure to set up Registration Costs or Event Costs before any user registers.
+  %b= t("note")
+  = t(".set_costs_warning")
 
 %fieldset.form__fieldset
   = simple_form_for(@event_configuration, url: update_go_live_event_configuration_path, method: :put) do |f|

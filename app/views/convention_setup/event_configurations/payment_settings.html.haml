@@ -1,18 +1,13 @@
-%h1 Payment Settings
+%h1= t(".header")
+
+%p= t(".description")
 
 %p
-  If you would like to receive payment via PayPal, enter your paypal account e-mail here.
-  You will also need to set up an IPN so that the registration website is informed of
-  payments.
-  %br
   For Additional Details on how to set up the IPN, please contact Robin or Scott.
   (we would like to have better documentation here...but...we would like a lot of things)
 
 %p
-  The URL for the IPN should be
-  - if @tenant.present?
-    = "http://#{@tenant.permanent_url}/payments/notification"
-
+  = t(".ipn_url", url: "http://#{@tenant.permanent_url}/payments/notification")
 
 %fieldset.form__fieldset
   = simple_form_for(@event_configuration, url: update_payment_settings_event_configuration_path, method: :put) do |f|

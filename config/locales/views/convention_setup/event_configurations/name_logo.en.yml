@@ -1,0 +1,8 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      name_logo:
+        header: Name & Logo
+        short_name_description: The Short Name will be used in places where the space is limited (e.g. many PDFs)
+        long_name_description: The Long Name, Location, and Dates Description will be used on the main webpage header.

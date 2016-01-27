@@ -1,0 +1,14 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      rules_waiver:
+        header: Waiver and Rules
+        description: Specify the type of waiver which you want to provide to the registrants.
+        sub_description: Optionally specify additional rules which you want to provide to the registrants. (e.g. Convention-specific adjustments to the IUF Rulebook)
+        online_waiver_description: "Online: User is required to sign the waiver"
+        print_waiver_description: "Print: We provide a waiver for the user to print/sign at the event. (available in advance on the website so that children can have their parents sign it)"
+        noncompetitor_description: "Non-Competitors cannot sign up for events"
+        rules: Rules
+        rulebook: Rulebook
+        current_iuf_rulebook_link: The current IUF Rulebook can be found at
