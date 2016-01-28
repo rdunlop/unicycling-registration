@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110004434) do
+ActiveRecord::Schema.define(version: 20160128023229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,8 @@ ActiveRecord::Schema.define(version: 20160110004434) do
     t.integer  "usa_family_membership_holder_id"
     t.string   "birthplace",                      limit: 255
     t.string   "italian_fiscal_code",             limit: 255
+    t.boolean  "usa_member_number_valid",                     default: false, null: false
+    t.string   "usa_member_number_status"
   end
 
   add_index "contact_details", ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree

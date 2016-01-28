@@ -37,6 +37,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   include CachedModel
 
   after_save :touch_members
+  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.usa? }
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
@@ -732,5 +733,13 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     else
       false
     end
+  end
+
+  private
+
+  # Queue a job to query the USA db for membership information
+  def update_usa_membership_status
+    return unless contact_detail.present? && last_name_changed?
+    UpdateUsaMembershipStatusWorker.perform_async(id, last_name, contact_detail.usa_member_number)
   end
 end

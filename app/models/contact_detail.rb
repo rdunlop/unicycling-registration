@@ -29,6 +29,8 @@
 #  usa_family_membership_holder_id :integer
 #  birthplace                      :string(255)
 #  italian_fiscal_code             :string(255)
+#  usa_member_number_valid         :boolean          default(FALSE), not null
+#  usa_member_number_status        :string
 #
 # Indexes
 #
@@ -48,6 +50,8 @@ class ContactDetail < ActiveRecord::Base
   validates :email, presence: true
   validates :birthplace, presence: true, if: "EventConfiguration.singleton.italian_requirements?"
   validates :italian_fiscal_code, format: { with: /\A[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]\Z/, message: "must be specified if you are from Italy" }, if: :vat_required?
+
+  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.usa? }
 
   # Italians are required to enter VAT_Number and Birthplace
   def vat_required?
@@ -79,5 +83,12 @@ class ContactDetail < ActiveRecord::Base
     else
       state_code
     end
+  end
+
+  private
+
+  def update_usa_membership_status
+    return unless usa_member_number_changed?
+    UpdateUsaMembershipStatusWorker.perform_async(registrant_id, registrant.last_name, usa_member_number)
   end
 end

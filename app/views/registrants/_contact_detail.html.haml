@@ -89,6 +89,7 @@
           .row
             .small-6.columns= f.label :usa_member_number
             .small-6.columns= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", title: t(".usa_membership_number_tooltip", convention_name: @config.short_name)
+          = render "/registrants/usa_membership_status", contact_detail: f.object
       %fieldset
         %legend= t(".emergency_contact")
         .row

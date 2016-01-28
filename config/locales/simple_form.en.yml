@@ -107,6 +107,7 @@ en:
         usa: |
           This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed.
           It also allows last-minute sign-up of competitors (by data-entry people)
+          It also causes the entered USA membership number to be confirmed with the USA membership database.
         iuf: Enabling this allows IUF membership questions.
         display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.
         test_mode: Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.

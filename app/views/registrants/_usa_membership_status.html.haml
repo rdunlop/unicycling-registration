@@ -1,0 +1,11 @@
+- if contact_detail.usa_member_number.present?
+  .row
+    .small-6.columns
+      USA membership status
+    .small-6.column
+      - if contact_detail.usa_member_number_valid?
+        %span.label.success Verified
+      - else
+        %span.label.alert Not Verified
+    .small-12.columns
+      = contact_detail.usa_member_number_status
