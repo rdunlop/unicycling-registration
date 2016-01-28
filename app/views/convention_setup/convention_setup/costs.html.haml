@@ -1,19 +1,19 @@
-%h2 Convention Setup
+%h2= t(".header")
 
-%p The Registration System can be configured to charge competitors with different settings:
+%p= t(".costs_settings")
 
-%h3 How much to charge the Registrants:
+%h3= t(".how_much_to_charge")
 %ul
   %li
-    Charge a price for Competitors, and Non-Competitors
-    (e.g. $50 for Early Competitor, $100 for Late Competitor)
+    = t(".charge_by_type")
+    = t(".charge_by_type_example")
     %br
     This is configured through the
     = link_to "Registration Costs", registration_costs_path
     menu
   %li
-    Charge by Event
-    (e.g. $5 for Individual Freestyle, $6 for Large Group.)
+    = t(".charge_by_event")
+    = t(".charge_by_event_example")
     %br
     This is configured on each individual
     = link_to "Event", convention_setup_categories_path
@@ -22,36 +22,37 @@
 = render "registration_costs/list", registrant_type: "noncompetitor"
 = render "registration_costs/events"
 
-%h3 Other Items for sale
+%h3= t(".other_items_for_sale")
 %p
   You may also have
   = link_to "Other Items for Sale", expense_groups_path
   (e.g. Lodging, Meals)
 
 
-%h3 How to charge Registrants
+%h3= t(".how_to_charge_registrants")
 %ul
   %li
     You can set the currency through
     = link_to "Payment Settings", payment_settings_event_configuration_path
   %li
-    Charge with Paypal.
+    = t(".money_through_paypal")
     %br
     This is configured through the
     = link_to "Payment Settings", payment_settings_event_configuration_path
   %li
-    Receive via Bank Transfer.
+    = t(".money_through_bank_transfer")
+
     %br
     You can specify instructions to the registrants for sending Bank Transfers on the
     = link_to "Payment Settings", payment_settings_event_configuration_path
 
-%h3 Discounts
+%h3= t(".discounts")
 %ul
   %li
     You can configure Coupons which can specify a discount to items through the
     = link_to "Coupon Codes", coupon_codes_path
 
-%h3 Wire/Bank Transfer
+%h3= t(".wire_bank_transfer")
 %ul
   %li
     If you receive money directly from a Registrant, you should mark that money as

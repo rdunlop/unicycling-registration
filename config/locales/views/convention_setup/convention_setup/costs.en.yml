@@ -1,0 +1,17 @@
+en:
+  convention_setup:
+    convention_setup:
+      costs:
+        header: Costs
+        costs_settings: "The Registration System can be configured to charge competitors with different settings:"
+        how_much_to_charge: "How much to charge the Registrants:"
+        charge_by_type: "Charge a price for Competitors, and Non-Competitors"
+        charge_by_type_example: "(e.g. $50 for Early Competitor, $100 for Late Competitor)"
+        charge_by_event: Charge by Event
+        charge_by_event_example: "(e.g. $5 for Individual Freestyle, $6 for Large Group.)"
+        other_items_for_sale: Other Items for sale
+        how_to_charge_registrants: How to charge Registrants
+        money_through_paypal: Receive Money with Paypal
+        money_through_bank_transfer: Receive Money via Bank Transfer
+        discounts: Discounts
+        wire_bank_transfer: "Wire/Bank Transfer"
