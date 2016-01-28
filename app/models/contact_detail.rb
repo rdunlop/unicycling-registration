@@ -88,7 +88,7 @@ class ContactDetail < ActiveRecord::Base
   private
 
   def update_usa_membership_status
-    return unless usa_member_number_changed?
+    return unless usa_member_number_changed? && registrant.present?
     UpdateUsaMembershipStatusWorker.perform_async(registrant_id, registrant.last_name, usa_member_number)
   end
 end
