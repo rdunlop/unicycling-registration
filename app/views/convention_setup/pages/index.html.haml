@@ -1,20 +1,20 @@
-%h1
-  Listing Information Pages
-%ul
-  %li Create Information Pages which are accessible to the public (available without logging in).
-  %li Links to these pages will appear in the top menu bar.
-  %li You can create a tree of pages.
+%h1= t(".header")
 
-%h4 Special Features
 %ul
-  %li If you create a page with the slug of `home`, it will become the default homepage for the convention.
-  %li If you create a page with the slug of `privacy-policy`, it will appear in the footer.
+  %li= t(".description")
+  %li= t(".pages_location_description")
+  %li= t(".pages_structure_description")
+
+%h4= t(".special_pages")
+%ul
+  %li= t(".home_page")
+  %li= t(".privacy_policy_page")
 
 %table
   %thead
     %tr
-      %th Slug (url)
-      %th Title
+      %th= Page.human_attribute_name(:slug)
+      %th= Page.human_attribute_name(:title)
       %th
       %th
       %th
@@ -23,8 +23,8 @@
       %tr
         %td= page.slug
         %td= page.title
-        %td= link_to 'Show', convention_setup_page_path(page)
-        %td= link_to 'Edit', edit_convention_setup_page_path(page)
-        %td= link_to 'Delete', [:convention_setup, page], method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to t("show"), convention_setup_page_path(page)
+        %td= link_to t("edit"), edit_convention_setup_page_path(page)
+        %td= link_to t("delete"), [:convention_setup, page], method: :delete, data: { confirm: t("are_you_sure") }
 
-= link_to "New Page", new_convention_setup_page_path
+= link_to t(".new_page"), new_convention_setup_page_path

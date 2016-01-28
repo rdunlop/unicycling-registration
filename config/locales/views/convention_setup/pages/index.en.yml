@@ -1,0 +1,13 @@
+---
+en:
+  convention_setup:
+    pages:
+      index:
+        header: Information Pages
+        description: Create Information Pages which are accessible to the public (available without logging in)
+        pages_location_description: Links to these pages will appear in the top menu bar
+        pages_structure_description: You can create a tree of pages
+        special_pages: Special Pages
+        home_page: "If you create a page with the slug of `home`, it will become the default homepage for the convention."
+        privacy_policy_page: "If you create a page with the slug of `privacy-policy`, it will appear in the footer."
+        new_page: New Page

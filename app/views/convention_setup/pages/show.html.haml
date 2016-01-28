@@ -1,5 +1,9 @@
-%h1 Slug: #{@page.slug}
+%h1
+  = Page.human_attribute_name(:slug)
+  \: #{@page.slug}
 
-%h2 Title: #{@page.title}
+%h2
+  = Page.human_attribute_name(:title)
+  \: #{@page.title}
 
 = @page.body.html_safe

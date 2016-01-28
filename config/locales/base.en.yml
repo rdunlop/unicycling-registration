@@ -15,12 +15,15 @@ en:
     - :month
     - :day
     - :year
+  delete: Delete
+  edit: Edit
   language_name: English
   'no': 'No'
   note: Note
   noncompetitor: Non-Competitor
   prices_increase_at_date: Prices Increase in %{end_date}
   prices_increase_soon: Prices Increase in less than 1 day
+  show: Show
   spectator: Spectator
   wizard:
     add_contact_details: Contact Details
