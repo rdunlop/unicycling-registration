@@ -1,12 +1,16 @@
 class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:data_entry_menu]
-  before_action :skip_authorization, only: [:index, :help, :feedback, :confirm]
+  before_action :skip_authorization, only: [:index, :help, :feedback, :confirm, :usa_membership]
 
   before_action :check_acceptable_format
 
   def help
     @contact_form = ContactForm.new
     @user = current_user
+  end
+
+  # GET /welcome/usa_membership
+  def usa_membership
   end
 
   def feedback
@@ -19,7 +23,7 @@ class WelcomeController < ApplicationController
     if @contact_form.valid? && captcha_valid?
       Notifications.send_feedback(@contact_form.serialize).deliver_later
       respond_to do |format|
-        format.html { redirect_to welcome_help_path, notice: 'Feedback sent successfully.' }
+        format.html { redirect_to help_welcome_path, notice: 'Feedback sent successfully.' }
       end
     else
       @user = current_user

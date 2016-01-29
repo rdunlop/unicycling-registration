@@ -35,8 +35,8 @@
 class RegistrantsController < ApplicationController
   before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
-  before_action :load_registrant_by_bib_number, only: [:show, :results, :destroy, :waiver]
-  before_action :authorize_registrant, only: [:show, :destroy, :waiver]
+  before_action :load_registrant_by_bib_number, only: [:show, :results, :refresh_usa_status, :destroy, :waiver]
+  before_action :authorize_registrant, only: [:show, :destroy, :refresh_usa_status, :waiver]
   before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
   before_action :skip_authorization, only: [:results]
 
@@ -137,6 +137,17 @@ class RegistrantsController < ApplicationController
         format.html { redirect_to root_path, alert: "Error deleting registrant" }
       end
     end
+  end
+
+  # PUT /registrants/:id/refresh
+  def refresh_usa_status
+    if @config.usa? && @registrant.contact_detail.present?
+      UpdateUsaMembershipStatusWorker.perform_async(
+        @registrant.id,
+        @registrant.last_name,
+        @registrant.contact_detail.usa_member_number)
+    end
+    render text: "", status: 200
   end
 
   def subregion_options

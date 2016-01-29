@@ -155,13 +155,11 @@ label input.boolean {
 }
 
 input.ui-tooltip {
-padding: 1px;
-
-position:relative;
-top: 0px;
-max-width: 10000px;
-box-shadow: none;
-z-index:1;
+  position:relative;
+  top: 0px;
+  max-width: 10000px;
+  box-shadow: none;
+  z-index:1;
 }
 
 .placeholder { color: #aaa; }

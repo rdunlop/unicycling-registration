@@ -3,7 +3,7 @@ require 'spec_helper'
 describe WelcomeController do
   describe "GET 'help'" do
     it "returns http success" do
-      get 'help'
+      get :help
       expect(response).to be_success
     end
   end
@@ -32,7 +32,7 @@ describe WelcomeController do
       @user = FactoryGirl.create(:user)
       sign_in @user
       expect do
-        get 'index', locale: 'humans', format: 'txt'
+        get :index, locale: 'humans', format: 'txt'
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
@@ -40,7 +40,7 @@ describe WelcomeController do
   describe "POST feedback" do
     it "returns http success" do
       post 'feedback', contact_form: { feedback: "Hello WorlD", email: "robin@dunlopweb.com"}
-      expect(response).to redirect_to(welcome_help_path)
+      expect(response).to redirect_to(help_welcome_path)
     end
     it "returns an error when no feedback" do
       post "feedback", contact_form: {feedback: nil}
@@ -78,6 +78,22 @@ describe WelcomeController do
         expect(@cf.username).to eq(@user.email)
         expect(@cf.registrants).to eq(@registrant.name)
       end
+    end
+  end
+
+  describe "GET usa_membership" do
+    describe "with USA enabled" do
+      let!(:event_configuration) { FactoryGirl.create(:event_configuration, :with_usa) }
+
+      it "returns http success" do
+        get :usa_membership
+        expect(response).to be_success
+      end
+    end
+
+    it "returns http success" do
+      get :usa_membership
+      expect(response).to be_success
     end
   end
 end

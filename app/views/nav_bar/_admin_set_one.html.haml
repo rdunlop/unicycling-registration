@@ -1,5 +1,5 @@
 - if policy(current_user).view_data_entry_menu?
-  %li= link_to t('.data_entry'), welcome_data_entry_menu_path
+  %li= link_to t('.data_entry'), data_entry_menu_welcome_path
 - if policy(@config).setup_convention?
   %li= link_to t('.convention_setup'), convention_setup_path
 - if policy(:admin_permission).index?

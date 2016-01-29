@@ -37,6 +37,18 @@ describe UpdateUsaMembershipStatusWorker do
     it "includes the target date" do
       expect(url).to include("strdatetocheck=2016-07-09")
     end
+
+    describe "special cases" do
+      describe "multiple words" do
+        let(:last_name) { "van der Velden" }
+        it { expect(url).to include("lastname=van+der+Velden") }
+      end
+
+      describe "apostrophes" do
+        let(:last_name) { "O'Brien" }
+        it { expect(url).to include("lastname=O%27Brien") }
+      end
+    end
   end
 
   describe "#call_api" do

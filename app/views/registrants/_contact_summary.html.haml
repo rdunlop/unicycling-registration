@@ -30,6 +30,12 @@
       %p
         %b= ContactDetail.human_attribute_name(:usa_member_number)
         = contact_detail.usa_member_number
+      %p
+        %b= ContactDetail.human_attribute_name(:usa_member_number_status)
+        = render "/registrants/usa_membership_badge", contact_detail: contact_detail
+        %span.non_printable
+          = link_to usa_membership_welcome_path, target: "_blank" do
+            %span.help_bubble{ title: "More details" }
     %p
       %b= t(".emergency_contact_name")
       = contact_detail.emergency_name

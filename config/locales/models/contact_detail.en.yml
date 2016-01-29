@@ -21,6 +21,7 @@ en:
         responsible_adult_phone: Primary Phone
         responsible_adult_name: Name
         usa_member_number: USA Membership Number
+        usa_member_number_status: USA Status
         zip: Zip
     models:
       contact_detail:

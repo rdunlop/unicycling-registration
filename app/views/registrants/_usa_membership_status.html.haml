@@ -2,10 +2,17 @@
   .row
     .small-6.columns
       USA membership status
-    .small-6.column
-      - if contact_detail.usa_member_number_valid?
-        %span.label.success Verified
-      - else
-        %span.label.alert Not Verified
-    .small-12.columns
+    .small-6.column.js--usa_member_status
+      = render "/registrants/usa_membership_badge", contact_detail: contact_detail
+      = link_to usa_membership_welcome_path, target: "_blank" do
+        %span.help_bubble{ title: "More details" }
+
+  .row.js--usa_member_status
+    .small-4.columns
+      USA Details
+    .small-8.columns
       = contact_detail.usa_member_number_status
+  .row
+    .small-12.columns
+      = link_to "Recheck USA Status", refresh_usa_status_registrant_path(contact_detail.registrant.bib_number), remote: true, method: :put, class: "js--usa_member_status_refresh"
+      = link_to "Reload Page", "javascript:window.location.reload()", class: "js--usa_member_refresh_notice is--hidden"

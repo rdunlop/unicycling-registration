@@ -9,6 +9,10 @@ class RegistrantPolicy < ApplicationPolicy
     user_record? || user.accessible_registrants.include?(record) || event_planner? || super_admin?
   end
 
+  def refresh_usa_status?
+    show?
+  end
+
   # ###########################
   # WIZARD STEPS
   # ###########################

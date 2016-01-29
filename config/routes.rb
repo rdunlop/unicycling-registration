@@ -359,6 +359,7 @@ Workspace::Application.routes.draw do
       member do
         get :results
         get :waiver
+        put :refresh_usa_status
       end
       resources :registrant_expense_items, only: [:create, :destroy]
       resources :standard_skill_routines, only: [:index, :create]
@@ -402,10 +403,15 @@ Workspace::Application.routes.draw do
       end
     end
     # get "results", to: "results#index"
-    get "welcome/help"
-    post "welcome/feedback"
-    get "welcome/confirm"
-    get 'welcome/data_entry_menu'
+    resource :welcome, only: [], controller: "welcome" do
+      collection do
+        get :help
+        post :feedback
+        get :confirm
+        get :data_entry_menu
+        get :usa_membership
+      end
+    end
 
     devise_for :users, controllers: { registrations: "registrations" }
 

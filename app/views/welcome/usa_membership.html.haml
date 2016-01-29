@@ -1,0 +1,38 @@
+%h1 USA Membership
+
+- if @config.usa?
+  .row
+    .small-12.columns
+      %p
+        During Registration, you will be asked for a USA membership number.
+        We will verify this number against the
+        = link_to "USA Membership Database", "https://www.memberuniusa.org/"
+        to confirm that your membership is valid for the current convention.
+
+      %p
+        All Competitors and Non-Competitors must be current USA Members.
+
+      %p
+        %b Current
+        is defined as "having a valid membership as of the first day of competition".
+
+      %p
+        It is the
+        = link_to "Unicycling Society of America", "http://uniusa.org/"
+        by which we have insurance and the ability to host events at a low cost
+        to attendees.
+
+      %p
+        You must have a valid USA Membership before you are able to pick up your
+        registration packet
+        %u (and before you can compete).
+
+      %p
+        If you believe that your USA Membership status is incorrect, please
+        = link_to "Send feedback", feedback_welcome_path
+        to the convention organizers.
+
+- else
+  %p
+    This convention is not a "USA" convention
+

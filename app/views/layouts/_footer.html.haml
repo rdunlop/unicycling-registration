@@ -5,7 +5,7 @@
         %li= link_to t("language_name", locale: locale), new_locale_path(locale), hreflang: locale, lang: locale
   = render "/attending/rulebook_link"
 
-  = link_to t('.help'), welcome_help_path
+  = link_to t('.help'), help_welcome_path
   - if Page.find_by(slug: 'privacy-policy')
     = link_to t('.privacy_policy'), page_path('privacy-policy')
   %p= t(".developed_by")
