@@ -6,6 +6,8 @@ class UpdateUsaMembershipStatusWorker
 
   # Query the USA membership API, and update the registrant record with the result
   def perform(registrant_id, last_name, usa_number)
+    return unless server.present?
+
     Rails.logger.debug "USA membership check for #{registrant_id}"
     registrant = Registrant.find(registrant_id)
     contact_detail = registrant.contact_detail
@@ -17,6 +19,8 @@ class UpdateUsaMembershipStatusWorker
     Rails.logger.debug "USA response: #{request}"
 
     process_response(contact_detail, JSON.parse(request))
+  rescue JSON::ParserError => ex
+    raise "Error (#{ex}) parsing response from USA database for #{request}"
   end
 
   # Build the API call URL
