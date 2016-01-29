@@ -89,6 +89,31 @@ describe ContactDetail do
     end
   end
 
+  context "with a db-backed contact_detail" do
+    let(:contact_detail) { FactoryGirl.create(:contact_detail) }
+
+    context "when usa mode is enabled" do
+      before do
+        EventConfiguration.singleton.update_attribute(:usa, true)
+      end
+
+      it "calls the update worker" do
+        expect(contact_detail).to receive(:update_usa_membership_status)
+        contact_detail.save
+      end
+    end
+    context "when usa mode is not enabled" do
+      before do
+        EventConfiguration.singleton.update_attribute(:usa, false)
+      end
+
+      it "does not call the update worker" do
+        expect(contact_detail).not_to receive(:update_usa_membership_status)
+        contact_detail.save
+      end
+    end
+  end
+
   it "requires city" do
     @cd.city = nil
     expect(@cd.valid?).to eq(false)
