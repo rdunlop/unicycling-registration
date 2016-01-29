@@ -28,6 +28,10 @@ class PagesController < ApplicationController
   private
 
   def determine_layout_from_params
-    "minimal" if params[:framed]
+    if params[:framed]
+      "minimal"
+    else
+      "pages"
+    end
   end
 end

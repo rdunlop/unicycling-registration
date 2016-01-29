@@ -1,0 +1,13 @@
+- content_for :content do
+  .main
+    = yield
+
+  - unless EventConfiguration.singleton.under_construction?
+    %hr
+    - if user_signed_in?
+      = link_to "Manage My Registrations", user_registrants_path(current_user), class: "button"
+    - else
+      To Begin Registration for #{@config.short_name}
+      = link_to "Sign In", new_user_session_path, class: "button"
+
+= render template: "layouts/application"
