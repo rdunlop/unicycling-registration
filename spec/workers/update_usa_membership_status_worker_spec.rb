@@ -12,7 +12,7 @@ describe UpdateUsaMembershipStatusWorker do
     allow(subject).to receive(:server).and_return(server)
     allow(subject).to receive(:endpoint).and_return(endpoint)
     allow(subject).to receive(:apikey).and_return(apikey)
-    allow(subject).to receive(:event_start_date).and_return(DateTime.new(2016, 7, 9))
+    allow(subject).to receive(:event_end_date).and_return(DateTime.new(2016, 7, 9))
   end
 
   describe "#build_url" do

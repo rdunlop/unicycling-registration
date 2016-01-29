@@ -29,7 +29,7 @@ class UpdateUsaMembershipStatusWorker
       apikey: apikey,
       membernum: usa_number,
       lastname: last_name,
-      strdatetocheck: event_start_date.strftime("%Y-%m-%d")
+      strdatetocheck: event_end_date.strftime("%Y-%m-%d")
     }
     URI::HTTPS.build(host: server, path: endpoint, query: query.to_query)
   end
@@ -54,7 +54,7 @@ class UpdateUsaMembershipStatusWorker
     Rails.application.secrets.usa_membership_api_key
   end
 
-  def event_start_date
-    EventConfiguration.singleton.start_date
+  def event_end_date
+    EventConfiguration.singleton.start_date + 10.days
   end
 end
