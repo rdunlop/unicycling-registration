@@ -1,0 +1,10 @@
+---
+en:
+  activerecord:
+    attributes:
+      expense_item:
+        cost: Cost
+    models:
+      expense_item:
+        one: Expense Item
+        other: Expense Items

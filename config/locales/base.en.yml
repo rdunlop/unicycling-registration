@@ -17,6 +17,7 @@ en:
     - :year
   delete: Delete
   edit: Edit
+  example: Example
   language_name: English
   'no': 'No'
   note: Note

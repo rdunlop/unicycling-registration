@@ -1,0 +1,14 @@
+en:
+  convention_setup:
+    registration_costs:
+      index:
+        header: Registration Costs
+        range_description: Each registration cost will define the range of dates that a user can register for the event at each price.
+        timezone_logic_description: |
+          Because the users may live in different timezones, in order to be fair to everyone,
+          the system will ALLOW paying the initial price until up to 1 full day after the registration period ends.
+          (depending on the location of the server)
+        timezone_logic_example: |
+          If the first registration period is Until April 20th,
+          Registrants will be able to pay the initial price until the server thinks that it is April 22nd.
+        new_registration_cost: New Registration Cost Entry

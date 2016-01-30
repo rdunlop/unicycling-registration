@@ -1,0 +1,13 @@
+---
+en:
+  activerecord:
+    attributes:
+      registration_cost:
+        name: Name
+        registrant_type: Registrant Type
+        start_date: Start Date
+        end_date: End Date
+    models:
+      registration_cost:
+        one: Registration Cost
+        other: Registration Costs

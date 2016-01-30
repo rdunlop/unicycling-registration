@@ -1,23 +1,24 @@
-%h1 Registration Costs
+%h1= t(".header")
+
+%p= t(".range_description")
 %p
-  Each registration cost will define the range of dates that a user can register for the event at each price.
-%p
-  = succeed ":" do
-    %b Note
-  Because the users may live in different timezones, in order to be fair to everyone, the system will ALLOW paying the initial price until up to 1 full day after the registration period ends.(depending on the location of the server)
+  %b= t("note")
+  \:
+  = t(".timezone_logic_description")
   %br
-  = succeed ":" do
-    %b Example
-  If the first registration period is Until April 20th, Registrants will be able to pay the initial price until the server thinks that it is April 22nd.
+  %b= t("example")
+  \:
+  = t(".timezone_logic_example")
   %br
+
 %table
   %thead
     %tr
-      %th Name
-      %th Type
-      %th Start date
-      %th End date
-      %th Cost
+      %th= RegistrationCost.human_attribute_name(:name)
+      %th= RegistrationCost.human_attribute_name(:registrant_type)
+      %th= RegistrationCost.human_attribute_name(:start_date)
+      %th= RegistrationCost.human_attribute_name(:end_date)
+      %th= ExpenseItem.human_attribute_name(:cost)
       %th
   %tbody
     - @registration_costs.each do |registration_cost|
@@ -27,7 +28,7 @@
         %td= registration_cost.start_date
         %td= registration_cost.end_date
         %td= registration_cost.expense_item.cost
-        %td= link_to 'Edit', edit_registration_cost_path(registration_cost)
+        %td= link_to t("edit"), edit_registration_cost_path(registration_cost)
 
 %br
-= link_to 'New Registration period', new_registration_cost_path
+= link_to t(".new_registration_cost"), new_registration_cost_path
