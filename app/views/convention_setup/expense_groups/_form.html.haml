@@ -5,11 +5,11 @@
   = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
   = f.input :info_page_id, collection: Page.ordinary
 
-  %h3 Does a Competitor get one free?
+  %h3= t(".competitor_get_one_free")
   = f.input :competitor_free_options, collection: ExpenseGroup.free_options
   = f.input :competitor_required
 
-  %h3 Does a NonCompetitor get one free?
+  %h3= t(".noncompetitor_get_one_free")
   = f.input :noncompetitor_free_options, collection: ExpenseGroup.free_options
   = f.input :noncompetitor_required
 

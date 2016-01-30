@@ -1,8 +1,6 @@
-%h1 #{@expense_group} - Expense Group Details
+%h1= t(".header", expense_group: @expense_group)
 
 %fieldset.form__fieldset
   = render 'form'
 
-= link_to 'Delete', @expense_group, method: :delete, data: { confirm: 'Are you sure?' }
-|
-\#{link_to 'Back', expense_groups_path}
+= link_to t(".delete"), @expense_group, method: :delete, data: { confirm: t("are_you_sure") }

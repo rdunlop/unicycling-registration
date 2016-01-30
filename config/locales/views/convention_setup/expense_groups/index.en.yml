@@ -1,0 +1,7 @@
+en:
+  convention_setup:
+    expense_groups:
+      index:
+        header: Items For Sale
+        description: "If you want to sell items (like T-Shirts, Lodging, etc.) create an Expense Group for set of items."
+        new_expense_group: New expense group
