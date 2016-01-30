@@ -35,6 +35,47 @@ If the competitors don't all start at the same time, you will probably have one 
 = image_tag "screenshots/sign_in_list_form.png", class: "screenshot"
 %hr
 
+%h3 Compete in Heats/Lanes
+
+%p
+  If you want to assign Heats/Lanes to the competitors <b>at the last minute</b> (e.g. at the track)
+  you can print a paper copy of all of the people who are signed up for the event,
+  and then assign them to heats/lanes using a laptop at the track.
+
+  %h4 Form
+  = image_tag "screenshots/heat_lane_pdf.png", class: "screenshot"
+
+  %h4 Heat/Lane Live Entry
+  = image_tag "screenshots/heat_lane_form.png", class: "screenshot"
+
+%p
+  If you want to assign Heats/Lanes to competitors <b>In advance</b> you can.
+  %ul
+    %li Display the registrant-entered Best Time information
+    %li Have the system pre-assign competitors to heats/lanes based on their entered best times
+    %li Manually adjust the pre-assigned heat/lane assignments
+
+%h4 Pre-Assign Heat/Lane
+= image_tag "screenshots/pre_assign_menu.png", class: "screenshot"
+
+%h4 Manually adjust Pre-Assignments
+= image_tag "screenshots/pre_assign_adjust.png", class: "screenshot"
+
+%h4 Files for E-Timers
+
+%h5 Registrants File
+
+%p You can download a list of all registrants for the timers to import into their system.
+
+= link_to "Sample Registrant File", download_file_event_competition_choices_path(@event, filename: "sample_competition_registrants.csv")
+
+%h5 EVT File
+
+%p Some E-Timer systems allow for "EVT" format files to specify the heat/lane assignments.
+
+%p Once the heats/lanes have been assigned, you can export an EVT file for the E-Timers
+
+= link_to "Sample EVT File", download_file_event_competition_choices_path(@event, filename: "heats_shortest-time-pop-up.evt")
 
 %h2 Start Line Data Recording
 
@@ -56,6 +97,22 @@ If the competitors don't all start at the same time, you will probably have one 
 %h4 Enter the results from that recording form
 = image_tag "screenshots/start_line_recording_two_line_form.png", class: "screenshot"
 
+%h3 Heat/Lane Assignment races
+
+%p
+  At the track, a track official can use an iPad to confirm the competitors are present
+  for their heats. This same view can also be useful for the E-Timer person, so that
+  they can confirm that they are recording entries for the correct number of competitors
+  and the correct lane numbers.
+
+= image_tag "screenshots/heat_lane_line_up_display.png", class: "screenshot"
+
+%p
+  If someone doesn't show up, or is disqualified during their attempt, the track
+  official can easily mark them as DQ.
+
+= image_tag "screenshots/heat_lane_line_up_dq.png", class: "screenshot"
+
 %hr
 %h2 Finish Line Data Recording
 
@@ -71,18 +128,27 @@ OR
 %h4 Import results from a CSV file
 = image_tag  "screenshots/finish_line_recording_import.png", class: "screenshot"
 
-%h4 Chip-Timing
+%h3 Chip-Timing
 
 %h4 Import Data file from E-Timer system
 = image_tag "screenshots/chip_timer_import.png", class: "screenshot"
 
-%hr
-?? Describe how the above settings should be configured.
-
-If there is any chip/camera timing, then you should configure that as well, so that you can export the competitor list, and import the results from the e-timer system.
+%h3 Track E-Timer
 
 %p
-  Examples with pictures here ????
+  Track races are usually done with a Photo-Finish system. To process these files,
+  the competitions system is able to process "LIF" format output files.
+
+= link_to "Sample LIF File", download_file_event_competition_choices_path(@event, filename: "heat_01.lif")
+%h4 Steps to process as LIF file
+%ul
+  %li Choose the Heat to import
+  %li Import the LIF file, and compare it against the track-official's notes for DQs
+  %li Approve the results
+  %li (Optionally) Calculate+Print Age-Group results once all heats of an age group have run.
+
+%h4 Import LIF File and view results
+= image_tag "screenshots/track_lif_import.png", class: "screenshot"
 
 %hr
 

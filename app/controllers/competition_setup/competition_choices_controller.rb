@@ -50,10 +50,31 @@ class CompetitionSetup::CompetitionChoicesController < CompetitionSetup::BaseCom
   def custom
   end
 
+  # Download a sample data file.
+  def download_file
+    filename = validate_file(params[:filename])
+    return unless filename.present?
+    send_file(
+      "#{Rails.root}/public/sample_data/#{filename}",
+      filename: filename
+    )
+  end
+
   private
 
   def set_competition_choices_breadcrumb
     add_breadcrumb "Competition Choices", event_competition_choices_path(@event)
+  end
+
+  # Internal: ensure that the specified filename is one of the
+  # expected filenames
+  def validate_file(filename)
+    allowed_names = [
+      "heats_shortest-time-pop-up.evt",
+      "sample_competition_registrants.csv",
+      "heat_01.lif"
+    ]
+    return filename if allowed_names.include?(filename)
   end
 
   def authorize_director_management

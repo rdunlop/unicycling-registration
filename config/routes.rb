@@ -238,6 +238,7 @@ Workspace::Application.routes.draw do
           get :street
           get :overall_champion
           get :custom
+          get :download_file
         end
       end
     end

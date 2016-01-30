@@ -1,6 +1,12 @@
-%h1 Track importer heat index
+%h1 Track E-Timer Import
 
-%p Choose which heat:
+%p
+  %b IMPORTANT
+  Please ensure that the E-Timer has their camera set to THOUSANDS precision.
+  (this system expects 3 decimal places of precision)
+
+%p Choose which heat to import:
+
 %ul
   - 1.upto(@max_heat) do |heat|
     %li= link_to "Heat #{heat}", competition_heat_review_path(@competition, heat)
