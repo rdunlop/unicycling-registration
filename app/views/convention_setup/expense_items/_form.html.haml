@@ -9,7 +9,7 @@
   = text_field_tag :total, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
 
   %hr
-  %h4 Advanced Options
+  %h4= t(".advanced_options")
   = f.input :has_details, input_html: { class: "js--inputEnable", data: { targets: "js--labelConditional" } }
   = f.input :details_label, input_html: { class: "js--labelConditional" }
 

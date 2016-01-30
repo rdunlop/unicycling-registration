@@ -1,0 +1,7 @@
+en:
+  convention_setup:
+    expense_items:
+      index:
+        header: "Listing %{expense_group} expense items"
+        description: "Create an Expense Item for each type of %{expense_group} you want to sell. E.g. Small T-Shirt..."
+        new_expense_item: New expense item

@@ -3,8 +3,11 @@ en:
   activerecord:
     attributes:
       expense_item:
+        name: Name
         cost: Cost
+        tax: Tax
         total: Total
+        total_cost: Total (calculated)
     models:
       expense_item:
         one: Expense Item

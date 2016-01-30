@@ -1,4 +1,5 @@
-%h1 Editing expense item
+%h1= t(".header")
+
 %fieldset.form__fieldset
   = render 'form'
-= link_to 'Back', expense_group_expense_items_path(@expense_group)
+= link_to t("back"), expense_group_expense_items_path(@expense_group)
