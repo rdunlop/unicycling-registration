@@ -1,55 +1,71 @@
-%h1 Import Chip CSV Data
+%h1 Import Chip Data
 
-%h2 CSV Import Instructions
+%h2 Chip-Data Import Instructions
 
-This page is  for e-timer data import.
+%p This page is  for e-timer data import.
 
-%br
+%p Please import a Semi-Colon-Separated-File file with the following format (for 'Distance' competitions).
 
-The document should begin with a header line (which will be ignored).
-%br
+%h3 Document Format
+.row
+  .small-12.columns
+    The document should begin with a header line (which will be ignored).
+.row
+  .small-12.columns
+    Different E-Timer systems output the data in different formats. In order to accommodate the different
+    formats, you must specify the column which contains the ID and the column which contains the time.
 
-Please import a Semi-Colon-Separated-File file with the following format (for 'Distance' competitions).
+    %ul
+      %li ID
+      %li Time (hours:minutes:seconds.thousands)
 
-%br
-Example:
-%pre 22;557;10k-Unl-1 (10:00);02/08/2014 10:13:00;Bruce Lee;4;00:23:28.106;16;00:05:54.972;00:05:54.972;00:05:56.526;00:05:49.218;00:05:47.390;104295;1
-%b Column 7
+.row
+  .small-12.columns
+    %b Example Entry
+    (ID: Column 2 (<b>557</b>), Time: Column 7 (<b>00:23:28.106</b>))
+  .small-12.columns
+    %pre 22;557;10k-Unl-1 (10:00);02/08/2014 10:13:00;Bruce Lee;4;00:23:28.106;16;00:05:54.972;00:05:54.972;00:05:56.526;00:05:49.218;00:05:47.390;104295;1
 
-Another example, with different format:
-%pre 1;178;Felix Dietze;DH Glide;2;00:00:34.201;2;00:00:34.201;00:00:35.339;-;103879
-%b Column 6
+.row
+  .small-12.columns
+    %b Example Entry
+    (ID: Column 2 (<b>178</b>), Time: Column 6 (<b>00:00:34.201</b>))
+  .small-12.columns
+    %pre 1;178;Felix Dietze;DH Glide;2;00:00:34.201;2;00:00:34.201;00:00:35.339;-;103879
 
-%ul
-  %li Column 2: ID
-  %li Column 6: Time (hours:minutes:seconds.thousands)
+%hr
+
+%h3 Upload Data
 
 = form_tag(import_chip_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
-  = label_tag :file, "Source File"
-  = file_field_tag :file
-  %br
-  = label_tag :bib_number_column_number
-  = number_field_tag :bib_number_column_number
-  %br
-  This column number starts counting at 1
-  %br
-  %br
-  = label_tag :time_column_number
-  = number_field_tag :time_column_number
-  %br
-  This column number starts counting at 1
-  %br
-  = label_tag :lap_column_number
-  = number_field_tag :lap_column_number
-  %br
-  This column number starts counting at 1
-  %br
-  %br
-  = label_tag :number_of_decimal_places
-  = number_field_tag :number_of_decimal_places, 3
-  %br
+  .row
+    .small-6.columns
+      = label_tag :file, "Source File"
+    .small-6.columns
+      = file_field_tag :file
+  .row
+    .small-6.columns
+      = label_tag :bib_number_column_number
+    .small-6.columns
+      = number_field_tag :bib_number_column_number
+  .row
+    .small-6.columns
+      = label_tag :time_column_number
+    .small-6.columns
+      = number_field_tag :time_column_number
+  .row
+    .small-6.columns
+      = label_tag :lap_column_number
+    .small-6.columns
+      = number_field_tag :lap_column_number
+  .row
+    .small-6.columns
+      = label_tag :number_of_decimal_places
+    .small-6.columns
+      = number_field_tag :number_of_decimal_places, 3
   = submit_tag "Load Chip File to Temp Table", class: "button"
 
+%hr
 = render :partial => "imported_time_results"
 
 = link_to "Review", review_user_competition_import_results_path(@user, @competition), class: "action_button"

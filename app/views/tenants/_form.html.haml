@@ -3,8 +3,11 @@
 
   %p
     In order to create a convention, you must prove you are allowed to do so by entering the Creation Access code.
-  = label_tag :code, "Creation Access Code"
-  = password_field_tag :code
+  .row
+    .small-4.columns
+      = label_tag :code, "Creation Access Code"
+    .small-8.columns
+      = password_field_tag :code
 
   %br
   %br

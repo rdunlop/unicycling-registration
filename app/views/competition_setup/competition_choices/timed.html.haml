@@ -21,19 +21,45 @@ If the competitors don't all start at the same time, you will probably have one 
     If each wave starts at a different time on a common stopwatch, the Event Director will be able to set the Wave Start Times.
   %li
     Start at will when the competitor arrives at the start line. (e.g. Muni Downhill)
+%hr
 
-%h4 Mass Start
 
-%p You can print sign in lists
+%h2 Data Recording
+
+%h3 Mass Start
+
+%h4 You can print sign in lists
 = image_tag "screenshots/shortest_time_mass_start.png", class: "screenshot"
 
-%p And enter the sign in results
+%h4 And enter the sign in results
 = image_tag "screenshots/sign_in_list_form.png", class: "screenshot"
+%hr
+
+
+%h2 Start Line Data Recording
+
+%h3 Two Data per Line
+
+%p
+  Most useful when competitors get two attempts at a competition, but don't have
+  to compete in a particular order. The official at the start line records their
+  start times (against a common clock).
+
+%p
+  In most circumstances, the finish line judge doesn't communicate with the start
+  line official, but only records the ID/time of each person to cross the line,
+  and the difference-in-time is calculated by the judging system.
+
+%h4 Print a paper recording form for the start line
+= image_tag "screenshots/start_line_recording_two_line.png", class: "screenshot"
+
+%h4 Enter the results from that recording form
+= image_tag "screenshots/start_line_recording_two_line_form.png", class: "screenshot"
 
 %hr
-%h4 Finish Line Data Recording
+%h2 Finish Line Data Recording
 
-%b One Data per line
+%h3 One Data per line
 
 %h4 Print a paper recording form for the finish line
 = image_tag "screenshots/finish_line_recording_pdf.png", class: "screenshot"
@@ -41,8 +67,14 @@ If the competitors don't all start at the same time, you will probably have one 
 %h4 Enter the results from that recording form
 = image_tag "screenshots/finish_line_recording_form.png", class: "screenshot"
 
+OR
 %h4 Import results from a CSV file
 = image_tag  "screenshots/finish_line_recording_import.png", class: "screenshot"
+
+%h4 Chip-Timing
+
+%h4 Import Data file from E-Timer system
+= image_tag "screenshots/chip_timer_import.png", class: "screenshot"
 
 %hr
 ?? Describe how the above settings should be configured.
