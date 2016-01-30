@@ -1,5 +1,35 @@
 %h1 Flatland Competition
 
+%h2 Competitor Order
+
+%p
+  The Event Director can configure the order in which competitors are expected to compete
+
+= image_tag "screenshots/flatland_order.png", class: "screenshot"
+
+%h2 Manage Judges
+
+%p
+  The Event director can configure a number of judge users who will be able to enter results
+
+= image_tag "screenshots/flatland_judge_selection.png", class: "screenshot"
+
+%h2 Enter Judging Results
+
+%p
+  Each Judge will be able to enter results for all competitors.
+
+= image_tag "screenshots/flatland_judge_data_entry_1.png", class: "screenshot"
+= image_tag "screenshots/flatland_judge_data_entry_2.png", class: "screenshot"
+
+%h2 Results Monitoring
+
+%p
+  The Event Director can monitor the number of results entered by each judge
+
+= image_tag "screenshots/flatland_judge_data_monitoring.png", class: "screenshot"
+= image_tag "screenshots/flatland_judge_data_monitoring_details.png", class: "screenshot"
+
 %p
   - params = { "competition[scoring_class]" => "Flatland", "competition[num_members_per_competitor]" => "One" }
   = link_to "Click here", new_event_competition_path(@event, params), class: "button"
