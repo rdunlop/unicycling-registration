@@ -1,34 +1,29 @@
 = simple_form_for(@registration_cost) do |f|
   = render partial: "shared/error_messages", object: @registration_cost
   .row
-    .small-4.columns
-      = f.input :name
-    .small-4.columns
+    .small-6.columns
       = f.input :registrant_type, as: :select, collection: %w(competitor noncompetitor)
-    .small-4.columns
-      = f.input :onsite
-      .help_bubble{ title: "This causes the 'Online Registration Closes' banner to be displayed appropriately in the Cost tables" }
+    .small-6.columns
+      = f.input :name
   .row
     .small-12.columns
-      .input_details
-        Traditionally, online registration closes a little before the convention starts, and on-site registration is only allowed in the registration-hall, on convention-controlled computers.
-      .input_details
-        This allows coordination of printing registration packets, preparing competitor lists, and other last-minute minutae
+      = t(".registration_costs_increase_description_html")
+  .row
+    .small-12.columns
+      = f.input :onsite
 
   .row
     .small-6.columns
       = f.input :start_date, as: :date_picker
-      .help_bubble{ title: "Specify the Date following the previous period's 'End Date'" }
-
     .small-6.columns
       = f.input :end_date, as: :date_picker
-      .help_bubble{ title: "Specify the last date that these prices apply" }
+
   .row
     .small-12.columns
-      .input_details
-        Because many people only pay at the last possible minute, the price automatically increases ~36 hours after end of the End Date. This allows last-minute registrants a reprieve.
+      %b= t("note")
+      = t(".last_minute_note")
 
-  %h3.row Cost
+  %h3.row= t(".cost_header")
   = f.simple_fields_for :expense_item do |ce|
     .row
       .small-4.columns
@@ -36,7 +31,7 @@
       .small-4.columns
         = ce.input :tax, input_html: { class: "js--costInput" }
       .small-4.columns
-        Total
+        = ExpenseItem.human_attribute_name(:total)
         = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
 
   .row

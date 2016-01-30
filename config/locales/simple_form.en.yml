@@ -126,6 +126,9 @@ en:
         position: Order the pages under a single parent page
       registrant_best_times:
         source_location: Enter Name and Date
+      registration_cost:
+        start_date: Specify the Date following the previous period's 'End Date'
+        end_date: Specify the last date that these prices apply
       wave_time:
         scheduled_time: "E.g. 02:00, 03:00"
     options:

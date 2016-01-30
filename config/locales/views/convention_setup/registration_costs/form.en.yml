@@ -1,0 +1,18 @@
+en:
+  convention_setup:
+    registration_costs:
+      form:
+        header: Editing %{registration_cost} Registration Cost
+        registration_costs_increase_description_html: |
+          Traditionally, online registration closes a little before the convention
+          starts, and on-site registration is only allowed in the registration-hall, on convention-controlled computers.
+          <br>
+          This allows coordination of printing registration packets, preparing
+          competitor lists, and other last-minute minutae
+          <br>
+          Setting a Registration Cost as "On-Site" causes the 'Online Registration Closes'
+          banner to be displayed appropriately in the Cost tables
+        last_minute_note: |
+          Because many people only pay at the last possible minute, the price automatically increases ~36 hours after
+          end of the End Date. This allows last-minute registrants a reprieve. (and also many last-minute registrants)
+        cost_header: Cost

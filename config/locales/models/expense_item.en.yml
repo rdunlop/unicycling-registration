@@ -4,6 +4,7 @@ en:
     attributes:
       expense_item:
         cost: Cost
+        total: Total
     models:
       expense_item:
         one: Expense Item

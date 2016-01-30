@@ -7,6 +7,7 @@ en:
         registrant_type: Registrant Type
         start_date: Start Date
         end_date: End Date
+        onsite: On-Site
     models:
       registration_cost:
         one: Registration Cost
