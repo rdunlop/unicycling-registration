@@ -739,7 +739,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
 
   # Queue a job to query the USA db for membership information
   def update_usa_membership_status
-    return unless contact_detail.present? && last_name_changed?
+    return unless contact_detail.present? && contact_detail.usa_member_number.present? && last_name_changed?
     UpdateUsaMembershipStatusWorker.perform_async(id, last_name, contact_detail.usa_member_number)
   end
 end
