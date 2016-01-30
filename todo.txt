@@ -1,3 +1,5 @@
+- Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
+- 
 "Judging Session"
 "Large Group freestyle"
 
