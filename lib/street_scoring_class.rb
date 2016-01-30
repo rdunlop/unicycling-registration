@@ -7,7 +7,7 @@ class StreetScoringClass < BaseScoringClass
   end
 
   def scoring_description
-    "A varation of the artistic scoring, for use in street comp"
+    "A variation of the artistic scoring, for use in street comp"
   end
 
   # describes how to label the results of this competition

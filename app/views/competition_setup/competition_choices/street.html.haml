@@ -1,5 +1,37 @@
 %h1 Street Comp
 
+%h2 Competitor Order
+
+%p
+  The Event Director can configure the order in which competitors are expected to compete
+
+= image_tag "screenshots/flatland_order.png", class: "screenshot"
+
+%h2 Manage Judges
+
+%p
+  The Event director can configure a number of judge users for each of 3 different "zones".
+  Each judge will be able to enter results
+
+= image_tag "screenshots/street_judge_selection.png", class: "screenshot"
+
+%h2 Enter Judging Results
+
+%p
+  Each Judge will be able to enter results for all competitors.
+
+= image_tag "screenshots/street_judge_data_entry_1.png", class: "screenshot"
+= image_tag "screenshots/street_judge_data_entry_2.png", class: "screenshot"
+
+%h2 Results Monitoring
+
+%p
+  The Event Director can monitor the number of results entered by each judge
+
+= image_tag "screenshots/street_judge_data_monitoring.png", class: "screenshot"
+= image_tag "screenshots/street_judge_data_monitoring_details.png", class: "screenshot"
+
+
 There are a number of Street Comp scoring options
 
 %p
@@ -7,6 +39,10 @@ There are a number of Street Comp scoring options
   = link_to "Click here", new_event_competition_path(@event, params), class: "button"
   to continue setting up your Street Competition.
 
+%p Street Final differs in the following ways
+%ul
+  %li Higher Scores are better
+  %li Placing Points are used  (points_per_rank: [10, 7, 5, 3, 2, 1])
 %p
   - params = { "competition[scoring_class]" => "Street Final", "competition[num_members_per_competitor]" => "One" }
   = link_to "Click here", new_event_competition_path(@event, params), class: "button"
