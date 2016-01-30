@@ -42,6 +42,26 @@ class RegistrantEventSignUp < ActiveRecord::Base
     includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)
   end
 
+  def event_category_name
+    event_category.name.to_s if event.event_categories.size > 1
+  end
+
+  # Create a registrantExpenseItem to pay for this event sign up
+  def create_reg_item
+    return unless event.expense_item.present?
+
+    if signed_up?
+      registrant.build_registration_item(event.expense_item)
+    else
+      registrant.remove_registration_item(event.expense_item)
+    end
+    registrant.save!
+  end
+
+  delegate :to_s, to: :event_category
+
+  private
+
   def auto_create_competitor
     if signed_up
       event_category.competitions_being_fed(registrant).each do |competition|
@@ -52,33 +72,25 @@ class RegistrantEventSignUp < ActiveRecord::Base
     end
   end
 
-  def event_category_name
-    event_category.name.to_s if event.event_categories.size > 1
-  end
-
   def mark_member_as_dropped
     # was signed up and now we are not
+    # Find any members which are assigned to compettiions, and mark them as "withdrawn"
     if signed_up_was && signed_up_changed? && !signed_up
-      ec = EventCategory.find(event_category_id_was)
-      ec.competitions_being_fed(registrant).each do |competition|
-        member = registrant.members.find{|mem| mem.competitor.competition == competition}
-        if member
-          member.update_attributes(dropped_from_registration: true)
-          competitor = member.competitor
-          if competitor.active? && competition.num_members_per_competitor == "One"
-            competitor.update_attributes(status: "withdrawn")
-          end
-        end
-      end
+      drop_from_event_category(event_category_id_was)
     end
 
-    # handle changing category
-    if signed_up && event_category_id_changed? && !event_category_id_was.nil?
-      old_category = EventCategory.find(event_category_id_was)
-      old_category.competitions_being_fed(registrant).each do |competition|
-        member = registrant.members.find{|mem| mem.competitor.try(:competition) == competition}
-        member.update_attributes(dropped_from_registration: true) if member
-        # NOTE: This is the same as the above function. wtf robin
+    # handle changing category, while still signed up.
+    if signed_up && signed_up_was && event_category_id_changed? && !event_category_id_was.nil?
+      drop_from_event_category(event_category_id_was)
+    end
+  end
+
+  def drop_from_event_category(event_category_id)
+    ec = EventCategory.find(event_category_id)
+    ec.competitions_being_fed(registrant).each do |competition|
+      member = registrant.members.find{|mem| mem.competitor.competition == competition}
+      if member
+        member.update_attributes(dropped_from_registration: true)
         competitor = member.competitor
         if competitor.active? && competition.num_members_per_competitor == "One"
           competitor.update_attributes(status: "withdrawn")
@@ -101,18 +113,4 @@ class RegistrantEventSignUp < ActiveRecord::Base
       end
     end
   end
-
-  # Create a registrantExpenseItem to pay for this event sign up
-  def create_reg_item
-    return unless event.expense_item.present?
-
-    if signed_up?
-      registrant.build_registration_item(event.expense_item)
-    else
-      registrant.remove_registration_item(event.expense_item)
-    end
-    registrant.save!
-  end
-
-  delegate :to_s, to: :event_category
 end
