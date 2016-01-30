@@ -35,12 +35,13 @@ OR
 
 %hr
 
-%p
-  - params = { "competition[scoring_class]" => "Points Low to High", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your "Lower points are better" Competition.
+- if @event.present?
+  %p
+    - params = { "competition[scoring_class]" => "Points Low to High", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your "Lower points are better" Competition.
 
-%p
-  - params = { "competition[scoring_class]" => "Points High to Low", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your "Higher Points are Better" Competition.
+  %p
+    - params = { "competition[scoring_class]" => "Points High to Low", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your "Higher Points are Better" Competition.

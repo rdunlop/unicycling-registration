@@ -67,7 +67,7 @@ If the competitors don't all start at the same time, you will probably have one 
 
 %p You can download a list of all registrants for the timers to import into their system.
 
-= link_to "Sample Registrant File", download_file_event_competition_choices_path(@event, filename: "sample_competition_registrants.csv")
+= example_download_link("Sample Registrant File", "sample_competition_registrants.csv")
 
 %h5 EVT File
 
@@ -75,7 +75,7 @@ If the competitors don't all start at the same time, you will probably have one 
 
 %p Once the heats/lanes have been assigned, you can export an EVT file for the E-Timers
 
-= link_to "Sample EVT File", download_file_event_competition_choices_path(@event, filename: "heats_shortest-time-pop-up.evt")
+= example_download_link("Sample EVT File", "heats_shortest-time-pop-up.evt")
 
 %h2 Start Line Data Recording
 
@@ -139,7 +139,8 @@ OR
   Track races are usually done with a Photo-Finish system. To process these files,
   the competitions system is able to process "LIF" format output files.
 
-= link_to "Sample LIF File", download_file_event_competition_choices_path(@event, filename: "heat_01.lif")
+= example_download_link("Sample LIF File", "heat_01.lif")
+
 %h4 Steps to process as LIF file
 %ul
   %li Choose the Heat to import
@@ -152,17 +153,18 @@ OR
 
 %hr
 
-%p
-  - params = { "competition[scoring_class]" => "Shortest Time", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Faster-is-better Timed Competition
+- if @event.present?
+  %p
+    - params = { "competition[scoring_class]" => "Shortest Time", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Faster-is-better Timed Competition
 
-%p
-  - params = { "competition[scoring_class]" => "Longest Time", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Slower-is-better Timed Competition
+  %p
+    - params = { "competition[scoring_class]" => "Longest Time", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Slower-is-better Timed Competition
 
-%p
-  - params = { "competition[scoring_class]" => "Timed Multi-Lap", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Multi-Lap Timed Competition
+  %p
+    - params = { "competition[scoring_class]" => "Timed Multi-Lap", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Multi-Lap Timed Competition

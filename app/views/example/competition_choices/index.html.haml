@@ -27,14 +27,16 @@
   Please choose from an option below in order to see the implications and options
   for that option
 
+
 %hr
 %ul
-  %li= link_to "Freestyle", freestyle_event_competition_choices_path(@event)
-  %li= link_to "Standard Skill", standard_skill_event_competition_choices_path(@event)
-  %li= link_to "High Jump/Long Jump", high_long_event_competition_choices_path(@event)
-  %li= link_to "Timed Races", timed_event_competition_choices_path(@event)
-  %li= link_to "Points", points_event_competition_choices_path(@event)
-  %li= link_to "Flatland", flatland_event_competition_choices_path(@event)
-  %li= link_to "Street", street_event_competition_choices_path(@event)
-  %li= link_to "Overall Champion", overall_champion_event_competition_choices_path(@event)
-  %li= link_to "Custom", custom_event_competition_choices_path(@event)
+  %li= example_link("Freestyle", :freestyle)
+  %li= example_link("Freestyle", :freestyle)
+  %li= example_link("Standard Skill", :standard_skill)
+  %li= example_link("High Jump/Long Jump", :high_long)
+  %li= example_link("Timed Races", :timed)
+  %li= example_link("Points", :points)
+  %li= example_link("Flatland", :flatland)
+  %li= example_link("Street", :street)
+  %li= example_link("Overall Champion", :overall_champion)
+  %li= example_link("Custom", :custom)

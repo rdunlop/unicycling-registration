@@ -1,8 +1,6 @@
-class CompetitionSetup::CompetitionChoicesController < CompetitionSetup::BaseCompetitionSetupController
-  before_action :authenticate_user!
-  before_action :authorize_director_management
-  before_action :load_event
-  before_action :set_competition_choices_breadcrumb
+class Example::CompetitionChoicesController < ApplicationController
+  before_action :set_priviledge_if_event_scoped
+  layout :event_scoped_or_public
 
   # GET /competition_setup/events/1/competition_choices
   def index
@@ -27,12 +25,6 @@ class CompetitionSetup::CompetitionChoicesController < CompetitionSetup::BaseCom
   end
 
   def timed
-  end
-
-  def multi_lap
-  end
-
-  def slow
   end
 
   def points
@@ -61,6 +53,27 @@ class CompetitionSetup::CompetitionChoicesController < CompetitionSetup::BaseCom
   end
 
   private
+
+  # If we are being invoked within a /event/:id/competition_choices scope
+  # we should ensure that we are allowed to be there
+  def set_priviledge_if_event_scoped
+    if params[:event_id]
+      authenticate_user!
+      authorize_director_management
+      load_event
+      add_breadcrumb "Competition Setup", competition_setup_path
+      set_competition_choices_breadcrumb
+    else
+      # If from the public, allow anyone to view these end-points
+      skip_authorization
+    end
+  end
+
+  def event_scoped_or_public
+    if params[:event_id]
+      "competition_setup"
+    end
+  end
 
   def set_competition_choices_breadcrumb
     add_breadcrumb "Competition Choices", event_competition_choices_path(@event)

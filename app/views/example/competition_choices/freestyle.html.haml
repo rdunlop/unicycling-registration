@@ -28,6 +28,6 @@
 %p
   What type of Freestyle Competition are you creating?
   %ul
-    %li= link_to "Individual", individual_event_competition_choices_path(@event)
-    %li= link_to "Pairs", pairs_event_competition_choices_path(@event)
-    %li= link_to "Group", group_event_competition_choices_path(@event)
+    %li= example_link("Individual", :individual)
+    %li= example_link("Pairs", :pairs)
+    %li= example_link("Group", :group)

@@ -32,18 +32,20 @@
 = image_tag "screenshots/street_judge_data_monitoring_details.png", class: "screenshot"
 
 
-There are a number of Street Comp scoring options
+There are 2 Street Comp scoring options, normal, and "finals".
 
-%p
-  - params = { "competition[scoring_class]" => "Street", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Street Competition.
+- if @event.present?
 
-%p Street Final differs in the following ways
-%ul
-  %li Higher Scores are better
-  %li Placing Points are used  (points_per_rank: [10, 7, 5, 3, 2, 1])
-%p
-  - params = { "competition[scoring_class]" => "Street Final", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Street <b>Final</b> Competition.
+  %p
+    - params = { "competition[scoring_class]" => "Street", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Street Competition.
+
+  %p Street Final differs in the following ways
+  %ul
+    %li Higher Scores are better
+    %li Placing Points are used  (points_per_rank: [10, 7, 5, 3, 2, 1])
+  %p
+    - params = { "competition[scoring_class]" => "Street Final", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Street <b>Final</b> Competition.

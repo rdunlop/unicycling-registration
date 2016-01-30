@@ -27,7 +27,8 @@
   = image_tag "standard_skill_judging_results_example.png"
 
 
-%p
-  - params = { "competition[scoring_class]" => "Standard Skill", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Standard Skill Competition
+- if @event.present?
+  %p
+    - params = { "competition[scoring_class]" => "Standard Skill", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Standard Skill Competition

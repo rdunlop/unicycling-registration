@@ -1,0 +1,6 @@
+%h1 Custom Competition
+
+- if @event.present?
+  %p
+    = link_to "Click here", new_event_competition_path(@event), class: "button"
+    to continue setting up your Custom Competition.

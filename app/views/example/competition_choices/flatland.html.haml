@@ -30,7 +30,8 @@
 = image_tag "screenshots/flatland_judge_data_monitoring.png", class: "screenshot"
 = image_tag "screenshots/flatland_judge_data_monitoring_details.png", class: "screenshot"
 
-%p
-  - params = { "competition[scoring_class]" => "Flatland", "competition[num_members_per_competitor]" => "One" }
-  = link_to "Click here", new_event_competition_path(@event, params), class: "button"
-  to continue setting up your Flatland Competition.
+- if @event.present?
+  %p
+    - params = { "competition[scoring_class]" => "Flatland", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your Flatland Competition.

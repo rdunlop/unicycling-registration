@@ -219,10 +219,10 @@ Workspace::Application.routes.draw do
 
     resources :coupon_code_summaries, only: [:show]
 
-    # This concern will probably also be exposed somewhere public for describing the system
-    # to new users
+    # This concern is exposed to the public for describing the system
+    # as well as to Competition Admins for creating competitions
     concern :competition_choosable do
-      resources :competition_choices, only: [:index] do
+      resources :competition_choices, only: [:index], controller: "/example/competition_choices" do
         collection do
           get :freestyle
           get :individual
@@ -231,8 +231,6 @@ Workspace::Application.routes.draw do
           get :standard_skill
           get :high_long
           get :timed
-          get :multi_lap
-          get :slow
           get :points
           get :flatland
           get :street
@@ -632,6 +630,10 @@ Workspace::Application.routes.draw do
   namespace :sample_data do
     resources :registrants, only: [:index, :create]
     resources :competitions, only: [:index, :create]
+  end
+
+  namespace :example do
+    concerns :competition_choosable
   end
 
   resources :styles, only: :index
