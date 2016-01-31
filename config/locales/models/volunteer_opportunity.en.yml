@@ -1,0 +1,10 @@
+---
+en:
+  activerecord:
+    attributes:
+      volunteer_opportunity:
+        description: Volunteer Role
+    models:
+      volunteer_opportunity:
+        one: Volunteer Opportunity
+        other: Volunteer Opportunities

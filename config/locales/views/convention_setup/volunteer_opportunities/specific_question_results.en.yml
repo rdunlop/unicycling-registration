@@ -1,0 +1,7 @@
+en:
+  convention_setup:
+    volunteer_opportunities:
+      specific_question_results:
+        new_volunteer_role: "New Volunteer Role"
+        confirmation: |
+          Are you sure? This will delete all registrant selections for this volunteer option

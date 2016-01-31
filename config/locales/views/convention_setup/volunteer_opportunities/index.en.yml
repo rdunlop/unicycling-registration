@@ -1,0 +1,9 @@
+en:
+  convention_setup:
+    volunteer_opportunities:
+      index:
+        header: Volunteer Opportunities
+        description: "When registering, a user can be asked to volunteer for any volunteer role."
+        only_one_volunteer_question: "Ask \"I want to Volunteer\""
+        many_volunteer_questions: "Ask \"I want to Volunteer for <role>\""
+        one_volunteer_question_header: 'Every Registrant will be asked "Do you want to Volunteer?"'
