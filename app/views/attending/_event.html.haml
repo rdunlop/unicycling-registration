@@ -8,7 +8,7 @@
   = f.fields_for :registrant_event_sign_ups, found_resu do |resu|
     %td.event_choice
       - if disabled_event && resu.object.signed_up?
-        = link_to "Drop Out", drop_event_registrant_build_index_path(@registrant, event_id: event.id), data: { confirm: "If you drop out, you cannot sign back up without admin approval. Continue?" }, class: "button alert tiny", method: :delete
+        = link_to t(".drop_out_of_event"), drop_event_registrant_build_index_path(@registrant, event_id: event.id), data: { confirm: t(".drop_out_confirmation") }, class: "button alert tiny", method: :delete
       = resu.hidden_field :event_id
 
       - if event.has_cost? && @registrant.paid_expense_items.include?(event.expense_item)
@@ -74,4 +74,4 @@
 
   - if event.accepts_music_uploads?
     %td
-      %a.music_help{:href => "#", :title => "Upload your music for this event from the 'Summary' page"} Upload Your Music?
+      %a.music_help{:href => "#", :title => t(".upload_music_details") }= t(".upload_music")

@@ -1,4 +1,4 @@
-%h2 Preview
+%h2= t(".header")
 - @categories = Category.load_for_form
 - @registrant = Registrant.new
 = simple_form_for setup_registrant_choices(@registrant), url: "#" do |f|

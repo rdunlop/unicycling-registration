@@ -6,3 +6,7 @@ en:
       best_time: Best Time
       paid_for: Paid For
       paid_for_tooltip: To withdraw from this event, please contact the event organizers.
+      drop_out_of_event: Drop Out
+      drop_out_confirmation: "If you drop out, you cannot sign back up without admin approval. Continue?"
+      upload_music: Upload Your Music?
+      upload_music_details: "Upload your music for this event from the 'Summary' page"
