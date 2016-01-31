@@ -1,17 +1,15 @@
-%h1 Competition Setup
+%h1= t(".header")
 
-%p Below are the list of Events which you can manage.
+%p= t(".instructions")
 
-%p Please create Director(s) for each event. You (or the director) can create Competition(s) for each event, which will dictate how the data gathering occurs for that event.
-
-%h2 Events by Category
+%h2= t(".events_by_category")
 %table
   %thead
     %tr
-      %th Category
-      %th Event
-      %th Directors
-      %th Competitions
+      %th= Category.model_name.human
+      %th= Event.model_name.human
+      %th= t(".directors")
+      %th= Competition.model_name.human(count: 2)
       %th
   %tbody
     - @categories.each do |category|
@@ -30,4 +28,4 @@
           %td
             %ul.categoryList__eventList
               - if policy(Competition.new).create?
-                %li= link_to "Create New Competition", event_competition_choices_path(event)
+                %li= link_to t(".new_competition"), event_competition_choices_path(event)

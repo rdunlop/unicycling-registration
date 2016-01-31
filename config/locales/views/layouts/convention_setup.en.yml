@@ -2,6 +2,7 @@
 en:
   layouts:
     convention_setup:
+      convention_setup: Convention Setup
       registrant_types: Offered Registrant Types
       rules_and_waiver: Rules and Waiver
       custom_domain: Domain Setup

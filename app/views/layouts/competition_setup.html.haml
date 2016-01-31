@@ -1,13 +1,13 @@
 - content_for :content do
   #side_nav
-    %h3 Competition Setup
+    %h3= t(".competition_setup")
 
     %ul.sideNav__list
-      %li= link_to 'Manage Directors', directors_path
-      %li= link_to  'Age Group Type', age_group_types_path
-      %li= link_to "Manage Competitions", competition_setup_path
+      %li= link_to t(".manage_directors"), directors_path
+      %li= link_to t(".manage_age_groups"), age_group_types_path
+      %li= link_to t(".manage_competitions"), competition_setup_path
       %li
-        Advanced
+        = t(".advanced")
         %ul
           %li= link_to "Global Competition Settings", edit_competition_setup_event_configuration_path
           %li= link_to "Manage Ineligible Registrants", ineligible_registrants_path

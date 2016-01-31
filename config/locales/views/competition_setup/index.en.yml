@@ -1,0 +1,11 @@
+en:
+  competition_setup:
+    index:
+      header: Competition Setup
+      instructions: |
+        Please create Director(s) for each event. You (or the director) can
+        create Competition(s) for each event, which will dictate how the data
+        gathering occurs for that event.
+      events_by_category: Events by Category
+      directors: Directors
+      new_competition: Create New Competition
