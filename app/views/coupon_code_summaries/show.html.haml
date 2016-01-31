@@ -1,11 +1,11 @@
-%h1 #{@coupon_code.name} Coupon Code
+%h1= t(".header", coupon_code: @coupon_code.name)
 
-%h3 Applied to:
+%h3= t(".coupon_applied_to")
 %table
   %thead
     %tr
-      %th Registration
-      %th Date Applied
+      %th= Registrant.model_name.human
+      %th= t(".date_coupon_applied")
   %tbody
     - @coupon_code.applied_to_payment_details.each do |payment_detail|
       %tr

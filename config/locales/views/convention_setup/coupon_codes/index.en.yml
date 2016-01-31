@@ -1,0 +1,7 @@
+en:
+  convention_setup:
+    coupon_codes:
+      index:
+        header: Listing Coupon Codes
+        description: Coupon codes can be created in order to provide a discount (or even FREE) on certain items.
+        new_coupon_code: New Coupon Code

@@ -1,0 +1,6 @@
+en:
+  coupon_code_summaries:
+    show:
+      header: "%{coupon_code} Coupon Code"
+      coupon_applied_to: "Applied to:"
+      date_coupon_applied: Date Applied

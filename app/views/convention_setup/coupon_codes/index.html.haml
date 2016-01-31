@@ -1,14 +1,15 @@
-%h1 Listing Coupon Codes
+%h1= t(".header")
 
-%p Coupon codes can be created in order to provide a discount (or even FREE) on certain items.
+%p= t(".description")
 
 %table
   %tr
-    %th Name
-    %th Code
-    %th Description
-    %th Price
-    %th Expense Items
+    %th= CouponCode.human_attribute_name(:name)
+    %th= CouponCode.human_attribute_name(:code)
+    %th= CouponCode.human_attribute_name(:description)
+    %th= CouponCode.human_attribute_name(:price)
+    %th= ExpenseItem.model_name.human(count: 2)
+    %th
     %th
   - @coupon_codes.each do |coupon_code|
     %tr
@@ -17,10 +18,10 @@
       %td= coupon_code.description
       %td= coupon_code.price
       %td= coupon_code.coupon_code_expense_items.map(&:expense_item).map(&:to_s).join(", ")
-      %td= link_to 'Edit', edit_coupon_code_path(coupon_code)
-      %td= link_to 'Delete', coupon_code, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to t("edit"), edit_coupon_code_path(coupon_code)
+      %td= link_to t("delete"), coupon_code, method: :delete, data: { confirm: t("are_you_sure") }
 %br
 
 %fieldset.form__fieldset
-  %h3 New Coupon Code
+  %h3= t(".new_coupon_code")
   = render 'form'
