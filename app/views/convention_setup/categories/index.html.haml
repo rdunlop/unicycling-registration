@@ -1,19 +1,19 @@
-%h1 Event Categories
+%h1= t(".header")
+
+%p= t(".description")
+
 
 %p
-  Events are grouped into Different Event Categories. E.g. "Team Sports", "Freestyle", "Muni"
-
-%p
-  %b Note
-  Once you have created a Category, choose "Manage Events" to create Events within that Category
+  %b= t("note")
+  = t(".manage_events_note")
 
 - if @categories.any?
-  %h2 Existing Categories
+  %h2= t(".existing_categories")
 
   %table.js--sortable{ data: { target: update_row_order_convention_setup_categories_path } }
     %thead
       %tr
-        %th Name
+        %th= Category.human_attribute_name(:name)
         %th
         %th
         %th
@@ -21,11 +21,11 @@
       - @categories.each do |category|
         %tr.item{ data: { item_id: category.id } }
           %td= category.name
-          %td= link_to 'Manage Events', convention_setup_category_events_path(category)
-          %td= link_to "Edit #{category}", edit_convention_setup_category_path(category)
-          %td= link_to 'Delete', [:convention_setup, category], method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to t(".manage_events"), convention_setup_category_events_path(category)
+          %td= link_to t("edit"), edit_convention_setup_category_path(category)
+          %td= link_to t("delete"), [:convention_setup, category], method: :delete, data: { confirm: t("are_you_sure") }
 %br
 %fieldset.form__fieldset
-  %h3 New Category
+  %h3= t(".new_category")
   = render 'form'
 = render :partial => "/attending/preview"

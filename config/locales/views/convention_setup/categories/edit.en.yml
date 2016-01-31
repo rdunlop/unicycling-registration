@@ -1,0 +1,10 @@
+en:
+  convention_setup:
+    categories:
+      edit:
+        header: Editing Event Categor
+        description:  "Events are grouped into Different Event Categories. E.g. Team Sports, Freestyle, Muni"
+        manage_events_note: 'Once you have created a Category, choose "Manage Events" to create Events within that Category'
+        existing_categories: Existing Categories
+        manage_events: Manage Events
+        new_category: New Category
