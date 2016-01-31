@@ -4,6 +4,10 @@ en:
     attributes:
       event:
         id: ID
+        best_time_format: Best Time Format
+        accepts_wheel_size_override: Accepts Wheel Size Override
+        visible: Visible
+        artistic: Artistic
     models:
       event:
         one: Event

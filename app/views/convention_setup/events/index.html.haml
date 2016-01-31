@@ -1,29 +1,21 @@
-%h1 Events in Category: #{@category}
+%h1= t(".header", category: @category)
 
-%p
-  Each Event describes something different that a Competitor can compete in.
+%p= t(".description_html")
 
-%p
-  Different classes of competition (e.g. Jr Expert, Advanced, Expert) are considered "Event Categories" if
-  the competitor can only choose a single one of these.
+%p= t(".available_event_options")
 
-%p
-  If a competitor can compete in both "Beginner X" as well as "Advanced X", they should be separate Events.
-
-%p
-  Once an Event has been created, you can specify:
 %ul
   %li= link_to "Translations", translations_path
-  %li Additional "Event Categories" (e.g. Advanced, Expert)
-  %li Manage "Event Categories" in order to specify age limits (e.g. "Ages 0-10")
-  %li Add "Event Choices" to ask more questions when a user registers for an event.
+  %li= t(".event_categories_option")
+  %li= t(".age_limits_option")
+  %li= t(".more_questions_option")
 
 - if @events.any?
-  %h2 Existing #{@category} Events
+  %h2= t(".existing_events", category: @category)
   %table.event_listing.js--sortable{ data: { target: update_row_order_convention_setup_events_path } }
     %thead
       %tr
-        %th Name
+        %th= Event.human_attribute_name(:name)
         %th
         %th
         %th
@@ -32,13 +24,13 @@
       - @events.each do |event|
         %tr.item{ data: { item_id: event.id } }
           %th= event.name
-          %td= link_to 'Event Categories', convention_setup_event_event_categories_path(event)
-          %td= link_to 'Event Choices', convention_setup_event_event_choices_path(event)
-          %td= link_to 'Edit', edit_convention_setup_event_path(event)
-          %td= link_to 'Delete', [:convention_setup, event], method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to EventCategory.model_name.human(count: 2), convention_setup_event_event_categories_path(event)
+          %td= link_to EventChoice.model_name.human(count: 2), convention_setup_event_event_choices_path(event)
+          %td= link_to t("edit"), edit_convention_setup_event_path(event)
+          %td= link_to t("delete"), [:convention_setup, event], method: :delete, data: { confirm: t("are_you_sure") }
 
 
 %fieldset.form__fieldset
-  %h3 New Event
+  %h3= t(".new_event")
   = render :partial => "form"
 = render :partial => "/attending/preview"

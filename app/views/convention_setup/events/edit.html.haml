@@ -1,4 +1,4 @@
 %fieldset.form__fieldset
-  %h1 Editing event
+  %h1= t(".header")
   = render partial: "form"
-= link_to 'Back', convention_setup_category_events_path(@form.category)
+= link_to t("back"), convention_setup_category_events_path(@form.category)

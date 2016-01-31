@@ -1,0 +1,5 @@
+en:
+  convention_setup:
+    events:
+      edit:
+        header: Editing event

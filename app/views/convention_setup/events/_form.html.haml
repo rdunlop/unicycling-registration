@@ -7,19 +7,20 @@
     = f.input :category_id, collection: Category.all, label_method: :name, include_blank: false
 
   %fieldset
-    %h3 Event Categories
+    %h3= EventCategory.model_name.human(count: 2)
     = f.simple_fields_for :event_categories do |ec|
-      = ec.input :name, label: "Event Category Name", hint: "specify 'All' if there is only 1 category (note: advanced options are available under 'Event Categories')"
+      - label_text = "#{EventCategory.model_name.human} #{EventCategory.human_attribute_name(:name)}"
+      = ec.input :name, label: label_text, hint: t(".event_category_hint")
 
   = f.input :best_time_format, collection: Event::BEST_TIME_FORMATS, include_blank: false
   = f.input :accepts_music_uploads
   = f.input :accepts_wheel_size_override
 
-  %a{ href: "#", class: "js--toggle", data: { toggle_target: "#advanced_settings" } } Advanced Settings
+  %a{ href: "#", class: "js--toggle", data: { toggle_target: "#advanced_settings" } }= t(".advanced_settings")
   #advanced_settings
 
     = f.input :visible
     = f.input :artistic
     .field
-      .input_details The Artistic Closed Date is #{EventConfiguration.singleton.artistic_closed_date.presence || "Undefined"}
+      .input_details= t(".artistic_closed_date", artistic_closed_date: EventConfiguration.singleton.artistic_closed_date)
   = f.button :submit

@@ -1,0 +1,20 @@
+en:
+  convention_setup:
+    events:
+      index:
+        header: "Events in Category: %{category}"
+        description_html: |
+          Each Event describes something different that a Competitor can compete in.
+          <br>
+          Different classes of competition (e.g. Jr Expert, Advanced, Expert) are
+          considered "Event Categories" if
+          the competitor can only choose a single one of these.
+          <br>
+          If a competitor can compete in both "Beginner X" as well as "Advanced X", they should be separate Events.
+        available_event_options: "Once an Event has been created, you can specify:"
+        event_categories_option: 'Additional "Event Categories" (e.g. Advanced, Expert)'
+        age_limits_option: 'Manage "Event Categories" in order to specify age limits (e.g. "Ages 0-10")'
+        more_questions_option: 'Add "Event Choices" to ask more questions when a user registers for an event.'
+        existing_events: "Existing %{category} Events"
+
+        new_event: New Event
