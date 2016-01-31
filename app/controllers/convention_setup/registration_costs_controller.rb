@@ -1,6 +1,7 @@
 class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConventionSetupController
   before_action :authorize_setup
   before_action :load_registration_cost, except: [:index, :new, :create]
+  before_action :load_available_registrant_types
 
   before_action :set_breadcrumbs
 
@@ -90,5 +91,13 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
       translations_attributes: [:id, :locale, :name],
       expense_item_attributes: [:id, :cost, :tax]
     )
+  end
+
+  def load_available_registrant_types
+    if @config.noncompetitors?
+      @registrant_types = ["competitor", "noncompetitor"]
+    else
+      @registrant_types = ["competitor"]
+    end
   end
 end

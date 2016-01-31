@@ -2,7 +2,7 @@
   = render partial: "shared/error_messages", object: @registration_cost
   .row
     .small-6.columns
-      = f.input :registrant_type, as: :select, collection: %w(competitor noncompetitor)
+      = f.input :registrant_type, as: :select, collection: @registrant_types
     .small-6.columns
       = f.input :name
   .row

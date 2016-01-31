@@ -22,5 +22,5 @@
     = f.input :visible
     = f.input :artistic
     .field
-      .input_details= t(".artistic_closed_date", artistic_closed_date: EventConfiguration.singleton.artistic_closed_date)
+      .input_details= t(".artistic_closed_date", artistic_closed_date: EventConfiguration.singleton.artistic_closed_date.presence || "Undefined")
   = f.button :submit

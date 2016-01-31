@@ -8,4 +8,4 @@ en:
           (note: advanced options are available under 'Event Categories')
         advanced_settings: Advanced Settings
         artistic_closed_date: |
-          The Artistic Closed Date is %{artistic_closed_date.presence || "Undefined"}
+          The Artistic Closed Date is %{artistic_closed_date}

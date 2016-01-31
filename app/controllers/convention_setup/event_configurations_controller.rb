@@ -117,7 +117,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   end
 
   def registrant_types_params
-    params.require(:event_configuration).permit(:spectators,
+    params.require(:event_configuration).permit(:spectators, :noncompetitors,
                                                 :competitor_benefits, :noncompetitor_benefits, :spectator_benefits,
                                                 :comp_noncomp_url, :comp_noncomp_page_id)
   end

@@ -40,6 +40,7 @@
 #  enabled_locales                       :string           default("en,fr"), not null
 #  comp_noncomp_page_id                  :integer
 #  under_construction                    :boolean          default(TRUE), not null
+#  noncompetitors                        :boolean          default(TRUE), not null
 #
 
 require 'spec_helper'

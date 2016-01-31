@@ -10,10 +10,10 @@
     .field
       = check_box_tag :competitor, true, true, disabled: true
       = label_tag :competitor, nil, class: 'label--checkbox'
-    .field
-      = check_box_tag :noncompetitor, true, true, disabled: true
-      = label_tag :noncompetitor, nil, class: 'label--checkbox'
-      .help_bubble{ title: t(".noncompetitor_description") }
+
+    = f.input :noncompetitors
+    .help_bubble{ title: t(".noncompetitor_description") }
+
     = f.input :spectators
 
     = f.input :comp_noncomp_url, input_html: { class: "js--fancyboxUrl" }

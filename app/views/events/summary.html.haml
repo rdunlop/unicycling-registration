@@ -13,11 +13,12 @@
       %td= @num_male_competitors
       %td= @num_female_competitors
       %td= @num_competitors
-    %tr
-      %th Non-Competitors
-      %td= @num_male_noncompetitors
-      %td= @num_female_noncompetitors
-      %td= @num_noncompetitors
+    - if @config.noncompetitors?
+      %tr
+        %th Non-Competitors
+        %td= @num_male_noncompetitors
+        %td= @num_female_noncompetitors
+        %td= @num_noncompetitors
     - if @config.spectators?
       %tr
         %th Spectators
