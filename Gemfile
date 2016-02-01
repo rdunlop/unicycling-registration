@@ -69,7 +69,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # multi-tenancy
 gem 'apartment'
-gem 'apartment-sidekiq'
+gem 'apartment-sidekiq', '= 0.2.0' # upgrading to 1.0.0 caused ActiveRecord::ConnectionTimeoutError
 
 # Model utils
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'

@@ -109,7 +109,7 @@ GEM
     apartment (1.0.2)
       activerecord (>= 3.1.2, < 5.0)
       rack (>= 1.3.6)
-    apartment-sidekiq (1.0.0)
+    apartment-sidekiq (0.2.0)
       apartment (~> 1.0)
       sidekiq (>= 2.11)
     arel (6.0.3)
@@ -662,7 +662,7 @@ DEPENDENCIES
   acts_as_restful_list!
   annotate
   apartment
-  apartment-sidekiq
+  apartment-sidekiq (= 0.2.0)
   autoprefixer-rails
   awesome_nested_fields
   aws-sdk-rails
