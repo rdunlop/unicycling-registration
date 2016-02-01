@@ -8,6 +8,6 @@
 
   %fieldset.form__fieldset
 
-    = f.input :volunteer_option, collection: EventConfiguration::VOLUNTEER_OPTIONS
+    = f.input :volunteer_option, collection: EventConfiguration::VOLUNTEER_OPTIONS, include_blank: false
 
     = f.button :submit
