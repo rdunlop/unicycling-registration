@@ -2,4 +2,4 @@ en:
   convention_setup:
     expense_groups:
       edit:
-        header: "%{@expense_group} - Expense Group Details"
+        header: "%{expense_group} - Expense Group Details"

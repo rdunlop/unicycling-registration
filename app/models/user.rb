@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   def self.role_transfer_permissions
     {
       super_admin: [*roles],
-      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin, :export_payment_lists],
+      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin, :export_payment_lists, :competition_admin],
       competition_admin: [:competition_admin, :awards_admin],
       director: [],
       payment_admin: [:payment_admin, :late_registrant, :export_payment_lists],
