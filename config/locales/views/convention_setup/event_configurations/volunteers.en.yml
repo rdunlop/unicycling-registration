@@ -1,0 +1,11 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      volunteers:
+        header: Volunteer Settings
+        description: |
+          When registering, we can ask each registrant whether they want to volunteer (generic),
+          or ask them specific questions (e.g. Do you want to volunteer for Track?) (choice),
+          or ask them no volunteering questions (none).
+        next_step: 'After you choose "choice", you can set the choices in the "Volunteer Opportunities" setting page'

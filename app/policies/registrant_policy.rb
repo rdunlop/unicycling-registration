@@ -34,7 +34,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def add_volunteers?
-    update?
+    (config.volunteer_option != "none") && update?
   end
 
   def add_contact_details?

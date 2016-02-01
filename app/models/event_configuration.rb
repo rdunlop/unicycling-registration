@@ -41,6 +41,7 @@
 #  comp_noncomp_page_id                  :integer
 #  under_construction                    :boolean          default(TRUE), not null
 #  noncompetitors                        :boolean          default(TRUE), not null
+#  volunteer_option                      :string           default("generic"), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -69,9 +70,16 @@ class EventConfiguration < ActiveRecord::Base
     ["USD", "CAD", "EUR"]
   end
 
+  VOLUNTEER_OPTIONS = [
+    "none",
+    "generic",
+    "choice"
+  ].freeze
+
   validates :currency_code, inclusion: { in: currency_codes }, allow_nil: true
   validates :style_name, inclusion: {in: style_names.map{|y| y[1]} }
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
+  validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
 
   validates :usa_membership_config, :standard_skill, inclusion: { in: [true, false] }
   validates :standard_skill_closed_date, presence: true, unless: "standard_skill.nil? or standard_skill == false"

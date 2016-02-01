@@ -2,14 +2,4 @@
 
 %p= t(".description")
 
-= radio_button_tag :volunteer_type, "one", VolunteerOpportunity.all.none?, class: "js--displayIfChecked", data: { displayBlock: "js--checkedSourceOne" }
-= label_tag :volunteer_type_one, t(".only_one_volunteer_question")
-%br
-= radio_button_tag :volunteer_type, "many", VolunteerOpportunity.all.any?, class: "js--displayIfChecked", data: { displayBlock: "js--checkedSourceMany" }
-= label_tag :volunteer_type_many, t(".many_volunteer_questions")
-
-.generic_results.js--checkedSourceOne
-  = t(".one_volunteer_question_header")
-
-.specific_results.js--checkedSourceMany
-  = render "specific_question_results"
+= render "specific_question_results"

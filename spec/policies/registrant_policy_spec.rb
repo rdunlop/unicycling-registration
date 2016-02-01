@@ -103,8 +103,20 @@ describe RegistrantPolicy do
     let(:authorized_laptop?) { false }
     let(:user) { my_user }
     let(:event_sign_up_closed?) { false }
-    let(:config) { double(event_sign_up_closed?: event_sign_up_closed?) }
+    let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "generic") }
     let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
+
+    permissions :add_volunteers? do
+      describe "when event_configuration has volunteers set by default" do
+        it { expect(subject).to permit(user_context, FactoryGirl.create(:competitor, user: user)) }
+      end
+
+      describe "when event_configuration has volunteers disabled" do
+        let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "none") }
+
+        it { expect(subject).not_to permit(user_context, FactoryGirl.create(:competitor, user: user)) }
+      end
+    end
 
     permissions :add_events? do
       describe "while registration is open" do

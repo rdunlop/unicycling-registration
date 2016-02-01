@@ -1,0 +1,13 @@
+%h1= t(".header")
+
+%p= t(".description")
+
+%p= t(".next_step")
+= simple_form_for(@event_configuration, url: update_volunteers_event_configuration_path, method: :put, multipart: true) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+
+  %fieldset.form__fieldset
+
+    = f.input :volunteer_option, collection: EventConfiguration::VOLUNTEER_OPTIONS
+
+    = f.button :submit

@@ -47,7 +47,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   before_action :load_event_configuration
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
 
-  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :payment_settings, :advanced_settings, :go_live]
+  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :volunteers, :payment_settings, :advanced_settings, :go_live]
 
   before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
 
@@ -126,6 +126,10 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
     params.require(:event_configuration).permit(:waiver, :waiver_url, :custom_waiver_text,
                                                 :accept_rules, :rules_file_name,
                                                 :rulebook_url)
+  end
+
+  def volunteers_params
+    params.require(:event_configuration).permit(:volunteer_option)
   end
 
   def advanced_settings_params

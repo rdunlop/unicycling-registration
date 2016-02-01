@@ -41,6 +41,7 @@
 #  comp_noncomp_page_id                  :integer
 #  under_construction                    :boolean          default(TRUE), not null
 #  noncompetitors                        :boolean          default(TRUE), not null
+#  volunteer_option                      :string           default("generic"), not null
 #
 
 require 'spec_helper'
