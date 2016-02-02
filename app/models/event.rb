@@ -44,6 +44,9 @@ class Event < ActiveRecord::Base
 
   acts_as_restful_list scope: :category
 
+  # include translations So that we can do Event.order(:name)
+  default_scope { includes(:translations) }
+
   def self.music_uploadable
     visible.where(accepts_music_uploads: true)
   end
