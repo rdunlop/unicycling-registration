@@ -273,6 +273,12 @@ class EventConfiguration < ActiveRecord::Base
     [:en, :fr, :de, :hu, :es]
   end
 
+  # Public: What is the maximum age that we should allow users to configure
+  # their wheel size?
+  def wheel_size_configuration_max_age
+    10
+  end
+
   private
 
   def is_date_in_the_past?(date)

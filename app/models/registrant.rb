@@ -149,47 +149,12 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   scope :active, -> { where(status: "active").active_or_incomplete }
   scope :started, -> { where.not(status: "blank").active_or_incomplete}
 
-  # is the current status past the desired status
-  def status_is_active?(desired_status)
-    self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
-  end
-
-  # this registrant is on a step subsequent to the initial step
-  def past_step_1?
-    status_is_active?("base_details")
-  end
-
-  # Never true for a spectator
-  # Have we entered the base details?
-  def comp_noncomp_past_step_1?
-    !spectator? && status_is_active?("base_details")
-  end
-
-  # Never true for a spectator
-  # have we entered events
-  def past_step_2?
-    !spectator? && status_is_active?("events")
-  end
-
-  def needs_waiver?
-    EventConfiguration.singleton.has_online_waiver && status_is_active?("contact_details")
-  end
-
-  def needs_rules_accepted?
-    EventConfiguration.singleton.accept_rules? && status_is_active?("contact_details")
-  end
-
   def spectator?
     registrant_type == 'spectator'
   end
 
   def validated?
     status == "active"
-  end
-  # end Wizard
-
-  def set_access_code
-    self.access_code ||= SecureRandom.hex(4)
   end
 
   def to_param
@@ -219,10 +184,6 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   # uses the CachedSetModel feature to give a key for this registrant's competitors
   def members_cache_key
     Member.cache_key_for_set(id)
-  end
-
-  def set_sorted_last_name
-    self.sorted_last_name = ActiveSupport::Inflector.transliterate(last_name).downcase if last_name
   end
 
   # updates the members, which update the competitors, if this competitor has changed (like their age, for example)
@@ -300,6 +261,8 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
+  # Internal: Set the bib number of this registrant
+  #
   def set_bib_number
     if bib_number.nil?
       prev_value = Registrant.maximum_bib_number(competitor?)
@@ -322,46 +285,16 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     competition_wheel_sizes.find{ |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
   end
 
-  def set_default_wheel_size
-    if default_wheel_size.nil?
-      if age > 10
-        self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
-      else
-        self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
-      end
-    end
-  end
-
-  def check_default_wheel_size_for_age
-    if age > 10
-      if default_wheel_size && default_wheel_size.description != "24\" Wheel"
-        errors[:base] << "You must choose a wheel size of 24\" if you are > 10 years old"
-      end
-    end
+  # Public: Is this registrant young enough that they may need
+  # to choose a wheel size?
+  #
+  # return a boolean
+  def young_enough_to_choose_wheel_size?
+    age <= EventConfiguration.singleton.wheel_size_configuration_max_age
   end
 
   def external_id
     bib_number
-  end
-
-  def gender_present
-    if gender.blank?
-      errors[:gender_male] = "" # Cause the label to be highlighted
-      errors[:gender_female] = "" # Cause the label to be highlighted
-    end
-  end
-
-  def no_payments_when_deleted
-    if paid_details.count > 0 && deleted?
-      errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
-    end
-  end
-
-  # ####################################
-  # Event Choices Validation
-  # ####################################
-  def choices_combination_valid
-    ChoicesValidator.new(self).validate
   end
 
   def minor?
@@ -377,14 +310,6 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   def event_warnings
     warned_sign_ups = signed_up_events.joins(:event_category).includes(:event, :event_category).merge(EventCategory.with_warnings)
     warned_sign_ups.map{|rei| "#{rei.event} - #{rei.event_category.name} Category" }
-  end
-
-  def age_at_event_date(event_date)
-    if (birthday.month < event_date.month) || (birthday.month == event_date.month && birthday.day <= event_date.day)
-      event_date.year - birthday.year
-    else
-      (event_date.year - 1) - birthday.year
-    end
   end
 
   def set_age
@@ -606,29 +531,6 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def not_exceeding_expense_item_limits
-    expense_items = registrant_expense_items.map{|rei| rei.new_record? ? rei.expense_item : nil}.reject { |ei| ei.nil? }
-    expense_items.uniq.each do |ei|
-      num_ei = expense_items.count(ei)
-      unless ei.can_i_add?(num_ei)
-        errors[:base] << "There are not that many #{ei} available"
-      end
-    end
-  end
-
-  def has_necessary_free_items
-    if competitor?
-      free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
-    else
-      free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
-    end
-    free_groups_required.each do |expense_group|
-      if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
-        errors[:base] << "You must choose a free #{expense_group}"
-      end
-    end
-  end
-
   def paid_individual_usa?
     ind = EventConfiguration.singleton.usa_individual_expense_item
     return false unless ind.present?
@@ -720,6 +622,39 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
   end
 
+  private
+
+  # is the current status past the desired status
+  def status_is_active?(desired_status)
+    self.class.statuses.index(status) >= self.class.statuses.index(desired_status)
+  end
+
+  # this registrant is on a step subsequent to the initial step
+  def past_step_1?
+    status_is_active?("base_details")
+  end
+
+  # Never true for a spectator
+  # Have we entered the base details?
+  def comp_noncomp_past_step_1?
+    !spectator? && status_is_active?("base_details")
+  end
+
+  # Never true for a spectator
+  # have we entered events
+  def past_step_2?
+    !spectator? && status_is_active?("events")
+  end
+
+  def needs_waiver?
+    EventConfiguration.singleton.has_online_waiver && status_is_active?("contact_details")
+  end
+
+  def needs_rules_accepted?
+    EventConfiguration.singleton.accept_rules? && status_is_active?("contact_details")
+  end
+  # end Wizard
+
   # returns true if it should be rejected
   # but returns false if it exists, and needs to be cleared.
   def no_best_time_entered(attributes)
@@ -735,11 +670,87 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
-  private
+  # ####################################
+  # Event Choices Validation
+  # ####################################
+  def choices_combination_valid
+    ChoicesValidator.new(self).validate
+  end
 
   # Queue a job to query the USA db for membership information
   def update_usa_membership_status
     return unless contact_detail.present? && contact_detail.usa_member_number.present? && last_name_changed?
     UpdateUsaMembershipStatusWorker.perform_async(id, last_name, contact_detail.usa_member_number)
+  end
+
+  def set_access_code
+    self.access_code ||= SecureRandom.hex(4)
+  end
+
+  def age_at_event_date(event_date)
+    if (birthday.month < event_date.month) || (birthday.month == event_date.month && birthday.day <= event_date.day)
+      event_date.year - birthday.year
+    else
+      (event_date.year - 1) - birthday.year
+    end
+  end
+
+  def not_exceeding_expense_item_limits
+    expense_items = registrant_expense_items.map{|rei| rei.new_record? ? rei.expense_item : nil}.reject { |ei| ei.nil? }
+    expense_items.uniq.each do |ei|
+      num_ei = expense_items.count(ei)
+      unless ei.can_i_add?(num_ei)
+        errors[:base] << "There are not that many #{ei} available"
+      end
+    end
+  end
+
+  def has_necessary_free_items
+    if competitor?
+      free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
+    else
+      free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
+    end
+    free_groups_required.each do |expense_group|
+      if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
+        errors[:base] << "You must choose a free #{expense_group}"
+      end
+    end
+  end
+
+  def gender_present
+    if gender.blank?
+      errors[:gender_male] = "" # Cause the label to be highlighted
+      errors[:gender_female] = "" # Cause the label to be highlighted
+    end
+  end
+
+  def set_sorted_last_name
+    self.sorted_last_name = ActiveSupport::Inflector.transliterate(last_name).downcase if last_name
+  end
+
+  def no_payments_when_deleted
+    if paid_details.count > 0 && deleted?
+      errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
+    end
+  end
+
+  def set_default_wheel_size
+    if default_wheel_size.nil?
+      if young_enough_to_choose_wheel_size?
+        self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
+      else
+        self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
+      end
+    end
+  end
+
+  def check_default_wheel_size_for_age
+    max_config_age = EventConfiguration.singleton.wheel_size_configuration_max_age
+    unless young_enough_to_choose_wheel_size?
+      if default_wheel_size && default_wheel_size.description != "24\" Wheel"
+        errors[:base] << "You must choose a wheel size of 24\" if you are > #{max_config_age} years old"
+      end
+    end
   end
 end

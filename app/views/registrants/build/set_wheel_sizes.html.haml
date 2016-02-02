@@ -12,7 +12,7 @@
   %p
     If you choose the 24" wheel size, you may be racing against older competitors (up to the age of 12)
 
-- if true # Event.where(accepts_wheel_size_override: true).any?
+- if Event.where(accepts_wheel_size_override: true).any?
   %fieldset.data_block
     %legend Non-Track Wheel Sizes
     = link_to "Set Other Wheel Sizes", registrant_competition_wheel_sizes_path(@registrant), class: "fancybox"
