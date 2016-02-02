@@ -69,6 +69,8 @@ Workspace::Application.routes.draw do
     namespace :translations do
       resource :event_configuration, only: [:edit, :update]
       resources :categories, only: [:index, :edit, :update]
+      resources :events, only: [:index, :edit, :update]
+      resources :event_categories, only: [:index, :edit, :update]
       resources :event_choices, only: [:index, :edit, :update]
       resources :pages, only: [:index, :edit, :update]
       resources :expense_groups, only: [:index, :edit, :update]

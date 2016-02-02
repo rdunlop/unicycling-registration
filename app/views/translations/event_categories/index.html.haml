@@ -1,0 +1,9 @@
+.row
+  .small-12.columns
+    %h1 Translate Event Category
+
+.row
+  .small-12.columns
+    %ul
+      - @event_categories.each do |event_category|
+        %li= link_to event_category, edit_translations_event_category_path(event_category)

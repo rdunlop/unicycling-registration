@@ -40,6 +40,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :category, inverse_of: :events, touch: true
   has_many :songs
+  translates :name, fallbacks_for_empty_translations: true
 
   acts_as_restful_list scope: :category
 

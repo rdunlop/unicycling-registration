@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131213048) do
+ActiveRecord::Schema.define(version: 20160202013939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,6 +301,17 @@ ActiveRecord::Schema.define(version: 20160131213048) do
   add_index "event_categories", ["event_id", "name"], name: "index_event_categories_on_event_id_and_name", unique: true, using: :btree
   add_index "event_categories", ["event_id", "position"], name: "index_event_categories_event_id", using: :btree
 
+  create_table "event_category_translations", force: :cascade do |t|
+    t.integer  "event_category_id", null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "name"
+  end
+
+  add_index "event_category_translations", ["event_category_id"], name: "index_event_category_translations_on_event_category_id", using: :btree
+  add_index "event_category_translations", ["locale"], name: "index_event_category_translations_on_locale", using: :btree
+
   create_table "event_choice_translations", force: :cascade do |t|
     t.integer  "event_choice_id",             null: false
     t.string   "locale",          limit: 255, null: false
@@ -386,6 +397,17 @@ ActiveRecord::Schema.define(version: 20160131213048) do
     t.boolean  "noncompetitors",                                    default: true,       null: false
     t.string   "volunteer_option",                                  default: "generic",  null: false
   end
+
+  create_table "event_translations", force: :cascade do |t|
+    t.integer  "event_id",   null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id", using: :btree
+  add_index "event_translations", ["locale"], name: "index_event_translations_on_locale", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "category_id"
