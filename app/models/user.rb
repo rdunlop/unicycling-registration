@@ -81,6 +81,11 @@ class User < ActiveRecord::Base
      :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
   end
 
+  # Public: List of roles available for easy-switching on the staging server
+  def self.staging_server_roles
+    roles - [:super_admin]
+  end
+
   # List which roles each roles can add to other users
   def self.role_transfer_permissions
     {
@@ -232,5 +237,12 @@ class User < ActiveRecord::Base
       end
     end
     false
+  end
+
+  # Internal: Prevent confirmation from being required for staging
+  # server users
+  # This overrides the devise:confirmable method to ensure no users require confirmation
+  def confirmation_required?
+    !Rails.env.stage?
   end
 end

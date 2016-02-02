@@ -12,7 +12,7 @@
         display: none;
       }
   %body.pdf_body{:onload => "number_pages"}
-    - if Rails.application.secrets.development_banner
+    - if Rails.env.stage?
       .alert-box.alert.top_banner{ data: { alert: true } }
         Non-Live System.
     .body

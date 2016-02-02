@@ -83,13 +83,17 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
     authorize @event_configuration
     role = params[:role]
 
-    if current_user.has_role? role
-      current_user.remove_role role
-    else
-      current_user.add_role role
-    end
+    if User.staging_server_roles.include?(role.to_sym)
+      if current_user.has_role? role
+        current_user.remove_role role
+      else
+        current_user.add_role role
+      end
 
-    redirect_to :back, notice: 'User Permissions successfully updated.'
+      redirect_to :back, notice: 'User Permissions successfully updated.'
+    else
+      redirect_to :back, alert: "Unable to set role"
+    end
   end
 
   private
