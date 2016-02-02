@@ -1,12 +1,29 @@
 .non_printable#bottom_nav
-  .choose_language
-    %ul
-      - I18n.available_locales.each do |locale|
-        %li= link_to t("language_name", locale: locale), new_locale_path(locale), hreflang: locale, lang: locale
-  = render "/attending/rulebook_link"
+  .row
+    .small-12.medium-3.columns
+      %ul
+        %li.footer__list-header
+          %h6 Information
+        %li= link_to t('.help'), help_welcome_path
+        - if Page.find_by(slug: 'privacy-policy')
+          %li= link_to t('.privacy_policy'), page_path('privacy-policy')
+    .small-12.medium-3.columns
+      %ul
+        %li.footer__list-header
+          %h6 Rulebook
+        %li= render "/attending/rulebook_link"
+    .small-12.medium-3.columns
+      %ul
+        %li.footer__list-header
+          %h6 Organizers
+        %li= link_to "Features", example_description_path
+    .small-12.medium-3.columns
+      %ul
+        %li.footer__list-header
+          %h6 Language
+        - I18n.available_locales.each do |locale|
+          %li= link_to t("language_name", locale: locale), new_locale_path(locale), hreflang: locale, lang: locale
+  .row
+    .small-12.columns
+      %p.footer__attribution= t(".developed_by")
 
-  = link_to t('.help'), help_welcome_path
-  - if Page.find_by(slug: 'privacy-policy')
-    = link_to t('.privacy_policy'), page_path('privacy-policy')
-    = link_to "Unicycling Event Organizers", example_description_path
-  %p= t(".developed_by")
