@@ -8,4 +8,5 @@
   = link_to t('.help'), help_welcome_path
   - if Page.find_by(slug: 'privacy-policy')
     = link_to t('.privacy_policy'), page_path('privacy-policy')
+    = link_to "Unicycling Event Organizers", example_description_path
   %p= t(".developed_by")

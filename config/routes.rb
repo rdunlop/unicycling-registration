@@ -635,6 +635,8 @@ Workspace::Application.routes.draw do
   end
 
   namespace :example do
+    resource :description, only: :show
+    resources :convention_choices, only: :index
     concerns :competition_choosable
   end
 
