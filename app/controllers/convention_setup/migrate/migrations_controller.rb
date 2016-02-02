@@ -18,7 +18,7 @@ class ConventionSetup::Migrate::MigrationsController < ApplicationController
   # creates the matching events in the current tenant
   def create_events
     Apartment::Tenant.switch @source_tenant.subdomain do
-      @events = Event.all.includes(:event_categories, category: :translations, event_choices: :translations).load
+      @events = Event.all.includes(:event_categories, :translations, category: :translations, event_choices: :translations).load
       @categories = Category.all.includes(:translations).load
     end
 
@@ -34,6 +34,7 @@ class ConventionSetup::Migrate::MigrationsController < ApplicationController
 
     @events.each do |event|
       new_event = event.dup
+      new_event.name = event.name
       new_event.category = Category.find_by(name: event.category.name)
       if new_event.save
         event.event_choices.each do |ec|
@@ -58,7 +59,9 @@ class ConventionSetup::Migrate::MigrationsController < ApplicationController
         end
 
         event.event_categories.each do |ec|
-          new_event.event_categories << ec.dup # this causes the save
+          new_event_category = ec.dup
+          new_event_category.name = ec.name
+          new_event.event_categories << new_event_category # this causes the save
         end
         successes += 1
       else

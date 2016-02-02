@@ -12,7 +12,7 @@ class ApplicationPolicy
       # for ease of testing, we allow passing a non-user context
       # in the actual system, we will always encapsulate the user in a UserContext object
       @user = user_context
-      @config = OpenStruct.new(music_submission_ended?: true)
+      @config = OpenStruct.new(music_submission_ended?: true, wheel_size_configuration_max_age: 10)
       @reg_closed = false
       @authorized_laptop = false
     end

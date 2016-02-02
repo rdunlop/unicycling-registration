@@ -51,7 +51,7 @@ describe Registrant do
 
     it "should have a 20\" wheel" do
       @reg.default_wheel_size = nil
-      @reg.set_default_wheel_size
+      @reg.send(:set_default_wheel_size)
       expect(@reg.default_wheel_size).to eq(@ws20)
     end
   end
@@ -71,7 +71,7 @@ describe Registrant do
       end
 
       it "should have a wheel_size of 24\"" do
-        @reg.set_default_wheel_size
+        @reg.send(:set_default_wheel_size)
         expect(@reg.default_wheel_size).to eq(@ws24)
       end
     end
@@ -87,7 +87,7 @@ describe Registrant do
 
       it "cannot choose a 20\" wheel" do
         @reg.default_wheel_size = @ws20
-        @reg.check_default_wheel_size_for_age
+        @reg.send(:check_default_wheel_size_for_age)
         expect(@reg.errors).not_to be_empty
       end
     end
