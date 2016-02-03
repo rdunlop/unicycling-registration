@@ -238,7 +238,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def music_submission_ended?
-    is_date_in_the_past?(music_submission_end_date)
+    is_date_in_the_past?(effective_music_submission_end_date)
   end
 
   def event_sign_up_closed?

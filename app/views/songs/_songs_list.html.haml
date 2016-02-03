@@ -1,7 +1,7 @@
 %p= t(".description")
 %b= t(".requirements")
 %p
-  %b= t(".music_deadline", end_date: @config.music_submission_end_date)
+  %b= t(".music_deadline", end_date: @config.effective_music_submission_end_date)
   = t(".changes_after_deadline")
 
 %table.sortable
