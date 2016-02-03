@@ -1,6 +1,6 @@
 - cache_i18n ['pages_bar', Page] do
   - if Page.ordinary.any?
-    %nav.top-bar.hide-for-small-only#page_bar{ data: { options: "is_hover: false", topbar: true }, role: "navigation" }
+    %nav.top-bar#page_bar{ data: { options: "is_hover: false", topbar: true }, role: "navigation" }
       %section.top-bar-section
         %ul.left
           = render "nav_bar/pages"

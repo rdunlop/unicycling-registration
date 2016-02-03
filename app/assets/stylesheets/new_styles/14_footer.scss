@@ -9,11 +9,15 @@ body {
 #container {
    min-height:100%;
    position:relative;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
 }
 #main {
    padding:10px;
    text-align: center;
    vertical-align: center;
+   flex-grow: 1;
    /* overflow: auto;*/
 }
 #main:after {

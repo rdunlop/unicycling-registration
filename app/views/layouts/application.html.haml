@@ -25,17 +25,18 @@
     = render partial: "layouts/admin_headers"
     .off-canvas-wrap{ data: { offcanvas: true } }
       .inner-wrap
-        = render "layouts/test_mode"
         = render "nav_bar/side_nav"
 
         #container
-          = render "nav_bar/top_nav"
+          = render "layouts/test_mode"
+          %div
+            .hide-for-small-only
+              = render "nav_bar/top_nav"
 
-
-          - if user_signed_in?
-            = render "shared/breadcrumbs"
-          - else
-            = render "shared/event_details_page"
+            - if user_signed_in?
+              = render "shared/breadcrumbs"
+            - else
+              = render "shared/event_details_page"
 
           #main
             = render "shared/flashes"
