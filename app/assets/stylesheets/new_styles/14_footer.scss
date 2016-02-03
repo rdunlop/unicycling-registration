@@ -13,11 +13,13 @@ body {
    display: flex;
    flex-direction: column;
 }
+#main_area {
+  flex-grow: 1;
+}
 #main {
    padding:10px;
    text-align: center;
    vertical-align: center;
-   flex-grow: 1;
    /* overflow: auto;*/
 }
 #main:after {

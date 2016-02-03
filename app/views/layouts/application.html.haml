@@ -38,9 +38,10 @@
             - else
               = render "shared/event_details_page"
 
-          #main
-            = render "shared/flashes"
-            = content_for?(:content) ? yield(:content) : yield
+          #main_area
+            #main
+              = render "shared/flashes"
+              = content_for?(:content) ? yield(:content) : yield
           = render partial: "layouts/footer"
         %a.exit-off-canvas{ href: "#" }
   = tinymce
