@@ -10,6 +10,32 @@
   %b= t("note")
   = t(".set_costs_warning")
 
+%h3 Things to check before going live:
+%table
+  %tbody
+    %tr
+      %th Logo Uploaded
+      %td= render "progress_check", status: @config.logo_file?
+    %tr
+      %th Convention E-mail Configured
+      %td= render "progress_check", status: @config.contact_email?
+    %tr
+      %th Costs are specified (Either Period, or Event based)
+      %td
+        "Period:"
+        = render "progress_check", status: RegistrationCost.any?
+        ", Event:"
+        = render "progress_check", status: ExpenseItem.where(cost_element_type: "Event").any?
+    %tr
+      %th Payment Settings are configured (either Paypal, or Offline Payment details)
+      %td= render "progress_check", status: (@config.offline_payment? || @config.paypal_account?)
+    %tr
+      %th At least 1 event is configured
+      %td= render "progress_check", status: Event.any?
+    %tr
+      %th Competition Start Date is configured
+      %td= render "progress_check", status: @config.start_date?
+
 %fieldset.form__fieldset
   = simple_form_for(@event_configuration, url: update_go_live_event_configuration_path, method: :put) do |f|
     = render partial: "/shared/error_messages", object: @event_configuration
