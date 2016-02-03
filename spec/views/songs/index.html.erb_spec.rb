@@ -23,7 +23,7 @@ describe "songs/index" do
     allow(@song1).to receive(:human_name).and_return("File Name")
     allow(@song2).to receive(:human_name).and_return("File Name")
     assign(:song, Song.new)
-    assign(:config, double(music_submission_end_date: "now"))
+    assign(:config, double(effective_music_submission_end_date: "now"))
     allow(controller).to receive(:current_user) { @registrant.user }
   end
 

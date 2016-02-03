@@ -12,6 +12,8 @@
         %li.footer__list-header
           %h6 Rulebook
         %li= render "/attending/rulebook_link"
+        - if @config.accept_rules?
+          %li= render "/shared/additional_rules_link"
     .small-12.medium-3.columns
       %ul
         %li.footer__list-header
