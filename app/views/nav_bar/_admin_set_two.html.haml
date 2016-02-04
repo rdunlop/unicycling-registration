@@ -25,8 +25,6 @@
   %li= link_to  'Multi-Tenant Research', research_competitions_path
 - if policy(@config).setup_convention?
   %li= link_to t('.copy_events'), migrate_index_path
-- if policy(@config).setup_convention?
-  %li= link_to t('.static_web_pages'), convention_setup_pages_path
 - if policy(current_user).view_modification_history?
   %li= link_to 'Modification History', rails_admin_path
 - if @config.standard_skill
