@@ -1,14 +1,15 @@
 class ExportPolicy < ApplicationPolicy
   def index?
-    download_payment_details? || download_events? || results?
+    download_payment_details? || results?
   end
 
   def download_competitors_for_timers?
     user.has_role?(:race_official, :any) || super_admin?
   end
 
+  # This link is on the Registration Overview page
   def download_events?
-    super_admin?
+    event_planner? || super_admin?
   end
 
   def download_payment_details?

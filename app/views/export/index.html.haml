@@ -12,10 +12,6 @@
         = f.button :submit, "Export Registrants who bought this item", :class => "multiclick button"
 
   %hr
-- if policy(:export).download_events?
-  = link_to 'Download Event Info', export_download_events_path(:format => :xls)
-
-  %hr
 
 - if policy(current_user).download_payments?
   = link_to "Download all Registrants and their paid payments", export_download_all_payments_path(:format => :xls)

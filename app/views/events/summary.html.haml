@@ -34,6 +34,11 @@
       %td
         %b= @num_registrants
 %hr
+
+- if policy(:export).download_events?
+  = link_to 'Download Event Info (xls)', export_download_events_path(:format => :xls)
+
+%hr
 %table.sortable
   %caption Event-Competitor-Breakdown
   %thead
