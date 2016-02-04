@@ -99,7 +99,12 @@ class Registrants::BuildController < ApplicationController
 
   def step_not_found
     flash[:alert] = "Step not found"
-    redirect_to registrant_build_path(@registrant.bib_number, steps.first)
+
+    if steps.first
+      redirect_to registrant_build_path(@registrant.bib_number, steps.first)
+    else
+      redirect_to registrant_path(@registrant.bib_number)
+    end
   end
 
   def load_registrant_by_bib_number
