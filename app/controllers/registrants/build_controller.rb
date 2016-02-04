@@ -11,6 +11,8 @@ class Registrants::BuildController < ApplicationController
 
   ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
 
+  rescue_from Wicked::Wizard::InvalidStepError, with: :step_not_found
+
   def finish_wizard_path
     if @registrant.events_with_music_allowed.any? && policy(Song.new).create?
       registrant_songs_path(@registrant)
@@ -94,6 +96,11 @@ class Registrants::BuildController < ApplicationController
   end
 
   private
+
+  def step_not_found
+    flash[:alert] = "Step not found"
+    redirect_to registrant_build_path(@registrant.bib_number, steps.first)
+  end
 
   def load_registrant_by_bib_number
     @registrant = Registrant.find_by!(bib_number: params[:registrant_id])
