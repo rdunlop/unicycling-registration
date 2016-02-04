@@ -26,6 +26,11 @@
     .small-6.columns
       = EventConfiguration.singleton.effective_event_sign_up_closed_date
   .row
+    .small-6.columns
+      = f.input :age_calculation_base_date, as: :date_picker
+    .small-6.columns
+      = EventConfiguration.singleton.effective_age_calculation_base_date
+  .row
     .small-6.columns.end
       = f.input :start_date, as: :date_picker
   .row

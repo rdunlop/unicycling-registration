@@ -170,6 +170,21 @@ describe EventConfiguration do
     expect(@ev.valid?).to eq(false)
   end
 
+  describe "#effective_age_calculation_base_date" do
+    it "has an effective_age_calculation_base_date" do
+      date = Date.today
+      @ev.age_calculation_base_date = date
+      expect(@ev.effective_age_calculation_base_date).to eq(date)
+    end
+
+    it "uses the start_date if age_calculation_base_date is nil" do
+      date = Date.today
+      @ev.start_date = date
+      @ev.age_calculation_base_date = nil
+      expect(@ev.effective_age_calculation_base_date).to eq(date)
+    end
+  end
+
   it "defaults test_mode to false" do
     ev = EventConfiguration.new
     expect(ev.test_mode).to eq(false)

@@ -160,7 +160,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
 
   def important_dates_params
     params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
-                                                :start_date)
+                                                :start_date, :age_calculation_base_date)
   end
 
   def go_live_params

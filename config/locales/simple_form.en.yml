@@ -103,7 +103,8 @@ en:
         artistic_closed_date: After this date, normal registrants cannot ADD any events marked as "Artistic". They can drop them though, until the Event Sign up Closed Date.
         music_submission_end_date: The last date at which music submissions will be allowed
         event_sign_up_closed_date: After this date, ONLY administrators can add events to registrations. (though they can still remove them)
-        start_date: Registrant Ages are calculated based on this date
+        start_date: "By default, Registrant Ages are calculated based on this date. This date is the default presented on calendars when configuring the system"
+        age_calculation_base_date: Registrant Ages are calculated based on this date
         usa: |
           This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed.
           It also allows last-minute sign-up of competitors (by data-entry people)

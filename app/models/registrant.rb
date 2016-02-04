@@ -313,7 +313,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def set_age
-    start_date = EventConfiguration.singleton.start_date
+    start_date = EventConfiguration.singleton.effective_age_calculation_base_date
     if start_date.nil? || birthday.nil?
       self.age = 99
     else

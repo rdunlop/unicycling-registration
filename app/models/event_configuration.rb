@@ -223,6 +223,14 @@ class EventConfiguration < ActiveRecord::Base
     event_sign_up_closed_date || registration_closed_date
   end
 
+  # Public: What is the base date we should use when calculating competitor
+  # Ages.
+  # Default to the start date of the competition, but can be changed, if
+  # necessary
+  def effective_age_calculation_base_date
+    age_calculation_base_date || start_date
+  end
+
   def registration_closed?
     return true if under_construction?
     # allow 1 day of grace to registration_closed_date

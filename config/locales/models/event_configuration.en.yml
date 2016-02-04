@@ -16,6 +16,7 @@ en:
         short_name: Short Name
         spectator_benefits: Spectator Benefits
         start_date: First Day of Competition
+        age_calculation_base_date: Base Date for Age Calculation
         style_name: Webpage Style
         under_construction: Under Construction
         artistic_closed_date: Last day to accept new Artistic Registration
