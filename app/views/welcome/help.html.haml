@@ -24,7 +24,3 @@
       %br
       - if signed_in?
         = t(".sharing_link", link: link_to(AdditionalRegistrantAccess.model_name.human, user_additional_registrant_accesses_path(@user)) ).html_safe
-
-= t(".general_help")
-%br
-= render "feedback"

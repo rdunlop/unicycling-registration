@@ -407,6 +407,7 @@ Workspace::Application.routes.draw do
     resource :welcome, only: [], controller: "welcome" do
       collection do
         get :help
+        get :contact_us
         post :feedback
         get :confirm
         get :data_entry_menu

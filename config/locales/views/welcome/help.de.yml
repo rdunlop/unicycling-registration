@@ -3,8 +3,6 @@ de:
   welcome:
     help:
       frequently_asked_questions: FAQ
-      general_help: Wenn du Probleme oder Fragen zur Anmeldung hast, schick uns dein
-        Feedback
       header: Hilfe
       i_cannot_login: Ich kann mich nicht anmelden
       login_help: Wenn du dich registriert hast, schau in deinen E-Mail nach der Bestätigungs

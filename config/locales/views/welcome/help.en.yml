@@ -22,4 +22,5 @@ en:
         request access so that you can pay for other members' registrations, as
         well as see the events that they have signed up for.
       sharing_link: Request access to your team's registrations through the %{link} Form
+      # Move this:
       general_help: If you have any problems or questions about registration, please submit feedback below
