@@ -55,7 +55,11 @@ class Email
   end
 
   def filtered_user_emails
-    filtered_users.map(&:email).compact.uniq if filtered_users.any?
+    if filtered_users.any?
+      filtered_users.map(&:email).compact.uniq
+    else
+      []
+    end
   end
 
   def filtered_users
