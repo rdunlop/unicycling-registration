@@ -99,6 +99,15 @@ class User < ActiveRecord::Base
     }
   end
 
+  # Which roles are currently allowed to be changed through test-mode
+  def self.changable_user_roles
+    if Rails.env.stage?
+      User.staging_server_roles
+    else
+      User.roles
+    end
+  end
+
   def roles_accessible
     roles.map(&:name).each_with_object([]) do |role, array|
       new_roles = self.class.role_transfer_permissions[role.to_sym]

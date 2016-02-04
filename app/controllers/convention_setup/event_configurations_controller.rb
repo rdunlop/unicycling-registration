@@ -83,7 +83,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
     authorize @event_configuration
     role = params[:role]
 
-    if User.staging_server_roles.include?(role.to_sym)
+    if User.changable_user_roles.include?(role.to_sym)
       if current_user.has_role? role
         current_user.remove_role role
       else
