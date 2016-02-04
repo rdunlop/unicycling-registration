@@ -42,6 +42,7 @@
 #  under_construction                    :boolean          default(TRUE), not null
 #  noncompetitors                        :boolean          default(TRUE), not null
 #  volunteer_option                      :string           default("generic"), not null
+#  age_calculation_base_date             :date
 #
 
 require 'spec_helper'
