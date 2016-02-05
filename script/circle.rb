@@ -22,10 +22,11 @@ exit unless node_index.zero?
 
 if node_total > 0
   # Copy coverage results from all nodes to circle artifacts directory
-  1.upto(node_total - 1) do |i|
+  1.upto(node_total) do |i|
     node = "node#{i}"
-    node_artifacts_dir = `ssh #{node} 'printf $CIRCLE_ARTIFACTS'`
-    from = File.join(node_artifacts_dir, 'coverage', filename)
+    # Modified because circleCI doesn't appear to deal with artifacts in the expected manner
+    node_project_dir = `ssh #{node} 'printf $CIRCLE_PROJECT_REPONAME'`
+    from = File.join("~/", node_project_dir, 'coverage', filename)
     to = File.join(coverage_dir, "#{i}#{filename}")
     command = "scp #{node}:#{from} #{to}"
 

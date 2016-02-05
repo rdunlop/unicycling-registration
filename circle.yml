@@ -4,8 +4,3 @@ test:
         parallel: true
   post:
     - bundle exec script/circle.rb
-
-general:
-  artifacts:
-    - coverage/
-    - coverage/.resultset.json
