@@ -3,12 +3,8 @@ CodeClimate::TestReporter.start
 require 'simplecov'
 
 # run coverage when on CI
-if ENV['CI'] || true
+if ENV['CI']
   SimpleCov.start 'rails' do
-    formatter SimpleCov::Formatter::MultiFormatter[
-      SimpleCov::Formatter::HTMLFormatter,
-      CodeClimate::TestReporter::Formatter
-    ]
     add_filter '/spec/'
   end
 end
