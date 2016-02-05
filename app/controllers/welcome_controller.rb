@@ -4,6 +4,9 @@ class WelcomeController < ApplicationController
 
   before_action :check_acceptable_format
 
+  def help_translate
+  end
+
   def help
   end
 

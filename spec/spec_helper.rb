@@ -1,10 +1,7 @@
 require 'simplecov'
-require 'coveralls'
 
-# save to Coveralls when on CI
+# run coverage when on CI
 if ENV['CI']
-  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-
   SimpleCov.start 'rails' do
     add_filter '/spec/'
   end
