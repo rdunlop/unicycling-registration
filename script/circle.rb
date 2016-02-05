@@ -6,13 +6,19 @@
 # from https://github.com/codeclimate/ruby-test-reporter/issues/10
 # https://gist.github.com/evanwhalen/f74879e0549b67eb17bb
 
+# Possibly look at:
+# http://technology.indiegogo.com/2015/08/how-we-get-coverage-on-parallelized-test-builds/
 require "codeclimate-test-reporter"
 
 branch = ENV['CIRCLE_BRANCH']
 node_index = ENV['CIRCLE_NODE_INDEX'].to_i
 node_total = ENV['CIRCLE_NODE_TOTAL'].to_i
-artifacts_dir = ENV['CIRCLE_ARTIFACTS']
-coverage_dir = File.join("..", "..", "..", ENV['CIRCLE_ARTIFACTS'], "coverage")
+coverage_dir = File.join("coverage")
+
+# Create directory if it doesn't exist
+require 'fileutils'
+FileUtils.mkdir_p coverage_dir
+
 filename = '.resultset.json'
 
 SimpleCov.coverage_dir(coverage_dir)
@@ -22,7 +28,7 @@ exit unless node_index.zero?
 
 if node_total > 0
   # Copy coverage results from all nodes to circle artifacts directory
-  1.upto(node_total) do |i|
+  1.upto(node_total - 1) do |i|
     node = "node#{i}"
     # Modified because circleCI doesn't appear to deal with artifacts in the expected manner
     node_project_dir = `ssh #{node} 'printf $CIRCLE_PROJECT_REPONAME'`
