@@ -40,11 +40,11 @@ describe WelcomeController do
   describe "POST feedback" do
     it "returns http success" do
       post 'feedback', contact_form: { feedback: "Hello WorlD", email: "robin@dunlopweb.com"}
-      expect(response).to redirect_to(help_welcome_path)
+      expect(response).to redirect_to(contact_us_welcome_path)
     end
     it "returns an error when no feedback" do
       post "feedback", contact_form: {feedback: nil}
-      expect(response).to render_template("help")
+      expect(response).to render_template("contact_us")
     end
     it "sends a message" do
       ActionMailer::Base.deliveries.clear
