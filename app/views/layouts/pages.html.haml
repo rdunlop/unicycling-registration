@@ -1,6 +1,5 @@
 - content_for :content do
-  .main
-    = yield
+  = yield
 
   - unless EventConfiguration.singleton.under_construction?
     %hr

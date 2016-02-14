@@ -1,0 +1,8 @@
+%nav.tab-bar.show-for-small-only
+  %section.left-small
+    %a.left-off-canvas-toggle.menu-icon{ href: "#"}
+      %span
+  %section.middle.tab-bar-section= @config.short_name
+  %section.right
+    - if user_signed_in?
+      = link_to t('.sign_out'), destroy_user_session_path, method: :delete
