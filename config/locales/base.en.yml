@@ -26,6 +26,10 @@ en:
   prices_increase_soon: Prices Increase in less than 1 day
   show: Show
   spectator: Spectator
+  organization_membership_types:
+    usa: USA
+    french_federation: French Federation
+  membership_number: Membership Number
   wizard:
     add_contact_details: Contact Details
     add_events: Events

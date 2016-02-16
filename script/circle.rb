@@ -8,6 +8,9 @@
 
 # Possibly look at:
 # http://technology.indiegogo.com/2015/08/how-we-get-coverage-on-parallelized-test-builds/
+#
+# Questions:
+# - Why aren't artifacts stored in the $CIRCLE_ARTIFACTS directory when doing SSH login?
 require "codeclimate-test-reporter"
 
 branch = ENV['CIRCLE_BRANCH']

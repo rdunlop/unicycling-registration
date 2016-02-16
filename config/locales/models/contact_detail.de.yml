@@ -21,7 +21,6 @@ de:
         phone: Telefonnummer
         responsible_adult_name: Name
         responsible_adult_phone: Haupt Rufnummer
-        usa_member_number: USA Mitglieds Nummer
         zip: Postleitzahl
     models:
       contact_detail:

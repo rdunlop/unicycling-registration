@@ -37,8 +37,8 @@ class UpdateUsaMembershipStatusWorker
   # Take the response hash, and update the registrant record
   def process_response(contact_detail, hash)
     contact_detail.update_attributes(
-      usa_member_number_valid: hash["success"],
-      usa_member_number_status: hash["message"]
+      organization_membership_system_confirmed: hash["success"],
+      organization_membership_system_status: hash["message"]
     )
   end
 

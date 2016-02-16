@@ -1,0 +1,28 @@
+
+%h1 Unicycling Society/Federation Membership Management
+
+= link_to "Export Details (excel)", export_organization_memberships_path(format: :xls)
+
+%ul
+  %li To update the membership number, click on their Membership Number
+  %li If this person has paid via club/etc, and you can confirm it via membership data, ensure that the member number is up-to-date, and then choose "Mark as Confirmed"
+
+%table.memberships.sortable
+  %thead
+    %tr
+      %th ID
+      %th Unicycling Membership#
+      %th First Name
+      %th Last Name
+      %th Age
+      %th Birthday
+      %th City
+      %th State
+      %th Country
+      %th Confirmed?
+      %th Actions
+
+  %tbody
+    - cache [Registrant, @config] do
+      - @registrants.each do |reg|
+        = render partial: "member_row", object: reg

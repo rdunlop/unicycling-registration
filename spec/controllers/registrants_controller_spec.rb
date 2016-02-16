@@ -59,7 +59,7 @@ describe RegistrantsController do
         zip: "12345",
         club: "TCUC",
         club_contact: "Connie",
-        usa_member_number: "12345",
+        organization_member_number: "12345",
         volunteer: false,
         emergency_name: "Jane",
         emergency_relationship: "Sig. Oth.",
@@ -160,6 +160,16 @@ describe RegistrantsController do
         sign_in FactoryGirl.create(:convention_admin_user)
       end
       it "Can read other users registrant" do
+        registrant = FactoryGirl.create(:competitor, user: @user)
+        get :show, id: registrant.to_param
+        expect(assigns(:registrant)).to eq(registrant)
+      end
+    end
+
+    context "as a usa-enabled membership system" do
+      let!(:event_configuration) { FactoryGirl.create(:event_configuration, :with_usa) }
+
+      it "can show the page" do
         registrant = FactoryGirl.create(:competitor, user: @user)
         get :show, id: registrant.to_param
         expect(assigns(:registrant)).to eq(registrant)

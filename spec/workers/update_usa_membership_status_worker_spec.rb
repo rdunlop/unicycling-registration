@@ -70,8 +70,8 @@ describe UpdateUsaMembershipStatusWorker do
       end
 
       it "stores a success and message" do
-        expect(contact_detail.usa_member_number_valid?).to be_truthy
-        expect(contact_detail.usa_member_number_status).to eq("You are a member")
+        expect(contact_detail.organization_membership_system_confirmed?).to be_truthy
+        expect(contact_detail.organization_membership_system_status).to eq("You are a member")
       end
     end
 
@@ -84,8 +84,8 @@ describe UpdateUsaMembershipStatusWorker do
       end
 
       it "stores failure and a message" do
-        expect(contact_detail.usa_member_number_valid?).to be_falsy
-        expect(contact_detail.usa_member_number_status).to eq("Your Membership has expired")
+        expect(contact_detail.organization_membership_system_confirmed?).to be_falsy
+        expect(contact_detail.organization_membership_system_status).to eq("Your Membership has expired")
       end
     end
   end

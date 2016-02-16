@@ -20,7 +20,6 @@ fr:
         phone: Numéro de téléphone
         responsible_adult_name: Nom
         responsible_adult_phone: Numéro de téléphone principal
-        usa_member_number: Numéro de membre de la USA
         zip: Code postal
     models:
       contact_detail:

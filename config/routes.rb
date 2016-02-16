@@ -390,10 +390,15 @@ Workspace::Application.routes.draw do
       end
     end
 
-    get "usa_memberships", to: "usa_memberships#index"
-    put "usa_memberships", to: "usa_memberships#update"
-    get "usa_memberships/export", to: "usa_memberships#export"
-    put "usa_memberships/update_number", to: "usa_memberships#update_number"
+    resources :organization_memberships, only: [:index] do
+      member do
+        put :toggle_confirm
+        put :update_number
+      end
+      collection do
+        get :export
+      end
+    end
 
     resources :results, only: [:index] do
       collection do

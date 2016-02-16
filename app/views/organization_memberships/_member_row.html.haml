@@ -1,0 +1,29 @@
+- reg = member_row
+- cache [reg, @config] do
+  %tr{ class: reg.organization_membership_confirmed? ? "confirmed" : "", id: "reg_#{reg.id}" }
+    %td= reg.bib_number
+    -# this shouldn't happen, as all "active" should include a contact_detail
+    - next if reg.contact_detail.nil?
+    %td
+      %span.member_number.js--toggle{ id: "membership_number_#{reg.bib_number}", data: { toggle_target: "#member_number_form_#{reg.bib_number}" } }= reg.contact_detail.organization_member_number.presence || "set number"
+      %span{ id: "member_number_form_#{reg.bib_number}" }
+        = form_tag update_number_organization_membership_path(id: reg.id), method: :put, remote: true do
+          = text_field_tag :membership_number, reg.contact_detail.organization_member_number
+          = submit_tag "Update Membership #", class: "button tiny"
+    %td= reg.first_name
+    %td= reg.last_name
+    %td= reg.age
+    %td= reg.birthday
+    %td= reg.contact_detail.city
+    %td= reg.contact_detail.state
+    %td= reg.contact_detail.country
+    %td= reg.organization_membership_confirmed?
+    %td
+      - if reg.contact_detail.organization_membership_system_confirmed?
+        = "Confirmed by System"
+      - elsif reg.contact_detail.organization_membership_manually_confirmed?
+        = "Manually Confirmed"
+        %br
+        = link_to "Mark as unconfirmed", toggle_confirm_organization_membership_path(id: reg.id), method: :put, remote: true
+      - else
+        = link_to "Mark as confirmed", toggle_confirm_organization_membership_path(id: reg.id), method: :put, remote: true

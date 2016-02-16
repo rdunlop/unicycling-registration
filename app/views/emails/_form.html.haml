@@ -15,11 +15,11 @@
   .small-12.columns
     = f.label :no_reg_accounts, "User Accounts with No Registrants"
     = f.check_box :no_reg_accounts
-- if @config.usa_membership_config?
+- if @config.organization_membership_config?
   .row
     .small-12.columns
-      = f.label :non_confirmed_usa, "User Accounts with Registrants who are not USA-Members"
-      = f.check_box :non_confirmed_usa
+      = f.label :non_confirmed_organization_members, "User Accounts with Registrants who are not Unicycling-Organization-Members"
+      = f.check_box :non_confirmed_organization_members
 .row
   .small-12.columns
     = f.label :competition_id, "Users who are assigned to a competition"

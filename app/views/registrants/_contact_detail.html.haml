@@ -85,11 +85,17 @@
         .row
           .small-6.columns= f.label :club_contact
           .small-6.columns= f.text_field :club_contact, :size => 25
-        - if @config.usa?
+        - if @config.organization_membership_config?
           .row
-            .small-6.columns= f.label :usa_member_number
-            .small-6.columns= f.text_field :usa_member_number, :size => 5, :class => "ui-tooltip", title: t(".usa_membership_number_tooltip", convention_name: @config.short_name)
-          = render "/registrants/usa_membership_status", contact_detail: f.object
+            .small-6.columns
+              = f.label :organization_member_number, organization_membership_label(@config)
+            .small-6.columns
+              = f.text_field :organization_member_number, :size => 5, :class => "ui-tooltip",
+                title: t(".organization_membership_number_tooltip",
+                organization_type: t("organization_membership_types.#{@config.organization_membership_type}"),
+                convention_name: @config.short_name)
+          - if @config.organization_membership_usa?
+            = render "/registrants/usa_membership_status", contact_detail: f.object
       %fieldset
         %legend= t(".emergency_contact")
         .row

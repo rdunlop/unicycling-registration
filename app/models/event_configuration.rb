@@ -22,13 +22,11 @@
 #  custom_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE), not null
-#  usa_individual_expense_item_id        :integer
-#  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE), not null
 #  spectators                            :boolean          default(FALSE), not null
-#  usa_membership_config                 :boolean          default(FALSE), not null
+#  organization_membership_config        :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
@@ -43,6 +41,7 @@
 #  noncompetitors                        :boolean          default(TRUE), not null
 #  volunteer_option                      :string           default("generic"), not null
 #  age_calculation_base_date             :date
+#  organization_membership_type          :string
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -82,11 +81,8 @@ class EventConfiguration < ActiveRecord::Base
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
   validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
 
-  validates :usa_membership_config, :standard_skill, inclusion: { in: [true, false] }
+  validates :organization_membership_config, :standard_skill, inclusion: { in: [true, false] }
   validates :standard_skill_closed_date, presence: true, unless: "standard_skill.nil? or standard_skill == false"
-
-  belongs_to :usa_individual_expense_item, class_name: "ExpenseItem"
-  belongs_to :usa_family_expense_item, class_name: "ExpenseItem"
 
   validates :usa, :iuf, inclusion: { in: [true, false] }
   validates :test_mode, inclusion: { in: [true, false] }
@@ -95,6 +91,14 @@ class EventConfiguration < ActiveRecord::Base
 
   validates :artistic_score_elimination_mode_naucc, inclusion: { in: [true, false] }
   validates :max_award_place, presence: true
+
+  def self.organization_membership_types
+    ["usa", "french_federation"]
+  end
+
+  validates :organization_membership_type, inclusion: { in: organization_membership_types }, if: :organization_membership_config?
+  validates :organization_membership_type, presence: true, if: :organization_membership_config?
+  validates :organization_membership_type, absence: true, unless: :organization_membership_config?
 
   def self.paypal_modes
     ["disabled", "test", "enabled"]
@@ -286,6 +290,11 @@ class EventConfiguration < ActiveRecord::Base
   # their wheel size?
   def wheel_size_configuration_max_age
     10
+  end
+
+  # Public: Is the USA-style membership system enabled?
+  def organization_membership_usa?
+    organization_membership_config? && organization_membership_type == "usa"
   end
 
   private

@@ -1,0 +1,22 @@
+%h1 Organization Membership Settings
+
+
+= simple_form_for(@event_configuration, url: update_organization_membership_event_configuration_path, method: :put, multipart: true) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+
+  %fieldset.form__fieldset
+    %h3 Should registrants be members of a Unicycling Organization?
+
+    = f.input :organization_membership_config
+
+    %h4 Which Unicycling Organization
+
+    = f.input :organization_membership_type, collection: EventConfiguration.organization_membership_types.map {|el| [t("organization_membership_types.#{el}"), el] }
+
+    %p
+      Specifying "USA" will cause the system to confirm that each registrant is a USA registrant by checking with the USA database.
+    %p
+      Specifying "French Federation" will prompt the user for their "French Federation" membership number.
+
+    %hr
+    = f.button :submit

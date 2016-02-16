@@ -22,13 +22,11 @@
 #  custom_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE), not null
-#  usa_individual_expense_item_id        :integer
-#  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE), not null
 #  spectators                            :boolean          default(FALSE), not null
-#  usa_membership_config                 :boolean          default(FALSE), not null
+#  organization_membership_config        :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
@@ -43,6 +41,7 @@
 #  noncompetitors                        :boolean          default(TRUE), not null
 #  volunteer_option                      :string           default("generic"), not null
 #  age_calculation_base_date             :date
+#  organization_membership_type          :string
 #
 
 require 'spec_helper'
@@ -75,6 +74,17 @@ describe EventConfiguration do
   it "doesn't allow an unknown currency code" do
     @ev.currency_code = "Robin"
     expect(@ev).to be_invalid
+  end
+
+  context "when organization_membership_config is enabled" do
+    before { @ev.organization_membership_config = true }
+    it { expect(@ev).to validate_presence_of(:organization_membership_type) }
+    it { expect(@ev).to validate_inclusion_of(:organization_membership_type).in_array(EventConfiguration.organization_membership_types) }
+  end
+
+  context "when organization_membership_config is disabled" do
+    before { @ev.organization_membership_config = false }
+    it { expect(@ev).to validate_absence_of(:organization_membership_type) }
   end
 
   context "when in EUR format" do

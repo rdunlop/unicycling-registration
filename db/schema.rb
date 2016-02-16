@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204050936) do
+ActiveRecord::Schema.define(version: 20160211130256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,33 +222,33 @@ ActiveRecord::Schema.define(version: 20160204050936) do
 
   create_table "contact_details", force: :cascade do |t|
     t.integer  "registrant_id"
-    t.string   "address",                         limit: 255
-    t.string   "city",                            limit: 255
-    t.string   "state_code",                      limit: 255
-    t.string   "zip",                             limit: 255
-    t.string   "country_residence",               limit: 255
-    t.string   "country_representing",            limit: 255
-    t.string   "phone",                           limit: 255
-    t.string   "mobile",                          limit: 255
-    t.string   "email",                           limit: 255
-    t.string   "club",                            limit: 255
-    t.string   "club_contact",                    limit: 255
-    t.string   "usa_member_number",               limit: 255
-    t.string   "emergency_name",                  limit: 255
-    t.string   "emergency_relationship",          limit: 255
-    t.boolean  "emergency_attending",                         default: false, null: false
-    t.string   "emergency_primary_phone",         limit: 255
-    t.string   "emergency_other_phone",           limit: 255
-    t.string   "responsible_adult_name",          limit: 255
-    t.string   "responsible_adult_phone",         limit: 255
+    t.string   "address",                                    limit: 255
+    t.string   "city",                                       limit: 255
+    t.string   "state_code",                                 limit: 255
+    t.string   "zip",                                        limit: 255
+    t.string   "country_residence",                          limit: 255
+    t.string   "country_representing",                       limit: 255
+    t.string   "phone",                                      limit: 255
+    t.string   "mobile",                                     limit: 255
+    t.string   "email",                                      limit: 255
+    t.string   "club",                                       limit: 255
+    t.string   "club_contact",                               limit: 255
+    t.string   "organization_member_number",                 limit: 255
+    t.string   "emergency_name",                             limit: 255
+    t.string   "emergency_relationship",                     limit: 255
+    t.boolean  "emergency_attending",                                    default: false, null: false
+    t.string   "emergency_primary_phone",                    limit: 255
+    t.string   "emergency_other_phone",                      limit: 255
+    t.string   "responsible_adult_name",                     limit: 255
+    t.string   "responsible_adult_phone",                    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "usa_confirmed_paid",                          default: false, null: false
+    t.boolean  "organization_membership_manually_confirmed",             default: false, null: false
     t.integer  "usa_family_membership_holder_id"
-    t.string   "birthplace",                      limit: 255
-    t.string   "italian_fiscal_code",             limit: 255
-    t.boolean  "usa_member_number_valid",                     default: false, null: false
-    t.string   "usa_member_number_status"
+    t.string   "birthplace",                                 limit: 255
+    t.string   "italian_fiscal_code",                        limit: 255
+    t.boolean  "organization_membership_system_confirmed",               default: false, null: false
+    t.string   "organization_membership_system_status"
   end
 
   add_index "contact_details", ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree
@@ -376,13 +376,11 @@ ActiveRecord::Schema.define(version: 20160204050936) do
     t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
     t.boolean  "artistic_score_elimination_mode_naucc",             default: true,       null: false
-    t.integer  "usa_individual_expense_item_id"
-    t.integer  "usa_family_expense_item_id"
     t.string   "logo_file",                             limit: 255
     t.integer  "max_award_place",                                   default: 5
     t.boolean  "display_confirmed_events",                          default: false,      null: false
     t.boolean  "spectators",                                        default: false,      null: false
-    t.boolean  "usa_membership_config",                             default: false,      null: false
+    t.boolean  "organization_membership_config",                    default: false,      null: false
     t.string   "paypal_account",                        limit: 255
     t.string   "waiver",                                limit: 255, default: "none"
     t.integer  "validations_applied"
@@ -397,6 +395,7 @@ ActiveRecord::Schema.define(version: 20160204050936) do
     t.boolean  "noncompetitors",                                    default: true,       null: false
     t.string   "volunteer_option",                                  default: "generic",  null: false
     t.date     "age_calculation_base_date"
+    t.string   "organization_membership_type"
   end
 
   create_table "event_translations", force: :cascade do |t|

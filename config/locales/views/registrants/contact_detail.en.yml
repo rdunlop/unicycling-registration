@@ -19,5 +19,5 @@ en:
       state: State
       state_province: State/Province
       team_affiliation: Team Affiliation
-      usa_membership_number_tooltip: A USA membership is required to participate at
+      organization_membership_number_tooltip: A %{organization_type} membership is required to participate at
         %{convention_name}

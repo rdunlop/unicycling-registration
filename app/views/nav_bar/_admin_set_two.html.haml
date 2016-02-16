@@ -4,8 +4,8 @@
   %li= link_to t('.translations'), translations_path
 - if policy(current_user).contact_registrants?
   %li= link_to t('.send_email_to_registrants'), emails_path
-- if policy(current_user).manage_usa_memberships?
-  %li= link_to t('.manage_usa_memberships'), usa_memberships_path
+- if policy(current_user).manage_memberships?
+  %li= link_to t('.manage_memberships'), organization_memberships_path
 - if @config.standard_skill && policy(current_user).under_development?
   %li= link_to t('.manage_standard_skill_entries'), standard_skill_entries_path
 - if policy(@config).manage_cache?

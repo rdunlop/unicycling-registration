@@ -39,6 +39,12 @@ module ApplicationHelper
     print_formatted_currency(cost)
   end
 
+  def organization_membership_label(config)
+    organization_type = t("organization_membership_types.#{config.organization_membership_type}")
+
+    [organization_type, t("membership_number")].join(" ")
+  end
+
   def print_time_until_prices_increase(reg_cost)
     if EventConfiguration.singleton.online_payment?
       if DateTime.now > reg_cost.end_date

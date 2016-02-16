@@ -15,14 +15,6 @@
     .description
       Requires collection of BirthPlace from everyone, and Italian Fiscal Code from Italian registrants.
 
-    %h3 Unicycling Society of America (USA) Membership Summary
-
-    = f.input :usa_membership_config
-
-    = f.association :usa_individual_expense_item, collection: ExpenseItem.user_manageable
-    = f.association :usa_family_expense_item, collection: ExpenseItem.user_manageable
-
-
     %h3 Standard Skill
 
     %p

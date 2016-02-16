@@ -19,5 +19,5 @@ fr:
       state: "État"
       state_province: "État/Province"
       team_affiliation: Appartenance à une équipe
-      usa_membership_number_tooltip: Une adhésion à l'USA est requis pour participer
+      organization_membership_number_tooltip: Une adhésion à la %{organization_type} est requis pour participer
         à %{convention_name}

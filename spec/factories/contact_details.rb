@@ -2,35 +2,35 @@
 #
 # Table name: contact_details
 #
-#  id                              :integer          not null, primary key
-#  registrant_id                   :integer
-#  address                         :string(255)
-#  city                            :string(255)
-#  state_code                      :string(255)
-#  zip                             :string(255)
-#  country_residence               :string(255)
-#  country_representing            :string(255)
-#  phone                           :string(255)
-#  mobile                          :string(255)
-#  email                           :string(255)
-#  club                            :string(255)
-#  club_contact                    :string(255)
-#  usa_member_number               :string(255)
-#  emergency_name                  :string(255)
-#  emergency_relationship          :string(255)
-#  emergency_attending             :boolean          default(FALSE), not null
-#  emergency_primary_phone         :string(255)
-#  emergency_other_phone           :string(255)
-#  responsible_adult_name          :string(255)
-#  responsible_adult_phone         :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  usa_confirmed_paid              :boolean          default(FALSE), not null
-#  usa_family_membership_holder_id :integer
-#  birthplace                      :string(255)
-#  italian_fiscal_code             :string(255)
-#  usa_member_number_valid         :boolean          default(FALSE), not null
-#  usa_member_number_status        :string
+#  id                                         :integer          not null, primary key
+#  registrant_id                              :integer
+#  address                                    :string(255)
+#  city                                       :string(255)
+#  state_code                                 :string(255)
+#  zip                                        :string(255)
+#  country_residence                          :string(255)
+#  country_representing                       :string(255)
+#  phone                                      :string(255)
+#  mobile                                     :string(255)
+#  email                                      :string(255)
+#  club                                       :string(255)
+#  club_contact                               :string(255)
+#  organization_member_number                 :string(255)
+#  emergency_name                             :string(255)
+#  emergency_relationship                     :string(255)
+#  emergency_attending                        :boolean          default(FALSE), not null
+#  emergency_primary_phone                    :string(255)
+#  emergency_other_phone                      :string(255)
+#  responsible_adult_name                     :string(255)
+#  responsible_adult_phone                    :string(255)
+#  created_at                                 :datetime
+#  updated_at                                 :datetime
+#  organization_membership_manually_confirmed :boolean          default(FALSE), not null
+#  usa_family_membership_holder_id            :integer
+#  birthplace                                 :string(255)
+#  italian_fiscal_code                        :string(255)
+#  organization_membership_system_confirmed   :boolean          default(FALSE), not null
+#  organization_membership_system_status      :string
 #
 # Indexes
 #
@@ -52,7 +52,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "EmailMyString+#{n}@example.com" }
     club "TCUC"
     club_contact "Connie Cotter"
-    usa_member_number "00001"
+    organization_member_number "00001"
     emergency_name "Jane Doe"
     emergency_relationship "SO"
     emergency_attending false

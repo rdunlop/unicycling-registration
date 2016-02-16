@@ -33,8 +33,9 @@ class UserPolicy < ApplicationPolicy
     awards_admin? || super_admin?
   end
 
-  def manage_usa_memberships?
-    config.usa_membership_config? && (membership_admin? || super_admin?)
+  # Can this user manage memberships in the Unicycling Body?
+  def manage_memberships?
+    config.organization_membership_config? && (membership_admin? || super_admin?)
   end
 
   # is this user allowed to make manual-received payments/etc?

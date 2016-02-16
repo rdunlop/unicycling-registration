@@ -19,5 +19,5 @@ de:
       state: Bundesstaat
       state_province: Bundesland/Region
       team_affiliation: Team Zugehörigkeit
-      usa_membership_number_tooltip: Eine USA Mitgliedschaft ist erforderlich um an
+      organization_membership_number_tooltip: Eine %{organization_type} Mitgliedschaft ist erforderlich um an
         der %{convention_name} teilnehmen zu können

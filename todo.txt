@@ -1,3 +1,10 @@
+- Why aren't comments being stripped from javascript?
+- Why aren't assets being gzipped? (nginx?)
+- change Tax column from "Free" to "Free/included"
+- replace carrierwave_direct with https://github.com/waynehoover/s3_direct_upload
+  - Reduce gems list further yet?
+- why isn't convention_setup/event_configuration being updated by Annotate
+- what should happen if Admin tries to change an EventCategory which has people signed up?
 - Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
 - 
 "Judging Session"

@@ -141,11 +141,11 @@ class RegistrantsController < ApplicationController
 
   # PUT /registrants/:id/refresh
   def refresh_usa_status
-    if @config.usa? && @registrant.contact_detail.present?
+    if @config.organization_membership_usa? && @registrant.contact_detail.present?
       UpdateUsaMembershipStatusWorker.perform_async(
         @registrant.id,
         @registrant.last_name,
-        @registrant.contact_detail.usa_member_number)
+        @registrant.contact_detail.organization_member_number)
     end
     render text: "", status: 200
   end

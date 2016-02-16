@@ -2,9 +2,9 @@
   - if @registrant.amount_owing > 0
     .unpaid_warning
       UNPAID?
-  - if @config.usa_membership_config? && !@registrant.usa_membership_paid? && !@registrant.spectator?
+  - if @config.organization_membership_config? && !@registrant.organization_membership_confirmed? && !@registrant.spectator?
     .unpaid_warning
-      USA#
+      = organization_membership_label(@config)
   - if @registrant.competitor? && @registrant.age <= 10
     .unpaid_warning
       Age <= 10 (wheel size)

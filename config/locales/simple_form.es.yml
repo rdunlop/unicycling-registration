@@ -78,7 +78,6 @@ es:
         standard_skill: Activar Sistema de Sumisión de Standard Skill
         standard_skill_closed_date: "Último día para presentar rutinas de Standard
           Skill en línea"
-        usa_membership_config: Mostrar páginas de administración de USA
       expense_item:
         details_label: Pregunta
         has_custom_cost: Donativo

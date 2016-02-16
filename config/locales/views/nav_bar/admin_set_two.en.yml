@@ -5,7 +5,7 @@ en:
       on_site_registration: 'On-Site Registration'
       translations: Translations
       send_email_to_registrants: 'Registrants (email)'
-      manage_usa_memberships: USA Membership Management
+      manage_memberships: Unicycling Society/Federation Membership Management
       manage_standard_skill_entries: Standard Skill Entries
       manage_cache: Cache Management
       registrant_bag_labels: 'Registrants Bag Labels (pdf)'

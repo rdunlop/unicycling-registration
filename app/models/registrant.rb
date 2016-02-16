@@ -37,7 +37,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   include CachedModel
 
   after_save :touch_members
-  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.usa? }
+  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
@@ -531,27 +531,9 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def paid_individual_usa?
-    ind = EventConfiguration.singleton.usa_individual_expense_item
-    return false unless ind.present?
-
-    paid_expense_items.include?(ind)
-  end
-
-  def paid_family_usa?
-    fam = EventConfiguration.singleton.usa_family_expense_item
-    return false unless fam.present?
-
-    paid_expense_items.include?(fam)
-  end
-
-  def usa_membership_paid?
+  def organization_membership_confirmed?
     return false unless validated?
-    contact_detail.usa_confirmed_paid || contact_detail.usa_family_membership_holder_id? || paid_individual_usa? || paid_family_usa?
-  end
-
-  def usa_family_membership_details
-    paid_details.select{|pd| pd.expense_item == EventConfiguration.singleton.usa_family_expense_item}.try(:details)
+    contact_detail.try(:organization_membership_confirmed?)
   end
 
   # Return a hash of categories, with values of a hash of event names
@@ -679,8 +661,8 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
 
   # Queue a job to query the USA db for membership information
   def update_usa_membership_status
-    return unless contact_detail.present? && contact_detail.usa_member_number.present? && last_name_changed?
-    UpdateUsaMembershipStatusWorker.perform_async(id, last_name, contact_detail.usa_member_number)
+    return unless contact_detail.present? && contact_detail.organization_member_number.present? && last_name_changed?
+    UpdateUsaMembershipStatusWorker.perform_async(id, last_name, contact_detail.organization_member_number)
   end
 
   def set_access_code

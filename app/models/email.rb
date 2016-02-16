@@ -8,7 +8,7 @@ class Email
   attribute :paid_reg_accounts, Boolean
   attribute :unpaid_reg_accounts, Boolean
   attribute :no_reg_accounts, Boolean
-  attribute :non_confirmed_usa, Boolean
+  attribute :non_confirmed_organization_members, Boolean
   attribute :competition_id, Array
   attribute :category_id, Integer
 
@@ -43,8 +43,8 @@ class Email
       "User Accounts with ANY Registrants who have NOT Paid Reg Fees"
     elsif no_reg_accounts
       "User Accounts with No Registrants"
-    elsif non_confirmed_usa
-      "User Accounts with Registrants who are not USA-Members"
+    elsif non_confirmed_organization_members
+      "User Accounts with Registrants who are not Unicycling-Organization-Members"
     elsif competitions.any?
       "Emails of users/registrants associated with #{competitions.map(&:to_s).join(' ')}"
     elsif category_id.present?
@@ -71,8 +71,8 @@ class Email
       User.unpaid_reg_fees
     elsif no_reg_accounts
       (User.confirmed - User.all_with_registrants)
-    elsif non_confirmed_usa
-      Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.all.reject(&:usa_membership_paid?).map(&:user).compact.uniq
+    elsif non_confirmed_organization_members
+      Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.all.reject(&:organization_membership_confirmed?).map(&:user).compact.uniq
     elsif competitions.any?
       competitions.map(&:registrants).flatten.map(&:user)
     elsif category_id.present?

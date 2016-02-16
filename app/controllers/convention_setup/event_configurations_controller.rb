@@ -46,8 +46,9 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
+  before_action :authorize_advanced_settings, only: [:advanced_settings]
 
-  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :important_dates, :volunteers, :payment_settings, :advanced_settings, :go_live]
+  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :organization_membership, :important_dates, :volunteers, :payment_settings, :advanced_settings, :go_live]
 
   before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
 
@@ -98,6 +99,11 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
 
   private
 
+  # prevent non-super-admin from accessing advanced-settings page
+  def authorize_advanced_settings
+    authorize @event_configuration, :advanced_settings?
+  end
+
   def authorize_cache
     authorize @event_configuration, :manage_cache?
   end
@@ -138,8 +144,6 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
 
   def advanced_settings_params
     params.require(:event_configuration).permit(:standard_skill, :standard_skill_closed_date,
-                                                :usa_membership_config,
-                                                :usa_individual_expense_item_id, :usa_family_expense_item_id,
                                                 :italian_requirements,
                                                 :iuf,
                                                 :test_mode, :usa,
@@ -151,6 +155,10 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   def name_logo_params
     params.require(:event_configuration).permit(:long_name, :short_name, :logo_file, :dates_description,
                                                 :event_url, :location, :contact_email, :style_name)
+  end
+
+  def organization_membership_params
+    params.require(:event_configuration).permit(:organization_membership_config, :organization_membership_type)
   end
 
   def payment_settings_params

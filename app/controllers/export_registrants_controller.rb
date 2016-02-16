@@ -40,7 +40,7 @@ class ExportRegistrantsController < ApplicationController
 
     headers = [
       "ID",
-      "USA#",
+      "Organization Membership #",
       "First Name",
       "Last Name",
       "Birthday",
@@ -58,7 +58,7 @@ class ExportRegistrantsController < ApplicationController
     Registrant.active.includes(:contact_detail).each do |reg|
       row = [
         reg.bib_number,
-        reg.contact_detail.usa_member_number,
+        reg.contact_detail.organization_member_number,
         reg.first_name,
         reg.last_name,
         reg.birthday,

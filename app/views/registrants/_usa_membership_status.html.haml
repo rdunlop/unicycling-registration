@@ -1,4 +1,4 @@
-- if contact_detail.usa_member_number.present?
+- if contact_detail.organization_member_number.present?
   .row
     .small-6.columns
       USA membership status
@@ -11,7 +11,7 @@
     .small-4.columns
       USA Details
     .small-8.columns
-      = contact_detail.usa_member_number_status
+      = contact_detail.organization_membership_system_status
   .row
     .small-12.columns
       = link_to "Recheck USA Status", refresh_usa_status_registrant_path(contact_detail.registrant.bib_number), remote: true, method: :put, class: "js--usa_member_status_refresh"

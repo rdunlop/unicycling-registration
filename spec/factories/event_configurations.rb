@@ -22,13 +22,11 @@
 #  custom_waiver_text                    :text
 #  music_submission_end_date             :date
 #  artistic_score_elimination_mode_naucc :boolean          default(TRUE), not null
-#  usa_individual_expense_item_id        :integer
-#  usa_family_expense_item_id            :integer
 #  logo_file                             :string(255)
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE), not null
 #  spectators                            :boolean          default(FALSE), not null
-#  usa_membership_config                 :boolean          default(FALSE), not null
+#  organization_membership_config        :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
@@ -43,6 +41,7 @@
 #  noncompetitors                        :boolean          default(TRUE), not null
 #  volunteer_option                      :string           default("generic"), not null
 #  age_calculation_base_date             :date
+#  organization_membership_type          :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -62,8 +61,6 @@ FactoryGirl.define do
     waiver "print"
     custom_waiver_text "Online Waiver."
     usa false
-    # association :usa_family_expense_item, factory: :expense_item, cost: 100
-    # association :usa_individual_expense_item, factory: :expense_item, cost: 50
     iuf false
     event_sign_up_closed_date "2013-5-10"
     comp_noncomp_url nil
@@ -78,9 +75,8 @@ FactoryGirl.define do
 
     trait :with_usa do
       usa true
-      usa_membership_config true
-      association :usa_family_expense_item, factory: :expense_item, cost: 100
-      association :usa_individual_expense_item, factory: :expense_item, cost: 50
+      organization_membership_config true
+      organization_membership_type "usa"
     end
   end
 end

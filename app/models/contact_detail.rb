@@ -2,35 +2,35 @@
 #
 # Table name: contact_details
 #
-#  id                              :integer          not null, primary key
-#  registrant_id                   :integer
-#  address                         :string(255)
-#  city                            :string(255)
-#  state_code                      :string(255)
-#  zip                             :string(255)
-#  country_residence               :string(255)
-#  country_representing            :string(255)
-#  phone                           :string(255)
-#  mobile                          :string(255)
-#  email                           :string(255)
-#  club                            :string(255)
-#  club_contact                    :string(255)
-#  usa_member_number               :string(255)
-#  emergency_name                  :string(255)
-#  emergency_relationship          :string(255)
-#  emergency_attending             :boolean          default(FALSE), not null
-#  emergency_primary_phone         :string(255)
-#  emergency_other_phone           :string(255)
-#  responsible_adult_name          :string(255)
-#  responsible_adult_phone         :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  usa_confirmed_paid              :boolean          default(FALSE), not null
-#  usa_family_membership_holder_id :integer
-#  birthplace                      :string(255)
-#  italian_fiscal_code             :string(255)
-#  usa_member_number_valid         :boolean          default(FALSE), not null
-#  usa_member_number_status        :string
+#  id                                         :integer          not null, primary key
+#  registrant_id                              :integer
+#  address                                    :string(255)
+#  city                                       :string(255)
+#  state_code                                 :string(255)
+#  zip                                        :string(255)
+#  country_residence                          :string(255)
+#  country_representing                       :string(255)
+#  phone                                      :string(255)
+#  mobile                                     :string(255)
+#  email                                      :string(255)
+#  club                                       :string(255)
+#  club_contact                               :string(255)
+#  organization_member_number                 :string(255)
+#  emergency_name                             :string(255)
+#  emergency_relationship                     :string(255)
+#  emergency_attending                        :boolean          default(FALSE), not null
+#  emergency_primary_phone                    :string(255)
+#  emergency_other_phone                      :string(255)
+#  responsible_adult_name                     :string(255)
+#  responsible_adult_phone                    :string(255)
+#  created_at                                 :datetime
+#  updated_at                                 :datetime
+#  organization_membership_manually_confirmed :boolean          default(FALSE), not null
+#  usa_family_membership_holder_id            :integer
+#  birthplace                                 :string(255)
+#  italian_fiscal_code                        :string(255)
+#  organization_membership_system_confirmed   :boolean          default(FALSE), not null
+#  organization_membership_system_status      :string
 #
 # Indexes
 #
@@ -51,7 +51,7 @@ class ContactDetail < ActiveRecord::Base
   validates :birthplace, presence: true, if: "EventConfiguration.singleton.italian_requirements?"
   validates :italian_fiscal_code, format: { with: /\A[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]\Z/, message: "must be specified if you are from Italy" }, if: :vat_required?
 
-  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.usa? }
+  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
 
   # Italians are required to enter VAT_Number and Birthplace
   def vat_required?
@@ -85,10 +85,15 @@ class ContactDetail < ActiveRecord::Base
     end
   end
 
+  # is this registrant a member of the relevant unicycling federation?
+  def organization_membership_confirmed?
+    organization_membership_system_confirmed? || organization_membership_manually_confirmed?
+  end
+
   private
 
   def update_usa_membership_status
-    return unless usa_member_number_changed? && registrant.present? && usa_member_number.present?
-    UpdateUsaMembershipStatusWorker.perform_async(registrant_id, registrant.last_name, usa_member_number)
+    return unless organization_member_number_changed? && registrant.present? && organization_member_number.present?
+    UpdateUsaMembershipStatusWorker.perform_async(registrant_id, registrant.last_name, organization_member_number)
   end
 end
