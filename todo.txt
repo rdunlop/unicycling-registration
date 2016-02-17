@@ -1,3 +1,7 @@
+- Create an actual to-do list which is exposed
+- Create/modify a ChangeLog (look up best practices)
+- split out tinymce into an Admin Stylesheet?
+- Mark stylesheets/javascript as "async"?
 - Why aren't comments being stripped from javascript?
 - Why aren't assets being gzipped? (nginx?)
 - change Tax column from "Free" to "Free/included"
@@ -192,6 +196,8 @@ Competitor.all.each do |comp|
   end
 end
 to_drop
+
+- When I withdraw a competitor, their "order" position in the "Set Orders" list should be removed so that the order remains sequential.
 
 - Deleting a registrant should "Withdraw" them from all competitions that they are competitors for.
 - TwoAttemptEntry and Import Result pages should show the competitors who have results on the page, so that importers don't get confused once they have "Approved" the results during Review.
