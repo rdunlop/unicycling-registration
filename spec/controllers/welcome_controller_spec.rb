@@ -1,10 +1,22 @@
 require 'spec_helper'
 
 describe WelcomeController do
+  let(:user) { FactoryGirl.create(:user) }
   describe "GET 'help'" do
-    it "returns http success" do
-      get :help
-      expect(response).to be_success
+    context "When not logged in" do
+      it "returns http success" do
+        get :help
+        expect(response).to be_success
+      end
+    end
+
+    context "when logged in" do
+      before { sign_in user }
+
+      it "returns http success" do
+        get :help
+        expect(response).to be_success
+      end
     end
   end
 
@@ -29,8 +41,7 @@ describe WelcomeController do
   # handle case where a machine queries for a non-locale
   describe "GET 'humans.txt'" do
     it "returns 404-not-found" do
-      @user = FactoryGirl.create(:user)
-      sign_in @user
+      sign_in user
       expect do
         get :index, locale: 'humans', format: 'txt'
       end.to raise_error(ActiveRecord::RecordNotFound)
@@ -62,20 +73,19 @@ describe WelcomeController do
 
     describe "when the user is signed in, and has registrants" do
       before(:each) do
-        @user = FactoryGirl.create(:user)
-        sign_in @user
-        @registrant = FactoryGirl.create(:competitor, user: @user)
+        sign_in user
+        @registrant = FactoryGirl.create(:competitor, user: user)
       end
       it "assigns the user object when feedback error" do
         post "feedback", contact_form: {feedback: nil}
-        expect(assigns(:user)).to eq(@user)
+        expect(assigns(:user)).to eq(user)
       end
 
       it "includes the user's e-mail (and names of registrants)" do
         post :feedback, contact_form: { feedback: "Hello werld" }
         @cf = assigns(:contact_form)
         expect(@cf.feedback).to eq("Hello werld")
-        expect(@cf.username).to eq(@user.email)
+        expect(@cf.username).to eq(user.email)
         expect(@cf.registrants).to eq(@registrant.name)
       end
     end

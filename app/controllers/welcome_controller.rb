@@ -8,6 +8,7 @@ class WelcomeController < ApplicationController
   end
 
   def help
+    @user = current_user
   end
 
   # GET /welcome/usa_membership
@@ -16,7 +17,6 @@ class WelcomeController < ApplicationController
 
   def contact_us
     @contact_form = ContactForm.new
-    @user = current_user
   end
 
   def feedback
