@@ -20,6 +20,13 @@ describe WelcomeController do
     end
   end
 
+  describe "GET help_translate" do
+    it "returns http success" do
+      get :help_translate
+      expect(response).to be_success
+    end
+  end
+
   describe "GET index" do
     describe "when there is a 'Home' page" do
       let!(:home_page) { FactoryGirl.create(:page, :home) }

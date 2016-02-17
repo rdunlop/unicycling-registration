@@ -22,6 +22,7 @@
           %h6= t(".language_header")
         - I18n.available_locales.each do |locale|
           %li= link_to t("language_name", locale: locale), new_locale_path(locale), hreflang: locale, lang: locale
+        %li.footer__list-separation= link_to t(".help_translate"), help_translate_welcome_path
   .row
     .small-12.columns
       %p.footer__attribution= t(".developed_by")

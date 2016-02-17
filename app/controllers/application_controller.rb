@@ -34,7 +34,18 @@ class ApplicationController < ActionController::Base
 
   # Override the default pundit_user so that we can pass additional state to the policies
   def pundit_user
-    @pundit_user ||= UserContext.new(current_user, EventConfiguration.singleton, EventConfiguration.closed?, allow_reg_modifications?)
+    @pundit_user ||= UserContext.new(
+      current_user,
+      EventConfiguration.singleton,
+      EventConfiguration.closed?,
+      allow_reg_modifications?,
+      translation_domain?,
+    )
+  end
+
+  # Is this domain marked as the Translations Domain
+  def translation_domain?
+    @tenant.subdomain == Rails.application.secrets.translations_subdomain
   end
 
   # so that devise routes are properly including the locale

@@ -1,26 +1,40 @@
-%h1 Help Translate this site
+%h1 Help Translate
 
 %p
+  The text and translations of the various pages of this site have been made by many volunteers.
+  %br
   Do you want to see this site translated into your language?
   %br
-  Do you see some translation mistakes that you want to help correct?
+  Do you see some text or translation mistakes that you want to help correct?
+  %br
+  Do you think that a page is confusing, and would like to make it better?
 
-%h2 How can you help?
+.row
+  .small-12.columns
+    %h2 How can you help?
 
-%ol
-  %li Sign up to be a translator
-  %li Translate some text from English into your language of choice
-  %li Submit your translations
+    %ol.text-left
+      %li Sign up to be a translator
+      %li Translate some text from English into your language of choice
+      %li Submit your translations through the translation system
 
-%p
-  There is no obligation to translate everything, any contributions are greatly appreciated.
+  .small-12.columns
+    There is no obligation to translate everything, <u>any</u> contributions are greatly appreciated.
 
-%p
-  After submitting the translations, they will appear on the live site within 24-48 hours (after approval).
+  .small-12.columns
+    After submitting the translations, they will appear on the live site within 24-48 hours (after approval).
 
 %h3 How to get started?
 
-= link_to "Sign Up as a translator", "#", class: "button"
+= link_to "Sign Up as a translator", Rails.application.secrets.translation_website_url, class: "button"
 
-Robin notes:
-- Create a convention_translator role, for use in convention-specific translations?
+%p.small
+  %b Note
+  The translations occur on a separate site, so that they can be reviewed before being published here on the main registration site.
+
+%p
+  %b Note
+  We are continually making changes to the site and its contents, and thus there are frequently new and changed texts which
+  need translating.
+  %br
+  We may periodically send out updates to the translators asking for them to review new text and submit new translations.

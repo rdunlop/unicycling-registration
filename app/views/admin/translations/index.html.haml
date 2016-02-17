@@ -2,6 +2,13 @@
 .row
   .small-12.columns
     %h1 Translate Content
+
+  .small-12.columns
+    Thank you for volunteering to translate some content. If you have any questions or problems,
+    please use the
+    = link_to "Contact Us Form", contact_us_welcome_path
+    to let us know.
+
   .small-12.columns
     %p
       The Registration and Competition system is available in multiple languages
@@ -15,25 +22,20 @@
       Convention is available in
       = @config.enabled_locales.map { |lang| t("language_name", locale: lang) }.join(", ")
 
-    %p There are two sets of Translations:
+    %p There are two different sets of Translations:
 
     %ol
-      %li Common Translations for all Conventions
-      %li Translations Specific to your Convention
+      %li Translations Common to all Conventions
+      %li Translations Specific to each Convention
 
-  .small-12.medium-6.columns
+  %h2 Common Translations
+
+  .small-12.columns
     %u Examples of Common Translations
     %ul
       %li Navigation Bar Labels
       %li Automated E-mail Text
       %li Field names (e.g. First Name, Phone Number)
-
-  .small-12.medium-6.columns
-    %u Examples of Convention-Specific Translations
-    %ul
-      %li Item name (e.g. Small T-Shirt)
-      %li Event Names (E.g. Flatland)
-      %li Event Choices (e.g. Jr. Expert)
 
   .small-12.columns
     %p
@@ -42,43 +44,62 @@
       Any changes made to these texts will be applied immediately to ALL convention
       systems.
 
-    %p
-      Because the Convention-Specific Translations depend on the text that you
-      have entered during configuration, they will need to be translated by you
-      or your volunteers.
-
 .row
-  .small-12.medium-6.columns
-    %h2 Common Translations
-    - if policy(:translation).manage_all_site_translations?
+  .small-12.columns
+    - if policy(:translation).manage_all_sites_translations?
       = render "all_site_translations"
-      %hr
     - else
       %p
         Access to the Common Translations system is not enabled for you.
         %br
         If you would like to help translate that text, please
-        = link_to "contact us", help_welcome_path
+        = link_to "follow the directions", help_translate_welcome_path
 
-  .small-12.medium-6.columns
-    %h2 Convention-Specific translations:
+  %hr
+
+  %h2 Convention-Specific Translations
+
+  .small-12.columns
+    %u Examples of Convention-Specific Translations
     %ul
-      %li= link_to "Event Configuration", edit_translations_event_configuration_path
-      %li= link_to "Categories", translations_categories_path
-      %li= link_to "Events", translations_events_path
-      %li= link_to "Event Categories", translations_event_categories_path
-      %li= link_to "Event Choices", translations_event_choices_path
-      %li= link_to "Expense Groups", translations_expense_groups_path
-      %li= link_to "Expense Items", translations_expense_items_path
-      %li= link_to "Registration Costs", translations_registration_costs_path
-      %li= link_to "Pages", translations_pages_path
+      %li Item name (e.g. Small T-Shirt)
+      %li Event Names (E.g. Flatland)
+      %li Event Choices (e.g. Jr. Expert)
 
+  .small-12.columns
+    %p
+      Because the Convention-Specific Translations depend on the text that was entered
+      have during convention configuration, they will need to be translated for
+      each convention group, or by volunteers.
+
+    %p
+      To assign volunteers access to help translate your specific convention information
+      use the
+      = link_to "User Management", permissions_path
+      to assign them the "Translator" role.
+
+  - if policy(:translation).manage_site_translations?
+    %b You have access to perform translations
+    .small-12.columns
+      %h2 Convention-Specific translations:
+      %ul
+        %li= link_to "Event Configuration", edit_translations_event_configuration_path
+        %li= link_to "Categories", translations_categories_path
+        %li= link_to "Events", translations_events_path
+        %li= link_to "Event Categories", translations_event_categories_path
+        %li= link_to "Event Choices", translations_event_choices_path
+        %li= link_to "Expense Groups", translations_expense_groups_path
+        %li= link_to "Expense Items", translations_expense_items_path
+        %li= link_to "Registration Costs", translations_registration_costs_path
+        %li= link_to "Pages", translations_pages_path
+  - else
+    %p You <b>Do Not</b> have access to translate the site
 
 - if policy(:translation).clear_cache?
   .row
     .small-12.columns
       %h2 Clear Caching after making translation changes
 
-      %p Once you are finished translating various files (and have "applied the changes" if doing shared translations), you may need to clear the page caching so that all possible pages are refreshed.
+      %p Once you are finished translating various files (and have "applied the changes" if doing common translations), you may need to clear the page caching so that all possible pages are refreshed.
 
       = link_to "Clear Translation Cache", translations_cache_path, method: :delete, class: "focus_button", data: { confirm: "Are you sure? This has performance impacts as the cache is rebuilt (please don't do this frequently) " }

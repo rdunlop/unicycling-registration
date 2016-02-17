@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:data_entry_menu]
-  before_action :skip_authorization, only: [:index, :contact_us, :help, :feedback, :confirm, :usa_membership]
+  before_action :skip_authorization, except: [:data_entry_menu]
 
   before_action :check_acceptable_format
 
@@ -13,6 +13,11 @@ class WelcomeController < ApplicationController
 
   # GET /welcome/usa_membership
   def usa_membership
+  end
+
+  # GET /welcome/confirm
+  # The path where users are directed after signing up
+  def confirm
   end
 
   def contact_us
@@ -37,8 +42,20 @@ class WelcomeController < ApplicationController
     end
   end
 
+  # This is the "root_path", and redirects the user to different places
+  # depending on the configuration of the server.
   def index
     flash.keep
+    # if this is the translation domain, put the user on the translation-instructions page
+    if translation_domain?
+      authenticate_user!
+      if user_signed_in?
+        redirect_to translations_path
+        return
+      end
+    end
+
+    # if we have a "home" page, show them that
     if Page.exists?(slug: "home")
       redirect_to page_path("home")
     else

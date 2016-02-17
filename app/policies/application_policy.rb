@@ -1,5 +1,5 @@
 class ApplicationPolicy
-  attr_reader :user, :record, :reg_closed, :authorized_laptop
+  attr_reader :user, :record, :reg_closed, :authorized_laptop, :translation_domain
   attr_reader :config
 
   def initialize(user_context, record)
@@ -8,6 +8,7 @@ class ApplicationPolicy
       @config = user_context.config
       @reg_closed = user_context.reg_closed
       @authorized_laptop = user_context.authorized_laptop
+      @translation_domain = user_context.translation_domain
     else
       # for ease of testing, we allow passing a non-user context
       # in the actual system, we will always encapsulate the user in a UserContext object
@@ -110,6 +111,10 @@ class ApplicationPolicy
 
   def payment_admin?
     user.has_role?(:payment_admin)
+  end
+
+  def all_sites_translator?
+    translation_domain
   end
 
   def translator?

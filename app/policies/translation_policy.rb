@@ -1,13 +1,17 @@
 class TranslationPolicy < ApplicationPolicy
   def index?
-    convention_admin? || translator? || super_admin?
+    convention_admin? || translator? || super_admin? || manage_all_sites_translations?
   end
 
   def clear_cache?
     index?
   end
 
-  def manage_all_site_translations?
-    translator? || super_admin?
+  def manage_site_translations?
+    index?
+  end
+
+  def manage_all_sites_translations?
+    all_sites_translator? || super_admin?
   end
 end
