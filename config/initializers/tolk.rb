@@ -4,7 +4,8 @@
 # See github.com/tolk/tolk for more informations
 
 Tolk::ApplicationController.authenticator = proc {
-  unless user_signed_in? && Pundit.policy(current_user, :translation).manage_all_sites_translations?
+  unless user_signed_in? && Apartment::Tenant.current == Rails.application.secrets.translations_subdomain
+    # OLD: unless user_signed_in? && Pundit.policy(current_user, :translation).manage_all_sites_translations?
     flash[:alert] = "You are not allowed"
     redirect_to "/"
   end

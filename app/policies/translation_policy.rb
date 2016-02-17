@@ -11,6 +11,7 @@ class TranslationPolicy < ApplicationPolicy
     index?
   end
 
+  # NOTE: this SHOULD be used by tolk.rb initializer
   def manage_all_sites_translations?
     all_sites_translator? || super_admin?
   end
