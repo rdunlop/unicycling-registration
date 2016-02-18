@@ -5,6 +5,7 @@ describe Translations::EventChoicesController do
   let(:user) { FactoryGirl.create(:convention_admin_user) }
 
   before { sign_in user }
+  after { I18n.locale = :en }
 
   describe "#index" do
     it "renders" do
