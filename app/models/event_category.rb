@@ -26,6 +26,7 @@ class EventCategory < ActiveRecord::Base
   has_many :competition_sources, dependent: :destroy
 
   translates :name, fallbacks_for_empty_translations: true
+  accepts_nested_attributes_for :translations
 
   validates :event, presence: true
   validates :name, presence: true, uniqueness: {scope: [:event_id]}
