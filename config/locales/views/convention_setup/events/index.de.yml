@@ -1,0 +1,22 @@
+---
+de:
+  convention_setup:
+    events:
+      index:
+        age_limits_option: Verwalte die 'Event Kategorien' um Altersklassen zu definieren
+          (z.B. "Altersklasse 0-10")
+        available_event_options: 'Wenn eine Disziplin angelegt ist kannst du folgendes
+          definieren:'
+        description_html: "Jede Disziplin beschreibt etwas anderes an dem ein Teilnehmer
+          teilnehmen kann.\r\n<br>\r\nUnterschiedliche Wettkampf Klassen  (z.B. Jr
+          Expert, Advanced, Expert) werden\r\nals \"Disziplin Kategorien\" angesehen
+          wenn\r\nder Teilnehmer nur eine davon auswählen kann.\r\n<br>\r\nWenn ein
+          Teilnehmer an mehreren Klassen teilnehmen kann \"Beginner X\" sowie \"Advanced
+          X\", sollten diese als separate Disziplinen angelegt werden."
+        event_categories_option: Zusätzliche "Disziplinen Kategorien" (z.B. Advanced,
+          Expert)
+        existing_events: Existierende %{category} Disziplinen
+        header: 'Disziplinen in der Kategorie: %{category}'
+        more_questions_option: Füge "Disziplin Optionen" hinzu um weitere Fragen zu
+          stellen wenn sich ein Teilnehmer für diese Disziplin anmeldet.
+        new_event: Neue Disziplin

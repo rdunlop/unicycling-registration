@@ -1,0 +1,7 @@
+---
+de:
+  coupon_code_summaries:
+    show:
+      coupon_applied_to: 'Angewendet auf:'
+      date_coupon_applied: Angewendet am
+      header: "%{coupon_code} Gutscheincode"

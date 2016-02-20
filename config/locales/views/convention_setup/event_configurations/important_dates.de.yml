@@ -1,0 +1,10 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      important_dates:
+        description: Wenn kein Datum angeben wird, ist der Zugriff beendet wenn die
+          Anmeldung schließt
+        effective_final_date: Mit Wirkung zum Abschlussdatum
+        header: Wichtige Daten
+        type_of_important_date: Art der wichtigen Daten

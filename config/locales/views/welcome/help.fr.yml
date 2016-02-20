@@ -3,6 +3,8 @@ fr:
   welcome:
     help:
       frequently_asked_questions: FAQ
+      general_help: Si vous avez des problèmes ou des question à propos de l'inscription,
+        s'il vous plaît envoyez un commentaire.
       header: Aide
       i_cannot_login: Je ne peux pas m'identifier
       login_help: Une fois votre inscription terminée, vérifiez vos courriel pour

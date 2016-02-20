@@ -1,0 +1,9 @@
+---
+de:
+  convention_setup:
+    expense_groups:
+      index:
+        description: Wenn du weitere Dinge verkaufen möchtest (T-shirts, Übernachtung,
+          etc.), lege eine Ausgaben Gruppe für diese Artikel an.
+        header: Angebotener Artikel
+        new_expense_group: Neue Ausgaben Gruppe

@@ -1,0 +1,16 @@
+---
+de:
+  convention_setup:
+    registration_costs:
+      index:
+        header: Anmeldegebühren
+        new_registration_cost: Neuer Anmeldegebühr Eintrag
+        range_description: Jede Anmeldegebühr definiert den Zeitraum in dem man sich
+          zu dieser Gebühr anmelden kann
+        timezone_logic_description: "Weil die Teilnehmer möglicherweise in verschiedenen
+          Zeitzonen leben,\r\nERLAUBT das System die Zahlung des jeweiligen Preises
+          bis zu einem Tag nach ende der Anmeldeperiode.\r\n(in Abhängigkeit vom Standort
+          des Servers)"
+        timezone_logic_example: "Wenn die erste Anmeldeperiode bis zum 20. April geht\r\nkönnen
+          die Angemeldeten solange bezahlen bis der Server denkt das der 22. April
+          begonnen hat."

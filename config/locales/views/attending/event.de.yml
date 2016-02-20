@@ -2,4 +2,14 @@
 de:
   attending:
     event:
+      best_time: Beste Zeit
       category: Kategorie
+      drop_out_confirmation: Wenn Sie abbrechen, können Sie sich nicht erneut anmelden
+        ohne Zustimmung des Administrators. Fortsetzen?
+      drop_out_of_event: Abbrechen
+      paid_for: Bezahlt für
+      paid_for_tooltip: Um sich von diesem Event abzumelden kontaktieren sie bitte
+        den Organisator
+      upload_music: Deine Musik hochladen?
+      upload_music_details: lade deine Musik für diese Veranstaltung von der "Zusammenfassungs
+        Seite" hoch

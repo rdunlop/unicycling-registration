@@ -1,0 +1,9 @@
+---
+de:
+  convention_setup:
+    expense_items:
+      index:
+        description: Erstelle ein kostenpflichtigen Artikel für jede %{expense_group}
+          die du anbieten möchtest. z.B. T-Shirt in S...
+        header: Liste %{expense_group} kostenpflichtige Artikel
+        new_expense_item: Neuer kostenpflichtiger Artikel

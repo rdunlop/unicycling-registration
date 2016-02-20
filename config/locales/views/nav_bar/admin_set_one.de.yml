@@ -1,0 +1,15 @@
+---
+de:
+  nav_bar:
+    admin_set_one:
+      competition_overview: Wettkampf Übersicht
+      convention_setup: Veranstaltungs Konfiguration
+      data_entry: Daten Eintrag
+      manage_awards: Drucke/kreiere Ehrungen
+      manage_music: Musik verwalten
+      manage_payments: Zahlungen
+      manage_registrants: Angemeldete (bearbeiten/drucken)
+      registration_overview: Anmelde Übersicht
+      search_by_id_button: Zusammenfassung
+      search_by_id_label: Reg ID#
+      user_management: Benutzer Verwaltung

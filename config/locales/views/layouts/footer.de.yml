@@ -2,6 +2,11 @@
 de:
   layouts:
     footer:
+      contact_us: Kontaktiere uns
       developed_by: Entwickelt von Robin Dunlop und Scott Wilton
       help: Hilfe
+      help_translate: Hilf bei der Übersetzung
+      information_header: Information
+      language_header: Sprache
+      organizers_header: Organisatoren
       privacy_policy: Datenschutz Richtlinien

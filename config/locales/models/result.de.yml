@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    models:
+      result:
+        one: Ergeniss
+        other: Ergebnisse

@@ -18,6 +18,8 @@ de:
         italian_fiscal_code: Umsatzsteuer Ident Nummer (erforderlich für Italienische
           Teilnehmer)
         mobile: Mobiltelefonnummer
+        organization_member_number: Mitgliedsnummer des Einrad Verbandes
+        organization_membership_system_status: Mitglieds Status
         phone: Telefonnummer
         responsible_adult_name: Name
         responsible_adult_phone: Haupt Rufnummer

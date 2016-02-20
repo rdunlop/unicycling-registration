@@ -1,0 +1,19 @@
+---
+de:
+  convention_setup:
+    registration_costs:
+      form:
+        cost_header: Kosten
+        header: "%{registration_cost} Anmeldegebühren bearbeiten"
+        last_minute_note: "Da viele Leute immer erst in der letzten Minute zahlen,
+          steigt der Preis automatisch ~36 Stunden nach\r\ndem Ende des gesetzten
+          Datums. Dies ermöglicht Anmeldungen in der letzten Minute. (und bringt meist
+          noch viele Anmeldungen in dieser Zeitphase)"
+        registration_costs_increase_description_html: "Üblicherweise schließt die
+          Online Registrierung kurz bevor die Veranstaltung\r\nbeginnt und die Vor
+          Ort Anmeldung ist nur am Anmelde Schalter auf\r\nVeranstalter kontrolierten
+          Computern möglich.\r\n<br>\r\nDies erlaubt die Koordinierung des Ausdrucks
+          von Anmelde Paketen, das preparieren von Wettkampf Listen und andere Dinge
+          in letzter Minute.\r\n<br>\r\nWenn man eine Anmeldegebühr auf \"Vor Ort\"
+          setzt, wird automatisch das 'Online Anmeldung schließt'\r\nBanner in der
+          Preis Übersicht angezeigt."

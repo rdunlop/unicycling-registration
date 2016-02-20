@@ -1,0 +1,19 @@
+---
+de:
+  convention_setup:
+    convention_setup:
+      costs:
+        charge_by_event: Bezahlung pro Disziplin
+        charge_by_event_example: "(z.B. 5€ für Einzelkür, 6€ für grosße Gruppen.)"
+        charge_by_type: Den Preis für Wettkämpfer und Begleiter bestimmen
+        charge_by_type_example: "(z.B. 50€ frühe Wettkämpfer, 100€ späte Wettkämpfer)"
+        costs_settings: Das Anmelde System kann so konfiguriert werden das es verschieden
+          Kosten Einstellungen gibt
+        discounts: Rabatte
+        header: Kosten
+        how_much_to_charge: Wieviel muss der Teilnehmer zahlen
+        how_to_charge_registrants: Wie Teilnehmer zahlen müssen
+        money_through_bank_transfer: Geld via Banküberweisung empfangen
+        money_through_paypal: Geld via Paypal empfangen
+        other_items_for_sale: Andere Dinge zum Verkaufen
+        wire_bank_transfer: Bank Überweisung

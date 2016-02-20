@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      volunteer_opportunity:
+        description: Helfer Aufgabe
+    models:
+      volunteer_opportunity:
+        one: Helfer Möglichkeit
+        other: Helfer Möglichkeiten

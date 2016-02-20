@@ -1,0 +1,17 @@
+---
+de:
+  convention_setup:
+    pages:
+      index:
+        description: Lege Informations Seiten an die öffentlich einsehbar sind (ohne
+          Anmeldung sichtbar)
+        header: Informations Seiten
+        home_page: Wenn du eine Seite mit dem slug `home` anlegst wird diese die standard
+          Startseite dieser Veranstaltung
+        new_page: Neue Seite
+        pages_location_description: Links zu diesen Seiten sind in der oberen Menü
+          Leiste sichtbar
+        pages_structure_description: Du kannst einen Seitenbaum anlegen
+        privacy_policy_page: Wenn du eine Seite mit dem slug `privacy policy` anlegst
+          wird diese unten im footer Bereich angelegt
+        special_pages: Spezielle Seiten

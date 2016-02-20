@@ -5,3 +5,4 @@ es:
       event_choice:
         optional_if_event_choice_id: Opcional si se elige este evento/elección
         required_if_event_choice_id: Requerido si se elige este evento/elección
+    models: 

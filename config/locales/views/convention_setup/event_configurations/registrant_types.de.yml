@@ -1,0 +1,9 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      registrant_types:
+        header: Registrierungs Typen
+        noncompetitor_description: Begleiter können sich nicht für Wettkämpfe anmelden
+        offered_types: Verfügbare Registrierungs Typen
+        subheader: Registrierungs Typen

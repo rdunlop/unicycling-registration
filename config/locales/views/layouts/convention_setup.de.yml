@@ -1,0 +1,19 @@
+---
+de:
+  layouts:
+    convention_setup:
+      convention_setup: Veranstaltungs Konfiguration
+      costs: Kosten
+      custom_domain: Domain Konfiguration
+      date_deadlines: Wichtige Daten
+      go_live: Live schalten
+      information_pages: Informations Seiten
+      items_for_sale: Verkaufs Artikel
+      manage_translations: "Übersetze die Veranstaltungs Einstellungen"
+      name_and_logo: Name & Logo
+      organization_membership: Vereins Mitgliedschaft
+      payment_settings: Zahlungs Einstellungen
+      registrant_types: Angebotene Registrierungs Typen
+      registration_costs: Anmeldegebühren
+      rules_and_waiver: Regeln und Teilnahmebedingungen
+      volunteer_settings: Helfer Einstellungen

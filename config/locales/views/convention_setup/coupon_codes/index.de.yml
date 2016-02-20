@@ -1,0 +1,9 @@
+---
+de:
+  convention_setup:
+    coupon_codes:
+      index:
+        description: Gutscheincodes können erzeugt werden um einen Rabatt (auch komplett
+          gratis) für einzelne Dinge anzubieten.
+        header: Gutscheincodes listen
+        new_coupon_code: Neuer Gutscheincode

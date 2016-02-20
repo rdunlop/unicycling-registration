@@ -1,0 +1,20 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      rules_waiver:
+        current_iuf_rulebook_link: Das aktuelle IUF Regelwerk findet man hier
+        description: Definiere die Art von Teilnahmebedingungen  die du den Teilnehmern
+          zur Verfügung stellen willst
+        header: Teilnahmebedingungen und Regeln
+        noncompetitor_description: Begleiter können sich nicht für Wettkämpfe anmelden
+        online_waiver_description: 'Online: der Teilnehmer ist verpflichtet die Teilnahmebedingungen
+          zu unterschreiben/bestätigen'
+        print_waiver_description: 'Druck: Wir bieten die Teilnahmebedingungen für
+          den Teilnehmer zum ausdrucken/unterschreiben an der Veranstaltung an. (auf
+          der Webseite vorab verfügbar damit Eltern sie für ihre Kinder unterschreiben
+          können)'
+        rulebook: Regelwerk
+        rules: Regeln
+        sub_description: Optional können spezifische Regeln definiert werden um sie
+          den Teilnehmern zu zeigen (z.B. Wettkampf spezifische Anpassungen des Regelwerks)

@@ -3,17 +3,35 @@ de:
   activerecord:
     attributes:
       event_configuration:
+        accept_rules: Regeln die akzeptiert werden müssen
+        age_calculation_base_date: Basis Datum zur Alters Berechnung
+        artistic_closed_date: Letzter Tag an dem neue Anmeldungen für Artistik akzeptiert
+          werden
+        competitor: Wettkämpfer
         competitor_benefits: Teilnehmer Vorteile
+        comp_noncomp_page_id: Wettkämpfer vs. Begleiter Beschreibungs Seite
+        contact_email: Veranstaltungs Email Kontakt
+        currency_code: Währungs Code
+        custom_waiver_text: Individuelle Teilnahmebedingungen
         dates_description: Daten Beschreibung
+        event_sign_up_closed_date: Letzter Tag um sich anzumelden
         event_url: Haupt Webseite
         location: Ort
+        logo_file: Logo
         long_name: Voller Name
+        music_submission_end_date: Letzter Tag um Musik hoch zu laden
+        noncompetitor: Begleiter (Non Competitor)
         noncompetitor_benefits: Begleiter Vorteile
         offline_payment: Gib Details zur offline Zahlmethode an
         offline_payment_description: Details der offline Zahlmethode
+        paypal_mode: Paypal Modus
+        rules_file_name: Regel Datei PDF
         short_name: Kurzname
+        spectator: Zuschauer
         spectator_benefits: Zuschauer Vorteile
         start_date: Erster Tag der Veranstaltung
+        style_name: Webseiten Stil
+        under_construction: wird gerade überarbeitet
   helpers:
     submit:
       event_configuration:

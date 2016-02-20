@@ -1,0 +1,14 @@
+---
+de:
+  activerecord:
+    attributes:
+      registration_cost:
+        end_date: End Datum
+        name: Name
+        onsite: Vor Ort
+        registrant_type: Registrierungs Art
+        start_date: Start Datum
+    models:
+      registration_cost:
+        one: Anmelde Gebühr
+        other: Anmelde Gebühren

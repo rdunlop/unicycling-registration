@@ -1,0 +1,9 @@
+---
+de:
+  layouts:
+    competition_setup:
+      advanced: Erweiterte Einstellungen
+      competition_setup: Wettkampf Konfiguration
+      manage_age_groups: Altersklassen Typ
+      manage_competitions: Wettkämpfe verwalten
+      manage_directors: Direktoren verwalten

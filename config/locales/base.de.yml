@@ -15,11 +15,17 @@ de:
     - :month
     - :day
     - :year
+  delete: Enfernen
+  edit: Bearbeiten
+  example: Beispiel
   language_name: Deutsch
+  membership_number: Mitglieds Nummer
   'no': Nein
   noncompetitor: Begleiter
+  note: Anmerkung
   prices_increase_at_date: Der Preis steigt in %{end_date}
   prices_increase_soon: Der Preis steigt in weniger als einem Tag
+  show: Anzeigen
   spectator: Zuschauer
   wizard:
     add_contact_details: Kontakt Details

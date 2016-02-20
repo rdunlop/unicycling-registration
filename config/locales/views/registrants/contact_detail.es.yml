@@ -12,6 +12,8 @@ es:
         de la registración, itinerario y nuevos eventos.
       emergency_contact: Contacto de emergencia
       in_case_of_emergency: En caso de emergencia
+      organization_membership_number_tooltip: Se requiere una membresía a la %{organization_type}
+        para participar en %{convention_name}
       responsible_adult: Adulto responsable
       responsible_adult_detail: "(para solicitantes menores de 18 años)"
       responsible_adult_tooltip: El "Adulto Responsable" será responsable del menor
@@ -19,5 +21,3 @@ es:
       state: Estado
       state_province: Estado/Provincia
       team_affiliation: Afiliación al Equipo
-      organization_membership_number_tooltip: Se requiere una membresía a la %{organization_type} para participar
-        en %{convention_name}

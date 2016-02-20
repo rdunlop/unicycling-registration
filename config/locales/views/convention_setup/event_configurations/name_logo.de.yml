@@ -1,0 +1,10 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      name_logo:
+        header: Name & Logo
+        long_name_description: Der lange Name, der Ort und die Daten Beschreibung
+          wird im Kopf der Hauptseite verwendet
+        short_name_description: Der kurz Name wird an Stellen verwendet wo der Platz
+          begrenzt ist (z.B. in vielen PDF's)

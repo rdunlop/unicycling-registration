@@ -1,0 +1,19 @@
+---
+de:
+  nav_bar:
+    admin_set_two:
+      copy_events: Kopiere Disziplinen von vorherigen Veranstaltungen
+      export_data: Daten exportieren
+      manage_cache: Cache Verwaltung
+      manage_memberships: Einrad Verbands Mitgliedschaft verwalten
+      manage_standard_skill_entries: Standard Skill Einträge
+      on_site_registration: Vor Ort Anmeldung
+      registrant_bag_labels: Teilnehmer Taschen Label )pdf)
+      registrant_summaries_by_id: Zusammenfassung aller Teilnehmer sortiert nach ID
+        (pdf)
+      registrant_summaries_by_last_name: Zusammenfassung aller Teilnehmer sortiert
+        nach Nachnahme (pdf)
+      send_email_to_registrants: Teilnehmer (email)
+      standard_skill_routines_export: Standard Skill Routine (export)
+      standard_skill_routines_view: Standard Skill Routine (Ansicht)
+      translations: "Übersetzungen"

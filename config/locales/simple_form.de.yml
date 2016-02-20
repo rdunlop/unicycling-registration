@@ -5,6 +5,8 @@ de:
       default_message: 'Bitte überprüfe die folgenden Probleme:'
     hints:
       category:
+        info_page_id: Wähle eine 'Seite' die diese Kategorie beschreibt. Dies wird
+          dem Teilnehmer die korekte Übersetzung der Seite anzeigen
         info_url: Dieser Link erscheint auf der Kategorien Seite und kann als ein
           Link zu zusätzlichen Informationen über die Wettbewerbe dieser Kategorie
           verwendet werden.
@@ -34,6 +36,8 @@ de:
           sind."
         uses_lane_assignments: Aktiviert das Werkzeug zur Generierung der Läufe
       coupon_code:
+        expense_items: Zeige die kostenpflichtigen Artikel die durch diesen Gutscheincode
+          rabatiert werden.
         inform_emails: Eine Komma separierte Liste von E-Mail Adressen die informiert
           werden wenn jemand diesen Coupon verwendet
         price: Der Preis der berechnet wird wenn dieser Coupon verwendet wird
@@ -44,6 +48,10 @@ de:
           unter 11 Jahren eine andere Radgröße auszuwählen.
         artistic: Das aktivieren dieses Boolschen Ausdrucks wird automatisch alle
           Änderungen nach dem Ablauf der Frist für den Bereich Artistik beschränken.
+        best_time_format: Möchtest du das der Teilnehmer ein "Bestes Ergebniss" für
+          diese Disziplin angibt. (Dies kann helfen um die Start Reihenfolge für einige
+          Wettkämpfe fest zu legen
+        cost: Gib die Anmeldegebühr für diese Disziplin an (optional).
       event_category:
         warning_on_registration_summary: Jeder Teilnehmer der sich für diese Kategorie
           anmeldet wird eine Warnung auf seinem Anmeldeformular sehen.
@@ -53,11 +61,14 @@ de:
           gewählt hat ist dieses Feld optional. (z.B. "Team Name" ist optional wenn
           "Pickup" gewählt wurde)
         required_if_event_choice_id: Wenn der Nutzer diese andere 'Wettbewerbs Auswahl'
-          gewählt hat ist dieses Feld erforderlich. (z.B. "Wettkampf der besten Zeit"
-          ist erforderlich wenn "Beste Zeit" gewählt wurde)
+          gewählt hat ist dieses Feld erforderlich. (z.B. "Team Farbe" wenn "ich mache
+          es nur aus Spass)
         tooltip: Dies wird angezeigt wenn der Nutzer mit der Maus über dieses Feld
           fährt
       event_configuration:
+        accept_rules: Zwinge alle Teilnehmer die als PDF angehängten Regeln zu akzeptieren
+        age_calculation_base_date: Das Teilnehmer Alter wird basierend auf diesem
+          Datum berechnet
         artistic_closed_date: Ab diesem Datum können normale Teilnehmer keine Wettbewerbe
           mehr hinzufügen die als "Artistik" markiert sind. Bis zum Registrierungsschluss
           können jedoch noch Wettbewerbe gelöscht werden.
@@ -82,18 +93,22 @@ de:
           erlaubt ist
         noncompetitor_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
           die Vorteile einer Anmeldung als Begleiter
+        organization_membership_config: Dies fragt von jedem Teilnehmer die Mitgliedschaft
+          im gewählten EInrad Verband ab.
         paypal_test: Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal
           bekomen zu haben
         spectator_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
           die Vorteile einer Anmeldung als Zuschauer
         spectators: Zuschauer müssen keine Anmeldegebühr bezahlen und können Artikel
           erwerben ohne für die Anmeldung bezahlen zu müssen
-        start_date: Das Alter der Teilnehmer wird auf dieses Datum berechnet
+        start_date: Das Alter der Teilnehmer wird auf dieses Datum berechnet. Dies
+          ist das Standard Datum das auf dem Kalender angezeigt wird wenn das System
+          konfiguriert wird
         test_mode: Das aktivieren dieses Feldes erlaubt es jedem Nutzer Super User
           zu werden und auch vorzutäuschen eine Zahlung vorgenommen zu haben.
         usa: "Diese Funktion priorisiert die USA und Kanada in der Länder Auswahl
           Box und zeigt die Bundesstaaten an.\r\nEbenfalls erlaubt sie die last-minute
-          Anmeldung von Teilnehmern (durch die Zuständigen für die Dateneingabe)"
+          Anmeldung von Teilnehmern (durch die Dateneingabe)"
       expense_group:
         competitor_required: Ein Artikel dieser Ausgaben Gruppe MUSS vom Teilnehmer
           ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
@@ -103,12 +118,23 @@ de:
         noncompetitor_required: Ein Artikel dieser Ausgaben Gruppe MUSS vom Teilnehmer
           ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
           ausgewählt)
+      expense_item:
+        has_custom_cost: Erlaube dem Teilnehmer auszuwählen wieviel er für diesen
+          Artikel bezahlen möchte
+        has_details: Frage den Teilnehmer nach zusätzlichen Informationen wenn sie
+          diesen Artikel auswählen
       page:
         parent_page: "[Optional] Gruppiere diese Seite unter der vorigen Seite"
+        position: Ordne die Seiten unter einer einzelnen Über Seite an
         slug: Der URL Text, verwende nur normale Buchstaben und keine Leerzeichen
+      registrant_best_times:
+        source_location: Trage Name und Datum ein
       registrant:
         wheel_size_id: Verwendet um Altersklassen zu wählen soweit zutreffend. (Rennbahn,
           Standard Wettkämpfe)
+      registration_cost:
+        end_date: Definiere den letzten Tag an dem dieser Preis gilt
+        start_date: Sezifiziere das Datum das vorherige "End Datum" folgt
       volunteer_opportunity:
         inform_emails: Wenn jemand sich für diese Helfer Position anmeldet wird eine
           E-Mail an diese E-Mail Adresse gesendet
@@ -120,6 +146,7 @@ de:
       event_configuration:
         artistic_score_elimination_mode_naucc: Kleine Gruppe
         comp_noncomp_url: Teilnehmer/Begleiter Erklärung
+        organization_membership_config: Zeige die Verbands Mitglieder Seiten an
         paypal_account: Paypal Händler Account E-Mail
         rulebook_url: URL zum Rulebook im PDF Format
         standard_skill: Aktiviere das Standard Skill Submissions System
@@ -131,15 +158,18 @@ de:
         has_details: Eine Frage an den Teilnehmer stellen
         maximum_available: Maximale gesamte Stückzahl zum Verkauf
         maximum_per_registrant: Maximum Stückzahl pro Teilnehmer
+      registrant_best_times:
+        formatted_value: Beste Zeit
+        source_location: Veranstaltungs Name
       volunteer_opportunity: E-Mail Adresse um über jede Helfer Anmeldung informiert
         zu werden
     'no': Nein
     options:
       event_configuration:
         waiver:
-          none: Keine Verzichtserklärung
-          online: Online Verzichtserklärung
-          print: Verzichtserklärung drucken
+          none: Keine Teilnahmebedingungen
+          online: Online Teilnahmebedingungen
+          print: Teilnahmebedingungen drucken
     placeholders:
       competitor_expense_item:
         cost: z.B 12.00

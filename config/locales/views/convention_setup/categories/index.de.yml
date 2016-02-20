@@ -1,0 +1,13 @@
+---
+de:
+  convention_setup:
+    categories:
+      index:
+        description: Disziplinen sind in verschiedene Disziplin Kategorien gruppiert.
+          z.B. Manschafts Sport, Freestyle, Muni
+        existing_categories: Bestehende Kategorien
+        header: Disziplin Kategorien
+        manage_events: Disziplinen verwalten
+        manage_events_note: Wenn du eine Kategorie angelegt hast, wähle "Disziplinen
+          verwalten" um innerhalb der Kategorie Disziplinen an zu legen
+        new_category: Neue Kategorie

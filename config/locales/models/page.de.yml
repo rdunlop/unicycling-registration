@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      page:
+        body: Inhalte
+        parent_page_id: "Übergeordnete Seite"
+        position: Position
+        slug: Benahmung der URL
+        title: Titel

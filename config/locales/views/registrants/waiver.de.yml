@@ -2,8 +2,8 @@
 de:
   registrants:
     waiver:
-      headline: Jeder Teilnehmer muss eine ausgefüllte verbindliche Verzichtserklärung
+      headline: Jeder Teilnehmer muss die ausgefüllten verbindlichen Teilnahmebedingungen
         zur Veranstaltung mitbringen.
       parent_guardian_blurb: Teilnehmer unter 18 müssen eine vom Erziehungsberechtigeten
         unterschriebene verbindliche Verzichtserklärung haben.
-      print_legal_waiver: Verbindliche Verzichtserklärung drucken
+      print_legal_waiver: Verbindliche Teilnahmebedingungen drucken

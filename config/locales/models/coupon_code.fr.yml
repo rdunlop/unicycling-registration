@@ -1,0 +1,9 @@
+---
+fr:
+  activerecord:
+    attributes:
+      coupon_code:
+        code: Code
+        description: Description
+        inform_emails: E-mails où signaler l'utilisation d'un code promo
+    models: 

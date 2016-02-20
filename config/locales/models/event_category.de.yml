@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      event_category:
+        name: Name
+    models:
+      event_category:
+        one: Ereignis Kategorie
+        other: Ereignis Kategorien

@@ -1,0 +1,10 @@
+---
+de:
+  convention_setup:
+    events:
+      form:
+        advanced_settings: Erweiterte Einstellungen
+        artistic_closed_date: Der Anmeldeschulss für Artistik ist %{artistic_closed_date}
+        event_category_hint: "Spezifiziere 'alle' wenn es nur eine Kategorie gibt\r\n(anmerkung:
+          erweiterte Optionen sind unter 'Disziplin Kategorien' verfügbar)"
+        header: Disziplin bearbeiten

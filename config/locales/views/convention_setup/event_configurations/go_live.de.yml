@@ -1,0 +1,13 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      go_live:
+        header: live schalten
+        set_costs_warning: Du solltest sicher sein die Veranstaltungskosten oder die
+          Kosten pro Disziplin eingerichtet zu haben bevor der erste Teilnehmer sich
+          anmeldet
+        system_live: Das derzeitige System ist live
+        system_under_construction: Das derzeitige System ist in Bearbeitung
+        under_construction_description: Wenn "in Bearbeitung" abgewählt ist wird es
+          Teilnehmern ermöglicht sich anzumelden

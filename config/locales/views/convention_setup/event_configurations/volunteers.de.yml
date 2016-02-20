@@ -1,0 +1,12 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      volunteers:
+        description: "Bei der Anmeldung kann jeder Teilnehmer gefragt werden ob er
+          bereit ist zu helfen (generic),\r\noder es kann nach spezifischen Bereichen
+          gefragt werden (z.B. Möchtest du bei den Bahn Rennen helfen?) (choice),\r\noder
+          es wird garnicht gefragt (none)."
+        header: Helfer Einstellungen
+        next_step: Nachdem du "Auswahl" gewählt hast kannst du die Auswahlmöglichkeiten
+          in der "Helfer Möglichkeiten" EInstellungs Seite definieren

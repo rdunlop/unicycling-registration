@@ -4,3 +4,4 @@ es:
     attributes:
       coupon_code:
         inform_emails: Correos electrónicos para notificar cada uso de cupones
+    models: 

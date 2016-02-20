@@ -1,0 +1,8 @@
+---
+de:
+  convention_setup:
+    volunteer_opportunities:
+      specific_question_results:
+        confirmation: Bist du sicher? Dies löscht alle Auswahlen des Teilnehmers für
+          die Helfer Möglichkeiten
+        new_volunteer_role: Neue Helfer Aufgabe

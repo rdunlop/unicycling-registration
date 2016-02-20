@@ -12,6 +12,8 @@ fr:
         sur les inscriptions, le calendrier et les nouveaux événements.
       emergency_contact: Coordonnées d’urgence
       in_case_of_emergency: En cas d’urgence
+      organization_membership_number_tooltip: Une adhésion à la %{organization_type}
+        est requis pour participer à %{convention_name}
       responsible_adult: Adulte responsable
       responsible_adult_detail: "(pour les participants de moins de 18 ans)"
       responsible_adult_tooltip: "'Responsible Adult' sera responsable pour le mineur
@@ -19,5 +21,3 @@ fr:
       state: "État"
       state_province: "État/Province"
       team_affiliation: Appartenance à une équipe
-      organization_membership_number_tooltip: Une adhésion à la %{organization_type} est requis pour participer
-        à %{convention_name}

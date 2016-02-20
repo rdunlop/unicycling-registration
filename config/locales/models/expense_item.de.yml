@@ -1,0 +1,14 @@
+---
+de:
+  activerecord:
+    attributes:
+      expense_item:
+        cost: Kosten
+        name: Name
+        tax: Steuer
+        total: Gesammt
+        total_cost: Gesammt (berechnet)
+    models:
+      expense_item:
+        one: Kostenpflichtiger Artikel
+        other: Kostenpflichtige Artikel

@@ -9,7 +9,7 @@ fr:
         club: Nom de l’équipe principale ou de l’association
         club_contact: Nom du contact de l’équipe principale ou de l’association
         country_representing: Pays représenté
-        country_residence: Pays de residence
+        country_residence: Pays de résidence
         email: Courriel
         emergency_name: Nom
         emergency_other_phone: Autre numéro de téléphone
@@ -17,6 +17,8 @@ fr:
         emergency_relationship: Lien
         italian_fiscal_code: Code fiscal (Requis pour les participants Italiens)
         mobile: Numéro de portable
+        organization_member_number: Numéro d'adhérent fédéral
+        organization_membership_system_status: Statut de votre adhésion
         phone: Numéro de téléphone
         responsible_adult_name: Nom
         responsible_adult_phone: Numéro de téléphone principal

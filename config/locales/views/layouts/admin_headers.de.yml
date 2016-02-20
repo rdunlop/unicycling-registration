@@ -1,0 +1,6 @@
+---
+de:
+  layouts:
+    admin_headers:
+      registration_system_access_notice: Dieser Browser hat Zugriff auf das Anmelde
+        System

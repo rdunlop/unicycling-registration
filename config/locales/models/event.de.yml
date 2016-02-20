@@ -3,4 +3,12 @@ de:
   activerecord:
     attributes:
       event:
+        accepts_wheel_size_override: Erlaube die Radgröße nicht zu berücksichtigen
+        artistic: Artistik
+        best_time_format: Bestes Zeit Format
         id: ID
+        visible: Sichtbar
+    models:
+      event:
+        one: Disziplin
+        other: Disziplinen

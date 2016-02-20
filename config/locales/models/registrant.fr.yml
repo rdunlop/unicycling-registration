@@ -4,7 +4,7 @@ fr:
     attributes:
       registrant:
         bib_number: Numéro d'identification
-        online_waiver_acceptance: Je confirme avoir lu et compris les Termes
+        online_waiver_acceptance: Je confirme avoir lu et compris les Conditions
         online_waiver_signature: Signee
         wheel_size_id: Grandeur de roue par défaut pour l'athlétisme
     models:

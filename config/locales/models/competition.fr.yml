@@ -5,12 +5,15 @@ fr:
       competition:
         award_subtitle_name: Sous-titre du prix
         award_title_name: Titre du prix
+        combined_competition_id: Calcul du champion global
+        end_data_type: Donnée de ligne d'arrivée
         has_experts: Calculer les experts également
         name: Nom de la compétition
-        num_members_per_competitor: Grandeur de l'équipe
+        num_members_per_competitor: Taille de l'équipe
         penalty_seconds: Secondes par pénalités
-        scheduled_completion_at: Temps d'achèvement de l'horaire
+        scheduled_completion_at: Heure de fin prévue
         scoring_class: Type de score
+        start_data_type: Donnée de départ
         uses_lane_assignments: Sera attribué à la ligne/vague
     models:
       competition:
