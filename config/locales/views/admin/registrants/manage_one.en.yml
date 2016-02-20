@@ -1,0 +1,6 @@
+en:
+  admin:
+    registrants:
+      manage_one:
+        edit_summary: "Edit/Summary"
+        full_registrant_list: "Full List"

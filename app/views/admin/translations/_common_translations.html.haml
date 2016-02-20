@@ -1,0 +1,24 @@
+.row
+  .small-12.columns
+    %h2= t(".common_translations")
+
+    .small-12.columns
+      %u= t(".examples_of_common_translations")
+      %ul
+        %li= t(".common_example_1")
+        %li= t(".common_example_2")
+        %li= t(".common_example_3")
+
+    .small-12.columns
+      %p= t(".common_translations_detail")
+
+.row
+  .small-12.columns
+    - if policy(:translation).manage_all_sites_translations?
+      = render "all_site_translations"
+    - else
+      %p
+        = t(".access_not_enabled")
+        %br
+        = t(".want_to_help")
+        = link_to t(".follow_the_directions"), help_translate_welcome_path

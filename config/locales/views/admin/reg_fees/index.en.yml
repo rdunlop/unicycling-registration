@@ -1,0 +1,14 @@
+en:
+  admin:
+    reg_fees:
+      index:
+        header: Change Registration Fee
+        description: |
+          This form allows you to specify the registration cost to be set for this registrant.
+        automatic_increase: |
+          Once specified, the selected registration period will be "Locked"
+          for the registrant, and will not automatically increase as the dates go by.
+        can_lock_again: |
+          After "Locking" the registration cost for a registrant, you can choose to "lock"
+          that registrant to a different cost, if desired.
+        set_reg_fee: Set Reg Fee

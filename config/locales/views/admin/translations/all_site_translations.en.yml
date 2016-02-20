@@ -1,0 +1,14 @@
+en:
+  admin:
+    translations:
+      all_site_translations:
+        be_careful_warning: |
+          Please be cautious when making translations here, as they will
+          affect not only YOUR convention, but ALL conventions.
+        text_translation_system: "Text Translation System"
+        when_done_translating: |
+          Once you are done translation, you should press the "Apply Changes"
+          button in the "Text Translation System" in order to apply the changes to the site.
+        performance_impact_warning: |
+          Please only "Apply Changes" and "Clear Translation Cache" when you
+          are done, because it can have performance implications.

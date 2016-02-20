@@ -1,24 +1,24 @@
 .non_printable
-  = link_to '(pdf)', manage_all_registrants_path(:format => :pdf)
+  = link_to t("pdf"), manage_all_registrants_path(:format => :pdf)
 
-%h1 Edit Registrants
+%h1= t(".header")
 
 %table.sortable.searchable
   %thead
     %tr
-      %th ID
-      %th Last Name
-      %th First Name
-      %th Age
-      %th Gender
+      %th= Registrant.human_attribute_name(:bib_number)
+      %th= Registrant.human_attribute_name(:last_name)
+      %th= Registrant.human_attribute_name(:first_name)
+      %th= Registrant.human_attribute_name(:age)
+      %th= Registrant.human_attribute_name(:gender)
       - if @config.usa?
-        %th State
+        %th= ContactDetail.human_attribute_name(:state)
       - else
-        %th Country
-      %th.non_printable Summary
-      %th.non_printable Edit
-      %th.non_printable Deleted?
-      %th.non_printable User
+        %th= ContactDetail.human_attribute_name(:country)
+      %th.non_printable= t(".summary")
+      %th.non_printable= t("edit")
+      %th.non_printable= t(".deleted_question")
+      %th.non_printable= User.model_name.human
   %tbody
     // # includes 'current_user' because of the 'can? Calls
     - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
@@ -41,15 +41,15 @@
             - else
               %td= registrant.country
             %td.non_printable
-              = link_to "Summary", registrant_path(registrant)
-              = link_to "(pdf)", registrant_path(registrant, :format => :pdf)
+              = link_to t(".summary"), registrant_path(registrant)
+              = link_to t("pdf"), registrant_path(registrant, :format => :pdf)
             %td.non_printable
               %span.js--showElementTarget{ data: { key: "edit_registrant_events#{registrant.id}" } }
-                = link_to "Events", registrant_build_path(registrant, :add_events)
+                = link_to Event.model_name.human(count: 2), registrant_build_path(registrant, :add_events)
               %span.js--showElementTarget{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
-                = link_to "Items", registrant_build_path(registrant, :expenses)
+                = link_to ExpenseItem.model_name.human(count: 2), registrant_build_path(registrant, :expenses)
             %td.non_printable
               %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
               - if registrant.deleted? && policy(registrant).undelete?
-                = link_to 'Undelete', undelete_registrant_path(registrant), :method => :post, data: { confirm: "Undelete this registrant?" }
+                = link_to t(".undelete"), undelete_registrant_path(registrant), :method => :post, data: { confirm: t(".undelete_confirmation") }
             %td.non_printable= registrant.user

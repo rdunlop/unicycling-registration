@@ -1,0 +1,32 @@
+.row
+  .small-12.columns
+  %h2= t(".header")
+
+  .small-12.columns
+    %u
+    %ul
+      %li= t(".example_1")
+      %li= t(".example_2")
+      %li= t(".example_3")
+
+  .small-12.columns
+    %p= t(".convention_translation_details")
+
+    %p= t(".assign_volunteers", link: link_to(t(".user_management"), permissions_path))
+
+  - if policy(:translation).manage_site_translations?
+    %b= t(".access_enabled")
+    .small-12.columns
+      %h2= t(".header")
+      %ul
+        %li= link_to EventConfiguration.model_name.human, edit_translations_event_configuration_path
+        %li= link_to Category.model_name.human(count: 2), translations_categories_path
+        %li= link_to Event.model_name.human(count: 2), translations_events_path
+        %li= link_to EventCategory.model_name.human(count: 2), translations_event_categories_path
+        %li= link_to EventChoice.model_name.human(count: 2), translations_event_choices_path
+        %li= link_to ExpenseGroup.model_name.human(count: 2), translations_expense_groups_path
+        %li= link_to ExpenseItem.model_name.human(count: 2), translations_expense_items_path
+        %li= link_to RegistrationCost.model_name.human(count: 2), translations_registration_costs_path
+        %li= link_to Page.model_name.human(count: 2), translations_pages_path
+  - else
+    %p= t(".access_denied")

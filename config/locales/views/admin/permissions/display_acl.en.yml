@@ -1,0 +1,12 @@
+en:
+  admin:
+    permissions:
+      display_acl:
+        header: Set Laptop special permissions
+        current_access_key: "Today's Access Key is"
+        description: |
+          This will also allow that laptop to create user
+          accounts without triggering e-mail confirmations.
+        instructions: |
+          To authorize A laptop, <u>on that laptop</u> go
+          to %{url} and type in the access key

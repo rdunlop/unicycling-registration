@@ -1,0 +1,9 @@
+en:
+  admin:
+    event_songs:
+      index:
+        header: All Songs
+        all_songs_together: All Songs on one page
+        by_event: By Event
+        by_competition: By Competition
+        num_songs: "# Uploaded Songs"

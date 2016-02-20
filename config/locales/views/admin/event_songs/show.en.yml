@@ -1,0 +1,10 @@
+en:
+  admin:
+    event_songs:
+      show:
+        header: "%{event} Songs"
+        description: |
+          This page lists all songs which
+          <b>Are not</b>
+          assigned to a competitor yet
+        download: Download

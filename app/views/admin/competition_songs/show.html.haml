@@ -1,22 +1,20 @@
-%h2 #{@competition} Songs
+%h2= t(".header", competition: @competition)
 
-%p
-  This page lists all songs which were uploaded for #{@competition.event} AND the registrant is listed as a competitor.
+%p= t(".description", event: @competition.event)
 
-%p
-  Each song must be assigned to a competitor
+%p= t(".assign_to_competitor")
 
 %table.sortable
   %thead
     %tr
-      %th Reg ID
-      %th Reg Name
-      %th Description
-      %th File name
-      %th Updated Date
-      %th Download
-      %th Competitor
-      %th Assign
+      %th= Registrant.human_attribute_name(:bib_number)
+      %th= Registrant.model_name.human
+      %th= Song.human_attribute_name(:description)
+      %th= Song.human_attribute_name(:song_file_name)
+      %th= Song.human_attribute_name(:updated_at)
+      %th= t(".download")
+      %th= t("competitor")
+      %th= t(".assign_to_competitor")
   %tbody
     - @songs.each do |song|
       %tr
@@ -27,13 +25,13 @@
         %td= song.updated_at
         %td.js--highlightIfBlank
           - if song.has_file?
-            = link_to 'Download', song.song_file_name_url, target: '_blank'
+            = link_to t(".download"), song.song_file_name_url, target: '_blank'
         %td.js--highlightIfBlank= song.competitor
         %td
           = form_tag(competition_songs_path, method: :post) do
             = hidden_field_tag :competition_id, @competition.id
             = hidden_field_tag :song_id, song.id
             = no_form_competitor_select_box(@competition)
-            = submit_tag "Assign", class: "small button"
+            = submit_tag t(".assign_to_competitor"), class: "small button"
 
-= link_to "Download Zip of Songs", competition_song_download_zip_path(@competition)
+= link_to t(".download_zip"), competition_song_download_zip_path(@competition)

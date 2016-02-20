@@ -1,25 +1,25 @@
-%h2 All Songs
+%h2= t(".header")
 
-= link_to "All Songs on one page", all_event_songs_path
+= link_to t(".all_songs_together"), all_event_songs_path
 
-%h3 By Event
+%h3= t(".by_event")
 %table.sortable
   %thead
     %tr
-      %th Event
-      %th # uploaded Songs
+      %th= Event.model_name.human
+      %th= t(".num_songs")
   %tbody
     - @events.each do |event|
       %tr
         %td= link_to event, event_song_path(event)
         %td= event.songs.count
 
-%h3 By Competition
+%h3= t(".by_competition")
 %table.sortable
   %thead
     %tr
-      %th Event
-      %th Competition
+      %th= Event.model_name.human
+      %th= Competition.model_name.human
   %tbody
     - @events.each do |event|
       - event.competitions.each do |competition|

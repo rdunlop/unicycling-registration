@@ -1,11 +1,10 @@
-%h1 Create Refund
+%h1= t(".header")
 
 = form_for(@manual_refund, :url => manual_refunds_path, method: :post) do |pf|
   = render :partial => "/shared/error_messages", :object => @manual_refund
   %br
   %br
-  %b.payment_instructions
-    Please describe the refund. Examples: "Canceled. Not Attending.", "Refund, organizer."
+  %b.payment_instructions= t(".description")
   .row
     .small-6.columns.text-right
       = pf.label :note
@@ -17,17 +16,18 @@
     .small-6.columns
       = pf.number_field :percentage
 
-  %h1 Paid Items
-  .payment_instructions
-    Check off the items to be marked as refunded
+  %h1= t(".paid_items")
+  .payment_instructions= t(".choose_items")
   %table.sortable
     %thead
       %tr
-        %th Registrant
-        %th Item
-        %th Cost
-        %th Details (only required for some items)
-        %th Mark this item as refunded
+        %th= Registrant.model_name.human
+        %th= ExpenseItem.model_name.human
+        %th= ExpenseItem.human_attribute_name(:cost)
+        %th
+          = ExpenseItem.human_attribute_name(:details)
+          = t(".details_note")
+        %th= t(".mark_this_item")
     %tbody
       = pf.fields_for :items do |paid_detail|
         %tr
@@ -44,11 +44,11 @@
     %tfoot
       %tr
         %th
-        %th Total
+        %th= ExpenseItem.human_attribute_name(:total)
         %th.js--total
         %th{ colspan: 2 }
 
-  = submit_tag "Create Refund", :class => "payment_link registration_button"
+  = submit_tag t(".submit"), :class => "payment_link registration_button"
 
 %div
-  = link_to 'Back', new_manual_refund_path
+  = link_to t("back"), new_manual_refund_path

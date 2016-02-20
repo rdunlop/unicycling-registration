@@ -1,0 +1,10 @@
+---
+en:
+  activerecord:
+    attributes:
+      age_group_type:
+        name: Name
+    models:
+      age_group_type:
+        one: Age Group Type
+        other: Age Group Type

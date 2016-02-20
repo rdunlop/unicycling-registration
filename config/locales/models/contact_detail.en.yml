@@ -8,6 +8,8 @@ en:
         city: City
         club: Primary Team or Club Name
         club_contact: Primary Team or Club Contact
+        state: State
+        country: Country
         country_representing: Country representing
         country_residence: Country of residence
         email: Email

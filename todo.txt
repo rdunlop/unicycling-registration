@@ -1,3 +1,5 @@
+- Figure out how to put links in i18n
+- Fix html in i18n. (see <b> tags in locales)
 - Create an actual to-do list which is exposed
 - Create/modify a ChangeLog (look up best practices)
 - split out tinymce into an Admin Stylesheet?

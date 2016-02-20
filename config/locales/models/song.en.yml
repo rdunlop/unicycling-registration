@@ -6,3 +6,4 @@ en:
         description: Description
         song_file_name: File name
         updated_at: Last Updated
+        uploaded_by_guest: Guest?

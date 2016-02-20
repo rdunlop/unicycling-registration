@@ -1,0 +1,14 @@
+en:
+  admin:
+    competition_songs:
+      show:
+        header: "%{competition} Songs"
+        description: |
+          This page lists all songs which were uploaded for
+          %{event} AND the registrant is listed as a competitor.
+        assign_to_competitor: |
+          Each song must be assigned to a competitor so that it is included
+          in the download zip file.
+        assign_to_competitor: Assign
+        download: Download
+        download_zip: Download Zip of Songs

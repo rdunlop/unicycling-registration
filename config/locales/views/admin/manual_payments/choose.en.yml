@@ -1,0 +1,13 @@
+en:
+  admin:
+    manual_payments:
+      choose:
+        header: Receive Payment
+        description: |
+          An email will be sent to the the associated user account when a payment is completed.
+        payment_description: "Please describe the payment. Examples: Cash, Cheque #123"
+        chosen_and_unpaid_items: Chosen (but unpaid) Items
+        choose_items: Check off the items to be marked as paid
+        details_note: (only required for some items)
+        mark_this_item: Mark this item as having Money-Received
+        submit: Create Payment Record

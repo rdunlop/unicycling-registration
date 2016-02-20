@@ -1,0 +1,9 @@
+en:
+  admin:
+    registrants:
+      manage_all:
+        header: Manage Registrants
+        summary: Summary
+        undelete: Undelete
+        undelete_confirmation: "Undelete this registrant?"
+        deleted_question: "Deleted?"

@@ -1,0 +1,32 @@
+en:
+  admin:
+    permissions:
+      index:
+        header: User Management
+        different_users_different_roles: |
+          The Registration System is separated into many different sections for use by many different people.
+        you_have_roles: "You currently have the role(s) of:"
+        role_allows_access: "Each role enables the user to see/use different parts of the system."
+        you_may_need_to_grant_yourself_roles: |
+          You may need to assign yourself other roles in order to gaint access
+          to other features of the system.
+        directors_permissions: |
+          To grant director-access to specific events, please use the %{link} page
+        event_planned_example: |
+          To see the list of Registrants signed up for each event, you
+          should enable the "Event Planner" role
+        payment_admin_example: |
+          To see/manage the Payments having been received (and provide Refunds),
+          enable the "Payment Admin" role
+        roles_listed: |
+          Listed on this page are all of the roles which you have the permission to see.
+          You can assign roles to other users in order to grant them more access.
+        other_roles_not_permitted: |
+          There may be additional roles which you
+          <u>do not</u>
+          have permission to see.
+        users_with_permissions: |
+          Users with permissions:
+        add_new_permission: Add new permission
+        set_password: Set User Password
+        role_descriptions: "Role Descriptions:"

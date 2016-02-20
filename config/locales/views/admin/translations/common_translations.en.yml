@@ -1,0 +1,18 @@
+en:
+  admin:
+    translations:
+      common_translations:
+        common_translations: Common Translations
+        examples_of_common_translations: Examples of Common Translations
+        common_example_1: Navigation Bar Labels
+        common_example_2: Automated E-mail Text
+        common_example_3: "Field names (e.g. First Name, Phone Number)"
+        common_translations_detail: |
+          Because the Common Translations are applicable to all Conventions, most likely
+          they are already fully translated for the languages that you desired.
+          Any changes made to these texts will be applied immediately to ALL convention
+          systems.
+        access_not_enabled: |
+          Access to the Common Translations system is not enabled for you.
+        want_to_help: If you would like to help translate that text, please
+        follow_the_directions: follow the directions
