@@ -32,7 +32,7 @@
 
 %hr
 
-- cache [Payment] do
+- cache [Payment, RegistrantExpenseItem] do
   %h2 Revenues by Group
 
   %table.sortable
@@ -59,15 +59,16 @@
             %td
               - unpaid_count = item.num_unpaid
               = unpaid_count
-    %tfoot
-      %tr
-        %th{colspan: 3}
-        %th Non-Refunded Amount
-        %th= print_formatted_currency(Payment.total_non_refunded_amount)
-      %tr
-        %th{colspan: 3}
-        %th Total
-        %th= print_formatted_currency(Payment.total_received)
+    - cache [Payment, Refund] do
+      %tfoot
+        %tr
+          %th{colspan: 3}
+          %th Non-Refunded Amount
+          %th= print_formatted_currency(Payment.total_non_refunded_amount)
+        %tr
+          %th{colspan: 3}
+          %th Total
+          %th= print_formatted_currency(Payment.total_received)
 
 - if CouponCode.any?
   %h2 Coupon Codes
@@ -78,6 +79,7 @@
         %th Number Applied
     %tbody
       - CouponCode.all.each do |coupon_code|
-        %tr
-          %td= link_to coupon_code, coupon_code_summary_path(coupon_code)
-          %td= coupon_code.applied_to_payment_details.count
+        - cache [PaymentDetailCouponCode.cache_key_for_set(coupon_code.id)] do
+          %tr
+            %td= link_to coupon_code, coupon_code_summary_path(coupon_code)
+            %td= coupon_code.applied_to_payment_details.count

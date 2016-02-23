@@ -16,6 +16,8 @@
 #
 
 class Refund < ActiveRecord::Base
+  include CachedModel
+
   validates :refund_date, :user_id, :note, :percentage, presence: true
   validates :percentage, inclusion: { in: 0..100 }
 

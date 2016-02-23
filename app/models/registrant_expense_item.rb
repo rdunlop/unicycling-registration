@@ -21,6 +21,7 @@
 
 class RegistrantExpenseItem < ActiveRecord::Base
   include CachedSetModel
+  include CachedModel
   include HasDetailsDescription
 
   belongs_to :registrant, touch: true

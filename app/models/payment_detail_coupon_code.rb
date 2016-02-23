@@ -15,12 +15,18 @@
 #
 
 class PaymentDetailCouponCode < ActiveRecord::Base
+  include CachedSetModel
+
   belongs_to :coupon_code
   belongs_to :payment_detail
   validates :payment_detail, :coupon_code, presence: true
 
   delegate :price, to: :coupon_code
   delegate :to_s, to: :coupon_code
+
+  def self.cache_set_field
+    :coupon_code_id
+  end
 
   def self.completed
     joins(payment_detail: :payment).merge(Payment.completed)
