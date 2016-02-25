@@ -1,0 +1,8 @@
+en:
+  admin:
+    manual_payments:
+      new:
+        header: New payment
+        description: |
+          Select the Registrants to adjust payments for:
+        start_process: 'Next Step (choose items)'

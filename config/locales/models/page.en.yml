@@ -8,3 +8,7 @@ en:
         position: Position
         parent_page_id: Parent Page
         body: Contents
+    models:
+      page:
+        one: Page
+        other: Pages

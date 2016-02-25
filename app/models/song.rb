@@ -21,6 +21,7 @@
 
 class Song < ActiveRecord::Base
   mount_uploader :song_file_name, MusicUploader
+  include CachedModel
 
   belongs_to :registrant, touch: true
   belongs_to :event

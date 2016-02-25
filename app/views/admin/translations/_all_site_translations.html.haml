@@ -1,13 +1,12 @@
-%b Please be cautious when making translations here, as they will affect not only YOUR convention, but ALL conventions.
+%b= t(".be_careful_warning")
 
 %br
-= link_to "Text Translation System", tolk_path, class: "focus_button", target: "_blank"
+= link_to t(".text_translation_system"), tolk_path, class: "focus_button", target: "_blank"
+
+%p= t(".when_done_translating")
 
 %p
-  Once you are done translation, you should press the "Apply Changes" button in the "Text Translation System" in order to apply the changes to the site.
-
-%p
-  %b Note
-  Please only "Apply Changes" and "Clear Translation Cache" when you are done, because it can have performance implications.
+  %b= t("note")
+  = t(".performance_impact_warning")
 
 = render "examples"

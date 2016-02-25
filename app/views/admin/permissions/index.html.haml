@@ -1,38 +1,38 @@
-%h1 User Management
+%h1= t(".header")
 
 %p
-  The Registration System is separated into many different sections for use by many different people.
+  = t(".different_users_different_roles")
+
   %br
   %b
-    You currently have the role(s) of:
+    = t(".you_have_roles")
     #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
   %br
 
-%p
-  Each role enables the user to see/use different parts of the system.
+%p= t(".role_allows_access")
 
-%p
-  If there is a feature which you think that you should have access to, you may need to grant yourself a different role.
+- if policy(@config).setup_competition?
+  - directors_name = t("layouts.competition_setup.manage_directors")
+  %div= t(".directors_permissions_html", link: link_to(directors_name, directors_path))
 
-%b Examples:
+%p= t(".you_may_need_to_grant_yourself_roles")
+
+%b= t("example")
 %ul
-  %li To see the list of Registrants signed up for each event, you should enable the "Event Planner" role
-  %li To see/manage the Payments having been received (and provide Refunds), enable the "Payment Admin" role.
+  %li= t(".event_planned_example")
+  %li= t(".payment_admin_example")
 
-
-%p Listed on this page are all of the roles which you have the permission to see.
+%p= t(".roles_listed")
 
 %p
-  %b Note
-  There may be additional roles which you
-  %u do not
-  have permission to see
+  %b= t("note)")
+  = t(".other_roles_not_permitted_html")
 
-%h3 Users with advanced permissions:
+%h3= t(".users_with_permissions")
 %table.sortable
   %thead
     %tr
-      %th User
+      %th= User.model_name.human
       - @available_roles.each do |role|
         %th= role.to_s.humanize
   %tbody
@@ -43,40 +43,36 @@
           %td
             = user.has_role?(role)
             - if user.has_role?(role)
-              = link_to "X", set_role_permissions_path(role_name: role, user_id: user.id), method: :put, data: { confirm: "Are you sure?" }
+              = link_to "X", set_role_permissions_path(role_name: role, user_id: user.id), method: :put, data: { confirm: t("are_you_sure") }
 
 .l--2up
   .l--column
     %fieldset.form__fieldset
-      %h3 Add new permission
+      %h3= t(".add_new_permission")
       = form_tag(set_role_permissions_path, { :method => :put}) do
-        = label_tag :user_id, "User"
+        = label_tag :user_id, User.model_name.human
         = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true , class: "chosen-select"
         %br
-        = label_tag :role_name, "Role"
+        = label_tag :role_name, Role.model_name.human
         = select_tag :role_name, options_for_select(@available_roles), include_blank: true
         %br
-        = submit_tag "Add Permission", class: "button"
+        = submit_tag t(".add_new_permission"), class: "button"
 
   .l--column
     - if policy(:admin_permission).set_password?
       %fieldset.form__fieldset
-        %h3 Set User Password
+        %h3= t(".set_password")
         = form_tag(set_password_permissions_path, { :method => :put}) do
-          = label_tag :user_id, "User"
+          = label_tag :user_id, User.model_name.human
           = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
           %br
           = label_tag :password
           = text_field_tag :password
           %br
-          = submit_tag "Set Password", class: "button"
-
-- if policy(@config).setup_competition?
-  %div
-    = link_to 'Manage Directors', directors_path
+          = submit_tag t(".set_password"), class: "button"
 
 %hr
-%h3 Role Descriptions:
+%h3= t(".role_descriptions")
 - @available_roles.each do |role|
   %h4= role.to_s.humanize
   %pre= User.role_description(role)

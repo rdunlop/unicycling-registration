@@ -30,6 +30,7 @@ en:
     usa: USA
     french_federation: French Federation
   membership_number: Membership Number
+  pdf: "(pdf)"
   wizard:
     add_contact_details: Contact Details
     add_events: Events

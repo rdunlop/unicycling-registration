@@ -1,28 +1,28 @@
-%h3 Some parts should be left un-translated:
+%h3= t(".leave_some_untranslated")
 
 .translation_examples
   %div
-    Example:
+    = t("example")
     %pre
       \---
       one: Contact Detail
       other: Contact Details
 
-    Should become:
+    = t(".example_should_become")
     %pre
       \---
       one: Kontakt Detail
       other: Kontakt Details
   %hr
   %div
-    Example:
+    = t("example")
     %pre
       \---
       \- :month
       \- :day
       \- :year
 
-    should become:
+    = t(".example_should_become")
     %pre
       \---
       \- :month
@@ -31,10 +31,10 @@
 
   %hr
   %div
-    Example:
+    = t("example")
     %pre
       Welcome %{email} to the Unicycling Registration!
 
-    Should become:
+    = t(".example_should_become")
     %pre
       Wilkommen %{email} zur Einrad Anmeldung!

@@ -1,0 +1,20 @@
+en:
+  admin:
+    translations:
+      convention_translations:
+        header: Convention-Specific Translations
+        examples_of_convention_translations: Examples of Convention-Specific Translations
+        example_1: Item name (e.g. Small T-Shirt)
+        example_2: Event Names (E.g. Flatland)
+        example_3: Event Choices (e.g. Jr. Expert)
+        convention_translations_detail: |
+          Because the Convention-Specific Translations depend on the text that was entered
+          have during convention configuration, they will need to be translated for
+          each convention group, or by volunteers.
+        assign_volunteers: |
+          To assign volunteers access to help translate your specific
+          convention information use the %{link} to assign them
+          the "Translator" role.
+        user_management: User Management
+        access_enabled: You have access to perform translations
+        access_denied_html: You <b>Do Not</b> have access to translate the site

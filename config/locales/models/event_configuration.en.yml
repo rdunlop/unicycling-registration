@@ -31,6 +31,10 @@ en:
         music_submission_end_date: Last day to accept Music Uploads
         event_sign_up_closed_date: Last day to sign up for Events
         custom_waiver_text: Custom Waiver Text
+    models:
+      event_choice:
+        one: Event Configuration
+        other: Event Configurations
   helpers:
     submit:
       event_configuration:

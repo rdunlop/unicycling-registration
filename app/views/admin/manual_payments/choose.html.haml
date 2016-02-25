@@ -1,32 +1,33 @@
-%h1 Receive Payment
+%h1= t(".header")
 
 %p
-  %b Note
-  An email will be sent to the the associated user account when a payment is completed.
+  %b= t("note")
+  = t(".description")
 
 = form_for(@manual_payment, :url => manual_payments_path, method: :post) do |pf|
   = render :partial => "/shared/error_messages", :object => @manual_payment
   %br
   %br
-  %b.payment_instructions
-    Please describe the payment. Examples: Cash, Cheque #123
+  %b.payment_instructions= t(".payment_description")
+
   .row
     .small-6.columns.text-right
       = pf.label :note
     .small-6.columns
       = pf.text_field :note
 
-  %h1 Chosen (but unpaid) Items
-  .payment_instructions
-    Check off the items to be marked as paid
+  %h1= t(".chosen_and_unpaid_items")
+  .payment_instructions= t(".choose_items")
   %table.sortable
     %thead
       %tr
-        %th Registrant
-        %th Item
-        %th Cost
-        %th Details (only required for some items)
-        %th Mark this item as having Money-Received
+        %th= Registrant.model_name.human
+        %th= ExpenseItem.model_name.human
+        %th= ExpenseItem.human_attribute_name(:cost)
+        %th
+          = ExpenseItem.human_attribute_name(:details)
+          = t(".details_note")
+        %th= t(".mark_this_item")
         %th= #Give this item to the Registrant for free
     %tbody
       = pf.fields_for :unpaid_details do |unpaid_detail|
@@ -45,11 +46,12 @@
     %tfoot
       %tr
         %th
-        %th Total
+        %th= ExpenseItem.human_attribute_name(:total)
         %th.js--total
         %th{ colspan: 2 }
+        %th
 
-  = submit_tag "Mark elements Received", :class => "payment_link registration_button"
+  = submit_tag t(".submit"), :class => "payment_link registration_button"
 
 %div
-  = link_to 'Back', new_manual_payment_path
+  = link_to t("back"), new_manual_payment_path

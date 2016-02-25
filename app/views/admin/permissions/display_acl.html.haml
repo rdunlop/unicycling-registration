@@ -1,8 +1,10 @@
-%b Administrator
-To authorize A laptop, <u>on that laptop</u> go to #{acl_permissions_url} and type in the access key
+%h1= t(".header")
 
-%p This will also allow that laptop to create user accounts without triggering e-mail confirmations.
+%p= t(".instructions_html", url: acl_permissions_url)
+
+
+%p= t(".description")
 
 %h2.current_access_key
-  Today's Access Key is
+  = t(".current_access_key")
   = modification_access_key

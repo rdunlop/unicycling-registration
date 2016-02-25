@@ -1,0 +1,14 @@
+en:
+  admin:
+    translations:
+      examples:
+        leave_some_untranslated: |
+          Some parts should be left un-translated:
+        example_should_become: "Should Become"
+        text_translation_system: "Text Translation System"
+        when_done_translating: |
+          Once you are done translation, you should press the "Apply Changes"
+          button in the "Text Translation System" in order to apply the changes to the site.
+        performance_impact_warning: |
+          Please only "Apply Changes" and "Clear Translation Cache" when you
+          are done, because it can have performance implications.

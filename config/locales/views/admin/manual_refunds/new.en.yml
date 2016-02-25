@@ -1,0 +1,10 @@
+en:
+  admin:
+    manual_refunds:
+      new:
+        header: New refund
+        description: |
+          This doesn't actually send back any money, it only
+          changes the accounting within the registration system.
+        select_registrants: "Select the Registrants to refund payments for:"
+        start_process: 'Next Step (choose items)'

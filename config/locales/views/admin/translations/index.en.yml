@@ -1,0 +1,29 @@
+en:
+  admin:
+    translations:
+      index:
+        header: Translate Content
+        thank_you_for_volunteering_html: |
+          Thank you for volunteering to translate some content.
+          If you have any questions or problems, please use %{link}
+          to let us know.
+        avaliable_in_multiple_languages: |
+          The Registration and Competition system is available in multiple languages
+        convention_available_in_languages_html: |
+          The
+          <b>%{convention}</b>
+          Convention is available in
+          %{languages}
+        two_sets_of_translations: |
+          There are two different sets of Translations:
+        common_translations_set: Translations Common to all Conventions
+        convention_translation_set: Translations Specific to each Convention
+        clear_translation_cache: Clear Caching after making translation changes
+        clear_translation_description: |
+          Once you are finished translating various files (and have
+          "applied the changes" if doing common translations), you may
+          need to clear the page caching so that all possible pages are refreshed.
+        clear_translation_action: Clear Translation Cache
+        clear_translation_confirm: |
+          Are you sure? This has performance impacts as the cache is
+          rebuilt (please don't do this frequently)

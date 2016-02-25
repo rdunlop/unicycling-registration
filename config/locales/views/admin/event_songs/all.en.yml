@@ -1,0 +1,6 @@
+en:
+  admin:
+    event_songs:
+      all:
+        header: All Songs
+        download: Download

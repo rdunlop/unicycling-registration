@@ -1,0 +1,13 @@
+en:
+  admin:
+    manual_refunds:
+      choose:
+        header: Create Refund
+        description: |
+          Please describe the refund.
+          Examples: "Canceled. Not Attending.", "Refund, organizer."
+        paid_items: Paid Items
+        choose_items: Check off the items to be marked as refunded
+        details_note: (only required for some items)
+        mark_this_item: Mark this item as refunded
+        submit: Create Refund Record
