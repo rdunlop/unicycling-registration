@@ -301,6 +301,37 @@ describe PaymentsController do
     end
   end
 
+  describe "GET offline" do
+    context "when EventConfiguration allows offline payment" do
+      before { @config.update(offline_payment: true, offline_payment_description: "Pay here") }
+
+      it "renders" do
+        get :offline
+        expect(response).to be_success
+      end
+    end
+
+    context "when EventConfiguration doesn't allow offline payment" do
+      it "redirects" do
+        get :offline
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  describe "POST apply_coupon" do
+    let(:payment) { FactoryGirl.create(:payment) }
+
+    context "without a valid coupon" do
+      it "renders" do
+        post :apply_coupon, id: payment.id
+      end
+    end
+
+    context "with a valid coupon" do
+    end
+  end
+
   describe "GET summary" do
     before(:each) do
       @user.add_role :payment_admin
