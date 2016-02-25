@@ -19,6 +19,22 @@ describe PaymentMailer do
     end
   end
 
+  describe "coupon_used" do
+    let(:payment) { FactoryGirl.create(:payment, completed: true) }
+    let!(:payment_detail) { FactoryGirl.create(:payment_detail, amount: 10, payment: payment) }
+    let!(:coupon_code) { FactoryGirl.create(:coupon_code, inform_emails: "a@b.c") }
+    let!(:payment_detail_coupon_code) do
+      FactoryGirl.create(:payment_detail_coupon_code,
+                         payment_detail: payment_detail,
+                         coupon_code: coupon_code)
+    end
+
+    it "sends to inform_emails" do
+      mail = described_class.coupon_used(payment_detail)
+      expect(mail.to).to eq(["a@b.c"])
+    end
+  end
+
   describe "payment_completed" do
     let(:payment) { FactoryGirl.create(:payment, completed: true) }
     let!(:payment_detail) { FactoryGirl.create(:payment_detail, amount: 10, payment: payment) }
