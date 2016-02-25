@@ -16,6 +16,33 @@ describe PaymentAdjustmentsController do
     end
   end
 
+  describe "GET new" do
+    it "Renders" do
+      get :new
+      expect(response).to be_success
+    end
+  end
+
+  describe "POST adjust_payment_choose" do
+    let(:registrant) { FactoryGirl.create(:registrant) }
+
+    context "without choosing a registrant" do
+      it "redirects to :new" do
+        post :adjust_payment_choose
+        expect(response).to redirect_to(new_payment_adjustment_path)
+      end
+    end
+
+    context "with a registrant" do
+      it "renders" do
+        post :adjust_payment_choose, registrant_id: [registrant.id]
+      end
+    end
+  end
+
+  describe "POST exchange_choose" do
+  end
+
   describe "POST exchange_create" do
     let(:registrant) { payment_detail.registrant.reload }
     let(:new_expense_item) { FactoryGirl.create(:expense_item) }
