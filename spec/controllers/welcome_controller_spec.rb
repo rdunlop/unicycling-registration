@@ -20,6 +20,13 @@ describe WelcomeController do
     end
   end
 
+  describe "GET changelog" do
+    it "returns http success" do
+      get :changelog
+      expect(response).to be_success
+    end
+  end
+
   describe "GET help_translate" do
     it "returns http success" do
       get :help_translate

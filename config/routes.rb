@@ -411,6 +411,7 @@ Workspace::Application.routes.draw do
     # get "results", to: "results#index"
     resource :welcome, only: [], controller: "welcome" do
       collection do
+        get :changelog
         get :help_translate
         get :help
         get :contact_us

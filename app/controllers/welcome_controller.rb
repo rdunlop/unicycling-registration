@@ -15,6 +15,10 @@ class WelcomeController < ApplicationController
   def usa_membership
   end
 
+  # GET /welcome/changelog
+  def changelog
+  end
+
   # GET /welcome/confirm
   # The path where users are directed after signing up
   def confirm
