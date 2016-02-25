@@ -29,6 +29,15 @@ describe ExpenseItem do
     @item = FactoryGirl.create(:expense_item)
   end
 
+  it "can have the same position but in different expense_groups" do
+    eg1 = FactoryGirl.create(:expense_group)
+    eg2 = FactoryGirl.create(:expense_group)
+    ei1 = FactoryGirl.create(:expense_item, expense_group: eg1)
+    ei2 = FactoryGirl.create(:expense_item, expense_group: eg2)
+    expect(ei1.position).to eq(ei2.position)
+    expect(ei2.valid?).to eq(true)
+  end
+
   it "must have tax" do
     @item.tax_cents = nil
     expect(@item.valid?).to eq(false)

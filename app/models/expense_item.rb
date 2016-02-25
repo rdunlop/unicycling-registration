@@ -41,7 +41,7 @@ class ExpenseItem < ActiveRecord::Base
   belongs_to :expense_group, inverse_of: :expense_items
   validates :expense_group_id, uniqueness: true, if: "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 
-  acts_as_restful_list
+  acts_as_restful_list scope: :expense_group
 
   before_destroy :check_for_payment_details
 

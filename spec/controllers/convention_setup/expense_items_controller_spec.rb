@@ -130,6 +130,18 @@ describe ConventionSetup::ExpenseItemsController do
     end
   end
 
+  describe "PUT update_row_order" do
+    let(:expense_group) { FactoryGirl.create(:expense_group) }
+    let!(:expense_item_1) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
+    let!(:expense_item_2) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
+
+    it "updates the order" do
+      put :update_row_order, id: expense_item_1.to_param, row_order_position: 1
+      expect(expense_item_2.reload.position).to eq(1)
+      expect(expense_item_1.reload.position).to eq(2)
+    end
+  end
+
   describe "DELETE destroy" do
     it "destroys the requested expense_item" do
       expense_item = FactoryGirl.create :expense_item

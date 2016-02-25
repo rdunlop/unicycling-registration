@@ -1,7 +1,7 @@
 class ConventionSetup::ExpenseItemsController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
-  before_action :load_expense_group
+  before_action :load_expense_group, except: :update_row_order
   before_action :load_expense_item, except: [:index, :create]
   before_action :authorize_setup
 
