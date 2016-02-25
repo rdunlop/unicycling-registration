@@ -17,4 +17,4 @@ en:
           the "Translator" role.
         user_management: User Management
         access_enabled: You have access to perform translations
-        access_denied: You <b>Do Not</b> have access to translate the site
+        access_denied_html: You <b>Do Not</b> have access to translate the site

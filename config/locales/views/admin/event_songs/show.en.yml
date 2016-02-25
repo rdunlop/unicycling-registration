@@ -3,7 +3,7 @@ en:
     event_songs:
       show:
         header: "%{event} Songs"
-        description: |
+        description_html: |
           This page lists all songs which
           <b>Are not</b>
           assigned to a competitor yet
