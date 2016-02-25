@@ -70,7 +70,7 @@ describe RegistrantExpenseItem do
     end
 
     it "should round" do
-      expect(@rei.total_cost).to eq(17.94)
+      expect(@rei.total_cost).to eq(17.94.to_money)
     end
   end
 

@@ -236,7 +236,7 @@ class User < ActiveRecord::Base
   end
 
   def total_owing
-    accessible_registrants.inject(0){|memo, reg| memo + reg.amount_owing }
+    accessible_registrants.inject(0.to_money){|memo, reg| memo + reg.amount_owing }
   end
 
   def has_minor?

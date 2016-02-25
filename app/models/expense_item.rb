@@ -89,11 +89,11 @@ class ExpenseItem < ActiveRecord::Base
 
   # how much have we received for the paid items
   def total_amount_paid
-    paid_items.map(&:cost).inject(:+).to_f
+    Money.new(paid_items.map(&:cost).inject(:+))
   end
 
   def total_amount_paid_after_refunds
-    refunded_items.map(&:cost).inject(:+).to_f
+    Money.new(refunded_items.map(&:cost).inject(:+))
   end
 
   # Items which are unpaid.

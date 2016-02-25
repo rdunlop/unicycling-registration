@@ -18,7 +18,7 @@ class EventForm < SimpleDelegator
           build_necessary_expense_item
         else
           # expense_item already exists, destroy it and create a new
-          unless expense_item.cost == cost
+          unless expense_item.cost == cost.to_money
             expense_item.destroy
             build_necessary_expense_item
           end

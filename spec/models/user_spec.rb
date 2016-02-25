@@ -46,7 +46,7 @@ describe User do
   end
 
   it "can sum the amount owing from all registrants" do
-    expect(@user.total_owing).to eq(0)
+    expect(@user.total_owing).to eq(0.to_money)
   end
   describe "with an expense_item" do
     before(:each) do
@@ -58,11 +58,11 @@ describe User do
 
     it "calculates the cost of a competitor" do
       @comp = FactoryGirl.create(:competitor, user: @user)
-      expect(@user.total_owing).to eq(100)
+      expect(@user.total_owing).to eq(100.to_money)
     end
     it "calculates the cost of a noncompetitor" do
       @comp = FactoryGirl.create(:noncompetitor, user: @user)
-      expect(@user.total_owing).to eq(50)
+      expect(@user.total_owing).to eq(50.to_money)
     end
   end
   describe "with related registrants" do

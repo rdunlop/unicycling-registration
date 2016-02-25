@@ -69,7 +69,7 @@ describe PaymentDetail do
     @pd.reload
     expect(@pd.refunded?).to eq(true)
     expect(@ref.percentage).to eq(100)
-    expect(@pd.cost).to eq(0)
+    expect(@pd.cost).to eq(0.to_money)
   end
 
   it "it marks the cost as partial if the refund is not 100%" do
@@ -80,7 +80,7 @@ describe PaymentDetail do
     @refund.save!
     @pd.reload
     expect(@pd.refunded?).to eq(true)
-    expect(@pd.cost).to eq(45) # amount is 90, 50% of 90 is 45
+    expect(@pd.cost).to eq(45.to_money) # amount is 90, 50% of 90 is 45
   end
 
   it "is not refunded by default" do
@@ -116,7 +116,7 @@ describe PaymentDetail do
     it "discounts the payment_detail" do
       FactoryGirl.create(:payment_detail_coupon_code, payment_detail: @pd, coupon_code: coupon_code)
       @pd.recalculate!
-      expect(@pd.amount).to eq(1.00)
+      expect(@pd.amount).to eq(1.to_money)
     end
   end
 end

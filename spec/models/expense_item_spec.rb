@@ -49,7 +49,7 @@ describe ExpenseItem do
 
   describe "With a tax percent of 0" do
     it "has a tax of 0" do
-      expect(@item.tax).to eq(0)
+      expect(@item.tax).to eq(0.to_money)
     end
 
     it "has a total_cost equal to the cost" do
@@ -64,11 +64,11 @@ describe ExpenseItem do
     end
 
     it "has a tax of $5" do
-      expect(@item.tax).to eq(5)
+      expect(@item.tax).to eq(5.to_money)
     end
 
     it "has a total_cost of 5+100" do
-      expect(@item.total_cost).to eq(105)
+      expect(@item.total_cost).to eq(105.to_money)
     end
   end
 
@@ -76,7 +76,7 @@ describe ExpenseItem do
     it "has no fractional-penny results" do
       @item.cost = 17
       @item.tax = 0.94
-      expect(@item.total_cost).to eq(17.94)
+      expect(@item.total_cost).to eq(17.94.to_money)
     end
   end
 
@@ -102,7 +102,7 @@ describe ExpenseItem do
 
   it "should default to a tax of 0" do
     item = ExpenseItem.new
-    expect(item.tax).to eq(0)
+    expect(item.tax).to eq(0.to_money)
   end
 
   it "must have a tax >= 0" do
@@ -135,7 +135,7 @@ describe ExpenseItem do
       expect(@payment.payment.completed).to eq(false)
       expect(@item.num_selected_items).to eq(0)
       expect(@item.num_paid).to eq(0)
-      expect(@item.total_amount_paid).to eq(0)
+      expect(@item.total_amount_paid).to eq(0.to_money)
     end
 
     it "counts this entry as a selected_item when the payment is complete" do
@@ -144,7 +144,7 @@ describe ExpenseItem do
       pay.save!
       expect(@item.num_selected_items).to eq(1)
       expect(@item.num_paid).to eq(1)
-      expect(@item.total_amount_paid).to eq(9.99)
+      expect(@item.total_amount_paid).to eq(9.99.to_money)
     end
   end
 

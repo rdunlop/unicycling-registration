@@ -36,7 +36,7 @@ describe ManualPayment do
       let(:payment) { @pay.build_payment }
 
       it "sets the payment_detail to the total cost" do
-        expect(payment.payment_details.first.amount).to eq 12.00
+        expect(payment.payment_details.first.amount).to eq 12.00.to_money
       end
     end
   end

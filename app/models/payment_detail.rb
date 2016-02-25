@@ -74,7 +74,7 @@ class PaymentDetail < ActiveRecord::Base
   end
 
   def cost
-    return 0 if free
+    return 0.to_money if free
     return amount - amount_refunded if refunded?
 
     amount

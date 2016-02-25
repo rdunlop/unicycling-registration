@@ -143,7 +143,7 @@ class Payment < ActiveRecord::Base
   end
 
   def total_amount
-    payment_details.reduce(0) { |memo, pd| memo + pd.cost }.to_f
+    Money.new(payment_details.reduce(0.to_money) { |memo, pd| memo + pd.cost })
   end
 
   def self.total_non_refunded_amount

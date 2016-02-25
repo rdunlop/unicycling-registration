@@ -421,7 +421,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
 
   def amount_paid
     Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_paid") do
-      paid_details.inject(0){|total, item| total + item.cost}
+      paid_details.inject(0.to_money){|total, item| total + item.cost}
     end
   end
 

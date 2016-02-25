@@ -229,10 +229,10 @@ describe Registrant do
 
   context "associations" do
     it "has an owing cost of 0 by default" do
-      expect(@reg.amount_owing).to eq(0)
+      expect(@reg.amount_owing).to eq(0.to_money)
     end
     it "always displays the expenses_total" do
-      expect(@reg.expenses_total).to eq(0)
+      expect(@reg.expenses_total).to eq(0.to_money)
     end
   end
 end
@@ -420,10 +420,10 @@ describe Registrant do
         expect(@comp.payment_details).to eq([@payment_detail])
       end
       it "should have an amount_paid" do
-        expect(@comp.amount_paid).to eq(100)
+        expect(@comp.amount_paid).to eq(100.to_money)
       end
       it "should owe 0" do
-        expect(@comp.amount_owing).to eq(0)
+        expect(@comp.amount_owing).to eq(0.to_money)
       end
       it "lists the paid_expense_items" do
         expect(@comp.paid_expense_items).to eq([@payment_detail.expense_item])
@@ -470,10 +470,10 @@ describe Registrant do
         expect(@comp.payment_details).to eq([@payment_detail])
       end
       it "should not have an amount_paid" do
-        expect(@comp.amount_paid).to eq(0)
+        expect(@comp.amount_paid).to eq(0.to_money)
       end
       it "should owe 100" do
-        expect(@comp.amount_owing).to eq(100)
+        expect(@comp.amount_owing).to eq(100.to_money)
       end
       it "lists the paid_expense_items" do
         expect(@comp.paid_expense_items).to eq([])

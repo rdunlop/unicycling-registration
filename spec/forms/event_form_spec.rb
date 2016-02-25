@@ -53,7 +53,7 @@ describe EventForm do
     before do
       @form = described_class.new(event)
       @form.assign_attributes(attributes)
-      @form.cost = 100
+      @form.cost = 100.50
       expect(@form.save).to be_truthy
     end
 
@@ -63,7 +63,7 @@ describe EventForm do
     end
 
     describe "when it has the same cost" do
-      before { @form.cost = "100" }
+      before { @form.cost = "100.50" }
       it "doesn't change the expense_item" do
         original_expense_item = @form.expense_item
         @form.save

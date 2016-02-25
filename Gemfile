@@ -20,7 +20,7 @@ gem 'prawn-labels'
 gem 'simple_form'
 gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # necessary to be able to specify non-ISO3166 countries
 gem 'country_select'
-gem 'money-rails', "= 1.4.1"
+gem 'money-rails'
 gem 'select2-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
