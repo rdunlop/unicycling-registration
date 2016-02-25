@@ -96,7 +96,7 @@ class PaymentsController < ApplicationController
   def complete
     @payment = Payment.find(params[:id])
     authorize @payment
-    unless @payment.total_amount == 0
+    unless @payment.total_amount == 0.to_money
       flash[:alert] = "Please use Paypal to complete the payment"
       redirect_to :back
       return

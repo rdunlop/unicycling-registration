@@ -116,7 +116,7 @@ describe PaypalPaymentsController do
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
-        post :notification, mc_gross: @payment.total_amount - 1, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
+        post :notification, mc_gross: @payment.total_amount - 1.to_money, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(2) # one for success, one for the error (payment different)

@@ -6,7 +6,7 @@
     = render partial: 'add_coupon'
   .row
     = t(".please_proceed_with_payment")
-    - if @payment.total_amount > 0
+    - if @payment.total_amount > 0.to_money
       = form_tag @payment.paypal_post_url do
         = hidden_field_tag :business, EventConfiguration.singleton.paypal_account
         = hidden_field_tag :cancel_return, user_payments_url(current_user)
@@ -19,9 +19,9 @@
         = hidden_field_tag :upload, "1"
         - index = 0
         - @payment.unique_payment_details.each do |pd|
-          - next if pd.amount == 0
+          - next if pd.amount == 0.to_money
           -# This must be in the format of "12.34" (no commas)
-          = hidden_field_tag "amount_#{index + 1}", pd.amount.format_with_settings(separator: ".", symbol: nil)
+          = hidden_field_tag "amount_#{index + 1}", pd.amount.format(separator: ".", symbol: nil)
           = hidden_field_tag "item_name_#{index + 1}", pd.to_s
           = hidden_field_tag "quantity_#{index + 1}", pd.count.to_s
           - index += 1

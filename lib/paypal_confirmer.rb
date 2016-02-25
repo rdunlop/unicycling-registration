@@ -16,9 +16,7 @@ class PaypalConfirmer
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = true
 
-    if Rails.env.test?
-      true
-    else
+    unless Rails.env.test?
       response = http.post(uri.request_uri, @raw,
                            'Content-Length' => @raw.size.to_s,
                            'User-Agent' => "My custom user agent"
@@ -26,9 +24,9 @@ class PaypalConfirmer
 
       raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
       raise StandardError.new("Invalid IPN: #{response}") unless response == "VERIFIED"
-
-      true
     end
+
+    true
   end
 
   def completed?

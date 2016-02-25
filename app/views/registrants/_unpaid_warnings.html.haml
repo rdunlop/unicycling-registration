@@ -1,5 +1,5 @@
 - cache_i18n [@registrant, @config] do
-  - if @registrant.amount_owing > 0
+  - if @registrant.amount_owing > 0.to_money
     .unpaid_warning
       UNPAID?
   - if @config.organization_membership_config? && !@registrant.organization_membership_confirmed? && !@registrant.spectator?

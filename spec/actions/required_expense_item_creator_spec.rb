@@ -23,7 +23,7 @@ describe RequiredExpenseItemCreator do
         @noncomp.create_associated_required_expense_items
       end
       it "should owe different cost" do
-        expect(@noncomp.amount_owing).to eq(50)
+        expect(@noncomp.amount_owing).to eq(50.to_money)
       end
       it "retrieves the non-comp registration_item" do
         expect(@noncomp.registrant_expense_items.first.expense_item).to eq(@noncomp_exp)

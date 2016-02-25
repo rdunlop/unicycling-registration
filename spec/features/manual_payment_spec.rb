@@ -17,8 +17,8 @@ describe 'Creating manual payments' do
       fill_in "manual_payment_note", with: "Volunteer"
       check 'manual_payment_unpaid_details_attributes_0_pay_for'
       click_button "Mark elements Received"
-      expect(competitor.reload.amount_owing).to eq(0)
-      expect(competitor.amount_paid).to_not eq(0)
+      expect(competitor.reload.amount_owing).to eq(0.to_money)
+      expect(competitor.amount_paid).to_not eq(0.to_money)
     end
   end
 end

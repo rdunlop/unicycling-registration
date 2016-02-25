@@ -18,7 +18,7 @@ describe 'Completing normal payments' do
       expect(page).to have_content("$20.00")
       click_button "Start Payment"
       click_link "Pretend to pay by credit card"
-      expect(competitor.reload.amount_owing).to eq(0)
+      expect(competitor.reload.amount_owing).to eq(0.to_money)
     end
 
     describe "with expense_items and details" do
@@ -31,7 +31,7 @@ describe 'Completing normal payments' do
         expect(page).to have_content("$5.00")
         click_button "Start Payment"
         click_link "Pretend to pay by credit card"
-        expect(competitor.reload.amount_owing).to eq(0)
+        expect(competitor.reload.amount_owing).to eq(0.to_money)
       end
     end
 
@@ -45,7 +45,7 @@ describe 'Completing normal payments' do
         expect(page).to have_content("$7.00")
         click_button "Start Payment"
         click_link "Pretend to pay by credit card"
-        expect(competitor.reload.amount_owing).to eq(0)
+        expect(competitor.reload.amount_owing).to eq(0.to_money)
       end
     end
   end

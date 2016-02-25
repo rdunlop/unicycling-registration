@@ -1,5 +1,5 @@
 - cache_i18n [registrant] do
-  - if registrant.amount_owing > 0
+  - if registrant.amount_owing > 0.to_money
     %span.unpaid
       = print_formatted_currency(registrant.amount_owing)
       = t(".unpaid")

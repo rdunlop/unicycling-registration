@@ -14,7 +14,7 @@ class PaypalPaymentsController < ApplicationController
           else
             payment.complete(transaction_id: paypal.transaction_id, payment_date: paypal.payment_date)
             PaymentMailer.payment_completed(payment).deliver_later
-            if payment.total_amount != paypal.payment_amount
+            if payment.total_amount != paypal.payment_amount.to_money
               PaymentMailer.ipn_received("Payment total #{payment.total_amount} not equal to the paypal amount #{paypal.payment_amount}").deliver_later
             end
           end

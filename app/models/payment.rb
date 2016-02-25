@@ -155,7 +155,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.total_received
-    total = 0
+    total = 0.to_money
     Payment.includes(payment_details: [:refund_detail]).completed.each do |payment|
       total += payment.total_amount
     end

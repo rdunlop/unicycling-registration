@@ -57,7 +57,7 @@ describe Payment do
     end
     it "can calcalate the payment total-amount" do
       @pd2 = FactoryGirl.create(:payment_detail, payment: @pay, amount: 23.0)
-      expect(@pay.total_amount == "80.49".to_f).to eq(true)
+      expect(@pay.total_amount == 80.49.to_money).to eq(true)
     end
 
     it "has a list of unique_payment_deatils" do
@@ -133,7 +133,7 @@ describe Payment do
     it "can determine the total received" do
       FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
-      expect(Payment.total_received).to eq(15.33)
+      expect(Payment.total_received).to eq(15.33.to_money)
     end
 
     it "returns the set of paid expense_items" do
