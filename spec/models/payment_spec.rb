@@ -153,6 +153,12 @@ describe Payment do
       it "doesn't list the item in the paid_expense_items" do
         expect(Payment.paid_expense_items).to eq([])
       end
+
+      describe "#total_non_refunded_amount" do
+        it "counts the payments" do
+          expect(Payment.total_non_refunded_amount).to eq(0.to_money)
+        end
+      end
     end
   end
 

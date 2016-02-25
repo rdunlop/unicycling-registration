@@ -147,7 +147,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.total_non_refunded_amount
-    total = 0
+    total = 0.to_money
     PaymentDetail.refunded.includes(:payment).each do |payment_detail|
       total += payment_detail.cost
     end
