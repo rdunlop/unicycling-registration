@@ -20,7 +20,7 @@ class PaypalConfirmer
       true
     else
       response = http.post(uri.request_uri, @raw,
-                           'Content-Length' => "#{@raw.size}",
+                           'Content-Length' => @raw.size.to_s,
                            'User-Agent' => "My custom user agent"
                           ).body
 
@@ -36,7 +36,7 @@ class PaypalConfirmer
   end
 
   def correct_paypal_account?
-    @params["receiver_email"] == EventConfiguration.singleton.paypal_account.downcase
+    EventConfiguration.singleton.paypal_account.casecmp(@params["receiver_email"]).zero?
   end
 
   def transaction_id

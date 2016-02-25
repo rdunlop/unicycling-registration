@@ -31,7 +31,7 @@ class RaceDataImporter
             minutes: lif_hash[:minutes],
             seconds: lif_hash[:seconds],
             thousands: lif_hash[:thousands],
-            status: (lif_hash[:disqualified] ? "DQ" : "active"),
+            status: (lif_hash[:disqualified] ? "DQ" : "active")
           )
           if result.save!
             self.num_rows_processed += 1

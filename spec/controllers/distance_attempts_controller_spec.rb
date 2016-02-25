@@ -34,7 +34,7 @@ describe DistanceAttemptsController do
       {
         registrant_id: comp.members.first.registrant.id,
         distance: 1.2,
-        fault: false,
+        fault: false
       }
     end
     describe "with valid params" do

@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
       EventConfiguration.singleton,
       EventConfiguration.closed?,
       allow_reg_modifications?,
-      translation_domain?,
+      translation_domain?
     )
   end
 
@@ -172,11 +172,11 @@ class ApplicationController < ActionController::Base
   end
 
   def add_category_breadcrumb(category)
-    add_breadcrumb "#{category}"
+    add_breadcrumb category.to_s
   end
 
   def add_competition_breadcrumb(competition)
-    add_breadcrumb "#{competition}", (competition_path(competition) if policy(competition).show?)
+    add_breadcrumb competition.to_s, (competition_path(competition) if policy(competition).show?)
   end
 
   def add_to_competition_breadcrumb(competition)

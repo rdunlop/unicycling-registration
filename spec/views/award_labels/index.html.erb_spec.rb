@@ -5,16 +5,16 @@ describe "award_labels/index" do
     @user = FactoryGirl.create(:award_admin_user)
     assign(:user, @user)
     assign(:award_labels, [
-      FactoryGirl.create(:award_label,
-                         bib_number: 123,
-                         line_1: "Robin Dunlop & Connie Cotter",
-                         line_2: "Pairs Freestyle",
-                         line_3: "TCUC",
-                         line_4: "Adults",
-                         line_5: "Winner",
-                         place: 2
-                        ),
-      FactoryGirl.create(:award_label)])
+             FactoryGirl.create(:award_label,
+                                bib_number: 123,
+                                line_1: "Robin Dunlop & Connie Cotter",
+                                line_2: "Pairs Freestyle",
+                                line_3: "TCUC",
+                                line_4: "Adults",
+                                line_5: "Winner",
+                                place: 2
+                               ),
+             FactoryGirl.create(:award_label)])
     @award_label = FactoryGirl.build(:award_label)
   end
 

@@ -523,7 +523,7 @@ class Competition < ActiveRecord::Base
         # We know that Street Finals Are ALWAYS lower is better to assign the points
         # But, we want to leave StreetScoringClass as higher_is_better because
         # that way the higher resulting points win.
-        points_per_rank: [10, 7, 5, 3, 2, 1],
+        points_per_rank: [10, 7, 5, 3, 2, 1]
       )
     when "Artistic Freestyle IUF 2015"
       Freestyle_2015_JudgePointsCalculator.new

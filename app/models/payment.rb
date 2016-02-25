@@ -52,7 +52,7 @@ class Payment < ActiveRecord::Base
   end
 
   def just_completed?
-    completed == true && self.completed_changed?
+    completed == true && completed_changed?
   end
 
   def inform_of_coupons
@@ -182,7 +182,7 @@ class Payment < ActiveRecord::Base
     payment = Payment.new(
       completed: true,
       note: options[:note],
-      completed_date: DateTime.now,
+      completed_date: DateTime.now
     )
     payment.payment_details.build(
       registrant: options[:registrant],

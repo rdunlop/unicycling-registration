@@ -159,7 +159,7 @@ Style/SingleLineBlockParams:
 
 # Offense count: 81
 # Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Enabled: false
 
 # Offense count: 94
@@ -190,12 +190,6 @@ Style/StringLiterals:
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.
 Style/SymbolProc:
-  Enabled: false
-
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline, SupportedStyles.
-Style/TrailingComma:
   Enabled: false
 
 # Offense count: 3

@@ -8,8 +8,8 @@ options[:webroot_path] = "/home/ec2-user/unicycling-registration/current/public"
 options[:base_domain] = "regtest.unicycling-software.com"
 options[:socket_path] = "/tmp/unicorn-unicycling-registration.socket"
 options[:include_ssl] = true
-LETSENCRYPT_CONFIG = "/etc/letsencrypt/cli.ini"
-NGINX_CONFIG = "/etc/nginx/conf.d/registration.conf"
+LETSENCRYPT_CONFIG = "/etc/letsencrypt/cli.ini".freeze
+NGINX_CONFIG = "/etc/nginx/conf.d/registration.conf".freeze
 
 OptionParser.new do |opts|
   opts.banner = "Usage: renew_certs.rb [options]"
@@ -36,7 +36,7 @@ unless File.exist?(options[:webroot_path])
 end
 
 # Repeat the "-d domain name" block as many times as necessary.
-CMD = "/home/ec2-user/letsencrypt/letsencrypt-auto"
+CMD = "/home/ec2-user/letsencrypt/letsencrypt-auto".freeze
 
 command = "#{CMD} certonly"
 

@@ -218,7 +218,7 @@ class CompetitorsController < ApplicationController
 
   def set_parent_breadcrumbs
     @competition ||= @competitor.competition
-    add_breadcrumb "#{@competition}", competition_path(@competition)
+    add_breadcrumb @competition.to_s, competition_path(@competition)
     add_breadcrumb "Manage Competitors", competition_competitors_path(@competition) if @competitor
   end
 end

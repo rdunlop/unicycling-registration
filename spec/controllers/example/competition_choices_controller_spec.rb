@@ -37,7 +37,7 @@ describe Example::CompetitionChoicesController do
     :flatland,
     :street,
     :overall_champion,
-    :custom,
+    :custom
   ]
 
   context "as public" do

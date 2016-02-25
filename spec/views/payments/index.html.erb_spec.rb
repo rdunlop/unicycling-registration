@@ -5,8 +5,8 @@ describe "payments/index" do
     @pay1 = FactoryGirl.create(:payment)
     @pay2 = FactoryGirl.create(:payment)
     assign(:payments, [
-      @pay1, @pay2
-    ])
+             @pay1, @pay2
+           ])
 
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
 

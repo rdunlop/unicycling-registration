@@ -56,6 +56,6 @@ class EventCategory < ActiveRecord::Base
   def age_is_in_range(age)
     return true if age.nil?
 
-    (age_range_start..age_range_end).include?(age)
+    (age_range_start..age_range_end).cover?(age)
   end
 end

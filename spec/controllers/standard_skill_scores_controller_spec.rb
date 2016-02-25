@@ -42,7 +42,7 @@ describe StandardSkillScoresController do
     {
       standard_skill_score_entries_attributes: [
         FactoryGirl.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_1.id),
-        FactoryGirl.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_2.id),
+        FactoryGirl.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_2.id)
       ]
     }
   end

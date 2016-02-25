@@ -45,7 +45,7 @@ namespace :translation do
         puts "****** ERROR *******"
         puts "For safety purposes you cannot run this with a dirty local git directory"
         puts "Changes local:"
-        puts "#{local_diff}"
+        puts local_diff.to_s
       end
     end
   end

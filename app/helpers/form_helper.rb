@@ -24,7 +24,8 @@ module FormHelper
 
   # The form element which is used to enter data
   def competitor_select_box(form, competition, options = {})
-    options.merge!(autofocus: true, class: "chosen-select #{options[:class]}")
+    options[:autofocus] = true
+    options[:class] = "chosen-select #{options[:class]}"
     disabled_ids = options[:disabled_ids]
     form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true, disabled: disabled_ids}, options
   end

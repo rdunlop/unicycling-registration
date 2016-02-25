@@ -48,7 +48,7 @@ class Compete::WaveAssignmentsController < ApplicationController
         File.open(file, 'r:ISO-8859-1') do |f|
           f.each_with_index do |line, index|
             next if index == 0
-            row = CSV.parse_line (line)
+            row = CSV.parse_line line
             bib_number = row[0]
             wave = row[1]
             # skip blank lines
@@ -74,6 +74,6 @@ class Compete::WaveAssignmentsController < ApplicationController
   end
 
   def set_parent_breadcrumbs
-    add_breadcrumb "#{@competition}", competition_path(@competition)
+    add_breadcrumb @competition.to_s, competition_path(@competition)
   end
 end

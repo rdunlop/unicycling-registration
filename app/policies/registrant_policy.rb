@@ -24,7 +24,7 @@ class RegistrantPolicy < ApplicationPolicy
   def add_events?
     return false unless record.competitor?
     return true if event_planner? || super_admin?
-    (user_record? || shared_editable_record?) && (!config.event_sign_up_closed?)
+    (user_record? || shared_editable_record?) && !config.event_sign_up_closed?
     # change this to allow add_events when registration is closed, but events date is open
     # !config.event_sign_up_closed?
     # BUT, still allow viewing of the events page after events have closed, but registration is open?

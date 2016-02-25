@@ -94,13 +94,13 @@ describe RegistrationCost do
 
     it "can retrieve the expense items for only a set of the registration_costs" do
       expect(RegistrationCost.for_type("competitor").all_registration_expense_items).to match_array([
-        comp_registration_cost1.expense_item,
-        comp_registration_cost2.expense_item,
-      ])
+                                                                                                      comp_registration_cost1.expense_item,
+                                                                                                      comp_registration_cost2.expense_item
+                                                                                                    ])
       expect(RegistrationCost.for_type("noncompetitor").all_registration_expense_items).to match_array([
-        noncomp_registration_cost1.expense_item,
-        noncomp_registration_cost2.expense_item,
-      ])
+                                                                                                         noncomp_registration_cost1.expense_item,
+                                                                                                         noncomp_registration_cost2.expense_item
+                                                                                                       ])
     end
 
     it "can retrieve period" do

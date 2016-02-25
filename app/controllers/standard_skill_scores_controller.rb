@@ -84,7 +84,7 @@ class StandardSkillScoresController < ApplicationController
 
   def standard_skill_score_params
     params.require(:standard_skill_score).permit(standard_skill_score_entries_attributes: [
-      :id, :standard_skill_routine_entry_id, :difficulty_devaluation_percent, :wave, :line, :cross, :circle]
+                                                   :id, :standard_skill_routine_entry_id, :difficulty_devaluation_percent, :wave, :line, :cross, :circle]
                                                 )
   end
 end

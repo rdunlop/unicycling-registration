@@ -23,7 +23,7 @@ module CachedSetModel
   extend ActiveSupport::Concern
 
   included do
-    if self.respond_to?(:after_save)
+    if respond_to?(:after_save)
       after_save :update_last_modified_set_collection_cache
       after_destroy :do_touch_set
       after_touch :do_touch_set
@@ -31,7 +31,7 @@ module CachedSetModel
   end
 
   def update_last_modified_set_collection_cache
-    return unless (changes.keys).any?
+    return unless changes.keys.any?
     do_touch_set
   end
 

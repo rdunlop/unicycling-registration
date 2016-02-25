@@ -29,7 +29,7 @@ class Page < ActiveRecord::Base
   belongs_to :parent_page, class_name: "Page"
   has_many :children, class_name: "Page", foreign_key: "parent_page_id"
 
-  SPECIAL_SLUGS = ['home', 'privacy-policy']
+  SPECIAL_SLUGS = ['home', 'privacy-policy'].freeze
 
   def self.ordinary
     where.not(slug: SPECIAL_SLUGS)

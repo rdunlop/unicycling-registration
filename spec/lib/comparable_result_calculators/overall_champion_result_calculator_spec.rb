@@ -164,12 +164,12 @@ describe OverallChampionResultCalculator do
     gender = "Male"
     initial_scores = {
       10 => [1, 2, 3],
-      11 => [5],
+      11 => [5]
     }
     expected_hash = {
       10 => [3],
       9.9 => [1, 2],
-      11 => [5],
+      11 => [5]
     }
     allow(result).to receive(:num_firsts).with("Male", 1).and_return(1)
     allow(result).to receive(:num_firsts).with("Male", 2).and_return(1)

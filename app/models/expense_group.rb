@@ -61,7 +61,7 @@ class ExpenseGroup < ActiveRecord::Base
            registration_items: true,
            competitor_required: false,
            noncompetitor_required: false,
-           group_name: "Registration",)
+           group_name: "Registration")
   end
 
   def self.event_items_group
@@ -74,7 +74,7 @@ class ExpenseGroup < ActiveRecord::Base
            registration_items: false,
            competitor_required: false,
            noncompetitor_required: false,
-           group_name: "System-Event",)
+           group_name: "System-Event")
   end
   # ################### END SYSTEM MANAGED #######################
 

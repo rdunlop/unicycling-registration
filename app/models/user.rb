@@ -116,7 +116,7 @@ class User < ActiveRecord::Base
   end
 
   def self.role_description(role)
-    case (role)
+    case role
       # when :results_printer
     when :convention_admin
       "[e.g. Olaf Scholte]
@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
 
   # Public: A list of all possible data-entry roles, what is used on each
   # competition is dependent upon the type of competition
-  POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer, :track_data_importer]
+  POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer, :track_data_importer].freeze
 
   def self.volunteer_role_descriptions(role)
     case role

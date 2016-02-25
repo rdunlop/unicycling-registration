@@ -38,7 +38,7 @@ class StandardSkillEntriesController < ApplicationController
     n = 0
     File.open(params[:dump][:file].tempfile, 'r:ISO-8859-1') do |f|
       f.each do |line|
-        row = CSV.parse_line (line)
+        row = CSV.parse_line line
         # sample rows:
         # 308, 'b', '3', 'free side jump mount'
         # 308, 'c', '3.1', 'side jump mount to seat on side'

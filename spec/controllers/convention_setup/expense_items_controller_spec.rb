@@ -17,7 +17,7 @@ describe ConventionSetup::ExpenseItemsController do
         "1" => {
           locale: "en",
           name: "Small T-Shirt",
-          details_label: nil,
+          details_label: nil
         }
       },
       cost: 15.00,

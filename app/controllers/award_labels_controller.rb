@@ -165,12 +165,12 @@ class AwardLabelsController < ApplicationController
         "paper_size" => "LETTER",
         "top_margin" => 38.23, # 0.531"
         "bottom_margin" => 38.23, # 0.531"
-        "left_margin" =>  38.23, # 0.406 "
-        "right_margin" =>  29.23, # 0.406"
-        "columns" =>  4,
-        "rows" =>  6,
-        "column_gutter" =>  20.152, # 0.391 "
-        "row_gutter" =>  6.152 # 0.391"
+        "left_margin" => 38.23, # 0.406 "
+        "right_margin" => 29.23, # 0.406"
+        "columns" => 4,
+        "rows" => 6,
+        "column_gutter" => 20.152, # 0.391 "
+        "row_gutter" => 6.152 # 0.391"
 
         # "top_margin" => 13.49, # 0.531"
         # "bottom_margin" => 13.49, # 0.531"
@@ -185,12 +185,12 @@ class AwardLabelsController < ApplicationController
         "paper_size" => "LETTER",
         "top_margin" => 65.23, # 0.531"
         "bottom_margin" => 54.23, # 0.531"
-        "left_margin" =>  52.23, # 0.406 "
-        "right_margin" =>  40.23, # 0.406"
-        "columns" =>  4,
-        "rows" =>  5,
-        "column_gutter" =>  55, # 0.391 "
-        "row_gutter" =>  50 # 0.391"
+        "left_margin" => 52.23, # 0.406 "
+        "right_margin" => 40.23, # 0.406"
+        "columns" => 4,
+        "rows" => 5,
+        "column_gutter" => 55, # 0.391 "
+        "row_gutter" => 50 # 0.391"
       },
       "Avery5160padded" => {
         "paper_size" => "LETTER",
@@ -212,7 +212,7 @@ class AwardLabelsController < ApplicationController
         "column_gutter" => 18, # 0.05 inch + 0.2 inch padding
         "left_margin" => 41.4, # 0.475 inch + 0.1 inch padding
         "right_margin" => 41.4, # 0.475 inch + 0.1 inch padding
-      },
+      }
     }
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.

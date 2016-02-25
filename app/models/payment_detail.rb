@@ -81,7 +81,7 @@ class PaymentDetail < ActiveRecord::Base
   end
 
   def amount_refunded
-    ((refund_detail.percentage.to_f) / 100) * amount
+    (refund_detail.percentage.to_f / 100) * amount
   end
 
   # update the amount owing for this payment_detail, based on the coupon code applied

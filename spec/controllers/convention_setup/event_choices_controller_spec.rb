@@ -129,7 +129,7 @@ describe ConventionSetup::EventChoicesController do
               "tooltip" => "tool_fr"}
           },
           "optional" => "0",
-          "optional_if_event_choice_id" => "",
+          "optional_if_event_choice_id" => ""
         }
       end
 

@@ -3,10 +3,15 @@ AllCops:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
     - "db/schema.rb" # Auto-generated
-  RunRailsCops: true
+Rails:
+  Enabled: true
 
 inherit_from: .rubocop_todo.yml
 
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
   Enabled: true
+
+# I don't like the way that this re-indents certain conditionals
+Style/ConditionalAssignment:
+  Enabled: false

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "compete/combined_competitions/index" do
   before(:each) do
     assign(:combined_competitions, [
-      FactoryGirl.build_stubbed(:combined_competition, name: "Name1"),
-      FactoryGirl.build_stubbed(:combined_competition, name: "Name2")])
+             FactoryGirl.build_stubbed(:combined_competition, name: "Name1"),
+             FactoryGirl.build_stubbed(:combined_competition, name: "Name2")])
   end
 
   it "renders a list of combined_competitions" do

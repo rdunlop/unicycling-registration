@@ -61,7 +61,7 @@ class CompetitorPolicy < ApplicationPolicy
   def manage?
     # can [:manage, :update_row_order], Competitor do |comp|
 
-    record.competition.unlocked? && (director_or_competition_admin?(user, record.competition))
+    record.competition.unlocked? && director_or_competition_admin?(user, record.competition)
   end
 
   class Scope < Scope

@@ -48,7 +48,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
   before_action :authorize_advanced_settings, only: [:advanced_settings]
 
-  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :organization_membership, :important_dates, :volunteers, :payment_settings, :advanced_settings, :go_live]
+  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :organization_membership, :important_dates, :volunteers, :payment_settings, :advanced_settings, :go_live].freeze
 
   before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
 
@@ -57,7 +57,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
       authorize_convention_setup
       update(page)
     end
-    before_action "set_#{page}_breadcrumbs".to_sym, only: ["update_#{page}".to_sym, "#{page}".to_sym]
+    before_action "set_#{page}_breadcrumbs".to_sym, only: ["update_#{page}".to_sym, page.to_s.to_sym]
     define_method("set_#{page}_breadcrumbs") do
       add_breadcrumb page.to_s.humanize
     end

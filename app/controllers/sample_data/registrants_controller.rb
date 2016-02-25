@@ -22,7 +22,7 @@ class SampleData::RegistrantsController < SampleData::BaseController
         ineligible: false,
         rules_accepted: true,
         online_waiver_acceptance: true,
-        user: User.first,
+        user: User.first
       )
       ContactDetail.create!(
         registrant: registrant,
@@ -38,7 +38,7 @@ class SampleData::RegistrantsController < SampleData::BaseController
         emergency_relationship: ["Father", "Mother", "Spouse"].sample,
         emergency_primary_phone: Faker::PhoneNumber.phone_number,
         responsible_adult_name: Faker::Name.name,
-        responsible_adult_phone: Faker::PhoneNumber.phone_number,
+        responsible_adult_phone: Faker::PhoneNumber.phone_number
       )
       if params[:sign_up_for_all_events] == "1"
         Event.all.each do |event|

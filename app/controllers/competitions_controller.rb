@@ -47,12 +47,12 @@ class CompetitionsController < ApplicationController
 
   def show
     authorize @competition
-    add_breadcrumb "#{@competition}"
+    add_breadcrumb @competition.to_s
   end
 
   def set_sort
     authorize @competition, :sort?
-    add_breadcrumb "#{@competition}", competition_path(@competition)
+    add_breadcrumb @competition.to_s, competition_path(@competition)
     add_breadcrumb "Manage Competitors", competition_competitors_path(@competition)
     add_breadcrumb "Sort Competitors"
   end
@@ -129,7 +129,7 @@ class CompetitionsController < ApplicationController
       end
     else
       csv_string = CSV.generate do |csv|
-        csv << ['judge_id', 'judge_type_id', 'registrant_external_id', 'val1', 'val2', 'val3', 'val4']
+        csv << %w(judge_id judge_type_id registrant_external_id val1 val2 val3 val4)
         @competition.scores.each do |score|
           csv << [score.judge.external_id,
                   score.judge.judge_type.name,
@@ -151,7 +151,7 @@ class CompetitionsController < ApplicationController
     authorize @competition
     if @competition.event_class == 'Shortest Time'
       csv_string = CSV.generate do |csv|
-        csv << ['registrant_external_id', 'gender', 'age', 'heat', 'lane', 'thousands', 'result']
+        csv << %w(registrant_external_id gender age heat lane thousands result)
         @competition.competitors.each do |comp|
           if comp.has_result?
             tr = comp.time_results.first

@@ -24,7 +24,7 @@ module TimePrintable
       remaining_minutes = minutes % 60
       "#{hours}:#{remaining_minutes.to_s.rjust(2, '0')}"
     else
-      "#{minutes}"
+      minutes.to_s
     end
   end
 

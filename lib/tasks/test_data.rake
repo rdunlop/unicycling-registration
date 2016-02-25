@@ -90,7 +90,7 @@ task create_fake_data: :environment do
   @regs = []
   100.times do |i|
     puts "creating #{i}"
-    reg  = create_registrant("john #{i}", "smith #{i}", "john#{i}")
+    reg = create_registrant("john #{i}", "smith #{i}", "john#{i}")
 
     sign_up_for_event(reg, @t100m)
 

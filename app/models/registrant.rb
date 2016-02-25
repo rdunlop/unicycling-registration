@@ -158,7 +158,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def to_param
-    "#{bib_number}" if persisted?
+    bib_number.to_s if persisted?
   end
 
   def competitor?
@@ -333,7 +333,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
 
   def name
     printed_name = full_name
-    printed_name += " (incomplete)" unless self.validated?
+    printed_name += " (incomplete)" unless validated?
     display_eligibility(printed_name, ineligible?)
   end
 

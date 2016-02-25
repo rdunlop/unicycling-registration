@@ -50,7 +50,7 @@ module ApplicationHelper
       if DateTime.now > reg_cost.end_date
         t("prices_increase_soon")
       else
-        end_date = distance_of_time_in_words(DateTime.now, reg_cost.last_day) + " (" + (l (reg_cost.last_day), format: :short) + ")"
+        end_date = distance_of_time_in_words(DateTime.now, reg_cost.last_day) + " (" + (l reg_cost.last_day, format: :short) + ")"
         t("prices_increase_at_date", end_date: end_date)
       end
     end

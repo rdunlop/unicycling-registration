@@ -110,7 +110,7 @@ class HeatsController < ApplicationController
   end
 
   def set_parent_breadcrumbs
-    add_breadcrumb "#{@competition}", competition_path(@competition)
+    add_breadcrumb @competition.to_s, competition_path(@competition)
   end
 
   def load_competition

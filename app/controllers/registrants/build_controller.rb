@@ -9,7 +9,7 @@ class Registrants::BuildController < ApplicationController
   before_action :load_categories, only: [:show, :update, :add_events]
   layout "wizard"
 
-  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses]
+  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses].freeze
 
   rescue_from Wicked::Wizard::InvalidStepError, with: :step_not_found
 

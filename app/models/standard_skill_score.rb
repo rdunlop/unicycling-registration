@@ -44,7 +44,7 @@ class StandardSkillScore < ActiveRecord::Base
   end
 
   def total_execution_devaluation
-    (wave_count * 0.5) + (line_count) + (cross_count * 2) + (circle_count * 3)
+    (wave_count * 0.5) + line_count + (cross_count * 2) + (circle_count * 3)
   end
 
   # total score, from the routine value

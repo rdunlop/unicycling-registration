@@ -32,6 +32,6 @@ class StandardSkillScoreEntry < ActiveRecord::Base
   validates :circle, presence: true, numericality: {greater_than_or_equal_to: 0}
 
   def difficulty_devaluation_score
-    standard_skill_routine_entry.points * ((difficulty_devaluation_percent) / 100.0)
+    standard_skill_routine_entry.points * (difficulty_devaluation_percent / 100.0)
   end
 end

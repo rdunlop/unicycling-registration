@@ -11,7 +11,7 @@ describe 'Creating manual payments' do
     it "can create a payment" do
       competitor # load the competitor
       visit new_manual_payment_path
-      select "#{competitor.with_id_to_s}", from: 'registrant_ids'
+      select competitor.with_id_to_s.to_s, from: 'registrant_ids'
       click_button "Start Payment Adjustment"
       expect(page).to have_content("Early Registration")
       fill_in "manual_payment_note", with: "Volunteer"

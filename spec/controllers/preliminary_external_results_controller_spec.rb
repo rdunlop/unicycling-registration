@@ -12,7 +12,7 @@ describe PreliminaryExternalResultsController do
   # ExternalResult. As you add validations to ExternalResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "competitor_id" =>  @competitor.id,
+    { "competitor_id" => @competitor.id,
       "details" => "soomething",
       "status" => "active",
       "points" => 1
