@@ -7,6 +7,6 @@ en:
         description: |
           This will also allow that laptop to create user
           accounts without triggering e-mail confirmations.
-        instructions: |
+        instructions_html: |
           To authorize A laptop, <u>on that laptop</u> go
           to %{url} and type in the access key

@@ -3,13 +3,13 @@ en:
     translations:
       index:
         header: Translate Content
-        thank_you_for_volunteering: |
+        thank_you_for_volunteering_html: |
           Thank you for volunteering to translate some content.
-          If you have any questions or problems, please use the [Contact Us Form](%{link})
+          If you have any questions or problems, please use %{link}
           to let us know.
         avaliable_in_multiple_languages: |
           The Registration and Competition system is available in multiple languages
-        convention_available_in_languages: |
+        convention_available_in_languages_html: |
           The
           <b>%{convention}</b>
           Convention is available in

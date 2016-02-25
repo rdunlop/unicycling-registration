@@ -12,7 +12,8 @@
 %p= t(".role_allows_access")
 
 - if policy(@config).setup_competition?
-  %div= t(".directors_permissions", link:directors_path)
+  - directors_name = t("layouts.competition_setup.manage_directors")
+  %div= t(".directors_permissions_html", link: link_to(directors_name, directors_path))
 
 %p= t(".you_may_need_to_grant_yourself_roles")
 
@@ -25,7 +26,7 @@
 
 %p
   %b= t("note)")
-  = t(".other_roles_not_permitted")
+  = t(".other_roles_not_permitted_html")
 
 %h3= t(".users_with_permissions")
 %table.sortable

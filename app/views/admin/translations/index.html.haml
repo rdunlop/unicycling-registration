@@ -3,7 +3,8 @@
     %h1= t(".header")
 
   .small-12.columns
-    = t(".thank_you_for_volunteering", link: contact_us_welcome_path)
+    - contact_us_text = t("layouts.footer.contact_us")
+    = t(".thank_you_for_volunteering_html", link: link_to(contact_us_text, contact_us_welcome_path))
 
   .small-12.columns
     %p
@@ -13,7 +14,7 @@
       ).
 
     %p
-      = t(".convention_available_in_languages", convention: @config.short_name, languages: @config.enabled_locales.map { |lang| t("language_name", locale: lang) }.join(", "))
+      = t(".convention_available_in_languages_html", convention: @config.short_name, languages: @config.enabled_locales.map { |lang| t("language_name", locale: lang) }.join(", "))
 
     %p= t(".two_sets_of_translations")
 

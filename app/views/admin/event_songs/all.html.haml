@@ -1,26 +1,27 @@
 %h2= t(".header")
 
-%table.sortable
-  %thead
-    %tr
-      %th= Event.model_name.human
-      %th= Registrant.human_attribute_name(:bib_number)
-      %th= Registrant.model_name.human
-      %th= Song.human_attribute_name(:uploaded_by_guest)
-      %th= Song.human_attribute_name(:description)
-      %th= Song.human_attribute_name(:song_file_name)
-      %th= Song.human_attribute_name(:updated_at)
-      %th= t(".download")
-  %tbody
-    - @songs.each do |song|
+- cache_i18n [Song] do
+  %table.sortable
+    %thead
       %tr
-        %td= link_to song.event, event_song_path(song.event)
-        %td= song.registrant.bib_number
-        %td= song.registrant
-        %td.js--highlightIfNotBlank= song.uploaded_by_guest? ? "#{t('yes')} (#{song.user})" : ""
-        %td= song.description
-        %td= song.human_name
-        %td= song.updated_at
-        %td
-          - if song.has_file?
-            = link_to t('.download'), song.song_file_name_url, target: '_blank'
+        %th= Event.model_name.human
+        %th= Registrant.human_attribute_name(:bib_number)
+        %th= Registrant.model_name.human
+        %th= Song.human_attribute_name(:uploaded_by_guest)
+        %th= Song.human_attribute_name(:description)
+        %th= Song.human_attribute_name(:song_file_name)
+        %th= Song.human_attribute_name(:updated_at)
+        %th= t(".download")
+    %tbody
+      - @songs.each do |song|
+        %tr
+          %td= link_to song.event, event_song_path(song.event)
+          %td= song.registrant.bib_number
+          %td= song.registrant
+          %td.js--highlightIfNotBlank= song.uploaded_by_guest? ? "#{t('yes')} (#{song.user})" : ""
+          %td= song.description
+          %td= song.human_name
+          %td= song.updated_at
+          %td
+            - if song.has_file?
+              = link_to t('.download'), song.song_file_name_url, target: '_blank'
