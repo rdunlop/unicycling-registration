@@ -28,7 +28,7 @@ class NotificationsPreview < ActionMailer::Preview
   private
 
   def contact_form
-    ContactForm.new(feedback: "This is a great site", email: "big_shot@unicycling.org", signed_in: false)
+    ContactForm.new(feedback: "This is a \"great\" site", email: "big_shot@unicycling.org", signed_in: false)
   end
 
   def registrant
@@ -40,7 +40,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def email
-    Email.new(body: "This is a mass e-mail body", subject: "I want to inform all of you")
+    Email.new(body: "This is a mass \"e-mail\" body", subject: "I want to inform all of you")
   end
 
   def addresses
