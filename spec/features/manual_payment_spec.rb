@@ -12,11 +12,11 @@ describe 'Creating manual payments' do
       competitor # load the competitor
       visit new_manual_payment_path
       select competitor.with_id_to_s.to_s, from: 'registrant_ids'
-      click_button "Start Payment Adjustment"
+      click_button "Next Step (choose items)"
       expect(page).to have_content("Early Registration")
       fill_in "manual_payment_note", with: "Volunteer"
       check 'manual_payment_unpaid_details_attributes_0_pay_for'
-      click_button "Mark elements Received"
+      click_button "Create Payment Record"
       expect(competitor.reload.amount_owing).to eq(0.to_money)
       expect(competitor.amount_paid).to_not eq(0.to_money)
     end

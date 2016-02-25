@@ -12,7 +12,7 @@ describe 'Creating refund' do
     it "can refund the item" do
       visit new_manual_refund_path
       select competitor.with_id_to_s.to_s, from: 'registrant_ids'
-      click_button "Start Payment Refund"
+      click_button "Next Step (choose items)"
       expect(page).to have_content("T-Shirt")
       fill_in "manual_refund_note", with: "As per Hugo"
       fill_in "manual_refund_percentage", with: "90"
