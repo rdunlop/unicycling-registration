@@ -52,7 +52,7 @@
     %tbody
       - cache_i18n [Competition, current_user] do
         -# Competition.limit(10).each do |competition|
-        - Competition.with_roles(User::POSSIBLE_DATA_VOLUNTEERS, current_user).distinct.find_each(batch_size: 10) do |competition|
+        - Competition.with_roles(User::POSSIBLE_DATA_VOLUNTEERS.dup, current_user).distinct.find_each(batch_size: 10) do |competition|
           - cache_i18n [competition, current_user] do
             %tr
               %td= competition.end_time_to_s

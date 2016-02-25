@@ -16,3 +16,7 @@ Style/BracesAroundHashParameters:
 # I don't like the way that this re-indents certain conditionals
 Style/ConditionalAssignment:
   Enabled: false
+
+# This caused a test failure in paypal_confirmer, and isn't as clear to me
+Performance/Casecmp:
+  Enabled: false

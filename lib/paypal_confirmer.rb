@@ -36,7 +36,7 @@ class PaypalConfirmer
   end
 
   def correct_paypal_account?
-    EventConfiguration.singleton.paypal_account.casecmp(@params["receiver_email"]).zero?
+    @params["receiver_email"] == EventConfiguration.singleton.paypal_account.downcase
   end
 
   def transaction_id
