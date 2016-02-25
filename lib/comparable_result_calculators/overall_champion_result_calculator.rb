@@ -148,7 +148,7 @@ class OverallChampionResultCalculator
       bib_number: bib_number,
       results: competitor_results,
       total_points: total_points,
-      display_points: total_points,
+      display_points: total_points
     }
   end
 
