@@ -30,7 +30,9 @@ class ExpenseItem < ActiveRecord::Base
   monetize :tax_cents, :cost_cents, numericality: { greater_than_or_equal_to: 0 }
   monetize :total_cost_cents
 
+  # use Exception so that RegistrationCost is rolled back if it attempts to be destroyed
   has_many :payment_details, dependent: :restrict_with_exception
+
   has_many :registrant_expense_items, inverse_of: :expense_item, dependent: :restrict_with_exception
   has_many :coupon_code_expense_items, dependent: :destroy
 
