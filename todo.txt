@@ -1,3 +1,4 @@
+- Payments#Summary page has "Non-Refunded Amount  366.30€" (but it's a "Refund" amount?)
 - Create an actual to-do list which is exposed
 - Create/modify a ChangeLog (look up best practices)
 - split out tinymce into an Admin Stylesheet?
