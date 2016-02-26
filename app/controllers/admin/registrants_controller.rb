@@ -14,7 +14,7 @@ class Admin::RegistrantsController < ApplicationController
     end
   end
 
-  # post /registrants/manage_one
+  # get /registrants/manage_one
   def manage_one
     authorize current_user, :registrant_information?
   end
@@ -79,6 +79,7 @@ class Admin::RegistrantsController < ApplicationController
     send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
   end
 
+  # GET /registrants/show_all.pdf
   def show_all
     authorize current_user, :registrant_information?
     if params[:order].present? && params[:order] == "id"
@@ -94,7 +95,6 @@ class Admin::RegistrantsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # show_all.html.erb
       format.pdf { render_common_pdf "show_all", 'Portrait' }
     end
   end

@@ -531,7 +531,7 @@ Workspace::Application.routes.draw do
       scope module: "compete" do
         resource :sign_ins, only: [:show, :edit, :update]
         resource :wave_assignments, only: [:show, :update]
-        resources :wave_times
+        resources :wave_times, except: [:new, :show]
       end
 
       resources :waves, only: [:index]
