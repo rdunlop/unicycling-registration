@@ -46,4 +46,20 @@ describe Admin::PermissionsController do
       end
     end
   end
+
+  describe "PUT set_password" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:new_password) { "New Password" }
+
+    before do
+      user
+      ActionMailer::Base.deliveries.clear
+    end
+
+    it "changes the users password" do
+      put :set_password, user_id: user.id, password: new_password
+      expect(user.password_valid?(new_password)).to be_truthy
+      expect(ActionMailer::Base.deliveries.count).to eq(0)
+    end
+  end
 end
