@@ -49,11 +49,11 @@ will also want to use a 'test' instance in order to test/explore features withou
 
 How to add/improve Translations
 -------------------------------
-If you would like to contribute language translations, the first step is to ask for a "translator" account.
+If you would like to contribute language translations, the first step is to ask for a "translator" account. See the instructions in the footer of the website for more details.
 
 Once you have a translator account, a "Translation" menu item will appear, which will allow you to see/adjust/improve the translations for any language (except English).
 
-- If you find that there is any text which only appears in English, or where the English is incorrect, please use the "Feedback" form to let me know, and I'll enable it in the translation system.
+- If you find that there is any text which only appears in English, or where the English is incorrect, please use the "Feedback" form to let us know, and we'll enable it in the translation system.
 
 
 If we want to add a new language to the list of possible translations:
@@ -156,13 +156,6 @@ In order to automatically update the registration period when the current period
 ends, a scheduled task must be executed daily. This is done with the 'whenever' gem
 which schedules the task to run daily
 
-Production flag
----------------
-
-Setting this flag will remove the "Development Site" banner
-
-    DEVELOPMENT_BANNER=false
-
 Caching
 --------
 
@@ -199,14 +192,14 @@ The following e-mail(s) will receive all error messages, "feedback", and other l
     ERROR_EMAIL2=bob+nauccerrors@dunlopweb.com
 
 
-The DOMAIN setting is used to build the links in the e-mails, set it to the hostname of the deployed application
+The `domain` setting is used to build the links in the e-mails, set it to the hostname of the deployed application
 
-    DOMAIN=uniregtest.herokuapp.com
+    domain: regtest.unicycling-software.com
 
 If you want to allow user accounts to be created WITHOUT requiring e-mail
 confirmation, set the following variable, or "Authorize the laptop":
 
-    MAIL_SKIP_CONFIRMATION=true
+    mail_skip_confirmation: true
 
 Paypal Account
 --------------
@@ -308,7 +301,7 @@ you need to configure the events offered at this particular competition, as well
 as the expense details for registration.
 
 * Create an account (using the "Sign Up" page)
-* Use the "heroku console" to set this user as "super_admin: true"
+* Use the console to set this user as "super_admin: true"
 
      u = User.find(1); u.add_role :super_admin;
 
