@@ -29,14 +29,14 @@ class CouponApplier
   private
 
   def apply_coupon(payment_detail)
-    if coupon_code_applies_to?(payment_detail.expense_item)
-      if coupon_limit_reached?
-        self.error = "Coupon limit reached"
-      else
-        payment_detail.create_payment_detail_coupon_code(coupon_code: coupon_code)
-        payment_detail.recalculate!
-        @applied_count += 1
-      end
+    return unless coupon_code_applies_to?(payment_detail.expense_item)
+
+    if coupon_limit_reached?
+      self.error = "Coupon limit reached"
+    else
+      payment_detail.create_payment_detail_coupon_code(coupon_code: coupon_code)
+      payment_detail.recalculate!
+      @applied_count += 1
     end
   end
 

@@ -20,3 +20,11 @@ Style/ConditionalAssignment:
 # This caused a test failure in paypal_confirmer, and isn't as clear to me
 Performance/Casecmp:
   Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Metrics/LineLength:
+  # I would like to support this, but it's quite violated currently
+  # Max: 120
+  Enabled: false
