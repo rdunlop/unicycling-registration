@@ -1,26 +1,45 @@
 require 'spec_helper'
 
 describe Admin::EventSongsController do
+  let(:user) { FactoryGirl.create(:super_admin_user) }
   before(:each) do
     FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    sign_in user
   end
 
-  describe "GET index" do
-    it "loads all songs" do
+  describe "as a normal user" do
+    before do
+      sign_out user
+      sign_in FactoryGirl.create(:user)
+    end
+
+    it "doesn't have permission" do
       get :index
       expect(response).to redirect_to(root_url)
     end
-    describe "as an admin" do
-      before :each do
-        sign_out @user
-        sign_in FactoryGirl.create(:super_admin_user)
-      end
-      it "views the songs list index" do
-        get :index
-        expect(response).to_not redirect_to(root_url)
-      end
+  end
+
+  describe "GET index" do
+    it "views the songs list index" do
+      get :index
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET show" do
+    let(:event) { FactoryGirl.create(:event) }
+    let!(:song) { FactoryGirl.create(:song, event: event)}
+
+    it "loads the page" do
+      get :show, id: event.to_param
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET all" do
+    it "loads all songs" do
+      get :all
+      expect(response).to be_success
     end
   end
 end

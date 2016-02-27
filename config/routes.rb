@@ -334,8 +334,10 @@ Workspace::Application.routes.draw do
           post :undelete
         end
       end
-      resources :competition_songs, only: [:show, :create] do
-        get :download_zip
+      resources :competition_songs, only: [:show, :create], param: :competition_id do
+        member do
+          get :download_zip
+        end
       end
       resources :event_songs, only: [:index, :show, :create] do
         collection do

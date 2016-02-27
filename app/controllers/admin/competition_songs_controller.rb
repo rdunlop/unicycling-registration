@@ -2,9 +2,9 @@ class Admin::CompetitionSongsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_music_admin
 
-  # GET /competition_songs/:id
+  # GET /competition_songs/:competition_id
   def show
-    @competition = Competition.find(params[:id])
+    @competition = Competition.find(params[:competition_id])
 
     add_breadcrumb "Music", event_songs_path
     add_breadcrumb "#{@competition} Songs"
@@ -15,7 +15,7 @@ class Admin::CompetitionSongsController < ApplicationController
     @songs = Song.where(registrant: registrants, event: @competition.event)
   end
 
-  # PUT /competition_songs/:id
+  # POST /competition_songs/:competition_id
   def create
     competition = Competition.find(params[:competition_id])
 
@@ -32,9 +32,9 @@ class Admin::CompetitionSongsController < ApplicationController
     redirect_to competition_song_path(competition)
   end
 
-  # GET /competition_songs/:id/download_zip
+  # GET /competition_songs/:competition_id/download_zip
   def download_zip
-    competition = Competition.find(params[:competition_song_id])
+    competition = Competition.find(params[:competition_id])
     zip_creator = MusicZipCreator.new(competition)
     filename = 'music_files-' + competition.to_s.gsub(/[^0-9a-zA-Z]/, '') + '.zip'
     zip_creator.zip_file(filename) do |zip_file|
