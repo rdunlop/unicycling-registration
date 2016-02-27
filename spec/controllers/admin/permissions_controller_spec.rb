@@ -58,7 +58,7 @@ describe Admin::PermissionsController do
 
     it "changes the users password" do
       put :set_password, user_id: user.id, password: new_password
-      expect(user.password_valid?(new_password)).to be_truthy
+      expect(user.reload.valid_password?(new_password)).to be_truthy
       expect(ActionMailer::Base.deliveries.count).to eq(0)
     end
   end
