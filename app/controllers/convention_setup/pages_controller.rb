@@ -13,10 +13,6 @@ class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupCon
     respond_with([:convention_setup, @pages])
   end
 
-  # GET /pages/1/edit
-  def edit
-  end
-
   # GET /pages/new
   def new
     @page = Page.new
@@ -31,6 +27,10 @@ class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupCon
     else
       render :new
     end
+  end
+
+  # GET /pages/1/edit
+  def edit
   end
 
   # PUT /event_choices/1
