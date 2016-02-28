@@ -79,6 +79,11 @@ FactoryGirl.define do
       scoring_class "Standard Skill"
     end
 
+    trait :combined do
+      scoring_class "Overall Champion"
+      combined_competition # Factory Girl
+    end
+
     trait :locked do
       locked_at DateTime.now
     end
