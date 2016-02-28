@@ -29,10 +29,6 @@ class CompetitionSignUp
     end
   end
 
-  def competition
-    @competition
-  end
-
   def age_group_entries
     return @agt.age_group_entries.map {|age| [age.to_s, age.gender] } unless @agt.nil?
     [["Male", "Male"], ["Female", "Female"]]
