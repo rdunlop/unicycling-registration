@@ -1,0 +1,14 @@
+en:
+  convention_setup:
+    event_choices:
+      index:
+        header: Listing event choices for %{event}
+        description: |
+          Event Choices are additional questions which you can present to your competitors in order to
+          gather more information from them.
+        example_1: Geared?
+        example_2: Team Name
+        example_3: Team Captain
+        example_4: Pairs Partner Name
+        existing_choices: Existing %{event} Event Choices
+        new_event_choice: New Event Choice

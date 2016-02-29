@@ -1,25 +1,24 @@
-%h1
-  Listing event choices for #{@event}
+%h1= t(".header", event: @event)
 
-%p
-  Event Choices are additional questions which you can present to your competitors in order to
-  gather more information from them.
 
-%h4 Examples
+%p= t(".description")
+
+
+%h4= t("example")
 %ul
-  %li Geared?
-  %li Team Name
-  %li Team Captain
-  %li Pairs Partner Name
+  %li= t(".example_1")
+  %li= t(".example_2")
+  %li= t(".example_3")
+  %li= t(".example_4")
 
 - if @event_choices.any?
-  %h3 Existing #{@event} Event Choices
+  %h3= t(".existing_choices", event: @event)
 
   %table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_choices_path(@event) } }
     %thead
       %tr
-        %th Label
-        %th Cell type
+        %th= EventChoice.human_attribute_name(:label)
+        %th= EventChoice.human_attribute_name(:cell_type)
         %th
         %th
     %tbody
@@ -28,11 +27,11 @@
         %tr.item{ data: { item_id: event_choice.id } }
           %td= event_choice.label
           %td= event_choice.cell_type
-          %td= link_to 'Edit', edit_convention_setup_event_choice_path(event_choice)
-          %td= link_to 'Delete', [:convention_setup, event_choice], method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to t("edit"), edit_convention_setup_event_choice_path(event_choice)
+          %td= link_to t("delete"), [:convention_setup, event_choice], method: :delete, data: { confirm: t("are_you_sure") }
 
 %fieldset.form__fieldset
-  %h3 New event choice
+  %h3= t(".new_event_choice")
   = render 'form'
 
 = render :partial => "/attending/preview"

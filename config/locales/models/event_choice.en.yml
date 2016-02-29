@@ -3,6 +3,8 @@ en:
   activerecord:
     attributes:
       event_choice:
+        label: Label
+        cell_type: Cell type
         optional_if_event_choice_id: Optional if this event_choice is chosen
         required_if_event_choice_id: Required if this event_choice is chosen
     models:

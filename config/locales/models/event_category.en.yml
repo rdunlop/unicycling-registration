@@ -4,6 +4,9 @@ en:
     attributes:
       event_category:
         name: Name
+        age_range_start: Age Range Start
+        age_range_end: Age Range End
+        warning_on_registration_summary: Warning on Registration Summary
     models:
       event_category:
         one: Event Category

@@ -1,6 +1,7 @@
 %p
-  %b Note:
-  If there is only one event_category, the user will not be presented with a selection-box.
+  %b= t("note")
+  = t(".details")
+
 
 = simple_form_for([:convention_setup, @event, @event_category]) do |f|
   = render partial: "/shared/error_messages", object: @event_category

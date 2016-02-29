@@ -1,0 +1,5 @@
+en:
+  convention_setup:
+    event_categories:
+      edit:
+        header: Editing Event Category

@@ -1,0 +1,5 @@
+en:
+  convention_setup:
+    event_categories:
+      form:
+        details: If there is only one event_category, the user will not be presented with a selection-box.

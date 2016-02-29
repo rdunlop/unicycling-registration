@@ -1,22 +1,16 @@
-%h1 Domain Setup
+%h1= t(".header")
 
-%p
-  The Registration System is currently configured to live at
-  = link_to @tenant.base_url
+%p= t(".current_url_html", link: link_to(@tenant.base_url))
 
-%p
-  This convention will <u>always</u> be accessible at
-  = link_to @tenant.permanent_url
+%p= t(".accessible_url_html", link: link_to(@tenant.permanent_url))
 
-%p
-  If you would like the registration system to appear to be at a different internet address, you may use a DNS CNAME record to create an alias.
+%p= t(".create_other_dns_record")
 
-%p
-  Once an Alias is created, you can set that alias as the "Primary Domain" here, which will cause all links sent out in e-mails to use that internet address instead of the default unicycling-software.com address.
+%p= t(".primary_domain_description")
 
 %ol.config_fields
   %li
-    Set up a DNS CNAME record from "&lt;yoururl.yoursite.com&gt;." to
+    = t(".base_dns_cname_html")
     = text_field_tag :cname_target, @tenant.permanent_url, disabled: true
   %li
     - if @tenant_alias.persisted?
@@ -25,19 +19,19 @@
     - else
       = simple_form_for(@tenant_alias) do |f|
         = render partial: "shared/error_messages", object: @tenant_alias
-        Enter the URL of the new domain
+        = t(".url_of_new_domain")
         = f.text_field :website_alias
         =# f.submit "Verify Alias CNAME Record"
-        = f.button :submit, "Save Record"
+        = f.button :submit, t(".submit")
   -# %li
-    = label_tag :verified, "Alias Verified"
+    = label_tag :verified, t(".alias_verified")
     = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
   %li
     - if @tenant_alias.persisted?
       - if @tenant_alias.primary_domain?
-        = link_to "Delete current Primary Domain", tenant_alias_path(@tenant_alias), method: :delete, class: "nonfocus_button"
+        = link_to t(".delete_current_primary_domain"), tenant_alias_path(@tenant_alias), method: :delete, class: "nonfocus_button"
       - else
-        = link_to "Set Alias as Primary Domain", activate_tenant_alias_path(@tenant_alias), method: :post, class: "focus_button"
+        = link_to t(".set_as_primary_domain"), activate_tenant_alias_path(@tenant_alias), method: :post, class: "focus_button"
     - else
       -#Before you can activate the alias, you must verify it.
-      Before you can activate the alias, you must "Save Record" it.
+      = t(".must_save_warning")

@@ -32,7 +32,7 @@ en:
         event_sign_up_closed_date: Last day to sign up for Events
         custom_waiver_text: Custom Waiver Text
     models:
-      event_choice:
+      event_configurations:
         one: Event Configuration
         other: Event Configurations
   helpers:

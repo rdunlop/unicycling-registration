@@ -1,10 +1,10 @@
-%h1 Listing Event Categories for #{@event}
+%h1= t(".header", event: @event)
 %table.js--sortable{ data: { target: update_row_order_convention_setup_event_event_categories_path(@event) } }
   %thead
     %tr
-      %th Name
-      %th Allowed Age Range
-      %th Warning on Registration Summary
+      %th= EventCategory.human_attribute_name(:name)
+      %th= t(".allowed_age_range")
+      %th= EventCategory.human_attribute_name(:warning_on_registration_summary)
       %th
       %th
       %th
@@ -14,12 +14,12 @@
         %td= event_category.name
         %td= "#{event_category.age_range_start}-#{event_category.age_range_end}"
         %td= event_category.warning_on_registration_summary?
-        %td= link_to 'Edit', edit_convention_setup_event_category_path(event_category)
-        %td= link_to 'Delete', [:convention_setup, event_category], method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to t("edit"), edit_convention_setup_event_category_path(event_category)
+        %td= link_to t("delete"), [:convention_setup, event_category], method: :delete, data: { confirm: t("are_you_sure") }
 
 
 %fieldset.form__fieldset
-  %h3 New event category
+  %h3= t(".new_event_category")
   = render 'form'
 
 = render :partial => "/attending/preview"

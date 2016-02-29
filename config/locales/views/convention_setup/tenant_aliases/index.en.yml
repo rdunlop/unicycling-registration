@@ -1,0 +1,24 @@
+en:
+  convention_setup:
+    tenant_aliases:
+      index:
+        header: Domain Setup
+        current_url_html: The Registration System is currently configured to live at %{link}
+        accessible_url_html: |
+          This convention will <u>always</u> be accessible at %{link}
+        create_other_dns_record: |
+          If you would like the registration system to appear to be at a
+          different internet address, you may use a DNS CNAME record to create an alias.
+        primary_domain_description: |
+          Once an Alias is created, you can set that alias as the "Primary Domain"
+          here, which will cause all links sent out in e-mails to use that internet
+          address instead of the default unicycling-software.com address.
+        base_dns_cname_html: |
+          Set up a DNS CNAME record from "&lt;yoururl.yoursite.com&gt;." to
+        url_of_new_domain: Enter the URL of the new domain
+        submit: Save Record
+        alias_verified: Alias Verified
+        delete_current_primary_domain: Delete current Primary Domain
+        set_as_primary_domain: Set Alias as Primary Domain
+        must_save_warning: |
+          Before you can activate the alias, you must "Save Record" it.

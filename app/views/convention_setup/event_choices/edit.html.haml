@@ -1,5 +1,5 @@
 %fieldset.form__fieldset
-  %h1 Editing event choice
+  %h1= t(".header")
   = render 'form'
 
-=link_to 'Back', convention_setup_event_event_choices_path(@event_choice.event)
+= link_to t("back"), convention_setup_event_event_choices_path(@event_choice.event)

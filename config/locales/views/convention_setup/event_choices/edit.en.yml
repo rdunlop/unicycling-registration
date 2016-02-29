@@ -1,0 +1,5 @@
+en:
+  convention_setup:
+    event_choices:
+      edit:
+        header: Editing Event Choice
