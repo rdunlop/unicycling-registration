@@ -29,7 +29,6 @@
 #  index_imported_results_user_id   (user_id)
 #
 
-require 'upload'
 class ImportResultsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, except: [:edit, :update, :destroy]

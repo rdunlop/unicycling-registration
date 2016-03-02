@@ -50,6 +50,10 @@ class HeatLaneResult < ActiveRecord::Base
     status == "DQ"
   end
 
+  # Public: Create a TimeResult entry for this HeatLaneResult
+  #
+  # Return: nothing
+  # Throws an ActiveRecord Exception if unable to save the record
   def import!
     tr = TimeResult.new(
       heat_lane_result: self,

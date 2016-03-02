@@ -102,6 +102,8 @@ class RaceDataImporter
     end
   end
 
+  private
+
   def convert_to_thousands(imported_time, number_of_decimal_places)
     case number_of_decimal_places
     when 1
@@ -114,15 +116,6 @@ class RaceDataImporter
       imported_time.round(-1) / 10
     else
       raise "What do you mean?"
-    end
-  end
-
-  def add_error(lane)
-    error_message = "Missing Lane Assignment for Lane #{lane}"
-    if errors.nil?
-      self.errors = error_message
-    else
-      self.errors += error_message
     end
   end
 end
