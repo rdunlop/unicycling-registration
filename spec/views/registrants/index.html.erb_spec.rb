@@ -11,13 +11,13 @@ describe "registrants/index" do
     before(:each) do
       @my_registrants = []
       @shared_registrants = []
-      @total_owing = 0
+      @total_owing = 0.to_money
     end
     it "should not render the registrants list" do
       render
       assert_select "legend", text: "Registrations", count: 0
     end
-    it "should not render the amonut owing block" do
+    it "should not render the amount owing block" do
       render
       assert_select "div", text: /Pay Now/, count: 0
     end
