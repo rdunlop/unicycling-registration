@@ -1,32 +1,35 @@
-%h1 Additional UDA Access
+%h1= t(".header")
 
 %p
-  Adding a user here allows them to view the "Data Entry" menu, and allows them to be assigned as judges and data-entry volunteer.
+  %ul
+    %li= t(".description_1")
+    %li= t(".description_2")
+    %li= t(".description_3")
 
-%h3 Give a user Additional UDA Access
+%h3= t(".assign_access")
 = simple_form_for [@competition, @data_entry_volunteer] do |f|
   = render partial: "/shared/error_messages", object: @data_entry_volunteer
   .row
     .small-12.medium-4.columns
-      = f.label :user_id, "User Account"
+      = f.label :user_id, User.model_name.human
       = f.select :user_id, User.all.map { |user| [user.email, user.id] }, { include_blank: true }, class: 'chosen-select'
     .small-12.medium-4.columns
-      = f.label :name, "Name"
+      = f.label :name, User.human_attribute_name(:name)
       = f.text_field :name
     .small-12.medium-4.columns
-      = f.button :submit, "Assign Additional Access"
+      = f.button :submit, t(".assign_access")
 %br
 %p
-  %b Note
-  Doing this also confirms unconfirmed e-mail accounts so that they can immediately log in.
+  %b= t("note")
+  = t(".note")
 
 %hr
 
-%h3 Users with Access
+%h3= t(".users_with_access")
 %table.sortable
   %thead
-    %th Name
-    %th User Account Email
+    %th= User.human_attribute_name(:name)
+    %th= User.human_attribute_name(:email)
   %tbody
     - @all_data_entry_volunteers.each do |user|
       %tr
