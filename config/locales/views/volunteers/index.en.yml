@@ -1,0 +1,8 @@
+en:
+  volunteers:
+    index:
+      header: Volunteers
+      add_volunteer_description_html: |
+        If the volunteer you need isn't listed here,
+        you will need to add that volunteer on the
+        %{link} page

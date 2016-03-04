@@ -1,0 +1,16 @@
+en:
+  volunteers:
+    manage_volunteer_type:
+      volunteer_role_descriptions:
+        data_entry_volunteer: |
+          Able to be assigned as data-recording volunteer
+        race_official: |
+          Able to DQ at start or end-line of Race
+          Able to download heat-lists for Track E-Timers
+        track_data_importer: |
+          Able to import e-timer data for track day.
+          Able to adjust time results
+        data_recording_volunteer: |
+          Able to enter Start/Finish Line results (transcribed)
+      create_role: "Create new %{role}"
+      confirm_remove_volunteer: "Remove this volunteer?"

@@ -1,8 +1,8 @@
-.row
-  - @competition.uses_volunteers.each do |role|
-    .small-12.medium-6.columns
-      = render "manage_volunteer_type", role: role, volunteers: User.with_role(role, @competition).order(:email), competition: @competition
+%h1= t(".header")
+
+%hr= t(".add_volunteer_description_html", link: link_to("Manage Additional Access", competition_data_entry_volunteers_path(@competition)))
 
 %hr
-If the volunteer you need isn't listed here, #{link_to "Manage Additional UDA Access", competition_data_entry_volunteers_path(@competition)}
-%br
+- @competition.uses_volunteers.each do |role|
+  = render "manage_volunteer_type", role: role, volunteers: User.with_role(role, @competition).order(:email), competition: @competition
+

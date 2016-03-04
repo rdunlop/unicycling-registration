@@ -192,25 +192,8 @@ class User < ActiveRecord::Base
 
   # Public: A list of all possible data-entry roles, what is used on each
   # competition is dependent upon the type of competition
+  # NOTE: When adding a role here, please be sure to also add a description to the volunteers.manage_volunteer_type.en.yml
   POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer, :track_data_importer].freeze
-
-  def self.volunteer_role_descriptions(role)
-    case role
-    when :data_entry_volunteer
-      "Able to be assigned as data-recording volunteer"
-    when :race_official
-      "Able to DQ at start or end-line of Race
-      Able to download heat-lists for Track E-Timers
-      "
-    when :track_data_importer
-      "Able to import e-timer data for track day.
-      Able to adjust time results"
-    when :data_recording_volunteer
-      "Able to enter Start/Finish Line results (transcribed)"
-    else
-      "No description"
-    end
-  end
 
   def self.data_entry_volunteer
     with_role(:data_entry_volunteer).reorder(:name)
