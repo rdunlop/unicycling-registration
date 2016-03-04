@@ -74,5 +74,7 @@
 %hr
 %h3= t(".role_descriptions")
 - @available_roles.each do |role|
-  %h4= role.to_s.humanize
-  %pre= User.role_description(role)
+  .row
+    %h4= role.to_s.humanize
+    %p= simple_format t(".role_description.#{role}")
+    %hr

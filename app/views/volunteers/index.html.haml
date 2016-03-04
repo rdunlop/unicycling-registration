@@ -5,4 +5,3 @@
 %hr
 - @competition.uses_volunteers.each do |role|
   = render "manage_volunteer_type", role: role, volunteers: User.with_role(role, @competition).order(:email), competition: @competition
-

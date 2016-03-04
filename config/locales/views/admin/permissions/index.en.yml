@@ -30,3 +30,60 @@ en:
         add_new_permission: Add new permission
         set_password: Set User Password
         role_descriptions: "Role Descriptions:"
+        role_description:
+          convention_admin: |
+            Able to configure the Convention settings with regards to registration settings
+            Can setup the look-and-feel, Convention Name, and Domain URL settings.
+            Can set payment costs
+            Can set the PayPal details
+            Can set events offered
+            Can set the volunteer options
+            Can reset users passwords
+            Can set up 'Authorized Laptops' for use in on-site registration
+            Can create payment_admin, event_planner, and music_dj users
+          competition_admin: |
+            Able to create competitions, and adjust competition configuration
+            Able to create/manage Age Groups
+            Can set registrants as ineligible
+            Can create director, data_entry_volunteer
+            Can reset user passwords
+            Can View all Event Sign Ups
+            Can Manage all Competition Competitors (while competition is unlocked)
+            Can Lock/Unlock Competition
+          director: |
+            Able to assign registrants to competitors
+            Can create judges, volunteers
+            Can reset user passwords
+          super_admin: |
+            Able to set roles of other people
+            Able to destroy payment information
+            Able to configure the site settings, event settings
+          payment_admin: |
+            Able to view the payments that have been received
+            Able to see the total number of items paid.
+            Able to Set Registration Fees per user
+            Able to mark checks as received
+          event_planner: |
+            Able to view/review the event sign_ups.
+            Able to SEARCH & MODIFY any registration.
+            Able to Add/Modify event choices, at all times.
+            Able to view/send emails to all registrants
+          membership_admin: |
+            Able to view the USA Memberships page.
+            Able to update the USA Membership numbers
+            Able to indicate whether a user is up-to-date with USA membership fees
+          awards_admin: |
+            Able to view the data results
+            Able to publish results
+            Able to mark competitions as awarded
+          music_dj: |
+            Able to view/download any music from the Manage Music page
+          translator: |
+            Able to access the translation menu.
+            Enter new translations, and apply them to the site
+          export_payment_lists: |
+            Able to use the Export menu to download Excel file of registrants who have paid for lodging
+          late_registrant: |
+            Able to access the registration system even after the registration period has closed.
+            Able to Create new registrants, update existing registrants, and make payments.
+            You should use this along with the SetRegFee function, to specify the fee they are to be charged.

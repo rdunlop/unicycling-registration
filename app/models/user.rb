@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
     User.confirmed.all_with_registrants - User.unpaid_reg_fees
   end
 
+  # NOTE: When adding roles Please be sure to add a description in the permissions/index.en.yml
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
     [:late_registrant, :export_payment_lists, :music_dj, :awards_admin, :event_planner, :translator,
@@ -113,81 +114,6 @@ class User < ActiveRecord::Base
       new_roles = self.class.role_transfer_permissions[role.to_sym]
       array << new_roles if new_roles.present?
     end.flatten.uniq
-  end
-
-  def self.role_description(role)
-    case role
-      # when :results_printer
-    when :convention_admin
-      "[e.g. Olaf Scholte]
-      Able to configure the Convention settings with regards to registration settings
-      Can setup the look-and-feel, Convention Name, and Domain URL settings.
-      Can set payment costs
-      Can set the PayPal details
-      Can set events offered
-      Can set the volunteer options
-      Can reset users passwords
-      Can set up 'Authorized Laptops' for use in on-site registration
-      Can create payment_admin, event_planner, and music_dj users
-      "
-    when :competition_admin
-      "[e.g. Scott Wilton]
-      Able to create competitions, and adjust competition configuration
-      Able to create/manage Age Groups
-      Can set registrants as ineligible
-      Can create director, data_entry_volunteer
-      Can reset user passwords
-      Can View all Event Sign Ups
-      Can Manage all Competition Competitors (while competition is unlocked)
-      Can Lock/Unlock Competition
-      "
-    when :director
-      "[e.g. Wendy Gryzch]
-      Able to assign registrants to competitors
-      Can create judges, volunteers
-      Can reset user passwords
-      "
-      # Note: Cannot currently reset passwords.
-    when :super_admin
-      "[e.g. Robin] Able to set roles of other people, able to destroy payment information, able to configure the site settings, event settings"
-    when :payment_admin
-      "[e.g. Garrett Macey]
-      Able to view the payments that have been received
-      Able to see the total number of items paid.
-      Able to Set Registration Fees per user
-      Able to mark checks as received"
-    when :event_planner
-      "[e.g. Mary Koehler]
-      Able to view/review the event sign_ups.
-      Able to SEARCH & MODIFY any registration.
-      Able to Add/Modify event choices, at all times.
-      Able to view/send emails to all registrants"
-    when :membership_admin
-      "Able to view the USA Memberships page.
-      Able to update the USA Membership numbers
-      Able to indicate whether a user is up-to-date with USA membership fees"
-    when :awards_admin
-      "[e.g. Kirsten]
-      Able to view the data results
-      Able to publish results
-      Able to mark competitions as awarded"
-    when :music_dj
-      "[e.g. JoAnn]
-      Able to view/download any music from the Manage Music page"
-    when :translator
-      "[e.g. Olaf]
-      Able to access the translation menu.
-      Enter new translations, and apply them to the site"
-    when :export_payment_lists
-      "Able to use the Export menu to download Excel file of registrants who have paid for lodging"
-    when :late_registrant
-      "Able to access the registration system even after the registration period has closed.
-      Able to Create new registrants, update existing registrants, and make payments.
-      You should use this along with the SetRegFee function, to specify the fee they are to be charged.
-      "
-    else
-      "No Description Available"
-    end
   end
 
   # Public: A list of all possible data-entry roles, what is used on each
