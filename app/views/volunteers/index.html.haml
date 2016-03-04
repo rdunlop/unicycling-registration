@@ -1,6 +1,6 @@
 %h1= t(".header")
 
-%hr= t(".add_volunteer_description_html", link: link_to("Manage Additional Access", competition_data_entry_volunteers_path(@competition)))
+%hr= t(".add_volunteer_description_html", link: link_to(t(".manage_additional_access"), competition_data_entry_volunteers_path(@competition)))
 
 %hr
 - @competition.uses_volunteers.each do |role|

@@ -2,6 +2,7 @@ en:
   volunteers:
     index:
       header: Volunteers
+      manage_additional_access: Manage Additional Access
       add_volunteer_description_html: |
         If the volunteer you need isn't listed here,
         you will need to add that volunteer on the

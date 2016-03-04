@@ -1,0 +1,19 @@
+en:
+  competition_setup:
+    directors:
+      index:
+        header: Manage Directors
+        description: |
+          Directors are assigned to a Event-class. They will be able to
+          create/manage start lists, judges, and data-entry volunteers for their competitions.
+        note_1: |
+          A competition must be configured by the "Competition Admin"
+          (that's probably you) before the director is able to manage the start lists
+          for the competition.
+        note_2: |
+          Directors cannot create the competitions themselves because choosing
+          the particular settings for a Competition is usually much more nuanced
+          than Directors may be aware.
+        director: Director
+        create_director: Create Director
+        add_director: Add Director

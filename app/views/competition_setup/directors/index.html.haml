@@ -1,20 +1,19 @@
-%h1 Manage Directors
+%h1= t(".header")
+
+%p= t(".description")
+
 
 %p
-  Add a director user for each Event class. They will be able to create/manage start lists, create/manage judges/data-entry for their competitions.
-
-%p
-  %b Note:
-  A competition must be configured by the "Competition Admin" (that's probably you) before the director is able to manage the start lists
-  for the competition.
+  %b= t("note")
+  = t(".note_1")
   %br
-  This is because choosing the particular settings for a Competition is usually much more nuanced than Directors may be.
+  = t(".note_2")
 
 %table.sortable
   %thead
     %tr
-      %th Event
-      %th Director
+      %th= Event.model_name.human
+      %th= t(".director")
   %tbody
     - @events.each do |event|
       %tr
@@ -22,16 +21,16 @@
         %td
           - User.with_role(:director, event).each do |user|
             = user
-            = link_to "Delete", director_path(user.id, event_id: event.id), method: :delete,  data: {confirm: "Are you sure?" }
+            = link_to t("delete"), director_path(user.id, event_id: event.id), method: :delete,  data: {confirm: t("are_you_sure") }
 
-%h2 Create Director
+%h2= t(".create_director")
 = form_tag(directors_path, :method => "post") do |f|
   .row
     .small-12.medium-4.columns
-      = label_tag :user_id, "User"
+      = label_tag :user_id, User.model_name.human
       = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
     .small-12.medium-4.columns
-      = label_tag :event_id, "Event"
+      = label_tag :event_id, Event.model_name.human
       = select_tag :event_id, options_from_collection_for_select(@events, "id", "to_s"), include_blank: true, class: "chosen-select"
     .small-12.medium-4.columns.text-left
-      = submit_tag "Add Director", :class => "focus_button"
+      = submit_tag t(".add_director"), :class => "focus_button"
