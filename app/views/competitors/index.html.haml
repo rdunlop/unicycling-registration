@@ -11,6 +11,12 @@
     %br
     Any Registrant who is added to this event will automatically create a competitor.
 
+- if @competition.age_group_type
+  %h3 Age Group Configuration
+  = link_to "View Configured Age Group", age_group_type_path(@competition.age_group_type)
+  %p If the age group breakdown is incorrect, contact an Organizer to have a different age group selected
+  %hr
+
 = render "display_sign_ups"
 
 %p
@@ -25,6 +31,3 @@
 %p
   Advanced Options:
   = link_to 'Advanced Create Competitor', new_competition_competitor_path(@competition), class: "minor_action"
-
-%br
-= link_to "Back", @competition

@@ -1,3 +1,5 @@
+%h2 Volunteers
+
 - if @competition.uses_judges
   %p
     There are currently
@@ -6,9 +8,8 @@
     judges assigned.
 
   %p
-    Please configure volunteers to help with data entry/judging
-
-  = link_to "Manage Judges for #{@competition}", competition_judges_path(@competition)
+    Configure volunteers to help with data entry/judging
 
 - if @competition.uses_volunteers
-  = link_to "Manage Volunteers for #{@competition}", competition_volunteers_path(@competition)
+  %p
+    Configure Volunteers to help you with data entry.

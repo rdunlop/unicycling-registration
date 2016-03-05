@@ -1,6 +1,6 @@
 - content_for :content do
   #side_nav
-    %h3 Manage #{@competition}
+    %h3= link_to @competition, @competition
     %h4= Competitor.model_name.human(count: 2)
     %ul.sideNav__list
       - # Duplicated in _show_competitors_selected
@@ -12,22 +12,37 @@
           %li= link_to "View/Assign Heats", competition_heats_path(@competition)
         - else
           %li= link_to "View Waves", competition_waves_path(@competition)
+      - if @competition.start_list?
+        %li
+          = link_to "Start list", start_list_printing_competition_path(@competition)
+          = link_to "(pdf)", start_list_printing_competition_path(@competition, :format => :pdf)
 
-      %li= link_to "View List", announcer_printing_competition_path(@competition)
+      %li
+        = link_to "View List", announcer_printing_competition_path(@competition)
+        = link_to "(pdf)", announcer_printing_competition_path(@competition, :format => :pdf)
 
     %h4 Data Entry
     %ul.sideNav__list
       - if @competition.uses_judges
         %li= link_to Judge.model_name.human(count: 2), competition_judges_path(@competition)
-      - else
+        %li= link_to "View Judge Results", competition_path(@competition, anchor: "view_judge_results")
+      - if @competition.uses_volunteers
         %li= link_to "Volunteers", competition_volunteers_path(@competition)
       = render "/competitions/data_entry_links", competition: @competition
 
     %h4= Result.model_name.human(count: 2)
     %ul.sideNav__list
-      %li= link_to "Monitor", result_competition_path(@competition)
-      -# %li= link_to "Approve", '#'
-      %li= link_to "Additional", competition_competition_results_path(@competition)
+      - if policy(@competition).result?
+        %li
+          = link_to "Monitor", result_competition_path(@competition)
+          (set places, export)
+      - unless @competition.results_path.nil?
+        %li= link_to "Enter/Modify Results", @competition.results_path
+      %li= link_to "Additional Results", competition_competition_results_path(@competition)
+      - if policy(@competition).results?
+        %li
+          = link_to "Preview Results", results_printing_competition_path(@competition)
+          = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
 
   #side_content
     = yield

@@ -3,7 +3,7 @@ class Printing::CompetitionsController < ApplicationController
   before_action :load_competition
   before_action :skip_authorization, only: [:announcer, :start_list]
 
-  before_action :set_breadcrumbs, only: [:announcer]
+  before_action :set_breadcrumbs, only: [:announcer, :results]
 
   def announcer
     add_breadcrumb "Competitor List"

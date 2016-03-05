@@ -1,7 +1,8 @@
+= render :partial => "results"
+
 - if policy(@competition).destroy_all_results?
   = link_to "Delete All", destroy_all_results_competition_path(@competition), method: :delete, class: "button small alert", data: { confirm: "This will delete ALL Time Data for this competition. Are you sure?" }
 
-  = render :partial => "results"
 %br
 %h2 New Time Result
 - unless @time_result.nil?

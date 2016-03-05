@@ -1,2 +1,0 @@
-$ ->
-  $(".accordion").accordion();

@@ -4,6 +4,8 @@
   %h3
     = @competition
     Raw Scores
+  .non_printable
+    = link_to("Toggle Displaying Judge Names", result_competition_path(@competition, anonymous: !@anonymous))
 
   - @competition.judge_types.uniq.each do |jt|
     %table.scores_outer

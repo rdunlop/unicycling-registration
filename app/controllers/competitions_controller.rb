@@ -109,7 +109,7 @@ class CompetitionsController < ApplicationController
 
   def result
     authorize @competition
-    @anonymous = params[:anonymous].present?
+    @anonymous = params[:anonymous].present? && params[:anonymous] == "true"
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Result", result_competition_path(@competition)
     render @competition.render_path

@@ -1,23 +1,22 @@
 %h1= @competition
 - if policy(@competition).update?
-  = link_to 'Edit', edit_competition_path(@competition)
-  = @competition.event_class
+  (Scoring Class: #{@competition.event_class} #{link_to 'Edit', edit_competition_path(@competition)} )
+
 
 %p Manage Competitors, Judges, Volunteers and Results.
 
-.accordion
-  %h2 Competitor Selected
-  %div
-    = render "show_competitors_selected"
+%p This page summarizes the state of the #{@competition} competition.
 
-  %h2 Volunteers Configured
-  %div
-    = render "show_volunteers_configured"
+%p Use the menu options along the Left-Hand side to manage the various actions.
 
-  %h2 Enter Results
-  %div
-    = render "show_enter_results"
+= render "show_competitors_selected"
+%hr
 
-  %h2 Results For Approval
-  %div
-    = render "show_results_for_approval"
+= render "show_volunteers_configured"
+%hr
+
+= render "show_enter_results"
+%hr
+
+= render "show_results_for_approval"
+%hr
