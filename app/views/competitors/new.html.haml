@@ -1,6 +1,8 @@
 %h3= "#{@competition.event} - #{@competition}"
 
-%h4 Add New Competitor
+.row
+  .small-12.columns
+    %h4 Add New Competitor
 
 = render :partial => "/competitors/form", :object => @competitor
 

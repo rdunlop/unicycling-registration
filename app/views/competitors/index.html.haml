@@ -18,16 +18,9 @@
   %hr
 
 = render "display_sign_ups"
+%hr
 
-%p
-  These are all of the competitors configured for this competition
-- if @competition.compete_in_order?
-  %p
-    %b Note
-    These are not in order of competition
 = render "display_competitors"
 
-%hr
 %p
-  Advanced Options:
-  = link_to 'Advanced Create Competitor', new_competition_competitor_path(@competition), class: "minor_action"
+  = link_to 'Manually Create Competitor', new_competition_competitor_path(@competition), class: "minor_action"

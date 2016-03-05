@@ -1,7 +1,14 @@
-%p
-  List of all competitors, including registrant info, with edit/delete, marking those who have NOT signed up.
+%h3 Create Competitors from Signed-Up Registrants
 
-%p Please choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors
+%p
+  Signing up for an event does NOT automatically cause that registrant to become a competitor in a competition. It is up to the director to manage the list.
+  %br
+  This is so that the director can add people who didn't sign up, and remove people who DID sign up, without changing their registration information. Also, for pairs/team events, multiple registrants become a single Competitor through this process.
+
+%p
+  Below, you will see a list of all the registrants who have signed up who are not yet assigned as competitors for this competition.
+
+%p Choose the registrants that you would like from the following list, and create competitors from those registrants. All registrants should be associated with competitors
 
 - @remaining_registrants = @registrants - (@competition.competitors.map{ |comp| comp.registrants }.flatten)
 
@@ -43,4 +50,4 @@
 
     = submit_tag Competitor.not_qualified_text, :class => "multiclick counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?" }
 - else
-  %p All Registrants are assigned to competition or marked as "will not compete"
+  %pb All Registrants are assigned to competition or are marked as "will not compete".

@@ -2,9 +2,9 @@
 = render :partial => "/shared/error_messages", :object => form
 = simple_form_for form.persisted? ? form : [form.competition, form] do |f|
   .row
-    .small-6.columns
+    .small-12.columns
       %fieldset.items
-        %legend Registrants
+        %legend Members
         = f.nested_fields_for :members do |member_f|
           .item.row
             .small-6.columns
@@ -13,16 +13,17 @@
             .small-3.columns
               = member_f.input :alternate
             .small-3.columns
-              %a.remove{:href => "#"} remove
+              %a.remove{:href => "#"} remove this member
               = member_f.hidden_field :id
               = member_f.hidden_field :_destroy
-      %a.add{:href => "#"} add registrant
-    .small-3.columns
+      %a.add{:href => "#"} add another member
+    %hr
+    .small-6.columns
       = f.label :custom_name, "Group/Team Name (optional)"
       = f.text_field :custom_name
-    .small-3.columns
+    .small-6.columns
       = f.label :status
       = f.select :status, Competitor.statuses.keys
-  %br
-  %br
-  = f.button :submit
+  .row
+    .small-12.columns
+      = f.button :submit

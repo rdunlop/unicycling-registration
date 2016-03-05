@@ -1,3 +1,10 @@
+%h3 Competitors
+
+- if @competition.compete_in_order?
+  %p
+    %b Note
+    These are in ID order (not in order of competition)
+
 - display_group_size = @competition.num_members_per_competitor == "Three or more"
 %table.sortable.competitor_statuses
   %caption Competitors
