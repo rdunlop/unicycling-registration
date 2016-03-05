@@ -151,4 +151,62 @@ describe AwardLabelsController do
       expect(response).to redirect_to(user_award_labels_path(@admin_user))
     end
   end
+
+  describe "with competition and competitors" do
+    let!(:competition) { FactoryGirl.create(:competition) }
+    let!(:competitors) { FactoryGirl.create_list(:event_competitor, 5, competition: competition) }
+    before do
+      competitors.each do |competitor|
+        FactoryGirl.create(:result, :overall, competitor: competitor)
+      end
+    end
+
+    describe "POST create_by_competition" do
+      it "renders" do
+        expect do
+          post :create_by_competition, competition_id: competition.id, user_id: @admin_user.to_param
+        end.to change(AwardLabel, :count).by(5)
+      end
+    end
+
+    describe "POST create_labels" do
+      context "by registrant_id" do
+      end
+
+      context "by registrant_group_id"
+
+      context "by competition id" do
+        it "renders" do
+          expect do
+            post :create_labels, age_groups: "true", competition_id: competition.id, user_id: @admin_user.to_param
+          end.to change(AwardLabel, :count).by(5)
+          expect(response).to redirect_to(user_award_labels_path(@admin_user))
+        end
+      end
+    end
+
+    describe "DELETE destroy_all" do
+      let!(:award) { FactoryGirl.create(:award_label, user: @admin_user) }
+
+      it "removes award" do
+        expect do
+          delete :destroy_all, user_id: @admin_user.to_param
+        end.to change(AwardLabel, :count).by(-1)
+      end
+    end
+
+    describe "GET normal_labels" do
+      it "renders" do
+        get :normal_labels, user_id: @admin_user.to_param
+        expect(response).to be_success
+      end
+    end
+
+    describe "GET announcer_sheet" do
+      it "renders" do
+        get :normal_labels, user_id: @admin_user.to_param
+        expect(response).to be_success
+      end
+    end
+  end
 end

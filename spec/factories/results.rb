@@ -23,5 +23,9 @@ FactoryGirl.define do
     association :competitor, factory: :event_competitor # FactoryGirl
     place 1
     result_type "AgeGroup"
+
+    trait :overall do
+      result_type "Overall"
+    end
   end
 end
