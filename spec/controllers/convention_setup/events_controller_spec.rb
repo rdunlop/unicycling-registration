@@ -212,6 +212,18 @@ describe ConventionSetup::EventsController do
     end
   end
 
+  describe "PUT update_row_order" do
+    let(:category) { FactoryGirl.create(:category) }
+    let!(:event_1) { FactoryGirl.create(:event, category: category) }
+    let!(:event_2) { FactoryGirl.create(:event, category: category) }
+
+    it "updates the order" do
+      put :update_row_order, category_id: category.to_param, id: event_1.to_param, row_order_position: 1
+      expect(event_2.reload.position).to eq(1)
+      expect(event_1.reload.position).to eq(2)
+    end
+  end
+
   describe "DELETE destroy" do
     it "destroys the requested event" do
       event = FactoryGirl.create(:event)

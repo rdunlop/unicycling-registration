@@ -6,6 +6,13 @@ describe Admin::TranslationsController do
     sign_in @admin_user
   end
 
+  describe "GET index" do
+    it "renders" do
+      get :index
+      expect(response).to be_success
+    end
+  end
+
   describe "DELETE clear_cache" do
     it "can clear the translation cache" do
       delete :clear_cache

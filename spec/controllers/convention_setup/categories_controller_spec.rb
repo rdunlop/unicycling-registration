@@ -127,6 +127,17 @@ describe ConventionSetup::CategoriesController do
     end
   end
 
+  describe "PUT update_row_order" do
+    let!(:category_1) { FactoryGirl.create(:category) }
+    let!(:category_2) { FactoryGirl.create(:category) }
+
+    it "updates the order" do
+      put :update_row_order, id: category_1.to_param, row_order_position: 1
+      expect(category_2.reload.position).to eq(1)
+      expect(category_1.reload.position).to eq(2)
+    end
+  end
+
   describe "DELETE destroy" do
     it "destroys the requested category" do
       category = Category.create! valid_attributes

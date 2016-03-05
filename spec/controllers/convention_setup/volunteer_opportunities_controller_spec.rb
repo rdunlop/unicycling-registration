@@ -78,6 +78,17 @@ describe ConventionSetup::VolunteerOpportunitiesController do
     end
   end
 
+  describe "PUT update_row_order" do
+    let!(:volunteer_opportunity_1) { FactoryGirl.create(:volunteer_opportunity) }
+    let!(:volunteer_opportunity_2) { FactoryGirl.create(:volunteer_opportunity) }
+
+    it "updates the order" do
+      put :update_row_order, id: volunteer_opportunity_1.to_param, row_order_position: 1
+      expect(volunteer_opportunity_2.reload.position).to eq(1)
+      expect(volunteer_opportunity_1.reload.position).to eq(2)
+    end
+  end
+
   describe "DELETE destroy" do
     it "removes volunteer opportunity" do
       volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
