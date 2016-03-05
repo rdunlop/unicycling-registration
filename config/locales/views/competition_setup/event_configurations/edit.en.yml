@@ -1,0 +1,11 @@
+en:
+  competition_setup:
+    event_configurations:
+      edit:
+        header: Global Competition Settings
+        description: |
+          These settings affect all events within the competition.
+        artistic_scoring_mode: Artistic Scoring Mode
+        artistic_mode_description: |
+          This chooses whether to eliminate 1 high, 1 low judge during scoring
+          (Small Event), 1 high, 1 low elimination PER JUDGE TYPE during scoring (Large Event).

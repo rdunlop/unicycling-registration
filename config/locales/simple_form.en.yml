@@ -113,6 +113,7 @@ en:
         iuf: Enabling this allows IUF membership questions.
         display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.
         test_mode: Enabling this allows any user to become a Super User, and also to "pretend to complete" a payment.
+        max_award_place: This sets the maximum place to print awards for. (applies to both age group and expert)
       event:
         accepts_music_uploads: Check this box if each competitor may choose music for their competition
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
