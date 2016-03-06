@@ -1,9 +1,13 @@
+%h1 Data Recording Form - Entry Form (External Results)
+%h2 Competition: #{@competition}
+
+= link_to "Review and Approve", review_competition_preliminary_external_results_path(@competition), class: "action_button"
+
 = render :partial => "results"
 %br
 %h1 New Entered Points Result
 = render 'form'
 
+%hr
 = render "/competitors/add_last_minute_competitor_form", competition: @competition
 
-%hr
-= link_to "Review and Approve results", review_competition_preliminary_external_results_path(@competition), class: "button"

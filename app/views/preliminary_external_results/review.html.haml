@@ -26,6 +26,7 @@
 %hr
 - imported_competitors = @external_results.map(&:competitor)
 - @competitors_without_results = @competition.competitors - imported_competitors
+-# Note this is duplicated in results/shared/competitors_without_results...95%
 %table.sortable
   %caption Competitors without Results
   %thead
@@ -41,4 +42,10 @@
         %td= competitor.status
 %hr
 
-= link_to "Approve these results", approve_competition_preliminary_external_results_path(@competition), method: :post, data: { confirm: "Are you sure?" }, class: "button"
+%p.competition_instructions
+  Please check that all results match with the expected competitors, and that anyone who should have a result, has a result.
+
+  %br
+  Once the ID and Times have been verified, Accept the results in order to make them part of the official record.
+
+= link_to "Approve these results", approve_competition_preliminary_external_results_path(@competition), method: :post, data: { confirm: t("are_you_sure") }, class: "button"
