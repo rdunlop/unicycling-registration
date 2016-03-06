@@ -231,11 +231,27 @@ describe ExpenseItem do
       before(:each) do
         reg = @rei.registrant
         reg.deleted = true
-        reg.save
+        reg.save!
       end
 
       it "should not count the expense_item as num_unpaid" do
         expect(@item.num_unpaid).to eq(0)
+      end
+    end
+
+    describe "when the registrant is not completed filling out their registration form" do
+      before(:each) do
+        reg = @rei.registrant
+        reg.status = "events"
+        reg.save!
+      end
+
+      it "should not count the expense_item as num_unpaid" do
+        expect(@item.num_unpaid).to eq(0)
+      end
+
+      it "should count the expense_item as num_unpaid when option is selected" do
+        expect(@item.num_unpaid(include_incomplete_registrants: true)).to eq(1)
       end
     end
   end

@@ -100,13 +100,17 @@ class ExpenseItem < ActiveRecord::Base
 
   # Items which are unpaid.
   # Note: Free items which are associated with Paid Registrants are considered Paid/Free.
-  def unpaid_items
-    reis = registrant_expense_items.joins(:registrant).where(registrants: {deleted: false})
+  def unpaid_items(include_incomplete_registrants: false)
+    reis = if include_incomplete_registrants
+             registrant_expense_items.joins(:registrant).merge(Registrant.active_or_incomplete)
+           else
+             registrant_expense_items.joins(:registrant).merge(Registrant.active)
+           end
     reis.free.select{ |rei| !rei.registrant.reg_paid? } + reis.where(free: false)
   end
 
-  def num_unpaid
-    unpaid_items.count # free.select{|rei| !rei.registrant.reg_paid? }.count + unpaid_items.where(free: false).count
+  def num_unpaid(include_incomplete_registrants: false)
+    unpaid_items(include_incomplete_registrants: include_incomplete_registrants).count
   end
 
   # If this expense_item is part of a "Required" expense group
@@ -155,8 +159,10 @@ class ExpenseItem < ActiveRecord::Base
     (cost_cents + tax_cents) if cost_cents && tax_cents
   end
 
+  # How many of this item have been selected by registrants in total
+  # Includes
   def num_selected_items
-    num_unpaid + num_paid
+    num_unpaid(include_incomplete_registrants: true) + num_paid
   end
 
   def can_i_add?(num_to_add)
