@@ -1,4 +1,10 @@
-%h1 Import CSV Data
+%h1 Import Data from CSV File
+%h2 Competition: #{@competition}
+%h3= start_finish_description(@is_start_time)
+
+-# NOTE: this whole page should be split so that it can be done for Start Times and Finish Times separately (without having to choose the checkbox)
+%p
+  This will import a file, which can then be approved before adding it to the official results.
 
 %h2 CSV Import Instructions
 
@@ -11,17 +17,18 @@ Please import a Comma-Separated-File (Windows CSV Format) file with the followin
   %li Column 4: Thousands
   %li Column 5: "DQ" or empty
 
+%b Include NO Header row
+
 = form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
+  = hidden_field_tag :is_start_times, @is_start_time
   .row
-    .small-4.columns
+    .small-12.medium-6.columns
       = label_tag :file, "Source File"
       = file_field_tag :file
-    .small-4.columns
-      = label_tag :start_times, "Start Times?"
-      = check_box_tag :start_times
-    .small-4.columns
-      = submit_tag "Load CSV to Temp Table", class: "button"
+    .small-12.medium-6.columns
+      = submit_tag "Import CSV", class: "button"
 
 = render :partial => "imported_time_results"
+%br
 
-= link_to "Review Results", review_user_competition_import_results_path(@user, @competition), class: "button"
+= link_to "Review Results", review_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), class: "button"

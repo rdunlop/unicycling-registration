@@ -30,6 +30,8 @@
 #
 
 class ImportResultsController < ApplicationController
+  include IsStartTimeAction
+
   before_action :authenticate_user!
   before_action :load_user, except: [:edit, :update, :destroy]
   before_action :load_competition, except: [:edit, :update, :destroy]
@@ -38,7 +40,8 @@ class ImportResultsController < ApplicationController
   before_action :load_new_import_result, only: [:create]
   before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :index]
   before_action :load_results_for_competition, only: [:review, :approve]
-  before_action :filter_import_results_by_start_times, only: [:data_entry, :review, :approve]
+  before_action :filter_import_results_by_start_times, only: [:data_entry, :display_csv, :review, :approve]
+  before_action :set_is_start_time, only: [:display_csv, :import_csv]
 
   before_action :authorize_competition_data, except: [:approve]
 
@@ -56,6 +59,7 @@ class ImportResultsController < ApplicationController
 
   # GET /users/#/competitions/#/import_results/review
   def review
+    add_breadcrumb "Add Data-Entry data", data_entry_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time)
     add_breadcrumb "Review"
     @import_results = @import_results.entered_order
     respond_to do |format|
@@ -145,12 +149,12 @@ class ImportResultsController < ApplicationController
   def import_csv
     importer = RaceDataImporter.new(@competition, @user)
 
-    if importer.process_csv(params[:file], params[:start_times])
+    if importer.process_csv(params[:file], @is_start_time)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
     end
-    redirect_to display_csv_user_competition_import_results_path(@user, @competition)
+    redirect_to display_csv_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time)
   end
 
   # DELETE /users/#/competitions/#/import_results/destroy_all

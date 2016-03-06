@@ -15,9 +15,7 @@
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");
   $(".chosen-select").trigger("change");
-  $(".js--autoFocus").each(function() {
-    $(this).select2("open");
-  });
+  $("#two_attempt_entry_bib_number").select2("open");
 
   $('#notice').empty();
 <% end %>

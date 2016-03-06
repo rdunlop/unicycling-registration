@@ -1,17 +1,14 @@
-%h1 Data Entry for #{@competition}
-
+%h1 Data Recording Form - Entry Form (One Attempt per line)
 - if @competition.locked?
   .locked_banner LOCKED
 
-= link_to "Review", review_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), class: 'action_button'
-
-%h2= "Competition: #{@competition}"
+%h2 Competition: #{@competition}
 %h3= start_finish_description(@is_start_time)
 
-%h1 Listing Imported Results
+= link_to "Review and Approve", review_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), class: 'action_button'
 
 = form_tag(destroy_all_user_competition_import_results_path(@user, @competition), {:method => :delete, :multipart=>true}) do
-  = submit_tag "Delete all in Temp Table", :class => "data_import_delete", data: {:confirm => "DELETE, Are you sure?" }
+  = submit_tag "Delete all in Temp Table", :class => "button alert tiny", data: {:confirm => "DELETE, Are you sure?" }
 
 %hr
 

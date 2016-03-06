@@ -1,4 +1,4 @@
-%h1 Two Attempt Entries
+%h1 Data Recording Form - Entry Form (Two Attempts per line)
 
 .non_printable
   = link_to "(pdf)", proof_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time, format: :pdf)
@@ -6,6 +6,7 @@
 %h2 Competition: #{@competition}
 %h3= start_finish_description(@is_start_time)
 
+-# Current Data
 %table.two_attempt_entries
   %thead
     %tr
@@ -33,6 +34,21 @@
           %td.competitor_exists Yes
         - else
           %td.competitor_not_exists No
+
+%hr
+- imported_bib_numbers = @two_attempt_entries.map(&:bib_number)
+= render "results/shared/competitors_without_results", competition: @competition, bib_numbers_with_results: imported_bib_numbers
+
 - if policy(@competition).create_preliminary_result?
-  %ul
-    %li= link_to "Accept these Results", approve_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
+  .non_printable
+    %hr
+    %p
+      Review the above entries, and have another person review that the entered numbers match those on the paper recording forms.
+      %br
+      Once the ID and Times have been verified, Accept the results in order to make them part of the official record.
+
+    = link_to "Accept these Results", approve_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => t("are_you_sure") }, class: "button success"
+
+    %p
+      %b= t("note")
+      Once accepted, the results will no longer be visible here.

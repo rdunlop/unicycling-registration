@@ -1,11 +1,20 @@
-%h1
-  Listing #{@competition}'s Entered Results
+%h1 Data Recording Form - Entry Form (One Attempt per line)
+
+%h2 Competition: #{@competition}
 %h3= start_finish_description(@is_start_time)
 
-%p.competition_instructions
-  Please check that all results match with the expected competitors, and that anyone who should have a result, has a result.
 = render partial: "import_results/proof_single", locals: { display_username: true }
+
 - if policy(@competition).create_preliminary_result?
-  %h3 Menu of actions
-  %ul
-    %li= link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
+  %hr
+  %p.competition_instructions
+    Please check that all results match with the expected competitors, and that anyone who should have a result, has a result.
+
+    %br
+    Once the ID and Times have been verified, Accept the results in order to make them part of the official record.
+
+  = link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => t("are_you_sure") }, class: "button success"
+
+  %p
+    %b= t("note")
+    Once accepted, the results will no longer be visible here.

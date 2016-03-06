@@ -1,14 +1,14 @@
-%h1 Two Attempt Entries
+%h1 Data Recording Form - Entry Form (Two Attempts per line)
 - if @competition.locked?
   .locked_banner LOCKED
-
-= link_to "Proof", proof_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), class: "button"
-
 
 %h2 Competition: #{@competition}
 %h3= start_finish_description(@is_start_time)
 
+= link_to "Review and Approve", proof_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time), class: "action_button"
+
 %p#notice
+
 = simple_form_for(@two_attempt_entry.new_record? ? [@user, @competition, @two_attempt_entry] : [@two_attempt_entry], {:remote => true, :html => {:class => "data_entry"}}) do |f|
   = render partial: "/shared/error_messages", object: @two_attempt_entry
   = f.hidden_field :is_start_time

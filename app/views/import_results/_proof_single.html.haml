@@ -32,18 +32,4 @@
 
 %hr
 - imported_bib_numbers = @import_results.map(&:bib_number)
-- @competitors_without_results = @competition.competitors.select{|competitor| !imported_bib_numbers.include?(competitor.lowest_member_bib_number) }
-%table.sortable
-  %caption Competitors without Results
-  %thead
-    %tr
-      %th ID
-      %th Name
-      %th Status
-  %tbody
-    - @competitors_without_results.each do |competitor|
-      %tr
-        %td= competitor.bib_number
-        %td= competitor
-        %td= competitor.status
-%hr
+= render "results/shared/competitors_without_results", competition: @competition, bib_numbers_with_results: imported_bib_numbers

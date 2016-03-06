@@ -1,3 +1,12 @@
+Currently working on:
+- Import Results into the Preliminary-Results tables
+Next:
+- Export results from the Final results table
+- Create graphics/explanation of the flow.
+- Export CSV file without contents for filling in, to match the recording sheets.
+- Drop the 'TimeResult#preliminary' column, once confirming it's unused
+==================================================
+
 Unknown priority
 ----------------
 Items which may be high priority, but need input/feedback

@@ -24,6 +24,8 @@
 #
 
 class TwoAttemptEntriesController < ApplicationController
+  include IsStartTimeAction
+
   before_action :authenticate_user!
   before_action :load_user, only: [:index, :create, :proof, :approve]
   before_action :load_competition, only: [:index, :proof, :create, :approve]
@@ -56,7 +58,7 @@ class TwoAttemptEntriesController < ApplicationController
   def update
     respond_to do |format|
       if @two_attempt_entry.update_attributes(two_attempt_entry_params)
-        format.html { redirect_to user_competition_two_attempt_entries_path(@two_attempt_entry.user, @two_attempt_entry.competition, is_start_times: @two_attempt_entry.is_start_time), notice: 'Two attemp entry was successfully updated.' }
+        format.html { redirect_to user_competition_two_attempt_entries_path(@two_attempt_entry.user, @two_attempt_entry.competition, is_start_times: @two_attempt_entry.is_start_time), notice: 'Entry was successfully updated.' }
         format.json { head :no_content }
         format.js { }
       else
@@ -163,9 +165,5 @@ class TwoAttemptEntriesController < ApplicationController
 
   def load_two_attempt_entries
     @two_attempt_entries = TwoAttemptEntry.where(competition: @competition, is_start_time: @is_start_time).order(:id)
-  end
-
-  def set_is_start_time
-    @is_start_time = params[:is_start_times] && params[:is_start_times] == "true"
   end
 end
