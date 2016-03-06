@@ -55,7 +55,7 @@ class RaceDataImporter
     ImportResult.transaction do
       raw_data.each do |raw|
         data = upload.convert_array_to_string(raw)
-        if TimeResult.build_and_save_imported_result(raw, data, @user, @competition, is_start_time)
+        if ImportResult.build_and_save_imported_result(raw, data, @user, @competition, is_start_time)
           self.num_rows_processed += 1
         end
       end

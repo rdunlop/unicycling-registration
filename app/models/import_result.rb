@@ -55,6 +55,22 @@ class ImportResult < ActiveRecord::Base
     status == "DQ"
   end
 
+  # Public: Create an ImportResult object.
+  # Throws an exception if not valid
+  def self.build_and_save_imported_result(raw, raw_data, user, competition, is_start_time)
+    dq = (raw[4] == "DQ")
+    ImportResult.create!(
+      bib_number: raw[0],
+      minutes: raw[1],
+      seconds: raw[2],
+      thousands: raw[3],
+      status: dq ? "DQ" : "active",
+      raw_data: raw_data,
+      user: user,
+      competition: competition,
+      is_start_time: is_start_time)
+  end
+
   # import the result in the results table, raise an exception on failure
   def import!
     raise "Unable to find registrant" if matching_registrant.nil?
