@@ -86,7 +86,7 @@ class PreliminaryExternalResultsController < ApplicationController
   def import_csv
     importer = ExternalResultImporter.new(@competition, current_user)
 
-    if importer.process_csv(params[:file])
+    if importer.process(params[:file])
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

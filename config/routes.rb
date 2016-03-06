@@ -440,6 +440,8 @@ Workspace::Application.routes.draw do
           collection do
             get :proof
             post :approve
+            get :display_csv
+            post :import_csv
           end
         end
 

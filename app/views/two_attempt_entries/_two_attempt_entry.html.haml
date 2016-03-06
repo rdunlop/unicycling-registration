@@ -17,5 +17,5 @@
   %td= two_attempt_entry.thousands_2
   %td= two_attempt_entry.status_2
   %td
-  %th= link_to "Edit", edit_two_attempt_entry_path(two_attempt_entry)
-  %td= link_to "Delete", two_attempt_entry_path(two_attempt_entry), data: {confirm: "Are you sure?"}, method: :delete
+  %td= link_to t("edit"), edit_two_attempt_entry_path(two_attempt_entry)
+  %td= link_to t("delete"), two_attempt_entry_path(two_attempt_entry), data: {confirm: t("are_you_sure") }, method: :delete

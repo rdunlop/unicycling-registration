@@ -27,11 +27,11 @@ class TwoAttemptEntriesController < ApplicationController
   include IsStartTimeAction
 
   before_action :authenticate_user!
-  before_action :load_user, only: [:index, :create, :proof, :approve]
-  before_action :load_competition, only: [:index, :proof, :create, :approve]
+  before_action :load_user, only: [:index, :create, :proof, :approve, :display_csv, :import_csv]
+  before_action :load_competition, only: [:index, :proof, :create, :approve, :display_csv, :import_csv]
   before_action :load_new_two_attempt_entry, only: [:create]
-  before_action :set_is_start_time, only: [:index, :proof, :approve]
-  before_action :load_two_attempt_entries, only: [:index, :proof, :approve]
+  before_action :set_is_start_time, only: [:index, :proof, :approve, :display_csv, :import_csv]
+  before_action :load_two_attempt_entries, only: [:index, :proof, :approve, :display_csv]
 
   before_action :load_two_attempt_entry, only: [:edit, :update, :destroy]
   before_action :authorize_data_entry, except: [:index]
@@ -92,6 +92,24 @@ class TwoAttemptEntriesController < ApplicationController
         format.js { }
       end
     end
+  end
+
+  # GET /users/#/competitions/#/two_attempt_entries/display_csv?is_start_times=true
+  def display_csv
+    add_breadcrumb "Import CSV"
+  end
+
+  # POST /users/#/competitions/#/two_attempt_entries/import_csv?is_start_times=true
+  def import_csv
+    importer = TwoAttemptEntryCsvImporter.new(@competition, current_user)
+
+    if importer.process(params[:file], @is_start_time)
+      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    else
+      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+    end
+
+    redirect_to display_csv_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)
   end
 
   def proof

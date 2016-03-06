@@ -8,7 +8,7 @@ class ExternalResultImporter
     @user = user
   end
 
-  def process_csv(file)
+  def process(file)
     upload = Upload.new
     # FOR EXCEL DATA:
     raw_data = upload.extract_csv(file)

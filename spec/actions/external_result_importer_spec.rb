@@ -21,7 +21,7 @@ describe ExternalResultImporter do
     create_competitor(competition, 104)
 
     expect do
-      expect(importer.process_csv(sample_input)).to be_truthy
+      expect(importer.process(sample_input)).to be_truthy
     end.to change(ExternalResult, :count).by(4)
     expect(importer.num_rows_processed).to eq(4)
   end
