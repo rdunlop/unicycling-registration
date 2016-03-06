@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RaceDataImporter do
+describe ImportResultCsvImporter do
   def create_competitor(competition, bib_number, heat, lane)
     competitor = FactoryGirl.create(:event_competitor, competition: competition)
     reg = competitor.members.first.registrant
@@ -12,7 +12,7 @@ describe RaceDataImporter do
 
   let(:admin_user) { FactoryGirl.create(:super_admin_user) }
   let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
-  let(:importer) { RaceDataImporter.new(competition, admin_user) }
+  let(:importer) { described_class.new(competition, admin_user) }
 
   let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
@@ -24,7 +24,7 @@ describe RaceDataImporter do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect do
-        importer.process_csv(sample_input, false)
+        importer.process(sample_input, false)
       end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
@@ -42,7 +42,7 @@ describe RaceDataImporter do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect do
-        importer.process_csv(sample_input, true)
+        importer.process(sample_input, true)
       end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
@@ -58,27 +58,11 @@ describe RaceDataImporter do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect do
-        importer.process_csv(sample_input, true)
+        importer.process(sample_input, true)
       end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
       expect(ImportResult.first.disqualified?).to eq(true)
     end
-  end
-
-  it "can process lif files" do
-    create_competitor(competition, 101, 10, 1)
-    create_competitor(competition, 102, 10, 2)
-    create_competitor(competition, 103, 10, 3)
-    create_competitor(competition, 104, 10, 4)
-    create_competitor(competition, 105, 10, 5)
-    create_competitor(competition, 106, 10, 6)
-    create_competitor(competition, 107, 10, 7)
-    create_competitor(competition, 108, 10, 8)
-
-    importer = RaceDataImporter.new(competition, admin_user)
-    expect do
-      expect(importer.process_lif(sample_input, 10)).to be_truthy
-    end.to change(HeatLaneResult, :count).by(8)
   end
 end
