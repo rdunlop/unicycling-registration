@@ -1,4 +1,4 @@
-%h1 Import CSV Data
+%h1 Import Data from CSV File
 
 %h2 CSV Import Instructions
 
@@ -10,15 +10,19 @@
       %li Column 2: Points
       %li Column 3: Details (to be printed on awards)
 
+.row
+  .small-12.columns
+    %b Include NO header row
+
 = form_tag(import_csv_competition_preliminary_external_results_path(@competition), {:method => :post, :multipart=>true}) do
   .row
     .small-6.columns
       = file_field_tag "file"
     .small-6.columns
-      = submit_tag "Load CSV to Preliminary Results table", class: "button small"
+      = submit_tag "Import CSV", class: "button small"
 
 = render "results"
 
 %hr
 
-= link_to "Review", review_competition_preliminary_external_results_path(@competition), class: "button"
+= link_to "Review Results", review_competition_preliminary_external_results_path(@competition), class: "button"
