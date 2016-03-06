@@ -26,7 +26,6 @@
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE), not null
 #  spectators                            :boolean          default(FALSE), not null
-#  organization_membership_config        :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
@@ -81,7 +80,7 @@ class EventConfiguration < ActiveRecord::Base
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
   validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
 
-  validates :organization_membership_config, :standard_skill, inclusion: { in: [true, false] }
+  validates :standard_skill, inclusion: { in: [true, false] }
   validates :standard_skill_closed_date, presence: true, unless: "standard_skill.nil? or standard_skill == false"
 
   validates :usa, :iuf, inclusion: { in: [true, false] }
@@ -96,9 +95,11 @@ class EventConfiguration < ActiveRecord::Base
     ["usa", "french_federation"]
   end
 
-  validates :organization_membership_type, inclusion: { in: organization_membership_types }, if: :organization_membership_config?
-  validates :organization_membership_type, presence: true, if: :organization_membership_config?
-  validates :organization_membership_type, absence: true, unless: :organization_membership_config?
+  validates :organization_membership_type, inclusion: { in: organization_membership_types }, allow_blank: true
+
+  def organization_membership_config?
+    organization_membership_type.present?
+  end
 
   def self.paypal_modes
     ["disabled", "test", "enabled"]
@@ -294,7 +295,7 @@ class EventConfiguration < ActiveRecord::Base
 
   # Public: Is the USA-style membership system enabled?
   def organization_membership_usa?
-    organization_membership_config? && organization_membership_type == "usa"
+    organization_membership_type == "usa"
   end
 
   private

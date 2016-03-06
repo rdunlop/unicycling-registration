@@ -93,8 +93,6 @@ de:
           erlaubt ist
         noncompetitor_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
           die Vorteile einer Anmeldung als Begleiter
-        organization_membership_config: Dies fragt von jedem Teilnehmer die Mitgliedschaft
-          im gewählten EInrad Verband ab.
         paypal_test: Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal
           bekomen zu haben
         spectator_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
@@ -146,7 +144,6 @@ de:
       event_configuration:
         artistic_score_elimination_mode_naucc: Kleine Gruppe
         comp_noncomp_url: Teilnehmer/Begleiter Erklärung
-        organization_membership_config: Zeige die Verbands Mitglieder Seiten an
         paypal_account: Paypal Händler Account E-Mail
         rulebook_url: URL zum Rulebook im PDF Format
         standard_skill: Aktiviere das Standard Skill Submissions System

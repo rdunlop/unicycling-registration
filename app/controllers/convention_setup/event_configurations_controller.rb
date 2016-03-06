@@ -158,7 +158,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   end
 
   def organization_membership_params
-    params.require(:event_configuration).permit(:organization_membership_config, :organization_membership_type)
+    params.require(:event_configuration).permit(:organization_membership_type)
   end
 
   def payment_settings_params

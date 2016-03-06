@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211130256) do
+ActiveRecord::Schema.define(version: 20160306195336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -380,7 +380,6 @@ ActiveRecord::Schema.define(version: 20160211130256) do
     t.integer  "max_award_place",                                   default: 5
     t.boolean  "display_confirmed_events",                          default: false,      null: false
     t.boolean  "spectators",                                        default: false,      null: false
-    t.boolean  "organization_membership_config",                    default: false,      null: false
     t.string   "paypal_account",                        limit: 255
     t.string   "waiver",                                limit: 255, default: "none"
     t.integer  "validations_applied"

@@ -26,7 +26,6 @@
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE), not null
 #  spectators                            :boolean          default(FALSE), not null
-#  organization_membership_config        :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
@@ -76,16 +75,9 @@ describe EventConfiguration do
     expect(@ev).to be_invalid
   end
 
-  context "when organization_membership_config is enabled" do
-    before { @ev.organization_membership_config = true }
-    it { expect(@ev).to validate_presence_of(:organization_membership_type) }
-    it { expect(@ev).to validate_inclusion_of(:organization_membership_type).in_array(EventConfiguration.organization_membership_types) }
-  end
-
-  context "when organization_membership_config is disabled" do
-    before { @ev.organization_membership_config = false }
-    it { expect(@ev).to validate_absence_of(:organization_membership_type) }
-  end
+  it { expect(@ev).to validate_inclusion_of(:organization_membership_type).in_array(EventConfiguration.organization_membership_types) }
+  it { should allow_value(nil).for(:organization_membership_type) }
+  it { should allow_value("").for(:organization_membership_type) }
 
   context "when in EUR format" do
     before :each do

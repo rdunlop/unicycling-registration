@@ -1,0 +1,8 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      organization_membership:
+        display_membership_pages: Zeige die Verbands Mitglieder Seiten an
+        requests_membership_number: Dies fragt von jedem Teilnehmer die Mitgliedschaft
+          im gewählten EInrad Verband ab.

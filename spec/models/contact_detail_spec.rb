@@ -94,7 +94,6 @@ describe ContactDetail do
 
     context "when organization_membership_config mode is enabled" do
       before do
-        EventConfiguration.singleton.update_attribute(:organization_membership_config, true)
         EventConfiguration.singleton.update_attribute(:organization_membership_type, "usa")
       end
 
@@ -105,9 +104,8 @@ describe ContactDetail do
     end
     context "when organization_membership_config mode is not enabled" do
       before do
-        EventConfiguration.singleton.update_attribute(:organization_membership_config, false)
+        EventConfiguration.singleton.update_attribute(:organization_membership_type, nil)
       end
-
       it "does not call the update worker" do
         expect(contact_detail).not_to receive(:update_usa_membership_status)
         contact_detail.save

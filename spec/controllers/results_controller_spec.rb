@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: results
+#
+#  id             :integer          not null, primary key
+#  competitor_id  :integer
+#  result_type    :string(255)
+#  result_subtype :integer
+#  place          :integer
+#  status         :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+# Indexes
+#
+#  index_results_on_competitor_id_and_result_type  (competitor_id,result_type) UNIQUE
+#
+
 require 'spec_helper'
 
 describe ResultsController do

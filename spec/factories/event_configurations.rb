@@ -26,7 +26,6 @@
 #  max_award_place                       :integer          default(5)
 #  display_confirmed_events              :boolean          default(FALSE), not null
 #  spectators                            :boolean          default(FALSE), not null
-#  organization_membership_config        :boolean          default(FALSE), not null
 #  paypal_account                        :string(255)
 #  waiver                                :string(255)      default("none")
 #  validations_applied                   :integer
@@ -75,7 +74,6 @@ FactoryGirl.define do
 
     trait :with_usa do
       usa true
-      organization_membership_config true
       organization_membership_type "usa"
     end
   end

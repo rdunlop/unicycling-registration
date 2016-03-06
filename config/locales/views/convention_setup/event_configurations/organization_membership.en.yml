@@ -1,0 +1,16 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      organization_membership:
+        header: Organization Membership Settings
+        should_be_members: Should registrants be members of a Unicycling Organization?
+        display_membership_pages: Display Organization Membership Pages
+        requests_membership_number: This presents the Unicycling-Organization-Membership to be requested of each registrant.
+        which_organization: Which Unicycling Organization?
+        usa_behavior_description: |
+          Specifying "USA" will cause the system to confirm that each registrant
+          is a USA registrant by checking with the USA database.
+        french_behavior_description: |
+          Specifying "French Federation" will prompt the user for their
+          "French Federation" membership number.
