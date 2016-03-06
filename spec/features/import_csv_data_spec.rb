@@ -12,6 +12,6 @@ describe 'With an Externally Ranked Competition' do
 
   it "can import csv data" do
     visit display_csv_user_competition_import_results_path(User.first, @competition)
-    expect(page).to have_content 'Import CSV Data'
+    expect(page).to have_content 'CSV Import'
   end
 end
