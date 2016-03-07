@@ -14,6 +14,7 @@ es:
         short_name: Nombre corto
         spectator_benefits: Ventajas para los espectadores
         start_date: Primer día de la competición
+    models: 
   helpers:
     submit:
       event_configuration:

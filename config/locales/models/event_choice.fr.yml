@@ -5,4 +5,7 @@ fr:
       event_choice:
         optional_if_event_choice_id: Optionnel si event_choice est choisi
         required_if_event_choice_id: Requis si event_choice est choisi
-    models: 
+    models:
+      event_choice:
+        one: Choix d'événement
+        other: Choix d'événements

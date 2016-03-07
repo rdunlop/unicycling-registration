@@ -6,3 +6,4 @@ fr:
         description: Description
         song_file_name: Nom du fichier
         updated_at: Dernière mise à jour
+        uploaded_by_guest: Invité ?

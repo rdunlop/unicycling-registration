@@ -8,6 +8,7 @@ de:
         city: Stadt
         club: Haupt Team oder Vereins Name
         club_contact: Haupt Team oder Vereins Kontakt
+        country: Land
         country_representing: Repräsentiertes Land
         country_residence: Heimatland
         email: E-Mail
@@ -23,6 +24,7 @@ de:
         phone: Telefonnummer
         responsible_adult_name: Name
         responsible_adult_phone: Haupt Rufnummer
+        state: Bundesland
         zip: Postleitzahl
     models:
       contact_detail:

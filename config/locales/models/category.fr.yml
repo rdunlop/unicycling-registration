@@ -9,4 +9,7 @@ fr:
         max_num_uses: Nombre max d'utilisateurs
         name: Nom
         price: Prix
-    models: 
+    models:
+      category:
+        one: Catégorie
+        other: Catégories

@@ -8,6 +8,7 @@ fr:
         city: Ville
         club: Nom de l’équipe principale ou de l’association
         club_contact: Nom du contact de l’équipe principale ou de l’association
+        country: Pays
         country_representing: Pays représenté
         country_residence: Pays de résidence
         email: Courriel
@@ -22,6 +23,7 @@ fr:
         phone: Numéro de téléphone
         responsible_adult_name: Nom
         responsible_adult_phone: Numéro de téléphone principal
+        state: Etat
         zip: Code postal
     models:
       contact_detail:

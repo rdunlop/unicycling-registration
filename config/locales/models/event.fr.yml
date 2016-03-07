@@ -3,5 +3,12 @@ fr:
   activerecord:
     attributes:
       event:
+        accepts_wheel_size_override: Accepte le changement de taille de roue
+        artistic: Artistique
+        best_time_format: Format du mailleur temps
         id: ID
-    models: 
+        visible: Visible
+    models:
+      event:
+        one: "Événement"
+        other: "Événements"

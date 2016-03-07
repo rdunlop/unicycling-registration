@@ -23,6 +23,10 @@ de:
   'no': Nein
   noncompetitor: Begleiter
   note: Anmerkung
+  organization_membership_types:
+    french_federation: French Federation
+    usa: USA
+  pdf: "(pdf)"
   prices_increase_at_date: Der Preis steigt in %{end_date}
   prices_increase_soon: Der Preis steigt in weniger als einem Tag
   show: Anzeigen

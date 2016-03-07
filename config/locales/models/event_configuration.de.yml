@@ -32,6 +32,7 @@ de:
         start_date: Erster Tag der Veranstaltung
         style_name: Webseiten Stil
         under_construction: wird gerade überarbeitet
+    models: 
   helpers:
     submit:
       event_configuration:

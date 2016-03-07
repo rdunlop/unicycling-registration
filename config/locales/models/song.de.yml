@@ -6,3 +6,4 @@ de:
         description: Beschreibung
         song_file_name: Datei Name
         updated_at: Zuletzt Aktualisiert
+        uploaded_by_guest: Gast?

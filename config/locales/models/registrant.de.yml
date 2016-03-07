@@ -4,6 +4,8 @@ de:
     attributes:
       registrant:
         bib_number: ID
+        first_name: Vorname
+        last_name: Nachname
         online_waiver_acceptance: Ich bestätige die Teilnahmebedingungen gelesen und
           verstanden zu haben und akzeptiere sie.
         online_waiver_signature: Unterschrift

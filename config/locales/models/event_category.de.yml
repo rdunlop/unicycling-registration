@@ -3,7 +3,10 @@ de:
   activerecord:
     attributes:
       event_category:
+        age_range_end: Altersbereich Ende
+        age_range_start: Altersbereich Start
         name: Name
+        warning_on_registration_summary: Warnung bei der Anmelde Zusammenfasung
     models:
       event_category:
         one: Ereignis Kategorie

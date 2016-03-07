@@ -6,4 +6,10 @@ fr:
         code: Code
         description: Description
         inform_emails: E-mails où signaler l'utilisation d'un code promo
-    models: 
+        max_num_uses: Nombre d'utilisations maximales
+        name: Nom
+        price: Prix
+    models:
+      coupon_code:
+        one: Code promo
+        other: Codes promo
