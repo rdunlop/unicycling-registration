@@ -1,0 +1,11 @@
+---
+de:
+  admin:
+    permissions:
+      display_acl:
+        current_access_key: Der heutige Zugangscode ist
+        description: "Dies erlaubt auch diesem Computer Benutzer Konten\r\nanzulegen
+          ohne eine Email Bestätigung auszulösen."
+        header: Setze spezielle Rechte für den Computer
+        instructions_html: "Um einen Computer zu authorisieren, <u>gehe an diesem
+          Computer</u>\r\nauf %{url} und gebe den Zugangs Code ein"

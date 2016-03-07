@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    attributes:
+      age_group_type:
+        name: Name
+    models: 

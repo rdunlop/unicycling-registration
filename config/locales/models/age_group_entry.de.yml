@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    attributes:
+      age_group_entry:
+        gender: Geschlecht
+    models: 

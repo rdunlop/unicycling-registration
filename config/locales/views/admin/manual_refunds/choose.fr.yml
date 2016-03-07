@@ -1,0 +1,12 @@
+---
+fr:
+  admin:
+    manual_refunds:
+      choose:
+        choose_items: Cocher les éléments à rembourser
+        description: "Cause du remboursement.\r\nExemples : \"Annulé. Pas présent.\",
+          \"Remboursement, organisateur.\""
+        details_note: "(seulement requis pour certains éléments)"
+        header: Créer un remboursement
+        mark_this_item: Marquer cette élément comme remboursé
+        paid_items: "Éléments payés"

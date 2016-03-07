@@ -1,0 +1,13 @@
+---
+de:
+  admin:
+    manual_refunds:
+      choose:
+        choose_items: Hake die Artikel an um sie als zurückgezahlt zu markieren
+        description: "Bitte beschreibe die Rückzahlung.\r\nBeispiele: \"Abgemeldet.
+          Nimmt nicht teil.\", \"Rückzahlung, Organisator.\""
+        details_note: "(nur für manche Artikel erforderlich"
+        header: Rückzahlung anlegen
+        mark_this_item: Diesen Artikel als zurückgezahlt markieren
+        paid_items: Bezahlte Artikel
+        submit: Einen Rückzahlungs Vermerk anlegen

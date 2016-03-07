@@ -1,0 +1,8 @@
+---
+de:
+  admin:
+    translations:
+      index:
+        convention_available_in_languages_html: "Die\r\n<b>%{convention}</b>\r\nVeranstaltung
+          ist verfügbar in\r\n%{languages}"
+        two_sets_of_translations: Es gibt zwei verschiedene Sätze von Übersetzungen

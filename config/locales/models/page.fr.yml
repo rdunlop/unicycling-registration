@@ -1,0 +1,14 @@
+---
+fr:
+  activerecord:
+    attributes:
+      page:
+        body: Contenus
+        parent_page_id: Page parente
+        position: Position
+        slug: Slug (url)
+        title: Titre
+    models:
+      page:
+        one: Page
+        other: Pages

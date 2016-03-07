@@ -1,0 +1,7 @@
+---
+de:
+  admin:
+    reg_fees:
+      index:
+        header: Anmeldegebühr ändern
+        set_reg_fee: Anmeldegebühr setzen

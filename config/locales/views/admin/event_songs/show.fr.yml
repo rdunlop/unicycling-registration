@@ -1,0 +1,9 @@
+---
+fr:
+  admin:
+    event_songs:
+      show:
+        description_html: "Cette page liste toutes les chansons qui\r\n<b>Ne sont
+          pas</b>\r\nattribuées à un compétiteur pour l'instant"
+        download: Télécharger
+        header: "%{event} Chansons"

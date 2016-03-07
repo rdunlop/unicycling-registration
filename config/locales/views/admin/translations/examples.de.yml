@@ -1,0 +1,8 @@
+---
+de:
+  admin:
+    translations:
+      examples:
+        example_should_become: Soll werden
+        leave_some_untranslated: Einige Teile sollten un übersetzt bleiben
+        text_translation_system: Text Übersetzungs System

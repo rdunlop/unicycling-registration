@@ -1,0 +1,10 @@
+---
+fr:
+  admin:
+    event_songs:
+      index:
+        all_songs_together: Toutes les chansons sur une page
+        by_competition: Par Compétition
+        by_event: Par événement
+        header: Toutes les chansons
+        num_songs: "# Chansons uploadées"

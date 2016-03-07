@@ -1,0 +1,25 @@
+---
+fr:
+  admin:
+    permissions:
+      index:
+        add_new_permission: Ajouter une nouvelle permission
+        different_users_different_roles: Le système d'inscription est séparé en différentes
+          sections pour utilisation par différentes personnes
+        directors_permissions_html: Pour donner l'accès "directeur" pour certains
+          événements, utilisez la page %{link}
+        event_planned_example: "Pour voir la liste des inscrits à chaque événement,
+          vous\r\ndevez avoir le rôle \"Event Planner\""
+        header: Gestion des Utilisateurs
+        other_roles_not_permitted_html: "Il peut y avoir d'autres rôles que vous\r\n<u>n'avez
+          pas</u>\r\nl'autorisation de voir."
+        payment_admin_example: "Pour voir / gérer les Paiements reçus (et effectuer
+          des remboursements),\r\ndonnez le rôle \"Payment Admin\""
+        role_allows_access: Chaque rôle permet à l'utilisateur de voir / utiliser
+          différentes parties du système
+        role_descriptions: 'Descriptions des rôles :'
+        roles_listed: "Cette page liste tous les rôles que vous avez la permission
+          de voir.\r\nVous pouvez assigner des rôles aux autres utilisateurs pour
+          leur donner un accès étendu."
+        set_password: Changer le mot de passe utilisateur
+        users_with_permissions: 'Utilisateurs avec permissions :'

@@ -1,0 +1,9 @@
+---
+de:
+  competition_setup:
+    directors:
+      index:
+        add_director: Direktor hinzufügen
+        create_director: Direktor anlegen
+        director: Direktor
+        header: Direktoren bearbeiten

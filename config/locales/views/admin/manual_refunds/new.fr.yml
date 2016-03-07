@@ -1,0 +1,10 @@
+---
+fr:
+  admin:
+    manual_refunds:
+      new:
+        description: "Ceci ne fait pas le remboursement lui-même, cela\r\nchange seulement
+          la comptabilité dans le système d'inscription"
+        header: Nouveau remboursement
+        select_registrants: Sélectionner les inscrits pour remboursement
+        start_process: Prochaine Étape (choisissez les éléments)

@@ -1,0 +1,10 @@
+---
+de:
+  admin:
+    manual_refunds:
+      new:
+        description: "Dieser Vorgang zahlt kein Geld zurück, es ändert\r\nlediglich
+          die Buchhaltung innerhalb des Registrierungs Systems."
+        header: Neue Rückzahlung
+        select_registrants: 'Wähle den Teilnehmer um Zahlungen zurückzuzahlen für:'
+        start_process: Nächster Schritt (wähle Artikel)

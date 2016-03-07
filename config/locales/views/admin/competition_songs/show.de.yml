@@ -1,0 +1,11 @@
+---
+de:
+  admin:
+    competition_songs:
+      show:
+        assign_to_competitor: Zuordnen
+        description: "Diese Seite listet alle Lieder die hochgeladen wurden für\r\n%{event}
+          UND der Teilnehmer als Wettkämpfer gelistet ist."
+        download: Herunterladen
+        download_zip: eine ZIP Datei der Lieder herunterladen
+        header: "%{competition} Lieder"

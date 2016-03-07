@@ -1,0 +1,65 @@
+---
+de:
+  admin:
+    permissions:
+      index:
+        add_new_permission: Neue Berechtigung anlegen
+        different_users_different_roles: Das Anmelde System ist aufgeteilt in viele
+          verschiedene Sektionen um diese von vielen verschiedenen Personen zu nutzen.
+        directors_permissions_html: Um Direktot Zugriff zu spezifischen Disziplinen
+          zu gewähren, verwende bitte diese %{link} Seite
+        event_planned_example: "Um eine Liste der Teilnehmer je Disziplin zu sehen
+          solltest Du\r\ndie Rolle \"Event Planer\" aktivieren"
+        header: Benutzer Verwaltung
+        role_allows_access: Jede Rolle ermöglicht dem Benutzer andere Bereiche des
+          Systems zu sehen/verwenden.
+        role_description:
+          awards_admin: "fähig die Ergenisse zu sehen\r\nfähig Ergebnisse zu veröffentlichen\r\nfähig
+            Wettkämpfe als geehrt zu markieren"
+          competition_admin: "fähig Wettkämpfe anzulegen und deren Konfiguration anzupassen\r\nfähig
+            Age Groups Anzulegen/zu bearbeiten\r\nkann Teilnehmer als ungeeignet markieren\r\nkann
+            Direktoren anlegen und Daten_Eintragungs_Helfer\r\nkann Benutzer Passwörter
+            zurücksetzen\r\nkann alle Disziplin Anmeldungen sehen \r\nkann alle Wettkampf
+            Teilnehmer bearbeiten (solange der Wettkampf offen ist)\r\nkann Wettkämpfe
+            schließen/öffnen"
+          convention_admin: "fähig die Convention EInstellungen im Bezug zu den Registrierungs
+            EInstellungen zu bearbeiten\r\nkann das Aussehen, den Convention Namen
+            und die Domain einstellen\r\nkann die Kosten dfinieren\r\nkann die PayPal
+            Details eintragen\r\nkann die angebotenen Disziplinen definieren\r\nkann
+            die Helfer Optionen definieren\r\nkann Benutzer Passwörter zurücksetzen\r\nkann
+            'authorisierte Computer' zur Verwendung bei der Vor Ort Registrierung
+            anlegen\r\nkann Zahlungs_Administrator, Event_Planer und Musik_DJ Benutzer
+            anlegen"
+          director: "fähig angemeldete zu Wettkämpfer zu machen\r\nkann Judges und
+            Helfer anlegen\r\nkann Benutzer Passwörter zurücksetzen"
+          event_planner: "fähig Disziplin Meldungen zu sehen/überprüfen\r\nfähig alle
+            Teilnehmer zu SUCHEN & MODIFIZIEREN\r\nfähig Disziplin wahlen zu jeder
+            Zeit zu Ändern/Hinzuzufügen\r\nfähig Emails an alle Teilnehmer zu sehen/senden"
+          export_payment_lists: fähig das Export Menü zu verwenden um Excel Listen
+            der Teilnehmer die für die Übernachtung gezahlt haben herunterzuladen
+          late_registrant: "fähig auf das Regisitrierungs System zuzugreifen auch
+            wenn es schon geschlossen ist\r\nfähig neue Teilnehmer anzulegen, bestehende
+            zu aktualisieren und Zahlungen vorzunehmen\r\nDu solltest dies zusammen
+            mit der SetRegFee Funktion verwenden um zu spezifizieren welche Zahlung
+            gefordert wird."
+          membership_admin: "fähig die USA Mitglieder Seiten zu sehen\r\nfähig die
+            USA Mitglieder Nummern zu aktualisieren\r\nfähig anzuzeigen ob ein Benutzer
+            mit den USA Mitglieds Beiträgen aktuell ist"
+          music_dj: fähig alle Musik von der Musik Manager Seite anzusehen/herunterzuladen
+          payment_admin: "fähig Zahlungen zu sehen die empfangen wurden\r\nfähig eine
+            Übersicht aller bezahlter Artikel zu sehen \r\nfähig Anmelde Gebühren
+            pro Benutzer zu definieren\r\nfähig Schecks als empfangen zu markieren"
+          super_admin: "fähig die Rollen anderer zu definieren\r\nfähig Zahlungs Informationen
+            zu zerstören\r\nfähig die Seiten und Disziplin EInstellungen zu konfigurieren"
+          translator: "fähig das Übersetzungs Menü zu nutzen\r\nNeue Übersetzungen
+            eintragen und sie für die Seite freizugeben"
+        role_descriptions: 'Rollen Beschreibungen:'
+        roles_listed: "AUf dieser Seite sind alle ROllen gelistet für die du die Rechte
+          hast\r\nDu kannst anderen Benutzern diese Rollen zuweisen um ihnen mehr
+          Zugriff zu gewähren."
+        set_password: Benutzer Passwort setzen
+        users_with_permissions: 'Benutzer mit Rechten:'
+        you_have_roles: 'Du hast derzeit folgende Rolle(n):'
+        you_may_need_to_grant_yourself_roles: "Möglicherweise musst du dich selber
+          für andere Rollen anmelden um\r\nZugriff auf andere Funktionen des Systems
+          zu bekommen,"

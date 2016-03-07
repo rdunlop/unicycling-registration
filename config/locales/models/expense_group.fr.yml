@@ -1,0 +1,10 @@
+---
+fr:
+  activerecord:
+    attributes:
+      expense_group:
+        group_name: Nom de groupe
+    models:
+      expense_group:
+        one: Groupe de dépense
+        other: Groupes de dépenses

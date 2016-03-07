@@ -1,0 +1,14 @@
+---
+fr:
+  activerecord:
+    attributes:
+      expense_item:
+        cost: Coût
+        name: Nom
+        tax: Taxe
+        total: Total
+        total_cost: Total (calculé)
+    models:
+      expense_item:
+        one: "Élément de dépense"
+        other: "Éléments de dépenses"

@@ -1,0 +1,8 @@
+---
+de:
+  admin:
+    manual_payments:
+      new:
+        description: 'Wähle den Teilnehmer aus um zahlungen anzupassen für:'
+        header: Neue Zahlung
+        start_process: Nexter Schritt (wähle Artikel)

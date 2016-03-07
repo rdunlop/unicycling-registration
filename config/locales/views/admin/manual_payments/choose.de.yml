@@ -1,0 +1,14 @@
+---
+de:
+  admin:
+    manual_payments:
+      choose:
+        choose_items: Haken sie die Elemente an um sie als bezahlt zu markieren
+        chosen_and_unpaid_items: Ausgewählte (aber nicht bezahlte) Artikel
+        description: Eine Email wird dem zugeordneten Benutzer Konto zugestellt wenn
+          die Zahlung vollständig ist
+        details_note: "(nur für manche Artikel erforderlich)"
+        header: Geld erhalten
+        payment_description: 'Bitte beschreibe die Zahlungsmethode. Beispiele: Bar,
+          Scheck #123'
+        submit: Zahlungsmethode anlegen

@@ -1,0 +1,9 @@
+---
+de:
+  admin:
+    event_songs:
+      show:
+        description_html: "Diese Seite listet alle Lieder die\r\n<b>noch nicht</b>\r\neinem
+          Teilnehmer zugeordnet sind"
+        download: Herunterladen
+        header: "%{event} Lieder"

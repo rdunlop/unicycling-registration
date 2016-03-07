@@ -1,0 +1,6 @@
+---
+fr:
+  admin:
+    permissions:
+      display_acl:
+        current_access_key: La Clé d'Accès du jour est

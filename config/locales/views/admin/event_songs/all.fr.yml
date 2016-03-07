@@ -1,0 +1,7 @@
+---
+fr:
+  admin:
+    event_songs:
+      all:
+        download: Télécharger
+        header: Toutes les chansons

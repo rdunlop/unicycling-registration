@@ -1,0 +1,10 @@
+---
+fr:
+  activerecord:
+    attributes:
+      age_group_entry:
+        gender: Sexe
+    models:
+      age_group_entry:
+        one: Groupe d'âge
+        other: Groupe d'âges

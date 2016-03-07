@@ -1,0 +1,10 @@
+---
+de:
+  admin:
+    registrants:
+      manage_all:
+        deleted_question: Gelöscht?
+        header: Teilnehmer bearbeiten
+        summary: Zusammenfassung
+        undelete: Löschen rückgängig machen
+        undelete_confirmation: Das löschen dieses Teilnehmers rückgängig machen?

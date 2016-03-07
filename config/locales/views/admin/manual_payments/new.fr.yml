@@ -1,0 +1,9 @@
+---
+fr:
+  admin:
+    manual_payments:
+      new:
+        description: 'Sélectionner les inscrits dont vous souhaitez ajuster les paiements
+          :'
+        header: Nouveau paiement
+        start_process: Prochaine étape (choisissez des éléments)

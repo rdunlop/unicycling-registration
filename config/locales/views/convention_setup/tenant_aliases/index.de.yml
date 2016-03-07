@@ -1,0 +1,13 @@
+---
+de:
+  convention_setup:
+    tenant_aliases:
+      index:
+        alias_verified: Alias verifiziert
+        delete_current_primary_domain: Enferne die derzeitige primäre Domain
+        header: Domain Setup
+        must_save_warning: Bevor du den ALias aktivieren kannst must du ihn als 'Datensatz
+          speichern'
+        set_as_primary_domain: Setze den Alias als primäre Domain
+        submit: Datensatz speichern
+        url_of_new_domain: Trage die URL der neuen Domain ein

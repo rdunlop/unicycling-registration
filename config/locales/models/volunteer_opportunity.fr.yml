@@ -1,0 +1,10 @@
+---
+fr:
+  activerecord:
+    attributes:
+      volunteer_opportunity:
+        description: Rôle bénévole
+    models:
+      volunteer_opportunity:
+        one: Opportunité de bénévolat
+        other: Opportunités de bénévolat
