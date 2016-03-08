@@ -1,8 +1,8 @@
 %table.js--sortable{ data: { target: update_row_order_competitors_path } }
   %thead
     %tr
-      %th Original Position
-      %th Competitor
+      %th= t(".original_position")
+      %th= Competitor.model_name.human
   %tbody#competitor-list
     - competitor_sort_list.competitors.order(:position).each do |f|
       %tr.item{ data: { item_id: f.id } }

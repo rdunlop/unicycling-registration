@@ -11,7 +11,7 @@
 %table.sortable
   %thead
     %tr
-      %th{:colspan => "2"} Registrant
+      %th{:colspan => "2"}= Registrant.model_name.human
       %th{:colspan => "2"}
       - if @competition.has_age_group_entry_results?
         %th{:colspan => "2"} Age Group

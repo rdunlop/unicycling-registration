@@ -38,8 +38,8 @@
   %table.sortable
     %thead
       %tr
-        %th Group
-        %th Item
+        %th= ExpenseGroup.model_name.human
+        %th= ExpenseItem.model_name.human
         %th Num paid (no discount)
         %th Num paid (with discount or free)
         %th Total Amount Paid
@@ -71,11 +71,11 @@
           %th= print_formatted_currency(Payment.total_received)
 
 - if CouponCode.any?
-  %h2 Coupon Codes
+  %h2= CouponCode.model_name.human(count: 2)
   %table.sortable
     %thead
       %tr
-        %th Coupon
+        %th= CouponCode.human_attribute_name(:name)
         %th Number Applied
     %tbody
       - CouponCode.all.each do |coupon_code|
