@@ -3,4 +3,4 @@ test:
     - cp config/secrets.yml.template config/secrets.yml:
         parallel: true
   post:
-    - bundle exec reoprt_coverage
+    - bundle exec report_coverage
