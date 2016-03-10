@@ -1,11 +1,11 @@
 require 'simplecov'
 
 # run coverage when on CI
-# if ENV['CI']
-SimpleCov.start 'rails' do
-  add_filter '/spec/'
+if ENV['CI']
+  SimpleCov.start 'rails' do
+    add_filter '/spec/'
+  end
 end
-# end
 
 require 'rubygems'
 require 'delorean'

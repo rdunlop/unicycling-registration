@@ -3,4 +3,4 @@ test:
     - cp config/secrets.yml.template config/secrets.yml:
         parallel: true
   post:
-    - bundle exec script/circle.rb
+    - bundle exec reoprt_coverage

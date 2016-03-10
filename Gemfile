@@ -99,8 +99,7 @@ group :naucc, :development, :caching do
 end
 
 group :test do
-  gem 'simplecov', require: false
-  gem "codeclimate-test-reporter"
+  gem 'codeclimate_circle_ci_coverage'
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist'
   gem 'factory_girl_rails'
