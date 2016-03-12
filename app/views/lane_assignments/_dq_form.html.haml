@@ -1,5 +1,5 @@
 %a.js--toggle.button.secondary{ href: "#", data: {toggle_target: ".dq_form"}} Show DQ option
-.dq_form
+.dq_form.is--hidden
   = simple_form_for @heat_lane_judge_note, url: dq_competitor_competition_lane_assignments_path(@competition) do |f|
     = render partial: "/shared/error_messages", object: @heat_lane_judge_note
 

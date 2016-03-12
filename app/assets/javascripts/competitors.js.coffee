@@ -35,7 +35,6 @@ $ ->
 
 
 $ ->
-  $(".js--hiddenToggle").hide()
   $(".js--hiddenToggleMenu").each ->
     $(this).on "click", ->
       $(".js--hiddenToggle").toggle()
@@ -79,7 +78,6 @@ $ ->
 $ ->
   $(".js--hideElementIfEmpty").each ->
     if $(this).children().size() == 0
-      console.log "hiding"
       $("." + $(this).data("hide-target")).hide()
 
 $ ->

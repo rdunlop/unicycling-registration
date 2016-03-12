@@ -28,7 +28,6 @@ $(document).ready ->
   $('input, textarea').placeholder()
 
 $ ->
-  $(".display_new_registrant").hide()
   $(".js--display_new_registrant").click ->
     reg_type = $(this).data("registrantType")
 

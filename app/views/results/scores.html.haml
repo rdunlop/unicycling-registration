@@ -2,7 +2,7 @@
 %h3= @competition.to_s
 
 .js--hiddenToggleMenu= "Show Calculation Details"
-.js--hiddenToggle
+.js--hiddenToggle.is--hidden
   - @combined_competition_entries = @combined_competition.combined_competition_entries
   = render partial: "points_breakdown"
 

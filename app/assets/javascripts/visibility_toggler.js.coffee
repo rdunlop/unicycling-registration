@@ -4,7 +4,6 @@
 $ ->
   $(".js--toggle").each ->
     target = $(this).data("toggle-target")
-    $(target).hide()
 
     $(this).on "click", ->
       $(target).toggle()

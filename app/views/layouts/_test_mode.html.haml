@@ -4,7 +4,7 @@
       Current User Roles: #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
     %div
       = link_to "Change Role", "#", class: "js--toggle", data: { toggle_target: "#set_roles"}
-    %ul#set_roles{ style: "display: none" }
+    %ul#set_roles.is--hidden{ style: "display: none" }
       - User.changable_user_roles.each do |role|
         %li= link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
     %a.close{ href: "#" } &times;

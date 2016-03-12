@@ -16,7 +16,7 @@
   .row
     .small-12.columns
       = form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do
-        .row#advanced_square
+        .row#advanced_square.is--hidden
           .small-6.columns
             = label_tag :separate_registrants, "Separate each registrant with a row of blank labels"
             = check_box_tag :separate_registrants
@@ -38,7 +38,7 @@
             %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_square"} } Advanced Options
   %hr
   %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Options
-#advanced_labels
+#advanced_labels.is--hidden
   %h2 Create Labels For a specific Registrant/Registrant-Group/Competition
   = form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do
     .row

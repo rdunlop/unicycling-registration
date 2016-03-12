@@ -1,7 +1,7 @@
 
 - if CouponCode.any?
   .js--toggle.coupon_offer.focus_button{ href: "#", data: { toggle_target: "#coupon_code_box" } }= t(".have_a_coupon")
-  #coupon_code_box
+  #coupon_code_box.is--hidden
     = form_tag apply_coupon_payment_path(@payment) do |f|
       .row
         .small-6.columns

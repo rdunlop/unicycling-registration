@@ -17,7 +17,7 @@
   = f.input :accepts_wheel_size_override
 
   %a{ href: "#", class: "js--toggle", data: { toggle_target: "#advanced_settings" } }= t(".advanced_settings")
-  #advanced_settings
+  #advanced_settings.is--hidden
 
     = f.input :visible
     = f.input :artistic

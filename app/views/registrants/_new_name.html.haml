@@ -1,4 +1,4 @@
-.display_new_registrant.show_hide_elements
+.display_new_registrant.is--hidden
   = form_for(@registrant, url: registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
     = render partial: "shared/error_messages", object: @registrant
     - if @registrant.errors.any?

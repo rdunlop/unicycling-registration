@@ -6,6 +6,13 @@ set_street_scoring_submitters = ->
     current_row.addClass('score_changed');
     $(this).parents("form").submit()
 
+all_scores = ->
+  $(".street_score").map (index, element) ->
+    if $(element).val() != ""
+      parseFloat($(element).val(), 10)
+    else
+      0
+
 update_all_scores = ->
   arr = all_scores()
   sorted = arr.slice().sort (a,b) ->
@@ -26,9 +33,3 @@ $ ->
   $('.street_score').change ->
     update_all_scores()
 
-all_scores = ->
-  $(".street_score").map (index, element) ->
-    if $(element).val() != ""
-      parseFloat($(element).val(), 10)
-    else
-      0
