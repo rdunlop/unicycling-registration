@@ -10,13 +10,6 @@ describe "registrants/build/expenses" do
     allow(view).to receive(:wizard_path).and_return(wizard_path)
   end
 
-  it "renders add_items form" do
-    render
-
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", action: single_registrant_expenses_url, method: "put"
-  end
-
   describe "with existing expense_items" do
     before(:each) do
       @item = FactoryGirl.create(:registrant_expense_item, registrant: @registrant)

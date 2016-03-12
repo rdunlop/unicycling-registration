@@ -385,13 +385,6 @@ Workspace::Application.routes.draw do
     end
     resources :standard_skill_entries, only: [:index]
 
-    # for AJAX use:
-    resources :registrant_expenses, only: [] do
-      collection do
-        post 'single'
-      end
-    end
-
     resources :organization_memberships, only: [:index] do
       member do
         put :toggle_confirm

@@ -7,7 +7,9 @@
       = t(".registration")
     = split_stylesheet_link_tag @config.style_name, media: "all"
 
+    -# Modernizr is necessary for Foundation 5
     = javascript_include_tag "vendor/modernizr"
+
     = javascript_include_tag "application"
 
     = csrf_meta_tags
