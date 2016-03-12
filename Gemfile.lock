@@ -42,14 +42,6 @@ GIT
       safe_yaml (>= 0.8.6)
 
 GIT
-  remote: git://github.com/sandelius/font-kit-rails.git
-  revision: 480c979b84aa4d32652772822dee2366c37eed2e
-  ref: 480c979b84aa4d32652772822dee2366c37eed2e
-  specs:
-    font-kit-rails (1.1.0)
-      rails
-
-GIT
   remote: git://github.com/seuros/capistrano-sidekiq.git
   revision: b5155675554e35f4ec3311b072bafad2b7b5b563
   specs:
@@ -694,7 +686,6 @@ DEPENDENCIES
   faker
   fancybox2-rails (~> 0.2.8)
   fog
-  font-kit-rails!
   foreman
   foundation-rails
   gaffe

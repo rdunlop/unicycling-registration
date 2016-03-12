@@ -25,7 +25,6 @@ gem 'select2-rails'
 gem 'breadcrumbs_on_rails'
 gem 'awesome_nested_fields'
 gem 'fancybox2-rails', '~> 0.2.8'
-gem 'font-kit-rails', git: "git://github.com/sandelius/font-kit-rails.git", ref: "480c979b84aa4d32652772822dee2366c37eed2e" # to get a change which includes font-url
 gem 'tinymce-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jquery-datetimepicker-rails'
