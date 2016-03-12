@@ -14,6 +14,14 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.foundation
+//= require jquery-ui/sortable
+//= require jquery-ui/tabs
+//= require jquery-ui/tooltip
+//= require jquery-ui/effect-blind
+//= require jquery-ui/effect-drop
+//= require jquery-ui/effect-fade
+//= require jquery-ui/effect-highlight
+//= require jquery-ui/effect-slide
 //= require foundation
 //= require select2
 //= require select2_locale_fr
@@ -85,18 +93,19 @@ $(document).ready(function(e) {
 // Sorting the list
 
 var get_sortable_string = function() {
-  additional = ""
+  additional = "";
   if ($('.drag_drop_sortable').data('additional')) {
-    additional = $("#" + $('.drag_drop_sortable').data('additional')).serialize()
-    if (additional != "") {
-      additional = "&" + additional
+    additional = $("#" + $('.drag_drop_sortable').data('additional')).serialize();
+    if (additional !== "") {
+      additional = "&" + additional;
     }
   }
 
-  return $('.drag_drop_sortable').sortable('serialize') + additional
-}
+  return $('.drag_drop_sortable').sortable('serialize') + additional;
+};
 
 var set_sortable = function() {
+  // jQuery UI Sortable
   $('.drag_drop_sortable').sortable({
     axis: 'y',
     dropOnEmpty: false,
@@ -113,10 +122,10 @@ var set_sortable = function() {
         complete: function(request){
           $('.drag_drop_sortable').effect('highlight');
         },
-        url: $('.drag_drop_sortable').data('target')})
+        url: $('.drag_drop_sortable').data('target')});
     }
   }).disableSelection();
-}
+};
 $(document).ready(function(){
   set_sortable();
 });

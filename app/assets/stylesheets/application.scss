@@ -18,7 +18,9 @@
  *= require foundation_and_overrides
 
  *= require fancybox
- *= require jquery-ui-1.9.2.custom
+ *= require jquery-ui/sortable
+ *= require jquery-ui/tabs
+ *= require jquery-ui/tooltip
  *= require select2
  *= require font-kit-rails
  *= require jquery.datetimepicker

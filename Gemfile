@@ -33,6 +33,8 @@ gem "jc-validates_timeliness"
 gem 'foundation-rails'
 gem "haml-rails", "~> 0.9"
 gem "autoprefixer-rails"
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', '~> 3.3.0'
 
 # system utils
@@ -134,8 +136,6 @@ gem 'coffee-rails'
 gem 'therubyracer'
 
 gem 'uglifier', '>= 1.0.3'
-
-gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

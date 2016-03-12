@@ -11,6 +11,7 @@ $ ->
     desired_width = table_width / cells + 'px'
     sortable_table.find('td').css('width', desired_width)
 
+    # jQuery Sortable
     sortable_table.sortable(
       axis: 'y'
       items: '.item'

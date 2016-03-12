@@ -37,6 +37,7 @@ $ ->
     el.addClass("show_#{reg_type}_elements")
     el.data("displaying", "show_#{reg_type}_elements")
 
+    # jQuery UI blind Effect animation
     $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
     $("#registrant_registrant_type").val(reg_type)
     top_pos = el.offset().top
