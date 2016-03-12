@@ -33,6 +33,7 @@ gem "jc-validates_timeliness"
 gem 'foundation-rails'
 gem "haml-rails", "~> 0.9"
 gem "autoprefixer-rails"
+gem 'jquery-datatables-rails', '~> 3.3.0'
 
 # system utils
 gem 'rake'
