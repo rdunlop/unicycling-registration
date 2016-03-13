@@ -3,4 +3,12 @@ de:
   admin:
     translations:
       convention_translations:
+        access_denied_html: Du <b>hast keinen</b> Zugriff diese Seite zu übersetzen
+        access_enabled: Du hast Zugriff um Übersetzungen zu machen
+        example_1: Artikel Name (z,B, T-Shirt in small)
+        example_2: Disziplinen Name (z.B. Flatland)
+        example_3: Disziplin Auswahlen (z.B. jr. Expert)
+        examples_of_convention_translations: Beispiele von Disziplin spezifischen
+          Übersetzungen
+        header: Disziplin spezifische Übersetzungen
         user_management: Benutzer Verwaltung

@@ -6,9 +6,9 @@ es:
         address:
           address: Dirección
           copy_from_other_registrant: Copiar dirección de %{other_name}
-          country_representing_description: Si usted representa un país diferente al de
-            su lugar de residencia, ingreselo aquí
-          email_tooltip: Proporcione su dirección de correo electrónico para recibir actualizaciones
-            de la registración, itinerario y nuevos eventos.
+          country_representing_description: Si usted representa un país diferente
+            al de su lugar de residencia, ingreselo aquí
+          email_tooltip: Proporcione su dirección de correo electrónico para recibir
+            actualizaciones de la registración, itinerario y nuevos eventos.
           state: Estado
           state_province: Estado/Provincia

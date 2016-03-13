@@ -3,4 +3,10 @@ de:
   admin:
     translations:
       all_site_translations:
+        performance_impact_warning: "Bitte klicke \"Apply Changes\" und \"Clear Translation
+          Cache\" nur wenn du\r\nfertig bist da es sich stark auf die Performance
+          auswirkt."
         text_translation_system: Text Übersetzungs System
+        when_done_translating: "Wenn du mit der Übersetzung fertig bist solltest du
+          den \"Apply Changes\"\r\nKnopf im \"Text Translation System\" drücken um
+          die Änderungen für die Seite zu übernehmen"

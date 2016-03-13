@@ -6,9 +6,9 @@ fr:
         address:
           address: Adresse
           copy_from_other_registrant: Copier l'adresse de  %{other_name}
-          country_representing_description: Si vous représentez un pays différent de celui
-            où vous résidez, entrez-le ici
-          email_tooltip: Inscrivez votre adresse e-mail pour recevoir des mises à jour
-            sur les inscriptions, le calendrier et les nouveaux événements.
+          country_representing_description: Si vous représentez un pays différent
+            de celui où vous résidez, entrez-le ici
+          email_tooltip: Inscrivez votre adresse e-mail pour recevoir des mises à
+            jour sur les inscriptions, le calendrier et les nouveaux événements.
           state: "État"
           state_province: "État/Province"

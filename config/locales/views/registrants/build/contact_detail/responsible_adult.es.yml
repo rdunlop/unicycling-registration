@@ -6,5 +6,5 @@ es:
         responsible_adult:
           responsible_adult: Adulto responsable
           responsible_adult_detail: "(para solicitantes menores de 18 años)"
-          responsible_adult_tooltip: El "Adulto Responsable" será responsable del menor
-            registrado.
+          responsible_adult_tooltip: El "Adulto Responsable" será responsable del
+            menor registrado.
