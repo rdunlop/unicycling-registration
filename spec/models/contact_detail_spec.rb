@@ -108,6 +108,27 @@ describe ContactDetail do
     end
   end
 
+  context "without a country_residence or country_representing" do
+    before { contact_detail.country_residence = nil }
+
+    it "returns the country of N/A" do
+      expect(subject.country).to eq("N/A")
+    end
+
+    it "returns nil for state" do
+      subject.state_code = nil
+      expect(subject.state).to be_nil
+    end
+  end
+
+  context "without a state_code" do
+    before { contact_detail.state_code = nil }
+
+    it "returns a state of nil" do
+      expect(subject.state).to be_nil
+    end
+  end
+
   context "when the address fields are not required" do
     before do
       EventConfiguration.singleton.update_attribute(:request_address, false)
