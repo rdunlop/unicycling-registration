@@ -66,7 +66,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.currency_codes
-    ["USD", "CAD", "EUR"]
+    ["USD", "CAD", "EUR", "DKK"]
   end
 
   VOLUNTEER_OPTIONS = [
@@ -133,6 +133,8 @@ class EventConfiguration < ActiveRecord::Base
       "%u%n CAD"
     when "EUR"
       "%n%u"
+    when "DKK"
+      "%n %u"
     end
   end
 
@@ -144,6 +146,8 @@ class EventConfiguration < ActiveRecord::Base
       "$"
     when "EUR"
       "€"
+    when "DKK"
+    "Kr."
     end
   end
 
