@@ -39,15 +39,25 @@
 
 class ContactDetail < ActiveRecord::Base
   belongs_to :registrant, inverse_of: :contact_detail, touch: true
-  validates :address, :city, :country_residence, :zip, presence: true
-  validates :state_code, presence: true, unless: "EventConfiguration.singleton.usa == false"
 
-  # contact-info block
-  validates :emergency_name, :emergency_relationship, :emergency_primary_phone, presence: true
-  validates :responsible_adult_name, :responsible_adult_phone, presence: true, if: :minor?
-  validates :email, presence: true
+  # address block
+  with_options if: "EventConfiguration.singleton.request_address?" do
+    validates :address, :city, :country_residence, :zip, presence: true
+    validates :state_code, presence: true, unless: "EventConfiguration.singleton.usa == false"
+  end
   validates :birthplace, presence: true, if: "EventConfiguration.singleton.italian_requirements?"
   validates :italian_fiscal_code, format: { with: /\A[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]\Z/, message: "must be specified if you are from Italy" }, if: :vat_required?
+
+  # contact-info block
+  with_options if: "EventConfiguration.singleton.request_emergency_contact?" do
+    validates :emergency_name, :emergency_relationship, :emergency_primary_phone, presence: true
+  end
+
+  with_options if: ["EventConfiguration.singleton.request_responsible_adult?", :minor?] do
+    validates :responsible_adult_name, :responsible_adult_phone, presence: true
+  end
+
+  validates :email, presence: true
 
   after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
 

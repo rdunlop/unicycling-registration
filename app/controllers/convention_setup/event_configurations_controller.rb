@@ -135,6 +135,8 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   def rules_waiver_params
     params.require(:event_configuration).permit(:waiver, :waiver_url, :custom_waiver_text,
                                                 :accept_rules, :rules_file_name,
+                                                :request_address, :request_emergency_contact,
+                                                :request_responsible_adult,
                                                 :rulebook_url)
   end
 

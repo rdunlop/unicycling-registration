@@ -31,6 +31,9 @@ en:
         music_submission_end_date: Last day to accept Music Uploads
         event_sign_up_closed_date: Last day to sign up for Events
         custom_waiver_text: Custom Waiver Text
+        request_address: Request Address
+        request_emergency_contact: Request Emergency Contact
+        request_responsible_adult: Request Responsible Adult
     models:
       event_configurations:
         one: Event Configuration

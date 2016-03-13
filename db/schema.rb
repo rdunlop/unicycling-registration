@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313185318) do
+ActiveRecord::Schema.define(version: 20160313190359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -394,6 +394,9 @@ ActiveRecord::Schema.define(version: 20160313185318) do
     t.string   "volunteer_option",                                  default: "generic",  null: false
     t.date     "age_calculation_base_date"
     t.string   "organization_membership_type"
+    t.boolean  "request_address",                                   default: true,       null: false
+    t.boolean  "request_emergency_contact",                         default: true,       null: false
+    t.boolean  "request_responsible_adult",                         default: true,       null: false
   end
 
   create_table "event_translations", force: :cascade do |t|

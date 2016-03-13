@@ -2,6 +2,7 @@
   %fieldset.row
     %legend= t(".contact_information")
     %fieldset.small-12.medium-6.columns
+
       %legend= t(".address")
       - if other_registrant
         .row
@@ -16,18 +17,13 @@
               href: "#" }
               = t(".copy_from_other_registrant", other_name: other_registrant.name)
       .row
-        .small-5.columns
-          = f.label :address, :class => "required"
-        .small-7.columns
-          = f.text_field :address
+        .small-5.columns= f.label :address, :class => "required"
+        .small-7.columns= f.text_field :address
       .row
-        .small-5.columns
-          = f.label :city, :class => "required"
-        .small-7.columns
-          = f.text_field :city
+        .small-5.columns= f.label :city, :class => "required"
+        .small-7.columns= f.text_field :city
       .row
-        .small-5.columns
-          = f.label :country_residence, :class => "required"
+        .small-5.columns= f.label :country_residence, :class => "required"
         .small-7.columns
           - if @config.usa?
             = f.country_select :country_residence, {priority_countries: %w(US CA), prompt: ' '}, class: "chosen-select"
@@ -42,33 +38,24 @@
         .small-7.columns
           = render partial: '/registrants/subregion_select', locals: {parent_region: f.object.country_residence, f: f, from_object: true}
       .row
-        .small-5.columns
-          = f.label :country_representing, :title => t(".country_representing_description")
+        .small-5.columns= f.label :country_representing, :title => t(".country_representing_description")
         .small-7.columns
           - if @config.usa?
             = f.country_select(:country_representing, {priority_countries: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
           - else
             = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
       .row
-        .small-5.columns
-          = f.label :zip, :class => "required"
-        .small-7.columns
-          = f.text_field :zip
+        .small-5.columns= f.label :zip, :class => "required"
+        .small-7.columns= f.text_field :zip
       .row
-        .small-5.columns
-          = f.label :phone
-        .small-7.columns
-          = f.telephone_field :phone
+        .small-5.columns= f.label :phone
+        .small-7.columns= f.telephone_field :phone
       .row
-        .small-5.columns
-          = f.label :mobile
-        .small-7.columns
-          = f.telephone_field :mobile
+        .small-5.columns= f.label :mobile
+        .small-7.columns= f.telephone_field :mobile
       .row
-        .small-5.columns
-          = f.label :email
-        .small-7.columns
-          = f.email_field :email, :class => "ui-tooltip", title: t(".email_tooltip")
+        .small-5.columns= f.label :email
+        .small-7.columns= f.email_field :email, :class => "ui-tooltip", title: t(".email_tooltip")
       - if EventConfiguration.singleton.italian_requirements?
         .row
           .small-5.columns= f.label :birthplace
@@ -76,6 +63,8 @@
         .row
           .small-5.columns= f.label :italian_fiscal_code
           .small-7.columns= f.text_field :italian_fiscal_code
+
+
     .small-12.medium-6.columns
       %fieldset
         %legend= t(".team_affiliation")
@@ -96,6 +85,7 @@
                 convention_name: @config.short_name)
           - if @config.organization_membership_usa?
             = render "/registrants/usa_membership_status", contact_detail: f.object
+
       %fieldset
         %legend= t(".emergency_contact")
         .row
@@ -116,9 +106,9 @@
         .row
           .small-6.columns= f.label :emergency_other_phone
           .small-6.columns= f.telephone_field :emergency_other_phone
-        .row
-          .small-12.columns
-            %b= t(".responsible_adult")
+
+      %fieldset
+        %legend= t(".responsible_adult")
         .row
           .small-12.columns
             %span.extra_info= t(".responsible_adult_detail")

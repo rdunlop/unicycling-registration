@@ -46,18 +46,14 @@ describe ContactDetail do
     @cd = FactoryGirl.build_stubbed(:contact_detail, registrant: @reg)
     allow(@reg).to receive(:age).and_return(20)
   end
+  subject(:contact_detail) { @cd }
 
   it "has a valid from FactoryGirl" do
     expect(@cd.valid?).to eq(true)
   end
 
-  it "requires address" do
-    @cd.address = nil
-    expect(@cd.valid?).to eq(false)
-  end
-
   context "when italian_requirements is enabled" do
-    before :each do
+    before do
       EventConfiguration.singleton.update_attribute(:italian_requirements, true)
     end
 
@@ -112,55 +108,74 @@ describe ContactDetail do
     end
   end
 
-  it "requires city" do
-    @cd.city = nil
-    expect(@cd.valid?).to eq(false)
+  context "when the address fields are not required" do
+    before do
+      EventConfiguration.singleton.update_attribute(:request_address, false)
+    end
+
+    it { is_expected.to_not validate_presence_of(:address) }
+    it { is_expected.to_not validate_presence_of(:city) }
+    it { is_expected.to_not validate_presence_of(:state_code) }
+    it { is_expected.to_not validate_presence_of(:zip) }
+    it { is_expected.to_not validate_presence_of(:country_residence) }
   end
 
-  it "requires state" do
-    @cd.state_code = nil
-    expect(@cd.valid?).to eq(false)
+  context "when address fields are required" do
+    # This is the default for EventConfiguration
+
+    it { is_expected.to validate_presence_of(:address) }
+    it { is_expected.to validate_presence_of(:city) }
+    it { is_expected.to validate_presence_of(:state_code) }
+    it { is_expected.to validate_presence_of(:zip) }
+    it { is_expected.to validate_presence_of(:country_residence) }
+
+    it "returns the country of residence as the country" do
+      @cd.country_residence = "CA"
+      expect(@cd.country_code).to eq("CA")
+    end
+
+    it "returns the country_representing, when specified" do
+      @cd.country_residence = "US"
+      @cd.country_representing = "CA"
+      expect(@cd.country_code).to eq("CA")
+    end
+
+    it "returns the country of residence even when country representing is blank" do
+      @cd.country_residence = "CA"
+      @cd.country_representing = ""
+      expect(@cd.country_code).to eq("CA")
+    end
   end
 
-  it "requires zip" do
-    @cd.zip = nil
-    expect(@cd.valid?).to eq(false)
+  context "when emergency fields are not required" do
+    before do
+      EventConfiguration.singleton.update_attribute(:request_emergency_contact, false)
+    end
+
+    it { is_expected.not_to validate_presence_of(:emergency_name) }
+    it { is_expected.not_to validate_presence_of(:emergency_relationship) }
+    it { is_expected.not_to validate_presence_of(:emergency_primary_phone) }
   end
 
-  it "requires country_residence" do
-    @cd.country_residence = nil
-    expect(@cd.valid?).to eq(false)
-  end
+  it { is_expected.to validate_presence_of(:emergency_name) }
+  it { is_expected.to validate_presence_of(:emergency_relationship) }
+  it { is_expected.to validate_presence_of(:emergency_primary_phone) }
 
-  it "returns the country of residence as the country" do
-    @cd.country_residence = "CA"
-    expect(@cd.country_code).to eq("CA")
-  end
+  context "for a minor" do
+    before { allow(@reg).to receive(:age).and_return(12) }
 
-  it "returns the country_representing, when specified" do
-    @cd.country_residence = "US"
-    @cd.country_representing = "CA"
-    expect(@cd.country_code).to eq("CA")
-  end
+    context "when responsible_adult is not required" do
+      before do
+        EventConfiguration.singleton.update_attribute(:request_responsible_adult, false)
+      end
 
-  it "returns the country of residence even when country representing is blank" do
-    @cd.country_residence = "CA"
-    @cd.country_representing = ""
-    expect(@cd.country_code).to eq("CA")
-  end
+      it { is_expected.not_to validate_presence_of(:responsible_adult_name) }
+      it { is_expected.not_to validate_presence_of(:responsible_adult_phone) }
+    end
 
-  it "requires emergency_contact name" do
-    @cd.emergency_name = nil
-    expect(@cd.valid?).to eq(false)
-  end
-
-  it "requires emergency_contact relationship" do
-    @cd.emergency_relationship = nil
-    expect(@cd.valid?).to eq(false)
-  end
-
-  it "requires emergency_contact primary_phone" do
-    @cd.emergency_primary_phone = nil
-    expect(@cd.valid?).to eq(false)
+    context "when responsible_adult fields are required" do
+      it { is_expected.to validate_presence_of(:responsible_adult_name) }
+      it { is_expected.to validate_presence_of(:responsible_adult_phone) }
+    end
   end
 end

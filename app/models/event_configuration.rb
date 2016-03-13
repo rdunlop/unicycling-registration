@@ -41,6 +41,9 @@
 #  volunteer_option                      :string           default("generic"), not null
 #  age_calculation_base_date             :date
 #  organization_membership_type          :string
+#  request_address                       :boolean          default(TRUE), not null
+#  request_emergency_contact             :boolean          default(TRUE), not null
+#  request_responsible_adult             :boolean          default(TRUE), not null
 #
 
 class EventConfiguration < ActiveRecord::Base
