@@ -150,7 +150,7 @@ class EventConfiguration < ActiveRecord::Base
     when "EUR"
       "€"
     when "DKK"
-    "Kr."
+      "Kr."
     end
   end
 
