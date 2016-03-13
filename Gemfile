@@ -91,6 +91,7 @@ gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'capistrano3-unicorn'
 gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+gem "capistrano-deploytags", require: false
 
 group :naucc, :development, :caching do
   gem 'quiet_assets'

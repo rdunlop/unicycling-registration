@@ -55,3 +55,5 @@ set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
 set :whenever_environment,  ->{ fetch :rails_env }
 set :whenever_identifier,   ->{ fetch :application }
 set :whenever_roles,        ->{ [:db, :app] }
+
+set :deploytag_time_format, "%Y%m%d%H%M%S"
