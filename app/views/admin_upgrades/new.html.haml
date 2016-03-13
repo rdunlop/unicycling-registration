@@ -1,7 +1,11 @@
 %h1 Upgrade my account to a convention administrator account
 
+%p
+  In order to upgrade the access of your account, you must enter the access code
+  provided to you by the IUF member who created your Convention server.
+
 = form_tag admin_upgrades_path do
-  .row
+  .row.creation_code_field
     .small-6.columns
       = label_tag :access_code, "Admin Upgrade Access code"
     .small-6.columns
