@@ -1,0 +1,14 @@
+---
+de:
+  registrants:
+    build:
+      contact_detail:
+        address:
+          address: Adresse
+          copy_from_other_registrant: Kopiere die Adresse von %{other_name}
+          country_representing_description: Wenn du ein anderes Land als dein Heimatland
+            repräsentierst, trag es hier ein
+          email_tooltip: Gib deine E-Mail Adresse an um Aktualisierungen zur Anmeldung,
+            dem Zeitplan und neuen Wettbewerben zu erhalten.
+          state: Bundesstaat
+          state_province: Bundesland/Region

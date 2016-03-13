@@ -1,0 +1,62 @@
+-# locals: f, other_registrant
+%fieldset
+  %legend= t(".address")
+  - if other_registrant
+    .row
+      .small-12.columns
+        %a#copy_address{ data: { address: other_registrant.contact_detail.address,
+          city: other_registrant.contact_detail.city,
+          country_representing: other_registrant.contact_detail.country_representing,
+          country_residence: other_registrant.contact_detail.country_residence,
+          phone: other_registrant.contact_detail.phone,
+          state: other_registrant.contact_detail.state_code,
+          zip: other_registrant.contact_detail.zip },
+          href: "#" }
+          = t(".copy_from_other_registrant", other_name: other_registrant.name)
+  .row
+    .small-5.columns= f.label :address, :class => "required"
+    .small-7.columns= f.text_field :address
+  .row
+    .small-5.columns= f.label :city, :class => "required"
+    .small-7.columns= f.text_field :city
+  .row
+    .small-5.columns= f.label :country_residence, :class => "required"
+    .small-7.columns
+      - if @config.usa?
+        = f.country_select :country_residence, {priority_countries: %w(US CA), prompt: ' '}, class: "chosen-select"
+      - else
+        = f.country_select :country_residence, {prompt: ' '}, class: "chosen-select"
+  .row
+    .small-5.columns
+      - if @config.usa?
+        = f.label :state_code, t(".state"), :class => "required"
+      - else
+        = f.label :state_code, t(".state_province")
+    .small-7.columns
+      = render partial: '/registrants/subregion_select', locals: {parent_region: f.object.country_residence, f: f, from_object: true}
+  .row
+    .small-5.columns= f.label :country_representing, :title => t(".country_representing_description")
+    .small-7.columns
+      - if @config.usa?
+        = f.country_select(:country_representing, {priority_countries: %w(US CA), prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
+      - else
+        = f.country_select(:country_representing, {prompt: ' '}, {:title => t(".country_representing_description"), class: "chosen-select" })
+  .row
+    .small-5.columns= f.label :zip, :class => "required"
+    .small-7.columns= f.text_field :zip
+  .row
+    .small-5.columns= f.label :phone
+    .small-7.columns= f.telephone_field :phone
+  .row
+    .small-5.columns= f.label :mobile
+    .small-7.columns= f.telephone_field :mobile
+  .row
+    .small-5.columns= f.label :email
+    .small-7.columns= f.email_field :email, :class => "ui-tooltip", title: t(".email_tooltip")
+  - if EventConfiguration.singleton.italian_requirements?
+    .row
+      .small-5.columns= f.label :birthplace
+      .small-7.columns= f.text_field :birthplace
+    .row
+      .small-5.columns= f.label :italian_fiscal_code
+      .small-7.columns= f.text_field :italian_fiscal_code

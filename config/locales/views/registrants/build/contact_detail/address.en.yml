@@ -1,0 +1,14 @@
+---
+en:
+  registrants:
+    build:
+      contact_detail:
+        address:
+          address: Address
+          copy_from_other_registrant: Copy Address from %{other_name}
+          country_representing_description: If you are representing a different country
+            than where you reside, enter it here
+          email_tooltip: Provide your email address to receive updates to registration,
+            schedule, and new events.
+          state: State
+          state_province: State/Province

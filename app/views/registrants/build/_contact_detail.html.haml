@@ -1,0 +1,14 @@
+-# locals: reg_f, other_registrant
+= reg_f.simple_fields_for :contact_detail do |f|
+  %fieldset.row
+    %legend= t(".contact_information")
+
+    .row
+      .small-12.large-6.columns
+        = render "/registrants/build/contact_detail/address", f: f, other_registrant: other_registrant
+      .small-12.large-6.columns
+        = render "/registrants/build/contact_detail/team_affiliation", f: f
+      .small-12.large-6.columns
+        = render "/registrants/build/contact_detail/emergency_contact", f: f
+      .small-12.large-6.columns
+        = render "/registrants/build/contact_detail/responsible_adult", f: f

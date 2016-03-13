@@ -1,0 +1,9 @@
+---
+en:
+  registrants:
+    build:
+      contact_detail:
+        team_affiliation:
+          team_affiliation: Team Affiliation
+          organization_membership_number_tooltip: A %{organization_type} membership is required to participate at
+            %{convention_name}

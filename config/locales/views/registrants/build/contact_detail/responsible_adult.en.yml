@@ -1,0 +1,10 @@
+---
+en:
+  registrants:
+    build:
+      contact_detail:
+        responsible_adult:
+          responsible_adult: Responsible Adult
+          responsible_adult_detail: "(for Registrants Under the age of 18)"
+          responsible_adult_tooltip: The 'Responsible Adult' will be responsible for the
+            registered minor.

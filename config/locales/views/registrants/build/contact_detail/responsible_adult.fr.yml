@@ -1,0 +1,10 @@
+---
+fr:
+  registrants:
+    build:
+      contact_detail:
+        responsible_adult:
+          responsible_adult: Adulte responsable
+          responsible_adult_detail: "(pour les participants de moins de 18 ans)"
+          responsible_adult_tooltip: "'Responsible Adult' sera responsable pour le mineur
+            inscrit."

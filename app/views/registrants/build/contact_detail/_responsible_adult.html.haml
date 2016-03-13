@@ -1,0 +1,12 @@
+-# locals: f
+%fieldset
+  %legend= t(".responsible_adult")
+  .row
+    .small-12.columns
+      %span.extra_info= t(".responsible_adult_detail")
+  .row
+    .small-6.columns= f.label :responsible_adult_name
+    .small-6.columns= f.text_field :responsible_adult_name, :class => "ui-tooltip", title: t(".responsible_adult_tooltip")
+  .row
+    .small-6.columns= f.label :responsible_adult_phone
+    .small-6.columns= f.telephone_field :responsible_adult_phone

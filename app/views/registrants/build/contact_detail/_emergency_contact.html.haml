@@ -1,0 +1,21 @@
+-# locals: f
+%fieldset
+  %legend= t(".emergency_contact")
+  .row
+    .small-12.columns
+      %b= t(".in_case_of_emergency")
+  .row
+    .small-6.columns= f.label :emergency_name, :class => "required"
+    .small-6.columns= f.text_field :emergency_name
+  .row
+    .small-6.columns= f.label :emergency_relationship, :class => "required"
+    .small-6.columns= f.text_field :emergency_relationship
+  .row
+    .small-6.columns= f.label :emergency_attending, "#{t(".attending")} #{@config.short_name}?"
+    .small-6.columns= f.input :emergency_attending, label: false
+  .row
+    .small-6.columns= f.label :emergency_primary_phone, :class => "required"
+    .small-6.columns= f.telephone_field :emergency_primary_phone
+  .row
+    .small-6.columns= f.label :emergency_other_phone
+    .small-6.columns= f.telephone_field :emergency_other_phone

@@ -1,0 +1,9 @@
+---
+fr:
+  registrants:
+    build:
+      contact_detail:
+        team_affiliation:
+          organization_membership_number_tooltip: Une adhésion à la %{organization_type}
+            est requis pour participer à %{convention_name}
+          team_affiliation: Appartenance à une équipe

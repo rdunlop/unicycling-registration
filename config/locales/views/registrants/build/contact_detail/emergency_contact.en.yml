@@ -1,0 +1,9 @@
+---
+en:
+  registrants:
+    build:
+      contact_detail:
+        emergency_contact:
+          attending: Attending
+          emergency_contact: Emergency Contact
+          in_case_of_emergency: In case of emergency
