@@ -1,8 +1,17 @@
-%h1 Conventions configured on this server
+%h1 Existing Conventions
 
-%ul.config_fields
-  - Tenant.all.each do |tenant|
-    %li= link_to tenant, tenant.base_url
+%table
+  %thead
+    %tr
+      %th Subdomain
+      %th Description
+      %th Created At
+  %tbody
+    - Tenant.all.each do |tenant|
+      %tr
+        %td= link_to tenant.subdomain, tenant.base_url
+        %td= tenant.description
+        %td= l tenant.created_at
 
 %hr
 

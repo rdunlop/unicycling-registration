@@ -646,6 +646,7 @@ Workspace::Application.routes.draw do
   end
 
   resources :styles, only: :index
+  get "/new", to: redirect("/tenants")
 
   mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 

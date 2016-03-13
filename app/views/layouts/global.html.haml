@@ -17,8 +17,5 @@
   %body
     #container
       #main
-        - unless notice.blank?
-          %p.notice= notice
-        - unless alert.blank?
-          %p.alert= alert
+        = render "shared/flashes"
         = content_for?(:content) ? yield(:content) : yield

@@ -1,19 +1,7 @@
 = simple_form_for(@new_tenant) do |f|
-  = render partial: "shared/error_messages", object: @tenant
+  = render partial: "shared/error_messages", object: @new_tenant
 
-  %p
-    In order to create a convention, you must prove you are allowed to do so by entering the Creation Access code.
-  .row
-    .small-4.columns
-      = label_tag :code, "Creation Access Code"
-    .small-8.columns
-      = password_field_tag :code
-
-  %br
-  %br
   %table
-    %thead
-      %tr
     %tbody
       %tr
         %th= f.label :subdomain
@@ -27,5 +15,11 @@
         %th= f.label :admin_upgrade_code
         %td= f.text_field :admin_upgrade_code
         %td Specify the code you want to use to upgrade your user account to an Convention Admin account.
+      %tr
+        %td.creation_code_field= label_tag :code, "Creation Access Code"
+        %td.creation_code_field= password_field_tag :code
+        %td.creation_code_field
+          In order to create a convention, you must prove you are allowed to do so by entering the Convention Creation Access code.
+  %br
 
   = f.button :submit
