@@ -26,7 +26,6 @@
 #  created_at                                 :datetime
 #  updated_at                                 :datetime
 #  organization_membership_manually_confirmed :boolean          default(FALSE), not null
-#  usa_family_membership_holder_id            :integer
 #  birthplace                                 :string(255)
 #  italian_fiscal_code                        :string(255)
 #  organization_membership_system_confirmed   :boolean          default(FALSE), not null

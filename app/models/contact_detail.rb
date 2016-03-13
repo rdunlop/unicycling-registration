@@ -26,7 +26,6 @@
 #  created_at                                 :datetime
 #  updated_at                                 :datetime
 #  organization_membership_manually_confirmed :boolean          default(FALSE), not null
-#  usa_family_membership_holder_id            :integer
 #  birthplace                                 :string(255)
 #  italian_fiscal_code                        :string(255)
 #  organization_membership_system_confirmed   :boolean          default(FALSE), not null
@@ -40,7 +39,6 @@
 
 class ContactDetail < ActiveRecord::Base
   belongs_to :registrant, inverse_of: :contact_detail, touch: true
-  belongs_to :usa_family_membership_holder, class_name: "Registrant"
   validates :address, :city, :country_residence, :zip, presence: true
   validates :state_code, presence: true, unless: "EventConfiguration.singleton.usa == false"
 

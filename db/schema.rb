@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306195336) do
+ActiveRecord::Schema.define(version: 20160313185318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,7 +244,6 @@ ActiveRecord::Schema.define(version: 20160306195336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "organization_membership_manually_confirmed",             default: false, null: false
-    t.integer  "usa_family_membership_holder_id"
     t.string   "birthplace",                                 limit: 255
     t.string   "italian_fiscal_code",                        limit: 255
     t.boolean  "organization_membership_system_confirmed",               default: false, null: false
