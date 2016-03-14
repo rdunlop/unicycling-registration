@@ -1,6 +1,7 @@
 $ ->
-  $(document).tooltip position:
-    at: "left bottom-10"
+  $("[title]").filter(":not(.select2-selection__rendered)").tooltip
+    position:
+      at: "left bottom-10"
 
 $ ->
   $("#show-option").tooltip show:
