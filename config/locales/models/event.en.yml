@@ -8,6 +8,7 @@ en:
         accepts_wheel_size_override: Accepts Wheel Size Override
         visible: Visible
         artistic: Artistic
+        standard_skill: Standard Skill
     models:
       event:
         one: Event

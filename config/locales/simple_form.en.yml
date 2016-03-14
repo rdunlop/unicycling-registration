@@ -120,6 +120,7 @@ en:
         artistic: "Setting this boolean will automatically restrict changes after the Artistic Closed Date."
         cost: Specify the registration cost for this event (optional).
         best_time_format: Do you want the user to input a "Best Time" for this event. (This can be useful for determining the start order for some competitions)
+        standard_skill: Check this box if competitors should also upload their Standard Skill Routines.
       registrant:
         wheel_size_id: Used to choose Age Groups when applicable.
           (track, Standard-class events)

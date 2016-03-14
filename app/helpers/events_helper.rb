@@ -15,6 +15,7 @@
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
 #  best_time_format            :string           default("none"), not null
+#  standard_skill              :boolean          default(FALSE), not null
 #
 # Indexes
 #

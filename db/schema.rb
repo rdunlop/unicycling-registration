@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313190359) do
+ActiveRecord::Schema.define(version: 20160314005601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,6 +423,7 @@ ActiveRecord::Schema.define(version: 20160313190359) do
     t.integer  "event_categories_count",                  default: 0,      null: false
     t.integer  "event_choices_count",                     default: 0,      null: false
     t.string   "best_time_format",                        default: "none", null: false
+    t.boolean  "standard_skill",                          default: false,  null: false
   end
 
   add_index "events", ["accepts_wheel_size_override"], name: "index_events_on_accepts_wheel_size_override", using: :btree

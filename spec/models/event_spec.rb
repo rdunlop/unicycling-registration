@@ -15,6 +15,7 @@
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
 #  best_time_format            :string           default("none"), not null
+#  standard_skill              :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -63,9 +64,9 @@ describe Event do
     end
   end
 
-  it "describes itself as StandardSkill if named so" do
+  it "describes itself as StandardSkill if configured so" do
     expect(@ev.standard_skill?).to eq(false)
-    @ev.name = "Standard Skill"
+    @ev.standard_skill = true
     @ev.save!
     expect(@ev.standard_skill?).to eq(true)
   end

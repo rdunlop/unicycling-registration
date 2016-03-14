@@ -15,6 +15,7 @@
 #  event_categories_count      :integer          default(0), not null
 #  event_choices_count         :integer          default(0), not null
 #  best_time_format            :string           default("none"), not null
+#  standard_skill              :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -89,11 +90,6 @@ class Event < ActiveRecord::Base
     if event_categories.empty?
       errors[:base] << "Must define an event category"
     end
-  end
-
-  # does this entry represent the Standard Skill event?
-  def standard_skill?
-    name == "Standard Skill"
   end
 
   def to_s
