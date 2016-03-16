@@ -23,12 +23,15 @@
     // # includes 'current_user' because of the 'can? Calls
     - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
       - @registrants.find_each(batch_size: 100) do |registrant|
+
+        -# Uses javascript to show/hide elements on the page so that better caching can be applied.
         - if policy(registrant).add_events?
           %span.js--showElement{ data: { key: "edit_registrant_events#{registrant.id}" } }
         - if policy(registrant).expenses?
           %span.js--showElement{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
         - if policy(registrant).undelete?
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
+
         - cache_i18n [registrant, @config] do
           %tr
             %td= registrant.bib_number
@@ -50,6 +53,6 @@
                 = link_to ExpenseItem.model_name.human(count: 2), registrant_build_path(registrant, :expenses)
             %td.non_printable
               %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
-              - if registrant.deleted? && policy(registrant).undelete?
+              - if registrant.deleted?
                 = link_to t(".undelete"), undelete_registrant_path(registrant), :method => :post, data: { confirm: t(".undelete_confirmation") }
             %td.non_printable= registrant.user
