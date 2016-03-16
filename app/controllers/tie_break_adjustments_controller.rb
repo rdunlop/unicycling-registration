@@ -39,8 +39,8 @@ class TieBreakAdjustmentsController < ApplicationController
 
   # DELETE /tie_break_adjustments/1
   def destroy
-    authorize @judge, :can_judge?
     judge = @tie_break_adjustment.judge
+    authorize judge, :can_judge?
 
     respond_to do |format|
       if @tie_break_adjustment.destroy

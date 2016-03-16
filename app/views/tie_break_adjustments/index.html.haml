@@ -1,4 +1,16 @@
 %h1 #{@judge.competition} - Tie Break Adjustments
+
+.row
+  .small-12.columns
+    %p
+      If competitors end their official attempts with a tie, they should compete
+      in a tie-breaker.
+
+    %p
+      From this page, you can enter the results of that tie breaker so that the
+      correct place is assigned to the individual competitors, even though they
+      both will receive the same official "Distance" result.
+
 - unless @tie_break_adjustments.empty?
   %table.sortable
     %caption All Tie Break Adjustments

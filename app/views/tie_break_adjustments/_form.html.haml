@@ -1,10 +1,12 @@
 %h3 New Tie Break Adjustment
 = render :partial => "/shared/error_messages", :object => @tie_break_adjustment
 = simple_form_for @tie_break_adjustment, :url => judge_tie_break_adjustments_path(@judge) do |f|
-  = f.label :competitor_id
-  = competitor_select_box(f, @judge.competition)
-  %br
-  = f.label :tie_break_place
-  = f.number_field :tie_break_place, autocomplete: 'off', required: true, min: 0
-  %br
-  = f.button :submit, "Enter Tie Break Adjustment", {:class => 'action_button' }
+  .row
+    .small-12.medium-6.columns
+      = f.label :competitor_id
+      = competitor_select_box(f, @judge.competition)
+    .small-12.medium-6.columns
+      = f.label :tie_break_place
+      = f.number_field :tie_break_place, autocomplete: 'off', required: true, min: 0
+  .row
+    = f.button :submit, "Enter Tie Break Adjustment", {:class => 'action_button' }
