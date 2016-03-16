@@ -1,4 +1,3 @@
-# /competitions/:competition_id/heat_review/:heat_id/review
 class HeatReviewController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
@@ -12,7 +11,7 @@ class HeatReviewController < ApplicationController
     @max_heat = LaneAssignment.where(competition: @competition).maximum(:heat) || 0
   end
 
-  # GET /competitions/#/heat_review/:heat_id/
+  # GET /competitions/#/heat_review/:heat/
   def show
     @lane_assignments = LaneAssignment.where(competition: @competition, heat: @heat)
     @heat_lane_results = HeatLaneResult.where(competition: @competition, heat: @heat)
@@ -42,7 +41,7 @@ class HeatReviewController < ApplicationController
     redirect_to competition_heat_review_path(@competition, @heat)
   end
 
-  # POST /competitions/#/heat_review/:heat_id/approve_heat
+  # POST /competitions/#/heat_review/:heat/approve_heat
   def approve_heat
     authorize @competition, :create_preliminary_result?
 
@@ -67,7 +66,7 @@ class HeatReviewController < ApplicationController
     end
   end
 
-  # DELETE /competitions/#/heat_review/:heat_id
+  # DELETE /competitions/#/heat_review/:heat
   def destroy
     heat_lane_results = HeatLaneResult.where(competition_id: @competition, heat: @heat)
     heat_lane_results.destroy_all
