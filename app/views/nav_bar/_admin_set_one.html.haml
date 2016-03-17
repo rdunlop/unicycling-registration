@@ -17,10 +17,10 @@
 - if policy(current_user).registrant_information?
   %li= link_to t('.manage_registrants'), manage_one_registrants_path
   %li
-    = form_tag choose_one_registrants_path, method: :post do
-      .row.collapse
-        .small-4.columns
+    %ul.menu
+      = form_tag choose_one_registrants_path, method: :post do
+        %li
           = text_field_tag :bib_number, nil, placeholder: t('.search_by_id_label')
           = hidden_field_tag :summary, "1", id: "unimportant"
-        .small-8.columns
+        %li
           = submit_tag t('.search_by_id_button'), class: "button primary"

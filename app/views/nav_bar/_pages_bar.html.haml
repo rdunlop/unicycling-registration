@@ -1,6 +1,9 @@
 - cache_i18n ['pages_bar', Page] do
   - if Page.ordinary.any?
+    .title_bar{ data: { hide_for: "medium", responsive_toggle: "page_bar" } }
+      %button.menu-icon{ data: { toggle: true } } CLICK ME
+      .title-bar-title Information Pages
     %nav.top-bar#page_bar{ data: { options: "is_hover: false", topbar: true }, role: "navigation" }
-      %section.top-bar-section
-        %ul.left
+      .top-bar-left
+        %ul.menu.vertical.medium-horizontal.dropdown{ data: { dropdown_menu: true} }
           = render "nav_bar/pages"

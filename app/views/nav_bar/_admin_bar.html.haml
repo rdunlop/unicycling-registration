@@ -1,11 +1,15 @@
 - cache_i18n ['admin_bar', current_user, @config] do
   - if user_signed_in? && current_user.roles.any?
+    .title_bar{ data: { hide_for: "medium", responsive_toggle: "admin_bar" } }
+      %button.menu-icon{ data: { toggle: true } } CLICK ME
+      .title-bar-title Admin Menu
     %nav.top-bar#admin_bar{ data: { topbar: true }, role: "navigation" }
-      %section.top-bar-section
-        %ul.left
+      .top-bar-left
+        %ul.menu.vertical.medium-horizontal
           = render "nav_bar/admin_set_one"
-        %ul.right
-          %li.has-dropdown
+      .top-bar-right
+        %ul.menu.vertical.medium-horizontal.dropdown{ data: { dropdown_menu: true} }
+          %li
             %a{ href: "#" }= t(".advanced_admin_bar")
-            %ul.dropdown
+            %ul.menu.vertical
               = render "nav_bar/admin_set_two"

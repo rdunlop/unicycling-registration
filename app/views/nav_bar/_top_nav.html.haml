@@ -1,15 +1,15 @@
-%nav.top-bar{ data: { topbar: true }, role: "navigation" }
+.title_bar{ data: { hide_for: "medium", responsive_toggle: "main_menu" } }
+  %button.menu-icon{ data: { toggle: true } } CLICK ME
+  .title-bar-title Navigation Menu
+%nav.top-bar#main_menu{ data: { topbar: true }, role: "navigation" }
   - if EventConfiguration.configuration_exists?
-    %ul.title-area
-      %li.name
-        %h1
-          = render "nav_bar/logo"
-  %section.top-bar-section
-    %ul.left
-      = render "nav_bar/my_links"
+    .top-bar-title
+      = render "nav_bar/logo"
+  %div
+    .top-bar-left
+      %ul.menu.vertical.medium-horizontal
+        = render "nav_bar/my_links"
     - if user_signed_in?
-      %ul.right
-        %li= link_to t('.sign_out'), destroy_user_session_path, :method => :delete
-
-= render "nav_bar/admin_bar"
-= render "nav_bar/pages_bar"
+      .top-bar-right
+        %ul.menu.vertical.medium-horizontal
+          %li= link_to t('.sign_out'), destroy_user_session_path, :method => :delete

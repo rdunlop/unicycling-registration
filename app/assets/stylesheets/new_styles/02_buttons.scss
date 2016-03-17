@@ -1,4 +1,4 @@
-@import "foundation/components/buttons";
+@import "foundation";
 
 // -----------------------------------------
 /* Competitor */
@@ -74,7 +74,8 @@
 }
 
 .nonfocus_button {
-  @include button($padding:$button-sml); //(220px);
+  @include button;
+  padding: map-get($button-sizes, small); //(220px);
   color: $nonfocus;
   background-color: white;
   border: 1px solid $nonfocus;
