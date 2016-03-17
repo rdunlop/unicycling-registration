@@ -1,0 +1,19 @@
+%h1= t(".header")
+
+%p= t(".description")
+
+= simple_form_for(@event_configuration, url: update_registration_questions_event_configuration_path, method: :put, multipart: true) do |f|
+  = render partial: "/shared/error_messages", object: @event_configuration
+
+  %fieldset.form__fieldset
+    %h3= t(".contact_details_requested")
+
+    = f.input :request_address
+    = f.input :request_emergency_contact
+    = f.input :request_responsible_adult
+
+    %h3= t(".request_young_users_wheel_size")
+
+    = f.input :registrants_should_specify_default_wheel_size
+
+    = f.button :submit

@@ -9,3 +9,7 @@ en:
         advanced_settings: Advanced Settings
         artistic_closed_date: |
           The Artistic Closed Date is %{artistic_closed_date}
+        wheel_size_override_only_when_default_wheel_size: |
+          Allowing users to specify a Wheel Size Override for an
+          event is ONLY allowed when the "Request Default Wheel Size"
+          option is enabled in the Registration Questions.

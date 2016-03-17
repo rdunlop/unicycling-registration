@@ -1,0 +1,9 @@
+---
+en:
+  convention_setup:
+    event_configurations:
+      registration_questions:
+        header: Questions to ask during Registration
+        description: Use this page if you want to ask your registrants fewer questions.
+        contact_details_requested: Contact Details
+        request_young_users_wheel_size: Request Default Wheel Size

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314005601) do
+ActiveRecord::Schema.define(version: 20160317012934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -356,47 +356,48 @@ ActiveRecord::Schema.define(version: 20160314005601) do
   add_index "event_configuration_translations", ["locale"], name: "index_event_configuration_translations_on_locale", using: :btree
 
   create_table "event_configurations", force: :cascade do |t|
-    t.string   "event_url",                             limit: 255
+    t.string   "event_url",                                     limit: 255
     t.date     "start_date"
-    t.string   "contact_email",                         limit: 255
+    t.string   "contact_email",                                 limit: 255
     t.date     "artistic_closed_date"
     t.date     "standard_skill_closed_date"
     t.date     "event_sign_up_closed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "test_mode",                                         default: false,      null: false
-    t.string   "comp_noncomp_url",                      limit: 255
-    t.boolean  "standard_skill",                                    default: false,      null: false
-    t.boolean  "usa",                                               default: false,      null: false
-    t.boolean  "iuf",                                               default: false,      null: false
-    t.string   "currency_code",                         limit: 255
-    t.string   "rulebook_url",                          limit: 255
-    t.string   "style_name",                            limit: 255
+    t.boolean  "test_mode",                                                 default: false,      null: false
+    t.string   "comp_noncomp_url",                              limit: 255
+    t.boolean  "standard_skill",                                            default: false,      null: false
+    t.boolean  "usa",                                                       default: false,      null: false
+    t.boolean  "iuf",                                                       default: false,      null: false
+    t.string   "currency_code",                                 limit: 255
+    t.string   "rulebook_url",                                  limit: 255
+    t.string   "style_name",                                    limit: 255
     t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
-    t.boolean  "artistic_score_elimination_mode_naucc",             default: true,       null: false
-    t.string   "logo_file",                             limit: 255
-    t.integer  "max_award_place",                                   default: 5
-    t.boolean  "display_confirmed_events",                          default: false,      null: false
-    t.boolean  "spectators",                                        default: false,      null: false
-    t.string   "paypal_account",                        limit: 255
-    t.string   "waiver",                                limit: 255, default: "none"
+    t.boolean  "artistic_score_elimination_mode_naucc",                     default: true,       null: false
+    t.string   "logo_file",                                     limit: 255
+    t.integer  "max_award_place",                                           default: 5
+    t.boolean  "display_confirmed_events",                                  default: false,      null: false
+    t.boolean  "spectators",                                                default: false,      null: false
+    t.string   "paypal_account",                                limit: 255
+    t.string   "waiver",                                        limit: 255, default: "none"
     t.integer  "validations_applied"
-    t.boolean  "italian_requirements",                              default: false,      null: false
-    t.string   "rules_file_name",                       limit: 255
-    t.boolean  "accept_rules",                                      default: false,      null: false
-    t.string   "paypal_mode",                           limit: 255, default: "disabled"
-    t.boolean  "offline_payment",                                   default: false,      null: false
-    t.string   "enabled_locales",                                   default: "en,fr",    null: false
+    t.boolean  "italian_requirements",                                      default: false,      null: false
+    t.string   "rules_file_name",                               limit: 255
+    t.boolean  "accept_rules",                                              default: false,      null: false
+    t.string   "paypal_mode",                                   limit: 255, default: "disabled"
+    t.boolean  "offline_payment",                                           default: false,      null: false
+    t.string   "enabled_locales",                                           default: "en,fr",    null: false
     t.integer  "comp_noncomp_page_id"
-    t.boolean  "under_construction",                                default: true,       null: false
-    t.boolean  "noncompetitors",                                    default: true,       null: false
-    t.string   "volunteer_option",                                  default: "generic",  null: false
+    t.boolean  "under_construction",                                        default: true,       null: false
+    t.boolean  "noncompetitors",                                            default: true,       null: false
+    t.string   "volunteer_option",                                          default: "generic",  null: false
     t.date     "age_calculation_base_date"
     t.string   "organization_membership_type"
-    t.boolean  "request_address",                                   default: true,       null: false
-    t.boolean  "request_emergency_contact",                         default: true,       null: false
-    t.boolean  "request_responsible_adult",                         default: true,       null: false
+    t.boolean  "request_address",                                           default: true,       null: false
+    t.boolean  "request_emergency_contact",                                 default: true,       null: false
+    t.boolean  "request_responsible_adult",                                 default: true,       null: false
+    t.boolean  "registrants_should_specify_default_wheel_size",             default: true,       null: false
   end
 
   create_table "event_translations", force: :cascade do |t|

@@ -34,6 +34,7 @@ en:
         request_address: Request Address
         request_emergency_contact: Request Emergency Contact
         request_responsible_adult: Request Responsible Adult
+        registrants_should_specify_default_wheel_size: Registrants should specify default wheel size
     models:
       event_configurations:
         one: Event Configuration

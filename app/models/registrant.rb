@@ -125,9 +125,9 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   validate  :gender_present, if: :comp_noncomp_past_step_1?
   before_validation :set_age, if: :comp_noncomp_past_step_1?
   validates :age, presence: true, if: :comp_noncomp_past_step_1?
-  before_validation :set_default_wheel_size, if: :comp_noncomp_past_step_1?
-  validates :default_wheel_size, presence: true, if: :comp_noncomp_past_step_1?
-  validate :check_default_wheel_size_for_age, if: :comp_noncomp_past_step_1?
+  before_validation :set_default_wheel_size, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
+  validates :default_wheel_size, presence: true, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
+  validate :check_default_wheel_size_for_age, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
 
   # events
   validate :choices_combination_valid, if: :past_step_2?
@@ -715,6 +715,11 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     if paid_details.count > 0 && deleted?
       errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
     end
+  end
+
+  # indicate whether this registrant needs to set a default_wheel_size
+  def registrants_should_specify_default_wheel_size?
+    EventConfiguration.singleton.registrants_should_specify_default_wheel_size?
   end
 
   def set_default_wheel_size

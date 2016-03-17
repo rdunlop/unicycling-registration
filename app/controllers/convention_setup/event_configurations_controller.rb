@@ -48,7 +48,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
   before_action :authorize_advanced_settings, only: [:advanced_settings]
 
-  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :organization_membership, :important_dates, :volunteers, :payment_settings, :advanced_settings, :go_live].freeze
+  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :organization_membership, :important_dates, :registration_questions, :volunteers, :payment_settings, :advanced_settings, :go_live].freeze
 
   before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
 
@@ -138,6 +138,12 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
                                                 :request_address, :request_emergency_contact,
                                                 :request_responsible_adult,
                                                 :rulebook_url)
+  end
+
+  def registration_questions_params
+    params.require(:event_configuration).permit(:request_address, :request_emergency_contact,
+                                                :request_responsible_adult,
+                                                :registrants_should_specify_default_wheel_size)
   end
 
   def volunteers_params

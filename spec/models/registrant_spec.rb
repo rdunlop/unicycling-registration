@@ -56,6 +56,17 @@ describe Registrant do
     end
   end
 
+  describe "when EventConfiguration does not require default wheel size" do
+    let(:registrant) { FactoryGirl.build(:minor_competitor, status: "base_details", contact_detail: nil) }
+    before { FactoryGirl.create(:event_configuration, registrants_should_specify_default_wheel_size: false) }
+
+    it "does not set a default wheel size" do
+      allow(registrant).to receive(:age).and_return(10)
+      expect(registrant).to be_valid
+      expect(registrant.default_wheel_size).to be_nil
+    end
+  end
+
   describe "with an event configuration starting date" do
     before(:each) do
       FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 05, 20))

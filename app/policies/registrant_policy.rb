@@ -31,6 +31,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def set_wheel_sizes?
+    return false unless config.registrants_should_specify_default_wheel_size?
     record.competitor? && update? && record.try(:age).to_i <= config.wheel_size_configuration_max_age
   end
 

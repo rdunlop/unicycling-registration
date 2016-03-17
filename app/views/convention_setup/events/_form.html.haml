@@ -14,14 +14,22 @@
 
   = f.input :best_time_format, collection: Event::BEST_TIME_FORMATS, include_blank: false
   = f.input :accepts_music_uploads
-  = f.input :accepts_wheel_size_override
 
-  %a{ href: "#", class: "js--toggle", data: { toggle_target: "#advanced_settings" } }= t(".advanced_settings")
-  #advanced_settings.is--hidden
+  - if EventConfiguration.singleton.registrants_should_specify_default_wheel_size?
+    = f.input :accepts_wheel_size_override
+  - else
+    = f.input :accepts_wheel_size_override, disabled: true
+    %small
+      %b= t(".wheel_size_override_only_when_default_wheel_size")
 
-    = f.input :visible
-    = f.input :artistic
-    .field
-      .input_details= t(".artistic_closed_date", artistic_closed_date: EventConfiguration.singleton.effective_artistic_closed_date.presence || "Undefined")
-    = f.input :standard_skill
+  %div
+    %a{ href: "#", class: "js--toggle", data: { toggle_target: "#advanced_settings" } }= t(".advanced_settings")
+    #advanced_settings.is--hidden
+
+      = f.input :visible
+      = f.input :artistic
+      .field
+        .input_details= t(".artistic_closed_date", artistic_closed_date: EventConfiguration.singleton.effective_artistic_closed_date.presence || "Undefined")
+      = f.input :standard_skill
+  %br
   = f.button :submit

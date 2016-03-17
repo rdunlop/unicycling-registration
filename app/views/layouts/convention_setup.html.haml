@@ -14,6 +14,7 @@
           %li= link_to t('.items_for_sale'), expense_groups_path
           %li= link_to CouponCode.model_name.human(count: 2), coupon_codes_path
           %li= link_to t('.payment_settings'), payment_settings_event_configuration_path
+      %li= link_to t('.registration_questions'), registration_questions_event_configuration_path
       %li= link_to Event.model_name.human(count: 2), convention_setup_categories_path
       %li= link_to t('.date_deadlines'), important_dates_event_configuration_path
       %li= link_to t('.organization_membership'), organization_membership_event_configuration_path

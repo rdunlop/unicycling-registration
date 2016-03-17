@@ -114,6 +114,7 @@ en:
         request_address: Require each registrant to enter a physical mailing address
         request_emergency_contact: Require each registrant to enter an emergency contact
         request_responsible_adult: Request each minor (under 18) registrant to enter a Responsible Adult
+        registrants_should_specify_default_wheel_size: Do we need to ask registrants <= 10 years old for their default wheel size (usually for Track Events).
       event:
         accepts_music_uploads: Check this box if each competitor may choose music for their competition
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
