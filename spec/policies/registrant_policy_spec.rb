@@ -173,9 +173,7 @@ describe RegistrantPolicy do
     end
 
     permissions :set_wheel_sizes? do
-      before do
-        FactoryGirl.create(:event_configuration, start_date: Date.today)
-      end
+      let(:config) { FactoryGirl.create(:event_configuration, start_date: Date.today) }
 
       describe "for an adult" do
         it { expect(subject).not_to permit(user_context, FactoryGirl.create(:minor_competitor, user: my_user, birthday: 11.years.ago)) }

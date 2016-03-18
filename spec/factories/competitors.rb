@@ -42,7 +42,7 @@ FactoryGirl.define do
     end
 
     after(:stub) do |competitor|
-      competitor.stub(:members).and_return([FactoryGirl.build_stubbed(:member, competitor: competitor)])
+      allow(competitor).to receive(:members).and_return([FactoryGirl.build_stubbed(:member, competitor: competitor)])
     end
   end
 
