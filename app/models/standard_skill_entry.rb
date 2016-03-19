@@ -23,13 +23,6 @@ class StandardSkillEntry < ActiveRecord::Base
 
   default_scope { order('number, letter') }
 
-  def initialize_from_array(arr)
-    self.number      = arr[0].to_i
-    self.letter      = arr[1]
-    self.points      = arr[2]
-    self.description = arr[3]
-  end
-
   def fullDescription
     skill_number_and_letter + " - " + description
   end

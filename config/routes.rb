@@ -89,12 +89,7 @@ Workspace::Application.routes.draw do
     end
     resource :import, only: [:new, :create]
 
-    resources :standard_skill_entries, only: [:index] do
-      collection do
-        get :upload_file
-        post :upload
-      end
-    end
+    resources :standard_skill_entries, only: [:index]
     resources :standard_skill_routines, only: [] do
       collection do
         get :download_file

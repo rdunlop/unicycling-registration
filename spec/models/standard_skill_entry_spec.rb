@@ -26,18 +26,6 @@ describe StandardSkillEntry do
     std.description = "riding holding seatpost, one hand"
     expect(std.valid?).to eq(true)
   end
-  it "can be created from a CSV-based array" do
-    s = StandardSkillEntry.new
-    arr = ["307", "n", "4.8", "jump mount to seat drag in back, feet holding seat"]
-    s.initialize_from_array(arr)
-    s.save!
-
-    s = StandardSkillEntry.last
-    expect(s.number).to eq(307)
-    expect(s.letter).to eq("n")
-    expect(s.points).to eq(4.8)
-    expect(s.description).to eq('jump mount to seat drag in back, feet holding seat')
-  end
 
   it "displays a full description" do
     std = FactoryGirl.build(:standard_skill_entry)
