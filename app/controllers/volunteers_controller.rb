@@ -54,7 +54,7 @@ class VolunteersController < ApplicationController
   # ensure that the given volunteer type is valid/allowed
   def load_and_validate_volunteer_type
     @volunteer_type = params[:volunteer_type]
-    unless @volunteer_type == "race_official"
+    unless @competition.uses_volunteers.include?(@volunteer_type.to_sym)
       flash[:alert] = "Unsupported volunteer type"
       redirect_to :back
     end
