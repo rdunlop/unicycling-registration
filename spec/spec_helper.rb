@@ -112,3 +112,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+# To enable using `allow` in FactoryGirl after(:stub) calls,
+# https://github.com/thoughtbot/factory_girl/issues/703
+FactoryGirl::SyntaxRunner.class_eval do
+  include RSpec::Mocks::ExampleMethods
+end
