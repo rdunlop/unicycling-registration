@@ -25,6 +25,7 @@ class TenantsController < ApplicationController
         Apartment::Tenant.create(@new_tenant.subdomain)
         Apartment::Tenant.switch!(@new_tenant.subdomain)
         Rails.application.load_seed
+        Notifications.new_convention_created(@new_tenant.description, @new_tenant.subdomain).deliver_later
         redirect_to root_url, notice: "New Convention created"
       else
         flash[:alert] = "Unable to create new convention"

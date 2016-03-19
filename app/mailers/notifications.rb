@@ -49,4 +49,10 @@ class Notifications < TenantAwareMailer
 
     mail to: Rails.application.secrets.server_admin_email, subject: "Certificates Renewed [#{Rails.env}]"
   end
+
+  def new_convention_created(convention_name, subdomain)
+    @convention_name = convention_name
+    @subdomain = subdomain
+    mail to: Rails.application.secrets.server_admin_email, subject: "New Convention Created #{convention_name}"
+  end
 end

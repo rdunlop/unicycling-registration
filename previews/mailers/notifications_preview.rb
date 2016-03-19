@@ -25,6 +25,10 @@ class NotificationsPreview < ActionMailer::Preview
     Notifications.missing_old_reg_items(bib_numbers)
   end
 
+  def new_convention_created
+    Notifications.new_convention_created("Next year's Convention", "nextyear3000")
+  end
+
   private
 
   def contact_form
