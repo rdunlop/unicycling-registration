@@ -11,7 +11,7 @@ en:
           Because the Convention-Specific Translations depend on the text that was entered
           have during convention configuration, they will need to be translated for
           each convention group, or by volunteers.
-        assign_volunteers: |
+        assign_volunteers_html: |
           To assign volunteers access to help translate your specific
           convention information use the %{link} to assign them
           the "Translator" role.

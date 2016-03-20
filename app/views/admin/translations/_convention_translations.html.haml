@@ -12,7 +12,7 @@
   .small-12.columns
     %p= t(".convention_translation_details")
 
-    %p= t(".assign_volunteers", link: link_to(t(".user_management"), permissions_path))
+    %p= t(".assign_volunteers_html", link: link_to(t(".user_management"), permissions_path))
 
   - if policy(:translation).manage_site_translations?
     %b= t(".access_enabled")
