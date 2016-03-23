@@ -334,7 +334,6 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   def name
     printed_name = full_name
     printed_name += " (incomplete)" unless validated?
-    printed_name += " (unpaid)" unless amount_owing == Money.new(0)
     display_eligibility(printed_name, ineligible?)
   end
 
