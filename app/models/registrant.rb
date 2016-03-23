@@ -453,7 +453,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     results = {}
     results[:description] = event.name
 
-    resu = signed_up_events.find_by(event_id: event.id)
+    resu = signed_up_events.detect { |sue| sue.event_id == event.id }
     # only add the Category if there are more than 1
     results[:category] = (resu.event_category_name unless resu.nil?)
 
@@ -472,7 +472,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
       end
     end
 
-    registrant_best_times.where(event: event).find_each do |rbt|
+    registrant_best_times.select { |rbt| rbt.event == event}.each do |rbt|
       results << rbt.to_s
     end
 

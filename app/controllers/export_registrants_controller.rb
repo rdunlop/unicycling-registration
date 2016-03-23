@@ -35,6 +35,51 @@ class ExportRegistrantsController < ApplicationController
     output_spreadsheet(headers, data, filename)
   end
 
+  def download_summaries
+    authorize current_user, :manage_all_payments?
+
+    headers = [
+      "Registrant ID",
+      "Paid?",
+      "First Name",
+      "Last Name",
+      "Gender",
+      "Age",
+      "Paid Items",
+      "Total Paid",
+      "PayPal Invoice ID ",
+      "Payment Notes",
+      "Events"
+    ]
+
+    data = []
+    Registrant.active_or_incomplete.limit(50).includes(
+      payment_details: [:payment],
+      signed_up_events: [:event],
+      registrant_choices: :event_choice,
+      registrant_best_times: [:event]
+    ).each do |registrant|
+      completed_payments = registrant.payment_details.map(&:payment).select(&:completed?)
+      data << [
+        registrant.bib_number,
+        registrant.reg_paid?,
+        registrant.first_name,
+        registrant.last_name,
+        registrant.gender,
+        registrant.age,
+        paid_items_summary(registrant),
+        registrant.amount_paid,
+        completed_payments.map(&:invoice_id).join("\n"),
+        completed_payments.map(&:note).join("\n"),
+        event_summary(registrant)
+      ]
+    end
+
+    filename = "#{@config.short_name} Registration Summaries #{Date.today}"
+
+    output_spreadsheet(headers, data, filename)
+  end
+
   def download_with_payment_details
     authorize current_user, :download_payments?
 
@@ -80,5 +125,17 @@ class ExportRegistrantsController < ApplicationController
     end
 
     output_spreadsheet(headers, data, "registrants_with_payments")
+  end
+
+  private
+
+  def paid_items_summary(registrant)
+    registrant.paid_expense_items.map(&:to_s).join("\n")
+  end
+
+  def event_summary(registrant)
+    registrant.signed_up_events.map do |resu|
+      registrant.describe_event(resu.event)
+    end.join("\n")
   end
 end
