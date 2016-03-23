@@ -472,7 +472,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
       end
     end
 
-    registrant_best_times.select { |rbt| rbt.event == event}.each do |rbt|
+    registrant_best_times.where(event: event).find_each do |rbt|
       results << rbt.to_s
     end
 
