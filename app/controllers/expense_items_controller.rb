@@ -31,7 +31,7 @@ class ExpenseItemsController < ApplicationController
     @expense_item = ExpenseItem.find(params[:id])
     authorize current_user, :manage_all_payments?
     @paid_details = @expense_item.paid_items
-    @unpaid_details = @expense_item.unpaid_items
+    @unpaid_details = @expense_item.unpaid_items(include_incomplete_registrants: true)
     @free_with_registration = @expense_item.free_items
     @refunded_details = @expense_item.refunded_items
   end
