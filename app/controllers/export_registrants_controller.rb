@@ -53,7 +53,7 @@ class ExportRegistrantsController < ApplicationController
     ]
 
     data = []
-    Registrant.active_or_incomplete.limit(50).includes(
+    Registrant.active_or_incomplete.includes(
       payment_details: [:payment],
       signed_up_events: [:event],
       registrant_choices: :event_choice,
