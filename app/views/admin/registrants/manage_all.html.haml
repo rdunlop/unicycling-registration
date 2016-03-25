@@ -52,7 +52,9 @@
               %span.js--showElementTarget{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
                 = link_to ExpenseItem.model_name.human(count: 2), registrant_build_path(registrant, :expenses)
             %td.non_printable
-              %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
               - if registrant.deleted?
-                = link_to t(".undelete"), undelete_registrant_path(registrant), :method => :post, data: { confirm: t(".undelete_confirmation") }
+                Deleted
+                %br
+                %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
+                  = link_to t(".undelete"), undelete_registrant_path(registrant), :method => :post, data: { confirm: t(".undelete_confirmation") }
             %td.non_printable= registrant.user
