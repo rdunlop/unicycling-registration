@@ -31,6 +31,15 @@
         .off-canvas-content{ data: { off_canvas_content: true } }
           #container
             %div
+              .title-bar.show-for-small-only{ data: { topbar: true }, role: "navigation" }
+                .title-bar-title
+                  = @config.short_name
+                .title-bar-left
+                  %button.menu_icon{ type: "button", data: { toggle: "offCanvas" } } Menu
+                - if user_signed_in?
+                  .title-bar-right
+                    = link_to t('nav_bar.top_nav.sign_out'), destroy_user_session_path, :method => :delete
+
               = render "layouts/test_mode"
               = render "nav_bar/top_nav"
               = render "nav_bar/admin_bar"

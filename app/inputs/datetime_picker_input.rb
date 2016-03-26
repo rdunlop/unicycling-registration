@@ -3,6 +3,6 @@
 # so that future i18n of the control will work correctly
 class DatetimePickerInput < SimpleForm::Inputs::StringInput
   def input_html_options
-    { class: 'datetimepicker', value: object.send(attribute_name).try(:strftime, "%Y/%m/%d %H:%M") }
+    { type: "text", class: 'datetimepicker', value: object.send(attribute_name).try(:strftime, "%Y/%m/%d %H:%M") }
   end
 end

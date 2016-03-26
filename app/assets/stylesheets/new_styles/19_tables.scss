@@ -26,3 +26,8 @@
 .translation_element {
   display: block;
 }
+
+// Override Foundation 6 table 'width: 100%' default
+table {
+  width: auto;
+}

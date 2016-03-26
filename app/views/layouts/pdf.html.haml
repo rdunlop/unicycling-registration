@@ -13,7 +13,7 @@
       }
   %body.pdf_body{:onload => "number_pages"}
     - if Rails.env.stage?
-      .alert-box.alert.top_banner{ data: { alert: true } }
+      .alert-box.callout.alert.top_banner
         Non-Live System.
     .body
       = yield

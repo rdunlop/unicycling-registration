@@ -17,10 +17,12 @@
 // Banners
 %h2.style_head Banners
 
-%p.notice Notice Banner
+.alert-box.callout.alert.top_banner Alert Banner
+.alert-box.callout.secondary.top_banner Secondary Banner
+.alert-box.callout.success.top_banner Success Banner
+
 %br
-%p.alert Alert Banner
-%br
+
 .reg_access_banner.non_printing This Computer is authorized
 %h2.current_access_key Today's Access Key is 12345
 
@@ -171,15 +173,15 @@ Registrant Expense Items
 
 .field
   %label{ for: 'end_date' } DatePicker Date chooser
-  %input{ class: 'datepicker', value: "2015/05/20", id: 'end_date' }
+  %input{ type: "text", class: 'datepicker', value: "2015/05/20", id: 'end_date' }
 
 .field
   %label{ for: 'end_datetime' } DateTimePicker Date chooser
-  %input{ class: 'datetimepicker', value: "2015/05/20 11:30", id: 'end_datetime' }
+  %input{ type: "text", class: 'datetimepicker', value: "2015/05/20 11:30", id: 'end_datetime' }
 
 %h2.style_head Forms (old-style markup)
 
-%fieldset.data_block
+%fieldset.data_block.fieldset
   %legend This is the legend
   %table
     %tbody

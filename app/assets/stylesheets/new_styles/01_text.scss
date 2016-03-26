@@ -50,9 +50,6 @@ div {
   input[type="radio"], input[type="checkbox"] {
     width: auto;
   }
-  input[disabled="disabled"] {
-    background-color: lightgrey;
-  }
 }
 
 $help_size: 16px;

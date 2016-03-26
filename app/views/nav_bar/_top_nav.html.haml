@@ -1,7 +1,4 @@
-.title_bar.show_for_small_only
-  %button.menu_icon{ type: "button", data: { toggle: "offCanvas" } } Open Menu
-  .title-bar-title Navigation Menu
-%nav.top-bar#main_menu.hide_for_small_only{ data: { topbar: true }, role: "navigation" }
+%nav.top-bar#main_menu.hide-for-small-only{ data: { topbar: true }, role: "navigation" }
   - if EventConfiguration.configuration_exists?
     .top-bar-title
       = render "nav_bar/logo"

@@ -12,3 +12,25 @@ $height: 50px;
     background-color: inherit;
   }
 }
+
+// Necessary in order to have the offCanvas sidebar "X" be click-able
+// This appears to be a poor interaction between dropdown menus and offcanvas
+.close-button {
+  z-index: 10;
+}
+
+// So that small-nav bars have a title which spans the width
+.title-bar-title {
+  width: 100%;
+  text-align: center;
+}
+
+
+.breadcrumbs {
+  padding: 0.5em 1em;
+}
+
+// search box in the top-bar
+#nav_bar_reg_id {
+  width: 90px;
+}

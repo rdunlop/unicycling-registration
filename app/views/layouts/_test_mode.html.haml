@@ -1,5 +1,5 @@
 - if user_signed_in? && @config.test_mode?
-  .alert-box.alert.top_banner{ data: { alert: true } }
+  .alert-box.callout.alert.top_banner{ data: { closable: true } }
     %div
       Current User Roles: #{current_user.roles.map{|role| role.name.humanize}.join(", ")}
     %div
@@ -7,4 +7,4 @@
     %ul#set_roles.is--hidden{ style: "display: none" }
       - User.changable_user_roles.each do |role|
         %li= link_to "Toggle #{role.to_s.humanize} Role", test_mode_role_event_configuration_path(role: role), :method => :post
-    %a.close{ href: "#" } &times;
+    %a.close-button{ data: { close: true }, href: "#" } &times;
