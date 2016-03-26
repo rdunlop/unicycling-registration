@@ -1,17 +1,19 @@
-%ul.menu.vertical
+%ul.menu.vertical{ data: { drilldown: true } }
   = render "nav_bar/my_links"
-  = render "nav_bar/pages"
+  %li
+    %a{ href: "#" } Pages
+    %ul.vertical.menu
+      %li.title Pages
+      = render "nav_bar/pages"
   - cache_i18n ['side_nav_admin_bar', current_user, @config] do
     - if user_signed_in? && current_user.roles.any?
-      %li.has-submenu.admin_bar
+      %li.admin_bar
         %a{ href: "#" }= t('.primary_admin_bar_header')
-        %ul.left-submenu.admin_bar
-          %li.back
-            %a{ href: "#" }= t('back')
+        %ul.vertical.menu
+          %li.title Admin Bar
           = render "nav_bar/admin_set_one"
-      %li.has-submenu.admin_bar
+      %li.admin_bar
         %a{ href: "#" }= t('.secondary_admin_bar_header')
-        %ul.left-submenu.admin_bar
-          %li.back
-            %a{ href: "#" }= t('back')
+        %ul.vertical.menu
+          %li.title Advanced Admin Bar
           = render "nav_bar/admin_set_two"

@@ -1,15 +1,15 @@
-.title_bar{ data: { hide_for: "medium", responsive_toggle: "main_menu" } }
-  %button.menu-icon{ data: { toggle: true } } CLICK ME
+.title_bar.show_for_small_only
+  %button.menu_icon{ type: "button", data: { toggle: "offCanvas" } } Open Menu
   .title-bar-title Navigation Menu
-%nav.top-bar#main_menu{ data: { topbar: true }, role: "navigation" }
+%nav.top-bar#main_menu.hide_for_small_only{ data: { topbar: true }, role: "navigation" }
   - if EventConfiguration.configuration_exists?
     .top-bar-title
       = render "nav_bar/logo"
   %div
     .top-bar-left
-      %ul.menu.vertical.medium-horizontal
+      %ul.menu.horizontal
         = render "nav_bar/my_links"
     - if user_signed_in?
       .top-bar-right
-        %ul.menu.vertical.medium-horizontal
+        %ul.menu.horizontal
           %li= link_to t('.sign_out'), destroy_user_session_path, :method => :delete

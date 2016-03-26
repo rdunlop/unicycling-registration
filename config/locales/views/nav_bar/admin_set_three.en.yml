@@ -1,0 +1,8 @@
+---
+en:
+  nav_bar:
+    admin_set_three:
+      export_data: Export Data
+      standard_skill_routines_view: 'Standard Skill Routines (view)'
+      standard_skill_routines_export: 'Standard Skill Routines (export)'
+      copy_events: Copy Events from previous Convention

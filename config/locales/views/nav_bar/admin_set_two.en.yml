@@ -11,7 +11,3 @@ en:
       registrant_bag_labels: 'Registrants Bag Labels (pdf)'
       registrant_summaries_by_last_name: "All Registrants Summaries Sorted By Last Name (pdf)"
       registrant_summaries_by_id: "All Registrants Summaries Sorted By ID (pdf)"
-      export_data: Export Data
-      copy_events: Copy Events from previous Convention
-      standard_skill_routines_view: 'Standard Skill Routines (view)'
-      standard_skill_routines_export: 'Standard Skill Routines (export)'

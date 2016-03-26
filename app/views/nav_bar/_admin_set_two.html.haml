@@ -15,22 +15,3 @@
 - if policy(current_user).registrant_information?
   %li= link_to t('.registrant_summaries_by_last_name'), show_all_registrants_path(:format => :pdf)
   %li= link_to t('.registrant_summaries_by_id'), show_all_registrants_path(order: :id, :format => :pdf)
-- if policy(current_user).under_development?
-  %li= link_to 'Registrant Groups', registrant_groups_path
-- if policy(:export).index?
-  %li= link_to t('.export_data'), export_index_path
-- if policy(current_user).under_development?
-  %li= link_to  'Import Data', new_import_path
-- if policy(current_user).under_development?
-  %li= link_to  'Multi-Tenant Research', research_competitions_path
-- if policy(@config).setup_convention?
-  %li= link_to t('.copy_events'), migrate_index_path
-- if policy(current_user).view_modification_history?
-  %li= link_to 'Modification History', rails_admin_path
-- if @config.standard_skill
-  - if policy(current_user).under_development?
-    %li= link_to t('.standard_skill_routines_view'), standard_skill_routines_path
-  - if policy(current_user).under_development?
-    %li= link_to t('.standard_skill_routines_export'), download_file_standard_skill_routines_path
-- if policy(:sample_data).create?
-  %li= link_to "Create Sample Data", sample_data_registrants_path
