@@ -9,6 +9,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w(
+  wysiwyg.js
   pdf.css
   base_green_blue.css base_green_blue_split2.css
   base_blue_purple.css base_blue_purple_split2.css

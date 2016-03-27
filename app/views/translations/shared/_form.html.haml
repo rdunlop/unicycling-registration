@@ -14,6 +14,7 @@
                 - if class_name.translation_class.columns_hash[attr_sym.to_s].type == :string
                   = g.text_field attr_sym
                 - else
+                  = render "shared/wysiwyg"
                   - if defined?(wysiwyg) && wysiwyg.include?(attr_sym)
                     = g.text_area attr_sym, class: "tinymce"
                   - elsif defined?(full_wysiwyg) && full_wysiwyg.include?(attr_sym)

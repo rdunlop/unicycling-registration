@@ -11,6 +11,9 @@
     = javascript_include_tag "vendor/modernizr"
 
     = javascript_include_tag "application", async: !Rails.env.development?
+    - if content_for?(:wysiwyg)
+      = yield(:wysiwyg)
+
 
     = csrf_meta_tags
     = render "shared/analytics/google"
@@ -44,4 +47,5 @@
               = content_for?(:content) ? yield(:content) : yield
           = render partial: "layouts/footer"
         %a.exit-off-canvas{ href: "#" }
-  = tinymce
+  - if content_for?(:wysiwyg)
+    = tinymce

@@ -1,3 +1,4 @@
+
 %h1= t(".header")
 
 %p= t(".description")
@@ -17,6 +18,7 @@
     = f.input :currency_code, collection: EventConfiguration.currency_codes
     = f.input :paypal_mode, collection: EventConfiguration.paypal_modes, include_blank: false
     = f.input :offline_payment
+    = render "shared/wysiwyg"
     = f.input :offline_payment_description, as: :text, input_html: { class: "tinymce" }
 
     = f.button :submit

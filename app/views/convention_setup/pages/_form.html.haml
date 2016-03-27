@@ -10,6 +10,7 @@
       = f.input :parent_page_id, collection: Page.ordinary.parent_or_single
   .row
     .small-12.columns
+      = render "shared/wysiwyg"
       = f.input :body, as: :text, input_html: { class: "full_tinymce" }
 
   .row

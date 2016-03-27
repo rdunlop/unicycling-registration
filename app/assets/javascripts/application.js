@@ -32,9 +32,30 @@
 //= require fancybox
 //= require jquery.nested-fields
 //= require jquery.are-you-sure
-//= require tinymce
 //= require jquery.datetimepicker
-//= require_tree .
+
+//= require attending
+//= require block_displayer
+//= require block_visible_based_on_select
+//= require chosen_enabler
+//= require competitors
+//= require date_picker
+//= require event_choice_creation_manager
+//= require fancybox_enabler
+//= require input_enabler
+//= require jquery.are-you-sure
+//= require jquery.placeholder
+//= require lane_assignment
+//= require payments
+//= require registrants
+//= require reorder_rows
+//= require street_score
+//= require total_calculator
+//= require total_cost
+//= require usa_member_refresher
+//= require visibility_toggler
+
+// NOTE This file does NOT include wysiwyg.js
 
 $(document).ready(function () {
   if (!$('input').hasClass("multiclick")) {

@@ -1,0 +1,3 @@
+-# Include this partial if you require a tinymce editor on your page
+- content_for(:wysiwyg) do
+  = javascript_include_tag "wysiwyg", async: !Rails.env.development?

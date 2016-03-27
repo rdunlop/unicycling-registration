@@ -1,3 +1,5 @@
+//= require tinymce
+
 $(document).ready(function() {
   tinymce.init({
     selector: ".full_tinymce",
