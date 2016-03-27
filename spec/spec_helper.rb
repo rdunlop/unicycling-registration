@@ -49,6 +49,12 @@ RSpec.configure do |config|
     # config.filter_run_excluding :pdf_generation => true
   end
 
+  config.before(:each) do
+    # We do this instead of setting cache_store = :null_store
+    # because sometimes we DO want caching enabled (see below)
+    Rails.cache.clear
+  end
+
   config.around(:each, :caching) do |example|
     caching = ActionController::Base.perform_caching
     ActionController::Base.perform_caching = example.metadata[:caching]

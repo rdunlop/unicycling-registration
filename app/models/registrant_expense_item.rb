@@ -85,11 +85,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
     return true if expense_item_id.nil? || registrant.nil? || (free == false)
 
     eg = expense_item.expense_group
-    if registrant.competitor?
-      free_options = eg.competitor_free_options
-    else
-      free_options = eg.noncompetitor_free_options
-    end
+    free_options = registrant.registrant_type_model.free_options(eg)
 
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"

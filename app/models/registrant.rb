@@ -173,12 +173,12 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     where(registrant_type: 'noncompetitor')
   end
 
-  def self.notcompetitor
-    where.not(registrant_type: 'competitor')
-  end
-
   def self.spectator
     where(registrant_type: 'spectator')
+  end
+
+  def registrant_type_model
+    RegistrantType.new(registrant_type)
   end
 
   # uses the CachedSetModel feature to give a key for this registrant's competitors
@@ -253,31 +253,11 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     curr_rei.save
   end
 
-  def self.maximum_bib_number(is_competitor)
-    if is_competitor
-      competitor.maximum("bib_number")
-    else
-      notcompetitor.maximum('bib_number')
-    end
-  end
-
   # Internal: Set the bib number of this registrant
   #
   def set_bib_number
     if bib_number.nil?
-      prev_value = Registrant.maximum_bib_number(competitor?)
-
-      if competitor?
-        initial_value = 1
-      else
-        initial_value = 2001
-      end
-
-      if prev_value.nil?
-        self.bib_number = initial_value
-      else
-        self.bib_number = prev_value + 1
-      end
+      self.bib_number = registrant_type_model.next_available_bib_number
     end
   end
 
@@ -515,12 +495,8 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def expense_item_is_free(expense_item)
-    free_options = nil
-    if competitor?
-      free_options = expense_item.expense_group.competitor_free_options
-    else
-      free_options = expense_item.expense_group.noncompetitor_free_options
-    end
+    free_options = registrant_type_model.free_options(expense_item.expense_group)
+
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"
       return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
@@ -688,11 +664,8 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def has_necessary_free_items
-    if competitor?
-      free_groups_required = ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
-    else
-      free_groups_required = ExpenseGroup.where(noncompetitor_free_options: "One Free In Group REQUIRED")
-    end
+    free_groups_required = registrant_type_model.required_free_expense_groups
+
     free_groups_required.each do |expense_group|
       if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
         errors[:base] << "You must choose a free #{expense_group}"

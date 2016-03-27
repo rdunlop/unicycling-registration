@@ -82,14 +82,6 @@ class ExpenseGroup < ActiveRecord::Base
     where(system_managed: false)
   end
 
-  def self.for_competitor_type(is_competitor)
-    if is_competitor
-      where(competitor_required: true)
-    else
-      where(noncompetitor_required: true)
-    end
-  end
-
   def to_s
     group_name
   end

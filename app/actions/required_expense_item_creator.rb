@@ -24,7 +24,7 @@ class RequiredExpenseItemCreator
 
   # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)
   def required_expense_items
-    egs = ExpenseGroup.for_competitor_type(@registrant.competitor?)
+    egs = @registrant.registrant_type_model.required_expense_groups
 
     egs.select { |expense_group| expense_group.expense_items.count == 1 }
        .map{ |expense_group| expense_group.expense_items.first }
