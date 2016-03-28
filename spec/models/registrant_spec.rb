@@ -41,7 +41,6 @@ describe Registrant do
     @ws24 = FactoryGirl.build_stubbed(:wheel_size_24)
     allow(WheelSize).to receive(:find_by_description).with("20\" Wheel").and_return(@ws20)
     allow(WheelSize).to receive(:find_by_description).with("24\" Wheel").and_return(@ws24)
-    allow(Registrant).to receive(:maximum_bib_number).and_return(nil)
   end
 
   describe "with a 10 year old registrant" do
@@ -204,17 +203,6 @@ describe Registrant do
     it "bib_number is set to 1 as a competitor" do
       expect(@reg.bib_number).to eq(1)
     end
-    describe "with a second competitor" do
-      before(:each) do
-        allow(Registrant).to receive(:maximum_bib_number).and_return(1)
-      end
-      it "assigns the second competitor bib_number 2" do
-        @reg2 = FactoryGirl.build_stubbed(:competitor)
-        @reg2.bib_number = nil # clear out the auto-set bib_number
-        @reg2.set_bib_number
-        expect(@reg2.bib_number).to eq(2)
-      end
-    end
   end
 
   context "checking non-competitor default" do
@@ -223,18 +211,6 @@ describe Registrant do
       @nreg.bib_number = nil # clear out auto-set bib number
       @nreg.set_bib_number
       expect(@nreg.bib_number).to eq(2001)
-    end
-
-    describe "with a second non-competitor" do
-      before :each do
-        allow(Registrant).to receive(:maximum_bib_number).and_return(2001)
-      end
-      it "assigns the second noncompetitor bib_number 2002" do
-        @reg2 = FactoryGirl.build_stubbed(:noncompetitor)
-        @reg2.bib_number = nil # clear out auto-set bib number
-        @reg2.set_bib_number
-        expect(@reg2.bib_number).to eq(2002)
-      end
     end
   end
 
