@@ -266,10 +266,6 @@
   padding: 3px;
 }
 
-.registrant_edit_button {
-  @include button; //(auto);
-}
-
 .payment_link {
   @include button($background: $payment, $background-hover: $payment_hover); //(150px);
   color:white;

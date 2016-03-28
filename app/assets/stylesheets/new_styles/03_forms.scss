@@ -128,9 +128,16 @@ div.data_block {
   font-size: 10px;
 }
 
+fieldset {
+  // this is essentially the '.fieldset' class from Foundation
+  // but I cannot (for some reason) extend it here.
+  border: 1px solid #cacaca;
+  padding: 1.25rem;
+  margin: 1.125rem 0;
 
-fieldset legend {
-  text-align: center;
+  legend {
+    text-align: center;
+  }
 }
 
 $header-bg: darkgray;

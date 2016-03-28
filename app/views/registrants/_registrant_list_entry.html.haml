@@ -7,10 +7,10 @@
     = t(".#{reg_class}")
   .small-2.columns
     - if policy(registrant).update_any_data?
-      = link_to t('.edit'), registrant_build_index_path(registrant), :class => "registrant_edit_button #{reg_class}"
+      = link_to t('.edit'), registrant_build_index_path(registrant), :class => "#{reg_class}_button"
   .small-4.columns
     - if registrant.validated?
-      = link_to t('.see_summary'), registrant_path(registrant), :class => "registrant_edit_button " + (reg_class)
+      = link_to t('.see_summary'), registrant_path(registrant), :class => "#{reg_class}_button"
     - else
       %span.incomplete
         = t('.incomplete')

@@ -45,7 +45,7 @@ module FormHelper
   end
 
   def wizard_progress_bar(allow_navigation = false)
-    content_tag(:ul, class: "button-group") do
+    content_tag(:ul, class: "progress_wizard") do
       wizard_steps.collect do |every_step|
         class_str = "secondary"
         li_class_str = "button secondary disabled"

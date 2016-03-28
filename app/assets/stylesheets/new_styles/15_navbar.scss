@@ -34,8 +34,15 @@ $height: 50px;
 #nav_bar_reg_id {
   width: 90px;
 }
+
+// To make the text white
 .top-bar {
   a {
     color: white;
+
+    // To make the drop-down arrow (if needed) white
+    &:after {
+      border-color: white transparent transparent !important;
+    }
   }
 }
