@@ -20,7 +20,7 @@
   = form_tag(exchange_choose_payment_adjustments_path, :method => :post) do
     - @p.registrants.each do |reg|
       = hidden_field_tag "registrant_id[]", reg.id
-    = submit_tag "Exchange some items", :class => "payment_link registration_button"
+    = submit_tag "Exchange some items", :class => "payment_link"
 
 %hr
 
@@ -43,7 +43,7 @@
   = form_tag(onsite_pay_confirm_payment_adjustments_path, :method => :post) do
     - @p.registrants.each do |reg|
       = hidden_field_tag "registrant_id[]", reg.id
-    = submit_tag "Choose Items to Mark Given for Free", :class => "payment_link registration_button"
+    = submit_tag "Choose Items to Mark Given for Free", :class => "payment_link"
 
 %div
   = link_to 'Back', new_payment_adjustment_path

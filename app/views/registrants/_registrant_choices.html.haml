@@ -9,7 +9,7 @@
     %ul.price_details
       - EventConfiguration.singleton.competitor_benefits_list.each do |item|
         %li= item
-    = link_to t(".create_new_competitor"), "#", class: "js--display_new_registrant competitor registration_button", data: { registrant_type: 'competitor' }
+    = link_to t(".create_new_competitor"), "#", class: "js--display_new_registrant competitor_button", data: { registrant_type: 'competitor' }
 
   - if @config.noncompetitors?
     .pricing_option.non-competitor_sign_up
@@ -21,7 +21,7 @@
       %ul.price_details
         - EventConfiguration.singleton.noncompetitor_benefits_list.each do |item|
           %li= item
-      = link_to t(".create_new_noncompetitor"), "#", class: "js--display_new_registrant noncompetitor registration_button", data: { registrant_type: 'noncompetitor' }
+      = link_to t(".create_new_noncompetitor"), "#", class: "js--display_new_registrant noncompetitor_button", data: { registrant_type: 'noncompetitor' }
 
   - if @config.spectators?
     .pricing_option.spectator_sign_up
@@ -31,6 +31,6 @@
       %ul.price_details
         - EventConfiguration.singleton.spectator_benefits_list.each do |item|
           %li= item
-      = link_to t(".create_new_spectator"), "#", class: "js--display_new_registrant spectator registration_button", data: { registrant_type: 'spectator' }
+      = link_to t(".create_new_spectator"), "#", class: "js--display_new_registrant spectator_button", data: { registrant_type: 'spectator' }
 
 = render partial: "new_name"

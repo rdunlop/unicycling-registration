@@ -50,22 +50,19 @@
 }
 
 .focus_button {
-  @include button; //(220px);
+  @include button($background: $focus, $background-hover: $focus_hover); //(220px);
   margin: 10px;
-  background-color: $focus;
   color: white;
-}
 
-.focus_button:hover {
-  color: white;
-  text-decoration: none;
-  background-color: $focus_hover;
-}
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 
-.focus_button:active {
-  background-color: $focus_active;
-  border-color: #205f3c;
-
+  &:active {
+    background-color: $focus_active;
+    border-color: #205f3c;
+  }
 }
 
 .nonfocus_button:visited {
@@ -74,48 +71,64 @@
 }
 
 .nonfocus_button {
-  @include button;
+  @include button($background: white, $background-hover: white);
   padding: map-get($button-sizes, small); //(220px);
   color: $nonfocus;
-  background-color: white;
   border: 1px solid $nonfocus;
-}
 
-.nonfocus_button:hover {
-  color: $nonfocus_hover;
-  background-color: white;
-  border: 1px solid $nonfocus_hover;
-}
-.nonfocus_button:active {
-  color: $nonfocus_active;
-  background-color: white;
-  border: 1px solid $nonfocus_active;
+  &:hover {
+    color: $nonfocus_hover;
+    border: 1px solid $nonfocus_hover;
+  }
+
+  &:active {
+    color: $nonfocus_active;
+    background-color: white;
+    border: 1px solid $nonfocus_active;
+  }
 }
 
 // -----------------------------------------
 /* Action Buttons */
 // -----------------------------------------
 .action_button {
-  @include button;
-  background-color: #12AC50;
-}
+  @include button($background: #12AC50, $background-hover: #4CD673);
 
-.action_button:hover {
-  background-color: #4CD673;
-}
-.action_button:visited {
-  color: black;
+  &:visited {
+    color: black;
+  }
 }
 
 .counter_action_button {
-  @include button;
-  background-color: #F1D6D6;
+  @include button($background: #F1D6D6, $background-hover: #F16565);
+
+  &:visited {
+    color: black;
+  }
 }
-.counter_action_button:hover {
-  background-color: #F16565;
+
+.competitor_button {
+  @include button($background: $competitor, $background-hover: $competitor_hover);
+
+  &:active {
+    background-color: $competitor_active;
+  }
 }
-.counter_action_button:visited {
-  color: black;
+
+.noncompetitor_button {
+  @include button($background: $noncompetitor, $background-hover: $noncompetitor_hover);
+
+  &:active {
+    background-color: $noncompetitor_active;
+  }
+}
+
+.spectator_button {
+  @include button($background: $spectator, $background-hover: $spectator_hover);
+
+  &:active {
+    background-color: $spectator_active;
+  }
 }
 
 
@@ -154,19 +167,15 @@
 }
 
 .incomplete, .incomplete:hover {
-  @include button;
+  @include button($background: #666);
   color: #ccc;
-  background-color: #666;
   box-shadow:none !important;
   cursor: no-drop;
 }
 
 .back_link {
-  @include button;
-  background-color: black;
-  &:hover {
-    background-color: #383838;
-  }
+  @include button($background: black, $background-hover: #383838);
+
   &:active {
     background-color: #282828;
   }
@@ -236,11 +245,7 @@
 
 
 .locked_competition_action {
-  @include button;
-  background-color: #5B99F5;
-}
-.locked_cometition_action:hover {
-  background-color: #9AC0F8;
+  @include button($background: #5B99F5, $background-hover: #9AC0F8);
 }
 
 .registration_button {
@@ -266,16 +271,12 @@
 }
 
 .payment_link {
-  @include button; //(150px);
-  background-color: $payment;
+  @include button($background: $payment, $background-hover: $payment_hover); //(150px);
   color:white;
   &:visited {
     color: white;
   }
 
-  &:hover {
-    background-color:$payment_hover;
-  }
   &:active {
     background-color: $payment_active;
   }

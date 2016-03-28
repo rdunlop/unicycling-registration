@@ -82,6 +82,6 @@
           %td= new_detail.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true
           %td= new_detail.text_field :details
           %td= new_detail.check_box :free
-  = pf.button :submit, "Create and Save Payment", :class => "payment_link registration_button"
+  = pf.button :submit, "Create and Save Payment", :class => "payment_link"
 %div
   = link_to 'Back', list_payment_adjustments_path
