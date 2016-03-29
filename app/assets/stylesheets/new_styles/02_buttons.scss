@@ -250,8 +250,6 @@
 
 .registration_button {
   @include button; //(220px);
-  margin-bottom:10px;
-  text-align:center;
 }
 
 .registration_button:hover, .registration_button:focus {

@@ -1,5 +1,4 @@
 Currently working on:
-- Remove the "*" from "Convention Name" on the Best Time Attending.
 - Import Results into the Preliminary-Results tables
 Next:
 - Export results from the Final results table
