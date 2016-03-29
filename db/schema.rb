@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317012934) do
+ActiveRecord::Schema.define(version: 20160329033714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,14 +264,15 @@ ActiveRecord::Schema.define(version: 20160317012934) do
   add_index "coupon_code_expense_items", ["expense_item_id"], name: "index_coupon_code_expense_items_on_expense_item_id", using: :btree
 
   create_table "coupon_codes", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "code",          limit: 255
-    t.string   "description",   limit: 255
-    t.integer  "max_num_uses",              default: 0
+    t.string   "name",                   limit: 255
+    t.string   "code",                   limit: 255
+    t.string   "description",            limit: 255
+    t.integer  "max_num_uses",                       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "inform_emails"
     t.integer  "price_cents"
+    t.integer  "maximum_registrant_age"
   end
 
   create_table "distance_attempts", force: :cascade do |t|

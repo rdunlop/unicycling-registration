@@ -29,7 +29,8 @@ class CouponApplier
   private
 
   def apply_coupon(payment_detail)
-    return unless coupon_code_applies_to?(payment_detail.expense_item)
+    return unless coupon_code_applies_to_expense_item?(payment_detail.expense_item)
+    return unless coupon_code_applies_to_registrant_age?(payment_detail.registrant.age)
 
     if coupon_limit_reached?
       self.error = "Coupon limit reached"
@@ -44,8 +45,14 @@ class CouponApplier
     @coupon_code ||= CouponCode.find_by(code: coupon_code_string)
   end
 
-  def coupon_code_applies_to?(expense_item)
+  def coupon_code_applies_to_expense_item?(expense_item)
     coupon_code.coupon_code_expense_items.map(&:expense_item).include?(expense_item)
+  end
+
+  def coupon_code_applies_to_registrant_age?(age)
+    return true unless coupon_code.maximum_registrant_age?
+
+    age <= coupon_code.maximum_registrant_age
   end
 
   def coupon_limit_reached?

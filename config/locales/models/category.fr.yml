@@ -3,12 +3,7 @@ fr:
   activerecord:
     attributes:
       category:
-        code: Code
-        description: Description
-        inform_emails: E-mails où signaler l'utilisation d'un code promo
-        max_num_uses: Nombre max d'utilisateurs
         name: Nom
-        price: Prix
     models:
       category:
         one: Catégorie

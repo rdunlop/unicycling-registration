@@ -9,6 +9,7 @@ en:
         max_num_uses: Max Number of Uses
         inform_emails: E-mails to notify on each coupon use
         price: Price
+        maximum_registrant_age: Maximum Registrant Age
     models:
       coupon_code:
         one: Coupon Code

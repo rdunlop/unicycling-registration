@@ -3,12 +3,7 @@ de:
   activerecord:
     attributes:
       category:
-        code: Code
-        description: Beschreibung
-        inform_emails: Emails um über jeden Coupon Gebrauch zu informieren
-        max_num_uses: Maximale Anzahl der Verwendung
         name: Name
-        price: Preis
     models:
       category:
         one: Kategorie

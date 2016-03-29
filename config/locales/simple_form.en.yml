@@ -85,6 +85,7 @@ en:
         inform_emails: "A comma-separate list of e-mail addresses which will be informed when someone uses this coupon"
         price: The price to be charged when using this coupon.
         expense_items: Choose the Expense Items which will be discounted by this Coupon Code.
+        maximum_registrant_age: Can be Applied to Registrants up to (and including) this age
       volunteer_opportunity:
         inform_emails: "when someone signs up for this volunteer position, an e-mail will be sent to these email addresses"
       event_configuration:

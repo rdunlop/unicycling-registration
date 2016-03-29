@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe CouponApplier do
+  before do
+    # so that registrants have ages:
+    FactoryGirl.create(:event_configuration, start_date: Date.current)
+  end
+
   let(:expense_item) { FactoryGirl.create(:expense_item) }
   let(:max_coupon_uses) { 0 }
   let(:coupon_code) { FactoryGirl.create(:coupon_code, max_num_uses: max_coupon_uses) }
@@ -39,6 +44,36 @@ describe CouponApplier do
     it "returns an error" do
       do_action
       expect(subject.error).to eq("Coupon Code not applicable to this order")
+    end
+  end
+
+  describe "when a maximum registrant age is specified" do
+    let(:coupon_code) { FactoryGirl.create(:coupon_code, maximum_registrant_age: 20) }
+    let!(:payment_detail) do
+      FactoryGirl.create(:payment_detail,
+                         payment: payment,
+                         registrant: registrant,
+                         expense_item: expense_item)
+    end
+
+    context "on a 21 year old" do
+      let(:registrant) { FactoryGirl.create(:competitor, birthday: 21.years.ago) }
+
+      it "doesn't allow the coupon to be used" do
+        do_action
+        expect(subject.error).to eq("Coupon Code not applicable to this order")
+        expect(subject.applied_count).to eq(0)
+      end
+    end
+
+    context "on a 20 year old" do
+      let(:registrant) { FactoryGirl.create(:competitor, birthday: 20.years.ago) }
+
+      it "does allow the coupon to be used on a 20 year old" do
+        do_action
+        expect(subject.error).to be_nil
+        expect(subject.applied_count).to eq(1)
+      end
     end
   end
 

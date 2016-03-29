@@ -63,6 +63,6 @@ class ConventionSetup::CouponCodesController < ConventionSetup::BaseConventionSe
   end
 
   def coupon_code_params
-    params.require(:coupon_code).permit(:name, :description, :inform_emails, :code, :max_num_uses, :price, expense_item_ids: [])
+    params.require(:coupon_code).permit(:name, :description, :inform_emails, :maximum_registrant_age, :code, :max_num_uses, :price, expense_item_ids: [])
   end
 end
