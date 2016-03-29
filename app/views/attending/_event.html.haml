@@ -68,9 +68,9 @@
         = rbt.hidden_field :event_id
         .row
           .small-12.medium-6.columns
-            = rbt.input :source_location
+            = rbt.input :source_location, required: false
           .small-12.medium-6.columns
-            = rbt.input :formatted_value, placeholder: rbt.object.hint
+            = rbt.input :formatted_value, required: false, placeholder: rbt.object.hint
 
   - if event.accepts_music_uploads?
     %td

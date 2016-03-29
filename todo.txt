@@ -1,10 +1,12 @@
 Currently working on:
+- Remove the "*" from "Convention Name" on the Best Time Attending.
 - Import Results into the Preliminary-Results tables
 Next:
 - Export results from the Final results table
 - Create graphics/explanation of the flow.
 - Export CSV file without contents for filling in, to match the recording sheets.
 - Drop the 'TimeResult#preliminary' column, once confirming it's unused
+- Clarify how the ExpenseGroup "competitor_required" works, especially with the "one free in group REQUIRED" feature. (Francois was confused)
 ==================================================
 
 Unknown priority
