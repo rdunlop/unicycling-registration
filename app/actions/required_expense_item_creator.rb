@@ -1,3 +1,5 @@
+# Adds system-managed items to the Registration model
+# Including RegistrationCost element, and any "Required" elements, if there is only 1 item
 class RequiredExpenseItemCreator
   attr_accessor :registrant
 
@@ -16,6 +18,9 @@ class RequiredExpenseItemCreator
     end
   end
 
+  # TODO: move ExpenseItem#create_reg_items to here
+
+  # TODO: move Registrant#set_registration_item_expense to here
   private
 
   def registration_item

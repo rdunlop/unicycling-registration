@@ -34,6 +34,15 @@ describe Admin::RegFeesController do
       expect(@reg.registrant_expense_items.first.locked).to eq(true)
     end
 
+    it "can change to a different reg fee twice" do
+      post :update_reg_fee, reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id }
+      post :update_reg_fee, reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp2.id }
+      @reg.reload
+      expect(@reg.owing_expense_items.count).to eq(1)
+      expect(@reg.owing_expense_items.first).to eq(@rp2.expense_item)
+      expect(@reg.registrant_expense_items.first.locked).to eq(true)
+    end
+
     it "cannot be updated if the registrant is already paid" do
       payment = FactoryGirl.create(:payment)
       FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @reg.registrant_expense_items.first.expense_item, payment: payment)

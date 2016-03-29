@@ -246,7 +246,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     end
     return false if curr_rei.nil?
     return true  if curr_rei.expense_item == expense_item
-    return true  if curr_rei.locked
+    return true  if curr_rei.locked && !lock
 
     curr_rei.expense_item = expense_item
     curr_rei.locked = lock
