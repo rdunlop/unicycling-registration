@@ -31,5 +31,8 @@
       .field
         .input_details= t(".artistic_closed_date", artistic_closed_date: EventConfiguration.singleton.effective_artistic_closed_date.presence || "Undefined")
       = f.input :standard_skill
+      .field
+        .input_details= t(".standard_skill_closed_date", standard_skill_closed_date: EventConfiguration.singleton.effective_standard_skill_closed_date.presence || "Undefined")
+        .input_details= t(".standard_skill_enabled", enabled: EventConfiguration.singleton.standard_skill?)
   %br
   = f.button :submit
