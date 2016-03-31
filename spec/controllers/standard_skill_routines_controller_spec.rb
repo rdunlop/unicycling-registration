@@ -51,9 +51,9 @@ describe StandardSkillRoutinesController do
       expect(response).to redirect_to(root_path)
     end
 
-    describe "when standard skill is closde" do
+    describe "when standard skill is closed" do
       before(:each) do
-        FactoryGirl.create(:event_configuration, standard_skill_closed_date: Date.yesterday)
+        EventConfiguration.first.update_attribute(:standard_skill_closed_date, Date.yesterday)
       end
 
       it "cannot create a new routine" do
