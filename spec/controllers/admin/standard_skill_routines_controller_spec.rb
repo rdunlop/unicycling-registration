@@ -17,6 +17,7 @@ require 'spec_helper'
 describe Admin::StandardSkillRoutinesController do
   describe "as super_admin" do
     before do
+      FactoryGirl.create(:event_configuration, standard_skill: true, standard_skill_closed_date: 1.week.from_now)
       @super_admin_user = FactoryGirl.create(:super_admin_user)
       sign_in @super_admin_user
     end

@@ -15,7 +15,8 @@
 require 'spec_helper'
 
 describe StandardSkillRoutinesController do
-  before (:each) do
+  before do
+    FactoryGirl.create(:event_configuration, standard_skill: true, standard_skill_closed_date: 1.week.from_now)
     @user = FactoryGirl.create(:user)
     @registrant = FactoryGirl.create(:competitor, user: @user)
     sign_in @user
