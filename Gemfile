@@ -96,8 +96,6 @@ gem "capistrano-deploytags", require: false
 group :naucc, :development, :caching do
   gem 'quiet_assets'
   gem 'consistency_fail'
-  gem 'web-console', '~> 2.0'
-  gem "binding_of_caller"
   gem 'rubocop', require: false
 end
 
