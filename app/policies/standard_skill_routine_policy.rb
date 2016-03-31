@@ -40,7 +40,7 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
   private
 
   def permitted?
-    return true if super_admin?
+    return true if super_admin? || event_planner?
     return false if config.standard_skill_closed?
     user.registrants.include?(record.registrant)
   end
