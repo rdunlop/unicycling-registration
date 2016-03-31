@@ -16,4 +16,12 @@
 
     = f.input :registrants_should_specify_default_wheel_size
 
-    = f.button :submit
+  %fieldset.form__fieldset
+    %h3 Standard Skill
+
+    %p
+      Enabling this feature allows a registrant to submit their standard skill routine with their registration.
+
+    = f.input :standard_skill
+
+  = f.button :submit

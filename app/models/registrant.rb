@@ -302,13 +302,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def has_standard_skill?
-    signed_up_events.includes(event_category: [:event]).each do |rc|
-      next if rc.event_category.nil?
-      if rc.event_category.event.standard_skill?
-        return true
-      end
-    end
-    false
+    signed_up_events.where(event: Event.standard_skill_events).any?
   end
 
   def name

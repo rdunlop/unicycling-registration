@@ -6,5 +6,5 @@
   %td= skill_entry.standard_skill_entry.points
   %td= skill_entry.standard_skill_entry.description
   %td
-    - if policy(current_user).under_development?
+    - if policy(@standard_skill_routine).update?
       = link_to 'destroy', [@standard_skill_routine, skill_entry], remote: true, data: { confirm: 'Are you sure?' }, method: :delete

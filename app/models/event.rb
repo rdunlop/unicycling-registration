@@ -61,6 +61,10 @@ class Event < ActiveRecord::Base
     where(artistic: true)
   end
 
+  def self.standard_skill_events
+    where(standard_skill: true)
+  end
+
   validates :name, presence: true
   validates :category_id, presence: true
 

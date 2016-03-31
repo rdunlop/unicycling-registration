@@ -143,6 +143,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   def registration_questions_params
     params.require(:event_configuration).permit(:request_address, :request_emergency_contact,
                                                 :request_responsible_adult,
+                                                :standard_skill,
                                                 :registrants_should_specify_default_wheel_size)
   end
 
@@ -151,8 +152,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   end
 
   def advanced_settings_params
-    params.require(:event_configuration).permit(:standard_skill, :standard_skill_closed_date,
-                                                :italian_requirements,
+    params.require(:event_configuration).permit(:italian_requirements,
                                                 :iuf,
                                                 :test_mode, :usa,
                                                 :display_confirmed_events,
@@ -175,7 +175,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   end
 
   def important_dates_params
-    params.require(:event_configuration).permit(:artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
+    params.require(:event_configuration).permit(:standard_skill_closed_date, :artistic_closed_date, :music_submission_end_date, :event_sign_up_closed_date,
                                                 :start_date, :age_calculation_base_date)
   end
 

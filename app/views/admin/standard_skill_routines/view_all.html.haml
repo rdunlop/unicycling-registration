@@ -1,18 +1,15 @@
-%h1 My Standard Skill Routines
+%h1 All Standard Skill Routines
 %table
-  %caption My Registrations
   %thead
     %tr
       %th ID
       %th Registrant
-      %th Signed-up for Standard skill?
       %th Standard Skill Routine created?
   %tbody
     - @registrants.each do |registrant|
       %tr
         %td= registrant.bib_number
         %td= link_to registrant, registrant
-        %td= registrant.has_standard_skill?
         %td
           - if registrant.standard_skill_routine.nil?
             No

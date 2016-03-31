@@ -12,8 +12,8 @@
 
 class StandardSkillRoutineEntriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_user
   before_action :load_standard_skill_routine
+  before_action :authorize_user_routine
   before_action :load_new_standard_skill_routine_entry, only: [:create]
 
   # POST /standard_skill_routines/:id/standard_skill_routine_entries
@@ -50,8 +50,8 @@ class StandardSkillRoutineEntriesController < ApplicationController
 
   private
 
-  def authorize_user
-    authorize current_user, :under_development?
+  def authorize_user_routine
+    authorize @standard_skill_routine, :update?
   end
 
   def load_new_standard_skill_routine_entry

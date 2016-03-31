@@ -91,11 +91,6 @@ Workspace::Application.routes.draw do
     resource :import, only: [:new, :create]
 
     resources :standard_skill_entries, only: [:index]
-    resources :standard_skill_routines, only: [] do
-      collection do
-        get :download_file
-      end
-    end
 
     #### For Registration creation purposes
     ###
@@ -340,6 +335,13 @@ Workspace::Application.routes.draw do
           get :all
         end
       end
+
+      resources :standard_skill_routines, only: [] do
+        collection do
+          get :view_all
+          get :download_file
+        end
+      end
     end
 
     resources :registrants, only: [:show, :destroy] do
@@ -361,7 +363,7 @@ Workspace::Application.routes.draw do
         put :refresh_usa_status
       end
       resources :registrant_expense_items, only: [:create, :destroy]
-      resources :standard_skill_routines, only: [:index, :create]
+      resources :standard_skill_routines, only: [:create]
       member do
         get :payments, to: "payments#registrant_payments"
       end
