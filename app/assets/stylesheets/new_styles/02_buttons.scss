@@ -235,10 +235,11 @@
   }
 }
 
-.sold_out, .sold_out:hover {
+// duplicate class name to increase specificity
+.sold_out.sold_out, .sold_out:hover {
   @extend %small_button;
-  color: #ccc;
-  background-color: #666;
+  color: black;
+  opacity: 1; // override foundation styling of disabled
   box-shadow:none;
   cursor: no-drop;
 }
