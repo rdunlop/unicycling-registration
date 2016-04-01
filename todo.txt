@@ -1,4 +1,6 @@
 Currently working on:
+- Is the e-mail message being set to the language of the previous request?
+- Add "tenant" to all log messages.
 - Import Results into the Preliminary-Results tables
 Next:
 - Export results from the Final results table
