@@ -1,0 +1,17 @@
+%h3 Paid Items (free with registration)
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Email
+      %th Details
+      %th Date
+  %tbody
+    - payment_details.each do |detail|
+      %tr
+        %td= detail.registrant.bib_number
+        %td= link_to detail.registrant, detail.registrant
+        %td= detail.registrant.user.email
+        %td= detail.details
+        %td= detail.created_at

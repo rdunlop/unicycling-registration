@@ -46,75 +46,9 @@
           %td= @paid_details.includes(:payment_detail_coupon_code).merge(PaymentDetailCouponCode.where(coupon_code: coupon)).count
 
 %hr
+= render "refunded_items", refunded_payment_details: @refunded_details, total: @expense_item.total_amount_paid_after_refunds
 
-%h3 Refunded Items
-%table.sortable
-  %thead
-    %tr
-      %th ID
-      %th Registrant
-      %th Details
-      %th Refund Note
-      %th Coupon
-      %th Amount Paid
-      %th Amount Refunded
-      %th Resulting Amount Paid
-  %tbody
-    - @refunded_details.each do |detail|
-      %tr
-        %td= detail.registrant.bib_number
-        %td= link_to detail.registrant, detail.registrant
-        %td= detail.details
-        %td= detail.refund_detail.refund.note
-        %td= detail.coupon_applied? ? detail.payment_detail_coupon_code.to_s : ""
-        %td= print_formatted_currency(detail.amount)
-        %td= print_formatted_currency(detail.amount_refunded)
-        %th= print_formatted_currency(detail.cost)
-  %tfoot
-    %tr
-      %td
-      %td
-      %td
-      %td
-      %td
-      %td
-      %th Total
-      %th= print_formatted_currency(@expense_item.total_amount_paid_after_refunds)
-
-%h3 Paid Items (free with registration)
-%table.sortable
-  %thead
-    %tr
-      %th ID
-      %th Registrant
-      %th Email
-      %th Details
-      %th Date
-  %tbody
-    - @free_with_registration.each do |detail|
-      %tr
-        %td= detail.registrant.bib_number
-        %td= link_to detail.registrant, detail.registrant
-        %td= detail.registrant.user.email
-        %td= detail.details
-        %td= detail.created_at
-
+= render "paid_items_free", payment_details: @free_with_registration
 %hr
 
-%h3 Unpaid Items
-%table.sortable
-  %thead
-    %tr
-      %th ID
-      %th Registrant
-      %th Email
-      %th Details
-      %th Date
-  %tbody
-    - @unpaid_details.each do |reg_item|
-      %tr
-        %td= reg_item.registrant.bib_number
-        %td= link_to reg_item.registrant, reg_item.registrant
-        %td= reg_item.registrant.user.try(:email)
-        %td= reg_item.details
-        %td= reg_item.created_at
+= render "unpaid_items", payment_details: @unpaid_details

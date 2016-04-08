@@ -1,0 +1,17 @@
+%h3 Unpaid Items
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Email
+      %th Details
+      %th Date
+  %tbody
+    - payment_details.each do |reg_item|
+      %tr
+        %td= reg_item.registrant.bib_number
+        %td= link_to reg_item.registrant, reg_item.registrant
+        %td= reg_item.registrant.user.try(:email)
+        %td= reg_item.details
+        %td= reg_item.created_at
