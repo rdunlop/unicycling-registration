@@ -6,7 +6,7 @@ module PunditViewPolicy
       controller.singleton_class.class_eval do
         def policy(_instance)
           Class.new do
-            def method_missing(*_args, &_block) # rubocop:disable Lint/NestedMethodDefinition
+            def method_missing(*_args, &_block)
               true
             end
           end.new
