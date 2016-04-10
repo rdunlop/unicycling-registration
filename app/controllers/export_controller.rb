@@ -23,15 +23,15 @@ class ExportController < ApplicationController
   end
 
   def download_events
-    event_categories = Event.includes(event_categories: :event).flat_map{ |ev| ev.event_categories }
+    event_categories = Event.includes(event_categories: [:event, :translations]).flat_map{ |ev| ev.event_categories }
     event_categories_titles = event_categories.map{|ec| ec.to_s}
 
-    event_choices = Event.includes(event_choices: :event).flat_map{ |ev| ev.event_choices }
+    event_choices = Event.includes(event_choices: [:event, :translations]).flat_map{ |ev| ev.event_choices }
     event_titles = event_choices.map{|ec| ec.to_s}
 
-    titles = ["ID", "Registrant Name", "Age", "Gender"] + event_categories_titles + event_titles
+    titles = ["ID", "First Name", "Last Name", "Birthday", "Age", "Gender", "Club"] + event_categories_titles + event_titles
     competitor_data = []
-    Registrant.active.includes(registrant_event_sign_ups: [], registrant_choices: :event_choice).each do |reg|
+    Registrant.active.includes(contact_detail: [], registrant_event_sign_ups: [], registrant_choices: :event_choice).each do |reg|
       reg_sign_up_data = []
       event_categories.each do |ec|
         # for performance reasons, loop it
@@ -67,7 +67,7 @@ class ExportController < ApplicationController
           reg_event_data += [rc.describe_value]
         end
       end
-      competitor_data << ([reg.bib_number, reg.name, reg.age, reg.gender] + reg_sign_up_data + reg_event_data)
+      competitor_data << ([reg.bib_number, reg.first_name, reg.last_name, reg.birthday, reg.age, reg.gender, reg.club] + reg_sign_up_data + reg_event_data)
     end
     @headers = titles
     @data = competitor_data
