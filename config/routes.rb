@@ -639,7 +639,11 @@ Workspace::Application.routes.draw do
 
   namespace :example do
     resource :description, only: :show
-    resources :convention_choices, only: :index
+    resources :convention_choices, only: :index do
+      collection do
+        get :standard_skill
+      end
+    end
     concerns :competition_choosable
   end
 
