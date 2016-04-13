@@ -292,6 +292,12 @@ describe PaymentsController do
         expect(assigns(:payment)).to be_a_new(Payment)
       end
 
+      it "when the params don't include payment hash" do
+        allow_any_instance_of(Payment).to receive(:save).and_return(false)
+        post :create
+        expect(response).to redirect_to(new_payment_path)
+      end
+
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)

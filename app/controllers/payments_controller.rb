@@ -82,6 +82,13 @@ class PaymentsController < ApplicationController
 
   # POST /payments
   def create
+    if params[:payment].nil?
+      flash[:alert] = "No Payment selected"
+      skip_authorization
+      redirect_to new_payment_path
+      return
+    end
+
     @payment = Payment.new(payment_params)
     @payment.user = current_user
     authorize @payment

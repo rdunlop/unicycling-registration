@@ -85,7 +85,7 @@ class RegistrantPolicy < ApplicationPolicy
 
   # view the registrant-specific payments
   def payments?
-    super_admin?
+    payment_admin? || super_admin?
   end
 
   def results?

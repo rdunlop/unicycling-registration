@@ -16,6 +16,13 @@ describe RegistrantPolicy do
 
   subject { described_class }
 
+  permissions :payments? do
+    let(:payment_admin) { FactoryGirl.create(:payment_admin) }
+
+    it { expect(subject).to permit(payment_admin, my_registrant) }
+    it { expect(subject).not_to permit(my_user, my_registrant) }
+  end
+
   permissions :create? do
     let(:reg_closed?) { false }
     let(:authorized_laptop?) { false }
