@@ -1,4 +1,5 @@
 Currently working on:
+- Make the "Competition Source" automatically start with one of the sources selected+populated to avoid the confusion Patricia had
 - Is the e-mail message being set to the language of the previous request?
 - Add "tenant" to all log messages.
 - Import Results into the Preliminary-Results tables
