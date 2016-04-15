@@ -1,0 +1,21 @@
+---
+fr:
+  convention_setup:
+    convention_setup:
+      costs:
+        charge_by_event: Coût par événement
+        charge_by_event_example: "(ex : 5€ pour l'artistique individuel, 6€ pour des
+          groupes)"
+        charge_by_type: Coût pour les compétiteurs, pour les non compétiteurs
+        charge_by_type_example: "(ex : 50€ pour les compétiteurs inscrits tôt, 100€
+          pour ceux inscrits tard)"
+        costs_settings: Le système d'inscription peut être configuré pour facturer
+          les compétiteurs selon différents paramètres
+        discounts: Promotion
+        header: Coûts
+        how_much_to_charge: 'Combien facturer les inscrits :'
+        how_to_charge_registrants: Comment facturer les inscrits
+        money_through_bank_transfer: Recevoir de l'argent par virement
+        money_through_paypal: Recevoir de l'argent par PayPal
+        other_items_for_sale: Autres éléments en vente
+        wire_bank_transfer: Virement

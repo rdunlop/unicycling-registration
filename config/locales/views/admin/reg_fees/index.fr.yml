@@ -1,0 +1,14 @@
+---
+fr:
+  admin:
+    reg_fees:
+      index:
+        automatic_increase: Une fois spécifié, la période d'inscription sélectionnée
+          sera "bloquée" pour l'inscription, et n'augmentera pas au fur et à mesure
+          du temps
+        can_lock_again: Après avoir "bloqué" le coût d'inscription d'un inscrit, vous
+          pouvez choisir de bloquer cet inscrit à un coût différent
+        description: Ce formulaire vous permet de spécifier le coût d'inscription
+          pour cet inscrit
+        header: Changer le coût d'inscription
+        set_reg_fee: Créer coût d'inscription

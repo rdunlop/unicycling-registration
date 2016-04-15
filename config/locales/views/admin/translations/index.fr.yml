@@ -1,0 +1,25 @@
+---
+fr:
+  admin:
+    translations:
+      index:
+        avaliable_in_multiple_languages: L'inscription et le système des compétitions
+          est disponible dans des langues multiples
+        clear_translation_action: Vider le cache de traduction
+        clear_translation_cache: Vider le cache après avoir fait des changements de
+          traduction
+        clear_translation_confirm: Etes-vous sûr ? Ceci aura des impacts de performance
+          jusqu'à la reconstruction du cache (ne pas faire trop souvent)
+        clear_translation_description: Quand vous avez terminé la traduction de divers
+          fichiers (et appliqué les changements pour les traductions communes), vous
+          aurez peut-être besoin de vider les caches afin que l'ensemble des pages
+          soient actualisées
+        common_translations_set: Traductions communes à toutes les conventions
+        convention_available_in_languages_html: "La\r\n<b>%{convention}</b>\r\nConvention
+          est disponible dans\r\n%{languages}"
+        convention_translation_set: Traductions spécifiques à chaque convention
+        header: Traduisez le contenu
+        thank_you_for_volunteering_html: "Merci de vous être proposé pour traduire
+          du contenu.\r\nSi vous avez des questions ou des problèmes, utilisez %{link}\r\npour
+          nous le dire"
+        two_sets_of_translations: Il a deux ensembles différents de traductions

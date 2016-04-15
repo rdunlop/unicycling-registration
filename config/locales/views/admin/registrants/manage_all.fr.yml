@@ -1,0 +1,10 @@
+---
+fr:
+  admin:
+    registrants:
+      manage_all:
+        deleted_question: Supprimé ?
+        header: Gérer les inscrits
+        summary: Résumé
+        undelete: Ne plus supprimer
+        undelete_confirmation: Recréer cette inscription ?

@@ -3,7 +3,10 @@ fr:
   activerecord:
     attributes:
       event_category:
+        age_range_end: Limite d'âge maximum
+        age_range_start: Limite d'âge minimim
         name: Nom
+        warning_on_registration_summary: Avertissement sur le résumé d'inscription
     models:
       event_category:
         one: Catégorie d'événement

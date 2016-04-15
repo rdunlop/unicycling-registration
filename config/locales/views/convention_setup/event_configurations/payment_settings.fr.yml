@@ -1,0 +1,10 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      payment_settings:
+        description: "Si vous voulez recevoir des paiement via PayPal, saisissez l'e-mail
+          du compte correspondant ici.\r\nVous devrez également créer un IPN(?) pour
+          que le site web d'inscription soit\r\ninformé des\r\npaiements."
+        header: Paramètres de paiement
+        ipn_url: L'URL de l'IPN(?) devra être %{url}

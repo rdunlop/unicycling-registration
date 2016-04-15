@@ -4,3 +4,8 @@ fr:
     permissions:
       display_acl:
         current_access_key: La Clé d'Accès du jour est
+        description: Ceci permettra à cet ordinateur de créer des comptes utilisateurs
+          sans envoi d'e-mail de confirmations
+        header: Créer les permissions liées à l'ordinateur
+        instructions_html: Pour autoriser un ordinateur, <u>sur cet ordinateur</u>
+          rendez vous sur %{url} et rentrez la clé d'accès

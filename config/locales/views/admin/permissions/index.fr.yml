@@ -17,9 +17,55 @@ fr:
           des remboursements),\r\ndonnez le rôle \"Payment Admin\""
         role_allows_access: Chaque rôle permet à l'utilisateur de voir / utiliser
           différentes parties du système
+        role_description:
+          awards_admin: "Peut voir les données de résultats\r\nPeut publier les résultats\r\nPeut
+            marquer les compétitions comme récompensées"
+          competition_admin: "Peut créer des compétitions, et modifier des configurations
+            de compétitions\r\nPeut créer / modifier les groupes d'âges\r\nPeut noter
+            un inscrit comme inéligible\r\nPeut créer un directeur, et un secrétaire
+            d'épreuve\r\nPeut réinitialiser les mots de passe utilisateur\r\nPeut
+            voir toutes les inscriptions à des événements\r\nPeut gérer tous les compétiteurs
+            d'une compétition (tant que la compétition n'est pas bloquée)\r\nPeut
+            bloquer / débloquer une compétition"
+          convention_admin: "Peut configurer les paramètres de la convention en fonction
+            des paramètres d'inscription\r\nPeut choisir l'apparence, le nom de la
+            convention, et les paramètres d'URL\r\nPeut créer les coûts de paiements\r\nPeut
+            créer la configuration PayPal\r\nPeut créer les événements proposés\r\nPeut
+            créer les options de bénévolat\r\nPeut réinitialiser les mots de passe
+            utilisateur\r\nPeut créer des \"Ordinateurs autorisés\" pour l'inscription
+            sur place\r\nPeut créer des utilisateurs payment_admin, event_planner,
+            et music_dj"
+          director: "Peut associés des inscrits et des compétiteurs\r\nPeut créer
+            des juges, des bénévoles\r\nPeut réinitialiser les mots de passe utilisateur"
+          event_planner: "Peut voir les inscriptions aux épreuves\r\nPeut chercher
+            et modifier n'importe quel inscription\r\nPeut ajouter / modifier des
+            choix d'événement à n'importe quel moment\r\nPeut voir / envoyer des emails
+            à tous les inscrits"
+          export_payment_lists: Peut utiliser le menu d'export pour télécharger un
+            fichier Excel des inscrits qui ont payé pour le logement
+          late_registrant: "Peut accéder au système d'inscription même après leur
+            fermeture\r\nPeut créer des inscriptions, en mettre à jour, et créer des
+            paiements\r\nVous devez utiliser ceci ainsi que la fonction SetRegFree
+            pour spécifier le prix"
+          membership_admin: "Peut voir les pages de membres de la Fédération\r\nPeut
+            mettre à jour les numéros d'adhérent à la Fédération\r\nPeut indiquer
+            si un utilisateur est à jour de son adhésion à la Fédération"
+          music_dj: Peut voir et télécharger de la musique depuis la page de gestion
+            des musiques
+          payment_admin: "Peut voir les paiements reçus\r\nPeut voir le nombre total
+            d'éléments achetés\r\nPeut créer des prix d'inscription par utilisateur\r\nPeut
+            noter la réception de chèque"
+          super_admin: "Peut créer des rôles pour d'autres gens\r\nPeut supprimer
+            des informations de paiement\r\nPeut configurer les paramètres du site
+            et des événements"
+          translator: "Peut accéder au menu de traduction\r\nSaisir de nouvelles traductions
+            et les appliquer au site"
         role_descriptions: 'Descriptions des rôles :'
         roles_listed: "Cette page liste tous les rôles que vous avez la permission
           de voir.\r\nVous pouvez assigner des rôles aux autres utilisateurs pour
           leur donner un accès étendu."
         set_password: Changer le mot de passe utilisateur
         users_with_permissions: 'Utilisateurs avec permissions :'
+        you_have_roles: 'Vos rôles actuels sont :'
+        you_may_need_to_grant_yourself_roles: Vous devrez peut-être vous assigner
+          d'autres rôles pour accéder à d'autres parties du système

@@ -1,0 +1,13 @@
+---
+fr:
+  convention_setup:
+    categories:
+      edit:
+        description: Les événements sont regroupés en différentes catégories, par
+          exemple Sports collectifs, Artistique, MUni
+        existing_categories: Catégories existantes
+        header: Modifier la catégorie d'événement
+        manage_events: Gérer les événements
+        manage_events_note: Quand vous avez créé une catégorie, choisissez "Gérer
+          les événements" pour créer des événements dans cette catégorie
+        new_category: Nouvelle catégorie

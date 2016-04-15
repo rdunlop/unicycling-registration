@@ -1,0 +1,10 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      registration_questions:
+        contact_details_requested: Coordonnées
+        description: Utilisez cette page si vous souhaitez moins d'information de
+          vos inscrits.
+        header: Questions à poser à l'inscription
+        request_young_users_wheel_size: Demander la taille de roue par défaut

@@ -4,3 +4,5 @@ fr:
     reg_closed_banner:
       no_changes_permitted: Vous ne pouvez plus faire de changement pour votre inscriptoions
       online_registration_is_closed: Les inscriptions en ligne sont maintenant terminées.
+      onsite_changes_explanation: Si vous voulez faire un don massif, vous pourrez
+        peut-être vous inscrire sur place (selon les choix de l'organisateur)

@@ -1,0 +1,7 @@
+---
+fr:
+  coupon_code_summaries:
+    show:
+      coupon_applied_to: 'Appliqué à :'
+      date_coupon_applied: Date appliquée
+      header: "%{coupon_code} Code promo"

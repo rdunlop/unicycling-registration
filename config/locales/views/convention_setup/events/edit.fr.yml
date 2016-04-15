@@ -1,0 +1,6 @@
+---
+fr:
+  convention_setup:
+    events:
+      edit:
+        header: Modification d'événement

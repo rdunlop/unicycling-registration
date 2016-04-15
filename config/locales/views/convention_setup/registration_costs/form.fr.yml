@@ -1,0 +1,19 @@
+---
+fr:
+  convention_setup:
+    registration_costs:
+      form:
+        cost_header: Coût
+        header: Modifier le %{registration_cost} coût d'inscription
+        last_minute_note: Parce que beaucoup de personnes paient au dernier moment
+          possible, le prix augmente automatiquement pendant 36 heurs après la fin
+          des inscriptions. Cela permet aux derniers voulant s'inscrire un délai supplémentaire
+          (et aussi plusieurs inscrits de dernière minute)
+        registration_costs_increase_description_html: "Habituellement, les inscriptions
+          en ligne se terminent un peu avant le début de la convention, et les inscriptions
+          sur place sont acceptées dans le hall des inscriptions, sur des ordinateurs.
+          \r\nCela permet aux organisateurs d'imprimer les dossiers d'inscriptions,
+          préparer la liste des compétiteurs et autres préparatifs de dernière minute.\r\nLa
+          mise en place du prix d'inscription \"sur place\" a pour effet de déplacer
+          la bannière \"Fermeture des Inscriptions en ligne\" dans le tableau des
+          prix."

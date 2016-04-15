@@ -1,0 +1,18 @@
+---
+fr:
+  convention_setup:
+    events:
+      form:
+        advanced_settings: Paramètres avancés
+        artistic_closed_date: La date de fermeture de l'artistique est  %{artistic_closed_date}
+        event_category_hint: "Spécifier \"Tous\" s'il y a une seule catégorie\r\n(note
+          : les options avancées sont disponibles sous \"Catégories d'événements\")"
+        header: Modification d'événement
+        standard_skill_closed_date: La fermeture des soumissions d'artistique technique
+          est %{standard_skill_closed_date}
+        standard_skill_enabled: Le système de soumission de l'artistique technique
+          est-il activé ? %{enabled}
+        wheel_size_override_only_when_default_wheel_size: Permettre aux utilisateurs
+          de spécifier une taille de roue pour un événement spécifique n'est possible
+          QUE lorsque l'option "Demande de taille de roue par défaut" est activé dans
+          les questions liées à l'inscription.

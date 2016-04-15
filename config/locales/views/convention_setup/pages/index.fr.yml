@@ -1,0 +1,17 @@
+---
+fr:
+  convention_setup:
+    pages:
+      index:
+        description: Créer des pages d'information accessibles au public (sans être
+          connecté)
+        header: Pages d'information
+        home_page: Si vous créer une page intitulée `home`, cela deviendra la page
+          d'accueil de la convention.
+        new_page: Nouvelle page
+        pages_location_description: Les liens vers ces pages vont apparaître dans
+          la barre de menu en haut
+        pages_structure_description: Vous pouvez créer une arborescence de pages
+        privacy_policy_page: Si vous créer une page intitulée `privacy-policy`, elle
+          apparaîtra dans le pied de page.
+        special_pages: Pages spéciales

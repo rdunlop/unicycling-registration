@@ -1,0 +1,20 @@
+---
+fr:
+  layouts:
+    convention_setup:
+      convention_setup: Création de la convention
+      costs: Coûts
+      custom_domain: Mise en place du domaine
+      date_deadlines: Dates importantes
+      go_live: Lancer l'application !
+      information_pages: Pages d'informations
+      items_for_sale: Eléments à vendre
+      manage_translations: Traduire les paramètres de la convention
+      name_and_logo: Nom et logo
+      organization_membership: Adhésion à l'organisation
+      payment_settings: Paramètres de paiement
+      registrant_types: Type d'inscriptions proposées
+      registration_costs: Coûts d'inscription
+      registration_questions: Questions à l'inscription
+      rules_and_waiver: Règles et décharge
+      volunteer_settings: Paramètres de bénévolat

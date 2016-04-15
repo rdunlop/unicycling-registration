@@ -1,0 +1,15 @@
+---
+fr:
+  nav_bar:
+    admin_set_one:
+      competition_overview: Résumé de la compétition
+      convention_setup: Mise en place de la compétition
+      data_entry: Saisie de données
+      manage_awards: Imprimer / créer les récompenses
+      manage_music: Gérer les musiques
+      manage_payments: Paiements
+      manage_registrants: Inscriptions (modifier / imprimer)
+      registration_overview: Résumé de l'inscription
+      search_by_id_button: Résumé
+      search_by_id_label: Inscr ID#
+      user_management: Gestion des utilisateurs

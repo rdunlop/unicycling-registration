@@ -1,0 +1,12 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      volunteers:
+        description: "A l'inscription, nous pouvons demander à chaque inscrits s'ils
+          souhaitent s'impliquer dans du bénévolat (générique),\r\nou leur poser des
+          questions spécifiques (ex : voulez-vous être volontaire pour l'athlétisme
+          ?) (choix),\r\nou ne rien leur demander vis-à-vis du bénévolat (aucun)."
+        header: Paramètres de bénévolat
+        next_step: Après avoir choisi "choix", vous pouvez créer les choix dans la
+          page paramètre "Opportunités de bénévolat"

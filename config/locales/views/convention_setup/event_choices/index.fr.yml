@@ -1,0 +1,14 @@
+---
+fr:
+  convention_setup:
+    event_choices:
+      index:
+        description: Les choix d'événement sont des questions supplémentaires que
+          vous pouvez poser au compétiteurs afin d'obtenir des informations supplémentaires
+        example_1: Avec vitesse ?
+        example_2: Nom d'équipe
+        example_3: Capitaine d'équipe
+        example_4: Nom du partenaire
+        existing_choices: Choix d'événement %{event} existant
+        header: Liste des choix d'événement pour %{event}
+        new_event_choice: Nouveau choix d'événement

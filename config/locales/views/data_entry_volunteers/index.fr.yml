@@ -1,0 +1,13 @@
+---
+fr:
+  data_entry_volunteers:
+    index:
+      assign_access: Attribuer des accès supplémentaires
+      description_1: En attribuant des accès supplémentaires à un utilisateur, leur
+        compte deviendra sélectionable dans les listes de juge ou de secrétaire d'épreuve.
+      description_2: Ajouter un utilisateur ici leur permet de voir le menu de saisie
+        de données, et leur permet d'être désigné comme juge ou secrétaire d'épreuve.
+      description_3: Vous pouvez aussi utiliser le "nom" de l'utilisateur ici, afin
+        de ne pas avoir à se souvenir de leur adresse email.
+      header: Accès supplémentaires
+      users_with_access: Utilisateurs avec des accès supplémentaires

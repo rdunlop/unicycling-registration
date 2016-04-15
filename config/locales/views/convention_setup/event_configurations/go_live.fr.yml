@@ -1,0 +1,12 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      go_live:
+        header: Lancer l'application !
+        set_costs_warning: Vous devez vous assurer que vous avez bien configuré les
+          coûts d'inscription et d'événements avant toute inscription
+        system_live: L'application actuelle est en ligne
+        system_under_construction: L'application actuelle est en construction
+        under_construction_description: Mettre "En construction" à faux permettra
+          à des utilisateurs de créer des inscriptions

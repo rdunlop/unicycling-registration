@@ -1,0 +1,18 @@
+---
+fr:
+  competition_setup:
+    directors:
+      index:
+        add_director: Ajouter un directeur
+        create_director: Créer un directeur
+        description: Les directeurs sont affectés à une classe d'événements. Ils pourront
+          créer / gérer les listes de départ, les juges, et les bénévoles secrétaires
+          d'épreuve (droit de saisie) pour leurs compétitions.
+        director: Directeur
+        header: Gérer les directeurs
+        note_1: Une compétition doit être configurée par "l'administrateur de la compétiton"
+          (c'est probablement vous) avant que le directeur puisse gérer les listes
+          de départ de la compétition.
+        note_2: Les directeurs ne peuvent pas créer eux-même leur compétition car
+          les choix des paramètres particulier d'un compétition sont bien souvent
+          plus complexe que ce que les directeurs imaginent.

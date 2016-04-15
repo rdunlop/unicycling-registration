@@ -1,0 +1,9 @@
+---
+fr:
+  convention_setup:
+    coupon_codes:
+      index:
+        description: Le code promo peut être créé afin de fournir une réduction (ou
+          même la gratuité) sur certains éléments.
+        header: Liste des codes promos
+        new_coupon_code: Nouveau code promo

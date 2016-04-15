@@ -1,0 +1,16 @@
+---
+fr:
+  convention_setup:
+    registration_costs:
+      index:
+        header: Coûts d'inscription
+        new_registration_cost: Nouveau coût d'inscription
+        range_description: Chaque coût d'inscription définira la période pendant laquelle
+          on pourra s'inscrire pour la compétition à chaque prix.
+        timezone_logic_description: Les utilisateurs peuvent habiter dans différents
+          fuseau horaires, afin d'être équitable, le système permettra donc le paiement
+          du prix initial jusqu'à 24h après la fin de la période d'inscription. (selon
+          la localisation du serveur)
+        timezone_logic_example: Si la première période d'inscription termine le 20
+          avril, les inscrits pourront payer le prix initial jusqu'à ce que le serveur
+          passe au 22 avril.

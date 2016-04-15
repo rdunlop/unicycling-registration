@@ -1,0 +1,17 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      organization_membership:
+        display_membership_pages: Montrer les pages de l'organisation nationale
+        french_behavior_description: Spécifié "Fédération Française" permettra de
+          demander à l'utilisateur son numéro d'adhérent fédéral
+        header: Paramètre d'adhésion à l'organisation
+        requests_membership_number: Ceci présente l'organisation monocycliste dont
+          l'adhésion sera demandé à chaque inscrit
+        should_be_members: Les inscrits doivent-ils être membres d'une organisation
+          monocycliste ?
+        usa_behavior_description: En spécifiant "USA", le système confirmera l'adhésion
+          de chaque inscrits à la fédération Nord-américaine en vérifiant dans la
+          base de donnée
+        which_organization: Quel organisation monocycliste ?

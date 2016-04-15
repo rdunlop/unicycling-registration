@@ -1,0 +1,10 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      name_logo:
+        header: Nom & Logo
+        long_name_description: Le nom long, le lieu et les dates. La description sera
+          utilisé en haut de la page d'accueil.
+        short_name_description: 'Le nom court sera utilisé lorsque l''espace est limité
+          (ex : la plupart des PDFs)'

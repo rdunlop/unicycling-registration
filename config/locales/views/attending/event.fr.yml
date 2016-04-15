@@ -4,3 +4,11 @@ fr:
     event:
       best_time: Meilleur temps
       category: Catégorie
+      drop_out_confirmation: Si vous renoncez, vous ne pourrez pas retrouver vos droits
+        sans l'intervention d'un admin. Continuer ?
+      drop_out_of_event: Se désinscrire de l'événement
+      paid_for: Payé
+      paid_for_tooltip: Pour renoncer à cet événement, vous devez contact les organisateurs
+      upload_music: Uploader votre musique ?
+      upload_music_details: Uploader votre musique pour cet événement depuis la page
+        "Résumé"

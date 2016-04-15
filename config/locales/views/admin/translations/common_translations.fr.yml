@@ -1,0 +1,17 @@
+---
+fr:
+  admin:
+    translations:
+      common_translations:
+        access_not_enabled: Vous n'avez pas accès au système de traduction commun
+        common_example_1: "Étiquettes de la bar de navigation"
+        common_example_2: Texte d'e-mail automatique
+        common_example_3: 'Noms de champ (ex : Prénom, Téléphone)'
+        common_translations: Traductions communes
+        common_translations_detail: Parce les Traduction Communes sont applicables
+          à l'ensemble des conventions, il est probable que ça soit déjà traduit dans
+          votre langue. Tous les changements à ces textes seront appliqués immédiatement
+          à TOUTES les conventions.
+        examples_of_common_translations: Exemples de traductions communes
+        follow_the_directions: suivez les consignes
+        want_to_help: Si vous souhaitez aider à traduire ce teste, svp

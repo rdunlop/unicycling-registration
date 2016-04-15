@@ -1,0 +1,7 @@
+---
+fr:
+  convention_setup:
+    event_categories:
+      form:
+        details: S'il y a une seule catégorie d'événement, l'utilisateur ne verra
+          pas de menu déroulant

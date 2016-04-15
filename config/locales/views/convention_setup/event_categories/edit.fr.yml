@@ -1,0 +1,6 @@
+---
+fr:
+  convention_setup:
+    event_categories:
+      edit:
+        header: Modifier la catégorie d'événement

@@ -1,0 +1,9 @@
+---
+fr:
+  convention_setup:
+    expense_items:
+      index:
+        description: 'Créer un élément de dépense pour chaque type de %{expense_group}
+          que vous voulez vendre. Ex : T-shirt small...'
+        header: Liste des éléments de dépense de %{expense_group}
+        new_expense_item: Nouvel élément de dépense

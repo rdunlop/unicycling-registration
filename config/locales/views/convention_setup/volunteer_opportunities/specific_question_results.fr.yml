@@ -1,0 +1,8 @@
+---
+fr:
+  convention_setup:
+    volunteer_opportunities:
+      specific_question_results:
+        confirmation: Etes-vous sûr ? Cela supprimera toutes les inscriptions concernée
+          par cette option de bénévolat
+        new_volunteer_role: Nouveau rôle de bénévole

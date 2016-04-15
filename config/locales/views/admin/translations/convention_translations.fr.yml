@@ -1,0 +1,20 @@
+---
+fr:
+  admin:
+    translations:
+      convention_translations:
+        access_denied_html: Vous <b>N'avez Pas</b> accès à la traduction de ce site
+        access_enabled: Vous avez accès à la traduction
+        assign_volunteers_html: Pour assigner des bénévoles à la traduction de vos
+          informations spécifiques de conventions, utilisez le %{link} pour leur donner
+          le rôle "Traducteur".
+        convention_translations_detail: La traduction spécifique de votre convention
+          dépend du texte saisi lors de la configuration de la convention, elle devra
+          donc être traduite pour chaque convention
+        example_1: 'Nom de l''élément (ex : T-shirt small)'
+        example_2: 'Nom d''événement (ex : Flat)'
+        example_3: 'Choix d''événement (ex : Junior Expert)'
+        examples_of_convention_translations: Exemples de traductions spécifiques à
+          la convention
+        header: Traductions spécifiques à la convention
+        user_management: Gestion des utilisateurs

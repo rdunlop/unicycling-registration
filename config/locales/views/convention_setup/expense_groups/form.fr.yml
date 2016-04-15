@@ -1,0 +1,8 @@
+---
+fr:
+  convention_setup:
+    expense_groups:
+      form:
+        competitor_get_one_free: Chaque compétiteur en reçoit-il gratuitement ?
+        noncompetitor_get_one_free: Chaque non-compétiteur en reçoit-il un gratuitement
+          ?

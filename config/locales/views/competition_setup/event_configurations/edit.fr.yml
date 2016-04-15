@@ -1,0 +1,11 @@
+---
+fr:
+  competition_setup:
+    event_configurations:
+      edit:
+        artistic_mode_description: Ceci permet de choisir si on élimine un juge haut,
+          un bas lors du jugement (petit événement), ou un haut un bas PAR TYPE DE
+          JUGE (gros événement)
+        artistic_scoring_mode: Mode de jugement artistique
+        description: Ces paramètres affectent tous les événements de la compétition
+        header: Paramètres globaux de compétition

@@ -15,11 +15,21 @@ fr:
     - :day
     - :month
     - :year
+  delete: Supprimer
+  edit: Modifier
+  example: Exemple
   language_name: Français
+  membership_number: Numéro d'adhérent
   'no': Non
   noncompetitor: Non-compétiteur
+  note: Note
+  organization_membership_types:
+    french_federation: Fédération française (CNM)
+    usa: USA
+  pdf: "(pdf)"
   prices_increase_at_date: Les prix augmentent das %{end_date}
   prices_increase_soon: Les prix augmentent en moins d'un jour
+  show: Montrer
   spectator: Spectateur
   wizard:
     add_contact_details: Coordonnées

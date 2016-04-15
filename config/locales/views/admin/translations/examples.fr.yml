@@ -1,0 +1,14 @@
+---
+fr:
+  admin:
+    translations:
+      examples:
+        example_should_become: Devrait Devenir
+        leave_some_untranslated: Certaines parties ne doivent pas être traduites
+        performance_impact_warning: N'utilisez les boutons "Appliquer les changements"
+          et "Vider le cache de traduction" que quand vous avez terminé, car cela
+          peut avoir des conséquences sur les performances.
+        text_translation_system: Système de traduction
+        when_done_translating: Une fois votre traduction terminée, appuyez sur le
+          bouton "Appliquer les changements" dans "Système de Traduction de Texte"
+          afin que les changements soient sauvegarder sur le site

@@ -6,6 +6,7 @@ fr:
         code: Code
         description: Description
         inform_emails: E-mails où signaler l'utilisation d'un code promo
+        maximum_registrant_age: Age maximum d'inscription
         max_num_uses: Nombre d'utilisations maximales
         name: Nom
         price: Prix

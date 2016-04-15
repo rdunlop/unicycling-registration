@@ -1,0 +1,14 @@
+---
+fr:
+  nav_bar:
+    admin_set_two:
+      manage_cache: Gestion du cache
+      manage_memberships: Gestion des adhésions à la fédération
+      manage_standard_skill_entries: Entrée d'artistique technique
+      on_site_registration: Inscription sur place
+      registrant_bag_labels: Numéro de sac des inscrits (pdf)
+      registrant_summaries_by_id: Tous les résumés d'inscriptions triés par ID (pdf)
+      registrant_summaries_by_last_name: Tous les résumés d'inscription triés par
+        nom (pdf)
+      send_email_to_registrants: Inscrits (email)
+      translations: Traductions

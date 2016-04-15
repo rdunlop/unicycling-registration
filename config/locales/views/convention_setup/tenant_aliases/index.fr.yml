@@ -1,0 +1,25 @@
+---
+fr:
+  convention_setup:
+    tenant_aliases:
+      index:
+        accessible_url_html: Cette convention sera <u>toujours</u> accessible à %{link}
+        alias_verified: Alias vérifié
+        base_dns_cname_html: MEttez en place un enregistrement DNS CNAME de "&lt;votreurl.votresite.com&gt;."
+          à
+        create_other_dns_record: Si vous voulez que le système d'inscription semble
+          appartenir à une autre adresse web,  vous pouvez utiliser un enregistrement
+          DNS CNAME pour créer un alias.
+        current_url_html: Le système d'inscription est actuellement configuré pour
+          être en ligne à %{link}
+        delete_current_primary_domain: Supprimer le domaine primaire actuel
+        header: Configuration du domaine
+        must_save_warning: Avant de pouvoir activer l'alias, vous devez "Sauvegarder
+          l'enregistrement".
+        primary_domain_description: "Une fois l'alias créé, vous pouvez le définir
+          comme \"Domaine primaire\"\r\nici, ce qui changera l'ensemble des liens
+          dans les emails en faveur de cette nouvelle adresse à la place de l'adresse
+          par défaut en unicycle-software.com."
+        set_as_primary_domain: Définir l'alias comme domaine primaire
+        submit: Sauvegarder l'enregistrement
+        url_of_new_domain: Saisissez l'URL du nouveau domaine

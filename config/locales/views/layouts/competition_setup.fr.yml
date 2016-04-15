@@ -1,0 +1,9 @@
+---
+fr:
+  layouts:
+    competition_setup:
+      advanced: Paramètres avancés
+      competition_setup: Création des compétitions
+      manage_age_groups: Type de tanche d'âge
+      manage_competitions: Gérer les compétitions
+      manage_directors: Gérer les directeurs

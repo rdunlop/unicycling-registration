@@ -1,0 +1,11 @@
+---
+fr:
+  competition_setup:
+    index:
+      directors: Directeurs
+      events_by_category: Evénements par catégorie
+      header: Configuration de la compétition
+      instructions: Veuillez créer des directeurs pour chaque événement. Vous (ou
+        le directeur) peut créer des compétitions pour chaque événement, ce qui dictera
+        comment le rassemblement des données aura lieu pour cet événement
+      new_competition: Créer une nouvelle compétition

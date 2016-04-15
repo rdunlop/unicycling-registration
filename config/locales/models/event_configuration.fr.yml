@@ -25,6 +25,11 @@ fr:
         offline_payment: Configuration des détails sur le paiement hors ligne
         offline_payment_description: Détails pour le paiement hors ligne
         paypal_mode: Mode Paypal
+        registrants_should_specify_default_wheel_size: Le compétiteur doit spécifier
+          sa taille de roue par défaut
+        request_address: Demander l'addresse
+        request_emergency_contact: Demander les contacts d'urgences
+        request_responsible_adult: Demander un adulte tuteur
         rules_file_name: Fichier PDF de règlement
         short_name: Nom écourté
         spectator: Spectateur
@@ -32,7 +37,10 @@ fr:
         start_date: Premier jour de compétition
         style_name: Style de page web
         under_construction: En construction
-    models: 
+    models:
+      event_configurations:
+        one: Configuration d'événement
+        other: Configuration d'événements
   helpers:
     submit:
       event_configuration:

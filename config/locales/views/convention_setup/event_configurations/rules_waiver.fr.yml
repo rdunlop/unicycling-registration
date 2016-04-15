@@ -1,0 +1,18 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      rules_waiver:
+        current_iuf_rulebook_link: Le livret des règles IUF peut être trouvé à
+        description: Spécifie le type de décharge que vous voulez fournir aux inscrits.
+        header: Décharge et règlements
+        noncompetitor_description: Les non-compétiteurs ne peuvent pas s'inscrire
+          à des événements
+        online_waiver_description: 'En ligne : l''utilisateur doit signer la décharge'
+        print_waiver_description: 'Impression : Nous fournissons une décharge pour
+          que les utilisateur l''imprime et la signe lors de lévénement. (disponible
+          en avance sur le site web afin que les parents puissent le signer)'
+        rulebook: Livret de règles
+        rules: Règles
+        sub_description: 'Vous pouvez spécifier des règles additionnelles que vous
+          voulez fournir aux inscrits (ex : des ajustements spécifiques à la convention)'

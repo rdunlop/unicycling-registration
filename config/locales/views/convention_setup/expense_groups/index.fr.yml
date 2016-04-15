@@ -1,0 +1,9 @@
+---
+fr:
+  convention_setup:
+    expense_groups:
+      index:
+        description: Si vous voulez vendre des éléments (comme des t-shirts, du logement,
+          etc.), créer un groupe de dépense pour ces éléments.
+        header: Eléments en vente
+        new_expense_group: Nouveau groupe de dépense

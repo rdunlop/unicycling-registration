@@ -7,6 +7,7 @@ fr:
         artistic: Artistique
         best_time_format: Format du mailleur temps
         id: ID
+        standard_skill: Standard Skill (artistique technique)
         visible: Visible
     models:
       event:

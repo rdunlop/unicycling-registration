@@ -1,0 +1,10 @@
+---
+fr:
+  convention_setup:
+    event_configurations:
+      important_dates:
+        description: SI vous ne remplissez pas cette date, l'accès fermera à la fermeture
+          des inscriptions.
+        effective_final_date: Date limite effective
+        header: Dates importantes
+        type_of_important_date: Type de date important
