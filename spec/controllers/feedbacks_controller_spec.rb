@@ -19,6 +19,9 @@ require 'spec_helper'
 describe FeedbacksController do
   let(:user) { FactoryGirl.create(:user) }
 
+  # To avoid TenantNotFound issues when creating urls in the e-mail
+  before { @tenant = FactoryGirl.create(:tenant, :test_schema) }
+
   describe "GET #new" do
     it "renders" do
       get :new
