@@ -6,7 +6,7 @@
 #  user_id        :integer
 #  entered_email  :string
 #  message        :text
-#  status         :string           not null
+#  status         :string           default("new"), not null
 #  resolved_at    :datetime
 #  resolved_by_id :integer
 #  resolution     :text

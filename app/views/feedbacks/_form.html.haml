@@ -1,6 +1,6 @@
 %h4= t(".header")
 = render :partial => "/shared/error_messages", :object => @feedback
-= simple_form_for @feedback do |f|
+= simple_form_for @feedback, url: feedback_path do |f|
   .row
     .small-2.columns.text-right
       = f.label :entered_email, t(".email")
