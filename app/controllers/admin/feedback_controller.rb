@@ -7,7 +7,7 @@ class Admin::FeedbackController < ApplicationController
 
   # GET /admin/feedback/
   def index
-    @feedbacks = Feedback.includes(:user, :resolved_by)
+    @feedbacks = Feedback.includes(:user, :resolved_by).order(created_at: :desc)
 
     respond_to do |format|
       format.html

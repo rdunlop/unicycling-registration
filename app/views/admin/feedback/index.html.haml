@@ -13,7 +13,7 @@
       %th Message
   %tbody
     - @feedbacks.each do |feedback|
-      %tr
+      %tr{ class: (feedback.resolved? ? "feedback_resolved_row" : "") }
         %td= link_to feedback.id, admin_feedback_path(feedback)
         %td= feedback.created_at
         %td= feedback.resolved?
