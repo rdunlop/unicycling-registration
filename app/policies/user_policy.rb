@@ -25,6 +25,11 @@ class UserPolicy < ApplicationPolicy
     !artistic_reg_closed? || event_planner? || super_admin?
   end
 
+  # Can create feedback (as if a user had submitted feedback)
+  def create_feedback?
+    super_admin?
+  end
+
   # Can view and resolve feedback submitted through the site
   def manage_feedback?
     convention_admin? || super_admin?

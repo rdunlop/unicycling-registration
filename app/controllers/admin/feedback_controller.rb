@@ -13,6 +13,25 @@ class Admin::FeedbackController < ApplicationController
     end
   end
 
+  # GET /admin/feedback/new
+  def new
+    authorize current_user, :create_feedback?
+    @feedback = Feedback.new
+  end
+
+  # POST /admin/feedback
+  def create
+    authorize current_user, :create_feedback?
+    @feedback = Feedback.new(create_feedback_params)
+    if @feedback.save
+      flash[:notice] = "Feedback created successfully"
+      redirect_to admin_feedback_index_path
+    else
+      flash[:alert] = "error creating feedback"
+      render :new
+    end
+  end
+
   # GET /admin/feedback/:id
   def show
     add_breadcrumb "All Feedback", admin_feedback_index_path
@@ -33,6 +52,19 @@ class Admin::FeedbackController < ApplicationController
   end
 
   private
+
+  def create_feedback_params
+    params.require(:feedback).permit(
+      :user_id,
+      :entered_email,
+      :message,
+      :status,
+      :resolved_at,
+      :resolved_by_id,
+      :resolution,
+      :created_at
+    )
+  end
 
   def load_feedback
     @feedback = Feedback.find(params[:id])

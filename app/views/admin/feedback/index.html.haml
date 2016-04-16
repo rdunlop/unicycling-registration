@@ -19,3 +19,6 @@
         %td= feedback.resolved?
         %td= feedback.username
         %td= link_to message_summary(feedback), admin_feedback_path(feedback)
+
+- if policy(current_user).create_feedback?
+  = link_to "Enter new feedback", new_admin_feedback_path, class: "button"

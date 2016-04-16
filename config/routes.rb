@@ -313,7 +313,7 @@ Workspace::Application.routes.draw do
     end
 
     namespace :admin do
-      resources :feedback, only: [:index, :show] do
+      resources :feedback, only: [:index, :show, :new, :create] do
         member do
           put :resolve
         end

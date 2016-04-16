@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Admin::FeedbackController do
-  before(:each) do
-    @user = FactoryGirl.create(:convention_admin_user)
-    sign_in @user
-  end
+  let(:user) { FactoryGirl.create(:convention_admin_user) }
   let!(:feedback) { FactoryGirl.create(:feedback) }
   let!(:resolved_feedback) { FactoryGirl.create(:feedback, :resolved) }
+
+  before(:each) do
+    sign_in user
+  end
 
   describe "#index" do
     it "can list the feedback" do
@@ -44,6 +45,24 @@ describe Admin::FeedbackController do
       it "re-renders the show view" do
         put :resolve, id: feedback.id
         expect(response).to redirect_to(admin_feedback_path(feedback))
+      end
+    end
+  end
+
+  context "as a super-admin" do
+    let(:user) { FactoryGirl.create(:super_admin_user) }
+    describe "#new" do
+      it "displays" do
+        get :new
+        expect(response).to be_successful
+      end
+    end
+
+    describe "#create" do
+      it "creates new feedback" do
+        expect do
+          post :create, feedback: { entered_email: "test@example.com", message: "help me obi-wan" }
+        end.to change(Feedback, :count).by(1)
       end
     end
   end

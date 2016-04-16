@@ -1,0 +1,18 @@
+%h1 New Feedback
+
+%p
+  This form is designed to be used to log feedback which has been dealt with externally.
+  %b It is only available to Super-Admin users
+
+= simple_form_for(@feedback, url: admin_feedback_index_path, method: :post) do |f|
+
+  = f.input :user_id, collection: User.all, label_method: :to_s
+  = f.input :entered_email
+  = f.input :message
+  = f.input :status, collection: ["new", "resolved"], allow_blank: false
+  = f.input :resolved_at, as: :datetime_picker, include_blank: true
+  = f.input :resolved_by_id, collection: User.all, label_method: :to_s
+  = f.input :resolution
+  = f.input :created_at, as: :datetime_picker, include_blank: true
+
+  = f.submit
