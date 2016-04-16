@@ -63,11 +63,13 @@ en:
             Able to see the total number of items paid.
             Able to Set Registration Fees per user
             Able to mark checks as received
+            Able to manage Feedback received by the system
           event_planner: |
             Able to view/review the event sign_ups.
             Able to SEARCH & MODIFY any registration.
             Able to Add/Modify event choices, at all times.
             Able to view/send emails to all registrants
+            Able to manage Feedback received by the system
           membership_admin: |
             Able to view the USA Memberships page.
             Able to update the USA Membership numbers

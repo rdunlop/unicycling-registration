@@ -32,7 +32,7 @@ class UserPolicy < ApplicationPolicy
 
   # Can view and resolve feedback submitted through the site
   def manage_feedback?
-    convention_admin? || super_admin?
+    event_planner? || payment_admin? || super_admin?
   end
 
   def manage_music?
