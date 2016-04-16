@@ -18,7 +18,7 @@
   %hr
   .row
     .small-4.columns
-      = f.input :status, collection: ["new", "resolved"], allow_blank: false
+      = f.input :status, collection: ["new", "resolved"], include_blank: false
     .small-4.columns
       = f.input :resolved_at, as: :datetime_picker, include_blank: true
     .small-4.columns
