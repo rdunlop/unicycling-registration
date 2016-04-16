@@ -312,6 +312,14 @@ Workspace::Application.routes.draw do
       end
     end
 
+    namespace :admin do
+      resources :feedback, only: [:index, :show] do
+        member do
+          put :resolve
+        end
+      end
+    end
+
     scope module: "admin" do
       resources :registrants, only: [] do
         collection do

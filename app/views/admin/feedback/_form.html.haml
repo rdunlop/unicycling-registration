@@ -1,0 +1,7 @@
+%h1 Resolve Feedback
+
+= simple_form_for(@feedback, url: resolve_admin_feedback_path(@feedback), method: :put) do |f|
+
+  = f.input :resolution
+
+  = f.submit

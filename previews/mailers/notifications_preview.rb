@@ -1,6 +1,6 @@
 class NotificationsPreview < ActionMailer::Preview
   def send_feedback
-    Notifications.send_feedback(contact_form.serialize)
+    Notifications.send_feedback(feedback)
   end
 
   def request_registrant_access
@@ -31,8 +31,8 @@ class NotificationsPreview < ActionMailer::Preview
 
   private
 
-  def contact_form
-    ContactForm.new(feedback: "This is a \"great\" site", email: "big_shot@unicycling.org", signed_in: false)
+  def feedback
+    Feedback.all.sample
   end
 
   def registrant

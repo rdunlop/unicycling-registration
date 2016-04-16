@@ -1,0 +1,29 @@
+%h1 Feedback ##{@feedback.id}
+
+%p
+  %b NOTE:
+  Writing a resolution here does
+  %u NOT
+  Send e-mail to anyone.
+  Please communicate with the feedback-submitter directly.
+
+%div
+  %ul
+    %li Entered Email: #{@feedback.username}
+    %li From: #{@feedback.username}
+    %li User's First Registrant: #{@feedback.user_first_registrant_name}
+
+
+- if @feedback.resolved?
+  %h2 Feedback Resolved
+  %p
+    Resolved by #{@feedback.resolved_by}
+  %p
+    Resolved on #{@feedback.resolved_at}
+  %p
+    Resolution:
+    %br
+    #{@feedback.resolution}
+
+- else
+  = render "form"

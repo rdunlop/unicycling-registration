@@ -15,6 +15,7 @@ Unknown priority
 ----------------
 Items which may be high priority, but need input/feedback
 
+- Use gem "mail_view" to make e-mails prettier
 - Ungeared Champion calculation ? (new rulebook entry)
 - Allow UNICON 2016 to solicit/store/review Standard Skill Routines
 

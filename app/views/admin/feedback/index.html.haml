@@ -1,0 +1,21 @@
+%h1 Handle submitted Feedback
+
+%p
+  Users of this site have submitted the following feedback. Please use this page to keep track of which feedback you have responded to.
+
+%table
+  %thead
+    %tr
+      %th Feedback #
+      %th Date Submitted
+      %th Resolved?
+      %th Submitted By
+      %th Message
+  %tbody
+    - @feedbacks.each do |feedback|
+      %tr
+        %td= link_to feedback.id, admin_feedback_path(feedback)
+        %td= feedback.created_at
+        %td= feedback.resolved?
+        %td= feedback.username
+        %td= link_to message_summary(feedback), admin_feedback_path(feedback)

@@ -25,6 +25,11 @@ class UserPolicy < ApplicationPolicy
     !artistic_reg_closed? || event_planner? || super_admin?
   end
 
+  # Can view and resolve feedback submitted through the site
+  def manage_feedback?
+    convention_admin? || super_admin?
+  end
+
   def manage_music?
     music_dj? || super_admin?
   end

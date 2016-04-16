@@ -4,6 +4,13 @@ FactoryGirl.define do
     user
     status "new"
     entered_email nil
+
+    trait :resolved do
+      status "resolved"
+      association :resolved_by, factory: :user
+      resolved_at { DateTime.current }
+      resolution "Sent him an e-mail"
+    end
   end
 end
 

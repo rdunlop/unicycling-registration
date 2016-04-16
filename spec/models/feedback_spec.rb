@@ -61,6 +61,31 @@ describe Feedback do
     feedback.user = user
     expect(feedback.reply_to_email).to eq("bob@dunlopweb.com")
   end
+
+  context "with a saved feedback" do
+    let(:feedback) { FactoryGirl.create(:feedback) }
+
+    context "with the resolution set" do
+      before { feedback.resolution = "something" }
+
+      it "cannot resolve without setting the resolved_by" do
+        expect(feedback.resolve).to be_falsey
+      end
+
+      context "having set the resolved_by user" do
+        before { feedback.resolved_by = FactoryGirl.create(:user) }
+
+        it "can resolve" do
+          expect(feedback.resolve).to be_truthy
+        end
+      end
+    end
+
+    it "cannot resolve without the resolution" do
+      feedback.resolved_by = FactoryGirl.create(:user)
+      expect(feedback.resolve).to be_falsey
+    end
+  end
 end
 
 # == Schema Information

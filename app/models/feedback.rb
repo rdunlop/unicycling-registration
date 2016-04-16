@@ -42,6 +42,12 @@ class Feedback < ActiveRecord::Base
     "unknown"
   end
 
+  def resolve
+    self.resolved_at = DateTime.current
+    self.status = "resolved"
+    save
+  end
+
   private
 
   def signed_in?
