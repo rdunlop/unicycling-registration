@@ -1,7 +1,7 @@
 ---
 de:
-  welcome:
-    feedback:
+  feedbacks:
+    form:
       email: Deine E-Mail Adresse
       header: Feedback
       optional: Optional

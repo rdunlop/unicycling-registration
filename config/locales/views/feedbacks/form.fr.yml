@@ -1,7 +1,7 @@
 ---
 fr:
-  welcome:
-    feedback:
+  feedbacks:
+    form:
       email: Votre e-mail
       header: Commentaires
       optional: Optionnel

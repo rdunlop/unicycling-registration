@@ -1,6 +1,6 @@
 en:
-  welcome:
-    feedback:
+  feedbacks:
+    form:
       header: Feedback
       email: Your Email
       optional: Optional

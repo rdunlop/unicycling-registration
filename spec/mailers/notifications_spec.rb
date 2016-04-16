@@ -27,9 +27,9 @@ describe Notifications do
   end
 
   describe "send_feedback" do
-    let(:contact_form) { ContactForm.new(feedback: "This is some feedback", email: "test@complaint.com") }
+    let(:feedback) { FactoryGirl.create(:feedback, message: "This is some feedback", entered_email: "test@complaint.com") }
     let(:mail) do
-      Notifications.send_feedback(contact_form.serialize)
+      Notifications.send_feedback(feedback.id)
     end
 
     it "sets the reply-to address" do
@@ -45,7 +45,7 @@ describe Notifications do
     end
 
     describe "with a signed in user without specifying an e-mail" do
-      let(:contact_form) { ContactForm.new(feedback: "other feedback", username: "test@email.com") }
+      let(:feedback) { FactoryGirl.create(:feedback, message: "other feedback", user: nil, entered_email: "test@email.com") }
 
       it "sets the reply to address" do
         expect(mail.reply_to).to match(["test@email.com"])

@@ -1,0 +1,18 @@
+%h4= t(".header")
+= render :partial => "/shared/error_messages", :object => @feedback
+= simple_form_for @feedback do |f|
+  .row
+    .small-2.columns.text-right
+      = f.label :entered_email, t(".email")
+    .small-10.columns
+      = f.text_field :entered_email, placeholder: t(".optional")
+  .row
+    .small-12.columns
+      = f.text_area :message, {:cols => 100, :rows => 6 }
+  - if recaptcha_required?
+    .row
+      .small-12.columns
+        = recaptcha_tags
+  .row
+    .small-12.columns
+      = f.button :submit, t(".submit"), :class => "focus_button"

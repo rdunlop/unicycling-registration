@@ -24,28 +24,6 @@ class WelcomeController < ApplicationController
   def confirm
   end
 
-  def contact_us
-    @contact_form = ContactForm.new
-  end
-
-  def feedback
-    @contact_form = ContactForm.new(contact_form_params)
-
-    if signed_in?
-      @contact_form.update_from_user(current_user)
-    end
-
-    if @contact_form.valid? && captcha_valid?
-      Notifications.send_feedback(@contact_form.serialize).deliver_later
-      respond_to do |format|
-        format.html { redirect_to contact_us_welcome_path, notice: 'Feedback sent successfully.' }
-      end
-    else
-      @user = current_user
-      render :contact_us
-    end
-  end
-
   # This is the "root_path", and redirects the user to different places
   # depending on the configuration of the server.
   def index
@@ -78,17 +56,6 @@ class WelcomeController < ApplicationController
 
   private
 
-  def captcha_valid?
-    return true unless recaptcha_required?
-
-    verify_recaptcha
-  end
-
-  def recaptcha_required?
-    Rails.application.secrets.recaptcha_private_key.present? && !signed_in?
-  end
-  helper_method :recaptcha_required?
-
   # This tries to get around the apple-touch-icon.png requests
   #  and the humans.txt requests
   def check_acceptable_format
@@ -96,9 +63,5 @@ class WelcomeController < ApplicationController
       params[:format] = nil
       raise ActiveRecord::RecordNotFound.new
     end
-  end
-
-  def contact_form_params
-    params.require(:contact_form).permit(:feedback, :email)
   end
 end

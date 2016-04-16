@@ -1,7 +1,7 @@
 ---
 es:
-  welcome:
-    feedback:
+  feedbacks:
+    form:
       email: Tu correo electrónico
       header: Retroalimentación
       optional: Opcional

@@ -4,7 +4,7 @@
 
   .small-12.columns
     - contact_us_text = t("layouts.footer.contact_us")
-    = t(".thank_you_for_volunteering_html", link: link_to(contact_us_text, contact_us_welcome_path))
+    = t(".thank_you_for_volunteering_html", link: link_to(contact_us_text, new_feedback_path))
 
   .small-12.columns
     %p

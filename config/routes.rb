@@ -402,13 +402,12 @@ Workspace::Application.routes.draw do
       end
     end
     # get "results", to: "results#index"
+    resource :feedback, only: [:new, :create]
     resource :welcome, only: [], controller: "welcome" do
       collection do
         get :changelog
         get :help_translate
         get :help
-        get :contact_us
-        post :feedback
         get :confirm
         get :data_entry_menu
         get :usa_membership
