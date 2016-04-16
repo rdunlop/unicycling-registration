@@ -5,14 +5,26 @@
   %b It is only available to Super-Admin users
 
 = simple_form_for(@feedback, url: admin_feedback_index_path, method: :post) do |f|
+  .row
+    .small-4.columns
+      = f.input :user_id, collection: User.all, label_method: :to_s, input_html: { class: "chosen-select" }
+    .small-4.columns
+      = f.input :entered_email
+    .small-4.columns
+      = f.input :created_at, as: :datetime_picker, include_blank: true
+  .row
+    .small-12.columns
+      = f.input :message
+  %hr
+  .row
+    .small-4.columns
+      = f.input :status, collection: ["new", "resolved"], allow_blank: false
+    .small-4.columns
+      = f.input :resolved_at, as: :datetime_picker, include_blank: true
+    .small-4.columns
+      = f.input :resolved_by_id, collection: User.all, label_method: :to_s, input_html: { class: "chosen-select" }
+  .row
+    .small-12.columns
+      = f.input :resolution
 
-  = f.input :user_id, collection: User.all, label_method: :to_s
-  = f.input :entered_email
-  = f.input :message
-  = f.input :status, collection: ["new", "resolved"], allow_blank: false
-  = f.input :resolved_at, as: :datetime_picker, include_blank: true
-  = f.input :resolved_by_id, collection: User.all, label_method: :to_s
-  = f.input :resolution
-  = f.input :created_at, as: :datetime_picker, include_blank: true
-
-  = f.submit
+  = f.submit class: "button"

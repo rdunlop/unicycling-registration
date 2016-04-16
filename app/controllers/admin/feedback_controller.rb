@@ -3,6 +3,7 @@ class Admin::FeedbackController < ApplicationController
   before_action :authorize_user
 
   before_action :load_feedback, only: [:show, :resolve]
+  before_action :add_index_breadcrumb, except: [:index]
 
   # GET /admin/feedback/
   def index
@@ -34,7 +35,6 @@ class Admin::FeedbackController < ApplicationController
 
   # GET /admin/feedback/:id
   def show
-    add_breadcrumb "All Feedback", admin_feedback_index_path
   end
 
   # PUT /admin/feedback/:id
@@ -52,6 +52,10 @@ class Admin::FeedbackController < ApplicationController
   end
 
   private
+
+  def add_index_breadcrumb
+    add_breadcrumb "All Feedback", admin_feedback_index_path
+  end
 
   def create_feedback_params
     params.require(:feedback).permit(

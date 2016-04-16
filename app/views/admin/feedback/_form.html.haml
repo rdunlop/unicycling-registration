@@ -1,7 +1,9 @@
 %h1 Resolve Feedback
 
-= simple_form_for(@feedback, url: resolve_admin_feedback_path(@feedback), method: :put) do |f|
+.row
+  .small-12.columns
+    = simple_form_for(@feedback, url: resolve_admin_feedback_path(@feedback), method: :put) do |f|
 
-  = f.input :resolution
+      = f.input :resolution
 
-  = f.submit class: "button"
+      = f.submit class: "button"
