@@ -327,7 +327,6 @@ Style/TrivialAccessors:
   Exclude:
     - 'app/actions/sample_competition_creator.rb'
     - 'app/models/competition_sign_up.rb'
-    - 'app/models/contact_form.rb'
 
 # Offense count: 36
 # Cop supports --auto-correct.
