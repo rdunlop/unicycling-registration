@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Admin::FeedbackController do
-  let(:user) { FactoryGirl.create(:convention_admin_user) }
+  let(:user) { FactoryGirl.create(:payment_admin) }
   let!(:feedback) { FactoryGirl.create(:feedback) }
   let!(:resolved_feedback) { FactoryGirl.create(:feedback, :resolved) }
 
