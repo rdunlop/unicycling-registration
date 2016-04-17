@@ -21,7 +21,7 @@
         %td= @feedback.user_first_registrant_name
       %tr
         %th Message
-        %td= @feedback.message
+        %td= simple_format(@feedback.message)
 
 - if @feedback.resolved?
   %h2 Feedback Resolved
@@ -37,7 +37,7 @@
           %td= @feedback.resolved_at
         %tr
           %th Resolution
-          %td= @feedback.resolution
+          %td= simple_format(@feedback.resolution)
 
 - else
   = render "form"
