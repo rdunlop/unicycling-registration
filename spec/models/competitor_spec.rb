@@ -221,11 +221,12 @@ describe Competitor do
       member = @comp.members(true).first
       @reg1 = member.registrant
 
-      Delorean.jump 2
-      @comp.reload
-      member2 = FactoryGirl.create(:member, competitor: @comp)
-      @comp.reload
-      @reg2 = member2.registrant
+      travel 2.seconds do
+        @comp.reload
+        member2 = FactoryGirl.create(:member, competitor: @comp)
+        @comp.reload
+        @reg2 = member2.registrant
+      end
     end
     it "should display the external id's for all members" do
       expect(@comp.bib_number).to eq(@reg1.external_id.to_s + ", " + @reg2.external_id.to_s)
@@ -240,11 +241,12 @@ describe Competitor do
     end
 
     it "should display the maximum ages for all members (when they are different)" do
-      Delorean.jump 2
-      @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 02, 10))
-      @comp2 = FactoryGirl.create(:event_competitor)
-      FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
-      @comp2.reload
+      travel 2.seconds do
+        @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 02, 10))
+        @comp2 = FactoryGirl.create(:event_competitor)
+        FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
+        @comp2.reload
+      end
 
       expect(@comp2.age).to eq(@reg3.age)
     end
@@ -265,10 +267,11 @@ describe Competitor do
     end
 
     it "should display (mixed) if both genders exist" do
-      Delorean.jump 2
-      @reg3 = FactoryGirl.create(:registrant, gender: "Female")
-      FactoryGirl.create(:member, competitor: @comp, registrant: @reg3)
-      @comp.reload
+      travel 2.seconds do
+        @reg3 = FactoryGirl.create(:registrant, gender: "Female")
+        FactoryGirl.create(:member, competitor: @comp, registrant: @reg3)
+        @comp.reload
+      end
 
       expect(@comp.gender).to eq("(mixed)")
     end
@@ -354,8 +357,9 @@ describe Competitor do
     let(:competition) { FactoryGirl.create(:distance_competition) }
 
     before(:each) do
-      Delorean.jump 2
-      @da = DistanceAttempt.new
+      travel 2.seconds do
+        @da = DistanceAttempt.new
+      end
     end
     it "should be accessible from the competitor" do
       da = FactoryGirl.create(:distance_attempt, competitor: @comp)
@@ -368,9 +372,9 @@ describe Competitor do
       FactoryGirl.create(:distance_attempt, competitor: comp)
 
       expect(DistanceAttempt.count).to eq(1)
-      Delorean.jump 2
-
-      comp.destroy
+      travel 2.seconds do
+        comp.destroy
+      end
       expect(DistanceAttempt.count).to eq(0)
     end
 
@@ -379,8 +383,9 @@ describe Competitor do
       FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.no_more_jumps?).to eq(false)
 
-      Delorean.jump 2
-      FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
+      travel 2.seconds do
+        FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
+      end
 
       expect(@comp.reload.no_more_jumps?).to eq(true)
     end
@@ -389,8 +394,9 @@ describe Competitor do
       expect(@comp.no_more_jumps?).to eq(false)
       da1 = FactoryGirl.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.no_more_jumps?).to eq(false)
-      Delorean.jump 2
-      FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
+      travel 2.seconds do
+        FactoryGirl.create(:distance_attempt, distance: da1.distance + 1, competitor: @comp, fault: true)
+      end
 
       expect(@comp.reload.no_more_jumps?).to eq(false)
     end
@@ -424,9 +430,16 @@ describe Competitor do
     describe "when attempts have already been made" do
       before (:each) do
         FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 10, fault: false)
-        Delorean.jump 2
-        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
-        Delorean.jump 2
+        travel 2.seconds do
+          FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
+        end
+      end
+      before do
+        travel 4.seconds
+      end
+
+      after do
+        travel_back
       end
 
       it "should not be allowed to attempt a smaller distance" do
@@ -461,8 +474,9 @@ describe Competitor do
 
       it "should allow multiple faults, interspersed within the attempts" do
         FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
-        Delorean.jump 2
-        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 25, fault: true)
+        travel 2.seconds do
+          FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 25, fault: true)
+        end
 
         da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 

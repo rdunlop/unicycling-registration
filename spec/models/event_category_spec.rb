@@ -69,9 +69,10 @@ describe EventCategory do
     @event = @ec.event
     old_update_time = @event.updated_at
 
-    Delorean.jump 2
+    travel 2.seconds do
+      @ec.touch
+    end
 
-    @ec.touch
     expect(@event.reload.updated_at.to_s).not_to eq(old_update_time.to_s)
   end
 

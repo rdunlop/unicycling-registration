@@ -44,7 +44,7 @@ end
 shared_examples_for "does update the global key" do
   it "updates the global key" do
     original_key = CachedModelTest.cache_key
-    Delorean.time_travel_to(2.seconds.from_now) do
+    travel 2.seconds do
       do_action
     end
     expect(CachedModelTest.cache_key).not_to eq(original_key)
@@ -54,7 +54,7 @@ end
 shared_examples_for "does not update the global key" do
   it "does not update the global key" do
     original_key = CachedModelTest.cache_key
-    Delorean.time_travel_to(2.seconds.from_now) do
+    travel 2.seconds do
       do_action
     end
     expect(CachedModelTest.cache_key).to eq(original_key)

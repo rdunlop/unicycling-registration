@@ -112,7 +112,6 @@ group :test do
   gem "shoulda-matchers", "= 3.0.1", require: false
 
   gem 'rspec-instafail', require: false
-  gem 'delorean'
 end
 
 group :development, :test do

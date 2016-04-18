@@ -208,7 +208,7 @@ describe EventConfiguration do
   end
 
   it "should NOT have standard_skill_closed by default " do
-    Delorean.time_travel_to(Date.new(2013, 1, 1)) do
+    travel_to(Date.new(2013, 1, 1)) do
       expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
     end
   end
@@ -216,13 +216,13 @@ describe EventConfiguration do
   describe "with the standard_skill_closed_date defined" do
     it "should be closed on the 6th" do
       @ev.save!
-      Delorean.time_travel_to(Date.new(2013, 5, 4)) do
+      travel_to(Date.new(2013, 5, 4)) do
         expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
       end
-      Delorean.time_travel_to(Date.new(2013, 5, 5)) do
+      travel_to(Date.new(2013, 5, 5)) do
         expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
       end
-      Delorean.time_travel_to(Date.new(2013, 5, 6)) do
+      travel_to(Date.new(2013, 5, 6)) do
         expect(EventConfiguration.singleton.standard_skill_closed?).to eq(true)
       end
     end
@@ -234,25 +234,25 @@ describe EventConfiguration do
       @rp = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
     end
     it "should be open on the last day of registration" do
-      Delorean.time_travel_to(Date.new(2012, 11, 07)) do
+      travel_to(Date.new(2012, 11, 07)) do
         expect(EventConfiguration.closed?).to eq(false)
       end
     end
     it "should be open as long as the registration_period is current" do
       d = Date.new(2012, 11, 07)
-      Delorean.time_travel_to(d) do
+      travel_to(d) do
         expect(@rp.current_period?(d)).to eq(true)
         expect(EventConfiguration.closed?).to eq(false)
       end
 
       e = Date.new(2012, 11, 8)
-      Delorean.time_travel_to(e) do
+      travel_to(e) do
         expect(@rp.current_period?(e)).to eq(true)
         expect(EventConfiguration.closed?).to eq(false)
       end
 
       f = Date.new(2012, 11, 9)
-      Delorean.time_travel_to(f) do
+      travel_to(f) do
         expect(@rp.current_period?(f)).to eq(false)
         expect(EventConfiguration.closed?).to eq(true)
       end

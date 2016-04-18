@@ -191,7 +191,7 @@ describe "when testing the update function for registration costs", caching: tru
 
     it "doesnt't update this registrants' items when moving to the next period" do
       FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-      Delorean.time_travel_to Date.new(2020, 12, 1) do
+      travel_to Date.new(2020, 12, 1) do
         RegistrationCost.update_current_period("competitor")
       end
       @reg.reload
@@ -204,7 +204,7 @@ describe "when testing the update function for registration costs", caching: tru
 
     before(:each) do
       ActionMailer::Base.deliveries.clear
-      Delorean.time_travel_to Date.new(2020, 12, 1) do
+      travel_to Date.new(2020, 12, 1) do
         @ret = RegistrationCost.update_current_period("competitor")
         @ret = RegistrationCost.update_current_period("noncompetitor")
       end
@@ -236,7 +236,7 @@ describe "when testing the update function for registration costs", caching: tru
   describe "when updating to a non-existent period" do
     before(:each) do
       ActionMailer::Base.deliveries.clear
-      Delorean.time_travel_to Date.new(2020, 12, 1) do
+      travel_to Date.new(2020, 12, 1) do
         @ret = RegistrationCost.update_current_period("competitor")
       end
     end
@@ -268,7 +268,7 @@ describe "when testing the update function for registration costs", caching: tru
       before(:each) do
         @comp_registration_cost2 = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
         @noncomp_registration_cost2 = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-        Delorean.time_travel_to Date.new(2020, 12, 1) do
+        travel_to Date.new(2020, 12, 1) do
           ActionMailer::Base.deliveries.clear
           @ret = RegistrationCost.update_current_period("competitor")
           @ret = RegistrationCost.update_current_period("noncompetitor")

@@ -8,9 +8,10 @@ describe OverallChampionResultCalculator do
     FactoryGirl.create(:result, competitor: comp, place: options[:place], result_type: "Overall")
     mem = comp.members.first
     mem.registrant = reg
-    Delorean.jump 2
-    mem.save!
-    FactoryGirl.create(:time_result, competitor: comp, minutes: 1)
+    travel 2.seconds do
+      mem.save!
+      FactoryGirl.create(:time_result, competitor: comp, minutes: 1)
+    end
     comp
   end
 
