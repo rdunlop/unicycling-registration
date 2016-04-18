@@ -47,8 +47,7 @@ class StandardSkillScore < ActiveRecord::Base
     (wave_count * 0.5) + line_count + (cross_count * 2) + (circle_count * 3)
   end
 
-  # total score, from the routine value
-  def total
-    standard_skill_score_entries.to_a.sum(&:score)
+  def total_devaluation
+    total_difficulty_devaluation + total_execution_devaluation
   end
 end

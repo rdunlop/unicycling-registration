@@ -5,11 +5,12 @@
     %table
       %thead
         %tr
-          %th{:rowspan => "2"} No
-          %th{:rowspan => "2"} Skill
-          %th{:rowspan => "2"} Description
-          %th{:colspan => "1"} Difficulty
-          %th{:colspan => "4"} Execution
+          %th{ rowspan: 2 } No
+          %th{ rowspan: 2 } Skill
+          %th{ rowspan: 2 } Description
+          %th{ rowspan: 2 } Points
+          %th{ colspan: 1 } Difficulty
+          %th{ colspan: 4 } Execution
         %tr
           %th 50% or 100%
           %th -
@@ -24,9 +25,46 @@
             %td= ssre.position
             %td= ssre.skill_number_and_letter
             %td= ssre.description
-            %td= standard_skill_score_entry_form.text_field :difficulty_devaluation_percent, :size => 5
-            %td= standard_skill_score_entry_form.text_field :wave, :size => 5
-            %td= standard_skill_score_entry_form.text_field :line, :size => 5
-            %td= standard_skill_score_entry_form.text_field :cross, :size => 5
-            %td= standard_skill_score_entry_form.text_field :circle, :size => 5
+            %td= ssre.points
+            %td= standard_skill_score_entry_form.input :difficulty_devaluation_percent, label: false, as: :select, collection: ["0", "50", "100"], include_blank: false
+            %td= standard_skill_score_entry_form.input :wave, label: false, size: 5
+            %td= standard_skill_score_entry_form.input :line, label: false, size: 5
+            %td= standard_skill_score_entry_form.input :cross, label: false, size: 5
+            %td= standard_skill_score_entry_form.input :circle, label: false, size: 5
     = f.button :submit
+
+  .results.row
+    .small-12.medium-4.columns
+      Judge #{@judge}
+    .small-12.medium-4.columns
+      Base Score #{@competitor.standard_skill_routine.total_skill_points}
+      %br
+      Total Devaluation #{@standard_skill_score.total_devaluation / 2}
+      %br
+      Final Score #{@competitor.standard_skill_routine.total_skill_points - (@standard_skill_score.total_devaluation / 2)}
+    .small-12.medium-4.columns
+      %table
+        %tr
+          %th{ colspan: 2 } Difficulty Devaluation
+          %td= @standard_skill_score.total_difficulty_devaluation
+        %tr
+          %th{ colspan: 3 } Execution Devaluation
+        %tr
+          %td= @standard_skill_score.wave_count
+          %td ~ X 0.5 =
+          %td= @standard_skill_score.wave_count * 0.5
+        %tr
+          %td= @standard_skill_score.line_count
+          %td ~ X 1.0 =
+          %td= @standard_skill_score.line_count
+        %tr
+          %td= @standard_skill_score.cross_count
+          %td ~ X 2.0 =
+          %td= @standard_skill_score.cross_count * 2
+        %tr
+          %td= @standard_skill_score.circle_count
+          %td ~ X 3.0 =
+          %td= @standard_skill_score.circle_count * 3
+        %tr
+          %th{ colspan: 2 } Total Devaluation
+          %td= @standard_skill_score.total_execution_devaluation
