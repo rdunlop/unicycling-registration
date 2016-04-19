@@ -3,11 +3,20 @@
     %td= competitor.position
     %td= competitor.bib_number
     %td= competitor.name
-    %td= competitor.standard_skill_routine.total_skill_points
+    %td
+      - routine = competitor.standard_skill_routine
+      - if routine.nil?
+        No Routine Entered
+      - else
+        = competitor.standard_skill_routine.try!(:total_skill_points)
     %td
       - score = competitor.standard_skill_scores.where(judge: @judge).first
       - if score.present?
         = link_to 'score', edit_judge_competitor_standard_skill_score_path(@judge, competitor, score)
       - else
         = link_to 'score', new_judge_competitor_standard_skill_score_path(@judge, competitor)
-    %td= link_to "pdf", writing_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
+    %td
+      - if routine.nil?
+        No Routine Entered
+      - else
+        = link_to "pdf", writing_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"

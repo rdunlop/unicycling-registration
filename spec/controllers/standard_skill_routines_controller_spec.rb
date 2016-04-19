@@ -28,7 +28,6 @@ describe StandardSkillRoutinesController do
       get :show, id: routine.to_param
       expect(assigns(:standard_skill_routine)).to eq(routine)
       expect(assigns(:total)).to eq(0)
-      expect(assigns(:entry)).to be_a_new(StandardSkillRoutineEntry)
     end
   end
 
