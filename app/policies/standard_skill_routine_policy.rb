@@ -3,7 +3,11 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
   # User Methods
   # #####################
   def index?
-    view_blank_judging_sheets?
+    # index is /en/standard_skill_routines,
+    # and thus is not scoped to each user, and safe without checking for user match
+    return false unless config.standard_skill?
+
+    true
   end
 
   def writing_judge?
