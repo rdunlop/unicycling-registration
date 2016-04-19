@@ -3,14 +3,15 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
   # User Methods
   # #####################
   def index?
-    return true if super_admin?
-    return false unless config.standard_skill?
+    view_blank_judging_sheets?
+  end
 
-    true
+  def writing_judge?
+    view_blank_judging_sheets?
   end
 
   def show?
-    index?
+    view_blank_judging_sheets?
   end
 
   def create?
@@ -38,6 +39,12 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
   end
 
   private
+
+  def view_blank_judging_sheets?
+    return true if super_admin? || event_planner?
+
+    user.registrants.include?(record.registrant)
+  end
 
   def permitted?
     return true if super_admin? || event_planner?

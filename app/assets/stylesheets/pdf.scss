@@ -31,5 +31,14 @@
   td {
     border-bottom: black thin solid;
   }
+
+  .standard_skill_routine_judging_table {
+    td, th {
+      border: solid black 1pt;
+    }
+    border: solid black 1pt;
+    border-collapse: collapse;
+  }
+
 }
 @import "common/printing";

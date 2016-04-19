@@ -7,7 +7,7 @@
   If you have more than 12 skills in your program, a maximum of 12 skills may be non-riding skills (Skill numbers above 100).
   %br
   All skills must have a different skill number.
-- if false #!@config.standard_skill_entry_editable
+- if @config.standard_skill_closed?
   %h2.closed Standard Skill Entry is now closed. See you soon
 - else
   %p
@@ -33,7 +33,8 @@
       %th#skill_total= @total
       %td
       %td
+= link_to "Download a PDF of my routine", standard_skill_routine_path(@standard_skill_routine, format: :pdf), class: "button"
 %hr
 - if policy(@standard_skill_routine).update?
   %h3 Add new Standard Skill Entry
-  = render :partial => 'form', :object => @entry
+  = render :partial => 'form', :object => @standard_skill_routine.standard_skill_routine_entries.build

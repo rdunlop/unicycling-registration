@@ -1,0 +1,46 @@
+%h1 Standard Skill Judging Sheet - Writing Judge
+%hr
+- registrant = @standard_skill_routine.registrant
+%h2 #{registrant.bib_number} - #{registrant}
+%hr
+
+%table.standard_skill_routine_judging_table
+  %thead
+    %tr
+      %th{ rowspan: 2 } #
+      %th{ rowspan: 2 } Skill
+      %th{ rowspan: 2 } Description
+      %th{ rowspan: 2 } Points
+      %th{ colspan: 2 } Difficulty
+      %th{ colspan: 4 } Execution
+    %tr
+      %th 50%
+      %th 100%
+      %th ~
+      %th /
+      %th +
+      %th 0
+  %tbody
+    - @standard_skill_routine.standard_skill_routine_entries.each do |skill_entry|
+      %tr
+        %td= skill_entry.position
+        %td= skill_entry.standard_skill_entry.skill_number_and_letter
+        %td= skill_entry.standard_skill_entry.description
+        %td= skill_entry.standard_skill_entry.points
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+  %tfoot
+    %tr
+      %td{ colspan: 2}
+      %td Total
+      %th= @standard_skill_routine.total_skill_points
+      %td
+      %td
+      %td
+      %td
+      %td
+      %td

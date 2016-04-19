@@ -1,4 +1,13 @@
 %h2= @judge.competition
 %h3= @judge
 %table.competitors
-  = render :partial => "competitor", :collection => @competitors
+  %thead
+    %tr
+      %th Order
+      %th ID
+      %th Name
+      %th Base Score
+      %th Score
+      %th Writing Judge PDF
+  %tbody
+    = render :partial => "competitor", :collection => @competitors

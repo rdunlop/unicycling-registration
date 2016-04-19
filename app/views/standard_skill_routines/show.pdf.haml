@@ -1,0 +1,27 @@
+%h1 Standard Skill Judging Sheet - Competitor Copy
+- registrant = @standard_skill_routine.registrant
+%h2 #{registrant.bib_number} - #{registrant}
+%hr
+
+%table
+  %thead
+    %tr
+      %th #
+      %th Skill
+      %th Description
+      %th Points
+      %th Skill Definition
+  %tbody
+    - @entries.each do |skill_entry|
+      %tr
+        %td= skill_entry.position
+        %td= skill_entry.standard_skill_entry.skill_number_and_letter
+        %td= skill_entry.standard_skill_entry.description
+        %td= skill_entry.standard_skill_entry.points
+        %td
+  %tfoot
+    %tr
+      %td{ colspan: 2}
+      %th Total
+      %th= @total
+      %td
