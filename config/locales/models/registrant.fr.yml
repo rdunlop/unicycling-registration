@@ -12,3 +12,4 @@ fr:
     models:
       registrant:
         one: Participant
+        other: Participants
