@@ -2,13 +2,18 @@
 #
 # Table name: standard_skill_entries
 #
-#  id          :integer          not null, primary key
-#  number      :integer
-#  letter      :string(255)
-#  points      :decimal(6, 2)
-#  description :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id                        :integer          not null, primary key
+#  number                    :integer
+#  letter                    :string(255)
+#  points                    :decimal(6, 2)
+#  description               :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  friendly_description      :text
+#  additional_description_id :integer
+#  skill_speed               :string
+#  skill_before_id           :integer
+#  skill_after_id            :integer
 #
 # Indexes
 #
@@ -17,6 +22,9 @@
 
 class StandardSkillEntry < ActiveRecord::Base
   has_many :standard_skill_routine_entries, dependent: :destroy
+  belongs_to :skill_before, class_name: "StandardSkillEntryTransition"
+  belongs_to :skill_after, class_name: "StandardSkillEntryTransition"
+  belongs_to :additional_description, class_name: "StandardSkillEntryAdditionalDescription"
 
   validates :number, :points, :description, presence: true
   validates :letter, presence: true, uniqueness: {scope: :number } # not allowed to have the same number/letter pair twice

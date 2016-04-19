@@ -3,22 +3,33 @@
 %h2 #{registrant.bib_number} - #{registrant}
 %hr
 
-%table
+%table.standard_skill_routine_competitor_sheet_table
   %thead
     %tr
       %th #
       %th Skill
-      %th Description
+      %th.description Description
       %th Points
       %th Skill Definition
   %tbody
     - @entries.each do |skill_entry|
+      - skill = skill_entry.standard_skill_entry
       %tr
         %td= skill_entry.position
-        %td= skill_entry.standard_skill_entry.skill_number_and_letter
-        %td= skill_entry.standard_skill_entry.description
-        %td= skill_entry.standard_skill_entry.points
+        %td= skill.skill_number_and_letter
         %td
+          - if skill.skill_before
+            %div= "** " + skill.skill_before.to_s + " **"
+
+          - if skill.skill_before || skill.skill_after
+            %b= skill.description
+          - else
+            = skill.description
+
+          - if skill.skill_after
+            %div= "** " + skill.skill_after.to_s + " **"
+        %td= skill.points
+        %td= skill.friendly_description
   %tfoot
     %tr
       %td{ colspan: 2}

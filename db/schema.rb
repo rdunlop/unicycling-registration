@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416180637) do
+ActiveRecord::Schema.define(version: 20160419023545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -936,14 +936,31 @@ ActiveRecord::Schema.define(version: 20160416180637) do
 
   create_table "standard_skill_entries", force: :cascade do |t|
     t.integer  "number"
-    t.string   "letter",      limit: 255
-    t.decimal  "points",                  precision: 6, scale: 2
-    t.string   "description", limit: 255
+    t.string   "letter",                    limit: 255
+    t.decimal  "points",                                precision: 6, scale: 2
+    t.string   "description",               limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "friendly_description"
+    t.integer  "additional_description_id"
+    t.string   "skill_speed"
+    t.integer  "skill_before_id"
+    t.integer  "skill_after_id"
   end
 
   add_index "standard_skill_entries", ["letter", "number"], name: "index_standard_skill_entries_on_letter_and_number", unique: true, using: :btree
+
+  create_table "standard_skill_entry_additional_descriptions", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "standard_skill_entry_transitions", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "standard_skill_routine_entries", force: :cascade do |t|
     t.integer  "standard_skill_routine_id"
