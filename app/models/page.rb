@@ -28,6 +28,7 @@ class Page < ActiveRecord::Base
 
   belongs_to :parent_page, class_name: "Page"
   has_many :children, class_name: "Page", foreign_key: "parent_page_id"
+  has_many :images, class_name: "PageImage", dependent: :destroy
 
   SPECIAL_SLUGS = ['home', 'privacy-policy'].freeze
 

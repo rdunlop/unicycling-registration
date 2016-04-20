@@ -60,7 +60,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.2)
     actionmailer (4.2.6)
       actionpack (= 4.2.6)
       actionview (= 4.2.6)
@@ -112,6 +111,8 @@ GEM
       execjs
     awesome_nested_fields (0.6.4)
       rails (>= 3.0.0)
+    aws-sdk (2.2.30)
+      aws-sdk-resources (= 2.2.30)
     aws-sdk-core (2.2.30)
       jmespath (~> 1.0)
     aws-sdk-rails (1.0.1)
@@ -150,15 +151,14 @@ GEM
       sshkit (~> 1.2)
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
-    carrierwave (0.10.0)
+    carrierwave (0.11.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    carrierwave_direct (0.0.15)
-      carrierwave
-      fog
-      uuidtools
+    carrierwave-aws (1.0.0)
+      aws-sdk (~> 2.0)
+      carrierwave (~> 0.7)
     chronic (0.10.2)
     cliver (0.3.2)
     codeclimate-test-reporter (0.5.0)
@@ -204,7 +204,6 @@ GEM
     exception_notification (4.1.4)
       actionmailer (~> 4.0)
       activesupport (~> 4.0)
-    excon (0.49.0)
     execjs (2.6.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -215,140 +214,10 @@ GEM
       i18n (~> 0.5)
     fancybox2-rails (0.2.8)
       railties (>= 3.1.0, < 5.0)
-    fission (0.5.0)
-      CFPropertyList (~> 2.2)
-    fog (1.38.0)
-      fog-aliyun (>= 0.1.0)
-      fog-atmos
-      fog-aws (>= 0.6.0)
-      fog-brightbox (~> 0.4)
-      fog-cloudatcost (~> 0.1.0)
-      fog-core (~> 1.32)
-      fog-dynect (~> 0.0.2)
-      fog-ecloud (~> 0.1)
-      fog-google (<= 0.1.0)
-      fog-json
-      fog-local
-      fog-openstack
-      fog-powerdns (>= 0.1.1)
-      fog-profitbricks
-      fog-rackspace
-      fog-radosgw (>= 0.0.2)
-      fog-riakcs
-      fog-sakuracloud (>= 0.0.4)
-      fog-serverlove
-      fog-softlayer
-      fog-storm_on_demand
-      fog-terremark
-      fog-vmfusion
-      fog-voxel
-      fog-vsphere (>= 0.4.0)
-      fog-xenserver
-      fog-xml (~> 0.1.1)
-      ipaddress (~> 0.5)
-    fog-aliyun (0.1.0)
-      fog-core (~> 1.27)
-      fog-json (~> 1.0)
-      ipaddress (~> 0.8)
-      xml-simple (~> 1.1)
-    fog-atmos (0.1.0)
-      fog-core
-      fog-xml
-    fog-aws (0.9.2)
-      fog-core (~> 1.27)
-      fog-json (~> 1.0)
-      fog-xml (~> 0.1)
-      ipaddress (~> 0.8)
-    fog-brightbox (0.10.1)
-      fog-core (~> 1.22)
-      fog-json
-      inflecto (~> 0.0.2)
-    fog-cloudatcost (0.1.2)
-      fog-core (~> 1.36)
-      fog-json (~> 1.0)
-      fog-xml (~> 0.1)
-      ipaddress (~> 0.8)
-    fog-core (1.36.0)
-      builder
-      excon (~> 0.45)
-      formatador (~> 0.2)
-    fog-dynect (0.0.3)
-      fog-core
-      fog-json
-      fog-xml
-    fog-ecloud (0.3.0)
-      fog-core
-      fog-xml
-    fog-google (0.1.0)
-      fog-core
-      fog-json
-      fog-xml
-    fog-json (1.0.2)
-      fog-core (~> 1.0)
-      multi_json (~> 1.10)
-    fog-local (0.3.0)
-      fog-core (~> 1.27)
-    fog-openstack (0.1.2)
-      fog-core (>= 1.35)
-      fog-json (>= 1.0)
-      fog-xml (>= 0.1)
-      ipaddress (>= 0.8)
-    fog-powerdns (0.1.1)
-      fog-core (~> 1.27)
-      fog-json (~> 1.0)
-      fog-xml (~> 0.1)
-    fog-profitbricks (0.0.5)
-      fog-core
-      fog-xml
-      nokogiri
-    fog-rackspace (0.1.1)
-      fog-core (>= 1.35)
-      fog-json (>= 1.0)
-      fog-xml (>= 0.1)
-      ipaddress (>= 0.8)
-    fog-radosgw (0.0.5)
-      fog-core (>= 1.21.0)
-      fog-json
-      fog-xml (>= 0.0.1)
-    fog-riakcs (0.1.0)
-      fog-core
-      fog-json
-      fog-xml
-    fog-sakuracloud (1.7.5)
-      fog-core
-      fog-json
-    fog-serverlove (0.1.2)
-      fog-core
-      fog-json
-    fog-softlayer (1.1.0)
-      fog-core
-      fog-json
-    fog-storm_on_demand (0.1.1)
-      fog-core
-      fog-json
-    fog-terremark (0.1.0)
-      fog-core
-      fog-xml
-    fog-vmfusion (0.1.0)
-      fission
-      fog-core
-    fog-voxel (0.1.0)
-      fog-core
-      fog-xml
-    fog-vsphere (0.6.3)
-      fog-core
-      rbvmomi (~> 1.8)
-    fog-xenserver (0.2.3)
-      fog-core
-      fog-xml
-    fog-xml (0.1.2)
-      fog-core
-      nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
-    formatador (0.2.5)
     foundation-rails (6.2.0.1)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -377,8 +246,6 @@ GEM
     i18n (0.7.0)
     i18n_data (0.7.0)
     ice_nine (0.11.1)
-    inflecto (0.0.2)
-    ipaddress (0.8.3)
     jc-validates_timeliness (3.1.1)
       timeliness (~> 0.3.7)
     jmespath (1.1.3)
@@ -507,10 +374,6 @@ GEM
     rainbow (2.1.0)
     raindrops (0.15.0)
     rake (10.5.0)
-    rbvmomi (1.8.2)
-      builder
-      nokogiri (>= 1.4.1)
-      trollop
     recaptcha (0.6.0)
       json
     redis (3.2.2)
@@ -634,7 +497,6 @@ GEM
     timeliness (0.3.7)
     tinymce-rails (4.3.8)
       railties (>= 3.1.1)
-    trollop (2.1.2)
     ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -648,7 +510,6 @@ GEM
       rack
       raindrops (~> 0.7)
     uniform_notifier (1.9.0)
-    uuidtools (2.1.5)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -666,7 +527,6 @@ GEM
       railties (>= 3.0.7)
     wicked_pdf (1.0.6)
     wkhtmltopdf-binary (0.9.9.3)
-    xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -691,7 +551,8 @@ DEPENDENCIES
   capistrano-sidekiq!
   capistrano3-unicorn
   capybara!
-  carrierwave_direct
+  carrierwave
+  carrierwave-aws
   codeclimate_circle_ci_coverage
   coffee-rails
   consistency_fail
@@ -705,7 +566,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fancybox2-rails (~> 0.2.8)
-  fog
   foreman
   foundation-rails
   gaffe

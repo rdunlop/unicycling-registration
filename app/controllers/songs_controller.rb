@@ -62,18 +62,16 @@ class SongsController < ApplicationController
     if @song.has_file?
       redirect_to registrant_songs_path(@song.registrant), alert: "Song already associated, please destroy and re-create if you need to change the music"
     end
-    @uploader = @song.song_file_name
-    @uploader.success_action_redirect = file_complete_song_url(@song)
   end
 
-  # GET /songs/1/file_complete
+  # PUT /songs/1/file_complete
   def file_complete
-    @song.key = params[:key]
+    @song.song_file_name = params[:song_file][:song_file_name]
 
     if @song.save
       flash[:notice] = "File was uploaded"
     else
-      flash[:alert] = "File was not uploaded"
+      flash[:alert] = "File was not uploaded. " + @song.errors.full_messages.join(", ")
     end
 
     if @song.uploaded_by_guest?

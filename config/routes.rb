@@ -278,7 +278,9 @@ Workspace::Application.routes.draw do
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
       end
-      resources :pages
+      resources :pages do
+        resources :images, except: [:edit, :update]
+      end
     end
     scope "convention_setup", module: "convention_setup" do
       resources :coupon_codes, except: [:show]
@@ -382,7 +384,7 @@ Workspace::Application.routes.draw do
     resources :songs, only: [:destroy] do
       member do
         get :add_file
-        get :file_complete
+        put :file_complete
       end
     end
 

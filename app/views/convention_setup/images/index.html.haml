@@ -1,0 +1,24 @@
+%h1 #{@page} Images
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th View
+      %th Url
+      %th Delete
+
+  %tbody
+    - @page.images.each do |image|
+      %tr
+        %td= image.name
+        %td= link_to "View", convention_setup_page_image_path(@page, image)
+        %td= image.image.url
+        %td= link_to "Delete", convention_setup_page_image_path(@page, image), method: :delete, data: { confirm: "Are you sure?" }
+
+= simple_form_for :image, url: convention_setup_page_images_path(@page), method: :post, html: { multipart: true }  do |f|
+  .row
+    .small-6.columns= f.input :name
+    .small-6.columns= f.input :file, as: :file
+  .row
+    .small-12.columns= f.submit "Upload Image", class: "button"

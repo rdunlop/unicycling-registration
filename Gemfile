@@ -44,7 +44,6 @@ gem 'redis-store', github: "rdunlop/redis-store" # necessary for lambda namespac
 gem 'redis-rails'
 gem 'rails_admin'
 gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
-gem "fog"
 gem 'aws-sdk-rails'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
@@ -75,7 +74,8 @@ gem 'apartment-sidekiq', '= 0.2.0' # upgrading to 1.0.0 caused ActiveRecord::Con
 
 # Model utils
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
-gem 'carrierwave_direct'
+gem 'carrierwave'
+gem 'carrierwave-aws'
 gem 'globalize', '~> 5.0.0'
 gem 'virtus'
 gem "wicked"

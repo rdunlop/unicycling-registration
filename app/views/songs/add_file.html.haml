@@ -10,8 +10,7 @@
   %legend= t(".step_2")
   = t(".upload_music_file")
 
-  = direct_upload_form_for @uploader do |f|
-    = hidden_field_tag 'Content-Type', 'audio/mpeg'
+  = form_for :song_file, url: file_complete_song_path(@song), method: :put do |f|
     %small
       %b= t(".note")
       = t(".max_file_size", size_mb: 40)

@@ -31,6 +31,7 @@ class Song < ActiveRecord::Base
   validates :registrant_id, :user_id, :event_id, :description, presence: true
 
   validates :event_id, uniqueness: { scope: [:user_id, :registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
+  validate :song_size_validation
 
   def human_name
     return nil unless has_file?
@@ -43,5 +44,11 @@ class Song < ActiveRecord::Base
 
   def uploaded_by_guest?
     user != registrant.user
+  end
+
+  private
+
+  def song_size_validation
+    errors[:song_file_name] << "should be less than 40MB" if song_file_name.size > 40.megabytes
   end
 end
