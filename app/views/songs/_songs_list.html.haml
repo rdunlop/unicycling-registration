@@ -29,7 +29,7 @@
         %td= song.updated_at
         %td
           - if song.has_file?
-            = link_to t(".download"), song.song_file_name_url, target: '_blank'
+            = link_to t(".download"), song.song_file_name.url, target: '_blank', download: true
           - else
             = link_to t(".add_song"), add_file_song_path(song)
         %td= link_to t(".remove"), song, method: :delete, data: { confirm: t("are_you_sure") }
