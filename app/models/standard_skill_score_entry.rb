@@ -5,11 +5,11 @@
 #  id                              :integer          not null, primary key
 #  standard_skill_score_id         :integer          not null
 #  standard_skill_routine_entry_id :integer          not null
-#  difficulty_devaluation_percent  :integer          not null
-#  wave                            :integer          not null
-#  line                            :integer          not null
-#  cross                           :integer          not null
-#  circle                          :integer          not null
+#  difficulty_devaluation_percent  :integer          default(0), not null
+#  wave                            :integer          default(0), not null
+#  line                            :integer          default(0), not null
+#  cross                           :integer          default(0), not null
+#  circle                          :integer          default(0), not null
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #

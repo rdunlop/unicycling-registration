@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420033735) do
+ActiveRecord::Schema.define(version: 20160421013135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -987,15 +987,15 @@ ActiveRecord::Schema.define(version: 20160420033735) do
   add_index "standard_skill_routines", ["registrant_id"], name: "index_standard_skill_routines_on_registrant_id", unique: true, using: :btree
 
   create_table "standard_skill_score_entries", force: :cascade do |t|
-    t.integer  "standard_skill_score_id",         null: false
-    t.integer  "standard_skill_routine_entry_id", null: false
-    t.integer  "difficulty_devaluation_percent",  null: false
-    t.integer  "wave",                            null: false
-    t.integer  "line",                            null: false
-    t.integer  "cross",                           null: false
-    t.integer  "circle",                          null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.integer  "standard_skill_score_id",                     null: false
+    t.integer  "standard_skill_routine_entry_id",             null: false
+    t.integer  "difficulty_devaluation_percent",  default: 0, null: false
+    t.integer  "wave",                            default: 0, null: false
+    t.integer  "line",                            default: 0, null: false
+    t.integer  "cross",                           default: 0, null: false
+    t.integer  "circle",                          default: 0, null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "standard_skill_score_entries", ["standard_skill_score_id", "standard_skill_routine_entry_id"], name: "standard_skill_entries_unique", unique: true, using: :btree

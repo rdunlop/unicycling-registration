@@ -20,6 +20,7 @@ class StandardSkillScoresController < ApplicationController
   before_action :find_judge
   before_action :find_competitor, except: [:index]
   before_action :authorize_user
+  before_action :add_breadcrumbs
 
   # GET /judges/29/standard_skill_scores
   def index
@@ -69,6 +70,10 @@ class StandardSkillScoresController < ApplicationController
   end
 
   private
+
+  def add_breadcrumbs
+    add_competition_breadcrumb(@judge.competition)
+  end
 
   def authorize_user
     authorize current_user, :under_development?
