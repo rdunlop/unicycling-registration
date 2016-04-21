@@ -45,6 +45,7 @@ class ConventionSetup::ImagesController < ConventionSetup::BaseConventionSetupCo
 
   def set_breadcrumbs
     add_breadcrumb "Pages", convention_setup_pages_path
+    add_breadcrumb "#{@page} Page", convention_setup_page_path(@page)
     add_breadcrumb "Images", convention_setup_page_images_path(@page)
   end
 

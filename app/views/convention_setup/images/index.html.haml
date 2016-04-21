@@ -1,21 +1,40 @@
 %h1 #{@page} Images
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th View
-      %th Url
-      %th Delete
+%p
+  From this page, you can upload new images. Once they have been uploaded, you
+  will need to put the URL into an Image tag on the Page.
 
-  %tbody
-    - @page.images.each do |image|
+%p
+  %b Note
+  Images should be sized properly. Please try saving/exporting the images with the
+  highest Compression ratio possible. Generally speaking images should not be > 300kb
+  each in order to ensure that user experiences are not degraded.
+  %br
+  %br
+  If you have any problems or questions, feel free to use the "feedback".
+
+%hr
+
+- if @page.images.any?
+  %table
+    %thead
       %tr
-        %td= image.name
-        %td= link_to "View", convention_setup_page_image_path(@page, image)
-        %td= image.image.url
-        %td= link_to "Delete", convention_setup_page_image_path(@page, image), method: :delete, data: { confirm: "Are you sure?" }
+        %th Name
+        %th View
+        %th Url
+        %th
 
+    %tbody
+      - @page.images.each do |image|
+        %tr
+          %td= image.name
+          %td= link_to "View", convention_setup_page_image_path(@page, image)
+          %td= image.image.url
+          %td= link_to "Delete", convention_setup_page_image_path(@page, image), method: :delete, data: { confirm: "Are you sure?" }
+
+  %hr
+
+%h3 Upload New Image
 = simple_form_for :image, url: convention_setup_page_images_path(@page), method: :post, html: { multipart: true }  do |f|
   .row
     .small-6.columns= f.input :name
