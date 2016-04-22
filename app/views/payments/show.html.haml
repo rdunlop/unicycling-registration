@@ -3,10 +3,10 @@
 
 - if @config.offline_payment?
   %fieldset
-    %legend Offline Payment Instructions
+    %legend= t(".offline_payment_instructions")
     = @config.offline_payment_description.try(:html_safe)
     %hr
-    %b Payment Reference ##{@payment.id}
+    %b= t(".payment_reference", payment_id: @payment.id)
 
 - unless @payment.completed_or_offline?
   .row
@@ -18,7 +18,7 @@
         = render "paypal_payment_form", payment: @payment, config: @config
       - if @config.offline_payment?
         = form_tag pay_offline_payment_path(@payment) do
-          = submit_tag "Pay Offline", data: { confirm: "Are you sure?" }, class: "payment_link"
+          = submit_tag t(".pay_offline"), data: { confirm: t("are_you_sure") }, class: "payment_link"
 
     - else
       = form_tag complete_payment_path(@payment) do

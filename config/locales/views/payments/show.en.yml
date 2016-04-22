@@ -4,3 +4,6 @@ en:
     show:
       payment_summary: Payment Summary
       please_proceed_with_payment: Please proceed with your payment
+      offline_payment_instructions: Offline Payment Instructions
+      payment_reference: "Payment Reference #%{payment_id}"
+      pay_offline: Pay Offline
