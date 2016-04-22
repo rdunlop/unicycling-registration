@@ -1,5 +1,5 @@
 - cache_i18n [@config, @registrant, details] do
-  - @registrant.paid_details.each do |pei|
+  - @registrant.paid_or_pending_details.each do |pei|
     %tr
       %td= pei
       - if details
@@ -7,5 +7,5 @@
           - if pei.has_details?
             = "#{pei.details_label}: #{pei.details}"
       %td= print_item_cost_currency(pei.cost)
-      %td= "✓ (#{t(".paid")})"
+      %td= "✓"
       %td

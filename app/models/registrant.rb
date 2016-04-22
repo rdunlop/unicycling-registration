@@ -389,6 +389,10 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     paid_details.map{|pd| pd.expense_item }
   end
 
+  def paid_or_pending_details
+    payment_details.includes(expense_item: [:translations, expense_group: :translations]).completed_or_offline.not_refunded.clone
+  end
+
   def paid_details
     payment_details.includes(expense_item: [:translations, expense_group: :translations]).completed.not_refunded.clone
   end

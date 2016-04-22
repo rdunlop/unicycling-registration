@@ -40,6 +40,7 @@ class PaymentDetail < ActiveRecord::Base
   delegate :has_details?, :details_label, to: :expense_item
 
   scope :completed, -> { joins(:payment).merge(Payment.completed) }
+  scope :completed_or_offline, -> { joins(:payment).merge(Payment.completed_or_offline) }
   scope :not_refunded, -> { includes(:refund_detail).where(refund_details: { payment_detail_id: nil}) }
 
   scope :paid, -> { completed.where(free: false) }
@@ -101,6 +102,9 @@ class PaymentDetail < ActiveRecord::Base
     end
     if coupon_applied?
       res += " (Discount applied)"
+    end
+    if payment.offline_pending?
+      res += " (Pending)"
     end
     res
   end
