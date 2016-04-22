@@ -13,7 +13,7 @@
 - if @shared_registrants.count > 0
   %div
     = t(".registrants_includes_shared")
-    = link_to (".registrant_access_page_title"), user_additional_registrant_accesses_path(@user)
+    = link_to t(".registrant_access_page_title"), user_additional_registrant_accesses_path(@user)
     = t(".link_end")
 
 = render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants}
