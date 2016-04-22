@@ -1,31 +1,23 @@
 %h1= t(".payment_summary")
 = render :partial => "summary", :locals => {:payment => @payment }
 
-- unless @payment.completed
+- unless @payment.completed_or_offline?
   .row
     = render partial: 'add_coupon'
   .row
     = t(".please_proceed_with_payment")
     - if @payment.total_amount > 0.to_money
-      = form_tag @payment.paypal_post_url do
-        = hidden_field_tag :business, EventConfiguration.singleton.paypal_account
-        = hidden_field_tag :cancel_return, user_payments_url(current_user)
-        = hidden_field_tag :cmd, "_cart"
-        = hidden_field_tag :currency_code, @config.currency_code
-        = hidden_field_tag :invoice, @payment.invoice_id
-        = hidden_field_tag :no_shipping, "1"
-        = hidden_field_tag :notify_url, notification_payments_url
-        = hidden_field_tag :return, success_payments_url
-        = hidden_field_tag :upload, "1"
-        - index = 0
-        - @payment.unique_payment_details.each do |pd|
-          - next if pd.amount == 0.to_money
-          -# This must be in the format of "12.34" (no commas)
-          = hidden_field_tag "amount_#{index + 1}", pd.amount.format(separator: ".", symbol: nil)
-          = hidden_field_tag "item_name_#{index + 1}", pd.to_s
-          = hidden_field_tag "quantity_#{index + 1}", pd.count.to_s
-          - index += 1
-        = submit_tag t(".pay_with_paypal"), :class => "payment_link"
+      - if @config.online_payment?
+        = render "paypal_payment_form", payment: @payment, config: @config
+      - if @config.offline_payment? || true
+        = form_tag pay_offline_payment_path(@payment) do
+          %fieldset
+            %legend Offline Payment
+            = @config.offline_payment_description.try(:html_safe)
+            %hr
+            Payment Reference ##{@payment.id}
+            %br
+            = submit_tag "Pay Offline", data: { confirm: "Are you sure?" }, class: "payment_link"
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag "Complete Payment", class: "payment_link"

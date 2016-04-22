@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421013135) do
+ActiveRecord::Schema.define(version: 20160422021631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -683,15 +683,17 @@ ActiveRecord::Schema.define(version: 20160421013135) do
 
   create_table "payments", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "completed",                  default: false, null: false
-    t.boolean  "cancelled",                  default: false, null: false
-    t.string   "transaction_id", limit: 255
+    t.boolean  "completed",                        default: false, null: false
+    t.boolean  "cancelled",                        default: false, null: false
+    t.string   "transaction_id",       limit: 255
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "payment_date",   limit: 255
-    t.string   "note",           limit: 255
-    t.string   "invoice_id",     limit: 255
+    t.string   "payment_date",         limit: 255
+    t.string   "note",                 limit: 255
+    t.string   "invoice_id",           limit: 255
+    t.boolean  "offline_pending",                  default: false, null: false
+    t.datetime "offline_pending_date"
   end
 
   add_index "payments", ["user_id"], name: "index_payments_user_id", using: :btree

@@ -2,17 +2,19 @@
 #
 # Table name: payments
 #
-#  id             :integer          not null, primary key
-#  user_id        :integer
-#  completed      :boolean          default(FALSE), not null
-#  cancelled      :boolean          default(FALSE), not null
-#  transaction_id :string(255)
-#  completed_date :datetime
-#  created_at     :datetime
-#  updated_at     :datetime
-#  payment_date   :string(255)
-#  note           :string(255)
-#  invoice_id     :string(255)
+#  id                   :integer          not null, primary key
+#  user_id              :integer
+#  completed            :boolean          default(FALSE), not null
+#  cancelled            :boolean          default(FALSE), not null
+#  transaction_id       :string(255)
+#  completed_date       :datetime
+#  created_at           :datetime
+#  updated_at           :datetime
+#  payment_date         :string(255)
+#  note                 :string(255)
+#  invoice_id           :string(255)
+#  offline_pending      :boolean          default(FALSE), not null
+#  offline_pending_date :datetime
 #
 # Indexes
 #
@@ -30,7 +32,7 @@ class PaymentsController < ApplicationController
     @user = User.find(params[:user_id])
     authorize @user, :payments?
 
-    @payments = @user.payments.completed
+    @payments = @user.payments.completed_or_offline
     @refunds = @user.refunds
     @title_name = @user.to_s
   end
@@ -43,13 +45,14 @@ class PaymentsController < ApplicationController
     add_registrant_breadcrumb(registrant)
     add_breadcrumb "Payments"
 
-    @payments = registrant.payments.completed.uniq
+    @payments = registrant.payments.completed_or_offline.uniq
     @refunds = registrant.refunds.uniq
     @title_name = registrant.to_s
 
     render action: "index" # index.html.erb
   end
 
+  # Display offline payment instructions
   def offline
     authorize Payment.new, :offline_payment?
     add_breadcrumb t("my_registrants", scope: "breadcrumbs"), user_registrants_path(current_user)
@@ -113,6 +116,25 @@ class PaymentsController < ApplicationController
 
     flash[:notice] = "Payment Completed"
     redirect_to user_registrants_path(@payment.user)
+  end
+
+  # User has agreed that they will make an offline payment
+  # As a result, we commit these expenses to a payment
+  def pay_offline
+    @payment = Payment.find(params[:id])
+    authorize @payment
+    if @payment.total_amount == 0.to_money
+      @payment.complete(note: "Zero Cost")
+      return
+    end
+
+    if @payment.offline_pay
+      flash[:notice] = "Payment Marked as an Offline Payment"
+      redirect_to user_registrants_path(@payment.user)
+    else
+      flash[:alert] = "Error marking payment ready for offline payment #{@payment.errors.full_messages}"
+      redirect_to payment_path(@payment)
+    end
   end
 
   def fake_complete

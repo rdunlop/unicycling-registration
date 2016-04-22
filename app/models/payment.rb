@@ -2,17 +2,19 @@
 #
 # Table name: payments
 #
-#  id             :integer          not null, primary key
-#  user_id        :integer
-#  completed      :boolean          default(FALSE), not null
-#  cancelled      :boolean          default(FALSE), not null
-#  transaction_id :string(255)
-#  completed_date :datetime
-#  created_at     :datetime
-#  updated_at     :datetime
-#  payment_date   :string(255)
-#  note           :string(255)
-#  invoice_id     :string(255)
+#  id                   :integer          not null, primary key
+#  user_id              :integer
+#  completed            :boolean          default(FALSE), not null
+#  cancelled            :boolean          default(FALSE), not null
+#  transaction_id       :string(255)
+#  completed_date       :datetime
+#  created_at           :datetime
+#  updated_at           :datetime
+#  payment_date         :string(255)
+#  note                 :string(255)
+#  invoice_id           :string(255)
+#  offline_pending      :boolean          default(FALSE), not null
+#  offline_pending_date :datetime
 #
 # Indexes
 #
@@ -23,6 +25,7 @@ class Payment < ActiveRecord::Base
   include CachedModel
 
   scope :completed, -> { where(completed: true) }
+  scope :completed_or_offline, -> { where("completed = TRUE or offline_pending = TRUE") }
 
   validates :user_id, presence: true
   validate :transaction_id_or_note
@@ -45,23 +48,29 @@ class Payment < ActiveRecord::Base
     self.invoice_id ||= SecureRandom.hex(10)
   end
 
+  def completed_or_offline?
+    completed? || offline_pending?
+  end
+
   def touch_payment_details
     payment_details.each do |pd|
       pd.touch
     end
   end
 
-  def just_completed?
-    completed == true && completed_changed?
+  def just_completed_or_offline_payment?
+    (completed? && completed_changed?) || (offline_pending? && offline_pending_changed?)
   end
 
   def inform_of_coupons
-    return true unless just_completed?
+    return true unless just_completed_or_offline_payment?
 
     payment_details.map(&:inform_of_coupon)
   end
 
   def details
+    return "(Offline Payment Pending)" if offline_pending?
+
     unless transaction_id.blank?
       return transaction_id
     end
@@ -75,13 +84,20 @@ class Payment < ActiveRecord::Base
 
   def complete(options = {})
     assign_attributes(options)
-    self.completed_date = DateTime.now
+    self.completed_date = DateTime.current
     self.completed = true
     save
   end
 
+  # Mark this payment as "will be paid offline"
+  def offline_pay
+    self.offline_pending_date = DateTime.current
+    self.offline_pending = true
+    save
+  end
+
   def transaction_id_or_note
-    if completed
+    if completed?
       if details.nil?
         errors[:base] << "Transaction ID or Note must be filled in"
       end
@@ -89,7 +105,7 @@ class Payment < ActiveRecord::Base
   end
 
   def update_registrant_items
-    return true unless just_completed?
+    return true unless just_completed_or_offline_payment?
 
     payment_details.each do |pd|
       rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: pd.details)

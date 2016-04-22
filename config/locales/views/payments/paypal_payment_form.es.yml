@@ -1,0 +1,4 @@
+es:
+  payments:
+    paypal_payment_form:
+      pay_with_paypal: Pagar con Paypol

@@ -2,6 +2,5 @@
 en:
   payments:
     show:
-      pay_with_paypal: Pay with Paypal
       payment_summary: Payment Summary
       please_proceed_with_payment: Please proceed with your payment

@@ -2,17 +2,19 @@
 #
 # Table name: payments
 #
-#  id             :integer          not null, primary key
-#  user_id        :integer
-#  completed      :boolean          default(FALSE), not null
-#  cancelled      :boolean          default(FALSE), not null
-#  transaction_id :string(255)
-#  completed_date :datetime
-#  created_at     :datetime
-#  updated_at     :datetime
-#  payment_date   :string(255)
-#  note           :string(255)
-#  invoice_id     :string(255)
+#  id                   :integer          not null, primary key
+#  user_id              :integer
+#  completed            :boolean          default(FALSE), not null
+#  cancelled            :boolean          default(FALSE), not null
+#  transaction_id       :string(255)
+#  completed_date       :datetime
+#  created_at           :datetime
+#  updated_at           :datetime
+#  payment_date         :string(255)
+#  note                 :string(255)
+#  invoice_id           :string(255)
+#  offline_pending      :boolean          default(FALSE), not null
+#  offline_pending_date :datetime
 #
 # Indexes
 #
