@@ -39,7 +39,7 @@ class PaymentDetail < ActiveRecord::Base
 
   delegate :has_details?, :details_label, to: :expense_item
 
-  scope :completed, -> { includes(:payment).where(payments: {completed: true}) }
+  scope :completed, -> { joins(:payment).merge(Payment.completed) }
   scope :not_refunded, -> { includes(:refund_detail).where(refund_details: { payment_detail_id: nil}) }
 
   scope :paid, -> { completed.where(free: false) }
