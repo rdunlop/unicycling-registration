@@ -20,7 +20,8 @@ describe RegistrantPolicy do
     let(:payment_admin) { FactoryGirl.create(:payment_admin) }
 
     it { expect(subject).to permit(payment_admin, my_registrant) }
-    it { expect(subject).not_to permit(my_user, my_registrant) }
+    it { expect(subject).to permit(my_user, my_registrant) }
+    it { expect(subject).not_to permit(my_user, other_registrant) }
   end
 
   permissions :create? do

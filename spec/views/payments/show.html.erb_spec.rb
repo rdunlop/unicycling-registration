@@ -4,6 +4,7 @@ describe "payments/show" do
   let(:user) { FactoryGirl.create :user }
   before(:each) do
     @config = FactoryGirl.create(:event_configuration)
+    assign(:config, @config)
     @payment = FactoryGirl.create(:payment)
     @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment)
     @payment.reload

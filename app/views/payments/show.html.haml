@@ -1,6 +1,13 @@
 %h1= t(".payment_summary")
 = render :partial => "summary", :locals => {:payment => @payment }
 
+- if @config.offline_payment?
+  %fieldset
+    %legend Offline Payment Instructions
+    = @config.offline_payment_description.try(:html_safe)
+    %hr
+    %b Payment Reference ##{@payment.id}
+
 - unless @payment.completed_or_offline?
   .row
     = render partial: 'add_coupon'
@@ -9,15 +16,10 @@
     - if @payment.total_amount > 0.to_money
       - if @config.online_payment?
         = render "paypal_payment_form", payment: @payment, config: @config
-      - if @config.offline_payment? || true
+      - if @config.offline_payment?
         = form_tag pay_offline_payment_path(@payment) do
-          %fieldset
-            %legend Offline Payment
-            = @config.offline_payment_description.try(:html_safe)
-            %hr
-            Payment Reference ##{@payment.id}
-            %br
-            = submit_tag "Pay Offline", data: { confirm: "Are you sure?" }, class: "payment_link"
+          = submit_tag "Pay Offline", data: { confirm: "Are you sure?" }, class: "payment_link"
+
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag "Complete Payment", class: "payment_link"
