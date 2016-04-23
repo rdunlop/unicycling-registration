@@ -223,6 +223,6 @@ class Payment < ActiveRecord::Base
 
   # has an offline payment now transitioned to completed?
   def offline_payment_now_completed?
-    (completed? && completed_changed? && offline_pending_was?)
+    offline_pending_was && (completed? && completed_changed?)
   end
 end
