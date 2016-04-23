@@ -40,6 +40,25 @@ describe Tenant do
     end
   end
 
+  context "ensure valid subdomain" do
+    it "trims trailing spaces" do
+      tenant = FactoryGirl.build(:tenant, subdomain: "testing ")
+      tenant.save
+      expect(tenant.subdomain).to eq("testing")
+    end
+
+    it "trims leading spaces" do
+      tenant = FactoryGirl.build(:tenant, subdomain: " testing")
+      tenant.save
+      expect(tenant.subdomain).to eq("testing")
+    end
+
+    it "doesn't allow subdomain with spaces" do
+      tenant = FactoryGirl.build(:tenant, subdomain: "not allowed")
+      expect(tenant).not_to be_valid
+    end
+  end
+
   context "without tenant aliases" do
     it "matches based on the subdomain" do
       expect(described_class.find_tenant_by_hostname("robin.localhost.dev")).to eq(tenant)
