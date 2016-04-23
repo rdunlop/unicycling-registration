@@ -7,6 +7,7 @@ en:
         contact_email: Convention Email Contact
         dates_description: Dates Description
         event_url: Main Website
+        enabled_locales: Enabled Languages
         location: Location
         long_name: Long Name
         logo_file: Logo

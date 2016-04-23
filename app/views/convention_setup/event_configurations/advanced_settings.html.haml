@@ -6,10 +6,6 @@
   = render partial: "/shared/error_messages", object: @event_configuration
 
   %fieldset.form__fieldset
-    %h3 Offered Languages
-
-    = f.input :enabled_locales, collection: EventConfiguration.all_available_languages, input_html: { multiple: true }
-
     %h3 Tax Settings
     = f.input :italian_requirements
     .description

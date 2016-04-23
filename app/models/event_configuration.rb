@@ -123,6 +123,7 @@ class EventConfiguration < ActiveRecord::Base
     self.style_name ||= "base_green_blue"
     self.currency_code ||= "USD"
     self.max_award_place ||= 5
+    self.enabled_locales ||= ["en", "fr", "de", "es"]
   end
 
   def additional_info?
@@ -292,7 +293,7 @@ class EventConfiguration < ActiveRecord::Base
   end
 
   def self.all_available_languages
-    [:en, :fr, :de, :hu, :es]
+    [:en, :fr, :de, :es]
   end
 
   # Public: What is the maximum age that we should allow users to configure

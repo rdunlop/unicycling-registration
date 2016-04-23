@@ -155,14 +155,21 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
     params.require(:event_configuration).permit(:italian_requirements,
                                                 :iuf,
                                                 :test_mode, :usa,
-                                                :display_confirmed_events,
-                                                enabled_locales: []
+                                                :display_confirmed_events
                                                )
   end
 
   def name_logo_params
-    params.require(:event_configuration).permit(:long_name, :short_name, :logo_file, :dates_description,
-                                                :event_url, :location, :contact_email, :style_name)
+    params.require(:event_configuration).permit(:long_name,
+                                                :short_name,
+                                                :logo_file,
+                                                :dates_description,
+                                                :event_url,
+                                                :location,
+                                                :contact_email,
+                                                :style_name,
+                                                enabled_locales: []
+                                               )
   end
 
   def organization_membership_params

@@ -15,5 +15,6 @@
     = f.input :logo_file
     = image_tag(@event_configuration.logo_file.url) if @event_configuration.logo_file?
     = f.input :contact_email
+    = f.input :enabled_locales, collection: EventConfiguration.all_available_languages, input_html: { multiple: true }
     = f.input :style_name, collection: EventConfiguration.style_names, include_blank: false
     = f.button :submit
