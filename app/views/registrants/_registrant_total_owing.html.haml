@@ -1,10 +1,13 @@
 - cache_i18n [registrant] do
   - if registrant.amount_owing > 0.to_money
-    %span.unpaid
+    .unpaid
       = print_formatted_currency(registrant.amount_owing)
       = t(".unpaid")
-  - else
-    %span.paid
-      = print_formatted_currency(registrant.expenses_total)
+  - if registrant.amount_pending > 0.to_money
+    .unpaid
+      = print_formatted_currency(registrant.amount_pending)
+      = t(".pending")
+  - if registrant.amount_paid > 0.to_money
+    .paid
+      = print_formatted_currency(registrant.amount_paid)
       = t(".paid")
-

@@ -40,6 +40,7 @@ class PaymentDetail < ActiveRecord::Base
   delegate :has_details?, :details_label, to: :expense_item
 
   scope :completed, -> { joins(:payment).merge(Payment.completed) }
+  scope :offline_pending, -> { joins(:payment).merge(Payment.offline_pending) }
   scope :completed_or_offline, -> { joins(:payment).merge(Payment.completed_or_offline) }
   scope :not_refunded, -> { includes(:refund_detail).where(refund_details: { payment_detail_id: nil}) }
 

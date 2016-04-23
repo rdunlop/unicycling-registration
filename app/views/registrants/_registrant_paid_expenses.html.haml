@@ -7,5 +7,7 @@
           - if pei.has_details?
             = "#{pei.details_label}: #{pei.details}"
       %td= print_item_cost_currency(pei.cost)
-      %td= "✓"
       %td
+        = "✓"
+        - if pei.payment.offline_pending?
+          = "(pending)"

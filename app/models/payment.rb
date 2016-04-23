@@ -26,6 +26,7 @@ class Payment < ActiveRecord::Base
 
   scope :completed, -> { where(completed: true) }
   scope :completed_or_offline, -> { where("completed = TRUE or offline_pending = TRUE") }
+  scope :offline_pending, -> { where(offline_pending: true) }
 
   validates :user_id, presence: true
   validate :transaction_id_or_note

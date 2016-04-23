@@ -359,6 +359,12 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     owing_expense_items + paid_expense_items
   end
 
+  def amount_pending
+    Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_pending_money") do
+      pending_details.inject(0.to_money) { |total, item| total + item.cost }
+    end
+  end
+
   def amount_owing
     Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_owing_money") do
       registrant_expense_items.inject(0.to_money) { |total, item| total + item.total_cost }
@@ -366,7 +372,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   end
 
   def expenses_total
-    amount_owing + amount_paid
+    amount_owing + amount_paid + amount_pending
   end
 
   # returns a list of expense_items that this registrant hasn't paid for
@@ -395,6 +401,10 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
 
   def paid_details
     payment_details.includes(expense_item: [:translations, expense_group: :translations]).completed.not_refunded.clone
+  end
+
+  def pending_details
+    payment_details.includes(expense_item: [:translations, expense_group: :translations]).offline_pending.not_refunded.clone
   end
 
   def amount_paid

@@ -4,3 +4,4 @@ en:
     registrant_total_owing:
       paid: Paid
       unpaid: Unpaid
+      pending: Pending
