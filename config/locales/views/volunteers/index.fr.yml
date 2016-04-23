@@ -1,0 +1,8 @@
+---
+fr:
+  volunteers:
+    index:
+      add_volunteer_description_html: "Si le bénévole que vous cherchez n'est pas
+        dans cette liste,\r\nvous devrez ajouter ce bénévole sur cette %{link} page"
+      header: Bénévoles
+      manage_additional_access: Gérer les accès supplémentaires

@@ -4,3 +4,7 @@ de:
     attributes:
       payment:
         total: Total
+    models:
+      registrant:
+        one: Angemeldeter
+        other: Angemeldeter

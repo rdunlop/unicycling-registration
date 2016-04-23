@@ -4,3 +4,7 @@ es:
     attributes:
       payment:
         total: Total
+    models:
+      registrant:
+        one: Solicitante de la inscripción
+        other: Solicitantes de la inscripción

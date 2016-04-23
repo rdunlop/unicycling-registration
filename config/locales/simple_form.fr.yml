@@ -17,12 +17,156 @@ fr:
         combined_competition_id: "Ceci devrait être activé sur la compétition globale
           et non sur les compétitions y faisant parti.\r\n(e.g. pas pour le 10k, mais
           pour la «Compétition de route»)"
+        has_experts: "Sélectionner ceci si les résultats entrés ici doivent AUSSI
+          être récompensés en ignorant les catégories d'âge.\r\nEn cochant cette case,
+          vous créez les récompenses expert en plus des récompenses par groupe d'âge\r\nSi
+          cette compétition concerne seulement des experts, alors ne cochez pas cette
+          case, ils seront placé dans un seul groupe / résultat.\r\nVous DEVEZ aussi
+          avoir une tranche d'âge spécifiée."
         num_members_per_competitor: Pour la plupart des événements, ceci sera «Un»
+        penalty_seconds: Est-il possible de pénaliser un compétiteur de "X" secondes
+          pour une infraction (une chute par exemple) ?
+        scheduled_completion_at: Utilisé pour trier les résultats dans le résumé administrateur
         scoring_class: Choisir le système de calcul
+        sign_in_list_enabled: "Le formulaire d'inscription est activé automatiquement
+          pour certains événements (comme l'athlétisme). Utilisez cette option\r\nsi
+          vous voulez saisir la taille des manivelles, et d'autres détails liés à
+          un événement qui n'a pas formulaire d'inscription par défaut."
+        uses_lane_assignments: Active l'outils de répartition dans les couloirs
       coupon_code:
+        expense_items: Choisissez l'élément de dépense dont le prix sera réduit par
+          ce code promo.
+        inform_emails: Une liste d'adresse email séparées par une virgule qui seront
+          informées lorsque ce code promo est utilisé
+        maximum_registrant_age: Peut être appliqué aux inscrits jusqu'à cet âge (inclut)
         price: Le prix à charger en utilisant ce coupon
-    labels:
+      event:
+        accepts_music_uploads: Cochez cette cas si chaque compétiteur peut choisir
+          une musique pour sa compétition
+        accepts_wheel_size_override: Utiliser cette option donne la possibilité aux
+          enfants de 10 ans et moins de spécifier une taille de roue différente.
+        artistic: En créant ce booléen, , vous restreignez automatiquement les changements
+          après la date de fermeture de l'artistique.
+        best_time_format: Voulez-vous que l'utilisateur donne un "Meilleur temps"
+          pour ce événement ? (Cela peut être utile pour déterminer l'ordre de départ
+          pour certaines compétitions)
+        cost: Spécifiez le coût d'inscription pour cette événement (optionnel).
+        standard_skill: Cochez cette case si les compétiteurs doivent aussi charger
+          leur programme d'artistique technique.
+      event_category:
+        warning_on_registration_summary: Chaque personne inscrite dans cette catégorie
+          aura un avertissement sur son formulaire d'inscription.
+      event_choice:
+        optional: Permet à l'utilisateur de choisir de ne pas rentrer de donnée dans
+          ce champ
+        optional_if_event_choice_id: 'Si l''utilisateur a choisi cet autre "Choix
+          d''événement", ce champ est optionnel (ex : "Nom d''équipe" optionnel si
+          "Reste du monde")'
+        required_if_event_choice_id: 'Si l''utilisateur a choisi cet autre "Choix
+          d''événement", ce champ est obligatoire (ex : "Couleur d''équipe" si "Pour
+          le fun")'
+        tooltip: Ceci apparaîtra lorsque l'utilisateur passera sa souris au dessus
+          du nom de champ
+      event_configuration:
+        accept_rules: Oblige l'ensemble des inscrits à accepter les règles jointes
+          en PDF
+        age_calculation_base_date: L'âge des inscrit est calculé à partir de cette
+          date.
+        artistic_closed_date: Après cette date, les inscrits ne peuvent plus AJOUTER
+          d'événement "Artistique". Ils peuvent cependant en supprimer tant que les
+          inscriptions aux événements sont ouvertes.
+        competitor_benefits: Apparaît sur la page d'accueil de l'inscription, décrit
+          les avantage dont bénéficient les compétiteurs
+        comp_noncomp_url: Lien qui explique la différence entre les différents type
+          d'inscription
+        contact_email: C'est la cible de l'ensemble des emails "Remarques" dans la
+          page "Aide".
+        dates_description: Cette descriptions apparaît dans la page non-connectée,
+          et doit décrire les dates de la convention.
+        display_confirmed_events: Activer ceci affiche les événements confirmés /
+          non-confirmés sur la page de résumé de l'inscription.
+        event_sign_up_closed_date: Après cette date, SEULS les administrateurs peuvent
+          ajouter des événements à une inscription. (bien qu'il puisse en supprimer)
+        event_url: Le logo dans la barre de menu renverra vers cet URL.
+        iuf: Activer ceci permet des questions sur l'adhésion à l'IUF.
+        logo_file: Les logos doivent faire 93px x 38px
+        max_award_place: Ceci configure la place maximum pour laquelle il faut imprimer
+          les récompenses. (s'applique à la fois aux catégories d'âge et aux experts)
+        music_submission_end_date: La date limite jusqu'à laquelle les musiques pourront
+          être chargées
+        noncompetitor_benefits: Apparaît sur la page d'accueil de l'inscription, décrit
+          les bénéfices de l'inscription non-compétiteur
+        paypal_test: Permet de prétendre recevoir des confirmations de paiement de
+          PayPal
+        registrants_should_specify_default_wheel_size: Devons-nous demander aux inscrits
+          de moins de 10 ans le taille de roue par défaut (généralement pour l'athlétisme)
+        request_address: Oblige chaque inscrit à donner une adresse postale
+        request_emergency_contact: Oblige chaque inscrit à donner un contact en cas
+          d'urgence
+        request_responsible_adult: Oblige chaque mineur (moins de 18 ans) à saisir
+          un adulte responsable
+        spectator_benefits: Apparaît sur la page d'accueil de l'inscription, décrit
+          les bénéfices de l'inscription spectateur
+        spectators: Les spectateurs n'ont pas de coût d'inscription, et peuvent acheter
+          des éléments sans payer d'inscription
+        start_date: Par défaut, l'âge des inscrits est calculé à partir de cette date.
+          Cette date est le défaut présenté sur le calendrier à la configuration du
+          système
+        test_mode: Activé ceci permet à chaque utilisateur de devenir un Super utilisateur,
+          et de prétendre avoir terminé un paiement.
+        usa: "Ceci mets en priorité USA et Canada dans la liste de sélection des pays,
+          et permet l'affichage des états.\r\nCela permet également d'inscrire des
+          compétiteurs à la dernière minute (par les secrétaires d'épreuve)"
+      expense_group:
+        competitor_required: Un élément de ce groupe de dépenses SERA attribué à l'inscrit
+          (Il ne peut y avoir QU'UN SEUL élément dans le groupe, et il sera ajouté
+          automatiquement à chaque inscription)
+        info_url: Ce lien apparaît dans la page des dépenses, utile si les dépenses
+          ont besoin de plus d'explications, ou pour montrer des images
+        noncompetitor_required: Un élément de ce groupe de dépenses SERA attribué
+          à l'inscrit (Il ne peut y avoir QU'UN SEUL élément dans le groupe, et il
+          sera ajouté automatiquement à chaque inscription)
+      expense_item:
+        has_custom_cost: Permet à l'inscrit de choisir combien il paiera pour cet
+          élément
+        has_details: Demander à l'utilisateur des détails supplémentaires lorsqu'ils
+          achètent cet élément
+      page:
+        parent_page: "[Optionnel] Grouper cette page sous cette page parente"
+        position: Trier les pages sous une seule page parente
+        slug: L'url facile à comprendre, utilisez des charactères normaux (pas d'espace)
       registrant_best_times:
+        source_location: Saisissez Nom et Date
+      registrant:
+        wheel_size_id: Utilisé pour choisir les groupe d'âge quand cela s'applique.
+          (athlétisme, événements standards)
+      registration_cost:
+        end_date: Spécifiez la date limite jusqu'à laquelle ces prix sont appliqués
+        start_date: Spécifiez la date qui suit la date limite de la période précédente
+      volunteer_opportunity:
+        inform_emails: quand quelqu'un s'inscrit pour ce rôle bénévole, un email sera
+          envoyé aux adresses mails suivantes
+      wave_time:
+        scheduled_time: 'Ex : 02:00, 03:00'
+    labels:
+      event:
+        accepts_music_uploads: Demander le chargement d'une musique
+      event_configuration:
+        artistic_score_elimination_mode_naucc: Petit groupe
+        comp_noncomp_url: Explication comp / non-comp
+        paypal_account: Email du compte marchand PayPal
+        rulebook_url: URL du pdf des règles
+        standard_skill: Activer le système de soumission de l'artistique technique
+        standard_skill_closed_date: Dernier jour pour soumettre un programme d'artistique
+          technique en ligne
+      expense_item:
+        details_label: Question
+        has_custom_cost: Don
+        has_details: Poser une question à l'inscrit
+        maximum_available: Nombre total max à vendre
+        maximum_per_registrant: Max par inscription
+      registrant_best_times:
+        formatted_value: Meilleur temps
         source_location: Nom de la convention
       volunteer_opportunity: Adresses e-mail à notifier pour chaque inscription de
         bénévole.

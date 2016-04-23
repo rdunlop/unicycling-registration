@@ -1,0 +1,14 @@
+---
+fr:
+  volunteers:
+    manage_volunteer_type:
+      confirm_remove_volunteer: Supprimer ce bénévole ?
+      create_role: Créer un nouveau %{role}
+      volunteer_role_descriptions:
+        data_entry_volunteer: Peut être désigné comme bénévole gestionnaire de données
+        data_recording_volunteer: Peut saisir des résultats de liste de départ / arrivée
+          (transcrits)
+        race_official: "Peut disqualifier au départ / à l'arrivée de la course\r\nPeut
+          télécharger les séries pour le chronomètrage électronique en athlétisme"
+        track_data_importer: "Peut importer des données de chronométrage électronique
+          pour l'athlétisme.\r\nPeut ajuster les temps"

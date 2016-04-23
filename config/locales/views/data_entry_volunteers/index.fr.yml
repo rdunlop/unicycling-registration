@@ -10,4 +10,6 @@ fr:
       description_3: Vous pouvez aussi utiliser le "nom" de l'utilisateur ici, afin
         de ne pas avoir à se souvenir de leur adresse email.
       header: Accès supplémentaires
+      note: Donner l'accès confirme également comptes dont l'email n'a pas été confirmé
+        afin qu'il puisse se connecter.
       users_with_access: Utilisateurs avec des accès supplémentaires

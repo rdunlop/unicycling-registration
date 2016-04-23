@@ -6,8 +6,14 @@ fr:
       changes_after_deadline: Si vous désirez changer votre musique après cette date,
         veuillez contacter le directeur ou l'organisateur. (ou utiliser «Aide» ->
         «Commentaires»)
+      description: Pour certaines compétitions, de la musique accompagne le compétiteur.
+        Veuillez charger un mp3 avec la musique que vous souhaitez avoir. Fournissez
+        s'il vous plait une musique de la longueur appropriée (voir règles) pour votre
+        compétition / catégorie.
       download: Télécharger
       guest: Cette chanson à déjà été soumise par un autre participant?
       music_deadline: La musique doit être soumise avant %{end_date}
       reg_name: Nom d'inscription
       remove: Enlever
+      requirements: Vous devez toujours avoir votre musique sur un CD ou un lecteur
+        mp3 lors de la compétition, afin d'avoir une copie en cas de problème technique.
