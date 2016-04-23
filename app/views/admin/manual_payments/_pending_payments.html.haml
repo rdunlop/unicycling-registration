@@ -1,0 +1,25 @@
+%h2= t(".header")
+%p= t(".description")
+
+%table
+  %thead
+    %tr
+      %th= Payment.model_name.human #
+      %th= Payment.human_attribute_name(:total)
+      %th= Payment.human_attribute_name(:offline_pending_date)
+      %th= t(".items")
+      %th= t(".actions")
+  %tbody
+    - @pending_payments.each do |pending_payment|
+      %tr
+        %td= pending_payment.id
+        %td= pending_payment.total_amount
+        %td= pending_payment.offline_pending_date
+        %td
+          - pending_payment.payment_details.each do |pd|
+            = pd
+            %br
+        %td
+          = simple_form_for(pending_payment, url: pay_pending_payment_path(pending_payment), method: :post) do |pf|
+            = pf.input :note
+            = pf.submit t(".mark_as_received", payment_number: pending_payment.id), class: "payment_link"

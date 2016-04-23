@@ -6,4 +6,10 @@ en:
       please_proceed_with_payment: Please proceed with your payment
       offline_payment_instructions: Offline Payment Instructions
       payment_reference: "Payment Reference #%{payment_id}"
-      pay_offline: Pay Offline
+      pay_offline: Agree to Pay Offline
+      offline_payment_instructions_description: |
+        In order to pay offline, please use the
+        "Payment Reference #" and follow these instructions:
+      confirm_pay_offline: |
+        Do you agree to make a Payment for this amount?
+        Please be sure to include Reference #%{payment_number}.

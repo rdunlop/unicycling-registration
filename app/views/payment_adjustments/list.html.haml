@@ -7,6 +7,10 @@
       %th Payment ID
       %th User
       %th Completed
+      %th
+        Offline
+        %br
+        Pending
       %th Cancelled
       %th Transaction
       %th Note
@@ -18,8 +22,11 @@
       %tr
         %td= payment.id
         %td= payment.user
-        %td= payment.completed
-        %td= payment.cancelled
+        %td= payment.completed?
+        %td
+          - if payment.offline_pending?
+            = payment.offline_pending_date
+        %td= payment.cancelled?
         %td= payment.transaction_id
         %td= payment.note
         %td= payment.completed_date

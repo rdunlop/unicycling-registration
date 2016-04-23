@@ -20,6 +20,8 @@ class Admin::ManualPaymentsController < ApplicationController
       registrant = Registrant.find(reg_id)
       @manual_payment.add_registrant(registrant)
     end
+
+    @pending_payments = PaymentDetail.offline_pending.where(registrant_id: params[:registrant_ids]).map(&:payment).flatten.uniq
   end
 
   def create
@@ -28,10 +30,7 @@ class Admin::ManualPaymentsController < ApplicationController
 
     if @manual_payment.save
       payment = @manual_payment.saved_payment
-      users = payment.payment_details.map(&:registrant).map(&:user).flatten.uniq
-      users.each do |user|
-        PaymentMailer.manual_payment_completed(payment, user).deliver_later
-      end
+      ManualPaymentReceiver.send_emails(payment)
       redirect_to payment_path(payment), notice: "Successfully created payment and sent e-mail"
     else
       add_breadcrumb "Choose Payment Items"

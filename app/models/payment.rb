@@ -87,6 +87,7 @@ class Payment < ActiveRecord::Base
     assign_attributes(options)
     self.completed_date = DateTime.current
     self.completed = true
+    self.offline_pending = false
     save
   end
 

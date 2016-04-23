@@ -147,6 +147,11 @@ Workspace::Application.routes.draw do
         post :apply_coupon
       end
     end
+    resources :pending_payments, only: [], controller: "admin/pending_payments" do
+      member do
+        post :pay
+      end
+    end
     resources :manual_payments, only: [:new, :create], controller: "admin/manual_payments" do
       collection do
         get :choose

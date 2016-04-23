@@ -3,55 +3,59 @@
 %p
   %b= t("note")
   = t(".description")
+%hr
 
-= form_for(@manual_payment, :url => manual_payments_path, method: :post) do |pf|
-  = render :partial => "/shared/error_messages", :object => @manual_payment
-  %br
-  %br
-  %b.payment_instructions= t(".payment_description")
+- if @pending_payments.any?
+  = render "pending_payments", pending_payments: @pending_payments
+  %hr
 
-  .row
-    .small-6.columns.text-right
-      = pf.label :note
-    .small-6.columns
-      = pf.text_field :note
+- if @manual_payment.unpaid_details.any?
+  = form_for(@manual_payment, :url => manual_payments_path, method: :post) do |pf|
+    = render :partial => "/shared/error_messages", :object => @manual_payment
+    %b.payment_instructions= t(".payment_description")
 
-  %h1= t(".chosen_and_unpaid_items")
-  .payment_instructions= t(".choose_items")
-  %table.sortable
-    %thead
-      %tr
-        %th= Registrant.model_name.human
-        %th= ExpenseItem.model_name.human
-        %th= ExpenseItem.human_attribute_name(:cost)
-        %th
-          = ExpenseItem.human_attribute_name(:details)
-          = t(".details_note")
-        %th= t(".mark_this_item")
-        %th= #Give this item to the Registrant for free
-    %tbody
-      = pf.fields_for :unpaid_details do |unpaid_detail|
+    .row
+      .small-6.columns.text-right
+        = pf.label :note
+      .small-6.columns
+        = pf.text_field :note
+
+    %h1= t(".chosen_and_unpaid_items")
+    .payment_instructions= t(".choose_items")
+    %table.sortable
+      %thead
         %tr
-          %td
-            = unpaid_detail.object.registrant
-            = unpaid_detail.hidden_field :registrant_expense_item_id
-          %td
-            = unpaid_detail.object.expense_item
-          %td= unpaid_detail.object.total_cost
-          %td
-            = unpaid_detail.object.details
-          %td= unpaid_detail.check_box :pay_for, { class: "js--costItem", data: { cents: (unpaid_detail.object.total_cost.to_f * 100)} }
-          %td= #unpaid_detail.check_box :free
+          %th= Registrant.model_name.human
+          %th= ExpenseItem.model_name.human
+          %th= ExpenseItem.human_attribute_name(:cost)
+          %th
+            = ExpenseItem.human_attribute_name(:details)
+            = t(".details_note")
+          %th= t(".mark_this_item")
+          %th= #Give this item to the Registrant for free
+      %tbody
+        = pf.fields_for :unpaid_details do |unpaid_detail|
+          %tr
+            %td
+              = unpaid_detail.object.registrant
+              = unpaid_detail.hidden_field :registrant_expense_item_id
+            %td
+              = unpaid_detail.object.expense_item
+            %td= unpaid_detail.object.total_cost
+            %td
+              = unpaid_detail.object.details
+            %td= unpaid_detail.check_box :pay_for, { class: "js--costItem", data: { cents: (unpaid_detail.object.total_cost.to_f * 100)} }
+            %td= #unpaid_detail.check_box :free
 
-    %tfoot
-      %tr
-        %th
-        %th= ExpenseItem.human_attribute_name(:total)
-        %th.js--total
-        %th{ colspan: 2 }
-        %th
+      %tfoot
+        %tr
+          %th
+          %th= ExpenseItem.human_attribute_name(:total)
+          %th.js--total
+          %th{ colspan: 2 }
+          %th
 
-  = submit_tag t(".submit"), :class => "payment_link"
+    = submit_tag t(".submit"), :class => "payment_link"
 
 %div
   = link_to t("back"), new_manual_payment_path

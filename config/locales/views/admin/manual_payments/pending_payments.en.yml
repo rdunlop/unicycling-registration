@@ -1,0 +1,10 @@
+en:
+  admin:
+    manual_payments:
+      pending_payments:
+        header: Pending Payments
+        description: |
+          This registrant is listed in the following Pending Payment(s).
+          Are you receiving one of these payments?
+        items: Items
+        mark_as_received: "Mark Payment #%{payment_number} as Received"

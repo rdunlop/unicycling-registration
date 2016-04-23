@@ -4,3 +4,8 @@ en:
     attributes:
       payment:
         total: Total
+        offline_pending_date: Date
+    models:
+      registrant:
+        one: Payment
+        other: Payments
