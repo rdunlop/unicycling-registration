@@ -36,5 +36,14 @@ describe ExpenseItemsController do
       get :details, id: expense_item.to_param
       expect(assigns(:expense_item)).to eq(expense_item)
     end
+
+    context "with a coupon-code applied" do
+      let!(:expense_item_coupon_code) { FactoryGirl.create(:coupon_code_expense_item, expense_item: expense_item) }
+
+      it "displays the details" do
+        get :details, id: expense_item.to_param
+        expect(assigns(:expense_item)).to eq(expense_item)
+      end
+    end
   end
 end

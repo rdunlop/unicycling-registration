@@ -43,7 +43,7 @@
       - @expense_item.coupon_code_expense_items.map(&:coupon_code).each do |coupon|
         %tr
           %td= coupon
-          %td= @paid_details.includes(:payment_detail_coupon_code).merge(PaymentDetailCouponCode.where(coupon_code: coupon)).count
+          %td= @paid_details.joins(:payment_detail_coupon_code).merge(PaymentDetailCouponCode.where(coupon_code: coupon)).count
 
 %hr
 = render "refunded_items", refunded_payment_details: @refunded_details, total: @expense_item.total_amount_paid_after_refunds
