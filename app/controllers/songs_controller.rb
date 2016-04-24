@@ -66,6 +66,12 @@ class SongsController < ApplicationController
 
   # PUT /songs/1/file_complete
   def file_complete
+    if params[:song_file].nil?
+      flash[:alert] = "File not specified"
+      redirect_to :back
+      return
+    end
+
     @song.song_file_name = params[:song_file][:song_file_name]
 
     if @song.save
