@@ -17,6 +17,8 @@
         %td= pending_payment.offline_pending_date
         %td
           - pending_payment.payment_details.each do |pd|
+            = pd.registrant
+            \-
             = pd
             %br
         %td
