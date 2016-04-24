@@ -124,7 +124,7 @@ class EventConfiguration < ActiveRecord::Base
     self.currency_code ||= "USD"
     self.max_award_place ||= 5
     # Cannot use `self.enabled_locales` because that conflicts with a method name
-    self[:enabled_locales] = ["en", "fr", "de", "es"].join(",")
+    self[:enabled_locales] ||= ["en", "fr", "de", "es"].join(",")
   end
 
   def additional_info?
