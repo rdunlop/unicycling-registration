@@ -5,7 +5,7 @@
 #  id                                            :integer          not null, primary key
 #  event_url                                     :string(255)
 #  start_date                                    :date
-#  contact_email                                 :string(255)
+#  contact_email                                 :string(28555)
 #  artistic_closed_date                          :date
 #  standard_skill_closed_date                    :date
 #  event_sign_up_closed_date                     :date
@@ -34,7 +34,7 @@
 #  accept_rules                                  :boolean          default(FALSE), not null
 #  paypal_mode                                   :string(255)      default("disabled")
 #  offline_payment                               :boolean          default(FALSE), not null
-#  enabled_locales                               :string           default("en,fr"), not null
+#  enabled_locales                               :string           not null
 #  comp_noncomp_page_id                          :integer
 #  under_construction                            :boolean          default(TRUE), not null
 #  noncompetitors                                :boolean          default(TRUE), not null
@@ -123,7 +123,8 @@ class EventConfiguration < ActiveRecord::Base
     self.style_name ||= "base_green_blue"
     self.currency_code ||= "USD"
     self.max_award_place ||= 5
-    self.enabled_locales ||= ["en", "fr", "de", "es"]
+    # Cannot use `self.enabled_locales` because that conflicts with a method name
+    self[:enabled_locales] = ["en", "fr", "de", "es"].join(",")
   end
 
   def additional_info?

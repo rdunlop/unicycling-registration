@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422021631) do
+ActiveRecord::Schema.define(version: 20160424200718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -388,7 +388,7 @@ ActiveRecord::Schema.define(version: 20160422021631) do
     t.boolean  "accept_rules",                                              default: false,      null: false
     t.string   "paypal_mode",                                   limit: 255, default: "disabled"
     t.boolean  "offline_payment",                                           default: false,      null: false
-    t.string   "enabled_locales",                                           default: "en,fr",    null: false
+    t.string   "enabled_locales",                                                                null: false
     t.integer  "comp_noncomp_page_id"
     t.boolean  "under_construction",                                        default: true,       null: false
     t.boolean  "noncompetitors",                                            default: true,       null: false
