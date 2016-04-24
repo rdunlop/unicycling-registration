@@ -11,7 +11,7 @@
         = link_to t(".drop_out_of_event"), drop_event_registrant_build_index_path(@registrant, event_id: event.id), data: { confirm: t(".drop_out_confirmation") }, class: "button alert tiny", method: :delete
       = resu.hidden_field :event_id
 
-      - if event.has_cost? && @registrant.paid_expense_items.include?(event.expense_item)
+      - if event.has_cost? && @registrant.paid_or_pending_expense_items.include?(event.expense_item)
         %span.label{ title: t(".paid_for_tooltip") }
           = t(".paid_for")
       - else

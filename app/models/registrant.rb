@@ -349,14 +349,14 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     return true if spectator?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
       registration_cost_items = RegistrationCost.all_registration_expense_items
-      paid_expense_items.any? { |item| registration_cost_items.include?(item) }
+      paid_or_pending_expense_items.any? { |item| registration_cost_items.include?(item) }
     end
   end
 
   # return a list of _ALL_ of the expense_items for this registrant
   #  PAID FOR or NOT
   def all_expense_items
-    owing_expense_items + paid_expense_items
+    owing_expense_items + paid_expense_items + pending_expense_items
   end
 
   def amount_pending
@@ -393,6 +393,14 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   # returns a list of paid-for expense_items
   def paid_expense_items
     paid_details.map{|pd| pd.expense_item }
+  end
+
+  def pending_expense_items
+    pending_details.map{|pd| pd.expense_item }
+  end
+
+  def paid_or_pending_expense_items
+    paid_expense_items + pending_expense_items
   end
 
   def paid_or_pending_details

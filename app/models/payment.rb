@@ -139,6 +139,7 @@ class Payment < ActiveRecord::Base
     all
   end
 
+  # DEAD CODE?
   def self.paid_expense_items
     all = []
     Registrant.includes(payment_details: [:expense_item]).each do |reg|
