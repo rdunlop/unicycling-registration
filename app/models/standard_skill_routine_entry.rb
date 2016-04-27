@@ -27,6 +27,11 @@ class StandardSkillRoutineEntry < ActiveRecord::Base
 
   delegate :description, to: :standard_skill_entry
 
+  # Does this Standard Skill Score Entry have any Judged Scores?
+  def judge_scores?
+    standard_skill_score_entries.any?
+  end
+
   def add_standard_skill_routine_entry(params)
     # keep the position values between 1 and 18
     if standard_skill_routine_entries.size > 1

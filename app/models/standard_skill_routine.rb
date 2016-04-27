@@ -43,4 +43,8 @@ class StandardSkillRoutine < ActiveRecord::Base
     end
     standard_skill_routine_entries.build(params)
   end
+
+  def judge_scores?
+    standard_skill_routine_entries.any?(&:judge_scores?)
+  end
 end

@@ -19,11 +19,13 @@ class StandardSkillScoresController < ApplicationController
 
   before_action :find_judge
   before_action :find_competitor, except: [:index]
-  before_action :authorize_user
+  before_action :load_standard_skill_score, only: [:edit, :update, :destroy]
+  before_action :authorize_score, except: [:index, :new, :create]
   before_action :add_breadcrumbs
 
   # GET /judges/29/standard_skill_scores
   def index
+    authorize @judge, :create_scores?
     @competitors = @judge.competitors
 
     respond_to do |format|
@@ -34,7 +36,8 @@ class StandardSkillScoresController < ApplicationController
   # GET /judges/29/competitors/4/standard_skill_scores/new
   def new
     skills = @competitor.registrants.first.standard_skill_routine.standard_skill_routine_entries.order(:position)
-    @standard_skill_score = StandardSkillScore.new
+    @standard_skill_score = StandardSkillScore.new(competitor: @competitor, judge: @judge)
+    authorize @standard_skill_score
     skills.each do |skill|
       @standard_skill_score.standard_skill_score_entries.build(standard_skill_routine_entry: skill)
     end
@@ -45,6 +48,7 @@ class StandardSkillScoresController < ApplicationController
     @standard_skill_score = StandardSkillScore.new(standard_skill_score_params)
     @standard_skill_score.competitor = @competitor
     @standard_skill_score.judge = @judge
+    authorize @standard_skill_score
     if @standard_skill_score.save
       redirect_to judge_standard_skill_scores_path(@judge), notice: "Standard Skill Score Saved"
     else
@@ -54,14 +58,11 @@ class StandardSkillScoresController < ApplicationController
   end
 
   def edit
-    @standard_skill_score = StandardSkillScore.find(params[:id])
   end
 
   # this is used to update standard_skill_score_entries
   # PUT /judges/29/competitors/4/standard_skill_score/1
   def update
-    @standard_skill_score = StandardSkillScore.find(params[:id])
-
     if @standard_skill_score.update_attributes(standard_skill_score_params)
       redirect_to judge_standard_skill_scores_path(@judge), notice: 'Standard Skill Scores successfully updated.'
     else
@@ -69,14 +70,29 @@ class StandardSkillScoresController < ApplicationController
     end
   end
 
+  # this is used to update standard_skill_score_entries
+  # DELETE /judges/29/competitors/4/standard_skill_score/1
+  def destroy
+    if @standard_skill_score.destroy
+      flash[:notice] = "Judge Scores for #{@standard_skill_score.competitor} Deleted"
+    else
+      flash[:alert] = "Unable to delete Scores for #{@standard_skill_score.competitor}"
+    end
+    redirect_to judge_standard_skill_scores_path(@judge)
+  end
+
   private
+
+  def load_standard_skill_score
+    @standard_skill_score = StandardSkillScore.find(params[:id])
+  end
 
   def add_breadcrumbs
     add_competition_breadcrumb(@judge.competition)
   end
 
-  def authorize_user
-    authorize current_user, :under_development?
+  def authorize_score
+    authorize @standard_skill_score
   end
 
   def find_judge

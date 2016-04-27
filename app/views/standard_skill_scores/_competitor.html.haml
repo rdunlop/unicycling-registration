@@ -22,3 +22,5 @@
         = link_to "competitor pdf", standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
         = link_to "writing judge pdf", writing_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
         = link_to "difficulty judge pdf", difficulty_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
+        - if score.present? && policy(score).destroy?
+          = link_to "Delete Scores", judge_competitor_standard_skill_score_path(@judge, competitor, score), method: :delete, data: { confirm: "Remove the Judged scores for this competitor?" }, class: "button alert small"

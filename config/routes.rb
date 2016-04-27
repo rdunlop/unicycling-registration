@@ -626,7 +626,7 @@ Workspace::Application.routes.draw do
         resources :scores, only: [:new, :create]
 
         # display chosen competitors current scores, and update them
-        resources :standard_skill_scores, only: [:new, :create, :edit, :update]
+        resources :standard_skill_scores, only: [:new, :create, :edit, :update, :destroy]
       end
 
       # choose the desired competitor to add scores to
