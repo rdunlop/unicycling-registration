@@ -15,7 +15,7 @@
 class StandardSkillRoutinesController < ApplicationController
   before_action :authenticate_user!
   before_action :load_registrant, only: [:create]
-  before_action :load_standard_skill_routine, only: [:show, :writing_judge]
+  before_action :load_standard_skill_routine, only: [:show, :writing_judge, :difficulty_judge]
 
   # GET /standard_skill_routines
   def index
@@ -37,7 +37,17 @@ class StandardSkillRoutinesController < ApplicationController
     authorize @standard_skill_routine
 
     respond_to do |format|
-      format.pdf { render_common_pdf "writing_judge", "Portrait" }
+      format.html { render "writing_judge", formats: [:pdf], layout: "simple_pdf.html" }
+      format.pdf { render_common_pdf "writing_judge", "Portrait", simple_pdf: true }
+    end
+  end
+
+  def difficulty_judge
+    authorize @standard_skill_routine
+
+    respond_to do |format|
+      format.html { render "difficulty_judge", formats: [:pdf], layout: "simple_pdf.html" }
+      format.pdf { render_common_pdf "difficulty_judge", "Portrait", simple_pdf: true }
     end
   end
 
@@ -49,7 +59,7 @@ class StandardSkillRoutinesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.pdf { render_common_pdf "show", 'Portrait' }
+      format.pdf { render_common_pdf "show", 'Portrait', simple_pdf: true }
     end
   end
 

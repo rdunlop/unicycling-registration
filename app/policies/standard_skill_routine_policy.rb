@@ -14,6 +14,10 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
     view_blank_judging_sheets?
   end
 
+  def difficulty_judge?
+    view_blank_judging_sheets?
+  end
+
   def show?
     view_blank_judging_sheets?
   end

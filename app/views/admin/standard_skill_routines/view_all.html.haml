@@ -5,6 +5,7 @@
       %th ID
       %th Registrant
       %th Standard Skill Routine created?
+      %th PDFs
   %tbody
     - @registrants.each do |registrant|
       %tr
@@ -15,3 +16,10 @@
             No
           - else
             = link_to "Yes", standard_skill_routine_path(registrant.standard_skill_routine)
+        %td
+          - unless registrant.standard_skill_routine.nil?
+            = link_to "Download a PDF of my routine", standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button"
+            - if policy(registrant.standard_skill_routine).writing_judge?
+              = link_to "writing judge pdf", writing_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"
+            - if policy(registrant.standard_skill_routine).difficulty_judge?
+              = link_to "difficulty judge pdf", difficulty_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"

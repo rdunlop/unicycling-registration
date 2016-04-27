@@ -1,4 +1,4 @@
-%h2 Standard Skill Judging Sheet - Competitor Copy
+%h2 Standard Skill Judging Sheet - Difficulty Judge
 - registrant = @standard_skill_routine.registrant
 %h3 #{registrant.bib_number} - #{registrant}
 %hr
@@ -6,13 +6,17 @@
 %table.standard_skill_routine_competitor_sheet_table
   %thead
     %tr
-      %th #
-      %th Skill
-      %th.description Description
-      %th Points
-      %th Skill Definition
+      %th{ rowspan: 2 } #
+      %th{ rowspan: 2 } Skill
+      %th.description{ rowspan: 2 } Description
+      %th{ colspan: 2 } Difficulty
+      %th{ rowspan: 2 } Points
+      %th{ rowspan: 2 } Skill Definition
+    %tr
+      %th 50%
+      %th 100%
   %tbody
-    - @entries.each do |skill_entry|
+    - @standard_skill_routine.standard_skill_routine_entries.each do |skill_entry|
       - skill = skill_entry.standard_skill_entry
       %tr{ class: skill.skill_speed_class }
         %td= skill_entry.position
@@ -28,13 +32,15 @@
 
           - if skill.skill_after
             %div= "** " + skill.skill_after.to_s + " **"
+        %td
+        %td
         %td= skill.points
         %td= skill.friendly_description
   %tfoot
     %tr
-      %td{ colspan: 2}
-      %th Total
-      %th= @total
+      %td{ colspan: 3}
+      %th{ colspan: 2} Total
+      %th= @standard_skill_routine.total_skill_points
       %td
 
 = render "legend"

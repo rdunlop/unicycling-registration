@@ -43,6 +43,16 @@ class StandardSkillEntry < ActiveRecord::Base
     number >= 100
   end
 
+  def skill_speed_class
+    case skill_speed
+    when "Slow"
+    when "Medium"
+      "standard_skill_row--medium"
+    when "Fast"
+      "standard_skill_row--fast"
+    end
+  end
+
   def self.non_riding_skills
     where("standard_skill_entries.number >= 100")
   end

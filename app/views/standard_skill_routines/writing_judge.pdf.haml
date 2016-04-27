@@ -22,7 +22,7 @@
       %th 0
   %tbody
     - @standard_skill_routine.standard_skill_routine_entries.each do |skill_entry|
-      %tr
+      %tr{ class: skill_entry.standard_skill_entry.skill_speed_class }
         %td= skill_entry.position
         %td= skill_entry.standard_skill_entry.skill_number_and_letter
         %td= skill_entry.standard_skill_entry.description
@@ -44,3 +44,21 @@
       %td
       %td
       %td
+      %br
+
+%br
+%table.standard_skill_routine_judging_table
+  %thead
+    %tr
+      %th Difficulty Judge
+      %th Execution Judge
+      %th Writing Judge
+      %th Chief Judge
+  %tbody
+    %tr.judge_name_entry
+      %td
+      %td
+      %td
+      %td
+
+= render "legend"

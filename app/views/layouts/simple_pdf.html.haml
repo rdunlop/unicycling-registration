@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %title Unicycling Registration
+    / This does NOT include the foundation/base styles
+    / Include the pdf style, to override some of the existing style
+    = wicked_pdf_stylesheet_link_tag    "pdf"
+    :css
+      .non_printable {
+        display: none;
+      }
+  %body.pdf_body{:onload => "number_pages"}
+    - if Rails.env.stage?
+      .alert-box.callout.alert.top_banner
+        Non-Live System.
+    .body
+      = yield

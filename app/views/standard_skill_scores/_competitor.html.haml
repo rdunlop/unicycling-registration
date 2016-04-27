@@ -19,4 +19,6 @@
       - if routine.nil?
         No Routine Entered
       - else
-        = link_to "pdf", writing_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
+        = link_to "competitor pdf", standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
+        = link_to "writing judge pdf", writing_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"
+        = link_to "difficulty judge pdf", difficulty_judge_standard_skill_routine_path(competitor.standard_skill_routine, format: :pdf), class: "button small"

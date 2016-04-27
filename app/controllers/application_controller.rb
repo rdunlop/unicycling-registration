@@ -88,12 +88,14 @@ class ApplicationController < ActionController::Base
     {left: '[date] [time]', center: @config.short_name, right: 'Page [page] of [topage]'}
   end
 
-  def render_common_pdf(view_name, orientation = "Portrait", attachment = false)
+  def render_common_pdf(view_name, orientation = "Portrait", attachment = false, simple_pdf: false)
     if attachment
       disposition = "attachment"
     else
       disposition = "inline"
     end
+
+    layout_html = simple_pdf ? "simple_pdf.html.haml" : "pdf.html.haml"
 
     render pdf: view_name,
            page_size: "Letter",
@@ -104,7 +106,7 @@ class ApplicationController < ActionController::Base
            formats: [:pdf, :html],
            orientation: orientation,
            disposition: disposition,
-           layout: "pdf.html"
+           layout: layout_html
   end
 
   # a prototype, not working (currently cutting off lines)
