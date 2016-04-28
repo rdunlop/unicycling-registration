@@ -14,6 +14,7 @@ fr:
         currency_code: Code de la monnaie
         custom_waiver_text: Texte règlementaire sur mesure
         dates_description: Descriptions des dates
+        enabled_locales: Langages disponibles
         event_sign_up_closed_date: Dernier jour pour s'inscrire aux événements
         event_url: Site principal
         location: Lieu

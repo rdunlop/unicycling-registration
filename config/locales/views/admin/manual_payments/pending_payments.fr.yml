@@ -1,0 +1,10 @@
+---
+fr:
+  admin:
+    manual_payments:
+      pending_payments:
+        description: Cette inscrit est dans la liste des paiements en attente suivant.
+          Réceptionnez-vous un de ces paiements ?
+        header: Paiements en attente
+        items: Eléments
+        mark_as_received: 'Marquer le paiement #%{payment_number} comme reçu'

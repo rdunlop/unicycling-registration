@@ -2,5 +2,12 @@
 fr:
   payments:
     show:
+      confirm_pay_offline: "Acceptez-vous d'effectuer un paiement de ce montant ?\r\nVeuillez
+        inclure la référence du paiement #%{payment_number}"
+      offline_payment_instructions: Instructions de paiement hors ligne
+      offline_payment_instructions_description: 'Afin de payer hors ligne, utilisez
+        le "Numéro # de référence du paiement" et suivez ces instructions'
+      payment_reference: 'Référence de paiement #%{payment_id}'
       payment_summary: Résumé du paiement
+      pay_offline: Accepter de payer hors ligne
       please_proceed_with_payment: Veuillez procéder à votre paiement
