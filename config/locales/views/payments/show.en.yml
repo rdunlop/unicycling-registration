@@ -13,3 +13,4 @@ en:
       confirm_pay_offline: |
         Do you agree to make a Payment for this amount?
         Please be sure to include Reference #%{payment_number}.
+      complete_payment: Complete Payment

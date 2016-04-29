@@ -2,10 +2,10 @@
 - unless @payments.empty?
   %table.payments
     %tr
-      %th Payment Id
-      %th Amount
-      %th Details (txn/note)
-      %th Completed date
+      %th= Payment.human_attribute_name(:payment_id)
+      %th= Payment.human_attribute_name(:amount)
+      %th= Payment.human_attribute_name(:details)
+      %th= Payment.human_attribute_name(:completed_date)
       %th
     - @payments.each do |payment|
       %tr
@@ -15,15 +15,15 @@
         %td= payment.completed_date
         %td
           - if policy(payment).show?
-            = link_to 'Show Details', payment
+            = link_to t(".show_details"), payment
 %br
 - unless @refunds.empty?
   %table.refunds
     %tr
-      %th Refund Id
-      %th Refunded by
-      %th Refund Date
-      %th Details (note)
+      %th= Refund.human_attribute_name(:refund_id)
+      %th= Refund.human_attribute_name(:user_id)
+      %th= Refund.human_attribute_name(:refund_date)
+      %th= Refund.human_attribute_name(:details)
       %th
     - @refunds.each do |refund|
       %tr
@@ -33,6 +33,6 @@
         %td= refund.note
         %td
           - if policy(refund).show?
-            = link_to "Refund Details", refund
+            = link_to t(".show_details"), refund
 %br
 = render partial: "/registrants/pay_now", :locals => {:total_owing => current_user.total_owing }

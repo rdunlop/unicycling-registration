@@ -4,7 +4,12 @@ en:
     attributes:
       payment:
         total: Total
+        completed_date: Completed Date
+        transaction_id: Transaction ID
+        note: Note
         offline_pending_date: Date
+        payment_id: Payment ID
+        details: Details (txn/note)
     models:
       registrant:
         one: Payment

@@ -1,17 +1,17 @@
 - # locals: payment
 %p
-  %b PaymentID:
+  %b= Payment.human_attribute_name(:payment_id)
   #{payment.id} - #{payment.invoice_id}
 
 - if payment.completed
   %p
-    %b TransactionID:
+    %b= Payment.human_attribute_name(:transaction_id)
     = @payment.transaction_id
   %p
-    %b Note:
+    %b= Payment.human_attribute_name(:note)
     = @payment.note
   %p
-    %b Completed date:
+    %b= Payment.human_attribute_name(:completed_date)
     = @payment.completed_date
 %table.sortable
   %caption

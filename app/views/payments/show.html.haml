@@ -23,7 +23,7 @@
 
     - else
       = form_tag complete_payment_path(@payment) do
-        = submit_tag "Complete Payment", class: "payment_link"
+        = submit_tag t(".complete_payment"), class: "payment_link"
     - if @config.test_mode?
       = link_to "Pretend to pay by credit card #{print_formatted_currency(@payment.total_amount)}", fake_complete_payment_path(@payment), :method => :post, class: "button warning"
 

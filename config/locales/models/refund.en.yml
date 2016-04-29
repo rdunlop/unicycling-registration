@@ -1,0 +1,13 @@
+---
+en:
+  activerecord:
+    attributes:
+      refund:
+        refund_id: Refund ID
+        user_id: Refunded By
+        refund_date: Refund Date
+        details: Details (note)
+    models:
+      refund:
+        one: Refund
+        other: Refunds
