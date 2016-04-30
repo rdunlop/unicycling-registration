@@ -1,12 +1,12 @@
-%h1 My Standard Skill Routines
+%h1= t(".header")
 %table
-  %caption My Registrations
+  %caption= t(".my_registrations")
   %thead
     %tr
-      %th ID
-      %th Registrant
-      %th Signed-up for Standard skill?
-      %th Standard Skill Routine created?
+      %th= Registrant.human_attribute_name(:bib_number)
+      %th= Registrant.model_name.human
+      %th= t(".signed_up_for_standard_skill")
+      %th= t(".standard_skill_routine_created")
   %tbody
     - @registrants.each do |registrant|
       %tr
@@ -15,6 +15,6 @@
         %td= registrant.has_standard_skill?
         %td
           - if registrant.standard_skill_routine.nil?
-            No
+            = t("no")
           - else
-            = link_to "Yes", standard_skill_routine_path(registrant.standard_skill_routine)
+            = link_to t("yes"), standard_skill_routine_path(registrant.standard_skill_routine)

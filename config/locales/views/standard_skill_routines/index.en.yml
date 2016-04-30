@@ -1,0 +1,8 @@
+---
+en:
+  standard_skill_routines:
+    index:
+      header: My Standard Skill Routines
+      my_registrations: My Registrations
+      signed_up_for_standard_skill: Signed-up for Standard skill?
+      standard_skill_routine_created: Standard Skill Routine created?
