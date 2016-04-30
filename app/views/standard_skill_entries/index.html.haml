@@ -1,11 +1,11 @@
-%h1 Standard-Skill Entries
-%p These are the available Standard Skill entries
+%h1= StandardSkillEntry.model_name.human(count: 2)
+%p= t(".available_entries")
 %table
   %tr
-    %th Number
-    %th Letter
-    %th Points
-    %th Description
+    %th= StandardSkillEntry.human_attribute_name(:number)
+    %th= StandardSkillEntry.human_attribute_name(:letter)
+    %th= StandardSkillEntry.human_attribute_name(:points)
+    %th= StandardSkillEntry.human_attribute_name(:description)
   - @standard_skill_entries.each do |entry|
     %tr
       %td= entry.number
