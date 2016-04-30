@@ -1,40 +1,37 @@
 %h1
   = @standard_skill_routine.registrant
-  \- Standard Skill Routine
+  \- #{StandardSkillRoutine.model_name.human}
 %p
-  You may have a maximum of 18 skills in your program.
-  %br
-  If you have more than 12 skills in your program, a maximum of 12 skills may be non-riding skills (Skill numbers above 100).
-  %br
-  All skills must have a different skill number.
+  = t(".limit_description")
 - if @config.standard_skill_closed?
-  %h2.closed Standard Skill Entry is now closed. See you soon
+  %h2.closed= t(".standard_skill_closed")
 - else
   %p
-    %b Your list of skills is automatically saved each time you make changes to it.
+    %b= t(".skills_are_saved_automatically")
 %p
-  You can see a #{link_to 'list of all approved skills here', standard_skill_entries_path}
+  = t(".see_list_of_skills_html", link: link_to(t(".list_of_approved_skills_here"), standard_skill_entries_path))
+
 %table#skills
   %thead
     %tr
-      %th Position#
-      %th Skill Number
-      %th Letter
-      %th Points
-      %th Description
-      %th Remove
+      %th= StandardSkillRoutineEntry.human_attribute_name(:bib_number)
+      %th= StandardSkillEntry.human_attribute_name(:number)
+      %th= StandardSkillEntry.human_attribute_name(:letter)
+      %th= StandardSkillEntry.human_attribute_name(:points)
+      %th= StandardSkillEntry.human_attribute_name(:description)
+      %th
   %tbody
     = render :partial => '/standard_skill_routine_entries/skill_entry', :collection => @entries
   %tfoot
     %tr
       %td
       %td
-      %th Total
+      %th= t(".total")
       %th#skill_total= @total
       %td
       %td
-= link_to "Download a PDF of my routine", standard_skill_routine_path(@standard_skill_routine, format: :pdf), class: "button"
+= link_to t(".download_my_routine"), standard_skill_routine_path(@standard_skill_routine, format: :pdf), class: "button"
 %hr
-- if policy(@standard_skill_routine).update?
-  %h3 Add new Standard Skill Entry
+- if policy(@standard_skill_routine).update? || true
+  %h3= t(".add_new_entry")
   = render :partial => 'form', :object => @standard_skill_routine.standard_skill_routine_entries.build

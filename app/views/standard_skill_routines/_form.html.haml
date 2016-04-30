@@ -4,12 +4,12 @@
   %span#errors
   .row
     .small-4.columns
-      = f.label :position, 'Insert at position'
+      = f.label :position, t(".insert_at_position")
       %br
       = f.number_field :position, { :min => 1, :max => 18 }
     .small-8.columns
-      = f.label :standard_skill_entry_id, 'Skill'
+      = f.label :standard_skill_entry_id, t(".skill")
       %br
       = f.select :standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]}, {}, class: "chosen-select"
   .actions
-    = f.button :submit, 'Insert New', :class => "multiclick"
+    = f.button :submit, t(".insert_new"), :class => "multiclick"

@@ -7,4 +7,4 @@
   %td= skill_entry.standard_skill_entry.description
   %td
     - if policy(@standard_skill_routine).update?
-      = link_to 'destroy', [@standard_skill_routine, skill_entry], remote: true, data: { confirm: 'Are you sure?' }, method: :delete
+      = link_to t("delete"), [@standard_skill_routine, skill_entry], remote: true, data: { confirm: t("are_you_sure") }, method: :delete

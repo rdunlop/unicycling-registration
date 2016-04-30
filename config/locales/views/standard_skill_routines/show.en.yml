@@ -1,0 +1,17 @@
+---
+en:
+  standard_skill_routines:
+    show:
+      limit_description: |
+        You may have a maximum of 18 skills in your program.
+
+        If you have more than 12 skills in your program, a maximum of 12 skills may be non-riding skills (Skill numbers above 100).
+
+        All skills must have a different skill number.
+      standard_skill_closed: Standard Skill Entry is now closed. See you soon
+      skills_are_saved_automatically: Your list of skills is automatically saved each time you make changes to it.
+      see_list_of_skills_html: You can see a %{link}
+      list_of_approved_skills_here: list of all approved skills here
+      total: Total
+      download_my_routine: Download a PDF of my routine
+      add_new_entry: Add new Standard Skill Entry

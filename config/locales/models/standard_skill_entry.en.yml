@@ -1,0 +1,14 @@
+---
+en:
+  activerecord:
+    attributes:
+      standard_skill_entry:
+        number: Skill Number
+        letter: Letter
+        points: Points
+        description: Description
+
+    models:
+      standard_skill_entry:
+        one: Standard Skill Entry
+        other: Standard Skill Entries
