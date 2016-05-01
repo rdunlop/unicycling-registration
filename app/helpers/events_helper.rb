@@ -27,17 +27,18 @@ module EventsHelper
   def scoring_link(judge, options = {})
     class_name = judge.competition.event_class
 
+    judge_name = "#{judge.competition} - #{judge.judge_type.name}"
     case class_name
     when 'High/Long', 'High/Long Preliminary IUF 2015', 'High/Long Final IUF 2015'
-      link_to "#{judge.competition} - #{judge.judge_type.name}", judge_distance_attempts_path(judge), options
+      link_to judge_name, judge_distance_attempts_path(judge), options
     when 'Freestyle', "Artistic Freestyle IUF 2015"
-      link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge), options
+      link_to judge_name, judge_scores_path(judge), options
     when 'Flatland'
-      link_to "#{judge.competition} - #{judge.judge_type.name}", judge_scores_path(judge), options
+      link_to judge_name, judge_scores_path(judge), options
     when 'Street', 'Street Final'
-      link_to judge.judge_type.name, judge_street_scores_path(judge), options
-    when 'Standard'
-      link_to judge.judge_type.name, competition_standard_scores_path(judge.competition), options
+      link_to judge_name, judge_street_scores_path(judge), options
+    when 'Standard Skill'
+      link_to judge_name, judge_standard_skill_scores_path(judge), options
     else
       "please update the scoring_link function (#{judge.competition.event_class})"
     end
