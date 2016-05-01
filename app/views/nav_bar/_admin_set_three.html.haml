@@ -10,7 +10,7 @@
   %li= link_to t('.copy_events'), migrate_index_path
 - if policy(current_user).view_modification_history?
   %li= link_to 'Modification History', rails_admin_path
-- if @config.standard_skill
+- if @config.standard_skill?
   - if policy(:standard_skill_routine).view_all?
     %li= link_to t('.standard_skill_routines_view'), view_all_standard_skill_routines_path
   - if policy(:standard_skill_routine).export?

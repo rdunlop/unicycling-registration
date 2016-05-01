@@ -1,11 +1,11 @@
-%h1 All Standard Skill Routines
+%h1= t(".header")
 %table
   %thead
     %tr
-      %th ID
-      %th Registrant
-      %th Standard Skill Routine created?
-      %th PDFs
+      %th= Registrant.human_attribute_name(:bib_number)
+      %th= Registrant.model_name.human
+      %th= t(".standard_skill_routine_created")
+      %th= t(".pdfs")
   %tbody
     - @registrants.each do |registrant|
       %tr
@@ -13,13 +13,13 @@
         %td= link_to registrant, registrant
         %td
           - if registrant.standard_skill_routine.nil?
-            No
+            = t("no")
           - else
-            = link_to "Yes", standard_skill_routine_path(registrant.standard_skill_routine)
+            = link_to t("yes"), standard_skill_routine_path(registrant.standard_skill_routine)
         %td
           - unless registrant.standard_skill_routine.nil?
-            = link_to "Download a PDF of my routine", standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button"
+            = link_to t(".download"), standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button"
             - if policy(registrant.standard_skill_routine).writing_judge?
-              = link_to "writing judge pdf", writing_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"
+              = link_to t(".writing_judge_pdf"), writing_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"
             - if policy(registrant.standard_skill_routine).difficulty_judge?
-              = link_to "difficulty judge pdf", difficulty_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"
+              = link_to t(".difficulty_judge_pdf"), difficulty_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"

@@ -43,7 +43,7 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
 
   def view_all?
     return false unless config.standard_skill?
-    event_planner? || super_admin?
+    event_planner? || super_admin? || standard_skill_director?
   end
 
   private
