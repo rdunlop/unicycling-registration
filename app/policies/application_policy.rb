@@ -141,6 +141,10 @@ class ApplicationPolicy
     user.has_role?(:super_admin)
   end
 
+  def standard_skill_director?
+    Event.standard_skill_events.any? { |event| director?(event) }
+  end
+
   def registration_closed?
     # Allows to modify your own records as long as you're a `late_registrant` or registration is still open
     reg_closed && !authorized_laptop && !late_registrant?

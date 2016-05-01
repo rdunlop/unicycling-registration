@@ -34,5 +34,9 @@ FactoryGirl.define do
     trait :marathon_best_time_format do
       best_time_format "h:mm"
     end
+
+    trait :standard_skill do
+      standard_skill true
+    end
   end
 end

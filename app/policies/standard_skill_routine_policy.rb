@@ -49,7 +49,7 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
   private
 
   def view_blank_judging_sheets?
-    return true if super_admin? || event_planner?
+    return true if super_admin? || event_planner? || standard_skill_director?
 
     user.registrants.include?(record.registrant)
   end

@@ -6,12 +6,26 @@ describe StandardSkillRoutinePolicy do
   let(:other_registrant) { FactoryGirl.create(:registrant) }
   let(:my_routine) { FactoryGirl.create(:standard_skill_routine, registrant: my_registrant)}
   let(:other_routine) { FactoryGirl.create(:standard_skill_routine, registrant: other_registant)}
+  let(:event_planner) { FactoryGirl.create(:event_planner) }
+  let(:std_director) { FactoryGirl.create(:user) }
+  let(:other_director) { FactoryGirl.create(:user) }
+  let(:standard_skill_event) { FactoryGirl.create(:event, :standard_skill)}
+  before do
+    std_director.add_role :director, standard_skill_event
+    other_director.add_role :director, FactoryGirl.create(:event)
+  end
 
   subject { described_class }
 
   permissions :show? do
     it { expect(subject).to permit(my_user, my_routine) }
     it { expect(subject).not_to permit(other_registrant.user, my_routine) }
+  end
+
+  permissions :writing_judge?, :difficulty_judge? do
+    it { expect(subject).to permit(event_planner, my_routine) }
+    it { expect(subject).to permit(std_director, my_routine) }
+    it { expect(subject).not_to permit(other_director, my_routine) }
   end
 
   describe "with a user context" do
