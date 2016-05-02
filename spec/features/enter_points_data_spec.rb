@@ -28,7 +28,7 @@ describe 'Entering Points data' do
         fill_in "external_result[details]", with: "1 pts"
 
         expect do
-          click_button "Create External result"
+          click_button "Create Entered Point Result"
         end.to change(ExternalResult, :count).by(1)
       end
     end

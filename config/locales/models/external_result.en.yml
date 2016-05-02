@@ -7,5 +7,5 @@ en:
         details: Details
     models:
       external_result:
-        one: Entered Point
-        other: Entered Points
+        one: Entered Point Result
+        other: Entered Point Results
