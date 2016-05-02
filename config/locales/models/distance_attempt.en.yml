@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      distance_attempt:
+        distance: Distance
+        fault: Fault
+    models:
+      distance_attempt:
+        one: Distance Attempt
+        other: Distance Attempt

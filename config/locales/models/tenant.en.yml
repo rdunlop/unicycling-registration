@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      tenant:
+        one: Tenant
+        other: Tenants

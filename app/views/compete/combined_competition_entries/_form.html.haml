@@ -1,28 +1,32 @@
 = simple_form_for([@combined_competition, @combined_competition_entry]) do |f|
   = render partial: "/shared/error_messages", object: @combined_competition_entry
-  .field
-    = f.label :abbreviation
-    %br
-    = f.text_field :abbreviation, {autofocus: true }
-  .field
-    = f.label :competition_id
-    %br
-    = f.select :competition_id, Competition.event_order.map{|e| [e, e.id]}
-  .field
-    = f.label :tie_breaker
-    %br
-    = f.check_box :tie_breaker
-  .field
-    = f.label :base_points
-    %br
-    = f.number_field :base_points, {min: 0}
-  - for place in 1..10
-    .field
-      - if @combined_competition.percentage_based_calculations?
-        = f.label "points_#{place}".to_sym, "Bonus Percentage #{place}"
-      - else
-        = f.label "points_#{place}".to_sym
+  .row
+    .small-12.medium-4.columns
+      = f.label :abbreviation
       %br
-      = f.number_field "points_#{place}".to_sym, {min: 0}
+      = f.text_field :abbreviation, {autofocus: true }
+    .small-12.medium-4.columns
+      = f.label :competition_id
+      %br
+      = f.select :competition_id, Competition.event_order.map{|e| [e, e.id]}
+    .small-12.medium-4.columns
+      = f.label :tie_breaker
+      %br
+      = f.check_box :tie_breaker
+  .row
+    .small-12.medium-4.columns
+      = f.label :base_points
+      %br
+      = f.number_field :base_points, {min: 0}
+  %hr
+  .row
+    - for place in 1..10
+      .small-12.columns
+        - if @combined_competition.percentage_based_calculations?
+          = f.label "points_#{place}".to_sym, "Bonus Percentage #{place}"
+        - else
+          = f.label "points_#{place}".to_sym
+        %br
+        = f.number_field "points_#{place}".to_sym, {min: 0}
   .actions
     = f.button :submit

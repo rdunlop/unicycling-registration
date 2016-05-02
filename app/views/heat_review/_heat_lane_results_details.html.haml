@@ -19,5 +19,5 @@
         %td= heat_lane_result.disqualified? ? "DQ" : ""
         %td= heat_lane_result.entered_by
         %td= heat_lane_result.entered_at
-        %td= link_to 'Edit', edit_heat_lane_result_path(heat_lane_result)
-        %td= link_to 'Delete', heat_lane_result, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to t("edit"), edit_heat_lane_result_path(heat_lane_result)
+        %td= link_to t("delete"), heat_lane_result, method: :delete, data: { confirm: t("are_you_sure") }

@@ -1,7 +1,7 @@
-%h2= "#{judges.count} #{judge_type} Judges"
+%h2= "#{judges.count} #{judge_type} #{Judge.model_name.human(count: 2)}"
 %table.sortable
   %thead
-    %th Judge
+    %th= Judge.model_name.human
     %th
   %tbody
     - judges.each do |judge|
@@ -10,4 +10,4 @@
         %td= judge.name
         %td
           - if policy(judge).destroy?
-            = link_to 'Delete', competition_judge_path(judge.competition, judge), data: {confirm: 'Are you sure?'}, method: :delete
+            = link_to t("delete"), competition_judge_path(judge.competition, judge), data: { confirm: t("are_you_sure") }, method: :delete

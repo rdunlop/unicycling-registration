@@ -37,7 +37,7 @@
     = link_to 'Publish', publish_competition_path(@competition), :method => :post, data: { confirm: "This will make the data available online for all to see. Continue?" }, class: "action_button"
 
 
-  %h4 Additional Results
+  %h4= CompetitionResult.model_name.human(count: 2)
   %p There are currently #{@competition.competition_results.additional.count} Additional Results attached to this event
 
 

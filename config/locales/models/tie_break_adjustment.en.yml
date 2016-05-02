@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      tie_break_adjustment:
+        one: Tie Break Adjustment
+        other: Tie Break Adjustments

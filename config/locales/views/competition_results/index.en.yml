@@ -1,0 +1,11 @@
+---
+en:
+  competition_results:
+    index:
+      description: |
+        Upload PDFs as "Additional Results" in order to provide additional information.
+        Examples: Round-Robin Results, Battle-Results, or other supporting results.
+      published_immediately_warning: |
+        These files will be published online immediately.
+      upload_a_file: Upload A PDF Result file
+      upload_these_results: Upload These Results

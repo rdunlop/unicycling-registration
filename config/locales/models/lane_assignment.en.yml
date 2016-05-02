@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      lane_assignment:
+        heat: Heat
+        lane: Lane
+    models:
+      lane_assignment:
+        one: Lane Assignment
+        other: Lane Assignments

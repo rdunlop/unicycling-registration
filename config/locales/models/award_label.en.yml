@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      award_label:
+        bib_number: ID
+        place: Place
+    models:
+      award_label:
+        one: Award Label
+        other: Award Labels

@@ -12,9 +12,9 @@
       %th ID
       %th Name
       %th Start Time?
-      %th Minutes
-      %th Seconds
-      %th Thousands
+      %th= TimeResult.human_attribute_name(:minutes)
+      %th= TimeResult.human_attribute_name(:seconds)
+      %th= TimeResult.human_attribute_name(:thousands)
       - if @competition.has_penalty?
         %th Penalties
       %th Disqualified
@@ -35,10 +35,10 @@
         %td= time_result.thousands
         - if @competition.has_penalty?
           %td= time_result.number_of_penalties
-        %td= time_result.disqualified? ? "yes" : ""
+        %td= time_result.disqualified? ? t("yes") : ""
         %td= time_result.entered_at_to_s
         %td= time_result.competitor.age_group_entry_description
         %td= time_result.competitor.place_formatted
         %td= time_result.competitor.overall_place_formatted
-        %td.non_printable= link_to 'Edit', edit_time_result_path(time_result)
-        %td.non_printable= link_to 'Delete', time_result, data: { confirm: 'Are you sure?' }, :method => :delete
+        %td.non_printable= link_to t("edit"), edit_time_result_path(time_result)
+        %td.non_printable= link_to t("delete"), time_result, data: { confirm: t("are_you_sure") }, :method => :delete

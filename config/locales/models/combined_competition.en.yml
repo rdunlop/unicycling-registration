@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      combined_competition:
+        use_age_group_places: Use Age Group Places
+        percentage_based_calculations: Percentage Based Calculations
+        tie_break_by_firsts: Tie Break By Firsts
+    models:
+      combined_competition:
+        one: Combined Competition
+        other: Combined Competitions

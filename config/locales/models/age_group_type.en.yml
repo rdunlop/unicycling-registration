@@ -4,6 +4,7 @@ en:
     attributes:
       age_group_type:
         name: Name
+        description: Description
     models:
       age_group_type:
         one: Age Group Type

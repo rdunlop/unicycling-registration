@@ -53,4 +53,4 @@
           %td.derived= ss.placing_points
           %td
             - if policy(ss).destroy?
-              = link_to 'Delete', judge_street_score_path(@judge, ss), data: { confirm: 'Are you sure?' }, method: :delete
+              = link_to t("delete"), judge_street_score_path(@judge, ss), data: { confirm: t("are_you_sure") }, method: :delete

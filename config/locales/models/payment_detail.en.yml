@@ -4,3 +4,7 @@ en:
     attributes:
       payment_detail:
         details: Details
+    models:
+      payment_details:
+        one: Detail
+        other: Details

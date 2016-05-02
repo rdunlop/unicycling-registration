@@ -38,7 +38,7 @@
           (set places, export)
       - unless @competition.results_path.nil?
         %li= link_to "Enter/Modify Results", @competition.results_path
-      %li= link_to "Additional Results", competition_competition_results_path(@competition)
+      %li= link_to CompetitionResult.model_name.human(count: 2), competition_competition_results_path(@competition)
       - if policy(@competition).results?
         %li
           = link_to "Preview Results", results_printing_competition_path(@competition)

@@ -4,6 +4,10 @@ en:
     attributes:
       age_group_entry:
         gender: Gender
+        start_age: Start Age
+        end_age: End Age
+        wheel_size: Required Wheel Size (optional)
+        gender: Gender
     models:
       age_group_entry:
         one: Age Group Entry

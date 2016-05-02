@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      page_image:
+        one: Image
+        other: Images

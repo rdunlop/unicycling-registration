@@ -16,8 +16,8 @@
     %table.sortable.lane_assignments
       %thead
         %tr
-          %th Heat
-          %th Lane
+          %th= LaneAssignment.human_attribute_name(:heat)
+          %th= LaneAssignment.human_attribute_name(:lane)
           %th ID
           %th Competitor
           %th Age Group

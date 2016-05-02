@@ -2,12 +2,12 @@
   %caption #{title}
   %thead
     %tr
-      %th Distance
-      %th Fault
-      %th ID
-      %th Competitor
-      %th Gender
-      %th Age
+      %th= DistanceAttempt.human_attribute_name(:distance)
+      %th= DistanceAttempt.human_attribute_name(:fault)
+      %th= Competitor.human_attribute_name(:bib_number)
+      %th= Competitor.model_name.human
+      %th= Competitor.human_attribute_name(:gender)
+      %th= Competitor.human_attribute_name(:age)
       - if display_delete
         %th
   %tbody

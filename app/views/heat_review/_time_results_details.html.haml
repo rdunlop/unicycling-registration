@@ -17,5 +17,5 @@
         %td= time_result.competitor
         %td= time_result.full_time
         %td= time_result.disqualified? ? "DQ" : ""
-        %td= link_to 'Edit', edit_time_result_path(time_result), target: "_blank"
-        %td= link_to 'Delete', time_result, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to t("edit"), edit_time_result_path(time_result), target: "_blank"
+        %td= link_to t("delete"), time_result, method: :delete, data: { confirm: t("are_you_sure") }

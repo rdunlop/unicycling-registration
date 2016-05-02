@@ -49,6 +49,6 @@
         %td= event_category
         %td{ class: competitor.warn? ? "unmatching" : nil }= competitor.member_warnings
         %td
-          = link_to 'Edit', edit_competitor_path(competitor)
-          = link_to 'Delete', competitor, method: :delete, data: { confirm: 'Are you sure?' }, remote: true
+          = link_to t("edit"), edit_competitor_path(competitor)
+          = link_to t("delete"), competitor, method: :delete, data: { confirm: t("are_you_sure") }, remote: true
           = link_to "Withdraw", withdraw_competitor_path(competitor), method: :put, data: { confirm: "Withdraw?" }

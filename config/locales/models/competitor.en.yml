@@ -1,6 +1,12 @@
 ---
 en:
   activerecord:
+    attributes:
+      competitor:
+        bib_number: ID
+        name: Name
+        gender: Gender
+        age: Age
     models:
       competitor:
         one: Competitor

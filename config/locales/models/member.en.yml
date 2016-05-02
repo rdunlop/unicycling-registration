@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      member:
+        one: Member
+        other: Members

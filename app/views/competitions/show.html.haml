@@ -1,6 +1,6 @@
 %h1= @competition
 - if policy(@competition).update?
-  (Scoring Class: #{@competition.event_class} #{link_to 'Edit', edit_competition_path(@competition)} )
+  (Scoring Class: #{@competition.event_class} #{link_to t("edit"), edit_competition_path(@competition)} )
 
 
 %p Manage Competitors, Judges, Volunteers and Results.

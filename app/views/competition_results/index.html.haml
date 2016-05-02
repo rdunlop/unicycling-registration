@@ -1,15 +1,13 @@
-%h2 Additional Results
-%p
-  Upload PDFs as "Additional Results" in order to provide additional information.
-  Examples: Round-Robin Results, Battle-Results, or other supporting results.
+%h2= CompetitionResult.model_name.human(count: 2)
+%p= t(".description")
 
-%p These files will be published online immediately.
+%p= t(".published_immediately_warning")
 
 - if @competition_results.active.additional.any?
   %table
     %thead
       %tr
-        %th Additional Result
+        %th= CompetitionResult.model_name.human
         %th
     %tbody
       - @competition_results.active.additional.each do |result|
@@ -17,10 +15,10 @@
           %td
             = link_to result.to_s, result.results_file_url
           %td
-            = link_to "Delete", competition_competition_result_path(@competition, result), method: :delete, data: { confirm: "Are you sure?" }
+            = link_to t("delete"), competition_competition_result_path(@competition, result), method: :delete, data: { confirm: t("are_you_sure") }
 
 %hr
-%h3 Upload A PDF Result file
+%h3= t(".upload_a_file")
 
 = form_tag competition_competition_results_path(@competition), multipart: true do
   .row
@@ -30,4 +28,4 @@
       = label_tag :custom_name
       = text_field_tag :custom_name
     .small-4.columns
-      = submit_tag "Upload These Results", class: "button"
+      = submit_tag t(".upload_these_results"), class: "button"

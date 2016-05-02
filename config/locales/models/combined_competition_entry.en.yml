@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      combined_competition_entry:
+        abbreviation: Abbreviation
+        tie_breaker: Tie Breaker
+        base_points: Base Points
+    models:
+      combined_competition_entry:
+        one: Combined Competition Entry
+        other: Combined Competition Entries

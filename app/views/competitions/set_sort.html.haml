@@ -11,7 +11,7 @@
   - else
     %fieldset.form__fieldset.data_block
       %h3 Random Sort
-      = link_to "Apply Random Sort", sort_random_competition_path(@competition), method: :post, data: { confirm: "Are you sure?" }, class: "nonfocus_button"
+      = link_to "Apply Random Sort", sort_random_competition_path(@competition), method: :post, data: { confirm: t("are_you_sure") }, class: "nonfocus_button"
 
     %fieldset.form__fieldset.data_block
       %h3 Manual Sort

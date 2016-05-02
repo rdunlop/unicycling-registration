@@ -30,7 +30,7 @@
           %td= image.name
           %td= link_to "View", convention_setup_page_image_path(@page, image)
           %td= image.image.url
-          %td= link_to "Delete", convention_setup_page_image_path(@page, image), method: :delete, data: { confirm: "Are you sure?" }
+          %td= link_to t("delete"), convention_setup_page_image_path(@page, image), method: :delete, data: { confirm: t("are_you_sure") }
 
   %hr
 

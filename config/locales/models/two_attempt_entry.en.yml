@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      two_attempt_entry:
+        one: Two Attempt Entry
+        other: Two Attempt Entries

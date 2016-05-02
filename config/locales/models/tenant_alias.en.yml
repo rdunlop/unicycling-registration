@@ -4,3 +4,7 @@ en:
     attributes:
       tenant_alias:
         website_alias: Website Alias
+    models:
+      tenant:
+        one: Tenant Alias
+        other: Tenants Aliases

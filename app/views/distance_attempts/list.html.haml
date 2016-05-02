@@ -1,15 +1,16 @@
-%h1 #{@competition} - Distance Attempts
+%h1= "#{@competition} - #{DistanceAttempt.model_name.human(count: 2)}"
+
 - unless @distance_attempts.empty?
   %table.top_distance_attempts.sortable.searchable
     %caption All Distance Attempts
     %thead
       %tr
-        %th Distance
-        %th Fault
-        %th ID
-        %th Competitor
-        %th Gender
-        %th Age
+        %th= DistanceAttempt.human_attribute_name(:distance)
+        %th= DistanceAttempt.human_attribute_name(:fault)
+        %th= Competitor.human_attribute_name(:bib_number)
+        %th= Competitor.model_name.human
+        %th= Competitor.human_attribute_name(:gender)
+        %th= Competitor.human_attribute_name(:age)
         %th Judge
         %th Date
     %tbody
@@ -17,7 +18,7 @@
         - cache [da, da.competitor] do
           %tr
             %td= da.distance
-            %td= da.fault? ? "Fault" : ""
+            %td= da.fault? ? DistanceAttempt.human_attribute_name(:fault) : ""
             %td= da.competitor.bib_number
             %td= da.competitor
             %td= da.competitor.gender

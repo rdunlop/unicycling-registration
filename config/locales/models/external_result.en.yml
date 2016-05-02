@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      external_result:
+        points: Points
+        details: Details
+    models:
+      external_result:
+        one: Entered Point
+        other: Entered Points

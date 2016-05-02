@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      wave_time:
+        one: Competition Wave Time
+        other: Competition Wave Times

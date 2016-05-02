@@ -26,7 +26,7 @@ class CompetitionResultsController < ApplicationController
     authorize @competition, :view_result_data?
 
     @competition_results = @competition.competition_results
-    add_breadcrumb "Additional Results"
+    add_breadcrumb CompetitionResult.model_name.human(count: 2)
   end
 
   # POST /competitions/#/competition_results

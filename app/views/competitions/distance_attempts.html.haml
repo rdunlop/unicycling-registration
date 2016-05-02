@@ -1,5 +1,5 @@
 %h1
-  Distance Attempts - #{@competition}
+  #{DistanceAttempt.model_name.human(count: 2)} - #{@competition}
 = render :partial => "/competitions/results"
 .scores
   %h3
@@ -8,9 +8,9 @@
   %table.distance_attempts.sortable
     %thead
       %tr
-        %th ID
-        %th Name
-        %th Distance
+        %th= Competitor.human_attribute_name(:bib_number)
+        %th= Competitor.human_attribute_name(:name)
+        %th= DistanceAttempt.human_attribute_name(:distance)
         %th Age Group
         %th Place
         %th Overall Place

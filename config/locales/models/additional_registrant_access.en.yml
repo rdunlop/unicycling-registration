@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      additional_registrant_access:
+        one: Additional Registrant Access
+        other: Additional Registrant Accesses

@@ -102,8 +102,8 @@
         %td= award_label.line_6
         %td= award_label.place
         %td.non_printable= award_label.registrant
-        %td.non_printable= link_to 'Edit', edit_award_label_path(award_label)
-        %td.non_printable= link_to 'Delete', award_label, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.non_printable= link_to t("edit"), edit_award_label_path(award_label)
+        %td.non_printable= link_to t("delete"), award_label, method: :delete, data: { confirm: t("are_you_sure") }
 %br
 .non_printable
   %h1 New award_label

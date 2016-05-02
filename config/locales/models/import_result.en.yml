@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      import_result:
+        one: Import Result
+        other: Import Results

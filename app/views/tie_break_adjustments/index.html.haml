@@ -34,7 +34,7 @@
             %td= tba.competitor.to_s
             %td= tba.tie_break_place
             %td= tba.judge.to_s
-            %td= link_to "Delete", tba, method: :delete, data: { confirm: "Are you sure?" }
+            %td= link_to t("delete"), tba, method: :delete, data: { confirm: t("are_you_sure") }
 
 .non_printable
   %br

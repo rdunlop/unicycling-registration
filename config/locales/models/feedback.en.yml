@@ -1,0 +1,7 @@
+---
+en:
+  activerecord:
+    models:
+      feedback:
+        one: Feedback
+        other: Feedback

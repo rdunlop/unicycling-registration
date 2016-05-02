@@ -1,0 +1,12 @@
+---
+en:
+  activerecord:
+    attributes:
+      time_result:
+        minutes: Minutes
+        seconds: Seconds
+        thousands: Thousands
+    models:
+      time_result:
+        one: Time Result
+        other: Time Results

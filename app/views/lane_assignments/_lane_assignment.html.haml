@@ -5,5 +5,5 @@
   %td= lane_assignment.competitor
   %td= lane_assignment.competitor.age_group_entry_description
   %td= lane_assignment.competitor.gender
-  %td= link_to 'Edit', edit_lane_assignment_path(lane_assignment)
-  %td= link_to 'Delete', lane_assignment, method: :delete, data: { confirm: 'Are you sure?' }
+  %td= link_to t("edit"), edit_lane_assignment_path(lane_assignment)
+  %td= link_to t("delete"), lane_assignment, method: :delete, data: { confirm: t("are_you_sure") }

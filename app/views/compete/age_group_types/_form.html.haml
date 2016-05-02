@@ -8,18 +8,18 @@
       %table.items
         %thead
           %tr
-            %th Description
-            %th Start Age
-            %th End Age
-            %th Required Wheel Size (optional)
-            %th Gender
+            %th= AgeGroupType.human_attribute_name(:description)
+            %th= AgeGroupEntry.human_attribute_name(:start_age)
+            %th= AgeGroupEntry.human_attribute_name(:end_age)
+            %th= AgeGroupEntry.human_attribute_name(:wheel_size)
+            %th= AgeGroupEntry.human_attribute_name(:gender)
             %th
         %tbody
           = f.nested_fields_for :age_group_entries, render_template: false do |member_f|
             %tr.item
               = render partial: "age_group_entry", locals: {f: member_f}
               %td
-                = link_to 'remove', "#", class: "remove", data: { confirm: "Are you sure?" }
+                = link_to t("delete"), "#", class: "remove", data: { confirm: t("are_you_sure") }
                 = member_f.hidden_field :id
                 = member_f.hidden_field :_destroy
       .text--right

@@ -8,5 +8,5 @@
     - if import_result.competition.has_penalty?
       %td= import_result.number_of_penalties
     %td= import_result.disqualified? ? "Yes" : ""
-    %td= link_to 'Edit', edit_import_result_path(import_result)
-    %td= link_to 'Delete', import_result, method: :delete, data: { confirm: 'Are you sure?' }
+    %td= link_to t("edit"), edit_import_result_path(import_result)
+    %td= link_to t("delete"), import_result, method: :delete, data: { confirm: t("are_you_sure") }

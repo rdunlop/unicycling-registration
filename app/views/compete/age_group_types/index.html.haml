@@ -1,9 +1,9 @@
-%h1 Age Group Types
+%h1= AgeGroupType.model_name.human(count: 2)
 %p An Age Group Type describes how competitors are segregated into different competitor groups
 
 %table
   %tr
-    %th Name
+    %th= AgeGroupType.human_attribute_name(:name)
     %th Details
     %th Currently used by
     %th
@@ -13,8 +13,10 @@
       %td= link_to 'Entries', age_group_type_path(age_group_type)
       %td= age_group_type.competitions.map(&:to_s).join(", ")
       %td
-        = link_to 'Edit', edit_age_group_type_path(age_group_type)
-        = link_to 'Delete', age_group_type_path(age_group_type), method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to t("edit"), edit_age_group_type_path(age_group_type)
+        = link_to t("delete"), age_group_type_path(age_group_type), method: :delete, data: { confirm: t("are_you_sure") }
 %br
-%h3 New Age Group Type
+%h3
+  New
+  = AgeGroupType.model_name.human
 = render 'form'

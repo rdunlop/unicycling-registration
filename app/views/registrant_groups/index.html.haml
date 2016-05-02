@@ -5,8 +5,8 @@
 %table.sortable
   %thead
     %tr
-      %th Group Name
-      %th Contact Person
+      %th= RegistrantGroup.human_attribute_name(:name)
+      %th= RegistrantGroup.human_attribute_name(:registrant_id)
       %th
       %th
       %th
@@ -18,7 +18,7 @@
         %td= registrant_group.contact_person
         %td= link_to 'Show', registrant_group
         %td= link_to 'Address Labels', address_labels_registrant_group_path(registrant_group)
-        %td= link_to 'Edit', edit_registrant_group_path(registrant_group)
-        %td= link_to 'Delete', registrant_group, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to t("edit"), edit_registrant_group_path(registrant_group)
+        %td= link_to t("delete"), registrant_group, method: :delete, data: { confirm: t("are_you_sure") }
 %h1 New Registrant Group
 = render :partial => "form"

@@ -26,5 +26,5 @@
         %td= external_result.competitor.bib_number
         %td= external_result.competitor
         %td= external_result.competitor.age_group_entry_description
-        %td= link_to 'Edit', edit_preliminary_external_result_path(external_result)
-        %td= link_to 'Delete', preliminary_external_result_path(external_result), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to t("edit"), edit_preliminary_external_result_path(external_result)
+        %td= link_to t("delete"), preliminary_external_result_path(external_result), method: :delete, data: { confirm: t("are_you_sure") }
