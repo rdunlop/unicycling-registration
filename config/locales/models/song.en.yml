@@ -8,6 +8,6 @@ en:
         updated_at: Last Updated
         uploaded_by_guest: Guest?
     models:
-      result:
+      song:
         one: Song
         other: Songs
