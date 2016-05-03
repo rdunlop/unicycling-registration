@@ -32,15 +32,19 @@
     border-bottom: black thin solid;
   }
 
-  .standard_skill_routine_competitor_sheet_table {
-    font-size: 10pt;
-  }
-  .standard_skill_routine_judging_table {
+  %standard_skill_table {
     td, th {
       border: solid black 1pt;
     }
     border: solid black 1pt;
     border-collapse: collapse;
+  }
+  .standard_skill_routine_competitor_sheet_table {
+    font-size: 10pt;
+    @extend %standard_skill_table;
+  }
+  .standard_skill_routine_judging_table {
+    @extend %standard_skill_table;
 
     .judge_name_entry {
       height: 60px;
