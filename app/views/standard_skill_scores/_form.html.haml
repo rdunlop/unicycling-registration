@@ -39,7 +39,7 @@
     .small-12.medium-4.columns
       Base Score #{@competitor.standard_skill_routine.total_skill_points}
       %br
-      Total Devaluation #{@standard_skill_score.total_devaluation / 2}
+      (Total Devaluation / 2 judges) = #{@standard_skill_score.total_devaluation / 2}
       %br
       Final Score #{@competitor.standard_skill_routine.total_skill_points - (@standard_skill_score.total_devaluation / 2)}
     .small-12.medium-4.columns
