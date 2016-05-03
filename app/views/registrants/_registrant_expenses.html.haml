@@ -1,17 +1,2 @@
 // [I18n.locale, @config, @registrant]
-%fieldset.data_block
-  %legend= t(".expenses")
-  %table.expense_items
-    %thead
-      %tr
-        %th.text-right= RegistrantExpenseItem.model_name.human
-        %th= t(".cost")
-        %th
-          = t(".paid")
-          ?
-    %tbody
-      = render partial: "/registrants/registrant_paid_expenses", locals: { details: false }
-      = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: false, details: false }
-    %tfoot
-      %th.text-right{colspan: 4}
-        = render partial: "/registrants/registrant_total_owing", locals: { registrant: @registrant }
+= render partial: "/registrant_expense_items/expenses", locals: { registrant: @registrant, details: false }

@@ -6,3 +6,4 @@ en:
       paid: Paid
       registrants_expenses: "%{registrant}'s Expenses"
       total: Total
+      items_not_guaranteed: These items are not guaranteed until your payment has been received

@@ -1,9 +1,11 @@
-- cache_i18n [@config, @registrant, include_form, details] do
-  - @registrant.owing_registrant_expense_items.each do |ce|
+- cache_i18n [@config, registrant, include_form, details] do
+  - registrant.owing_registrant_expense_items.each do |ce|
     %tr
-      %td= ce
-      - if details
-        %td= ce.details_description
+      %td
+        = ce
+        - if details
+          %br
+          = ce.details_description
       %td= print_item_cost_currency(ce.total_cost)
       - if ce.free
         %td n/a
@@ -12,5 +14,5 @@
       - if include_form
         %td
           - if ce.persisted? and not ce.system_managed?
-            = simple_form_for([@registrant, ce], :url => registrant_registrant_expense_item_path(@registrant, ce), :html => { :method => :delete }) do |ff|
+            = simple_form_for([@registrant, ce], :url => registrant_registrant_expense_item_path(registrant, ce), :html => { :method => :delete }) do |ff|
               = ff.button :submit, t(".delete"), :class => "delete"

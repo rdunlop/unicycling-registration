@@ -1,3 +1,5 @@
+-# local variables: details, registrants
+- include_form = details
 .expenses
   .data_block
     %fieldset
@@ -6,18 +8,22 @@
         %thead
           %tr
             %th.text-right= RegistrantExpenseItem.model_name.human
-            %th
             %th= t(".cost")
             %th
               = t(".paid")
               ?
-            %th
+            - if include_form
+              %th
         %tbody
-          = render partial: "/registrants/registrant_paid_expenses", locals: { details: true }
-          = render partial: "/registrants/registrant_unpaid_expenses", locals: { include_form: true, details: true }
+          = render partial: "/registrants/registrant_paid_expenses", locals: { registrant: registrant, details: details }
+          = render partial: "/registrants/registrant_unpaid_expenses", locals: { registrant: registrant, include_form: include_form, details: details }
         %tfoot
           %tr
             %th
+            %th{ colspan: include_form ? 3 : 2}
+              = render partial: "/registrants/registrant_total_owing", locals: { registrant: registrant }
+          %tr
             %th.text-right= t(".total")
-            %th= print_formatted_currency(registrant.expenses_total)
-            %th{colspan: 2}
+            %th{ colspan: include_form ? 3 : 2}= print_formatted_currency(registrant.expenses_total)
+
+      %p.small= t(".items_not_guaranteed")
