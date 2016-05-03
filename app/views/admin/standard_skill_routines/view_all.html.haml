@@ -17,9 +17,4 @@
           - else
             = link_to t("yes"), standard_skill_routine_path(registrant.standard_skill_routine)
         %td
-          - unless registrant.standard_skill_routine.nil?
-            = link_to t(".download"), standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button"
-            - if policy(registrant.standard_skill_routine).writing_judge?
-              = link_to t(".writing_judge_pdf"), writing_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"
-            - if policy(registrant.standard_skill_routine).difficulty_judge?
-              = link_to t(".difficulty_judge_pdf"), difficulty_judge_standard_skill_routine_path(registrant.standard_skill_routine, format: :pdf), class: "button small"
+          = render partial: "/admin/standard_skill_routines/view_pdfs", locals: { standard_skill_routine: registrant.standard_skill_routine }

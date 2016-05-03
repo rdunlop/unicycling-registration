@@ -40,7 +40,7 @@ class StandardSkillResultCalculator
     base_points = get_base_points(competitor)
 
     total_score = competitor.standard_skill_scores.to_a.sum do |skill_score|
-      base_points - skill_score.total_execution_devaluation - skill_score.total_difficulty_devaluation
+      base_points - skill_score.total_devaluation
     end
 
     # minimum value is 0

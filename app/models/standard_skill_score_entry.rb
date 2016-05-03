@@ -20,7 +20,7 @@
 
 class StandardSkillScoreEntry < ActiveRecord::Base
   belongs_to :standard_skill_routine_entry
-  belongs_to :standard_skill_score, inverse_of: :standard_skill_score_entries
+  belongs_to :standard_skill_score, inverse_of: :standard_skill_score_entries, touch: true
 
   validates :standard_skill_score, presence: true
   validates :standard_skill_routine_entry_id, presence: true

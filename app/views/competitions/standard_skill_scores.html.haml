@@ -5,4 +5,26 @@
     = @competition
     Raw Scores
 
-  %h4 Under Construction
+  %table
+    %thead
+      %tr
+        %th= Competitor.model_name.human
+        %th= Competitor.human_attribute_name(:bib_number)
+        %th= "Base Score"
+        %th= "Judge 1 Devaluation"
+        %th= "Judge 2 Devaluation"
+        %th= "Total"
+    %tbody
+      - judge1 = @competition.judges.order(:id).first
+      - judge2 = @competition.judges.order(:id).second
+      - @competition.competitors.each do |competitor|
+        - routine = competitor.standard_skill_routine
+        - score1 = competitor.standard_skill_scores.find_by(judge: judge1)
+        - score2 = competitor.standard_skill_scores.find_by(judge: judge2)
+        %tr
+          %td= competitor
+          %td= competitor.bib_number
+          %td= routine.total_skill_points
+          %td= score1.total_devaluation if score1
+          %td= score2.total_devaluation if score2
+          %td= competitor.result

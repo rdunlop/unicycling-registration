@@ -1,0 +1,8 @@
+---
+en:
+  admin:
+    standard_skill_routines:
+      view_pdfs:
+        download: Download a PDF of this routine
+        writing_judge_pdf: Writing Judge pdf
+        difficulty_judge_pdf: Difficulty Judge pdf
