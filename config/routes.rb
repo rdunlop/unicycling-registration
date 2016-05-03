@@ -398,6 +398,7 @@ Workspace::Application.routes.draw do
       member do
         get :writing_judge
         get :difficulty_judge
+        get :execution_judge
       end
       resources :standard_skill_routine_entries, only: [:destroy, :create]
     end

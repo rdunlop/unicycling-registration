@@ -6,11 +6,11 @@
 %table.standard_skill_routine_competitor_sheet_table
   %thead
     %tr
-      %th{ rowspan: 2 } #
-      %th{ rowspan: 2 } Skill
-      %th.description{ rowspan: 2 } Description
+      %th.narrow_column{ rowspan: 2 } #
+      %th.narrow_column{ rowspan: 2 } Skill
+      %th.narrow_column{ rowspan: 2 } Description
       %th{ colspan: 2 } Difficulty
-      %th{ rowspan: 2 } Points
+      %th.narrow_column{ rowspan: 2 } Points
       %th{ rowspan: 2 } Skill Definition
     %tr
       %th 50%
@@ -19,9 +19,9 @@
     - @standard_skill_routine.standard_skill_routine_entries.each do |skill_entry|
       - skill = skill_entry.standard_skill_entry
       %tr{ class: skill.skill_speed_class }
-        %td= skill_entry.position
-        %td= skill.skill_number_and_letter
-        %td
+        %td.narrow_column= skill_entry.position
+        %td.narrow_column= skill.skill_number_and_letter
+        %td.narrow_column
           - if skill.skill_before
             %div= "** " + skill.skill_before.to_s + " **"
 
@@ -34,7 +34,7 @@
             %div= "** " + skill.skill_after.to_s + " **"
         %td
         %td
-        %td= skill.points
+        %td.narrow_column= skill.points
         %td= skill.friendly_description
   %tfoot
     %tr

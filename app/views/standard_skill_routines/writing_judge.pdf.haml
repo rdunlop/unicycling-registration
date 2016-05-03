@@ -7,10 +7,10 @@
 %table.standard_skill_routine_judging_table
   %thead
     %tr
-      %th{ rowspan: 2 } #
-      %th{ rowspan: 2 } Skill
-      %th{ rowspan: 2 } Description
-      %th{ rowspan: 2 } Points
+      %th.narrow_column{ rowspan: 2 } #
+      %th.narrow_column{ rowspan: 2 } Skill
+      %th.narrow_column{ rowspan: 2 } Description
+      %th.narrow_column{ rowspan: 2 } Points
       %th{ colspan: 2 } Difficulty
       %th{ colspan: 4 } Execution
     %tr
@@ -23,10 +23,10 @@
   %tbody
     - @standard_skill_routine.standard_skill_routine_entries.each do |skill_entry|
       %tr{ class: skill_entry.standard_skill_entry.skill_speed_class }
-        %td= skill_entry.position
-        %td= skill_entry.standard_skill_entry.skill_number_and_letter
-        %td= skill_entry.standard_skill_entry.description
-        %td= skill_entry.standard_skill_entry.points
+        %td.narrow_column= skill_entry.position
+        %td.narrow_column= skill_entry.standard_skill_entry.skill_number_and_letter
+        %td.narrow_column= skill_entry.standard_skill_entry.description
+        %td.narrow_column= skill_entry.standard_skill_entry.points
         %td
         %td
         %td

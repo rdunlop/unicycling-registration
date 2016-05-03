@@ -22,7 +22,7 @@ describe StandardSkillRoutinePolicy do
     it { expect(subject).not_to permit(other_registrant.user, my_routine) }
   end
 
-  permissions :writing_judge?, :difficulty_judge? do
+  permissions :writing_judge?, :difficulty_judge?, :execution_judge do
     it { expect(subject).to permit(event_planner, my_routine) }
     it { expect(subject).to permit(std_director, my_routine) }
     it { expect(subject).not_to permit(other_director, my_routine) }

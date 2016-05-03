@@ -5,3 +5,5 @@
     = link_to t(".writing_judge_pdf"), writing_judge_standard_skill_routine_path(standard_skill_routine, format: :pdf), class: "button small"
   - if policy(standard_skill_routine).difficulty_judge?
     = link_to t(".difficulty_judge_pdf"), difficulty_judge_standard_skill_routine_path(standard_skill_routine, format: :pdf), class: "button small"
+  - if policy(standard_skill_routine).execution_judge?
+    = link_to t(".execution_judge_pdf"), execution_judge_standard_skill_routine_path(standard_skill_routine, format: :pdf), class: "button small"

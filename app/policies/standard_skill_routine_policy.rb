@@ -18,6 +18,10 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
     view_blank_judging_sheets?
   end
 
+  def execution_judge?
+    view_blank_judging_sheets?
+  end
+
   def show?
     view_blank_judging_sheets?
   end
