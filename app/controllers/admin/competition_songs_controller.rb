@@ -24,9 +24,9 @@ class Admin::CompetitionSongsController < ApplicationController
     song.competitor = competitor
 
     if song.save
-      flash[:notice] = "Assigned #{competitor} to #{song}"
+      flash[:notice] = "Assigned #{competitor} to #{song.description}"
     else
-      flash[:alert] = "Error assigning #{competitor} to #{song}"
+      flash[:alert] = "Error assigning #{competitor} to #{song.description}. #{song.errors.full_messages.join(', ')}"
     end
 
     redirect_to competition_song_path(competition)

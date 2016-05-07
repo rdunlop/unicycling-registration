@@ -51,4 +51,14 @@ describe Song do
       expect(song1a).to be_valid
     end
   end
+
+  describe "validations" do
+    subject(:song) { FactoryGirl.build(:song) }
+    it { is_expected.to validate_presence_of(:registrant_id) }
+    it { is_expected.to validate_presence_of(:user_id) }
+    it { is_expected.to validate_presence_of(:event_id) }
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_uniqueness_of(:competitor_id).with_message("Cannot assign more than 1 song to the same competitor for this competition") }
+    it { is_expected.to validate_uniqueness_of(:event_id).scoped_to([:user_id, :registrant_id]).with_message("cannot have multiple songs associated. Remove and re-add.") }
+  end
 end
