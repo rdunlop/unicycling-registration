@@ -13,6 +13,10 @@
 #  price_cents            :integer
 #  maximum_registrant_age :integer
 #
+# Indexes
+#
+#  index_coupon_codes_on_code  (code) UNIQUE
+#
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 

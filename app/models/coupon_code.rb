@@ -13,6 +13,10 @@
 #  price_cents            :integer
 #  maximum_registrant_age :integer
 #
+# Indexes
+#
+#  index_coupon_codes_on_code  (code) UNIQUE
+#
 
 class CouponCode < ActiveRecord::Base
   include CachedModel

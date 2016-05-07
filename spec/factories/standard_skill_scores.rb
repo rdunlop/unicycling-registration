@@ -11,7 +11,7 @@
 # Indexes
 #
 #  index_standard_skill_scores_on_competitor_id               (competitor_id)
-#  index_standard_skill_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id)
+#  index_standard_skill_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

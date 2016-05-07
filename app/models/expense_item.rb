@@ -19,7 +19,7 @@
 # Indexes
 #
 #  index_expense_items_expense_group_id                          (expense_group_id)
-#  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id)
+#  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id) UNIQUE
 #
 
 class ExpenseItem < ActiveRecord::Base

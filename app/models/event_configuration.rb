@@ -5,7 +5,7 @@
 #  id                                            :integer          not null, primary key
 #  event_url                                     :string(255)
 #  start_date                                    :date
-#  contact_email                                 :string(28555)
+#  contact_email                                 :string(255)
 #  artistic_closed_date                          :date
 #  standard_skill_closed_date                    :date
 #  event_sign_up_closed_date                     :date

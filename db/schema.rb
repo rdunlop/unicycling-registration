@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424200718) do
+ActiveRecord::Schema.define(version: 20160507180405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,8 @@ ActiveRecord::Schema.define(version: 20160424200718) do
     t.integer  "maximum_registrant_age"
   end
 
+  add_index "coupon_codes", ["code"], name: "index_coupon_codes_on_code", unique: true, using: :btree
+
   create_table "distance_attempts", force: :cascade do |t|
     t.integer  "competitor_id"
     t.decimal  "distance",      precision: 4
@@ -484,7 +486,7 @@ ActiveRecord::Schema.define(version: 20160424200718) do
     t.string   "cost_element_type"
   end
 
-  add_index "expense_items", ["cost_element_type", "cost_element_id"], name: "index_expense_items_on_cost_element_type_and_cost_element_id", using: :btree
+  add_index "expense_items", ["cost_element_type", "cost_element_id"], name: "index_expense_items_on_cost_element_type_and_cost_element_id", unique: true, using: :btree
   add_index "expense_items", ["expense_group_id"], name: "index_expense_items_expense_group_id", using: :btree
 
   create_table "external_results", force: :cascade do |t|
@@ -663,7 +665,7 @@ ActiveRecord::Schema.define(version: 20160424200718) do
   end
 
   add_index "payment_detail_coupon_codes", ["coupon_code_id"], name: "index_payment_detail_coupon_codes_on_coupon_code_id", using: :btree
-  add_index "payment_detail_coupon_codes", ["payment_detail_id"], name: "index_payment_detail_coupon_codes_on_payment_detail_id", using: :btree
+  add_index "payment_detail_coupon_codes", ["payment_detail_id"], name: "index_payment_detail_coupon_codes_on_payment_detail_id", unique: true, using: :btree
 
   create_table "payment_details", force: :cascade do |t|
     t.integer  "payment_id"
@@ -1010,7 +1012,7 @@ ActiveRecord::Schema.define(version: 20160424200718) do
   end
 
   add_index "standard_skill_scores", ["competitor_id"], name: "index_standard_skill_scores_on_competitor_id", using: :btree
-  add_index "standard_skill_scores", ["judge_id", "competitor_id"], name: "index_standard_skill_scores_on_judge_id_and_competitor_id", using: :btree
+  add_index "standard_skill_scores", ["judge_id", "competitor_id"], name: "index_standard_skill_scores_on_judge_id_and_competitor_id", unique: true, using: :btree
 
   create_table "tenant_aliases", force: :cascade do |t|
     t.integer  "tenant_id",                                  null: false
@@ -1067,6 +1069,7 @@ ActiveRecord::Schema.define(version: 20160424200718) do
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree
+  add_index "time_results", ["heat_lane_result_id"], name: "index_time_results_on_heat_lane_result_id", unique: true, using: :btree
 
   create_table "tolk_locales", force: :cascade do |t|
     t.string   "name"

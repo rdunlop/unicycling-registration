@@ -22,7 +22,8 @@
 #
 # Indexes
 #
-#  index_time_results_on_competitor_id  (competitor_id)
+#  index_time_results_on_competitor_id        (competitor_id)
+#  index_time_results_on_heat_lane_result_id  (heat_lane_result_id) UNIQUE
 #
 
 class TimeResultsController < ApplicationController
