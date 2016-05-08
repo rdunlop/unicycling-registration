@@ -6,7 +6,7 @@ class Admin::CompetitionSongsController < ApplicationController
   def show
     @competition = Competition.find(params[:competition_id])
 
-    add_breadcrumb "Music", event_songs_path
+    add_breadcrumb "Manage Music", event_songs_path
     add_breadcrumb "#{@competition} Songs"
 
     # List of all songs for any registrant in this competition

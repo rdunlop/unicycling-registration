@@ -2,8 +2,15 @@ en:
   admin:
     event_songs:
       index:
-        header: All Songs
+        header: Manage Music
+        description: View, Download, and Assign Music to Competitors from these pages
         all_songs_together: All Songs on one page
-        by_event: By Event
-        by_competition: By Competition
+        by_event: Music, By Event
+        by_event_description: View the Music which has been uploaded for each Competitor/Event
+        by_competition: Music, By Competition
+        by_competition_description: |
+          Once Competitions and Competitors have been created, use the following Competition
+          pages to assign music to competitors. From the Competition Music pages, you can
+          download a Zip file of all of the music for a competition, with the files ordered
+          in competitor-order.
         num_songs: "# Uploaded Songs"

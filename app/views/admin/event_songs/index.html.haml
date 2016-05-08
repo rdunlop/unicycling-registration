@@ -1,28 +1,44 @@
 %h2= t(".header")
 
+%p= t(".description")
+
+%hr
+
 = link_to t(".all_songs_together"), all_event_songs_path
 
+%hr
+
 %h3= t(".by_event")
-%table.sortable
-  %thead
-    %tr
-      %th= Event.model_name.human
-      %th= t(".num_songs")
-  %tbody
-    - @events.each do |event|
-      %tr
-        %td= link_to event, event_song_path(event)
-        %td= event.songs.count
+%p= t(".by_event_description")
+
+.row
+  .small-12.columns
+    %table.sortable
+      %thead
+        %tr
+          %th= Event.model_name.human
+          %th= t(".num_songs")
+      %tbody
+        - @events.each do |event|
+          %tr
+            %td= link_to event, event_song_path(event)
+            %td= event.songs.count
+
+%hr
 
 %h3= t(".by_competition")
-%table.sortable
-  %thead
-    %tr
-      %th= Event.model_name.human
-      %th= Competition.model_name.human
-  %tbody
-    - @events.each do |event|
-      - event.competitions.each do |competition|
+.row
+  .small-12.columns
+    %p= t(".by_competition_description")
+
+    %table.sortable
+      %thead
         %tr
-          %td= link_to event, event_song_path(event)
-          %td= link_to competition, competition_song_path(competition)
+          %th= Event.model_name.human
+          %th= Competition.model_name.human
+      %tbody
+        - @events.each do |event|
+          - event.competitions.each do |competition|
+            %tr
+              %td= event
+              %td= link_to competition, competition_song_path(competition)

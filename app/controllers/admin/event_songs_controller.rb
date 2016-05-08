@@ -29,6 +29,6 @@ class Admin::EventSongsController < ApplicationController
   end
 
   def add_breadcrumbs
-    add_breadcrumb "Music", event_songs_path
+    add_breadcrumb "Manage Music", event_songs_path
   end
 end

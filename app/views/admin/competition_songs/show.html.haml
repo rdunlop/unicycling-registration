@@ -1,8 +1,18 @@
 %h2= t(".header", competition: @competition)
 
-%p= t(".description", event: @competition.event)
+.row
+  .small-12.columns
+    %b= t(".assign_to_competitor")
 
-%p= t(".assign_to_competitor")
+.row
+  .small-12.columns
+    %p= t(".zip_description")
+
+%hr
+
+.row
+  .small-12.columns
+    %p= t(".description", event: @competition.event)
 
 - cache_i18n [@competition, Song] do
   %table.sortable
@@ -15,7 +25,7 @@
         %th= Song.human_attribute_name(:updated_at)
         %th= t(".download")
         %th= t("competitor")
-        %th= t(".assign_to_competitor")
+        %th= t(".assign")
     %tbody
       - @songs.each do |song|
         %tr
@@ -33,6 +43,8 @@
               = hidden_field_tag :competition_id, @competition.id
               = hidden_field_tag :song_id, song.id
               = no_form_competitor_select_box(@competition)
-              = submit_tag t(".assign_to_competitor"), class: "small button"
+              = submit_tag t(".assign"), class: "small button"
 
-= link_to t(".download_zip"), download_zip_competition_song_path(@competition)
+.row
+  .small-12.columns
+    = link_to t(".download_zip"), download_zip_competition_song_path(@competition), class: "button"
