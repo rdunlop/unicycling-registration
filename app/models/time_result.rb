@@ -32,6 +32,7 @@ class TimeResult < ActiveRecord::Base
   include StatusNilWhenEmpty
   include CachedSetModel
 
+  validates :heat_lane_result_id, uniqueness: { message: "Only 1 Import Per Heat/Lane." }
   validates :minutes, :seconds, :thousands, numericality: {greater_than_or_equal_to: 0}
 
   def self.cache_set_field
