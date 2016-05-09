@@ -4,7 +4,10 @@
 
     = f.input :scheduled_time
     = f.input :wave
-    = f.input :minutes, input_html: {min: 0}
-    = f.input :seconds, input_html: {min: 0}
+    .row
+      .small-6.columns
+        = f.input :minutes, input_html: {min: 0}
+      .small-6.columns
+        = f.input :seconds, input_html: {min: 0}
 
     = f.button :submit

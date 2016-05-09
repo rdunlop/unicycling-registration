@@ -10,6 +10,7 @@
       %th Seconds
   %tbody
     - @wave_times.each do |wave_time|
+      - next unless wave_time.persisted?
       %tr
         %td= wave_time.scheduled_time
         %td= wave_time.wave
