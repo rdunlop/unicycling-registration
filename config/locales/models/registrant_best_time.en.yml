@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      registrant_best_time:
+        source_location: Convention Name
+        formatted_value: Best Time
+    models:
+      registrant_best_time:
+        one: Registrant Best Time
+        other: Registrant Best Times

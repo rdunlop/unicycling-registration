@@ -36,6 +36,12 @@ en:
         request_emergency_contact: Request Emergency Contact
         request_responsible_adult: Request Responsible Adult
         registrants_should_specify_default_wheel_size: Registrants should specify default wheel size
+        comp_noncomp_url: "Comp/Non-Comp Explanation"
+        artistic_score_elimination_mode_naucc: "Small Group"
+        rulebook_url: "Rulebook PDF URL"
+        standard_skill: "Enable Standard Skill Submisssion System"
+        standard_skill_closed_date: "Last day to submit Standard Skill Routines online"
+        paypal_account: "Paypal Merchant Account Email"
     models:
       event_configurations:
         one: Event Configuration

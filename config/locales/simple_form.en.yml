@@ -11,25 +11,8 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     labels:
-      event_configuration:
-        comp_noncomp_url: "Comp/Non-Comp Explanation"
-        artistic_score_elimination_mode_naucc: "Small Group"
-        rulebook_url: "Rulebook PDF URL"
-        standard_skill: "Enable Standard Skill Submisssion System"
-        standard_skill_closed_date: "Last day to submit Standard Skill Routines online"
-        paypal_account: "Paypal Merchant Account Email"
-      expense_item:
-        has_details: "Ask a question from registrant"
-        has_custom_cost: "Donation"
-        details_label: "Question"
-        maximum_available: "Max Total Number for Sale"
-        maximum_per_registrant: "Max per registrant"
-      volunteer_opportunity: "E-mail addresses to notify on each volunteer sign-up"
       event:
         accepts_music_uploads: "Request Music be Uploaded"
-      registrant_best_times:
-        source_location: Convention Name
-        formatted_value: Best Time
     placeholders:
       coupon_code:
         code: "Code for user to enter"

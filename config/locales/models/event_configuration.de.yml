@@ -32,7 +32,14 @@ de:
         start_date: Erster Tag der Veranstaltung
         style_name: Webseiten Stil
         under_construction: wird gerade überarbeitet
-    models: 
+        artistic_score_elimination_mode_naucc: Kleine Gruppe
+        comp_noncomp_url: Teilnehmer/Begleiter Erklärung
+        paypal_account: Paypal Händler Account E-Mail
+        rulebook_url: URL zum Rulebook im PDF Format
+        standard_skill: Aktiviere das Standard Skill Submissions System
+        standard_skill_closed_date: Letzter Tag um Standard Skill Routinen online
+          zu übertragen
+    models:
   helpers:
     submit:
       event_configuration:

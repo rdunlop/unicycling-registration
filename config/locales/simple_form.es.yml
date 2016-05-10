@@ -70,22 +70,6 @@ es:
     labels:
       event:
         accepts_music_uploads: Solicitar Música sea Subida
-      event_configuration:
-        artistic_score_elimination_mode_naucc: Grupo pequeño
-        comp_noncomp_url: Explicación Competidor / No-Competidor
-        paypal_account: Correo electrónico de Cuenta Mercantil de Paypal
-        rulebook_url: Reglamento PDF URL
-        standard_skill: Activar Sistema de Sumisión de Standard Skill
-        standard_skill_closed_date: "Último día para presentar rutinas de Standard
-          Skill en línea"
-      expense_item:
-        details_label: Pregunta
-        has_custom_cost: Donativo
-        has_details: Haga una pregunta del registrante
-        maximum_available: Número total Max en Venta
-        maximum_per_registrant: Máximo por registrante
-      volunteer_opportunity: Direcciones de correo electrónico para notificar cada
-        voluntario que se inscriba
     'no': 'No'
     options:
       event_configuration:

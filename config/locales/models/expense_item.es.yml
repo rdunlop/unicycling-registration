@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      expense_item:
+        details_label: Pregunta
+        has_custom_cost: Donativo
+        has_details: Haga una pregunta del registrante
+        maximum_available: Número total Max en Venta
+        maximum_per_registrant: Máximo por registrante

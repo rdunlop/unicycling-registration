@@ -141,25 +141,6 @@ de:
     labels:
       event:
         accepts_music_uploads: Anfrage um Musik hoch zu laden
-      event_configuration:
-        artistic_score_elimination_mode_naucc: Kleine Gruppe
-        comp_noncomp_url: Teilnehmer/Begleiter Erklärung
-        paypal_account: Paypal Händler Account E-Mail
-        rulebook_url: URL zum Rulebook im PDF Format
-        standard_skill: Aktiviere das Standard Skill Submissions System
-        standard_skill_closed_date: Letzter Tag um Standard Skill Routinen online
-          zu übertragen
-      expense_item:
-        details_label: Frage
-        has_custom_cost: Spende
-        has_details: Eine Frage an den Teilnehmer stellen
-        maximum_available: Maximale gesamte Stückzahl zum Verkauf
-        maximum_per_registrant: Maximum Stückzahl pro Teilnehmer
-      registrant_best_times:
-        formatted_value: Beste Zeit
-        source_location: Veranstaltungs Name
-      volunteer_opportunity: E-Mail Adresse um über jede Helfer Anmeldung informiert
-        zu werden
     'no': Nein
     options:
       event_configuration:

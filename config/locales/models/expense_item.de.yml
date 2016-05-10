@@ -8,6 +8,11 @@ de:
         tax: Steuer
         total: Gesammt
         total_cost: Gesammt (berechnet)
+        details_label: Frage
+        has_custom_cost: Spende
+        has_details: Eine Frage an den Teilnehmer stellen
+        maximum_available: Maximale gesamte Stückzahl zum Verkauf
+        maximum_per_registrant: Maximum Stückzahl pro Teilnehmer
     models:
       expense_item:
         one: Kostenpflichtiger Artikel

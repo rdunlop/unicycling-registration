@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    attributes:
+      registrant_best_time:
+        formatted_value: Meilleur temps
+        source_location: Nom de la convention

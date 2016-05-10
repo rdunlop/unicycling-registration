@@ -151,25 +151,6 @@ fr:
     labels:
       event:
         accepts_music_uploads: Demander le chargement d'une musique
-      event_configuration:
-        artistic_score_elimination_mode_naucc: Petit groupe
-        comp_noncomp_url: Explication comp / non-comp
-        paypal_account: Email du compte marchand PayPal
-        rulebook_url: URL du pdf des règles
-        standard_skill: Activer le système de soumission de l'artistique technique
-        standard_skill_closed_date: Dernier jour pour soumettre un programme d'artistique
-          technique en ligne
-      expense_item:
-        details_label: Question
-        has_custom_cost: Don
-        has_details: Poser une question à l'inscrit
-        maximum_available: Nombre total max à vendre
-        maximum_per_registrant: Max par inscription
-      registrant_best_times:
-        formatted_value: Meilleur temps
-        source_location: Nom de la convention
-      volunteer_opportunity: Adresses e-mail à notifier pour chaque inscription de
-        bénévole.
     'no': Non
     options:
       event_configuration:

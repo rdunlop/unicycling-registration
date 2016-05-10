@@ -8,6 +8,11 @@ en:
         tax: Tax
         total: Total
         total_cost: Total (calculated)
+        has_details: "Ask a question from registrant"
+        has_custom_cost: "Donation"
+        details_label: "Question"
+        maximum_available: "Max Total Number for Sale"
+        maximum_per_registrant: "Max per registrant"
     models:
       expense_item:
         one: Expense Item
