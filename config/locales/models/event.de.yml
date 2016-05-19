@@ -7,6 +7,7 @@ de:
         artistic: Artistik
         best_time_format: Bestes Zeit Format
         id: ID
+        standard_skill: Standard Skill
         visible: Sichtbar
     models:
       event:

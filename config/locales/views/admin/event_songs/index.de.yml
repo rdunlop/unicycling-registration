@@ -4,7 +4,11 @@ de:
     event_songs:
       index:
         all_songs_together: Alle Lieder auf einer Seite
-        by_competition: Nach Wettbewerb
-        by_event: Nach Disziplin
-        header: ALle Lieder
+        by_competition: Musik nach Wettbewerb
+        by_event: Musik nach DIsziplin
+        by_event_description: Sichte die Musik an die für jeden Teilnehmer/Disziplin
+          hochgeladen wurde
+        description: Sichten, herunterladen und zuordnen der Musik zu Teilnehmern
+          von diesen Seiten
+        header: Musik verwalten
         num_songs: Hochgeladene Lieder

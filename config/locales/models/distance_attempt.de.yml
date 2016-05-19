@@ -2,6 +2,6 @@
 de:
   activerecord:
     attributes:
-      payment_detail:
-        details: Details
+      distance_attempt:
+        distance: Distanz
     models: 

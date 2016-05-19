@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    attributes:
+      lane_assignment:
+        heat: Runde
+        lane: Bahn
+    models: 

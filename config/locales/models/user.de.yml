@@ -3,6 +3,6 @@ de:
   activerecord:
     attributes:
       user:
-        email: Benutzer Konto Email
+        email: Benutzer Email
         name: Name
     models: 

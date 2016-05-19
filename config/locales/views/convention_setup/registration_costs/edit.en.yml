@@ -1,5 +1,5 @@
 en:
   convention_setup:
     registration_costs:
-      edit:
+      index:
         header: Editing %{registration_cost} Registration Cost

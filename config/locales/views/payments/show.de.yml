@@ -2,5 +2,6 @@
 de:
   payments:
     show:
+      offline_payment_instructions: Anweisung zur Zahlung per Überweisung
       payment_summary: Zusammenfassung der Zahlung
       please_proceed_with_payment: Bitte führe deine Zahlung durch

@@ -4,3 +4,4 @@ fr:
     attributes:
       tenant_alias:
         website_alias: Alias de site web
+    models: 

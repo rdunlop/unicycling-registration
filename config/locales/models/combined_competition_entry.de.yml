@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    attributes:
+      combined_competition_entry:
+        tie_breaker: Stechen
+    models: 

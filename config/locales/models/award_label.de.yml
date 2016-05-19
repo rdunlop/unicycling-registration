@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    attributes:
+      award_label:
+        bib_number: ID
+        place: Platzierung
+    models: 

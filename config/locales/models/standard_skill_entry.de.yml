@@ -2,7 +2,6 @@
 de:
   activerecord:
     attributes:
-      age_group_type:
+      standard_skill_entry:
         description: Beschreibung
-        name: Name
     models: 

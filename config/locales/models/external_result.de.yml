@@ -2,6 +2,7 @@
 de:
   activerecord:
     attributes:
-      payment_detail:
+      external_result:
         details: Details
+        points: Punkte
     models: 

@@ -3,6 +3,7 @@ de:
   activerecord:
     attributes:
       payment:
+        offline_pending_date: Datum
         total: Total
     models:
       registrant:

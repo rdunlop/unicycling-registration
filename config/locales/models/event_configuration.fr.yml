@@ -7,9 +7,11 @@ fr:
         age_calculation_base_date: Date de départ pour le calcul de l'âge
         artistic_closed_date: Date limite d'acceptation des inscriptions catégorie
           Artistique
+        artistic_score_elimination_mode_naucc: Petit groupe
         competitor: Compétiteur
         competitor_benefits: Avantages des compétiteurs
         comp_noncomp_page_id: Page de description compétiteur vs. non-compétiteur
+        comp_noncomp_url: Explication comp / non-comp
         contact_email: Email de contact de la convention
         currency_code: Code de la monnaie
         custom_waiver_text: Texte règlementaire sur mesure
@@ -25,26 +27,24 @@ fr:
         noncompetitor_benefits: Avantages des Non-Compétiteurs
         offline_payment: Configuration des détails sur le paiement hors ligne
         offline_payment_description: Détails pour le paiement hors ligne
+        paypal_account: Email du compte marchand PayPal
         paypal_mode: Mode Paypal
         registrants_should_specify_default_wheel_size: Le compétiteur doit spécifier
           sa taille de roue par défaut
         request_address: Demander l'addresse
         request_emergency_contact: Demander les contacts d'urgences
         request_responsible_adult: Demander un adulte tuteur
+        rulebook_url: URL du pdf des règles
         rules_file_name: Fichier PDF de règlement
         short_name: Nom écourté
         spectator: Spectateur
         spectator_benefits: Avantages des spectateurs
-        start_date: Premier jour de compétition
-        style_name: Style de page web
-        under_construction: En construction
-        artistic_score_elimination_mode_naucc: Petit groupe
-        comp_noncomp_url: Explication comp / non-comp
-        paypal_account: Email du compte marchand PayPal
-        rulebook_url: URL du pdf des règles
         standard_skill: Activer le système de soumission de l'artistique technique
         standard_skill_closed_date: Dernier jour pour soumettre un programme d'artistique
           technique en ligne
+        start_date: Premier jour de compétition
+        style_name: Style de page web
+        under_construction: En construction
     models:
       event_configurations:
         one: Configuration d'événement

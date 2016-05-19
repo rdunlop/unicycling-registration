@@ -3,7 +3,9 @@ es:
   activerecord:
     attributes:
       event_configuration:
+        artistic_score_elimination_mode_naucc: Grupo pequeño
         competitor_benefits: Ventajas para los participantes
+        comp_noncomp_url: Explicación Competidor / No-Competidor
         dates_description: Descripción de datos
         event_url: Sitio web principal
         location: Lugar
@@ -11,17 +13,15 @@ es:
         noncompetitor_benefits: Ventajas para los acompañantes
         offline_payment: Proporcione detalles sobre el pago fuera de línea
         offline_payment_description: Detalles para el pago fuera de línea
-        short_name: Nombre corto
-        spectator_benefits: Ventajas para los espectadores
-        start_date: Primer día de la competición
-        artistic_score_elimination_mode_naucc: Grupo pequeño
-        comp_noncomp_url: Explicación Competidor / No-Competidor
         paypal_account: Correo electrónico de Cuenta Mercantil de Paypal
         rulebook_url: Reglamento PDF URL
+        short_name: Nombre corto
+        spectator_benefits: Ventajas para los espectadores
         standard_skill: Activar Sistema de Sumisión de Standard Skill
         standard_skill_closed_date: "Último día para presentar rutinas de Standard
           Skill en línea"
-    models:
+        start_date: Primer día de la competición
+    models: 
   helpers:
     submit:
       event_configuration:

@@ -3,6 +3,7 @@ de:
   convention_setup:
     event_choices:
       index:
+        example_1: Gangschaltung?
         example_2: Team Name
         example_3: Team Kapitän
         example_4: Partner Name des Paars

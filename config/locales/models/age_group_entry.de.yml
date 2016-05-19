@@ -3,5 +3,7 @@ de:
   activerecord:
     attributes:
       age_group_entry:
+        end_age: maximales Alter
         gender: Geschlecht
+        start_age: mindest Alter
     models: 

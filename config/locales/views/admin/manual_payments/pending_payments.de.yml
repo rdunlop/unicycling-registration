@@ -1,0 +1,7 @@
+---
+de:
+  admin:
+    manual_payments:
+      pending_payments:
+        header: offene Zahlungen
+        mark_as_received: 'Markiere Zahlung #%{payment_number} als bezahlt'

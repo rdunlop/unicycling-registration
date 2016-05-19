@@ -108,14 +108,14 @@ de:
           Box und zeigt die Bundesstaaten an.\r\nEbenfalls erlaubt sie die last-minute
           Anmeldung von Teilnehmern (durch die Dateneingabe)"
       expense_group:
-        competitor_required: Ein Artikel dieser Ausgaben Gruppe MUSS vom Teilnehmer
-          ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
-          ausgewählt)
+        competitor_required: Ein Artikel dieser Ausgaben Gruppe WIRD dem Teilnehmer
+          zugewiesen werden (ES KANN NUR einen Artikel in der Gruppe geben und dieser
+          wird automatisch dem Teilnehmer zugewiesen)
         info_url: Dieser Link erscheint auf der Ausgabe Seite. Es kann hilfreich sein
           wenn die Ausgaben besondere Erklärungen erfodern oder um Bilder anzuzeigen
-        noncompetitor_required: Ein Artikel dieser Ausgaben Gruppe MUSS vom Teilnehmer
-          ausgewählt werden (wenn es nur einen Artikel gibt wird dieser automatisch
-          ausgewählt)
+        noncompetitor_required: Ein Artikel dieser Ausgaben Gruppe WIRD dem Teilnehmer
+          zugewiesen werden (ES KANN NUR einen Artikel in der Gruppe geben und dieser
+          wird automatisch dem Teilnehmer zugewiesen)
       expense_item:
         has_custom_cost: Erlaube dem Teilnehmer auszuwählen wieviel er für diesen
           Artikel bezahlen möchte

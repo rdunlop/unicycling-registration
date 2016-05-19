@@ -1,0 +1,7 @@
+---
+de:
+  admin:
+    standard_skill_routines:
+      view_all:
+        header: Alle Standard Skill Routinen
+        pdfs: PDFs

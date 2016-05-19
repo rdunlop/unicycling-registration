@@ -34,7 +34,8 @@ de:
             Helfer anlegen\r\nkann Benutzer Passwörter zurücksetzen"
           event_planner: "fähig Disziplin Meldungen zu sehen/überprüfen\r\nfähig alle
             Teilnehmer zu SUCHEN & MODIFIZIEREN\r\nfähig Disziplin wahlen zu jeder
-            Zeit zu Ändern/Hinzuzufügen\r\nfähig Emails an alle Teilnehmer zu sehen/senden"
+            Zeit zu Ändern/Hinzuzufügen\r\nfähig Emails an alle Teilnehmer zu sehen/senden\r\nfähig
+            Feedback das vom System empfangen wurde zu verwalten"
           export_payment_lists: fähig das Export Menü zu verwenden um Excel Listen
             der Teilnehmer die für die Übernachtung gezahlt haben herunterzuladen
           late_registrant: "fähig auf das Regisitrierungs System zuzugreifen auch
@@ -48,7 +49,8 @@ de:
           music_dj: fähig alle Musik von der Musik Manager Seite anzusehen/herunterzuladen
           payment_admin: "fähig Zahlungen zu sehen die empfangen wurden\r\nfähig eine
             Übersicht aller bezahlter Artikel zu sehen \r\nfähig Anmelde Gebühren
-            pro Benutzer zu definieren\r\nfähig Schecks als empfangen zu markieren"
+            pro Benutzer zu definieren\r\nfähig Schecks als empfangen zu markieren\r\nfähig
+            Feedback das vom System empfangen wurde zu verwalten"
           super_admin: "fähig die Rollen anderer zu definieren\r\nfähig Zahlungs Informationen
             zu zerstören\r\nfähig die Seiten und Disziplin EInstellungen zu konfigurieren"
           translator: "fähig das Übersetzungs Menü zu nutzen\r\nNeue Übersetzungen

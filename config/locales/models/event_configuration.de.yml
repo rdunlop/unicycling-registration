@@ -7,13 +7,16 @@ de:
         age_calculation_base_date: Basis Datum zur Alters Berechnung
         artistic_closed_date: Letzter Tag an dem neue Anmeldungen für Artistik akzeptiert
           werden
+        artistic_score_elimination_mode_naucc: Kleine Gruppe
         competitor: Wettkämpfer
         competitor_benefits: Teilnehmer Vorteile
         comp_noncomp_page_id: Wettkämpfer vs. Begleiter Beschreibungs Seite
+        comp_noncomp_url: Teilnehmer/Begleiter Erklärung
         contact_email: Veranstaltungs Email Kontakt
         currency_code: Währungs Code
         custom_waiver_text: Individuelle Teilnahmebedingungen
         dates_description: Daten Beschreibung
+        enabled_locales: Aktivierte Sprachen
         event_sign_up_closed_date: Letzter Tag um sich anzumelden
         event_url: Haupt Webseite
         location: Ort
@@ -24,22 +27,23 @@ de:
         noncompetitor_benefits: Begleiter Vorteile
         offline_payment: Gib Details zur offline Zahlmethode an
         offline_payment_description: Details der offline Zahlmethode
+        paypal_account: Paypal Händler Account E-Mail
         paypal_mode: Paypal Modus
+        request_address: Adresse erfragen
+        request_emergency_contact: Notfall Kontakt erfragen
+        request_responsible_adult: Verantwortlichen Erwachsenen erfragen
+        rulebook_url: URL zum Rulebook im PDF Format
         rules_file_name: Regel Datei PDF
         short_name: Kurzname
         spectator: Zuschauer
         spectator_benefits: Zuschauer Vorteile
-        start_date: Erster Tag der Veranstaltung
-        style_name: Webseiten Stil
-        under_construction: wird gerade überarbeitet
-        artistic_score_elimination_mode_naucc: Kleine Gruppe
-        comp_noncomp_url: Teilnehmer/Begleiter Erklärung
-        paypal_account: Paypal Händler Account E-Mail
-        rulebook_url: URL zum Rulebook im PDF Format
         standard_skill: Aktiviere das Standard Skill Submissions System
         standard_skill_closed_date: Letzter Tag um Standard Skill Routinen online
           zu übertragen
-    models:
+        start_date: Erster Tag der Veranstaltung
+        style_name: Webseiten Stil
+        under_construction: wird gerade überarbeitet
+    models: 
   helpers:
     submit:
       event_configuration:

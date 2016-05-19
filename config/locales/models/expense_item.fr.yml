@@ -4,15 +4,15 @@ fr:
     attributes:
       expense_item:
         cost: Coût
-        name: Nom
-        tax: Taxe
-        total: Total
-        total_cost: Total (calculé)
         details_label: Question
         has_custom_cost: Don
         has_details: Poser une question à l'inscrit
         maximum_available: Nombre total max à vendre
         maximum_per_registrant: Max par inscription
+        name: Nom
+        tax: Taxe
+        total: Total
+        total_cost: Total (calculé)
     models:
       expense_item:
         one: "Élément de dépense"
