@@ -34,7 +34,8 @@ class Admin::ManualPaymentsController < ApplicationController
       redirect_to payment_path(payment), notice: "Successfully created payment and sent e-mail"
     else
       add_breadcrumb "Choose Payment Items"
-      render :choose
+      flash[:alert] = "Please fill out a note, and select items"
+      redirect_to :back
     end
   end
 
