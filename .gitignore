@@ -18,6 +18,7 @@ dump.rdb
 /notes_and_stuff
 /public/uploads
 /public/public
+/public/assets
 /config/custom_locales
 
 # Ignore the default SQLite database.

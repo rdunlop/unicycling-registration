@@ -1,5 +1,6 @@
 class ConventionSetup::ImagesController < ConventionSetup::BaseConventionSetupController
   before_action :load_page
+  before_action :load_images
   before_action :load_image, only: [:destroy]
   before_action :authorize_setup
 
@@ -9,32 +10,31 @@ class ConventionSetup::ImagesController < ConventionSetup::BaseConventionSetupCo
 
   # GET /convention_setup/pages/:id/images
   def index
-    @images = @page.images
-  end
-
-  # GET /convention_setup/pages/:id/images/new
-  def new
     @image = PageImage.new
   end
 
   # POST /convention_setup/pages/:id/images
   def create
     @image = @page.images.build
-    @image.name = params[:image][:name]
-    @image.image = params[:image][:file]
+    if params[:page_image]
+      @image.name = params[:page_image][:name]
+      @image.image = params[:page_image][:file]
+    end
+
     if @image.save
       flash[:notice] = 'Image was successfully created.'
       redirect_to convention_setup_page_images_path(@page)
     else
-      render :new
+      render :index
     end
   end
 
   # DELETE /event_choices/1
   def destroy
     @image.destroy
+    flash[:notice] = "Image was successfully deleted"
 
-    respond_with(@image, location: convention_setup_page_images_path)
+    redirect_to convention_setup_page_images_path(@page)
   end
 
   private
@@ -51,6 +51,10 @@ class ConventionSetup::ImagesController < ConventionSetup::BaseConventionSetupCo
 
   def load_page
     @page = Page.find(params[:page_id])
+  end
+
+  def load_images
+    @images = @page.images
   end
 
   def load_image

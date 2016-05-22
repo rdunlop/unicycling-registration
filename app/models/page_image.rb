@@ -15,5 +15,5 @@ class PageImage < ActiveRecord::Base
 
   belongs_to :page
 
-  validates :page, :name, presence: true
+  validates :page, :name, :image, presence: true
 end

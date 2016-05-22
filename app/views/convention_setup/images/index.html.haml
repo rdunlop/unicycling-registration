@@ -26,16 +26,18 @@
 
     %tbody
       - @page.images.each do |image|
+        - next if image.new_record?
         %tr
           %td= image.name
-          %td= link_to "View", convention_setup_page_image_path(@page, image)
+          %td= link_to "View", image.image.url, target: "_blank"
           %td= image.image.url
           %td= link_to t("delete"), convention_setup_page_image_path(@page, image), method: :delete, data: { confirm: t("are_you_sure") }
 
   %hr
 
 %h3 Upload New Image
-= simple_form_for :image, url: convention_setup_page_images_path(@page), method: :post, html: { multipart: true }  do |f|
+= simple_form_for @image, url: convention_setup_page_images_path(@page), method: :post, html: { multipart: true }  do |f|
+  = render partial: "shared/error_messages", object: @image
   .row
     .small-6.columns= f.input :name
     .small-6.columns= f.input :file, as: :file

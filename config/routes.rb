@@ -285,7 +285,7 @@ Workspace::Application.routes.draw do
         post :update_row_order, on: :collection
       end
       resources :pages do
-        resources :images, except: [:edit, :update]
+        resources :images, only: [:index, :create, :destroy]
       end
     end
     scope "convention_setup", module: "convention_setup" do
