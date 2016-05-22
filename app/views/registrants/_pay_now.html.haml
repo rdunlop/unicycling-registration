@@ -1,4 +1,4 @@
-- return if total_owing == Money.new(0)
+- return if total_owing == 0.to_money
 .registrations_box
   - if policy(current_user).create_payments?
     .payment_process

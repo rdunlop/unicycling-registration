@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def print_item_cost_currency(cost)
-    return "Free" if cost == 0
+    return "Free" if cost == 0.to_money
     print_formatted_currency(cost)
   end
 
