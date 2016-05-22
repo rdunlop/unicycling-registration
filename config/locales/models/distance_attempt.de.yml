@@ -4,4 +4,5 @@ de:
     attributes:
       distance_attempt:
         distance: Distanz
+        fault: Fehler
     models: 

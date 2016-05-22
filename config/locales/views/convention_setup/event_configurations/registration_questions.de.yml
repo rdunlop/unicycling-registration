@@ -1,0 +1,10 @@
+---
+de:
+  convention_setup:
+    event_configurations:
+      registration_questions:
+        contact_details_requested: Kontakt Details
+        description: Verwende diese Seite wenn du die Teilnehmer weitere Dinge fragen
+          möchtest.
+        header: Fragen die wärend der Anmeldung gestellt werden sollen
+        request_young_users_wheel_size: Die Standard Radgröße abfragen

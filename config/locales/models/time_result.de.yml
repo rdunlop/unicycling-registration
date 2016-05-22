@@ -1,0 +1,9 @@
+---
+de:
+  activerecord:
+    attributes:
+      time_result:
+        minutes: Minuten
+        seconds: Sekunden
+        thousands: Tausender
+    models: 

@@ -95,6 +95,11 @@ de:
           die Vorteile einer Anmeldung als Begleiter
         paypal_test: Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal
           bekomen zu haben
+        request_address: Erfordert von jedem Teilnehmer die EIngabe einer Email Adresse
+        request_emergency_contact: Erfordert von jedem Teilnehmer die EIngabe eines
+          Notfall Kontakt
+        request_responsible_adult: Erfragt von jedem minderjährigen (unter 18) Teilnehmer
+          die Angabe eines verantwortlichen Erwachsenen
         spectator_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
           die Vorteile einer Anmeldung als Zuschauer
         spectators: Zuschauer müssen keine Anmeldegebühr bezahlen und können Artikel

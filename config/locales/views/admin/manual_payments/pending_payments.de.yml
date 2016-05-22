@@ -4,4 +4,5 @@ de:
     manual_payments:
       pending_payments:
         header: offene Zahlungen
+        items: Artikel
         mark_as_received: 'Markiere Zahlung #%{payment_number} als bezahlt'

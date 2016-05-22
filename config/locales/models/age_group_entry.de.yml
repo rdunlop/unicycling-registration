@@ -6,4 +6,5 @@ de:
         end_age: maximales Alter
         gender: Geschlecht
         start_age: mindest Alter
+        wheel_size: Erforderliche Radgröße (optional)
     models: 

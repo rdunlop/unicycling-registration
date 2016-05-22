@@ -4,4 +4,7 @@ de:
     attributes:
       standard_skill_entry:
         description: Beschreibung
+        letter: Brief
+        number: Skill Nummer
+        points: Punkte
     models: 

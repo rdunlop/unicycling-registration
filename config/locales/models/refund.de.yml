@@ -1,0 +1,10 @@
+---
+de:
+  activerecord:
+    attributes:
+      refund:
+        details: Details (Hinweis)
+        refund_date: Rückerstattungs Datum
+        refund_id: Rückerstattungs ID
+        user_id: Rückerstattet von
+    models: 

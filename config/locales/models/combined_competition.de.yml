@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    attributes:
+      combined_competition:
+        percentage_based_calculations: Prozent basierte Kalkulationen
+        use_age_group_places: Verwende Altersklassen Platzierungen
+    models: 

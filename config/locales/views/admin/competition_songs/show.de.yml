@@ -3,6 +3,7 @@ de:
   admin:
     competition_songs:
       show:
+        assign: Zuordnen
         assign_to_competitor: Jeder Song muss einem Teilnehmer zugeordnet werden damit
           er im Download zip enthalten ist.
         description: "Diese Seite listet alle Lieder die hochgeladen wurden für\r\n%{event}
@@ -10,3 +11,6 @@ de:
         download: Herunterladen
         download_zip: eine ZIP Datei der Lieder herunterladen
         header: "%{competition} Lieder"
+        zip_description: "Um es für den DJ einfacher zu machen die Musik\r\nfür einen
+          Wettkampf zu spielen, sind die Dateien im Zip umbenannt\r\nso das sie in
+          der Teilnehmer Reihenfolge erscheinen."

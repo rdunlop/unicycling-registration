@@ -3,8 +3,11 @@ de:
   activerecord:
     attributes:
       payment:
+        note: Hinweis
         offline_pending_date: Datum
+        payment_id: Zahlungs ID
         total: Total
+        transaction_id: Transaktions ID
     models:
       registrant:
         one: Angemeldeter

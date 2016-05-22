@@ -29,6 +29,8 @@ de:
         offline_payment_description: Details der offline Zahlmethode
         paypal_account: Paypal Händler Account E-Mail
         paypal_mode: Paypal Modus
+        registrants_should_specify_default_wheel_size: Teilnehmer sollen ihre Standard
+          Radgröße spezifizieren
         request_address: Adresse erfragen
         request_emergency_contact: Notfall Kontakt erfragen
         request_responsible_adult: Verantwortlichen Erwachsenen erfragen
