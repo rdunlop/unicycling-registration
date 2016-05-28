@@ -5,10 +5,10 @@ end
 case @environment
 when "production"
   every 1.month, roles: [:db] do
-    rake "update_ssl_certificate"
+    rake "renew_and_update_certificate"
   end
 when "stage"
-  every 1.week, roles: [:db] do
-    rake "update_ssl_certificate"
+  every 1.day, roles: [:db] do
+    rake "renew_and_update_certificate"
   end
 end

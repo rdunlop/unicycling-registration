@@ -1,40 +1,31 @@
 require "open3"
 
 class CertificateManager
-  # Update the certs.yml file in the server_config directory
-  # with the list of domains which this server is serving
-  def self.update_domains_file(basic_only = false)
-    new.update_domains_file(basic_only)
-  end
-
-  def self.renew_certificate
-    new.renew_certificate
-  end
-
   def self.update_nginx
     new.update_nginx
-  end
-
-  def renew_certificate
-    Rails.logger.info "Renewing Certificate"
-    Notifications.certificate_renewal_command_status("Starting Certificate Renewal [#{Rails.env}]", "", "", true).deliver_later
-    cmd = Rails.root.join("server_config", "renew_certs.rb")
-    run_command("sudo ruby #{cmd} -u -p -c #{certs_path}")
-    run_command("sudo ruby #{cmd} -r -c #{certs_path}")
-    Rails.logger.info "DONE Renewing Certificate"
   end
 
   def update_nginx
     Rails.logger.info "Creating new nginx configuration"
     Notifications.certificate_renewal_command_status("Starting nginx config [#{Rails.env}]", "", "", true).deliver_later
     cmd = Rails.root.join("server_config", "renew_certs.rb")
-    run_command("sudo ruby #{cmd} -n -c #{certs_path} -d #{Rails.application.secrets.domain}")
-    run_command("sudo service nginx restart")
+    with_ssl = cert_exists? ? "" : "--no-ssl"
+    run_command("sudo ruby #{cmd} -n #{with_ssl} -d #{Rails.application.secrets.domain}")
+    restart_nginx
     Rails.logger.info "DONE setting up nginx"
   end
 
-  def update_domains_file(basic_only)
-    domains = []
+  def restart_nginx
+    run_command("sudo service nginx restart")
+  end
+
+  # returns an array containing 2 lists:
+  # successful domains
+  # rejected domains (those which don't appear properly configured in DNS)
+  def accessible_domains(basic_only)
+    # always assume base domain URL is correct
+    domains = [Rails.application.secrets.domain]
+
     rejected_domains = []
     Tenant.all.each do |tenant|
       domains << tenant.permanent_url
@@ -48,21 +39,35 @@ class CertificateManager
         end
       end
     end
+    [domains, rejected_domains]
+  end
 
-    # puts "the domains are: #{domains}"
-    # puts "the rejected domains are: #{rejected_domains}"
-    Notifications.certificate_renewal_command_status(
-      "Updating certs.yml file",
-      "good domains: #{domains.join(' ')}",
-      "rejected domains: #{rejected_domains.join(' ')}",
-      write_domains_file(domains))
+  def store_certificate(certificate)
+    # Save the certificate and the private key to files
+    File.write(cert_path("privkey.pem"), certificate.request.private_key.to_pem)
+    File.write(cert_path("cert.pem"), certificate.to_pem)
+    File.write(cert_path("chain.pem"), certificate.chain_to_pem)
+    File.write(cert_path("fullchain.pem"), certificate.fullchain_to_pem)
+
+    store_s3_file("privkey.pem", certificate.request.private_key.to_pem)
+    store_s3_file("cert.pem", certificate.to_pem)
+    store_s3_file("chain.pem", certificate.chain_to_pem)
+    store_s3_file("fullchain.pem", certificate.fullchain_to_pem)
+  end
+
+  # do we have a certificate on this server?
+  # We cannot start nginx when it is pointing at a non-existing certificate,
+  # so we need to check
+  def cert_exists?
+    File.exist?(cert_path("privkey.pem"))
   end
 
   private
 
-  # returns true if successful
-  def write_domains_file(domains)
-    File.write(certs_path, YAML.dump(domains: domains)) > 0
+  def store_s3_file(filename, file_contents)
+    s3 = Aws::S3::Resource.new(region: Rails.application.secrets.aws_region)
+    object = s3.bucket(Rails.application.secrets.aws_bucket).object(filename)
+    object.put(body: file_contents)
   end
 
   def run_command(command)
@@ -87,7 +92,7 @@ class CertificateManager
     end
   end
 
-  def certs_path
-    Rails.root.join("public", "system", "certs.yml")
+  def cert_path(filename)
+    Rails.root.join("public", "system", filename)
   end
 end
