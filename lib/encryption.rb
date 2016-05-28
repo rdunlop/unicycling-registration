@@ -1,6 +1,25 @@
 require 'openssl'
 require 'acme-client'
 
+# Initially, the system is only accessible via subdomain.example.com
+# But, as we add more Conventions, we want to be able to access those also,
+# thus we will need:
+# - a.subdomain.example.com
+# - b.subdomain.example.com
+# - c.subdomain.example.com
+#
+# Also, each convention may add an "alias" for their convention, like:
+# - www.naucc.com
+# - french-convention.unicycle.fr
+#
+# Steps to make this work:
+# 1) When a new Convention is created, or a new alias is added, configure nginx
+#    so that it responds to that domain request
+#    `rake create_base_nginx_configuration` (writes a new nginx.conf and restarts nginx)
+#
+# 2) Register the new domain with letsencrypt
+#    `rake renew_and_update_certificate`
+#
 # Manage the encryption of the website (https).
 class Encryption
   ENCRYPTION_S3_NAME = 'server_encryption_client_private_key.der'.freeze
