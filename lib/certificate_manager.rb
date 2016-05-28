@@ -33,8 +33,13 @@ class CertificateManager
     Rails.logger.info "DONE setting up nginx"
   end
 
-  def update_domains_file(basic_only)
-    domains = []
+  # returns an array containing 2 lists:
+  # successful domains
+  # rejected domains (those which don't appear properly configured in DNS)
+  def accessible_domains(basic_only)
+    # always assume base domain URL is correct
+    domains = [Rails.application.secrets.domain]
+
     rejected_domains = []
     Tenant.all.each do |tenant|
       domains << tenant.permanent_url
@@ -48,6 +53,11 @@ class CertificateManager
         end
       end
     end
+    [domains, rejected_domains]
+  end
+
+  def update_domains_file(basic_only)
+    domains, rejected_domains = accessible_domains(basic_only)
 
     # puts "the domains are: #{domains}"
     # puts "the rejected domains are: #{rejected_domains}"

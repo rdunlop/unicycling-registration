@@ -8,7 +8,7 @@ when "production"
     rake "update_ssl_certificate"
   end
 when "stage"
-  every 1.week, roles: [:db] do
-    rake "update_ssl_certificate"
-  end
+  # every 1.week, roles: [:db] do
+  #   rake "update_ssl_certificate"
+  # end
 end
