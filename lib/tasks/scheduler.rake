@@ -14,18 +14,8 @@ end
 
 desc "Create Initial Ngnix Configuration (without SSL)"
 task create_base_nginx_configuration: :environment do
-  puts "updating certs.yml file"
-  CertificateManager.update_domains_file(true)
   puts "Updating Ngnix Configuration"
   cmd = Rails.root.join("server_config", "renew_certs.rb")
   `ruby #{cmd} -n --no-ssl`
   puts "done."
-end
-
-desc "Update SSL Certificates with letsencrypt.org"
-task update_ssl_certificate: :environment do
-  puts "updating certs.yml file to ensure all are ping-able"
-  CertificateManager.update_domains_file(true)
-  puts "Updating Certificate"
-  CertificateManager.renew_certificate
 end

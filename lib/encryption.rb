@@ -108,6 +108,7 @@ class Encryption
   end
 
   # Create a Certificate for our new set of domain names
+  # returns that certificate
   def request_certificate(common_name:, domains:)
     # We're going to need a certificate signing request. If not explicitly
     # specified, the first name listed becomes the common name.
@@ -118,11 +119,7 @@ class Encryption
     # OpenSSL::X509::Request should work too.
     certificate = client.new_certificate(csr) # => #<Acme::Client::Certificate ....>
 
-    # Save the certificate and the private key to files
-    File.write("privkey.pem", certificate.request.private_key.to_pem)
-    File.write("cert.pem", certificate.to_pem)
-    File.write("chain.pem", certificate.chain_to_pem)
-    File.write("fullchain.pem", certificate.fullchain_to_pem)
+    certificate
   end
 
   def client
