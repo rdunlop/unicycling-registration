@@ -124,7 +124,7 @@ server {
 
     # FOR HTTP:
     # listen 80 default_server;
-    server_name *.<%= options[:base_domain] %>;
+    server_name *.<%= options[:base_domain] %> <%= options[:base_domain] %>;
 
     gzip on;
 
