@@ -650,7 +650,7 @@ Workspace::Application.routes.draw do
   end
 
   resources :admin_upgrades, only: [:new, :create]
-  resources :tenants, only: [:index, :create]
+  resources :tenants, only: [:index, :new, :create]
 
   namespace :sample_data do
     resources :registrants, only: [:index, :create]

@@ -15,6 +15,9 @@ class TenantsController < ApplicationController
   layout "global"
 
   def index
+  end
+
+  def new
     @new_tenant = Tenant.new
   end
 
@@ -26,14 +29,14 @@ class TenantsController < ApplicationController
         Apartment::Tenant.switch!(@new_tenant.subdomain)
         Rails.application.load_seed
         Notifications.new_convention_created(@new_tenant.description, @new_tenant.subdomain).deliver_later
-        redirect_to root_url, notice: "New Convention created"
+        redirect_to root_url, notice: "New Convention created. You may need to change the URL in your browser now"
       else
         flash[:alert] = "Unable to create new convention"
-        render :index
+        render :new
       end
     else
       flash[:alert] = "Incorrect creation code"
-      render :index
+      render :new
     end
   end
 
