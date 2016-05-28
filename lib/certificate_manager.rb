@@ -11,8 +11,12 @@ class CertificateManager
     cmd = Rails.root.join("server_config", "renew_certs.rb")
     with_ssl = cert_exists? ? "" : "--no-ssl"
     run_command("sudo ruby #{cmd} -n #{with_ssl} -d #{Rails.application.secrets.domain}")
-    run_command("sudo service nginx restart")
+    restart_nginx
     Rails.logger.info "DONE setting up nginx"
+  end
+
+  def restart_nginx
+    run_command("sudo service nginx restart")
   end
 
   # returns an array containing 2 lists:

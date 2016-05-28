@@ -76,12 +76,12 @@ server {
     # The following should be enabled once everything is SSL
     # ssl on;
 
-    ssl_certificate <%= options[:webroot_path]/system/cert.pem;
-    ssl_certificate_key <%= options[:webroot_path]/system/privkey.pem;
+    ssl_certificate <%= options[:webroot_path] %>/system/cert.pem;
+    ssl_certificate_key <%= options[:webroot_path] %>/system/privkey.pem;
 
     ssl_stapling on;
     ssl_stapling_verify on;
-    ssl_trusted_certificate <%= options[:webroot_path]/system/fullchain.pem;
+    ssl_trusted_certificate <%= options[:webroot_path] %>/system/fullchain.pem;
 
     ssl_session_timeout 5m;
     <% end %>
