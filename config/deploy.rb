@@ -1,4 +1,4 @@
-lock '3.4.0'
+lock '3.5.0'
 
 set :application, 'unicycling-registration'
 set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
