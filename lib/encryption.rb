@@ -158,7 +158,7 @@ class Encryption
     # We need an ACME server to talk to, see github.com/letsencrypt/boulder
     # WARNING: This endpoint is the production endpoint, which is rate limited and will produce valid certificates.
     # You should probably use the staging endpoint for all your experimentation:
-    if Rails.env.production?
+    if Rails.env.production? || Rails.env.stage?
       'https://acme-v01.api.letsencrypt.org/'
     else
       'https://acme-staging.api.letsencrypt.org/'
