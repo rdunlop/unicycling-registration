@@ -48,6 +48,11 @@ class CertificateManager
     File.write(cert_path("cert.pem"), certificate.to_pem)
     File.write(cert_path("chain.pem"), certificate.chain_to_pem)
     File.write(cert_path("fullchain.pem"), certificate.fullchain_to_pem)
+
+    store_s3_file("privkey.pem", certificate.request.private_key.to_pem)
+    store_s3_file("cert.pem", certificate.to_pem)
+    store_s3_file("chain.pem", certificate.chain_to_pem)
+    store_s3_file("fullchain.pem", certificate.fullchain_to_pem)
   end
 
   # do we have a certificate on this server?
@@ -58,6 +63,12 @@ class CertificateManager
   end
 
   private
+
+  def store_s3_file(filename, file_contents)
+    s3 = Aws::S3::Resource.new(region: Rails.application.secrets.aws_region)
+    object = s3.bucket(Rails.application.secrets.aws_bucket).object(filename)
+    object.put(body: file_contents)
+  end
 
   def run_command(command)
     Open3.popen3(command) do |_stdin, stdout, stderr, wait_thr|

@@ -522,14 +522,6 @@ Amazon Server Setup
   - create a new nginx `registration.conf` using the rake command `sudo rake create_base_nginx_configuration`
   - `sudo service start nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
-- Install letsencrypt
-  - `sudo yum install git`
-  - `git clone https://github.com/letsencrypt/letsencrypt`
-  - Install letsencrypt `cd letsencrypt && ./letsencrypt-auto --debug -v`
-  - If you already have certificates on a server:
-    - Copy the existing certificates from production `/etc/letsencrypt/*`
-  - Otherwise, create new certificates using `sudo ruby renew_certs.rb -n && sudo service nginx restart`
-- Determine all domains which are possible through this server `cd server_config && sudo ruby ./renew_certs.rb -u -p && sudo ruby ./renew_certs.rb -r`
 
 SSL Certificates
 ----------------
@@ -537,32 +529,19 @@ SSL Certificates
 **Note: This section is under construction **
 
 In order to provide a secure connection, we are using [letsencrypt.org](https://letsencrypt.org) to
-automatically create ssl certificates for the various domains which the server will run on.
+automatically create ssl certificates for the various domains which the server will run on. But, we are doing the validation/registration through the `acme-client` gem instead of using the lets-encrypt binary.
 
-In order for this to work, the letsencrypt application must be installed on the server.
-
-    On Amazon Linux, we had to `yum install python27-devel` before we could successfully run `./letsencrypt-auto --debug -v`
-    By the time that you read this, they may officially support Amazon Linux, which would make this step simple.
-
-Whenever a new domain is added to the application, we run letsencrypt in order to generate a new certificate.
-
-There is a scheduled job which runs every month to update the certificates. Additionally, the certificates are updated each time a new Tenant or Primary Domain are specified.
+Every night, we check all configured domains, and re-configure the nginx server to properly respond to any newly configured domain names. If we have a new domain name, we also request a new SSL certificate, enabling HTTPS for that domain.
 
 How the Encryption process works:
 ---------------------------------
 
 1. A list of domains which are served by this server is created.
-2. A shell script for letsencrypt is generated
-3. The shell script is run, generating a new SSL Certificate
-4. [Necessary?] Nginx is restarted to pick up the new certificate.
-5. An e-mail is sent to the ERROR_EMAILS list if any issues occur.
-
-Preconditions:
-
-1. secrets.yml must have specified the letsencrypt binary location
-2. all of the domains listed in the list are correct (accessible, and properly mapped)
-
-The template for running letsencrypt can be found in [/server_config/letsencrypt-command.template](/server_config/letsencrypt-command.template)
+2. The list of all these domains is used to determine which ones are properly configured in DNS.
+3. We `authorize` each domain with LetsEncrypt
+4. A new SSL certificate is requested and installed
+5. Nginx is restarted to pick up the new certificate.
+6. An e-mail is sent to the ERROR_EMAILS list if any issues occur.
 
 Comments on the database schema
 ===============================

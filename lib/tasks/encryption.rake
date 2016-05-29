@@ -7,7 +7,7 @@ end
 desc "Authorize all domains and request new certificate"
 task renew_and_update_certificate: :environment do
   crypto = Encryption.new
-  good_domains, rejected_domains = CertificateManager.new.accessible_domains(true)
+  good_domains, rejected_domains = CertificateManager.new.accessible_domains(false)
   puts "All domains to be requested: #{good_domains}, invalid domains: #{rejected_domains}"
   domains = crypto.authorize_domains(good_domains)
   puts "authorized-domains list: #{domains}"

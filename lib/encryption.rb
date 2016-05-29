@@ -77,7 +77,8 @@ class Encryption
     FileUtils.mkdir_p(Rails.root.join('public', File.dirname(challenge.filename)))
 
     # We'll write the content of the file
-    File.write(Rails.root.join('public', challenge.filename), challenge.file_content)
+    full_challenge_filename = Rails.root.join('public', challenge.filename)
+    File.write(full_challenge_filename, challenge.file_content)
 
     # Optionally save the challenge for use at another time (eg: by a background job processor)
     #  File.write('challenge', challenge.to_h.to_json)
@@ -103,6 +104,7 @@ class Encryption
       # Wait a bit for the server to make the request, or just blink. It should be fast.
       sleep(1)
     end
+    File.delete(full_challenge_filename)
 
     success
   end
