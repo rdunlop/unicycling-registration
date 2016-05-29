@@ -93,7 +93,7 @@ describe EventConfiguration do
     end
 
     it "converts from EUR to Symbol" do
-      expect(print_item_cost_currency(10)).to eq("10.00€")
+      expect(print_item_cost_currency(10.to_money)).to eq("10.00€")
     end
   end
 

@@ -29,7 +29,7 @@ describe "registrants/index" do
         FactoryGirl.create(:registrant, first_name: "Robin", last_name: "Dunlop"),
         FactoryGirl.create(:registrant, first_name: "Jane", last_name: "Doe")]
       @shared_registrants = []
-      @total_owing = 5
+      @total_owing = 5.to_money
       @exp = FactoryGirl.create(:registrant_expense_item, registrant: @my_registrants[0])
       @my_registrants.each do |ei|
         ei.reload
