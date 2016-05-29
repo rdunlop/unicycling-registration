@@ -12,8 +12,8 @@ task renew_and_update_certificate: :environment do
   domains = crypto.authorize_domains(good_domains)
   puts "authorized-domains list: #{domains}"
   certificate = crypto.request_certificate(common_name: Rails.application.secrets.domain, domains: domains)
-  CertificateManager.store_certificate(certificate)
+  CertificateManager.new.store_certificate(certificate)
   puts "Restarting nginx with new certificate"
-  CertificateManager.restart_nginx
+  CertificateManager.new.restart_nginx
   puts "done."
 end
