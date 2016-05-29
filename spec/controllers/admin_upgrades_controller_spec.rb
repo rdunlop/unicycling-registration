@@ -23,7 +23,7 @@ describe AdminUpgradesController do
 
     context "with correct code" do
       it "upgrades user" do
-        post :create, access_code: nil # tests don't have a stored Tenant, so `nil` is the access_code of a new object
+        post :create, access_code: FactoryGirl.attributes_for(:tenant)[:admin_upgrade_code]
         expect(user.reload.has_role?(:convention_admin)).to be_truthy
       end
     end
