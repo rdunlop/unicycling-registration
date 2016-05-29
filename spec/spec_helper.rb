@@ -53,6 +53,10 @@ RSpec.configure do |config|
     # We do this instead of setting cache_store = :null_store
     # because sometimes we DO want caching enabled (see below)
     Rails.cache.clear
+
+    # so that the tenant can be found even though
+    # The request is not using the Apartment::Elevator
+    FactoryGirl.create(:tenant, :test_schema)
   end
 
   config.around(:each, :caching) do |example|

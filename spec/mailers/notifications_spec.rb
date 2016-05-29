@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe Notifications do
   before(:each) do
-    @tenant = FactoryGirl.create(:tenant, :test_schema)
     @ec = FactoryGirl.create(:event_configuration, long_name: "NAUCC 2140", contact_email: "guy@convention.com")
   end
 
