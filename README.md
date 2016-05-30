@@ -543,6 +543,15 @@ How the Encryption process works:
 5. Nginx is restarted to pick up the new certificate.
 6. An e-mail is sent to the ERROR_EMAILS list if any issues occur.
 
+Setting up crypto the first time:
+---------------------------------
+
+1. `rake create_crypto_client` - Register an account with LetsEncrypt
+2. `rake renew_and_update_certificate` - Authorize/create certificates
+3. `rake update_nginx_config` - re-write the nginx file to point at the certificates
+
+At this point, the only thing necessary is to run `rake renew_and_update_certificate` on a regular basis, which will find new domains, authorize them, and get new SSL certs for them.
+
 Comments on the database schema
 ===============================
 
