@@ -1,17 +1,20 @@
 lock '3.5.0'
 
+set :eye_env, -> { {rails_env: fetch(:rails_env)} }
 set :application, 'unicycling-registration'
 set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
 set :stages, %w(prod)
 
 # Default value for :linked_files is []
-set :linked_files, %w(config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt)
+set :linked_files, %w(config/eye.yml config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt)
 
 # Default value for linked_dirs is []
 # .well-known is for letsencrypt
 set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known)
 
+# To avoid an Out-of-Memory error, we stop sidekiq before deploying
 before 'deploy', 'sidekiq:stop'
+
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do

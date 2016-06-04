@@ -1,0 +1,34 @@
+name: Unicycling Registration
+
+config:
+  logger: /home/ec2-user/unicycling-registration/current/log/eye.log
+
+application:
+  working_dir: /home/ec2-user/unicycling-registration/current
+  stop_on_delete: true
+
+processes:
+  - name: unicorn
+    config:
+      pid_file: tmp/pids/unicorn.pid
+      start_command: bundle exec unicorn -Dc config/unicorn/production.rb
+      restart_command: "kill -USR2 {PID}"
+      user_commands:
+        rotate: "kill -USR1 {PID}" # Requires eye >= 0.6.4
+      start_timeout: 40 seconds
+      start_grace: 30 seconds
+      restart_timeout: 40 seconds
+      restart_grace: 30 seconds
+      stdout: log/unicorn.stdout.log
+      stderr: log/unicorn.stderr.log
+      monitor_children:
+        stop_command: "kill -QUIT {PID}"
+
+  - name: sidekiq
+    config:
+      start_command: bundle exec sidekiq --daemon --config config/sidekiq.yml --logfile log/sidekiq.log
+      stop_command: bundle exec sidekiqctl shutdown tmp/pids/sidekiq.pid
+      user_commands:
+        rotate: "kill -USR2 {PID}" # Requires eye >= 0.6.4
+      stdall: log/sidekiq.log
+      pid_file: tmp/pids/sidekiq.pid

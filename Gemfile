@@ -56,6 +56,7 @@ gem 'whenever'
 gem 'gaffe'
 gem 'rubyzip'
 gem 'acme-client'
+gem 'eye-patch'
 
 # determined we are over IE8 CSS limits using
 # http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
