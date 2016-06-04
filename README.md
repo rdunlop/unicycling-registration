@@ -501,7 +501,7 @@ Amazon Server Setup
   - `\curl -sSL https://get.rvm.io | bash -s stable`
 - `cap stage deploy` (or `cap prod deploy`)
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
-- Copy the configuration files (database.yml, secrets.yml, newrelic.yml)
+- Copy the configuration files (eye.yml database.yml, secrets.yml, newrelic.yml)
 - copy the robots.txt file (public/robots.txt)
 - install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
 - install PostgreSQL `sudo yum install postgresql postgresql-devel`
