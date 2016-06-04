@@ -552,6 +552,12 @@ Setting up crypto the first time:
 
 At this point, the only thing necessary is to run `rake renew_and_update_certificate` on a regular basis, which will find new domains, authorize them, and get new SSL certs for them.
 
+Log Rotation settings:
+----------------------
+
+It is assumed that the server is running logrotate.
+In order to have the production logs backed up in a rotating basis, install the logrotation file `server_config/unicorn-unicycling-registration_logs` into the `/etc/logrotate.d/` directory.
+
 Comments on the database schema
 ===============================
 

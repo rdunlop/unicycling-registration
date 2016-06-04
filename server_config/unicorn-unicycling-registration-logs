@@ -1,0 +1,12 @@
+/home/ec2-user/unicycling-registration/current/log/*log {
+    create 0644 ec2-user ec2-user
+    daily
+    rotate 100
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+        cd /home/ec2-user/unicycling-registration/current/ && bundle exec eye user_command rotate all
+    endscript
+}
