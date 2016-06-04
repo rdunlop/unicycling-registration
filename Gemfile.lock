@@ -42,14 +42,6 @@ GIT
       safe_yaml (>= 0.8.6)
 
 GIT
-  remote: git://github.com/seuros/capistrano-sidekiq.git
-  revision: 0794cf99be7bfe7f3e6828c4965db135d7e1c20b
-  specs:
-    capistrano-sidekiq (0.5.4)
-      capistrano
-      sidekiq (>= 3.4)
-
-GIT
   remote: git://github.com/sudosu/rails_admin_pundit.git
   revision: 285e3e79a37242cf7a527053e9b438782801557a
   specs:
@@ -608,7 +600,6 @@ DEPENDENCIES
   capistrano-deploytags
   capistrano-rails
   capistrano-rvm
-  capistrano-sidekiq!
   capistrano3-unicorn
   capybara!
   carrierwave
