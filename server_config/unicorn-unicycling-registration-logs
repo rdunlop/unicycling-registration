@@ -1,7 +1,7 @@
 /home/ec2-user/unicycling-registration/current/log/*log {
     create 0644 ec2-user ec2-user
     daily
-    rotate 100
+    rotate 30
     missingok
     notifempty
     compress
