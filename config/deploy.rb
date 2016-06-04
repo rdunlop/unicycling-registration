@@ -12,16 +12,6 @@ set :linked_files, %w(config/eye.yml config/database.yml config/secrets.yml conf
 # .well-known is for letsencrypt
 set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known)
 
-# To avoid an Out-of-Memory error, we stop sidekiq before deploying
-before 'deploy', 'sidekiq:stop'
-
-after 'deploy:publishing', 'deploy:restart'
-namespace :deploy do
-  task :restart do
-    invoke 'unicorn:restart'
-  end
-end
-
 namespace :deploy do
   task install_translations: [:set_rails_env] do
     on primary(:app) do
