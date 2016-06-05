@@ -14,10 +14,10 @@
       %ul
         %li.footer__list-header
           %h6= t(".organizers_header")
-        %li= link_to "Features", example_description_path
-        %li= link_to "Upcoming Changes", changelog_welcome_path
+        %li= link_to t(".features"), example_description_path
+        %li= link_to t(".upcoming_changes"), changelog_welcome_path
         - if user_signed_in? && policy(current_user).manage_feedback?
-          %li= link_to "Handle Submitted Feedback", admin_feedback_index_path
+          %li= link_to t(".handle_feedback"), admin_feedback_index_path
         -# %li= link_to "Help Translate", help_translate_welcome_path
     .small-12.medium-3.columns
       %ul
