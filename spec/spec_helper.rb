@@ -105,6 +105,12 @@ RSpec.configure do |config|
     Sidekiq::Worker.clear_all
   end
 
+  # In order to cause .deliver_later to actually .deliver_now
+  config.before(:each) do
+    ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
+    ActiveJob::Base.queue_adapter.perform_enqueued_at_jobs = true
+  end
+
   config.around(:each) do |example|
     if example.metadata[:sidekiq] == :fake
       Sidekiq::Testing.fake!(&example)

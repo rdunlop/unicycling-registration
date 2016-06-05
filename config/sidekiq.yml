@@ -4,3 +4,4 @@ staging:
 production:
 :queues:
   - default
+  - mailers # for Action Mailer

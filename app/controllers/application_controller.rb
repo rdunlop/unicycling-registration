@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) << [:name]
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
   # a true rails_admin_controller? method was removed from rails_admin:

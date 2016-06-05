@@ -6,7 +6,6 @@ gem 'rails', '4.2.6'
 # Authentication
 gem 'devise'
 gem 'devise-i18n'
-gem 'devise-async'
 gem 'pundit'
 gem 'rolify'
 

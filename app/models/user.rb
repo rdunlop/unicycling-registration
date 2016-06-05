@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :async,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   devise :confirmable
@@ -63,6 +63,12 @@ class User < ActiveRecord::Base
 
   def touch_for_role(_role)
     touch
+  end
+
+  # Cause devise mail to be sent asynchronously
+  # https://github.com/plataformatec/devise#activejob-integration
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
   end
 
   # get all users who have registrants with unpaid fees
