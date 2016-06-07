@@ -1,6 +1,5 @@
-.nested_nested
-  #competition_sources
-    = f.simple_fields_for :competition_sources do |cs|
-      = render "competition_source_fields", f: cs
-  .links
-    = link_to_add_association 'add entry', f, :competition_sources
+#competition_sources
+  = f.simple_fields_for :competition_sources do |cs|
+    = render "competition_source_fields", f: cs
+.links
+  = link_to_add_association 'add entry', f, :competition_sources

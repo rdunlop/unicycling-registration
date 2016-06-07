@@ -31,7 +31,7 @@
 / Calculate Experts Too:
 / Hide for Freestyle
 
-= simple_form_for(@competition.new_record? ? [@event, @competition] : [@competition], html: {class: 'multiple_nested'}) do |f|
+= simple_form_for(@competition.new_record? ? [@event, @competition] : [@competition]) do |f|
   = render partial: "/shared/error_messages", object: @competition
 
   = f.input :name

@@ -3,7 +3,7 @@
 = simple_form_for form.persisted? ? form : [form.competition, form] do |f|
   .row
     .small-12.columns
-      %fieldset.items
+      %fieldset
         %legend Members
         #members
           = f.simple_fields_for :members do |member_f|
