@@ -5,18 +5,11 @@
     .small-12.columns
       %fieldset.items
         %legend Members
-        = f.nested_fields_for :members do |member_f|
-          .item.row
-            .small-6.columns
-              = member_f.label :registrant
-              = all_registrant_competitors(member_f)
-            .small-3.columns
-              = member_f.input :alternate
-            .small-3.columns
-              %a.remove{:href => "#"} remove this member
-              = member_f.hidden_field :id
-              = member_f.hidden_field :_destroy
-      %a.add{:href => "#"} add another member
+        #members
+          = f.simple_fields_for :members do |member_f|
+            = render "member_fields", f: member_f
+          .links
+            = link_to_add_association 'add another member', f, :members
     %hr
     .small-6.columns
       = f.label :custom_name, "Group/Team Name (optional)"

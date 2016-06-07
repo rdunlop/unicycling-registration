@@ -5,7 +5,7 @@
     = f.input :name, autofocus: true
 
     %div
-      %table.items
+      %table
         %thead
           %tr
             %th= AgeGroupType.human_attribute_name(:description)
@@ -14,17 +14,11 @@
             %th= AgeGroupEntry.human_attribute_name(:wheel_size)
             %th= AgeGroupEntry.human_attribute_name(:gender)
             %th
-        %tbody
-          = f.nested_fields_for :age_group_entries, render_template: false do |member_f|
-            %tr.item
-              = render partial: "age_group_entry", locals: {f: member_f}
-              %td
-                = link_to t("delete"), "#", class: "remove", data: { confirm: t("are_you_sure") }
-                = member_f.hidden_field :id
-                = member_f.hidden_field :_destroy
-      .text--right
-        = link_to "add new", "#", class: "add"
-      = nested_fields_templates
+        %tbody#age_group_entries
+          = f.simple_fields_for :age_group_entries do |member_f|
+            = render "age_group_entry_fields", f: member_f
+      .text--right.links
+        = link_to_add_association 'add new', f, :age_group_entries, { data: { association_insertion_node: "#age_group_entries", association_insertion_method: "append" } }
     = f.button :submit
 
   = render "order_warning"

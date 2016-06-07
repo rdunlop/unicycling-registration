@@ -22,7 +22,7 @@ gem 'country_select'
 gem 'money-rails'
 gem 'select2-rails'
 gem 'breadcrumbs_on_rails'
-gem 'awesome_nested_fields'
+gem 'cocoon' # for nested forms
 gem 'fancybox2-rails', '~> 0.2.8'
 gem 'tinymce-rails'
 gem 'recaptcha', require: 'recaptcha/rails'

@@ -1,0 +1,8 @@
+.nested-fields.item.row
+  .small-6.columns
+    = f.label :registrant
+    = all_registrant_competitors(f)
+  .small-3.columns
+    = f.input :alternate
+  .small-3.columns
+    = link_to_remove_association "remove this member", f

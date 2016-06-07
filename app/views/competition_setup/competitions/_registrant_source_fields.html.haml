@@ -1,0 +1,18 @@
+.nested-fields
+  Event Category
+  = f.select :event_category_id, event.event_categories.map{|ec| [ec, ec.id]}, :include_blank => true
+  %br
+
+  Gender
+  = f.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true
+  %br
+  Age Range
+  .row
+    .small-5.columns
+      = f.number_field :min_age, {min: 0, placeholder: "min"}
+    .small-2.columns
+      \-
+    .small-5.columns
+      = f.number_field :max_age, {min: 0, placeholder: "max"}
+  .remove_label
+    = link_to_remove_association 'remove', f

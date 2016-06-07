@@ -1,30 +1,6 @@
 .nested_nested
-  .items
-    = f.nested_fields_for :competition_sources do |cs|
-      .item
-        .field
-          Competition Source
-          = cs.select :competition_id, Competition.event_order.all.map{|c| [c, c.id]}, :include_blank => true
-        .field
-          Max Place
-          = cs.number_field :max_place, {min: 0}
-          .input_details
-            Specify the overall_place which the competitors must achieve in the Source Competition to be included as competitors
-        .field
-          Gender
-          = cs.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true
-        .field
-          Age Range
-          .row
-            .small-5.columns
-              = cs.number_field :min_age, {min: 0, placeholder: "min"}
-            .small-2.columns
-              \-
-            .small-5.columns
-              = cs.number_field :max_age, {min: 0, placeholder: "max"}
-
-        .remove_label
-          %a{href: '#', class: 'remove'} remove
-          = cs.hidden_field :id
-          = cs.hidden_field :_destroy
-  %a{ href: "#", class: "add"} add entry
+  #competition_sources
+    = f.simple_fields_for :competition_sources do |cs|
+      = render "competition_source_fields", f: cs
+  .links
+    = link_to_add_association 'add entry', f, :competition_sources

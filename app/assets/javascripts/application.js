@@ -30,7 +30,7 @@
 //= require select2_locale_es
 // NOTE: not available select2_locale_ja
 //= require fancybox
-//= require jquery.nested-fields
+//= require cocoon
 //= require jquery.are-you-sure
 //= require jquery.datetimepicker
 
@@ -96,17 +96,9 @@ $(document).ready(function(e) {
   };
 
   $('FORM').each(function() {
-    if ($(this).hasClass('multiple_nested')) {
-      $('.nested_nested').nestedFields({
-        afterInsert: init_new_row
-      });
-    }
-    else
-    {
-      $(this).nestedFields({
-        afterInsert: init_new_row
-     });
-    }
+    $(this).on('cocoon:after-insert', function(e, added_item) {
+      init_new_row(added_item)
+    });
   });
 });
 
