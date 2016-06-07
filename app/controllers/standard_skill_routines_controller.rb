@@ -24,13 +24,21 @@ class StandardSkillRoutinesController < ApplicationController
   end
 
   # POST /registrants/:id/standard_skill_routines/
+  # Creates a new standard skill routine, if necessary.
+  # and redirects the user to that routine entry
   def create
-    @routine = @registrant.build_standard_skill_routine
-    authorize @routine
+    @routine = @registrant.standard_skill_routine
+    if @routine.present?
+      skip_authorization
+    else
+      @routine = @registrant.build_standard_skill_routine
+      authorize @routine
 
-    @routine.save!
+      @routine.save!
+      flash[:notice] = 'Standard Skill Routine Successfully Started.'
+    end
 
-    redirect_to standard_skill_routine_path(@routine), notice: 'Standard Skill Routine Successfully Started.'
+    redirect_to standard_skill_routine_path(@routine)
   end
 
   def writing_judge

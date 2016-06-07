@@ -45,6 +45,17 @@ describe StandardSkillRoutinesController do
       end
     end
 
+    describe "when a routine already exists" do
+      let!(:standard_skill_routine) { FactoryGirl.create(:standard_skill_routine, registrant: @registrant) }
+
+      it "redirects to that routine without creating a new one" do
+        expect do
+          post :create, registrant_id: @registrant.to_param
+        end.not_to change(StandardSkillRoutine, :count)
+        expect(response).to redirect_to(standard_skill_routine)
+      end
+    end
+
     it "Cannot create a routine for another user" do
       post :create, registrant_id: FactoryGirl.create(:registrant).to_param
       expect(response).to redirect_to(root_path)
