@@ -52,7 +52,7 @@
     - if @registrant.has_standard_skill?
       %hr.non_printable
       .edit_link_block
-        = link_to "Manage Standard Skill Routine for #{registrant}", registrant_standard_skill_routines_path(@registrant), :method => :post, class: "button"
+        = link_to "Manage Standard Skill Routine for #{@registrant}", registrant_standard_skill_routines_path(@registrant), :method => :post, class: "button"
     %hr.non_printable
     .non_printable
       = link_to t(".done"), user_registrants_path(current_user), {:class => "registration_button"}
