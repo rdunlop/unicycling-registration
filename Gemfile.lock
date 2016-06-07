@@ -106,8 +106,6 @@ GEM
     ast (2.2.0)
     autoprefixer-rails (6.3.6.1)
       execjs
-    awesome_nested_fields (0.6.4)
-      rails (>= 3.0.0)
     aws-sdk (2.2.30)
       aws-sdk-resources (= 2.2.30)
     aws-sdk-core (2.2.30)
@@ -185,6 +183,7 @@ GEM
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     cliver (0.3.2)
+    cocoon (1.2.9)
     codeclimate-test-reporter (0.5.0)
       simplecov (>= 0.7.1, < 1.0.0)
     codeclimate_circle_ci_coverage (0.1.2)
@@ -590,7 +589,6 @@ DEPENDENCIES
   apartment
   apartment-sidekiq (= 0.2.0)
   autoprefixer-rails
-  awesome_nested_fields
   aws-sdk-rails
   breadcrumbs_on_rails
   bullet
@@ -603,6 +601,7 @@ DEPENDENCIES
   capybara!
   carrierwave
   carrierwave-aws
+  cocoon
   codeclimate_circle_ci_coverage
   coffee-rails
   consistency_fail

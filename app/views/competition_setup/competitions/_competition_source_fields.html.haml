@@ -1,0 +1,24 @@
+.nested-fields
+  .field
+    Competition Source
+    = f.select :competition_id, Competition.event_order.all.map{|c| [c, c.id]}, :include_blank => true
+  .field
+    Max Place
+    = f.number_field :max_place, {min: 0}
+    .input_details
+      Specify the overall_place which the competitors must achieve in the Source Competition to be included as competitors
+  .field
+    Gender
+    = f.select :gender_filter, CompetitionSource.gender_filters, :include_blank => true
+  .field
+    Age Range
+    .row
+      .small-5.columns
+        = f.number_field :min_age, {min: 0, placeholder: "min"}
+      .small-2.columns
+        \-
+      .small-5.columns
+        = f.number_field :max_age, {min: 0, placeholder: "max"}
+
+  .remove_label
+    = link_to_remove_association 'remove', f
