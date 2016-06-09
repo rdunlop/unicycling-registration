@@ -1,0 +1,11 @@
+---
+fr:
+  activerecord:
+    attributes:
+      award_label:
+        bib_number: ID
+        place: Classement
+    models:
+      award_label:
+        one: Etiquette de récompense
+        other: Etiquettes de récompense

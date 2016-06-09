@@ -1,0 +1,8 @@
+---
+fr:
+  admin:
+    standard_skill_routines:
+      view_all:
+        header: Tous les programmes de standard skill
+        pdfs: PDFs
+        standard_skill_routine_created: Programme de standard skill créé ?

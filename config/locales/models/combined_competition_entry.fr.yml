@@ -1,0 +1,12 @@
+---
+fr:
+  activerecord:
+    attributes:
+      combined_competition_entry:
+        abbreviation: Abbréviation
+        base_points: Points de base
+        tie_breaker: Départage des ex aecos
+    models:
+      combined_competition_entry:
+        one: Elément de compétition combiné
+        other: Eléments de compétitions combinés

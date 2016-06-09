@@ -1,0 +1,10 @@
+---
+fr:
+  competition_results:
+    index:
+      description: "Chargez les PDFs comme \"Résultats additionnels\" afin de fournir
+        des informations supplémentaires\r\nExemples : résultats de poule, résultats
+        de battle, ou autre type de résultats."
+      published_immediately_warning: Ces fichiers seront publiés en ligne immédiatement.
+      upload_a_file: Chargez un PDF de fichier de résultat
+      upload_these_results: Charger ces résultats

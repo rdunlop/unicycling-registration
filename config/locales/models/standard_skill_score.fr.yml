@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      standard_skill_score:
+        one: Score standard skill
+        other: Scores standard skill

@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      heat_lane_result:
+        one: Résultat par série et couloir
+        other: Résultats par séries et couloirs

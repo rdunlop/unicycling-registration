@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      feedback:
+        one: Réaction
+        other: Réactions

@@ -1,0 +1,12 @@
+---
+fr:
+  activerecord:
+    attributes:
+      time_result:
+        minutes: Minutes
+        seconds: Secondes
+        thousands: Milliers
+    models:
+      time_result:
+        one: Résultat du chronomètre
+        other: Résultats du chronomètre

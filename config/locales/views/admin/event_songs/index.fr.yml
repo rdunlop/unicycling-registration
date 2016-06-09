@@ -5,6 +5,15 @@ fr:
       index:
         all_songs_together: Toutes les chansons sur une page
         by_competition: Par Compétition
+        by_competition_description: Une fois que les compétitions et les compétiteurs
+          ont été créés, utilisez les pages de compétition suivante pour affecter
+          la musique aux compétiteurs. Depuis les pages de musique de compétition,
+          vous pouvez télécharger un fichier Zip de toutes les musiques d'une compétition,
+          avec les fichier ordonnés dans l'ordre des compétiteurs.
         by_event: Par événement
+        by_event_description: Voir la musique qui a été uploadée pour chaque compétiteur
+          / événement
+        description: Visionnez, téléchargez et affectez la musique aux compétiteurs
+          depuis ces pages
         header: Toutes les chansons
         num_songs: "# Chansons uploadées"

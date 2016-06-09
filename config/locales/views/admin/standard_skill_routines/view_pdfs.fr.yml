@@ -1,0 +1,9 @@
+---
+fr:
+  admin:
+    standard_skill_routines:
+      view_pdfs:
+        difficulty_judge_pdf: Pdf du juge de diffculté
+        download: Téléchargez un PDF de ce programme
+        execution_judge_pdf: Pdf du juge de réalisation
+        writing_judge_pdf: Pdf du juge d'écriture

@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       age_group_type:
+        description: Description
         name: Nom
     models:
       age_group_type:

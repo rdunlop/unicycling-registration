@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      heat_lane_judge_note:
+        one: Note du juge
+        other: Note des juges

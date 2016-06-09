@@ -1,0 +1,13 @@
+---
+fr:
+  activerecord:
+    attributes:
+      refund:
+        details: Détails (note)
+        refund_date: Date de remboursement
+        refund_id: ID de remboursement
+        user_id: Remboursé par
+    models:
+      refund:
+        one: Remboursement
+        other: Remboursements

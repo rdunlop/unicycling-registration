@@ -1,9 +1,6 @@
 ---
 fr:
   activerecord:
-    attributes:
-      tenant_alias:
-        website_alias: Alias de site web
     models:
       tenant:
         one: Alias du titulaire

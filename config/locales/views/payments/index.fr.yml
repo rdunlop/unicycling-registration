@@ -4,3 +4,4 @@ fr:
     index:
       my_payments: Mes paiements
       persons_payments: "%{registrant}'s paiements"
+      show_details: Voir les détails

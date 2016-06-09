@@ -3,9 +3,12 @@ fr:
   admin:
     competition_songs:
       show:
+        assign: Affecte
         assign_to_competitor: Attribuer
         description: "Cette page liste toutes les chansons qui ont été chargées pour\r\n%{event}
           ET dont l'inscrit est compétiteur."
         download: Télécharger
         download_zip: Télécharger l'archive (zip) des chansons
         header: "%{competition} Chansons"
+        zip_description: Pour faciliter le travail du DJ, les fichiers des ZIP sont
+          renommés afin d'apparaître dans l'ordre de la compétition.

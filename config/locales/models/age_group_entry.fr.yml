@@ -3,7 +3,10 @@ fr:
   activerecord:
     attributes:
       age_group_entry:
+        end_age: Age de fin
         gender: Sexe
+        start_age: Age de début
+        wheel_size: Taille de roue requise (optionnel)
     models:
       age_group_entry:
         one: Groupe d'âge

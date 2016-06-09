@@ -1,0 +1,17 @@
+---
+fr:
+  standard_skill_routines:
+    show:
+      add_new_entry: Ajouter un nouvel élément de standard skill
+      download_my_routine: Télécharger un PDF de mon programme
+      limit_description: "Vos pouvez avoir un maximum de 18 figures dans votre programme.\r\n\r\nSi
+        vous avez plus de 12 figures dans votre programme, un maximum de 12 figures
+        peuvent des figures non monocyclistes (numéro de figure supérieur à 100)\r\n\r\nToutes
+        les figures doivent avoir un numéro de figure différent."
+      list_of_approved_skills_here: liste de toutes les figures approuvées ici
+      see_list_of_skills_html: Vous pouvez voir un %{link}
+      skills_are_saved_automatically: Votre liste de figure est sauvegardée automatiquement
+        chaque fois que vous y apportez des changements.
+      standard_skill_closed: L'épreuve de standard skill est maintenant fermée. A
+        bientôt
+      total: Total

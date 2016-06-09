@@ -5,4 +5,7 @@ fr:
       registrant_best_time:
         formatted_value: Meilleur temps
         source_location: Nom de la convention
-    models: 
+    models:
+      registrant_best_time:
+        one: Meilleur temps de l'inscrit
+        other: Meilleurs temps de l'inscrit

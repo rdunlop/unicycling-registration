@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      payment_detail_coupon_code:
+        one: Code promo de paiement
+        other: Codes promo de paiement

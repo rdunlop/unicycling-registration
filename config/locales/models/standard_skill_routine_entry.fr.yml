@@ -1,0 +1,10 @@
+---
+fr:
+  activerecord:
+    attributes:
+      standard_skill_routine_entry:
+        position: 'Place #'
+    models:
+      standard_skill_routine_entry:
+        one: Elément de programme de standard skill
+        other: Eléments de programme de standard skill

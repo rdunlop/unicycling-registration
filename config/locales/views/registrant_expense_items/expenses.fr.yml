@@ -3,6 +3,8 @@ fr:
   registrant_expense_items:
     expenses:
       cost: Prix
+      items_not_guaranteed: Ces éléments ne sont pas garantis tant que votre paiement
+        n'a pas été reçu
       paid: Payé
       registrants_expenses: Frais de %{registrant}
       total: Total

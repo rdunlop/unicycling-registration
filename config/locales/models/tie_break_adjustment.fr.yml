@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      tie_break_adjustment:
+        one: Ajustement du départage
+        other: Ajustements du départage

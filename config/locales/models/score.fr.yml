@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    models:
+      score:
+        one: Score
+        other: Scores
