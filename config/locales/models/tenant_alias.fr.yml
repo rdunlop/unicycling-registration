@@ -5,6 +5,6 @@ fr:
       tenant_alias:
         website_alias: Alias de site web
     models:
-      tenant:
+      tenant_alias:
         one: Alias du titulaire
         other: Alias des titulaires

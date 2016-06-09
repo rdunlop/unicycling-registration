@@ -5,6 +5,6 @@ en:
       tenant_alias:
         website_alias: Website Alias
     models:
-      tenant:
+      tenant_alias:
         one: Tenant Alias
         other: Tenants Aliases

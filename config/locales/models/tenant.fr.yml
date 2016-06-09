@@ -3,5 +3,5 @@ fr:
   activerecord:
     models:
       tenant:
-        one: Alias du titulaire
-        other: Alias des titulaires
+        one: Titulaire
+        other: Titulaires
