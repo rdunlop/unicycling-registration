@@ -523,6 +523,11 @@ Amazon Server Setup
   - `sudo service start nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
 
+Redis Configuration:
+- Adjust the redis.conf file so that it has a maxmemory of 256000000, and a eviction policy of volatile-lru.
+- Redis says: "WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect."
+- Read http://redis.io/topics/admin ...perhaps disable huge pages?
+
 SSL Certificates
 ----------------
 
