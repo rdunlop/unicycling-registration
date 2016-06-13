@@ -111,25 +111,33 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def warn?
+  # decorator method, which determines how we should present the `member_warnings`
+  #
+  # returns a class name
+  def warning_class
     competition_registrants = competition.signed_up_registrants
 
     # if status != "active" && status != "withdrawn"
     #   error += "Competitor is #{status}<br>"
     # end
 
+    not_found = false
     members.each do |member|
       # if you are withdrawn, but still signed up, you should be warned
       if status == "withdrawn" && !member.currently_dropped?
-        return true
+        return "competitor_warning"
+      elsif member.currently_dropped?
+        return "competitor_warning"
       elsif !competition_registrants.include?(member.registrant)
-        return true
+        not_found = true
       end
     end
+    return "competitor_not_found" if not_found
 
-    false
+    nil
   end
 
+  # Returns a set of 2
   def member_warnings
     competition_registrants = competition.signed_up_registrants
     error = ""
