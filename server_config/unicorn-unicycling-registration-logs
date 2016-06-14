@@ -7,7 +7,6 @@
     compress
     sharedscripts
     postrotate
-        source /home/ec2-user/.rvm/environments/ruby-2.2.3@unicycling-registration
-        cd /home/ec2-user/unicycling-registration/current/ && bundle exec eye user_command rotate all
+        /etc/init.d/registration rotate
     endscript
 }
