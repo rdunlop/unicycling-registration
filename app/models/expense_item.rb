@@ -67,12 +67,20 @@ class ExpenseItem < ActiveRecord::Base
     payment_details.paid.where(refunded: true)
   end
 
+  def pending_items
+    payment_details.offline_pending
+  end
+
   def num_paid_with_coupon
     paid_items.with_coupon.count
   end
 
   def num_paid_without_coupon
     num_paid - num_paid_with_coupon
+  end
+
+  def num_pending
+    pending_items.count
   end
 
   # How many of this expense item are free

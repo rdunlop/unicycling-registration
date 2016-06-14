@@ -1,0 +1,17 @@
+%h3 Pending Payment Items
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Registrant
+      %th Email
+      %th Details
+      %th Date
+  %tbody
+    - payment_details.each do |item|
+      %tr
+        %td= item.registrant.bib_number
+        %td= link_to item.registrant, item.registrant
+        %td= item.registrant.user.email
+        %td= item.details
+        %td= item.created_at

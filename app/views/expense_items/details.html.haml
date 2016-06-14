@@ -49,6 +49,9 @@
 = render "refunded_items", refunded_payment_details: @refunded_details, total: @expense_item.total_amount_paid_after_refunds
 
 = render "paid_items_free", payment_details: @free_with_registration
+%br
+
+= render "pending_items", payment_details: @pending_details
 %hr
 
 = render "unpaid_items", payment_details: @unpaid_details

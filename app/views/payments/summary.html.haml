@@ -43,6 +43,7 @@
         %th Num paid (no discount)
         %th Num paid (with discount or free)
         %th Total Amount Paid
+        %th Num Pending
         %th Num unpaid
     %tbody
       - @expense_items.each do |item|
@@ -57,6 +58,8 @@
             %td
               = print_formatted_currency(item.total_amount_paid)
             %td
+              = item.num_pending
+            %td
               - unpaid_count = item.num_unpaid
               = unpaid_count
     - cache [Payment, Refund] do
@@ -65,10 +68,12 @@
           %th{colspan: 3}
           %th Non-Refunded Amount
           %th= print_formatted_currency(Payment.total_non_refunded_amount)
+          %th{ colspan: 2}
         %tr
           %th{colspan: 3}
           %th Total
           %th= print_formatted_currency(Payment.total_received)
+          %th{ colspan: 2}
 
 - if CouponCode.any?
   %h2= CouponCode.model_name.human(count: 2)
