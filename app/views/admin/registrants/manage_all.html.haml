@@ -3,6 +3,7 @@
 
 %h1= t(".header")
 
+- can_undelete = policy(Registrant).undelete?
 %table.sortable.searchable
   %thead
     %tr
@@ -25,11 +26,11 @@
       - @registrants.find_each(batch_size: 100) do |registrant|
 
         -# Uses javascript to show/hide elements on the page so that better caching can be applied.
-        - if policy(registrant).add_events?
+        - if registrant.competitor?
           %span.js--showElement{ data: { key: "edit_registrant_events#{registrant.id}" } }
-        - if policy(registrant).expenses?
-          %span.js--showElement{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
-        - if policy(registrant).undelete?
+        -# Can always set expenses if I am allowed to view this page
+        %span.js--showElement{ data: { key: "edit_registrant_expenses#{registrant.id}" } }
+        - if can_undelete
           %span.js--showElement{ data: { key: "undelete#{registrant.id}" } }
 
         - cache_i18n [registrant, @config] do
