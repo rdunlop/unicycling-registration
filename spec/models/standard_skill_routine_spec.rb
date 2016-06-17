@@ -100,10 +100,10 @@ describe StandardSkillRoutine do
   it "should be able to total up some scores" do
     skill1 = FactoryGirl.create(:standard_skill_entry, points: 1.1)
     skill2 = FactoryGirl.create(:standard_skill_entry, points: 2.2)
-    @routine.standard_skill_routine_entries.build(
+    @routine.standard_skill_routine_entries.create(
       position: 1,
       standard_skill_entry_id: skill1.id)
-    @routine.standard_skill_routine_entries.build(
+    @routine.standard_skill_routine_entries.create(
       position: 2,
       standard_skill_entry_id: skill2.id)
 
