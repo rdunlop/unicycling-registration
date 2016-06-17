@@ -6,14 +6,16 @@ class ChoicesValidator
   end
 
   def registrant_choices
-    @registrant_choices ||= @registrant.registrant_choices
+    @registrant_choices ||= @registrant.registrant_choices.includes(event_choice: [:event])
   end
 
   def validate
     # for each event that we have choices made
     # determine if we have values for ALL or NONE of the choices for that event
     # loop
-    sign_up_events = @registrant.registrant_event_sign_ups.map{|resu| resu.event}
+    sign_up_events = @registrant.registrant_event_sign_ups
+                                .includes(event: [:translations])
+                                .map{|resu| resu.event}
     choice_events = registrant_choices.map{|rc| rc.event_choice}.map{|ec| ec.event}
 
     events_to_validate = sign_up_events + choice_events
