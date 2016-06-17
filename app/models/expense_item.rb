@@ -110,9 +110,9 @@ class ExpenseItem < ActiveRecord::Base
   # Note: Free items which are associated with Paid Registrants are considered Paid/Free.
   def unpaid_items(include_incomplete_registrants: false)
     reis = if include_incomplete_registrants
-             registrant_expense_items.joins(:registrant).merge(Registrant.active_or_incomplete)
+             registrant_expense_items.includes(:registrant).joins(:registrant).merge(Registrant.active_or_incomplete)
            else
-             registrant_expense_items.joins(:registrant).merge(Registrant.active)
+             registrant_expense_items.includes(:registrant).joins(:registrant).merge(Registrant.active)
            end
     reis.free.select{ |rei| !rei.registrant.reg_paid? } + reis.where(free: false)
   end
@@ -202,6 +202,6 @@ class ExpenseItem < ActiveRecord::Base
   end
 
   def free_items_with_reg_paid
-    registrant_expense_items.joins(:registrant).where(registrants: {deleted: false}).free.select{ |rei| rei.registrant.reg_paid? }
+    registrant_expense_items.includes(:registrant).joins(:registrant).where(registrants: {deleted: false}).free.select{ |rei| rei.registrant.reg_paid? }
   end
 end
