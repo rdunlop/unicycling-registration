@@ -27,6 +27,8 @@ describe AgeGroupEntry do
     @age_group_entry = FactoryGirl.build_stubbed(:age_group_entry)
   end
 
+  it { is_expected.to validate_uniqueness_of(:short_description).scoped_to(:age_group_type_id) }
+
   it "can be created by factorygirl" do
     expect(@age_group_entry.valid?).to eq(true)
   end
