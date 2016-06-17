@@ -11,6 +11,8 @@ class Email
   attribute :non_confirmed_organization_members, Boolean
   attribute :competition_id, Array
   attribute :category_id, Integer
+  attribute :event_id, Integer
+  attribute :expense_item_id, Integer
 
   attr_accessor :subject, :body
   validates :subject, :body, presence: true
@@ -19,19 +21,6 @@ class Email
     attributes.each do |name, value|
       send("#{name}=", value)
     end
-  end
-
-  def competitions
-    return @competitions if @competitions
-    @competitions = []
-    competition_id.each do |cid|
-      @competitions << Competition.find(cid) if cid.present?
-    end
-    @competitions
-  end
-
-  def category
-    Category.find(category_id) if category_id.present?
   end
 
   def filter_description
@@ -49,6 +38,10 @@ class Email
       "Emails of users/registrants associated with #{competitions.map(&:to_s).join(' ')}"
     elsif category_id.present?
       "Emails of users/registrants associated with any competition in #{category}"
+    elsif event_id.present?
+      "Emails of users/registrants Signed up for the Event: #{event}"
+    elsif expense_item_id.present?
+      "Emails of users/registrants who have Paid for #{expense_item}"
     else
       "Unknown"
     end
@@ -77,6 +70,10 @@ class Email
       competitions.map(&:registrants).flatten.map(&:user)
     elsif category_id.present?
       category.events.map(&:competitor_registrants).flatten.map(&:user)
+    elsif event_id.present?
+      event.registrant_event_sign_ups.signed_up.map(&:registrant).map(&:user).uniq
+    elsif expense_item_id.present?
+      expense_item.paid_items.map(&:registrant).map(&:user).uniq
     else
       []
     end
@@ -100,11 +97,30 @@ class Email
     false
   end
 
-  def serialize
-    YAML.dump(self)
+  private
+
+  def competitions
+    return @competitions if @competitions
+
+    @competitions = []
+    if competition_id.present?
+      competition_id.each do |cid|
+        @competitions << Competition.find(cid) if cid.present?
+      end
+    end
+
+    @competitions
   end
 
-  def self.deserialize(yaml)
-    YAML.load(yaml)
+  def category
+    Category.find(category_id) if category_id.present?
+  end
+
+  def event
+    Event.find(event_id) if event_id.present?
+  end
+
+  def expense_item
+    ExpenseItem.find(expense_item_id) if expense_item_id.present?
   end
 end

@@ -19,11 +19,10 @@ class Notifications < TenantAwareMailer
     mail to: requesting_user.email, subject: 'Registrantion Access Granted'
   end
 
-  def send_mass_email(email_yaml, addresses)
-    email = Email.deserialize(email_yaml)
-    @body = email.body
+  def send_mass_email(subject, body, addresses)
+    @body = body
 
-    mail bcc: addresses, subject: email.subject
+    mail bcc: addresses, subject: subject
   end
 
   ######### ADMIN

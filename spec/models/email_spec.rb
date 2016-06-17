@@ -34,4 +34,34 @@ describe Email do
       expect(@email.filtered_user_emails).to match_array([@reg.user.email])
     end
   end
+
+  describe "with a registrant signed up for an event" do
+    before do
+      @reg = FactoryGirl.create(:competitor)
+      resu = FactoryGirl.create(:registrant_event_sign_up, registrant: @reg)
+      @reg_not_signed_up = FactoryGirl.create(:competitor)
+      @event = resu.event
+    end
+
+    it "can create a list via the event id" do
+      @email.event_id = @event.id
+      expect(@email.filtered_user_emails).to match_array([@reg.user.email])
+    end
+  end
+
+  describe "with a registrant who has paid for an item" do
+    before do
+      @reg = FactoryGirl.create(:competitor)
+      @ei = FactoryGirl.create(:expense_item)
+      paid_payment = FactoryGirl.create(:payment, :completed)
+      FactoryGirl.create(:payment_detail, payment: paid_payment, registrant: @reg, expense_item: @ei)
+      @reg_not_paid_item = FactoryGirl.create(:competitor)
+      FactoryGirl.create(:payment_detail, registrant: @reg_not_paid_item, expense_item: @ei)
+    end
+
+    it "can create a list via the expense item id" do
+      @email.expense_item_id = @ei.id
+      expect(@email.filtered_user_emails).to match_array([@reg.user.email])
+    end
+  end
 end

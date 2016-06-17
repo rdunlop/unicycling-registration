@@ -2,8 +2,12 @@
 
 Scroll down to see the e-mail form
 
-
 %h3= @email_form.filter_description
+
+Note: It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
+
+%h4 E-mail
+= render :partial => "/shared/error_messages", :object => @email_form
 
 %table.sortable
   %thead
@@ -22,15 +26,9 @@ Scroll down to see the e-mail form
           %br
 
 %hr
-
-Note: It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
-
-%h4 E-mail
-= render :partial => "/shared/error_messages", :object => @email_form
 = simple_form_for @email_form, url: emails_path do |f|
-  = render partial: "form", locals: { f: f }
-  %br
-  %br
+  .hide
+    = render partial: "form", locals: { f: f }
   <b>Note</b> This form will send to all the e-mails in BOTH of the columns above.
   %br
 
@@ -40,5 +38,6 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
   = f.label :body
   = f.text_area :body, {:cols => 100, :rows => 6 }
   %br
-  = f.button :submit, "Send Email", :class => "focus_button"
+  = f.button :submit, "Send Email", class: "focus_button"
 %hr
+= link_to "Start over", emails_path, class: "back_link"

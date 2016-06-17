@@ -33,14 +33,15 @@ class EmailsController < ApplicationController
   end
 
   def create
-    mass_emailer = MassEmailer.new(params)
+    @email_form = Email.new(params[:email])
 
     respond_to do |format|
-      if mass_emailer.send_emails
+      if @email_form.valid?
+        mass_emailer = MassEmailer.new(@email_form.subject, @email_form.body, @email_form.filtered_combined_emails)
+        mass_emailer.send_emails
         format.html { redirect_to emails_path, notice: 'Email sent successfully.' }
       else
         set_email_breadcrumb
-        @email_form = mass_emailer.email_form
         format.html { render "list" }
       end
     end
