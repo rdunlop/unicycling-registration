@@ -21,7 +21,7 @@ class StandardSkillRoutine < ActiveRecord::Base
 
   def total_skill_points
     total = 0
-    standard_skill_routine_entries.each do |entry|
+    standard_skill_routine_entries.includes(:standard_skill_entry).each do |entry|
       total += entry.standard_skill_entry.points unless entry.standard_skill_entry.nil?
     end
     total
