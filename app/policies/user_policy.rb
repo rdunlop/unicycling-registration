@@ -17,6 +17,11 @@ class UserPolicy < ApplicationPolicy
     event_planner? || super_admin?
   end
 
+  # associate a registrant with a different user
+  def change_registrant_user?
+    convention_admin? || super_admin?
+  end
+
   def add_events?
     !event_sign_up_closed? || event_planner? || super_admin?
   end

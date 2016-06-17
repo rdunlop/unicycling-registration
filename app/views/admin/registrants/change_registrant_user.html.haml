@@ -1,0 +1,13 @@
+%h1= t(".header")
+
+= form_tag(set_registrant_user_registrants_path, method: :put) do
+  .row
+    .small-6.columns
+      = label_tag :user_id, User.model_name.human
+      = select_tag :user_id, options_from_collection_for_select(@users, "id", "to_s"), class: "chosen-select", include_blank: true
+    .small-6.columns
+      = label_tag :registrant_id, Registrant.model_name.human
+      = select_tag :registrant_id, options_from_collection_for_select(@registrants, "id", "with_id_to_s"), class: "chosen-select", include_blank: true
+  .row
+    .small-12.columns
+      = submit_tag t(".change_associated_user"), class: "button"

@@ -5,3 +5,4 @@ en:
         summary: Summary
         edit_summary: "Edit/Summary"
         full_registrant_list: "Full List"
+        change_registrant_user: Change the User for a Registrant record

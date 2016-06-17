@@ -10,9 +10,13 @@
     .small-12.medium-6.columns.text-right
       = label_tag :summary, t(".summary")
     .small-12.medium-6.columns.text-left
-      = check_box_tag :summary
+      = check_box_tag :summary, "1", true
   .row
     .small-12.columns
       = submit_tag t(".edit_summary"), class: "button"
 
 = link_to t(".full_registrant_list"), manage_all_registrants_path
+
+- if policy(current_user).change_registrant_user?
+  %br
+  = link_to t(".change_registrant_user"), change_registrant_user_registrants_path

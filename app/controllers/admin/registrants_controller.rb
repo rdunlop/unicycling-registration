@@ -45,6 +45,28 @@ class Admin::RegistrantsController < ApplicationController
     end
   end
 
+  def change_registrant_user
+    authorize current_user, :change_registrant_user?
+    @registrants = Registrant.all
+    @users = User.all
+  end
+
+  def set_registrant_user
+    authorize current_user, :change_registrant_user?
+    if params[:registrant_id].present? && params[:user_id].present?
+      user_id = params[:user_id]
+      registrant = Registrant.find(params[:registrant_id])
+      user = User.find(user_id)
+      if registrant.update_attribute(:user_id, user_id)
+        redirect_to change_registrant_user_registrants_path, notice: "Assigned #{registrant} to user #{user}"
+      else
+        redirect_to change_registrant_user_registrants_path, alert: "Unable to update registrant"
+      end
+    else
+      redirect_to change_registrant_user_registrants_path, alert: "Registrant and User must both be specified"
+    end
+  end
+
   def undelete
     authorize @registrant, :undelete?
     @registrant.deleted = false

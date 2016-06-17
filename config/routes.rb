@@ -336,6 +336,8 @@ Workspace::Application.routes.draw do
           get :manage_all # How do I use cancan on this, if I were to name the action 'index'?
           get :manage_one
           post :choose_one
+          get :change_registrant_user
+          put :set_registrant_user
         end
         member do
           post :undelete
