@@ -80,6 +80,7 @@ gem 'carrierwave-aws'
 gem 'globalize', '~> 5.0.0'
 gem 'virtus'
 gem "wicked"
+gem 'validates_email_format_of'
 
 gem 'faker' # to support 'sample_data'
 

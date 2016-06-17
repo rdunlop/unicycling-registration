@@ -23,6 +23,7 @@ class Feedback < ActiveRecord::Base
   validates :message, presence: true
   validates :entered_email, presence: true, unless: :signed_in?
   validates :resolved_at, :resolved_by_id, :resolution, presence: true, if: :resolved?
+  validates :entered_email, email_format: true, allow_blank: true
 
   def resolved?
     status == "resolved"

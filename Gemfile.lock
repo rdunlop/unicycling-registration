@@ -559,6 +559,8 @@ GEM
       raindrops (~> 0.7)
     uniform_notifier (1.10.0)
     url_safe_base64 (0.2.2)
+    validates_email_format_of (1.6.3)
+      i18n
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -664,6 +666,7 @@ DEPENDENCIES
   tolk!
   uglifier (>= 1.0.3)
   unicorn
+  validates_email_format_of
   virtus
   watchr
   whenever

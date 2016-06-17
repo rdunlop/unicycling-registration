@@ -17,6 +17,15 @@ describe Feedback do
     expect(feedback).to be_valid
   end
 
+  it "is not valid with an invalid email" do
+    feedback.message = "hi"
+    user = FactoryGirl.create(:user)
+    feedback.user = user
+    expect(feedback).to be_valid
+    feedback.entered_email = "this is what is wrong"
+    expect(feedback).to be_invalid
+  end
+
   it "returns a default username" do
     expect(feedback.username).to eq("not-signed-in")
   end
