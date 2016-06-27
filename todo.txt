@@ -1,7 +1,4 @@
 Currently working on:
-- Make the "Competition Source" automatically start with one of the sources selected+populated to avoid the confusion Patricia had
-- Is the e-mail message being set to the language of the previous request?
-- Add "tenant" to all log messages.
 - Import Results into the Preliminary-Results tables
 Next:
 - Export results from the Final results table
@@ -17,24 +14,15 @@ Items which may be high priority, but need input/feedback
 
 - Use gem "mail_view" to make e-mails prettier
 - Ungeared Champion calculation ? (new rulebook entry)
-- Allow UNICON 2016 to solicit/store/review Standard Skill Routines
 
 Highest Priority Items
 ----------------------
 These are items which should be completed before NAUCC 2016 or UNICON 2016.
 They are sorted in priority order.
 
-- Creating Expert Heats of 100m/etc were very manual, and didn't split up by gender.
-- Ineligible competitors are not indicated as such on the Announcer Sheet
 - Import CSV of external Results doesn't work
 
 - Unclear how to Import Start time data, ...and the review shows nothing because the 'is-start-time' isn't passed to the review page properly.
-
-- set up log rotation/eye? Otherwise, we will have difficulty troubleshooting (logs), and may run out of disk space.
-
-- Time data entry had some issues entering hours:minutes:seconds instead of minutes:seconds:thousands. Add the ability to choose the resolution of the data-entry fields, and make it easier to get right. (hundreds vs thousands, etc)
-
-- Automatically attempting to import data into other competition-within-event was fought against a lot. Make this feature optional, with clear instructions. Re-design the flow of information here.
 
 - Track Day Race Officials were unable to adjust lane assignments for heats (unable to add people to competition)
 
@@ -42,18 +30,10 @@ They are sorted in priority order.
 
 - External Results had "pts" added next to the name many places
 
-## Standard Skill
-- Standard Skill Recording Sheets
-- Standard Skill Scoring Data Entry system/testing
-- Standard Skill Data Entry Reports
-- Error saving standard skill doesn't say which field failed.
-
 ## Scott's new feature:
   - Chief judge - scoring overview.
     - Styling of the background of the numbers, based on standard deviation
     - Mastery would be colored based on how different it is from the Mean
-
-- Unable to data-entry Multi-Lap Races (import doesn'n ask for number of laps)
 
 Next Highest Priority Items
 ---------------------------
@@ -91,8 +71,6 @@ These are items which have value, but not in the immediate term.
 
 - split out tinymce into an Admin Stylesheet?
 - Mark stylesheets/javascript as "async"?
-- Why aren't comments being stripped from javascript?
-- Why aren't assets being gzipped? (nginx?)
 - replace carrierwave_direct with https://github.com/waynehoover/s3_direct_upload
   - Reduce gems list further yet?
 - why isn't convention_setup/event_configuration being updated by Annotate
@@ -100,14 +78,6 @@ These are items which have value, but not in the immediate term.
 - what should happen if Admin tries to change an EventCategory which has people signed up?
 
 - Change TenantAlias flow to REQUIRE that the alias be verified before being set as primary
-- set up letsencrypt
- - document it
- - back up the keys
- - Cause E-mail to be sent on scheduled job run/success/failure
- - Set up dunlopweb.com email address to receive configuration settings/email
- - Figure out how to determine the location of the keys being written (consistency)
- - Schedule the Stage/prod running of the re-certification process
-
 ==============================================================================
 
 
@@ -120,10 +90,6 @@ make the "RegistrationCost" Expense Items get their names from the Registration 
 
 - Use Policy instead of _start_data_entry.html.haml conditionals
 - Create a Seed of data, which shows each of the scenarios and examples of configurations
-- 
-- Allow Image uploads to the Information Pages
-
-- Feedback should ensure that the "Email" field does not contain any spaces (preferably should be an e-mail address too)
 
 - select2 should open on focus? (or at least allow typing to start the search?)
   - autofocus not allowing typing into the form without first opening it up?
@@ -151,35 +117,11 @@ End of sorted set
 
 - Payment THrough PayPal?
 
-Things that caused the most grief:
----------------------------------
-- Multi-lap racing data recording was inaccurate enough that it took a lot of manual effort (and time) post-race to get accurate results.
-- Double-tab when using chosen-select boxes.
-- Import CSV of external Results doesn't work
-- Competitors without Members causes the competitors#show page to 500
-- Track Day Race Officials were unable to adjust lane assignments for heats (unable to add people to competition)
-- "Withdrawn" competitors cause issues for Last-minute-add and other start-line things.
-- Having registrants choose a wheel size doesn't translate into an age group (under 10 age)
-- Creating Expert Heats of 100m/etc were very manual, and didn't split up by gender.
-- Ineligible competitors are not indicated as such on the Announcer Sheet
-- Registrant is able to sign up for an event without choosing the "Signup" checkbox.
-- External Results had "pts" added next to the name many places
-- Time data entry had some issues entering hours:minutes:seconds instead of minutes:seconds:thousands
-- Automatically attempting to import data into other competition-within-event was faught against a lot
-- Many Reports have "unknown" as the rank place for people who were DNS or DNF.
- - Should be marked as such, and should show up at the END of the list.
-- Unclear how to Import Start time data, ...and the review shows nothing because the 'is-start-time' isn't passed to the review page properly.
-
-Requests:
----------
-- Copy Competition
-
 Minor:
 ------
 - Lane Assignment Race Officials needed to use 2 select boxes in order to add last-minute registrants.
 - Combined Competition is confusingly still a "Competition"
 - The Combined Competition Results are not published for competitors to see.
-
 
 ===================================================
 Robin's ToDo List, re-organized August 3, 2015
