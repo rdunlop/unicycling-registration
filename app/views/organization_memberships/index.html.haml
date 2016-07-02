@@ -24,5 +24,5 @@
 
   %tbody
     - cache [Registrant, @config] do
-      - @registrants.each do |reg|
+      - @registrants.find_each(batch_size: 100) do |reg|
         = render partial: "member_row", object: reg

@@ -17,7 +17,11 @@
     %td= reg.contact_detail.city
     %td= reg.contact_detail.state
     %td= reg.contact_detail.country
-    %td= reg.organization_membership_confirmed?
+    %td
+      = reg.organization_membership_confirmed?
+      - unless reg.organization_membership_confirmed?
+        %br
+        = reg.contact_detail.try!(:organization_membership_system_status)
     %td
       - if reg.contact_detail.organization_membership_system_confirmed?
         = "Confirmed by System"
