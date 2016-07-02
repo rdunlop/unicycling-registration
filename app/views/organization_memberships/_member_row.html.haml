@@ -1,7 +1,7 @@
 - reg = member_row
 - cache [reg, @config] do
   %tr{ class: reg.organization_membership_confirmed? ? "confirmed" : "", id: "reg_#{reg.id}" }
-    %td= reg.bib_number
+    %td= link_to reg.bib_number, registrant_path(reg)
     -# this shouldn't happen, as all "active" should include a contact_detail
     - next if reg.contact_detail.nil?
     %td

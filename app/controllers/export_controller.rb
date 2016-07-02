@@ -118,7 +118,14 @@ class ExportController < ApplicationController
     headers = ["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result", "Details", "Age Group"]
 
     data = []
-    Result.includes(competitor: [competition: [], members: [registrant: [:competition_wheel_sizes]], external_results: [], time_results: [], distance_attempts: [], scores: []]).all.each do |result|
+    Result.includes(
+      competitor: [competition: [],
+                   members: [
+                     registrant: [:competition_wheel_sizes]],
+                   external_results: [],
+                   time_results: [],
+                   distance_attempts: [],
+                   scores: []]).all.find_each(batch_size: 100) do |result|
       data << [
         result.competitor.bib_number,
         result.competitor.to_s,

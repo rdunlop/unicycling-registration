@@ -44,7 +44,7 @@
       %th Age Group
       %th Best Time
   %tbody
-    - @competitors.each do |competitor|
+    - @competitors.find_each(batch_size: 100) do |competitor|
       %tr
         %th= competitor.wave
         %td= competitor.lowest_member_bib_number

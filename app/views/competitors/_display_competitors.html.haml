@@ -27,7 +27,7 @@
       %th Warnings?
       %th.competitor_member
   %tbody
-    - @competitors.each do |competitor|
+    - @competitors.find_each(batch_size: 100) do |competitor|
       - next if competitor.new_record?
       %tr{:class => competitor.status == "active" ? "active" : "not_active", id: "row#{competitor.id}" }
         - event_category = nil

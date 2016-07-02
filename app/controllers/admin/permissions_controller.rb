@@ -3,7 +3,6 @@ class Admin::PermissionsController < ApplicationController
   before_action :authorize_permission
 
   def index
-    @users = User.includes(:roles).all
     @available_roles = current_user.roles_accessible
   end
 

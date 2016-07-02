@@ -11,7 +11,6 @@ describe Admin::PermissionsController do
       convention_admin_user = FactoryGirl.create(:convention_admin_user)
       user = FactoryGirl.create(:user)
       get :index, {}
-      expect(assigns(:users)).to match_array([@super_user, convention_admin_user, user])
     end
   end
 
