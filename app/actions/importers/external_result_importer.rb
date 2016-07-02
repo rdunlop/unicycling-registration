@@ -1,14 +1,7 @@
-require 'upload'
-
-class ExternalResultImporter
-  attr_accessor :competition, :user, :num_rows_processed, :errors
-
-  def initialize(competition, user)
-    @competition = competition
-    @user = user
-  end
-
+class ExternalResultImporter < BaseImporter
   def process(file)
+    return false unless valid_file?(file)
+
     upload = Upload.new
     # FOR EXCEL DATA:
     raw_data = upload.extract_csv(file)

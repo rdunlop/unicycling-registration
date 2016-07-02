@@ -1,14 +1,7 @@
-require 'upload'
-
-class HeatLaneLifImporter
-  attr_accessor :competition, :user, :num_rows_processed, :errors
-
-  def initialize(competition, user)
-    @competition = competition
-    @user = user
-  end
-
+class HeatLaneLifImporter < BaseImporter
   def process(file, heat)
+    return false unless valid_file?(file)
+
     upload = Upload.new
     raw_data = upload.extract_csv(file)
     raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?

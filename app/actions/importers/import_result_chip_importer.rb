@@ -1,16 +1,9 @@
-require 'upload'
-
-class ImportResultChipImporter
-  attr_accessor :competition, :user, :num_rows_processed, :errors
-
-  def initialize(competition, user)
-    @competition = competition
-    @user = user
-  end
-
+class ImportResultChipImporter < BaseImporter
   # Create ImportResult records from a file.
   # File Format, separated by ';', includes a blank line.
   def process(file, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
+    return false unless valid_file?(file)
+
     upload = Upload.new(';', bib_number_column_number, time_column_number, lap_column_number)
     raw_data = upload.extract_csv(file)
     self.num_rows_processed = 0

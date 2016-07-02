@@ -41,5 +41,21 @@ describe ImportResultChipImporter do
       expect(result.seconds).to eq(34)
       expect(result.thousands).to eq(390)
     end
+
+    context "when a file is not specified" do
+      let(:sample_input) { nil }
+
+      it "returns an error message" do
+        @reg = FactoryGirl.create(:registrant, bib_number: 101)
+
+        result = nil
+        expect do
+          result = importer.process(sample_input, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
+        end.not_to change(ImportResult, :count)
+
+        expect(result).to be_falsey
+        expect(importer.errors).to eq("File not found")
+      end
+    end
   end
 end
