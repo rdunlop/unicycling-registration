@@ -221,9 +221,6 @@ GEM
     docile (1.1.5)
     equalizer (0.0.11)
     erubis (2.7.0)
-    exception_notification (4.1.4)
-      actionmailer (~> 4.0)
-      activesupport (~> 4.0)
     execjs (2.7.0)
     eye (0.8.1)
       celluloid (~> 0.17.3)
@@ -441,6 +438,8 @@ GEM
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rolify (5.1.0)
+    rollbar (2.12.0)
+      multi_json
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -612,7 +611,6 @@ DEPENDENCIES
   css_splitter
   devise
   devise-i18n
-  exception_notification
   eye-patch
   factory_girl_rails
   faker
@@ -648,6 +646,7 @@ DEPENDENCIES
   redis-rails
   redis-store!
   rolify
+  rollbar
   rspec-instafail
   rspec-rails
   rspec_junit_formatter (= 0.2.2)

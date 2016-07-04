@@ -38,7 +38,7 @@ gem 'jquery-datatables-rails', '~> 3.3.0'
 # system utils
 gem 'rake'
 gem 'paper_trail', '~> 3.0.1'
-gem 'exception_notification'
+gem 'rollbar'
 gem 'redis-store', github: "rdunlop/redis-store" # necessary for lambda namespace (https://github.com/redis-store/redis-store/pull/163)
 gem 'redis-rails'
 gem 'rails_admin'
