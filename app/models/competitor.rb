@@ -145,7 +145,9 @@ class Competitor < ActiveRecord::Base
     if status != "active"
       error += "Competitor is #{status}"
       if status == "withdrawn"
-        error += " as of #{withdrawn_at.to_s(:short)}"
+        if withdrawn_at.present?
+          error += " as of #{withdrawn_at.to_s(:short)}"
+        end
       end
       error += "<br>"
     end
