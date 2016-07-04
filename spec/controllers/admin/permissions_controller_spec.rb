@@ -6,14 +6,6 @@ describe Admin::PermissionsController do
     sign_in @super_user
   end
 
-  describe "GET index" do
-    it "assigns all users as @users" do
-      convention_admin_user = FactoryGirl.create(:convention_admin_user)
-      user = FactoryGirl.create(:user)
-      get :index, {}
-    end
-  end
-
   describe "PUT set_role" do
     describe "with a normal user" do
       before(:each) do

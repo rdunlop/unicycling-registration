@@ -19,12 +19,12 @@ describe ChoicesValidator do
       let(:boolean_choice) { FactoryGirl.create(:event_choice, event: event) }
 
       it "can select the boolean choice" do
-        bool_choice = FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: boolean_choice, value: "1")
+        FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: boolean_choice, value: "1")
         expect(registrant).to be_valid
       end
 
       it "can be not signed up, with a boolean event_choice" do
-        bool_choice = FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: boolean_choice, value: "0")
+        FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: boolean_choice, value: "0")
         resu.update_attribute(:signed_up, false)
 
         expect(registrant).to be_valid
