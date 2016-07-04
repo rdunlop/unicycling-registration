@@ -119,33 +119,12 @@ class Competition < ActiveRecord::Base
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 
-  def no_competition_sources_when_overall_calculation
-    if scoring_class == "Overall Champion" && competition_sources.size > 0
-      errors[:competiton_sources_attributes] << "unable to specify competition sources when using Overall Champion"
-    end
-  end
-
-  def automatic_competitor_creation_only_with_one
-    if num_members_per_competitor != "One" && automatic_competitor_creation?
-      errors.add(:automatic_competitor_creation, "Only valid with one-member-competitor competitions")
-    end
-  end
-
-  def award_label_title_checks
-    # cannot specify subtitle when also specifying an age group
-    if age_group_type.present? && award_subtitle_name.present?
-      errors[:base] << "Cannot specify a subtitle AND an age group"
-    end
-
-    # has_expert is only allowed when there is also an age group type
-    if has_experts? && age_group_type.nil?
-      errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
-    end
-
-    # requires_age_groups is true for discance and race scoring classes
-    if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
-      errors[:age_group_type_id] << "Must specify an age group when using #{scoring_class} scoring class"
-    end
+  # Which columns do we expect to be presented during data-entry?
+  # Not yet fully tested/working, see ImportResult:104
+  def data_entry_format
+    OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+    # future option:
+    # OpenStruct.new(hours?: true, thousands?: false, hundreds?: true)
   end
 
   def self.awarded
@@ -162,18 +141,6 @@ class Competition < ActiveRecord::Base
 
   def unlocked?
     !locked?
-  end
-
-  def published_only_when_locked
-    if published? && !locked?
-      errors[:base] << "Cannot Publish an unlocked Competition"
-    end
-  end
-
-  def awarded_only_when_published
-    if awarded? && !published?
-      errors[:base] << "Cannot Award an un-published Competition"
-    end
   end
 
   # Caching-related functions
@@ -234,15 +201,6 @@ class Competition < ActiveRecord::Base
 
   def end_time_to_s
     scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
-  end
-
-  def clear_data_types_of_strings
-    self.start_data_type = nil if start_data_type == ""
-    self.end_data_type = nil if end_data_type == ""
-  end
-
-  def clear_num_members_per_compeititor_of_strings
-    self.num_members_per_competitor = nil if num_members_per_competitor == ""
   end
 
   def to_s_with_event_class
@@ -563,5 +521,57 @@ class Competition < ActiveRecord::Base
     best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt).compact
 
     best_attempts_for_each_competitor.sort{ |a, b| b.distance <=> a.distance }
+  end
+
+  private
+
+  def clear_num_members_per_compeititor_of_strings
+    self.num_members_per_competitor = nil if num_members_per_competitor == ""
+  end
+
+  def clear_data_types_of_strings
+    self.start_data_type = nil if start_data_type == ""
+    self.end_data_type = nil if end_data_type == ""
+  end
+
+  def published_only_when_locked
+    if published? && !locked?
+      errors[:base] << "Cannot Publish an unlocked Competition"
+    end
+  end
+
+  def awarded_only_when_published
+    if awarded? && !published?
+      errors[:base] << "Cannot Award an un-published Competition"
+    end
+  end
+
+  def no_competition_sources_when_overall_calculation
+    if scoring_class == "Overall Champion" && competition_sources.size > 0
+      errors[:competiton_sources_attributes] << "unable to specify competition sources when using Overall Champion"
+    end
+  end
+
+  def automatic_competitor_creation_only_with_one
+    if num_members_per_competitor != "One" && automatic_competitor_creation?
+      errors.add(:automatic_competitor_creation, "Only valid with one-member-competitor competitions")
+    end
+  end
+
+  def award_label_title_checks
+    # cannot specify subtitle when also specifying an age group
+    if age_group_type.present? && award_subtitle_name.present?
+      errors[:base] << "Cannot specify a subtitle AND an age group"
+    end
+
+    # has_expert is only allowed when there is also an age group type
+    if has_experts? && age_group_type.nil?
+      errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
+    end
+
+    # requires_age_groups is true for discance and race scoring classes
+    if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
+      errors[:age_group_type_id] << "Must specify an age group when using #{scoring_class} scoring class"
+    end
   end
 end

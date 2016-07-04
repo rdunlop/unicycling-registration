@@ -18,7 +18,6 @@
 #
 
 class HeatLaneResult < ActiveRecord::Base
-  include TimePrintable
   include FindsMatchingCompetitor
   include TracksEnteredBy
   include FindsBibNumberFromHeatLane
@@ -68,6 +67,10 @@ class HeatLaneResult < ActiveRecord::Base
       entered_by: entered_by
     )
     tr.save!
+  end
+
+  def full_time
+    TimeResultPreesnter.new(minutes, seconds, thousands).full_time
   end
 
   private

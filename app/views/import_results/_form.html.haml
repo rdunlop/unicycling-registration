@@ -5,19 +5,7 @@
 
   %table.import_results
     - cache ['header', @competition] do
-      %thead
-        %tr
-          %th ID
-          %th Name
-          %th Competitor Exists?
-          %th Minutes
-          %th Seconds
-          %th Thousands
-          - if @competition.has_penalty?
-            %th Penalties
-          %th Disqualified
-          %th
-          %th
+      = render "imported_time_result_thead"
     %tbody
       = render partial: 'imported_time_result', collection: @import_results, as: :import_result
 
@@ -26,9 +14,14 @@
       %tr
         %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition, class: "js--autoFocus")
         %td
+        - if @competition.data_entry_format.hours?
+          %td= f.number_field :hours, {:min => 0}
         %td= f.number_field :minutes, {:min => 0}
         %td= f.number_field :seconds, {:min => 0}
-        %td= f.number_field :thousands, {:min => 0}
+        - if @competition.data_entry_format.thousands?
+          %td= f.number_field :thousands, {:min => 0}
+        - if @competition.data_entry_format.hundreds?
+          %td= f.number_field :hundreds, {:min => 0}
         - if @competition.has_penalty?
           %td= f.number_field :number_of_penalties
         %td= f.select :status, TimeResult.status_values, include_blank: true

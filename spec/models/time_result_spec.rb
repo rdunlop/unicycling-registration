@@ -84,41 +84,15 @@ describe TimeResult do
       @tr.seconds = 16
       @tr.thousands = 701
     end
+
     it "can print the full time when all values exist" do
       expect(@tr.full_time).to eq("19:16.701")
     end
+
     it "doesn't print the values if it is disqualified" do
       @tr.status = "DQ"
       expect(@tr.full_time).to eq("")
     end
-    it "shouldn't print the thousands if they are 0" do
-      @tr.thousands = 0
-      expect(@tr.full_time).to eq("19:16")
-    end
-    it "should only print tens, if the result is tens" do
-      @tr.thousands = 100
-      expect(@tr.full_time).to eq("19:16.1")
-    end
-    it "shouldn't print the thousands if they are 0, even for multi-hour events" do
-      @tr.minutes = 200
-      @tr.thousands = 0
-      expect(@tr.full_time).to eq("3:20:16")
-    end
-  end
-
-  it "can print the full time when the numbers start with 0" do
-    @tr.minutes = 9
-    @tr.seconds = 6
-    @tr.thousands = 05
-    expect(@tr.full_time).to eq("9:06.005")
-  end
-
-  it "can print the full time when the minutes are more than an hour" do
-    @tr.minutes = 61
-    @tr.seconds = 10
-    @tr.thousands = 123
-
-    expect(@tr.full_time).to eq("1:01:10.123")
   end
 
   it "can return the full time in thousands" do

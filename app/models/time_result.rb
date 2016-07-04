@@ -99,7 +99,7 @@ class TimeResult < ActiveRecord::Base
   def full_time
     return "" if disqualified?
 
-    TimeResultPresenter.new(full_time_in_thousands).full_time
+    TimeResultPresenter.from_thousands(full_time_in_thousands).full_time
   end
 
   def result

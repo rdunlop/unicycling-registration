@@ -13,7 +13,7 @@ class RaceResultCalculator
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result? && !competitor.disqualified?
-      TimeResultPresenter.new(competitor.best_time_in_thousands).full_time
+      TimeResultPresenter.from_thousands(competitor.best_time_in_thousands).full_time
     end
   end
 
