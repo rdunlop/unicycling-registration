@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Registrants::BuildController do
+  let(:user) { FactoryGirl.create(:user) }
   before(:each) do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    sign_in user
 
     allow_any_instance_of(EventConfiguration).to receive(:registration_closed?).and_return(false)
     allow_any_instance_of(EventConfiguration).to receive(:organization_membership_config?).and_return(true)
@@ -18,7 +18,7 @@ describe Registrants::BuildController do
       first_name: "Robin",
       last_name: "Dunlop",
       gender: "Male",
-      user_id: @user.id,
+      user_id: user.id,
       birthday: Date.new(1982, 01, 19),
       contact_detail_attributes: {
         address: "123 Fake Street",
@@ -44,7 +44,7 @@ describe Registrants::BuildController do
 
   describe "GET show" do
     context "viewing the add_contact_details page" do
-      let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: @user) }
+      let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
 
       it "displays the contact detail form" do
         get :show, registrant_id: registrant.to_param, id: "add_contact_details"
@@ -71,7 +71,7 @@ describe Registrants::BuildController do
           post :create, registrant_id: "new", registrant: valid_attributes.merge(
             registrant_type: 'competitor')
         end.to change(Registrant, :count).by(1)
-        expect(Registrant.last.user).to eq(@user)
+        expect(Registrant.last.user).to eq(user)
         expect(Registrant.last.contact_detail).not_to be_nil
       end
 
@@ -122,7 +122,7 @@ describe Registrants::BuildController do
     end
     describe "When creating nested registrant choices" do
       before(:each) do
-        @reg = FactoryGirl.create(:registrant, user: @user)
+        @reg = FactoryGirl.create(:registrant, user: user)
         @ev = FactoryGirl.create(:event)
         @ec = FactoryGirl.create(:event_choice, event: @ev)
         @attributes = valid_attributes.merge(registrant_type: 'competitor',
@@ -161,7 +161,7 @@ describe Registrants::BuildController do
 
     describe "when creating registrant_event_sign_ups" do
       before(:each) do
-        @reg = FactoryGirl.create(:registrant, user: @user)
+        @reg = FactoryGirl.create(:registrant, user: user)
         @ecat = FactoryGirl.create(:event).event_categories.first
         @attributes = valid_attributes.merge(registrant_type: 'competitor',
                                              registrant_event_sign_ups_attributes: [
@@ -200,7 +200,7 @@ describe Registrants::BuildController do
   xdescribe "PUT update" do
     describe "with valid params" do
       it "updates the requested registrant" do
-        registrant = FactoryGirl.create(:competitor, user: @user)
+        registrant = FactoryGirl.create(:competitor, user: user)
         # Assuming there are no other registrants in the database, this
         # specifies that the Registrant created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -210,32 +210,32 @@ describe Registrants::BuildController do
       end
 
       it "assigns the requested registrant as @registrant" do
-        registrant = FactoryGirl.create(:competitor, user: @user)
+        registrant = FactoryGirl.create(:competitor, user: user)
         put :update, registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes
         expect(assigns(:registrant)).to eq(registrant)
       end
 
       it "cannot change the competitor to a non-competitor" do
-        registrant = FactoryGirl.create(:competitor, user: @user)
+        registrant = FactoryGirl.create(:competitor, user: user)
         put :update, registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes.merge(registrant_type: 'noncompetitor')
         expect(assigns(:registrant)).to eq(registrant)
         expect(assigns(:registrant).competitor?).to eq(true)
       end
 
       it "redirects competitors to the items" do
-        registrant = FactoryGirl.create(:competitor, user: @user)
+        registrant = FactoryGirl.create(:competitor, user: user)
         put :update, registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes
         expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
       it "redirects noncompetitors to the items" do
-        registrant = FactoryGirl.create(:noncompetitor, user: @user)
+        registrant = FactoryGirl.create(:noncompetitor, user: user)
         put :update, registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes
         expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 
     describe "with invalid params" do
-      let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
+      let(:registrant) { FactoryGirl.create(:competitor, user: user) }
       let(:do_action) do
         put :update, registrant_id: registrant.to_param, id: "add_name", registrant: {registrant_type: 'competitor'}
       end
@@ -258,6 +258,19 @@ describe Registrants::BuildController do
         do_action
         expect(response).to render_template("edit")
       end
+    end
+  end
+
+  describe "DELETE drop_event" do
+    let(:event) { FactoryGirl.create(:event) }
+    let(:registrant) { FactoryGirl.create(:competitor, user: user) }
+    let(:event_choice) { FactoryGirl.create(:event_choice, event: event) }
+    let(:event_category) { event.event_categories.first }
+    let!(:resu) { FactoryGirl.create(:registrant_event_sign_up, event: event, event_category: event_category, registrant: registrant) }
+
+    it "sign out for event" do
+      delete :drop_event, registrant_id: registrant.bib_number, event_id: event.id
+      expect(registrant.reload.registrant_event_sign_ups.find_by(event: event).signed_up).to be_falsey
     end
   end
 end

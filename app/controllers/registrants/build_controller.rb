@@ -88,8 +88,8 @@ class Registrants::BuildController < ApplicationController
     @registrant.transaction do
       sign_up = @registrant.registrant_event_sign_ups.find_by(event: event)
       choices = @registrant.registrant_choices.includes(event_choice: :event).select{ |ec| ec.event_choice.event == event}
-      sign_up.destroy
       choices.map(&:destroy)
+      sign_up.update_attribute(:signed_up, false)
     end
     flash[:notice] = "Successfully dropped #{event}"
     redirect_to registrant_build_path(@registrant.bib_number, :add_events)

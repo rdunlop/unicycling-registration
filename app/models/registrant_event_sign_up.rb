@@ -74,7 +74,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
 
   def mark_member_as_dropped
     # was signed up and now we are not
-    # Find any members which are assigned to compettiions, and mark them as "withdrawn"
+    # Find any members which are assigned to competitions, and mark them as "withdrawn"
     if signed_up_was && signed_up_changed? && !signed_up
       drop_from_event_category(event_category_id_was)
     end
@@ -93,7 +93,7 @@ class RegistrantEventSignUp < ActiveRecord::Base
         member.update_attributes(dropped_from_registration: true)
         competitor = member.competitor
         if competitor.active? && competition.num_members_per_competitor == "One"
-          competitor.update_attributes(status: "withdrawn")
+          WithdrawCompetitor.perform(competitor)
         end
       end
     end

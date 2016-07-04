@@ -15,6 +15,7 @@
 #  notes                    :string(255)
 #  wave                     :integer
 #  riding_crank_size        :integer
+#  withdrawn_at             :datetime
 #
 # Indexes
 #
@@ -142,7 +143,11 @@ class Competitor < ActiveRecord::Base
     competition_registrants = competition.signed_up_registrants
     error = ""
     if status != "active"
-      error += "Competitor is #{status}<br>"
+      error += "Competitor is #{status}"
+      if status == "withdrawn"
+        error += " as of #{withdrawn_at.to_s(:short)}"
+      end
+      error += "<br>"
     end
 
     members.each do |member|

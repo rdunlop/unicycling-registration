@@ -12,7 +12,6 @@ Unknown priority
 ----------------
 Items which may be high priority, but need input/feedback
 
-- Use gem "mail_view" to make e-mails prettier
 - Ungeared Champion calculation ? (new rulebook entry)
 
 Highest Priority Items
@@ -41,7 +40,6 @@ These are items which would increase the value of the system.
 
 - add a banner to the main sign-in page which says "Not yet open" (when "under construction")
 
-- Improve the Tenant Creation flow
 - Improve the "Admin Upgrade" flow/add instructions
 
 - Payments#Summary page has "Non-Refunded Amount  366.30€" (but it's a "Refund" amount?). (No one has complained, but I think that this is incorrectly labeled)
@@ -1007,54 +1005,3 @@ A super-judge by Time:
   - Split it by ID only, then record their 2 times
   - See the gender of the competition, or split the competitors by gender.
 
-===========================================================
-Behaviour comments abotu Data Entry:
-===========================================================
-When doing data entry, adding data:
-Only seeing the first set of data when there is more than 2 data entries for the same person.
-The “search” box is being cut off because the footer is overlapping.
-Single data entry, can we put the error box near the submit instead of the top.
-When an error occurs, put the focus on the first box that is missing.
-The error shouldn’t “or rank” because it doesn’t exist here
-Don’t allow tab to the competition rulebook.
-When there is double-entry it should be highlighted.
-
-========================================================================================================================
-Rulebook Rule changes desired:
-
-- Add a rulebook rule for how to cut off the ends of High/Long competition (you are allowed to jump...forever?)
-- add recommendations for how to schedule an event, including awarding younger riders' awards earlier, and not performing awards the same evening as an event.
-- add recommendation for scheduling event to include always having water stations, clearly labeled bathrooms, and announcing medical services are available, where.
-
-- Scott/Hugo/benoit - UNICON rule: Scott, can we add a rule to Trials for tie-breakers, so that we know that people need to be present for tie-breaking.
-
-
-What is the way in which the High/Long competition will be run?
-Connie has ideas about the “most efficient” way of running it. Who is the director, and how do they think it should be run?
-
-Scott: section 4.6 Age Groups (Muni)
-There are the age groups that must be used for Muni? (it seems to indicate this by saying "The following age groups are the maximum allowable for muni competitions:”
-
-
-Section 5.7 Announcing of Results (Freestyle)
-This seems to say that we are required to continuously announce the results of the judging. We have always restricted this information until after the awards. Is this still planned to be done?
-
-Scetion 5.23 Individual Freestyle - Technical Score
-Should "The Technical part of the judging is broken into four parts” be “three parts”?
-
-
-5.25.1 Pairs Freestyle: Quantity of Unicycling Skills and Transitions
-
-This section feels like it needs some grammatical correction.
-
-
-
-========================================================================================================================
-========================================================================================================================
-========================================================================================================================
-Group Num Paid (No Discount)  Num paid (with discount or free)  Total Amount Paid Num unpaid
-Final Party Items 97  0 $1287.00  10
-Registrations 133 16  $9445.00  7
-Standard T-Shirts 66  3 $1044.78  6
-Women's T-Shirts  40  0 $633.20 0
-Youth T-Shirts  13  0 $205.79 2

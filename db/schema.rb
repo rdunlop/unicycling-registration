@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507180405) do
+ActiveRecord::Schema.define(version: 20160704131117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 20160507180405) do
     t.string   "notes",                    limit: 255
     t.integer  "wave"
     t.integer  "riding_crank_size"
+    t.datetime "withdrawn_at"
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree

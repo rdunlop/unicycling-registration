@@ -5,9 +5,7 @@ class ChoicesValidator
     @registrant = registrant
   end
 
-  def registrant_choices
-    @registrant_choices ||= @registrant.registrant_choices.includes(event_choice: [:event])
-  end
+  delegate :registrant_choices, to: :registrant
 
   def validate
     # for each event that we have choices made
@@ -16,7 +14,7 @@ class ChoicesValidator
     sign_up_events = @registrant.registrant_event_sign_ups
                                 .includes(event: [:translations])
                                 .map{|resu| resu.event}
-    choice_events = registrant_choices.map{|rc| rc.event_choice}.map{|ec| ec.event}
+    choice_events = registrant_choices.includes(event_choice: [:event]).map{|rc| rc.event_choice}.map{|ec| ec.event}
 
     events_to_validate = sign_up_events + choice_events
 

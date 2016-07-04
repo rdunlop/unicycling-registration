@@ -15,6 +15,7 @@
 #  notes                    :string(255)
 #  wave                     :integer
 #  riding_crank_size        :integer
+#  withdrawn_at             :datetime
 #
 # Indexes
 #
