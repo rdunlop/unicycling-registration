@@ -1,5 +1,16 @@
 %h1 Individual Freestyle Competitions
 
+= render "assign_order"
+
+= render "assign_judges"
+
+%p
+  Once the judging results have been entered, you can review them, and then "Lock" the competition results.
+
+%p
+  %b Note:
+  Results will not be posted until the "publish" button is pressed, normally after Awards.
+
 - if @event.present?
   %p
     - params = { "competition[scoring_class]" => "Artistic Freestyle IUF 2015", "competition[num_members_per_competitor]" => "One" }

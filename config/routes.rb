@@ -236,6 +236,7 @@ Workspace::Application.routes.draw do
           get :overall_champion
           get :custom
           get :download_file
+          get :director_responsibilities
         end
       end
     end

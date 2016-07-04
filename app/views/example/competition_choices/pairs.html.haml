@@ -1,5 +1,9 @@
 %h1 Pairs Freestyle Competitions
 
+= render "assign_order"
+
+= render "assign_judges"
+
 - if @event.present?
   %p
     - params = { "competition[scoring_class]" => "Artistic Freestyle IUF 2015", "competition[num_members_per_competitor]" => "Two" }

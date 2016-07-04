@@ -1,6 +1,7 @@
 class Example::CompetitionChoicesController < ApplicationController
   before_action :set_priviledge_if_event_scoped
   layout :event_scoped_or_public
+  before_action :set_action_breadcrumb, unless: :index
 
   # GET /competition_setup/events/1/competition_choices
   def index
@@ -10,12 +11,15 @@ class Example::CompetitionChoicesController < ApplicationController
   end
 
   def individual
+    add_breadcrumb "Freestyle", freestyle_example_competition_choices_path
   end
 
   def pairs
+    add_breadcrumb "Freestyle", freestyle_example_competition_choices_path
   end
 
   def group
+    add_breadcrumb "Freestyle", freestyle_example_competition_choices_path
   end
 
   def standard_skill
@@ -66,6 +70,7 @@ class Example::CompetitionChoicesController < ApplicationController
     else
       # If from the public, allow anyone to view these end-points
       skip_authorization
+      add_breadcrumbs
     end
   end
 
@@ -96,5 +101,14 @@ class Example::CompetitionChoicesController < ApplicationController
 
   def load_event
     @event = Event.find(params[:event_id])
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb "Features", example_description_path
+    add_breadcrumb "Scoring", example_competition_choices_path
+  end
+
+  def set_action_breadcrumb
+    add_breadcrumb action_name.titleize
   end
 end
