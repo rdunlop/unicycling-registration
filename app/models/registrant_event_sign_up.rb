@@ -55,7 +55,6 @@ class RegistrantEventSignUp < ActiveRecord::Base
     else
       registrant.remove_registration_item(event.expense_item)
     end
-    registrant.save!
   end
 
   delegate :to_s, to: :event_category
