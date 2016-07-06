@@ -5,6 +5,7 @@ en:
         header: Manage Music
         description: View, Download, and Assign Music to Competitors from these pages
         all_songs_together: All Songs on one page
+        add_new_song: Add a new song for a registrant
         by_event: Music, By Event
         by_event_description: View the Music which has been uploaded for each Competitor/Event
         by_competition: Music, By Competition

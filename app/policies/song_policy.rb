@@ -1,6 +1,7 @@
 class SongPolicy < ApplicationPolicy
-  [:update, :destroy, :file_complete, :add_file, :my_songs, :create_guest_song].each do |sym|
+  [:update, :destroy, :add_file, :my_songs, :create_guest_song, :file_complete].each do |sym|
     define_method("#{sym}?") do
+      # allow DJ to upload new music for other registrants
       music_management?
     end
   end
@@ -16,7 +17,7 @@ class SongPolicy < ApplicationPolicy
   private
 
   def music_management?
-    (user_song? && !config.music_submission_ended?) || super_admin?
+    (user_song? && (!config.music_submission_ended? || music_dj?)) || super_admin?
   end
 
   def user_song?
