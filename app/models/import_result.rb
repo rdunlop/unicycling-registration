@@ -98,7 +98,7 @@ class ImportResult < ActiveRecord::Base
   end
 
   def full_time
-    TimeResultPreesnter.new(minutes, seconds, thousands).full_time
+    TimeResultPresenter.new(minutes, seconds, thousands).full_time
   end
 
   # NOT YET fully tested to be working.
