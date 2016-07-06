@@ -10,6 +10,4 @@ de:
         details_note: "(nur für manche Artikel erforderlich)"
         header: Geld erhalten
         mark_this_item: markiere diesen Gegenstand als bezahlt
-        payment_description: 'Bitte beschreibe die Zahlungsmethode. Beispiele: Bar,
-          Scheck #123'
         submit: Zahlungsmethode anlegen

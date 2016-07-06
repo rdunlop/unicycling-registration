@@ -135,6 +135,9 @@ fr:
         parent_page: "[Optionnel] Grouper cette page sous cette page parente"
         position: Trier les pages sous une seule page parente
         slug: L'url facile à comprendre, utilisez des charactères normaux (pas d'espace)
+      payment:
+        note: 'Décrivez le paiement s''il vous plait. Exemples : Espèces,
+          Chèque # 123'
       registrant_best_times:
         source_location: Saisissez Nom et Date
       registrant:

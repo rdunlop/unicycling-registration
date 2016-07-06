@@ -29,12 +29,11 @@ class Admin::ManualPaymentsController < ApplicationController
     @manual_payment.user = current_user
 
     if @manual_payment.save
-      payment = @manual_payment.saved_payment
-      ManualPaymentReceiver.send_emails(payment)
-      redirect_to payment_path(payment), notice: "Successfully created payment and sent e-mail"
+      payment = @manual_payment.created_payment
+      redirect_to payment_path(payment), notice: "Created DRAFT payment, please apply coupons and mark as paid"
     else
       add_breadcrumb "Choose Payment Items"
-      flash[:alert] = "Please fill out a note, and select items"
+      flash[:alert] = "Error: #{@manual_payment.error_message}"
       redirect_to :back
     end
   end

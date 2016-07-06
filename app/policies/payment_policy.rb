@@ -21,6 +21,11 @@ class PaymentPolicy < ApplicationPolicy
     end
   end
 
+  # allow marking a payment as "complete"
+  def admin_complete?
+    payment_admin? || super_admin?
+  end
+
   delegate :offline_payment?, to: :config
 
   def summary?

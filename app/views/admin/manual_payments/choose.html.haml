@@ -12,13 +12,6 @@
 - if @manual_payment.unpaid_details.any?
   = form_for(@manual_payment, :url => manual_payments_path, method: :post) do |pf|
     = render :partial => "/shared/error_messages", :object => @manual_payment
-    %b.payment_instructions= t(".payment_description")
-
-    .row
-      .small-6.columns.text-right
-        = pf.label :note
-      .small-6.columns
-        = pf.text_field :note
 
     %h1= t(".chosen_and_unpaid_items")
     .payment_instructions= t(".choose_items")

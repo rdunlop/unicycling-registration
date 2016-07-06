@@ -47,11 +47,9 @@ class ManualPayment
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attribute :note, String
-
   attribute :user, User
-  attribute :saved_payment, Payment
-  validates :note, presence: true
+  attribute :created_payment, Payment
+  attribute :error_message, String
   validate :at_least_one_paid_element
 
   def at_least_one_paid_element
@@ -68,6 +66,7 @@ class ManualPayment
 
   def initialize(params = {})
     @new_expense_items = []
+    @error_message = nil
     params.each do |name, value|
       send("#{name}=", value)
     end
@@ -100,23 +99,27 @@ class ManualPayment
 
   def build_payment
     payment = Payment.new
-    payment.note = note
 
     unpaid_details.each do |ud|
       build_payment_detail(payment, ud)
     end
-    payment.completed = true
-    payment.completed_date = DateTime.now
     payment.user = user
     payment
   end
 
   def save
-    return false if invalid?
+    if invalid?
+      self.error_message = "Please choose some elements"
+      return false
+    end
     payment = build_payment
-    return false if payment.invalid? # how to show when this fails?
 
-    self.saved_payment = payment
+    if payment.invalid?
+      self.error_message = payment.errors.full_messages.join(" ")
+      return false
+    end
+
+    self.created_payment = payment
     payment.save
   end
 end

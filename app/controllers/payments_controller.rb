@@ -159,6 +159,18 @@ class PaymentsController < ApplicationController
     redirect_to @payment
   end
 
+  def admin_complete
+    payment = Payment.find(params[:id])
+    authorize payment
+
+    if payment.complete(note: params[:payment][:note])
+      ManualPaymentReceiver.send_emails(payment)
+      redirect_to payment_path(payment), notice: "Successfully created payment and sent e-mail"
+    else
+      redirect_to user_payments_path(current_user)
+    end
+  end
+
   private
 
   def payment_params

@@ -10,6 +10,4 @@ fr:
         details_note: "(seulement requis pour certains éléments)"
         header: Recevoir le paiement
         mark_this_item: Marquer cette élément comme Argent-Reçu
-        payment_description: 'Décrivez le paiement s''il vous plait. Exemples : Espèces,
-          Chèque # 123'
         submit: Créer un enregistrement de paiement

@@ -143,6 +143,7 @@ Workspace::Application.routes.draw do
       member do
         post :fake_complete
         post :complete
+        post :admin_complete
         post :pay_offline
         post :apply_coupon
       end

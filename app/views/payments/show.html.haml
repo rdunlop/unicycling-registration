@@ -1,7 +1,7 @@
 %h1= t(".payment_summary")
 = render :partial => "summary", :locals => {:payment => @payment }
 
-- if @config.offline_payment?
+- if @config.offline_payment? && !@payment.completed?
   %fieldset
     %legend= t(".offline_payment_instructions")
     %b= t(".payment_reference", payment_id: @payment.id)
@@ -24,6 +24,16 @@
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag t(".complete_payment"), class: "payment_link"
+
+    - if policy(@payment).admin_complete?
+      = link_to "Mark as Paid (admin function)", "#", class: "js--toggle admin_payment button warning", data: { toggle_target: ".admin_payment" }
+      %fieldset.admin_payment.is--hidden
+        = simple_form_for @payment, url: admin_complete_payment_path(@payment), method: :post do |f|
+          -# Should make this only appear when clicked, and should outline it to make it a group.
+          = f.input :note
+          = f.submit "Mark as Paid (admin function)", class: "button warning"
+      %br
+
     - if @config.test_mode?
       = link_to "Pretend to pay by credit card #{print_formatted_currency(@payment.total_amount)}", fake_complete_payment_path(@payment), :method => :post, class: "button warning"
 
