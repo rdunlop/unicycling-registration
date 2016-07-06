@@ -39,7 +39,7 @@ class PaymentPolicy < ApplicationPolicy
   private
 
   def manage?
-    (user_record? && !registration_closed?) || super_admin?
+    (user_record? && (!registration_closed? || payment_admin?)) || super_admin?
   end
 
   def user_record?
