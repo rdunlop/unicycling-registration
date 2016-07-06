@@ -5,13 +5,6 @@ describe ManualPayment do
     @pay = ManualPayment.new
   end
 
-  it "requires that the note be set" do
-    @pay.user = FactoryGirl.create(:payment_admin)
-    expect(@pay.valid?).to eq(false)
-    @pay.note = "Hello"
-    expect(@pay.valid?).to eq(false)
-  end
-
   describe "when a registrant has been added" do
     let(:registrant) { FactoryGirl.create(:competitor) }
     let(:expense_item) { FactoryGirl.create :expense_item, cost: 10.00, tax: 2.00 }
@@ -24,12 +17,6 @@ describe ManualPayment do
 
     it "lists the unpaid items for the registrant" do
       expect(@pay.unpaid_details.size).to eq(1)
-    end
-
-    it "is valid with a note" do
-      expect(@pay).not_to be_valid
-      @pay.note = "Paid by cheque"
-      expect(@pay).to be_valid
     end
 
     describe "with a built payment" do

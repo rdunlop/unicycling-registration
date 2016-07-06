@@ -38,7 +38,6 @@ describe Admin::ManualPaymentsController do
     it "can create a payment with refund elements" do
       expect do
         post :create, manual_payment: {
-          note: "Paid manually",
           unpaid_details_attributes: {
             "0" => {
               registrant_expense_item_id: rei.id,
@@ -47,7 +46,7 @@ describe Admin::ManualPaymentsController do
         }
       end.to change(Payment, :count).by(1)
       p = Payment.last
-      expect(p.note).to eq("Paid manually")
+      expect(p.completed).to be_falsey
       pd = PaymentDetail.last
       expect(pd.expense_item).to eq(rei.expense_item)
     end
