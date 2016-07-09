@@ -577,6 +577,7 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
       event_hash = category_hash[competitor.event.to_s] ||= {}
       event_hash[:competition_name] = competitor.competition.award_title
       event_hash[:team_name] = competitor.team_name
+      event_hash[:age_group] = competitor.age_group_entry_description
       event_hash[:additional_details] = nil
       event_hash[:confirmed] = true
       event_hash[:status] = competitor.status

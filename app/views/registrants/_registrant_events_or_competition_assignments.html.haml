@@ -12,6 +12,7 @@
           %tr{ class: details[:status] ? "competitor-#{details[:status]}" : nil }
             %td= details[:competition_name]
             %td
+              = details[:age_group]
               = details[:team_name]
               = details[:additional_details]
             %td
