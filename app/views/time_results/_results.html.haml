@@ -17,6 +17,8 @@
       %th= TimeResult.human_attribute_name(:thousands)
       - if @competition.has_penalty?
         %th Penalties
+      - if @competition.has_num_laps?
+        %th # Laps
       %th Disqualified
       %th Entered At
       %th Age Group
@@ -35,6 +37,8 @@
         %td= time_result.thousands
         - if @competition.has_penalty?
           %td= time_result.number_of_penalties
+        - if @competition.has_num_laps?
+          %td= time_result.number_of_laps
         %td= time_result.disqualified? ? t("yes") : ""
         %td= time_result.entered_at_to_s
         %td= time_result.competitor.age_group_entry_description

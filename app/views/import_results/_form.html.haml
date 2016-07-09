@@ -24,6 +24,8 @@
           %td= f.number_field :hundreds, {:min => 0}
         - if @competition.has_penalty?
           %td= f.number_field :number_of_penalties
+        - if @competition.has_num_laps?
+          %td= f.number_field :number_of_laps
         %td= f.select :status, TimeResult.status_values, include_blank: true
         %td{ colspan: "2"}= f.button :submit, "Submit", :class => "multiclick"
 

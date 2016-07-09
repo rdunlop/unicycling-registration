@@ -317,6 +317,10 @@ class Competition < ActiveRecord::Base
     penalty_seconds && penalty_seconds != 0
   end
 
+  def has_num_laps?
+    event_class == "Timed Multi-Lap"
+  end
+
   def age_group_entries
     age_group_type.age_group_entries unless age_group_type.nil?
   end

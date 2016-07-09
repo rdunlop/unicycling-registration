@@ -13,6 +13,8 @@
       %th Hundreds
     - if @competition.has_penalty?
       %th Penalties
+    - if @competition.has_num_laps?
+      %th # Laps
     %th Disqualified
     %th
     %th
