@@ -24,30 +24,7 @@ When a competition's competitor list is based on the results of other competitio
 %hr
 
 .non_printable
-  %h3 Assign Competitors to Heat/Lane
-
-  - def get_lane(place)
-    - heat_lane = [4, 5, 3, 6, 2, 7, 1, 8]
-    -  heat_lane[place - 1] if place > 0 && place <= 8
-
-  = form_tag(create_from_candidates_competition_competitors_path(@competition), method: :post) do
-    = label_tag :heat
-    = text_field_tag :heat
-    %table.sortable
-      %thead
-        %tr
-          %th Place
-          %th Competitor
-          %th Time
-          %th Lane
-      %tbody
-        - @competitors.each do |comp|
-          = fields_for "competitors[#{comp.id}]" do |comp_f|
-            %tr
-              %td= comp.overall_place
-              %td= comp
-              %td= comp.result
-              %td
-                = comp_f.hidden_field :bib_number, value: comp.bib_number
-                = comp_f.text_field :lane, value: get_lane(comp.overall_place)
-    = submit_tag "Assign Heat/Lanes", class: "button"
+  - if @lanes_for_places
+    = render "confirm_proposed_lane_assignments"
+  - else
+    = render "choose_expert_lane_assignments"

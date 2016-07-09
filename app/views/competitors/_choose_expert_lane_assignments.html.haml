@@ -1,0 +1,22 @@
+%h3 Which Competitors do you want to assign? Heat/Lane
+
+= form_tag(display_candidates_competition_competitors_path(@competition), method: :get) do
+  .row
+    .small-6.columns
+      = label_tag :gender
+      = select_tag :gender, options_for_select(["Male", "Female", "(mixed)"])
+
+    .small-6.columns
+      %h3 Place -> Lane Assignment
+      %table
+        %thead
+          - (1..8).each do |i|
+            %th #{i}
+        %tbody
+          %tr
+            - initial_lanes = [4, 5, 3, 6, 2, 7, 1, 8]
+            - (1..8).each do |i|
+              %td
+                = text_field_tag "lane_for_place_#{i}", initial_lanes[i - 1]
+  = submit_tag "Next Step", class: "button"
+

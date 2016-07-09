@@ -5,7 +5,7 @@
     .small-12.columns
       %fieldset
         %legend Members
-        #members
+        #membersF
           = f.simple_fields_for :members do |member_f|
             = render "member_fields", f: member_f
           .links

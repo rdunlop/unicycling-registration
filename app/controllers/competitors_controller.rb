@@ -54,6 +54,14 @@ class CompetitorsController < ApplicationController
     authorize @competition.competitors.new
     add_breadcrumb "Display Competition Candidates"
     @competitors = @competition.signed_up_competitors
+
+    if params[:gender]
+      @gender = params[:gender]
+      @lanes_for_places = []
+      (1..8).each do |i|
+        @lanes_for_places[i] = params["lane_for_place_#{i}"]
+      end
+    end
   end
 
   # process a form submission which includes HEAT&Lane for each candidate, creating the competitor as well as the lane assignment

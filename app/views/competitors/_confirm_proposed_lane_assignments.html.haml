@@ -1,0 +1,26 @@
+%h3 Assign Competitors to Heat/Lane
+
+= form_tag(create_from_candidates_competition_competitors_path(@competition), method: :post) do
+  = label_tag :heat
+  = text_field_tag :heat
+  %table.sortable
+    %thead
+      %tr
+        %th Place
+        %th Competitor
+        %th Time
+        %th Lane
+    %tbody
+      - @competitors.each do |comp|
+        - next if @lanes_for_places[comp.overall_place].nil?
+        - next unless @gender == comp.gender
+        = fields_for "competitors[#{comp.id}]" do |comp_f|
+          %tr
+            %td= comp.overall_place
+            %td= comp
+            %td= comp.result
+            %td
+              = comp_f.hidden_field :bib_number, value: comp.bib_number
+              = comp_f.text_field :lane, value: @lanes_for_places[comp.overall_place]
+  = submit_tag "Assign Heat/Lanes", class: "button"
+  = link_to "cancel", display_candidates_competition_competitors_path
