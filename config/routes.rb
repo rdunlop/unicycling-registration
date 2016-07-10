@@ -584,6 +584,7 @@ Workspace::Application.routes.draw do
           post :dq_competitor
           get :review
           get :download_heats_evt
+          post :create_last_minute_competitor
         end
       end
       resources :heat_review, param: :heat, only: [:index, :show, :destroy] do

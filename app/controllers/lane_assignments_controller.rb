@@ -111,6 +111,35 @@ class LaneAssignmentsController < ApplicationController
     end
   end
 
+  # POST /lane_assignments/last_minute_competitor
+  def create_last_minute_competitor
+    competition = Competition.find(params[:competition_id])
+    registrant = Registrant.find(params[:registrant_id])
+
+    @competitor = competition.find_competitor_with_bib_number(registrant.bib_number)
+    if @competitor.present?
+      if @competitor.status == "withdrawn"
+        @competitor.status = "active"
+      end
+    else
+      @competitor = @competition.competitors.new
+      @competitor.members.build(registrant: registrant)
+    end
+
+    authorize @competitor, :create?
+    respond_to do |format|
+      if @competitor.save
+        format.html { redirect_to competition_lane_assignments_path(competition) }
+        format.js { }
+      else
+        @lane_assignment = LaneAssignment.new
+        @lane_assignments = competition.lane_assignments
+        format.html { render action: "index" }
+        format.js { }
+      end
+    end
+  end
+
   # PUT /lane_assignments/1
   # PUT /lane_assignments/1.json
   def update
