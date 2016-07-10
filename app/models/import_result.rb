@@ -77,12 +77,15 @@ class ImportResult < ActiveRecord::Base
     competitor = matching_competitor
     target_competition = competition
     if competitor.nil?
-      matching_competition = matching_registrant.matching_competition_in_event(competition.event)
-      if matching_competition
-        # another competition with a competitor in the same event exists, use a competitor there
-        competitor = matching_registrant.competitors.find_by(competition: matching_competition)
-        raise "error finding matching competitor" if competitor.nil?
-        target_competition = matching_competition
+      import_into_matching_competitions = false
+      if import_into_matching_competitions
+        matching_competition = matching_registrant.matching_competition_in_event(competition.event)
+        if matching_competition
+          # another competition with a competitor in the same event exists, use a competitor there
+          competitor = matching_registrant.competitors.find_by(competition: matching_competition)
+          raise "error finding matching competitor" if competitor.nil?
+          target_competition = matching_competition
+        end
       end
     end
     if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
