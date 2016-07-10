@@ -8,5 +8,5 @@
 %p Choose which heat to import:
 
 %ul
-  - 1.upto(@max_heat) do |heat|
+  - @min_heat.upto(@max_heat) do |heat|
     %li= link_to "Heat #{heat}", competition_heat_review_path(@competition, heat)
