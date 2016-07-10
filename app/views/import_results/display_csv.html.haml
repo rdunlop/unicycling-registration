@@ -15,7 +15,9 @@ Please import a Comma-Separated-File (Windows CSV Format) file with the followin
   %li Column 2: Minutes
   %li Column 3: Seconds
   %li Column 4: Thousands
-  %li Column 5: "DQ" or empty
+  %li Column 5: "DQ" or "DNF" or empty
+  - if @competition.has_num_laps?
+    %li Column 6: "# Laps"
 
 %b Include NO Header row
 

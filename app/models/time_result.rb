@@ -40,7 +40,7 @@ class TimeResult < ActiveRecord::Base
   end
 
   def self.status_values
-    ["active", "DQ"]
+    ["active", "DQ", "DNF"]
   end
 
   validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
@@ -71,7 +71,7 @@ class TimeResult < ActiveRecord::Base
   end
 
   def disqualified?
-    status == "DQ"
+    status == "DQ" || status == "DNF"
   end
 
   def active?

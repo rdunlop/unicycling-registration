@@ -51,19 +51,29 @@ class ImportResult < ActiveRecord::Base
   scope :entered_order, -> { reorder(:id) }
 
   def disqualified?
-    status == "DQ"
+    status == "DQ" || status == "DNF"
   end
 
   # Public: Create an ImportResult object.
   # Throws an exception if not valid
   def self.build_and_save_imported_result(raw, raw_data, user, competition, is_start_time)
-    dq = (raw[4] == "DQ")
+    status = case raw[4]
+             when "DQ"
+               "DQ"
+             when "DNF"
+               "DNF"
+             else
+               "active"
+             end
+
+    num_laps = competition.has_num_laps? ? raw[5] : nil
     ImportResult.create!(
       bib_number: raw[0],
       minutes: raw[1],
       seconds: raw[2],
       thousands: raw[3],
-      status: dq ? "DQ" : "active",
+      number_of_laps: num_laps,
+      status: status,
       raw_data: raw_data,
       user: user,
       competition: competition,
