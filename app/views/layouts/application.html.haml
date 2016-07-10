@@ -30,7 +30,7 @@
           = render "nav_bar/side_nav"
         .off-canvas-content{ data: { off_canvas_content: true } }
           #container
-            %div
+            %div.non_printable
               .title-bar.show-for-small-only{ data: { topbar: true }, role: "navigation" }
                 .title-bar-title
                   = @config.short_name

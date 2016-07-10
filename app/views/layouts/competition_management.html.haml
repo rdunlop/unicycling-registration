@@ -1,5 +1,5 @@
 - content_for :content do
-  #side_nav
+  #side_nav.non_printable
     %h3= link_to @competition, @competition
     %h4= Competitor.model_name.human(count: 2)
     %ul.sideNav__list
