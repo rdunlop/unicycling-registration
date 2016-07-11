@@ -119,6 +119,8 @@ class OverallChampionResultCalculator
   def create_registrant_entry(bib_number, gender)
     competitor_results = {}
     combined_competition.combined_competition_entries.each do |entry|
+      next unless entry.competition.published?
+
       matching_comp = matching_competitor(bib_number, gender, entry.competition)
       if matching_comp
         points = calc_points(entry, matching_comp)
