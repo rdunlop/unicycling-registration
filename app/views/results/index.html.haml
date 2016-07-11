@@ -46,6 +46,9 @@
               - else
                 Not yet available
           %td
+            - if competition.combined_competition
+              = link_to "Preliminary Calculated Results", scores_result_path(competition)
+              %br
             - if !competition.published? && competition.has_age_group_entry_results?
               - competition.published_age_group_entries.each do |entry|
                 = link_to entry, competition_published_age_group_entry_path(competition, entry), title: "published at #{entry.published_formatted}"
@@ -60,17 +63,3 @@
               - competition.competition_results.active.each do |result|
                 = result.published_date_to_s
                 %br
-
-
--#
-  %h1 Overall Champions
-  %table.sortable
-    %thead
-      %tr
-        %th Championship
-        %th Preliminary Results
-    %tbody
-      - CombinedCompetition.all.each do |combined_competition|
-        %tr
-          %td= combined_competition.name
-          %td= link_to "Results", scores_result_path(combined_competition.competition)

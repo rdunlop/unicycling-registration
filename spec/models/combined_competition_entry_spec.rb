@@ -20,6 +20,7 @@
 #  updated_at              :datetime
 #  competition_id          :integer
 #  base_points             :integer
+#  distance                :integer
 #
 
 require 'spec_helper'
@@ -39,7 +40,7 @@ describe CombinedCompetitionEntry do
   end
 
   describe "requires base_points only when percentage based" do
-    let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, percentage_based_calculations: true }
+    let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, :percentage_based_calculations }
 
     it "requires base_ponints" do
       entry = FactoryGirl.build :combined_competition_entry, combined_competition: combined_competition

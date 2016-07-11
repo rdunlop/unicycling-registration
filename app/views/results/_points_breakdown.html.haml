@@ -1,4 +1,12 @@
 - cache @combined_competition do
+  - if @combined_competition.requires_per_place_points?
+    %p Based on the overall rank in each competition, points are awarded.
+  - if @combined_competition.average_speed_calculation?
+    %p
+      The total time for each competitor, divided by the distance, is used to determine their average speed.
+      %br
+      The average of all competitions is summed to determine the competitor's total points
+
   %table
     %thead
       %tr
@@ -11,8 +19,14 @@
           %th Base Points
           - @combined_competition_entries.each do |cc|
             %td= cc.base_points
-      - for place in 1..10
+      - if @combined_competition.average_speed_calculation?
         %tr
-          %th= place
+          %th Distance (m)
           - @combined_competition_entries.each do |cc|
-            %td= cc.send("points_#{place}")
+            %td= cc.distance
+      - if @combined_competition.requires_per_place_points?
+        - for place in 1..10
+          %tr
+            %th= place
+            - @combined_competition_entries.each do |cc|
+              %td= cc.send("points_#{place}")

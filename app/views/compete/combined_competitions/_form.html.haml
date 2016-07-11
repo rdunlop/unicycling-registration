@@ -1,20 +1,25 @@
 = simple_form_for(@combined_competition) do |f|
   = render partial: "shared/error_messages", object: @combined_competition
-  .field
-    = f.label :name
-    %br
-    = f.text_field :name
-  .field
-    = f.label :tie_break_by_firsts
-    %br
-    = f.check_box :tie_break_by_firsts
-  .field
-    = f.label :use_age_group_places
-    %br
-    = f.check_box :use_age_group_places
-  .field
-    = f.label :percentage_based_calculations
-    %br
-    = f.check_box :percentage_based_calculations
-  .actions
-    = f.button :submit
+  .row
+    .small-6.columns
+      = f.label :name
+    .small-6.columns
+      = f.text_field :name
+  .row
+    .small-6.columns
+      = f.label :tie_break_by_firsts
+    .small-6.columns
+      = f.check_box :tie_break_by_firsts
+  .row
+    .small-6.columns
+      = f.label :use_age_group_places
+    .small-6.columns
+      = f.check_box :use_age_group_places
+  .row
+    .small-6.columns
+      = f.label :calculation_mode
+    .small-6.columns
+      = f.select :calculation_mode, CombinedCompetition::CALCULATION_MODES
+  .row
+    .small-12.columns
+      = f.button :submit

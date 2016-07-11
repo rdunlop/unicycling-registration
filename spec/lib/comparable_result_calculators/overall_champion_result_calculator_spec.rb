@@ -140,7 +140,7 @@ describe OverallChampionResultCalculator do
 end
 
 describe OverallChampionResultCalculator do
-  let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, percentage_based_calculations: true }
+  let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, :percentage_based_calculations }
   let(:result) { described_class.new(combined_competition) }
 
   context "calculate the number of points by percentage calculation" do

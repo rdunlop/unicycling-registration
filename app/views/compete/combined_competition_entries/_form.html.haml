@@ -13,20 +13,28 @@
       = f.label :tie_breaker
       %br
       = f.check_box :tie_breaker
-  .row
-    .small-12.medium-4.columns
-      = f.label :base_points
-      %br
-      = f.number_field :base_points, {min: 0}
-  %hr
-  .row
-    - for place in 1..10
-      .small-12.columns
-        - if @combined_competition.percentage_based_calculations?
-          = f.label "points_#{place}".to_sym, "Bonus Percentage #{place}"
-        - else
-          = f.label "points_#{place}".to_sym
+  - if @combined_competition.percentage_based_calculations?
+    .row
+      .small-12.medium-4.columns
+        = f.label :base_points
         %br
-        = f.number_field "points_#{place}".to_sym, {min: 0}
+        = f.number_field :base_points, {min: 0}
+  - if @combined_competition.average_speed_calculation?
+    .row
+      .small-12.medium-4.columns
+        = f.label :distance, "Distance (m)"
+        %br
+        = f.number_field :distance, {min: 0}
+  - if @combined_competition.requires_per_place_points?
+    %hr
+    - for place in 1..10
+      .row
+        .small-6.columns
+          - if @combined_competition.percentage_based_calculations?
+            = f.label "points_#{place}".to_sym, "Bonus Percentage #{place}"
+          - else
+            = f.label "points_#{place}".to_sym
+        .small-6.columns
+          = f.number_field "points_#{place}".to_sym, {min: 0}
   .actions
     = f.button :submit

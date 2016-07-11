@@ -38,6 +38,7 @@ class ResultsController < ApplicationController
     end
   end
 
+  # Display the CombinedCompetition preliminary scores
   def scores
     @competition = Competition.find(params[:id])
     @combined_competition = @competition.combined_competition

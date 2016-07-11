@@ -2,13 +2,13 @@
 #
 # Table name: combined_competitions
 #
-#  id                            :integer          not null, primary key
-#  name                          :string(255)
-#  created_at                    :datetime
-#  updated_at                    :datetime
-#  use_age_group_places          :boolean          default(FALSE), not null
-#  percentage_based_calculations :boolean          default(FALSE), not null
-#  tie_break_by_firsts           :boolean          default(TRUE), not null
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  use_age_group_places :boolean          default(FALSE), not null
+#  tie_break_by_firsts  :boolean          default(TRUE), not null
+#  calculation_mode     :string           not null
 #
 # Indexes
 #

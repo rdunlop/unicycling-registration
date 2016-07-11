@@ -1,7 +1,11 @@
-%h1= @combined_competition.name
-%h3= @competition.to_s
+%h1= @competition.to_s
+%h2 Preliminary Calculated Results
 
-.js--hiddenToggleMenu= "Show Calculation Details"
+%p
+  #{@competition} is based upon the results of many different competitions.
+  %br
+  As the results for those competitions are entered and published, this page will be updated.
+.js--hiddenToggleMenu.button.secondary= "Show Calculation Details"
 .js--hiddenToggle.is--hidden
   - @combined_competition_entries = @combined_competition.combined_competition_entries
   = render partial: "points_breakdown"

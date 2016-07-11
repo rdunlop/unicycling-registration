@@ -20,6 +20,7 @@
 #  updated_at              :datetime
 #  competition_id          :integer
 #  base_points             :integer
+#  distance                :integer
 #
 
 class CombinedCompetitionEntry < ActiveRecord::Base
@@ -28,10 +29,11 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   validates :combined_competition_id, :abbreviation, presence: true
   validates :competition_id, presence: true
-  validates :points_1, :points_2, :points_3, :points_4, :points_5, presence: true
-  validates :points_6, :points_7, :points_8, :points_9, :points_10, presence: true
+  validates :points_1, :points_2, :points_3, :points_4, :points_5, presence: true, if: :requires_points?
+  validates :points_6, :points_7, :points_8, :points_9, :points_10, presence: true, if: :requires_points?
 
   validates :base_points, presence: true, if: :is_percentage_based?
+  validates :distance, presence: true, if: :is_average_speed_based?
 
   validates :tie_breaker, inclusion: { in: [true, false] }
 
@@ -75,5 +77,13 @@ class CombinedCompetitionEntry < ActiveRecord::Base
 
   def is_percentage_based?
     combined_competition.percentage_based_calculations?
+  end
+
+  def is_average_speed_based?
+    combined_competition.average_speed_calculation?
+  end
+
+  def requires_points?
+    combined_competition.requires_per_place_points?
   end
 end
