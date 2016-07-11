@@ -12,9 +12,14 @@
       %th ID
       %th Name
       %th Start Time?
+      - if @competition.data_entry_format.hours?
+        %th= TimeResult.human_attribute_name(:hours)
       %th= TimeResult.human_attribute_name(:minutes)
       %th= TimeResult.human_attribute_name(:seconds)
-      %th= TimeResult.human_attribute_name(:thousands)
+      - if @competition.data_entry_format.hundreds?
+        %th= TimeResult.human_attribute_name(:hundreds)
+      - if @competition.data_entry_format.thousands?
+        %th= TimeResult.human_attribute_name(:thousands)
       - if @competition.has_penalty?
         %th Penalties
       - if @competition.has_num_laps?
@@ -32,9 +37,16 @@
         %td= time_result.bib_number
         %td= time_result.competitor
         %td= time_result.is_start_time?
-        %td= time_result.minutes
+        - if @competition.data_entry_format.hours?
+          %td= time_result.facade_hours
+          %td= time_result.facade_minutes
+        - else
+          %td= time_result.minutes
         %td= time_result.seconds
-        %td= time_result.thousands
+        - if @competition.data_entry_format.hundreds?
+          %td= time_result.facade_hundreds
+        - if @competition.data_entry_format.thousands?
+          %td= time_result.thousands
         - if @competition.has_penalty?
           %td= time_result.number_of_penalties
         - if @competition.has_num_laps?

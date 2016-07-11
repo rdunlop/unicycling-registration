@@ -3,13 +3,15 @@
     %td= import_result.bib_number
     = render partial: "matching_registrant_cell", locals: { import_result: import_result }
     - if import_result.competition.data_entry_format.hours?
-      %td= import_result.hours
-    %td= import_result.minutes
+      %td= import_result.facade_hours
+      %td= import_result.facade_minutes
+    - else
+      %td= import_result.minutes
     %td= import_result.seconds
     - if import_result.competition.data_entry_format.thousands?
       %td= import_result.thousands
     - if import_result.competition.data_entry_format.hundreds?
-      %td= import_result.hundreds
+      %td= import_result.facade_hundreds
     - if import_result.competition.has_penalty?
       %td= import_result.number_of_penalties
     - if import_result.competition.has_num_laps?

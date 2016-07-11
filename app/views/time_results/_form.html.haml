@@ -4,9 +4,14 @@
     %thead
       %tr
         %th= f.label :competitor_id
+        - if @competition.data_entry_format.hours?
+          %th= f.label :facade_hours
         %th= f.label :minutes
         %th= f.label :seconds
-        %th= f.label :thousands
+        - if @competition.data_entry_format.hundreds?
+          %th= f.label :hundreds
+        - if @competition.data_entry_format.thousands?
+          %th= f.label :thousands
         %th= f.label :status
         %th= f.label :comments
         %th= f.label :comments_by
@@ -16,9 +21,16 @@
       %tr
         %td.ui-widget
           = competitor_select_box(f, @competition)
-        %td= f.number_field :minutes, {min: 0}
+        - if @competition.data_entry_format.hours?
+          %td= f.number_field :facade_hours, {min: 0}
+          %td= f.number_field :facade_minutes, {min: 0}
+        - else
+          %td= f.number_field :minutes, {min: 0}
+        - if @competition.data_entry_format.hundreds?
+          %td= f.number_field :facade_hundreds, {min: 0}
         %td= f.number_field :seconds, {min: 0}
-        %td= f.number_field :thousands, {min: 0}
+        - if @competition.data_entry_format.thousands?
+          %td= f.number_field :thousands, {min: 0}
         %td= f.select :status, TimeResult.status_values, include_blank: false
         %td= f.text_field :comments
         %td= f.text_field :comments_by

@@ -80,6 +80,8 @@
   = f.input :sign_in_list_enabled
 
   %br
+  = f.input :time_entry_columns, collection: Competition::TIME_ENTRY_COLUMN_TYPES
+  %br
   = f.label :automatic_competitor_creation
   = f.check_box :automatic_competitor_creation, disabled: "disabled"
   %p DISABLED automatic creation because I think that it's more trouble than it's worth

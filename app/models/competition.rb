@@ -25,6 +25,7 @@
 #  locked_at                     :datetime
 #  published_at                  :datetime
 #  sign_in_list_enabled          :boolean          default(FALSE), not null
+#  time_entry_columns            :string           default("minutes_seconds_thousands")
 #
 # Indexes
 #
@@ -110,6 +111,9 @@ class Competition < ActiveRecord::Base
   validates :combined_competition, presence: true, if: proc{ |f| f.scoring_class == "Overall Champion" }
   validates :combined_competition, absence: true, unless: proc{ |f| f.scoring_class == "Overall Champion" }
 
+  TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "hours_minutes_seconds"].freeze
+  validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }
+
   scope :event_order, -> { includes(:event).order("events.name") }
 
   validates :name, :award_title_name, presence: true
@@ -122,9 +126,16 @@ class Competition < ActiveRecord::Base
   # Which columns do we expect to be presented during data-entry?
   # Not yet fully tested/working, see ImportResult:104
   def data_entry_format
-    OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
-    # future option:
-    # OpenStruct.new(hours?: true, thousands?: false, hundreds?: true)
+    case time_entry_columns
+    when "minutes_seconds_thousands"
+      OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+    when "minutes_seconds_hundreds"
+      OpenStruct.new(hours?: false, thousands?: false, hundreds?: true)
+    when "hours_minutes_seconds"
+      OpenStruct.new(hours?: true, thousands?: false, hundreds?: false)
+    else
+      OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+    end
   end
 
   def self.awarded

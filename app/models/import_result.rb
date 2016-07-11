@@ -32,6 +32,7 @@
 class ImportResult < ActiveRecord::Base
   include StatusNilWhenEmpty
   include FindsMatchingCompetitor
+  include HoursFacade
 
   validates :competition_id, presence: true
   validates :user_id, :bib_number, presence: true
@@ -113,30 +114,6 @@ class ImportResult < ActiveRecord::Base
   def full_time
     TimeResultPresenter.new(minutes, seconds, thousands).full_time
   end
-
-  # NOT YET fully tested to be working.
-  # def minutes
-  #   return nil if self[:minutes].blank?
-  #   self[:minutes] % 60
-  # end
-
-  # def hours
-  #   return nil if self[:minutes].blank?
-  #   self[:minutes] / 60
-  # end
-
-  # def hours=(new_hours)
-  #   self.minutes = new_hours.to_i * 60 + (minutes || 0)
-  # end
-
-  # def hundreds=(new_hundreds)
-  #   self.thousands = new_hundreds.to_i * 10
-  # end
-
-  # def hundreds
-  #   return nil if thousands.blank?
-  #   thousands / 10
-  # end
 
   private
 

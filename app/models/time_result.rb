@@ -31,6 +31,7 @@ class TimeResult < ActiveRecord::Base
   include Placeable
   include StatusNilWhenEmpty
   include CachedSetModel
+  include HoursFacade
 
   validates :heat_lane_result_id, uniqueness: { message: "Only 1 Import Per Heat/Lane." }, allow_nil: true
   validates :minutes, :seconds, :thousands, numericality: {greater_than_or_equal_to: 0}

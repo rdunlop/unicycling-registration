@@ -25,6 +25,7 @@
 #  locked_at                     :datetime
 #  published_at                  :datetime
 #  sign_in_list_enabled          :boolean          default(FALSE), not null
+#  time_entry_columns            :string           default("minutes_seconds_thousands")
 #
 # Indexes
 #
