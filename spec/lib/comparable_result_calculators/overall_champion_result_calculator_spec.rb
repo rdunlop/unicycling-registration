@@ -143,15 +143,6 @@ describe OverallChampionResultCalculator do
   let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, :percentage_based_calculations }
   let(:result) { described_class.new(combined_competition) }
 
-  context "calculate the number of points by percentage calculation" do
-    context "when I am in first place" do
-      specify { expect(result.calc_perc_points(best_time: 300, time: 300, base_points: 50, bonus_percentage: 20)).to eq(60) }
-    end
-    context "when I am in second place" do
-      specify { expect(result.calc_perc_points(best_time: 300, time: 330, base_points: 50, bonus_percentage: 10)).to be_within(0.1).of(50) }
-    end
-  end
-
   it "adjusts points by number of firsts" do
     score = 10
     bib_numbers = [3, 2]

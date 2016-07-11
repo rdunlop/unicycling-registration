@@ -3,7 +3,7 @@
 #
 class OverallChampionResultCalculator
   attr_accessor :combined_competition, :results_competition
-  delegate :percentage_based_calculations?, to: :combined_competition
+  delegate :percentage_based_calculations?, :average_speed_calculation?, to: :combined_competition
 
   def initialize(combined_competition, results_competition = nil)
     @combined_competition = combined_competition
@@ -92,25 +92,12 @@ class OverallChampionResultCalculator
 
   def calc_points(entry, competitor)
     if percentage_based_calculations?
-      calc_perc_points(
-        best_time: entry.best_time_in_thousands(competitor.gender),
-        time: competitor.best_time_in_thousands,
-        base_points: entry.base_points,
-        bonus_percentage: entry.bonus_for_place(get_place(competitor)))
+      ::PercentageBasedCalculation.calculate_points(competitor, entry, get_place(competitor))
+    elsif average_speed_calculation?
+      ::AverageSpeedCalculation.calculate_points(competitor, entry)
     else
-      place = get_place(competitor)
-      if place > 0 && place <= 10
-        entry.send("points_#{get_place(competitor)}")
-      else
-        0
-      end
+      ::DefaultOverallCalculation.calculate_points(entry, get_place(competitor))
     end
-  end
-
-  def calc_perc_points(best_time:, time:, base_points:, bonus_percentage:)
-    return 0 if time == 0
-    points = (best_time * 1.0 / time) * base_points
-    points + (points * bonus_percentage / 100.0)
   end
 
   def get_place(competitor)
