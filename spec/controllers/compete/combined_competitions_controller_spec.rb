@@ -5,7 +5,7 @@ describe Compete::CombinedCompetitionsController do
     sign_in FactoryGirl.create(:super_admin_user)
   end
 
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString", calculation_mode: 'default' } }
 
   describe "GET index" do
     it "assigns all combined_competitions as @combined_competitions" do
