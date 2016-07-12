@@ -90,6 +90,7 @@ FactoryGirl.define do
     end
 
     trait :published do
+      locked
       published_at DateTime.now
     end
   end

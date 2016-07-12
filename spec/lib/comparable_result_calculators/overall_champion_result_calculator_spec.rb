@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe OverallChampionResultCalculator do
   def build_competitor(options = {})
-    competition = (options[:competition]) || FactoryGirl.create(:competition)
+    competition = (options[:competition]) || FactoryGirl.create(:competition, :published)
     reg = FactoryGirl.create(:registrant, bib_number: options[:bib_number], gender: "Male")
     comp = FactoryGirl.create(:event_competitor, competition: competition)
     FactoryGirl.create(:result, competitor: comp, place: options[:place], result_type: "Overall")
@@ -15,7 +15,7 @@ describe OverallChampionResultCalculator do
     comp
   end
 
-  let(:race_100m) { FactoryGirl.create(:timed_competition) }
+  let(:race_100m) { FactoryGirl.create(:timed_competition, :published) }
   let(:combined_competition) { FactoryGirl.create(:combined_competition) }
   let(:combined_competition_result) { described_class.new(combined_competition).results("Male") }
   let(:combined_competition_entry) { FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition, abbreviation: "TT", competition: race_100m) }
@@ -60,9 +60,9 @@ describe OverallChampionResultCalculator do
 
   describe "when there is a tie" do
     before(:each) do
-      competition1 = FactoryGirl.create(:competition)
-      competition2 = FactoryGirl.create(:competition)
-      competition3 = FactoryGirl.create(:competition)
+      competition1 = FactoryGirl.create(:competition, :published)
+      competition2 = FactoryGirl.create(:competition, :published)
+      competition3 = FactoryGirl.create(:competition, :published)
       # competitor1m    =
       build_competitor(place: 2, bib_number: 10, competition: competition1)
 
