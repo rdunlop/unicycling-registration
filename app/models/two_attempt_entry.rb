@@ -37,6 +37,18 @@ class TwoAttemptEntry < ActiveRecord::Base
   validates :status_2, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :is_start_time, inclusion: { in: [true, false] }
 
+  class TwoAttemptEntryElement
+    attr_accessor :minutes, :seconds, :thousands, :status
+    include HoursFacade
+
+    def initialize(minutes:, seconds:, thousands:, status:)
+      minutes = minutes
+      seconds = seconds
+      thousands = thousands
+      status = status
+    end
+  end
+
   belongs_to :user
   belongs_to :competition
 
@@ -71,6 +83,29 @@ class TwoAttemptEntry < ActiveRecord::Base
       tr2.is_start_time = is_start_time
       tr2.save!
     end
+  end
+
+  def first_attempt
+    TwoAttemptEntryElement.new(minutes: minutes_1, seconds: seconds_1, thousands: thousands_1, status: status_1)
+  end
+
+  def first_attempt=(attempt_params)
+    # need a way to input facade_hours, and output Minutes
+    self.minutes_1 = attempt_params[:minutes]
+    self.seconds_1 = attempt_params[:seconds]
+    self.thousands_1 = attempt_params[:thousands]
+    self.status_1 = attempt_params[:status]
+  end
+
+  def second_attempt
+    TwoAttemptEntryElement.new(minutes: minutes_2, seconds: seconds_2, thousands: thousands_2, status: status_2)
+  end
+
+  def second_attempt=(attempt_params)
+    self.minutes_2 = attempt_params[:minutes]
+    self.seconds_2 = attempt_params[:seconds]
+    self.thousands_2 = attempt_params[:thousands]
+    self.status_2 = attempt_params[:status]
   end
 
   def full_time_1

@@ -3,13 +3,32 @@
   %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition)
   %td
   %td
-  %td= f.number_field :minutes_1, {:min => 0}
-  %td= f.number_field :seconds_1, {:min => 0}
-  %td= f.number_field :thousands_1, {:min => 0}
-  %td= f.select :status_1, TimeResult.status_values
+  -# Note: this is done this way so that we can use the concerns properly
   %td
-  %td= f.number_field :minutes_2, {:min => 0}
-  %td= f.number_field :seconds_2, {:min => 0}
-  %td= f.number_field :thousands_2, {:min => 0}
-  %td= f.select :status_2, TimeResult.status_values
+    = f.fields_for :first_attempt, f.object.first_attempt do |g|
+      = g.number_field :minutes, {min: 0}
+  %td
+    = f.fields_for :first_attempt, f.object.first_attempt do |g|
+      = g.number_field :seconds, {min: 0}
+  %td
+    = f.fields_for :first_attempt, f.object.first_attempt do |g|
+      = g.number_field :thousands, {min: 0}
+  %td
+    = f.fields_for :first_attempt, f.object.first_attempt do |g|
+      = g.select :status, TimeResult.status_values
+  %td
+
+  %td
+    = f.fields_for :second_attempt, f.object.second_attempt do |g|
+      = g.number_field :minutes, {min: 0}
+  %td
+    = f.fields_for :second_attempt, f.object.second_attempt do |g|
+      = g.number_field :seconds, {min: 0}
+  %td
+    = f.fields_for :second_attempt, f.object.second_attempt do |g|
+      = g.number_field :thousands, {min: 0}
+  %td
+    = f.fields_for :second_attempt, f.object.second_attempt do |g|
+      = g.select :status, TimeResult.status_values
+
   %td{ colspan: "3"}= f.button :submit, "Submit", :class => "multiclick"
