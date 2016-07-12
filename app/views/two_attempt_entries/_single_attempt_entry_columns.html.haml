@@ -1,0 +1,12 @@
+- if @competition.data_entry_format.hours?
+  %td= attempt.facade_hours
+  %td= attempt.facade_minutes
+- else
+  %td= attempt.minutes
+%td= attempt.seconds
+- if @competition.data_entry_format.thousands?
+  %td= attempt.thousands
+- if @competition.data_entry_format.hundreds?
+  %td= attempt.facade_hundreds
+%td= attempt.status
+%td

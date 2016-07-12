@@ -7,15 +7,7 @@
   - else
     %td.competitor_not_exists No
   %th
-  %td= two_attempt_entry.minutes_1
-  %td= two_attempt_entry.seconds_1
-  %td= two_attempt_entry.thousands_1
-  %td= two_attempt_entry.status_1
-  %td
-  %td= two_attempt_entry.minutes_2
-  %td= two_attempt_entry.seconds_2
-  %td= two_attempt_entry.thousands_2
-  %td= two_attempt_entry.status_2
-  %td
+  = render "single_attempt_entry_columns", attempt: two_attempt_entry.first_attempt
+  = render "single_attempt_entry_columns", attempt: two_attempt_entry.second_attempt
   %td= link_to t("edit"), edit_two_attempt_entry_path(two_attempt_entry)
   %td= link_to t("delete"), two_attempt_entry_path(two_attempt_entry), data: {confirm: t("are_you_sure") }, method: :delete

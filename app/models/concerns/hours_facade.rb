@@ -1,4 +1,12 @@
 module HoursFacade
+  PERMITTED_PARAMS = [
+    :facade_hours,
+    :facade_minutes,
+    :facade_hundreds,
+    :seconds,
+    :minutes,
+    :thousands].freeze
+
   extend ActiveSupport::Concern
   # NOT YET fully tested to be working.
   def facade_minutes

@@ -1,0 +1,10 @@
+- if @competition.data_entry_format.hours?
+  %th Hours
+%th Minutes
+%th Seconds
+- if @competition.data_entry_format.thousands?
+  %th Thousands
+- if @competition.data_entry_format.hundreds?
+  %th Hundreds
+%th DQ
+%th

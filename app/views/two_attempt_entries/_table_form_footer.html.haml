@@ -4,29 +4,56 @@
   %td
   %td
   -# Note: this is done this way so that we can use the concerns properly
-  %td
-    = f.fields_for :first_attempt, f.object.first_attempt do |g|
-      = g.number_field :minutes, {min: 0}
+  - if @competition.data_entry_format.hours?
+    %td
+      = f.fields_for :first_attempt, f.object.first_attempt do |g|
+        = g.number_field :facade_hours, {min: 0}
+    %td
+      = f.fields_for :first_attempt, f.object.first_attempt do |g|
+        = g.number_field :facade_minutes, {min: 0}
+  - else
+    %td
+      = f.fields_for :first_attempt, f.object.first_attempt do |g|
+        = g.number_field :minutes, {min: 0}
   %td
     = f.fields_for :first_attempt, f.object.first_attempt do |g|
       = g.number_field :seconds, {min: 0}
-  %td
-    = f.fields_for :first_attempt, f.object.first_attempt do |g|
-      = g.number_field :thousands, {min: 0}
+  - if @competition.data_entry_format.thousands?
+    %td
+      = f.fields_for :first_attempt, f.object.first_attempt do |g|
+        = g.number_field :thousands, {min: 0}
+  - if @competition.data_entry_format.hundreds?
+    %td
+      = f.fields_for :first_attempt, f.object.first_attempt do |g|
+        = g.number_field :facade_hundreds, {min: 0}
   %td
     = f.fields_for :first_attempt, f.object.first_attempt do |g|
       = g.select :status, TimeResult.status_values
   %td
 
-  %td
-    = f.fields_for :second_attempt, f.object.second_attempt do |g|
-      = g.number_field :minutes, {min: 0}
+  -# Note: this is done this way so that we can use the concerns properly
+  - if @competition.data_entry_format.hours?
+    %td
+      = f.fields_for :second_attempt, f.object.second_attempt do |g|
+        = g.number_field :facade_hours, {min: 0}
+    %td
+      = f.fields_for :second_attempt, f.object.second_attempt do |g|
+        = g.number_field :facade_minutes, {min: 0}
+  - else
+    %td
+      = f.fields_for :second_attempt, f.object.second_attempt do |g|
+        = g.number_field :minutes, {min: 0}
   %td
     = f.fields_for :second_attempt, f.object.second_attempt do |g|
       = g.number_field :seconds, {min: 0}
-  %td
-    = f.fields_for :second_attempt, f.object.second_attempt do |g|
-      = g.number_field :thousands, {min: 0}
+  - if @competition.data_entry_format.thousands?
+    %td
+      = f.fields_for :second_attempt, f.object.second_attempt do |g|
+        = g.number_field :thousands, {min: 0}
+  - if @competition.data_entry_format.hundreds?
+    %td
+      = f.fields_for :second_attempt, f.object.second_attempt do |g|
+        = g.number_field :facade_hundreds, {min: 0}
   %td
     = f.fields_for :second_attempt, f.object.second_attempt do |g|
       = g.select :status, TimeResult.status_values

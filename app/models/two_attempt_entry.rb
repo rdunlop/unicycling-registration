@@ -40,13 +40,7 @@ class TwoAttemptEntry < ActiveRecord::Base
   class TwoAttemptEntryElement
     attr_accessor :minutes, :seconds, :thousands, :status
     include HoursFacade
-
-    def initialize(minutes:, seconds:, thousands:, status:)
-      minutes = minutes
-      seconds = seconds
-      thousands = thousands
-      status = status
-    end
+    include ActiveModel::Model
   end
 
   belongs_to :user
@@ -90,11 +84,11 @@ class TwoAttemptEntry < ActiveRecord::Base
   end
 
   def first_attempt=(attempt_params)
-    # need a way to input facade_hours, and output Minutes
-    self.minutes_1 = attempt_params[:minutes]
-    self.seconds_1 = attempt_params[:seconds]
-    self.thousands_1 = attempt_params[:thousands]
-    self.status_1 = attempt_params[:status]
+    attempt = TwoAttemptEntryElement.new(attempt_params)
+    self.minutes_1 = attempt.minutes
+    self.seconds_1 = attempt.seconds
+    self.thousands_1 = attempt.thousands
+    self.status_1 = attempt.status
   end
 
   def second_attempt
@@ -102,18 +96,19 @@ class TwoAttemptEntry < ActiveRecord::Base
   end
 
   def second_attempt=(attempt_params)
-    self.minutes_2 = attempt_params[:minutes]
-    self.seconds_2 = attempt_params[:seconds]
-    self.thousands_2 = attempt_params[:thousands]
-    self.status_2 = attempt_params[:status]
+    attempt = TwoAttemptEntryElement.new(attempt_params)
+    self.minutes_2 = attempt.minutes
+    self.seconds_2 = attempt.seconds
+    self.thousands_2 = attempt.thousands
+    self.status_2 = attempt.status
   end
 
   def full_time_1
-    "#{minutes_1}:#{seconds_1}:#{thousands_1}"
+    TimeResultPresenter.new(minutes_1, seconds_1, thousands_1).full_time
   end
 
   def full_time_2
-    "#{minutes_2}:#{seconds_2}:#{thousands_2}"
+    TimeResultPresenter.new(minutes_2, seconds_2, thousands_2).full_time
   end
 
   private

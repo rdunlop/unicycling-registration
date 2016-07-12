@@ -51,6 +51,8 @@ class ImportResult < ActiveRecord::Base
 
   scope :entered_order, -> { reorder(:id) }
 
+  before_validation :set_zeros
+
   def disqualified?
     status == "DQ" || status == "DNF"
   end
@@ -117,11 +119,25 @@ class ImportResult < ActiveRecord::Base
 
   private
 
+  # Set thousands to 0 if there is no way to enter anything that precise
+  def set_zeros
+    return if competition.nil?
+
+    self.thousands = 0 unless competition.data_entry_format.thousands? || competition.data_entry_format.hundreds?
+  end
+
   # determines that the import_result has enough information
   def results_for_competition
     return if disqualified?
-    unless time_is_present? || points?
-      errors.add(:base, "Must select either time or points")
+
+    if competition.imports_times?
+      unless time_is_present?
+        errors.add(:base, "Must enter full time")
+      end
+    else
+      unless points?
+        errors.add(:base, "Must select either time or points")
+      end
     end
   end
 
