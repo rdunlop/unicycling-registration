@@ -141,6 +141,10 @@ class CompetitionPolicy < ApplicationPolicy
     track_data_importer?(record) || director?(record.event) || super_admin?
   end
 
+  def assign_tiers?
+    record.uses_tiers? && (director?(record.event) || competition_admin? || super_admin?)
+  end
+
   private
 
   def view_access?

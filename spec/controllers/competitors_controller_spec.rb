@@ -16,6 +16,8 @@
 #  wave                     :integer
 #  riding_crank_size        :integer
 #  withdrawn_at             :datetime
+#  tier_number              :integer          default(1), not null
+#  tier_description         :string
 #
 # Indexes
 #

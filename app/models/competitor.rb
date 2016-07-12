@@ -16,6 +16,8 @@
 #  wave                     :integer
 #  riding_crank_size        :integer
 #  withdrawn_at             :datetime
+#  tier_number              :integer          default(1), not null
+#  tier_description         :string
 #
 # Indexes
 #
@@ -53,6 +55,8 @@ class Competitor < ActiveRecord::Base
   validates :competition_id, presence: true
   validates_associated :members
   validate :must_have_3_members_for_custom_name
+  validates :tier_number, presence: true
+  validates :tier_number, numericality: { greater_than_or_equal_to: 1, less_than: 10 }
 
   enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
   after_save :touch_members

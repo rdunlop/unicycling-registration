@@ -1,0 +1,35 @@
+%h1= "#{@competition} - Tier Assignment"
+
+%p
+  On this page, you can specify the tier # and description for each competitor.
+
+%p
+  Specifying a Tier # will cause them to be ranked AFTER anyone with a lower # tier.
+  %br
+  e.g. tier 1 competitors are ranked above all tier 2 competitors, who are ranked above tier 3 competitors.
+
+%p
+  The "Tier Description" is what will be printed on the results/awards
+
+= simple_form_for @competition, url: competition_tier_assignments_path(@competition), method: :put do |f|
+  %table.competitor_statuses
+    %caption Competitors
+    %thead
+      %tr
+        %th.sign_up ID
+        %th.sign_up Name
+        %th.sign_up Age
+        %th.sign_up Gender
+        %th Tier Number
+        %th Tier Description
+    %tbody
+      - @competitors.each do |competitor|
+        = f.fields_for :competitors, competitor do |comp_f|
+          %tr
+            %td= comp_f.object.bib_number
+            %td= comp_f.object.detailed_name
+            %td= comp_f.object.age
+            %td= comp_f.object.gender
+            %Th= comp_f.number_field :tier_number, class: "sign_in_heat"
+            %td= comp_f.text_field :tier_description, class: "sign_in_notes"
+  = f.button :submit

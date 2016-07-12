@@ -32,6 +32,9 @@
   - when "Externally Ranked"
     %li= link_to "View", review_user_competition_import_results_path(current_user, competition, options)
 
+  - if policy(competition).assign_tiers?
+    %li= link_to "Assign Tiers", competition_tier_assignments_path(competition)
+
   - if policy(competition).view_sign_ins?
     %li
       = link_to "Sign-In List", competition_sign_ins_path(competition)

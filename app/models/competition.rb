@@ -89,7 +89,8 @@ class Competition < ActiveRecord::Base
       "Longest Time",
       "Shortest Time",
       "Overall Champion",
-      "Standard Skill"
+      "Standard Skill",
+      "Shortest Time with Tiers"
     ]
   end
 
@@ -332,6 +333,10 @@ class Competition < ActiveRecord::Base
     event_class == "Timed Multi-Lap"
   end
 
+  def uses_tiers?
+    event_class == "Shortest Time with Tiers"
+  end
+
   def age_group_entries
     age_group_type.age_group_entries unless age_group_type.nil?
   end
@@ -378,7 +383,7 @@ class Competition < ActiveRecord::Base
 
   def can_calculated_age_group_results?
     case event_class
-    when "Shortest Time"
+    when "Shortest Time", "Shortest Time with Tiers"
       true
     when "Longest Time"
       true
@@ -389,7 +394,7 @@ class Competition < ActiveRecord::Base
 
   def scoring_helper
     case event_class
-    when "Shortest Time"
+    when "Shortest Time", "Shortest Time with Tiers"
       @rc ||= RaceScoringClass.new(self)
     when "Timed Multi-Lap"
       @rc ||= RaceScoringClass.new(self)
@@ -450,6 +455,8 @@ class Competition < ActiveRecord::Base
   # provides a numeric/comparable score for the competitor
   def scoring_calculator
     case event_class
+    when "Shortest Time with Tiers"
+      @scrc ||= ShortestTimeWithTierCalculator.new
     when "Shortest Time"
       @scrc ||= RaceResultCalculator.new
     when "Longest Time"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712023815) do
+ActiveRecord::Schema.define(version: 20160712173523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -219,6 +219,8 @@ ActiveRecord::Schema.define(version: 20160712023815) do
     t.integer  "wave"
     t.integer  "riding_crank_size"
     t.datetime "withdrawn_at"
+    t.integer  "tier_number",                          default: 1,     null: false
+    t.string   "tier_description"
   end
 
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree

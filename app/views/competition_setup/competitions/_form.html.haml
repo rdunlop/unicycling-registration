@@ -70,10 +70,10 @@
 
   %h3 Data Entry Setup
 
-  .js--blockVisibleTarget{ data: { show: ["Points High to Low", "Points Low to High", "Timed Multi-Lap", "Shortest Time"] } }
+  .js--blockVisibleTarget{ data: { show: ["Points High to Low", "Points Low to High", "Timed Multi-Lap", "Shortest Time", "Shortest Time with Tiers"] } }
     = f.input :start_data_type, collection: Competition.data_recording_types, :include_blank => true
 
-  .js--blockVisibleTarget{ data: { show: ["Longest Time", "Points High to Low", "Points Low to High", "Shortest Time", "Timed Multi-Lap"] } }
+  .js--blockVisibleTarget{ data: { show: ["Longest Time", "Points High to Low", "Points Low to High", "Shortest Time", "Shortest Time with Tiers", "Timed Multi-Lap"] } }
     = f.input :end_data_type, collection: Competition.data_recording_types, :include_blank => true
 
   %br
