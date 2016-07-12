@@ -32,8 +32,9 @@
 require 'spec_helper'
 
 describe ImportResult do
+  let(:competition) { FactoryGirl.build_stubbed(:timed_competition) }
   before(:each) do
-    @ir = FactoryGirl.build_stubbed(:import_result)
+    @ir = FactoryGirl.build_stubbed(:import_result, competition: competition)
   end
   it "has a valid factory" do
     expect(@ir.valid?).to eq(true)

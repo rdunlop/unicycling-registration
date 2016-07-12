@@ -129,6 +129,7 @@ class ImportResult < ActiveRecord::Base
   # determines that the import_result has enough information
   def results_for_competition
     return if disqualified?
+    return if competition.nil?
 
     if competition.imports_times?
       unless time_is_present?
