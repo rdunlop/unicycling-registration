@@ -9,7 +9,7 @@ class Compete::TierAssignmentsController < ApplicationController
 
   # GET /competitions/1/tier_assignments
   def show
-    authorize @competition, :show?
+    authorize @competition, :assign_tiers?
     add_breadcrumb "Current Tiers"
     @competitors = @competition.competitors
     respond_to do |format|
@@ -19,7 +19,7 @@ class Compete::TierAssignmentsController < ApplicationController
 
   # PUT /competitions/1/tier_assignments
   def update
-    authorize @competition, :modify_result_data?
+    authorize @competition, :assign_tiers?
 
     if @competition.update_attributes(update_competitors_params)
       flash[:notice] = "updated competitor tiers/descriptions"

@@ -12,7 +12,7 @@ class SampleCompetitionCreator
     name = "#{competition_type} #{Faker::Hipster.word}"
 
     case competition_type
-    when "Longest Time", "Shortest Time", "Timed Multi-Lap", "High/Long", "High/Long Final IUF 2015", "High/Long Preliminary IUF 2015"
+    when "Longest Time", "Shortest Time", "Shortest Time with Tiers", "Timed Multi-Lap", "High/Long", "High/Long Final IUF 2015", "High/Long Preliminary IUF 2015"
       Competition.create!(
         name: name,
         event: Event.first,
