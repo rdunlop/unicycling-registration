@@ -9,11 +9,11 @@
 #  minutes_1      :integer
 #  minutes_2      :integer
 #  seconds_1      :integer
-#  status_1       :string(255)
+#  status_1       :string(255)      default("active")
 #  seconds_2      :integer
 #  thousands_1    :integer
 #  thousands_2    :integer
-#  status_2       :string(255)
+#  status_2       :string(255)      default("active")
 #  is_start_time  :boolean          default(FALSE), not null
 #  created_at     :datetime
 #  updated_at     :datetime
