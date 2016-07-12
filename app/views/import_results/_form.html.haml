@@ -12,6 +12,7 @@
 
     %tfoot
       %tr
+        %td
         %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition, class: "js--autoFocus")
         %td
         - if @competition.data_entry_format.hours?

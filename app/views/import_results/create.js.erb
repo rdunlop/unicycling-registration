@@ -10,7 +10,7 @@
 
 
 <% else %>
-  var new_row = $("<%= escape_javascript(render partial: 'imported_time_result', locals: {import_result: @import_result }) %>")
+  var new_row = $("<%= escape_javascript(render partial: 'imported_time_result', locals: {import_result: @import_result,  import_result_counter: nil }) %>")
   new_row.appendTo(".import_results");
   new_row.effect("highlight", {}, 3000);
   $(".data_entry").trigger("reset");
