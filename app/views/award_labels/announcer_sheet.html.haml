@@ -20,7 +20,9 @@
         %tr
           %td.separator{colspan: 8}
       %tr
-        %td= award_label.bib_number
+        %td
+          = award_label.bib_number
+          = "*" if award_label.try(:registrant).try(:ineligible?)
         %td= award_label.line_1
         %td= award_label.line_2
         %td= award_label.line_3
