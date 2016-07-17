@@ -24,12 +24,14 @@ class HeatsController < ApplicationController
   #  - Lanes - maximum number of lanes for each heat
   def create
     max_lane_number = params[:lanes].to_i
+    lane_assignment_order = params[:lane_order].split(" ")
     if max_lane_number <= 0
       flash[:alert] = "Error: Invalid number of lanes"
     elsif @competition.lane_assignments.any?
       flash[:alert] = "Error: Cannot auto-assign with existing Lane Assignments"
     else
-      creator = HeatAssignmentCreator.new(@competition, max_lane_number)
+      calculator = HeatLaneCalculator.new(max_lane_number, lane_assignment_order: lane_assignment_order)
+      creator = HeatAssignmentCreator.new(@competition, calculator)
       if creator.perform
         flash[:notice] = "Created Heats/Lanes from Competitors"
       else

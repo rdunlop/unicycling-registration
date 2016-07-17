@@ -18,6 +18,9 @@
     .small-4.columns
       = label_tag :lanes, "Number of Lanes per Heat"
       = text_field_tag :lanes
+    .small-4.columns
+      = label_tag :lane_order, "Priority Order of Lane Assignment"
+      = text_field_tag :lane_order, HeatLaneCalculator::DEFAULT_LANE_ASSIGNMENT_ORDER
     .small-4.columns.end
       = submit_tag "Create Heat/Lane Assignments", class: "button"
 

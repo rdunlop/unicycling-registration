@@ -24,17 +24,17 @@ describe HeatAssignmentCreator do
 
     it "assigns the competitors by their returned order" do
       expect{ perform }.to change(LaneAssignment, :count).by(3)
-      expect(LaneAssignment.first.heat).to eq(1)
-      expect(LaneAssignment.first.lane).to eq(1)
-      expect(LaneAssignment.first.competitor).to eq(competitor1)
+      competitor1_lane_assignment = LaneAssignment.find_by(competitor: competitor1)
+      expect(competitor1_lane_assignment.heat).to eq(1)
+      expect(competitor1_lane_assignment.lane).to eq(2)
 
-      expect(LaneAssignment.second.heat).to eq(1)
-      expect(LaneAssignment.second.lane).to eq(2)
-      expect(LaneAssignment.second.competitor).to eq(competitor2)
+      competitor2_lane_assignment = LaneAssignment.find_by(competitor: competitor2)
+      expect(competitor2_lane_assignment.heat).to eq(1)
+      expect(competitor2_lane_assignment.lane).to eq(1)
 
-      expect(LaneAssignment.last.heat).to eq(2)
-      expect(LaneAssignment.last.lane).to eq(1)
-      expect(LaneAssignment.last.competitor).to eq(competitor3)
+      competitor3_lane_assignment = LaneAssignment.find_by(competitor: competitor3)
+      expect(competitor3_lane_assignment.heat).to eq(2)
+      expect(competitor3_lane_assignment.lane).to eq(1)
     end
 
     describe "when all competitors have best times" do
@@ -45,14 +45,17 @@ describe HeatAssignmentCreator do
       end
       it "assigns in descending order of best times" do
         perform
-        expect(competitor1.lane_assignments.first.heat).to eq(1)
-        expect(competitor1.lane_assignments.first.lane).to eq(1)
+        competitor1_lane_assignment = LaneAssignment.find_by(competitor: competitor1)
+        competitor2_lane_assignment = LaneAssignment.find_by(competitor: competitor2)
+        competitor3_lane_assignment = LaneAssignment.find_by(competitor: competitor3)
+        expect(competitor1_lane_assignment.heat).to eq(1)
+        expect(competitor1_lane_assignment.lane).to eq(2)
 
-        expect(competitor2.lane_assignments.first.heat).to eq(1)
-        expect(competitor2.lane_assignments.first.lane).to eq(2)
+        expect(competitor2_lane_assignment.heat).to eq(1)
+        expect(competitor2_lane_assignment.lane).to eq(1)
 
-        expect(competitor3.lane_assignments.first.heat).to eq(2)
-        expect(competitor3.lane_assignments.first.lane).to eq(1)
+        expect(competitor3_lane_assignment.heat).to eq(2)
+        expect(competitor3_lane_assignment.lane).to eq(1)
       end
     end
 
@@ -64,14 +67,17 @@ describe HeatAssignmentCreator do
       it "assigns those without best times first" do
         perform
 
-        expect(competitor3.lane_assignments.first.heat).to eq(1)
-        expect(competitor3.lane_assignments.first.lane).to eq(1)
+        competitor1_lane_assignment = LaneAssignment.find_by(competitor: competitor1)
+        competitor2_lane_assignment = LaneAssignment.find_by(competitor: competitor2)
+        competitor3_lane_assignment = LaneAssignment.find_by(competitor: competitor3)
+        expect(competitor3_lane_assignment.heat).to eq(1)
+        expect(competitor3_lane_assignment.lane).to eq(2)
 
-        expect(competitor1.lane_assignments.first.heat).to eq(1)
-        expect(competitor1.lane_assignments.first.lane).to eq(2)
+        expect(competitor1_lane_assignment.heat).to eq(1)
+        expect(competitor1_lane_assignment.lane).to eq(1)
 
-        expect(competitor2.lane_assignments.first.heat).to eq(2)
-        expect(competitor2.lane_assignments.first.lane).to eq(1)
+        expect(competitor2_lane_assignment.heat).to eq(2)
+        expect(competitor2_lane_assignment.lane).to eq(1)
       end
     end
   end
