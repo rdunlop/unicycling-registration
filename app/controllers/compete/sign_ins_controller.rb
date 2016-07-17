@@ -10,7 +10,6 @@ class Compete::SignInsController < ApplicationController
 
   # GET /competitions/1/sign_ins
   def show
-    authorize @competition, :create_preliminary_result?
     add_breadcrumb "Sign-In Sheets"
 
     respond_to do |format|
@@ -21,13 +20,11 @@ class Compete::SignInsController < ApplicationController
 
   # GET /competitions/1/sign_ins/edit
   def edit
-    authorize @competition, :create_preliminary_result?
     add_breadcrumb "Enter Sign-In"
   end
 
   # PUT /competitions/1/sign_ins
   def update
-    authorize @competition, :create_preliminary_result?
     respond_to do |format|
       if @competition.update_attributes(update_competitors_params)
         flash[:notice] = 'Competitors successfully updated.'
@@ -52,6 +49,7 @@ class Compete::SignInsController < ApplicationController
 
   def load_competition
     @competition = Competition.find(params[:competition_id])
+    authorize @competition, :enter_sign_ins?
   end
 
   def update_competitors_params

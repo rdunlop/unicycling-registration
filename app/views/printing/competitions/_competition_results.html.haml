@@ -13,7 +13,6 @@
     - competitors.each do |competitor|
       %h3
         Place: #{competitor.send(place_function)} -  #{competitor}
-      %hr
       %table
         %thead
           %tr
@@ -24,6 +23,7 @@
             %tr
               %td= member.registrant.bib_number
               %td= member.registrant
+      %hr
   - else
     %table.full.results.race
       %thead
@@ -36,5 +36,12 @@
           %th.details Details
       %tbody
         - competitors.each do |competitor|
-          = render :partial => "/printing/competitions/result_entry", :locals => {:id => competitor.bib_number, :name => competitor.to_s, :time => competitor.result, :place => competitor.send(place_function), details: competitor.details }
+          %tr
+            %td.place= competitor.send(place_function)
+            %td= competitor.bib_number
+            %td= competitor.to_s
+            - unless result_description.nil?
+              %td.time= competitor.result
+            %td.details= competitor.details
+
   %hr.age_group_separator

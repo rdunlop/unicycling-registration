@@ -23,7 +23,8 @@
           %th.name Name
           - unless competition.result_description.nil?
             %th.time= competition.result_description
-          %th.details Details
+          - if competition.sign_in_list?
+            %th.details Details
       %tbody
         - competitors.each do |competitor|
           - cache [competitor, Result.cache_key_for_set(competitor.id)] do
@@ -35,8 +36,9 @@
                   %b= competitor.team_name
                   %br
                 = competitor.members.map(&:to_s).join(", ")
-              - unless competitor.result.nil?
+              - unless competition.result_description.nil?
                 %td.time= competitor.result
-              %td.details= competitor.details
+              - if competition.sign_in_list?
+                %td.details= competitor.details
 
   %hr.age_group_separator
