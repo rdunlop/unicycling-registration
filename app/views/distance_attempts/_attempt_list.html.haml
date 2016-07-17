@@ -1,4 +1,4 @@
-%table.top_distance_attempts
+%table.top_distance_attempts{ class: local_assigns[:additional_classes] }
   %caption #{title}
   %thead
     %tr
@@ -8,8 +8,11 @@
       %th= Competitor.model_name.human
       %th= Competitor.human_attribute_name(:gender)
       %th= Competitor.human_attribute_name(:age)
+      %th= Judge.model_name.human
       - if display_delete
         %th
   %tbody
+    - # Note: cannot use find_each here, as this list may be limited, and find_each doesn't
+    - # Honor limits.
     - list.each do |da|
       = render partial: "attempt", object: da, locals: {display_delete: display_delete }

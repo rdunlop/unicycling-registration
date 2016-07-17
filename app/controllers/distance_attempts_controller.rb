@@ -35,7 +35,7 @@ class DistanceAttemptsController < ApplicationController
   def index
     @distance_attempts = @judge.distance_attempts
     # show the current attempts, and a button which says "add new attempt"
-    @recent_distance_attempts = @distance_attempts.includes(:competitor).limit(20)
+    @recent_distance_attempts = @distance_attempts.includes(:competitor, :judge).limit(20)
   end
 
   # Retrieve the details for a competitor
@@ -85,7 +85,7 @@ class DistanceAttemptsController < ApplicationController
   def list
     @competition = Competition.find(params[:competition_id])
     authorize current_user, :view_data_entry_menu?
-    @distance_attempts = @competition.distance_attempts.includes(:competitor)
+    @distance_attempts = @competition.distance_attempts.includes(:competitor, :judge)
     respond_to do |format|
       format.html { render action: "list" }
       format.json { head :no_content }

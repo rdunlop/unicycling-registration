@@ -1,4 +1,4 @@
-- cache [attempt, attempt.competitor] do
+- cache [attempt, attempt.competitor, display_delete] do
   %tr
     %td= attempt.distance
     %td= attempt.fault? ? "Fault" : ""
@@ -6,5 +6,6 @@
     %td= attempt.competitor
     %td= attempt.competitor.gender
     %td= attempt.competitor.age
+    %td= attempt.judge.name
     - if display_delete
       %td= link_to t("delete"), distance_attempt_path(attempt), data: { confirm: t("are_you_sure") }, method: :delete

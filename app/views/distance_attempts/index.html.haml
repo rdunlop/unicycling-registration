@@ -11,7 +11,7 @@
 
 .attempts_lists
   .recent_attempt_list
-    = render partial: "attempt_list", locals: {title: "Recent Attempts", list: @recent_distance_attempts, display_delete: true }
+    = render partial: "attempt_list", locals: {title: "Recent Attempts", list: @recent_distance_attempts, display_delete: policy(@judge).can_judge? }
     (only the recent  ~20 are listed)
 
 %hr
