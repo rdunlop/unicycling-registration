@@ -1,8 +1,6 @@
-
 %h1 Candidates
 
 When a competition's competitor list is based on the results of other competitions, this page shows the results of those other competitions.
-
 
 %table.sortable
   %thead
@@ -23,8 +21,9 @@ When a competition's competitor list is based on the results of other competitio
 
 %hr
 
-.non_printable
-  - if @lanes_for_places
-    = render "confirm_proposed_lane_assignments"
-  - else
-    = render "choose_expert_lane_assignments"
+- if @competition.uses_lane_assignments?
+  .non_printable
+    - if @lanes_for_places
+      = render "confirm_proposed_lane_assignments"
+    - else
+      = render "choose_expert_lane_assignments"

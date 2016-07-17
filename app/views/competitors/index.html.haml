@@ -5,7 +5,11 @@
     %b Note:
     This competition appears to be sourced from another competition results.
     %br
-    = link_to "Display + Assign Candidates", display_candidates_competition_competitors_path(@competition), class: "button primary"
+    = link_to display_candidates_competition_competitors_path(@competition), class: "button primary" do
+      - if @competition.uses_lane_assignments?
+        Display + Assign Candidates
+      - else
+        Display Candidates
 
 - if @competition.automatic_competitor_creation?
   .competition_instructions
