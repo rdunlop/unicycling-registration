@@ -1,7 +1,7 @@
 - if @config.can_create_competitors_at_lane_assignment?
   .add_competitor
     %h3 Add Last-Minute Competitor
-    = form_tag(create_last_minute_competitor_competition_lane_assignments_path(competition), method: :post, remote: true) do
+    = form_tag(create_last_minute_competitor_competition_path(competition), method: :post, remote: true) do
       .row
         .small-8.columns
           = non_signed_up_registrant_select_box(competition)

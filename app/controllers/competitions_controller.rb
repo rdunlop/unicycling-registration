@@ -275,6 +275,27 @@ class CompetitionsController < ApplicationController
     redirect_to @competition
   end
 
+  # POST /competitions/1/last_minute_competitor
+  def create_last_minute_competitor
+    registrant = Registrant.find(params[:registrant_id])
+
+    @competitor = @competition.find_competitor_with_bib_number(registrant.bib_number)
+    if @competitor.present?
+      if @competitor.status == "withdrawn"
+        @competitor.status = "active"
+      end
+    else
+      @competitor = @competition.competitors.new
+      @competitor.members.build(registrant: registrant)
+    end
+
+    authorize @competitor, :create?
+    respond_to do |format|
+      @competitor.save
+      format.js { }
+    end
+  end
+
   private
 
   def load_competition

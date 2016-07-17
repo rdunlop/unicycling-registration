@@ -123,4 +123,27 @@ describe CompetitionsController do
       expect(competition.published?).to eq(false)
     end
   end
+
+  describe "POST create_last_minute_competitor" do
+    let(:new_registrant) { FactoryGirl.create(:competitor) }
+    let!(:config) { FactoryGirl.create(:event_configuration, :with_usa) }
+    it "creates a competitor for the competition" do
+      expect do
+        post :create_last_minute_competitor, id: competition.id, registrant_id: new_registrant.id, format: :js
+      end.to change(Competitor, :count).by(1)
+    end
+
+    context "with a withdrawn competitor for this registrant" do
+      before do
+        @withdrawn_competitor = FactoryGirl.create(:event_competitor, competition: competition, status: "withdrawn")
+        @withdrawn_competitor.members.first.update_attribute(:registrant_id, new_registrant.id)
+      end
+
+      it "changes the competitor status" do
+        expect do
+          post :create_last_minute_competitor, id: competition.id, registrant_id: new_registrant.id, format: :js
+        end.to change { @withdrawn_competitor.reload.status }.to("active")
+      end
+    end
+  end
 end

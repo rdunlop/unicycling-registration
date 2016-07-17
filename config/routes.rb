@@ -536,6 +536,7 @@ Workspace::Application.routes.draw do
         post :publish_age_group_entry
         post :award
         delete :award
+        post :create_last_minute_competitor
       end
       resources :competition_results, only: [:index, :create, :destroy]
       resources :competitors, only: [:index, :new, :create] do
@@ -585,7 +586,6 @@ Workspace::Application.routes.draw do
           post :dq_competitor
           get :review
           get :download_heats_evt
-          post :create_last_minute_competitor
         end
       end
       resources :heat_review, param: :heat, only: [:index, :show, :destroy] do
