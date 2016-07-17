@@ -10,5 +10,5 @@
   $("#best_time_<%= @registrant_best_time.registrant_id %>").effect("highlight", {color: "red"}, 3000);
 <% else %>
   $("#best_time_<%= @registrant_best_time.registrant_id %>").effect("highlight", {color: "green"}, 3000);
-  $('#notice').html();
+  $('#notice').html(""); // Clear the notices on success
 <% end %>
