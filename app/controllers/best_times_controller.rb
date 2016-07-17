@@ -1,5 +1,6 @@
 class BestTimesController < ApplicationController
   before_action :load_and_authorize_event_category
+  before_action :add_breadcrumbs
 
   def show
     @registrants = @event_category.signed_up_registrants
@@ -20,6 +21,11 @@ class BestTimesController < ApplicationController
   end
 
   private
+
+  def add_breadcrumbs
+    add_breadcrumb "Events Report", summary_events_path
+    add_breadcrumb "#{@event_category} Best Times"
+  end
 
   def load_and_authorize_event_category
     @event_category = EventCategory.find(params[:event_category_id])
