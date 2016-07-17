@@ -1,0 +1,29 @@
+#notice
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Age
+      %th Gender
+      %th Country
+      %th Details
+      %th Action
+  %tbody
+    - @registrants.each do |registrant|
+      %tr{ id: "best_time_#{registrant.id}" }
+        %td= registrant.bib_number
+        %td= registrant.to_s
+        %td= registrant.age
+        %td= registrant.gender
+        %td= registrant.country
+        %td= registrant.describe_event_hash(@event)[:additional]
+        %td
+          - found_rbt = registrant.registrant_best_times.find_by(event: @event_category.event) || RegistrantBestTime.new(registrant: registrant, event: @event_category.event)
+          = simple_form_for(found_rbt, url: event_category_best_times_path(@event_category), method: :put, remote: true) do |f|
+            = f.hidden_field :id
+            = f.hidden_field :registrant_id
+            = f.input :source_location
+            = f.input :formatted_value, placeholder: found_rbt.hint
+            = f.submit "Update", class: "multiclick button"

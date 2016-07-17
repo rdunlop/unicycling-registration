@@ -45,6 +45,7 @@
     %th Category
     %th Event Name
     %th Event Category
+    %th Manage
     %th Sign Up List
     %th # Signed Up
   %tbody
@@ -55,6 +56,9 @@
           %td= event
           %td= ecat
           %td
+            - if event.best_time?
+              = link_to "Manage Best Times", event_category_best_times_path(ecat)
+          %td
             = link_to "HTML", sign_ups_event_category_path(ecat)
             = link_to "PDF", sign_ups_event_category_path(ecat, :format => :pdf)
           %td= ecat.num_signed_up_registrants
@@ -63,6 +67,7 @@
           %td= event.category
           %td= event
           %td ALL Combined
+          %td
           %td
             = link_to 'HTML', sign_ups_event_path(event)
             = link_to 'PDF', sign_ups_event_path(event, :format => :pdf)

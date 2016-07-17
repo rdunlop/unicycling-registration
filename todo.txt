@@ -654,7 +654,6 @@ Features which NAUCC would like added:
 - On Payments#Summary, show the total-we-can-keep (ie: without taxes/fees)
 - Ability to upgrade a registration before/after having been paid (from Non-Comp to Comp, spectator to non-comp)
 - "upgrade" from non-competitor to competitor? ....some way for Admins...
-- Use new Menubar system, to allow for better responsiveness at smaller screen sizes
 - make "best time" input force seconds (etc)
  - Add much more logic into the 'best time' field to help it become useful information, to be used by the system for creating start-lists, etc
  - Allow formats: "hh:mm", "min:sec", "mm:ss:hh"
@@ -667,8 +666,6 @@ Features which NAUCC would like added:
 - Re-Work the slow-race data entry (as per Scott).
 - Include a Report which shows the way that experts are positioned on the track
 - Competitors#index should have a "Delete all who have dropped"
-- Allow specifying the precision of expected data input (thousands, or hundreds, and REQUIRE that many digits)
- - This should help prevent some input mistakes
 - allow marking a registrant as DNF (or some way of making that clearer when doing data entry of single-data results)
 - Add a page which lists the High/Long result which require tie breaks (top 3 places which are tie, by age group results)
 - Make the music file download as a zip file, or folder file thing.
@@ -676,7 +673,6 @@ Features which NAUCC would like added:
 - Printing/entry of the Heat Data (gear/crank) is sorted incorrectly where there are heat times also).
 - If I change a TimeResult from DQ to not-DQ, it doesn't cause the competitor to be updated/touched.
 - Allow DNS, DNF
-- Fix the "Display Candidates -> create heat" to allow un-selecting peoplo for the heat (male and female heat separately)
 - For Trials Finals, put the Expert Male and Expert Female separately, with a small heading in front of each.
 - When doing MUNI data entry, it should easily allow changing the result to be "this competition" instead of auto-adding to another event. Perhaps make the auto-select-event a feature flag?
 - Feedback from Chris Hugo, The "Manage Competitors" button is not clearly the next action I need to do.
@@ -703,12 +699,7 @@ Features which NAUCC would like added:
   - Determine who came in top-3, and then combine all of these people into a list.
   - List the shirt-size for each of these competitors.
   - Allow adding another competition if there are still shirts/etc.
-- Need a way to Display the results of a Combined competition (and publish them)
-- need a way to print awards for a Combined Competition
-- Rename the "Combined Competition" to something more descriptive
-- Add indicator to the Import Results page which shows whether the given competitor already has a result record stored (this would be a BAD thing)
 - allow admins/payment_admins to adjust the reg_fee of competitors, make it clearer/more accessible
-- Integrate with USA Membership site
 
 
 ========================================================================================================================
@@ -717,7 +708,6 @@ Bugs which Robin would like fixed:
 - Need to seed new tenants
 - Fix mailer when mailing from regtest site.
 - RailsAdmin
-- fix sign-out function (due to changes in the js for the navbar)
 - Stop putting "Results" for people who are competitors but didn't race. (e.g. Slow Races ugh).
 - Time Results Edit should have penalties (WTF robin)
 - What happens if a competitor has no members? (do the pages display? do the calculations die?)
