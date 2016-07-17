@@ -54,7 +54,7 @@ describe HeatsController do
     describe "with valid params" do
       it "calls the heat assignment creatorcreates" do
         allow_any_instance_of(HeatAssignmentCreator).to receive(:perform).and_return(true)
-        post :create, lanes: 1, competition_id: @competition.id
+        post :create, lanes: 1, competition_id: @competition.id, lane_order: "1 2 3 4 5 6 7 8"
 
         expect(flash[:notice]).to match(/Created Heats/)
       end
@@ -63,7 +63,7 @@ describe HeatsController do
     describe "with invalid params" do
       describe "when the lane_number is invalid" do
         def do_action
-          post :create, competition_id: @competition.id, lanes: 0
+          post :create, competition_id: @competition.id, lanes: 0, lane_order: "1 2 3 4 5 6 7 8"
         end
 
         it "returns an error" do
@@ -81,7 +81,7 @@ describe HeatsController do
         before { allow_any_instance_of(Competition).to receive(:lane_assignments).and_return(["thing"]) }
 
         it "returns an error" do
-          post :create, competition_id: @competition.id, lanes: 5
+          post :create, competition_id: @competition.id, lanes: 5, lane_order: "1 2 3 4 5 6 7 8"
           expect(flash[:alert]).to match(/Cannot auto-assign with existing Lane Assignments/)
         end
       end

@@ -10,7 +10,8 @@ describe HeatAssignmentCreator do
   let!(:competitor3) { FactoryGirl.create(:event_competitor, competition: competition) }
 
   def perform
-    described_class.new(competition, lanes).perform
+    calculator = HeatLaneCalculator.new(lanes)
+    described_class.new(competition, calculator).perform
   end
 
   describe "with no age groups" do
