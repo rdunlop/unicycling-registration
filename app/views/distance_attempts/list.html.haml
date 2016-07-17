@@ -13,6 +13,7 @@
         %th= Competitor.human_attribute_name(:age)
         %th Judge
         %th Date
+        %th Delete
     %tbody
       - @distance_attempts.each do |da|
         - cache [da, da.competitor] do
@@ -25,4 +26,6 @@
             %td= da.competitor.age
             %td= da.judge.name
             %td= da.created_at
-
+            %td
+              - if policy(da.judge).can_judge?
+                = link_to t("delete"), distance_attempt_path(da), data: { confirm: t("are_you_sure") }, method: :delete
