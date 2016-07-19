@@ -21,12 +21,19 @@ class Admin::CompetitionSongsController < ApplicationController
 
     song = Song.find(params[:song_id])
     competitor = Competitor.find(params[:competitor_id])
+    existing_song = Song.find_by(competitor: competitor)
     song.competitor = competitor
+    Song.transaction do
+      if existing_song
+        existing_song.update(competitor: nil)
+        flash[:notice] = "Un-Assigned A different song, and assigned new song"
+      end
 
-    if song.save
-      flash[:notice] = "Assigned #{competitor} to #{song.description}"
-    else
-      flash[:alert] = "Error assigning #{competitor} to #{song.description}. #{song.errors.full_messages.join(', ')}"
+      if song.save
+        flash[:notice] = "Assigned #{competitor} to #{song.description}"
+      else
+        flash[:alert] = "Error assigning #{competitor} to #{song.description}. #{song.errors.full_messages.join(', ')}"
+      end
     end
 
     redirect_to competition_song_path(competition)

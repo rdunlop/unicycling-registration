@@ -36,6 +36,16 @@ describe Admin::CompetitionSongsController do
       post :create, competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id
       expect(song.reload.competitor).to eq(competitor)
     end
+
+    context "when the competitor already has a song associated" do
+      let!(:old_song) { FactoryGirl.create(:song, competitor: competitor) }
+
+      it "un-assigns, and assigns to a new song" do
+        post :create, competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id
+        expect(song.reload.competitor).to eq(competitor)
+        expect(old_song.reload.competitor).to be_nil
+      end
+    end
   end
 
   describe "GET download_zip" do
