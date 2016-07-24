@@ -586,9 +586,12 @@ Workspace::Application.routes.draw do
           get :view_heat
           post :dq_competitor
           get :review
-          get :download_heats_evt
         end
       end
+      resources :heat_exports, only: [:index] do
+        get :download_evt
+      end
+
       resources :heat_review, param: :heat, only: [:index, :show, :destroy] do
         member do
           post :approve_heat

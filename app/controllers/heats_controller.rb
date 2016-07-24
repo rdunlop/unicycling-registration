@@ -21,7 +21,8 @@ class HeatsController < ApplicationController
   # process a form submission which includes HEAT&Lane for each candidate, creating the necessary lane assignment
   # It creates heats for each age group
   # parameters:
-  #  - Lanes - maximum number of lanes for each heat
+  #  - lanes - maximum number of lanes for each heat
+  #  - lane_order - the priority order of lane assignments, as a space-separated string of numbers
   def create
     max_lane_number = params[:lanes].to_i
     lane_assignment_order = params[:lane_order].split(" ")
