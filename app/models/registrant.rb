@@ -35,6 +35,7 @@
 class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   include Eligibility
   include CachedModel
+  extend OrderAsSpecified
 
   after_save :touch_members
   after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }

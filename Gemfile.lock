@@ -334,6 +334,8 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     numerizer (0.1.1)
+    order_as_specified (1.1)
+      activerecord (>= 4.0)
     orm_adapter (0.5.0)
     paper_trail (3.0.8)
       activerecord (>= 3.0, < 5.0)
@@ -629,6 +631,7 @@ DEPENDENCIES
   kaminari
   money-rails
   newrelic_rpm
+  order_as_specified
   paper_trail (~> 3.0.1)
   pg
   poltergeist

@@ -18,9 +18,9 @@ class ShowAllRegistrantsPdfJob < ActiveJob::Base
     end
 
     if order.present? && order == "id"
-      @registrants = Registrant.active.reorder(:bib_number).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+      @registrants = Registrant.active.reorder(:bib_number)
     else
-      @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+      @registrants = Registrant.active.reorder(:sorted_last_name, :first_name)
     end
 
     if offset

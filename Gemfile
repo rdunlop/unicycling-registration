@@ -56,6 +56,7 @@ gem 'gaffe'
 gem 'rubyzip'
 gem 'acme-client'
 gem 'eye-patch', require: false
+gem 'order_as_specified'
 
 # determined we are over IE8 CSS limits using
 # http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
