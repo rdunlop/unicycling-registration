@@ -4,7 +4,8 @@
 - # but we also use `order_as_specified` (gem) in order to preserve the order internally
 - ordered_registrant_ids = @registrants.pluck(:id)
 - ordered_registrant_ids.in_groups_of(100).each do |registrant_ids|
-  - registrants = Registrant.where(id: registrant_ids).order_as_specified(id: registrant_ids).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
+  - ids_without_nil = registrant_ids.compact
+  - registrants = Registrant.where(id: ids_without_nil).order_as_specified(id: ids_without_nil).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
   - registrants.each do |reg|
     - @registrant = reg
     = render :partial => "/registrants/show_single_registrant", formats: :pdf
