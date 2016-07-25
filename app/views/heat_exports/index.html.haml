@@ -52,11 +52,16 @@
       nil nil 81  5 Hills Raegan  Italy 30+ w
       nil nil 498 6 Walter Yvette  Germany 30+ w
 
-    = link_to "Competitor List Heat files (zip)", download_all_heats_tsv_competition_heat_exports_path(@competition), method: :post
 
+    %h4 Download a Single Heat File
     = form_tag(download_heat_tsv_competition_heat_exports_path(@competition)) do
-      = label_tag :heat_number, "Heat"
-      = text_field_tag :heat_number
-
-      %br
-      = submit_tag "Download Single Heat TSV", class: "multiclick"
+      .row
+        .small-6.medium-3.columns
+          = label_tag :heat_number, "Heat"
+        .small-6.medium-3.columns
+          = text_field_tag :heat_number
+        .small-12.medium-6.columns
+          = submit_tag "Download Single Heat TSV", class: "multiclick"
+    %h4 Download All Heat Files
+    %br
+    = link_to "Competitor ALL List Heat files (zip)", download_all_heats_tsv_competition_heat_exports_path(@competition), method: :post
