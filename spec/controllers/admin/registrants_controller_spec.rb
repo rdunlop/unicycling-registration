@@ -78,17 +78,17 @@ describe Admin::RegistrantsController do
       describe "GET show_all" do
         it "renders in normal order" do
           get :show_all, format: :pdf
-          expect(response).to be_success
+          expect(response).to redirect_to(reports_path)
         end
 
         it "renders in id order" do
           get :show_all, order: "id", format: :pdf
-          expect(response).to be_success
+          expect(response).to redirect_to(reports_path)
         end
 
         it "renders in id order with offset" do
           get :show_all, order: "id", offset: "20", max: "5", format: :pdf
-          expect(response).to be_success
+          expect(response).to redirect_to(reports_path)
         end
       end
 
