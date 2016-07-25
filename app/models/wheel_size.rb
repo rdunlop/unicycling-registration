@@ -17,6 +17,15 @@ class WheelSize < ActiveRecord::Base
   has_many :age_group_entries, dependent: :nullify
   has_many :registrants, dependent: :nullify
 
+  def self.available_sizes
+    if EventConfiguration.singleton.usa?
+      all
+    else
+      # Hide the 16" whees size
+      where.not(description: "16\" Wheel")
+    end
+  end
+
   def to_s
     description
   end

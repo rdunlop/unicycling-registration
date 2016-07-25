@@ -11,6 +11,6 @@
       .small-12.medium-6.columns.text-right
         = f.label :wheel_size_id
       .small-12.medium-6.columns.text-right
-        = f.collection_select :wheel_size_id, WheelSize.all, :id, :description
+        = f.collection_select :wheel_size_id, WheelSize.available_sizes, :id, :description
   .actions
     = f.button :submit, 'Set Wheel Size'

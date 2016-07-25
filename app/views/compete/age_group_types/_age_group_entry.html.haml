@@ -1,5 +1,5 @@
 %td= f.input :short_description, label: false, autofocus: true
 %td= f.input :start_age, label: false, input_html: { min: 0 }
 %td= f.input :end_age, label: false, input_html: { min: 0 }
-%td= f.input :wheel_size_id, label: false, collection: WheelSize.all.map { |ws| [ws.description, ws.id] }, include_blank: true, input_html: { title: "Specify \"blank\" to ignore the competitor's specified wheel size." }
+%td= f.input :wheel_size_id, label: false, collection: WheelSize.available_sizes.map { |ws| [ws.description, ws.id] }, include_blank: true, input_html: { title: "Specify \"blank\" to ignore the competitor's specified wheel size." }
 %td= f.input :gender, label: false, collection: ['Mixed', 'Male', 'Female'], include_blank: false

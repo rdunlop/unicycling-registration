@@ -22,6 +22,6 @@
   = simple_form_for(@registrant, url: wizard_path, method: :put) do |f|
     = render partial: "shared/error_messages", object: @registrant
     .data_block
-      = f.input :wheel_size_id, collection: WheelSize.all, include_blank: false
+      = f.input :wheel_size_id, collection: WheelSize.available_sizes, include_blank: false
     = render partial: "/registrants/form_actions", locals: {f: f}
 
