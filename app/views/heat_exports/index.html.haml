@@ -1,1 +1,62 @@
-index.html.haml
+%h1 Export Heat data for #{@competition}
+
+%hr
+
+.row
+  .small-12.columns.left_aligned
+    %h2 Track E-Timer EVT file (For FinishLynx-style system)
+
+    %b Example:
+
+    %p blank, id, lane, last_name, first_name country
+
+    %pre
+      nil,2,5,Dunlop,Robin,Canada
+
+    = link_to "Competitor List EVT", download_evt_competition_heat_exports_path(@competition)
+
+%hr
+
+.row
+  .small-12.columns.left_aligned
+    %h2 IUF Slalom-style semicolon separated file
+
+    %b Example:
+
+    %b id, last_name, first_name, country, gender, age_group
+
+    %pre
+      StartNr;Nachname;Vorname;Land;Geschlecht;AK
+      2;Durgan;Whitney;USA;f;30+
+      3;Crist;Amely;USA;f;30+
+
+    = link_to "Competitor List TSV", download_competitor_list_ssv_competition_heat_exports_path(@competition)
+
+%hr
+
+.row
+  .small-12.columns.left_aligned
+    %h2 Swiss-Timing file export
+
+    %b Example:
+
+    %b nil nil ID lane-number name country age group gender
+
+    %b Note: The "nil" are actually not present
+
+    %pre
+      nil nil 698 1 Durgan Whitney  Germany 30+ w
+      nil nil 92  2 Crist Amely Italy 30+ w
+      nil nil 543 3 Spinka Hank  Germany 30+ w
+      nil nil 364 4 Larkin Cara Kornelia  Switzerland 30+ w
+      nil nil 81  5 Hills Raegan  Italy 30+ w
+      nil nil 498 6 Walter Yvette  Germany 30+ w
+
+    = link_to "Competitor List Heat files (zip)", download_all_heats_tsv_competition_heat_exports_path(@competition), method: :post
+
+    = form_tag(download_heat_tsv_competition_heat_exports_path(@competition)) do
+      = label_tag :heat_number, "Heat"
+      = text_field_tag :heat_number
+
+      %br
+      = submit_tag "Download Single Heat TSV", class: "multiclick"

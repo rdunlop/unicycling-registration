@@ -589,7 +589,12 @@ Workspace::Application.routes.draw do
         end
       end
       resources :heat_exports, only: [:index] do
-        get :download_evt
+        collection do
+          get :download_evt
+          get :download_competitor_list_ssv
+          post :download_heat_tsv
+          post :download_all_heats_tsv
+        end
       end
 
       resources :heat_review, param: :heat, only: [:index, :show, :destroy] do
