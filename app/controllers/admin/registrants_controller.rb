@@ -104,21 +104,10 @@ class Admin::RegistrantsController < ApplicationController
   # GET /registrants/show_all.pdf
   def show_all
     authorize current_user, :registrant_information?
-    if params[:order].present? && params[:order] == "id"
-      @registrants = Registrant.active.reorder(:bib_number).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
-    else
-      @registrants = Registrant.active.reorder(:sorted_last_name, :first_name).includes(:contact_detail, :registrant_expense_items, :registrant_event_sign_ups)
-    end
+    report = Report.create!(report_type: "registration_summary")
+    ShowAllRegistrantsPdfJob.perform_later(report.id, params[:order], params[:offset], params[:max], current_user)
 
-    if params[:offset]
-      max = params[:max]
-      offset = params[:offset]
-      @registrants = @registrants.limit(max).offset(offset)
-    end
-
-    respond_to do |format|
-      format.pdf { render_common_pdf "show_all", 'Portrait' }
-    end
+    redirect_to reports_path, notice: "Report Generation started. Check back in a few minutes"
   end
 
   private

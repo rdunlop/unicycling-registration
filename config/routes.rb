@@ -346,6 +346,7 @@ Workspace::Application.routes.draw do
           post :undelete
         end
       end
+      resources :reports, only: [:index]
       resources :competition_songs, only: [:show, :create], param: :competition_id do
         member do
           get :download_zip

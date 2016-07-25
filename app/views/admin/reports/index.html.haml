@@ -1,0 +1,16 @@
+%h1 Reports
+
+%table
+  %thead
+    %tr
+      %th Requested At
+      %th Report Type
+      %th Complete?
+      %th Link
+  %tbody
+    - Report.all.each do |report|
+      %tr
+        %td= report.created_at
+        %td= report.report_type
+        %td= report.completed_at.present?
+        %td= link_to report.url, report.url_url
