@@ -11,12 +11,13 @@ all_scores = ->
     if $(element).val() != ""
       parseFloat($(element).val(), 10)
     else
-      0
+      100000
 
 update_all_scores = ->
   arr = all_scores()
   sorted = arr.slice().sort (a,b) ->
-    b-a
+    a-b
+
   clean_sorted = []
   sorted.each (i) ->
     clean_sorted[i] = sorted[i]

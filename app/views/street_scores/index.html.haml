@@ -12,7 +12,7 @@
       %th Order
       %th ID
       %th Competitor
-      %th Score
+      %th Rank
       %th Place
   %tbody.competitor_statuses
     - @competitors.each do |competitor|
@@ -23,13 +23,12 @@
         %td
           - competitor_score = @street_scores.select{ |s| s.competitor == competitor}.first.try(:val_1)
           - if policy(@judge).create_scores?
-            = form_tag(update_score_judge_street_scores_path(@judge), class: "street_ranking no_dirty_check", remote: true, data: { competitor: competitor.id }) do
+            = form_tag(update_score_judge_street_scores_path(@judge), class: "no_dirty_check", remote: true, data: { competitor: competitor.id }) do
               = hidden_field_tag :competitor_id, competitor.id
               = number_field_tag :score, competitor_score, id: "score_#{competitor.id}", class: "street_score", min: 0, max: @judge.judge_type.val_1_max
           - else
             = competitor_score
         %td.place{ id: "comp_#{competitor.id}_place"}
-
 
 - unless @street_scores.empty?
   %table.top_distance_attempts
