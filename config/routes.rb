@@ -480,6 +480,7 @@ Workspace::Application.routes.draw do
       resources :award_labels, shallow: true, except: [:new, :show] do
         collection do
           post :create_by_competition
+          post :create_generic_by_competition
           post :create_labels
           get :normal_labels
           delete :destroy_all
