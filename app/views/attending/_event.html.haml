@@ -4,7 +4,7 @@
 - @registrant.registrant_event_sign_ups.each do |resu|
   - if resu.event_id == event.id
     - found_resu = resu
-- if @config.can_only_drop_or_modify_events? && !found_resu.signed_up?
+- if !policy(current_user).under_development? && @config.can_only_drop_or_modify_events? && !found_resu.signed_up?
   - disabled_event = true
 %tr{:class => "event #{disabled_event ? 'disabled_event' : ''}" }
   = f.fields_for :registrant_event_sign_ups, found_resu do |resu|
