@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725031348) do
+ActiveRecord::Schema.define(version: 20160726134005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -406,6 +406,7 @@ ActiveRecord::Schema.define(version: 20160725031348) do
     t.boolean  "request_emergency_contact",                                 default: true,       null: false
     t.boolean  "request_responsible_adult",                                 default: true,       null: false
     t.boolean  "registrants_should_specify_default_wheel_size",             default: true,       null: false
+    t.datetime "add_event_end_date",                                                             null: false
   end
 
   create_table "event_translations", force: :cascade do |t|

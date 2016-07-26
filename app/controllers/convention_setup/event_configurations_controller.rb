@@ -155,7 +155,8 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
     params.require(:event_configuration).permit(:italian_requirements,
                                                 :iuf,
                                                 :test_mode, :usa,
-                                                :display_confirmed_events
+                                                :display_confirmed_events,
+                                                :add_event_end_date
                                                )
   end
 

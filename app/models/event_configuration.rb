@@ -45,6 +45,7 @@
 #  request_emergency_contact                     :boolean          default(TRUE), not null
 #  request_responsible_adult                     :boolean          default(TRUE), not null
 #  registrants_should_specify_default_wheel_size :boolean          default(TRUE), not null
+#  add_event_end_date                            :datetime         not null
 #
 
 class EventConfiguration < ActiveRecord::Base
@@ -159,6 +160,11 @@ class EventConfiguration < ActiveRecord::Base
 
   def online_payment?
     paypal_mode == "test" || paypal_mode == "enabled"
+  end
+
+  def can_only_drop_or_modify_events?
+    return false unless add_event_end_date.present?
+    is_date_in_the_past?(add_event_end_date)
   end
 
   def paypal_test?

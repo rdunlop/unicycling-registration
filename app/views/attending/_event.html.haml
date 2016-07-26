@@ -1,10 +1,12 @@
 - @registrant = registrant
 - disabled_event = event.artistic? && !policy(current_user).add_artistic_events?
+- found_resu = nil
+- @registrant.registrant_event_sign_ups.each do |resu|
+  - if resu.event_id == event.id
+    - found_resu = resu
+- if @config.can_only_drop_or_modify_events? && !found_resu.signed_up?
+  - disabled_event = true
 %tr{:class => "event #{disabled_event ? 'disabled_event' : ''}" }
-  - found_resu = nil
-  - @registrant.registrant_event_sign_ups.each do |resu|
-    - if resu.event_id == event.id
-      - found_resu = resu
   = f.fields_for :registrant_event_sign_ups, found_resu do |resu|
     %td.event_choice
       - if disabled_event && resu.object.signed_up?

@@ -23,5 +23,9 @@
     = f.input :display_confirmed_events
     = f.input :test_mode
 
+    = f.input :add_event_end_date, as: :date_picker
+    .description
+      After this date, only Drop or modify of registration is allowed for ALL events.
+
     %hr
     = f.button :submit
