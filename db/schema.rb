@@ -406,7 +406,7 @@ ActiveRecord::Schema.define(version: 20160726134005) do
     t.boolean  "request_emergency_contact",                                 default: true,       null: false
     t.boolean  "request_responsible_adult",                                 default: true,       null: false
     t.boolean  "registrants_should_specify_default_wheel_size",             default: true,       null: false
-    t.datetime "add_event_end_date",                                                             null: false
+    t.datetime "add_event_end_date"
   end
 
   create_table "event_translations", force: :cascade do |t|

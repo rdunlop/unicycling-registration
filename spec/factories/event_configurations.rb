@@ -45,7 +45,7 @@
 #  request_emergency_contact                     :boolean          default(TRUE), not null
 #  request_responsible_adult                     :boolean          default(TRUE), not null
 #  registrants_should_specify_default_wheel_size :boolean          default(TRUE), not null
-#  add_event_end_date                            :datetime         not null
+#  add_event_end_date                            :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
