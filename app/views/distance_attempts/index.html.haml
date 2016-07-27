@@ -1,15 +1,16 @@
 %h1= "#{@competition} - #{DistanceAttempt.model_name.human(count: 2)}"
 
-#notice
+.row
+  #notice
 
 = render partial: 'competitor_lookup'
 
-.l--2up
-  .l--column
+.row
+  .small-12.medium-6.columns
     = render "form"
-  #competitor_details_holder.l--column
+  #competitor_details_holder.small-12.medium-6.columns
 
-.attempts_lists
+.attempts_lists.left-aligned
   .recent_attempt_list
     = render partial: "attempt_list", locals: {title: "Recent Attempts", list: @recent_distance_attempts, display_delete: policy(@judge).can_judge? }
     (only the recent  ~20 are listed)

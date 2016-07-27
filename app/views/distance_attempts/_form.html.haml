@@ -12,11 +12,9 @@
       = f.number_field :distance, class: "distance_input", autocomplete: 'off', required: true, min: 0
   .row
     .small-6.columns.text-right
-      %label.distance_label Fault
+      = f.label :fault, class: "distance_fault_label"
     .small-6.columns.text-left
-      .switch
-        = f.check_box :fault, class: "distance_input"
-        = f.label :fault, class: "distance_fault_label"
+      = f.check_box :fault, class: "distance_input"
   .row
     .small-12.columns
       = f.button :submit, "Enter Attempt", {:class => 'add_distance_attempt_button action_button multiclick' }
