@@ -27,7 +27,9 @@ class TieBreakAdjustmentsController < ApplicationController
   # POST /judges/#/tie_break_adjustments
   def create
     authorize @judge, :can_judge?
+
     @tie_break_adjustment = TieBreakAdjustment.new(tie_break_adjustment_params)
+    @tie_break_adjustment.judge = @judge
     if @tie_break_adjustment.save
       flash[:notice] = 'Tie Break Adjustment was successfully created.'
     else
@@ -75,6 +77,6 @@ class TieBreakAdjustmentsController < ApplicationController
   end
 
   def tie_break_adjustment_params
-    params.require(:tie_break_adjustment).permit(:judge_id, :competitor_id, :tie_break_place)
+    params.require(:tie_break_adjustment).permit(:competitor_id, :tie_break_place)
   end
 end
