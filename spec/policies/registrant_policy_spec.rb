@@ -148,7 +148,7 @@ describe RegistrantPolicy do
         describe "on an authorized laptop" do
           let(:authorized_laptop?) { true }
 
-          it { expect(subject).not_to permit(user_context, my_registrant) }
+          it { expect(subject).to permit(user_context, my_registrant) }
         end
 
         describe "as a super_admin" do
