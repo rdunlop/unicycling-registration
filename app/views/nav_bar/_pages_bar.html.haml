@@ -1,6 +1,9 @@
 - cache_i18n ['pages_bar', Page] do
   - if Page.ordinary.any?
-    %nav.top-bar.hide-for-small-only{ data: { options: "is_hover: false", topbar: true }, role: "navigation" }
+    .title-bar{ data: { responsive_toggle: "pages", hide_for: "large" } }
+      .title-bar-title{ data: { toggle: true } }
+        = "Pages"
+    %nav.top-bar#pages
       .top-bar-left
-        %ul.menu.horizontal.dropdown{ data: { dropdown_menu: true} }
+        %ul.menu.horizontal{ data: { responsive_menu: "drilldown medium-dropdown" } }
           = render "nav_bar/pages"

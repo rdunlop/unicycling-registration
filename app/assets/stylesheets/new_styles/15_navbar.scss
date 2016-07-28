@@ -23,8 +23,12 @@ $height: 50px;
 .title-bar-title {
   width: 100%;
   text-align: center;
+  cursor: pointer;
 }
 
+.top-bar-title {
+  color: white;
+}
 
 .breadcrumbs {
   padding: 0.5em 1em;

@@ -22,39 +22,24 @@
       </style>
   %body
     = render partial: "layouts/admin_headers"
-    .off-canvas-wrapper
-      .off-canvas-wrapper-inner{ data: { off_canvas_wrapper: true } }
-        .off-canvas.position-left#offCanvas{ data: { off_canvas: true } }
-          %button.close-button{ type: "button", aria: { label: "Close menu" }, data: { close: true } }
-            %span{ aria: { hidden: "true" } } &times;
-          = render "nav_bar/side_nav"
-        .off-canvas-content{ data: { off_canvas_content: true } }
-          #container
-            %div.non_printable
-              .title-bar.show-for-small-only{ data: { topbar: true }, role: "navigation" }
-                .title-bar-title
-                  = @config.short_name
-                .title-bar-left
-                  %button.menu_icon{ type: "button", data: { toggle: "offCanvas" } } Menu
-                - if user_signed_in?
-                  .title-bar-right
-                    = link_to t('nav_bar.top_nav.sign_out'), destroy_user_session_path, :method => :delete
+    #container
+      %div.non_printable
 
-              = render "layouts/test_mode"
-              = render "nav_bar/top_nav"
-              = render "nav_bar/admin_bar"
-              = render "nav_bar/pages_bar"
+        = render "layouts/test_mode"
+        = render "nav_bar/top_nav"
+        = render "nav_bar/admin_bar"
+        = render "nav_bar/pages_bar"
 
-              - if user_signed_in?
-                %nav{ role: "navigation" }
-                  = render "shared/breadcrumbs"
-              - else
-                = render "shared/event_details_page"
+        - if user_signed_in?
+          %nav{ role: "navigation" }
+            = render "shared/breadcrumbs"
+        - else
+          = render "shared/event_details_page"
 
-            #main_area
-              #main
-                = render "shared/flashes"
-                = content_for?(:content) ? yield(:content) : yield
-            = render partial: "layouts/footer"
+      #main_area
+        #main
+          = render "shared/flashes"
+          = content_for?(:content) ? yield(:content) : yield
+      = render partial: "layouts/footer"
   - if content_for?(:wysiwyg)
     = tinymce

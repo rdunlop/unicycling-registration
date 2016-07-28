@@ -1,16 +1,29 @@
 - cache_i18n ['admin_bar', current_user, @config] do
   - if user_signed_in? && current_user.roles.any?
-    %nav.top-bar.hide-for-small-only#admin_bar{ data: { topbar: true }, role: "navigation" }
+    .title-bar{ data: { responsive_toggle: "admin-bar-menu", hide_for: "large" } }
+      .title-bar-title{ data: { toggle: true } }
+        = "Admin bar"
+    %nav.top-bar#admin-bar-menu
       .top-bar-left
-        %ul.menu.horizontal
+        %ul.menu.vertical.large-horizontal
           = render "nav_bar/admin_set_one"
-          %li
-            %a{ href: "#", data: { toggle: "advanced_admin_bar_two advanced_admin_bar_three"} }= t(".advanced_admin_bar")
-    %nav.top-bar.hide#advanced_admin_bar_two{ data: { toggler: "hide", topbar: true }, role: "navigation" }
+
+- cache_i18n ['admin_bar2', current_user, @config] do
+  - if user_signed_in? && current_user.roles.any?
+    .title-bar{ data: { responsive_toggle: "admin-bar-menu2", hide_for: "large" } }
+      .title-bar-title{ data: { toggle: true } }
+        = "Admin bar 2"
+    %nav.top-bar#admin-bar-menu2
       .top-bar-left
-        %ul.menu.horizontal
+        %ul.menu.vertical.large-horizontal
           = render "nav_bar/admin_set_two"
-    %nav.top-bar.hide#advanced_admin_bar_three{ data: { toggler: "hide", topbar: true }, role: "navigation" }
+
+- cache_i18n ['admin_bar2', current_user, @config] do
+  - if user_signed_in? && current_user.roles.any?
+    .title-bar{ data: { responsive_toggle: "admin-bar-menu3", hide_for: "large" } }
+      .title-bar-title{ data: { toggle: true } }
+        = "Admin bar 3"
+    %nav.top-bar#admin-bar-menu3
       .top-bar-left
-        %ul.menu.horizontal
+        %ul.menu.vertical.large-horizontal
           = render "nav_bar/admin_set_three"
