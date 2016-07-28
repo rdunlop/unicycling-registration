@@ -36,6 +36,7 @@
 
 //= require attending
 //= require block_displayer
+//= require block_visible
 //= require block_visible_based_on_select
 //= require chosen_enabler
 //= require competitors
