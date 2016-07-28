@@ -21,6 +21,10 @@
     = link_to "Set Competition Wave Times", competition_wave_times_path(@competition)
     page to specify the start time for each wave.
 
+%hr
+.non_printable
+  = link_to "View sorted by ID", edit_competition_sign_ins_path(@competition, sort: "id")
+
 = render partial: "shared/error_messages", object: @competition
 - if @competitors.any?
   = simple_form_for @competition, url: competition_sign_ins_path(@competition), method: :put do |f|

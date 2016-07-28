@@ -1,5 +1,11 @@
 %h2= "#{@competition} Sign-In"
 
+.non_printable
+  = link_to "View PDF (default sort)", competition_sign_ins_path(@competition, format: :pdf)
+  %br
+  = link_to "Sort by ID", competition_sign_ins_path(@competition, sort: "id")
+  = link_to "(pdf)", competition_sign_ins_path(@competition, sort: "id", format: :pdf)
+
 %table.full.grid.race.sign_in_sheet
   %thead
     %tr
