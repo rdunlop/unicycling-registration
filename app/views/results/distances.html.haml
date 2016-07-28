@@ -15,7 +15,7 @@
       %th Completed?
   %tbody
     - cache [@competition] do
-      - @competition.competitors.each do |competitor|
+      - @competition.competitors.active.each do |competitor|
         - cache [competitor] do
           %tr
             %td= competitor.bib_number
