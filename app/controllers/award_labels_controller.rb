@@ -161,6 +161,17 @@ class AwardLabelsController < ApplicationController
     names += build_names_from_labels(labels, separate_registrants)
 
     Prawn::Labels.types = {
+      "Spanish4716" => {
+        "paper_size" => "A4",
+        "top_margin" => 28.09,
+        "bottom_margin" => 28.09,
+        "left_margin" => 28.09,
+        "right_margin" => 28.09,
+        "columns" => 5,
+        "rows" => 13,
+        "column_gutter" => 20,
+        "row_gutter" => 0
+      },
       "Avery5293" => {
         "paper_size" => "LETTER",
         "top_margin" => 38.23, # 0.531"
@@ -356,7 +367,7 @@ module Prawn
       linecount = (split_lines = record.split("\n")).length
 
       # 15 is estimated max character length per line.
-      split_lines.each {|line| linecount += line.length / 13 }
+      split_lines.each {|line| linecount += line.length / 20 } # Total hack to make square labels work.
 
       # -10 accounts for the overflow margins
       rowheight = @document.grid.row_height - 10
