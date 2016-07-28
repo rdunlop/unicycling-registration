@@ -299,7 +299,7 @@ class Competition < ActiveRecord::Base
   end
 
   def sorted_competitors
-    competitors.sort{|a, b| a.bib_number.to_i <=> b.bib_number.to_i }
+    competitors.active.sort{|a, b| a.bib_number.to_i <=> b.bib_number.to_i }
   end
 
   def other_eligible_registrants
