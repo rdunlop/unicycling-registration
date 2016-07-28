@@ -426,6 +426,7 @@ Workspace::Application.routes.draw do
       end
       member do
         get :scores
+        get :distances
       end
     end
     # get "results", to: "results#index"

@@ -1,0 +1,28 @@
+%h1 #{@competition} Preliminary Results
+
+%p
+  These are the results so far in the system. More results may be entered throughout the competition day.
+
+= @competition.updated_at
+%table.sortable
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Gender
+      %th Country
+      %th Age Group
+      %th Best Successful Distance
+      %th Completed?
+  %tbody
+    - cache [@competition] do
+      - @competition.competitors.each do |competitor|
+        - cache [competitor] do
+          %tr
+            %td= competitor.bib_number
+            %td= competitor.name
+            %td= competitor.gender
+            %td= competitor.country
+            %td= competitor.age_group_entry_description
+            %td= competitor.max_successful_distance
+            %td= competitor.no_more_jumps? ? "Yes" : ""

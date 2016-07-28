@@ -44,4 +44,10 @@ class ResultsController < ApplicationController
     @combined_competition = @competition.combined_competition
     redirect_to root_url, alert: "competition has no viewable scores" if @combined_competition.nil?
   end
+
+  # Display the current results for HighJump/LongJump
+  def distances
+    @competition = Competition.find(params[:id])
+    redirect_to root_url, alert: "competition has no viewable scores" unless @competition.high_long_event?
+  end
 end

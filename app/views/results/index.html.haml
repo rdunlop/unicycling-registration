@@ -49,6 +49,11 @@
             - if competition.combined_competition
               = link_to "Preliminary Calculated Results", scores_result_path(competition)
               %br
+
+            - if competition.high_long_event?
+              = link_to "Preliminary Results", distances_result_path(competition)
+              %br
+
             - if !competition.published? && competition.has_age_group_entry_results?
               - competition.published_age_group_entries.each do |entry|
                 = link_to entry, competition_published_age_group_entry_path(competition, entry), title: "published at #{entry.published_formatted}"

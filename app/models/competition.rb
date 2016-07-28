@@ -510,6 +510,10 @@ class Competition < ActiveRecord::Base
     end
   end
 
+  def high_long_event?
+    ["High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"].include?(event_class)
+  end
+
   def distance_attempt_manager
     case event_class
     when "High/Long"
