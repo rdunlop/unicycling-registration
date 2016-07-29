@@ -41,6 +41,7 @@ Please import a Comma-Separated-File (Windows CSV Format) file with the followin
 %p
   Import a semi-colon separated file (UNICON 18 format)
 = form_tag(import_csv_user_competition_two_attempt_entries_path(@user, @competition, advanced: true), {:method => :post, :multipart=>true}) do
+  = hidden_field_tag :is_start_times, @is_start_time
   .row
     .small-6.columns
       = label_tag :file, "Source File"
