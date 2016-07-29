@@ -32,6 +32,22 @@ Please import a Comma-Separated-File (Windows CSV Format) file with the followin
     .small-12.medium-6.columns
       = submit_tag "Import CSV", class: "button"
 
+%hr
+
+%h2 Advanced CSV Import
+
+%b Include NO Header row
+
+%p
+  Import a semi-colon separated file (UNICON 18 format)
+= form_tag(import_csv_user_competition_two_attempt_entries_path(@user, @competition, advanced: true), {:method => :post, :multipart=>true}) do
+  .row
+    .small-6.columns
+      = label_tag :file, "Source File"
+    .small-6.columns
+      = file_field_tag :file
+  = submit_tag "Load Chip File to Temp Table", class: "button"
+
 %table.sortable.two_attempt_entries
   = render "table_header"
   %tbody
