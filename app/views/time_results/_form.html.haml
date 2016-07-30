@@ -27,9 +27,9 @@
           %td= f.number_field :facade_minutes, {min: 0}
         - else
           %td= f.number_field :minutes, {min: 0}
+        %td= f.number_field :seconds, {min: 0}
         - if @competition.data_entry_format.hundreds?
           %td= f.number_field :facade_hundreds, {min: 0}
-        %td= f.number_field :seconds, {min: 0}
         - if @competition.data_entry_format.thousands?
           %td= f.number_field :thousands, {min: 0}
         %td= f.select :status, TimeResult.status_values, include_blank: false
