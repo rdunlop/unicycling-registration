@@ -14,7 +14,7 @@
         %th= Competitor.state_or_country_description(@config.usa?)
 
     %tbody
-      - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
+      - competitors = @competition.competitors.active.includes(:members => [:registrant => [:contact_detail]]).active
       - competitors = competitors.reorder("competitors.lowest_member_bib_number")
       - competitors.each do |comp|
         -# Why is this cached with i18n?
