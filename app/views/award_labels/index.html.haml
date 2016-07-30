@@ -1,6 +1,6 @@
 %h1 Award Labels
 .non_printable
-  %h2 New Menu: Create by Competition
+  %h2 Create by Competition
   = form_tag(create_by_competition_user_award_labels_path(@user), {method: :post}) do
     .row
       .small-12.medium-6.columns.text-right
@@ -10,6 +10,16 @@
     .row
       .small-12.columns
         = submit_tag "Create Labels for Selected Competition", class: "button success"
+  %hr
+  = form_tag(create_generic_by_competition_user_award_labels_path(@user), {method: :post}) do
+    .row
+      .small-12.medium-6.columns.text-right
+        = label_tag :competition_id, "Competition"
+      .small-12.medium-6.columns
+        = select_tag :competition_id, options_from_collection_for_select(Competition.includes(:event).order(:name), "id", "to_s"), :include_blank => true, class: 'chosen-select'
+    .row
+      .small-12.columns
+        = submit_tag "Create Labels (Generic) for Selected Competition", class: "button success"
   %hr
   %h2 Print Labels Sheet
   = link_to "Announcer Sheet (pdf)", announcer_sheet_user_award_labels_path(@user, format: :pdf)

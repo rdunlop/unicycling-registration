@@ -91,6 +91,51 @@ class AwardLabelsController < ApplicationController
     end
   end
 
+  # POST /user/:id/award_labels/create_generic_by_competition
+  def create_generic_by_competition
+    competition = Competition.find(params[:competition_id])
+    min_place = 1
+    max_place = @config.max_award_place
+    n = 0
+
+    # Age Groups
+    if competition.has_age_group_entry_results?
+      competition.age_group_entries.each do |age_group_entry|
+        (min_place..max_place).each do |place|
+          award_label = AwardLabel.new
+          award_label.user = current_user
+          award_label.populate_generic_age_group_from_competition(competition, age_group_entry, place)
+          award_label.save!
+          n += 1
+        end
+      end
+    else
+      (min_place..max_place).each do |place|
+        award_label = AwardLabel.new
+        award_label.user = current_user
+        award_label.populate_generic_age_group_from_competition(competition, nil, place)
+        award_label.save!
+        n += 1
+      end
+    end
+
+    if competition.has_experts?
+      ["Male", "Female"].each do |gender|
+        (min_place..max_place).each do |place|
+          award_label = AwardLabel.new
+          award_label.user = current_user
+          award_label.populate_generic_expert_from_competition(competition, place, gender)
+          award_label.save!
+          n += 1
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to user_award_labels_path(@user), notice: "Created #{n} labels." }
+    end
+  end
+
   def create_labels
     min_place = set_int_if_present(params[:minimum_place], 1)
     max_place = set_int_if_present(params[:maximum_place], 5)
