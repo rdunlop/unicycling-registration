@@ -28,8 +28,8 @@ class PointsScoringClass < BaseScoringClass
     "external_results"
   end
 
-  def competitor_dq?(_competitor)
-    false
+  def competitor_dq?(competitor)
+    competitor.external_result.try(:disqualified?)
   end
 
   # Used when trying to destroy all results for a competition

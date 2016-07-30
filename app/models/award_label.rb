@@ -43,7 +43,7 @@ class AwardLabel < ActiveRecord::Base
     self.bib_number = registrant.bib_number
   end
 
-  def populate_generic_expert_from_competition(competition, place)
+  def populate_generic_expert_from_competition(competition, place, gender)
     # competition_name
     self.line_1 = competition.award_title_name
     # category_name
@@ -51,7 +51,7 @@ class AwardLabel < ActiveRecord::Base
       if competition.num_members_per_competitor == "Two" || competition.num_members_per_competitor == "Three or more"
         "Expert"
       else
-        "Expert #{competitor.gender}"
+        "Expert #{gender}"
       end
 
     self.place = place
@@ -62,12 +62,7 @@ class AwardLabel < ActiveRecord::Base
     # competition_name
     self.line_1 = competition.award_title_name
     # category_name
-    self.line_2 =
-      if competition.age_group_type.present?
-        age_group_entry.to_s
-      else
-        competition.award_subtitle_name
-      end
+    self.line_2 = age_group_entry.try(:to_s) || competition.award_subtitle_name
 
     self.place = place
     self.registrant = Registrant.first
