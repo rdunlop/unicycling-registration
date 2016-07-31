@@ -37,6 +37,9 @@
   - when "Chip-Timing"
     - if policy(competition).modify_result_data?
       %li= link_to "Import Chip CSV", display_chip_user_competition_import_results_path(current_user, competition)
+  - when "Swiss Track"
+    - if policy(competition).modify_result_data?
+      %li= link_to "Import Swiss Data", user_competition_swiss_results_path(current_user, competition)
 
   - if competition.imports_times? && policy(competition).modify_result_data?
     %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition, is_start_times: false)

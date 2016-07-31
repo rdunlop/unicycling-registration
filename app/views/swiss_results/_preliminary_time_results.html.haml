@@ -1,0 +1,9 @@
+%h3 Preliminary Time Results
+
+%table.import_results
+  =# render "imported_time_result_thead"
+  %tbody
+    - @time_results.each do |tr|
+      %tr
+        %th= tr.bib_number
+    =# render partial: 'preliminary_time_result', collection: @import_results, as: :import_result

@@ -29,12 +29,14 @@ class SwissHeatResult
   end
 
   attr_accessor :bib_number, :heat, :lane, :minutes, :seconds, :thousands, :status
+  attr_accessor :raw
 
   # Create a SwissHeatResult from 3 strings
   def initialize(heat, bib_number, lane, time)
     @heat = heat.to_i
     @bib_number = bib_number.to_i
     @lane = lane.to_i
+    @raw = time
     process_time(time)
   end
 
@@ -64,48 +66,4 @@ class SwissHeatResult
       "DQ"
     end
   end
-  #   return false unless valid_file?(file)
-
-  #   upload = Upload.new("\t")
-  #   raw_data = upload.extract_csv(file)
-  #   raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
-  #   self.num_rows_processed = 0
-  #   self.errors = nil
-  #   process_raw_rows(heat, raw_data)
-  # end
-
-  # def process_raw_rows(heat, raw_data)
-  #   begin
-  #     HeatLaneResult.transaction do
-  #       raw_data.each do |raw|
-  #         process_single_row(heat, raw)
-  #       end
-  #     end
-  #   rescue ActiveRecord::RecordInvalid => invalid
-  #     @errors = invalid
-  #     return false
-  #   end
-  #   true
-  # end
-
-  # def process_single_row(heat, raw)
-  #   row_hash = convert_to_hash(raw)
-  #   lane = row_hash[:lane]
-
-  #   result = HeatLaneResult.new(
-  #     entered_by: @user,
-  #     entered_at: DateTime.current,
-  #     heat: heat,
-  #     lane: lane,
-  #     raw_data: raw,
-  #     competition: @competition,
-  #     minutes: row_hash[:minutes],
-  #     seconds: row_hash[:seconds],
-  #     thousands: row_hash[:thousands],
-  #     status: (row_hash[:disqualified] ? "DQ" : "active")
-  #   )
-  #   if result.save!
-  #     self.num_rows_processed += 1
-  #   end
-  # end
 end
