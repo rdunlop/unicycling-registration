@@ -4,7 +4,7 @@
 - if matching_competitor.try(:competition) == import_result.competition
   %td.competitor_exists Yes
 - else
-  - import_into_matching_competitions = false # disabled for now
+  - import_into_matching_competitions = import_result.competition.import_results_into_other_competition?
   - if import_into_matching_competitions
     - other_competition = reg.matching_competition_in_event(import_result.competition.event)
     - if other_competition

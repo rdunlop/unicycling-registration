@@ -15,6 +15,7 @@ en:
         award_title_name: Award Title
         award_subtitle_name: Award Subtitle
         has_experts: Calculate Experts too
+        import_results_into_other_competition: Import Results into other Competition
     models:
       competition:
         one: Competition

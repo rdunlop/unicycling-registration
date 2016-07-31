@@ -52,6 +52,9 @@ en:
           The Sign in form is enabled automatically for some events (like Track). Use this option
           if you want to enter crank-length, and other details for an event which doesn't have sign-in
           forms by default.
+        import_results_into_other_competition: |
+          When importing results, if the registrant is not assigned to this competition, but assigned to
+          another competition within the same event, this will import the results there, after approving.
       event_choice:
         tooltip: This will be presented when the user hovers over the label
         optional: Allows the user to choose not to enter data in this field

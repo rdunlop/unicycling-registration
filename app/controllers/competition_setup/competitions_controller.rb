@@ -68,7 +68,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
                                         :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,
                                         :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
-                                        :sign_in_list_enabled, :time_entry_columns,
+                                        :sign_in_list_enabled, :time_entry_columns, :import_results_into_other_competition,
                                         competition_sources_attributes: [:id, :event_category_id, :gender_filter, :min_age, :max_age, :competition_id, :max_place, :_destroy])
   end
 

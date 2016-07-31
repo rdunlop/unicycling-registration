@@ -90,7 +90,7 @@ class ImportResult < ActiveRecord::Base
     competitor = matching_competitor
     target_competition = competition
     if competitor.nil?
-      import_into_matching_competitions = false
+      import_into_matching_competitions = import_result.competition.import_results_into_other_competition?
       if import_into_matching_competitions
         matching_competition = matching_registrant.matching_competition_in_event(competition.event)
         if matching_competition
