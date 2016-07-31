@@ -80,39 +80,15 @@ class Upload
     arr[@laps_column] unless @laps_column.nil?
   end
 
-  def convert_full_time_to_hash(results, ft)
-    if ft == "DQ" || ft == "DSQ"
+  def convert_full_time_to_hash(results, full_time)
+    if full_time == "DQ" || full_time == "DSQ"
       results[:status] = "DQ"
-      return
     else
       results[:status] = nil
+      results.merge!(TimeParser.new(full_time).result)
     end
 
-    if ft.index(":").nil?
-      # no minutes
-      results[:minutes] = 0
-      seconds_and_hundreds = ft
-    else
-      split_by_minutes = ft.split(':')
-      if split_by_minutes.length == 3
-        hours = split_by_minutes[0].to_i
-        minutes = split_by_minutes[1].to_i
-        results[:minutes] = minutes + (hours * 60)
-      else
-        results[:minutes] = split_by_minutes[0].to_i # full_time[0..(full_time.index(":")-1)].to_i
-      end
-      seconds_and_hundreds = split_by_minutes[-1] # full_time[full_time.index(":")+1..-1]
-    end
-
-    index = seconds_and_hundreds.index(".")
-    results[:seconds] = seconds_and_hundreds[0..(index - 1)].to_i
-
-    thous = seconds_and_hundreds[(index + 1)..-1]
-    if thous.length == 1
-      results[:thousands] = thous.to_i * 100
-    else
-      results[:thousands] = thous.to_i
-    end
+    results
   end
 
   def find_full_time(arr)
