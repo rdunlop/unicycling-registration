@@ -1,0 +1,9 @@
+- registrant_best_time = registrant.registrant_best_times.find_by(event: event_category.event) || RegistrantBestTime.new(registrant: registrant, event: event_category.event)
+= simple_form_for(registrant_best_time, url: event_category_best_time_path(event_category, registrant.id), method: :put, remote: true) do |f|
+  = f.hidden_field :id
+  = f.input :source_location
+  = f.input :formatted_value, placeholder: registrant_best_time.hint
+  = f.submit "Update", class: "multiclick button"
+
+- if registrant_best_time.persisted?
+  = link_to "Delete", event_category_best_time_path(event_category, registrant_best_time), method: :delete, remote: true

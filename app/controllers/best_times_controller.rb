@@ -2,22 +2,23 @@ class BestTimesController < ApplicationController
   before_action :load_and_authorize_event_category
   before_action :add_breadcrumbs
 
-  def show
+  def index
     @registrants = @event_category.signed_up_registrants
   end
 
   # AJAX request to update a best time
   def update
-    if params[:registrant_best_time][:id].present?
-      @registrant_best_time = RegistrantBestTime.find(params[:registrant_best_time][:id])
-      @registrant_best_time.update_attributes(registrant_best_time_params)
-    else
-      @registrant_best_time = RegistrantBestTime.new(registrant_best_time_params)
-      @registrant_best_time.event = @event
-    end
+    @registrant_best_time = RegistrantBestTime.find_or_initialize_by(event: @event, registrant_id: params[:id])
 
+    @registrant_best_time.update_attributes(registrant_best_time_params)
     @registrant_best_time.save
     # Format JS
+  end
+
+  def destroy
+    @registrant_best_time = RegistrantBestTime.find(params[:id])
+    @registrant_best_time.destroy
+    @registrant = @registrant_best_time.registrant
   end
 
   private
@@ -34,6 +35,6 @@ class BestTimesController < ApplicationController
   end
 
   def registrant_best_time_params
-    params.require(:registrant_best_time).permit(:source_location, :formatted_value, :registrant_id)
+    params.require(:registrant_best_time).permit(:source_location, :formatted_value)
   end
 end

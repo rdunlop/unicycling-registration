@@ -1,0 +1,8 @@
+el = $($.trim('<%= escape_javascript render :partial => "/best_times/registrant_form", locals: { registrant: @registrant, event_category: @event_category } %>'))
+
+form_element = $("#best_time_form_<%= @registrant.id %>")
+form_element.children().remove()
+form_elemnet.append(el)
+
+$("#best_time_<%= @registrant.id %>").effect("highlight", {color: "green"}, 3000);
+$('#notice').html(""); // Clear the notices on success

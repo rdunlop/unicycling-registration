@@ -265,7 +265,7 @@ Workspace::Application.routes.draw do
       member do
         get :sign_ups
       end
-      resource :best_times, only: [:show, :update]
+      resources :best_times, only: [:index, :update, :destroy]
     end
 
     get '/convention_setup', to: 'convention_setup/convention_setup#index'
