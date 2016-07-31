@@ -412,7 +412,7 @@ module Prawn
       linecount = (split_lines = record.split("\n")).length
 
       # 15 is estimated max character length per line.
-      split_lines.each {|line| linecount += line.length / 20 } # Total hack to make square labels work.
+      split_lines.each {|line| linecount += line.length / 13 } # Total hack to make square labels work.
 
       # -10 accounts for the overflow margins
       rowheight = @document.grid.row_height - 10
