@@ -35,9 +35,9 @@ describe TwoAttemptEntryAdvancedImporter do
       expect(entry.thousands_1).to be_nil
       expect(entry.status_1).to eq("DQ")
 
-      expect(entry.minutes_2).to eq(0)
-      expect(entry.seconds_2).to eq(0)
-      expect(entry.thousands_2).to eq(0)
+      expect(entry.minutes_2).to be_nil
+      expect(entry.seconds_2).to be_nil
+      expect(entry.thousands_2).to be_nil
       expect(entry.status_2).to eq("DQ")
 
       expect(entry.bib_number).to eq(30)

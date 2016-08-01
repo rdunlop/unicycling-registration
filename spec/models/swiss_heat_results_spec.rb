@@ -21,5 +21,12 @@ describe SwissHeatResult do
   it "marks dqs properly" do
     result = described_class.from_string("DNK\tdisq. Rot\t555\t1", 14)
     expect(result.status).to eq("DQ")
+    expect(result.status_description).to eq("False Start")
+  end
+
+  it "marks Scratched properly" do
+    result = described_class.from_string("DNK\tScratched\t555\t1", 14)
+    expect(result.status).to eq("DQ")
+    expect(result.status_description).to eq("Restart")
   end
 end

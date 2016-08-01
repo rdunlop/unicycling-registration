@@ -1,0 +1,30 @@
+%table.sortable
+  %thead
+    %tr
+      %th Heat
+      %th Lane
+      %th ID
+      %th Time
+      %th Name
+      %th Status
+      %th Status Description
+      %th
+  %tbody
+    - time_results.each do |tr|
+      - heat_lane = tr.heat_lane_result
+      %tr
+        %td= heat_lane.try(:heat)
+        %td= heat_lane.try(:lane)
+        %td= tr.bib_number
+        %td= tr.full_time
+        %td= tr.competitor
+        %td= tr.status
+        %td= tr.status_description
+        %td
+          - if display_dq
+            .js--toggle{ data: { toggle_target: "#tr_dq_#{tr.id}"} }
+              Enter DQ
+            .div.is--hidden{ id: "tr_dq_#{tr.id}" }
+              = form_for(tr, url: user_competition_swiss_result_dq_single_path(@user, @competition, tr)) do
+                = text_field_tag :reason, "Restart"
+                = submit_tag "DQ"

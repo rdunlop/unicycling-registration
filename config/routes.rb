@@ -470,12 +470,20 @@ Workspace::Application.routes.draw do
             post :approve
 
             get  :data_entry
-            get :import_csv, as: "display_csv", action: :display_csv
+            get :display_csv
             post :import_csv
-            get :import_chip, as: "display_chip", action: :display_chip
+            get :display_chip
             post :import_chip
             delete :destroy_all
           end
+        end
+        resources :swiss_results, only: [:index] do
+          collection do
+            post :import
+            post :approve
+            delete :destroy_all
+          end
+          patch :dq_single
         end
       end
       resources :award_labels, shallow: true, except: [:new, :show] do

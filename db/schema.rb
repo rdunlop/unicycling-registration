@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731114027) do
+ActiveRecord::Schema.define(version: 20160801054601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1081,6 +1081,7 @@ ActiveRecord::Schema.define(version: 20160731114027) do
     t.integer  "entered_by_id",                                   null: false
     t.boolean  "preliminary"
     t.integer  "heat_lane_result_id"
+    t.string   "status_description"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree
