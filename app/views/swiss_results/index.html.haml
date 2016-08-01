@@ -1,24 +1,20 @@
 %h1 Import Swiss Track Racing Data
 
-%h2 Swiss-Data Import Instructions
+%h2.js--toggle{ data: { toggle_target: "#instructions" } } Swiss-Data Import Instructions
 
-%p This page is for e-timer data import from the Swiss Timing Team system.
+#instructions.is--hidden
+  %p This page is for e-timer data import from the Swiss Timing Team system.
 
-%p Please import a Tab-Separated-File file with the following format
+  %p Please import a Tab-Separated-File file with the following format
 
-%h3 Document Format
+  %h3 Document Format
 
-.row
-  .small-12.columns
-    %b Example Entry
-    (ID: Column 3 (<b>557</b>), Time: Column 2 (<b>00:23:28.106</b>), Lane (<b>3</b>))
-  .small-12.columns
-    %pre 3 00:00:13.973  277 1 Monika Sveistrup  "0-10 20"" Female, 20"" Wheel"  Female          00:00:00.186
-
-%p
-  %b= t("note")
-  Columns are counted from "1".
-%hr
+  .row
+    .small-12.columns
+      %b Example Entry
+      (ID: Column 3 (<b>557</b>), Time: Column 2 (<b>00:23:28.106</b>), Lane (<b>3</b>))
+    .small-12.columns
+      %pre 3 00:23:28.106  557 3 Monika Sveistrup  "0-10 20"" Female, 20"" Wheel"  Female          00:00:00.186
 
 %h3 Upload Data
 
@@ -35,9 +31,13 @@
       = number_field_tag :heat, nil, autocomplete: "off"
   = submit_tag "Load Data File to Temp Table", class: "button"
 
-%hr
-= render :partial => "preliminary_time_results"
+.row
+  .small-12.medium-6.columns
+    = render partial: "preliminary_time_results"
 
-= link_to "Accept these Results", approve_user_competition_swiss_results_path(@user, @competition), method: :post, data: {:confirm => t("are_you_sure") }, class: "button success"
+    = link_to "Accept these Results", approve_user_competition_swiss_results_path(@user, @competition), method: :post, data: {:confirm => t("are_you_sure") }, class: "button success"
 
-= link_to "Delete these Results (to start over)", destroy_all_user_competition_swiss_results_path(@user, @competition), method: :delete, data: {:confirm => t("are_you_sure") }, class: "button alert"
+    = link_to "Delete these Results (to start over)", destroy_all_user_competition_swiss_results_path(@user, @competition), method: :delete, data: {:confirm => t("are_you_sure") }, class: "button alert"
+  .small-12.medium-6.columns
+    = render partial: "previous_time_results", competitors: @bib_numbers
+

@@ -483,6 +483,7 @@ Workspace::Application.routes.draw do
             post :approve
             delete :destroy_all
           end
+          patch :dq_single
         end
       end
       resources :award_labels, shallow: true, except: [:new, :show] do

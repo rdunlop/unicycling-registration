@@ -10,6 +10,8 @@ class SwissResultsController < ApplicationController
 
   def index
     add_breadcrumb "Import Swiss Data"
+
+    @previous_time_results = @competition.time_results.where(competitor: @time_results.map(&:competitor), entered_by: current_user)
   end
 
   def import
@@ -53,6 +55,19 @@ class SwissResultsController < ApplicationController
         format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
       end
     end
+  end
+
+  def dq_single
+    @time_result = TimeResult.find(params[:swiss_result_id])
+    @time_result.status = "DQ"
+    @time_result.status_description = params[:reason]
+    if @time_result.save
+      flash[:notice] = "Disqualified"
+    else
+      flash[:alert] = "Error marking as dq"
+    end
+
+    redirect_to user_competition_swiss_results_path(@user, @competition)
   end
 
   private
