@@ -28,7 +28,8 @@ class SwissHeatResult
     new(heat, array[2], array[3], array[1])
   end
 
-  attr_accessor :bib_number, :heat, :lane, :minutes, :seconds, :thousands, :status
+  attr_accessor :bib_number, :heat, :lane, :minutes, :seconds, :thousands
+  attr_accessor :status, :status_description
   attr_accessor :raw
 
   # Create a SwissHeatResult from 3 strings
@@ -43,6 +44,7 @@ class SwissHeatResult
   def process_time(full_time)
     if disqualification?(full_time)
       self.status = disqualified_status(full_time)
+      self.status_description = disqualification_description(full_time)
       self.minutes = 0
       self.seconds = 0
       self.thousands = 0
@@ -50,6 +52,7 @@ class SwissHeatResult
       time_result = TimeParser.new(full_time).result
 
       self.status = "active"
+      self.status_description = nil
       self.minutes = time_result[:minutes]
       self.seconds = time_result[:seconds]
       self.thousands = time_result[:thousands]
@@ -62,8 +65,28 @@ class SwissHeatResult
 
   def disqualified_status(full_time)
     case full_time.downcase
-    when "gestürzt", "scratched", "nicht am start", "disq. rot", "disqualifiziert", "disq. blau"
+    when "gestürzt", "scratched", "nicht am start", "disq. rot", "disq. rot agh", "disqualifiziert", "disq. blau", "nicht im ziel"
       "DQ"
+    end
+  end
+
+  def disqualification_description(full_time)
+    case full_time.downcase
+    when "gestürzt"
+      "Dismount"
+    when "scratched"
+      "Restart"
+    when "nicht am start"
+      "DNS"
+    when "disq. rot"
+      "False Start"
+    when "disq. rot agh"
+      "Lane"
+    when "disqualifiziert"
+    when "disq. blau"
+      "5m Line"
+    when "vicht im ziel"
+      "DNF"
     end
   end
 end

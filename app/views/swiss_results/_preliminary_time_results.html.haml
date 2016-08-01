@@ -1,9 +1,22 @@
 %h3 Preliminary Time Results
 
 %table.import_results
-  =# render "imported_time_result_thead"
+  %thead
+    %tr
+      %th ID
+      %th Minutes
+      %th Seconds
+      %th Thousands
+      %th Name
+      %th Status
+      %th Status Description
   %tbody
     - @time_results.each do |tr|
       %tr
-        %th= tr.bib_number
-    =# render partial: 'preliminary_time_result', collection: @import_results, as: :import_result
+        %td= tr.bib_number
+        %td= tr.minutes
+        %td= tr.seconds
+        %td= tr.thousands
+        %td= tr.competitor
+        %td= tr.status
+        %td= tr.status_description

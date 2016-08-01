@@ -24,13 +24,13 @@ class SwissResultsController < ApplicationController
     redirect_to user_competition_swiss_results_path(@user, @competition)
   end
 
-  # DELETE /users/#/competitions/#/import_results/destroy_all
+  # DELETE /users/#/competitions/#/swiss_results/destroy_all
   def destroy_all
     @time_results.destroy_all
     redirect_to :back
   end
 
-  # # POST /users/#/competitions/#/import_results/approve
+  # # POST /users/#/competitions/#/swiss_results/approve
   def approve
     authorize @competition, :create_preliminary_result?
 
@@ -42,7 +42,7 @@ class SwissResultsController < ApplicationController
           time_result.save!
         end
       end
-    rescue Exception => ex
+    rescue StandardError => ex
       errors = ex
     end
 

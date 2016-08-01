@@ -19,6 +19,7 @@
 #  entered_by_id       :integer          not null
 #  preliminary         :boolean
 #  heat_lane_result_id :integer
+#  status_description  :string
 #
 # Indexes
 #

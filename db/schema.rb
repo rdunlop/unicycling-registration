@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726134005) do
+ActiveRecord::Schema.define(version: 20160801054601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,28 +178,29 @@ ActiveRecord::Schema.define(version: 20160726134005) do
 
   create_table "competitions", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "name",                          limit: 255
+    t.string   "name",                                  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "age_group_type_id"
-    t.boolean  "has_experts",                               default: false,                       null: false
-    t.string   "scoring_class",                 limit: 255
-    t.string   "start_data_type",               limit: 255
-    t.string   "end_data_type",                 limit: 255
-    t.boolean  "uses_lane_assignments",                     default: false,                       null: false
+    t.boolean  "has_experts",                                       default: false,                       null: false
+    t.string   "scoring_class",                         limit: 255
+    t.string   "start_data_type",                       limit: 255
+    t.string   "end_data_type",                         limit: 255
+    t.boolean  "uses_lane_assignments",                             default: false,                       null: false
     t.datetime "scheduled_completion_at"
-    t.boolean  "awarded",                                   default: false,                       null: false
-    t.string   "award_title_name",              limit: 255
-    t.string   "award_subtitle_name",           limit: 255
-    t.string   "num_members_per_competitor",    limit: 255
-    t.boolean  "automatic_competitor_creation",             default: false,                       null: false
+    t.boolean  "awarded",                                           default: false,                       null: false
+    t.string   "award_title_name",                      limit: 255
+    t.string   "award_subtitle_name",                   limit: 255
+    t.string   "num_members_per_competitor",            limit: 255
+    t.boolean  "automatic_competitor_creation",                     default: false,                       null: false
     t.integer  "combined_competition_id"
-    t.boolean  "order_finalized",                           default: false,                       null: false
+    t.boolean  "order_finalized",                                   default: false,                       null: false
     t.integer  "penalty_seconds"
     t.datetime "locked_at"
     t.datetime "published_at"
-    t.boolean  "sign_in_list_enabled",                      default: false,                       null: false
-    t.string   "time_entry_columns",                        default: "minutes_seconds_thousands"
+    t.boolean  "sign_in_list_enabled",                              default: false,                       null: false
+    t.string   "time_entry_columns",                                default: "minutes_seconds_thousands"
+    t.boolean  "import_results_into_other_competition",             default: false,                       null: false
   end
 
   add_index "competitions", ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
@@ -1080,6 +1081,7 @@ ActiveRecord::Schema.define(version: 20160726134005) do
     t.integer  "entered_by_id",                                   null: false
     t.boolean  "preliminary"
     t.integer  "heat_lane_result_id"
+    t.string   "status_description"
   end
 
   add_index "time_results", ["competitor_id"], name: "index_time_results_on_competitor_id", using: :btree

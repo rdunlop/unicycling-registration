@@ -7,14 +7,16 @@ class SwissResultImporter < BaseImporter
     self.num_rows_processed = 0
     self.errors = nil
 
+    current_row = nil
     begin
       TimeResult.transaction do
         swiss_results.each do |swiss_result|
+          current_row = swiss_result
           process_single_swiss_result(swiss_result, heat)
         end
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      @errors = invalid
+      @errors = "#{invalid} -> Original: #{current_row.bib_number} #{current_row.raw}"
       return false
     end
   end
@@ -39,6 +41,7 @@ class SwissResultImporter < BaseImporter
     result = TimeResult.new(
       competitor: competitor,
       status: swiss_result.status,
+      status_description: swiss_result.status_description,
       minutes: swiss_result.minutes,
       seconds: swiss_result.seconds,
       thousands: swiss_result.thousands,
