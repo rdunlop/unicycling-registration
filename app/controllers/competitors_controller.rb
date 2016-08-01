@@ -29,7 +29,7 @@ class CompetitorsController < ApplicationController
   before_action :load_competition, except: [:edit, :update, :destroy, :withdraw, :update_row_order]
   before_action :load_competitor, only:    [:edit, :update, :destroy, :withdraw, :update_row_order]
 
-  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit, :display_candidates]
+  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit]
   before_action :authorize_sort, only: :update_row_order
 
   # GET /competitions/:competition_id/1/competitors/new
@@ -47,42 +47,6 @@ class CompetitorsController < ApplicationController
     add_breadcrumb "Manage Competitors"
     @registrants = @competition.signed_up_registrants
     @competitors = @competition.competitors.includes(members: [:registrant])
-  end
-
-  # show the competitors, their overall places, and their times
-  def display_candidates
-    authorize @competition.competitors.new
-    add_breadcrumb "Display Competition Candidates"
-    @competitors = @competition.signed_up_competitors
-
-    if params[:gender]
-      @gender = params[:gender]
-      @lanes_for_places = []
-      (1..8).each do |i|
-        @lanes_for_places[i] = params["lane_for_place_#{i}"]
-      end
-    end
-  end
-
-  # process a form submission which includes HEAT&Lane for each candidate, creating the competitor as well as the lane assignment
-  def create_from_candidates
-    authorize @competition.competitors.new
-
-    heat = params[:heat].to_i
-    competitors = params[:competitors]
-    begin
-      LaneAssignment.transaction do
-        competitors.each do |_, competitor|
-          reg = Registrant.find_by!(bib_number: competitor[:bib_number])
-          lane_assignment = LaneAssignment.new(registrant_id: reg.id, lane: competitor[:lane].to_i, heat: heat, competition: @competition)
-          lane_assignment.save!
-        end
-      end
-      flash[:notice] = "Created Lane Assignments & Competitors"
-    rescue Exception => ex
-      flash[:alert] = "Error creating lane assignments/competitors #{ex}"
-    end
-    redirect_to competition_competitors_path(@competition)
   end
 
   def add

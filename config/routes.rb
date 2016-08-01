@@ -561,7 +561,10 @@ Workspace::Application.routes.draw do
           post :add
           post :add_all
           delete :destroy_all
-          get :display_candidates
+        end
+      end
+      resources :candidates, only: [:index] do
+        collection do
           post :create_from_candidates
         end
       end

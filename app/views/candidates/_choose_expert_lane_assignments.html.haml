@@ -1,6 +1,6 @@
 %h3 Which Competitors do you want to assign? Heat/Lane
 
-= form_tag(display_candidates_competition_competitors_path(@competition), method: :get) do
+= form_tag(competition_candidates_path(@competition), method: :get) do
   .row
     .small-6.columns
       = label_tag :gender

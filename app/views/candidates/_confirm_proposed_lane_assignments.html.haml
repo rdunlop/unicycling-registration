@@ -1,6 +1,6 @@
 %h3 Assign Competitors to Heat/Lane
 
-= form_tag(create_from_candidates_competition_competitors_path(@competition), method: :post) do
+= form_tag(create_from_candidates_competition_candidates_path(@competition), method: :post) do
   = label_tag :heat
   = text_field_tag :heat
   %table.sortable
@@ -23,4 +23,4 @@
               = comp_f.hidden_field :bib_number, value: comp.bib_number
               = comp_f.text_field :lane, value: @lanes_for_places[comp.overall_place]
   = submit_tag "Assign Heat/Lanes", class: "button"
-  = link_to "cancel", display_candidates_competition_competitors_path
+  = link_to "cancel", competition_candidates_path(@competition)
