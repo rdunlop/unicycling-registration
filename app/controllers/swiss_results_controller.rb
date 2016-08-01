@@ -11,7 +11,7 @@ class SwissResultsController < ApplicationController
   def index
     add_breadcrumb "Import Swiss Data"
 
-    @previous_time_results = @competition.time_results.where(competitor: @time_results.map(&:competitor), entered_by: current_user)
+    @previous_time_results = @competition.time_results.where(preliminary: false, competitor: @time_results.map(&:competitor), entered_by: current_user)
 
     @entered_heats = @competition.heat_lane_results.pluck(:heat).uniq.sort
   end

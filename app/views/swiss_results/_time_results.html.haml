@@ -13,8 +13,8 @@
     - time_results.each do |tr|
       - heat_lane = tr.heat_lane_result
       %tr
-        %td= heat_lane.try(:heat)
-        %td= heat_lane.try(:lane)
+        %td.js--highlightIfBlank= heat_lane.try(:heat)
+        %td.js--highlightIfBlank= heat_lane.try(:lane)
         %td= tr.bib_number
         %td= tr.full_time
         %td= tr.competitor
