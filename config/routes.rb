@@ -45,7 +45,12 @@ Workspace::Application.routes.draw do
     # ADMIN (for use in Setting up the system)
     #
     #
-    resources :age_group_types, except: [:new], controller: "compete/age_group_types"
+    resources :age_group_types, except: [:new], controller: "compete/age_group_types" do
+      member do
+        post :duplicate
+      end
+    end
+
     resources :age_group_entries, only: [], controller: "compete/age_group_entries" do
       post :update_row_order, on: :collection
     end

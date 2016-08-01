@@ -15,6 +15,7 @@
       %td
         = link_to t("edit"), edit_age_group_type_path(age_group_type)
         = link_to t("delete"), age_group_type_path(age_group_type), method: :delete, data: { confirm: t("are_you_sure") }
+        = link_to "Duplicate", duplicate_age_group_type_path(age_group_type), method: :post, data: { confirm: "Copy this Age Group Type?" }
 %br
 %h3
   New

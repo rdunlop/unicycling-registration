@@ -2,7 +2,7 @@ class Compete::AgeGroupTypesController < CompetitionSetup::BaseCompetitionSetupC
   before_action :authenticate_user!
   before_action :authorize_admin
   before_action :add_breadcrumbs
-  before_action :load_age_group_type, only: [:edit, :show, :update, :destroy]
+  before_action :load_age_group_type, only: [:edit, :show, :update, :destroy, :duplicate]
 
   respond_to :html
 
@@ -21,6 +21,25 @@ class Compete::AgeGroupTypesController < CompetitionSetup::BaseCompetitionSetupC
     end
 
     respond_with(@age_group_type, location: age_group_types_path, action: "index")
+  end
+
+  # POST /age_group_types/:id/duplicate
+  def duplicate
+    new_age_group_type = @age_group_type.dup
+    new_age_group_type.age_group_entries = @age_group_type.age_group_entries.collect do |entry|
+      new_entry = entry.dup
+      new_entry.age_group_type = new_age_group_type
+      new_entry
+    end
+
+    new_age_group_type.name += " (Copy)"
+    if new_age_group_type.save
+      flash[:notice] = "Duplicated Age Group Type"
+    else
+      flash[:alert] = "Error duplicating age group type"
+    end
+
+    redirect_to age_group_types_path
   end
 
   def show
