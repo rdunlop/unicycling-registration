@@ -19,11 +19,7 @@
   %h3 Competition Results Lock Status: Locked
   = link_to 'Unlock', unlock_competition_path(@competition), :method => :delete, data: { confirm: t("are_you_sure") }, class: "button small secondary"
 
-
-- if policy(@competition).publish_age_group_entry?
-  - if @competition.has_age_group_entry_results?
-    %h3 Preliminary Age Group Entry Results
-    = render partial: "publish_age_group_entries"
+= render partial: "publish_age_group_entries"
 
 - if policy(@competition).publish?
   %h3 Official Result
