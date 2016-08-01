@@ -24,7 +24,7 @@ class TwoAttemptEntryAdvancedImporter < BaseImporter
   end
 
   # Example data
-  # 30;Hürzeler;Ramona;19,64;19,40;Switzerland;23;w;IUF-Slalom
+  # 30;Smith;Ramona;19,64;19,40;Switzerland;23;w;IUF-Slalom
   # 65;Rondeau;Antoine;24,66;disq;France;22;m;IUF-Slalom
   # 268;Jorgensen;Jonas ;abgem;abgem;Denmark;20;m;IUF-Slalom
   def build_entry(is_start_time, raw)
@@ -42,8 +42,6 @@ class TwoAttemptEntryAdvancedImporter < BaseImporter
       minutes_1 = 0
       seconds_1 = broken_apart[0]
       thousands_1 = broken_apart[1].to_i * 10
-    elsif status_1 == "DQ"
-      minutes_1 = 0
     end
 
     if status_2 == "active"
@@ -51,8 +49,6 @@ class TwoAttemptEntryAdvancedImporter < BaseImporter
       minutes_2 = 0
       seconds_2 = broken_apart[0]
       thousands_2 = broken_apart[1].to_i * 10
-    elsif status_2 == "DQ"
-      minutes_2 = 0
     end
 
     TwoAttemptEntry.new(

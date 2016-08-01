@@ -32,6 +32,35 @@ describe TwoAttemptEntry do
       expect { two_attempt_entry.import! }.to change(TimeResult, :count).by(2)
     end
   end
+
+  describe "creating time_results from two attempt entry with no data" do
+    let(:two_attempt_entry) do
+      TwoAttemptEntry.new(
+        user: user,
+        bib_number: competitor1.bib_number,
+        competition: competition,
+
+        minutes_1: nil,
+        seconds_1: nil,
+        thousands_1: nil,
+        status_1: "",
+
+        minutes_2: nil,
+        seconds_2: nil,
+        thousands_2: nil,
+        status_2: ""
+      )
+    end
+
+    it "can save to the database" do
+      expect(two_attempt_entry.save).to eq(true)
+    end
+
+    it "can import the results to time results" do
+      two_attempt_entry.save
+      expect { two_attempt_entry.import! }.to change(TimeResult, :count).by(0)
+    end
+  end
 end
 
 # == Schema Information
