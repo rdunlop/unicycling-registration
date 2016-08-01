@@ -20,17 +20,22 @@
 
 = form_tag(import_user_competition_swiss_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
   .row
-    .small-6.columns
+    .small-6.medium-3.columns
       = label_tag :file, "Source File"
-    .small-6.columns
       = file_field_tag :file
-  .row
-    .small-6.columns
+    .small-6.medium-3.columns
       = label_tag :heat
-    .small-6.columns
       = number_field_tag :heat, nil, autocomplete: "off"
+    .small-6.medium-6.columns
+      %b Stored Heats:
+      - if @entered_heats.count > 10
+        = precede "..." do
+          = @entered_heats.last(10).join(", ")
+      - else
+        = @entered_heats.join(", ")
   = submit_tag "Load Data File to Temp Table", class: "button"
 
+%hr
 .row
   .small-12.medium-6.columns
     = render partial: "preliminary_time_results"
