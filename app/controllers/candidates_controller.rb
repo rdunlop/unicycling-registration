@@ -12,12 +12,26 @@ class CandidatesController < ApplicationController
     add_breadcrumb "Display Competition Candidates"
     @competitors = @competition.signed_up_competitors
 
+    if params[:sort]
+      case params[:sort]
+      when "result"
+        @competitors = @competitors.sort_by{|a| a.result }
+      when "gender"
+        @competitors = @competitors.sort_by{|a| [a.gender, a.overall_place] }
+      end
+    end
+
     if params[:gender]
       @gender = params[:gender]
       @lanes_for_places = []
       (1..8).each do |i|
         @lanes_for_places[i] = params["lane_for_place_#{i}"]
       end
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf "index" }
     end
   end
 

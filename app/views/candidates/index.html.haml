@@ -3,6 +3,10 @@
 %p
   These are the competitors who are currently candidates for the #{@competition.award_title_name}
 
+.non_printable
+  = link_to "PDF (by gender)", competition_candidates_path(@competition, format: :pdf, sort: "gender")
+  = link_to "PDF (by result)", competition_candidates_path(@competition, format: :pdf, sort: "result")
+
 %table.sortable
   %thead
     %tr
