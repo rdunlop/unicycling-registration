@@ -1,0 +1,7 @@
+%td= registrant.bib_number
+%td= registrant.to_s
+%td= registrant.age
+%td= registrant.gender
+%td= registrant.country
+%td= registrant.describe_event_hash(event)[:additional]
+%td= render "registrant_form", registrant: registrant, event_category: event_category

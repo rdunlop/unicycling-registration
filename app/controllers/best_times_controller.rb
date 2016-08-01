@@ -12,6 +12,7 @@ class BestTimesController < ApplicationController
 
     @registrant_best_time.update_attributes(registrant_best_time_params)
     @registrant_best_time.save
+    @registrant = @registrant_best_time.registrant
     # Format JS
   end
 

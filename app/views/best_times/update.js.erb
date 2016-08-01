@@ -10,6 +10,12 @@
 
   $("#best_time_<%= @registrant_best_time.registrant_id %>").effect("highlight", {color: "red"}, 3000);
 <% else %>
+  el = $($.trim('<%= escape_javascript(render partial: "/best_times/registrant_row", locals: { registrant: @registrant, event: @event, event_category: @event_category }) %>'))
+
+  td_cell = $("#best_time_<%= @registrant.id %>")
+  td_cell.children().remove()
+  td_cell.append(el)
+
   $("#best_time_<%= @registrant_best_time.registrant_id %>").effect("highlight", {color: "green"}, 3000);
   $('#notice').html(""); // Clear the notices on success
 <% end %>
