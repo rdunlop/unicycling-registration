@@ -13,6 +13,7 @@
         - if @competition.data_entry_format.thousands?
           %th= f.label :thousands
         %th= f.label :status
+        %th= f.label :status_description
         %th= f.label :comments
         %th= f.label :comments_by
         - if @competition.has_num_laps?
@@ -33,6 +34,7 @@
         - if @competition.data_entry_format.thousands?
           %td= f.number_field :thousands, {min: 0}
         %td= f.select :status, TimeResult.status_values, include_blank: false
+        %td= f.text_field :status_description
         %td= f.text_field :comments
         %td= f.text_field :comments_by
         - if @competition.has_num_laps?

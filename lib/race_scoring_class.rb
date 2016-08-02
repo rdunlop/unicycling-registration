@@ -34,6 +34,17 @@ class RaceScoringClass < BaseScoringClass
     competitor.has_result? && (competitor.time_results.all?(&:disqualified?) || competitor.best_time_in_thousands == 0)
   end
 
+  def competitor_dq_status_description(competitor)
+    return nil unless competitor_dq?(competitor)
+
+    if competitor.time_results.any?
+      time_result = competitor.time_results.order(:id).last
+      "DQ #{time_result.status_description}" if time_result.disqualified?
+    else
+      "DQ"
+    end
+  end
+
   # Used when trying to destroy all results for a competition
   def all_competitor_results
     @competition.time_results

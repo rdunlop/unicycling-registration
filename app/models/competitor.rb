@@ -206,7 +206,7 @@ class Competitor < ActiveRecord::Base
   end
 
   def place_formatted
-    return "DQ" if disqualified?
+    return scoring_helper.competitor_dq_status_description(self) if disqualified?
 
     if place == 0 || place.nil?
       return "Unknown"

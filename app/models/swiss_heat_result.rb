@@ -85,7 +85,7 @@ class SwissHeatResult
     when "disqualifiziert"
     when "disq. blau"
       "5m Line"
-    when "vicht im ziel"
+    when "nicht im ziel"
       "DNF"
     end
   end

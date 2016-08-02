@@ -20,6 +20,10 @@ class BaseScoringClass
     false
   end
 
+  def competitor_dq_status_description
+    "DQ"
+  end
+
   def imports_times?
     false
   end
