@@ -39,7 +39,7 @@ class RaceScoringClass < BaseScoringClass
 
     if competitor.time_results.any?
       time_result = competitor.time_results.order(:id).last
-      "DQ #{time_result.status_description}" if time_result.disqualified?
+      ["DQ", time_result.status_description].compact.join(" ")
     else
       "DQ"
     end
