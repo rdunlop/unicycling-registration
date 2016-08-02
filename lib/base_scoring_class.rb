@@ -20,7 +20,7 @@ class BaseScoringClass
     false
   end
 
-  def competitor_dq_status_description
+  def competitor_dq_status_description(_)
     "DQ"
   end
 
