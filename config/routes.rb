@@ -675,7 +675,8 @@ Workspace::Application.routes.draw do
       resources :tie_break_adjustments, only: [:index, :create]
       resources :street_scores, only: [:index, :destroy] do
         collection do
-          post :update_score
+          post :update_order
+          post :set_rank
         end
       end
     end

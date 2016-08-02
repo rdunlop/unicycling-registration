@@ -1,0 +1,13 @@
+el = $($.trim('<%= escape_javascript(render partial: "/street_scores/current_ranks", locals: { judge: @judge, street_scores: @street_scores }) %>'))
+
+parent = $('#current_ranks')
+parent.children().remove()
+parent.append(el)
+set_js_sortable();
+
+<% if @score.persisted? %>
+  p = $('#row_<%= @score.competitor_id %>')
+  p.fadeOut()
+<% else %>
+  alert("error saving score")
+<% end %>

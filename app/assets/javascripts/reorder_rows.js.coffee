@@ -3,7 +3,9 @@
 # on each individual row, you should have an "item-id" data element, which holds
 # the value of the object's id.
 
-$ ->
+exports = exports ? @
+
+set_js_sortable = ->
   sortable_table = $('.js--sortable')
   if sortable_table.length > 0
     table_width = sortable_table.width()
@@ -25,12 +27,19 @@ $ ->
         ui.item.children('td').effect('highlight', {}, 1000)
       update: (e, ui) ->
         item_id = ui.item.data('item-id')
-        console.log(item_id)
         position = ui.item.index() # this will not work with paginated items, as the index is zero on every page
         $.ajax(
           type: 'POST'
           url: sortable_table.data('target')
           dataType: 'json'
           data: { id: item_id, row_order_position: position }
+          complete: (request) =>
+            if request.status == 200
+              eval(request.responseText)
         )
     )
+
+$ ->
+  set_js_sortable()
+
+exports.set_js_sortable = set_js_sortable

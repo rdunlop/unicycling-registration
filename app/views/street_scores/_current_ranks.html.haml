@@ -1,0 +1,15 @@
+%table#ranked_competitors.js--sortable{ data: { target: update_order_judge_street_scores_path(judge) } }
+  %thead
+    %tr
+      %th Rank
+      %th ID
+      %th Competitor
+      %th Starting Order
+  %tbody
+    - street_scores.sort_by(&:val_1).each do |competitor_score|
+      - competitor = competitor_score.competitor
+      %tr.item{ data: { item_id: competitor.id } }
+        %th= competitor_score.val_1
+        %td= competitor.bib_number
+        %td= competitor.to_s
+        %th= competitor.position
