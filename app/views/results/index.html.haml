@@ -16,10 +16,10 @@
       .small-12.medium-6.columns.text-left
         = submit_tag "View Results", class: "button"
 
-%table.sortable
+%table
   %thead
     %tr
-      %th Competition End
+      // %th Competition End
       %th Competition
       %th
       //%th Status
@@ -28,10 +28,10 @@
       %th Results
       %th Date Published
   %tbody
-    - Competition.includes(:published_age_group_entries).all.each do |competition|
+    - Competition.includes(:published_age_group_entries).order(:scheduled_completion_at).all.each do |competition|
       - cache_i18n [competition] do
         %tr
-          %td= competition.end_time_to_s
+          // %td= competition.end_time_to_s
           %td= competition.award_title_name
           %td= competition.award_subtitle_name
           // competition_presenter = CompetitionPresenter.new(competition)
