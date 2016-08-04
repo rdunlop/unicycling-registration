@@ -4,7 +4,7 @@ class Compete::SignInsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
   before_action :set_parent_breadcrumbs
-  before_action :load_competitors_by_order, only: [:show, :edit]
+  before_action :load_competitors_by_order, only: [:show, :edit, :update]
 
   respond_to :html
 
