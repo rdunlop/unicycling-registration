@@ -16,7 +16,7 @@ class Notifications < TenantAwareMailer
   def registrant_access_accepted(target_registrant, requesting_user)
     @target_registration = target_registrant.to_s
 
-    mail to: requesting_user.email, subject: 'Registrantion Access Granted'
+    mail to: requesting_user.email, subject: 'Registration Access Granted'
   end
 
   def send_mass_email(subject, body, addresses)
