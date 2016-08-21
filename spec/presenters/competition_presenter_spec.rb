@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CompetitionPresenter do
-  let(:competition) { FactoryGirl.build_stubbed(:competition) }
+  let(:competition) { FactoryGirl.create(:competition) }
   let(:presenter) { described_class.new(competition) }
 
   describe "#status" do

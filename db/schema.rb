@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801054601) do
+ActiveRecord::Schema.define(version: 20160821150034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,8 +222,10 @@ ActiveRecord::Schema.define(version: 20160801054601) do
     t.datetime "withdrawn_at"
     t.integer  "tier_number",                          default: 1,     null: false
     t.string   "tier_description"
+    t.integer  "age_group_entry_id"
   end
 
+  add_index "competitors", ["competition_id", "age_group_entry_id"], name: "index_competitors_on_competition_id_and_age_group_entry_id", using: :btree
   add_index "competitors", ["competition_id"], name: "index_competitors_event_category_id", using: :btree
 
   create_table "contact_details", force: :cascade do |t|

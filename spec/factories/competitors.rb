@@ -18,10 +18,12 @@
 #  withdrawn_at             :datetime
 #  tier_number              :integer          default(1), not null
 #  tier_description         :string
+#  age_group_entry_id       :integer
 #
 # Indexes
 #
-#  index_competitors_event_category_id  (competition_id)
+#  index_competitors_event_category_id                         (competition_id)
+#  index_competitors_on_competition_id_and_age_group_entry_id  (competition_id,age_group_entry_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

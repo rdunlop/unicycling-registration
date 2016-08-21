@@ -21,14 +21,22 @@ class AgeGroupType < ActiveRecord::Base
 
   accepts_nested_attributes_for :age_group_entries, allow_destroy: true
 
-  after_save(:touch_competitions)
-  after_touch(:touch_competitions)
+  after_save :update_competitor_age_group_entries
+  after_touch :update_competitor_age_group_entries
 
   default_scope { order(:name) }
 
-  def touch_competitions
-    competitions.each do |comp|
-      comp.touch_competitors
+  # Touch all age groups so that it triggers updates
+  # to all competitors age group entries
+  def self.update_all
+    Apartment.tenant_names.each do |tenant|
+      Apartment::Tenant.switch(tenant) do
+        Rails.logger.debug("Hi #{Apartment::Tenant.current}")
+        AgeGroupType.all.find_each do |age_group_type|
+          Rails.logger.debug("H1i")
+          age_group_type.touch
+        end
+      end
     end
   end
 
@@ -41,13 +49,6 @@ class AgeGroupType < ActiveRecord::Base
     entries.first
   end
 
-  def age_group_entry_description(age, gender, default_wheel_size_id = nil)
-    Rails.cache.fetch("/age_group_type/#{id}-#{updated_at}/age/#{age}/gender/#{gender}/wheel_size/#{default_wheel_size_id}") do
-      ag_entry = age_group_entry_for(age, gender, default_wheel_size_id)
-      ag_entry.nil? ? nil : ag_entry.to_s
-    end
-  end
-
   def as_json(options = {})
     options = {
       except: [:id, :updated_at, :created_at],
@@ -58,5 +59,15 @@ class AgeGroupType < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  private
+
+  def update_competitor_age_group_entries
+    competitions.includes(:competitors).each do |competition|
+      competition.competitors.each do |competitor|
+        CompetitorAgeGroupEntryUpdateJob.perform_later(competitor.id)
+      end
+    end
   end
 end

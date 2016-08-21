@@ -18,10 +18,12 @@
 #  withdrawn_at             :datetime
 #  tier_number              :integer          default(1), not null
 #  tier_description         :string
+#  age_group_entry_id       :integer
 #
 # Indexes
 #
-#  index_competitors_event_category_id  (competition_id)
+#  index_competitors_event_category_id                         (competition_id)
+#  index_competitors_on_competition_id_and_age_group_entry_id  (competition_id,age_group_entry_id)
 #
 
 class Competitor < ActiveRecord::Base
@@ -45,6 +47,7 @@ class Competitor < ActiveRecord::Base
   has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
   has_one :external_result, dependent: :destroy
   has_many :results, dependent: :destroy, inverse_of: :competitor
+  belongs_to :age_group_entry
 
   # these are here to allow eager loading/performance optimization
   has_one :age_group_result, -> { where "results.result_type = 'AgeGroup'" }, class_name: "Result"
@@ -60,6 +63,7 @@ class Competitor < ActiveRecord::Base
 
   enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
   after_save :touch_members
+  after_save :update_age_group_entry
 
   def touch_members
     members.each do |member|
@@ -230,16 +234,11 @@ class Competitor < ActiveRecord::Base
     end
   end
 
-  def age_group_entry_description # XXX combine with the other age_group function
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age_group_entry_description") do
-      competition.get_age_group_entry_description(age, gender, wheel_size) if members.any?
-    end
-  end
+  def age_group_entry_description
+    return unless members.any?
+    return "No Age Group for #{age}-#{gender}" if age_group_entry.nil?
 
-  def age_group_entry
-    Rails.cache.fetch("/competitor/#{id}-#{updated_at}/age_group_entry") do
-      competition.age_group_type.age_group_entry_for(age, gender, wheel_size) if competition.age_group_type.present?
-    end
+    age_group_entry.to_s
   end
 
   public
@@ -503,4 +502,10 @@ class Competitor < ActiveRecord::Base
   end
 
   delegate :lower_is_better, to: :scoring_helper
+
+  private
+
+  def update_age_group_entry
+    CompetitorAgeGroupEntryUpdateJob.perform_later(id)
+  end
 end

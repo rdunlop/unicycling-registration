@@ -311,17 +311,6 @@ class Competition < ActiveRecord::Base
     end
   end
 
-  def get_age_group_entry_description(age, gender, wheel_size_id)
-    return if age_group_type.nil?
-
-    ag_entry_description = age_group_type.age_group_entry_description(age, gender, wheel_size_id)
-    if ag_entry_description.nil?
-      "No Age Group for #{age}-#{gender}"
-    else
-      ag_entry_description
-    end
-  end
-
   def has_age_group_entry_results?
     age_group_type.present?
   end
