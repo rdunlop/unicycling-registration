@@ -25,8 +25,6 @@ They are sorted in priority order.
 
 - Track Day Race Officials were unable to adjust lane assignments for heats (unable to add people to competition)
 
-- Having registrants choose a wheel size doesn't translate into an age group (under 10 age)
-
 - External Results had "pts" added next to the name many places
 
 ## Scott's new feature:
