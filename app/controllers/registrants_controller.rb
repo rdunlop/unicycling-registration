@@ -35,7 +35,7 @@
 class RegistrantsController < ApplicationController
   before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
-  before_action :load_registrant_by_bib_number, only: [:show, :results, :refresh_usa_status, :destroy, :waiver]
+  before_action :load_registrant_by_bib_number, only: [:show, :results, :refresh_usa_status, :copy_to_competitor, :copy_to_noncompetitor, :destroy, :waiver]
   before_action :authorize_registrant, only: [:show, :destroy, :refresh_usa_status, :waiver]
   before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
   before_action :skip_authorization, only: [:results]
@@ -152,6 +152,28 @@ class RegistrantsController < ApplicationController
 
   def subregion_options
     render partial: 'subregion_select', locals: {from_object: false}
+  end
+
+  def copy_to_competitor
+    authorize @registrant, :duplicate_registrant?
+    @user = @registrant.user
+    if DuplicateRegistrant.new(@registrant).to_competitor
+      flash[:notice] = "Successfully created new competitor registrant. Go set up the events, expense items, and registration costs"
+    else
+      flash[:alert] = "Error creating new competitor registrant"
+    end
+    redirect_to user_registrants_path(@user)
+  end
+
+  def copy_to_noncompetitor
+    authorize @registrant, :duplicate_registrant?
+    @user = @registrant.user
+    if DuplicateRegistrant.new(@registrant).to_noncompetitor
+      flash[:notice] = "Successfully created new noncompetitor registrant. Go set up the expense items, and registration costs"
+    else
+      flash[:alert] = "Error creating new noncompetitor registrant"
+    end
+    redirect_to user_registrants_path(@user)
   end
 
   private

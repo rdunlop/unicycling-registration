@@ -4,6 +4,10 @@ class RegistrantPolicy < ApplicationPolicy
     (user_record? && !registration_closed?) || super_admin?
   end
 
+  def duplicate_registrant?
+    event_planner? || payment_admin? || convention_admin? || super_admin?
+  end
+
   # show the summary page
   def show?
     user_record? || user.accessible_registrants.include?(record) || event_planner? || super_admin?

@@ -166,6 +166,10 @@ class Registrant < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
     registrant_type == 'competitor'
   end
 
+  def noncompetitor?
+    registrant_type == 'noncompetitor'
+  end
+
   def self.competitor
     where(registrant_type: 'competitor')
   end

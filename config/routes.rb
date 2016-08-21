@@ -384,10 +384,13 @@ Workspace::Application.routes.draw do
         get :empty_waiver
         get :subregion_options
       end
+
       member do
         get :results
         get :waiver
         put :refresh_usa_status
+        post :copy_to_competitor
+        post :copy_to_noncompetitor
       end
       resources :registrant_expense_items, only: [:create, :destroy]
       resources :standard_skill_routines, only: [:create]
