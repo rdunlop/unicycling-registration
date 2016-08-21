@@ -38,5 +38,11 @@ FactoryGirl.define do
     val_3_max 10
     val_4_max 10
     boundary_calculation_enabled false
+
+    trait :street_judge do
+      val_2_max 0
+      val_3_max 0
+      val_4_max 0
+    end
   end
 end

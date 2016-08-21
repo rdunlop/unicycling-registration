@@ -7,8 +7,9 @@ describe StreetScoresController do
     @other_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @admin
 
-    @judge = FactoryGirl.create(:judge, user_id: @user.id)
-    @other_judge = FactoryGirl.create(:judge, user_id: @other_user.id)
+    @judge_type = FactoryGirl.create(:judge_type, :street_judge)
+    @judge = FactoryGirl.create(:judge, user_id: @user.id, judge_type: @judge_type)
+    @other_judge = FactoryGirl.create(:judge, user_id: @other_user.id, judge_type: @judge_type)
 
     @comp = FactoryGirl.create(:event_competitor, competition: @judge.competition)
     @comp2 = FactoryGirl.create(:event_competitor, competition: @judge.competition)
@@ -31,22 +32,22 @@ describe StreetScoresController do
     end
     describe "when returning a list of scores" do
       before(:each) do
-        @user_score1 = FactoryGirl.create(:score, val_1: 5, judge: @judge, competitor: @comp)
         @user_score2 = FactoryGirl.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
+        @user_score1 = FactoryGirl.create(:score, val_1: 5, judge: @judge, competitor: @comp)
       end
 
-      it "should return them in descending order of val_1 points" do
+      it "should return them in ascending order of val_1 points" do
         get :index, judge_id: @judge.id
-        expect(assigns(:street_scores)).to eq([@user_score2, @user_score1])
+        expect(assigns(:street_scores)).to eq([@user_score1, @user_score2])
       end
     end
   end
 
-  describe "POST create" do
+  describe "POST set_rank" do
     describe "with valid competitor_id" do
       it "creates a new Score" do
         expect do
-          post :update_score, competitor_id: @comp2.id, score: 4, judge_id: @judge.id, format: :js
+          post :set_rank, competitor_id: @comp2.id, rank: 4, judge_id: @judge.id, format: :js
         end.to change(Score, :count).by(1)
       end
     end
