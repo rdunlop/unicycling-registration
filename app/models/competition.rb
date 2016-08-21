@@ -346,7 +346,7 @@ class Competition < ActiveRecord::Base
   end
 
   def results_list_for(ag_entry)
-    results = competitors.active.select{ |competitor| competitor.has_result? && competitor.age_group_entry == ag_entry }
+    results = competitors.active.where(age_group_entry: ag_entry).select(&:has_result?)
     results.sort!{|a, b| a.sorting_place <=> b.sorting_place}
   end
 
