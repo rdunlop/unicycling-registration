@@ -10,7 +10,7 @@
       %th # of registrants
   %tbody
     - @age_group_type.age_group_entries.each do |ag_entry|
-      - competitors_in_age_group = @competition.competitors.active.select{ |competitor| competitor.age_group_entry == ag_entry }
+      - competitors_in_age_group = @competition.competitors.active.where(age_group_entry: ag_entry)
       %tr
         %td= ag_entry
         %td= competitors_in_age_group.count
