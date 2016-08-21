@@ -1,4 +1,4 @@
-class Compete::AgeGroupEntriesController < ApplicationController
+class CompetitionSetup::AgeGroupEntriesController < ApplicationController
   before_action :authenticate_user!
   include SortableObject
   before_action :authenticate_ability

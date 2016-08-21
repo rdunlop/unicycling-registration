@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Compete::AgeGroupEntriesController do
+describe CompetitionSetup::AgeGroupEntriesController do
   before(:each) do
     sign_in FactoryGirl.create(:super_admin_user)
   end

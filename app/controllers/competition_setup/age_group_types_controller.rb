@@ -1,4 +1,4 @@
-class Compete::AgeGroupTypesController < CompetitionSetup::BaseCompetitionSetupController
+class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetitionSetupController
   before_action :authenticate_user!
   before_action :authorize_admin
   before_action :add_breadcrumbs
