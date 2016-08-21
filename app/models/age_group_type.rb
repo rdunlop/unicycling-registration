@@ -66,7 +66,7 @@ class AgeGroupType < ActiveRecord::Base
   def update_competitor_age_group_entries
     competitions.includes(:competitors).each do |competition|
       competition.competitors.each do |competitor|
-        CompetitorAgeGroupEntryUpdateJob.perform_later(competitor.id)
+        competitor.update_age_group_entry
       end
     end
   end

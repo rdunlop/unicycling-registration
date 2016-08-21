@@ -503,8 +503,6 @@ class Competitor < ActiveRecord::Base
 
   delegate :lower_is_better, to: :scoring_helper
 
-  private
-
   def update_age_group_entry
     CompetitorAgeGroupEntryUpdateJob.perform_later(id)
   end
