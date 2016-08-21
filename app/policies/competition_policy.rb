@@ -145,6 +145,10 @@ class CompetitionPolicy < ApplicationPolicy
     record.uses_tiers? && (director?(record.event) || competition_admin? || super_admin?)
   end
 
+  def manage_age_group?
+    director?(record.event) || competition_admin? || super_admin?
+  end
+
   private
 
   def view_access?

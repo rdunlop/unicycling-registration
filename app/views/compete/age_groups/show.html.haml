@@ -1,0 +1,16 @@
+%h1 #{@competition} Age Group - #{@age_group_type}
+
+%p
+  In total, there are #{@competition.competitors.active.count} competitors. This page will show how these registrants fit into the various age group entries.
+
+%table
+  %thead
+    %tr
+      %th Entry
+      %th # of registrants
+  %tbody
+    - @age_group_type.age_group_entries.each do |ag_entry|
+      - competitors_in_age_group = @competition.competitors.active.select{ |competitor| competitor.age_group_entry == ag_entry }
+      %tr
+        %td= ag_entry
+        %td= competitors_in_age_group.count
