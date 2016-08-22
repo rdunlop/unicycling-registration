@@ -31,9 +31,7 @@ class AgeGroupType < ActiveRecord::Base
   def self.update_all
     Apartment.tenant_names.each do |tenant|
       Apartment::Tenant.switch(tenant) do
-        Rails.logger.debug("Hi #{Apartment::Tenant.current}")
         AgeGroupType.all.find_each do |age_group_type|
-          Rails.logger.debug("H1i")
           age_group_type.touch
         end
       end

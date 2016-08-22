@@ -125,6 +125,8 @@ class Competition < ActiveRecord::Base
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 
+  after_save :update_age_group_if_necessary
+
   # Which columns do we expect to be presented during data-entry?
   # Not yet fully tested/working, see ImportResult:104
   def data_entry_format
@@ -588,6 +590,14 @@ class Competition < ActiveRecord::Base
     # requires_age_groups is true for discance and race scoring classes
     if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
       errors[:age_group_type_id] << "Must specify an age group when using #{scoring_class} scoring class"
+    end
+  end
+
+  def update_age_group_if_necessary
+    return unless age_group_type_id_changed?
+
+    competitors.each do |competitor|
+      competitor.update_age_group_entry
     end
   end
 end
