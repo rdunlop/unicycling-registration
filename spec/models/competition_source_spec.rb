@@ -70,7 +70,7 @@ describe CompetitionSource do
       @competitor = FactoryGirl.create(:event_competitor, competition: @source_competition)
       FactoryGirl.create(:result, place: 1, result_type: "Overall", competitor: @competitor)
 
-      expect(@cs2.signed_up_registrants.count).to eq(1)
+      expect(@cs2.reload.signed_up_registrants.count).to eq(1)
     end
     it "doesn't choose a competitor with an overall_place worse than the required" do
       @competitor = FactoryGirl.create(:event_competitor, competition: @source_competition)
