@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821150034) do
+ActiveRecord::Schema.define(version: 20160821224431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -621,6 +621,19 @@ ActiveRecord::Schema.define(version: 20160821150034) do
 
   add_index "lane_assignments", ["competition_id", "heat", "lane"], name: "index_lane_assignments_on_competition_id_and_heat_and_lane", unique: true, using: :btree
   add_index "lane_assignments", ["competition_id"], name: "index_lane_assignments_on_competition_id", using: :btree
+
+  create_table "mass_emails", force: :cascade do |t|
+    t.integer  "sent_by_id",                  null: false
+    t.datetime "sent_at"
+    t.string   "subject"
+    t.text     "body"
+    t.text     "email_addresses",                          array: true
+    t.string   "email_addresses_description"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "mass_emails", ["email_addresses"], name: "index_mass_emails_on_email_addresses", using: :gin
 
   create_table "members", force: :cascade do |t|
     t.integer  "competitor_id"

@@ -1,0 +1,16 @@
+%h1 Sent E-mails
+
+%table.sortable
+  %thead
+    %tr
+      %th Sent Date
+      %th Sent By
+      %th Subject
+      %th View
+  %tbody
+    - @emails.each do |email|
+      %tr
+        %td= email.sent_at
+        %td= email.sent_by
+        %td= email.subject
+        %td= link_to "View", sent_email_path(email)

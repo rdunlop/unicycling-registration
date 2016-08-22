@@ -325,6 +325,11 @@ Workspace::Application.routes.draw do
       collection do
         get :list
         get :download
+        get :all_sent
+      end
+
+      member do
+        get :sent
       end
     end
 

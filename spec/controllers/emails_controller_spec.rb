@@ -13,6 +13,7 @@ describe EmailsController do
       post :create, email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
+      expect(MassEmail.count).to eq(1)
       message = ActionMailer::Base.deliveries.first
       expect(message.bcc.count).to eq(2)
     end
