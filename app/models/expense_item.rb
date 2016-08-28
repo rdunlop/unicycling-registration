@@ -41,7 +41,9 @@ class ExpenseItem < ActiveRecord::Base
 
   belongs_to :cost_element, polymorphic: true, inverse_of: :expense_item
   belongs_to :expense_group, inverse_of: :expense_items
-  validates :expense_group_id, uniqueness: true, if: "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
+  validates :expense_group_id, uniqueness: {
+    message: "- You cannot add a 2nd item to this Expense Group. Using the Expense Group option 'competitor/non-competitor required' means only ONE item can exist in this expense group"
+  }, if: "(expense_group.try(:competitor_required) == true) or (expense_group.try(:noncompetitor_required) == true)"
 
   acts_as_restful_list scope: :expense_group
 
