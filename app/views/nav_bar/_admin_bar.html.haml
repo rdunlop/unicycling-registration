@@ -18,7 +18,7 @@
         %ul.menu.vertical.large-horizontal
           = render "nav_bar/admin_set_two"
 
-- cache_i18n ['admin_bar2', current_user, @config] do
+- cache_i18n ['admin_bar3', current_user, @config] do
   - if user_signed_in? && current_user.roles.any?
     .title-bar{ data: { responsive_toggle: "admin-bar-menu3", hide_for: "large" } }
       .title-bar-title{ data: { toggle: true } }
