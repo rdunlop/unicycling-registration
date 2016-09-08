@@ -26,7 +26,7 @@ require 'spec_helper'
 describe PaymentsController do
   before(:each) do
     @user = FactoryGirl.create(:user)
-    @config = FactoryGirl.create(:event_configuration)
+    @config = FactoryGirl.create(:event_configuration, event_sign_up_closed_date: Date.tomorrow)
     sign_in @user
   end
 

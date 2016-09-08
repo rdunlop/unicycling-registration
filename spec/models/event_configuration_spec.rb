@@ -199,8 +199,21 @@ describe EventConfiguration do
   end
 
   it "should be open if no periods are defined" do
+    @ev.update_attribute(:event_sign_up_closed_date, nil)
     @ev.save
     expect(EventConfiguration.closed?).to eq(false)
+  end
+
+  it "should be closed if the event_closed_date is defined, and in the past" do
+    ev = EventConfiguration.new(under_construction: false)
+    ev.event_sign_up_closed_date = Date.new(2013, 05, 01)
+    travel_to(Date.new(2013, 05, 04)) do
+      expect(ev.registration_closed?).to be_truthy
+    end
+
+    travel_to(Date.new(2013, 05, 01)) do
+      expect(ev.registration_closed?).to be_falsy
+    end
   end
 
   it "should be closed if it is under construction" do

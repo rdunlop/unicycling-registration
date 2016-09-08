@@ -66,7 +66,7 @@ FactoryGirl.define do
     custom_waiver_text "Online Waiver."
     usa false
     iuf false
-    event_sign_up_closed_date "2013-5-10"
+    event_sign_up_closed_date Date.new(2013, 5, 10)
     comp_noncomp_url nil
     test_mode true
     style_name "base_green_blue"

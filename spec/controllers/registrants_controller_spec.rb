@@ -35,7 +35,7 @@
 require 'spec_helper'
 
 describe RegistrantsController do
-  let!(:event_configuration) { FactoryGirl.create(:event_configuration) }
+  let!(:event_configuration) { FactoryGirl.create(:event_configuration, event_sign_up_closed_date: Date.tomorrow) }
   before(:each) do
     @user = FactoryGirl.create(:user)
     sign_in @user
