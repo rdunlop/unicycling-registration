@@ -205,7 +205,7 @@ GEM
     country_select (2.4.0)
       countries (~> 1.1.0)
       sort_alphabetical (~> 1.0)
-    css_splitter (0.4.5)
+    css_splitter (0.4.6)
       sprockets (>= 2.0.0)
     currencies (0.4.2)
     descendants_tracker (0.0.4)
