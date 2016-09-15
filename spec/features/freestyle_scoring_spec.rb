@@ -14,9 +14,7 @@ describe 'Judging an event' do
 
     describe "in event judging" do
       before :each do
-        within "#admin_bar" do
-          click_link "Data Entry"
-        end
+        visit '/en/welcome/data_entry_menu'
         click_link "Individual - Presentation"
       end
 

@@ -22,9 +22,12 @@ $height: 50px;
 // So that small-nav bars have a title which spans the width
 .title-bar-title {
   width: 100%;
-  text-align: center;
+  cursor: pointer;
 }
 
+.top-bar-title {
+  color: white;
+}
 
 .breadcrumbs {
   padding: 0.5em 1em;
@@ -33,6 +36,12 @@ $height: 50px;
 // search box in the top-bar
 #nav_bar_reg_id {
   width: 90px;
+}
+
+.title-bar {
+  a {
+    color: white;
+  }
 }
 
 // To make the text white
