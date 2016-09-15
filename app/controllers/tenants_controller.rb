@@ -11,6 +11,8 @@
 #
 
 class TenantsController < ApplicationController
+  # so that we can display this list without the known subdomain
+  skip_before_action :load_tenant
   before_action :skip_authorization
   layout "global"
 
