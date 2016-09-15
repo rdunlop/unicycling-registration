@@ -82,11 +82,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_tenant
-    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current) || public_tenant
-  end
-
-  def public_tenant
-    Tenant.new subdomain: 'public'
+    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current) || redirect_to(tenants_path)
   end
 
   def default_footer
