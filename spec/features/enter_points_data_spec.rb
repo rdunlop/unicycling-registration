@@ -10,9 +10,7 @@ describe 'Entering Points data' do
   describe "the event on the page" do
     before :each do
       user.add_role(:data_recording_volunteer, Competition.first)
-      within "#admin_bar" do
-        click_link "Data Entry"
-      end
+      visit '/en/welcome/data_entry_menu'
     end
 
     specify { expect(page).to have_content("Basketball") }
