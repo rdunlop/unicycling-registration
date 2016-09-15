@@ -2,7 +2,9 @@
   - if Page.ordinary.any?
     .title-bar{ data: { responsive_toggle: "pages", hide_for: "large" } }
       .title-bar-title{ data: { toggle: true } }
-        = "Pages"
+        %a{ href: "#" }
+          %button.menu-icon
+          = "Pages"
     %nav.top-bar#pages
       .top-bar-left
         %ul.menu.horizontal{ data: { responsive_menu: "drilldown medium-dropdown" } }

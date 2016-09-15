@@ -1,7 +1,9 @@
 .title-bar{ data: { responsive_toggle: "responsive-menu", hide_for: "large" } }
   .title-bar-title{ data: { toggle: true } }
-    = @config.short_name
-    Menu
+    %a{ href: "#" }
+      %button.menu-icon
+      = @config.short_name
+      Menu
 %nav.top-bar#responsive-menu
   .top-bar-left
     %ul.menu.vertical.large-horizontal

@@ -2,7 +2,9 @@
   - if user_signed_in? && current_user.roles.any?
     .title-bar{ data: { responsive_toggle: "admin-bar-menu", hide_for: "large" } }
       .title-bar-title{ data: { toggle: true } }
-        = "Admin bar"
+        %a{ href: "#" }
+          %button.menu-icon
+          = "Admin bar"
     %nav.top-bar#admin-bar-menu
       .top-bar-left
         %ul.menu.vertical.large-horizontal
@@ -12,17 +14,20 @@
   - if user_signed_in? && current_user.roles.any?
     .title-bar{ data: { responsive_toggle: "admin-bar-menu2", hide_for: "large" } }
       .title-bar-title{ data: { toggle: true } }
-        = "Admin bar 2"
+        %a{ href: "#" }
+          %button.menu-icon
+          = "Admin bar 2"
     %nav.top-bar#admin-bar-menu2
       .top-bar-left
         %ul.menu.vertical.large-horizontal
           = render "nav_bar/admin_set_two"
-
 - cache_i18n ['admin_bar3', current_user, @config] do
   - if user_signed_in? && current_user.roles.any?
     .title-bar{ data: { responsive_toggle: "admin-bar-menu3", hide_for: "large" } }
       .title-bar-title{ data: { toggle: true } }
-        = "Admin bar 3"
+        %a{ href: "#" }
+          %button.menu-icon
+          = "Admin bar 3"
     %nav.top-bar#admin-bar-menu3
       .top-bar-left
         %ul.menu.vertical.large-horizontal
