@@ -1,6 +1,21 @@
-module ApplicationHelper
+module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
+
+  def load_config_object_and_i18n
+    @config = EventConfiguration.singleton
+    I18n.available_locales = EventConfiguration.all_available_languages & @config.enabled_locales
+    set_fallbacks
+  end
+
+  # called by load_config_object_and_i18n
+  def set_fallbacks
+    fallbacks_hash = {}
+    I18n.available_locales.each do |locale|
+      fallbacks_hash[locale] = [locale, *(I18n.available_locales - [locale])]
+    end
+    Globalize.fallbacks = fallbacks_hash
+  end
 
   def log(msg)
     Rails.logger.debug msg

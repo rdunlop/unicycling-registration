@@ -17,6 +17,8 @@ class ShowAllRegistrantsPdfJob < ActiveJob::Base
       include Pundit
     end
 
+    av.load_config_object_and_i18n
+
     if order.present? && order == "id"
       @registrants = Registrant.active.reorder(:bib_number)
     else

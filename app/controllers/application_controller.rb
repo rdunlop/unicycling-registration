@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include EventsHelper
   include Pundit
 
-  before_action :load_config_object
+  before_action :load_config_object_and_i18n
   before_action :set_locale
   before_action :load_tenant
 
@@ -66,20 +66,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
-  def load_config_object
-    @config = EventConfiguration.singleton
-    I18n.available_locales = EventConfiguration.all_available_languages & @config.enabled_locales
-    set_fallbacks
-  end
-
-  def set_fallbacks
-    fallbacks_hash = {}
-    I18n.available_locales.each do |locale|
-      fallbacks_hash[locale] = [locale, *(I18n.available_locales - [locale])]
-    end
-    Globalize.fallbacks = fallbacks_hash
-  end
 
   def load_tenant
     @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current) || public_tenant
