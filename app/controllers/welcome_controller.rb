@@ -37,12 +37,6 @@ class WelcomeController < ApplicationController
       end
     end
 
-    if unmatched_tenant?
-      flash[:notice] = "Please choose a valid registration domain"
-      redirect_to tenants_path
-      return
-    end
-
     # if we have a "home" page, show them that
     if Page.exists?(slug: "home")
       redirect_to page_path("home")

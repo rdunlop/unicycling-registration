@@ -49,11 +49,6 @@ class ApplicationController < ActionController::Base
     @tenant.subdomain == Rails.application.secrets.translations_subdomain
   end
 
-  # Is the currently-entered tenant domain not matching anything on file?
-  def unmatched_tenant?
-    @tenant.new_record?
-  end
-
   # so that devise routes are properly including the locale
   # https://github.com/plataformatec/devise/wiki/How-To:--Redirect-with-locale-after-authentication-failure
   def self.default_url_options(options = {})
@@ -68,7 +63,10 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def load_tenant
-    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current) || redirect_to(tenants_path)
+    @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
+    if @tenant.nil?
+      redirect_to tenants_path, flash: { alert: "Invalid subdomain" }
+    end
   end
 
   def default_footer
