@@ -122,7 +122,7 @@ class ExportController < ApplicationController
       competitor: [competition: [],
                    members: [
                      registrant: [:competition_wheel_sizes]],
-                   external_results: [],
+                   external_result: [],
                    time_results: [],
                    distance_attempts: [],
                    scores: []]).all.find_each(batch_size: 100) do |result|
@@ -139,6 +139,7 @@ class ExportController < ApplicationController
         result.competitor.age_group_entry_description
       ]
     end
+    @data = data
 
     output_spreadsheet(headers, data, "results")
   end

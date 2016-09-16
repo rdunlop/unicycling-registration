@@ -63,4 +63,14 @@ describe ExportController do
       end
     end
   end
+
+  describe "GET results" do
+    let!(:result) { FactoryGirl.create(:result, :overall) }
+
+    it "returns much data" do
+      get :results, format: 'xls'
+      data = assigns(:data)
+      expect(data.count).to eq(1)
+    end
+  end
 end
