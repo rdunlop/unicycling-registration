@@ -50,7 +50,7 @@ describe RegistrantsController do
       last_name: "Dunlop",
       gender: "Male",
       user_id: @user.id,
-      birthday: Date.new(1982, 01, 19),
+      birthday: Date.new(1982, 1, 19),
       contact_detail_attributes: {
         address: "123 Fake Street",
         city: "Madison",
@@ -106,7 +106,7 @@ describe RegistrantsController do
 
   describe "GET waiver" do
     let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
-    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 07, 21)) }
+    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 7, 21)) }
 
     it "assigns the requested registrant as @registrant" do
       get :waiver, id: registrant.to_param
@@ -115,7 +115,7 @@ describe RegistrantsController do
     end
 
     it "sets the event-related variables" do
-      allow(Date).to receive(:today).and_return(Date.new(2012, 01, 22))
+      allow(Date).to receive(:today).and_return(Date.new(2012, 1, 22))
       get :waiver, id: registrant.to_param
 
       expect(assigns(:event_name)).to eq(event_configuration.long_name)

@@ -4,8 +4,8 @@ describe "registrants/build/add_events" do
   let(:wizard_path) { "/" }
   before(:each) do
     FactoryGirl.create(:registration_cost, :competitor,
-                       start_date: Date.new(2012, 01, 10),
-                       end_date: Date.new(2012, 02, 11))
+                       start_date: Date.new(2012, 1, 10),
+                       end_date: Date.new(2012, 2, 11))
     FactoryGirl.create(:wheel_size_24, id: 3)
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
     allow(view).to receive(:wizard_path).and_return(wizard_path)
@@ -15,8 +15,8 @@ describe "registrants/build/add_events" do
     before(:each) do
       @registrant = FactoryGirl.build(:competitor)
       FactoryGirl.create(:registration_cost,
-                         start_date: Date.new(2012, 01, 10),
-                         end_date: Date.new(2012, 02, 11))
+                         start_date: Date.new(2012, 1, 10),
+                         end_date: Date.new(2012, 2, 11))
       @ev1 = FactoryGirl.create(:event)
       @categories = [@ev1.category]
     end

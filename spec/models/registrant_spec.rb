@@ -68,12 +68,12 @@ describe Registrant do
 
   describe "with an event configuration starting date" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 05, 20))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 5, 20))
     end
 
     describe "and a registrant born on the starting day in 1982" do
       before(:each) do
-        @reg.birthday = Date.new(1982, 05, 20)
+        @reg.birthday = Date.new(1982, 5, 20)
         @reg.set_age
       end
       it "should have an age of 30" do
@@ -88,7 +88,7 @@ describe Registrant do
 
     describe "and a registrant born the day after the starting date in 1982" do
       before(:each) do
-        @reg.birthday = Date.new(1982, 05, 21)
+        @reg.birthday = Date.new(1982, 5, 21)
         @reg.set_age
       end
       it "should have an age of 29" do
@@ -152,7 +152,7 @@ describe Registrant do
     end
 
     it "can not have a birthday, while having a configuration" do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 05, 20))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 5, 20))
       @reg.birthday = nil
       expect(@reg.valid?).to eq(false)
     end
@@ -364,17 +364,17 @@ describe Registrant do
     before(:each) do
       @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
       @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
-      @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2010, 01, 01), end_date: Date.new(2022, 01, 01), expense_item: @comp_exp)
-      @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2010, 01, 01), end_date: Date.new(2022, 01, 01), expense_item: @noncomp_exp)
+      @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1), expense_item: @comp_exp)
+      @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1), expense_item: @noncomp_exp)
     end
 
     describe "with an older (PAID_FOR) registration_cost" do
       before(:each) do
         @oldcomp_exp = FactoryGirl.create(:expense_item, cost: 90)
         @oldnoncomp_exp = FactoryGirl.create(:expense_item, cost: 40)
-        @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2009, 01, 01), end_date: Date.new(2010, 01, 01),
+        @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2009, 1, 1), end_date: Date.new(2010, 1, 1),
                                                                              expense_item: @oldcomp_exp)
-        @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2009, 01, 01), end_date: Date.new(2010, 01, 01),
+        @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2009, 1, 1), end_date: Date.new(2010, 1, 1),
                                                                                    expense_item: @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)

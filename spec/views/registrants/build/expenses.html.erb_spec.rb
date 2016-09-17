@@ -4,8 +4,8 @@ describe "registrants/build/expenses" do
   let(:wizard_path) { "/" }
   before(:each) do
     FactoryGirl.create(:registration_cost, :competitor,
-                       start_date: Date.new(2012, 01, 10),
-                       end_date: Date.new(2012, 02, 11))
+                       start_date: Date.new(2012, 1, 10),
+                       end_date: Date.new(2012, 2, 11))
     @registrant = FactoryGirl.create(:competitor)
     allow(view).to receive(:wizard_path).and_return(wizard_path)
   end

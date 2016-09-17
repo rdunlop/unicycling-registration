@@ -15,7 +15,7 @@ describe PaypalPaymentsController do
       completed: false,
       cancelled: false,
       transaction_id: nil,
-      completed_date: Date.new(2012, 01, 30)
+      completed_date: Date.new(2012, 1, 30)
     }
   end
 

@@ -21,7 +21,7 @@
 require 'spec_helper'
 
 describe RegistrationCost do
-  let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07)) }
+  let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7)) }
 
   it "is valid from FactoryGirl" do
     expect(registration_cost.valid?).to eq(true)
@@ -79,10 +79,10 @@ describe RegistrationCost do
   end
 
   describe "with existing periods" do
-    let!(:comp_registration_cost1) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 01, 01), end_date: Date.new(2012, 02, 02)) }
-    let!(:noncomp_registration_cost1) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 01, 01), end_date: Date.new(2012, 02, 02)) }
-    let!(:comp_registration_cost2) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 02, 03), end_date: Date.new(2012, 04, 04)) }
-    let!(:noncomp_registration_cost2) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 02, 03), end_date: Date.new(2012, 04, 04)) }
+    let!(:comp_registration_cost1) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
+    let!(:noncomp_registration_cost1) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
+    let!(:comp_registration_cost2) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 02, 3), end_date: Date.new(2012, 4, 4)) }
+    let!(:noncomp_registration_cost2) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 2, 3), end_date: Date.new(2012, 4, 4)) }
 
     it "can retrieve only the competitor periods" do
       expect(RegistrationCost.for_type("competitor")).to match_array([comp_registration_cost1, comp_registration_cost2])
@@ -104,19 +104,19 @@ describe RegistrationCost do
     end
 
     it "can retrieve period" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 01, 15))).to eq(comp_registration_cost1)
+      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 1, 15))).to eq(comp_registration_cost1)
     end
 
     it "gets nil for missing section" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2010, 01, 01))).to be_nil
+      expect(RegistrationCost.relevant_period("competitor", Date.new(2010, 1, 1))).to be_nil
     end
 
     it "returns the first registration period INCLUDING the day AFTER the period ends" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 02, 03))).to eq(comp_registration_cost1)
+      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 2, 3))).to eq(comp_registration_cost1)
     end
 
     it "returns the second registration period +2 days after the first period ends" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 02, 04))).to eq(comp_registration_cost2)
+      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 2, 4))).to eq(comp_registration_cost2)
     end
 
     it "disregards onsite registration periods for last_online_period" do
@@ -125,7 +125,7 @@ describe RegistrationCost do
       expect(RegistrationCost.for_type("competitor").last_online_period).to eq(comp_registration_cost2)
     end
     describe "with more registration periods" do
-      let!(:comp_registration_cost0) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2010, 02, 03), end_date: Date.new(2010, 04, 04)) }
+      let!(:comp_registration_cost0) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2010, 2, 3), end_date: Date.new(2010, 4, 4)) }
 
       it "returns the periods in ascending date order" do
         registration_cost.save!
@@ -134,16 +134,16 @@ describe RegistrationCost do
     end
 
     it "can identify the current period" do
-      expect(comp_registration_cost1.current_period?(Date.new(2012, 01, 14))).to eq(true)
-      expect(comp_registration_cost2.current_period?(Date.new(2012, 01, 14))).to eq(false)
-      expect(noncomp_registration_cost1.current_period?(Date.new(2012, 01, 14))).to eq(true)
-      expect(noncomp_registration_cost2.current_period?(Date.new(2012, 01, 14))).to eq(false)
+      expect(comp_registration_cost1.current_period?(Date.new(2012, 1, 14))).to eq(true)
+      expect(comp_registration_cost2.current_period?(Date.new(2012, 1, 14))).to eq(false)
+      expect(noncomp_registration_cost1.current_period?(Date.new(2012, 1, 14))).to eq(true)
+      expect(noncomp_registration_cost2.current_period?(Date.new(2012, 1, 14))).to eq(false)
     end
     it "can identify past periods" do
-      expect(comp_registration_cost1.past_period?(Date.new(2012, 02, 20))).to eq(true)
-      expect(comp_registration_cost2.past_period?(Date.new(2012, 02, 20))).to eq(false)
-      expect(noncomp_registration_cost1.past_period?(Date.new(2012, 02, 20))).to eq(true)
-      expect(noncomp_registration_cost2.past_period?(Date.new(2012, 02, 20))).to eq(false)
+      expect(comp_registration_cost1.past_period?(Date.new(2012, 2, 20))).to eq(true)
+      expect(comp_registration_cost2.past_period?(Date.new(2012, 2, 20))).to eq(false)
+      expect(noncomp_registration_cost1.past_period?(Date.new(2012, 2, 20))).to eq(true)
+      expect(noncomp_registration_cost2.past_period?(Date.new(2012, 2, 20))).to eq(false)
     end
   end
 end

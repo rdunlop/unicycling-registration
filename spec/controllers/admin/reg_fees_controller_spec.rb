@@ -15,8 +15,8 @@ describe Admin::RegFeesController do
 
   describe "POST change the reg fee" do
     before(:each) do
-      @rp1 = FactoryGirl.create(:registration_cost, start_date: Date.new(2010, 01, 01), end_date: Date.new(2012, 01, 01))
-      @rp2 = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 01, 02), end_date: Date.new(2020, 02, 02))
+      @rp1 = FactoryGirl.create(:registration_cost, start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 1, 1))
+      @rp2 = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 1, 2), end_date: Date.new(2020, 2, 2))
       @reg = FactoryGirl.create(:competitor)
     end
 
