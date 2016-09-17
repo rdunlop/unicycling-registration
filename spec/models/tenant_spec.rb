@@ -31,12 +31,12 @@ describe Tenant do
       let!(:alias3) { FactoryGirl.create(:tenant_alias, website_alias: "my.website.com", tenant: tenant, primary_domain: true) }
 
       it "uses the default_host_domain and subdomain for default mailer" do
-        expect(tenant.base_url).to eq("http://my.website.com")
+        expect(tenant.base_url).to eq("https://my.website.com")
       end
     end
 
     it "uses the default_host_domain and subdomain for default mailer" do
-      expect(tenant.base_url).to eq("http://robin.localhost.dev")
+      expect(tenant.base_url).to eq("https://robin.localhost.dev")
     end
   end
 

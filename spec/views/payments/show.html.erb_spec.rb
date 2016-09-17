@@ -28,7 +28,7 @@ describe "payments/show" do
       assert_select "input[type=hidden][name=currency_code][value='USD']"
       assert_select "input[type=hidden][name=invoice][value='" + @payment.invoice_id + "']"
       assert_select "input[type=hidden][name=no_shipping][value='1']"
-      assert_select "input[type=hidden][name=notify_url][value='" + notification_payments_url + "']"
+      assert_select "input[type=hidden][name=notify_url][value='" + notification_payments_url(protocol: "https") + "']"
       assert_select "input[type=hidden][name=return][value='" + success_payments_url + "']"
       assert_select "input[type=hidden][name=upload][value='1']"
 
