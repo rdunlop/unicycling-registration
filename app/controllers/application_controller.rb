@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include EventsHelper
   include Pundit
 
+  before_action :set_paper_trail_whodunnit
   before_action :load_config_object_and_i18n
   before_action :set_locale
   before_action :load_tenant
