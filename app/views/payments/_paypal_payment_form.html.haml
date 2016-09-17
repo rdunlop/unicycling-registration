@@ -5,7 +5,7 @@
   = hidden_field_tag :currency_code, config.currency_code
   = hidden_field_tag :invoice, payment.invoice_id
   = hidden_field_tag :no_shipping, "1"
-  = hidden_field_tag :notify_url, notification_payments_url
+  = hidden_field_tag :notify_url, notification_payments_url(protocol: "https")
   = hidden_field_tag :return, success_payments_url
   = hidden_field_tag :upload, "1"
   - index = 0

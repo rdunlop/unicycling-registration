@@ -30,7 +30,7 @@ class Tenant < ActiveRecord::Base
 
   def base_url
     raw_url = tenant_aliases.primary.first.try(:to_s) || permanent_url
-    "http://#{raw_url}"
+    "https://#{raw_url}"
   end
 
   def permanent_url

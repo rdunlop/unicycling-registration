@@ -8,7 +8,7 @@
   (we would like to have better documentation here...but...we would like a lot of things)
 
 %p
-  = t(".ipn_url", url: "http://#{@tenant.permanent_url}/payments/notification")
+  = t(".ipn_url", url: "https://#{@tenant.permanent_url}/payments/notification")
 
 %fieldset.form__fieldset
   = simple_form_for(@event_configuration, url: update_payment_settings_event_configuration_path, method: :put) do |f|

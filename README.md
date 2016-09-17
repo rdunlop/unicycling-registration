@@ -217,25 +217,24 @@ Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 
 Paypal Settings required for proper integration:
 
-Configure your paypal account to send out IPN notifications;
+Instant Payment Notification (IPN)
+
+We used to think that the Paypal account had to have IPN settings enabled through the UI (Instructions from paypal: https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/).
+
   The <notification url> will be the hosted website URL, with /payments/notification at the end.
-  Example: http://registrationtest.unicycling-software.com/payments/notification
+  Example: https://registrationtest.unicycling-software.com/payments/notification
 
-. New Paypal UI: Login to the PayPal merchant account -> Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Getting paid and managing my risk -> Instant Payment Notifications -> ...
+NOTE: We no longer believe that this is necessary. When a user is sent to paypal to pay, that request includes the necessary IPN `notify_url` so that we will receive a message. The following settings may be necessary though:
 
-. Old Paypal UI: Login to the PayPal merchant account -> Profile -> Instant Payment Notification Preferences -> ...
-
-Then: Enter <notification url> and select radio button “Receive IPN messages” -> Save
+Auto-Return
 
 Enable Auto Return:
-  <return_url> will be http://registrationtest.unicycling-software.com/payments/
+  <return_url> will be https://registrationtest.regtest.unicycling-software.com/payments/
 
 
  New UI: Click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Selling Online -> Website preferences -> ...
 
  Old UI:  "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> ...
-
- Then: Payment Data Transfer (On), Auto Return ON: Return URL: <return_url>
 
 Set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
   "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> PayPal Account Optional (On) -> save"
