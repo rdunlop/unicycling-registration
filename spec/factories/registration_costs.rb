@@ -22,7 +22,7 @@
 
 FactoryGirl.define do
   factory :registration_cost do
-    start_date Date.new(2012, 11, 03)
+    start_date Date.new(2012, 11, 3)
     end_date Date.new(2022, 11, 27)
     association :expense_item, cost: 100
     name "Early Registration"

@@ -222,7 +222,7 @@ describe Competitor do
 
   describe "when it has multiple members" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2010, 01, 01))
+      FactoryGirl.create(:event_configuration, start_date: Date.new(2010, 1, 1))
       member = @comp.members(true).first
       @reg1 = member.registrant
 
@@ -247,7 +247,7 @@ describe Competitor do
 
     it "should display the maximum ages for all members (when they are different)" do
       travel 2.seconds do
-        @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 02, 10))
+        @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 2, 10))
         @comp2 = FactoryGirl.create(:event_competitor)
         FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
         @comp2.reload

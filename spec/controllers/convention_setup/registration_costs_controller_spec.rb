@@ -14,8 +14,8 @@ describe ConventionSetup::RegistrationCostsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      start_date: Date.new(2013, 01, 20),
-      end_date: Date.new(2013, 02, 20),
+      start_date: Date.new(2013, 1, 20),
+      end_date: Date.new(2013, 2, 20),
       onsite: false,
       name: "Early Competitor",
       registrant_type: "competitor",

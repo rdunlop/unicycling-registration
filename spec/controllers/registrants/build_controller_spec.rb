@@ -19,7 +19,7 @@ describe Registrants::BuildController do
       last_name: "Dunlop",
       gender: "Male",
       user_id: user.id,
-      birthday: Date.new(1982, 01, 19),
+      birthday: Date.new(1982, 1, 19),
       contact_detail_attributes: {
         address: "123 Fake Street",
         city: "Madison",

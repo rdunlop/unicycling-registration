@@ -5,12 +5,12 @@ describe "registrants/build/add_name" do
     @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
     @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
     FactoryGirl.create(:registration_cost, :competitor,
-                       start_date: Date.new(2012, 01, 10),
-                       end_date: Date.new(2012, 02, 11),
+                       start_date: Date.new(2012, 1, 10),
+                       end_date: Date.new(2012, 2, 11),
                        expense_item: @comp_exp)
     FactoryGirl.create(:registration_cost, :noncompetitor,
-                       start_date: Date.new(2012, 01, 10),
-                       end_date: Date.new(2012, 02, 11),
+                       start_date: Date.new(2012, 1, 10),
+                       end_date: Date.new(2012, 2, 11),
                        expense_item: @noncomp_exp)
     FactoryGirl.create(:wheel_size_24, id: 3)
     allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }

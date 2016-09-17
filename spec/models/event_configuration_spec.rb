@@ -206,12 +206,12 @@ describe EventConfiguration do
 
   it "should be closed if the event_closed_date is defined, and in the past" do
     ev = EventConfiguration.new(under_construction: false)
-    ev.event_sign_up_closed_date = Date.new(2013, 05, 01)
-    travel_to(Date.new(2013, 05, 04)) do
+    ev.event_sign_up_closed_date = Date.new(2013, 5, 1)
+    travel_to(Date.new(2013, 5, 4)) do
       expect(ev.registration_closed?).to be_truthy
     end
 
-    travel_to(Date.new(2013, 05, 01)) do
+    travel_to(Date.new(2013, 5, 1)) do
       expect(ev.registration_closed?).to be_falsy
     end
   end
@@ -245,15 +245,15 @@ describe EventConfiguration do
   describe "with a registration cost" do
     before(:each) do
       FactoryGirl.create(:event_configuration)
-      @rp = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 11, 03), end_date: Date.new(2012, 11, 07))
+      @rp = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7))
     end
     it "should be open on the last day of registration" do
-      travel_to(Date.new(2012, 11, 07)) do
+      travel_to(Date.new(2012, 11, 7)) do
         expect(EventConfiguration.closed?).to eq(false)
       end
     end
     it "should be open as long as the registration_period is current" do
-      d = Date.new(2012, 11, 07)
+      d = Date.new(2012, 11, 7)
       travel_to(d) do
         expect(@rp.current_period?(d)).to eq(true)
         expect(EventConfiguration.closed?).to eq(false)

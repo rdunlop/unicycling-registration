@@ -1,4 +1,4 @@
-lock '3.5.0'
+lock '3.6.1'
 
 set :eye_env, -> { {rails_env: fetch(:rails_env)} }
 set :application, 'unicycling-registration'

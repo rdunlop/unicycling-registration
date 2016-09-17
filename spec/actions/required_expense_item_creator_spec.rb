@@ -10,10 +10,10 @@ describe RequiredExpenseItemCreator do
       @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
       @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
       @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor,
-                                          start_date: Date.new(2010, 01, 01), end_date: Date.new(2022, 01, 01),
+                                          start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1),
                                           expense_item: @comp_exp)
       @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor,
-                                             start_date: Date.new(2010, 01, 01), end_date: Date.new(2022, 01, 01),
+                                             start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1),
                                              expense_item: @noncomp_exp)
     end
 

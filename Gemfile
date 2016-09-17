@@ -72,7 +72,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # multi-tenancy
 gem 'apartment'
-gem 'apartment-sidekiq', '= 0.2.0' # upgrading to 1.0.0 caused ActiveRecord::ConnectionTimeoutError
+gem 'apartment-sidekiq'
 
 # Model utils
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
@@ -107,7 +107,7 @@ group :test do
   gem 'poltergeist'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'rspec_junit_formatter', '0.2.2' # locked to 0.2.2 as per circleCI https://circleci.com/docs/test-metadata
+  gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
 
   # locked to 3.0.1 because https://github.com/thoughtbot/shoulda-matchers/issues/904
   # causes is_expected.not_to validate_presence_of(:address) to fail with an obscure message
