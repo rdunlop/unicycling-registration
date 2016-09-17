@@ -36,6 +36,7 @@
   = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true, input_html: { class: "js--blockVisibleSource" }
   %hr
 
+  = f.input :base_age_group_type_id, collection: AgeGroupType.all, include_blank: true
   = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
   = link_to "Manage Age Groups", age_group_types_path, target: "_blank"
 

@@ -27,10 +27,12 @@
 #  sign_in_list_enabled                  :boolean          default(FALSE), not null
 #  time_entry_columns                    :string           default("minutes_seconds_thousands")
 #  import_results_into_other_competition :boolean          default(FALSE), not null
+#  base_age_group_type_id                :integer
 #
 # Indexes
 #
 #  index_competitions_event_id                    (event_id)
+#  index_competitions_on_base_age_group_type_id   (base_age_group_type_id)
 #  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 
@@ -40,6 +42,7 @@ class Competition < ActiveRecord::Base
 
   resourcify
 
+  belongs_to :base_age_group_type, class_name: "AgeGroupType"
   belongs_to :age_group_type, inverse_of: :competitions
   belongs_to :event, inverse_of: :competitions
 
@@ -331,6 +334,17 @@ class Competition < ActiveRecord::Base
 
   def age_group_entries
     age_group_type.age_group_entries unless age_group_type.nil?
+  end
+
+  def registrant_age_group_data
+    registrants.reorder(nil).select(:age, :gender, :wheel_size_id).group(:age, :gender, :wheel_size_id).count(:age).map do |element, count|
+      {
+        age: element[0],
+        gender: element[1],
+        wheel_size_id: element[2],
+        count: count
+      }
+    end
   end
 
   # returns all of the results together, ignoring age-group data

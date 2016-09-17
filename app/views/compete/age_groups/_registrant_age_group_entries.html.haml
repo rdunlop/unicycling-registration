@@ -1,0 +1,12 @@
+%table
+  %thead
+    %tr
+      %th Age Group
+      %th Wheel Size
+      %th Number of registrants
+  %tbody
+    - entries.sort_by{|el| el[:age]}.each do |element|
+      %tr
+        %td= element[:age]
+        %td= element[:wheel_size_id]
+        %td= element[:count]

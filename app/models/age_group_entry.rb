@@ -33,6 +33,16 @@ class AgeGroupEntry < ActiveRecord::Base
 
   default_scope { order(:position) }
 
+  def number_matching_registrant(registrant_data)
+    matching_entries = registrant_data.select do |element|
+      element[:gender] == gender &&
+        start_age <= element[:age] &&
+        element[:age] <= end_age
+    end
+
+    matching_entries.sum {|element| element[:count] }
+  end
+
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
   def as_json(options = {})
     options ||= {}

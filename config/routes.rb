@@ -581,7 +581,11 @@ Workspace::Application.routes.draw do
         resource :wave_assignments, only: [:show, :update]
         resource :tier_assignments, only: [:show, :update]
         resources :wave_times, except: [:new, :show]
-        resource :age_groups, only: [:show]
+        resource :age_groups, only: [:show] do
+          member do
+            put :combine
+          end
+        end
       end
 
       resources :waves, only: [:index]

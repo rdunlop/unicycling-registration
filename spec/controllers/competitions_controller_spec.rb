@@ -27,10 +27,12 @@
 #  sign_in_list_enabled                  :boolean          default(FALSE), not null
 #  time_entry_columns                    :string           default("minutes_seconds_thousands")
 #  import_results_into_other_competition :boolean          default(FALSE), not null
+#  base_age_group_type_id                :integer
 #
 # Indexes
 #
 #  index_competitions_event_id                    (event_id)
+#  index_competitions_on_base_age_group_type_id   (base_age_group_type_id)
 #  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 

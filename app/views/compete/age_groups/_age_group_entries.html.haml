@@ -1,0 +1,11 @@
+%table
+  %thead
+    %tr
+      %th Entry
+      %th # of registrants
+  %tbody
+    - age_group_type.age_group_entries.each do |ag_entry|
+      - competitors_in_age_group = ag_entry.number_matching_registrant(age_group_data)
+      %tr
+        %td= ag_entry
+        %td= competitors_in_age_group

@@ -18,6 +18,11 @@ class Compete::AgeGroupsController < ApplicationController
     end
   end
 
+  def combine
+    flash[:notice] = "Age Group Entry X and Y combined"
+    redirect_to competition_age_groups_path(@competition)
+  end
+
   private
 
   def load_competition

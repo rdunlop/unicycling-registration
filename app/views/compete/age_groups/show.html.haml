@@ -1,16 +1,43 @@
-%h1 #{@competition} Age Group - #{@age_group_type}
+%h1 #{@competition} Age Group Management
 
 %p
-  In total, there are #{@competition.competitors.active.count} competitors. This page will show how these registrants fit into the various age group entries.
+  In total, there are #{@competition.competitors.active.count} competitors. This page will show how these competitors fit into the various age group entries. From this page, you can combine age group entries as per the rulebook
 
-%table
-  %thead
-    %tr
-      %th Entry
-      %th # of registrants
-  %tbody
-    - @age_group_type.age_group_entries.each do |ag_entry|
-      - competitors_in_age_group = @competition.competitors.active.where(age_group_entry: ag_entry)
-      %tr
-        %td= ag_entry
-        %td= competitors_in_age_group.count
+.row
+  .small-12.columns
+    %h2 Registrant Sign up breakdown
+    - age_group_data = @competition.registrant_age_group_data
+.row
+  .small-12.medium-6.columns
+    %h3 Male
+    = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Male" }
+
+  .small-12.medium-6.columns
+    %h3 Female
+    = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Female" }
+
+.row
+  .small-12.medium-6.columns
+    - if @competition.base_age_group_type.present?
+      %h2 Base Age Group: #{@competition.base_age_group_type}
+
+      = render "age_group_entries", age_group_type: @competition.base_age_group_type, competition: @competition, age_group_data: age_group_data
+
+  .small-12.medium-6.columns
+    %h2 Current Age Group #{@age_group_type}
+
+    %table
+      %thead
+        %tr
+          %th Entry
+          %th # Registrants
+          %th Action
+      %tbody
+        - @age_group_type.age_group_entries.each do |ag_entry|
+          - competitors_in_age_group = @competition.competitors.active.where(age_group_entry: ag_entry)
+          %tr
+            %td= ag_entry
+            %td= ag_entry.number_matching_registrant(age_group_data)
+            %td
+              = link_to "combine with X", combine_competition_age_groups_path(age_group_entry_id: ag_entry.id, second_age_group_entry_id: ag_entry.id), data: { confirm: "Are you sure?" }, method: :put
+
