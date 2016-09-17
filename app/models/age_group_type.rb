@@ -38,6 +38,10 @@ class AgeGroupType < ActiveRecord::Base
     end
   end
 
+  def age_group_entries_by_age_gender
+    age_group_entries.reorder(:gender, :start_age)
+  end
+
   # Return the age group entry that meets the given age requirements
   def age_group_entry_for(age, gender, default_wheel_size_id = nil)
     entries = age_group_entries.where("(start_age <= :age AND :age <= end_age) AND " \

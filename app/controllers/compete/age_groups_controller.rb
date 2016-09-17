@@ -19,7 +19,37 @@ class Compete::AgeGroupsController < ApplicationController
   end
 
   def combine
-    flash[:notice] = "Age Group Entry X and Y combined"
+    if params[:age_group_entry_ids].size < 2
+      flash[:alert] = "Must choose at least 2 age groups"
+    else
+      age_group_entries = @competition.age_group_type.age_group_entries_by_age_gender.where(id: params[:age_group_entry_ids])
+      smallest_age_group_entry = age_group_entries.first
+
+      remaining_entries = age_group_entries - [smallest_age_group_entry]
+
+      max_age = smallest_age_group_entry.end_age
+      remaining_entries.each do |ag_entry|
+        if ag_entry.gender != smallest_age_group_entry.gender
+          flash[:alert] = "Age Group Entries must be the same gender"
+          redirect_to competition_age_groups_path(@competition)
+          return
+        end
+        if ag_entry.start_age != max_age + 1
+          flash[:alert] = "Age Group Entries must be contiguous"
+          redirect_to competition_age_groups_path(@competition)
+          return
+        end
+        max_age = ag_entry.end_age
+      end
+
+      AgeGroupEntry.transaction do
+        smallest_age_group_entry.end_age = max_age
+        smallest_age_group_entry.short_description = "#{smallest_age_group_entry.start_age} - #{smallest_age_group_entry.end_age} #{smallest_age_group_entry.gender}"
+        smallest_age_group_entry.save!
+        remaining_entries.each(&:destroy!)
+      end
+      flash[:notice] = "Combined #{remaining_entries.count} entries into #{smallest_age_group_entry}"
+    end
     redirect_to competition_age_groups_path(@competition)
   end
 

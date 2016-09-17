@@ -3,18 +3,18 @@
 %p
   In total, there are #{@competition.competitors.active.count} competitors. This page will show how these competitors fit into the various age group entries. From this page, you can combine age group entries as per the rulebook
 
-.row
-  .small-12.columns
-    %h2 Registrant Sign up breakdown
-    - age_group_data = @competition.registrant_age_group_data
-.row
-  .small-12.medium-6.columns
-    %h3 Male
-    = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Male" }
+- age_group_data = @competition.registrant_age_group_data
 
-  .small-12.medium-6.columns
-    %h3 Female
-    = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Female" }
+.js--hiddenToggleMenu.button.secondary Show Registrant Sign up breakdown
+.js--hiddenToggle.is--hidden
+  .row
+    .small-12.medium-6.columns
+      %h3 Male
+      = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Male" }
+
+    .small-12.medium-6.columns
+      %h3 Female
+      = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Female" }
 
 .row
   .small-12.medium-6.columns
@@ -39,5 +39,16 @@
             %td= ag_entry
             %td= ag_entry.number_matching_registrant(age_group_data)
             %td
-              = link_to "combine with X", combine_competition_age_groups_path(age_group_entry_id: ag_entry.id, second_age_group_entry_id: ag_entry.id), data: { confirm: "Are you sure?" }, method: :put
+              - if ag_entry.number_matching_registrant(age_group_data) < 6
+                - smallest_neighbour = ag_entry.smallest_neighbour(age_group_data)
+                - if smallest_neighbour
+                  = link_to "Combine with #{smallest_neighbour}", combine_competition_age_groups_path(age_group_entry_ids: [ag_entry.id, smallest_neighbour.id]), method: :put, data: { confirm: "Are you sure?"}
+
+%hr
+%h2 Combine Age Group Entries
+
+%p Note: You must combine contiguous age group entries.
+= form_tag combine_competition_age_groups_path, method: :put do
+  = select_tag :age_group_entry_ids, options_from_collection_for_select(@age_group_type.age_group_entries, "id", "to_s"), multiple: true
+  = submit_tag "combine"
 
