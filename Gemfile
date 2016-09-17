@@ -107,7 +107,7 @@ group :test do
   gem 'poltergeist'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'rspec_junit_formatter', '0.2.2' # locked to 0.2.2 as per circleCI https://circleci.com/docs/test-metadata
+  gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
 
   # locked to 3.0.1 because https://github.com/thoughtbot/shoulda-matchers/issues/904
   # causes is_expected.not_to validate_presence_of(:address) to fail with an obscure message
