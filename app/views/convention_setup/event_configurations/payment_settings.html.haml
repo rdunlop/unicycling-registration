@@ -3,9 +3,51 @@
 
 %p= t(".description")
 
+%h2 Paypal Settings
+
 %p
-  For Additional Details on how to set up the IPN, please contact Robin or Scott.
-  (we would like to have better documentation here...but...we would like a lot of things)
+  There are 3 paypal settings which need to be configured within the receiving paypal account:
+
+%div
+  %h3 1) Instant Payment Notification (IPN)
+
+  %p
+    We used to think that the Paypal account had to have IPN settings enabled through the UI (Instructions from paypal: https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/).
+
+  %p
+    The <notification url> will be the hosted website URL, with /payments/notification at the end.
+    Example: https://registrationtest.unicycling-software.com/payments/notification
+  %p
+    NOTE: We no longer believe that this is necessary. When a user is sent to paypal to pay, that request includes the necessary IPN `notify_url` so that we will receive a message. The following settings may be necessary though:
+
+%div
+  %h3 2) Auto-Return
+
+  %p
+    This means that after a payment is done, the user's browser will be redirected back to the registration website
+
+  %p
+    In the paypal system, click on the person icon top right next to sign out -> Profile and settings -> My selling tools -> Selling Online -> Website preferences -> ...
+    %br
+    %br
+    or
+    %br
+    From "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> ...
+  %p
+  Enable Auto Return:
+  %br
+  <return_url> will be https://registrationtest.regtest.unicycling-software.com/payments/
+
+%div
+  %h3 3) Account Optional
+
+  %p Make it so that user can pay with paypal, without having a paypal account (useful if they just want to pay with a credit card
+
+  %p Set the "PayPal Account Optional" setting on so that people don't have to have a paypal account to pay
+
+  %p
+    "My Account -> Profile -> Sellers Preferences -> Website Payment Preferences -> PayPal Account Optional (On) -> save"
+
 
 %p
   = t(".ipn_url", url: "https://#{@tenant.permanent_url}/payments/notification")
