@@ -339,7 +339,7 @@ GEM
     order_as_specified (1.1)
       activerecord (>= 4.0)
     orm_adapter (0.5.0)
-    paper_trail (3.0.8)
+    paper_trail (3.0.9)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     parser (2.3.0.7)
