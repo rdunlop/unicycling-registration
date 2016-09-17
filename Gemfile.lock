@@ -26,13 +26,6 @@ GIT
       i18n_data (~> 0.7.0)
 
 GIT
-  remote: git://github.com/rdunlop/redis-store.git
-  revision: 89a77957f1e1f66fff15cf161ecc6306553278e1
-  specs:
-    redis-store (1.1.4)
-      redis (>= 2.2)
-
-GIT
   remote: git://github.com/rdunlop/tolk.git
   revision: 66e5ddfe48f5ea1d04d68bb02a76a9f86e737b5d
   branch: improve_import_export
@@ -420,22 +413,24 @@ GEM
     recaptcha (0.6.0)
       json
     redis (3.3.1)
-    redis-actionpack (4.0.1)
-      actionpack (~> 4)
-      redis-rack (~> 1.5.0)
-      redis-store (~> 1.1.0)
-    redis-activesupport (4.1.5)
-      activesupport (>= 3, < 5)
-      redis-store (~> 1.1.0)
+    redis-actionpack (5.0.0)
+      actionpack (>= 4.0.0, < 6)
+      redis-rack (~> 2.0.0.pre)
+      redis-store (~> 1.2.0.pre)
+    redis-activesupport (5.0.1)
+      activesupport (>= 3, < 6)
+      redis-store (~> 1.2.0)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    redis-rack (1.5.0)
-      rack (~> 1.5)
-      redis-store (~> 1.1.0)
-    redis-rails (4.0.0)
-      redis-actionpack (~> 4)
-      redis-activesupport (~> 4)
-      redis-store (~> 1.1.0)
+    redis-rack (2.0.0.pre)
+      rack (> 1.5, < 3)
+      redis-store (~> 1.2.0.pre)
+    redis-rails (5.0.1)
+      redis-actionpack (~> 5.0.0)
+      redis-activesupport (~> 5.0.0)
+      redis-store (~> 1.2.0)
+    redis-store (1.2.0)
+      redis (>= 2.2)
     ref (2.0.0)
     remotipart (1.2.1)
     request_store (1.3.1)
@@ -648,7 +643,7 @@ DEPENDENCIES
   recaptcha
   redis-namespace
   redis-rails
-  redis-store!
+  redis-store
   rolify
   rollbar
   rspec-instafail
