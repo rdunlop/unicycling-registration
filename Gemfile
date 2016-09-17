@@ -33,7 +33,7 @@ gem "haml-rails", "~> 0.9"
 gem "autoprefixer-rails"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'jquery-datatables-rails'
 
 # system utils
 gem 'rake'
