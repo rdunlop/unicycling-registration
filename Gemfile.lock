@@ -96,10 +96,10 @@ GEM
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
-    apartment (1.0.2)
-      activerecord (>= 3.1.2, < 5.0)
+    apartment (1.2.0)
+      activerecord (>= 3.1.2, < 6.0)
       rack (>= 1.3.6)
-    apartment-sidekiq (0.2.0)
+    apartment-sidekiq (1.1.0)
       apartment (~> 1.0)
       sidekiq (>= 2.11)
     arel (6.0.3)
@@ -418,7 +418,7 @@ GEM
     rake (11.2.2)
     recaptcha (0.6.0)
       json
-    redis (3.3.0)
+    redis (3.3.1)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
@@ -493,9 +493,10 @@ GEM
     sexp_processor (4.6.0)
     shoulda-matchers (3.0.1)
       activesupport (>= 4.0.0)
-    sidekiq (4.1.2)
+    sidekiq (4.2.1)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (~> 1.5)
       redis (~> 3.2, >= 3.2.1)
     sigar (0.7.3)
     simple_form (3.2.1)
@@ -590,7 +591,7 @@ DEPENDENCIES
   acts_as_restful_list!
   annotate
   apartment
-  apartment-sidekiq (= 0.2.0)
+  apartment-sidekiq
   autoprefixer-rails
   aws-sdk-rails
   breadcrumbs_on_rails
