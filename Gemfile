@@ -48,8 +48,6 @@ gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'redis-namespace'
 gem 'sidekiq', '< 5'
-# if you require 'sinatra' you get the Sinatra DSL extended to Object
-gem 'sinatra', '>= 1.3.0', require: nil # necessary for sidekiq routing
 gem 'unicorn', require: false
 gem 'whenever'
 gem 'gaffe'
