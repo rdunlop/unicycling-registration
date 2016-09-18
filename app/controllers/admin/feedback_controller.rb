@@ -46,7 +46,7 @@ class Admin::FeedbackController < ApplicationController
       flash[:notice] = "Successfully resolved Feedback ##{@feedback.id}"
       redirect_to admin_feedback_index_path
     else
-      flash[:alert] = "Unable to resolve feedback"
+      flash[:alert] = "Unable to resolve feedback. Did you set a resolution comment?"
       redirect_to admin_feedback_path(@feedback)
     end
   end
