@@ -4,4 +4,4 @@
       %h2 Competitor Lookup
     = form_tag(competitor_details_judge_distance_attempts_path(@judge), method: :get, remote: true) do
       = no_form_competitor_select_box(@competition, class: "js--competitors")
-      = submit_tag 'Lookup', class: "multiclick button"
+      = submit_tag 'Lookup', class: "button", data: { disable_with: false }

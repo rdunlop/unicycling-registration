@@ -58,15 +58,6 @@
 
 // NOTE This file does NOT include wysiwyg.js
 
-$(document).ready(function () {
-  if (!$('input').hasClass("multiclick")) {
-    $('form').submit(function() {
-      $("input[type='submit']", this).attr("disabled", "disabled");
-      $("input[type='submit']", this).val("Please wait...");
-    });
-  }
-});
-
 $(document).ready(function() {
   // this conflicts with using a password manager on the log-in page
   $('form').not(".no_dirty_check").areYouSure();
