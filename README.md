@@ -563,7 +563,7 @@ Log Rotation settings:
 ----------------------
 
 It is assumed that the server is running logrotate.
-In order to have the production logs backed up in a rotating basis, install the logrotation file `server_config/unicorn-unicycling-registration_logs` into the `/etc/logrotate.d/` directory.
+In order to have the production logs backed up in a rotating basis, install the logrotation file `server_config/unicorn-unicycling-registration-logs` into the `/etc/logrotate.d/` directory.
 
 Comments on the database schema
 ===============================
