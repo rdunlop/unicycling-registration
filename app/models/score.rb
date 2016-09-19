@@ -20,7 +20,7 @@
 #  index_scores_on_competitor_id_and_judge_id  (competitor_id,judge_id) UNIQUE
 #
 
-class Score < ActiveRecord::Base
+class Score < ApplicationRecord
   include Judgeable
 
   def self.score_fields

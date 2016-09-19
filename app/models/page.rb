@@ -16,7 +16,7 @@
 #  index_pages_on_slug                         (slug) UNIQUE
 #
 
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   include CachedModel
 
   validate :slug_cannot_have_special_characters

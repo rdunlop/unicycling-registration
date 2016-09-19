@@ -11,7 +11,7 @@
 #  verified       :boolean          default(FALSE), not null
 #
 
-class TenantAlias < ActiveRecord::Base
+class TenantAlias < ApplicationRecord
   validates :website_alias, :tenant, presence: true
   validates :website_alias, uniqueness: true
   validates :primary_domain, uniqueness: { scope: :tenant_id }, if: :primary_domain?

@@ -20,7 +20,7 @@
 #  index_award_labels_on_user_id  (user_id)
 #
 
-class AwardLabel < ActiveRecord::Base
+class AwardLabel < ApplicationRecord
   validates :registrant_id, presence: true
   validates :user_id, presence: true
   validates :place, presence: true, numericality: {greater_than: 0}

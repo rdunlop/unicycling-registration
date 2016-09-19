@@ -18,7 +18,7 @@
 #  standard_skill_entries_unique  (standard_skill_score_id,standard_skill_routine_entry_id) UNIQUE
 #
 
-class StandardSkillScoreEntry < ActiveRecord::Base
+class StandardSkillScoreEntry < ApplicationRecord
   belongs_to :standard_skill_routine_entry
   belongs_to :standard_skill_score, inverse_of: :standard_skill_score_entries, touch: true
 

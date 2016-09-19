@@ -20,7 +20,7 @@
 #  index_boundary_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
-class BoundaryScore < ActiveRecord::Base
+class BoundaryScore < ApplicationRecord
   include Judgeable
 
   validates :number_of_people, presence: true, numericality: {greater_than: 0}

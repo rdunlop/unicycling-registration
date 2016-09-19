@@ -18,7 +18,7 @@
 #  index_judges_user_id                                          (user_id)
 #
 
-class Judge < ActiveRecord::Base
+class Judge < ApplicationRecord
   belongs_to :competition
   belongs_to :judge_type
   belongs_to :user

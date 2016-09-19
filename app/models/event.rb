@@ -23,7 +23,7 @@
 #  index_events_on_accepts_wheel_size_override  (accepts_wheel_size_override)
 #
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   include CostItem
   resourcify
 

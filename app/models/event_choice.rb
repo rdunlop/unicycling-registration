@@ -18,7 +18,7 @@
 #  index_event_choices_on_event_id_and_position  (event_id,position)
 #
 
-class EventChoice < ActiveRecord::Base
+class EventChoice < ApplicationRecord
   belongs_to :event, touch: true, inverse_of: :event_choices, counter_cache: true
 
   has_many :registrant_choices, dependent: :destroy

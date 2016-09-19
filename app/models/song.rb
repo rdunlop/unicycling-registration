@@ -19,7 +19,7 @@
 #  index_songs_registrant_id                              (registrant_id)
 #
 
-class Song < ActiveRecord::Base
+class Song < ApplicationRecord
   mount_uploader :song_file_name, MusicUploader
   include CachedModel
 

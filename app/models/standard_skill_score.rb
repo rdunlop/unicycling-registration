@@ -14,7 +14,7 @@
 #  index_standard_skill_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
-class StandardSkillScore < ActiveRecord::Base
+class StandardSkillScore < ApplicationRecord
   include Competeable
   belongs_to :judge
   has_many :standard_skill_score_entries, dependent: :destroy, inverse_of: :standard_skill_score

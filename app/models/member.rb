@@ -16,7 +16,7 @@
 #  index_members_registrant_id  (registrant_id)
 #
 
-class Member < ActiveRecord::Base
+class Member < ApplicationRecord
   include CachedSetModel
 
   belongs_to :competitor, inverse_of: :members

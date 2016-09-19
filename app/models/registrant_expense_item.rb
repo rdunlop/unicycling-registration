@@ -19,7 +19,7 @@
 #  index_registrant_expense_items_registrant_id    (registrant_id)
 #
 
-class RegistrantExpenseItem < ActiveRecord::Base
+class RegistrantExpenseItem < ApplicationRecord
   include CachedSetModel
   include CachedModel
   include HasDetailsDescription

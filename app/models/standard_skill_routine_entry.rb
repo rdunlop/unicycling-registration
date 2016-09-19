@@ -10,7 +10,7 @@
 #  updated_at                :datetime
 #
 
-class StandardSkillRoutineEntry < ActiveRecord::Base
+class StandardSkillRoutineEntry < ApplicationRecord
   belongs_to :standard_skill_entry
   belongs_to :standard_skill_routine
   acts_as_restful_list scope: :standard_skill_routine

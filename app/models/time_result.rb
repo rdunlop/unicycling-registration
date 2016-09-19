@@ -27,7 +27,7 @@
 #  index_time_results_on_heat_lane_result_id  (heat_lane_result_id) UNIQUE
 #
 
-class TimeResult < ActiveRecord::Base
+class TimeResult < ApplicationRecord
   include Competeable
   include Placeable
   include StatusNilWhenEmpty

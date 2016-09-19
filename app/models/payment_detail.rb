@@ -20,7 +20,7 @@
 #  index_payment_details_registrant_id    (registrant_id)
 #
 
-class PaymentDetail < ActiveRecord::Base
+class PaymentDetail < ApplicationRecord
   include CachedSetModel
   include HasDetailsDescription
 

@@ -17,7 +17,7 @@
 #  system_managed             :boolean          default(FALSE), not null
 #
 
-class ExpenseGroup < ActiveRecord::Base
+class ExpenseGroup < ApplicationRecord
   include PageOrUrlLink
 
   validates :group_name, presence: true

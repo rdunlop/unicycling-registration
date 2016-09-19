@@ -26,7 +26,7 @@
 #  index_competitors_on_competition_id_and_age_group_entry_id  (competition_id,age_group_entry_id)
 #
 
-class Competitor < ActiveRecord::Base
+class Competitor < ApplicationRecord
   include Eligibility
   include Slugify
 

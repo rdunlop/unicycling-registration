@@ -37,7 +37,7 @@
 #  index_contact_details_registrant_id     (registrant_id)
 #
 
-class ContactDetail < ActiveRecord::Base
+class ContactDetail < ApplicationRecord
   belongs_to :registrant, inverse_of: :contact_detail, touch: true
 
   # address block

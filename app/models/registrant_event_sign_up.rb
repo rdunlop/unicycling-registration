@@ -18,7 +18,7 @@
 #  index_registrant_event_sign_ups_registrant_id                  (registrant_id)
 #
 
-class RegistrantEventSignUp < ActiveRecord::Base
+class RegistrantEventSignUp < ApplicationRecord
   validates :event, :registrant, presence: true
   # The following should be re-enabled? first double-check to see which conventions have violating data.
   # also ensure that flow still works with this. (do we have any events which do not have event_categories?)

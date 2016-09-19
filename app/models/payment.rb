@@ -21,7 +21,7 @@
 #  index_payments_user_id  (user_id)
 #
 
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
   include CachedModel
 
   scope :completed, -> { where(completed: true) }

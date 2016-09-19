@@ -18,7 +18,7 @@
 #  index_heat_lane_judge_notes_on_competition_id  (competition_id)
 #
 
-class HeatLaneJudgeNote < ActiveRecord::Base
+class HeatLaneJudgeNote < ApplicationRecord
   include TracksEnteredBy
   include FindsMatchingCompetitor
   include FindsBibNumberFromHeatLane

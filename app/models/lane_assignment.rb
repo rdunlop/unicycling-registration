@@ -16,7 +16,7 @@
 #  index_lane_assignments_on_competition_id_and_heat_and_lane  (competition_id,heat,lane) UNIQUE
 #
 
-class LaneAssignment < ActiveRecord::Base
+class LaneAssignment < ApplicationRecord
   belongs_to :competition
   belongs_to :competitor, touch: true
   include CompetitorAutoCreation

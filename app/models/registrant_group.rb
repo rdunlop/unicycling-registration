@@ -13,7 +13,7 @@
 #  index_registrant_groups_registrant_id  (registrant_id)
 #
 
-class RegistrantGroup < ActiveRecord::Base
+class RegistrantGroup < ApplicationRecord
   belongs_to :contact_person, class_name: "Registrant", foreign_key: "registrant_id"
 
   has_many :registrant_group_members, dependent: :destroy, inverse_of: :registrant_group

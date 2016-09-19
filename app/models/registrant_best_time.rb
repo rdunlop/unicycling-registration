@@ -16,7 +16,7 @@
 #  index_registrant_best_times_on_registrant_id               (registrant_id)
 #
 
-class RegistrantBestTime < ActiveRecord::Base
+class RegistrantBestTime < ApplicationRecord
   validates :event_id, presence: true, uniqueness: {scope: [:registrant_id]}
   validates :registrant, :source_location, :value, presence: true
   validate :formatted_value_is_formatted

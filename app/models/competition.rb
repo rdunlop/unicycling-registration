@@ -36,7 +36,7 @@
 #  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   include CachedModel
   include Slugify
 

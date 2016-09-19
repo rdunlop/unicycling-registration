@@ -14,7 +14,7 @@
 #  index_payment_detail_coupon_codes_on_payment_detail_id  (payment_detail_id) UNIQUE
 #
 
-class PaymentDetailCouponCode < ActiveRecord::Base
+class PaymentDetailCouponCode < ApplicationRecord
   include CachedSetModel
 
   belongs_to :coupon_code

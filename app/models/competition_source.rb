@@ -20,7 +20,7 @@
 #  index_competition_sources_target_competition_id  (target_competition_id)
 #
 
-class CompetitionSource < ActiveRecord::Base
+class CompetitionSource < ApplicationRecord
   belongs_to :event_category, inverse_of: :competition_sources
   belongs_to :target_competition, class_name: "Competition", inverse_of: :competition_sources
   belongs_to :competition

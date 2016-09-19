@@ -16,7 +16,7 @@
 #  index_distance_attempts_judge_id       (judge_id)
 #
 
-class DistanceAttempt < ActiveRecord::Base
+class DistanceAttempt < ApplicationRecord
   include Competeable
   include Placeable
   include CachedSetModel

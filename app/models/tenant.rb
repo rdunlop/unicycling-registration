@@ -10,7 +10,7 @@
 #  admin_upgrade_code :string(255)
 #
 
-class Tenant < ActiveRecord::Base
+class Tenant < ApplicationRecord
   validates :subdomain, :description, :admin_upgrade_code, presence: true
   validates :subdomain, uniqueness: true
   validate :subdomain_has_no_spaces

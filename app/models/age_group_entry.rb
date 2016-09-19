@@ -20,7 +20,7 @@
 #  index_age_group_entries_wheel_size_id      (wheel_size_id)
 #
 
-class AgeGroupEntry < ActiveRecord::Base
+class AgeGroupEntry < ApplicationRecord
   validates :age_group_type, :short_description, :start_age, :end_age, presence: true
   validates :start_age, :end_age, numericality: {greater_than_or_equal_to: 0}
   validates :short_description, uniqueness: {scope: :age_group_type_id}

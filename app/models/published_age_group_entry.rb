@@ -14,7 +14,7 @@
 #  index_published_age_group_entries_on_competition_id  (competition_id)
 #
 
-class PublishedAgeGroupEntry < ActiveRecord::Base
+class PublishedAgeGroupEntry < ApplicationRecord
   belongs_to :competition, touch: true
   belongs_to :age_group_entry
 

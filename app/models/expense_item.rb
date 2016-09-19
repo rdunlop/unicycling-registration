@@ -22,7 +22,7 @@
 #  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id) UNIQUE
 #
 
-class ExpenseItem < ActiveRecord::Base
+class ExpenseItem < ApplicationRecord
   validates :name, :cost, :expense_group, presence: true
   validates :has_details, inclusion: { in: [true, false] } # because it's a boolean
   validates :has_custom_cost, inclusion: { in: [true, false] } # because it's a boolean

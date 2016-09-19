@@ -48,7 +48,7 @@
 #  add_event_end_date                            :datetime
 #
 
-class EventConfiguration < ActiveRecord::Base
+class EventConfiguration < ApplicationRecord
   include MultiLevelValidation
 
   specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
