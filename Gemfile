@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby "2.2.3"
-gem 'rails', '4.2.7.1'
+gem 'rails'
 
 # Authentication
 gem 'devise'
@@ -41,7 +41,7 @@ gem 'paper_trail'
 gem 'rollbar'
 gem 'redis-store'
 gem 'redis-rails'
-gem 'rails_admin'
+gem 'rails_admin', '= 1.0.0.rc' # pre-release necessary to support rails 5
 gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
 gem 'aws-sdk-rails'
 gem 'http_accept_language'
@@ -64,9 +64,10 @@ gem 'css_splitter' # support ie9 css rule limits
 # use rdunlop branch which has:
 #  fixed the Pagination-Load issue
 #  specific import/export functions to match the translation-file structure used
+# also, the released version of tolk does not yet support rails 5. (need to use `master`)
 gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 gem 'kaminari'
-gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+gem 'rails-i18n'
 
 # multi-tenancy
 gem 'apartment'
