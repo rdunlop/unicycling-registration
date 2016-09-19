@@ -23,7 +23,7 @@ gem 'money-rails'
 gem 'select2-rails'
 gem 'breadcrumbs_on_rails'
 gem 'cocoon' # for nested forms
-gem 'fancybox2-rails', '~> 0.2.8'
+gem 'fancybox2-rails', github: 'saketramdurbha/fancybox2-rails' # for rails 5 support
 gem 'tinymce-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jquery-datetimepicker-rails'
@@ -95,7 +95,6 @@ gem 'capistrano3-unicorn'
 gem "capistrano-deploytags", require: false
 
 group :naucc, :development, :caching do
-  gem 'quiet_assets'
   gem 'consistency_fail'
   gem 'rubocop', require: false
 end
