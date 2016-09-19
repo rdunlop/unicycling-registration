@@ -77,7 +77,7 @@ gem 'apartment-sidekiq'
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
 gem 'carrierwave'
 gem 'carrierwave-aws'
-gem 'globalize', '~> 5.0.0'
+gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
 gem 'virtus'
 gem "wicked"
 gem 'validates_email_format_of'
