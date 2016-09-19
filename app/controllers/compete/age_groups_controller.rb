@@ -33,6 +33,19 @@ class Compete::AgeGroupsController < ApplicationController
     redirect_to competition_age_groups_path(@competition)
   end
 
+  # create a duplicate of the selected age group type, and assign it to this competition
+  def duplicate_type
+    duplicator = AgeGroupTypeDuplicator.new(@competition.age_group_type)
+
+    if duplicator.duplicate && @competition.update(age_group_type: duplicator.new_age_group_type)
+      flash[:notice] = "Successfully duplicated age group"
+    else
+      flash[:alert] = "Error duplicating age group"
+    end
+
+    redirect_to competition_age_groups_path(@competition)
+  end
+
   private
 
   def load_competition

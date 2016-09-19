@@ -583,6 +583,7 @@ Workspace::Application.routes.draw do
         resources :wave_times, except: [:new, :show]
         resource :age_groups, only: [:show] do
           member do
+            post :duplicate_type
             put :combine
           end
         end

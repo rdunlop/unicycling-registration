@@ -16,6 +16,14 @@
       %h3 Female
       = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Female" }
 
+- if @age_group_type.competitions.size > 1
+  .callout.warning
+    %h2 Age Group is in use by multiple competitions
+    %p
+      Be aware that this age group (#{@age_group_type}) is being used by the following competitions:
+      = @age_group_type.competitions.join(", ")
+    = link_to "Duplicate the #{@age_group_type} age group so that it is independent", duplicate_type_competition_age_groups_path(@competition), method: :post, data: { confirm: "Create a new age group?" }
+
 .row
   .small-12.medium-6.columns
     - if @competition.base_age_group_type.present?
@@ -39,7 +47,7 @@
             %td= ag_entry
             %td= ag_entry.number_matching_registrant(age_group_data)
             %td
-              - if ag_entry.number_matching_registrant(age_group_data) < 50
+              - if ag_entry.number_matching_registrant(age_group_data) < 6
                 - smallest_neighbour = ag_entry.smallest_neighbour(age_group_data)
                 - if smallest_neighbour
                   = link_to "Combine with #{smallest_neighbour}", combine_competition_age_groups_path(age_group_entry_ids: [ag_entry.id, smallest_neighbour.id]), method: :put, data: { confirm: "Are you sure?"}
