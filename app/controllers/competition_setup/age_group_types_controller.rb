@@ -25,15 +25,9 @@ class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetit
 
   # POST /age_group_types/:id/duplicate
   def duplicate
-    new_age_group_type = @age_group_type.dup
-    new_age_group_type.age_group_entries = @age_group_type.age_group_entries.collect do |entry|
-      new_entry = entry.dup
-      new_entry.age_group_type = new_age_group_type
-      new_entry
-    end
+    duplicator = AgeGroupTypeDuplicator.new(@age_group_type)
 
-    new_age_group_type.name += " (Copy)"
-    if new_age_group_type.save
+    if duplicator.duplicate
       flash[:notice] = "Duplicated Age Group Type"
     else
       flash[:alert] = "Error duplicating age group type"
