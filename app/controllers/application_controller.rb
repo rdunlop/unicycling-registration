@@ -144,6 +144,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
+    set_i18n_available_locales
     I18n.locale = locale_parameter || locale_from_user || locale_from_headers || I18n.default_locale
   end
 
