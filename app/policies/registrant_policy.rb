@@ -87,6 +87,10 @@ class RegistrantPolicy < ApplicationPolicy
     super_admin?
   end
 
+  def really_destroy?
+    super_admin?
+  end
+
   # view the registrant-specific payments
   def payments?
     user_record? || payment_admin? || super_admin?

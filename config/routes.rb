@@ -354,6 +354,7 @@ Workspace::Application.routes.draw do
         end
         member do
           post :undelete
+          delete :really_destroy
         end
       end
       resources :reports, only: [:index]

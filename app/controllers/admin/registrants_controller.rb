@@ -1,7 +1,7 @@
 class Admin::RegistrantsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_registrants_breadcrumb
-  before_action :load_registrant, only: [:undelete]
+  before_action :load_registrant, only: [:really_destroy, :undelete]
 
   # GET /registrants/manage_all
   def manage_all
@@ -42,6 +42,18 @@ class Admin::RegistrantsController < ApplicationController
       redirect_to registrant_path(registrant)
     else
       redirect_to registrant_build_path(registrant, :add_name)
+    end
+  end
+
+  # DELETE /registrants/1/really_destroy
+  def really_destroy
+    authorize @registrant
+    respond_to do |format|
+      if @registrant.destroy
+        format.html { redirect_to root_path, notice: 'Registrant deleted' }
+      else
+        format.html { redirect_to root_path, alert: "Error deleting registrant" }
+      end
     end
   end
 

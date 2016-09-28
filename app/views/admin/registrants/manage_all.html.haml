@@ -3,6 +3,12 @@
 
 %h1= t(".header")
 
+%p
+  Next Registrant Bib Numbers:
+  %br
+  Competitor #{RegistrantType.new('competitor').next_available_bib_number}
+  %br
+  NonCompetitor #{RegistrantType.new('noncompetitor').next_available_bib_number}
 - can_undelete = policy(Registrant).undelete?
 %table.sortable.searchable
   %thead
@@ -58,4 +64,6 @@
                 %br
                 %span.js--showElementTarget{ data: { key: "undelete#{registrant.id}" } }
                   = link_to t(".undelete"), undelete_registrant_path(registrant), :method => :post, data: { confirm: t(".undelete_confirmation") }
+                  %br
+                  = link_to "Really Destroy", really_destroy_registrant_path(registrant), method: :delete, data: { confirm: t(".are_you_sure") }
             %td.non_printable= registrant.user
