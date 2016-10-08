@@ -49,7 +49,7 @@ class Member < ApplicationRecord
 
   def update_min_bib_number
     return if no_touch_cascade
-    comp = competitor(true)
+    comp = reload.competitor
     return if comp.nil?
     lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
     competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number

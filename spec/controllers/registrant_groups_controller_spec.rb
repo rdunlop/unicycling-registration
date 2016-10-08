@@ -99,16 +99,6 @@ describe RegistrantGroupsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested registrant_group" do
-        registrant_group = RegistrantGroup.create! valid_attributes
-        # Assuming there are no other registrant_groups in the database, this
-        # specifies that the RegistrantGroup created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(RegistrantGroup).to receive(:update_attributes).with("name" => "MyString")
-        put :update, id: registrant_group.to_param, registrant_group: { "name" => "MyString" }
-      end
-
       it "assigns the requested registrant_group as @registrant_group" do
         registrant_group = RegistrantGroup.create! valid_attributes
         put :update, id: registrant_group.to_param, registrant_group: valid_attributes

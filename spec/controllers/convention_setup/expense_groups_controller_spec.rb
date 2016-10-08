@@ -81,16 +81,6 @@ describe ConventionSetup::ExpenseGroupsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested expense_group" do
-        expense_group = ExpenseGroup.create! valid_attributes
-        # Assuming there are no other expense_groups in the database, this
-        # specifies that the ExpenseGroup created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(ExpenseGroup).to receive(:update_attributes).with({})
-        put :update, id: expense_group.to_param, expense_group: {'these' => 'params'}
-      end
-
       it "assigns the requested expense_group as @expense_group" do
         expense_group = ExpenseGroup.create! valid_attributes
         put :update, id: expense_group.to_param, expense_group: valid_attributes

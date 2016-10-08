@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ArtisticResultCalculator do
+RSpec.describe ArtisticResultCalculator do
   before(:each) do
     @competition = FactoryGirl.create(:competition)
     @judge1 = FactoryGirl.create(:judge, competition: @competition)

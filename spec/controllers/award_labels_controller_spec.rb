@@ -43,22 +43,22 @@ describe AwardLabelsController do
     describe "When not signed in" do
       before { sign_out @admin_user }
       it "redirects to root path" do
-        get :index, user_id: @admin_user
+        get :index, params: { user_id: @admin_user }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     it "assigns all award_labels as @award_labels" do
       aw_label = FactoryGirl.create(:award_label, user: @admin_user)
-      get :index, user_id: @admin_user
-      expect(assigns(:award_labels)).to eq([aw_label])
+      get :index, params: { user_id: @admin_user }
+      assert_select "td", aw_label.line_1
     end
   end
 
   describe "GET edit" do
     it "assigns the requested award_label as @award_label" do
-      get :edit, id: award_label.to_param
-      expect(assigns(:award_label)).to eq(award_label)
+      get :edit, params: { id: award_label.to_param }
+      assert_select "input[value=?]", award_label.line_1
     end
   end
 
@@ -66,18 +66,12 @@ describe AwardLabelsController do
     describe "with valid params" do
       it "creates a new AwardLabel" do
         expect do
-          post :create, award_label: valid_attributes, user_id: @admin_user.id
+          post :create, params: { award_label: valid_attributes, user_id: @admin_user.id }
         end.to change(AwardLabel, :count).by(1)
       end
 
-      it "assigns a newly created award_label as @award_label" do
-        post :create, award_label: valid_attributes, user_id: @admin_user.id
-        expect(assigns(:award_label)).to be_a(AwardLabel)
-        expect(assigns(:award_label)).to be_persisted
-      end
-
       it "redirects to the created award_label" do
-        post :create, award_label: valid_attributes, user_id: @admin_user.id
+        post :create, params: { award_label: valid_attributes, user_id: @admin_user.id }
         expect(response).to redirect_to(user_award_labels_path(@admin_user))
       end
     end
@@ -86,37 +80,30 @@ describe AwardLabelsController do
       it "assigns a newly created but unsaved award_label as @award_label" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
-        post :create, award_label: { "bib_number" => "invalid value" }, user_id: @admin_user.id
-        expect(assigns(:award_label)).to be_a_new(AwardLabel)
+        expect do
+          post :create, params: { award_label: { "bib_number" => "invalid value" }, user_id: @admin_user.id }
+        end.not_to change(AwardLabel, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
-        post :create, award_label: { "bib_number" => "invalid value" }, user_id: @admin_user.id
-        expect(response).to render_template("index")
+        post :create, params: { award_label: { "bib_number" => "invalid value" }, user_id: @admin_user.id }
+        assert_select "h1", "Award Labels"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested award_label" do
-        # Assuming there are no other award_labels in the database, this
-        # specifies that the AwardLabel created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(AwardLabel).to receive(:update_attributes).with("bib_number" => "1")
-        put :update, id: award_label.to_param, award_label: { "bib_number" => "1" }
-      end
-
       it "assigns the requested award_label as @award_label" do
-        put :update, id: award_label.to_param, award_label: valid_attributes
-        expect(assigns(:award_label)).to eq(award_label)
+        expect do
+          put :update, params: { id: award_label.to_param, award_label: valid_attributes.merge("place" => 2) }
+        end.to change{ award_label.reload.place }
       end
 
       it "redirects to the award_label" do
-        put :update, id: award_label.to_param, award_label: valid_attributes
+        put :update, params: { id: award_label.to_param, award_label: valid_attributes }
         expect(response).to redirect_to(user_award_labels_path(@admin_user))
       end
     end
@@ -125,15 +112,16 @@ describe AwardLabelsController do
       it "assigns the award_label as @award_label" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
-        put :update, id: award_label.to_param, award_label: { "bib_number" => "invalid value" }
-        expect(assigns(:award_label)).to eq(award_label)
+        expect do
+          put :update, params: { id: award_label.to_param, award_label: { "bib_number" => "invalid value" } }
+        end.not_to change{ award_label.reload.bib_number }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
-        put :update, id: award_label.to_param, award_label: { "bib_number" => "invalid value" }
-        expect(response).to render_template("edit")
+        put :update, params: { id: award_label.to_param, award_label: { "bib_number" => "invalid value" } }
+        assert_select "h1", "Editing award_label"
       end
     end
   end
@@ -142,12 +130,12 @@ describe AwardLabelsController do
     it "destroys the requested award_label" do
       aw_label = FactoryGirl.create(:award_label, user: @admin_user)
       expect do
-        delete :destroy, id: aw_label.to_param
+        delete :destroy, params: { id: aw_label.to_param }
       end.to change(AwardLabel, :count).by(-1)
     end
 
     it "redirects to the award_labels list" do
-      delete :destroy, id: award_label.to_param
+      delete :destroy, params: { id: award_label.to_param }
       expect(response).to redirect_to(user_award_labels_path(@admin_user))
     end
   end
@@ -164,7 +152,7 @@ describe AwardLabelsController do
     describe "POST create_by_competition" do
       it "renders" do
         expect do
-          post :create_by_competition, competition_id: competition.id, user_id: @admin_user.to_param
+          post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
         end.to change(AwardLabel, :count).by(5)
       end
     end
@@ -178,7 +166,7 @@ describe AwardLabelsController do
       context "by competition id" do
         it "renders" do
           expect do
-            post :create_labels, age_groups: "true", competition_id: competition.id, user_id: @admin_user.to_param
+            post :create_labels, params: { age_groups: "true", competition_id: competition.id, user_id: @admin_user.to_param }
           end.to change(AwardLabel, :count).by(5)
           expect(response).to redirect_to(user_award_labels_path(@admin_user))
         end
@@ -190,21 +178,21 @@ describe AwardLabelsController do
 
       it "removes award" do
         expect do
-          delete :destroy_all, user_id: @admin_user.to_param
+          delete :destroy_all, params: { user_id: @admin_user.to_param }
         end.to change(AwardLabel, :count).by(-1)
       end
     end
 
     describe "GET normal_labels" do
       it "renders" do
-        get :normal_labels, user_id: @admin_user.to_param
+        get :normal_labels, params: { user_id: @admin_user.to_param }
         expect(response).to be_success
       end
     end
 
     describe "GET announcer_sheet" do
       it "renders" do
-        get :normal_labels, user_id: @admin_user.to_param
+        get :normal_labels, params: { user_id: @admin_user.to_param }
         expect(response).to be_success
       end
     end

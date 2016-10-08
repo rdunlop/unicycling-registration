@@ -36,9 +36,9 @@ describe AdditionalRegistrantAccessesController do
 
   describe "GET index" do
     it "assigns all additional_registrant_accesses as @additional_registrant_accesses" do
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
-      get :index, user_id: @user.id
-      expect(assigns(:additional_registrant_accesses)).to eq([additional_registrant_access])
+      FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
+      get :index, params: { user_id: @user.id }
+      assert_select "tr>td", text: @reg.to_s, count: 1
     end
   end
 
@@ -46,20 +46,22 @@ describe AdditionalRegistrantAccessesController do
     it "assigns all invitations for me to @invitations" do
       my_reg = FactoryGirl.create(:registrant, user: @user)
       ada = FactoryGirl.create(:additional_registrant_access, registrant: my_reg)
-      get :invitations, user_id: @user.id
-      expect(assigns(:additional_registrant_accesses)).to eq([ada])
+      get :invitations, params: { user_id: @user.id }
+      assert_select "td", ada.user.to_s
     end
     it "doesn't assign other people's invitations" do
       FactoryGirl.create(:additional_registrant_access)
-      get :invitations, user_id: @user.id
-      expect(assigns(:additional_registrant_accesses)).to eq([])
+      get :invitations, params: { user_id: @user.id }
+      assert_select "td", count: 0, text: "Decline"
     end
   end
 
   describe "GET new" do
     it "assigns a new additional_registrant_access as @additional_registrant_access" do
-      get :new, user_id: @user.id
-      expect(assigns(:additional_registrant_access)).to be_a_new(AdditionalRegistrantAccess)
+      get :new, params: { user_id: @user.id }
+      assert_select "form", action: user_additional_registrant_accesses_path(@user), method: "post" do
+        assert_select "select#additional_registrant_access_registrant_id", name: "additional_registrant_access[registrant_id]"
+      end
     end
   end
 
@@ -67,22 +69,23 @@ describe AdditionalRegistrantAccessesController do
     describe "with valid params" do
       it "creates a new AdditionalRegistrantAccess" do
         expect do
-          post :create, user_id: @user.id, additional_registrant_access: valid_attributes
+          post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
         end.to change(AdditionalRegistrantAccess, :count).by(1)
       end
 
       it "assigns a newly created additional_registrant_access as @additional_registrant_access" do
-        post :create, user_id: @user.id, additional_registrant_access: valid_attributes
-        expect(assigns(:additional_registrant_access)).to be_persisted
+        expect do
+          post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
+        end.to change(AdditionalRegistrantAccess, :count).by(1)
       end
 
       it "redirects to the created additional_registrant_access" do
-        post :create, user_id: @user.id, additional_registrant_access: valid_attributes
+        post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
         expect(response).to redirect_to(user_additional_registrant_accesses_path(@user))
       end
       it "creates an e-mail to the target registrants' user" do
         ActionMailer::Base.deliveries.clear
-        post :create, user_id: @user.id, additional_registrant_access: valid_attributes
+        post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1)
         mail = ActionMailer::Base.deliveries.first
@@ -94,15 +97,16 @@ describe AdditionalRegistrantAccessesController do
       it "assigns a newly created but unsaved additional_registrant_access as @additional_registrant_access" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AdditionalRegistrantAccess).to receive(:save).and_return(false)
-        post :create, user_id: @user.id, additional_registrant_access: { "registrant_id" => "invalid value" }
-        expect(assigns(:additional_registrant_access)).to be_a_new(AdditionalRegistrantAccess)
+        expect do
+          post :create, params: { user_id: @user.id, additional_registrant_access: { "registrant_id" => "invalid value" } }
+        end.not_to change(AdditionalRegistrantAccess, :count)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AdditionalRegistrantAccess).to receive(:save).and_return(false)
-        post :create, user_id: @user.id, additional_registrant_access: { "registrant_id" => "invalid value" }
-        expect(response).to render_template("new")
+        post :create, params: { user_id: @user.id, additional_registrant_access: { "registrant_id" => "invalid value" } }
+        assert_select "h1", "New Registrant Access Request"
       end
     end
   end
@@ -115,11 +119,11 @@ describe AdditionalRegistrantAccessesController do
 
       it "cannot accept its own invitation" do
         expect do
-          put :accept_readonly, id: @additional_registrant_access.to_param
+          put :accept_readonly, params: { id: @additional_registrant_access.to_param }
         end.to_not change(@additional_registrant_access, :accepted_readonly)
       end
       it "redirects to the root if unauthorized" do
-        put :accept_readonly, id: @additional_registrant_access.to_param
+        put :accept_readonly, params: { id: @additional_registrant_access.to_param }
         expect(response).to redirect_to(root_path)
       end
 
@@ -131,12 +135,12 @@ describe AdditionalRegistrantAccessesController do
 
         it "allows the registrant's user to accept the invitation" do
           expect do
-            put :accept_readonly, id: @additional_registrant_access.to_param
+            put :accept_readonly, params: { id: @additional_registrant_access.to_param }
           end.to_not change(@additional_registrant_access, :accepted_readonly)
         end
         it "creates an e-mail to the requesting user" do
           ActionMailer::Base.deliveries.clear
-          put :accept_readonly, id: @additional_registrant_access.to_param
+          put :accept_readonly, params: { id: @additional_registrant_access.to_param }
           num_deliveries = ActionMailer::Base.deliveries.size
           expect(num_deliveries).to eq(1)
           mail = ActionMailer::Base.deliveries.first
@@ -150,7 +154,7 @@ describe AdditionalRegistrantAccessesController do
     it "dosen't allow the creator to decline the invitation" do
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
 
-      delete :decline, id: additional_registrant_access.to_param
+      delete :decline, params: { id: additional_registrant_access.to_param }
       expect(additional_registrant_access.reload.declined).to eq(false)
     end
     it "decline the requested additional_registrant_access" do
@@ -159,7 +163,7 @@ describe AdditionalRegistrantAccessesController do
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
 
       expect(additional_registrant_access.declined).to eq(false)
-      delete :decline, id: additional_registrant_access.to_param
+      delete :decline, params: { id: additional_registrant_access.to_param }
       expect(additional_registrant_access.reload.declined).to eq(true)
     end
 
@@ -167,7 +171,7 @@ describe AdditionalRegistrantAccessesController do
       sign_out @user
       sign_in @reg.user
       additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
-      delete :decline, id: additional_registrant_access.to_param
+      delete :decline, params: { id: additional_registrant_access.to_param }
       expect(response).to redirect_to(invitations_user_additional_registrant_accesses_path(@reg.user))
     end
   end

@@ -62,11 +62,6 @@ describe ConventionSetup::PagesController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested page" do
-        expect_any_instance_of(Page).to receive(:update_attributes).with({})
-        put :update, id: page.to_param, page: {'these' => 'params'}
-      end
-
       it "assigns the requested page as @page" do
         put :update, id: page.to_param, page: FactoryGirl.attributes_for(:page)
         expect(assigns(:page)).to eq(page)

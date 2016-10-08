@@ -1,5 +1,3 @@
-require 'upload'
-
 class BaseImporter
   attr_accessor :competition, :user, :num_rows_processed, :errors
 
