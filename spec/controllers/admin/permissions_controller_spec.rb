@@ -12,14 +12,14 @@ describe Admin::PermissionsController do
         @user = FactoryGirl.create(:user)
       end
       it "can change a user to an admin" do
-        put :set_role, user_id: @user.to_param, role_name: :convention_admin
+        put :set_role, params: { user_id: @user.to_param, role_name: :convention_admin }
         expect(response).to redirect_to(permissions_path)
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(true)
       end
       it "can change an admin back to a user" do
         admin = FactoryGirl.create(:convention_admin_user)
-        put :set_role, user_id: admin.to_param, role_name: :convention_admin
+        put :set_role, params: { user_id: admin.to_param, role_name: :convention_admin }
         expect(response).to redirect_to(permissions_path)
         admin.reload
         expect(admin.has_role?(:convention_admin)).to eq(false)
@@ -30,7 +30,7 @@ describe Admin::PermissionsController do
         sign_out @super_user
         sign_in user
 
-        put :set_role, user_id: @user.to_param, role_name: :convention_admin
+        put :set_role, params: { user_id: @user.to_param, role_name: :convention_admin }
         expect(response).to redirect_to(root_path)
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(false)
@@ -48,7 +48,7 @@ describe Admin::PermissionsController do
     end
 
     it "changes the users password" do
-      put :set_password, user_id: user.id, password: new_password
+      put :set_password, params: { user_id: user.id, password: new_password }
       expect(user.reload.valid_password?(new_password)).to be_truthy
       expect(ActionMailer::Base.deliveries.count).to eq(0)
     end

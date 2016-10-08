@@ -7,6 +7,8 @@ describe WelcomeController do
       it "returns http success" do
         get :help
         expect(response).to be_success
+
+        expect(rendered).to match(/Help/)
       end
     end
 
@@ -16,6 +18,8 @@ describe WelcomeController do
       it "returns http success" do
         get :help
         expect(response).to be_success
+
+        expect(rendered).to match(/Help/)
       end
     end
   end

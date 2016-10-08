@@ -16,10 +16,9 @@ describe SampleData::CompetitionsController do
   end
 
   describe "POST create" do
-    let(:params) { { competition_type: "Artistic Freestyle IUF 2015" } }
     it "creates a competition" do
       expect do
-        post :create, params
+        post :create, params: { competition_type: "Artistic Freestyle IUF 2015" }
       end.to change(Competition, :count).by(1)
     end
   end

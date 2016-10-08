@@ -26,12 +26,12 @@ describe ConventionSetup::PagesController do
     describe "with valid params" do
       it "creates a new Page" do
         expect do
-          post :create, page: FactoryGirl.attributes_for(:page)
+          post :create, params: { page: FactoryGirl.attributes_for(:page) }
         end.to change(Page, :count).by(1)
       end
 
       it "redirects to the created page" do
-        post :create, page: FactoryGirl.attributes_for(:page)
+        post :create, params: { page: FactoryGirl.attributes_for(:page) }
         expect(response).to redirect_to(convention_setup_page_path(Page.last))
       end
     end
@@ -40,14 +40,14 @@ describe ConventionSetup::PagesController do
       it "assigns a newly created but unsaved page as @page" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Page).to receive(:save).and_return(false)
-        post :create, page: { slug: "not valid" }
+        post :create, params: { page: { slug: "not valid" } }
         expect(assigns(:page)).to be_a_new(Page)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Page).to receive(:save).and_return(false)
-        post :create, page: { slug: "not valid" }
+        post :create, params: { page: { slug: "not valid" } }
         expect(response).to render_template("new")
       end
     end
@@ -55,7 +55,7 @@ describe ConventionSetup::PagesController do
 
   describe "GET edit" do
     it "assigns the requested page as @page" do
-      get :edit, id: page.to_param
+      get :edit, params: { id: page.to_param }
       expect(assigns(:page)).to eq(page)
     end
   end
@@ -63,13 +63,13 @@ describe ConventionSetup::PagesController do
   describe "PUT update" do
     describe "with valid params" do
       it "assigns the requested page as @page" do
-        put :update, id: page.to_param, page: FactoryGirl.attributes_for(:page)
+        put :update, params: { id: page.to_param, page: FactoryGirl.attributes_for(:page) }
         expect(assigns(:page)).to eq(page)
       end
 
       it "redirects to the page" do
         # params = FactoryGirl.attributes_for(:page).merge(expense_item_attributes: { id: page.expense_item.id })
-        put :update, id: page.to_param, page: FactoryGirl.attributes_for(:page)
+        put :update, params: { id: page.to_param, page: FactoryGirl.attributes_for(:page) }
         expect(response).to redirect_to(convention_setup_page_path(page))
       end
     end
@@ -78,7 +78,7 @@ describe ConventionSetup::PagesController do
       it "assigns the page as @page" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Page).to receive(:update_attributes).and_return(false)
-        put :update, id: page.to_param, page: {slug: 'fake'}
+        put :update, params: { id: page.to_param, page: {slug: 'fake'} }
         expect(assigns(:page)).to eq(page)
       end
     end
@@ -88,12 +88,12 @@ describe ConventionSetup::PagesController do
     it "destroys the requested page" do
       page
       expect do
-        delete :destroy, id: page.to_param
+        delete :destroy, params: { id: page.to_param }
       end.to change(Page, :count).by(-1)
     end
 
     it "redirects to the pages list" do
-      delete :destroy, id: page.to_param
+      delete :destroy, params: { id: page.to_param }
       expect(response).to redirect_to(convention_setup_pages_path)
     end
   end

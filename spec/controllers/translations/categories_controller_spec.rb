@@ -16,7 +16,7 @@ describe Translations::CategoriesController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: category.id
+      get :edit, params: { id: category.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::CategoriesController do
     end
 
     it "renders" do
-      put :update, id: category.id, category: valid_attributes
+      put :update, params: { id: category.id, category: valid_attributes }
       expect(response).to redirect_to(translations_categories_path)
       I18n.locale = :fr
       expect(category.reload.name).to eq("Le Track")

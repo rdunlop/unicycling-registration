@@ -11,19 +11,19 @@ describe Compete::SignInsController do
 
   describe "GET show" do
     it "displays the competitors" do
-      get :show, competition_id: competition.id
+      get :show, params: { competition_id: competition.id }
       expect(response).to be_success
     end
 
     it "downloads the pdf" do
-      get :show, competition_id: competition.id, format: :pdf
+      get :show, params: { competition_id: competition.id, format: :pdf }
       expect(response.content_type.to_s).to eq("application/pdf")
     end
   end
 
   describe "GET edit" do
     it "displays the competitors" do
-      get :edit, competition_id: competition.id
+      get :edit, params: { competition_id: competition.id }
       expect(response).to be_success
     end
   end
@@ -42,7 +42,7 @@ describe Compete::SignInsController do
         }
       }
       expect(competitor1.wave).to be_nil
-      put :update, competition_id: competition.id, competition: params
+      put :update, params: { competition_id: competition.id, competition: params }
       expect(competitor1.reload.wave).to eq(1)
     end
   end

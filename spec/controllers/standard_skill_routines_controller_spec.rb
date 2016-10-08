@@ -25,9 +25,15 @@ describe StandardSkillRoutinesController do
   describe "GET show" do
     it "assigns the requested routine as @standard_skill_routine" do
       routine = FactoryGirl.create(:standard_skill_routine, registrant: @registrant)
+      FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: routine, standard_skill_entry: FactoryGirl.create(:standard_skill_entry, number: 1, letter: "a", description: "One"))
       get :show, id: routine.to_param
-      expect(assigns(:standard_skill_routine)).to eq(routine)
-      expect(assigns(:total)).to eq(0)
+
+      expect(rendered).to match(/One/)
+
+      assert_select "form", action: standard_skill_routine_standard_skill_routine_entries_path(routine), method: "post" do
+        assert_select "select#standard_skill_routine_entry_standard_skill_entry_id", name: "standard_skill_routine_entry[standard_skill_entry_id]"
+        assert_select "input#standard_skill_routine_entry_position", name: "standard_skill_routine_entry[position]"
+      end
     end
   end
 
@@ -35,7 +41,7 @@ describe StandardSkillRoutinesController do
     describe "with valid params" do
       it "creates a new routine" do
         expect do
-          post :create, registrant_id: @registrant.to_param
+          post :create, params: { registrant_id: @registrant.to_param }
         end.to change(StandardSkillRoutine, :count).by(1)
       end
 
@@ -50,14 +56,14 @@ describe StandardSkillRoutinesController do
 
       it "redirects to that routine without creating a new one" do
         expect do
-          post :create, registrant_id: @registrant.to_param
+          post :create, params: { registrant_id: @registrant.to_param }
         end.not_to change(StandardSkillRoutine, :count)
         expect(response).to redirect_to(standard_skill_routine)
       end
     end
 
     it "Cannot create a routine for another user" do
-      post :create, registrant_id: FactoryGirl.create(:registrant).to_param
+      post :create, params: { registrant_id: FactoryGirl.create(:registrant).to_param }
       expect(response).to redirect_to(root_path)
     end
 
@@ -67,7 +73,7 @@ describe StandardSkillRoutinesController do
       end
 
       it "cannot create a new routine" do
-        post :create, registrant_id: @registrant.to_param
+        post :create, params: { registrant_id: @registrant.to_param }
         expect(response).to redirect_to(root_path)
       end
     end

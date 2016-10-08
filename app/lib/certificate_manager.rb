@@ -29,13 +29,12 @@ class CertificateManager
     rejected_domains = []
     Tenant.all.each do |tenant|
       domains << tenant.permanent_url
-      unless basic_only
-        tenant.tenant_aliases.each do |tenant_alias|
-          if tenant_alias.properly_configured?
-            domains << tenant_alias.website_alias
-          else
-            rejected_domains << tenant_alias.website_alias
-          end
+      next if basic_only
+      tenant.tenant_aliases.each do |tenant_alias|
+        if tenant_alias.properly_configured?
+          domains << tenant_alias.website_alias
+        else
+          rejected_domains << tenant_alias.website_alias
         end
       end
     end

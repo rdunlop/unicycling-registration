@@ -26,7 +26,7 @@ describe Admin::RegFeesController do
     end
 
     it "can be changed to a different reg period" do
-      post :update_reg_fee, reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id }
+      post :update_reg_fee, params: { reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id } }
       expect(response).to redirect_to set_reg_fees_path
       @reg.reload
       expect(@reg.owing_expense_items.count).to eq(1)
@@ -35,8 +35,8 @@ describe Admin::RegFeesController do
     end
 
     it "can change to a different reg fee twice" do
-      post :update_reg_fee, reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id }
-      post :update_reg_fee, reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp2.id }
+      post :update_reg_fee, params: { reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id } }
+      post :update_reg_fee, params: { reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp2.id } }
       @reg.reload
       expect(@reg.owing_expense_items.count).to eq(1)
       expect(@reg.owing_expense_items.first).to eq(@rp2.expense_item)
@@ -49,7 +49,7 @@ describe Admin::RegFeesController do
       payment.completed = true
       payment.save
       @reg.reload
-      post :update_reg_fee, reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id }
+      post :update_reg_fee, params: { reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id } }
       expect(response).to render_template("index")
     end
   end

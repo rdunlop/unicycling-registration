@@ -16,7 +16,7 @@ describe Translations::EventsController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: event.id
+      get :edit, params: { id: event.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::EventsController do
     end
 
     it "renders" do
-      put :update, id: event.id, event: valid_attributes
+      put :update, params: { id: event.id, event: valid_attributes }
       expect(response).to redirect_to(translations_events_path)
       I18n.locale = :fr
       expect(event.reload.name).to eq("Slow thing")

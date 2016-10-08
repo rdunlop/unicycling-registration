@@ -22,7 +22,7 @@ describe CompetitionResultsController do
 
   describe "GET index" do
     it "renders" do
-      get :index, competition_id: competition.id
+      get :index, params: { competition_id: competition.id }
       expect(response).to be_success
     end
   end
@@ -33,7 +33,7 @@ describe CompetitionResultsController do
 
     it "creates a result" do
       expect do
-        post :create, results_file: test_data_file, custom_name: "New Results", competition_id: competition.id
+        post :create, params: { results_file: test_data_file, custom_name: "New Results", competition_id: competition.id }
       end.to change(CompetitionResult, :count).by(1)
     end
   end
@@ -42,7 +42,7 @@ describe CompetitionResultsController do
     let!(:result) { FactoryGirl.create(:competition_result, competition: competition) }
     it "removes the result" do
       expect do
-        delete :destroy, id: result.id, competition_id: competition.id
+        delete :destroy, params: { id: result.id, competition_id: competition.id }
       end.to change(CompetitionResult, :count).by(-1)
     end
   end

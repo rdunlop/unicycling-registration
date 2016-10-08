@@ -16,7 +16,7 @@ describe Translations::EventCategoriesController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: event_category.id
+      get :edit, params: { id: event_category.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::EventCategoriesController do
     end
 
     it "renders" do
-      put :update, id: event_category.id, event_category: valid_attributes
+      put :update, params: { id: event_category.id, event_category: valid_attributes }
       expect(response).to redirect_to(translations_event_categories_path)
       I18n.locale = :fr
       expect(event_category.reload.name).to eq("Le Team Name")

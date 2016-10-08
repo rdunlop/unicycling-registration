@@ -13,7 +13,7 @@ describe HeatReviewController do
   end
 
   describe "GET index" do
-    before { get :index, competition_id: @competition.id }
+    before { get :index, params: { competition_id: @competition.id } }
 
     it "assigns @max_heat" do
       expect(assigns(:max_heat)).to eq(1)
@@ -21,7 +21,7 @@ describe HeatReviewController do
   end
 
   describe "GET show" do
-    before { get :show, competition_id: @competition.id, heat: @lane_assignment.heat }
+    before { get :show, params: { competition_id: @competition.id, heat: @lane_assignment.heat } }
 
     it do
       expect(response).to be_success
@@ -34,7 +34,7 @@ describe HeatReviewController do
 
       it "calls the creator" do
         allow_any_instance_of(HeatLaneLifImporter).to receive(:process).and_return(true)
-        post :import_lif, heat: 1, competition_id: @competition.id, file: test_file
+        post :import_lif, params: { heat: 1, competition_id: @competition.id, file: test_file }
 
         expect(flash[:notice]).to match(/Successfully imported/)
       end
@@ -43,7 +43,7 @@ describe HeatReviewController do
     describe "with invalid params" do
       describe "when the file is missing" do
         def do_action
-          post :import_lif, heat: 1, competition_id: @competition.id, file: nil
+          post :import_lif, params: { heat: 1, competition_id: @competition.id, file: nil }
         end
 
         it "returns an error" do
@@ -59,7 +59,7 @@ describe HeatReviewController do
       let(:test_file) { "stubbed" }
 
       it "calls the creator" do
-        post :approve_heat, heat: 1, competition_id: @competition.id
+        post :approve_heat, params: { heat: 1, competition_id: @competition.id }
 
         expect(flash[:notice]).to match(/Added Heat/)
       end
@@ -71,7 +71,7 @@ describe HeatReviewController do
 
     it "removes all heat lane rsults" do
       expect do
-        delete :destroy, competition_id: @competition.id, heat: result.heat
+        delete :destroy, params: { competition_id: @competition.id, heat: result.heat }
       end.to change(HeatLaneResult, :count).by(-1)
     end
   end

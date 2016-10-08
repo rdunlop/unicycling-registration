@@ -16,7 +16,7 @@ describe Translations::PagesController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: page.id
+      get :edit, params: { id: page.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::PagesController do
     end
 
     it "renders" do
-      put :update, id: page.id, page: valid_attributes
+      put :update, params: { id: page.id, page: valid_attributes }
       expect(response).to redirect_to(translations_pages_path)
       I18n.locale = :fr
       expect(page.reload.title).to eq("Le Lodging")

@@ -18,7 +18,7 @@ describe Compete::IneligibleRegistrantsController do
     let!(:registrant) { FactoryGirl.create(:registrant) }
 
     it "marks registrant as ineligible" do
-      post :create, registrant_id: registrant.id
+      post :create, params: { registrant_id: registrant.id }
       expect(registrant.reload).to be_ineligible
     end
   end
@@ -27,7 +27,7 @@ describe Compete::IneligibleRegistrantsController do
     let!(:registrant) { FactoryGirl.create(:registrant, ineligible: true) }
 
     it "marks registrant as eligible" do
-      delete :destroy, id: registrant.id
+      delete :destroy, params: { id: registrant.id }
       expect(registrant.reload).not_to be_ineligible
     end
   end

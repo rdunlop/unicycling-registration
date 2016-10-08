@@ -26,7 +26,7 @@ describe Admin::ManualPaymentsController do
 
     context "with registrant_ids" do
       it "renders" do
-        get :choose, registrant_ids: [registrant.id]
+        get :choose, params: { registrant_ids: [registrant.id] }
         expect(response).to be_success
       end
     end
@@ -37,13 +37,13 @@ describe Admin::ManualPaymentsController do
 
     it "can create a payment with refund elements" do
       expect do
-        post :create, manual_payment: {
+        post :create, params: { manual_payment: {
           unpaid_details_attributes: {
             "0" => {
               registrant_expense_item_id: rei.id,
               pay_for: "1"
             }}
-        }
+        } }
       end.to change(Payment, :count).by(1)
       p = Payment.last
       expect(p.completed).to be_falsey

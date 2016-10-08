@@ -56,9 +56,9 @@ describe EventsController do
   describe "GET summary" do
     it "assigns all events as @events" do
       event
-      get :summary, {}
+      get :summary
       expect(response).to be_success
-      expect(assigns(:events)).to eq([event])
+      assert_select "td", event.event_categories.first.to_s
     end
     describe "With competitors and non-competitors" do
       before(:each) do
@@ -67,16 +67,16 @@ describe EventsController do
         @non_comp1 = FactoryGirl.create(:noncompetitor)
       end
       it "sets the number of registrants as @num_registrants" do
-        get :summary, {}
-        expect(assigns(:num_registrants)).to eq(3)
+        get :summary
+        assert_select "b.num_registrants", "3"
       end
       it "sets the number of competitors as @num_competitors" do
-        get :summary, {}
-        expect(assigns(:num_competitors)).to eq(2)
+        get :summary
+        assert_select ".num_competitors", "2"
       end
       it "sets the number of non_competitors as @num_noncompetitors" do
-        get :summary, {}
-        expect(assigns(:num_noncompetitors)).to eq(1)
+        get :summary
+        assert_select ".num_noncompetitors", "1"
       end
     end
   end
@@ -92,14 +92,14 @@ describe EventsController do
     let(:volunteer_opportunity) { FactoryGirl.create(:volunteer_opportunity) }
 
     it "returns a list" do
-      get :specific_volunteers, volunteer_opportunity_id: volunteer_opportunity.id
+      get :specific_volunteers, params: { volunteer_opportunity_id: volunteer_opportunity.id }
       expect(response).to be_success
     end
   end
 
   describe "GET sign_ups" do
     it "returns all sign ups" do
-      get :sign_ups, id: event.id
+      get :sign_ups, params: { id: event.id }
       expect(response).to be_success
     end
   end

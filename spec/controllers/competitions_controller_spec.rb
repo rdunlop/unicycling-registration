@@ -49,46 +49,46 @@ describe CompetitionsController do
 
   describe "#show" do
     it "renders successfully" do
-      get :show, id: competition.id
+      get :show, params: { id: competition.id }
       expect(response).to be_success
     end
   end
 
   describe "#toggle_final_sort" do
     it "changes the final_sort status" do
-      put :toggle_final_sort, id: competition.id
+      put :toggle_final_sort, params: { id: competition.id }
       expect(competition.reload).to be_order_finalized
 
       # and back again
-      put :toggle_final_sort, id: competition.id
+      put :toggle_final_sort, params: { id: competition.id }
       expect(competition.reload).not_to be_order_finalized
     end
   end
 
   describe "#set_sort" do
     it "renders" do
-      get :set_sort, id: competition.id
+      get :set_sort, params: { id: competition.id }
       expect(response).to be_success
     end
   end
 
   describe "#sort_random" do
     it "redirects to sort path" do
-      post :sort_random, id: competition.id
+      post :sort_random, params: { id: competition.id }
       expect(response).to redirect_to(set_sort_competition_path(competition))
     end
   end
 
   describe "#set_places" do
     it "renders" do
-      post :set_places, id: competition.id
+      post :set_places, params: { id: competition.id }
       expect(response).to redirect_to(result_competition_path(competition))
     end
   end
 
   describe "#result" do
     it "renders" do
-      get :result, id: competition.id
+      get :result, params: { id: competition.id }
       expect(response).to be_success
     end
   end
@@ -96,7 +96,7 @@ describe CompetitionsController do
   describe "POST lock" do
     it "locks the competition" do
       competition = FactoryGirl.create(:competition, event: @event)
-      post :lock, id: competition.to_param
+      post :lock, params: { id: competition.to_param }
       competition.reload
       expect(competition.locked?).to eq(true)
     end
@@ -104,7 +104,7 @@ describe CompetitionsController do
   describe "DELETE lock" do
     it "unlocks the competition" do
       competition = FactoryGirl.create(:competition, :locked, event: @event)
-      delete :unlock, id: competition.to_param
+      delete :unlock, params: { id: competition.to_param }
       competition.reload
       expect(competition.locked?).to eq(false)
     end
@@ -113,7 +113,7 @@ describe CompetitionsController do
   describe "POST publish" do
     it "publishes the competition results" do
       competition = FactoryGirl.create(:competition, :locked, event: @event)
-      post :publish, id: competition.to_param
+      post :publish, params: { id: competition.to_param }
       competition.reload
       expect(competition.published?).to eq(true)
     end
@@ -121,7 +121,7 @@ describe CompetitionsController do
   describe "DELETE publish" do
     it "un-publishes the competition" do
       competition = FactoryGirl.create(:competition, :locked, :published, event: @event)
-      delete :unpublish, id: competition.to_param
+      delete :unpublish, params: { id: competition.to_param }
       competition.reload
       expect(competition.published?).to eq(false)
     end
@@ -132,7 +132,7 @@ describe CompetitionsController do
     let!(:config) { FactoryGirl.create(:event_configuration, :with_usa) }
     it "creates a competitor for the competition" do
       expect do
-        post :create_last_minute_competitor, id: competition.id, registrant_id: new_registrant.id, format: :js
+        post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }
       end.to change(Competitor, :count).by(1)
     end
 
@@ -144,7 +144,7 @@ describe CompetitionsController do
 
       it "changes the competitor status" do
         expect do
-          post :create_last_minute_competitor, id: competition.id, registrant_id: new_registrant.id, format: :js
+          post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }
         end.to change { @withdrawn_competitor.reload.status }.to("active")
       end
     end

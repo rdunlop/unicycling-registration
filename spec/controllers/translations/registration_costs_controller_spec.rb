@@ -16,7 +16,7 @@ describe Translations::RegistrationCostsController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: registration_cost.id
+      get :edit, params: { id: registration_cost.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::RegistrationCostsController do
     end
 
     it "renders" do
-      put :update, id: registration_cost.id, registration_cost: valid_attributes
+      put :update, params: { id: registration_cost.id, registration_cost: valid_attributes }
       expect(response).to redirect_to(translations_registration_costs_path)
       I18n.locale = :fr
       expect(registration_cost.reload.name).to eq("Pretot")

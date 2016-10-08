@@ -80,7 +80,7 @@ class Email
   end
 
   def filtered_registrant_emails
-    if competition_id.any?
+    if competition_id && competition_id.any?
       competitions.map(&:registrants).flatten.map(&:contact_detail).compact.map(&:email).compact.uniq
     elsif category_id.present?
       category.events.map(&:competitor_registrants).flatten.map(&:contact_detail).compact.map(&:email).compact.uniq

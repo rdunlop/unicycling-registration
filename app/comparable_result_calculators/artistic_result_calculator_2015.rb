@@ -19,7 +19,7 @@ class ArtisticResultCalculator_2015
   end
 
   def competitor_tie_break_comparable_result(competitor)
-    jt = JudgeType.find_by(name: "Technical", event_class: competitor.competition.event_class) # TODO this should be properly identified
+    jt = JudgeType.find_by(name: "Technical", event_class: competitor.competition.event_class) # TODO: this should be properly identified
     total_points(competitor, jt)
   end
 

@@ -11,7 +11,7 @@ describe PaymentAdjustmentsController do
 
   describe "GET list" do
     it "assigns all payments as @payments" do
-      get :list, {}
+      get :list
       expect(assigns(:payments)).to match_array([payment, other_payment])
     end
   end
@@ -35,7 +35,7 @@ describe PaymentAdjustmentsController do
 
     context "with a registrant" do
       it "renders" do
-        post :adjust_payment_choose, registrant_id: [registrant.id]
+        post :adjust_payment_choose, params: { registrant_id: [registrant.id] }
       end
     end
   end
@@ -50,10 +50,10 @@ describe PaymentAdjustmentsController do
 
     it "can create an exchange of elements" do
       expect do
-        post :exchange_create,           note: "exchange shirts",
+        post :exchange_create, params: { note: "exchange shirts",
                                          registrant_id: registrant.id,
                                          old_item_id: payment_detail.expense_item.id,
-                                         new_item_id: new_expense_item.id
+                                         new_item_id: new_expense_item.id }
       end.to change(RefundDetail, :count).by(1)
       r = Refund.last
       expect(r.note).to eq("exchange shirts")
@@ -67,10 +67,10 @@ describe PaymentAdjustmentsController do
 
     it "doesn't create any refunds when there is not a matching paid expense item" do
       expect do
-        post :exchange_create,           note: "exchange shirts",
+        post :exchange_create, params: { note: "exchange shirts",
                                          registrant_id: registrant.id,
                                          old_item_id: other_expense_item.id,
-                                         new_item_id: new_expense_item.id
+                                         new_item_id: new_expense_item.id }
       end.to_not change(Refund, :count)
     end
   end

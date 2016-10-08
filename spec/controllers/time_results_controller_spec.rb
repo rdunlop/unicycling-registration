@@ -57,7 +57,7 @@ describe TimeResultsController do
     end
 
     it "Cannot read time_results" do
-      get :index, competition_id: @competition.id
+      get :index, params: { competition_id: @competition.id }
       expect(response).to redirect_to(root_path)
     end
   end
@@ -65,11 +65,11 @@ describe TimeResultsController do
   describe "GET index" do
     it "assigns all time_results as @time_results" do
       time_result = FactoryGirl.create(:time_result, competitor: @competitor)
-      get :index, competition_id: @competition.id
+      get :index, params: { competition_id: @competition.id }
       expect(assigns(:time_results)).to eq([time_result])
     end
     it "assigns a new time_result" do
-      get :index, competition_id: @competition.id
+      get :index, params: { competition_id: @competition.id }
       expect(assigns(:time_result)).to be_a_new(TimeResult)
     end
   end
@@ -77,7 +77,7 @@ describe TimeResultsController do
   describe "GET edit" do
     it "assigns the requested time_result as @time_result" do
       time_result = FactoryGirl.create(:time_result)
-      get :edit, id: time_result.id
+      get :edit, params: { id: time_result.id }
       expect(assigns(:time_result)).to eq(time_result)
     end
   end
@@ -86,18 +86,18 @@ describe TimeResultsController do
     describe "with valid params" do
       it "creates a new TimeResult" do
         expect do
-          post :create, competition_id: @competition.id, time_result: valid_attributes
+          post :create, params: { competition_id: @competition.id, time_result: valid_attributes }
         end.to change(TimeResult, :count).by(1)
       end
 
       it "assigns a newly created time_result as @time_result" do
-        post :create, competition_id: @competition.id, time_result: valid_attributes
+        post :create, params: { competition_id: @competition.id, time_result: valid_attributes }
         expect(assigns(:time_result)).to be_a(TimeResult)
         expect(assigns(:time_result)).to be_persisted
       end
 
       it "redirects to the created time_result" do
-        post :create, competition_id: @competition.id, time_result: valid_attributes
+        post :create, params: { competition_id: @competition.id, time_result: valid_attributes }
         expect(response).to redirect_to(competition_time_results_path(@competition))
       end
     end
@@ -106,24 +106,24 @@ describe TimeResultsController do
       it "assigns a newly created but unsaved event_category as @event_category" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        post :create, competition_id: @competition.id, time_result: {status: "DQ"}
+        post :create, params: { competition_id: @competition.id, time_result: {status: "DQ"} }
         expect(assigns(:time_result)).to be_a_new(TimeResult)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        post :create, competition_id: @competition.id, time_result: {status: "DQ"}
+        post :create, params: { competition_id: @competition.id, time_result: {status: "DQ"} }
         expect(response).to render_template("index")
       end
       it "loads the time_results" do
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        post :create, competition_id: @competition.id, time_result: {status: "DQ"}
+        post :create, params: { competition_id: @competition.id, time_result: {status: "DQ"} }
         expect(assigns(:time_results)).to eq([])
       end
       it "loads the event" do
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        post :create, competition_id: @competition.id, time_result: {status: "DQ"}
+        post :create, params: { competition_id: @competition.id, time_result: {status: "DQ"} }
         expect(assigns(:competition)).to eq(@competition)
       end
     end
@@ -131,20 +131,10 @@ describe TimeResultsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested time_result" do
-        time_result = FactoryGirl.create(:time_result)
-        # Assuming there are no other event_categories in the database, this
-        # specifies that the EventCategory created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(TimeResult).to receive(:update_attributes).with({})
-        put :update, id: time_result.to_param, time_result: {'these' => 'params'}
-      end
-
       it "redirects to the event time results" do
         other_competitor = FactoryGirl.create(:event_competitor, competition: @competition)
         time_result = FactoryGirl.create(:time_result, competitor: other_competitor)
-        put :update, id: time_result.to_param, time_result: valid_attributes
+        put :update, params: { id: time_result.to_param, time_result: valid_attributes }
         expect(response).to redirect_to(competition_time_results_path(@competition))
       end
     end
@@ -154,7 +144,7 @@ describe TimeResultsController do
         time_result = FactoryGirl.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        put :update, id: time_result.to_param, time_result: {status: "DQ"}
+        put :update, params: { id: time_result.to_param, time_result: {status: "DQ"} }
         expect(assigns(:time_result)).to eq(time_result)
       end
 
@@ -162,7 +152,7 @@ describe TimeResultsController do
         time_result = FactoryGirl.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        put :update, id: time_result.to_param, time_result: {status: "DQ"}
+        put :update, params: { id: time_result.to_param, time_result: {status: "DQ"} }
         expect(response).to render_template("edit")
       end
     end
@@ -172,14 +162,14 @@ describe TimeResultsController do
     it "destroys the requested time_result" do
       time_result = FactoryGirl.create(:time_result)
       expect do
-        delete :destroy, id: time_result.to_param
+        delete :destroy, params: { id: time_result.to_param }
       end.to change(TimeResult, :count).by(-1)
     end
 
     it "redirects to the event's time_results list" do
       time_result = FactoryGirl.create(:time_result)
       competition = time_result.competition
-      delete :destroy, id: time_result.to_param
+      delete :destroy, params: { id: time_result.to_param }
       expect(response).to redirect_to(competition_time_results_path(competition))
     end
   end

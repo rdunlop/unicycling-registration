@@ -45,19 +45,19 @@ describe PaymentsController do
   describe "POST fake_complete" do
     it "sets the payment as completed" do
       payment = FactoryGirl.create(:payment, user: @user, transaction_id: nil)
-      post :fake_complete, id: payment.to_param
+      post :fake_complete, params: { id: payment.to_param }
       payment.reload
       expect(payment.completed).to eq(true)
     end
     it "redirects to registrants page" do
       payment = FactoryGirl.create(:payment, user: @user)
-      post :fake_complete, id: payment.to_param
+      post :fake_complete, params: { id: payment.to_param }
       expect(response).to redirect_to root_path
     end
     it "cannot change if config test_mode is disabled" do
       @config.update_attribute(:test_mode, false)
       payment = FactoryGirl.create(:payment, user: @user)
-      post :fake_complete, id: payment.to_param
+      post :fake_complete, params: { id: payment.to_param }
       payment.reload
       expect(payment.completed).to eq(false)
     end
@@ -69,7 +69,7 @@ describe PaymentsController do
       @payment = FactoryGirl.create(:payment, user: @user, completed: true)
     end
     it "doesn't assign other people's payments as @payments" do
-      get :index, user_id: @super_admin.id
+      get :index, params: { user_id: @super_admin.id }
       expect(assigns(:payments)).to eq([])
     end
     describe "as normal user" do
@@ -77,21 +77,23 @@ describe PaymentsController do
         sign_in @user
       end
       it "can read index" do
-        get :index, user_id: @user.id
+        get :index, params: { user_id: @user.id }
         expect(response).to be_success
       end
       it "receives a list of payments" do
-        get :index, user_id: @user.id
-        expect(assigns(:payments)).to eq([@payment])
+        get :index, params: { user_id: @user.id }
+
+        assert_select "tr>td", text: @payment.transaction_id.to_s, count: 1
       end
+
       it "does not include other people's payments" do
         FactoryGirl.create(:payment, user: @super_admin)
-        get :index, user_id: @user.id
+        get :index, params: { user_id: @user.id }
         expect(assigns(:payments)).to eq([@payment])
       end
       it "doesn't list my payments which are not completed" do
         FactoryGirl.create(:payment, completed: false, user: @user)
-        get :index, user_id: @user.id
+        get :index, params: { user_id: @user.id }
         expect(assigns(:payments)).to eq([@payment])
       end
     end
@@ -105,7 +107,7 @@ describe PaymentsController do
     end
 
     it "can get the registrants payments" do
-      get :registrant_payments, id: @reg
+      get :registrant_payments, params: { id: @reg }
       expect(response).to be_success
     end
 
@@ -116,24 +118,51 @@ describe PaymentsController do
       end
 
       it "cannot get the registrants payments" do
-        get :registrant_payments, id: @reg
+        get :registrant_payments, params: { id: @reg }
         expect(response).to redirect_to(root_path)
       end
     end
   end
 
   describe "GET show" do
+    let!(:payment) { FactoryGirl.create(:payment, user: @user) }
+
     it "assigns the requested payment as @payment" do
-      payment = FactoryGirl.create(:payment, user: @user)
-      get :show, id: payment.to_param
-      expect(assigns(:payment)).to eq(payment)
+      get :show, params: { id: payment.to_param }
+
+      assert_select "form", action: payment.paypal_post_url, method: "post" do
+        assert_select ("input[type=hidden][name=business][value='" + @config.paypal_account + "']")
+        assert_select "input[type=hidden][name=cancel_return][value='" + user_payments_url(@user) + "']"
+        assert_select "input[type=hidden][name=cmd][value='_cart']"
+        assert_select "input[type=hidden][name=currency_code][value='USD']"
+        assert_select "input[type=hidden][name=invoice][value='" + payment.invoice_id + "']"
+        assert_select "input[type=hidden][name=no_shipping][value='1']"
+        assert_select "input[type=hidden][name=notify_url][value='" + notification_payments_url(protocol: "https") + "']"
+        assert_select "input[type=hidden][name=return][value='" + success_payments_url + "']"
+        assert_select "input[type=hidden][name=upload][value='1']"
+
+        assert_select "input[type=submit]"
+      end
     end
+
+    context "with a payment_detail" do
+      let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment) }
+
+      it "renders the sub-entries for associated payment_details" do
+        get :show, params: { id: payment.to_param }
+
+        assert_select "form", action: @payment.paypal_post_url, method: "post" do
+          assert_select "input[type=hidden][name=amount_1][value='" + payment_detail.amount.to_s + "']"
+          assert_select "input[type=hidden][name=item_name_1][value='" + payment_detail.expense_item.to_s + "']"
+          assert_select "input[type=hidden][name=quantity_1][value='1']"
+        end
+      end
   end
 
   describe "Complete a $0 payment" do
     it "sets the payment completed" do
       payment = FactoryGirl.create(:payment, user: @user)
-      post :complete, id: payment.to_param
+      post :complete, params: { id: payment.to_param }
       expect(payment.reload.completed).to be_truthy
     end
 
@@ -141,7 +170,7 @@ describe PaymentsController do
       request.env["HTTP_REFERER"] = root_path
       payment = FactoryGirl.create(:payment, user: @user)
       FactoryGirl.create(:payment_detail, payment: payment, amount: 1.00)
-      post :complete, id: payment.to_param
+      post :complete, params: { id: payment.to_param }
       expect(payment.reload.completed).to be_falsy
     end
   end
@@ -214,7 +243,7 @@ describe PaymentsController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:do_action) { post :create, payment: valid_attributes }
+      let(:do_action) { post :create, params: { payment: valid_attributes } }
 
       it "creates a new Payment" do
         expect { do_action }.to change(Payment, :count).by(1)
@@ -244,7 +273,7 @@ describe PaymentsController do
         it "creates the payment_detail" do
           @ei = FactoryGirl.create(:expense_item)
           @reg = FactoryGirl.create(:competitor)
-          post :create, payment: {
+          post :create, params: { payment: {
             payment_details_attributes: [
               {
                 registrant_id: @reg.id,
@@ -253,7 +282,7 @@ describe PaymentsController do
                 free: true,
                 amount: 100
               }]
-          }
+          } }
           expect(PaymentDetail.count).to eq(1)
           expect(PaymentDetail.last.refunded?).to eq(false)
         end
@@ -262,7 +291,7 @@ describe PaymentsController do
           @ei = FactoryGirl.create(:expense_item)
           @ei2 = FactoryGirl.create(:expense_item)
           @reg = FactoryGirl.create(:competitor)
-          post :create, payment: {
+          post :create, params: { payment: {
             payment_details_attributes: [
               {
                 registrant_id: @reg.id,
@@ -279,7 +308,7 @@ describe PaymentsController do
                 amount: 100,
                 _destroy: "1"
               }]
-          }
+          } }
           expect(PaymentDetail.count).to eq(1)
           expect(PaymentDetail.last.refunded?).to eq(false)
         end
@@ -290,7 +319,7 @@ describe PaymentsController do
       it "assigns a newly created but unsaved payment as @payment" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
-        post :create, payment: {other: true}
+        post :create, params: { payment: {other: true} }
         expect(assigns(:payment)).to be_a_new(Payment)
       end
 
@@ -303,7 +332,7 @@ describe PaymentsController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
-        post :create, payment: {other: true}
+        post :create, params: { payment: {other: true} }
         expect(response).to render_template("new")
       end
     end
@@ -332,7 +361,7 @@ describe PaymentsController do
 
     context "without a valid coupon" do
       it "renders" do
-        post :apply_coupon, id: payment.id
+        post :apply_coupon, params:  { id: payment.id }
       end
     end
 

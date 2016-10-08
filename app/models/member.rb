@@ -49,7 +49,7 @@ class Member < ApplicationRecord
 
   def update_min_bib_number
     return if no_touch_cascade
-    comp = reload.competitor
+    comp = competitor.reload
     return if comp.nil?
     lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
     competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
@@ -75,7 +75,7 @@ class Member < ApplicationRecord
         return
       end
       if registrant.competitors.where(competition: competitor.competition).any?
-        errors[:base] = "Cannot have the same registrant (#{registrant}) in the same competition twice"
+        errors.add(:base, "Cannot have the same registrant (#{registrant}) in the same competition twice")
       end
     end
   end

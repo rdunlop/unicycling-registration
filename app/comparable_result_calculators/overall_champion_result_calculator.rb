@@ -122,13 +122,12 @@ class OverallChampionResultCalculator
       next unless entry.competition.published?
 
       matching_comp = matching_competitor(bib_number, gender, entry.competition)
-      if matching_comp
-        points = calc_points(entry, matching_comp)
-        competitor_results[entry.abbreviation] = {
-          entry_place: get_place(matching_comp),
-          entry_points: points
-        }
-      end
+      next unless matching_comp
+      points = calc_points(entry, matching_comp)
+      competitor_results[entry.abbreviation] = {
+        entry_place: get_place(matching_comp),
+        entry_points: points
+      }
     end
     total_points = 0
     competitor_results.keys.map { |race| total_points += competitor_results[race][:entry_points] }

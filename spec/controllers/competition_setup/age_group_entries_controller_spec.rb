@@ -11,7 +11,7 @@ describe CompetitionSetup::AgeGroupEntriesController do
     let!(:age_group_entry_2) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
 
     it "updates the order" do
-      put :update_row_order, id: age_group_entry_1.to_param, row_order_position: 1
+      put :update_row_order, params: { id: age_group_entry_1.to_param, row_order_position: 1 }
       expect(age_group_entry_2.reload.position).to eq(1)
       expect(age_group_entry_1.reload.position).to eq(2)
     end

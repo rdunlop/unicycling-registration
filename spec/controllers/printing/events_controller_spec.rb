@@ -12,7 +12,7 @@ describe Printing::EventsController do
   describe "GET results" do
     it "renders" do
       event
-      get :results, id: event.id
+      get :results, params: { id: event.id }
       expect(response).to be_success
     end
   end

@@ -35,7 +35,7 @@ describe AdditionalRegistrantAccessesController do
   end
 
   describe "GET index" do
-    it "assigns all additional_registrant_accesses as @additional_registrant_accesses" do
+    it "show all additional_registrant_accesses" do
       FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
       get :index, params: { user_id: @user.id }
       assert_select "tr>td", text: @reg.to_s, count: 1
@@ -43,13 +43,13 @@ describe AdditionalRegistrantAccessesController do
   end
 
   describe "GET invitations" do
-    it "assigns all invitations for me to @invitations" do
+    it "show all invitations for me" do
       my_reg = FactoryGirl.create(:registrant, user: @user)
       ada = FactoryGirl.create(:additional_registrant_access, registrant: my_reg)
       get :invitations, params: { user_id: @user.id }
       assert_select "td", ada.user.to_s
     end
-    it "doesn't assign other people's invitations" do
+    it "doesn't show other people's invitations" do
       FactoryGirl.create(:additional_registrant_access)
       get :invitations, params: { user_id: @user.id }
       assert_select "td", count: 0, text: "Decline"
@@ -57,7 +57,7 @@ describe AdditionalRegistrantAccessesController do
   end
 
   describe "GET new" do
-    it "assigns a new additional_registrant_access as @additional_registrant_access" do
+    it "show a new additional_registrant_access" do
       get :new, params: { user_id: @user.id }
       assert_select "form", action: user_additional_registrant_accesses_path(@user), method: "post" do
         assert_select "select#additional_registrant_access_registrant_id", name: "additional_registrant_access[registrant_id]"
@@ -73,7 +73,7 @@ describe AdditionalRegistrantAccessesController do
         end.to change(AdditionalRegistrantAccess, :count).by(1)
       end
 
-      it "assigns a newly created additional_registrant_access as @additional_registrant_access" do
+      it "create a new additional_registrant_access" do
         expect do
           post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
         end.to change(AdditionalRegistrantAccess, :count).by(1)
@@ -94,7 +94,7 @@ describe AdditionalRegistrantAccessesController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved additional_registrant_access as @additional_registrant_access" do
+      it "does not create a new additional_registrant_access" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AdditionalRegistrantAccess).to receive(:save).and_return(false)
         expect do

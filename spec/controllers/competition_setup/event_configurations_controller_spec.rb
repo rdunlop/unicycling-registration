@@ -24,7 +24,7 @@ describe CompetitionSetup::EventConfigurationsController do
     end
 
     it "updates the EC" do
-      put :update, event_configuration: ec_attributes
+      put :update, params: { event_configuration: ec_attributes }
       expect(@event_configuration.reload.max_award_place).to eq(4)
       expect(@event_configuration.reload.artistic_score_elimination_mode_naucc).to be_falsey
     end

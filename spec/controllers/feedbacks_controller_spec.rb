@@ -28,28 +28,33 @@ describe FeedbacksController do
 
   describe "POST #create" do
     it "returns http success" do
-      post :create, feedback: { message: "Hello WorlD", entered_email: "robin@dunlopweb.com"}
+      post :create, params: { feedback: { message: "Hello WorlD", entered_email: "robin@dunlopweb.com"} }
       expect(response).to redirect_to(new_feedback_path)
     end
 
     it "returns an error when no message" do
-      post :create, feedback: { message: nil }
-      expect(response).to render_template(:new)
+      post :create, params: { feedback: { message: nil } }
+      assert_select "h1", "Contact Us"
     end
 
     it "sends a message" do
       ActionMailer::Base.deliveries.clear
-      post :create, feedback: { message: "Hello werld", entered_email: "robin@dunlopweb.com" }
+      post :create, params: { feedback: { message: "Hello werld", entered_email: "robin@dunlopweb.com" } }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
     end
 
     it "when no user signed in, has placeholder for email and registrants" do
-      post :create, feedback: { message: "Hello werld" }
-      @cf = assigns(:feedback)
-      expect(@cf.message).to eq("Hello werld")
-      expect(@cf.username).to eq("not-signed-in")
-      expect(@cf.user_first_registrant_name).to eq("unknown")
+      ActionMailer::Base.deliveries.clear
+      post :create, params: { feedback: { message: "Hello werld" } }
+      # email = ActionMailer::Base.deliveries.last
+      # assert_equal "Feedback", email.subject
+      assert_select_email do
+        # assert_select "From Entered Email:"
+        assert_select "Hello werld"
+        assert_select "From User Email: not-signed-in"
+        assert_select "User's First Registrant: unknown"
+      end
     end
 
     describe "when the user is signed in, and has registrants" do
@@ -58,17 +63,20 @@ describe FeedbacksController do
         @registrant = FactoryGirl.create(:competitor, user: user)
       end
 
-      it "assigns the feedback object when feedback error" do
-        post :create, feedback: { message: nil }
-        expect(assigns(:feedback)).to be
+      it "shows the feedback new page when feedback error" do
+        post :create, params: { feedback: { message: nil } }
+        assert_select "h1", "Contact Us"
       end
 
       it "includes the user's e-mail (and names of registrants)" do
-        post :create, feedback: { message: "Hello werld" }
-        @cf = assigns(:feedback)
-        expect(@cf.message).to eq("Hello werld")
-        expect(@cf.username).to eq(user.email)
-        expect(@cf.user_first_registrant_name).to eq(@registrant.name)
+        post :create, params: { feedback: { message: "Hello werld" } }
+        # assert_equal "Feedback", email.subject
+        assert_select_email do
+          # assert_select "From Entered Email:"
+          assert_select "Hello werld"
+          assert_select "From User Email: #{user.email}"
+          assert_select "User's First Registrant: #{@registrant.name}"
+        end
       end
     end
   end

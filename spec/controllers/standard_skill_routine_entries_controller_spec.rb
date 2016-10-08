@@ -30,7 +30,7 @@ xdescribe StandardSkillRoutineEntriesController do
     describe "with valid params" do
       it "creates a new StandardSkillRoutineEntry" do
         expect do
-          post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes
+          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes }
         end.to change(StandardSkillRoutineEntry, :count).by(1)
       end
 
@@ -41,7 +41,7 @@ xdescribe StandardSkillRoutineEntriesController do
       end
 
       it "redirects to the created entry" do
-        post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes
+        post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes }
         expect(response).to redirect_to(standard_skill_routine_path(@routine))
       end
       describe "when 4 entries already exist" do
@@ -58,17 +58,17 @@ xdescribe StandardSkillRoutineEntriesController do
         it "inserts a new element at the top of the list, by the 'position'" do
           # creates 5b
           skill = FactoryGirl.create(:standard_skill_entry)
-          post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
+          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
             standard_skill_routine_id: @routine.id,
             standard_skill_entry_id: skill.id,
-            position: 1 }
+            position: 1 } }
           expect(response).to redirect_to(standard_skill_routine_path(@routine))
         end
         it "inserts a new one at the bottom of the list, if no position specified" do
           skill = FactoryGirl.create(:standard_skill_entry)
-          post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
+          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
             standard_skill_routine_id: @routine.id,
-            standard_skill_entry_id: skill.id }
+            standard_skill_entry_id: skill.id } }
           expect(response).to redirect_to(standard_skill_routine_path(@routine))
           # 1 initial, + 5 + 1 == 7
           expect(assigns(:standard_skill_routine_entry).position).to eq(7)
@@ -80,14 +80,14 @@ xdescribe StandardSkillRoutineEntriesController do
       it "assigns a newly created but unsaved entry as @entry" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillRoutine).to receive(:save).and_return(false)
-        post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1}
+        post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
         expect(assigns(:standard_skill_routine_entry)).to be_a_new(StandardSkillRoutineEntry)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillRoutine).to receive(:save).and_return(false)
-        post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1}
+        post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
         expect(response).to render_template("show")
       end
     end
@@ -98,7 +98,7 @@ xdescribe StandardSkillRoutineEntriesController do
 
       it "Cannot create new entries" do
         expect do
-          post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes
+          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes }
         end.to change(StandardSkillRoutineEntry, :count).by(0)
       end
     end
@@ -108,13 +108,13 @@ xdescribe StandardSkillRoutineEntriesController do
     it "destroys the requested entry" do
       entry = @initial_entry
       expect do
-        delete :destroy, standard_skill_routine_id: @routine.id, id: entry.to_param
+        delete :destroy, params: { standard_skill_routine_id: @routine.id, id: entry.to_param }
       end.to change(StandardSkillRoutineEntry, :count).by(-1)
     end
 
     it "redirects to the entries list" do
       entry = StandardSkillRoutineEntry.create! @valid_attributes
-      delete :destroy, standard_skill_routine_id: @routine.id, id: entry.to_param
+      delete :destroy, params: { standard_skill_routine_id: @routine.id, id: entry.to_param }
       expect(response).to redirect_to(standard_skill_routine_path(@routine))
     end
   end

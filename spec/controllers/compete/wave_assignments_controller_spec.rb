@@ -11,12 +11,12 @@ describe Compete::WaveAssignmentsController do
 
   describe "GET show" do
     it "displays the competitors" do
-      get :show, competition_id: competition.id
+      get :show, params: { competition_id: competition.id }
       expect(response).to be_success
     end
 
     it "downloads the xls" do
-      get :show, competition_id: competition.id, format: :xls
+      get :show, params: { competition_id: competition.id, format: :xls }
       expect(response.content_type.to_s).to eq("application/vnd.ms-excel")
     end
   end
@@ -31,7 +31,7 @@ describe Compete::WaveAssignmentsController do
 
     it "updates the waves" do
       expect(competitor1.wave).to be_nil
-      put :update, competition_id: competition.id, file: wave_data_file
+      put :update, params: { competition_id: competition.id, file: wave_data_file }
       expect(competitor1.reload.wave).to eq(1)
       expect(competitor2.reload.wave).to eq(1)
       expect(competitor3.reload.wave).to eq(2)

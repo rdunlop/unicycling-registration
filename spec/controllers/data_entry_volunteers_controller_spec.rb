@@ -22,12 +22,12 @@ describe DataEntryVolunteersController do
     describe "with valid params" do
       it "creates a new Volunteer" do
         expect do
-          post :create, data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id
+          post :create, params: { data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id }
         end.to change(@user.roles, :count).by(1)
       end
 
       it "updates the user's name" do
-        post :create, data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id
+        post :create, params: { data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id }
         expect(@user.reload.to_s).to eq("Robin")
       end
     end
@@ -36,7 +36,7 @@ describe DataEntryVolunteersController do
       sign_out @super_admin
       sign_in @user
 
-      post :create, data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id
+      post :create, params: { data_entry_volunteer: {user_id: @user.id, name: "Robin"}, competition_id: @ec.id }
       expect(response).to redirect_to(root_path)
     end
   end
@@ -44,7 +44,7 @@ describe DataEntryVolunteersController do
   describe "missing a name" do
     it "doesn't create the volunteer" do
       expect do
-        post :create, data_entry_volunteer: {user_id: @user.id, name: ""}, competition_id: @ec.id
+        post :create, params: { data_entry_volunteer: {user_id: @user.id, name: ""}, competition_id: @ec.id }
       end.to_not change(@user.roles, :count)
     end
   end

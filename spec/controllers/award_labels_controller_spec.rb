@@ -48,17 +48,57 @@ describe AwardLabelsController do
       end
     end
 
-    it "assigns all award_labels as @award_labels" do
-      aw_label = FactoryGirl.create(:award_label, user: @admin_user)
+    it "shows all award_labels" do
+      aw_label = FactoryGirl.create(:award_label,
+                                    bib_number: 123,
+                                    line_1: "Robin Dunlop & Connie Cotter",
+                                    line_2: "Pairs Freestyle",
+                                    line_3: "TCUC",
+                                    line_4: "Adults",
+                                    line_5: "Winner",
+                                    place: 2,
+                                    user: @admin_user
+                                   )
       get :index, params: { user_id: @admin_user }
       assert_select "td", aw_label.line_1
+
+      assert_select "tr>td", text: 123.to_s, count: 1
+      assert_select "tr>td", text: "Robin Dunlop & Connie Cotter".to_s, count: 1
+      assert_select "tr>td", text: "Pairs Freestyle".to_s, count: 1
+      assert_select "tr>td", text: "TCUC".to_s, count: 1
+      assert_select "tr>td", text: "Adults".to_s, count: 1
+      assert_select "tr>td", text: "Winner".to_s, count: 1
+      assert_select "tr>td", text: "2nd Place".to_s, count: 1
+      assert_select "tr>td", text: 2.to_s, count: 1
+
+      assert_select "form", action: user_award_labels_path(@admin_user), method: "post" do
+        assert_select "input#award_label_bib_number", name: "award_label[bib_number]"
+        assert_select "input#award_label_line_1", name: "award_label[line_1]"
+        assert_select "input#award_label_line_2", name: "award_label[line_2]"
+        assert_select "input#award_label_line_3", name: "award_label[line_3]"
+        assert_select "input#award_label_line_4", name: "award_label[line_4]"
+        assert_select "input#award_label_line_5", name: "award_label[line_5]"
+        assert_select "input#award_label_place", name: "award_label[place]"
+        assert_select "select#award_label_registrant_id", name: "award_label[registrant_id]"
+      end
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested award_label as @award_label" do
+    it "shows the requested award_label" do
       get :edit, params: { id: award_label.to_param }
       assert_select "input[value=?]", award_label.line_1
+
+      assert_select "form", action: award_label_path(award_label), method: "put" do
+        assert_select "input#award_label_bib_number", name: "award_label[bib_number]"
+        assert_select "input#award_label_line_1", name: "award_label[line_1]"
+        assert_select "input#award_label_line_2", name: "award_label[line_2]"
+        assert_select "input#award_label_line_3", name: "award_label[line_3]"
+        assert_select "input#award_label_line_4", name: "award_label[line_4]"
+        assert_select "input#award_label_line_5", name: "award_label[line_5]"
+        assert_select "input#award_label_place", name: "award_label[place]"
+        assert_select "select#award_label_registrant_id", name: "award_label[registrant_id]"
+      end
     end
   end
 
@@ -77,7 +117,7 @@ describe AwardLabelsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved award_label as @award_label" do
+      it "does not create unsaved award_label" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         expect do
@@ -96,7 +136,7 @@ describe AwardLabelsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested award_label as @award_label" do
+      it "updates the requested award_label" do
         expect do
           put :update, params: { id: award_label.to_param, award_label: valid_attributes.merge("place" => 2) }
         end.to change{ award_label.reload.place }
@@ -109,7 +149,7 @@ describe AwardLabelsController do
     end
 
     describe "with invalid params" do
-      it "assigns the award_label as @award_label" do
+      it "does not update the award_label" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         expect do

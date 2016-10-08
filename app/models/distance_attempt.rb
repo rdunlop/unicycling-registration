@@ -59,7 +59,7 @@ class DistanceAttempt < ApplicationRecord
   def cannot_have_new_attempts_after_certain_jumps
     if new_record?
       unless competitor.nil? || distance.nil?
-        if competitor(true).no_more_jumps?
+        if competitor.reload.no_more_jumps?
           errors[:base] << "Unable to make new attempts - #{competitor.distance_attempt_status}"
         end
       end

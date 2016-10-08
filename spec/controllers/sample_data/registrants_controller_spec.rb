@@ -16,21 +16,18 @@ describe SampleData::RegistrantsController do
   end
 
   describe "POST create" do
-    let(:params) { { number: "1" } }
     it "creates a registrant" do
       expect do
-        post :create, params
+        post :create, params: { number: "1" }
       end.to change(Registrant, :count).by(1)
     end
 
     context "when the sign_up_for_events is checked" do
       let!(:event) { FactoryGirl.create(:event) }
 
-      let(:params) { { number: "1", sign_up_for_all_events: "1" } }
-
       it "signs the registrant up for all events" do
         expect do
-          post :create, params
+          post :create, params: { number: "1", sign_up_for_all_events: "1" }
         end.to change(RegistrantEventSignUp, :count).by(1)
 
         expect(Registrant.last.registrant_event_sign_ups.map(&:event)).to include(event)

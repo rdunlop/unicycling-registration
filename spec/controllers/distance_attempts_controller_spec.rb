@@ -26,6 +26,20 @@ describe DistanceAttemptsController do
     sign_in @data_entry_volunteer_user
   end
 
+  describe "GET index" do
+    before (:each) do
+      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
+    end
+
+    it "should return a list of all distance_attempts" do
+      get :index, params: { judge_id: @judge.id }
+
+      assert_select "form", action: judge_distance_attempts_path(@judge), method: "get" do
+        assert_select "input#distance_attempt_distance", name: "distance_attempt_distance"
+      end
+    end
+  end
+
   describe "POST create" do
     before (:each) do
       @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
@@ -42,7 +56,7 @@ describe DistanceAttemptsController do
         request.env["HTTP_REFERER"] = judge_distance_attempts_path(@judge)
 
         expect do
-          post :create, distance_attempt: valid_attributes, judge_id: @judge.id
+          post :create, params: { distance_attempt: valid_attributes, judge_id: @judge.id }
         end.to change(DistanceAttempt, :count).by(1)
 
         expect(response).to redirect_to(judge_distance_attempts_path(@judge))
@@ -50,8 +64,8 @@ describe DistanceAttemptsController do
     end
     describe "with invalid params" do
       it "renders the 'new' form" do
-        post :create, distance_attempt: {fault: false}, judge_id: @judge.id
-        expect(response).to render_template("index")
+        post :create, params: { distance_attempt: {fault: false}, judge_id: @judge.id }
+        assert_select "h1", "#{competition} - Distance Attempt"
       end
     end
   end
@@ -60,23 +74,19 @@ describe DistanceAttemptsController do
     before(:each) do
       @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
     end
-    it "should return a list of all distance_attempts" do
-      get :list, competition_id: competition.id
 
-      expect(response).to render_template("list")
-    end
     it "should return the distance attempts" do
       da = FactoryGirl.create(:distance_attempt, judge: @judge, competitor: comp)
-      get :list, competition_id: competition.id
+      get :list, params: { competition_id: competition.id }
 
-      expect(assigns(:distance_attempts)).to eq([da])
+      assert_select "td", da.competitor.to_s
     end
     it "should not be accessible to non-data_entry_volunteers" do
       sign_out @data_entry_volunteer_user
       @normal_user = FactoryGirl.create(:user)
       sign_in @normal_user
 
-      get :list, competition_id: competition.id
+      get :list, params: { competition_id: competition.id }
 
       expect(response).to redirect_to(root_path)
     end
@@ -90,13 +100,13 @@ describe DistanceAttemptsController do
     it "destroys the requested distance_attempt" do
       distance_attempt = FactoryGirl.create(:distance_attempt, competitor: comp)
       expect do
-        delete :destroy, id: distance_attempt.to_param
+        delete :destroy, params: { id: distance_attempt.to_param }
       end.to change(DistanceAttempt, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
       distance_attempt = FactoryGirl.create(:distance_attempt, competitor: comp)
-      delete :destroy, id: distance_attempt.to_param
+      delete :destroy, params: { id: distance_attempt.to_param }
       expect(response).to redirect_to(root_path)
     end
   end
