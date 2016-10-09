@@ -5,10 +5,10 @@ describe Compete::CombinedCompetitionsController do
     sign_in FactoryGirl.create(:super_admin_user)
   end
 
-  let(:valid_attributes) { { "name" => "MyString", calculation_mode: 'default' } }
+  let(:valid_attributes) { { name: "MyString", calculation_mode: 'default' } }
 
   describe "GET index" do
-    it "assigns all combined_competitions as @combined_competitions" do
+    it "shows all combined_competitions" do
       combined_competition = CombinedCompetition.create! valid_attributes
       get :index
       assert_select "tr>td", text: combined_competition.name.to_s, count: 1
@@ -16,7 +16,7 @@ describe Compete::CombinedCompetitionsController do
   end
 
   describe "GET new" do
-    it "assigns a new combined_competition as @combined_competition" do
+    it "shows a new combined_competition form" do
       get :new
       assert_select "form[action=?][method=?]", combined_competitions_path(locale: :en), "post" do
         assert_select "input#combined_competition_name[name=?]", "combined_competition[name]"
@@ -25,7 +25,7 @@ describe Compete::CombinedCompetitionsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested combined_competition as @combined_competition" do
+    it "shows the requested combined_competition" do
       combined_competition = CombinedCompetition.create! valid_attributes
       get :edit, params: { id: combined_competition.to_param }
       assert_select "form[action=?][method=?]", combined_competition_path(combined_competition, locale: :en), "post" do
@@ -42,12 +42,6 @@ describe Compete::CombinedCompetitionsController do
         end.to change(CombinedCompetition, :count).by(1)
       end
 
-      it "assigns a newly created combined_competition as @combined_competition" do
-        post :create, params: { combined_competition: valid_attributes }
-        expect(assigns(:combined_competition)).to be_a(CombinedCompetition)
-        expect(assigns(:combined_competition)).to be_persisted
-      end
-
       it "redirects to the created combined_competition" do
         post :create, params: { combined_competition: valid_attributes }
         expect(response).to redirect_to(combined_competition_combined_competition_entries_path(CombinedCompetition.last))
@@ -55,18 +49,12 @@ describe Compete::CombinedCompetitionsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved combined_competition as @combined_competition" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(CombinedCompetition).to receive(:save).and_return(false)
-        post :create, params: { combined_competition: { "name" => "invalid value" } }
-        expect(assigns(:combined_competition)).to be_a_new(CombinedCompetition)
-      end
-
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(CombinedCompetition).to receive(:save).and_return(false)
         post :create, params: { combined_competition: { "name" => "invalid value" } }
-        expect(response).to render_template("new")
+
+        assert_select "h1", "New Overall Champion Calculator"
       end
     end
   end
@@ -75,8 +63,9 @@ describe Compete::CombinedCompetitionsController do
     describe "with valid params" do
       it "assigns the requested combined_competition as @combined_competition" do
         combined_competition = CombinedCompetition.create! valid_attributes
-        put :update, params: { id: combined_competition.to_param, combined_competition: valid_attributes }
-        expect(assigns(:combined_competition)).to eq(combined_competition)
+        expect do
+          put :update, params: { id: combined_competition.to_param, combined_competition: valid_attributes.merge(name: "Hello") }
+        end.to change{ combined_competition.reload.name }
       end
 
       it "redirects to the combined_competition" do
@@ -91,8 +80,9 @@ describe Compete::CombinedCompetitionsController do
         combined_competition = CombinedCompetition.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(CombinedCompetition).to receive(:save).and_return(false)
-        put :update, params: { id: combined_competition.to_param, combined_competition: { "name" => "invalid value" } }
-        expect(assigns(:combined_competition)).to eq(combined_competition)
+        expect do
+          put :update, params: { id: combined_competition.to_param, combined_competition: { "name" => "invalid value" } }
+        end.not_to change { combined_competition.reload.name }
       end
 
       it "re-renders the 'edit' template" do
@@ -100,7 +90,8 @@ describe Compete::CombinedCompetitionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(CombinedCompetition).to receive(:save).and_return(false)
         put :update, params: { id: combined_competition.to_param, combined_competition: { "name" => "invalid value" } }
-        expect(response).to render_template("edit")
+
+        assert_select "h1", "Editing Overall Champion Calculator"
       end
     end
   end
