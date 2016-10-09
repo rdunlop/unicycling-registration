@@ -34,8 +34,8 @@ describe ConventionSetup::TenantAliasesController do
       get :index
     end
 
-    it "loads a blank tenant_alias" do
-      expect(assigns(:tenant_alias)).not_to be_persisted
+    it "loads a blank tenant_alias form" do
+      assert_select "form#new_tenant_alias", 1
     end
   end
 

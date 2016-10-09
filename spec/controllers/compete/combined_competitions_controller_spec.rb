@@ -61,7 +61,7 @@ describe Compete::CombinedCompetitionsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested combined_competition as @combined_competition" do
+      it "updates the requested combined_competition" do
         combined_competition = CombinedCompetition.create! valid_attributes
         expect do
           put :update, params: { id: combined_competition.to_param, combined_competition: valid_attributes.merge(name: "Hello") }
@@ -76,7 +76,7 @@ describe Compete::CombinedCompetitionsController do
     end
 
     describe "with invalid params" do
-      it "assigns the combined_competition as @combined_competition" do
+      it "does not update the combined_competition" do
         combined_competition = CombinedCompetition.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(CombinedCompetition).to receive(:save).and_return(false)

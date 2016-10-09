@@ -23,11 +23,12 @@ describe ConventionSetup::VolunteerOpportunitiesController do
   end
 
   describe "GET index" do
-    it "assigns all volunteer opportunities as @voluntee_opportunities" do
+    it "shows all volunteer opportunities" do
       volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
       get :index
       expect(response).to be_success
-      expect(assigns(:volunteer_opportunities)).to eq([volunteer_opportunity])
+      assert_select "h1", "Volunteer Opportunities"
+      assert_select "td", volunteer_opportunity.description
     end
   end
 
@@ -35,7 +36,10 @@ describe ConventionSetup::VolunteerOpportunitiesController do
     it "lists the new opportunity" do
       get :new
       expect(response).to be_success
-      expect(assigns(:volunteer_opportunity)).to be_a_new(VolunteerOpportunity)
+
+      assert_select "form#new_volunteer_opportunity", action: convention_setup_volunteer_opportunities_path, method: "post" do
+        assert_select "input#volunteer_opportunity_description", name: "volunteer_opportunity[description]"
+      end
     end
   end
 
@@ -51,7 +55,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(VolunteerOpportunity).to receive(:save).and_return(false)
         post :create, params: { volunteer_opportunity: valid_attributes }
-        expect(response).to render_template("new")
+        assert_select "h1", "New Volunteer Role"
       end
     end
   end
@@ -73,7 +77,8 @@ describe ConventionSetup::VolunteerOpportunitiesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(VolunteerOpportunity).to receive(:save).and_return(false)
         put :update, params: { volunteer_opportunity: { description: "New description" }, id: volunteer_opportunity.id }
-        expect(response).to render_template("edit")
+
+        assert_select "h1", "Edit Volunteer Role"
       end
     end
   end

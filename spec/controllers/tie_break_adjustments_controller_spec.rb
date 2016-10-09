@@ -32,14 +32,18 @@ describe TieBreakAdjustmentsController do
   end
 
   describe "GET index" do
-    it "assigns all tie_break_adjustments as @tie_break_adjustments" do
+    it "shows all tie_break_adjustments" do
       tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, competitor: @competitor, judge: @judge)
       get :index, params: { judge_id: @judge.id }
-      expect(assigns(:tie_break_adjustments)).to eq([tie_break_adjustment])
+
+      assert_select "h1", "#{@judge.competition} - Tie Break Adjustments"
+      assert_select "td", tie_break_adjustment.tie_break_place.to_s
     end
-    it "assigns a new tie_break_adjustment" do
+
+    it "shows new tie_break_adjustment form" do
       get :index, params: { judge_id: @judge.id }
-      expect(assigns(:tie_break_adjustment)).to be_a_new(TieBreakAdjustment)
+
+      assert_select "h3", "New Tie Break Adjustment"
     end
   end
 

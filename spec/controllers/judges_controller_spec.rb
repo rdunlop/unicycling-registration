@@ -48,12 +48,6 @@ describe JudgesController do
         end.to change(Judge, :count).by(1)
       end
 
-      it "assigns a newly created judge as @judge" do
-        post :create, params: { judge: valid_attributes, competition_id: @ec.id }
-        expect(assigns(:judge)).to be_a(Judge)
-        expect(assigns(:judge)).to be_persisted
-      end
-
       it "redirects to the events show page" do
         post :create, params: { judge: valid_attributes, competition_id: @ec.id }
         expect(response).to redirect_to(competition_judges_path(@ec))
@@ -61,20 +55,20 @@ describe JudgesController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved judge as @judge" do
+      it "does not create a new judge" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
-        post :create, params: { judge: {user_id: 1}, competition_id: @ec.id }
-        expect(assigns(:judge)).to be_a_new(Judge)
-        expect(assigns(:judge_types)).to eq([@judge_type])
-        expect(assigns(:all_data_entry_volunteers)).to eq([@data_entry_volunteer_user])
+        expect do
+          post :create, params: { judge: {user_id: 1}, competition_id: @ec.id }
+        end.not_to change(Judge, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
         post :create, params: { judge: {user_id: 1}, competition_id: @ec.id }
-        expect(response).to render_template("index")
+
+        assert_select "h1", "Manage #{@ec} Judges"
       end
     end
   end
@@ -141,14 +135,6 @@ describe JudgesController do
       assert_select "form", url: copy_judges_competition_judges_path(@ec), method: "post" do
         assert_select "select#copy_judges_competition_id", name: "copy_judges[competition_id]"
       end
-    end
-
-    it "lists this events' judges" do
-      other_data_entry_volunteer_user = FactoryGirl.create(:user)
-      other_data_entry_volunteer_user.add_role(:data_entry_volunteer)
-      @judge = FactoryGirl.create(:judge, user: @data_entry_volunteer_user, competition: @ec)
-      get :index, params: { competition_id: @ec }
-      expect(assigns(:judges)).to include(@judge)
     end
 
     it "has a blank judge" do

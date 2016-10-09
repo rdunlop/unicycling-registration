@@ -19,20 +19,24 @@ describe ConventionSetup::CouponCodesController do
   end
 
   describe "GET index" do
-    it "assigns all coupon_codes as @coupon_codes" do
+    it "shows all coupon_codes" do
       coupon_code = FactoryGirl.create(:coupon_code)
       get :index
       expect(response).to be_success
-      expect(assigns(:coupon_codes)).to eq([coupon_code])
+
+      assert_select "td", coupon_code.code
     end
   end
 
   describe "GET edit" do
-    it "assigns coupon_code as @coupon_code" do
+    it "shows the coupon_code form" do
       coupon_code = FactoryGirl.create(:coupon_code)
       get :edit, params: { id: coupon_code.id }
       expect(response).to be_success
-      expect(assigns(:coupon_code)).to eq(coupon_code)
+
+      assert_select "form", action: edit_coupon_code_path(coupon_code), method: "put" do
+        assert_select "input#coupon_code_code", name: "coupon_code[code]"
+      end
     end
   end
 

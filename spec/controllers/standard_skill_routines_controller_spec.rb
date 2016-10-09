@@ -23,7 +23,7 @@ describe StandardSkillRoutinesController do
   end
 
   describe "GET show" do
-    it "assigns the requested routine as @standard_skill_routine" do
+    it "shows the requested routine" do
       routine = FactoryGirl.create(:standard_skill_routine, registrant: @registrant)
       FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: routine, standard_skill_entry: FactoryGirl.create(:standard_skill_entry, number: 1, letter: "a", description: "One"))
       get :show, id: routine.to_param

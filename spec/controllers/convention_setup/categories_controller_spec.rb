@@ -28,15 +28,17 @@ describe ConventionSetup::CategoriesController do
   end
 
   describe "GET index" do
-    it "assigns all categories as @categories" do
+    it "shows all categories" do
       category = Category.create! valid_attributes
       get :index
       assert_select "tr>td", text: category.to_s, count: 1
+
+      assert_select "h1", "Event Categories"
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested category as @category" do
+    it "shows the requested category" do
       category = Category.create! valid_attributes
       get :edit, params: { id: category.to_param }
       assert_select "form", action: convention_setup_categories_path(category), method: "post" do
@@ -53,12 +55,6 @@ describe ConventionSetup::CategoriesController do
         end.to change(Category, :count).by(1)
       end
 
-      it "assigns a newly created category as @category" do
-        post :create, params: { category: valid_attributes }
-        expect(assigns(:category)).to be_a(Category)
-        expect(assigns(:category)).to be_persisted
-      end
-
       it "redirects to the created category" do
         post :create, params: { category: valid_attributes }
         expect(response).to redirect_to(convention_setup_categories_path)
@@ -66,30 +62,32 @@ describe ConventionSetup::CategoriesController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved category as @category" do
+      it "does not update a newly created category" do
         # Trigger the behavior that occurs when invalid params are submitted
         category = Category.create! valid_attributes
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        post :create, params: { category: {name: "Hi"} }
-        expect(assigns(:category)).to be_a_new(Category)
-        expect(assigns(:categories)).to eq([category])
+        expect do
+          post :create, params: { category: {name: "Hi"} }
+        end.not_to change { category.reload.name }
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
         post :create, params: { category: {name: "Hi"} }
-        expect(response).to render_template("index")
+
+        assert_select "h1", "Event Categories"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested category as @category" do
+      it "updates the requested category" do
         category = Category.create! valid_attributes
-        put :update, params: { id: category.to_param, category: valid_attributes }
-        expect(assigns(:category)).to eq(category)
+        expect do
+          put :update, params: { id: category.to_param, category: valid_attributes.merge(name: "New name") }
+        end.to change { category.reload.name }
       end
 
       it "redirects to the category" do
@@ -100,12 +98,13 @@ describe ConventionSetup::CategoriesController do
     end
 
     describe "with invalid params" do
-      it "assigns the category as @category" do
+      it "does not update the category" do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        put :update, params: { id: category.to_param, category: {name: 'fake'} }
-        expect(assigns(:category)).to eq(category)
+        expect do
+          put :update, params: { id: category.to_param, category: {name: 'fake'} }
+        end.not_to change { category.reload.name }
       end
 
       it "re-renders the 'edit' template" do
@@ -113,7 +112,8 @@ describe ConventionSetup::CategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
         put :update, params: { id: category.to_param, category: {name: "Hi"} }
-        expect(response).to render_template("edit")
+
+        assert_select "h1", "Editing Event Category"
       end
     end
   end

@@ -48,11 +48,11 @@ describe StandardSkillScoresController do
   end
 
   describe "GET index" do
-    it "assigns all competitors as @competitors" do
+    it "shows all competitors" do
       get :index, params: { judge_id: @judge.id }
       expect(response).to be_success
-      expect(rendered).to match(/#{@comp.registrants.first.first_name}/)
-      expect(rendered).to match(/#{@comp2.registrants.first.first_name}/)
+      assert_match /#{@comp.registrants.first.first_name}/, response.body
+      assert_match /#{@comp2.registrants.first.first_name}/, response.body
     end
   end
 
@@ -60,7 +60,7 @@ describe StandardSkillScoresController do
     it "creates a new standard_skill_score with 2 entries" do
       get :new, params: { judge_id: @judge.id, competitor_id: @comp.id }
 
-      expect(rendered).to match(skiil_1.standard_skill_entry.description)
+      assert_match skill_1.standard_skill_entry.description, response.body
     end
   end
 
@@ -84,7 +84,8 @@ describe StandardSkillScoresController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillScore).to receive(:valid?).and_return(false)
         post :create, params: { judge_id: @judge.id, competitor_id: @comp.id, standard_skill_score: valid_attributes }
-        expect(response).to render_template("new")
+
+        assert_select "h1", "New Score"
       end
     end
   end

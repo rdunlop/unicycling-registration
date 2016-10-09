@@ -5,14 +5,17 @@ describe PaymentAdjustmentsController do
     @user = FactoryGirl.create(:super_admin_user)
     sign_in @user
   end
-  let!(:payment) { FactoryGirl.create(:payment, completed: true) }
-  let!(:other_payment) { FactoryGirl.create(:payment) }
+  let!(:payment) { FactoryGirl.create(:payment, completed: true, transaction_id: "My Transaction ID") }
+  let!(:other_payment) { FactoryGirl.create(:payment, transaction_id: "Other Transaction ID") }
   let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
 
   describe "GET list" do
     it "assigns all payments as @payments" do
       get :list
-      expect(assigns(:payments)).to match_array([payment, other_payment])
+
+      assert_select "h1", "Listing payments And Refunds"
+      assert_select "td", payment.transaction_id
+      assert_select "td", other_payment.transaction_id
     end
   end
 

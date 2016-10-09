@@ -35,7 +35,7 @@ describe Compete::CombinedCompetitionEntriesController do
   end
 
   describe "GET new" do
-    it "assigns a new combined_competition_entry as @combined_competition_entry" do
+    it "shows a new combined_competition_entry form" do
       get :new, params: { combined_competition_id: combined_competition.id }
       assert_select "form[action=?][method=?]", combined_competition_combined_competition_entries_path(combined_competition, locale: :en), "post" do
         assert_select "input#combined_competition_entry_abbreviation[name=?]", "combined_competition_entry[abbreviation]"
@@ -47,7 +47,7 @@ describe Compete::CombinedCompetitionEntriesController do
   end
 
   describe "GET edit" do
-    it "assigns the requested combined_competition_entry as @combined_competition_entry" do
+    it "shows the requested combined_competition_entry" do
       combined_competition_entry = FactoryGirl.create(:combined_competition_entry)
       get :edit, params: { id: combined_competition_entry.to_param, combined_competition_id: combined_competition.id }
 

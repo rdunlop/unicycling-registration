@@ -16,16 +16,20 @@ describe CompetitionSetup::AgeGroupTypesController do
       agt = FactoryGirl.create(:age_group_type)
       get :index
       expect(response).to be_success
-      expect(assigns(:age_group_types)).to eq([agt])
+
+      assert_select "h1", "Age Group Types"
+
+      assert_select "td", agt.name
     end
   end
 
   describe "GET show" do
-    it "assigns all age_group_entries as @age_group_entries" do
+    it "shows all age_group_entries" do
       age_group_type = FactoryGirl.create(:age_group_type)
-      FactoryGirl.create(:age_group_entry, age_group_type: age_group_type)
+      age = FactoryGirl.create(:age_group_entry, age_group_type: age_group_type, short_description: "hi there")
       get :show, params: { id: age_group_type.id }
-      expect(assigns(:age_group_type)).to eq(age_group_type)
+
+      assert_select "td", age.short_description
     end
   end
 

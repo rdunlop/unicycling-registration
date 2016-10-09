@@ -25,7 +25,7 @@ FactoryGirl.define do
     event # FactoryGIrl
     cell_type "boolean"
     multiple_values nil
-    label "Event_choice chosen"
+    sequence(:label) { |n| "Event_choice #{n} chosen" }
     optional false
   end
 end

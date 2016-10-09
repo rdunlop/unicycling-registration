@@ -34,7 +34,7 @@ describe HeatsController do
       allow_any_instance_of(Competitor).to receive(:best_time).and_return("2:20")
       get :index, params: { competition_id: @competition.id }
     end
-    it "assigns all competitors as @competitors" do
+    it "shows all competitors" do
       assert_select "td", @competitor.age.to_s
     end
 
@@ -44,7 +44,7 @@ describe HeatsController do
   end
 
   describe "GET new" do
-    it "assigns the requested lane_assignment as @lane_assignment" do
+    it "shows the requested lane_assignment form" do
       get :new, params: { competition_id: @competition.id }
       expect(response).to be_success
     end

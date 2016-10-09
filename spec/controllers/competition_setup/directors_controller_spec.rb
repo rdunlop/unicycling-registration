@@ -9,9 +9,10 @@ describe CompetitionSetup::DirectorsController do
   end
 
   describe "GET index" do
-    it "assigns the events as @events" do
+    it "shows the events" do
       get :index
-      expect(assigns(:events)).to eq([@event])
+
+      assert_select "td", @event.to_s
     end
   end
 

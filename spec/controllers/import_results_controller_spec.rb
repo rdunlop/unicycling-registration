@@ -43,12 +43,19 @@ describe ImportResultsController do
   # ImportResult. As you add validations to ImportResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "details" => "100pts", "points" => "1", "bib_number" => "123", "minutes" => "1", "seconds" => "2", "thousands" => "3" }
+    {
+      details: "100pts",
+      points: 1,
+      bib_number: 123,
+      minutes: 1,
+      seconds: 2,
+      thousands: 3
+    }
   end
 
   describe "GET edit" do
-    it "assigns the requested import_result as @import_result" do
-      get :edit, id: import_result.to_param
+    it "show the import_result form" do
+      get :edit, params: { id: import_result.to_param }
 
       assert_select "form", action: import_result_path(import_result), method: "post" do
         assert_select "select#import_result_bib_number", name: "import_result[bib_number]"
@@ -73,12 +80,6 @@ describe ImportResultsController do
         expect(ImportResult.last.is_start_time).to be_truthy
       end
 
-      it "assigns a newly created import_result as @import_result" do
-        post :create, params: { import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id }
-        expect(assigns(:import_result)).to be_a(ImportResult)
-        expect(assigns(:import_result)).to be_persisted
-      end
-
       it "redirects to the user's import_results" do
         post :create, params: { import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id }
         expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: false))
@@ -86,27 +87,29 @@ describe ImportResultsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved import_result as @import_result" do
+      it "does not create a new import_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        post :create, params: { import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id }
-        expect(assigns(:import_result)).to be_a_new(ImportResult)
+        expect do
+          post :create, params: { import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id }
+        end.not_to change(ImportResult, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
         post :create, params: { import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id }
-        expect(response).to render_template("data_entry")
+        assert_select "h1", "Data Recording Form - Entry Form (One Attempt per line)"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested import_result as @import_result" do
-        put :update, params: { id: import_result.to_param, import_result: valid_attributes }
-        expect(assigns(:import_result)).to eq(import_result)
+      it "updates the requested import_result" do
+        expect do
+          put :update, params: { id: import_result.to_param, import_result: valid_attributes.merge(bib_number: 1211) }
+        end.to change { import_result.reload.bib_number }
       end
 
       it "redirects to the import_result" do
@@ -116,18 +119,19 @@ describe ImportResultsController do
     end
 
     describe "with invalid params" do
-      it "assigns the import_result as @import_result" do
+      it "does not update the import_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        put :update, params: { id: import_result.to_param, import_result: { "raw_data" => "invalid value" } }
-        expect(assigns(:import_result)).to eq(import_result)
+        expect do
+          put :update, params: { id: import_result.to_param, import_result: { raw_data: "invalid value" } }
+        end.not_to change { import_result.reload.raw_data }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        put :update, params: { id: import_result.to_param, import_result: { "raw_data" => "invalid value" } }
-        expect(response).to render_template("edit")
+        put :update, params: { id: import_result.to_param, import_result: { raw_data: "invalid value" } }
+        assert_select "h1", "Editing import_result"
       end
     end
   end

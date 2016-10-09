@@ -35,20 +35,15 @@ describe SongsController do
   let(:event) { FactoryGirl.create(:event) }
   let(:valid_attributes) { { description: "MyString", event_id: event.id } }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # SongsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
-
   describe "GET index" do
-    it "assigns all songs for reg as @songs" do
+    it "hsows all songs for reg" do
       FactoryGirl.create(:song, registrant: @reg, description: "Description")
       get :index, params: { registrant_id: @reg.to_param }
 
       assert_select "tr>td", text: "Description".to_s, count: 1
     end
 
-    it "assigns a new song as @song" do
+    it "shows a new song form" do
       get :index, params: { registrant_id: @reg.to_param }
 
       assert_select "form[action=?][method=?]", registrant_songs_path(@reg, locale: 'en'), "post" do
@@ -73,18 +68,19 @@ describe SongsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved song as @song" do
+      it "does not create a new song" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Song).to receive(:save).and_return(false)
-        post :create, params: { song: { "description" => "invalid value" }, registrant_id: @reg.to_param }
-        expect(assigns(:song)).to be_a_new(Song)
+        expect do
+          post :create, params: { song: { "description" => "invalid value" }, registrant_id: @reg.to_param }
+        end.not_to change(Song, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Song).to receive(:save).and_return(false)
         post :create, params: { song: { "description" => "invalid value" }, registrant_id: @reg.to_param }
-        expect(response).to render_template("index")
+        assert_select "h1", "#{@reg}'s songs"
       end
     end
   end

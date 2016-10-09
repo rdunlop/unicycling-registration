@@ -54,7 +54,7 @@ describe EventsController do
   end
 
   describe "GET summary" do
-    it "assigns all events as @events" do
+    it "shows all events" do
       event
       get :summary
       expect(response).to be_success

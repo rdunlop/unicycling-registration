@@ -33,20 +33,20 @@ describe LaneAssignmentsController do
   # LaneAssignment. As you add validations to LaneAssignment, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "heat" => 1,
-      "lane" => 2,
-      "competitor_id" => @competitor.id}
+    { heat: 1,
+      lane: 2,
+      competitor_id: @competitor.id}
   end
 
   let(:lane_assignment) { FactoryGirl.create(:lane_assignment, competition: @competition) }
 
   describe "GET index" do
-    it "assigns all lane_assignments as @lane_assignments" do
+    it "shows all lane_assignments" do
       la = FactoryGirl.create(:lane_assignment, competition: @competition, heat: 3, lane: 4)
       get :index, params: { competition_id: @competition.id }
 
-      assert_select "tr>td", text: 3.to_s, count: 1
-      assert_select "tr>td", text: 4.to_s, count: 1
+      assert_select "tr>td.heat", text: 3.to_s, count: 1
+      assert_select "tr>td.lane", text: 4.to_s, count: 1
 
       assert_select "form", action: competition_lane_assignments_path(@competition), method: "post" do
         assert_select "select#lane_assignment_competitor_id", name: "lane_assignment[competitor_id]"
@@ -57,7 +57,7 @@ describe LaneAssignmentsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested lane_assignment as @lane_assignment" do
+    it "shows the requested lane_assignment form" do
       get :edit, params: { id: lane_assignment.to_param }
 
       assert_select "form", action: lane_assignment_path(lane_assignment), method: "post" do
@@ -76,12 +76,6 @@ describe LaneAssignmentsController do
         end.to change(LaneAssignment, :count).by(1)
       end
 
-      it "assigns a newly created lane_assignment as @lane_assignment" do
-        post :create, params: { lane_assignment: valid_attributes, competition_id: @competition.id }
-        expect(assigns(:lane_assignment)).to be_a(LaneAssignment)
-        expect(assigns(:lane_assignment)).to be_persisted
-      end
-
       it "redirects to the created lane_assignment" do
         post :create, params: { lane_assignment: valid_attributes, competition_id: @competition.id }
         expect(response).to redirect_to(competition_lane_assignments_path(@competition))
@@ -89,27 +83,29 @@ describe LaneAssignmentsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved lane_assignment as @lane_assignment" do
+      it "does not create a new lane_assignment" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
-        post :create, params: { lane_assignment: { "competition_id" => "invalid value" }, competition_id: @competition.id }
-        expect(assigns(:lane_assignment)).to be_a_new(LaneAssignment)
+        expect do
+          post :create, params: { lane_assignment: { competition_id: "invalid value" }, competition_id: @competition.id }
+        end.not_to change(LaneAssignment, :count)
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
-        post :create, params: { lane_assignment: { "competition_id" => "invalid value" }, competition_id: @competition.id }
-        expect(response).to render_template("index")
+        post :create, params: { lane_assignment: { competition_id: "invalid value" }, competition_id: @competition.id }
+        assert_select "h1", "#{@competition} New Lane Assignment"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested lane_assignment as @lane_assignment" do
-        put :update, params: { id: lane_assignment.to_param, lane_assignment: valid_attributes }
-        expect(assigns(:lane_assignment)).to eq(lane_assignment)
+      it "updates the requested lane_assignment" do
+        expect do
+          put :update, params: { id: lane_assignment.to_param, lane_assignment: valid_attributes.merge(heat: 10) }
+        end.to change { lane_assignment.reload.heat }
       end
 
       it "redirects to the lane_assignment" do
@@ -119,18 +115,19 @@ describe LaneAssignmentsController do
     end
 
     describe "with invalid params" do
-      it "assigns the lane_assignment as @lane_assignment" do
+      it "does not update the lane_assignment" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
-        put :update, params: { id: lane_assignment.to_param, lane_assignment: { "competition_id" => "invalid value" } }
-        expect(assigns(:lane_assignment)).to eq(lane_assignment)
+        expect do
+          put :update, params: { id: lane_assignment.to_param, lane_assignment: { competition_id: "invalid value" } }
+        end.not_to change { lane_assignment.reload.heat }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(LaneAssignment).to receive(:save).and_return(false)
-        put :update, params: { id: lane_assignment.to_param, lane_assignment: { "competition_id" => "invalid value" } }
-        expect(response).to render_template("edit")
+        put :update, params: { id: lane_assignment.to_param, lane_assignment: { competition_id: "invalid value" } }
+        assert_select "h1", "Editing lane_assignment"
       end
     end
   end

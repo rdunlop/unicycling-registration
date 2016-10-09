@@ -20,9 +20,10 @@ describe CompetitionSetup::CompetitionsController do
   end
 
   describe "GET new" do
-    it "assigns the event as @event" do
+    it "shows new competition event form" do
       get :new, params: { event_id: @event.id }
-      expect(assigns(:event)).to eq(@event)
+
+      assert_select "h1", "New #{@event} Competition"
     end
 
     describe "with a copy_from argument" do
@@ -35,10 +36,11 @@ describe CompetitionSetup::CompetitionsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested competition as @competition" do
-      competition = FactoryGirl.create(:competition)
+    it "shows the requested competition form" do
+      competition = FactoryGirl.create(:competition, event: @event)
       get :edit, params: { id: competition.to_param }
-      expect(assigns(:competition)).to eq(competition)
+
+      assert_select "h1", "Editing #{@event} #{competition}"
     end
   end
 
@@ -57,12 +59,6 @@ describe CompetitionSetup::CompetitionsController do
         expect(CompetitionSource.last.gender_filter).to eq("Female")
       end
 
-      it "assigns a newly created competition as @competition" do
-        post :create, params: { event_id: @event.id, competition: valid_attributes }
-        expect(assigns(:competition)).to be_a(Competition)
-        expect(assigns(:competition)).to be_persisted
-      end
-
       it "redirects to the competition_setup path" do
         post :create, params: { event_id: @event.id, competition: valid_attributes }
         expect(response).to redirect_to(competition_setup_path)
@@ -74,22 +70,19 @@ describe CompetitionSetup::CompetitionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         post :create, params: { event_id: @event.id, competition: {name: "comp"} }
-        expect(response).to render_template("new")
-      end
-      it "loads the event" do
-        allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
-        post :create, params: { event_id: @event.id, competition: {name: "comp"} }
-        expect(assigns(:event)).to eq(@event)
+
+        assert_select "h1", "New #{@event} Competition"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested competition as @competition" do
+      it "updates the requested competition" do
         competition = FactoryGirl.create(:competition)
-        put :update, params: { id: competition.to_param, competition: valid_attributes }
-        expect(assigns(:competition)).to eq(competition)
+        expect do
+          put :update, params: { id: competition.to_param, competition: valid_attributes.merge(name: "test Name") }
+        end.to change { competition.reload.name }
       end
 
       it "redirects to the competition" do
@@ -104,16 +97,18 @@ describe CompetitionSetup::CompetitionsController do
         competition = FactoryGirl.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
-        put :update, params: { id: competition.to_param, competition: {name: "fake"} }
-        expect(assigns(:competition)).to eq(competition)
+        expect do
+          put :update, params: { id: competition.to_param, competition: {name: "fake"} }
+        end.not_to change { competition.reload.name }
       end
 
       it "re-renders the 'edit' template" do
-        competition = FactoryGirl.create(:competition)
+        competition = FactoryGirl.create(:competition, event: @event)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         put :update, params: { id: competition.to_param, competition: {name: "comp"} }
-        expect(response).to render_template("edit")
+
+        assert_select "h1", "Editing #{@event} comp" # comp from update args
       end
     end
   end

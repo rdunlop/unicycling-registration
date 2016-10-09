@@ -28,7 +28,7 @@ class HeatReviewController < ApplicationController
   # POST /competitions/#/heat_review/:heat/import_lif
   def import_lif
     importer = HeatLaneLifImporter.new(@competition, current_user)
-    if params[:file].nil?
+    if params[:file].blank?
       flash[:alert] = "Please specify a file"
       redirect_to competition_heat_review_path(@competition, @heat)
       return

@@ -62,24 +62,29 @@ describe PaymentsController do
       expect(payment.completed).to eq(false)
     end
   end
+
   describe "GET index" do
     before(:each) do
       @super_admin = FactoryGirl.create(:super_admin_user)
       sign_in @super_admin
       @payment = FactoryGirl.create(:payment, user: @user, completed: true)
     end
+
     it "doesn't assign other people's payments as @payments" do
       get :index, params: { user_id: @super_admin.id }
-      expect(assigns(:payments)).to eq([])
+      assert_select "td", @payment.details, count: 0
     end
+
     describe "as normal user" do
       before(:each) do
         sign_in @user
       end
+
       it "can read index" do
         get :index, params: { user_id: @user.id }
         expect(response).to be_success
       end
+
       it "receives a list of payments" do
         get :index, params: { user_id: @user.id }
 
@@ -91,6 +96,7 @@ describe PaymentsController do
         get :index, params: { user_id: @user.id }
         expect(assigns(:payments)).to eq([@payment])
       end
+
       it "doesn't list my payments which are not completed" do
         FactoryGirl.create(:payment, completed: false, user: @user)
         get :index, params: { user_id: @user.id }
@@ -127,7 +133,7 @@ describe PaymentsController do
   describe "GET show" do
     let!(:payment) { FactoryGirl.create(:payment, user: @user) }
 
-    it "assigns the requested payment as @payment" do
+    it "shows the payment form" do
       get :show, params: { id: payment.to_param }
 
       assert_select "form", action: payment.paypal_post_url, method: "post" do
@@ -157,6 +163,7 @@ describe PaymentsController do
           assert_select "input[type=hidden][name=quantity_1][value='1']"
         end
       end
+    end
   end
 
   describe "Complete a $0 payment" do
@@ -176,10 +183,9 @@ describe PaymentsController do
   end
 
   describe "GET new" do
-    it "assigns a new payment as @payment" do
+    it "shows a new payment form" do
       get :new
-      expect(assigns(:payment)).to be_a_new(Payment)
-      expect(assigns(:payment).payment_details).to eq([])
+      assert_select "h1", "New payment"
     end
 
     describe "for a user with a registrant owing money" do
@@ -187,23 +193,27 @@ describe PaymentsController do
         @reg_period = FactoryGirl.create(:registration_cost, :competitor)
         @reg = FactoryGirl.create(:competitor, user: @user)
       end
+
       it "assigns a new payment_detail for the registrant" do
         get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.registrant).to eq(@reg)
         expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
       end
+
       it "sets the amount to the owing amount" do
         expect(@user.registrants.count).to eq(1)
         get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.amount).to eq(@reg_period.expense_item.cost)
       end
+
       it "associates the payment_detail with the expense_item" do
         get :new
         pd = assigns(:payment).payment_details.first
         expect(pd.expense_item).to eq(@reg_period.expense_item)
       end
+
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, user: @user)
         @payment = FactoryGirl.create(:payment)
@@ -216,6 +226,7 @@ describe PaymentsController do
         expect(pd.registrant).to eq(@reg)
         expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
       end
+
       describe "has paid, but owes for more items" do
         before(:each) do
           @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
@@ -225,6 +236,7 @@ describe PaymentsController do
           @payment.completed = true
           @payment.save
         end
+
         it "handles registrants who have paid, but owe more" do
           get :new
           pd = assigns(:payment).payment_details.first
@@ -232,6 +244,7 @@ describe PaymentsController do
           expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
           expect(pd.expense_item).to eq(@rei.expense_item)
         end
+
         it "copies the details" do
           get :new
           pd = assigns(:payment).payment_details.first

@@ -26,7 +26,7 @@ describe StreetScoresController do
   end
 
   describe "GET index" do
-    it "assigns all scores as @scores" do
+    it "shows all scores" do
       get :index, params: { judge_id: @judge.id }
       expect(response).to be_success
     end

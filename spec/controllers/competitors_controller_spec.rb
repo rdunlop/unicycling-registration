@@ -44,7 +44,7 @@ describe CompetitorsController do
   end
 
   describe "GET index" do
-    it "assigns all competitors as @competitors" do
+    it "shows all competitors" do
       competitor = FactoryGirl.create(:event_competitor, competition: @ec)
       get :index, params: { competition_id: @ec.id }
       assert_select "h3", "Competitors"
@@ -53,7 +53,7 @@ describe CompetitorsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested competitor as @competitor" do
+    it "shows the requested competitor" do
       competitor = FactoryGirl.create(:event_competitor, competition: @ec)
       get :edit, params: { id: competitor.to_param }
 
@@ -64,7 +64,7 @@ describe CompetitorsController do
   end
 
   describe "GET new" do
-    it "assigns a new competitor as @competitor" do
+    it "shows a new competitor form" do
       get :new, params: { competition_id: @ec.to_param }
 
       assert_select "form", action: new_competition_competitor_path(@ec), method: "post" do
@@ -172,7 +172,7 @@ describe CompetitorsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested competitor as @competitor" do
+      it "updates the requested competitor" do
         competitor = FactoryGirl.create(:event_competitor, competition: @ec)
         expect do
           put :update, params: { id: competitor.to_param, competitor: valid_attributes.merge(status: "withdrawn") }
@@ -187,7 +187,7 @@ describe CompetitorsController do
     end
 
     describe "with invalid params" do
-      it "assigns the competitor as @competitor" do
+      it "does not change the competitor" do
         competitor = FactoryGirl.create(:event_competitor, competition: @ec)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)

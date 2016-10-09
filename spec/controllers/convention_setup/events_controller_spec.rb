@@ -29,18 +29,22 @@ describe ConventionSetup::EventsController do
   end
 
   describe "GET index" do
-    it "assigns all events as @events" do
+    it "shows all events" do
       event = FactoryGirl.create(:event, category: @category)
       FactoryGirl.create(:event)
       get :index, params: { category_id: @category.id }
-      expect(assigns(:events)).to eq([event])
-      expect(assigns(:form)).to be_a_new(EventForm)
-      expect(assigns(:category)).to eq(@category)
+
+      assert_select "td", event.name
+
+      # new form
+      assert_select "form", action: convention_setup_category_events_path(@category), method: "post" do
+        assert_select "input#event_name", name: "event[name]"
+      end
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested event as @event" do
+    it "shows the requested event" do
       event = FactoryGirl.create(:event, category: @category)
       get :edit, params: { id: event.to_param }
       assert_select "form", action: convention_setup_event_path(event), method: "post" do
@@ -63,12 +67,6 @@ describe ConventionSetup::EventsController do
         end.to change(ExpenseItem, :count).by(1)
       end
 
-      it "assigns a newly created event as @event" do
-        post :create, params: { event: valid_attributes, category_id: @category.id }
-        expect(assigns(:form)).to be_a(EventForm)
-        expect(assigns(:form)).to be_persisted
-      end
-
       it "redirects to the created event" do
         post :create, params: { event: valid_attributes, category_id: @category.id }
         expect(response).to redirect_to(convention_setup_category_events_path(@category))
@@ -88,28 +86,31 @@ describe ConventionSetup::EventsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved event as @event" do
+      it "does not create event" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
-        post :create, params: { event: {name: "event"}, category_id: @category.id }
-        expect(assigns(:form)).to be_a_new(EventForm)
+        expect do
+          post :create, params: { event: {name: "event"}, category_id: @category.id }
+        end.not_to change(Event, :count)
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
         post :create, params: { event: {name: "event"}, category_id: @category.id }
-        expect(response).to render_template("index")
+
+        assert_select "h1", "Events in Category: #{@category}"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested event as @event" do
+      it "updates the requested event as @event" do
         event = FactoryGirl.create(:event)
-        put :update, params: { id: event.to_param, event: valid_attributes }
-        expect(assigns(:form)).to eq(event)
+        expect do
+          put :update, params: { id: event.to_param, event: valid_attributes.merge(name: "Naaa") }
+        end.to change { event.reload.name }
       end
 
       it "redirects to the event" do
@@ -120,12 +121,13 @@ describe ConventionSetup::EventsController do
     end
 
     describe "with invalid params" do
-      it "assigns the event as @event" do
+      it "does not update the event" do
         event = FactoryGirl.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
-        put :update, params: { id: event.to_param, event: {name: "event"} }
-        expect(assigns(:form)).to eq(event)
+        expect do
+          put :update, params: { id: event.to_param, event: {name: "event"} }
+        end.not_to change { event.reload.name }
       end
 
       it "re-renders the 'edit' template" do
@@ -133,7 +135,8 @@ describe ConventionSetup::EventsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
         put :update, params: { id: event.to_param, event: {name: "event"} }
-        expect(response).to render_template("edit")
+
+        assert_select "h1", "Editing event"
       end
     end
     describe "with nested event_choices" do
@@ -168,14 +171,14 @@ describe ConventionSetup::EventsController do
         ec = EventChoice.last
 
         expect do
-          put :update, id: @event.to_param, event: {
+          put :update, params: { id: @event.to_param, event: {
             event_choices_attributes: [
               {
                 cell_type: ec.cell_type,
                 label: "new Label",
                 multiple_values: ec.multiple_values,
                 id: ec.id
-              }] }
+              }] } }
         end.to change(EventChoice, :count).by(0)
         ec.reload
         expect(ec.label).to eq("new Label")

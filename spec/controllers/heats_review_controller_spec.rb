@@ -16,7 +16,7 @@ describe HeatReviewController do
     before { get :index, params: { competition_id: @competition.id } }
 
     it "assigns @max_heat" do
-      expect(assigns(:max_heat)).to eq(1)
+      assert_select "a", text: "Heat 1"
     end
   end
 
@@ -48,7 +48,7 @@ describe HeatReviewController do
 
         it "returns an error" do
           do_action
-          expect(flash[:alert]).to match(/Please specify a file/)
+          assert_match /Please specify a file/, flash[:alert]
         end
       end
     end

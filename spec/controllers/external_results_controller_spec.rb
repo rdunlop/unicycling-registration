@@ -40,7 +40,7 @@ describe ExternalResultsController do
   end
 
   describe "GET index" do
-    it "assigns all external_results as @external_results" do
+    it "shows all external_results" do
       external_result = FactoryGirl.create(:external_result, competitor: @competitor)
       get :index, params: { competition_id: @competition.id }
       assert_select "h1", "New Entered Points Result"
@@ -54,7 +54,7 @@ describe ExternalResultsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested external_result as @external_result" do
+    it "shows requested external_result form" do
       external_result = FactoryGirl.create(:external_result)
       get :edit, params: { id: external_result.to_param }
       assert_select "h1", "Editing points result"
@@ -93,7 +93,7 @@ describe ExternalResultsController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "assigns the requested external_result as @external_result" do
+      it "updates the requested external_result" do
         external_result = FactoryGirl.create(:external_result)
         expect do
           put :update, params: { id: external_result.to_param, external_result: valid_attributes }
