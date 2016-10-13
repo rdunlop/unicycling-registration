@@ -137,7 +137,7 @@ describe PaymentsController do
       get :show, params: { id: payment.to_param }
 
       assert_select "form", action: payment.paypal_post_url, method: "post" do
-        assert_select ("input[type=hidden][name=business][value='" + @config.paypal_account + "']")
+        assert_select "input[type=hidden][name=business][value='" + @config.paypal_account + "']"
         assert_select "input[type=hidden][name=cancel_return][value='" + user_payments_url(@user) + "']"
         assert_select "input[type=hidden][name=cmd][value='_cart']"
         assert_select "input[type=hidden][name=currency_code][value='USD']"
