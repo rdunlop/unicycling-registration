@@ -92,15 +92,18 @@ describe PaymentsController do
       end
 
       it "does not include other people's payments" do
-        FactoryGirl.create(:payment, user: @super_admin)
+        other_payment = FactoryGirl.create(:payment, user: @super_admin, transaction_id: "123 OTHER")
         get :index, params: { user_id: @user.id }
-        expect(assigns(:payments)).to eq([@payment])
+
+        assert_select "td", other_payment.transaction_id, count: 0
       end
 
       it "doesn't list my payments which are not completed" do
-        FactoryGirl.create(:payment, completed: false, user: @user)
+        my_incomplete_payment = FactoryGirl.create(:payment, completed: false, user: @user, note: "MY NOTE")
+
         get :index, params: { user_id: @user.id }
-        expect(assigns(:payments)).to eq([@payment])
+
+        assert_select "td", my_incomplete_payment.note, count: 0
       end
     end
   end
@@ -132,6 +135,7 @@ describe PaymentsController do
 
   describe "GET show" do
     let!(:payment) { FactoryGirl.create(:payment, user: @user) }
+    let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment) }
 
     it "shows the payment form" do
       get :show, params: { id: payment.to_param }
@@ -157,7 +161,7 @@ describe PaymentsController do
       it "renders the sub-entries for associated payment_details" do
         get :show, params: { id: payment.to_param }
 
-        assert_select "form", action: @payment.paypal_post_url, method: "post" do
+        assert_select "form", action: payment.paypal_post_url, method: "post" do
           assert_select "input[type=hidden][name=amount_1][value='" + payment_detail.amount.to_s + "']"
           assert_select "input[type=hidden][name=item_name_1][value='" + payment_detail.expense_item.to_s + "']"
           assert_select "input[type=hidden][name=quantity_1][value='1']"
@@ -204,14 +208,12 @@ describe PaymentsController do
       it "sets the amount to the owing amount" do
         expect(@user.registrants.count).to eq(1)
         get :new
-        pd = assigns(:payment).payment_details.first
-        expect(pd.amount).to eq(@reg_period.expense_item.cost)
+        assert_select "input[type=hidden][value=?]", @reg_period.expense_item.cost.to_s
       end
 
       it "associates the payment_detail with the expense_item" do
         get :new
-        pd = assigns(:payment).payment_details.first
-        expect(pd.expense_item).to eq(@reg_period.expense_item)
+        assert_select "input[type=hidden][value=?]", @reg_period.expense_item.id.to_s
       end
 
       it "only assigns registrants that owe money" do
@@ -247,8 +249,7 @@ describe PaymentsController do
 
         it "copies the details" do
           get :new
-          pd = assigns(:payment).payment_details.first
-          expect(pd.details).to eq("Additional Details")
+          assert_select "input[type=hidden][value=?]", @rei.details
         end
       end
     end
@@ -260,12 +261,6 @@ describe PaymentsController do
 
       it "creates a new Payment" do
         expect { do_action }.to change(Payment, :count).by(1)
-      end
-
-      it "assigns a newly created payment as @payment" do
-        do_action
-        expect(assigns(:payment)).to be_a(Payment)
-        expect(assigns(:payment)).to be_persisted
       end
 
       it "redirects to the created payment" do
@@ -329,11 +324,12 @@ describe PaymentsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved payment as @payment" do
+      it "does not create a new payment" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
-        post :create, params: { payment: {other: true} }
-        expect(assigns(:payment)).to be_a_new(Payment)
+        expect do
+          post :create, params: { payment: {other: true} }
+        end.not_to change(Payment, :count)
       end
 
       it "when the params don't include payment hash" do
@@ -346,7 +342,7 @@ describe PaymentsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
         post :create, params: { payment: {other: true} }
-        expect(response).to render_template("new")
+        assert_select "h1", "New payment"
       end
     end
   end
@@ -392,7 +388,8 @@ describe PaymentsController do
     it "assigns the known expense groups as expense_groups" do
       item = payment_detail.expense_item
       get :summary
-      expect(assigns(:expense_items)).to eq([item])
+
+      assert_select "a", item.to_s
     end
   end
 end
