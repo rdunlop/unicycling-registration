@@ -211,13 +211,12 @@ describe Competitor do
     end
   end
 
-  it "should have a name, even without any registrants" do
+  it "should delete the competitor if the last member is deleted" do
     member = @comp.reload.members.first
 
-    member.destroy
-    @comp.reload
-    expect(@comp.name).to eq("(No registrants)")
-    expect(@comp.bib_number).to eq("(No registrants)")
+    expect do
+      member.destroy
+    end.to change(Competitor, :count).by(-1)
   end
 
   describe "when it has multiple members" do

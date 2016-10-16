@@ -21,15 +21,16 @@ class Member < ApplicationRecord
 
   belongs_to :competitor, inverse_of: :members
   belongs_to :registrant
-  after_destroy :destroy_orphaned_competitors
 
   validates :registrant, presence: true
   validate :registrant_once_per_competition
 
   after_touch :update_min_bib_number
   after_save :update_min_bib_number
-  after_destroy :update_min_bib_number
   after_save :touch_competitor
+
+  after_destroy :update_min_bib_number
+  after_destroy :destroy_orphaned_competitors
 
   # This is used by the Competitor, in order to update Members
   # without cascading the change back to the Competitor.
