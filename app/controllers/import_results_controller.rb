@@ -110,7 +110,7 @@ class ImportResultsController < ApplicationController
     @import_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: user_competition_import_results_path(@import_result.user, @import_result.competition)) }
       format.json { head :no_content }
     end
   end
@@ -160,7 +160,7 @@ class ImportResultsController < ApplicationController
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
     @user.import_results.where(competition_id: @competition).destroy_all
-    redirect_to :back
+    redirect_back(fallback_location: data_entry_user_competition_import_results_path(@user, @competition))
   end
 
   # POST /users/#/competitions/#/import_results/approve
@@ -179,13 +179,13 @@ class ImportResultsController < ApplicationController
       errors = ex
     end
 
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
-      end
+    if errors
+      flash[:alert] = "Errors: #{errors}"
+    else
+      flash[:notice] = "Added #{n} rows to #{@competition}."
     end
+
+    redirect_back(fallback_location: review_user_competition_import_results_path(@user, @competition))
   end
 
   private

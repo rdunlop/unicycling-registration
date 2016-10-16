@@ -12,7 +12,7 @@
 
 require 'spec_helper'
 
-xdescribe StandardSkillRoutineEntriesController do
+describe StandardSkillRoutineEntriesController do
   before(:each) do
     @user = FactoryGirl.create(:user)
     sign_in @user
@@ -34,16 +34,11 @@ xdescribe StandardSkillRoutineEntriesController do
         end.to change(StandardSkillRoutineEntry, :count).by(1)
       end
 
-      it "assigns a newly created entry as @entry" do
-        post :create, standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes
-        expect(assigns(:standard_skill_routine_entry)).to be_a(StandardSkillRoutineEntry)
-        expect(assigns(:standard_skill_routine_entry)).to be_persisted
-      end
-
       it "redirects to the created entry" do
         post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: @valid_attributes }
         expect(response).to redirect_to(standard_skill_routine_path(@routine))
       end
+
       describe "when 4 entries already exist" do
         before(:each) do
           5.times do |i|
@@ -64,6 +59,7 @@ xdescribe StandardSkillRoutineEntriesController do
             position: 1 } }
           expect(response).to redirect_to(standard_skill_routine_path(@routine))
         end
+
         it "inserts a new one at the bottom of the list, if no position specified" do
           skill = FactoryGirl.create(:standard_skill_entry)
           post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
@@ -71,26 +67,28 @@ xdescribe StandardSkillRoutineEntriesController do
             standard_skill_entry_id: skill.id } }
           expect(response).to redirect_to(standard_skill_routine_path(@routine))
           # 1 initial, + 5 + 1 == 7
-          expect(assigns(:standard_skill_routine_entry).position).to eq(7)
+          expect(StandardSkillRoutineEntry.last.position).to eq(7)
         end
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved entry as @entry" do
+      it "does not create a new entry" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillRoutine).to receive(:save).and_return(false)
-        post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
-        expect(assigns(:standard_skill_routine_entry)).to be_a_new(StandardSkillRoutineEntry)
+        expect do
+          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
+        end.not_to change(StandardSkillRoutineEntry, :count)
       end
 
-      it "re-renders the 'index' template" do
+      it "re-renders the 'show' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillRoutine).to receive(:save).and_return(false)
         post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
-        expect(response).to render_template("show")
+        assert_select "h1", "#{@registrant} - Standard Skill Routine"
       end
     end
+
     describe "when standard_skill is closed" do
       before(:each) do
         FactoryGirl.create(:event_configuration, standard_skill_closed_date: Date.yesterday)

@@ -63,7 +63,7 @@ describe Registrants::BuildController do
 
       it "displays the add-expenses form" do
         get :show, params: { registrant_id: registrant.to_param, id: "expenses" }
-        assert_select "fieldset", 1 do
+        assert_select "fieldset" do
           assert_select "legend", text: "Add " + group.group_name
           assert_select "td", text: item1.name
           assert_select "td", text: item3.name, count: 0

@@ -70,11 +70,6 @@ describe PaymentsController do
       @payment = FactoryGirl.create(:payment, user: @user, completed: true)
     end
 
-    it "doesn't assign other people's payments as @payments" do
-      get :index, params: { user_id: @super_admin.id }
-      assert_select "td", @payment.details, count: 0
-    end
-
     describe "as normal user" do
       before(:each) do
         sign_in @user
@@ -91,19 +86,12 @@ describe PaymentsController do
         assert_select "tr>td", text: @payment.transaction_id.to_s, count: 1
       end
 
-      it "does not include other people's payments" do
-        other_payment = FactoryGirl.create(:payment, user: @super_admin, transaction_id: "123 OTHER")
-        get :index, params: { user_id: @user.id }
-
-        assert_select "td", other_payment.transaction_id, count: 0
-      end
-
       it "doesn't list my payments which are not completed" do
         my_incomplete_payment = FactoryGirl.create(:payment, completed: false, user: @user, note: "MY NOTE")
 
         get :index, params: { user_id: @user.id }
 
-        assert_select "td", my_incomplete_payment.note, count: 0
+        assert_select "[contains(?)]", my_incomplete_payment.note, false
       end
     end
   end
@@ -200,9 +188,7 @@ describe PaymentsController do
 
       it "assigns a new payment_detail for the registrant" do
         get :new
-        pd = assigns(:payment).payment_details.first
-        expect(pd.registrant).to eq(@reg)
-        expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
+        assert_select "input[name='payment[payment_details_attributes][0][registrant_id]'][value=?]", @reg.id.to_s
       end
 
       it "sets the amount to the owing amount" do
@@ -224,9 +210,7 @@ describe PaymentsController do
         @payment.completed = true
         @payment.save
         get :new
-        pd = assigns(:payment).payment_details.first
-        expect(pd.registrant).to eq(@reg)
-        expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
+        assert_select "input[name='payment[payment_details_attributes][0][details]']", count: 1
       end
 
       describe "has paid, but owes for more items" do
@@ -241,10 +225,7 @@ describe PaymentsController do
 
         it "handles registrants who have paid, but owe more" do
           get :new
-          pd = assigns(:payment).payment_details.first
-          expect(pd.registrant).to eq(@reg)
-          expect(assigns(:payment).payment_details.first).to eq(assigns(:payment).payment_details.last)
-          expect(pd.expense_item).to eq(@rei.expense_item)
+          assert_select "input[type='hidden'][value=?][name='payment[payment_details_attributes][0][expense_item_id]']", @rei.expense_item_id.to_s
         end
 
         it "copies the details" do

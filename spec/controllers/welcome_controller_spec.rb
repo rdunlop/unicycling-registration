@@ -8,7 +8,7 @@ describe WelcomeController do
         get :help
         expect(response).to be_success
 
-        expect(rendered).to match(/Help/)
+        assert_match(/Help/, response.body)
       end
     end
 
@@ -19,7 +19,7 @@ describe WelcomeController do
         get :help
         expect(response).to be_success
 
-        expect(rendered).to match(/Help/)
+        assert_match(/Help/, response.body)
       end
     end
   end
@@ -61,7 +61,7 @@ describe WelcomeController do
     it "returns 404-not-found" do
       sign_in user
       expect do
-        get :index, locale: 'humans', format: 'txt'
+        get :index, params: { locale: 'humans' }, format: 'txt'
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

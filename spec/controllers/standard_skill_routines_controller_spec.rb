@@ -26,9 +26,9 @@ describe StandardSkillRoutinesController do
     it "shows the requested routine" do
       routine = FactoryGirl.create(:standard_skill_routine, registrant: @registrant)
       FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: routine, standard_skill_entry: FactoryGirl.create(:standard_skill_entry, number: 1, letter: "a", description: "One"))
-      get :show, id: routine.to_param
+      get :show, params: { id: routine.to_param }
 
-      expect(rendered).to match(/One/)
+      assert_match(/One/, response.body)
 
       assert_select "form", action: standard_skill_routine_standard_skill_routine_entries_path(routine), method: "post" do
         assert_select "select#standard_skill_routine_entry_standard_skill_entry_id", name: "standard_skill_routine_entry[standard_skill_entry_id]"
@@ -46,7 +46,7 @@ describe StandardSkillRoutinesController do
       end
 
       it "redirects to the created routine" do
-        post :create, registrant_id: @registrant.to_param
+        post :create, params: { registrant_id: @registrant.to_param }
         expect(response).to redirect_to(StandardSkillRoutine.last)
       end
     end

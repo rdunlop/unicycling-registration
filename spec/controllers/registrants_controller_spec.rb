@@ -76,14 +76,13 @@ describe RegistrantsController do
     context "with a registrant" do
       let!(:registrant) { FactoryGirl.create(:competitor, user: @user, first_name: "Robin", last_name: "Dunlop") }
 
-      it "assigns all registrants as @registrants" do
+      it "shows all registrants" do
         FactoryGirl.create(:registrant) # other user's registrant
         get :index, params: { user_id: @user.id }
 
         assert_select "legend", text: "Registrations", count: 1
 
         assert_select "a", text: "Robin Dunlop".to_s, count: 1
-        assert_select "a", text: "Pay Now".to_s, count: 1
       end
     end
 
@@ -109,64 +108,48 @@ describe RegistrantsController do
         end
         it "shows the registrant" do
           get :index, params: { user_id: @user.id }
-          expect(assigns(:shared_registrants)).to eq([@other_reg])
+
+          assert_select "div[contains(?)]", "#{@other_reg.first_name} #{@other_reg.last_name}"
         end
       end
     end
   end
 
   describe "get all" do
-    it "assigns all registrants as @registrants" do
+    it "shows all registrants" do
       registrant = FactoryGirl.create(:competitor, user: @user)
       other_reg = FactoryGirl.create(:registrant)
       get :all
-      expect(assigns(:registrants)).to eq([registrant, other_reg])
+      assert_select "td", registrant.to_s
+      assert_select "td", other_reg.to_s
     end
   end
 
   describe "GET waiver" do
-    let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
+    let(:registrant) { FactoryGirl.create(:minor_competitor, user: @user, birthday: Date.new(2000, 1, 2)) }
     let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 7, 21)) }
 
-    it "assigns the requested registrant as @registrant" do
+    it "shows the requested registrant" do
       get :waiver, params: { id: registrant.to_param }
       expect(response).to be_success
-      expect(assigns(:registrant)).to eq(registrant)
+      assert_select "[contains(?)]", registrant.to_s
     end
 
     it "sets the event-related variables" do
       allow(Date).to receive(:today).and_return(Date.new(2012, 1, 22))
       get :waiver, params: { id: registrant.to_param }
 
-      expect(assigns(:event_name)).to eq(event_configuration.long_name)
-      expect(assigns(:event_start_date)).to eq("Jul 21, 2013")
-
-      expect(assigns(:today_date)).to eq("January 22, 2012")
-    end
-
-    it "sets the contact details" do
-      get :waiver, params: { id: registrant.to_param }
-
-      expect(assigns(:name)).to eq(registrant.to_s)
-      expect(assigns(:club)).to eq(registrant.club)
-      expect(assigns(:age)).to eq(registrant.age)
-      expect(assigns(:country)).to eq("US")
-    end
-
-    it "sets the emergency-variables" do
-      get :waiver, id: registrant.to_param
-
-      expect(assigns(:emergency_name)).to eq(registrant.contact_detail.emergency_name)
-      expect(assigns(:emergency_primary_phone)).to eq(registrant.contact_detail.emergency_primary_phone)
-      expect(assigns(:emergency_other_phone)).to eq(registrant.contact_detail.emergency_other_phone)
+      assert_select "[contains(?)]", "January 22, 2012" # Today's date
+      assert_select "[contains(?)]", "Consent and release of parent or guardian, if above entrant is under 18 years of age" # consent
+      assert_select "[contains(?)]", "on Jul 21, 2013." # consent date
     end
   end
 
   describe "GET show" do
-    it "assigns the requested registrant as @registrant" do
+    it "shows the requested registrant" do
       registrant = FactoryGirl.create(:competitor, user: @user)
       get :show, params: { id: registrant.to_param }
-      expect(assigns(:registrant)).to eq(registrant)
+      assert_select "h1[contains(?)]", "#{registrant.last_name}, #{registrant.first_name}"
     end
 
     it "cannot read another user's registrant" do
@@ -175,14 +158,15 @@ describe RegistrantsController do
       get :show, params: { id: registrant.to_param }
       expect(response).to redirect_to(root_path)
     end
-    describe "as an admin" do
+    describe "as an event planner" do
       before(:each) do
-        sign_in FactoryGirl.create(:convention_admin_user)
+        sign_in FactoryGirl.create(:event_planner)
       end
       it "Can read other users registrant" do
         registrant = FactoryGirl.create(:competitor, user: @user)
         get :show, params: { id: registrant.to_param }
-        expect(assigns(:registrant)).to eq(registrant)
+
+        assert_select "h1[contains(?)]", "#{registrant.last_name}, #{registrant.first_name}"
       end
     end
 
@@ -192,7 +176,7 @@ describe RegistrantsController do
       it "can show the page" do
         registrant = FactoryGirl.create(:competitor, user: @user)
         get :show, params: { id: registrant.to_param }
-        expect(assigns(:registrant)).to eq(registrant)
+        assert_select "h1[contains(?)]", "#{registrant.last_name}, #{registrant.first_name}"
       end
     end
   end

@@ -6,6 +6,13 @@ describe Admin::PermissionsController do
     sign_in @super_user
   end
 
+  describe "GET index" do
+    it 'can display the page' do
+      get :index
+      assert_select "h1", "User Management"
+    end
+  end
+
   describe "PUT set_role" do
     describe "with a normal user" do
       before(:each) do

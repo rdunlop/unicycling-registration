@@ -51,8 +51,8 @@ describe StandardSkillScoresController do
     it "shows all competitors" do
       get :index, params: { judge_id: @judge.id }
       expect(response).to be_success
-      assert_match /#{@comp.registrants.first.first_name}/, response.body
-      assert_match /#{@comp2.registrants.first.first_name}/, response.body
+      assert_match(/#{@comp.registrants.first.first_name}/, response.body)
+      assert_match(/#{@comp2.registrants.first.first_name}/, response.body)
     end
   end
 
@@ -60,7 +60,7 @@ describe StandardSkillScoresController do
     it "creates a new standard_skill_score with 2 entries" do
       get :new, params: { judge_id: @judge.id, competitor_id: @comp.id }
 
-      assert_match skill_1.standard_skill_entry.description, response.body
+      assert_match(skill_1.standard_skill_entry.description, response.body)
     end
   end
 

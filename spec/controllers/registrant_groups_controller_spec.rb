@@ -40,7 +40,7 @@ describe RegistrantGroupsController do
     it "shows the requested registrant_group" do
       registrant_group = RegistrantGroup.create! valid_attributes
       get :show, params: { id: registrant_group.to_param }
-      assert_match /#{registrant_group.name}/, response.body
+      assert_match(/#{registrant_group.name}/, response.body)
     end
   end
 

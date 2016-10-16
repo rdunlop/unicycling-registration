@@ -1,6 +1,5 @@
 %h1
-  = @standard_skill_routine.registrant
-  \- #{StandardSkillRoutine.model_name.human}
+  #{@standard_skill_routine.registrant} - #{StandardSkillRoutine.model_name.human}
 %p
   = t(".limit_description")
 - if @config.standard_skill_closed?
@@ -34,4 +33,4 @@
 %hr
 - if policy(@standard_skill_routine).update?
   %h3= t(".add_new_entry")
-  = render :partial => 'form', :object => @standard_skill_routine.standard_skill_routine_entries.build
+  = render :partial => 'standard_skill_routines/form', :object => @standard_skill_routine.standard_skill_routine_entries.build

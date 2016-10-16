@@ -34,7 +34,7 @@ describe StandardSkillEntriesController do
       get :index
       expect(response).to be_success
 
-      expect(rendered).to match(/first skill/)
+      assert_match(/first skill/, response.body)
     end
   end
 end

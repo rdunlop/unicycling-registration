@@ -48,7 +48,7 @@ describe HeatReviewController do
 
         it "returns an error" do
           do_action
-          assert_match /Please specify a file/, flash[:alert]
+          assert_match(/Please specify a file/, flash[:alert])
         end
       end
     end

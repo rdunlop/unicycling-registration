@@ -50,7 +50,7 @@ describe Admin::RegFeesController do
       payment.save
       @reg.reload
       post :update_reg_fee, params: { reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp1.id } }
-      expect(response).to render_template("index")
+      assert_select "[contains(?)]", "This registrant is already paid"
     end
   end
 end

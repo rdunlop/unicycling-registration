@@ -10,7 +10,7 @@ describe PaymentAdjustmentsController do
   let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
 
   describe "GET list" do
-    it "assigns all payments as @payments" do
+    it "lists all payments" do
       get :list
 
       assert_select "h1", "Listing payments And Refunds"

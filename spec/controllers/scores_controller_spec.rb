@@ -64,8 +64,8 @@ describe ScoresController do
     it "renders the titles and ranges" do
       get :index, params: { judge_id: @judge.id }
 
-      assert_match /#{@judge.judge_type.val_1_description}/, response.body
-      assert_match /\(0-#{@judge.judge_type.val_1_max}\)/, response.body
+      assert_match(/#{@judge.judge_type.val_1_description}/, response.body)
+      assert_match(/\(0-#{@judge.judge_type.val_1_max}\)/, response.body)
     end
 
     it "renders a list of scores" do
@@ -111,7 +111,7 @@ describe ScoresController do
 
       get :index, params: { judge_id: @judge.id }
 
-      assert_match /Scores for this event are now locked \(closed\)/, response.body
+      assert_match(/Scores for this event are now locked \(closed\)/, response.body)
     end
   end
 
