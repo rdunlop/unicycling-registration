@@ -53,9 +53,7 @@ describe OrganizationMembershipsController do
   describe "#export" do
     it "outputs some rows" do
       get :export, format: 'xls'
-      expect(assigns(:headers)).to include("ID")
-      expect(assigns(:headers)).to include("Organization Membership#")
-      expect(assigns(:rows).count).to eq(5)
+      expect(response.content_type.to_s).to eq("application/vnd.ms-excel")
     end
   end
 end

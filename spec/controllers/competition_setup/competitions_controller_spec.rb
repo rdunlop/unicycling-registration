@@ -30,7 +30,7 @@ describe CompetitionSetup::CompetitionsController do
       it "sets the arguments from an existing competition" do
         first_competition = FactoryGirl.create(:competition)
         get :new, params: { event_id: @event.id, copy_from: first_competition.id }
-        expect(assigns(:competition).name).to eq(first_competition.name)
+        assert_select "input[type='text'][value=?]", first_competition.name
       end
     end
   end

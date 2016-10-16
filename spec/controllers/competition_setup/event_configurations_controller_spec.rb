@@ -5,13 +5,13 @@ describe CompetitionSetup::EventConfigurationsController do
     @admin_user = FactoryGirl.create(:competition_admin_user)
     sign_in @admin_user
     @event = FactoryGirl.create(:event)
-    @event_configuration = FactoryGirl.create(:event_configuration)
+    @event_configuration = FactoryGirl.create(:event_configuration, max_award_place: 6)
   end
 
   describe "GET edit" do
     it "assigns event_configuration as @event_configuration" do
       get :edit
-      expect(assigns(:event_configuration)).to eq(@event_configuration)
+      assert_select "input[value=?]", @event_configuration.max_award_place.to_s
     end
   end
 
