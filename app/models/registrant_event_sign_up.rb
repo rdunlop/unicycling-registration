@@ -50,14 +50,18 @@ class RegistrantEventSignUp < ApplicationRecord
   def create_reg_item
     return unless event.expense_item.present?
 
+    # clean_registrant, otherwise we get ActiveRecord::ReadOnlyRecord due to the
+    # .signed_up scope causing a join
+    clean_registrant = Registrant.find(registrant.id)
+
     if signed_up?
-      registrant.build_registration_item(event.expense_item)
+      clean_registrant.build_registration_item(event.expense_item)
     else
-      registrant.remove_registration_item(event.expense_item)
+      clean_registrant.remove_registration_item(event.expense_item)
     end
 
-    if registrant.valid?
-      registrant.save
+    if clean_registrant.valid?
+      clean_registrant.save
     end
   end
 

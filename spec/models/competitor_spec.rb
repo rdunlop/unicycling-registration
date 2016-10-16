@@ -212,7 +212,7 @@ describe Competitor do
   end
 
   it "should have a name, even without any registrants" do
-    member = @comp.members(true).first
+    member = @comp.reload.members.first
 
     member.destroy
     @comp.reload
@@ -223,7 +223,7 @@ describe Competitor do
   describe "when it has multiple members" do
     before(:each) do
       FactoryGirl.create(:event_configuration, start_date: Date.new(2010, 1, 1))
-      member = @comp.members(true).first
+      member = @comp.reload.members.first
       @reg1 = member.registrant
 
       travel 2.seconds do
@@ -519,7 +519,7 @@ describe Competitor do
 
   describe "with an ineligible registrant" do
     before(:each) do
-      @reg = @comp.registrants(true).first
+      @reg = @comp.reload.registrants.first
       @reg.ineligible = true
       @reg.save!
     end
