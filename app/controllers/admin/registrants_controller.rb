@@ -34,7 +34,7 @@ class Admin::RegistrantsController < ApplicationController
 
     if registrant.nil?
       flash[:error] = "Choose a Registrant"
-      redirect_to :back
+      redirect_back(fallback_location: manage_one_registrants_path)
       return
     end
 

@@ -337,7 +337,7 @@ class EventConfiguration < ApplicationRecord
 
   def only_one_info_type
     if comp_noncomp_url.present? && comp_noncomp_page.present?
-      errors[:comp_noncomp_page_id] << "Unable to specify both Comp-NonComp URL and Comp-NonComp Page"
+      errors.add(:comp_noncomp_page_id, "Unable to specify both Comp-NonComp URL and Comp-NonComp Page")
     end
   end
 end

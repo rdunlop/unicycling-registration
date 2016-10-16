@@ -53,7 +53,7 @@ class StandardSkillRoutineEntry < ApplicationRecord
     # XXX should not traverse this 'standard_skill_routine' object?
     if standard_skill_routine.standard_skill_routine_entries.count >= 18
       if new_record?
-        errors[:base] << "You cannot specify more than 18 entries in your skills routine"
+        errors.add(:base, "You cannot specify more than 18 entries in your skills routine")
       end
     end
   end
@@ -67,7 +67,7 @@ class StandardSkillRoutineEntry < ApplicationRecord
     end
     if count > 12
       if new_record?
-        errors[:base] << "You cannot have more than 12 non-riding-skills (skills above 100)"
+        errors.add(:base, "You cannot have more than 12 non-riding-skills (skills above 100)")
       end
     end
   end
@@ -76,7 +76,7 @@ class StandardSkillRoutineEntry < ApplicationRecord
     if new_record?
       standard_skill_routine.standard_skill_routine_entries.each do |first_entry|
         if first_entry.standard_skill_entry.number == standard_skill_entry.number
-          errors[:base] << "You cannot have 2 skills with the same number (#{first_entry.standard_skill_entry.number})"
+          errors.add(:base, "You cannot have 2 skills with the same number (#{first_entry.standard_skill_entry.number})")
         end
       end
     end

@@ -50,6 +50,6 @@ class Song < ApplicationRecord
   private
 
   def song_size_validation
-    errors[:song_file_name] << "should be less than 40MB" if song_file_name.size > 40.megabytes
+    errors.add(:song_file_name, "should be less than 40MB") if song_file_name.size > 40.megabytes
   end
 end

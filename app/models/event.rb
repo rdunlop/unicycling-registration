@@ -92,7 +92,7 @@ class Event < ApplicationRecord
 
   def has_event_category
     if event_categories.empty?
-      errors[:base] << "Must define an event category"
+      errors.add(:base, "Must define an event category")
     end
   end
 

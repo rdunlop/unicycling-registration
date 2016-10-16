@@ -81,7 +81,7 @@ class Payment < ApplicationRecord
   def transaction_id_or_note
     if completed?
       if details.nil?
-        errors[:base] << "Transaction ID or Note must be filled in"
+        errors.add(:base, "Transaction ID or Note must be filled in")
       end
     end
   end

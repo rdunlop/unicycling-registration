@@ -57,7 +57,7 @@ class PaymentDetail < ApplicationRecord
 
   def registrant_must_be_valid
     if registrant && (!registrant.validated? || registrant.invalid?)
-      errors[:registrant] = "Registrant #{registrant} form is incomplete"
+      errors.add(:registrant, "Registrant #{registrant} form is incomplete")
       return false
     end
     true

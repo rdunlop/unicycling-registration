@@ -102,7 +102,7 @@ class Competitor < ApplicationRecord
 
   def must_have_3_members_for_custom_name
     if (members.size < 3) && !custom_name.blank?
-      errors[:base] << "Must have at least 3 members to specify a custom name"
+      errors.add(:base, "Must have at least 3 members to specify a custom name")
     end
   end
 

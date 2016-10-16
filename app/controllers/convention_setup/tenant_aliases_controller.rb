@@ -48,9 +48,9 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
   def verify
     tenant_alias = TenantAlias.find_by(id: params[:id])
     if tenant_alias.present? && tenant_alias.website_alias == request.host
-      render text: "TRUE"
+      render plain: "TRUE"
     else
-      render text: "FALSE"
+      render plain: "FALSE"
     end
   end
 

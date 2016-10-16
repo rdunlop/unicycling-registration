@@ -87,11 +87,11 @@ class Judge < ApplicationRecord
   # Note, this appears to be duplicated in ability.rb
   def check_for_scores
     if active_scores.count > 0
-      errors[:base] << "cannot delete judge containing a score"
+      errors.add(:base, "cannot delete judge containing a score")
       return false
     end
     if distance_attempts.count > 0
-      errors[:base] << "cannot delete judge containing distance attempts"
+      errors.add(:base, "cannot delete judge containing distance attempts")
       return false
     end
   end

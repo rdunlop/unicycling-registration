@@ -29,34 +29,24 @@ class RegistrantExpenseItemsController < ApplicationController
     @registrant_expense_item = RegistrantExpenseItem.new(registrant_expense_item_params)
     @registrant_expense_item.registrant = @registrant
     authorize @registrant_expense_item
-    respond_to do |format|
-      format.html do
-        if @registrant_expense_item.save
-          flash[:notice] = "Successfully created Expense Item"
-          redirect_to :back
-        else
-          flash[:alert] = @registrant_expense_item.errors.full_messages.join(", ")
-          redirect_to :back
-        end
-      end
+    if @registrant_expense_item.save
+      flash[:notice] = "Successfully created Expense Item"
+    else
+      flash[:alert] = @registrant_expense_item.errors.full_messages.join(", ")
     end
+    redirect_back(fallback_location: registrant_build_path(@registrant, :expenses))
   end
 
   def destroy
     @registrant_expense_item = @registrant.registrant_expense_items.find(params[:id])
     authorize @registrant_expense_item
 
-    respond_to do |format|
-      format.html do
-        if @registrant_expense_item.destroy
-          flash[:notice] = "Successfully removed Expense Item"
-          redirect_to :back
-        else
-          flash[:alert] = "Error Removing Expense Item"
-          redirect_to :back
-        end
-      end
+    if @registrant_expense_item.destroy
+      flash[:notice] = "Successfully removed Expense Item"
+    else
+      flash[:alert] = "Error Removing Expense Item"
     end
+    redirect_back(fallback_location: registrant_build_path(@registrant, :expenses))
   end
 
   private

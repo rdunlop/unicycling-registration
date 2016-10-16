@@ -680,7 +680,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     expense_items.uniq.each do |ei|
       num_ei = expense_items.count(ei)
       unless ei.can_i_add?(num_ei)
-        errors[:base] << "There are not that many #{ei} available"
+        errors.add(:base, "There are not that many #{ei} available")
       end
     end
   end
@@ -690,15 +690,15 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
     free_groups_required.each do |expense_group|
       if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
-        errors[:base] << "You must choose a free #{expense_group}"
+        errors.add(:base, "You must choose a free #{expense_group}")
       end
     end
   end
 
   def gender_present
     if gender.blank?
-      errors[:gender_male] = "" # Cause the label to be highlighted
-      errors[:gender_female] = "" # Cause the label to be highlighted
+      errors.add(:gender_male, "") # Cause the label to be highlighted
+      errors.add(:gender_female, "") # Cause the label to be highlighted
     end
   end
 
@@ -708,7 +708,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def no_payments_when_deleted
     if paid_details.count > 0 && deleted?
-      errors[:base] << "Cannot delete a registration which has completed payments (refund them before deleting the registrant)"
+      errors.add(:base, "Cannot delete a registration which has completed payments (refund them before deleting the registrant)")
     end
   end
 
@@ -731,7 +731,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     max_config_age = EventConfiguration.singleton.wheel_size_configuration_max_age
     unless young_enough_to_choose_wheel_size?
       if default_wheel_size && default_wheel_size.description != "24\" Wheel"
-        errors[:base] << "You must choose a wheel size of 24\" if you are > #{max_config_age} years old"
+        errors.add(:base, "You must choose a wheel size of 24\" if you are > #{max_config_age} years old")
       end
     end
   end

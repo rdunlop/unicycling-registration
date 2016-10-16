@@ -50,7 +50,7 @@ class DistanceAttempt < ApplicationRecord
     if new_record?
       unless competitor.nil? || distance.nil?
         unless competitor.acceptable_distance?(distance)
-          errors[:distance] << competitor.acceptable_distance_error(distance)
+          errors.add(:distance, competitor.acceptable_distance_error(distance))
         end
       end
     end
@@ -60,7 +60,7 @@ class DistanceAttempt < ApplicationRecord
     if new_record?
       unless competitor.nil? || distance.nil?
         if competitor.reload.no_more_jumps?
-          errors[:base] << "Unable to make new attempts - #{competitor.distance_attempt_status}"
+          errors.add(:base, "Unable to make new attempts - #{competitor.distance_attempt_status}")
         end
       end
     end

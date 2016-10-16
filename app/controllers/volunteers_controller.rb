@@ -47,7 +47,7 @@ class VolunteersController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     if @user.nil?
       flash[:alert] = "Please choose a user"
-      redirect_to :back
+      redirect_back(fallback_location: competition_volunteers_path(@competition))
     end
   end
 
@@ -56,7 +56,7 @@ class VolunteersController < ApplicationController
     @volunteer_type = params[:volunteer_type]
     unless @competition.uses_volunteers.include?(@volunteer_type.to_sym)
       flash[:alert] = "Unsupported volunteer type"
-      redirect_to :back
+      redirect_back(fallback_location: competition_volunteers_path(@competition))
     end
   end
 

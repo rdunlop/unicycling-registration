@@ -63,7 +63,7 @@ class RegistrantBestTime < ApplicationRecord
     return unless entered_value
 
     unless formatter.valid?(entered_value)
-      errors[:formatted_value] << "Value must match format #{formatter.hint}"
+      errors.add(:formatted_value, "Value must match format #{formatter.hint}")
     end
   end
 end

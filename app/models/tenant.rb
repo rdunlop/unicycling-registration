@@ -49,7 +49,7 @@ class Tenant < ApplicationRecord
 
   def subdomain_has_no_spaces
     if subdomain.present? && subdomain.include?(" ")
-      errors[:subdomain] << "Subdomain cannot have spaces"
+      errors.add(:subdomain, "Subdomain cannot have spaces")
     end
   end
 end

@@ -57,7 +57,7 @@ class Page < ApplicationRecord
 
   def slug_cannot_have_special_characters
     if slug.present? && slug.include?(" ")
-      errors[:slug] << "Slug cannot have spaces"
+      errors.add(:slug, "Slug cannot have spaces")
     end
   end
 end

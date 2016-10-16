@@ -43,7 +43,7 @@ describe VolunteersController do
 
   describe "GET index" do
     it "renders the page" do
-      get :index, competition_id: @ec.id
+      get :index, params: { competition_id: @ec.id }
       expect(response).to be_success
     end
   end

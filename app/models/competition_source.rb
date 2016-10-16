@@ -43,13 +43,13 @@ class CompetitionSource < ApplicationRecord
 
   def source_present
     if event_category.nil? && competition.nil?
-      errors[:base] << "Must select an Event Category or a Competition"
+      errors.add(:base, "Must select an Event Category or a Competition")
     end
   end
 
   def max_place_with_competition
     if max_place && competition.nil?
-      errors[:base] << "Must select a Competition when setting max_place"
+      errors.add(:base, "Must select a Competition when setting max_place")
     end
   end
 

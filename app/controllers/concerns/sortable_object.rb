@@ -8,6 +8,6 @@ module SortableObject
     new_position = params[:row_order_position].to_i + 1
     obj.position = new_position
     obj.save
-    render nothing: true
+    head :ok
   end
 end
