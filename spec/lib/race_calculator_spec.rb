@@ -65,6 +65,10 @@ describe OrderedResultCalculator do
         @reg.save!
         expect(@reg.age).to eq(60)
 
+        @tr1.competitor.reload
+        @tr2.competitor.reload
+        expect(@tr1.competitor.age_group_entry).not_to eq(@tr2.competitor.age_group_entry)
+
         recalc
 
         expect(@tr1.competitor.place).to eq(1) # not a tie, different groups

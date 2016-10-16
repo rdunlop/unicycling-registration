@@ -44,19 +44,6 @@ describe FeedbacksController do
       expect(num_deliveries).to eq(1)
     end
 
-    it "when no user signed in, has placeholder for email and registrants" do
-      ActionMailer::Base.deliveries.clear
-      post :create, params: { feedback: { message: "Hello werld" } }
-      # email = ActionMailer::Base.deliveries.last
-      # assert_equal "Feedback", email.subject
-      assert_select_email do
-        # assert_select "From Entered Email:"
-        assert_select "Hello werld"
-        assert_select "From User Email: not-signed-in"
-        assert_select "User's First Registrant: unknown"
-      end
-    end
-
     describe "when the user is signed in, and has registrants" do
       before(:each) do
         sign_in user
@@ -68,15 +55,11 @@ describe FeedbacksController do
         assert_select "h1", "Contact Us"
       end
 
-      it "includes the user's e-mail (and names of registrants)" do
+      it "sends a message" do
+        ActionMailer::Base.deliveries.clear
         post :create, params: { feedback: { message: "Hello werld" } }
-        # assert_equal "Feedback", email.subject
-        assert_select_email do
-          # assert_select "From Entered Email:"
-          assert_select "Hello werld"
-          assert_select "From User Email: #{user.email}"
-          assert_select "User's First Registrant: #{@registrant.name}"
-        end
+        num_deliveries = ActionMailer::Base.deliveries.size
+        expect(num_deliveries).to eq(1)
       end
     end
   end
