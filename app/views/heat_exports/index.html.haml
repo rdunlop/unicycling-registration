@@ -61,7 +61,7 @@
         .small-6.medium-3.columns
           = text_field_tag :heat_number
         .small-12.medium-6.columns
-          = submit_tag "Download Single Heat TSV", data: [ disable_with: false ]
+          = submit_tag "Download Single Heat TSV", data: { disable_with: false }
     %h4 Download All Heat Files
     %br
     = link_to "Competitor ALL List Heat files (zip)", download_all_heats_tsv_competition_heat_exports_path(@competition), method: :post
