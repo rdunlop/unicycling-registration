@@ -176,10 +176,14 @@ describe Competitor do
     it "should have updated age when a members age is updated" do
       registrant = @comp.members.first.registrant
       expect(@comp.age).to eq(registrant.age)
-      expect do
-        registrant.birthday -= 2.years
-        registrant.save
-      end.to change{ registrant.reload.age }
+
+      # to burst the cache on Competitor#age
+      travel 2.seconds do
+        expect do
+          registrant.birthday -= 2.years
+          registrant.save
+        end.to change{ registrant.reload.age }
+      end
 
       expect(@comp.reload.age).to eq(registrant.age)
     end
