@@ -169,6 +169,22 @@ describe Competitor do
   it "should be elgiible" do
     expect(@comp.ineligible?).to eq(false)
   end
+
+  describe "when event configuration defines the start date of convention" do
+    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 1, 1)) }
+
+    it "should have updated age when a members age is updated" do
+      registrant = @comp.members.first.registrant
+      expect(@comp.age).to eq(registrant.age)
+      expect do
+        registrant.birthday -= 2.years
+        registrant.save
+      end.to change{ registrant.reload.age }
+
+      expect(@comp.reload.age).to eq(registrant.age)
+    end
+  end
+
   it "should not set the external name if it is a blank-string" do
     @comp.custom_name = ""
     reg = @comp.registrants.first
@@ -418,13 +434,13 @@ describe Competitor do
       da2 = FactoryGirl.create(:distance_attempt, distance: 2, competitor: @comp, fault: false)
       da3 = FactoryGirl.create(:distance_attempt, distance: 3, competitor: @comp, fault: false)
 
-      expect(@comp.distance_attempts).to eq([da3, da2, da1])
+      expect(@comp.reload.distance_attempts).to eq([da3, da2, da1])
     end
     it "should return the attempts in descending attempt order (if the same distance)" do
       da1 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: true)
       da2 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
 
-      expect(@comp.distance_attempts).to eq([da2, da1])
+      expect(@comp.reload.distance_attempts).to eq([da2, da1])
     end
 
     it "should describe the status clearly" do

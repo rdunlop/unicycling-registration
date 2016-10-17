@@ -14,6 +14,8 @@ class Admin::RegFeesController < ApplicationController
   def update_reg_fee
     authorize current_user, :manage_all_payments?
 
+    # NOTE: There is a warning about rails 5.1 about the Parameters
+    # see https://github.com/solnic/virtus/issues/362 for discussion (and hopefully, eventually, a fix)
     @reg_fee = RegFee.new(reg_fee_params)
 
     if @reg_fee.save

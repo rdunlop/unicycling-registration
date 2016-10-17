@@ -64,6 +64,7 @@ class Competitor < ApplicationRecord
   enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
   after_save :touch_members
   after_save :update_age_group_entry
+  after_touch :update_age_group_entry
 
   def touch_members
     members.each do |member|

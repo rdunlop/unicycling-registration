@@ -28,6 +28,7 @@ class Member < ApplicationRecord
   after_touch :update_min_bib_number
   after_save :update_min_bib_number
   after_save :touch_competitor
+  after_touch :touch_competitor
 
   after_destroy :update_min_bib_number
   after_destroy :destroy_orphaned_competitors
