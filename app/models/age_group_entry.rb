@@ -45,7 +45,7 @@ class AgeGroupEntry < ApplicationRecord
 
   def smallest_neighbour(registrant_data)
     entries = age_group_type.age_group_entries_by_age_gender.where(wheel_size_id: wheel_size_id, gender: gender)
-    current_index = entries.index self
+    current_index = entries.find_index self
 
     earlier_neighbour = entries[current_index - 1]
     next_neighbour = entries[current_index + 1]

@@ -68,4 +68,21 @@ describe AgeGroupEntry do
     @age_group_entry.gender = "Other"
     expect(@age_group_entry.valid?).to eq(false)
   end
+
+  describe "#smallest_neighbour" do
+    let!(:age_group_type) { FactoryGirl.create(:age_group_type) }
+    let!(:age_group_entry_1) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+    let!(:age_group_entry_2) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+    let(:registrant_data) do
+      {
+        gender: 'male',
+        age: 10
+      }
+    end
+
+    it "can determine the smallest neighbour" do
+      expect(age_group_entry_1.smallest_neighbour(registrant_data)).not_to be_nil
+      expect(age_group_entry_1.smallest_neighbour(registrant_data)).to eq(age_group_entry_2)
+    end
+  end
 end
