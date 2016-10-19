@@ -39,7 +39,7 @@ end
 # Elevator Configuration
 
 unless Rails.env.test?
-  Rails.application.config.middleware.use 'Apartment::Elevators::Generic', lambda { |request|
+  Rails.application.config.middleware.insert_before Warden::Manager, Apartment::Elevators::Generic, lambda { |request|
     Tenant.find_tenant_by_hostname(request.host).try(:subdomain) || "public"
   }
 end
