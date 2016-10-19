@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
-  protect_from_forgery
+  protect_from_forgery unless: [:devise_controller?]
   # after_action :verify_authorized, :except => :index
   after_action :verify_authorized, unless: [:devise_controller?, :rails_admin_controller?]
 
