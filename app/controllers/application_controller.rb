@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include EventsHelper
   include Pundit
 
+  protect_from_forgery
   before_action :set_paper_trail_whodunnit
   before_action :load_config_object_and_i18n
   before_action :set_locale
@@ -10,7 +11,6 @@ class ApplicationController < ActionController::Base
 
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
-  protect_from_forgery unless: [:devise_controller?]
   # after_action :verify_authorized, :except => :index
   after_action :verify_authorized, unless: [:devise_controller?, :rails_admin_controller?]
 
