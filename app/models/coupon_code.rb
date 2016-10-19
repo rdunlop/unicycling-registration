@@ -18,7 +18,7 @@
 #  index_coupon_codes_on_code  (code) UNIQUE
 #
 
-class CouponCode < ActiveRecord::Base
+class CouponCode < ApplicationRecord
   include CachedModel
 
   before_validation { |cc| cc.code = cc.code.downcase }

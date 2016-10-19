@@ -16,7 +16,7 @@
 #  index_registrant_best_times_on_registrant_id               (registrant_id)
 #
 
-class RegistrantBestTime < ActiveRecord::Base
+class RegistrantBestTime < ApplicationRecord
   validates :event_id, presence: true, uniqueness: {scope: [:registrant_id]}
   validates :registrant, :source_location, :value, presence: true
   validate :formatted_value_is_formatted
@@ -63,7 +63,7 @@ class RegistrantBestTime < ActiveRecord::Base
     return unless entered_value
 
     unless formatter.valid?(entered_value)
-      errors[:formatted_value] << "Value must match format #{formatter.hint}"
+      errors.add(:formatted_value, "Value must match format #{formatter.hint}")
     end
   end
 end

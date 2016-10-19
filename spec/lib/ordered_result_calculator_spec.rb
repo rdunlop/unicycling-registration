@@ -57,7 +57,7 @@ describe OrderedResultCalculator do
 
     describe "with an ineligible registrant in first place" do
       before(:each) do
-        r = @tr1.competitor.members(true).first.registrant
+        r = @tr1.competitor.reload.members.first.registrant
         r.ineligible = true
         r.save!
         @tr1.reload

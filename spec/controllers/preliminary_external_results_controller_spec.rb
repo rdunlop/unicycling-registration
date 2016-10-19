@@ -12,26 +12,29 @@ describe PreliminaryExternalResultsController do
   # ExternalResult. As you add validations to ExternalResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "competitor_id" => @competitor.id,
-      "details" => "soomething",
-      "status" => "active",
-      "points" => 1
+    {
+      competitor_id: @competitor.id,
+      details: "soomething",
+      status: "active",
+      points: 1
     }
   end
 
   describe "GET index" do
-    it "assigns all external_results as @external_results" do
-      external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor)
-      get :index, competition_id: @competition.id
-      expect(assigns(:external_results)).to eq([external_result])
+    it "shows all external_results" do
+      external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor, details: "My details")
+      get :index, params: { competition_id: @competition.id }
+
+      assert_select "h1", "Data Recording Form - Entry Form (External Results)"
+      assert_select "td", external_result.details
     end
   end
 
   describe "GET edit" do
     it "assigns the requested external_result as @external_result" do
       external_result = FactoryGirl.create(:external_result, :preliminary)
-      get :edit, id: external_result.to_param
-      expect(assigns(:external_result)).to eq(external_result)
+      get :edit, params: { id: external_result.to_param }
+      assert_select "h1", "Editing points result"
     end
   end
 
@@ -39,79 +42,66 @@ describe PreliminaryExternalResultsController do
     describe "with valid params" do
       it "creates a new ExternalResult" do
         expect do
-          post :create, external_result: valid_attributes, competition_id: @competition.id
+          post :create, params: { external_result: valid_attributes, competition_id: @competition.id }
         end.to change(ExternalResult, :count).by(1)
       end
 
-      it "assigns a newly created external_result as @external_result" do
-        post :create, external_result: valid_attributes, competition_id: @competition.id
-        expect(assigns(:external_result)).to be_a(ExternalResult)
-        expect(assigns(:external_result)).to be_persisted
-      end
-
       it "redirects to the created external_result" do
-        post :create, external_result: valid_attributes, competition_id: @competition.id
+        post :create, params: { external_result: valid_attributes, competition_id: @competition.id }
         expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved external_result as @external_result" do
+      it "does not create external_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        post :create, external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id
-        expect(assigns(:external_result)).to be_a_new(ExternalResult)
+        expect do
+          post :create, params: { external_result: { competitor_id: "invalid value" }, competition_id: @competition.id }
+        end.not_to change(ExternalResult, :count)
       end
 
-      it "re-renders the 'new' template" do
+      it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        post :create, external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id
-        expect(response).to render_template("index")
+        post :create, params: { external_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id }
+        assert_select "h1", "Data Recording Form - Entry Form (External Results)"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested external_result" do
+      it "updates the external_result" do
         external_result = FactoryGirl.create(:external_result, :preliminary)
-        # Assuming there are no other external_results in the database, this
-        # specifies that the ExternalResult created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(ExternalResult).to receive(:update_attributes).with("competitor_id" => "1")
-        put :update, id: external_result.to_param, external_result: { "competitor_id" => "1" }
-      end
-
-      it "assigns the requested external_result as @external_result" do
-        external_result = FactoryGirl.create(:external_result, :preliminary)
-        put :update, id: external_result.to_param, external_result: valid_attributes
-        expect(assigns(:external_result)).to eq(external_result)
+        expect do
+          put :update, params: { id: external_result.to_param, external_result: valid_attributes }
+        end.to change { external_result.reload.details }
       end
 
       it "redirects to the external_result index" do
         external_result = FactoryGirl.create(:external_result, :preliminary)
-        put :update, id: external_result.to_param, external_result: valid_attributes
+        put :update, params: { id: external_result.to_param, external_result: valid_attributes }
         expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
       end
     end
 
     describe "with invalid params" do
-      it "assigns the external_result as @external_result" do
+      it "does not update the external_result" do
         external_result = FactoryGirl.create(:external_result, :preliminary)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        put :update, id: external_result.to_param, external_result: { "competitor_id" => "invalid value" }
-        expect(assigns(:external_result)).to eq(external_result)
+        expect do
+          put :update, params: { id: external_result.to_param, external_result: { competitor_id: "invalid value" } }
+        end.not_to change { external_result.reload.details }
       end
 
       it "re-renders the 'edit' template" do
         external_result = FactoryGirl.create(:external_result, :preliminary)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
-        put :update, id: external_result.to_param, external_result: { "competitor_id" => "invalid value" }
-        expect(response).to render_template("edit")
+        put :update, params: { id: external_result.to_param, external_result: { "competitor_id" => "invalid value" } }
+        assert_select "h1", "Editing points result"
       end
     end
   end
@@ -120,13 +110,13 @@ describe PreliminaryExternalResultsController do
     it "destroys the requested external_result" do
       external_result = FactoryGirl.create(:external_result, :preliminary)
       expect do
-        delete :destroy, id: external_result.to_param
+        delete :destroy, params: { id: external_result.to_param }
       end.to change(ExternalResult, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
       external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor)
-      delete :destroy, id: external_result.to_param
+      delete :destroy, params: { id: external_result.to_param }
       expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
     end
   end
@@ -150,7 +140,7 @@ describe PreliminaryExternalResultsController do
 
     it "creates entries" do
       expect do
-        post :import_csv, competition_id: @competition.id, file: test_file
+        post :import_csv, params: { competition_id: @competition.id, file: test_file }
       end.to change(ExternalResult, :count).by 4
       expect(ExternalResult.preliminary.count).to eq(4)
     end

@@ -18,7 +18,7 @@
 #  index_judges_user_id                                          (user_id)
 #
 
-class Judge < ActiveRecord::Base
+class Judge < ApplicationRecord
   belongs_to :competition
   belongs_to :judge_type
   belongs_to :user
@@ -87,11 +87,11 @@ class Judge < ActiveRecord::Base
   # Note, this appears to be duplicated in ability.rb
   def check_for_scores
     if active_scores.count > 0
-      errors[:base] << "cannot delete judge containing a score"
+      errors.add(:base, "cannot delete judge containing a score")
       return false
     end
     if distance_attempts.count > 0
-      errors[:base] << "cannot delete judge containing distance attempts"
+      errors.add(:base, "cannot delete judge containing distance attempts")
       return false
     end
   end

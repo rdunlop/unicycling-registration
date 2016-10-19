@@ -16,7 +16,7 @@ describe Translations::ExpenseGroupsController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: expense_group.id
+      get :edit, params: { id: expense_group.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::ExpenseGroupsController do
     end
 
     it "renders" do
-      put :update, id: expense_group.id, expense_group: valid_attributes
+      put :update, params: { id: expense_group.id, expense_group: valid_attributes }
       expect(response).to redirect_to(translations_expense_groups_path)
       I18n.locale = :fr
       expect(expense_group.reload.group_name).to eq("Le T-Shirts")

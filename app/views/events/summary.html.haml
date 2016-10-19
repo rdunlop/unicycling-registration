@@ -12,13 +12,13 @@
       %th Competitors
       %td= @num_male_competitors
       %td= @num_female_competitors
-      %td= @num_competitors
+      %td.num_competitors= @num_competitors
     - if @config.noncompetitors?
       %tr
         %th Non-Competitors
         %td= @num_male_noncompetitors
         %td= @num_female_noncompetitors
-        %td= @num_noncompetitors
+        %td.num_noncompetitors= @num_noncompetitors
     - if @config.spectators?
       %tr
         %th Spectators
@@ -32,7 +32,7 @@
       %td
         %b= @num_female_registrants
       %td
-        %b= @num_registrants
+        %b.num_registrants= @num_registrants
 %hr
 
 - if policy(:export).download_events?

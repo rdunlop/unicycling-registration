@@ -20,7 +20,7 @@
 #  index_competition_sources_target_competition_id  (target_competition_id)
 #
 
-class CompetitionSource < ActiveRecord::Base
+class CompetitionSource < ApplicationRecord
   belongs_to :event_category, inverse_of: :competition_sources
   belongs_to :target_competition, class_name: "Competition", inverse_of: :competition_sources
   belongs_to :competition
@@ -43,13 +43,13 @@ class CompetitionSource < ActiveRecord::Base
 
   def source_present
     if event_category.nil? && competition.nil?
-      errors[:base] << "Must select an Event Category or a Competition"
+      errors.add(:base, "Must select an Event Category or a Competition")
     end
   end
 
   def max_place_with_competition
     if max_place && competition.nil?
-      errors[:base] << "Must select a Competition when setting max_place"
+      errors.add(:base, "Must select a Competition when setting max_place")
     end
   end
 

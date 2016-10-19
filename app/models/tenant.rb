@@ -10,7 +10,7 @@
 #  admin_upgrade_code :string(255)
 #
 
-class Tenant < ActiveRecord::Base
+class Tenant < ApplicationRecord
   validates :subdomain, :description, :admin_upgrade_code, presence: true
   validates :subdomain, uniqueness: true
   validate :subdomain_has_no_spaces
@@ -49,7 +49,7 @@ class Tenant < ActiveRecord::Base
 
   def subdomain_has_no_spaces
     if subdomain.present? && subdomain.include?(" ")
-      errors[:subdomain] << "Subdomain cannot have spaces"
+      errors.add(:subdomain, "Subdomain cannot have spaces")
     end
   end
 end

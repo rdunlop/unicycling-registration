@@ -33,7 +33,6 @@
 #
 
 require 'csv'
-require 'upload'
 class CompetitionsController < ApplicationController
   include EventsHelper
   layout "competition_management"

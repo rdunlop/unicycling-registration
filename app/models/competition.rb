@@ -36,7 +36,7 @@
 #  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   include CachedModel
   include Slugify
 
@@ -568,19 +568,19 @@ class Competition < ActiveRecord::Base
 
   def published_only_when_locked
     if published? && !locked?
-      errors[:base] << "Cannot Publish an unlocked Competition"
+      errors.add(:base, "Cannot Publish an unlocked Competition")
     end
   end
 
   def awarded_only_when_published
     if awarded? && !published?
-      errors[:base] << "Cannot Award an un-published Competition"
+      errors.add(:base, "Cannot Award an un-published Competition")
     end
   end
 
   def no_competition_sources_when_overall_calculation
     if scoring_class == "Overall Champion" && competition_sources.size > 0
-      errors[:competiton_sources_attributes] << "unable to specify competition sources when using Overall Champion"
+      errors.add(:competiton_sources_attributes, "unable to specify competition sources when using Overall Champion")
     end
   end
 
@@ -593,17 +593,17 @@ class Competition < ActiveRecord::Base
   def award_label_title_checks
     # cannot specify subtitle when also specifying an age group
     if age_group_type.present? && award_subtitle_name.present?
-      errors[:base] << "Cannot specify a subtitle AND an age group"
+      errors.add(:base, "Cannot specify a subtitle AND an age group")
     end
 
     # has_expert is only allowed when there is also an age group type
     if has_experts? && age_group_type.nil?
-      errors[:age_group_type_id] << "Must specify an age group to also have Experts chosen"
+      errors.add(:age_group_type_id, "Must specify an age group to also have Experts chosen")
     end
 
     # requires_age_groups is true for discance and race scoring classes
     if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
-      errors[:age_group_type_id] << "Must specify an age group when using #{scoring_class} scoring class"
+      errors.add(:age_group_type_id, "Must specify an age group when using #{scoring_class} scoring class")
     end
   end
 

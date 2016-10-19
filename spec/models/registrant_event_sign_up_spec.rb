@@ -46,7 +46,7 @@ describe RegistrantEventSignUp do
     end
     it "creates a registrant_expense_item" do
       expect { sign_up }.to change(RegistrantExpenseItem, :count).by(1)
-      expect(reg).to have_expense_item(expense_item)
+      expect(reg.reload).to have_expense_item(expense_item)
     end
 
     describe "when I have already signed-up for that event" do

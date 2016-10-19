@@ -18,7 +18,7 @@ module PageOrUrlLink
 
   def only_one_info_type
     if info_url.present? && info_page.present?
-      errors[:info_page_id] << "Unable to specify both Info URL and Info Page"
+      errors.add(:info_page_id, "Unable to specify both Info URL and Info Page")
     end
   end
 end

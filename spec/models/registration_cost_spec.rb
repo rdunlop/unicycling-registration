@@ -150,14 +150,14 @@ end
 
 describe "when testing the update function for registration costs", caching: true do
   before(:each) do
+    @reg = FactoryGirl.create(:competitor) # will have rp1
+    @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
     ActionMailer::Base.deliveries.clear
     # create a rp which encompasses "today"
     @comp_registration_cost1 = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
     @noncomp_registration_cost1 = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
-    @reg = FactoryGirl.create(:competitor) # will have rp1
-    @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
   end
-  it "automically has the current_period set already" do
+  it "automatically has the current_period set" do
     expect(RegistrationCost.for_type("competitor").current_period).to eq(@comp_registration_cost1)
     expect(RegistrationCost.for_type("noncompetitor").current_period).to eq(@noncomp_registration_cost1)
   end
@@ -171,6 +171,8 @@ describe "when testing the update function for registration costs", caching: tru
   end
 
   it "initially, the registrant has an expense_item from the current period" do
+    @reg.reload
+    @nc_reg.reload
     expect(@reg.registrant_expense_items.count).to eq(1)
     expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost1.expense_item)
     expect(@nc_reg.registrant_expense_items.count).to eq(1)
@@ -180,6 +182,8 @@ describe "when testing the update function for registration costs", caching: tru
   it "sends an e-mail when it changes the reg period" do
     num_deliveries = ActionMailer::Base.deliveries.size
     expect(num_deliveries).to eq(2) # 1 for Comp, 1 for NonComp
+    expect(ActionMailer::Base.deliveries[0].subject).to eq("Updated Registration Period")
+    expect(ActionMailer::Base.deliveries[1].subject).to eq("Updated Registration Period")
   end
 
   describe "when a registrant has a LOCKED registration_item" do

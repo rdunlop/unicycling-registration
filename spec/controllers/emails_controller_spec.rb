@@ -10,7 +10,7 @@ describe EmailsController do
     it "can send an e-mail" do
       FactoryGirl.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] }
+      post :create, params: { email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] } }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
       expect(MassEmail.count).to eq(1)
@@ -23,7 +23,7 @@ describe EmailsController do
         FactoryGirl.create(:user)
       end
       ActionMailer::Base.deliveries.clear
-      post :create, email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] }
+      post :create, params: { email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] } }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(2)
 

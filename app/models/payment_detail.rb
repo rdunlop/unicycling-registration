@@ -20,7 +20,7 @@
 #  index_payment_details_registrant_id    (registrant_id)
 #
 
-class PaymentDetail < ActiveRecord::Base
+class PaymentDetail < ApplicationRecord
   include CachedSetModel
   include HasDetailsDescription
 
@@ -57,7 +57,7 @@ class PaymentDetail < ActiveRecord::Base
 
   def registrant_must_be_valid
     if registrant && (!registrant.validated? || registrant.invalid?)
-      errors[:registrant] = "Registrant #{registrant} form is incomplete"
+      errors.add(:registrant, "Registrant #{registrant} form is incomplete")
       return false
     end
     true

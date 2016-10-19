@@ -43,13 +43,27 @@ describe ImportResultsController do
   # ImportResult. As you add validations to ImportResult, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "details" => "100pts", "points" => "1", "bib_number" => "123", "minutes" => "1", "seconds" => "2", "thousands" => "3" }
+    {
+      details: "100pts",
+      points: 1,
+      bib_number: 123,
+      minutes: 1,
+      seconds: 2,
+      thousands: 3
+    }
   end
 
   describe "GET edit" do
-    it "assigns the requested import_result as @import_result" do
-      get :edit, id: import_result.to_param
-      expect(assigns(:import_result)).to eq(import_result)
+    it "show the import_result form" do
+      get :edit, params: { id: import_result.to_param }
+
+      assert_select "form", action: import_result_path(import_result), method: "post" do
+        assert_select "select#import_result_bib_number", name: "import_result[bib_number]"
+        assert_select "input#import_result_minutes", name: "import_result[minutes]"
+        assert_select "input#import_result_seconds", name: "import_result[seconds]"
+        assert_select "input#import_result_thousands", name: "import_result[thousands]"
+        assert_select "select#import_result_status", name: "import_result[status]"
+      end
     end
   end
 
@@ -57,40 +71,35 @@ describe ImportResultsController do
     describe "with valid params" do
       it "creates a new ImportResult" do
         expect do
-          post :create, import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id
+          post :create, params: { import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id }
         end.to change(ImportResult, :count).by(1)
       end
 
       it "creates a new ImportResult with start_time" do
-        post :create, import_result: valid_attributes.merge(is_start_time: true), user_id: @admin_user.id, competition_id: @competition.id
+        post :create, params: { import_result: valid_attributes.merge(is_start_time: true), user_id: @admin_user.id, competition_id: @competition.id }
         expect(ImportResult.last.is_start_time).to be_truthy
       end
 
-      it "assigns a newly created import_result as @import_result" do
-        post :create, import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id
-        expect(assigns(:import_result)).to be_a(ImportResult)
-        expect(assigns(:import_result)).to be_persisted
-      end
-
       it "redirects to the user's import_results" do
-        post :create, import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id
+        post :create, params: { import_result: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id }
         expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: false))
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved import_result as @import_result" do
+      it "does not create a new import_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        post :create, import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id
-        expect(assigns(:import_result)).to be_a_new(ImportResult)
+        expect do
+          post :create, params: { import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id }
+        end.not_to change(ImportResult, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        post :create, import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id
-        expect(response).to render_template("data_entry")
+        post :create, params: { import_result: { "raw_data" => "invalid value" }, user_id: @admin_user.id, competition_id: @competition.id }
+        assert_select "h1", "Data Recording Form - Entry Form (One Attempt per line)"
       end
     end
   end
@@ -98,38 +107,31 @@ describe ImportResultsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested import_result" do
-        # Assuming there are no other import_results in the database, this
-        # specifies that the ImportResult created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(ImportResult).to receive(:update_attributes).with("raw_data" => "MyString")
-        put :update, id: import_result.to_param, import_result: { "raw_data" => "MyString" }
-      end
-
-      it "assigns the requested import_result as @import_result" do
-        put :update, id: import_result.to_param, import_result: valid_attributes
-        expect(assigns(:import_result)).to eq(import_result)
+        expect do
+          put :update, params: { id: import_result.to_param, import_result: valid_attributes.merge(bib_number: 1211) }
+        end.to change { import_result.reload.bib_number }
       end
 
       it "redirects to the import_result" do
-        put :update, id: import_result.to_param, import_result: valid_attributes
+        put :update, params: { id: import_result.to_param, import_result: valid_attributes }
         expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition, is_start_times: import_result.is_start_time))
       end
     end
 
     describe "with invalid params" do
-      it "assigns the import_result as @import_result" do
+      it "does not update the import_result" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        put :update, id: import_result.to_param, import_result: { "raw_data" => "invalid value" }
-        expect(assigns(:import_result)).to eq(import_result)
+        expect do
+          put :update, params: { id: import_result.to_param, import_result: { raw_data: "invalid value" } }
+        end.not_to change { import_result.reload.raw_data }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ImportResult).to receive(:save).and_return(false)
-        put :update, id: import_result.to_param, import_result: { "raw_data" => "invalid value" }
-        expect(response).to render_template("edit")
+        put :update, params: { id: import_result.to_param, import_result: { raw_data: "invalid value" } }
+        assert_select "h1", "Editing import_result"
       end
     end
   end
@@ -141,12 +143,12 @@ describe ImportResultsController do
     it "destroys the requested import_result" do
       im_result = FactoryGirl.create(:import_result, user: @admin_user, competition: @competition)
       expect do
-        delete :destroy, id: im_result.to_param
+        delete :destroy, params: { id: im_result.to_param }
       end.to change(ImportResult, :count).by(-1)
     end
 
     it "redirects to the import_results list" do
-      delete :destroy, id: import_result.to_param
+      delete :destroy, params: { id: import_result.to_param }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(@admin_user, @competition))
     end
   end
@@ -158,7 +160,7 @@ describe ImportResultsController do
       @config = FactoryGirl.create(:event_configuration, :with_usa)
       import = FactoryGirl.create(:import_result, competition: competition, bib_number: reg.bib_number)
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
-      post :approve, user_id: import.user, competition_id: competition.id
+      post :approve, params: { user_id: import.user, competition_id: competition.id }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
   end
@@ -168,7 +170,7 @@ describe ImportResultsController do
       competition = FactoryGirl.create(:timed_competition)
       import = FactoryGirl.create(:import_result, competition: competition)
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
-      delete :destroy_all, user_id: import.user, competition_id: competition.id
+      delete :destroy_all, params: { user_id: import.user, competition_id: competition.id }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
     end
   end

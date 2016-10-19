@@ -15,7 +15,7 @@
 #  index_competition_wheel_sizes_registrant_id_event_id         (registrant_id,event_id)
 #
 
-class CompetitionWheelSize < ActiveRecord::Base
+class CompetitionWheelSize < ApplicationRecord
   belongs_to :registrant, touch: true
   belongs_to :event
   belongs_to :wheel_size

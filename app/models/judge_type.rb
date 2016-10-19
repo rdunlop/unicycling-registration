@@ -22,7 +22,7 @@
 #  index_judge_types_on_name_and_event_class  (name,event_class) UNIQUE
 #
 
-class JudgeType < ActiveRecord::Base
+class JudgeType < ApplicationRecord
   has_many :judges, dependent: :destroy
   has_many :competitions, through: :judges
   has_many :scores, through: :judges

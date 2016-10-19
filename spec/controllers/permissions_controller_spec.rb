@@ -9,7 +9,7 @@ describe PermissionsController do
 
     it "can authorize acl" do
       allow_any_instance_of(ApplicationController).to receive(:modification_access_key).and_return(123456)
-      post :set_acl, access_key: "123456"
+      post :set_acl, params: { access_key: "123456" }
       expect(flash[:notice]).to eq("Successfully Enabled Access")
     end
 
@@ -19,20 +19,20 @@ describe PermissionsController do
 
       it "can use the access code" do
         expect do
-          post :use_code, registrant_id: registrant.id, code: access_code
+          post :use_code, params: { registrant_id: registrant.id, code: access_code }
         end.to change(User, :count).by(1)
       end
 
       it "doesn't succeed if the access code is invalid" do
         expect do
-          post :use_code, registrant_id: registrant.id, code: "invalid_code"
+          post :use_code, params: { registrant_id: registrant.id, code: "invalid_code" }
         end.to_not change(User, :count)
       end
 
       it "doesn't create another guest if one already exists" do
-        post :use_code, registrant_id: registrant.id, code: access_code
+        post :use_code, params: { registrant_id: registrant.id, code: access_code }
         expect do
-          post :use_code, registrant_id: registrant.id, code: access_code
+          post :use_code, params: { registrant_id: registrant.id, code: access_code }
         end.to_not change(User, :count)
       end
     end

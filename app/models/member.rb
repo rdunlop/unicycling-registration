@@ -16,20 +16,22 @@
 #  index_members_registrant_id  (registrant_id)
 #
 
-class Member < ActiveRecord::Base
+class Member < ApplicationRecord
   include CachedSetModel
 
   belongs_to :competitor, inverse_of: :members
   belongs_to :registrant
-  after_destroy :destroy_orphaned_competitors
 
   validates :registrant, presence: true
   validate :registrant_once_per_competition
 
   after_touch :update_min_bib_number
   after_save :update_min_bib_number
-  after_destroy :update_min_bib_number
   after_save :touch_competitor
+  after_touch :touch_competitor
+
+  after_destroy :update_min_bib_number
+  after_destroy :destroy_orphaned_competitors
 
   # This is used by the Competitor, in order to update Members
   # without cascading the change back to the Competitor.
@@ -49,7 +51,7 @@ class Member < ActiveRecord::Base
 
   def update_min_bib_number
     return if no_touch_cascade
-    comp = competitor(true)
+    comp = competitor.reload
     return if comp.nil?
     lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
     competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
@@ -75,7 +77,7 @@ class Member < ActiveRecord::Base
         return
       end
       if registrant.competitors.where(competition: competitor.competition).any?
-        errors[:base] = "Cannot have the same registrant (#{registrant}) in the same competition twice"
+        errors.add(:base, "Cannot have the same registrant (#{registrant}) in the same competition twice")
       end
     end
   end

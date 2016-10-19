@@ -23,7 +23,7 @@
 #  distance                :integer
 #
 
-class CombinedCompetitionEntry < ActiveRecord::Base
+class CombinedCompetitionEntry < ApplicationRecord
   belongs_to :combined_competition, touch: true
   belongs_to :competition
 

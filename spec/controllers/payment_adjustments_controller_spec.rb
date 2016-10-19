@@ -5,14 +5,17 @@ describe PaymentAdjustmentsController do
     @user = FactoryGirl.create(:super_admin_user)
     sign_in @user
   end
-  let!(:payment) { FactoryGirl.create(:payment, completed: true) }
-  let!(:other_payment) { FactoryGirl.create(:payment) }
+  let!(:payment) { FactoryGirl.create(:payment, completed: true, transaction_id: "My Transaction ID") }
+  let!(:other_payment) { FactoryGirl.create(:payment, transaction_id: "Other Transaction ID") }
   let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
 
   describe "GET list" do
-    it "assigns all payments as @payments" do
-      get :list, {}
-      expect(assigns(:payments)).to match_array([payment, other_payment])
+    it "lists all payments" do
+      get :list
+
+      assert_select "h1", "Listing payments And Refunds"
+      assert_select "td", payment.transaction_id
+      assert_select "td", other_payment.transaction_id
     end
   end
 
@@ -35,7 +38,7 @@ describe PaymentAdjustmentsController do
 
     context "with a registrant" do
       it "renders" do
-        post :adjust_payment_choose, registrant_id: [registrant.id]
+        post :adjust_payment_choose, params: { registrant_id: [registrant.id] }
       end
     end
   end
@@ -50,10 +53,10 @@ describe PaymentAdjustmentsController do
 
     it "can create an exchange of elements" do
       expect do
-        post :exchange_create,           note: "exchange shirts",
+        post :exchange_create, params: { note: "exchange shirts",
                                          registrant_id: registrant.id,
                                          old_item_id: payment_detail.expense_item.id,
-                                         new_item_id: new_expense_item.id
+                                         new_item_id: new_expense_item.id }
       end.to change(RefundDetail, :count).by(1)
       r = Refund.last
       expect(r.note).to eq("exchange shirts")
@@ -67,10 +70,10 @@ describe PaymentAdjustmentsController do
 
     it "doesn't create any refunds when there is not a matching paid expense item" do
       expect do
-        post :exchange_create,           note: "exchange shirts",
+        post :exchange_create, params: { note: "exchange shirts",
                                          registrant_id: registrant.id,
                                          old_item_id: other_expense_item.id,
-                                         new_item_id: new_expense_item.id
+                                         new_item_id: new_expense_item.id }
       end.to_not change(Refund, :count)
     end
   end

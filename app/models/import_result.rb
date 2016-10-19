@@ -29,7 +29,7 @@
 #  index_imported_results_user_id   (user_id)
 #
 
-class ImportResult < ActiveRecord::Base
+class ImportResult < ApplicationRecord
   include StatusNilWhenEmpty
   include FindsMatchingCompetitor
   include HoursFacade

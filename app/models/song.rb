@@ -19,7 +19,7 @@
 #  index_songs_registrant_id                              (registrant_id)
 #
 
-class Song < ActiveRecord::Base
+class Song < ApplicationRecord
   mount_uploader :song_file_name, MusicUploader
   include CachedModel
 
@@ -50,6 +50,6 @@ class Song < ActiveRecord::Base
   private
 
   def song_size_validation
-    errors[:song_file_name] << "should be less than 40MB" if song_file_name.size > 40.megabytes
+    errors.add(:song_file_name, "should be less than 40MB") if song_file_name.size > 40.megabytes
   end
 end

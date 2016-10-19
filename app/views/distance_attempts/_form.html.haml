@@ -17,4 +17,4 @@
       = f.check_box :fault, class: "distance_input"
   .row
     .small-12.columns
-      = f.button :submit, "Enter Attempt", {:class => 'add_distance_attempt_button action_button multiclick' }
+      = f.button :submit, "Enter Attempt", class: 'add_distance_attempt_button action_button', data: { disable_with: false }

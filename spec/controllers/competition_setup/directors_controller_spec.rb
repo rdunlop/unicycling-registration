@@ -9,16 +9,17 @@ describe CompetitionSetup::DirectorsController do
   end
 
   describe "GET index" do
-    it "assigns the events as @events" do
+    it "shows the events" do
       get :index
-      expect(assigns(:events)).to eq([@event])
+
+      assert_select "td", @event.to_s
     end
   end
 
   describe "POST create" do
     it "assigns the requested user as director" do
       user = FactoryGirl.create(:user)
-      post :create, user_id: user.id, event_id: @event.id
+      post :create, params: { user_id: user.id, event_id: @event.id }
       expect(user.reload.roles.count).to eq(1)
     end
   end
@@ -27,7 +28,7 @@ describe CompetitionSetup::DirectorsController do
     it "removes users role" do
       user = FactoryGirl.create(:user)
       user.add_role(:director, @event)
-      delete :destroy, id: user.id, event_id: @event.id
+      delete :destroy, params: { id: user.id, event_id: @event.id }
       expect(user.reload.roles.count).to eq(0)
     end
   end

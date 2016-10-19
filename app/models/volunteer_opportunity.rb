@@ -15,7 +15,7 @@
 #  index_volunteer_opportunities_on_position     (position)
 #
 
-class VolunteerOpportunity < ActiveRecord::Base
+class VolunteerOpportunity < ApplicationRecord
   validates :description, presence: true
   validates :description, uniqueness: true
 

@@ -18,7 +18,7 @@
 #  index_event_categories_on_event_id_and_name  (event_id,name) UNIQUE
 #
 
-class EventCategory < ActiveRecord::Base
+class EventCategory < ApplicationRecord
   belongs_to :event, inverse_of: :event_categories, touch: true, counter_cache: true
 
   has_many :registrant_event_sign_ups, dependent: :destroy

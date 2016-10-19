@@ -48,7 +48,7 @@
 #  add_event_end_date                            :datetime
 #
 
-class EventConfiguration < ActiveRecord::Base
+class EventConfiguration < ApplicationRecord
   include MultiLevelValidation
 
   specify_validations :base_settings, :name_logo, :payment_settings, :important_dates
@@ -337,7 +337,7 @@ class EventConfiguration < ActiveRecord::Base
 
   def only_one_info_type
     if comp_noncomp_url.present? && comp_noncomp_page.present?
-      errors[:comp_noncomp_page_id] << "Unable to specify both Comp-NonComp URL and Comp-NonComp Page"
+      errors.add(:comp_noncomp_page_id, "Unable to specify both Comp-NonComp URL and Comp-NonComp Page")
     end
   end
 end

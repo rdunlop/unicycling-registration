@@ -39,38 +39,50 @@ describe ConventionSetup::RegistrationCostsController do
   end
 
   describe "GET index" do
-    it "assigns all registration_costs as @registration_costs" do
+    it "shows all registration_costs" do
       registration_cost
-      get :index, {}
-      expect(assigns(:registration_costs)).to eq([registration_cost])
+      get :index
+
+      assert_select "h1", "Registration Costs"
+      assert_select "td", registration_cost.name
+    end
+  end
+
+  describe "GET new" do
+    it "shows a new registration_cost" do
+      get :new
+      assert_select "h1", "New Registration Cost Entry"
     end
 
     it "only lists both competitor and non-competitor" do
-      get :index, {}
-      expect(assigns(:registrant_types)).to match_array(["competitor", "noncompetitor"])
+      get :new
+
+      assert_select "form.new_registration_cost" do
+        assert_select "select#registration_cost_registrant_type", name: "registration_cost[registrant_type]" do
+          assert_select "option", value: "competitor"
+          assert_select "option", value: "noncompetitor"
+        end
+      end
     end
 
     context "in a convention without noncompetitors" do
       before { FactoryGirl.create(:event_configuration, noncompetitors: false) }
 
       it "only lists competitor options" do
-        get :index, {}
-        expect(assigns(:registrant_types)).to eq(["competitor"])
+        get :new
+        assert_select "select#registration_cost_registrant_type", name: "registration_cost[registrant_type]" do
+          assert_select "option", value: "competitor"
+          assert_select "option", 2 # blank and competitor, no "Noncompetitor" option
+        end
       end
     end
   end
 
-  describe "GET new" do
-    it "assigns a new registration_cost as @registration_cost" do
-      get :new, {}
-      expect(assigns(:registration_cost)).to be_a_new(RegistrationCost)
-    end
-  end
-
   describe "GET edit" do
-    it "assigns the requested registration_cost as @registration_cost" do
-      get :edit, id: registration_cost.to_param
-      expect(assigns(:registration_cost)).to eq(registration_cost)
+    it "shows the requested registration_cost form" do
+      get :edit, params: { id: registration_cost.to_param }
+
+      assert_select "h1", "Editing #{registration_cost} Registration Cost"
     end
   end
 
@@ -78,75 +90,63 @@ describe ConventionSetup::RegistrationCostsController do
     describe "with valid params" do
       it "creates a new RegistrationCost" do
         expect do
-          post :create, registration_cost: valid_attributes
+          post :create, params: { registration_cost: valid_attributes }
         end.to change(RegistrationCost, :count).by(1)
       end
 
-      it "assigns a newly created registration_cost as @registration_cost" do
-        post :create, registration_cost: valid_attributes
-        expect(assigns(:registration_cost)).to be_a(RegistrationCost)
-        expect(assigns(:registration_cost)).to be_persisted
-      end
-
       it "redirects to the created registration_cost" do
-        post :create, registration_cost: valid_attributes
+        post :create, params: { registration_cost: valid_attributes }
         expect(response).to redirect_to(registration_costs_path)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved registration_cost as @registration_cost" do
+      it "does not create a new registration_cost" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
-        post :create, registration_cost: {onsite: true}
-        expect(assigns(:registration_cost)).to be_a_new(RegistrationCost)
+        expect do
+          post :create, params: { registration_cost: {onsite: true} }
+        end.not_to change(RegistrationCost, :count)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
-        post :create, registration_cost: {onsite: true}
-        expect(response).to render_template("new")
+        post :create, params: { registration_cost: {onsite: true} }
+        assert_select "h1", "New Registration Cost Entry"
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested registration_cost" do
-        # Assuming there are no other registration_costs in the database, this
-        # specifies that the RegistrationCost created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect_any_instance_of(RegistrationCost).to receive(:update_attributes).with({})
-        put :update, id: registration_cost.to_param, registration_cost: {'these' => 'params'}
-      end
-
-      it "assigns the requested registration_cost as @registration_cost" do
-        put :update, id: registration_cost.to_param, registration_cost: valid_attributes
-        expect(assigns(:registration_cost)).to eq(registration_cost)
+      it "updates the registration_cost" do
+        expect do
+          put :update, params: { id: registration_cost.to_param, registration_cost: {name: "New Namee"} }
+        end.to change { registration_cost.reload.name }
       end
 
       it "redirects to the registration_cost" do
         params = valid_attributes.merge(expense_item_attributes: { id: registration_cost.expense_item.id })
-        put :update, id: registration_cost.to_param, registration_cost: params
+        put :update, params: { id: registration_cost.to_param, registration_cost: params }
         expect(response).to redirect_to(registration_costs_path)
       end
     end
 
     describe "with invalid params" do
-      it "assigns the registration_cost as @registration_cost" do
+      it "does not update the registration_cost" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
-        put :update, id: registration_cost.to_param, registration_cost: {name: 'fake'}
-        expect(assigns(:registration_cost)).to eq(registration_cost)
+        expect do
+          put :update, params: { id: registration_cost.to_param, registration_cost: {name: 'fake'} }
+        end.not_to change { registration_cost.reload.name }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
-        put :update, id: registration_cost.to_param, registration_cost: {onsite: true}
-        expect(response).to render_template("edit")
+        put :update, params: { id: registration_cost.to_param, registration_cost: {onsite: true} }
+        assert_select "h1", "Editing #{registration_cost} Registration Cost"
       end
     end
   end
@@ -155,12 +155,12 @@ describe ConventionSetup::RegistrationCostsController do
     it "destroys the requested registration_cost" do
       registration_cost
       expect do
-        delete :destroy, id: registration_cost.to_param
+        delete :destroy, params: { id: registration_cost.to_param }
       end.to change(RegistrationCost, :count).by(-1)
     end
 
     it "redirects to the registration_costs list" do
-      delete :destroy, id: registration_cost.to_param
+      delete :destroy, params: { id: registration_cost.to_param }
       expect(response).to redirect_to(registration_costs_url)
     end
 
@@ -170,7 +170,7 @@ describe ConventionSetup::RegistrationCostsController do
       let(:registration_cost) { FactoryGirl.create(:registration_cost, expense_item: expense_item) }
 
       it "cannot delete the registration_cost" do
-        expect { delete :destroy, id: registration_cost.to_param }.to raise_error(ActiveRecord::DeleteRestrictionError)
+        expect { delete :destroy, params: { id: registration_cost.to_param } }.to raise_error(ActiveRecord::DeleteRestrictionError)
         expect(RegistrationCost.find_by(id: registration_cost.id)).not_to be_nil
       end
     end

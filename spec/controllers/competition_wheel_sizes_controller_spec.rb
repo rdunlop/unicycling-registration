@@ -25,7 +25,7 @@ describe CompetitionWheelSizesController do
 
   describe "GET index" do
     it "renders" do
-      get :index, registrant_id: registrant.bib_number
+      get :index, params: { registrant_id: registrant.bib_number }
       expect(response).to be_success
     end
   end
@@ -39,7 +39,7 @@ describe CompetitionWheelSizesController do
     end
     it "creates a competition_wheel_size" do
       expect do
-        post :create, registrant_id: registrant.bib_number, competition_wheel_size: valid_attributes
+        post :create, params: { registrant_id: registrant.bib_number, competition_wheel_size: valid_attributes }
       end.to change(CompetitionWheelSize, :count).by(1)
     end
   end
@@ -48,7 +48,7 @@ describe CompetitionWheelSizesController do
     let!(:wheel_size) { FactoryGirl.create(:competition_wheel_size, registrant: registrant) }
     it "removes the result" do
       expect do
-        delete :destroy, id: wheel_size.id, registrant_id: registrant.bib_number
+        delete :destroy, params: { id: wheel_size.id, registrant_id: registrant.bib_number }
       end.to change(CompetitionWheelSize, :count).by(-1)
     end
   end

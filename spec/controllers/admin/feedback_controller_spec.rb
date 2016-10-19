@@ -19,14 +19,14 @@ describe Admin::FeedbackController do
   describe "#show" do
     context "a unresolved feedback" do
       it "can show the feedback" do
-        get :show, id: feedback.id
+        get :show, params: { id: feedback.id }
         expect(response).to be_successful
       end
     end
 
     context "a resolved feedback" do
       it "can show the feedback" do
-        get :show, id: resolved_feedback.id
+        get :show, params: { id: resolved_feedback.id }
         expect(response).to be_successful
       end
     end
@@ -36,14 +36,14 @@ describe Admin::FeedbackController do
     context "with good params" do
       it "can resolve the feedback" do
         expect do
-          put :resolve, id: feedback.id, feedback: { resolution: "This is done" }
+          put :resolve, params: { id: feedback.id, feedback: { resolution: "This is done" } }
         end.to change{ feedback.reload.status }.to("resolved")
       end
     end
 
     context "missing the resolution" do
       it "re-renders the show view" do
-        put :resolve, id: feedback.id
+        put :resolve, params: { id: feedback.id }
         expect(response).to redirect_to(admin_feedback_path(feedback))
       end
     end
@@ -61,7 +61,7 @@ describe Admin::FeedbackController do
     describe "#create" do
       it "creates new feedback" do
         expect do
-          post :create, feedback: { entered_email: "test@example.com", message: "help me obi-wan" }
+          post :create, params: { feedback: { entered_email: "test@example.com", message: "help me obi-wan" } }
         end.to change(Feedback, :count).by(1)
       end
     end

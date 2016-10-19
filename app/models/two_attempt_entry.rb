@@ -23,7 +23,7 @@
 #  index_two_attempt_entries_ids  (competition_id,is_start_time,id)
 #
 
-class TwoAttemptEntry < ActiveRecord::Base
+class TwoAttemptEntry < ApplicationRecord
   include FindsMatchingCompetitor
 
   validates :competition_id, presence: true

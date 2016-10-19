@@ -83,7 +83,7 @@ describe ConventionSetup::EventConfigurationsController do
     let!(:event_configuration) { EventConfiguration.create! valid_attributes }
 
     it "Cannot edit configuration" do
-      get :advanced_settings, id: event_configuration.to_param
+      get :advanced_settings, params: { id: event_configuration.to_param }
       expect(response).to redirect_to(root_path)
     end
 
@@ -92,17 +92,17 @@ describe ConventionSetup::EventConfigurationsController do
         request.env["HTTP_REFERER"] = root_url
       end
       it "redirects to root" do
-        post 'test_mode_role', role: "normal_user"
+        post :test_mode_role, params: { role: "normal_user" }
         expect(response).to redirect_to(root_path)
       end
       it "changes my user to convention_admin" do
-        post 'test_mode_role', role: "convention_admin"
+        post :test_mode_role, params: { role: "convention_admin" }
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(true)
       end
       it "cannot change if config test_mode is disabled" do
         event_configuration.update_attribute(:test_mode, false)
-        post 'test_mode_role', role: "convention_admin"
+        post :test_mode_role, params: { role: "convention_admin" }
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(false)
       end

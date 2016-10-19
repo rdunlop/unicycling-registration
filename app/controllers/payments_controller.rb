@@ -45,7 +45,7 @@ class PaymentsController < ApplicationController
     add_registrant_breadcrumb(registrant)
     add_breadcrumb "Payments"
 
-    @payments = registrant.payments.completed_or_offline.uniq
+    @payments = registrant.payments.completed_or_offline.distinct
     @refunds = registrant.refunds.uniq
     @title_name = registrant.to_s
 
@@ -108,7 +108,7 @@ class PaymentsController < ApplicationController
     authorize @payment
     unless @payment.total_amount == 0.to_money
       flash[:alert] = "Please use Paypal to complete the payment"
-      redirect_to :back
+      redirect_back(fallback_location: payment_path(@payment))
       return
     end
 

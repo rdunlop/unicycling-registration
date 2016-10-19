@@ -43,7 +43,7 @@ describe VolunteersController do
 
   describe "GET index" do
     it "renders the page" do
-      get :index, competition_id: @ec.id
+      get :index, params: { competition_id: @ec.id }
       expect(response).to be_success
     end
   end
@@ -54,14 +54,14 @@ describe VolunteersController do
     describe "with valid params" do
       it "creates a new Volunteer" do
         expect do
-          post :create, competition_id: @ec.id, user_id: other_user.id, volunteer_type: "race_official"
+          post :create, params: { competition_id: @ec.id, user_id: other_user.id, volunteer_type: "race_official" }
         end.to change(other_user.roles, :count).by(1)
       end
     end
 
     describe "with missing user_id" do
       it "returns the user to the competition page" do
-        post :create, competition_id: @ec.id, volunteer_type: "race_official"
+        post :create, params: { competition_id: @ec.id, volunteer_type: "race_official" }
         expect(response).to redirect_to(competition_path(@ec))
       end
     end
@@ -69,7 +69,7 @@ describe VolunteersController do
     describe "with invalid volunteer_type" do
       it "does something" do
         expect do
-          post :create, competition_id: @ec.id, user_id: other_user.id, volunteer_type: "big_boss"
+          post :create, params: { competition_id: @ec.id, user_id: other_user.id, volunteer_type: "big_boss" }
         end.not_to change(other_user.roles, :count)
         expect(response).to redirect_to(competition_path(@ec))
       end
@@ -84,7 +84,7 @@ describe VolunteersController do
 
     it "removes the role" do
       expect do
-        delete :destroy, competition_id: @ec.id, user_id: other_user.id, volunteer_type: "race_official"
+        delete :destroy, params: { competition_id: @ec.id, user_id: other_user.id, volunteer_type: "race_official" }
       end.to change(other_user.roles, :count).by(-1)
     end
   end

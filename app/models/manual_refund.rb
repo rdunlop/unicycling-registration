@@ -58,7 +58,7 @@ class ManualRefund
 
   def at_least_one_refunded_element
     if items.none? { |el| el.refund? }
-      errors[:base] = "At least one element must be marked refunded"
+      errors.add(:base, "At least one element must be marked refunded")
     end
   end
 

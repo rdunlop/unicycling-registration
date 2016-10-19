@@ -15,7 +15,7 @@
 #  index_refunds_on_user_id  (user_id)
 #
 
-class Refund < ActiveRecord::Base
+class Refund < ApplicationRecord
   include CachedModel
 
   validates :refund_date, :user_id, :note, :percentage, presence: true

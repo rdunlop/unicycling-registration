@@ -26,7 +26,7 @@
 #  index_competitors_on_competition_id_and_age_group_entry_id  (competition_id,age_group_entry_id)
 #
 
-class Competitor < ActiveRecord::Base
+class Competitor < ApplicationRecord
   include Eligibility
   include Slugify
 
@@ -64,6 +64,7 @@ class Competitor < ActiveRecord::Base
   enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
   after_save :touch_members
   after_save :update_age_group_entry
+  after_touch :update_age_group_entry
 
   def touch_members
     members.each do |member|
@@ -102,7 +103,7 @@ class Competitor < ActiveRecord::Base
 
   def must_have_3_members_for_custom_name
     if (members.size < 3) && !custom_name.blank?
-      errors[:base] << "Must have at least 3 members to specify a custom name"
+      errors.add(:base, "Must have at least 3 members to specify a custom name")
     end
   end
 

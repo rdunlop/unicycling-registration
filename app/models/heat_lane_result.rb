@@ -17,7 +17,7 @@
 #  updated_at     :datetime
 #
 
-class HeatLaneResult < ActiveRecord::Base
+class HeatLaneResult < ApplicationRecord
   include FindsMatchingCompetitor
   include TracksEnteredBy
   include FindsBibNumberFromHeatLane

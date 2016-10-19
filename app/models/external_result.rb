@@ -18,7 +18,7 @@
 #  index_external_results_on_competitor_id  (competitor_id) UNIQUE
 #
 
-class ExternalResult < ActiveRecord::Base
+class ExternalResult < ApplicationRecord
   include Competeable
   include Placeable
   include CachedSetModel

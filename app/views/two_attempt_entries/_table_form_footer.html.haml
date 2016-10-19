@@ -58,4 +58,4 @@
     = f.fields_for :second_attempt, f.object.second_attempt do |g|
       = g.select :status, TimeResult.status_values
 
-  %td{ colspan: "3"}= f.button :submit, "Submit", :class => "multiclick"
+  %td{ colspan: "3"}= f.button :submit, "Submit", data: { disable_with: false }

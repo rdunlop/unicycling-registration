@@ -34,8 +34,8 @@ describe ConventionSetup::TenantAliasesController do
       get :index
     end
 
-    it "loads a blank tenant_alias" do
-      expect(assigns(:tenant_alias)).not_to be_persisted
+    it "loads a blank tenant_alias form" do
+      assert_select "form#new_tenant_alias", 1
     end
   end
 
@@ -59,14 +59,14 @@ describe ConventionSetup::TenantAliasesController do
     let!(:tenant_alias) { FactoryGirl.create(:tenant_alias) }
 
     it "returns False by default" do
-      get :verify, id: 99
+      get :verify, params: { id: 99 }
       expect(response).to be_success
       expect(response.body).to eq("FALSE")
     end
 
     it "returns false if the request is from a different domain" do
       @request.host = "otherdomain.com"
-      get :verify, id: tenant_alias.id
+      get :verify, params: { id: tenant_alias.id }
 
       expect(response).to be_success
       expect(response.body).to eq("FALSE")
@@ -74,7 +74,7 @@ describe ConventionSetup::TenantAliasesController do
 
     it "returns true if the request in from the correct domain" do
       @request.host = tenant_alias.website_alias
-      get :verify, id: tenant_alias.id
+      get :verify, params: { id: tenant_alias.id }
 
       expect(response).to be_success
       expect(response.body).to eq("TRUE")

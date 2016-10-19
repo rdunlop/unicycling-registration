@@ -33,16 +33,16 @@ describe ExpenseItemsController do
 
   describe "GET details" do
     it "displays the details" do
-      get :details, id: expense_item.to_param
-      expect(assigns(:expense_item)).to eq(expense_item)
+      get :details, params: { id: expense_item.to_param }
+      assert_select "h1", "Listing Payment Details for #{expense_item}"
     end
 
     context "with a coupon-code applied" do
       let!(:expense_item_coupon_code) { FactoryGirl.create(:coupon_code_expense_item, expense_item: expense_item) }
 
       it "displays the details" do
-        get :details, id: expense_item.to_param
-        expect(assigns(:expense_item)).to eq(expense_item)
+        get :details, params: { id: expense_item.to_param }
+        assert_select "td", expense_item_coupon_code.coupon_code.to_s
       end
     end
   end

@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class PageImage < ActiveRecord::Base
+class PageImage < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   belongs_to :page

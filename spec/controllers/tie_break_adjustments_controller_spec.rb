@@ -32,14 +32,18 @@ describe TieBreakAdjustmentsController do
   end
 
   describe "GET index" do
-    it "assigns all tie_break_adjustments as @tie_break_adjustments" do
+    it "shows all tie_break_adjustments" do
       tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, competitor: @competitor, judge: @judge)
-      get :index, judge_id: @judge.id
-      expect(assigns(:tie_break_adjustments)).to eq([tie_break_adjustment])
+      get :index, params: { judge_id: @judge.id }
+
+      assert_select "h1", "#{@judge.competition} - Tie Break Adjustments"
+      assert_select "td", tie_break_adjustment.tie_break_place.to_s
     end
-    it "assigns a new tie_break_adjustment" do
-      get :index, judge_id: @judge.id
-      expect(assigns(:tie_break_adjustment)).to be_a_new(TieBreakAdjustment)
+
+    it "shows new tie_break_adjustment form" do
+      get :index, params: { judge_id: @judge.id }
+
+      assert_select "h3", "New Tie Break Adjustment"
     end
   end
 
@@ -55,12 +59,12 @@ describe TieBreakAdjustmentsController do
 
       it "creates a new TimeResult" do
         expect do
-          post :create, judge_id: @judge.id, tie_break_adjustment: valid_attributes
+          post :create, params: { judge_id: @judge.id, tie_break_adjustment: valid_attributes }
         end.to change(TieBreakAdjustment, :count).by(1)
       end
 
       it "redirects to the index" do
-        post :create, judge_id: @judge.id, tie_break_adjustment: valid_attributes
+        post :create, params: { judge_id: @judge.id, tie_break_adjustment: valid_attributes }
         expect(response).to redirect_to(judge_tie_break_adjustments_path(@judge))
       end
     end
@@ -70,13 +74,13 @@ describe TieBreakAdjustmentsController do
     it "destroys the requested tie_break_adjustment" do
       tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, judge: @judge)
       expect do
-        delete :destroy, id: tie_break_adjustment.to_param
+        delete :destroy, params: { id: tie_break_adjustment.to_param }
       end.to change(TieBreakAdjustment, :count).by(-1)
     end
 
     it "redirects to the event's tie_break_adjustment list" do
       tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, judge: @judge)
-      delete :destroy, id: tie_break_adjustment.to_param
+      delete :destroy, params: { id: tie_break_adjustment.to_param }
       expect(response).to redirect_to(judge_tie_break_adjustments_path(@judge))
     end
   end

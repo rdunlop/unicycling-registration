@@ -9,7 +9,7 @@
 #  updated_at  :datetime
 #
 
-class WheelSize < ActiveRecord::Base
+class WheelSize < ApplicationRecord
   validates :position, :description, presence: true
 
   default_scope { order("position DESC") }

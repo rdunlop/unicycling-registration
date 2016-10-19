@@ -15,7 +15,7 @@
 #  volunteer_choices_reg_vol_opt_unique                 (registrant_id,volunteer_opportunity_id) UNIQUE
 #
 
-class VolunteerChoice < ActiveRecord::Base
+class VolunteerChoice < ApplicationRecord
   belongs_to :volunteer_opportunity
   belongs_to :registrant, inverse_of: :volunteer_choices
 

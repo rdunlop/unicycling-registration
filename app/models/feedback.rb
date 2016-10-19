@@ -14,7 +14,7 @@
 #  updated_at     :datetime         not null
 #
 
-class Feedback < ActiveRecord::Base
+class Feedback < ApplicationRecord
   belongs_to :user
   belongs_to :resolved_by, class_name: "User"
 

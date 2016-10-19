@@ -17,7 +17,7 @@
 #  index_mass_emails_on_email_addresses  (email_addresses)
 #
 
-class MassEmail < ActiveRecord::Base
+class MassEmail < ApplicationRecord
   belongs_to :sent_by, class_name: "User"
 
   validates :sent_by, presence: true

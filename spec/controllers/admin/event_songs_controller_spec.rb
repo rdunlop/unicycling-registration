@@ -28,11 +28,13 @@ describe Admin::EventSongsController do
 
   describe "GET show" do
     let(:event) { FactoryGirl.create(:event) }
-    let!(:song) { FactoryGirl.create(:song, event: event)}
+    let!(:song) { FactoryGirl.create(:song, event: event, description: "Description")}
 
     it "loads the page" do
-      get :show, id: event.to_param
+      get :show, params: { id: event.to_param }
       expect(response).to be_success
+
+      assert_select "tr>td", text: "Description".to_s, count: 1
     end
   end
 

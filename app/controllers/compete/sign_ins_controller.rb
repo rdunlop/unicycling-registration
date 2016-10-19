@@ -28,7 +28,7 @@ class Compete::SignInsController < ApplicationController
     respond_to do |format|
       if @competition.update_attributes(update_competitors_params)
         flash[:notice] = 'Competitors successfully updated.'
-        format.html { redirect_to :back }
+        format.html { redirect_back(fallback_location: edit_competition_sign_ins_path(@competition)) }
       else
         edit
         format.html { render :edit }

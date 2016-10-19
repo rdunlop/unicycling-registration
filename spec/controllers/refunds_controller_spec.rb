@@ -27,7 +27,7 @@ describe RefundsController do
 
   describe "GET show" do
     it "renders" do
-      get :show, id: refund.id
+      get :show, params: { id: refund.id }
       expect(response).to be_success
     end
   end

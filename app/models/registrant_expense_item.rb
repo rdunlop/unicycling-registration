@@ -19,7 +19,7 @@
 #  index_registrant_expense_items_registrant_id    (registrant_id)
 #
 
-class RegistrantExpenseItem < ActiveRecord::Base
+class RegistrantExpenseItem < ApplicationRecord
   include CachedSetModel
   include CachedModel
   include HasDetailsDescription
@@ -59,7 +59,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
   def custom_cost_present
     if !expense_item.nil? && expense_item.has_custom_cost?
       if custom_cost_cents.nil? || custom_cost_cents <= 0
-        errors[:base] << "Must specify a custom cost for this item"
+        errors.add(:base, "Must specify a custom cost for this item")
       end
     end
   end
@@ -90,11 +90,11 @@ class RegistrantExpenseItem < ActiveRecord::Base
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"
       if registrant.has_chosen_free_item_from_expense_group(eg)
-        errors[:base] = "Only 1 free item is permitted in this expense_group"
+        errors.add(:base, "Only 1 free item is permitted in this expense_group")
       end
     when "One Free of Each In Group"
       if registrant.has_chosen_free_item_of_expense_item(expense_item)
-        errors[:base] = "Only 1 free item of this item is permitted"
+        errors.add(:base, "Only 1 free item of this item is permitted")
       end
     end
     true
@@ -106,7 +106,7 @@ class RegistrantExpenseItem < ActiveRecord::Base
     return true if max == 0
 
     if registrant.all_expense_items.count(expense_item) == max
-      errors[:base] = "Each Registrant is only permitted #{max} of #{expense_item}"
+      errors.add(:base, "Each Registrant is only permitted #{max} of #{expense_item}")
     end
   end
 end

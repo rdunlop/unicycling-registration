@@ -16,7 +16,7 @@
 #  index_pages_on_slug                         (slug) UNIQUE
 #
 
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   include CachedModel
 
   validate :slug_cannot_have_special_characters
@@ -57,7 +57,7 @@ class Page < ActiveRecord::Base
 
   def slug_cannot_have_special_characters
     if slug.present? && slug.include?(" ")
-      errors[:slug] << "Slug cannot have spaces"
+      errors.add(:slug, "Slug cannot have spaces")
     end
   end
 end

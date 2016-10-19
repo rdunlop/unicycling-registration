@@ -14,11 +14,12 @@ describe Admin::RegistrantsController do
     end
 
     describe "GET manage_all" do
-      it "assigns all registrants as @registrants" do
+      it "displays all registrants" do
         registrant = FactoryGirl.create(:competitor)
         other_reg = FactoryGirl.create(:registrant)
         get :manage_all
-        expect(assigns(:registrants)).to match_array([registrant, other_reg])
+        assert_select "td", registrant.first_name
+        assert_select "td", other_reg.first_name
       end
     end
 
@@ -36,7 +37,7 @@ describe Admin::RegistrantsController do
       let(:registrant) { FactoryGirl.create(:registrant) }
 
       before { request.env["HTTP_REFERER"] = root_path }
-      before { post :choose_one, bib_number: bib_number, registrant_id: registrant_id, summary: summary }
+      before { post :choose_one, params: { bib_number: bib_number, registrant_id: registrant_id, summary: summary } }
 
       context "with a bib_number" do
         context "with a matching bib_number" do
@@ -82,12 +83,12 @@ describe Admin::RegistrantsController do
         end
 
         it "renders in id order" do
-          get :show_all, order: "id", format: :pdf
+          get :show_all, params: { order: "id" }, format: :pdf
           expect(response).to redirect_to(reports_path)
         end
 
         it "renders in id order with offset" do
-          get :show_all, order: "id", offset: "20", max: "5", format: :pdf
+          get :show_all, params: { order: "id", offset: "20", max: "5"}, format: :pdf
           expect(response).to redirect_to(reports_path)
         end
       end
@@ -106,14 +107,14 @@ describe Admin::RegistrantsController do
       end
       it "un-deletes a deleted registration" do
         registrant = FactoryGirl.create(:competitor, deleted: true)
-        post :undelete, id: registrant.to_param
+        post :undelete, params: { id: registrant.to_param }
         registrant.reload
         expect(registrant.deleted).to eq(false)
       end
 
       it "redirects to the root" do
         registrant = FactoryGirl.create(:competitor, deleted: true)
-        post :undelete, id: registrant.to_param
+        post :undelete, params: { id: registrant.to_param }
         expect(response).to redirect_to(manage_all_registrants_path)
       end
 
@@ -124,7 +125,7 @@ describe Admin::RegistrantsController do
         end
         it "Cannot undelete a user" do
           registrant = FactoryGirl.create(:competitor, deleted: true)
-          post :undelete, id: registrant.to_param
+          post :undelete, params: { id: registrant.to_param }
           registrant.reload
           expect(registrant.deleted).to eq(true)
         end

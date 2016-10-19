@@ -20,7 +20,7 @@
 #  index_standard_skill_entries_on_letter_and_number  (letter,number) UNIQUE
 #
 
-class StandardSkillEntry < ActiveRecord::Base
+class StandardSkillEntry < ApplicationRecord
   has_many :standard_skill_routine_entries, dependent: :destroy
   belongs_to :skill_before, class_name: "StandardSkillEntryTransition"
   belongs_to :skill_after, class_name: "StandardSkillEntryTransition"

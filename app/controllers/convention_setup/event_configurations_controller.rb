@@ -91,10 +91,11 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
         current_user.add_role role
       end
 
-      redirect_to :back, notice: 'User Permissions successfully updated.'
+      flash[:notice] = 'User Permissions successfully updated.'
     else
-      redirect_to :back, alert: "Unable to set role"
+      flash[:alert] = "Unable to set role"
     end
+    redirect_back(fallback_location: root_path)
   end
 
   private

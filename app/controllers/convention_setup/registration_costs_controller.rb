@@ -1,7 +1,7 @@
 class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConventionSetupController
   before_action :authorize_setup
   before_action :load_registration_cost, except: [:index, :new, :create]
-  before_action :load_available_registrant_types
+  before_action :load_available_registrant_types, except: [:index]
 
   before_action :set_breadcrumbs
 

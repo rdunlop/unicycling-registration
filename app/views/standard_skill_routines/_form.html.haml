@@ -12,4 +12,4 @@
       %br
       = f.select :standard_skill_entry_id, StandardSkillEntry.all.map{ |ent| [ent, ent.id]}, {}, class: "chosen-select"
   .actions
-    = f.button :submit, t(".insert_new"), :class => "multiclick"
+    = f.button :submit, t(".insert_new"), data: { disable_with: false }

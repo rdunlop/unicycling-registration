@@ -25,7 +25,7 @@ FactoryGirl.define do
     start_date Date.new(2012, 11, 3)
     end_date Date.new(2022, 11, 27)
     association :expense_item, cost: 100
-    name "Early Registration"
+    sequence(:name) { |n| "Early Registration #{n}" }
     onsite false
     registrant_type "competitor"
 

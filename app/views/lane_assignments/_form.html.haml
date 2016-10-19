@@ -11,4 +11,4 @@
       = f.label :lane
       = f.number_field :lane, {min: 1, required: true}
   .row
-    = f.button :submit, class: "multiclick"
+    = f.button :submit, data: { disable_with: false }

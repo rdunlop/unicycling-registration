@@ -10,7 +10,7 @@
 #  updated_at   :datetime         not null
 #
 
-class Report < ActiveRecord::Base
+class Report < ApplicationRecord
   mount_uploader :url, PdfUploader
 
   validates :report_type, inclusion: { in: ["registration_summary"] }

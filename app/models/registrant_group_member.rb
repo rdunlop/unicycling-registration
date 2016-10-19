@@ -15,7 +15,7 @@
 #  reg_group_reg_group                                 (registrant_id,registrant_group_id) UNIQUE
 #
 
-class RegistrantGroupMember < ActiveRecord::Base
+class RegistrantGroupMember < ApplicationRecord
   belongs_to :registrant_group, inverse_of: :registrant_group_members
   belongs_to :registrant
 

@@ -13,7 +13,7 @@
 #  name           :string(255)
 #
 
-class CompetitionResult < ActiveRecord::Base
+class CompetitionResult < ApplicationRecord
   belongs_to :competition, inverse_of: :competition_results, touch: true
 
   validates :competition, presence: true

@@ -12,7 +12,7 @@
 #  index_standard_skill_routines_on_registrant_id  (registrant_id) UNIQUE
 #
 
-class StandardSkillRoutine < ActiveRecord::Base
+class StandardSkillRoutine < ApplicationRecord
   validates :registrant_id, presence: true, uniqueness: true
 
   belongs_to :registrant

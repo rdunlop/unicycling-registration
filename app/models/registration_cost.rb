@@ -18,7 +18,7 @@
 #  index_registration_costs_on_registrant_type_and_current_period  (registrant_type,current_period)
 #
 
-class RegistrationCost < ActiveRecord::Base
+class RegistrationCost < ApplicationRecord
   include CachedModel
 
   default_scope { order(:start_date) }

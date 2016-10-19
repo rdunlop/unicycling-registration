@@ -8,7 +8,7 @@
 #  updated_at  :datetime         not null
 #
 
-class StandardSkillEntryAdditionalDescription < ActiveRecord::Base
+class StandardSkillEntryAdditionalDescription < ApplicationRecord
   validates :description, presence: true
 
   def to_s

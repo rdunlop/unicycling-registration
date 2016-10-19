@@ -22,7 +22,7 @@
 #  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id) UNIQUE
 #
 
-class ExpenseItem < ActiveRecord::Base
+class ExpenseItem < ApplicationRecord
   validates :name, :cost, :expense_group, presence: true
   validates :has_details, inclusion: { in: [true, false] } # because it's a boolean
   validates :has_custom_cost, inclusion: { in: [true, false] } # because it's a boolean
@@ -152,7 +152,7 @@ class ExpenseItem < ActiveRecord::Base
 
   def check_for_payment_details
     if payment_details.count > 0
-      errors[:base] << "cannot delete expense_item containing a matching payment"
+      errors.add(:base, "cannot delete expense_item containing a matching payment")
       return false
     end
   end

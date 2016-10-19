@@ -16,7 +16,7 @@ describe Translations::EventChoicesController do
 
   describe "#edit" do
     it "renders" do
-      get :edit, id: event_choice.id
+      get :edit, params: { id: event_choice.id }
       expect(response).to be_success
     end
   end
@@ -40,7 +40,7 @@ describe Translations::EventChoicesController do
     end
 
     it "renders" do
-      put :update, id: event_choice.id, event_choice: valid_attributes
+      put :update, params: { id: event_choice.id, event_choice: valid_attributes }
       expect(response).to redirect_to(translations_event_choices_path)
       I18n.locale = :fr
       expect(event_choice.reload.label).to eq("Equipe")

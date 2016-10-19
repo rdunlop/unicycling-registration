@@ -18,7 +18,7 @@
 #  index_additional_registrant_accesses_user_id        (user_id)
 #
 
-class AdditionalRegistrantAccess < ActiveRecord::Base
+class AdditionalRegistrantAccess < ApplicationRecord
   belongs_to :registrant
   belongs_to :user
   validates :user, :registrant, presence: true

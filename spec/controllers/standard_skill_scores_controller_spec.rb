@@ -48,18 +48,19 @@ describe StandardSkillScoresController do
   end
 
   describe "GET index" do
-    it "assigns all competitors as @competitors" do
-      get :index, judge_id: @judge.id
+    it "shows all competitors" do
+      get :index, params: { judge_id: @judge.id }
       expect(response).to be_success
-      expect(assigns(:competitors)).to eq([@comp, @comp2])
+      assert_match(/#{@comp.registrants.first.first_name}/, response.body)
+      assert_match(/#{@comp2.registrants.first.first_name}/, response.body)
     end
   end
 
   describe "GET new" do
     it "creates a new standard_skill_score with 2 entries" do
-      get :new, judge_id: @judge.id, competitor_id: @comp.id
-      expect(assigns(:standard_skill_score)).to be_a_new(StandardSkillScore)
-      expect(assigns(:standard_skill_score).standard_skill_score_entries.size).to eq(2)
+      get :new, params: { judge_id: @judge.id, competitor_id: @comp.id }
+
+      assert_match(skill_1.standard_skill_entry.description, response.body)
     end
   end
 
@@ -67,13 +68,13 @@ describe StandardSkillScoresController do
     describe "with valid params" do
       it "can create a standard_skill_score" do
         expect do
-          post :create, judge_id: @judge.id,  competitor_id: @comp.id, standard_skill_score: valid_attributes
+          post :create, params: { judge_id: @judge.id,  competitor_id: @comp.id, standard_skill_score: valid_attributes }
         end.to change(StandardSkillScore, :count).by(1)
       end
 
       it "creates score_entries too" do
         expect do
-          post :create, judge_id: @judge.id,  competitor_id: @comp.id, standard_skill_score: valid_attributes
+          post :create, params: { judge_id: @judge.id,  competitor_id: @comp.id, standard_skill_score: valid_attributes }
         end.to change(StandardSkillScoreEntry, :count).by(2)
       end
     end
@@ -82,8 +83,9 @@ describe StandardSkillScoresController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillScore).to receive(:valid?).and_return(false)
-        post :create, judge_id: @judge.id,  competitor_id: @comp.id, standard_skill_score: valid_attributes
-        expect(response).to render_template("new")
+        post :create, params: { judge_id: @judge.id, competitor_id: @comp.id, standard_skill_score: valid_attributes }
+
+        assert_select "h1", "New Score"
       end
     end
   end

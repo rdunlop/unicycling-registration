@@ -1,4 +1,4 @@
-class CompetitorAgeGroupEntryUpdateJob < ActiveJob::Base
+class CompetitorAgeGroupEntryUpdateJob < ApplicationJob
   # Determine the Competitor's assigned age group, and update, if necessary
   def perform(competitor_id)
     competitor = Competitor.find(competitor_id)

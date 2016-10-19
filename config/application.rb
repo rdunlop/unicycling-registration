@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 require File.expand_path('../../config/initializers/redis', __FILE__)
@@ -37,9 +37,6 @@ module Workspace
     # In order for Devise to send e-mail asynchronously, we have to
     # configure an ActiveJob queue Adapter
     config.active_job.queue_adapter = :sidekiq
-
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
 
     config.action_dispatch.rescue_responses['Errors::TenantNotFound'] = :not_found
 

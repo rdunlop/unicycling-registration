@@ -14,7 +14,7 @@
 #  index_refund_details_on_refund_id          (refund_id)
 #
 
-class RefundDetail < ActiveRecord::Base
+class RefundDetail < ApplicationRecord
   validates :payment_detail_id, presence: true
 
   belongs_to :refund

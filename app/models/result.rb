@@ -16,7 +16,7 @@
 #  index_results_on_competitor_id_and_result_type  (competitor_id,result_type) UNIQUE
 #
 
-class Result < ActiveRecord::Base
+class Result < ApplicationRecord
   include CachedSetModel
   include CachedModel
 

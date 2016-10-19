@@ -21,7 +21,7 @@
 #  index_payments_user_id  (user_id)
 #
 
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
   include CachedModel
 
   scope :completed, -> { where(completed: true) }
@@ -81,7 +81,7 @@ class Payment < ActiveRecord::Base
   def transaction_id_or_note
     if completed?
       if details.nil?
-        errors[:base] << "Transaction ID or Note must be filled in"
+        errors.add(:base, "Transaction ID or Note must be filled in")
       end
     end
   end

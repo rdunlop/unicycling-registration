@@ -18,7 +18,7 @@
 #  index_registrant_event_sign_ups_registrant_id                  (registrant_id)
 #
 
-class RegistrantEventSignUp < ActiveRecord::Base
+class RegistrantEventSignUp < ApplicationRecord
   validates :event, :registrant, presence: true
   # The following should be re-enabled? first double-check to see which conventions have violating data.
   # also ensure that flow still works with this. (do we have any events which do not have event_categories?)
@@ -50,14 +50,18 @@ class RegistrantEventSignUp < ActiveRecord::Base
   def create_reg_item
     return unless event.expense_item.present?
 
+    # clean_registrant, otherwise we get ActiveRecord::ReadOnlyRecord due to the
+    # .signed_up scope causing a join
+    clean_registrant = Registrant.find(registrant.id)
+
     if signed_up?
-      registrant.build_registration_item(event.expense_item)
+      clean_registrant.build_registration_item(event.expense_item)
     else
-      registrant.remove_registration_item(event.expense_item)
+      clean_registrant.remove_registration_item(event.expense_item)
     end
 
-    if registrant.valid?
-      registrant.save
+    if clean_registrant.valid?
+      clean_registrant.save
     end
   end
 
@@ -104,15 +108,15 @@ class RegistrantEventSignUp < ActiveRecord::Base
 
   def category_chosen_when_signed_up
     if signed_up && event_category.nil?
-      errors[:base] << "Cannot sign up for #{event.name} without choosing a category"
+      errors.add(:base, "Cannot sign up for #{event.name} without choosing a category")
     end
   end
 
   def category_in_age_range
     unless event_category.nil? || registrant.nil?
       if signed_up && !event_category.age_is_in_range(registrant.age)
-        errors[:base] << "You must be between #{event_category.age_range_start} and #{event_category.age_range_end}
-        years old to select #{event_category.name} for #{event.name} in #{event.category}"
+        errors.add(:base, "You must be between #{event_category.age_range_start} and #{event_category.age_range_end}
+        years old to select #{event_category.name} for #{event.name} in #{event.category}")
       end
     end
   end

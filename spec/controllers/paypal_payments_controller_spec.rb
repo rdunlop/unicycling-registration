@@ -33,13 +33,13 @@ describe PaypalPaymentsController do
       end
 
       it "is OK even when incomplete" do
-        post :notification, payment_status: "Incomplete"
+        post :notification, params: { payment_status: "Incomplete" }
         expect(response).to be_success
       end
 
       describe "with a valid post" do
-        before(:each) do
-          @attributes = {
+        let(:attributes) do
+          {
             receiver_email: paypal_account,
             payment_status: "Completed",
             txn_id: "12345",
@@ -48,14 +48,15 @@ describe PaypalPaymentsController do
             mc_gross: @payment.total_amount
           }
         end
+
         it "sets the payment as completed" do
-          post :notification, @attributes
+          post :notification, params: attributes
           expect(response).to be_success
           @payment.reload
           expect(@payment.completed).to eq(true)
         end
         it "sets the transaction number" do
-          post :notification, @attributes
+          post :notification, params: attributes
           expect(response).to be_success
           @payment.reload
           expect(@payment.transaction_id).to eq("12345")
@@ -63,21 +64,21 @@ describe PaypalPaymentsController do
         it "sets the completed_date to today" do
           t = DateTime.now
           allow(DateTime).to receive(:now).and_return(t)
-          post :notification, @attributes
+          post :notification, params: attributes
           expect(response).to be_success
           @payment.reload
           expect(@payment.completed_date.to_i).to eq(t.to_i)
         end
         it "sets the payment_date to the received payment_date string" do
-          post :notification, @attributes
+          post :notification, params: attributes
           expect(response).to be_success
           @payment.reload
           expect(@payment.payment_date).to eq("Some Paypal payment date")
         end
       end
       describe "with an incorrect payment_id" do
-        before(:each) do
-          @attributes = {
+        let(:attributes) do
+          {
             receiver_email: paypal_account,
             payment_status: "Completed",
             txn_id: "12345",
@@ -87,28 +88,28 @@ describe PaypalPaymentsController do
         end
         it "sends an IPN message" do
           ActionMailer::Base.deliveries.clear
-          post :notification, @attributes
+          post :notification, params: attributes
           expect(response).to be_success
           num_deliveries = ActionMailer::Base.deliveries.size
           expect(num_deliveries).to eq(1) # one for error
         end
       end
       it "doesn't set the payment if the wrong paypal account is specified" do
-        post :notification, receiver_email: "bob@bob.com", payment_status: "Completed", invoice: @payment.invoice_id
+        post :notification, params: { receiver_email: "bob@bob.com", payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
         @payment.reload
         expect(@payment.completed).to eq(false)
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
-        post :notification, mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
+        post :notification, params: { mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1) # one for success
       end
       it "should send an e-mail to notify of payment error when mc_gross is empty" do
         ActionMailer::Base.deliveries.clear
-        post :notification, mc_gross: "", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
+        post :notification, params: { mc_gross: "", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(2) # one for success, one for the error
@@ -116,7 +117,7 @@ describe PaypalPaymentsController do
 
       it "should send an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
-        post :notification, mc_gross: @payment.total_amount - 1.to_money, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id
+        post :notification, params: { mc_gross: @payment.total_amount - 1.to_money, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(2) # one for success, one for the error (payment different)

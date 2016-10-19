@@ -38,16 +38,16 @@
 
     - display_all = @competition.num_members_per_competitor.nil?
     - if display_all || @competition.num_members_per_competitor == "One"
-      = submit_tag Competitor.single_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?" }
+      = submit_tag Competitor.single_selection_text, :class => "action_button", :data => { :confirm => "This will create a SEPARATE competitor for each chosen registrant. Continue?", disable_with: false }
       %br
     - if @competition.num_members_per_competitor == "Two"
-      = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Pair with the chosen registrants. Continue?" }
+      = submit_tag Competitor.group_selection_text, :class => "action_button", :data => { :confirm => "This will create a Pair with the chosen registrants. Continue?", disable_with: false }
       %br
     - if display_all ||  @competition.num_members_per_competitor == "Three or more"
       = text_field_tag :group_name, nil, :placeholder => "Group Name (optional)"
       %br
-      = submit_tag Competitor.group_selection_text, :class => "multiclick action_button", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?" }
+      = submit_tag Competitor.group_selection_text, :class => "action_button", :data => { :confirm => "This will create a Single competitor for all chosen registrants. Continue?", disable_with: false }
 
-    = submit_tag Competitor.not_qualified_text, :class => "multiclick counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?" }
+    = submit_tag Competitor.not_qualified_text, :class => "counter_action_button", :data => { :confirm => "This will create a Single competitor for each registrants, and mark these as 'not qualified'. Continue?", disable_with: false }
 - else
   %pb All Registrants are assigned to competition or are marked as "will not compete".

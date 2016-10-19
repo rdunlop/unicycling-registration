@@ -35,7 +35,7 @@ describe ResultsController do
 
   describe "GET registrant" do
     it "renders" do
-      get :registrant, registrant_id: registrant.id
+      get :registrant, params: { registrant_id: registrant.id }
       expect(response).to redirect_to(results_registrant_path(registrant))
     end
   end
@@ -43,7 +43,7 @@ describe ResultsController do
   describe "GET scores" do
     let(:competition) { FactoryGirl.create(:competition, :combined) }
     it "renders" do
-      get :scores, id: competition.id
+      get :scores, params: { id: competition.id }
       expect(response).to be_success
     end
   end

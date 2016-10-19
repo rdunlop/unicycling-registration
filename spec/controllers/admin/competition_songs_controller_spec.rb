@@ -15,14 +15,14 @@ describe Admin::CompetitionSongsController do
     end
 
     it "doesn't have permission" do
-      get :show, competition_id: competition.id
+      get :show, params: { competition_id: competition.id }
       expect(response).to redirect_to(root_url)
     end
   end
 
   describe "GET show" do
     it "views the songs list index" do
-      get :show, competition_id: competition.id
+      get :show, params: { competition_id: competition.id }
       expect(response).to be_success
     end
   end
@@ -33,7 +33,7 @@ describe Admin::CompetitionSongsController do
     let(:song) { FactoryGirl.create(:song) }
 
     it "assigns the competitor to the song" do
-      post :create, competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id
+      post :create, params: { competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id }
       expect(song.reload.competitor).to eq(competitor)
     end
 
@@ -41,7 +41,7 @@ describe Admin::CompetitionSongsController do
       let!(:old_song) { FactoryGirl.create(:song, competitor: competitor) }
 
       it "un-assigns, and assigns to a new song" do
-        post :create, competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id
+        post :create, params: { competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id }
         expect(song.reload.competitor).to eq(competitor)
         expect(old_song.reload.competitor).to be_nil
       end
@@ -53,7 +53,8 @@ describe Admin::CompetitionSongsController do
     let!(:song) { FactoryGirl.create(:song, competitor: competitor) }
 
     it "loads all songs" do
-      get :download_zip, competition_id: competition.to_param
+      get :download_zip, params: { competition_id: competition.to_param }
+
       expect(response).to be_success
     end
   end

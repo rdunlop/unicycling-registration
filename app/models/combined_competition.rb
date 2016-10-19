@@ -15,7 +15,7 @@
 #  index_combined_competitions_on_name  (name) UNIQUE
 #
 
-class CombinedCompetition < ActiveRecord::Base
+class CombinedCompetition < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :calculation_mode, presence: true
   CALCULATION_MODES = ['default', 'percentage', 'average_speed'].freeze

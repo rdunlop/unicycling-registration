@@ -22,7 +22,7 @@ describe ConventionSetup::Migrate::MigrationsController do
     end
 
     it "can copy the events" do
-      post :create_events, tenant: "other"
+      post :create_events, params: { tenant: "other" }
       expect(Event.count).to eq(1)
     end
   end

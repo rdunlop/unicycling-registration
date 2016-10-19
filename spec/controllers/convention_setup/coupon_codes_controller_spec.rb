@@ -19,20 +19,24 @@ describe ConventionSetup::CouponCodesController do
   end
 
   describe "GET index" do
-    it "assigns all coupon_codes as @coupon_codes" do
+    it "shows all coupon_codes" do
       coupon_code = FactoryGirl.create(:coupon_code)
-      get :index, {}
+      get :index
       expect(response).to be_success
-      expect(assigns(:coupon_codes)).to eq([coupon_code])
+
+      assert_select "td", coupon_code.code
     end
   end
 
   describe "GET edit" do
-    it "assigns coupon_code as @coupon_code" do
+    it "shows the coupon_code form" do
       coupon_code = FactoryGirl.create(:coupon_code)
-      get :edit, id: coupon_code.id
+      get :edit, params: { id: coupon_code.id }
       expect(response).to be_success
-      expect(assigns(:coupon_code)).to eq(coupon_code)
+
+      assert_select "form", action: edit_coupon_code_path(coupon_code), method: "put" do
+        assert_select "input#coupon_code_code", name: "coupon_code[code]"
+      end
     end
   end
 
@@ -42,7 +46,7 @@ describe ConventionSetup::CouponCodesController do
 
       it "creates a new CouponCode" do
         expect do
-          post :create, coupon_code: valid_attributes
+          post :create, params: { coupon_code: valid_attributes }
         end.to change(CouponCode, :count).by(1)
       end
     end
@@ -53,7 +57,7 @@ describe ConventionSetup::CouponCodesController do
     let(:new_valid_attributes) { FactoryGirl.attributes_for(:coupon_code) }
 
     it "updates the coupon code" do
-      put :update, id: coupon_code.to_param, coupon_code: new_valid_attributes
+      put :update, params: { id: coupon_code.to_param, coupon_code: new_valid_attributes }
       expect(coupon_code.reload.name).to eq(new_valid_attributes[:name])
     end
   end
@@ -63,7 +67,7 @@ describe ConventionSetup::CouponCodesController do
 
     it "deletes the object" do
       expect do
-        delete :destroy, id: coupon_code.to_param
+        delete :destroy, params: { id: coupon_code.to_param }
       end.to change(CouponCode, :count).by(-1)
     end
   end

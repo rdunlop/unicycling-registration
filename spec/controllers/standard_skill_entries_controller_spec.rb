@@ -30,8 +30,11 @@ describe StandardSkillEntriesController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      get 'index'
+      FactoryGirl.create(:standard_skill_entry, description: "first skill")
+      get :index
       expect(response).to be_success
+
+      assert_match(/first skill/, response.body)
     end
   end
 end

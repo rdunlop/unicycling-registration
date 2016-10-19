@@ -62,7 +62,7 @@ class JudgesController < ApplicationController
     else
       @judge.update_attribute(:status, "active")
     end
-    redirect_to :back
+    redirect_back(fallback_location: result_competition_path(@judge.competition))
   end
 
   # DELETE /judges/1

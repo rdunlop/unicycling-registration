@@ -169,6 +169,26 @@ describe Competitor do
   it "should be elgiible" do
     expect(@comp.ineligible?).to eq(false)
   end
+
+  describe "when event configuration defines the start date of convention" do
+    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 1, 1)) }
+
+    it "should have updated age when a members age is updated" do
+      registrant = @comp.members.first.registrant
+      expect(@comp.age).to eq(registrant.age)
+
+      # to burst the cache on Competitor#age
+      travel 2.seconds do
+        expect do
+          registrant.birthday -= 2.years
+          registrant.save
+        end.to change{ registrant.reload.age }
+      end
+
+      expect(@comp.reload.age).to eq(registrant.age)
+    end
+  end
+
   it "should not set the external name if it is a blank-string" do
     @comp.custom_name = ""
     reg = @comp.registrants.first
@@ -211,19 +231,18 @@ describe Competitor do
     end
   end
 
-  it "should have a name, even without any registrants" do
-    member = @comp.members(true).first
+  it "should delete the competitor if the last member is deleted" do
+    member = @comp.reload.members.first
 
-    member.destroy
-    @comp.reload
-    expect(@comp.name).to eq("(No registrants)")
-    expect(@comp.bib_number).to eq("(No registrants)")
+    expect do
+      member.destroy
+    end.to change(Competitor, :count).by(-1)
   end
 
   describe "when it has multiple members" do
     before(:each) do
       FactoryGirl.create(:event_configuration, start_date: Date.new(2010, 1, 1))
-      member = @comp.members(true).first
+      member = @comp.reload.members.first
       @reg1 = member.registrant
 
       travel 2.seconds do
@@ -419,13 +438,13 @@ describe Competitor do
       da2 = FactoryGirl.create(:distance_attempt, distance: 2, competitor: @comp, fault: false)
       da3 = FactoryGirl.create(:distance_attempt, distance: 3, competitor: @comp, fault: false)
 
-      expect(@comp.distance_attempts).to eq([da3, da2, da1])
+      expect(@comp.reload.distance_attempts).to eq([da3, da2, da1])
     end
     it "should return the attempts in descending attempt order (if the same distance)" do
       da1 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: true)
       da2 = FactoryGirl.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
 
-      expect(@comp.distance_attempts).to eq([da2, da1])
+      expect(@comp.reload.distance_attempts).to eq([da2, da1])
     end
 
     it "should describe the status clearly" do
@@ -519,7 +538,7 @@ describe Competitor do
 
   describe "with an ineligible registrant" do
     before(:each) do
-      @reg = @comp.registrants(true).first
+      @reg = @comp.reload.registrants.first
       @reg.ineligible = true
       @reg.save!
     end

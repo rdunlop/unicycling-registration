@@ -17,7 +17,7 @@
 #  index_tie_break_adjustments_on_competitor_id_and_judge_id  (competitor_id,judge_id) UNIQUE
 #
 
-class TieBreakAdjustment < ActiveRecord::Base
+class TieBreakAdjustment < ApplicationRecord
   include Competeable
 
   belongs_to :judge

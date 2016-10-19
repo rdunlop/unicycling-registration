@@ -10,7 +10,7 @@
 #  info_page_id :integer
 #
 
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   include CachedModel
   include PageOrUrlLink
 

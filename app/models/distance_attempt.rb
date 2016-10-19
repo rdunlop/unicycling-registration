@@ -16,7 +16,7 @@
 #  index_distance_attempts_judge_id       (judge_id)
 #
 
-class DistanceAttempt < ActiveRecord::Base
+class DistanceAttempt < ApplicationRecord
   include Competeable
   include Placeable
   include CachedSetModel
@@ -50,7 +50,7 @@ class DistanceAttempt < ActiveRecord::Base
     if new_record?
       unless competitor.nil? || distance.nil?
         unless competitor.acceptable_distance?(distance)
-          errors[:distance] << competitor.acceptable_distance_error(distance)
+          errors.add(:distance, competitor.acceptable_distance_error(distance))
         end
       end
     end
@@ -59,8 +59,8 @@ class DistanceAttempt < ActiveRecord::Base
   def cannot_have_new_attempts_after_certain_jumps
     if new_record?
       unless competitor.nil? || distance.nil?
-        if competitor(true).no_more_jumps?
-          errors[:base] << "Unable to make new attempts - #{competitor.distance_attempt_status}"
+        if competitor.reload.no_more_jumps?
+          errors.add(:base, "Unable to make new attempts - #{competitor.distance_attempt_status}")
         end
       end
     end

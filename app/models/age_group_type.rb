@@ -13,7 +13,7 @@
 #  index_age_group_types_on_name  (name) UNIQUE
 #
 
-class AgeGroupType < ActiveRecord::Base
+class AgeGroupType < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   has_many :age_group_entries, -> {order "age_group_entries.position"}, dependent: :destroy, inverse_of: :age_group_type

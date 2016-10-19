@@ -16,7 +16,7 @@
 #  index_wave_times_on_competition_id_and_wave  (competition_id,wave) UNIQUE
 #
 
-class WaveTime < ActiveRecord::Base
+class WaveTime < ApplicationRecord
   validates :wave, :competition, :minutes, :seconds, presence: true
   validates :minutes, :seconds, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 

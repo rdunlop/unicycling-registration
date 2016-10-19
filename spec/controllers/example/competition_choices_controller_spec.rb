@@ -49,7 +49,7 @@ describe Example::CompetitionChoicesController do
     end
 
     it "can download a file" do
-      get :download_file, filename: "heat_01.lif"
+      get :download_file, params: { filename: "heat_01.lif" }
       expect(response).to be_success
     end
   end
@@ -68,7 +68,7 @@ describe Example::CompetitionChoicesController do
     end
 
     it "can download a file" do
-      get :download_file, filename: "heat_01.lif"
+      get :download_file, params: { filename: "heat_01.lif" }
       expect(response).to be_success
     end
   end
