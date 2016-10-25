@@ -4,7 +4,7 @@ class ExportPolicy < ApplicationPolicy
   end
 
   def download_competitors_for_timers?
-    user.has_role?(:race_official, :any) || super_admin?
+    user.has_role?(:race_official, :any) || competition_admin? || super_admin?
   end
 
   # This link is on the Registration Overview page
