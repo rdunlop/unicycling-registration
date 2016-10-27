@@ -34,6 +34,10 @@ describe AgeGroupType do
       expect(@agt.age_group_entry_for(-1, "Male")).to be_nil
     end
 
+    it "returns mixed_gender_age_groups?" do
+      expect(@agt.mixed_gender_age_groups?).to be_falsey
+    end
+
     it "can return the correct age_group_entry for a given age" do
       expect(@agt.age_group_entry_for(10, "Male")).to eq(@age1)
     end
@@ -71,6 +75,20 @@ describe AgeGroupType do
       it "puts the rider on a 24\" wheel in the correct age group" do
         expect(@agt.age_group_entry_for(10, "Male", @ws24)).to eq(@age1b)
       end
+    end
+  end
+
+  describe "with a mixed-age-group entry" do
+    before(:each) do
+      @agt = FactoryGirl.create(:age_group_type)
+      # This is an unexpected combination of Male and Mixed, used for testing
+      # to ensure that "Mixed" wins.
+      @age1 = FactoryGirl.create(:age_group_entry, age_group_type: @agt, start_age: 0, end_age: 10, gender: "Male")
+      @age2 = FactoryGirl.create(:age_group_entry, age_group_type: @agt, start_age: 11, end_age: 100, gender: "Mixed")
+    end
+
+    it "returns mixed_gender_age_groups?" do
+      expect(@agt.mixed_gender_age_groups?).to be_truthy
     end
   end
 

@@ -38,6 +38,10 @@ class AgeGroupType < ApplicationRecord
     end
   end
 
+  def mixed_gender_age_groups?
+    age_group_entries.pluck(:gender).include?("Mixed")
+  end
+
   def age_group_entries_by_age_gender
     age_group_entries.reorder(:gender, :start_age)
   end

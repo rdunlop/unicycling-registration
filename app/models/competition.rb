@@ -336,6 +336,8 @@ class Competition < ApplicationRecord
     age_group_type.age_group_entries unless age_group_type.nil?
   end
 
+  delegate :mixed_gender_age_groups?, to: :age_group_type, allow_nil: true
+
   def registrant_age_group_data
     registrants.reorder(nil).select(:age, :gender, :wheel_size_id).group(:age, :gender, :wheel_size_id).count(:age).map do |element, count|
       {
