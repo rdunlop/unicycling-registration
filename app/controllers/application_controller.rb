@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   # Is this domain marked as the Translations Domain
   # NOTE: This logic is duplicated in tolk.rb initializer
   def translation_domain?
-    @tenant.subdomain == Rails.application.secrets.translations_subdomain
+    @tenant.try(:subdomain) == Rails.application.secrets.translations_subdomain
   end
 
   # so that devise routes are properly including the locale
