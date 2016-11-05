@@ -2,6 +2,7 @@ class ErrorsController < ApplicationController
   include Gaffe::Errors
   before_action :skip_authorization
   before_action :set_default_content_type
+  skip_before_action :load_tenant
 
   def not_found
     if @tenant.try(:persisted?)

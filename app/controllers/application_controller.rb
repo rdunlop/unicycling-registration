@@ -64,8 +64,6 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def load_tenant
-    return if Apartment::Tenant.current == "public"
-
     @tenant = Tenant.find_by(subdomain: Apartment::Tenant.current)
     if @tenant.nil?
       redirect_to tenants_path, flash: { alert: "Invalid subdomain" }
