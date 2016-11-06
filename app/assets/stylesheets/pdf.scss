@@ -11,6 +11,14 @@
  *= require_self
  */
 .page-break { display:block; clear:both; page-break-after:always; }
+
+// the following 3 lines are required in wkpdfhtml 0.12+ due to a problem
+// when a table crosses page boundaries. The header would overlap the content.
+// This is a fix found on https://github.com/wkhtmltopdf/wkhtmltopdf/issues/1770
+thead { display: table-header-group }
+tfoot { display: table-row-group }
+tr { page-break-inside: avoid }
+
 @media all
 {
   /* this allows the pdf to render the font, since 'Open Sans' doesn't seem to work */

@@ -11,7 +11,10 @@
 
 @include foundation-global-styles;
 @include foundation-grid;
+
+// I would like to disable foundation-typography this because adding it seems to break other styling in PDF view
 @include foundation-typography;
+
 @include foundation-button;
 @include foundation-forms;
 @include foundation-visibility-classes;
