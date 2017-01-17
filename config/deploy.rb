@@ -1,5 +1,3 @@
-lock '3.6.1'
-
 set :eye_env, -> { {rails_env: fetch(:rails_env)} }
 set :application, 'unicycling-registration'
 set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
