@@ -87,7 +87,7 @@ gem 'faker' # to support 'sample_data'
 gem 'pg'
 
 # deployment
-gem 'capistrano'
+gem 'capistrano', '=3.6.1' # 3.7.1 seems to cause a deploy error on production (strategy)
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'
