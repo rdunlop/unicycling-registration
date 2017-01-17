@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
       current_user,
       EventConfiguration.singleton,
       EventConfiguration.closed?,
+      EventConfiguration.singleton.new_registration_closed?,
       allow_reg_modifications?,
       translation_domain?
     )

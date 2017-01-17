@@ -77,6 +77,7 @@ en:
       event_configuration:
         accept_rules: "Force all registrants to accept the rules attached in PDF"
         spectators: Spectators are not charged "Registration Fees", and can buy items without paying for registration
+        max_registrants: Users will be unable to create new registrations once this number of (unpaid or paid) registrants exist. Specify 0 to disable this feature.
         competitor_benefits: "Appears on the Registration Homepage, describing the benefits of Competitor Registration"
         noncompetitor_benefits: "Appears on the Registration Homepage, describing the benefits of NonCompetitor Registration"
         spectator_benefits: "Appears on the Registration Homepage, describing the benefits of Spectator Registration"

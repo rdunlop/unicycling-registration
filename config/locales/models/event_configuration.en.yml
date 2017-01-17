@@ -26,6 +26,7 @@ en:
         competitor: Competitor
         noncompetitor: Non-Competitor
         spectator: Spectator
+        max_registrants: Maximum Total Number of Registrants
         comp_noncomp_page_id: "Competitor vs Non-Competitor description Page"
         rules_file_name: Rules File PDF
         accept_rules: Must Accept Rules

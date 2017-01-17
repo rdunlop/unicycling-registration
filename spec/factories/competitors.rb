@@ -8,7 +8,7 @@
 #  custom_name              :string(255)
 #  created_at               :datetime
 #  updated_at               :datetime
-#  status                   :integer          default(0)
+#  status                   :integer          default("active")
 #  lowest_member_bib_number :integer
 #  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer

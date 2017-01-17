@@ -46,6 +46,7 @@
 #  request_responsible_adult                     :boolean          default(TRUE), not null
 #  registrants_should_specify_default_wheel_size :boolean          default(TRUE), not null
 #  add_event_end_date                            :datetime
+#  max_registrants                               :integer          default(0), not null
 #
 
 require 'spec_helper'

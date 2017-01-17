@@ -7,3 +7,4 @@ en:
         subheader: Registrant Types
         offered_types: Registration Types Available
         noncompetitor_description: "Non-Competitors cannot sign up for events"
+        current_num_registrants: There are currently %{num} registrants

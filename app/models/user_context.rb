@@ -1,10 +1,11 @@
 class UserContext
-  attr_reader :user, :config, :reg_closed, :authorized_laptop, :translation_domain
+  attr_reader :user, :config, :reg_closed, :new_reg_closed, :authorized_laptop, :translation_domain
 
-  def initialize(user, config, reg_closed, authorized_laptop, translation_domain = false)
+  def initialize(user, config, reg_closed, new_reg_closed, authorized_laptop, translation_domain = false)
     @user = user
     @config = config
     @reg_closed = reg_closed
+    @new_reg_closed = new_reg_closed
     @authorized_laptop = authorized_laptop
     @translation_domain = translation_domain
   end

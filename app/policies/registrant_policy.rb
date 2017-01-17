@@ -1,7 +1,7 @@
 class RegistrantPolicy < ApplicationPolicy
   # create a new registrant
   def create?
-    (user_record? && !registration_closed?) || super_admin?
+    (user_record? && !new_registration_closed?) || super_admin?
   end
 
   def duplicate_registrant?

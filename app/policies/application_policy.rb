@@ -1,5 +1,5 @@
 class ApplicationPolicy
-  attr_reader :user, :record, :reg_closed, :authorized_laptop, :translation_domain
+  attr_reader :user, :record, :reg_closed, :new_reg_closed, :authorized_laptop, :translation_domain
   attr_reader :config
 
   def initialize(user_context, record)
@@ -7,6 +7,7 @@ class ApplicationPolicy
       @user = user_context.user
       @config = user_context.config
       @reg_closed = user_context.reg_closed
+      @new_reg_closed = user_context.new_reg_closed
       @authorized_laptop = user_context.authorized_laptop
       @translation_domain = user_context.translation_domain
     else
@@ -15,6 +16,7 @@ class ApplicationPolicy
       @user = user_context
       @config = OpenStruct.new(music_submission_ended?: true, wheel_size_configuration_max_age: 10)
       @reg_closed = false
+      @new_reg_closed = false
       @authorized_laptop = false
     end
 
@@ -145,9 +147,14 @@ class ApplicationPolicy
     Event.standard_skill_events.any? { |event| director?(event) }
   end
 
+  # Allows to modify your own records as long as you're a `late_registrant` or registration is still open
   def registration_closed?
-    # Allows to modify your own records as long as you're a `late_registrant` or registration is still open
     reg_closed && !authorized_laptop && !late_registrant?
+  end
+
+  # are new registrations allowed
+  def new_registration_closed?
+    new_reg_closed && !authorized_laptop && !late_registrant?
   end
 
   def scope

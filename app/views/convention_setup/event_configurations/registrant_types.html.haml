@@ -16,6 +16,11 @@
 
     = f.input :spectators
 
+    %hr
+    = f.input :max_registrants
+    = t(".current_num_registrants", num: Registrant.not_deleted.count)
+    %hr
+
     = f.input :comp_noncomp_url, input_html: { class: "js--fancyboxUrl" }
     = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
     = f.input :comp_noncomp_page_id, collection: Page.ordinary

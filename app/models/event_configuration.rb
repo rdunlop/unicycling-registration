@@ -46,6 +46,7 @@
 #  request_responsible_adult                     :boolean          default(TRUE), not null
 #  registrants_should_specify_default_wheel_size :boolean          default(TRUE), not null
 #  add_event_end_date                            :datetime
+#  max_registrants                               :integer          default(0), not null
 #
 
 class EventConfiguration < ApplicationRecord
@@ -95,6 +96,8 @@ class EventConfiguration < ApplicationRecord
 
   validates :artistic_score_elimination_mode_naucc, inclusion: { in: [true, false] }
   validates :max_award_place, presence: true
+  validates :max_registrants, presence: true
+  validates :max_registrants, numericality: {greater_than_or_equal_to: 0}
 
   def self.organization_membership_types
     ["usa", "french_federation"]
@@ -258,6 +261,13 @@ class EventConfiguration < ApplicationRecord
     return true if under_construction?
     # allow 1 day of grace to registration_closed_date
     is_date_in_the_past?(registration_closed_date)
+  end
+
+  def new_registration_closed?
+    return true if registration_closed?
+    return false if max_registrants == 0
+
+    Registrant.not_deleted.count.count < max_registrants
   end
 
   def standard_skill_closed?

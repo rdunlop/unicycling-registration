@@ -9,6 +9,10 @@
 #  updated_at         :datetime
 #  admin_upgrade_code :string(255)
 #
+# Indexes
+#
+#  index_tenants_on_subdomain  (subdomain)
+#
 
 require 'spec_helper'
 

@@ -10,6 +10,11 @@
 #  updated_at     :datetime
 #  verified       :boolean          default(FALSE), not null
 #
+# Indexes
+#
+#  index_tenant_aliases_on_tenant_id_and_primary_domain  (tenant_id,primary_domain)
+#  index_tenant_aliases_on_website_alias                 (website_alias)
+#
 
 class TenantAlias < ApplicationRecord
   validates :website_alias, :tenant, presence: true

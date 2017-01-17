@@ -146,9 +146,10 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_associated :registrant_expense_items
   validate :has_necessary_free_items, if: :validated?
 
-  scope :active_or_incomplete, -> { where(deleted: false).order(:bib_number) }
+  scope :active_or_incomplete, -> { not_deleted.order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
   scope :started, -> { where.not(status: "blank").active_or_incomplete}
+  scope :not_deleted, -> { where(deleted: false) }
 
   def spectator?
     registrant_type == 'spectator'

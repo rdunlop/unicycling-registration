@@ -5,7 +5,7 @@ describe SampleDataPolicy do
   let(:config) { FactoryGirl.create(:event_configuration, test_mode: test_mode) }
   let(:reg_closed?) { false }
   let(:authorized_laptop?) { false }
-  let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
+  let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
 
   subject { described_class }
 

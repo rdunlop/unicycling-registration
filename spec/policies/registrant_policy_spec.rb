@@ -26,18 +26,40 @@ describe RegistrantPolicy do
 
   permissions :create? do
     let(:reg_closed?) { false }
+    let(:new_reg_closed?) { false }
     let(:authorized_laptop?) { false }
     let(:user) { my_user }
-    let(:user_context) { UserContext.new(user, false, reg_closed?, authorized_laptop?) }
+    let(:user_context) { UserContext.new(user, false, reg_closed?, new_reg_closed?, authorized_laptop?) }
 
     describe "while registration is open" do
       it "allows creation" do
         expect(subject).to permit(user_context, my_registrant)
       end
+
+      context "but new_reg is closed" do
+        let(:new_reg_closed?) { true }
+
+        it "disallows creation" do
+          expect(subject).not_to permit(user_context, my_registrant)
+        end
+
+        describe "on an authorized laptop" do
+          let(:authorized_laptop?) { true }
+
+          it { expect(subject).to permit(user_context, my_registrant) }
+        end
+
+        describe "as a super_admin" do
+          let(:user) { FactoryGirl.create(:super_admin_user) }
+
+          it { expect(subject).to permit(user_context, my_registrant) }
+        end
+      end
     end
 
     describe "when registration is closed" do
       let(:reg_closed?) { true }
+      let(:new_reg_closed?) { true }
 
       describe "on a normal laptop" do
         it { expect(subject).not_to permit(user_context, my_registrant) }
@@ -112,7 +134,7 @@ describe RegistrantPolicy do
     let(:user) { my_user }
     let(:event_sign_up_closed?) { false }
     let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "generic", wheel_size_configuration_max_age: 10) }
-    let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
+    let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
 
     permissions :add_volunteers? do
       describe "when event_configuration has volunteers set by default" do

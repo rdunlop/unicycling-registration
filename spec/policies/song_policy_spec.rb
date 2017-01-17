@@ -12,7 +12,7 @@ describe SongPolicy do
     let(:user) { my_user }
     let(:reg_closed?) { false }
     let(:authorized_laptop?) { false }
-    let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
+    let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
 
     it "can update my own song" do
       expect(subject).to permit(user_context, my_song)

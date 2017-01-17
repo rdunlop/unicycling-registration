@@ -9,6 +9,10 @@
 #  updated_at         :datetime
 #  admin_upgrade_code :string(255)
 #
+# Indexes
+#
+#  index_tenants_on_subdomain  (subdomain)
+#
 
 class Tenant < ApplicationRecord
   validates :subdomain, :description, :admin_upgrade_code, presence: true

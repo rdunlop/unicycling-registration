@@ -34,7 +34,7 @@ describe StandardSkillRoutinePolicy do
     let(:user) { my_user }
     let(:standard_skill_closed?) { false }
     let(:config) { double(standard_skill_closed?: standard_skill_closed?) }
-    let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
+    let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
 
     permissions :create? do
       it { expect(subject).to permit(user_context, my_routine) }

@@ -3,7 +3,7 @@ require "spec_helper"
 describe PaymentPolicy do
   let(:user) { FactoryGirl.create(:user) }
   let(:my_payment) { FactoryGirl.build(:payment, user: user) }
-  let(:user_context) { UserContext.new(user, config, reg_closed?, authorized_laptop?) }
+  let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
   let(:reg_closed?) { false }
   let(:authorized_laptop?) { false }
 
