@@ -267,7 +267,7 @@ class EventConfiguration < ApplicationRecord
     return true if registration_closed?
     return false if max_registrants == 0
 
-    Registrant.not_deleted.count < max_registrants
+    Registrant.not_deleted.count >= max_registrants
   end
 
   def standard_skill_closed?

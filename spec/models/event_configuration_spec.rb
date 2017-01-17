@@ -222,6 +222,33 @@ describe EventConfiguration do
     expect(@ev.registration_closed?).to be_truthy
   end
 
+  describe "#new_registration_closed" do
+    let(:ev) { EventConfiguration.new(under_construction: false) }
+    before do
+      ev.event_sign_up_closed_date = Date.new(2013, 5, 1)
+    end
+
+    it "should be closed if registration_closed?" do
+      travel_to(Date.new(2013, 5, 4)) do
+        expect(ev.registration_closed?).to be_truthy
+        expect(ev.new_registration_closed?).to be_truthy
+      end
+    end
+
+    it "should be closed if the number of registrants is >= the max_limit" do
+      FactoryGirl.create(:competitor)
+
+      travel_to(Date.new(2013, 5, 1)) do
+        expect(ev.registration_closed?).to be_falsy
+        ev.max_registrants = 1
+        expect(ev.new_registration_closed?).to be_truthy
+
+        FactoryGirl.create(:competitor)
+        expect(ev.new_registration_closed?).to be_truthy
+      end
+    end
+  end
+
   it "should NOT have standard_skill_closed by default " do
     travel_to(Date.new(2013, 1, 1)) do
       expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
