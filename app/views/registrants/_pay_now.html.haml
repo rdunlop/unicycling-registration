@@ -1,6 +1,6 @@
 - return if total_owing == 0.to_money
 .registrations_box
-  - if policy(current_user).create_payments?
+  - if policy(Payment).new?
     .payment_process
       = link_to t(".pay_now"), new_payment_path, :class => "payment_link"
     = render "registration_costs/prices_increase"

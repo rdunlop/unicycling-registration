@@ -8,10 +8,6 @@ class UserPolicy < ApplicationPolicy
     record == user || super_admin?
   end
 
-  def create_payments?
-    !registration_closed? || super_admin?
-  end
-
   # view all registrant-information
   def registrant_information?
     event_planner? || super_admin?
