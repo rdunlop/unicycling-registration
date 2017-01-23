@@ -3,7 +3,10 @@
   = t(".registration")
 = render "additional_registrant_access_banners"
 
-= render "reg_closed_banner" if EventConfiguration.closed?
+- if EventConfiguration.under_construction?
+  = render "reg_under_construction"
+- elsif EventConfiguration.closed?
+  = render "reg_closed_banner"
 
 - if policy(@registrant).create? # until registration is closed
   - if @config.additional_info?

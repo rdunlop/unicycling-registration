@@ -228,6 +228,10 @@ class EventConfiguration < ApplicationRecord
     singleton.registration_closed?
   end
 
+  def self.under_construction?
+    singleton.under_construction?
+  end
+
   def registration_closed_date
     reg_cost_closed_date = RegistrationCost.for_type("competitor").last_online_period.try(:end_date).try(:+, 1.day)
     reg_cost_closed_date || event_sign_up_closed_date.try(:+, 1.day)
