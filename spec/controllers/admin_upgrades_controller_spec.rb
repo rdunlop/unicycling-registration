@@ -23,7 +23,7 @@ describe AdminUpgradesController do
 
     context "with correct code" do
       it "upgrades user" do
-        post :create, params: { access_code: FactoryGirl.attributes_for(:tenant)[:admin_upgrade_code] }
+        post :create, params: { access_code: "TEST_UPGRADE_CODE" }
         expect(user.reload.has_role?(:convention_admin)).to be_truthy
       end
     end
