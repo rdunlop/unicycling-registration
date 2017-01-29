@@ -12,7 +12,7 @@
   .row
     .small-12.medium-4.columns
       = f.label :user_id, User.model_name.human
-      = f.select :user_id, User.all.map { |user| [user.email, user.id] }, { include_blank: true }, class: 'chosen-select'
+      = f.select :user_id, User.this_tenant.all.map { |user| [user.email, user.id] }, { include_blank: true }, class: 'chosen-select'
     .small-12.medium-4.columns
       = f.label :name, User.human_attribute_name(:name)
       = f.text_field :name

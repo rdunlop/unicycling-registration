@@ -101,7 +101,7 @@ class Event < ApplicationRecord
   end
 
   def directors
-    User.with_role(:director, self)
+    User.this_tenant.with_role(:director, self)
   end
 
   # determine the number of people who have signed up for this event

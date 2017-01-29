@@ -36,7 +36,7 @@
       - @available_roles.each do |role|
         %th= role.to_s.humanize
   %tbody
-    - User.with_any_role(*@available_roles).each do |user|
+    - User.this_tenant.with_any_role(*@available_roles).each do |user|
       %tr
         %th= user
         - @available_roles.each do |role|
@@ -51,7 +51,7 @@
       %h3= t(".add_new_permission")
       = form_tag(set_role_permissions_path, { :method => :put}) do
         = label_tag :user_id, User.model_name.human
-        = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true , class: "chosen-select"
+        = select_tag :user_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s"), include_blank: true , class: "chosen-select"
         %br
         = label_tag :role_name, Role.model_name.human
         = select_tag :role_name, options_for_select(@available_roles), include_blank: true
@@ -64,7 +64,7 @@
         %h3= t(".set_password")
         = form_tag(set_password_permissions_path, { :method => :put}) do
           = label_tag :user_id, User.model_name.human
-          = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
+          = select_tag :user_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s"), include_blank: true, class: "chosen-select"
           %br
           = label_tag :password
           = text_field_tag :password

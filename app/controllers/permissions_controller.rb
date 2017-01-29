@@ -37,7 +37,7 @@ class PermissionsController < ApplicationController
     reg = Registrant.find(registrant_id)
     user = reg.additional_registrant_accesses.map(&:user).find(&:guest?)
     return user if user
-    user ||= User.create(name: "guest", guest: true, confirmed_at: Time.current, email: "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com")
+    user ||= User.this_tenant.create(name: "guest", guest: true, confirmed_at: Time.current, email: "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com")
     user.save!(validate: false)
     access = user.additional_registrant_accesses.build(accepted_readwrite: true, registrant: reg)
     access.save!

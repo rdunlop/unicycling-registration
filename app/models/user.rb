@@ -61,6 +61,7 @@ class User < ApplicationRecord
 
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
+  scope :this_tenant, -> { joins(:user_conventions).merge(UserConvention.where(subdomain: Apartment::Tenant.current)) }
 
   def touch_for_role(_role)
     touch
@@ -79,7 +80,7 @@ class User < ApplicationRecord
   end
 
   def self.paid_reg_fees
-    User.confirmed.all_with_registrants - User.unpaid_reg_fees
+    User.this_tenant.confirmed.all_with_registrants - User.this_tenant.unpaid_reg_fees
   end
 
   # NOTE: When adding roles Please be sure to add a description in the permissions/index.en.yml

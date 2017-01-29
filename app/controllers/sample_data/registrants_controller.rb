@@ -22,7 +22,7 @@ class SampleData::RegistrantsController < SampleData::BaseController
         ineligible: false,
         rules_accepted: true,
         online_waiver_acceptance: true,
-        user: User.first
+        user: User.this_tenant.first
       )
       ContactDetail.create!(
         registrant: registrant,

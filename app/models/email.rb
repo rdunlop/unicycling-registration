@@ -57,13 +57,13 @@ class Email
 
   def filtered_users
     if confirmed_accounts
-      User.confirmed
+      User.this_tenant.confirmed
     elsif paid_reg_accounts
-      User.paid_reg_fees
+      User.this_tenant.paid_reg_fees
     elsif unpaid_reg_accounts
-      User.unpaid_reg_fees
+      User.this_tenant.unpaid_reg_fees
     elsif no_reg_accounts
-      (User.confirmed - User.all_with_registrants)
+      (User.this_tenant.confirmed - User.this_tenant.all_with_registrants)
     elsif non_confirmed_organization_members
       Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.all.reject(&:organization_membership_confirmed?).map(&:user).compact.uniq
     elsif competitions.any?

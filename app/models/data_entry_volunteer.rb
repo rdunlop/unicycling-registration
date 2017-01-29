@@ -14,7 +14,7 @@ class DataEntryVolunteer
       send("#{name}=", value)
     end
     if user_id
-      self.user = User.find(user_id)
+      self.user = User.this_tenant.find(user_id)
     else
       self.user ||= User.new
     end

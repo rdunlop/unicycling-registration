@@ -202,7 +202,7 @@ class ImportResultsController < ApplicationController
   end
 
   def load_user
-    @user = User.find(params[:user_id])
+    @user = User.this_tenant.find(params[:user_id])
   end
 
   def load_competition
