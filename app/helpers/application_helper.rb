@@ -2,6 +2,20 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   include ActionView::Helpers::NumberHelper
   include LanguageHelper
 
+  # Devise method invoked after login
+  # ensures that the user has a UserConvention record for the current subdomain
+  def after_sign_in_path_for(user)
+    # Check to see that the user has a user_convention record after they have signed in
+    subdomain = Apartment::Tenant.current
+    unless user.user_conventions.where(subdomain: subdomain).any?
+      flash[:notice] = t("application.subdomain.welcome", subdomain: subdomain)
+      # welcome: Welcome to %{subdomain}
+      user.user_conventions.create!(subdomain: subdomain)
+    end
+
+    super
+  end
+
   def load_config_object_and_i18n
     @config = EventConfiguration.singleton
     set_fallbacks

@@ -18,6 +18,8 @@
           = f.text_field :name
     %fieldset
       %legend= t(".change_password")
+      %p
+        = render "devise/shared/password_warning", user: resource
       .row
         .small-3.columns.text-right
           = f.label :password

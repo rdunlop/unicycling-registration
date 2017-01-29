@@ -3,5 +3,5 @@ en:
   devise:
     sessions:
       new:
-        action: Log in
+        action: Log in to Unicycling Registration
         use_access_code: Use an access code
