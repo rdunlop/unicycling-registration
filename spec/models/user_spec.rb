@@ -32,7 +32,7 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user, password: "base_password", password_confirmation: "base_password")
   end
 
   it "can be created by factory girl" do
@@ -118,6 +118,45 @@ describe User do
 
     it "lists them in alphabetical order" do
       expect(User.all).to eq([@a, @b, @c, @user])
+    end
+  end
+
+  context "with user_convention" do
+    let(:encrypted_password) { Devise::Encryptor.digest(User, "legacy_password") }
+    let(:subdomain) { Apartment::Tenant.current }
+    let!(:user_convention) do
+      FactoryGirl.create(:user_convention,
+                         user: @user,
+                         legacy_encrypted_password: encrypted_password,
+                         subdomain: subdomain)
+    end
+
+    it "is valid with legacy password" do
+      expect(@user.valid_password?("legacy_password")).to be_truthy
+    end
+
+    it "is valid with original password" do
+      expect(@user.valid_password?("base_password")).to be_truthy
+    end
+
+    it "does not allow blank password" do
+      expect(@user.valid_password?(nil)).to be_falsey
+    end
+
+    context "when the only sign in is for a different subdomain" do
+      let(:subdomain) { "other" }
+
+      it "is NOT valid with legacy password" do
+        expect(@user.valid_password?("legacy_password")).to be_falsey
+      end
+    end
+
+    context "when the user_convention has no legacy password" do
+      let!(:user_convention) { FactoryGirl.create(:user_convention, user: @user, legacy_encrypted_password: nil) }
+
+      it "does not allow blank password" do
+        expect(@user.valid_password?(nil)).to be_falsey
+      end
     end
   end
 end

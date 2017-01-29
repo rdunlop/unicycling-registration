@@ -57,6 +57,7 @@ class User < ApplicationRecord
   has_many :import_results
   has_many :award_labels
   has_many :songs
+  has_many :user_conventions
 
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
@@ -168,5 +169,14 @@ class User < ApplicationRecord
   # This overrides the devise:confirmable method to ensure no users require confirmation
   def confirmation_required?
     !Rails.env.stage?
+  end
+
+  # Allow user to sign in with a legacy_password
+  def valid_password?(password)
+    return true if super(password)
+
+    user_conventions.where(subdomain: Apartment::Tenant.current).any? do |user_convention|
+      Devise::Encryptor.compare(self.class, user_convention.legacy_encrypted_password, password)
+    end
   end
 end
