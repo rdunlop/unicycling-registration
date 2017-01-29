@@ -4,6 +4,8 @@ Rails.application.configure do
     Bullet.bullet_logger = true
   end
 
+  config.log_tags = [:subdomain]
+
   config.action_mailer.default_url_options = { host: 'localhost:9292' }
   # Settings specified here will take precedence over those in config/application.rb.
 
