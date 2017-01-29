@@ -23,7 +23,12 @@ describe GlobalUserMigrator do
       global_user = GlobalUserMigrator::GlobalUser.first
       attributes = user.attributes.reject{|key, _| key == "id" }
       attributes.keys.each do |attribute|
-        expect(global_user.send(attribute)).to eq(user.send(attribute))
+        value = global_user.send(attribute)
+        if value.is_a?(ActiveSupport::TimeWithZone)
+          expect(value).to match_microseconds(user.send(attribute))
+        else
+          expect(value).to eq(user.send(attribute))
+        end
       end
     end
   end
@@ -148,35 +153,35 @@ describe GlobalUserMigrator do
 
       context "when the global_user has BETTER attributes at every turn" do
         let(:ga_reset_password_token) { "ga_reset_password_token" }
-        let(:ga_reset_password_sent_at) { DateTime.now }
-        let(:ga_remember_created_at) { DateTime.now }
+        let(:ga_reset_password_sent_at) { DateTime.now.in_time_zone }
+        let(:ga_remember_created_at) { DateTime.now.in_time_zone }
         let(:ga_sign_in_count) { 10 }
-        let(:ga_current_sign_in_at) { DateTime.now }
-        let(:ga_last_sign_in_at) { DateTime.now }
+        let(:ga_current_sign_in_at) { DateTime.now.in_time_zone }
+        let(:ga_last_sign_in_at) { DateTime.now.in_time_zone }
         let(:ga_current_sign_in_ip) { "4.4.4.4" }
         let(:ga_last_sign_in_ip) { "3.3.3.3" }
         let(:ga_confirmation_token) { "ga_token" }
-        let(:ga_confirmed_at) { 10.days.ago }
-        let(:ga_confirmation_sent_at) { DateTime.now }
+        let(:ga_confirmed_at) { 10.days.ago.in_time_zone }
+        let(:ga_confirmation_sent_at) { DateTime.now.in_time_zone }
         let(:ga_name) { "ga_name" }
         let(:ga_guest) { false }
-        let(:ga_created_at) { 10.days.ago }
+        let(:ga_created_at) { 10.days.ago.in_time_zone }
 
-        it "does not update the global_user attributes" do
+        it "does not update the global_user attributes", :aggregate_failures do
           global_user = GlobalUserMigrator::GlobalUser.first
           expect(global_user.encrypted_password).to eq(ga_encrypted_password)
           expect(global_user.reset_password_token).to eq(ga_reset_password_token)
-          expect(global_user.reset_password_sent_at).to eq(ga_reset_password_sent_at)
-          expect(global_user.remember_created_at).to eq(ga_remember_created_at)
+          expect(global_user.reset_password_sent_at).to match_microseconds(ga_reset_password_sent_at)
+          expect(global_user.remember_created_at).to match_microseconds(ga_remember_created_at)
           expect(global_user.sign_in_count).to eq(original_sign_in_count + ga_sign_in_count)
-          expect(global_user.current_sign_in_at).to eq(ga_current_sign_in_at)
-          expect(global_user.last_sign_in_at).to eq(ga_last_sign_in_at)
+          expect(global_user.current_sign_in_at).to match_microseconds(ga_current_sign_in_at)
+          expect(global_user.last_sign_in_at).to match_microseconds(ga_last_sign_in_at)
           expect(global_user.current_sign_in_ip).to eq(ga_current_sign_in_ip)
           expect(global_user.last_sign_in_ip).to eq(ga_last_sign_in_ip)
           expect(global_user.confirmation_token).to eq(ga_confirmation_token)
-          expect(global_user.confirmed_at).to eq(ga_confirmed_at)
-          expect(global_user.confirmation_sent_at).to eq(ga_confirmation_sent_at)
-          expect(global_user.created_at).to eq(ga_created_at)
+          expect(global_user.confirmed_at).to match_microseconds(ga_confirmed_at)
+          expect(global_user.confirmation_sent_at).to match_microseconds(ga_confirmation_sent_at)
+          expect(global_user.created_at).to match_microseconds(ga_created_at)
           # activerecord overwrites this
           # expect(global_user.updated_at).to eq(ga_updated_at)
           expect(global_user.name).to eq(ga_name)
