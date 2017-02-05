@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: user_conventions
+# Table name: public.user_conventions
 #
 #  id                        :integer          not null, primary key
 #  user_id                   :integer          not null
