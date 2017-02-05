@@ -503,7 +503,7 @@ Amazon Server Setup
 - Copy the configuration files (eye.yml database.yml, secrets.yml, newrelic.yml)
 - copy the robots.txt file (public/robots.txt)
 - install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
-- install PostgreSQL `sudo yum install postgresql postgresql-devel`
+- install PostgreSQL `sudo yum install postgresql94 postgresql94-devel`
 - install bundler `gem install bundler`
 - install a JavaScript runtime
   - See http://stackoverflow.com/questions/27350634/how-to-yum-install-node-js-on-amazon-linux#answer-32664598
