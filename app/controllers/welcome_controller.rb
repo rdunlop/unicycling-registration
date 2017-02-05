@@ -24,6 +24,9 @@ class WelcomeController < ApplicationController
   def confirm
   end
 
+  def passwords
+  end
+
   # This is the "root_path", and redirects the user to different places
   # depending on the configuration of the server.
   def index

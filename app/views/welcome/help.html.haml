@@ -10,6 +10,10 @@
       \:
       = t(".login_help")
     %li
+      %b= t(".shared_passord")
+      \:
+      =t(".password_account_details", link: link_to(t(".this_link"), passwords_welcome_path)).html_safe
+    %li
       %b= t(".translations")
       \:
       = t(".translation_help")
