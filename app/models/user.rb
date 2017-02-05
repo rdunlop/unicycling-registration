@@ -179,7 +179,7 @@ class User < ApplicationRecord
     user_conventions.where(subdomain: Apartment::Tenant.current).any? do |user_convention|
       password_match = Devise::Encryptor.compare(self.class, user_convention.legacy_encrypted_password, password)
       Notifications.old_password_used(self, Apartment::Tenant.current).deliver_later if password_match
-      password_match
+      false # Always Disallow using older passwords
     end
   end
 end

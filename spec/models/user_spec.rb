@@ -131,8 +131,8 @@ describe User do
                          subdomain: subdomain)
     end
 
-    it "is valid with legacy password" do
-      expect(@user.valid_password?("legacy_password")).to be_truthy
+    it "is NOT valid with legacy password" do
+      expect(@user.valid_password?("legacy_password")).to be_falsey
     end
 
     it "is valid with original password" do
