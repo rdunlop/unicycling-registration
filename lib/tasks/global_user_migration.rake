@@ -27,4 +27,15 @@ namespace :global_user do
     GlobalUserMigrator.new(tenant).migrate_user_ids
     puts "done."
   end
+
+  desc "Migrate all tenants"
+  task migrate_all: :environment do
+    Tenant.all.each do |tenant|
+      subdomain = tenant.subdomain
+      puts "Migrating Users for #{subdomain}"
+      GlobalUserMigrator.new(subdomain).update_global_users
+      GlobalUserMigrator.new(subdomain).migrate_user_ids
+      puts "done"
+    end
+  end
 end
