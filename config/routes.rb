@@ -453,10 +453,11 @@ Rails.application.routes.draw do
         get :confirm
         get :data_entry_menu
         get :usa_membership
+        get :passwords
       end
     end
 
-    devise_for :users, controllers: { registrations: "registrations" }
+    devise_for :users, controllers: { registrations: "devise/custom_registrations", passwords: "devise/custom_passwords" }
 
     resources :users, only: [] do
       resources :registrants, only: [:index]

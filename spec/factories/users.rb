@@ -74,5 +74,6 @@ FactoryGirl.define do
     end
 
     after(:create) { |user| user.confirm if Rails.application.secrets.mail_skip_confirmation.nil? }
+    after(:create) { |user| user.user_conventions.create(subdomain: Tenant.first.subdomain) }
   end
 end

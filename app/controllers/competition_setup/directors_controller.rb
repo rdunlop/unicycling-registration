@@ -8,7 +8,7 @@ class CompetitionSetup::DirectorsController < CompetitionSetup::BaseCompetitionS
 
   # POST /directors/
   def create
-    user = User.find(params[:user_id])
+    user = User.this_tenant.find(params[:user_id])
     event = Event.find(params[:event_id])
     user.add_role(:director, event)
 
@@ -17,7 +17,7 @@ class CompetitionSetup::DirectorsController < CompetitionSetup::BaseCompetitionS
 
   # DELETE /directors/:id/
   def destroy
-    user = User.find(params[:id])
+    user = User.this_tenant.find(params[:id])
     event = Event.find(params[:event_id])
     user.remove_role(:director, event)
 

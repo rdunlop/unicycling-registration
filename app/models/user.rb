@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: public.users
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -57,9 +57,11 @@ class User < ApplicationRecord
   has_many :import_results
   has_many :award_labels
   has_many :songs
+  has_many :user_conventions
 
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
   scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
+  scope :this_tenant, -> { joins(:user_conventions).merge(UserConvention.where(subdomain: Apartment::Tenant.current)) }
 
   def touch_for_role(_role)
     touch
@@ -78,7 +80,7 @@ class User < ApplicationRecord
   end
 
   def self.paid_reg_fees
-    User.confirmed.all_with_registrants - User.unpaid_reg_fees
+    User.this_tenant.confirmed.all_with_registrants - User.this_tenant.unpaid_reg_fees
   end
 
   # NOTE: When adding roles Please be sure to add a description in the permissions/index.en.yml
@@ -168,5 +170,16 @@ class User < ApplicationRecord
   # This overrides the devise:confirmable method to ensure no users require confirmation
   def confirmation_required?
     !Rails.env.stage?
+  end
+
+  # Allow user to sign in with a legacy_password
+  def valid_password?(password)
+    return true if super(password)
+
+    user_conventions.where(subdomain: Apartment::Tenant.current).any? do |user_convention|
+      password_match = Devise::Encryptor.compare(self.class, user_convention.legacy_encrypted_password, password)
+      Notifications.old_password_used(self, Apartment::Tenant.current).deliver_later if password_match
+      false # Always Disallow using older passwords
+    end
   end
 end

@@ -53,10 +53,31 @@ RSpec.configure do |config|
     # We do this instead of setting cache_store = :null_store
     # because sometimes we DO want caching enabled (see below)
     Rails.cache.clear
+  end
 
-    # so that the tenant can be found even though
-    # The request is not using the Apartment::Elevator
-    FactoryGirl.create(:tenant, :test_schema)
+  # Apartment Related
+  config.before(:suite) do
+    # Clean all tables to start
+    DatabaseCleaner.clean_with :truncation
+    # Use transactions for tests
+    DatabaseCleaner.strategy = :transaction
+    # Truncating doesn't drop schemas, ensure we're clean here, app *may not* exist
+    begin
+      Apartment::Tenant.drop('testing')
+    rescue
+      nil
+    end
+    # Create the default tenant for our tests
+    tenant = Tenant.create!(description: 'Test Tenant', subdomain: 'testing', admin_upgrade_code: "TEST_UPGRADE_CODE")
+    Apartment::Tenant.create(tenant.subdomain)
+  end
+
+  config.before(:each) do
+    Apartment::Tenant.switch! 'testing'
+  end
+
+  config.after(:each) do
+    Apartment::Tenant.reset
   end
 
   config.around(:each, :caching) do |example|

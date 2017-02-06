@@ -1,0 +1,4 @@
+en:
+  devise:
+    failure:
+      invalid: "Invalid %{authentication_keys} or password. Older accounts can now be accessed through your current password. See 'Help' for details"

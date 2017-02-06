@@ -54,4 +54,10 @@ class Notifications < TenantAwareMailer
     @subdomain = subdomain
     mail to: Rails.application.secrets.server_admin_email, subject: "New Convention Created #{convention_name}"
   end
+
+  def old_password_used(user, subdomain)
+    @email = user
+    @subdomain = subdomain
+    mail to: Rails.application.secrets.server_admin_email, subject: "User used old password to log in"
+  end
 end

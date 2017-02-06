@@ -3,6 +3,7 @@
   = devise_error_messages!
   = f.hidden_field :reset_password_token
   .panel.row
+    = render "devise/shared/password_warning", user: resource
     .row
       .small-3.columns.text-right
         = f.label :password, t(".password_label")

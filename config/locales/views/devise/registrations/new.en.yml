@@ -5,6 +5,7 @@ en:
       new:
         confirmation_reminder: After Signing up, you will receive a confirmation E-mail
           that you must open to confirm your e-mail address
-        header: Sign Up
+        header: Sign Up for a Unicycling Registration Account
+        subheader: This account will be used for all Unicycling Conventions on this system.
         password_min_length: "(minimum 6 characters)"
         sign_up: Sign Up

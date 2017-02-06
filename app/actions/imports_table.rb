@@ -25,7 +25,7 @@ class ImportsTable
     hash.keys.each do |key|
       case key.to_sym
       when :lookup_user_id_by_email
-        user = User.find_by!(email: hash[key].downcase)
+        user = User.this_tenant.find_by!(email: hash[key].downcase)
         new_hash["user_id"] = user.id
       when :expense_item_lookup_by_name
         ei = ExpenseItem.find_by!(name: hash[key])

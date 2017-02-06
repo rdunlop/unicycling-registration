@@ -44,7 +44,7 @@ class VolunteersController < ApplicationController
   private
 
   def load_user
-    @user = User.find_by(id: params[:user_id])
+    @user = User.this_tenant.find_by(id: params[:user_id])
     if @user.nil?
       flash[:alert] = "Please choose a user"
       redirect_back(fallback_location: competition_volunteers_path(@competition))

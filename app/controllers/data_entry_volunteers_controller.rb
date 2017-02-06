@@ -13,7 +13,7 @@ class DataEntryVolunteersController < ApplicationController
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Additional UDA Access", competition_data_entry_volunteers_path(@competition)
 
-    @all_data_entry_volunteers = User.data_entry_volunteer
+    @all_data_entry_volunteers = User.this_tenant.data_entry_volunteer
 
     @events = Event.all
   end

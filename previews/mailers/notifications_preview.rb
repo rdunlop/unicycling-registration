@@ -29,6 +29,10 @@ class NotificationsPreview < ActionMailer::Preview
     Notifications.new_convention_created("Next year's Convention", "nextyear3000")
   end
 
+  def old_password_used
+    Notifications.old_password_used(user, "oldsubdomain-2000")
+  end
+
   private
 
   def feedback

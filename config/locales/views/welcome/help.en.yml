@@ -8,6 +8,11 @@ en:
       login_help: Once you have Signed Up, check your e-mail for a confirmation message.
         Check all spam filters. Choose "Resend Confirmation E-mail" if you cannot find
         the e-mail
+      shared_password: Do I need to Sign up each year?
+      password_account_details: Once you have Signed up for your first Unicycling Convention,
+        you can use that same e-mail/password to Sign In for future conventions. For more
+        details, see %{link}.
+      this_link: this link
       translations: Translations
       translation_help: I found a missing/mistake in a translation. Submit the translation
         details here in the 'feedback', or apply to be a translator, and help do more of

@@ -7,7 +7,7 @@
 = simple_form_for(@feedback, url: admin_feedback_index_path, method: :post) do |f|
   .row
     .small-4.columns
-      = f.input :user_id, collection: User.all, label_method: :to_s, input_html: { class: "chosen-select" }
+      = f.input :user_id, collection: User.this_tenant.all, label_method: :to_s, input_html: { class: "chosen-select" }
     .small-4.columns
       = f.input :entered_email
     .small-4.columns
@@ -22,7 +22,7 @@
     .small-4.columns
       = f.input :resolved_at, as: :datetime_picker, include_blank: true
     .small-4.columns
-      = f.input :resolved_by_id, collection: User.all, label_method: :to_s, input_html: { class: "chosen-select" }
+      = f.input :resolved_by_id, collection: User.this_tenant.all, label_method: :to_s, input_html: { class: "chosen-select" }
   .row
     .small-12.columns
       = f.input :resolution

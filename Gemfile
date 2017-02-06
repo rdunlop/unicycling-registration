@@ -101,6 +101,7 @@ end
 
 group :test do
   gem 'codeclimate_circle_ci_coverage'
+  gem 'database_cleaner'
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'poltergeist'
   gem 'factory_girl_rails'

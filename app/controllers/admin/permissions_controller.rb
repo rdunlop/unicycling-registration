@@ -7,7 +7,7 @@ class Admin::PermissionsController < ApplicationController
   end
 
   def set_role
-    @user = User.find(params[:user_id])
+    @user = User.this_tenant.find(params[:user_id])
     role = params[:role_name]
     if current_user.roles_accessible.include?(role.to_sym)
       if @user.has_role? role
@@ -24,7 +24,7 @@ class Admin::PermissionsController < ApplicationController
   end
 
   def set_password
-    @user = User.find(params[:user_id])
+    @user = User.this_tenant.find(params[:user_id])
     new_password = params[:password]
 
     @user.password = new_password

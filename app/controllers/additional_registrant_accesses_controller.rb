@@ -120,7 +120,7 @@ class AdditionalRegistrantAccessesController < ApplicationController
   end
 
   def load_user
-    @user = User.find(params[:user_id])
+    @user = User.this_tenant.find(params[:user_id])
   end
 
   def additional_registrant_access_params

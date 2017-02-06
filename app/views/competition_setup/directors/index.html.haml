@@ -19,7 +19,7 @@
       %tr
         %td= event
         %td
-          - User.with_role(:director, event).each do |user|
+          - User.this_tenant.with_role(:director, event).each do |user|
             = user
             = link_to t("delete"), director_path(user.id, event_id: event.id), method: :delete,  data: {confirm: t("are_you_sure") }
 
@@ -28,7 +28,7 @@
   .row
     .small-12.medium-4.columns
       = label_tag :user_id, User.model_name.human
-      = select_tag :user_id, options_from_collection_for_select(User.all, "id", "to_s"), include_blank: true, class: "chosen-select"
+      = select_tag :user_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s"), include_blank: true, class: "chosen-select"
     .small-12.medium-4.columns
       = label_tag :event_id, Event.model_name.human
       = select_tag :event_id, options_from_collection_for_select(@events, "id", "to_s"), include_blank: true, class: "chosen-select"

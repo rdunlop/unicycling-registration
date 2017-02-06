@@ -1,0 +1,6 @@
+---
+en:
+  devise:
+    custom_registrations:
+      create:
+        flash_error: An account already exists (possibly from a previous convention), please sign in below
