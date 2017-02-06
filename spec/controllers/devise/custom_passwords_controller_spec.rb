@@ -15,6 +15,7 @@ describe Devise::CustomPasswordsController do
     let!(:user_convention) { user.user_conventions.first }
 
     before do
+      user_convention.update(legacy_encrypted_password: user.encrypted_password) # set _a_ password
       raw, enc = Devise.token_generator.generate(user.class, :reset_password_token)
       user.reset_password_token   = enc
       user.reset_password_sent_at = Time.now.utc
@@ -22,10 +23,14 @@ describe Devise::CustomPasswordsController do
       @token = raw
     end
 
-    it "clears all legacy_passwords" do
+    it "can sign in with new password" do
       put :update, params: { user: valid_attributes.merge(reset_password_token: @token) }
-      expect(user_convention.reload.legacy_encrypted_password).to be_nil
       expect(user.reload.valid_password?("password")).to be_truthy
+    end
+
+    it "does NOT clear all legacy_passwords" do
+      put :update, params: { user: valid_attributes.merge(reset_password_token: @token) }
+      expect(user_convention.reload.legacy_encrypted_password).not_to be_nil
     end
   end
 end

@@ -46,11 +46,20 @@ describe Devise::CustomRegistrationsController do
     let(:user) { FactoryGirl.create(:user, confirmed_at: 1.day.ago, email: valid_attributes[:email], password: initial_password, password_confirmation: initial_password) }
     let!(:user_convention) { user.user_conventions.first }
 
-    it "clears all legacy_passwords" do
+    before do
+      user_convention.update(legacy_encrypted_password: user.encrypted_password) # set _a_ password
+    end
+
+    it "can sign in with new password" do
       sign_in user
       put :update, params: { user: valid_attributes.merge(current_password: initial_password) }
-      expect(user_convention.reload.legacy_encrypted_password).to be_nil
       expect(user.reload.valid_password?("password")).to be_truthy
+    end
+
+    it "does NOT clear all legacy_passwords" do
+      sign_in user
+      put :update, params: { user: valid_attributes.merge(current_password: initial_password) }
+      expect(user_convention.reload.legacy_encrypted_password).not_to be_nil
     end
   end
 end
