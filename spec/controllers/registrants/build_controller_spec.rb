@@ -125,31 +125,61 @@ describe Registrants::BuildController do
         end
       end
     end
-
-    context "add_events page" do
-    end
   end
 
-  xdescribe "POST create" do
+  describe "POST create" do
+    before(:each) do
+      @ws20 = FactoryGirl.create(:wheel_size_20)
+      @ws24 = FactoryGirl.create(:wheel_size_24)
+    end
+
+    context "when creating with copy-from-previous convention" do
+      before do
+        Apartment::Tenant.create("other")
+        Apartment::Tenant.switch "other" do
+          @other_reg = FactoryGirl.create(:competitor, user: user)
+        end
+      end
+      after do
+        Apartment::Tenant.drop("other")
+      end
+
+      let(:previous_reg_reference) { "other-#{@other_reg.id}" }
+
+      it "can create a competitor based on a previous convention record" do
+        expect do
+          post :create, params: { registrant: { registrant_type: "competitor" }, registrant_id: "new", copy_from_previous: "true", previous_registrant: previous_reg_reference}
+        end.to change(Registrant, :count).by(1)
+        expect(Registrant.last.contact_detail).not_to be_nil
+      end
+    end
+
     describe "with valid params" do
       before(:each) do
-        @ws20 = FactoryGirl.create(:wheel_size_20)
-        @ws24 = FactoryGirl.create(:wheel_size_24)
         @comp_attributes = valid_attributes.merge(registrant_type: 'competitor')
+      end
+      let(:params) do
+        {
+          registrant_type: "competitor",
+          first_name: "Bob",
+          last_name: "Smith",
+          "birthday(2i)" => "1",
+          "birthday(3i)" => "13",
+          "birthday(1i)" => "1995",
+          gender: "Male"
+        }
       end
       it "creates a new Registrant" do
         expect do
-          post :create, params: { registrant_id: "new", registrant: @comp_attributes }
+          post :create, params: { registrant_id: "new", registrant: params }
         end.to change(Registrant, :count).by(1)
       end
 
       it "assigns the registrant to the current user" do
         expect do
-          post :create, params: { registrant_id: "new", registrant: valid_attributes.merge(
-            registrant_type: 'competitor') }
+          post :create, params: { registrant_id: "new", registrant: params }
         end.to change(Registrant, :count).by(1)
         expect(Registrant.last.user).to eq(user)
-        expect(Registrant.last.contact_detail).not_to be_nil
       end
 
       it "sets the registrant as a competitor" do
@@ -159,7 +189,7 @@ describe Registrants::BuildController do
 
       it "redirects to the created registrant" do
         post :create, params: { registrant_id: "new", registrant: @comp_attributes }
-        expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
+        expect(response).to redirect_to(registrant_build_path(Registrant.last.to_param, :add_events))
       end
     end
 
@@ -176,23 +206,7 @@ describe Registrants::BuildController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
-        assert_select "h1", "New Registration"
-      end
-
-      it "has categories" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        FactoryGirl.create(:category)
-        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
-        post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
-        # expect(assigns(:categories)).to eq([category1])
-        assert_select "h1", "New Registration"
-      end
-
-      it "should not load categories for a noncompetitor" do
-        FactoryGirl.create(:category)
-        allow_any_instance_of(Registrant).to receive(:save).and_return(false)
-        post :create, params: { registrant_id: "new", registrant: {registrant_type: 'noncompetitor'} }
-        # expect(assigns(:categories)).to be_nil
+        expect(response).to redirect_to(user_registrants_path(user))
       end
     end
 
@@ -221,7 +235,7 @@ describe Registrants::BuildController do
         end.to change(RegistrantChoice, :count).by(1)
       end
 
-      it "doesn't create a new entry if one already exists" do
+      xit "doesn't create a new entry if one already exists" do
         expect(RegistrantChoice.count).to eq(0)
         put :update, params: { registrant_id: @reg.to_param, registrant: @attributes }
         expect(RegistrantChoice.count).to eq(1)
@@ -231,11 +245,11 @@ describe Registrants::BuildController do
         @attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
         @attributes[:registrant_choices_attributes][0][:id] = RegistrantChoice.first.id
         put :update, params: { registrant_id: @reg.to_param, id: "add_events", registrant: @attributes }
-        expect(response).to redirect_to(registrant_registrant_expense_items_path(@reg))
+        expect(response).to redirect_to(registrant_build_path(@reg.to_param, :add_volunteers))
       end
     end
 
-    describe "when creating registrant_event_sign_ups" do
+    xdescribe "when creating registrant_event_sign_ups" do
       before(:each) do
         @reg = FactoryGirl.create(:registrant, user: user)
         @ecat = FactoryGirl.create(:event).event_categories.first

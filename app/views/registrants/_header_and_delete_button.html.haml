@@ -6,5 +6,6 @@
         = link_to "Copy into a Non-Competitor record", copy_to_noncompetitor_registrant_path(@registrant), method: :post, data: { confirm: "Create a new registrant based on this record?" }
       - elsif @registrant.noncompetitor?
         = link_to "Copy into a Competitor record", copy_to_competitor_registrant_path(@registrant), method: :post, data: { confirm: "Create a new registrant based on this record?" }
+      %br
     - if policy(@registrant).destroy?
       = link_to t('.delete'), registrant_path(@registrant), data: { confirm: "Are you sure you want to delete this registration" }, :method => :delete
