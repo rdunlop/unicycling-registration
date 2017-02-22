@@ -516,7 +516,7 @@ Amazon Server Setup
 - KNOWN ISSUE: unable to write to /etc/nginx/conf.d files. (worked around using `chmod o+w /etc/nginx/conf.d/`)
 - install and configure nginx
   - `sudo yum install nginx`
-  - set the `/etc/nginx/nginx.conf` to be `user ec2-user`
+  - set the `/etc/nginx/nginx.conf` to be `user ec2-user` (`chown ec2-user /etc/nginx/nginx.conf`)
   - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake update_nginx_config`
   - `sudo service start nginx`
