@@ -32,6 +32,14 @@ describe RegistrantBestTime do
     it "includes formatted value and location" do
       expect(@rb.to_s).to eq("Best Time: 0:10 @ Nationals 2012")
     end
+
+    context "when the event is no longer asking for a best time" do
+      before do
+        event.update(best_time_format: "none")
+      end
+
+      it { expect(@rb.to_s).to be_nil }
+    end
   end
 
   it "can store a large value" do
