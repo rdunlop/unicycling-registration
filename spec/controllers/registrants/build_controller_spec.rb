@@ -181,7 +181,7 @@ describe Registrants::BuildController do
 
       it "has categories" do
         # Trigger the behavior that occurs when invalid params are submitted
-        category1 = FactoryGirl.create(:category)
+        FactoryGirl.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
         # expect(assigns(:categories)).to eq([category1])

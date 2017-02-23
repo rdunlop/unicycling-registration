@@ -42,7 +42,7 @@ describe LaneAssignmentsController do
 
   describe "GET index" do
     it "shows all lane_assignments" do
-      la = FactoryGirl.create(:lane_assignment, competition: @competition, heat: 3, lane: 4)
+      FactoryGirl.create(:lane_assignment, competition: @competition, heat: 3, lane: 4)
       get :index, params: { competition_id: @competition.id }
 
       assert_select "tr>td.heat", text: 3.to_s, count: 1

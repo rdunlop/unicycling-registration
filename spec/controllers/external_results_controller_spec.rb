@@ -41,7 +41,7 @@ describe ExternalResultsController do
 
   describe "GET index" do
     it "shows all external_results" do
-      external_result = FactoryGirl.create(:external_result, competitor: @competitor)
+      FactoryGirl.create(:external_result, competitor: @competitor)
       get :index, params: { competition_id: @competition.id }
       assert_select "h1", "New Entered Points Result"
 
