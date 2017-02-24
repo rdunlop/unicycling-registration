@@ -35,6 +35,14 @@ GIT
       i18n_data (~> 0.7.0)
 
 GIT
+  remote: git://github.com/rdunlop/fancybox2-rails.git
+  revision: 7e63203d9032846202e632771e817872471e9132
+  branch: rails5
+  specs:
+    fancybox2-rails (0.2.8)
+      railties (>= 3.1.0, < 6.0)
+
+GIT
   remote: git://github.com/rdunlop/tolk.git
   revision: 1f9ffdeb888c79f8967d96b5cd7a5be0153b32b7
   branch: improve_import_export
@@ -42,13 +50,6 @@ GIT
     tolk (2.0.0.pre.pre)
       rails (>= 4.0, < 5.1)
       safe_yaml (>= 0.8.6)
-
-GIT
-  remote: git://github.com/saketramdurbha/fancybox2-rails.git
-  revision: 6300b76ea4609eab64ff27e5e6953873ec02551c
-  specs:
-    fancybox2-rails (0.2.9)
-      railties (>= 3.1.0, < 6.0)
 
 GIT
   remote: git://github.com/sudosu/rails_admin_pundit.git
@@ -541,7 +542,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.4)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (2.0.5)
     timeliness (0.3.8)
     timers (4.1.1)
