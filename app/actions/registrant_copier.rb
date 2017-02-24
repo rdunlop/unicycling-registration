@@ -50,14 +50,8 @@ class RegistrantCopier
          :email,
          :club,
          :club_contact,
-         :organization_member_number,
-         :emergency_name,
-         :emergency_relationship,
-         :emergency_attending,
-         :emergency_primary_phone,
-         :emergency_other_phone,
-         :responsible_adult_name,
-         :responsible_adult_phone].each do |attribute|
+         :organization_member_number
+         ].each do |attribute|
           contact_attributes[attribute] = contact_detail.send(attribute)
         end
       end
