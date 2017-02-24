@@ -58,6 +58,14 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def new
+    @user = current_user
+    @registrant = Registrant.new(user: @user)
+    authorize @registrant
+    @registrant.registrant_type = params[:registrant_type]
+    @copy_from_previous = params[:copy_from_previous] == "true"
+  end
+
   # GET /registrants/all
   def all
     @registrants = Registrant.includes(:contact_detail).active.order(:bib_number)

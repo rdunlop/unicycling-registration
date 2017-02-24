@@ -1,0 +1,9 @@
+= link_to "Display Price details", "#", class: "js--toggle", data: { toggle_target: ".js--price_details" }
+.js--price_details.is--hidden
+  .row
+    .small-12.columns
+      = render :partial => "registration_costs/list", locals: { registrant_type: "competitor" }
+      = render partial: "registration_costs/events"
+  .row
+    .small-12.columns
+      = render :partial => "registration_costs/list", locals: {registrant_type: "noncompetitor" }

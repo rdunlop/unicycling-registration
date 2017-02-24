@@ -33,4 +33,23 @@
           %li= item
       = link_to t(".create_new_spectator"), "#", class: "js--display_new_registrant spectator_button", data: { registrant_type: 'spectator' }
 
-= render partial: "new_name"
+.row.display_new_registrant.is--hidden
+  .small-12.columns
+    %fieldset
+      .competitor_show
+        .row
+          .small-12.columns
+            = link_to "Copy from previous convention", new_registrant_path(registrant_type: "competitor", copy_from_previous: true), class: "button"
+            = link_to "Create new Competitor", new_registrant_path(registrant_type: "competitor", copy_from_previous: false), class: "button"
+      .noncompetitor_show
+        .row
+          .small-12.columns
+            = link_to "Copy from previous convention", new_registrant_path(registrant_type: "noncompetitor", copy_from_previous: true), class: "button"
+            = link_to "Create new Non-Competitor", new_registrant_path(registrant_type: "noncompetitor", copy_from_previous: false), class: "button"
+      .spectator_show
+        .row
+          .small-12.columns
+            = link_to "Copy from previous convention", new_registrant_path(registrant_type: "spectator", copy_from_previous: true), class: "button"
+            = link_to "Create new Spectator", new_registrant_path(registrant_type: "spectator", copy_from_previous: false), class: "button"
+
+      = link_to t("cancel"), "#", class: "js--hide_new_registrant"

@@ -377,7 +377,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :registrants, only: [:show, :destroy] do
+    resources :registrants, only: [:new, :show, :destroy] do
       resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create] do
         collection do
           delete :drop_event

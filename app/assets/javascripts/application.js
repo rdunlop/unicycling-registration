@@ -51,7 +51,6 @@
 //= require payments
 //= require registrants
 //= require reorder_rows
-//= require street_score
 //= require total_calculator
 //= require total_cost
 //= require usa_member_refresher

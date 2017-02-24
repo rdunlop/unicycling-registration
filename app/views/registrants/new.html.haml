@@ -1,0 +1,5 @@
+%h1 New #{@registrant.registrant_type}
+
+.row{ class: "show_#{@registrant.registrant_type}_elements" }
+  .small-12.columns
+    = render "/registrants/new_name"

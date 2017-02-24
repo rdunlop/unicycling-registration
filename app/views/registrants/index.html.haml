@@ -13,6 +13,7 @@
     .sign_up_difference
       = link_to t(".whats_the_difference"), additional_information_url(@config, I18n.locale, "comp_noncomp"), class: "fancybox", title: t(".difference_tooltip")
   = render "registrant_choices"
+  = render "registrant_prices"
 - if @shared_registrants.count > 0
   %div
     = t(".registrants_includes_shared")

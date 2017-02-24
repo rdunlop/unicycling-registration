@@ -86,7 +86,7 @@ class Registrants::BuildController < ApplicationController
       redirect_to wizard_path(steps.second, registrant_id: @registrant)
     else
       flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
-      redirect_to user_registrants_path(current_user)
+      redirect_to new_registrant_path(registrant_type: @registrant.registrant_type, copy_from_previous: params[:copy_from_previous])
     end
   end
 

@@ -1,59 +1,54 @@
-.display_new_registrant.is--hidden
-  = form_for(@registrant, url: registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
-    = f.hidden_field :registrant_type
-    = render partial: "shared/error_messages", object: @registrant
-    - if @registrant.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(@registrant.errors.count, "error")
-          prohibited this registrant from being saved:
-        %ul
-          - @registrant.errors.each do |attribute,error_message|
-            - next if attribute == :gender_male
-            - next if attribute == :gender_female
-            - next if "#{attribute}" == "registrant_event_sign_ups.signed_up"
-            - next if "#{attribute}" == "registrant_event_sign_ups.event_category_id"
-            - if "#{attribute}" == "registrant_event_sign_ups.base"
-              %li= error_message
-            - else
-              %li= @registrant.errors.full_message(attribute, error_message )
-    .row.copy_choices
-      - options = []
-      - @user.user_conventions.where.not(subdomain: Apartment::Tenant.current).each do |user_convention|
-        - subdomain = user_convention.subdomain
-        - Apartment::Tenant.switch(subdomain) do
-          - @user.reload.registrants.each do |registrant|
-            - options << ["#{subdomain} - #{registrant.to_s}", "#{subdomain}-#{registrant.id}"]
-      .small-12.columns
-        .row
-          .small-12.columns.left-aligned
-            = radio_button_tag :copy_from_previous, true, options.any?, class: "js--disableByRadio", data: { disable_wrapper: "js--createNew", enable_wrapper: "js--copyFromPrevious"}
-            = label_tag(:copy_from_previous_true, "Copy name & address from a previous convention")
-        .row.js--copyFromPrevious
-          .small-12.columns.row
-            .small-12.medium-3.columns
-              = label_tag(:previous_registrant, "Previous Registrant")
-            .small-12.medium-9.columns
-              = select_tag(:previous_registrant, options_for_select(options), include_blank: true)
-      %hr
-      .small-12.columns
-        .row
-          .small-12.columns.left-aligned
-            = radio_button_tag :copy_from_previous, false, options.none?, class: "js--disableByRadio", data: { disable_wrapper: "js--copyFromPrevious", enable_wrapper: "js--createNew"}
-            = label_tag(:copy_from_previous_false, "Create new")
-        .row.js--createNew
-          .small-12.columns
-            = render partial: "/registrants/base_details", locals: {f: f}
+#tabs{ data: { active: (@copy_from_previous ? 0 : 1) } }
+  %ul
+    %li
+      %a{ href: "#tabs-copy-from-previous"} Copy From Previous
+    %li
+      %a{ href: "#tabs-new-registrant" } New Registrant
+  %div{ id: "tabs-copy-from-previous"}
+    %h2 Copy name & address from a previous convention
 
-    .competitor_show
+    = form_for(@registrant, url: registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
+      = f.hidden_field :registrant_type
+      = hidden_field_tag :copy_from_previous, true
+      = render partial: "shared/error_messages", object: @registrant
+      .row.copy_choices
+        - options = []
+        - @user.user_conventions.where.not(subdomain: Apartment::Tenant.current).each do |user_convention|
+          - subdomain = user_convention.subdomain
+          - Apartment::Tenant.switch(subdomain) do
+            - @user.reload.registrants.each do |registrant|
+              - options << ["#{subdomain} - #{registrant.to_s}", "#{subdomain}-#{registrant.id}"]
+        .small-12.medium-3.columns
+          = label_tag(:previous_registrant, "Previous Registrant")
+        .small-12.medium-9.columns
+          = select_tag(:previous_registrant, options_for_select(options), include_blank: true)
+      = render partial: "/registrants/form_actions", locals: {f: f}
+      = link_to t("cancel"), user_registrants_path(@user)
+
+  %div{ id: "tabs-new-registrant"}
+    = form_for(@registrant, url: registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
+      = f.hidden_field :registrant_type
+      = render partial: "shared/error_messages", object: @registrant
+      - if @registrant.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@registrant.errors.count, "error")
+            prohibited this registrant from being saved:
+          %ul
+            - @registrant.errors.each do |attribute,error_message|
+              - next if attribute == :gender_male
+              - next if attribute == :gender_female
+              - next if "#{attribute}" == "registrant_event_sign_ups.signed_up"
+              - next if "#{attribute}" == "registrant_event_sign_ups.event_category_id"
+              - if "#{attribute}" == "registrant_event_sign_ups.base"
+                %li= error_message
+              - else
+                %li= @registrant.errors.full_message(attribute, error_message )
+
       .row
         .small-12.columns
-          = render :partial => "registration_costs/list", locals: { registrant_type: "competitor" }
-          = render partial: "registration_costs/events"
-    .noncompetitor_show
-      .row
-        .small-12.columns
-          = render :partial => "registration_costs/list", locals: {registrant_type: "noncompetitor" }
+          = render partial: "/registrants/base_details", locals: {f: f}
 
-    = render partial: "/registrants/form_actions", locals: {f: f}
-    = link_to t("cancel"), "#", class: "js--hide_new_registrant"
+
+      = render partial: "/registrants/form_actions", locals: {f: f}
+      = link_to t("cancel"), user_registrants_path(@user)
