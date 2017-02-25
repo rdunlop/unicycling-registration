@@ -206,7 +206,7 @@ describe Registrants::BuildController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
-        expect(response).to redirect_to(user_registrants_path(user))
+        expect(response).to redirect_to(new_registrant_path(registrant_type: 'competitor'))
       end
     end
 

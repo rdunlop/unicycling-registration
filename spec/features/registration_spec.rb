@@ -11,12 +11,19 @@ describe 'Logging in to the system' do
     end
 
     context 'within the new_competitor form' do
-      before { click_link 'Create New Non-Competitor' }
+      before do
+        click_link 'Create New Non-Competitor'
+        within '.display_new_registrant' do
+          click_link 'Create new Non-Competitor'
+        end
+      end
 
       context 'filling in the neccesary information' do
         include_context 'basic registrant data'
         before :each do
-          click_button 'Save & Continue'
+          within "#tabs-new-registrant" do
+            click_button 'Save & Continue'
+          end
         end
 
         it "creates a registrant" do
@@ -27,12 +34,19 @@ describe 'Logging in to the system' do
   end
 
   context 'within the new competitor form' do
-    before { click_link 'Create New Competitor' }
+    before do
+      click_link 'Create New Competitor'
+      within '.display_new_registrant' do
+        click_link 'Create new Competitor'
+      end
+    end
 
     context 'filling in the necessary information' do
       include_context 'basic registrant data'
       before :each do
-        click_button 'Save & Continue'
+        within "#tabs-new-registrant" do
+          click_button 'Save & Continue'
+        end
         check '100m'
         click_button 'Save & Continue'
       end
