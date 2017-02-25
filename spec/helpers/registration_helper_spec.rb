@@ -45,7 +45,7 @@ describe RegistrationHelper do
 
       context "with a 2nd, older convention" do
         before do
-          travel (- 2.months) do
+          travel(- 2.months) do
             @older_registrant = create_registrant_in_previous_convention(
               subdomain: "older", user_attributes: { first_name: "Robert", last_name: "Smith" })
           end
