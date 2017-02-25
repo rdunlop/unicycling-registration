@@ -62,14 +62,10 @@ class Registrants::BuildController < ApplicationController
     render_wizard @registrant
   end
 
-  def create
-    if params[:copy_from_previous] && params[:copy_from_previous] == "true"
-      copier = RegistrantCopier.new(params[:previous_registrant], params[:registrant][:registrant_type])
-      @registrant = copier.registrant
-      @contact_detail = copier.contact_detail
-    else
-      @registrant = Registrant.new(registrant_params)
-    end
+  def create_from_previous
+    copier = RegistrantCopier.new(params[:previous_registrant], params[:registrant][:registrant_type])
+    @registrant = copier.registrant
+    @contact_detail = copier.contact_detail
 
     @registrant.user = current_user
     authorize @registrant
@@ -81,12 +77,30 @@ class Registrants::BuildController < ApplicationController
         @contact_detail.save(validate: false) # the contact_detail may not be valid yet.
       end
 
+      # drop into the **FIRST** step
+      set_steps # reset steps to ensure we get the correct set of steps
+      flash[:notice] = "Previous Competitor Copied Successfully, please review and continue"
+      redirect_to wizard_path(steps.first, registrant_id: @registrant)
+    else
+      flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
+      redirect_to new_registrant_path(registrant_type: @registrant.registrant_type, copy_from_previous: true)
+    end
+  end
+
+  def create
+    @registrant = Registrant.new(registrant_params)
+
+    @registrant.user = current_user
+    authorize @registrant
+
+    @registrant.status = "base_details"
+    if @registrant.save
       # drop into the second step
       set_steps # reset steps to ensure we get the correct set of steps
       redirect_to wizard_path(steps.second, registrant_id: @registrant)
     else
       flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
-      redirect_to new_registrant_path(registrant_type: @registrant.registrant_type, copy_from_previous: params[:copy_from_previous])
+      redirect_to new_registrant_path(registrant_type: @registrant.registrant_type, copy_from_previous: false)
     end
   end
 

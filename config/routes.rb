@@ -380,6 +380,7 @@ Rails.application.routes.draw do
     resources :registrants, only: [:new, :show, :destroy] do
       resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create] do
         collection do
+          post :create_from_previous
           delete :drop_event
         end
       end
