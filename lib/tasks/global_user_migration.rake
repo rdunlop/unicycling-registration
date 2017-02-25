@@ -38,4 +38,16 @@ namespace :global_user do
       puts "done"
     end
   end
+
+  desc "Update UserConvention records"
+  task update_user_convention_timestamps: :environment do
+    Tenant.all.each do |tenant|
+      subdomain = tenant.subdomain
+      puts "Update UserConvention for #{subdomain}"
+      Apartment::Tenant.switch(subdomain) do
+        UserConvention.update_all(created_at: tenant.created_at)
+      end
+      puts "done"
+    end
+  end
 end
