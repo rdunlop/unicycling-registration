@@ -4,6 +4,10 @@ class RegistrantPolicy < ApplicationPolicy
     (user_record? && !new_registration_closed?) || super_admin?
   end
 
+  def create_from_previous?
+    create?
+  end
+
   def duplicate_registrant?
     event_planner? || payment_admin? || convention_admin? || super_admin?
   end

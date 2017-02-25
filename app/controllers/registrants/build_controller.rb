@@ -2,7 +2,7 @@ class Registrants::BuildController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!
 
-  before_action :load_registrant_by_bib_number, except: [:create]
+  before_action :load_registrant_by_bib_number, except: [:create, :create_from_previous]
   before_action :set_steps, except: [:drop_event]
   before_action :setup_wizard, except: [:drop_event]
 
