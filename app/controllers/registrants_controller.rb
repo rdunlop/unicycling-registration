@@ -33,6 +33,8 @@
 #
 
 class RegistrantsController < ApplicationController
+  include RegistrationHelper
+
   before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
   before_action :load_registrant_by_bib_number, only: [:show, :results, :refresh_usa_status, :copy_to_competitor, :copy_to_noncompetitor, :destroy, :waiver]
@@ -64,6 +66,7 @@ class RegistrantsController < ApplicationController
     authorize @registrant
     @registrant.registrant_type = params[:registrant_type]
     @copy_from_previous = params[:copy_from_previous] == "true"
+    @previous_registrant_options = previous_registrants_for(@user)
   end
 
   # GET /registrants/all

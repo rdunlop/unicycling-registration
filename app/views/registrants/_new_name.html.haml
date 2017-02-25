@@ -12,16 +12,10 @@
       = hidden_field_tag :copy_from_previous, true
       = render partial: "shared/error_messages", object: @registrant
       .row.copy_choices
-        - options = []
-        - @user.user_conventions.where.not(subdomain: Apartment::Tenant.current).each do |user_convention|
-          - subdomain = user_convention.subdomain
-          - Apartment::Tenant.switch(subdomain) do
-            - @user.reload.registrants.each do |registrant|
-              - options << ["#{subdomain} - #{registrant.to_s}", "#{subdomain}-#{registrant.id}"]
         .small-12.medium-3.columns
           = label_tag(:previous_registrant, "Previous Registrant")
         .small-12.medium-9.columns
-          = select_tag(:previous_registrant, options_for_select(options), include_blank: true)
+          = select_tag(:previous_registrant, options_for_select(@previous_registrant_options), include_blank: true)
       = render partial: "/registrants/form_actions", locals: {f: f}
       = link_to t("cancel"), user_registrants_path(@user)
 
