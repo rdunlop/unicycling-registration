@@ -148,7 +148,7 @@ describe Registrants::BuildController do
 
       it "can create a competitor based on a previous convention record" do
         expect do
-          post :create, params: { registrant: { registrant_type: "competitor" }, registrant_id: "new", copy_from_previous: "true", previous_registrant: previous_reg_reference}
+          post :create_from_previous, params: { registrant: { registrant_type: "competitor" }, registrant_id: "new", previous_registrant: previous_reg_reference}
         end.to change(Registrant, :count).by(1)
         expect(Registrant.last.contact_detail).not_to be_nil
       end
@@ -206,7 +206,7 @@ describe Registrants::BuildController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
-        expect(response).to redirect_to(new_registrant_path(registrant_type: 'competitor'))
+        expect(response).to redirect_to(new_registrant_path(registrant_type: 'competitor', copy_from_previous: false))
       end
     end
 
