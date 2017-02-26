@@ -7,6 +7,9 @@
   %div{ id: "tabs-copy-from-previous"}
     %h2 Copy name & address from a previous convention
 
+    %p
+      Choose a registrant from your past conventions to copy the name/address details.
+
     = form_for(@registrant, url: create_from_previous_registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
       = f.hidden_field :registrant_type
       = render partial: "shared/error_messages", object: @registrant

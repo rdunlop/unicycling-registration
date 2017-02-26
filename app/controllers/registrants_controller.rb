@@ -64,6 +64,15 @@ class RegistrantsController < ApplicationController
     @user = current_user
     @registrant = Registrant.new(user: @user)
     authorize @registrant
+    if params[:copy_from_previous].nil?
+      if previous_registrants_for(current_user).any?
+        flash.now[:notice] = "We have found registrations from previous conventions."
+        params[:copy_from_previous] = "true"
+      else
+        params[:copy_from_previous] = "false"
+      end
+    end
+
     @registrant.registrant_type = params[:registrant_type]
     @copy_from_previous = params[:copy_from_previous] == "true"
     @previous_registrant_options = previous_registrants_for(@user)
