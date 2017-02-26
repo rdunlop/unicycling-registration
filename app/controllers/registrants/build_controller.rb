@@ -76,6 +76,8 @@ class Registrants::BuildController < ApplicationController
         @contact_detail.registrant = @registrant
         @contact_detail.save(validate: false) # the contact_detail may not be valid yet.
       end
+      session[:copy_from_previous_warnings] ||= []
+      session[:copy_from_previous_warnings] << @registrant.id
 
       # drop into the **FIRST** step
       set_steps # reset steps to ensure we get the correct set of steps
