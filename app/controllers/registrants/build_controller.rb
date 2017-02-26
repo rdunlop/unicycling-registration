@@ -81,7 +81,7 @@ class Registrants::BuildController < ApplicationController
 
       # drop into the **FIRST** step
       set_steps # reset steps to ensure we get the correct set of steps
-      flash[:notice] = "Previous Competitor Copied Successfully, please review and continue"
+      flash[:notice] = "Previous Registrant Copied Successfully, please review and continue"
       redirect_to wizard_path(steps.first, registrant_id: @registrant)
     else
       flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
