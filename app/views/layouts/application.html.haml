@@ -8,9 +8,6 @@
     = split_stylesheet_link_tag @config.style_name, media: "all"
 
     = javascript_include_tag "application", async: !Rails.env.development?
-    - if content_for?(:wysiwyg)
-      = yield(:wysiwyg)
-
 
     = csrf_meta_tags
     = render "shared/analytics/google"
@@ -43,4 +40,5 @@
           = content_for?(:content) ? yield(:content) : yield
       = render partial: "layouts/footer"
   - if content_for?(:wysiwyg)
+    = yield(:wysiwyg)
     = tinymce
