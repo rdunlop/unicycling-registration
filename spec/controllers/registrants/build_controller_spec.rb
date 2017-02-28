@@ -287,6 +287,47 @@ describe Registrants::BuildController do
     end
   end
 
+  describe "PUT update" do
+    def valid_attributes
+      {
+        first_name: "Robin",
+        last_name: "Dunlop",
+        gender: "Male",
+        birthday: Date.new(1982, 1, 19)
+      }
+    end
+
+    context "when registrant is copied from a previous convention" do
+      let(:registrant) { FactoryGirl.create(:competitor, user: user, status: "base_details") }
+
+      before do
+        # Copied from previous convention don't have these fields
+        cd = registrant.contact_detail
+        cd.emergency_relationship = nil
+        cd.emergency_name = nil
+        cd.save(validate: false)
+      end
+
+      context "when starting on the new_name page" do
+        it "redirects to the next page" do
+          put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
+          expect(response).to redirect_to(registrant_build_path(registrant.to_param, :add_events))
+        end
+      end
+
+      context "When we are using USA organization_membership_usa" do
+        let(:event_configuration) { FactoryGirl.create(:event_configuration, :with_usa) }
+
+        context "when starting on the new_name page" do
+          it "redirects to the next page" do
+            put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
+            expect(response).to redirect_to(registrant_build_path(registrant.to_param, :add_events))
+          end
+        end
+      end
+    end
+  end
+
   xdescribe "PUT update" do
     describe "with valid params" do
       it "assigns the requested registrant as @registrant" do

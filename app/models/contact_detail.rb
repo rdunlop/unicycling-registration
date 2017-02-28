@@ -102,8 +102,8 @@ class ContactDetail < ApplicationRecord
   private
 
   def update_usa_membership_status
-    return unless organization_member_number_changed? && registrant.present? && organization_member_number.present?
+    return unless organization_member_number_changed?
     # If we perform the search immediately, sometimes the ContactDetail hasn't been committed yet, so we wait 3 seconds.
-    UpdateUsaMembershipStatusWorker.perform_in(3.seconds, registrant_id, registrant.last_name, organization_member_number)
+    UpdateUsaMembershipStatusWorker.perform_in(3.seconds, registrant_id)
   end
 end

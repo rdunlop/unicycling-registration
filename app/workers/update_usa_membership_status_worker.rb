@@ -5,11 +5,17 @@ class UpdateUsaMembershipStatusWorker
   include Sidekiq::Worker
 
   # Query the USA membership API, and update the registrant record with the result
-  def perform(registrant_id, last_name, usa_number)
+  def perform(registrant_id)
     return unless server.present?
+    return unless event_is_usa?
 
     Rails.logger.debug "USA membership check for #{registrant_id}"
     registrant = Registrant.find(registrant_id)
+    last_name = registrant.last_name
+    usa_number = registrant.contact_detail.try(:organization_member_number)
+
+    return if usa_number.blank?
+
     contact_detail = registrant.contact_detail
 
     uri = build_url(usa_number, last_name)
@@ -56,5 +62,9 @@ class UpdateUsaMembershipStatusWorker
 
   def event_end_date
     EventConfiguration.singleton.start_date + 10.days
+  end
+
+  def event_is_usa?
+    EventConfiguration.singleton.organization_membership_usa?
   end
 end
