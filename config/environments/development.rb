@@ -20,6 +20,14 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local = true
 
+  if Rails.application.secrets.ssl_enabled
+    config.force_ssl = true
+    config.to_prepare { Devise::SessionsController.force_ssl }
+    config.to_prepare { Devise::PasswordsController.force_ssl }
+    config.to_prepare { Devise::RegistrationsController.force_ssl }
+    config.action_mailer.default_url_options = { protocol: 'https' }
+  end
+
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
