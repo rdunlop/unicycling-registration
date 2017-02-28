@@ -144,7 +144,7 @@ describe Registrants::BuildController do
         Apartment::Tenant.drop("other")
       end
 
-      let(:previous_reg_reference) { "other-#{@other_reg.id}" }
+      let(:previous_reg_reference) { RegistrantCopier.build_key("other", @other_reg.id) }
 
       it "can create a competitor based on a previous convention record" do
         expect do
