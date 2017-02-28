@@ -43,6 +43,9 @@ class EventCopier
     source_event.event_categories.each do |ec|
       new_event_category = ec.dup
       new_event_category.name = ec.name
+      # necessary to avoid uniqueness errors, because the event_id is not
+      # cleared until AFTER validation is performed on EventCategory
+      new_event_category.event = nil
       ec.translations.each do |translation|
         new_event_category.translations << translation.dup
       end
