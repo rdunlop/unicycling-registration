@@ -2,8 +2,13 @@
 class RegistrantCopier
   attr_accessor :subdomain, :previous_id, :registrant_type
 
+  # Should be inverse of the splitter in the initializer
+  def self.build_key(subdomain, registrant_id)
+    "#{subdomain}/#{registrant_id}"
+  end
+
   def initialize(registrant_source_string, registrant_type)
-    @subdomain, @previous_id = registrant_source_string.split("-")
+    @subdomain, @previous_id = registrant_source_string.split("/")
     @registrant_type = registrant_type
   end
 

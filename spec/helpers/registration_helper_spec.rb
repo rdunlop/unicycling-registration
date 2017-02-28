@@ -38,7 +38,7 @@ describe RegistrationHelper do
       it "returns the registrants with subdomain keys" do
         expect(helper.previous_registrants_for(user)).to eq(
           [
-            ["other - Bob Smith", "other-#{@old_registrant.id}"]
+            ["other - Bob Smith", RegistrantCopier.build_key("other", @old_registrant.id)]
           ]
         )
       end
@@ -54,8 +54,8 @@ describe RegistrationHelper do
         it "returns the registrants in reverse calendar order" do
           expect(helper.previous_registrants_for(user)).to eq(
             [
-              ["other - Bob Smith", "other-#{@old_registrant.id}"],
-              ["older - Robert Smith", "older-#{@older_registrant.id}"]
+              ["other - Bob Smith", RegistrantCopier.build_key("other", @old_registrant.id)],
+              ["older - Robert Smith", RegistrantCopier.build_key("older", @older_registrant.id)]
             ]
           )
         end
