@@ -24,6 +24,11 @@
           %td= link_to t(".manage_events"), convention_setup_category_events_path(category)
           %td= link_to t("edit"), edit_convention_setup_category_path(category)
           %td= link_to t("delete"), [:convention_setup, category], method: :delete, data: { confirm: t("are_you_sure") }
+- else
+  %h2= t(".copy_from_previous.header")
+  %p
+    = link_to t(".copy_from_previous.link"), migrate_index_path
+
 %br
 %fieldset.form__fieldset
   %h3= t(".new_category")

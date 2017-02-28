@@ -8,3 +8,6 @@ en:
         existing_categories: Existing Categories
         manage_events: Manage Events
         new_category: New Category
+        copy_from_previous:
+          header: Copy Events and Categories from a previous convention
+          link: Choose a previous convention and copy its events
