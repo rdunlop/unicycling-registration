@@ -10,7 +10,6 @@
       - EventConfiguration.singleton.competitor_benefits_list.each do |item|
         %li= item
     = link_to t(".create_new_competitor"), new_registrant_path(registrant_type: 'competitor'), class: "competitor_button"
-    = # link_to t(".create_new_competitor"), "#", class: "js--display_new_registrant competitor_button", data: { registrant_type: 'competitor' }
 
   - if @config.noncompetitors?
     .pricing_option.non-competitor_sign_up
@@ -23,7 +22,6 @@
         - EventConfiguration.singleton.noncompetitor_benefits_list.each do |item|
           %li= item
       = link_to t(".create_new_noncompetitor"), new_registrant_path(registrant_type: 'noncompetitor'), class: "noncompetitor_button"
-      = # link_to t(".create_new_noncompetitor"), "#", class: "js--display_new_registrant noncompetitor_button", data: { registrant_type: 'noncompetitor' }
 
   - if @config.spectators?
     .pricing_option.spectator_sign_up
@@ -34,27 +32,3 @@
         - EventConfiguration.singleton.spectator_benefits_list.each do |item|
           %li= item
       = link_to t(".create_new_spectator"), new_registrant_path(registrant_type: 'spectator'), class: "spectator_button"
-
-      = # link_to t(".create_new_spectator"), "#", class: "js--display_new_registrant spectator_button", data: { registrant_type: 'spectator' }
-
-// This is no longer used, using the #new action to choose the correct action instead
-.row.display_new_registrant.is--hidden
-  .small-12.columns
-    %fieldset
-      .competitor_show
-        .row
-          .small-12.columns
-            = link_to "Copy from previous convention", new_registrant_path(registrant_type: "competitor", copy_from_previous: true), class: "button"
-            = link_to "Create new Competitor", new_registrant_path(registrant_type: "competitor", copy_from_previous: false), class: "button"
-      .noncompetitor_show
-        .row
-          .small-12.columns
-            = link_to "Copy from previous convention", new_registrant_path(registrant_type: "noncompetitor", copy_from_previous: true), class: "button"
-            = link_to "Create new Non-Competitor", new_registrant_path(registrant_type: "noncompetitor", copy_from_previous: false), class: "button"
-      .spectator_show
-        .row
-          .small-12.columns
-            = link_to "Copy from previous convention", new_registrant_path(registrant_type: "spectator", copy_from_previous: true), class: "button"
-            = link_to "Create new Spectator", new_registrant_path(registrant_type: "spectator", copy_from_previous: false), class: "button"
-
-      = link_to t("cancel"), "#", class: "js--hide_new_registrant"

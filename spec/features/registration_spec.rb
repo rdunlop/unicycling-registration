@@ -13,9 +13,6 @@ describe 'Logging in to the system' do
     context 'within the new_competitor form' do
       before do
         click_link 'Create New Non-Competitor'
-        # within '.display_new_registrant' do
-        #   click_link 'Create new Non-Competitor'
-        # end
       end
 
       context 'filling in the neccesary information' do
@@ -36,9 +33,6 @@ describe 'Logging in to the system' do
   context 'within the new competitor form' do
     before do
       click_link 'Create New Competitor'
-      # within '.display_new_registrant' do
-      #   click_link 'Create new Competitor'
-      # end
     end
 
     context 'filling in the necessary information' do

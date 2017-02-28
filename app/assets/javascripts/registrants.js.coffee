@@ -29,25 +29,6 @@ $(document).ready ->
   $('input, textarea').placeholder()
 
 $ ->
-  $(".js--display_new_registrant").click ->
-    reg_type = $(this).data("registrantType")
-
-    el = $(".display_new_registrant")
-    el.removeClass(el.data('displaying'))
-    el.addClass("show_#{reg_type}_elements")
-    el.data("displaying", "show_#{reg_type}_elements")
-
-    # jQuery UI blind Effect animation
-    $(".display_new_registrant").show("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
-    $("#registrant_registrant_type").val(reg_type)
-    top_pos = el.offset().top
-    $('body').animate({scrollTop:top_pos}, 600)
-    return false
-  $(".js--hide_new_registrant").click ->
-    $(".display_new_registrant").hide("blind", {easing: "easeOutBounce", direction: "up", duration: 1400})
-    return false
-
-$ ->
   $('select#registrant_contact_detail_attributes_country_residence').change (event) ->
     select_wrapper = $('#registrant_contact_detail_attributes_state_wrapper')
 
