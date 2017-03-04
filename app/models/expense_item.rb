@@ -176,19 +176,17 @@ class ExpenseItem < ApplicationRecord
   end
 
   def can_i_add?(num_to_add)
-    if maximum_available.nil?
-      true
-    else
-      num_selected_items + num_to_add <= maximum_available
-    end
+    return true if maximum_available.nil?
+    return true unless has_limits?
+
+    num_selected_items + num_to_add <= maximum_available
   end
 
   def maximum_reached?
-    if maximum_available.nil?
-      false
-    else
-      num_selected_items >= maximum_available
-    end
+    return false if maximum_available.nil?
+    return false unless has_limits?
+
+    num_selected_items >= maximum_available
   end
 
   def has_limits?

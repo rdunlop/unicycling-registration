@@ -119,6 +119,26 @@ describe ExpenseItem do
     expect(@item.to_s).to eq(@item.expense_group.to_s + " - " + @item.name)
   end
 
+  it "has not reached the maximum" do
+    expect(@item.maximum_reached?).to be_falsey
+  end
+
+  it "Can add more entries" do
+    expect(@item.can_i_add?(1)).to be_truthy
+  end
+
+  context "When there is a 0-limit set for the maximum available" do
+    before { @item.maximum_available = 0 }
+
+    it "has not reached the maximum" do
+      expect(@item.maximum_reached?).to be_falsey
+    end
+
+    it "Can add more entries" do
+      expect(@item.can_i_add?(1)).to be_truthy
+    end
+  end
+
   describe "when an associated payment has been created" do
     before(:each) do
       @payment = FactoryGirl.create(:payment_detail, expense_item: @item)
