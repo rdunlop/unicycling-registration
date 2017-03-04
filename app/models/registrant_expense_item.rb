@@ -102,7 +102,7 @@ class RegistrantExpenseItem < ApplicationRecord
 
   def no_more_than_max_per_registrant
     return true if expense_item_id.nil? || registrant.nil?
-    max = expense_item.maximum_per_registrant
+    max = expense_item.maximum_per_registrant.to_i
     return true if max == 0
 
     if registrant.all_expense_items.count(expense_item) == max
