@@ -227,7 +227,7 @@ describe Competitor do
     it "should return the first registrant when two registrants" do
       @comp.registrants << FactoryGirl.create(:registrant)
       @comp.save!
-      expect(@comp.export_id).to eq(@comp.registrants.first.external_id)
+      expect(@comp.registrants.map(&:external_id)).to include(@comp.export_id)
     end
   end
 
