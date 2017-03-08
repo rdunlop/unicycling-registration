@@ -1,4 +1,4 @@
-class ImportResultCsvImporter < BaseImporter
+class Importers::ImportResultCsvImporter < Importers::BaseImporter
   def process(file, start_times)
     return false unless valid_file?(file)
 

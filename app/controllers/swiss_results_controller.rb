@@ -17,7 +17,7 @@ class SwissResultsController < ApplicationController
   end
 
   def import
-    importer = SwissResultImporter.new(@competition, @user)
+    importer = Importers::SwissResultImporter.new(@competition, @user)
 
     if importer.process(params[:file], params[:heat])
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"

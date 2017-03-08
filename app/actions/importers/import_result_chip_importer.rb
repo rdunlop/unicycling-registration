@@ -1,4 +1,4 @@
-class ImportResultChipImporter < BaseImporter
+class Importers::ImportResultChipImporter < Importers::BaseImporter
   # Create ImportResult records from a file.
   # File Format, separated by ';', includes a blank line.
   def process(file, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)

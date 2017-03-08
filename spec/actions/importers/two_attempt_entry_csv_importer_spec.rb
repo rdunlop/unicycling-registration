@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TwoAttemptEntryCsvImporter do
+describe Importers::TwoAttemptEntryCsvImporter do
   def create_competitor(competition, bib_number, heat, lane)
     competitor = FactoryGirl.create(:event_competitor, competition: competition)
     reg = competitor.members.first.registrant

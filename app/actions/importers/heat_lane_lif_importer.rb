@@ -1,4 +1,4 @@
-class HeatLaneLifImporter < BaseImporter
+class Importers::HeatLaneLifImporter < Importers::BaseImporter
   def process(file, heat)
     return false unless valid_file?(file)
 

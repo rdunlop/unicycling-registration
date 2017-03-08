@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TwoAttemptEntryAdvancedImporter do
+describe Importers::TwoAttemptEntryAdvancedImporter do
   describe "when importing IUF-style data" do
     it "can process a normal single line" do
       obj = described_class.new(nil, nil)
