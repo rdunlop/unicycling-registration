@@ -486,32 +486,26 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # return true/false to show whether an expense_group has been chosen by this registrant
   def has_chosen_free_item_from_expense_group(expense_group)
-    registrant_expense_items.each do |rei|
-      next unless rei.free
-      if rei.expense_item.expense_group == expense_group
-        return true
-      end
-    end
-    paid_details.each do |pei|
-      next unless pei.free
-      if pei.expense_item.expense_group == expense_group
-        return true
-      end
-    end
-
-    false
+    has_chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
   end
 
-  def has_chosen_free_item_of_expense_item(expense_item)
+  def has_chosen_free_item_of_expense_item(_expense_item)
+    has_chosen_free_item?{ |expense_item| expense_item == expense_item }
+  end
+
+  # return true if user has chosen or paid for an expense item
+  # given a block which defines what we are comparing to
+  def has_chosen_free_item?
     registrant_expense_items.each do |rei|
       next unless rei.free
-      if rei.expense_item == expense_item
+      if yield(rei.expense_item)
         return true
       end
     end
+
     paid_details.each do |pei|
       next unless pei.free
-      if pei.expense_item == expense_item
+      if yield(pei.expense_item)
         return true
       end
     end
