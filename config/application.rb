@@ -13,7 +13,6 @@ module Workspace
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/lib/judge_points_calculators #{config.root}/lib/overall_champion_calculators #{config.root}/lib/comparable_result_calculators #{config.root}/lib/distance_attempt_managers)
-    config.autoload_paths += %W(#{config.root}/app/models/best_time_formatters)
     config.autoload_paths += %W(#{config.root}/app/forms)
     config.autoload_paths += %W(#{config.root}/app/actions/importers)
 
