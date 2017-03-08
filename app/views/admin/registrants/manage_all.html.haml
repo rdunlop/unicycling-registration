@@ -6,9 +6,9 @@
 %p
   Next Registrant Bib Numbers:
   %br
-  Competitor #{RegistrantType.new('competitor').next_available_bib_number}
+  Competitor #{RegistrantType.for('competitor').next_available_bib_number}
   %br
-  NonCompetitor #{RegistrantType.new('noncompetitor').next_available_bib_number}
+  NonCompetitor #{RegistrantType.for('noncompetitor').next_available_bib_number}
 - can_undelete = policy(Registrant).undelete?
 %table.sortable.searchable
   %thead

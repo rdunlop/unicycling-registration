@@ -184,7 +184,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def registrant_type_model
-    RegistrantType.new(registrant_type)
+    RegistrantType.for(registrant_type)
   end
 
   # uses the CachedSetModel feature to give a key for this registrant's competitors
