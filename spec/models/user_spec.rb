@@ -98,15 +98,6 @@ describe User do
       # @reg2, being a non-competitor, is a higher bib_number than the other two compeittors
       expect(@user.registrants.active).to eq([@reg1, @reg3, @reg2])
     end
-
-    it "determines if the user has a related minor" do
-      expect(@user.has_minor?).to eq(false)
-    end
-    it "says no_minors if there are none" do
-      FactoryGirl.create(:event_configuration, start_date: Date.today)
-      @reg4 = FactoryGirl.create(:minor_competitor, user: @user, birthday: Date.today - 10.years)
-      expect(@user.has_minor?).to eq(true)
-    end
   end
 
   describe "with 3 users" do

@@ -284,6 +284,9 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def minor?
+    return false unless EventConfiguration.singleton.request_responsible_adult?
+    return false if registrant.spectator?
+
     age < 18
   end
 
