@@ -1,4 +1,4 @@
-class OrganizationMembershipsExporter
+class Exporters::OrganizationMembershipsExporter
   def initialize(registrants)
     @registrants = registrants
   end

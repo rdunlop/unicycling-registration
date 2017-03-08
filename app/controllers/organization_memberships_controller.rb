@@ -46,7 +46,7 @@ class OrganizationMembershipsController < ApplicationController
   end
 
   def export
-    exporter = OrganizationMembershipsExporter.new(@registrants)
+    exporter = Exporters::OrganizationMembershipsExporter.new(@registrants)
     output_spreadsheet(exporter.headers, exporter.rows, "registrants_with_membership_details")
   end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ResultsExporter do
+describe Exporters::ResultsExporter do
   let!(:result) { FactoryGirl.create(:result, :overall) }
   let(:exporter) { described_class.new }
 

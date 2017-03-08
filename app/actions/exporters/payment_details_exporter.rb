@@ -1,4 +1,4 @@
-class PaymentDetailsExporter
+class Exporters::PaymentDetailsExporter
   attr_accessor :expense_item
 
   def initialize(expense_item)

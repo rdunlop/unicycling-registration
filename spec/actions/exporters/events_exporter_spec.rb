@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EventsExporter do
+describe Exporters::EventsExporter do
   before do
     @ev = FactoryGirl.create(:event)
   end
