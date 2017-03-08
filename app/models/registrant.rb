@@ -451,8 +451,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     has_chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
   end
 
-  def has_chosen_free_item_of_expense_item(_expense_item)
-    has_chosen_free_item?{ |expense_item| expense_item == expense_item }
+  def has_chosen_free_item_of_expense_item(target_expense_item)
+    has_chosen_free_item?{ |expense_item| expense_item == target_expense_item }
   end
 
   # return true if user has chosen or paid for an expense item
@@ -637,7 +637,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def not_exceeding_expense_item_limits
-    expense_items = registrant_expense_items.map{|rei| rei.new_record? ? rei.expense_item : nil}.reject { |ei| ei.nil? }
+    expense_items = registrant_expense_items.select(&:new_record?).map(&:expense_item).reject(&:nil?)
     expense_items.uniq.each do |ei|
       num_ei = expense_items.count(ei)
       unless ei.can_i_add?(num_ei)
