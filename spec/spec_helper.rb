@@ -88,6 +88,10 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
+  config.before(:each) do
+    EventConfiguration.remove_instance_variable(:@singleton)
+  end
+
   config.before(:each, type: :view) do
     assign(:config, EventConfiguration.new)
   end
