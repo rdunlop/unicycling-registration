@@ -4,7 +4,7 @@ class RegistrantType
     when 'competitor'
       RegistrantType::Competitor.new
     when 'noncompetitor'
-      RegistrantType::Noncmpetitor.new
+      RegistrantType::Noncompetitor.new
     else
       RegistrantType::Spectator.new
     end
