@@ -209,8 +209,13 @@ class EventConfiguration < ApplicationRecord
     usa?
   end
 
+  # Display State instead of Country
+  def state?
+    usa?
+  end
+
   def self.singleton
-    EventConfiguration.includes(:translations).first || EventConfiguration.new
+    @singleton ||= EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
   def self.paypal_base_url

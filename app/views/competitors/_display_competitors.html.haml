@@ -16,10 +16,7 @@
         %th.sign_up # Members
       %th.sign_up Age
       %th.sign_up Gender
-      - if @config.usa?
-        %th.sign_up State
-      - else
-        %th.sign_up Country
+      %th.sign_up= Competitor.state_or_country_description
       %th.sign_up Age Group
       - if @competition.event.accepts_music_uploads?
         %th.sign_up Music
@@ -39,10 +36,7 @@
           %td= competitor.members.active.count
         %td= competitor.age
         %td= competitor.gender
-        - if @config.usa?
-          %td= competitor.state
-        - else
-          %td= competitor.country
+        %td= competitor.state_or_country
         %td= competitor.age_group_entry_description
         - if @competition.event.accepts_music_uploads?
           %td= competitor.has_music?

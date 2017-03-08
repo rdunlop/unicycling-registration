@@ -11,7 +11,7 @@
         %th Name
         - if @competition.age_group_type
           %th Age Group
-        %th= Competitor.state_or_country_description(@config.usa?)
+        %th= Competitor.state_or_country_description
 
     %tbody
       - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
@@ -30,4 +30,4 @@
                 %br
             - if @competition.age_group_type
               %td= comp.age_group_entry_description
-            %td= comp.state_or_country(@config.usa?)
+            %td= comp.state_or_country

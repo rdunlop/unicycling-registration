@@ -330,8 +330,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
 
-  def state_or_country(usa)
-    if usa
+  def state_or_country(state = EventConfiguration.singleton.state?)
+    if state
       state
     else
       country

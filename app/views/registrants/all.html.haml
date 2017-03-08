@@ -8,7 +8,7 @@
         %th= t(".name")
         %th= t(".registrant_type")
         %th= t(".club")
-        - if @config.usa?
+        - if @config.state?
           %th= t(".state")
         - else
           %th= t(".country")
@@ -19,7 +19,4 @@
           %td= registrant
           %td= registrant.registrant_type.capitalize
           %td= registrant.club
-          - if @config.usa?
-            %td= registrant.state
-          - else
-            %td= registrant.country
+          %td= registrant.state_or_country
