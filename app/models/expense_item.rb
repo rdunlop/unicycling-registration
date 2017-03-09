@@ -52,6 +52,10 @@ class ExpenseItem < ApplicationRecord
   after_create :create_reg_items
   after_create :create_cost_item_registrant_items
 
+  def self.for_event
+    where(cost_element_type: "Event")
+  end
+
   def self.ordered
     order(:expense_group_id, :position)
   end
