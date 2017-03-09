@@ -329,6 +329,12 @@ class EventConfiguration < ApplicationRecord
     organization_membership_type == "usa"
   end
 
+  def has_expenses?
+    return @has_expenses if defined?(@has_expenses)
+
+    @has_expenses = ExpenseItem.any_in_use?
+  end
+
   private
 
   def is_date_in_the_past?(date)

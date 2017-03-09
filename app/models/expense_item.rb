@@ -60,6 +60,10 @@ class ExpenseItem < ApplicationRecord
     joins(:expense_group).merge(ExpenseGroup.user_manageable)
   end
 
+  def self.any_in_use?
+    where("cost_cents > 0").any?
+  end
+
   # items paid for
   def paid_items
     payment_details.paid.where(refunded: false)
