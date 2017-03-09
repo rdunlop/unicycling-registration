@@ -52,7 +52,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def expenses?
-    update?
+    update? && config.has_expenses?
   end
 
   def wicked_finish?
