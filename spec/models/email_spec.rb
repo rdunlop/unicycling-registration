@@ -47,6 +47,11 @@ describe Email do
       @email.event_id = @event.id
       expect(@email.filtered_user_emails).to match_array([@reg.user.email])
     end
+
+    it "can include the email in a category-search email" do
+      @email.signed_up_category_id = @event.category.id
+      expect(@email.filtered_user_emails).to match_array([@reg.user.email])
+    end
   end
 
   describe "with a registrant who has paid for an item" do
