@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OrganizationMembershipsExporter do
+describe Exporters::OrganizationMembershipsExporter do
   before do
     FactoryGirl.create_list(:competitor, 5)
   end

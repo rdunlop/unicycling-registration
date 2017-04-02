@@ -184,7 +184,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def registrant_type_model
-    RegistrantType.new(registrant_type)
+    RegistrantType.for(registrant_type)
   end
 
   # uses the CachedSetModel feature to give a key for this registrant's competitors
@@ -284,6 +284,9 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def minor?
+    return false unless EventConfiguration.singleton.request_responsible_adult?
+    return false if spectator?
+
     age < 18
   end
 
@@ -327,8 +330,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
 
-  def state_or_country(usa)
-    if usa
+  def state_or_country(state = EventConfiguration.singleton.state?)
+    if state
       state
     else
       country
@@ -437,78 +440,34 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     active_competitors(event).first
   end
 
-  def describe_event(event)
-    details = describe_event_hash(event)
-    description = details[:description]
+  delegate :describe_event, :describe_event_hash, :describe_additional_selection, to: :presenter
 
-    unless details[:category].nil?
-      description += " - Category: " + details[:category]
-    end
-
-    unless details[:additional].nil?
-      description += " - " + details[:additional]
-    end
-    description
-  end
-
-  def describe_event_hash(event)
-    results = {}
-    results[:description] = event.name
-
-    resu = signed_up_events.detect { |sue| sue.event_id == event.id }
-    # only add the Category if there are more than 1
-    results[:category] = (resu.event_category_name unless resu.nil?)
-
-    results[:additional] = describe_additional_selection(event)
-
-    results
-  end
-
-  def describe_additional_selection(event)
-    results = []
-
-    event.event_choices.each do |ec|
-      my_val = registrant_choices.find_by(event_choice_id: ec.id)
-      if my_val.present? && my_val.has_value?
-        results << ec.label + ": " + my_val.describe_value
-      end
-    end
-
-    registrant_best_times.where(event: event).find_each do |rbt|
-      results << rbt.to_s
-    end
-
-    results.join(" - ") if results.any?
+  def presenter
+    RegistrantPresenter.new(self)
   end
 
   # return true/false to show whether an expense_group has been chosen by this registrant
   def has_chosen_free_item_from_expense_group(expense_group)
-    registrant_expense_items.each do |rei|
-      next unless rei.free
-      if rei.expense_item.expense_group == expense_group
-        return true
-      end
-    end
-    paid_details.each do |pei|
-      next unless pei.free
-      if pei.expense_item.expense_group == expense_group
-        return true
-      end
-    end
-
-    false
+    has_chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
   end
 
-  def has_chosen_free_item_of_expense_item(expense_item)
+  def has_chosen_free_item_of_expense_item(target_expense_item)
+    has_chosen_free_item?{ |expense_item| expense_item == target_expense_item }
+  end
+
+  # return true if user has chosen or paid for an expense item
+  # given a block which defines what we are comparing to
+  def has_chosen_free_item?
     registrant_expense_items.each do |rei|
       next unless rei.free
-      if rei.expense_item == expense_item
+      if yield(rei.expense_item)
         return true
       end
     end
+
     paid_details.each do |pei|
       next unless pei.free
-      if pei.expense_item == expense_item
+      if yield(pei.expense_item)
         return true
       end
     end
@@ -678,7 +637,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def not_exceeding_expense_item_limits
-    expense_items = registrant_expense_items.map{|rei| rei.new_record? ? rei.expense_item : nil}.reject { |ei| ei.nil? }
+    expense_items = registrant_expense_items.select(&:new_record?).map(&:expense_item).reject(&:nil?)
     expense_items.uniq.each do |ei|
       num_ei = expense_items.count(ei)
       unless ei.can_i_add?(num_ei)

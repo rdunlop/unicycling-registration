@@ -7,7 +7,7 @@ class ExportController < ApplicationController
   end
 
   def download_competitors_for_timers
-    exporter = CompetitorsExporter.new
+    exporter = Exporters::CompetitorsExporter.new
     csv_string = CSV.generate do |csv|
       csv << exporter.headers
       exporter.rows.each do |row|
@@ -21,7 +21,7 @@ class ExportController < ApplicationController
   end
 
   def download_events
-    exporter = EventsExporter.new
+    exporter = Exporters::EventsExporter.new
     headers = exporter.headers
     data = exporter.rows
     output_spreadsheet(headers, data, "download_events#{Date.today}")
@@ -29,7 +29,7 @@ class ExportController < ApplicationController
 
   def download_payment_details
     ei = ExpenseItem.find(params[:data][:expense_item_id])
-    exporter = PaymentDetailsExporter.new(ei)
+    exporter = Exporters::PaymentDetailsExporter.new(ei)
     headers = exporter.headers
     data = exporter.rows
 
@@ -37,7 +37,7 @@ class ExportController < ApplicationController
   end
 
   def results
-    exporter = ResultsExporter.new
+    exporter = Exporters::ResultsExporter.new
     headers = exporter.headers
     data = exporter.rows
     output_spreadsheet(headers, data, "results")

@@ -8,7 +8,7 @@ describe ExportController do
 
   describe "GET download_competitors_for_timers" do
     before do
-      FactoryGirl.create(:event_configuration, short_name: "this is the event")
+      EventConfiguration.singleton.update(short_name: "this is the event")
     end
 
     it "can download the file" do

@@ -1,4 +1,4 @@
-class ResultsExporter
+class Exporters::ResultsExporter
   def headers
     ["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result", "Details", "Age Group"]
   end

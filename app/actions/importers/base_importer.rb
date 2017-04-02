@@ -1,4 +1,4 @@
-class BaseImporter
+class Importers::BaseImporter
   attr_accessor :competition, :user, :num_rows_processed, :errors
 
   def initialize(competition, user)

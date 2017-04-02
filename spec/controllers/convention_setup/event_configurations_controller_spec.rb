@@ -76,11 +76,13 @@ describe ConventionSetup::EventConfigurationsController do
   end
 
   describe "as a logged in user" do
-    before(:each) do
+    let(:event_configuration) { EventConfiguration.singleton }
+
+    before do
       @user = FactoryGirl.create(:user)
       sign_in @user
+      event_configuration.update(valid_attributes)
     end
-    let!(:event_configuration) { EventConfiguration.create! valid_attributes }
 
     it "Cannot edit configuration" do
       get :advanced_settings, params: { id: event_configuration.to_param }

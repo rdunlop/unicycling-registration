@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RegistrantType do
   context "as a competitor" do
-    subject(:registrant_type) { described_class.new("competitor") }
+    subject(:registrant_type) { described_class.for("competitor") }
 
     it "initially assigns 1" do
       expect(subject.next_available_bib_number).to eq(1)
@@ -19,7 +19,7 @@ describe RegistrantType do
   end
 
   context "as a noncompetitor" do
-    subject(:registrant_type) { described_class.new("noncompetitor") }
+    subject(:registrant_type) { described_class.for("noncompetitor") }
 
     it "initially assigns 2001" do
       expect(subject.next_available_bib_number).to eq(2001)

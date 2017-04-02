@@ -37,6 +37,8 @@ RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
   config.include ActiveSupport::Testing::TimeHelpers
 
+  config.example_status_persistence_file_path = "examples.txt"
+
   config.render_views
   # ## Mock Framework
   #
@@ -86,6 +88,12 @@ RSpec.configure do |config|
     example.run
     Rails.cache.clear
     ActionController::Base.perform_caching = caching
+  end
+
+  config.before(:each) do
+    if EventConfiguration.instance_variable_defined?(:@singleton)
+      EventConfiguration.remove_instance_variable(:@singleton)
+    end
   end
 
   config.before(:each, type: :view) do

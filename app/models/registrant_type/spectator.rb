@@ -1,0 +1,30 @@
+class RegistrantType
+  class Spectator
+    def free_options(_expense_group)
+      nil
+    end
+
+    # Returns a collection of ExpenseGroups which are required to have items selected
+    def required_free_expense_groups
+      []
+    end
+
+    def required_expense_groups
+      []
+    end
+
+    def next_available_bib_number
+      max_bib_number = current_max_bib_number
+      return (max_bib_number + 1) if max_bib_number.present?
+
+      # defaults
+      2001
+    end
+
+    private
+
+    def current_max_bib_number
+      Registrant.where.not(registrant_type: 'competitor').maximum("bib_number")
+    end
+  end
+end

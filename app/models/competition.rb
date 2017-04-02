@@ -225,10 +225,6 @@ class Competition < ApplicationRecord
     to_s + " (#{event_class})"
   end
 
-  def no_source_selected(attributes)
-    attributes['event_category_id'].blank? && attributes['competition_id'].blank?
-  end
-
   def num_assigned_registrants
     Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_assigned_registrants") do
       registrants.count
@@ -245,14 +241,6 @@ class Competition < ApplicationRecord
     Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_results") do
       competitors.to_a.count{|comp| comp.has_result? }
     end
-  end
-
-  def has_results_for_all_competitors?
-    num_results > 0 && num_competitors == num_results
-  end
-
-  def all_registrants_are_competitors?
-    signed_up_registrants.count == num_assigned_registrants
   end
 
   def find_competitor_with_bib_number(bib_number)
@@ -558,6 +546,10 @@ class Competition < ApplicationRecord
   end
 
   private
+
+  def no_source_selected(attributes)
+    attributes['event_category_id'].blank? && attributes['competition_id'].blank?
+  end
 
   def clear_num_members_per_compeititor_of_strings
     self.num_members_per_competitor = nil if num_members_per_competitor == ""

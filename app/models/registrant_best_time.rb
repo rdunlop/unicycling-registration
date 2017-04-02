@@ -54,9 +54,9 @@ class RegistrantBestTime < ApplicationRecord
   def formatter
     case event.best_time_format
     when "h:mm"
-      HourMinuteFormatter
+      BestTimeFormatter::HourMinuteFormatter
     when "(m)m:ss.xx"
-      MinuteSecondFormatter
+      BestTimeFormatter::MinuteSecondFormatter
     end
   end
 

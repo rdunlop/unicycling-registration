@@ -127,7 +127,7 @@ class ImportResultsController < ApplicationController
   end
 
   def import_chip
-    importer = ImportResultChipImporter.new(@competition, @user)
+    importer = Importers::ImportResultChipImporter.new(@competition, @user)
 
     if importer.process(params[:file],
                         params[:bib_number_column_number].to_i - 1,
@@ -147,7 +147,7 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
-    importer = ImportResultCsvImporter.new(@competition, @user)
+    importer = Importers::ImportResultCsvImporter.new(@competition, @user)
 
     if importer.process(params[:file], @is_start_time)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"

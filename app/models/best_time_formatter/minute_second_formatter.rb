@@ -1,4 +1,4 @@
-class MinuteSecondFormatter
+class BestTimeFormatter::MinuteSecondFormatter
   def self.hint
     "(m)m:ss.xx"
   end

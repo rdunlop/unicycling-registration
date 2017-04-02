@@ -6,9 +6,9 @@
 %p
   Next Registrant Bib Numbers:
   %br
-  Competitor #{RegistrantType.new('competitor').next_available_bib_number}
+  Competitor #{RegistrantType.for('competitor').next_available_bib_number}
   %br
-  NonCompetitor #{RegistrantType.new('noncompetitor').next_available_bib_number}
+  NonCompetitor #{RegistrantType.for('noncompetitor').next_available_bib_number}
 - can_undelete = policy(Registrant).undelete?
 %table.sortable.searchable
   %thead
@@ -18,10 +18,11 @@
       %th= Registrant.human_attribute_name(:first_name)
       %th= Registrant.human_attribute_name(:age)
       %th= Registrant.human_attribute_name(:gender)
-      - if @config.usa?
-        %th= ContactDetail.human_attribute_name(:state)
-      - else
-        %th= ContactDetail.human_attribute_name(:country)
+      %th
+        - if @config.state?
+          = ContactDetail.human_attribute_name(:state)
+        - else
+          = ContactDetail.human_attribute_name(:country)
       %th.non_printable= t(".summary")
       %th.non_printable= t("edit")
       %th.non_printable= t(".deleted_question")
@@ -46,10 +47,7 @@
             %td= registrant.first_name
             %td= registrant.age
             %td= registrant.gender
-            - if @config.usa?
-              %td= registrant.state
-            - else
-              %td= registrant.country
+            %td= registrant.state_or_country
             %td.non_printable
               = link_to t(".summary"), registrant_path(registrant)
               = link_to t("pdf"), registrant_path(registrant, :format => :pdf)

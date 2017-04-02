@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExternalResultImporter do
+describe Importers::ExternalResultImporter do
   def create_competitor(competition, bib_number)
     competitor = FactoryGirl.create(:event_competitor, competition: competition)
     reg = competitor.members.first.registrant

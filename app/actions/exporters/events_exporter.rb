@@ -1,4 +1,4 @@
-class EventsExporter
+class Exporters::EventsExporter
   def headers
     [
       "ID",

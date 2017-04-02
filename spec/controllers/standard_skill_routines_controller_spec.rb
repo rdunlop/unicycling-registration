@@ -16,7 +16,7 @@ require 'spec_helper'
 
 describe StandardSkillRoutinesController do
   before do
-    FactoryGirl.create(:event_configuration, standard_skill: true, standard_skill_closed_date: 1.week.from_now)
+    EventConfiguration.singleton.update(standard_skill: true, standard_skill_closed_date: 1.week.from_now)
     @user = FactoryGirl.create(:user)
     @registrant = FactoryGirl.create(:competitor, user: @user)
     sign_in @user
@@ -69,7 +69,7 @@ describe StandardSkillRoutinesController do
 
     describe "when standard skill is closed" do
       before(:each) do
-        EventConfiguration.first.update_attribute(:standard_skill_closed_date, Date.yesterday)
+        EventConfiguration.singleton.update_attribute(:standard_skill_closed_date, Date.yesterday)
       end
 
       it "cannot create a new routine" do

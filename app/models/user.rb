@@ -156,15 +156,6 @@ class User < ApplicationRecord
     accessible_registrants.inject(0.to_money){|memo, reg| memo + reg.amount_owing }
   end
 
-  def has_minor?
-    registrants.active.each do |reg|
-      if reg.minor?
-        return true
-      end
-    end
-    false
-  end
-
   # Internal: Prevent confirmation from being required for staging
   # server users
   # This overrides the devise:confirmable method to ensure no users require confirmation

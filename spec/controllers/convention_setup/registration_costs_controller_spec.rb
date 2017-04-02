@@ -66,7 +66,7 @@ describe ConventionSetup::RegistrationCostsController do
     end
 
     context "in a convention without noncompetitors" do
-      before { FactoryGirl.create(:event_configuration, noncompetitors: false) }
+      before { EventConfiguration.singleton.update(noncompetitors: false) }
 
       it "only lists competitor options" do
         get :new

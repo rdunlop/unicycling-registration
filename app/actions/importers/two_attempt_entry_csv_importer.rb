@@ -1,4 +1,4 @@
-class TwoAttemptEntryCsvImporter < BaseImporter
+class Importers::TwoAttemptEntryCsvImporter < Importers::BaseImporter
   # Create TwoAttemptEntry records from a file.
   def process(file, start_times)
     return false unless valid_file?(file)

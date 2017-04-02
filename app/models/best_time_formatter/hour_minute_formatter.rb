@@ -1,4 +1,4 @@
-class HourMinuteFormatter
+class BestTimeFormatter::HourMinuteFormatter
   def self.hint
     "h:mm"
   end

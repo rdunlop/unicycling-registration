@@ -9,7 +9,7 @@
         %th Name
         - if @competition.age_group_type
           %th Age Group
-        %th= Competitor.state_or_country_description(@config.usa?)
+        %th= Competitor.state_or_country_description
 
     %tbody
       - competitors.each do |comp|
@@ -33,4 +33,4 @@
                 %br
             - if @competition.age_group_type
               %td= comp.age_group_entry_description
-            %td= comp.state_or_country(@config.usa?)
+            %td= comp.state_or_country

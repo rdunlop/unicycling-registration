@@ -53,7 +53,7 @@ class ContactDetail < ApplicationRecord
     validates :emergency_name, :emergency_relationship, :emergency_primary_phone, presence: true
   end
 
-  with_options if: ["EventConfiguration.singleton.request_responsible_adult?", :minor?] do
+  with_options if: :minor? do
     validates :responsible_adult_name, :responsible_adult_phone, presence: true
   end
 
@@ -61,13 +61,11 @@ class ContactDetail < ApplicationRecord
 
   after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
 
+  delegate :minor?, to: :registrant, allow_nil: true
+
   # Italians are required to enter VAT_Number and Birthplace
   def vat_required?
     EventConfiguration.singleton.italian_requirements? && country_residence == "IT"
-  end
-
-  def minor?
-    registrant && !registrant.spectator? && registrant.age < 18
   end
 
   def country_code

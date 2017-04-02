@@ -4,7 +4,7 @@ describe SampleData::RegistrantsController do
   before(:each) do
     @reg = FactoryGirl.create(:registrant) # so that WheelSizes are created
     @user = FactoryGirl.create(:super_admin_user)
-    FactoryGirl.create(:event_configuration, test_mode: true)
+    EventConfiguration.singleton.update(test_mode: true)
     sign_in @user
   end
 
