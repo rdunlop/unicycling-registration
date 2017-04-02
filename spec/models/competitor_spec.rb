@@ -171,7 +171,9 @@ describe Competitor do
   end
 
   describe "when event configuration defines the start date of convention" do
-    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 1, 1)) }
+    before do
+      EventConfiguration.singleton.update(start_date: Date.new(2013, 1, 1))
+    end
 
     it "should have updated age when a members age is updated" do
       registrant = @comp.members.first.registrant
@@ -241,7 +243,7 @@ describe Competitor do
 
   describe "when it has multiple members" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2010, 1, 1))
+      EventConfiguration.singleton.update(start_date: Date.new(2010, 1, 1))
       member = @comp.reload.members.first
       @reg1 = member.registrant
 

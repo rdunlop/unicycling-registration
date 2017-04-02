@@ -28,6 +28,7 @@ dump.rdb
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/examples.txt
 
 # Ignore simplecov report
 /coverage

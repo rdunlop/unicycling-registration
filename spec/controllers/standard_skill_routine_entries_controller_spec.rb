@@ -91,7 +91,7 @@ describe StandardSkillRoutineEntriesController do
 
     describe "when standard_skill is closed" do
       before(:each) do
-        FactoryGirl.create(:event_configuration, standard_skill_closed_date: Date.yesterday)
+        EventConfiguration.singleton.update(standard_skill_closed_date: Date.yesterday)
       end
 
       it "Cannot create new entries" do

@@ -3,7 +3,8 @@ require 'spec_helper'
 describe PaypalPaymentsController do
   before(:each) do
     @user = FactoryGirl.create(:user)
-    @config = FactoryGirl.create(:event_configuration)
+    @config = EventConfiguration.singleton
+    @config.update(FactoryGirl.attributes_for(:event_configuration))
     sign_in @user
   end
 

@@ -4,7 +4,7 @@ describe SampleData::CompetitionsController do
   before(:each) do
     FactoryGirl.create(:event)
     @user = FactoryGirl.create(:super_admin_user)
-    FactoryGirl.create(:event_configuration, test_mode: true)
+    EventConfiguration.singleton.update(test_mode: true)
     sign_in @user
   end
 

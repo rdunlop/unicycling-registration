@@ -37,6 +37,8 @@ RSpec.configure do |config|
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
   config.include ActiveSupport::Testing::TimeHelpers
 
+  config.example_status_persistence_file_path = "examples.txt"
+
   config.render_views
   # ## Mock Framework
   #
