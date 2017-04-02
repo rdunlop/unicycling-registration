@@ -23,10 +23,9 @@ class CouponCode < ApplicationRecord
 
   before_validation { |cc| cc.code = cc.code.downcase }
 
-  validates :name, :code, :description, presence: true
+  validates :name, :code, :description, :price_cents, presence: true
   validates :code, uniqueness: true
   validates :max_num_uses, numericality: { greater_than_or_equal_to: 0 }
-  validates :price_cents, presence: true
 
   monetize :price_cents
 

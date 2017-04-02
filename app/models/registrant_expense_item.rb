@@ -56,14 +56,6 @@ class RegistrantExpenseItem < ApplicationRecord
     ret
   end
 
-  def custom_cost_present
-    if !expense_item.nil? && expense_item.has_custom_cost?
-      if custom_cost_cents.nil? || custom_cost_cents <= 0
-        errors.add(:base, "Must specify a custom cost for this item")
-      end
-    end
-  end
-
   def cost
     return 0 if free
     return custom_cost if expense_item.has_custom_cost?
@@ -80,6 +72,8 @@ class RegistrantExpenseItem < ApplicationRecord
   def total_cost
     (cost + tax).round(2)
   end
+
+  private
 
   def only_one_free_per_expense_group
     return true if expense_item_id.nil? || registrant.nil? || (free == false)
@@ -107,6 +101,14 @@ class RegistrantExpenseItem < ApplicationRecord
 
     if registrant.all_expense_items.count(expense_item) == max
       errors.add(:base, "Each Registrant is only permitted #{max} of #{expense_item}")
+    end
+  end
+
+  def custom_cost_present
+    if !expense_item.nil? && expense_item.has_custom_cost?
+      if custom_cost_cents.nil? || custom_cost_cents <= 0
+        errors.add(:base, "Must specify a custom cost for this item")
+      end
     end
   end
 end
