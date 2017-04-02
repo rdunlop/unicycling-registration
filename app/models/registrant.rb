@@ -42,27 +42,31 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
-  has_one :contact_detail, dependent: :destroy, autosave: true, inverse_of: :registrant
-  has_one :standard_skill_routine, dependent: :destroy
+  with_options dependent: :destroy do
+    has_one :contact_detail, autosave: true, inverse_of: :registrant
+    has_one :standard_skill_routine
+  end
 
   # may move into another object
-  has_many :registrant_best_times, dependent: :destroy, inverse_of: :registrant
-  has_many :registrant_choices, dependent: :destroy, inverse_of: :registrant
-  has_many :registrant_event_sign_ups, dependent: :destroy, inverse_of: :registrant
-  has_many :signed_up_events, -> { where(signed_up: true) }, class_name: 'RegistrantEventSignUp'
-  has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, dependent: :destroy, autosave: true
-  has_many :volunteer_choices, dependent: :destroy, inverse_of: :registrant
-  has_many :volunteer_opportunities, through: :volunteer_choices
+  with_options dependent: :destroy do
+    has_many :registrant_best_times, inverse_of: :registrant
+    has_many :registrant_choices, inverse_of: :registrant
+    has_many :registrant_event_sign_ups, inverse_of: :registrant
+    has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, autosave: true
+    has_many :payment_details, -> {includes :payment}
+    has_many :additional_registrant_accesses
+    has_many :registrant_group_members
+    has_many :songs
+    has_many :volunteer_choices, inverse_of: :registrant
+  end
 
-  has_many :payment_details, -> {includes :payment}, dependent: :destroy
-  has_many :additional_registrant_accesses, dependent: :destroy
-  has_many :registrant_group_members, dependent: :destroy
-  has_many :songs, dependent: :destroy
+  has_many :signed_up_events, -> { where(signed_up: true) }, class_name: 'RegistrantEventSignUp'
 
   # THROUGH
   has_many :event_choices, through: :registrant_choices
   has_many :events, through: :event_choices
   has_many :categories, through: :events
+  has_many :volunteer_opportunities, through: :volunteer_choices
 
   has_many :expense_items, through: :registrant_expense_items
 
@@ -110,8 +114,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def self.statuses
     ["blank", "base_details", "events", "contact_details", "active"]
   end
-  validates :status, presence: true
-  validates :status, inclusion: { in: statuses }
+  validates :status, inclusion: { in: statuses }, presence: true
 
   # Base details
 
@@ -121,14 +124,19 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :user_id, presence: true
 
   # necessary for comp/non-comp only (not spectators):
-  validates :birthday, :gender, presence: true, if: :comp_noncomp_past_step_1?
-  validates :gender, inclusion: {in: %w(Male Female), message: "%{value} must be either 'Male' or 'Female'"}, if: :comp_noncomp_past_step_1?
-  validate  :gender_present, if: :comp_noncomp_past_step_1?
-  before_validation :set_age, if: :comp_noncomp_past_step_1?
-  validates :age, presence: true, if: :comp_noncomp_past_step_1?
-  before_validation :set_default_wheel_size, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
-  validates :default_wheel_size, presence: true, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
-  validate :check_default_wheel_size_for_age, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
+  with_options if: :comp_noncomp_past_step_1? do
+    validates :birthday, :gender, presence: true
+    validates :gender, inclusion: {in: %w(Male Female), message: "%{value} must be either 'Male' or 'Female'"}
+    validate  :gender_present
+    before_validation :set_age
+    validates :age, presence: true
+  end
+
+  with_options if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?] do
+    before_validation :set_default_wheel_size
+    validates :default_wheel_size, presence: true
+    validate :check_default_wheel_size_for_age
+  end
 
   # events
   validate :choices_combination_valid, if: :past_step_2?
