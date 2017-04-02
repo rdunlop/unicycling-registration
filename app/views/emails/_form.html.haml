@@ -38,5 +38,9 @@
 
 .row
   .small-12.columns
+    = f.label :signed_up_category_id, "Users who have SIGNED UP to any event in this category"
+    = f.select :signed_up_category_id, Category.all.map{ |category| [category, category.id] }, {include_blank: true}, class: "chosen-select"
+.row
+  .small-12.columns
     = f.label :expense_item_id, "Users who have PAID for a particular Expense Item"
     = f.select :expense_item_id, ExpenseItem.all.map{ |ei| [ei.to_s, ei.id] }, {include_blank: true}, class: "chosen-select"

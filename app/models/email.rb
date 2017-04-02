@@ -11,6 +11,7 @@ class Email
   attribute :non_confirmed_organization_members, Boolean
   attribute :competition_id, Array
   attribute :category_id, Integer
+  attribute :signed_up_category_id, Integer
   attribute :event_id, Integer
   attribute :expense_item_id, Integer
 
@@ -40,6 +41,8 @@ class Email
       "Emails of users/registrants associated with any competition in #{category}"
     elsif event_id.present?
       "Emails of users/registrants Signed up for the Event: #{event}"
+    elsif signed_up_category_id.present?
+      "Emails of users/registrants Signed up for any event in #{signed_up_category}"
     elsif expense_item_id.present?
       "Emails of users/registrants who have Paid for #{expense_item}"
     else
@@ -72,6 +75,10 @@ class Email
       category.events.map(&:competitor_registrants).flatten.map(&:user)
     elsif event_id.present?
       event.registrant_event_sign_ups.signed_up.map(&:registrant).map(&:user).uniq
+    elsif signed_up_category_id.present?
+      signed_up_category.events.map do |event|
+        event.registrant_event_sign_ups.signed_up.map(&:registrant).map(&:user).uniq
+      end.flatten.uniq
     elsif expense_item_id.present?
       expense_item.paid_items.map(&:registrant).map(&:user).uniq
     else
@@ -114,6 +121,10 @@ class Email
 
   def category
     Category.find(category_id) if category_id.present?
+  end
+
+  def signed_up_category
+    Category.find(signed_up_category_id) if signed_up_category_id.present?
   end
 
   def event

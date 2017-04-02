@@ -62,12 +62,13 @@ describe PaypalPaymentsController do
           expect(@payment.transaction_id).to eq("12345")
         end
         it "sets the completed_date to today" do
-          t = DateTime.now
-          allow(DateTime).to receive(:now).and_return(t)
-          post :notification, params: attributes
-          expect(response).to be_success
-          @payment.reload
-          expect(@payment.completed_date.to_i).to eq(t.to_i)
+          travel_to DateTime.now do # freeze time
+            t = DateTime.now
+            post :notification, params: attributes
+            expect(response).to be_success
+            @payment.reload
+            expect(@payment.completed_date.to_i).to eq(t.to_i)
+          end
         end
         it "sets the payment_date to the received payment_date string" do
           post :notification, params: attributes

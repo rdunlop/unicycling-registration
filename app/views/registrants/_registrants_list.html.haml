@@ -5,9 +5,10 @@
       = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => false }
     - shared_list.each do |registrant|
       = render :partial => "registrant_list_entry", :object => registrant, :locals => {:shared => true }
-    .row
-      .small-10.columns.text-right
-        %strong= t(".total_amount_owing")
-      .small-2.columns
-        %strong= print_formatted_currency(@total_owing)
+    - if ExpenseItem.any_in_use? || !@total_owing.zero?
+      .row
+        .small-10.columns.text-right
+          %strong= t(".total_amount_owing")
+        .small-2.columns
+          %strong= print_formatted_currency(@total_owing)
 = render :partial => "/registrants/pay_now", :locals => {:total_owing => @total_owing }
