@@ -454,46 +454,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     RegistrantPresenter.new(self)
   end
 
-  # return true/false to show whether an expense_group has been chosen by this registrant
-  def has_chosen_free_item_from_expense_group(expense_group)
-    has_chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
-  end
-
-  def has_chosen_free_item_of_expense_item(target_expense_item)
-    has_chosen_free_item?{ |expense_item| expense_item == target_expense_item }
-  end
-
-  # return true if user has chosen or paid for an expense item
-  # given a block which defines what we are comparing to
-  def has_chosen_free_item?
-    registrant_expense_items.each do |rei|
-      next unless rei.free
-      if yield(rei.expense_item)
-        return true
-      end
-    end
-
-    paid_details.each do |pei|
-      next unless pei.free
-      if yield(pei.expense_item)
-        return true
-      end
-    end
-
-    false
-  end
-
   def expense_item_is_free(expense_item)
-    free_options = registrant_type_model.free_options(expense_item.expense_group)
-
-    case free_options
-    when "One Free In Group", "One Free In Group REQUIRED"
-      return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
-    when "One Free of Each In Group"
-      return !has_chosen_free_item_of_expense_item(expense_item)
-    else
-      return false
-    end
+    ExpenseItemFreeChecker.new(self, expense_item).expense_item_is_free?
   end
 
   def organization_membership_confirmed?

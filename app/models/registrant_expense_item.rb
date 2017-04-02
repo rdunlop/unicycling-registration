@@ -78,20 +78,10 @@ class RegistrantExpenseItem < ApplicationRecord
   def only_one_free_per_expense_group
     return true if expense_item_id.nil? || registrant.nil? || (free == false)
 
-    eg = expense_item.expense_group
-    free_options = registrant.registrant_type_model.free_options(eg)
-
-    case free_options
-    when "One Free In Group", "One Free In Group REQUIRED"
-      if registrant.has_chosen_free_item_from_expense_group(eg)
-        errors.add(:base, "Only 1 free item is permitted in this expense_group")
-      end
-    when "One Free of Each In Group"
-      if registrant.has_chosen_free_item_of_expense_item(expense_item)
-        errors.add(:base, "Only 1 free item of this item is permitted")
-      end
+    free_item_checker = ExpenseItemFreeChecker.new(registrant, expense_item)
+    if free_item_checker.free_item_already_exists?
+      errors.add(:base, free_item_checker.error_message)
     end
-    true
   end
 
   def no_more_than_max_per_registrant
