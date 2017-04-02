@@ -97,7 +97,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # always present validations
   before_validation :set_bib_number, on: :create
   validates :bib_number, presence: true
-  validates :registrant_type, inclusion: { in: %w(competitor noncompetitor spectator) }, presence: true
+  validates :registrant_type, inclusion: { in: RegistrantType::TYPES }, presence: true
   validates :ineligible, :deleted, inclusion: { in: [true, false] } # because it's a boolean
   validate :no_payments_when_deleted
   before_validation :set_access_code
@@ -159,10 +159,6 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :started, -> { where.not(status: "blank").active_or_incomplete}
   scope :not_deleted, -> { where(deleted: false) }
 
-  def spectator?
-    registrant_type == 'spectator'
-  end
-
   def validated?
     status == "active"
   end
@@ -171,24 +167,20 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     bib_number.to_s if persisted?
   end
 
-  def competitor?
-    registrant_type == 'competitor'
-  end
+  RegistrantType::TYPES.each do |reg_type|
+    # def competitor?
+    #   registrant_type == 'competitor'
+    # end
+    define_method "#{reg_type}?" do
+      registrant_type == reg_type
+    end
 
-  def noncompetitor?
-    registrant_type == 'noncompetitor'
-  end
-
-  def self.competitor
-    where(registrant_type: 'competitor')
-  end
-
-  def self.noncompetitor
-    where(registrant_type: 'noncompetitor')
-  end
-
-  def self.spectator
-    where(registrant_type: 'spectator')
+    # def self.competitor
+    #   where(registrant_type: 'competitor')
+    # end
+    define_singleton_method reg_type.to_s do
+      where(registrant_type: reg_type)
+    end
   end
 
   def registrant_type_model
