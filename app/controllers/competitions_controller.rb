@@ -114,59 +114,16 @@ class CompetitionsController < ApplicationController
     render @competition.render_path
   end
 
-  def export_scores
+  def export
     authorize @competition
-    if @competition.event_class == 'High/Long'
-      csv_string = CSV.generate do |csv|
-        csv << ['registrant_external_id', 'distance']
-        @competition.competitors.each do |comp|
-          if comp.has_result?
-            csv << [comp.export_id,
-                    comp.result]
-          end
-        end
-      end
-    else
-      csv_string = CSV.generate do |csv|
-        csv << %w(judge_id judge_type_id registrant_external_id val1 val2 val3 val4)
-        @competition.scores.each do |score|
-          csv << [score.judge.external_id,
-                  score.judge.judge_type.name,
-                  score.competitor.export_id, # use a single value even in groups
-                  score.val_1,
-                  score.val_2,
-                  score.val_3,
-                  score.val_4]
-        end
+    exporter = @competition.exporter
+    csv_string = CSV.generate do |csv|
+      csv << exporter.headers
+      exporter.data.each do |row|
+        csv << row
       end
     end
-    filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
-    send_data(csv_string,
-              type: 'text/csv; charset=utf-8; header=present',
-              filename: filename)
-  end
 
-  def export_times
-    authorize @competition
-    if @competition.event_class == 'Shortest Time'
-      csv_string = CSV.generate do |csv|
-        csv << %w(registrant_external_id gender age heat lane thousands result)
-        @competition.competitors.each do |comp|
-          if comp.has_result?
-            tr = comp.time_results.first
-            heat = tr.heat_lane_result
-
-            csv << [comp.export_id,
-                    comp.gender,
-                    comp.age,
-                    heat.try(:heat),
-                    heat.try(:lane),
-                    comp.best_time_in_thousands,
-                    comp.result]
-          end
-        end
-      end
-    end
     filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
     send_data(csv_string,
               type: 'text/csv; charset=utf-8; header=present',

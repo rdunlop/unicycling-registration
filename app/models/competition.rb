@@ -395,6 +395,10 @@ class Competition < ApplicationRecord
     end
   end
 
+  def exporter
+    @exporter ||= ScoringClass.for(event_class, self)[:exporter]
+  end
+
   def scoring_helper
     @scoring_helper ||= ScoringClass.for(event_class, self)[:helper]
   end

@@ -551,8 +551,7 @@ Rails.application.routes.draw do
         post :sort_random
         post :set_age_group_places
         post :set_places
-        get :export_scores
-        get :export_times
+        get :export
         # view scores
         get :result
         delete :destroy_all_results

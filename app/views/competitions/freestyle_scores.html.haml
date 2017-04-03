@@ -18,4 +18,4 @@
   = render partial: "scores_summary", locals: { competitors: @competition.competitors.active }
   .non_printable
     %hr
-    = link_to 'Download Scores CSV', export_scores_competition_path(@competition)
+    = link_to 'Download Scores CSV', export_competition_path(@competition)
