@@ -403,7 +403,11 @@ class Competition < ApplicationRecord
     if event_class == "Overall Champion"
       scoring_helper.rebuild_competitors(scoring_calculator.competitor_bib_numbers)
     end
-    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_all_places
+    result_calculator = OrderedResultCalculator.new(self, scoring_helper.lower_is_better)
+    if has_age_group_entry_results?
+      result_calculator.update_age_group_results
+    end
+    result_calculator.update_overall_results
   end
 
   def place_age_group_entry(age_group_entry)

@@ -27,6 +27,13 @@ class MultiLapResultCalculator
     nil
   end
 
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :start_time_results,
+      :finish_time_results
+    )
+  end
+
   private
 
   # convert 1 lap int 9900000000, 2 laps into 980000000000....thus sorting by shortest time correctly.

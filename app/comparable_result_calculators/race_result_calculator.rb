@@ -23,4 +23,11 @@ class RaceResultCalculator
   def competitor_tie_break_comparable_result(_competitor)
     nil
   end
+
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :start_time_results,
+      :finish_time_results
+    )
+  end
 end

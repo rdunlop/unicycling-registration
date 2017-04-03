@@ -3,7 +3,10 @@ require 'spec_helper'
 describe OrderedResultCalculator do
   def recalc
     Rails.cache.clear
-    @calc.update_all_places
+    if @competition.has_age_group_entry_results?
+      @calc.update_age_group_results
+    end
+    @calc.update_overall_results
   end
 
   before(:each) do

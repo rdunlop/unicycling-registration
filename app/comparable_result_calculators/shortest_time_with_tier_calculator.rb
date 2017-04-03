@@ -24,6 +24,13 @@ class ShortestTimeWithTierCalculator
     nil
   end
 
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :start_time_results,
+      :finish_time_results
+    )
+  end
+
   private
 
   # convert tier 1 to 0, tier 2 to 11_000_000, tier 3 to 22_000_000

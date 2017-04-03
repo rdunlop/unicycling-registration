@@ -22,6 +22,12 @@ class FlatlandResultCalculator
     total_last_trick_points(competitor)
   end
 
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      scores: [judge: :judge_type]
+    )
+  end
+
   # Return the resulting score for this competitor
   # after having eliminated the highest and lowest total score
   # Note: There is only 1 judge-type for flatland

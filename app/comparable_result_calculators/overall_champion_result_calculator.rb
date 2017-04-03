@@ -38,6 +38,11 @@ class OverallChampionResultCalculator
     nil
   end
 
+  def eager_load_results_relations(competitors)
+    # no-op
+    competitors
+  end
+
   # What are the bib numbers of all competitors
   # who have results in the overall competition?
   def competitor_bib_numbers

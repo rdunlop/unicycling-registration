@@ -33,4 +33,11 @@ class DistanceResultCalculator
       0
     end
   end
+
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :distance_attempts,
+      :tie_break_adjustment
+    )
+  end
 end
