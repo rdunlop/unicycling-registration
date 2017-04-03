@@ -22,7 +22,6 @@ class EventCategory < ApplicationRecord
   belongs_to :event, inverse_of: :event_categories, touch: true, counter_cache: true
 
   has_many :registrant_event_sign_ups, dependent: :destroy
-
   has_many :competition_sources, dependent: :destroy
 
   translates :name, fallbacks_for_empty_translations: true

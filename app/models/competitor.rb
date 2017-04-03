@@ -30,28 +30,32 @@ class Competitor < ApplicationRecord
   include Eligibility
   include Slugify
 
-  has_many :members, dependent: :destroy, inverse_of: :competitor
-  has_many :registrants, through: :members
-  belongs_to :competition, touch: true, inverse_of: :competitors
-  acts_as_restful_list scope: :competition
-
-  has_one :music_file, class_name: "Song", foreign_key: "competitor_id", dependent: :nullify
-  has_many :lane_assignments, dependent: :destroy
-  has_many :scores, dependent: :destroy
-  has_many :boundary_scores, dependent: :destroy
-  has_many :standard_skill_scores, dependent: :destroy
-  has_many :distance_attempts, -> { order "distance DESC, id DESC" }, dependent: :destroy
-  has_one :tie_break_adjustment, dependent: :destroy
-  has_many :time_results, dependent: :destroy
-  has_many :start_time_results, -> { merge(TimeResult.start_times) }, class_name: "TimeResult"
-  has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
-  has_one :external_result, dependent: :destroy
-  has_many :results, dependent: :destroy, inverse_of: :competitor
-  belongs_to :age_group_entry
+  with_options dependent: :destroy do
+    has_many :members, inverse_of: :competitor
+    has_many :lane_assignments
+    has_many :scores
+    has_many :boundary_scores
+    has_many :standard_skill_scores
+    has_many :distance_attempts, -> { order "distance DESC, id DESC" }
+    has_one :tie_break_adjustment
+    has_many :time_results
+    has_one :external_result
+    has_many :results, inverse_of: :competitor
+  end
 
   # these are here to allow eager loading/performance optimization
   has_one :age_group_result, -> { where "results.result_type = 'AgeGroup'" }, class_name: "Result"
   has_one :overall_result, -> { where "results.result_type = 'Overall'" }, class_name: "Result"
+
+  has_one :music_file, class_name: "Song", foreign_key: "competitor_id", dependent: :nullify
+  has_many :start_time_results, -> { merge(TimeResult.start_times) }, class_name: "TimeResult"
+  has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
+  has_many :registrants, through: :members
+
+  belongs_to :competition, touch: true, inverse_of: :competitors
+  belongs_to :age_group_entry
+
+  acts_as_restful_list scope: :competition
 
   accepts_nested_attributes_for :members, allow_destroy: true
 

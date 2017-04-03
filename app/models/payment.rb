@@ -78,14 +78,6 @@ class Payment < ApplicationRecord
     save
   end
 
-  def transaction_id_or_note
-    if completed?
-      if details.nil?
-        errors.add(:base, "Transaction ID or Note must be filled in")
-      end
-    end
-  end
-
   # return a set of payment_details which are unique With-respect-to {amount, expense_item }
   def unique_payment_details
     results = []
@@ -165,6 +157,14 @@ class Payment < ApplicationRecord
   end
 
   private
+
+  def transaction_id_or_note
+    if completed?
+      if details.nil?
+        errors.add(:base, "Transaction ID or Note must be filled in")
+      end
+    end
+  end
 
   def set_invoice_id
     self.invoice_id ||= SecureRandom.hex(10)

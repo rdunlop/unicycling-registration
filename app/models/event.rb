@@ -27,46 +27,31 @@ class Event < ApplicationRecord
   include CostItem
   resourcify
 
-  has_many :event_choices, -> {order "event_choices.position"}, dependent: :destroy, inverse_of: :event
-  accepts_nested_attributes_for :event_choices
+  with_options dependent: :destroy, inverse_of: :event do
+    has_many :event_choices, -> {order "event_choices.position"}
+    has_many :event_categories, -> { order "event_categories.position"}
+    has_many :registrant_event_sign_ups
+    has_many :competitions, -> {order "competitions.name"}
+  end
 
-  has_many :event_categories, -> { order "event_categories.position"}, dependent: :destroy, inverse_of: :event
-  accepts_nested_attributes_for :event_categories
-
-  has_many :registrant_event_sign_ups, dependent: :destroy, inverse_of: :event
-
-  has_many :competitions, -> {order "competitions.name"}, dependent: :destroy, inverse_of: :event
   has_many :competitors, through: :competitions
   has_many :time_results, through: :competitors
 
   belongs_to :category, inverse_of: :events, touch: true
   has_many :songs
+
   translates :name, fallbacks_for_empty_translations: true
+  accepts_nested_attributes_for :event_choices
+  accepts_nested_attributes_for :event_categories
   accepts_nested_attributes_for :translations
 
   acts_as_restful_list scope: :category
 
-  # include translations So that we can do Event.order(:name)
-  default_scope { includes(:translations) }
-
-  def self.music_uploadable
-    visible.where(accepts_music_uploads: true)
-  end
-
-  def self.visible
-    where(visible: true)
-  end
-
-  def self.artistic
-    where(artistic: true)
-  end
-
-  def self.standard_skill_events
-    where(standard_skill: true)
-  end
-
   validates :name, presence: true
   validates :category_id, presence: true
+
+  # include translations So that we can do Event.order(:name)
+  default_scope { includes(:translations) }
 
   BEST_TIME_FORMATS = [
     "none",
@@ -82,18 +67,22 @@ class Event < ApplicationRecord
 
   before_validation :build_event_category
 
-  def build_event_category
-    if event_categories.empty?
-      event_categories.build name: "All"
-    end
-  end
-
   validate :has_event_category
 
-  def has_event_category
-    if event_categories.empty?
-      errors.add(:base, "Must define an event category")
-    end
+  def self.music_uploadable
+    visible.where(accepts_music_uploads: true)
+  end
+
+  def self.visible
+    where(visible: true)
+  end
+
+  def self.artistic
+    where(artistic: true)
+  end
+
+  def self.standard_skill_events
+    where(standard_skill: true)
   end
 
   def to_s
@@ -136,6 +125,20 @@ class Event < ApplicationRecord
   def create_for_all_registrants
     signed_up_registrants.each do |registrant_sign_up|
       registrant_sign_up.create_reg_item
+    end
+  end
+
+  private
+
+  def build_event_category
+    if event_categories.empty?
+      event_categories.build name: "All"
+    end
+  end
+
+  def has_event_category
+    if event_categories.empty?
+      errors.add(:base, "Must define an event category")
     end
   end
 end

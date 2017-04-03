@@ -55,14 +55,6 @@ class PaymentDetail < ApplicationRecord
     :expense_item_id
   end
 
-  def registrant_must_be_valid
-    if registrant && (!registrant.validated? || registrant.invalid?)
-      errors.add(:registrant, "Registrant #{registrant} form is incomplete")
-      return false
-    end
-    true
-  end
-
   def base_cost
     return 0 if free
 
@@ -118,5 +110,15 @@ class PaymentDetail < ApplicationRecord
 
   def coupon_applied?
     payment_detail_coupon_code.present?
+  end
+
+  private
+
+  def registrant_must_be_valid
+    if registrant && (!registrant.validated? || registrant.invalid?)
+      errors.add(:registrant, "Registrant #{registrant} form is incomplete")
+      return false
+    end
+    true
   end
 end

@@ -480,10 +480,6 @@ describe Registrant do
       @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
-    it "marks the registrant as expense_item_is_free for this expense_item" do
-      expect(@reg.expense_item_is_free(@ei)).to eq(true)
-    end
-
     it "is invalid without the item" do
       expect(@reg).to be_invalid
     end
@@ -496,99 +492,6 @@ describe Registrant do
 
       it "is valid" do
         expect(@reg).to be_valid
-      end
-    end
-  end
-
-  describe "with an expense_group which allows one free item per group" do
-    before(:each) do
-      @eg = FactoryGirl.create(:expense_group, competitor_free_options: "One Free In Group")
-      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
-    end
-
-    it "marks the registrant as expense_item_is_free for this expense_item" do
-      expect(@reg.expense_item_is_free(@ei)).to eq(true)
-    end
-    describe "when it has a non-free item of the same expense_group (not free though)" do
-      before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei)
-        @reg.reload
-      end
-
-      it "shows that a free item is available" do
-        expect(@reg.expense_item_is_free(@ei)).to eq(true)
-      end
-    end
-
-    describe "when it has a free expense_item" do
-      before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
-        @reg.reload
-      end
-
-      it "doesn't allow registrant to have 2 free of this group" do
-        @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
-        expect(@rei.valid?).to eq(false)
-      end
-
-      it "shows that it has the given expense_group" do
-        expect(@reg.has_chosen_free_item_from_expense_group(@eg)).to eq(true)
-      end
-    end
-
-    describe "when it has a paid expense_item" do
-      before(:each) do
-        @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
-        @pay = FactoryGirl.create(:payment)
-        @pei = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @pay, expense_item: @ei, free: true)
-        @pay.reload
-        @pay.completed = true
-        @pay.save!
-        @reg.reload
-      end
-
-      it "shows that it has the given expense_group" do
-        expect(@reg.has_chosen_free_item_from_expense_group(@eg)).to eq(true)
-      end
-    end
-  end
-
-  describe "with an expense_group which allows one free item per item in group" do
-    before(:each) do
-      @eg = FactoryGirl.create(:expense_group, competitor_free_options: "One Free of Each In Group")
-      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
-    end
-
-    it "marks the registrant as expense_item_is_free for this expense_item" do
-      expect(@reg.expense_item_is_free(@ei)).to eq(true)
-    end
-
-    describe "when it has a non-free item of the same expense_group (not free though)" do
-      before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei)
-        @reg.reload
-      end
-
-      it "shows that a free item is available" do
-        expect(@reg.expense_item_is_free(@ei)).to eq(true)
-      end
-    end
-
-    describe "when it has a free expense_item" do
-      before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
-        @reg.reload
-      end
-
-      it "doesn't allow registrant to have 2 free of this expense_item" do
-        @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
-        expect(@rei.valid?).to eq(false)
-      end
-
-      it "allows different free expense_items in the same group" do
-        @ei2 = FactoryGirl.create(:expense_item, expense_group: @eg)
-        @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @ei2, free: true)
-        expect(@rei.valid?).to eq(true)
       end
     end
   end

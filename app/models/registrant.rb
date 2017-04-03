@@ -42,27 +42,31 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
-  has_one :contact_detail, dependent: :destroy, autosave: true, inverse_of: :registrant
-  has_one :standard_skill_routine, dependent: :destroy
+  with_options dependent: :destroy do
+    has_one :contact_detail, autosave: true, inverse_of: :registrant
+    has_one :standard_skill_routine
+  end
 
   # may move into another object
-  has_many :registrant_best_times, dependent: :destroy, inverse_of: :registrant
-  has_many :registrant_choices, dependent: :destroy, inverse_of: :registrant
-  has_many :registrant_event_sign_ups, dependent: :destroy, inverse_of: :registrant
-  has_many :signed_up_events, -> { where(signed_up: true) }, class_name: 'RegistrantEventSignUp'
-  has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, dependent: :destroy, autosave: true
-  has_many :volunteer_choices, dependent: :destroy, inverse_of: :registrant
-  has_many :volunteer_opportunities, through: :volunteer_choices
+  with_options dependent: :destroy do
+    has_many :registrant_best_times, inverse_of: :registrant
+    has_many :registrant_choices, inverse_of: :registrant
+    has_many :registrant_event_sign_ups, inverse_of: :registrant
+    has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, autosave: true
+    has_many :payment_details, -> {includes :payment}
+    has_many :additional_registrant_accesses
+    has_many :registrant_group_members
+    has_many :songs
+    has_many :volunteer_choices, inverse_of: :registrant
+  end
 
-  has_many :payment_details, -> {includes :payment}, dependent: :destroy
-  has_many :additional_registrant_accesses, dependent: :destroy
-  has_many :registrant_group_members, dependent: :destroy
-  has_many :songs, dependent: :destroy
+  has_many :signed_up_events, -> { where(signed_up: true) }, class_name: 'RegistrantEventSignUp'
 
   # THROUGH
   has_many :event_choices, through: :registrant_choices
   has_many :events, through: :event_choices
   has_many :categories, through: :events
+  has_many :volunteer_opportunities, through: :volunteer_choices
 
   has_many :expense_items, through: :registrant_expense_items
 
@@ -93,7 +97,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # always present validations
   before_validation :set_bib_number, on: :create
   validates :bib_number, presence: true
-  validates :registrant_type, inclusion: { in: %w(competitor noncompetitor spectator) }, presence: true
+  validates :registrant_type, inclusion: { in: RegistrantType::TYPES }, presence: true
   validates :ineligible, :deleted, inclusion: { in: [true, false] } # because it's a boolean
   validate :no_payments_when_deleted
   before_validation :set_access_code
@@ -110,8 +114,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def self.statuses
     ["blank", "base_details", "events", "contact_details", "active"]
   end
-  validates :status, presence: true
-  validates :status, inclusion: { in: statuses }
+  validates :status, inclusion: { in: statuses }, presence: true
 
   # Base details
 
@@ -121,14 +124,19 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :user_id, presence: true
 
   # necessary for comp/non-comp only (not spectators):
-  validates :birthday, :gender, presence: true, if: :comp_noncomp_past_step_1?
-  validates :gender, inclusion: {in: %w(Male Female), message: "%{value} must be either 'Male' or 'Female'"}, if: :comp_noncomp_past_step_1?
-  validate  :gender_present, if: :comp_noncomp_past_step_1?
-  before_validation :set_age, if: :comp_noncomp_past_step_1?
-  validates :age, presence: true, if: :comp_noncomp_past_step_1?
-  before_validation :set_default_wheel_size, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
-  validates :default_wheel_size, presence: true, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
-  validate :check_default_wheel_size_for_age, if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?]
+  with_options if: :comp_noncomp_past_step_1? do
+    validates :birthday, :gender, presence: true
+    validates :gender, inclusion: {in: %w(Male Female), message: "%{value} must be either 'Male' or 'Female'"}
+    validate  :gender_present
+    before_validation :set_age
+    validates :age, presence: true
+  end
+
+  with_options if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?] do
+    before_validation :set_default_wheel_size
+    validates :default_wheel_size, presence: true
+    validate :check_default_wheel_size_for_age
+  end
 
   # events
   validate :choices_combination_valid, if: :past_step_2?
@@ -151,10 +159,6 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :started, -> { where.not(status: "blank").active_or_incomplete}
   scope :not_deleted, -> { where(deleted: false) }
 
-  def spectator?
-    registrant_type == 'spectator'
-  end
-
   def validated?
     status == "active"
   end
@@ -163,24 +167,20 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     bib_number.to_s if persisted?
   end
 
-  def competitor?
-    registrant_type == 'competitor'
-  end
+  RegistrantType::TYPES.each do |reg_type|
+    # def competitor?
+    #   registrant_type == 'competitor'
+    # end
+    define_method "#{reg_type}?" do
+      registrant_type == reg_type
+    end
 
-  def noncompetitor?
-    registrant_type == 'noncompetitor'
-  end
-
-  def self.competitor
-    where(registrant_type: 'competitor')
-  end
-
-  def self.noncompetitor
-    where(registrant_type: 'noncompetitor')
-  end
-
-  def self.spectator
-    where(registrant_type: 'spectator')
+    # def self.competitor
+    #   where(registrant_type: 'competitor')
+    # end
+    define_singleton_method reg_type.to_s do
+      where(registrant_type: reg_type)
+    end
   end
 
   def registrant_type_model
@@ -446,46 +446,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     RegistrantPresenter.new(self)
   end
 
-  # return true/false to show whether an expense_group has been chosen by this registrant
-  def has_chosen_free_item_from_expense_group(expense_group)
-    has_chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
-  end
-
-  def has_chosen_free_item_of_expense_item(target_expense_item)
-    has_chosen_free_item?{ |expense_item| expense_item == target_expense_item }
-  end
-
-  # return true if user has chosen or paid for an expense item
-  # given a block which defines what we are comparing to
-  def has_chosen_free_item?
-    registrant_expense_items.each do |rei|
-      next unless rei.free
-      if yield(rei.expense_item)
-        return true
-      end
-    end
-
-    paid_details.each do |pei|
-      next unless pei.free
-      if yield(pei.expense_item)
-        return true
-      end
-    end
-
-    false
-  end
-
   def expense_item_is_free(expense_item)
-    free_options = registrant_type_model.free_options(expense_item.expense_group)
-
-    case free_options
-    when "One Free In Group", "One Free In Group REQUIRED"
-      return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
-    when "One Free of Each In Group"
-      return !has_chosen_free_item_of_expense_item(expense_item)
-    else
-      return false
-    end
+    ExpenseItemFreeChecker.new(self, expense_item).expense_item_is_free?
   end
 
   def organization_membership_confirmed?

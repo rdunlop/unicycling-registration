@@ -23,7 +23,7 @@ class RegistrationCost < ApplicationRecord
 
   default_scope { order(:start_date) }
 
-  validates :registrant_type, inclusion: { in: %w(competitor noncompetitor spectator) }
+  validates :registrant_type, inclusion: { in: RegistrantType::TYPES }
   validates :start_date, :end_date, :expense_item, presence: true
   validates :name, presence: true
 

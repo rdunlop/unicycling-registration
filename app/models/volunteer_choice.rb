@@ -24,6 +24,10 @@ class VolunteerChoice < ApplicationRecord
 
   after_create :send_email_to_admins
 
+  delegate :to_s, to: :volunteer_opportunity
+
+  private
+
   def send_email_to_admins
     if volunteer_opportunity.inform_emails.present?
       # Wait a minute to deliver so that the VolunteerChoice has been created
@@ -31,6 +35,4 @@ class VolunteerChoice < ApplicationRecord
       VolunteerMailer.new_volunteer(self).deliver_later(wait: 1.minute)
     end
   end
-
-  delegate :to_s, to: :volunteer_opportunity
 end

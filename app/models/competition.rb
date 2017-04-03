@@ -46,29 +46,36 @@ class Competition < ApplicationRecord
   belongs_to :age_group_type, inverse_of: :competitions
   belongs_to :event, inverse_of: :competitions
 
-  has_many :competitors, -> { order "position" }, dependent: :destroy, inverse_of: :competition
-  has_many :registrants, through: :competitors
-  has_many :results, through: :competitors
+  with_options dependent: :destroy do
+    has_many :competitors, -> { order "position" }, inverse_of: :competition
+    has_many :judges, -> { order "judge_type_id" }
+    has_many :competition_sources, foreign_key: "target_competition_id", inverse_of: :target_competition
+    has_many :combined_competition_entries
+    has_many :published_age_group_entries
+    has_many :wave_times, inverse_of: :competition
+    has_many :competition_results
+    has_many :heat_lane_judge_notes, inverse_of: :competition
+    has_many :heat_lane_results, inverse_of: :competition
+    has_many :lane_assignments
+  end
 
-  has_many :judges, -> { order "judge_type_id" }, dependent: :destroy
-  has_many :judge_types, through: :judges
-  has_many :scores, through: :judges
-  has_many :distance_attempts, through: :competitors
-  has_many :time_results, through: :competitors
-  has_many :external_results, through: :competitors
-  has_many :competition_sources, foreign_key: "target_competition_id", inverse_of: :target_competition, dependent: :destroy
-  has_many :combined_competition_entries, dependent: :destroy
-  has_many :published_age_group_entries, dependent: :destroy
-  has_many :wave_times, inverse_of: :competition, dependent: :destroy
-  has_many :competition_results, dependent: :destroy
-  has_many :heat_lane_judge_notes, dependent: :destroy, inverse_of: :competition
-  has_many :heat_lane_results, dependent: :destroy, inverse_of: :competition
   belongs_to :combined_competition
+
+  with_options through: :competitors do
+    has_many :registrants
+    has_many :results
+    has_many :distance_attempts
+    has_many :time_results
+    has_many :external_results
+  end
+
+  with_options through: :judges do
+    has_many :judge_types
+    has_many :scores
+  end
 
   accepts_nested_attributes_for :competition_sources, reject_if: :no_source_selected, allow_destroy: true
   accepts_nested_attributes_for :competitors
-
-  has_many :lane_assignments, dependent: :destroy
 
   def self.data_recording_types
     ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing", "Swiss Track"]
@@ -389,44 +396,7 @@ class Competition < ApplicationRecord
   end
 
   def scoring_helper
-    case event_class
-    when "Shortest Time", "Shortest Time with Tiers"
-      @rc ||= RaceScoringClass.new(self)
-    when "Timed Multi-Lap"
-      @rc ||= RaceScoringClass.new(self)
-
-    when "Longest Time"
-      @rc ||= RaceScoringClass.new(self, false)
-
-    when "Points Low to High"
-      @ers ||= PointsScoringClass.new(self)
-
-    when "Points High to Low"
-      @ers ||= PointsScoringClass.new(self, false)
-
-    when "Freestyle"
-      @asc ||= ArtisticScoringClass.new(self)
-
-    when "Artistic Freestyle IUF 2015"
-      @asc2015 ||= ArtisticScoringClass_2015.new(self)
-
-    when "Flatland"
-      @fsc ||= FlatlandScoringClass.new(self)
-
-    when "Street"
-      @ssc ||= StreetScoringClass.new(self)
-    when "Street Final"
-      @ssc ||= StreetScoringClass.new(self, false) # this interacts with the judge_score_calculator
-
-    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
-      @dsc ||= DistanceScoringClass.new(self)
-
-    when "Overall Champion"
-      @oc ||= OverallChampionScoringClass.new(self)
-
-    when "Standard Skill"
-      @ss ||= StandardSkillScoringClass.new(self)
-    end
+    @scoring_helper ||= ScoringClass.for(event_class, self)[:helper]
   end
 
   def place_all
@@ -450,60 +420,11 @@ class Competition < ApplicationRecord
   # All ScoreCalculators result in a function 'competitor_comparable_result' which
   # provides a numeric/comparable score for the competitor
   def scoring_calculator
-    case event_class
-    when "Shortest Time with Tiers"
-      @scrc ||= ShortestTimeWithTierCalculator.new
-    when "Shortest Time"
-      @scrc ||= RaceResultCalculator.new
-    when "Longest Time"
-      ### XXX this is strange...the determination as to which is the better score is not needed here?
-      @scsc ||= RaceResultCalculator.new(false)
-    when "Timed Multi-Lap"
-      @scrc ||= MultiLapResultCalculator.new
-    when "Points Low to High"
-      @scers ||= ExternalResultResultCalculator.new
-    when "Points High to Low"
-      @scers ||= ExternalResultResultCalculator.new
-    when "Freestyle"
-      unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
-      @scasc ||= ArtisticResultCalculator.new(unicon_scoring)
-    when "Artistic Freestyle IUF 2015"
-      @scasc ||= ArtisticResultCalculator_2015.new
-    when "Flatland"
-      @scsc ||= FlatlandResultCalculator.new
-    when "Street", "Street Final"
-      @scsc ||= StreetResultCalculator.new
-    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
-      @scdsc ||= DistanceResultCalculator.new
-    when "Overall Champion"
-      @ascoc ||= OverallChampionResultCalculator.new(combined_competition, self)
-    when "Standard Skill"
-      @sscs ||= StandardSkillResultCalculator.new
-    end
+    @scoring_calculator ||= ScoringClass.for(event_class, self)[:calculator]
   end
 
   def judge_score_calculator
-    case event_class
-    when "Freestyle"
-      GenericPlacingPointsCalculator.new(
-        lower_is_better: false,
-      # For Freestyle, the judges enter higher scores for better riders
-      )
-    when "Street", "Flatland"
-      GenericPlacingPointsCalculator.new(
-        lower_is_better: scoring_helper.lower_is_better
-      )
-    when "Street Final"
-      GenericPlacingPointsCalculator.new(
-        lower_is_better: true,
-        # We know that Street Finals Are ALWAYS lower is better to assign the points
-        # But, we want to leave StreetScoringClass as higher_is_better because
-        # that way the higher resulting points win.
-        points_per_rank: [10, 7, 5, 3, 2, 1]
-      )
-    when "Artistic Freestyle IUF 2015"
-      Freestyle_2015_JudgePointsCalculator.new
-    end
+    @judge_scoring_calculator ||= ScoringClass.for(event_class, self)[:judge_score_calculator]
   end
 
   def high_long_event?

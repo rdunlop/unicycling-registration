@@ -49,27 +49,25 @@ class Member < ApplicationRecord
     where(alternate: false)
   end
 
-  def update_min_bib_number
-    return if no_touch_cascade
-    comp = competitor.reload
-    return if comp.nil?
-    lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
-    competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
-  end
-
   # validates :competitor, :presence => true # removed for spec tests
-
-  def destroy_orphaned_competitors
-    if competitor && competitor.members.none?
-      competitor.destroy
-    end
-  end
 
   # Should we consider this member dropped?
   # Only do so if they ever dropped, and they are currrently not registered.
   def currently_dropped?
     dropped_from_registration? && !competitor.competition.signed_up_registrants.include?(registrant)
   end
+
+  def to_s
+    if alternate
+      registrant.to_s + "(alternate)"
+    else
+      registrant.to_s
+    end
+  end
+
+  delegate :club, :state, :country, :ineligible?, :gender, :external_id, :age, to: :registrant
+
+  private
 
   def registrant_once_per_competition
     if new_record?
@@ -82,13 +80,17 @@ class Member < ApplicationRecord
     end
   end
 
-  def to_s
-    if alternate
-      registrant.to_s + "(alternate)"
-    else
-      registrant.to_s
-    end
+  def update_min_bib_number
+    return if no_touch_cascade
+    comp = competitor.reload
+    return if comp.nil?
+    lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
+    competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
   end
 
-  delegate :club, :state, :country, :ineligible?, :gender, :external_id, :age, to: :registrant
+  def destroy_orphaned_competitors
+    if competitor && competitor.members.none?
+      competitor.destroy
+    end
+  end
 end
