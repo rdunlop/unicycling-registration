@@ -1,10 +1,4 @@
 class ShortestTimeWithTierCalculator
-  attr_accessor :lower_is_better
-
-  def initialize
-    @lower_is_better = true
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.finish_time_results.any?

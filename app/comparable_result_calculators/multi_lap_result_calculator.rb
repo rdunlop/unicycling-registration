@@ -1,7 +1,7 @@
 class MultiLapResultCalculator
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.time_results.finish_times.any?
+    competitor.finish_time_results.any?
   end
 
   # returns the result for this competitor

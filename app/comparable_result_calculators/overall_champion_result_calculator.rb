@@ -12,10 +12,6 @@ class OverallChampionResultCalculator
     @registrant_bib_numbers ||= {}
   end
 
-  def lower_is_better
-    false
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(_competitor)
     true # always indicate that we have a result, so that all competitors are created.

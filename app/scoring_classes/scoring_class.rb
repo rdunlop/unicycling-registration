@@ -13,8 +13,7 @@ class ScoringClass
       }
     when "Longest Time"
       {
-        ### XXX this is strange...the determination as to which is the better score is not needed here?
-        calculator: RaceResultCalculator.new(false),
+        calculator: RaceResultCalculator.new,
         helper: RaceScoringClass.new(competition, false)
       }
     when "Timed Multi-Lap"
