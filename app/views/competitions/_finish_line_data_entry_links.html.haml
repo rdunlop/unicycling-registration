@@ -6,9 +6,9 @@
       = link_to "Recording Sheets", two_attempt_recording_printing_competition_path(competition, options)
       = link_to "(pdf)", two_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
 
-    %li= link_to "Entry Form", user_competition_two_attempt_entries_path(current_user, competition, is_start_times: false)
+    %li= link_to "Entry Form", user_competition_two_attempt_entries_path(current_user, competition, options)
     - if competition.imports_times? && policy(competition).modify_result_data?
-      %li= link_to "Import CSV", display_csv_user_competition_two_attempt_entries_path(current_user, competition, is_start_times: false)
+      %li= link_to "Import CSV", display_csv_user_competition_two_attempt_entries_path(current_user, competition, options)
 
     %li= link_to "Verification", proof_user_competition_two_attempt_entries_path(current_user, competition, options)
 
@@ -18,7 +18,7 @@
       = link_to "(pdf)", single_attempt_recording_printing_competition_path(competition, options.merge(:format => :pdf))
 
     - if competition.imports_times?
-      %li= link_to "Entry Form", data_entry_user_competition_import_results_path(current_user, competition, is_start_times: false)
+      %li= link_to "Entry Form", data_entry_user_competition_import_results_path(current_user, competition, options)
       %li= link_to "Verification", review_user_competition_import_results_path(current_user, competition, options)
     - elsif competition.imports_points?
       %li= link_to "Entry Form", competition_preliminary_external_results_path(competition)
@@ -42,7 +42,7 @@
       %li= link_to "Import Swiss Data", user_competition_swiss_results_path(current_user, competition)
 
   - if competition.imports_times? && policy(competition).modify_result_data?
-    %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition, is_start_times: false)
+    %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition, options)
 
   - if competition.imports_points? && policy(competition).modify_result_data?
     %li= link_to "Import CSV", display_csv_competition_preliminary_external_results_path(competition)

@@ -199,14 +199,20 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
+  # TODO: This should be extracted into a form helper?
   def self.select_box_options
     active.competitor.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
+  # TODO: This should be extracted into a form helper?
   def self.all_select_box_options
     started.map{ |reg| [reg.with_id_to_s, reg.id] }
   end
 
+  # ##########################################################
+  # TODO: Extract the following 4 methods into a collaborator
+  # #########################################################
+  #
   # Add a system-managed RegistrantExpenseItem, if it doesn't already exist
   def build_registration_item(reg_item)
     unless reg_item.nil? || has_expense_item?(reg_item)
@@ -222,24 +228,6 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
       item_to_remove = registrant_expense_items.to_a.find { |rei| rei.system_managed? && rei.expense_item == reg_item}
       item_to_remove.mark_for_destruction
     end
-  end
-
-  def matching_competition_in_event(event)
-    competitors.active.find{ |competitor| competitor.event == event }.try(:competition)
-  end
-
-  def create_associated_required_expense_items
-    RequiredExpenseItemCreator.new(self).create
-  end
-
-  # determine if this registrant has an unpaid (or paid) version of this expense item
-  def has_expense_item?(expense_item)
-    all_expense_items.include?(expense_item)
-  end
-
-  def registration_item
-    all_reg_items = RegistrationCost.all_registration_expense_items
-    registrant_expense_items.system_managed.find_by(expense_item_id: all_reg_items)
   end
 
   # for use when overriding the default system-managed reg_item
@@ -259,12 +247,26 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     curr_rei.save
   end
 
-  # Internal: Set the bib number of this registrant
-  #
-  def set_bib_number
-    if bib_number.nil?
-      self.bib_number = registrant_type_model.next_available_bib_number
-    end
+  # determine if this registrant has an unpaid (or paid) version of this expense item
+  def has_expense_item?(expense_item)
+    all_expense_items.include?(expense_item)
+  end
+
+  # ##########################################################
+  # END Extraction
+  # ##########################################################
+
+  def matching_competition_in_event(event)
+    competitors.active.find{ |competitor| competitor.event == event }.try(:competition)
+  end
+
+  def create_associated_required_expense_items
+    RequiredExpenseItemCreator.new(self).create
+  end
+
+  def registration_item
+    all_reg_items = RegistrationCost.all_registration_expense_items
+    registrant_expense_items.system_managed.find_by(expense_item_id: all_reg_items)
   end
 
   def wheel_size_id_for_event(event)
@@ -301,15 +303,6 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     warned_sign_ups.map{|rei| "#{rei.event} - #{rei.event_category.name} Category" }
   end
 
-  def set_age
-    start_date = EventConfiguration.singleton.effective_age_calculation_base_date
-    if start_date.nil? || birthday.nil?
-      self.age = 99
-    else
-      self.age = age_at_event_date(start_date)
-    end
-  end
-
   def has_standard_skill?
     signed_up_events.where(event: Event.standard_skill_events).any?
   end
@@ -330,6 +323,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
 
+  # TODO: Extract into ContactDetail?
   def state_or_country(state = EventConfiguration.singleton.state?)
     if state
       state
@@ -525,6 +519,23 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   private
+
+  # Internal: Set the bib number of this registrant
+  #
+  def set_bib_number
+    if bib_number.nil?
+      self.bib_number = registrant_type_model.next_available_bib_number
+    end
+  end
+
+  def set_age
+    start_date = EventConfiguration.singleton.effective_age_calculation_base_date
+    if start_date.nil? || birthday.nil?
+      self.age = 99
+    else
+      self.age = age_at_event_date(start_date)
+    end
+  end
 
   # is the current status past the desired status
   def status_is_active?(desired_status)

@@ -47,18 +47,18 @@ class ScoringClass
         helper: ArtisticScoringClass_2015.new(competition)
       }
     when "Flatland"
-      helper = FlatlandScoringClass.new(competition)
+      scoring_helper = FlatlandScoringClass.new(competition)
       {
         calculator: FlatlandResultCalculator.new,
-        judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: helper.lower_is_better),
-        helper: helper
+        judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
+        helper: scoring_helper
       }
     when "Street"
-      helper = StreetScoringClass.new(competition)
+      scoring_helper = StreetScoringClass.new(competition)
       {
         calculator: StreetResultCalculator.new,
-        judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: helper.lower_is_better),
-        helper: helper
+        judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
+        helper: scoring_helper
       }
     when "Street Final"
       {
