@@ -215,7 +215,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def self.singleton
-    @singleton ||= EventConfiguration.includes(:translations).first || EventConfiguration.new
+    @singleton = EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
   def self.paypal_base_url
