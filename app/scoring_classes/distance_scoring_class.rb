@@ -1,6 +1,6 @@
 class DistanceScoringClass < BaseScoringClass
   def scoring_description
-    "Å competitor can attempt repeatedly, scoring higher distances.
+    "A competitor can attempt repeatedly, scoring higher distances.
     Their last successful distance will be their final score.
     The competitor with the highest max distance will win."
   end

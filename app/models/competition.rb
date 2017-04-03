@@ -396,44 +396,7 @@ class Competition < ApplicationRecord
   end
 
   def scoring_helper
-    case event_class
-    when "Shortest Time", "Shortest Time with Tiers"
-      @rc ||= RaceScoringClass.new(self)
-    when "Timed Multi-Lap"
-      @rc ||= RaceScoringClass.new(self)
-
-    when "Longest Time"
-      @rc ||= RaceScoringClass.new(self, false)
-
-    when "Points Low to High"
-      @ers ||= PointsScoringClass.new(self)
-
-    when "Points High to Low"
-      @ers ||= PointsScoringClass.new(self, false)
-
-    when "Freestyle"
-      @asc ||= ArtisticScoringClass.new(self)
-
-    when "Artistic Freestyle IUF 2015"
-      @asc2015 ||= ArtisticScoringClass_2015.new(self)
-
-    when "Flatland"
-      @fsc ||= FlatlandScoringClass.new(self)
-
-    when "Street"
-      @ssc ||= StreetScoringClass.new(self)
-    when "Street Final"
-      @ssc ||= StreetScoringClass.new(self, false) # this interacts with the judge_score_calculator
-
-    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
-      @dsc ||= DistanceScoringClass.new(self)
-
-    when "Overall Champion"
-      @oc ||= OverallChampionScoringClass.new(self)
-
-    when "Standard Skill"
-      @ss ||= StandardSkillScoringClass.new(self)
-    end
+    @scoring_helper ||= ScoringClass.for(event_class, self)[:helper]
   end
 
   def place_all
@@ -457,60 +420,11 @@ class Competition < ApplicationRecord
   # All ScoreCalculators result in a function 'competitor_comparable_result' which
   # provides a numeric/comparable score for the competitor
   def scoring_calculator
-    case event_class
-    when "Shortest Time with Tiers"
-      @scrc ||= ShortestTimeWithTierCalculator.new
-    when "Shortest Time"
-      @scrc ||= RaceResultCalculator.new
-    when "Longest Time"
-      ### XXX this is strange...the determination as to which is the better score is not needed here?
-      @scsc ||= RaceResultCalculator.new(false)
-    when "Timed Multi-Lap"
-      @scrc ||= MultiLapResultCalculator.new
-    when "Points Low to High"
-      @scers ||= ExternalResultResultCalculator.new
-    when "Points High to Low"
-      @scers ||= ExternalResultResultCalculator.new
-    when "Freestyle"
-      unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
-      @scasc ||= ArtisticResultCalculator.new(unicon_scoring)
-    when "Artistic Freestyle IUF 2015"
-      @scasc ||= ArtisticResultCalculator_2015.new
-    when "Flatland"
-      @scsc ||= FlatlandResultCalculator.new
-    when "Street", "Street Final"
-      @scsc ||= StreetResultCalculator.new
-    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
-      @scdsc ||= DistanceResultCalculator.new
-    when "Overall Champion"
-      @ascoc ||= OverallChampionResultCalculator.new(combined_competition, self)
-    when "Standard Skill"
-      @sscs ||= StandardSkillResultCalculator.new
-    end
+    @scoring_calculator ||= ScoringClass.for(event_class)[:calculator]
   end
 
   def judge_score_calculator
-    case event_class
-    when "Freestyle"
-      GenericPlacingPointsCalculator.new(
-        lower_is_better: false,
-      # For Freestyle, the judges enter higher scores for better riders
-      )
-    when "Street", "Flatland"
-      GenericPlacingPointsCalculator.new(
-        lower_is_better: scoring_helper.lower_is_better
-      )
-    when "Street Final"
-      GenericPlacingPointsCalculator.new(
-        lower_is_better: true,
-        # We know that Street Finals Are ALWAYS lower is better to assign the points
-        # But, we want to leave StreetScoringClass as higher_is_better because
-        # that way the higher resulting points win.
-        points_per_rank: [10, 7, 5, 3, 2, 1]
-      )
-    when "Artistic Freestyle IUF 2015"
-      Freestyle_2015_JudgePointsCalculator.new
-    end
+    @judge_scoring_calculator ||= ScoringClass.for(event_class)[:judge_score_calculator]
   end
 
   def high_long_event?
