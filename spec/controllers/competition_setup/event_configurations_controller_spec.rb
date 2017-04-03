@@ -6,7 +6,7 @@ describe CompetitionSetup::EventConfigurationsController do
     @admin_user = FactoryGirl.create(:competition_admin_user)
     sign_in @admin_user
     @event = FactoryGirl.create(:event)
-    EventConfiguration.singleton.max_award_place = max_place
+    EventConfiguration.singleton.update(max_award_place: max_place)
   end
 
   describe "GET edit" do
