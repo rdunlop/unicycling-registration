@@ -215,6 +215,9 @@ class EventConfiguration < ApplicationRecord
   end
 
   def self.singleton
+    # Use the request-level EventConfiguration, if it is defined, otherwise, fall-back
+    # to fetching from the DB
+    return @config if defined?(@config)
     @singleton = EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
