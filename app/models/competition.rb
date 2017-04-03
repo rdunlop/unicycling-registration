@@ -420,11 +420,11 @@ class Competition < ApplicationRecord
   # All ScoreCalculators result in a function 'competitor_comparable_result' which
   # provides a numeric/comparable score for the competitor
   def scoring_calculator
-    @scoring_calculator ||= ScoringClass.for(event_class)[:calculator]
+    @scoring_calculator ||= ScoringClass.for(event_class, self)[:calculator]
   end
 
   def judge_score_calculator
-    @judge_scoring_calculator ||= ScoringClass.for(event_class)[:judge_score_calculator]
+    @judge_scoring_calculator ||= ScoringClass.for(event_class, self)[:judge_score_calculator]
   end
 
   def high_long_event?
