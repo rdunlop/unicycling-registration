@@ -5,7 +5,8 @@ class ScoringClass
       {
         calculator: ShortestTimeWithTierCalculator.new,
         exporter: EnteredDataExporter::Time.new(competition),
-        helper: RaceScoringClass.new(competition)
+        helper: RaceScoringClass.new(competition),
+        tiers_enabled: true
       }
     when "Shortest Time"
       {
@@ -23,7 +24,8 @@ class ScoringClass
       {
         calculator: MultiLapResultCalculator.new,
         exporter: EnteredDataExporter::Time.new(competition),
-        helper: RaceScoringClass.new(competition)
+        helper: RaceScoringClass.new(competition),
+        num_laps_enabled: true
       }
     when "Points Low to High"
       {

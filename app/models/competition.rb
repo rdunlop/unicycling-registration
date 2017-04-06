@@ -320,11 +320,11 @@ class Competition < ApplicationRecord
   end
 
   def has_num_laps?
-    event_class == "Timed Multi-Lap"
+    ScoringClass.for(event_class, self)[:num_laps_enabled]
   end
 
   def uses_tiers?
-    event_class == "Shortest Time with Tiers"
+    ScoringClass.for(event_class, self)[:tiers_enabled]
   end
 
   def age_group_entries
