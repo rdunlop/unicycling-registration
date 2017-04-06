@@ -3,7 +3,10 @@ require 'spec_helper'
 describe OrderedResultCalculator do
   def recalc(calc = @calc)
     Rails.cache.clear
-    calc.update_all_places
+    if @competition.has_age_group_entry_results?
+      calc.update_age_group_results
+    end
+    calc.update_overall_results
     @tr1.try(:reload)
     @tr2.try(:reload)
     @tr3.try(:reload)
@@ -192,17 +195,17 @@ describe OrderedResultCalculator do
     it "has increasing thousands" do
       @all_together = FactoryGirl.create(:age_group_type)
       FactoryGirl.create(:age_group_entry, age_group_type: @all_together, start_age: 0, end_age: 100, gender: "Male")
-      @comp = FactoryGirl.create(:timed_competition, age_group_type: @all_together)
+      @competition = FactoryGirl.create(:timed_competition, age_group_type: @all_together)
       travel 2.seconds do
-        tr1 = FactoryGirl.create(:time_result, minutes: 1, seconds: 15, thousands: 935, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
-        tr2 = FactoryGirl.create(:time_result, minutes: 1, seconds: 23, thousands: 97, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
-        tr4 = FactoryGirl.create(:time_result, minutes: 1, seconds: 26, thousands: 745, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
-        tr5 = FactoryGirl.create(:time_result, minutes: 1, seconds: 28, thousands: 498, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
-        tr3 = FactoryGirl.create(:time_result, minutes: 1, seconds: 25, thousands: 206, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
-        tr6 = FactoryGirl.create(:time_result, minutes: 1, seconds: 32, thousands: 508, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
-        tr7 = FactoryGirl.create(:time_result, minutes: 1, seconds: 32, thousands: 815, competitor: FactoryGirl.create(:event_competitor, competition: @comp))
+        tr1 = FactoryGirl.create(:time_result, minutes: 1, seconds: 15, thousands: 935, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+        tr2 = FactoryGirl.create(:time_result, minutes: 1, seconds: 23, thousands: 97, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+        tr4 = FactoryGirl.create(:time_result, minutes: 1, seconds: 26, thousands: 745, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+        tr5 = FactoryGirl.create(:time_result, minutes: 1, seconds: 28, thousands: 498, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+        tr3 = FactoryGirl.create(:time_result, minutes: 1, seconds: 25, thousands: 206, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+        tr6 = FactoryGirl.create(:time_result, minutes: 1, seconds: 32, thousands: 508, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
+        tr7 = FactoryGirl.create(:time_result, minutes: 1, seconds: 32, thousands: 815, competitor: FactoryGirl.create(:event_competitor, competition: @competition))
 
-        rc = OrderedResultCalculator.new(@comp)
+        rc = OrderedResultCalculator.new(@competition)
         recalc(rc)
 
         expect(tr1.reload.competitor.place).to eq(1)
