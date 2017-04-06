@@ -21,6 +21,12 @@ class StreetResultCalculator
     nil
   end
 
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      scores: [judge: :judge_type]
+    )
+  end
+
   # must be exposed in order to allow displaying of per-judge-type points
   def total_points(competitor, judge_type = nil)
     if judge_type.nil?

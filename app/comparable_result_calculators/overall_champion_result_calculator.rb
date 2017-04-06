@@ -12,10 +12,6 @@ class OverallChampionResultCalculator
     @registrant_bib_numbers ||= {}
   end
 
-  def lower_is_better
-    false
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(_competitor)
     true # always indicate that we have a result, so that all competitors are created.
@@ -40,6 +36,11 @@ class OverallChampionResultCalculator
 
   def competitor_tie_break_comparable_result(_competitor)
     nil
+  end
+
+  def eager_load_results_relations(competitors)
+    # no-op
+    competitors
   end
 
   # What are the bib numbers of all competitors

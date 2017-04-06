@@ -27,6 +27,12 @@ class ArtisticResultCalculator
     total_points(competitor, jt)
   end
 
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      scores: [judge: :judge_type]
+    )
+  end
+
   # Must be 'public' so that we can show calculation steps on the chief-judge view
   def total_points(competitor, judge_type = nil)
     if judge_type.nil?

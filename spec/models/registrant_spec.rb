@@ -36,7 +36,7 @@ require 'spec_helper'
 
 describe Registrant do
   before(:each) do
-    @reg = FactoryGirl.build_stubbed(:registrant)
+    @reg = FactoryGirl.build(:registrant)
     @ws20 = FactoryGirl.build_stubbed(:wheel_size_20)
     @ws24 = FactoryGirl.build_stubbed(:wheel_size_24)
     allow(WheelSize).to receive(:find_by_description).with("20\" Wheel").and_return(@ws20)
@@ -57,7 +57,7 @@ describe Registrant do
 
   describe "when EventConfiguration does not require default wheel size" do
     let(:registrant) { FactoryGirl.build(:minor_competitor, status: "base_details", contact_detail: nil) }
-    before { FactoryGirl.create(:event_configuration, registrants_should_specify_default_wheel_size: false) }
+    before { EventConfiguration.singleton.update(registrants_should_specify_default_wheel_size: false) }
 
     it "does not set a default wheel size" do
       allow(registrant).to receive(:age).and_return(10)
@@ -68,13 +68,13 @@ describe Registrant do
 
   describe "with an event configuration starting date" do
     before(:each) do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 5, 20))
+      EventConfiguration.singleton.update(start_date: Date.new(2012, 5, 20))
     end
 
     describe "and a registrant born on the starting day in 1982" do
       before(:each) do
         @reg.birthday = Date.new(1982, 5, 20)
-        @reg.set_age
+        @reg.valid? # set age
       end
       it "should have an age of 30" do
         expect(@reg.age).to eq(30)
@@ -89,7 +89,7 @@ describe Registrant do
     describe "and a registrant born the day after the starting date in 1982" do
       before(:each) do
         @reg.birthday = Date.new(1982, 5, 21)
-        @reg.set_age
+        @reg.valid? # set_age
       end
       it "should have an age of 29" do
         expect(@reg.age).to eq(29)
@@ -106,7 +106,7 @@ describe Registrant do
   context "checking required attributes" do
     before :each do
       @reg.bib_number = nil # clear out the auto-set bib_number
-      @reg.set_bib_number
+      @reg.valid? # cause bib_number to be set
     end
     it "has a valid reg from FactoryGirl" do
       expect(@reg.valid?).to eq(true)
@@ -141,18 +141,13 @@ describe Registrant do
       expect(@reg.valid?).to eq(false)
     end
 
-    it "requires an bib_number" do
-      @reg.bib_number = nil
-      expect(@reg.valid?).to eq(false)
-    end
-
     it "requires a birthday" do
       @reg.birthday = nil
       expect(@reg.valid?).to eq(false)
     end
 
     it "can not have a birthday, while having a configuration" do
-      FactoryGirl.create(:event_configuration, start_date: Date.new(2012, 5, 20))
+      EventConfiguration.singleton.update(start_date: Date.new(2012, 5, 20))
       @reg.birthday = nil
       expect(@reg.valid?).to eq(false)
     end
@@ -207,9 +202,9 @@ describe Registrant do
 
   context "checking non-competitor default" do
     it "bib_number is set to 2001 as a non-competitor" do
-      @nreg = FactoryGirl.build_stubbed(:noncompetitor)
+      @nreg = FactoryGirl.build(:noncompetitor)
       @nreg.bib_number = nil # clear out auto-set bib number
-      @nreg.set_bib_number
+      @nreg.valid? # cause bib_number to be set
       expect(@nreg.bib_number).to eq(2001)
     end
   end

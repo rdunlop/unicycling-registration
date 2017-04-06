@@ -320,11 +320,11 @@ class Competition < ApplicationRecord
   end
 
   def has_num_laps?
-    event_class == "Timed Multi-Lap"
+    ScoringClass.for(event_class, self)[:num_laps_enabled]
   end
 
   def uses_tiers?
-    event_class == "Shortest Time with Tiers"
+    ScoringClass.for(event_class, self)[:tiers_enabled]
   end
 
   def age_group_entries
@@ -395,6 +395,10 @@ class Competition < ApplicationRecord
     end
   end
 
+  def exporter
+    @exporter ||= ScoringClass.for(event_class, self)[:exporter]
+  end
+
   def scoring_helper
     @scoring_helper ||= ScoringClass.for(event_class, self)[:helper]
   end
@@ -403,7 +407,11 @@ class Competition < ApplicationRecord
     if event_class == "Overall Champion"
       scoring_helper.rebuild_competitors(scoring_calculator.competitor_bib_numbers)
     end
-    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_all_places
+    result_calculator = OrderedResultCalculator.new(self, scoring_helper.lower_is_better)
+    if has_age_group_entry_results?
+      result_calculator.update_age_group_results
+    end
+    result_calculator.update_overall_results
   end
 
   def place_age_group_entry(age_group_entry)

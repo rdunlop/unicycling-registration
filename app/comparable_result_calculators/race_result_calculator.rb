@@ -1,10 +1,4 @@
 class RaceResultCalculator
-  attr_accessor :lower_is_better
-
-  def initialize(lower_is_better = true)
-    @lower_is_better = lower_is_better
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.finish_time_results.any?
@@ -28,5 +22,12 @@ class RaceResultCalculator
 
   def competitor_tie_break_comparable_result(_competitor)
     nil
+  end
+
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :start_time_results,
+      :finish_time_results
+    )
   end
 end

@@ -1,10 +1,4 @@
 class ExternalResultResultCalculator
-  attr_accessor :lower_is_better
-
-  def initialize(lower_is_better = true)
-    @lower_is_better = lower_is_better
-  end
-
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.external_result.try(:active?)
@@ -27,5 +21,11 @@ class ExternalResultResultCalculator
 
   def competitor_tie_break_comparable_result(_competitor)
     nil
+  end
+
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :external_result
+    )
   end
 end

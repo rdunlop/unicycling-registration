@@ -63,11 +63,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   ###### END State Machine transitions ############
 
-  def export_scores?
-    director?(record.event) || super_admin?
-  end
-
-  def export_times?
+  def export?
     director?(record.event) || super_admin?
   end
 

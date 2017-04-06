@@ -32,6 +32,13 @@ class StandardSkillResultCalculator
     total_score / competitor.standard_skill_scores.count
   end
 
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :standard_skill_scores,
+      standard_kill_routine: [standard_skill_routine_entries: :standard_skill_entry]
+    )
+  end
+
   # Calculate the total number of points for a given competitor
   # Minimum value is 0
   #

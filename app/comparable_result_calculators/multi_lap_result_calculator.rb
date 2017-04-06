@@ -1,7 +1,7 @@
 class MultiLapResultCalculator
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
-    competitor.time_results.finish_times.any?
+    competitor.finish_time_results.any?
   end
 
   # returns the result for this competitor
@@ -25,6 +25,13 @@ class MultiLapResultCalculator
 
   def competitor_tie_break_comparable_result(_competitor)
     nil
+  end
+
+  def eager_load_results_relations(competitors)
+    competitors.includes(
+      :start_time_results,
+      :finish_time_results
+    )
   end
 
   private
