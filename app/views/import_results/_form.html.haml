@@ -9,26 +9,16 @@
     %tbody
       = render partial: 'imported_time_result', collection: @import_results, as: :import_result
 
-
     %tfoot
       %tr
         %td
         %td{ colspan: 2}= registrant_bib_number_select_box(f, @competition, class: "js--autoFocus")
         %td
-        - if @competition.data_entry_format.hours?
-          %td= f.number_field :facade_hours, {:min => 0}
-          %td= f.number_field :facade_minutes, {:min => 0}
-        - else
-          %td= f.number_field :minutes, {:min => 0}
-        %td= f.number_field :seconds, {:min => 0}
-        - if @competition.data_entry_format.thousands?
-          %td= f.number_field :thousands, {:min => 0}
-        - if @competition.data_entry_format.hundreds?
-          %td= f.number_field :facade_hundreds, {:min => 0}
-        - if @competition.has_penalty?
-          %td= f.number_field :number_of_penalties
-        - if @competition.has_num_laps?
-          %td= f.number_field :number_of_laps
+
+        - displayer = @competition.results_displayer
+        - displayer.form_inputs.each do |field_name, field_options|
+          %td= f.number_field field_name, field_options
+
         %td= f.select :status, TimeResult.status_values, include_blank: true
         %td{ colspan: "2"}= f.button :submit, "Submit", data: { disable_with: false }
 

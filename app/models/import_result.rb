@@ -69,6 +69,7 @@ class ImportResult < ApplicationRecord
                "active"
              end
 
+    # TODO: extract this into a place which is controlled more closely by ScoringClass
     num_laps = competition.has_num_laps? ? raw[5] : nil
     ImportResult.create!(
       bib_number: raw[0],

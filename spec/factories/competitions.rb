@@ -69,6 +69,11 @@ FactoryGirl.define do
       age_group_type # factory Girl
     end
 
+    factory :timed_laps_competition do
+      scoring_class "Timed Multi-Lap"
+      age_group_type # factory Girl
+    end
+
     factory :ranked_competition do
       scoring_class "Points Low to High"
       age_group_type # factory Girl
