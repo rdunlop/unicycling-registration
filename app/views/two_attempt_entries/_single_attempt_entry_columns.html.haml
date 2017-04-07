@@ -1,12 +1,6 @@
-- if @competition.data_entry_format.hours?
-  %td= attempt.facade_hours
-  %td= attempt.facade_minutes
-- else
-  %td= attempt.minutes
-%td= attempt.seconds
-- if @competition.data_entry_format.thousands?
-  %td= attempt.thousands
-- if @competition.data_entry_format.hundreds?
-  %td= attempt.facade_hundreds
+- displayer = @competition.results_displayer
+- displayer.result_data(attempt).each do |data|
+  %td= data
+
 %td= attempt.status
 %td
