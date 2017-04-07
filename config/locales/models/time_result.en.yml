@@ -4,9 +4,14 @@ en:
     attributes:
       time_result:
         facade_hours: Hours
+        hours: Hours
         minutes: Minutes
+        facade_minutes: Minutes
         seconds: Seconds
+        facade_hundreds: Hundreds
         thousands: Thousands
+        number_of_penalties: "Penalties"
+        number_of_laps: "# Laps"
     models:
       time_result:
         one: Time Result

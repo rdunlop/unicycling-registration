@@ -16,7 +16,7 @@ class ResultDisplayer::TimeResult
     if @competition.imports_times?
       results << "Time"
     else
-      results << "Points"
+      results << "Points" # TODO: Extract this into a separate Point-type object?
     end
     if @competition.has_num_laps?
       results << "# Laps"
@@ -39,76 +39,18 @@ class ResultDisplayer::TimeResult
   end
 
   def headings
-    result = []
-    if @competition.data_entry_format.hours?
-      result << TimeResult.human_attribute_name(:hours)
-    end
-    result << TimeResult.human_attribute_name(:minutes)
-    result << TimeResult.human_attribute_name(:seconds)
-    if @competition.data_entry_format.hundreds?
-      result << TimeResult.human_attribute_name(:hundreds)
-    end
-    if @competition.data_entry_format.thousands?
-      result << TimeResult.human_attribute_name(:thousands)
-    end
-    if @competition.has_penalty?
-      result << "Penalties"
-    end
-    if @competition.has_num_laps?
-      result << "# Laps"
-    end
-    result
+    form_inputs.map{|field_name, _| TimeResult.human_attribute_name(field_name) }
   end
 
+  # get the value of each field from the passed time_result/import_result object
   def result_data(time_result)
-    result = []
-
-    if @competition.data_entry_format.hours?
-      result << time_result.facade_hours
-      result << time_result.facade_minutes
-    else
-      result << time_result.minutes
+    form_inputs.map do |field_name, _|
+      time_result.public_send(field_name)
     end
-    result << time_result.seconds
-    if @competition.data_entry_format.hundreds?
-      result << time_result.facade_hundreds
-    end
-    if @competition.data_entry_format.thousands?
-      result << time_result.thousands
-    end
-    if @competition.has_penalty?
-      result << time_result.number_of_penalties
-    end
-    if @competition.has_num_laps?
-      result << time_result.number_of_laps
-    end
-
-    result
   end
 
   def form_label_symbols
-    results = []
-    if @competition.data_entry_format.hours?
-      results << :facade_hours
-      results << :facade_minutes
-    else
-      results << :minutes
-    end
-    results << :seconds
-    if @competition.data_entry_format.hundreds?
-      results << :facade_hundreds
-    end
-    if @competition.data_entry_format.thousands?
-      results << :thousands
-    end
-    if @competition.has_penalty?
-      results << :number_of_penalties
-    end
-    if @competition.has_num_laps?
-      results << :number_of_laps
-    end
-
-    results
+    form_inputs.map{|field_name, _| field_name }
   end
 
   def form_inputs
