@@ -29,13 +29,7 @@
         - if @competition.start_list_present?
           %th= comp.wave
         %td.bib_number= comp.bib_number
-        %td.name
-          - if comp.team_name.present?
-            %b= comp.team_name
-            %br
-          - comp.members.each do |member|
-            = member
-            %br
+        %td.name= name_with_team(comp)
         %td.age= comp.age
         %td.signed_in
         %td.geared
