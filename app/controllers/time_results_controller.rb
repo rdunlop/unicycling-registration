@@ -119,7 +119,8 @@ class TimeResultsController < ApplicationController
 
   def time_result_params
     params.require(:time_result).permit(
-      :number_of_laps, :comments, :comments_by, :status, :status_description,
+      :number_of_laps, :number_of_penalties, :comments, :comments_by,
+      :status, :status_description,
       :competitor_id, *HoursFacade::PERMITTED_PARAMS)
   end
 end
