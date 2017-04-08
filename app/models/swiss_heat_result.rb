@@ -60,33 +60,14 @@ class SwissHeatResult
   end
 
   def disqualification?(full_time)
-    disqualified_status(full_time).present?
+    disqualified_status(full_time) == "DQ"
   end
 
   def disqualified_status(full_time)
-    case full_time.downcase
-    when "gestürzt", "scratched", "nicht am start", "disq. rot", "disq. rot agh", "disqualifiziert", "disq. blau", "nicht im ziel"
-      "DQ"
-    end
+    Importers::StatusTranslation::Swiss.translate(full_time)
   end
 
   def disqualification_description(full_time)
-    case full_time.downcase
-    when "gestürzt"
-      "Dismount"
-    when "scratched"
-      "Restart"
-    when "nicht am start"
-      "DNS"
-    when "disq. rot"
-      "False Start"
-    when "disq. rot agh"
-      "Lane"
-    when "disqualifiziert"
-    when "disq. blau"
-      "5m Line"
-    when "nicht im ziel"
-      "DNF"
-    end
+    Importers::StatusTranslation::Swiss.dq_description(full_time)
   end
 end
