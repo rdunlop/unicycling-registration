@@ -25,5 +25,5 @@
           %tr
             %th.text-right= t(".total")
             %th{ colspan: include_form ? 3 : 2}= print_formatted_currency(registrant.expenses_total)
-
-      %p.small.non_printable= t(".items_not_guaranteed")
+      - if @config.online_payment? || @config.offline_payment?
+        %p.small.non_printable= t(".items_not_guaranteed")
