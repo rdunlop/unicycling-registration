@@ -5,7 +5,8 @@ describe HeatLaneCalculator do
   let(:num_competitors) { 4 }
   let(:first_heat_number) { 1 }
 
-  let(:result) { described_class.new(lanes).heat_lane_list(num_competitors, first_heat_number) }
+  let(:subject) { described_class.new(lanes) }
+  let(:result) { subject.heat_lane_list(num_competitors, first_heat_number) }
 
   describe "basic assignment" do
     it "fills the heat from the worst lane to the best" do
@@ -15,6 +16,10 @@ describe HeatLaneCalculator do
                              { heat: 1, lane: 2 },
                              { heat: 1, lane: 1 }
                            ])
+    end
+
+    it "is valid" do
+      expect(subject).to be_valid
     end
 
     context "with 2 heats of registrants" do
@@ -101,6 +106,18 @@ describe HeatLaneCalculator do
                              { heat: 1, lane: 5 },
                              { heat: 1, lane: 4 }
                            ])
+    end
+  end
+
+  context "with a specified order with fewer entries than num lanes" do
+    let(:subject) { described_class.new(5, lane_assignment_order: [1, 2, 3]) }
+
+    it "is invalid" do
+      expect(subject).not_to be_valid
+    end
+
+    it "has an error" do
+      expect(subject.error).to eq("Unable to assign 5 lanes with only 3 positions specified")
     end
   end
 end
