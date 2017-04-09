@@ -33,8 +33,6 @@ class Admin::RegFeesController < ApplicationController
     params.require(:reg_fee).permit(:registrant_id, :registration_cost_id)
   end
 
-  private
-
   def set_payments_breadcrumb
     add_breadcrumb "Payment Summary", summary_payments_path
   end

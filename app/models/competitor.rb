@@ -246,8 +246,6 @@ class Competitor < ApplicationRecord
     age_group_entry.to_s
   end
 
-  public
-
   def has_result?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/has_result?") do
       scoring_calculator.competitor_has_result?(self)

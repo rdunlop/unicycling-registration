@@ -23,18 +23,6 @@ Lint/RescueException:
     - 'app/controllers/payment_adjustments_controller.rb'
     - 'app/controllers/two_attempt_entries_controller.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/UnneededDisable:
-  Exclude:
-    - 'spec/support/pundit_view_policy.rb'
-
-# Offense count: 2
-Lint/UselessAccessModifier:
-  Exclude:
-    - 'app/controllers/admin/reg_fees_controller.rb'
-    - 'app/models/competitor.rb'
-
 # Offense count: 150
 Metrics/AbcSize:
   Max: 72
