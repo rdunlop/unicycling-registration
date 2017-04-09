@@ -47,7 +47,7 @@
             %td= registrant.first_name
             %td= registrant.age
             %td= registrant.gender
-            %td= registrant.state_or_country
+            %td= registrant.representation
             %td.non_printable
               = link_to t(".summary"), registrant_path(registrant)
               = link_to t("pdf"), registrant_path(registrant, :format => :pdf)

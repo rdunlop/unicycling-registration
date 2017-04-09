@@ -47,6 +47,7 @@
 #  registrants_should_specify_default_wheel_size :boolean          default(TRUE), not null
 #  add_event_end_date                            :datetime
 #  max_registrants                               :integer          default(0), not null
+#  representation_type                           :string           default("country"), not null
 #
 
 class EventConfiguration < ApplicationRecord
@@ -85,6 +86,7 @@ class EventConfiguration < ApplicationRecord
   validates :style_name, inclusion: {in: style_names.map{|y| y[1]} }
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
   validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
+  validates :representation_type, inclusion: { in: RepresentationType::TYPES }
 
   validates :standard_skill, inclusion: { in: [true, false] }
   validates :standard_skill_closed_date, presence: true, unless: "standard_skill.nil? or standard_skill == false"

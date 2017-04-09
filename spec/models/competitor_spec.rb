@@ -126,32 +126,9 @@ describe Competitor do
     before do
       allow(@comp).to receive(:members).and_return([registrant])
     end
+    let(:subject) { @comp }
 
-    describe "when EventConfiguration wants to display the state" do
-      before do
-        EventConfiguration.singleton.update(usa: true)
-      end
-
-      it "displays the associated state" do
-        expect(@comp.state_or_country).to eq("Illinois")
-      end
-    end
-
-    describe "when EventConfiguration wants to display the country" do
-      before do
-        EventConfiguration.singleton.update(usa: false)
-      end
-
-      it "displays the associated representing-country" do
-        expect(@comp.state_or_country).to eq("United States")
-      end
-    end
-
-    describe "when EventConfiguration wants to display the club" do
-      pending "displays the associated club" do
-        expect(@comp.state_or_country).to eq("My Club")
-      end
-    end
+    include_context 'can display correct state, country, club', state: "Illinois", country: "United States", club: "My Club"
   end
 end
 

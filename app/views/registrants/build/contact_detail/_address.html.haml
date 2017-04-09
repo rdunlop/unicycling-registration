@@ -29,7 +29,7 @@
           = f.country_select :country_residence, {prompt: ' '}, class: "chosen-select"
     .row
       .small-5.columns
-        - if @config.state?
+        - if @config.usa?
           = f.label :state_code, t(".state"), :class => "required"
         - else
           = f.label :state_code, t(".state_province")

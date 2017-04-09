@@ -11,7 +11,7 @@
         %th Name
         - if @competition.age_group_type
           %th Age Group
-        %th= Competitor.state_or_country_description
+        %th= RepresentationType.description
 
     %tbody
       - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
@@ -25,4 +25,4 @@
               = name_with_team(comp)
             - if @competition.age_group_type
               %td= comp.age_group_entry_description
-            %td= comp.state_or_country
+            %td= comp.representation

@@ -144,7 +144,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   def registration_questions_params
     params.require(:event_configuration).permit(:request_address, :request_emergency_contact,
                                                 :request_responsible_adult,
-                                                :standard_skill,
+                                                :standard_skill, :representation_type,
                                                 :registrants_should_specify_default_wheel_size)
   end
 

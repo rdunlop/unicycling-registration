@@ -12,6 +12,7 @@
     = f.input :request_emergency_contact
     = f.input :request_responsible_adult
 
+  %fieldset.form__fieldset
     %h3= t(".request_young_users_wheel_size")
 
     = f.input :registrants_should_specify_default_wheel_size
@@ -23,5 +24,12 @@
       Enabling this feature allows a registrant to submit their standard skill routine with their registration.
 
     = f.input :standard_skill
+  %fieldset.form__fieldset
+    %h3= t(".representation_type")
+
+    = f.input :representation_type, collection: RepresentationType::TYPES, include_blank: false
+
+    %p
+      When displaying a registrant/competitor, what other information might we display.
 
   = f.button :submit

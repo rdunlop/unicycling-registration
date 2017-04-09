@@ -34,6 +34,7 @@
 
 class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   include Eligibility
+  include Representable
   include CachedModel
   extend OrderAsSpecified
 
@@ -322,15 +323,6 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
-
-  # TODO: Extract into ContactDetail?
-  def state_or_country(display_state = EventConfiguration.singleton.state?)
-    if display_state
-      state
-    else
-      country
-    end
-  end
 
   # return an object describing the best time entered by this registrant
   def best_time(event)

@@ -8,6 +8,7 @@
         %th= t(".name")
         %th= t(".registrant_type")
         %th= t(".club")
+        %th= RepresentationType.description
         - if @config.state?
           %th= t(".state")
         - else
@@ -19,4 +20,4 @@
           %td= registrant
           %td= registrant.registrant_type.capitalize
           %td= registrant.club
-          %td= registrant.state_or_country
+          %td= RepresentationType.show(registrant)

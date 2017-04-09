@@ -47,6 +47,7 @@
 #  registrants_should_specify_default_wheel_size :boolean          default(TRUE), not null
 #  add_event_end_date                            :datetime
 #  max_registrants                               :integer          default(0), not null
+#  representation_type                           :string           default("country"), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
