@@ -31,7 +31,7 @@ require 'spec_helper'
 describe Competitor do
   let(:competition) { FactoryGirl.build_stubbed(:timed_competition) }
 
-  before :each do
+  before do
     @comp = FactoryGirl.build_stubbed(:event_competitor, competition: competition)
     allow(@comp).to receive(:lower_is_better).and_return(true)
     Rails.cache.clear
@@ -42,7 +42,7 @@ describe Competitor do
   end
 
   describe "when there are time results" do
-    before :each do
+    before do
       @tr1 = FactoryGirl.build_stubbed(:time_result, minutes: 1)
       allow(@comp).to receive(:finish_time_results).and_return([@tr1])
     end
@@ -52,7 +52,7 @@ describe Competitor do
     end
 
     describe "when there is also a start time" do
-      before :each do
+      before do
         @tr2 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, seconds: 10)
         allow(@comp).to receive(:start_time_results).and_return([@tr2])
       end
@@ -63,7 +63,7 @@ describe Competitor do
     end
 
     describe "when there is a matching wave + wave_time" do
-      before :each do
+      before do
         allow(competition).to receive(:wave_time_for).with(1).and_return(30)
       end
 
@@ -74,7 +74,7 @@ describe Competitor do
     end
   end
   describe "when there are multiple start and end times" do
-    before :each do
+    before do
       @start1 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, minutes: 1)
       @start2 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, minutes: 10)
 
@@ -86,7 +86,7 @@ describe Competitor do
     end
 
     describe "with lower_is_better" do
-      before :each do
+      before do
         Rails.cache.clear
         allow(@comp).to receive(:lower_is_better).and_return(true)
       end
@@ -96,7 +96,7 @@ describe Competitor do
     end
 
     describe "with higher_is_better" do
-      before :each do
+      before do
         Rails.cache.clear
         allow(@comp).to receive(:lower_is_better).and_return(false)
       end
@@ -107,7 +107,7 @@ describe Competitor do
   end
 
   describe "when there are end times without start times" do
-    before :each do
+    before do
       @end1 = FactoryGirl.build_stubbed(:time_result, minutes: 2, seconds: 30)
       @end2 = FactoryGirl.build_stubbed(:time_result, minutes: 10, seconds: 45)
 
@@ -123,7 +123,7 @@ end
 describe Competitor do
   let(:competition) { FactoryGirl.create(:competition) }
 
-  before(:each) do
+  before do
     @comp = FactoryGirl.create(:event_competitor, competition: competition)
   end
 
@@ -242,7 +242,7 @@ describe Competitor do
   end
 
   describe "when it has multiple members" do
-    before(:each) do
+    before do
       EventConfiguration.singleton.update(start_date: Date.new(2010, 1, 1))
       member = @comp.reload.members.first
       @reg1 = member.registrant
@@ -310,7 +310,7 @@ describe Competitor do
   end
 
   describe "when a join pair exists" do
-    before(:each) do
+    before do
       @reg = FactoryGirl.create(:registrant)
 
       @competition = FactoryGirl.create(:competition)
@@ -349,7 +349,7 @@ describe Competitor do
     end
   end
   describe "with a standard skill score" do
-    before(:each) do
+    before do
       @st_score = FactoryGirl.create(:standard_skill_score)
     end
 
@@ -358,7 +358,7 @@ describe Competitor do
     end
   end
   describe "with a score" do
-    before(:each) do
+    before do
       @score = FactoryGirl.create(:score)
     end
     it "should delete the score when the associated competitor is deleted" do
@@ -369,7 +369,7 @@ describe Competitor do
     end
   end
   describe "with a boundary_score" do
-    before(:each) do
+    before do
       @score = FactoryGirl.create(:boundary_score)
     end
     it "should delete the boundary_score when the associated competitor is deleted" do
@@ -382,7 +382,7 @@ describe Competitor do
   describe "with a distance attempt" do
     let(:competition) { FactoryGirl.create(:distance_competition) }
 
-    before(:each) do
+    before do
       travel 2.seconds do
         @da = DistanceAttempt.new
       end
@@ -454,12 +454,13 @@ describe Competitor do
     end
 
     describe "when attempts have already been made" do
-      before (:each) do
+      before do
         FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 10, fault: false)
         travel 2.seconds do
           FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         end
       end
+
       before do
         travel 4.seconds
       end
@@ -539,7 +540,7 @@ describe Competitor do
   end
 
   describe "with an ineligible registrant" do
-    before(:each) do
+    before do
       @reg = @comp.reload.registrants.first
       @reg.ineligible = true
       @reg.save!

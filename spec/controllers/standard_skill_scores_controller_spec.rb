@@ -17,7 +17,7 @@
 require 'spec_helper'
 
 describe StandardSkillScoresController do
-  before (:each) do
+  before do
     @admin = FactoryGirl.create(:super_admin_user)
     @user = FactoryGirl.create(:data_entry_volunteer_user)
     @other_user = FactoryGirl.create(:data_entry_volunteer_user)

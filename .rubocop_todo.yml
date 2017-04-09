@@ -12,21 +12,6 @@ Lint/HandleExceptions:
     - 'config/unicorn/production.rb'
     - 'config/unicorn/stage.rb'
 
-# Offense count: 14
-Lint/ParenthesesAsGroupedExpression:
-  Exclude:
-    - 'spec/controllers/award_labels_controller_spec.rb'
-    - 'spec/controllers/distance_attempts_controller_spec.rb'
-    - 'spec/controllers/scores_controller_spec.rb'
-    - 'spec/controllers/standard_skill_routines_controller_spec.rb'
-    - 'spec/controllers/standard_skill_scores_controller_spec.rb'
-    - 'spec/controllers/street_scores_controller_spec.rb'
-    - 'spec/lib/upload_spec.rb'
-    - 'spec/models/competitor_spec.rb'
-    - 'spec/models/payment_spec.rb'
-    - 'spec/models/score_spec.rb'
-    - 'spec/views/payments/show.html.erb_spec.rb'
-
 # Offense count: 10
 Lint/RescueException:
   Exclude:

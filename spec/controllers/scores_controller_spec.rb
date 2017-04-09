@@ -23,7 +23,7 @@
 require 'spec_helper'
 
 describe ScoresController do
-  before (:each) do
+  before do
     @user = FactoryGirl.create(:data_entry_volunteer_user)
     @other_user = FactoryGirl.create(:data_entry_volunteer_user)
 
@@ -126,7 +126,7 @@ describe ScoresController do
   end
 
   describe "POST create" do
-    before(:each) do
+    before do
       sign_out @user
       sign_in @other_user
     end
@@ -140,7 +140,7 @@ describe ScoresController do
   end
 
   describe "when the competition is locked" do
-    before(:each) do
+    before do
       @comp.competition.locked_at = DateTime.now
       @comp.competition.save!
     end
@@ -171,7 +171,7 @@ describe ScoresController do
     describe "authentication of edit/update pages" do
       # http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
 
-      before (:each) do
+      before do
         # create score with existing current_user
         @user_score = @signed_in_scores[0]
 
@@ -180,6 +180,7 @@ describe ScoresController do
         @auth_user = FactoryGirl.create(:user)
         sign_in @auth_user
       end
+
       it "should deny access to edit" do
         get :new, params: { judge_id: @judge, competitor_id: @comp.id }
         expect(response).to redirect_to(root_path)

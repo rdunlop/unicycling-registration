@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe StreetScoresController do
-  before (:each) do
+  before do
     @admin = FactoryGirl.create(:super_admin_user)
     @user = FactoryGirl.create(:data_entry_volunteer_user)
     @other_user = FactoryGirl.create(:data_entry_volunteer_user)
@@ -31,7 +31,7 @@ describe StreetScoresController do
       expect(response).to be_success
     end
     describe "when returning a list of scores" do
-      before(:each) do
+      before do
         @user_score2 = FactoryGirl.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
         @user_score1 = FactoryGirl.create(:score, val_1: 5, judge: @judge, competitor: @comp)
       end
@@ -67,7 +67,7 @@ describe StreetScoresController do
     end
   end
   describe "DELETE destroy" do
-    before(:each) do
+    before do
       @user_score1 = FactoryGirl.create(:score, val_1: 5, judge: @judge, competitor: @comp)
       @user_score2 = FactoryGirl.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
     end
@@ -81,7 +81,7 @@ describe StreetScoresController do
   describe "authentication of edit/update pages" do
     # http://ruby.railstutorial.org/chapters/updating-showing-and-deleting-users#sec:protecting_pages
 
-    before (:each) do
+    before do
       # create score with existing current_user
       @user_score = FactoryGirl.create(:score, judge: @judge, competitor: @comp)
 

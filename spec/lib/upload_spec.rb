@@ -2,9 +2,6 @@ require 'spec_helper'
 require 'upload'
 
 describe Upload do
-  before (:each) do
-  end
-
   it "can extract csv for normal race results" do
     sample_file = fixture_path + '/sample_time_results_bib_101.txt'
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")

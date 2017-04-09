@@ -28,7 +28,7 @@ describe AwardLabelsController do
     sign_in @admin_user
     @registrant = FactoryGirl.create(:competitor)
   end
-  let (:award_label) { FactoryGirl.create(:award_label, user: @admin_user) }
+  let(:award_label) { FactoryGirl.create(:award_label, user: @admin_user) }
 
   # This should return the minimal set of attributes required to create a valid
   # AwardLabel. As you add validations to AwardLabel, be sure to

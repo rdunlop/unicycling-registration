@@ -21,13 +21,13 @@ require 'spec_helper'
 describe DistanceAttemptsController do
   let(:competition) { FactoryGirl.create(:distance_competition) }
   let(:comp) { FactoryGirl.create(:event_competitor, competition: competition) }
-  before(:each) do
+  before do
     @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @data_entry_volunteer_user
   end
 
   describe "GET index" do
-    before (:each) do
+    before do
       @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
     end
 
@@ -41,7 +41,7 @@ describe DistanceAttemptsController do
   end
 
   describe "POST create" do
-    before (:each) do
+    before do
       @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
     end
     def valid_attributes
@@ -71,7 +71,7 @@ describe DistanceAttemptsController do
   end
 
   describe "GET list" do
-    before(:each) do
+    before do
       @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
     end
 
