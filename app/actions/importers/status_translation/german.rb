@@ -3,9 +3,7 @@ class Importers::StatusTranslation::German
     case status
     when "", nil
       nil
-    when "disq"
-      "DQ"
-    when "abgem"
+    when "disq", "abgem"
       "DQ"
     else
       "active"
