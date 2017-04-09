@@ -49,45 +49,8 @@ class HeatsController < ApplicationController
 
   # manually re-sort the lane assignments
   def sort
-    @lane_assignments = LaneAssignment.where(id: params[:age_group_entry]).order(:heat, :lane)
-
-    # holds the list of all heats/lanes
-    previous_heat_lanes = @lane_assignments.map{|la| [la.heat, la.lane] }
-
-    # enable a mode which assigns new lane numbers (but not heats)
-    if params[:move_lane]
-      move_to_new_position = true
-      found_moved_lane = false
-    end
-
-    # XXX this is doing unsafe updates (validations disabled)
-    # sets these to the new order given
-    new_lanes = []
-    moved_heat = 0
-    moved_lane = 0
-    params[:age_group_entry].each_with_index do |lane_assignment_id, index|
-      la = LaneAssignment.find(lane_assignment_id)
-      if previous_heat_lanes[index][0] != la.heat || previous_heat_lanes[index][1] != la.lane
-        # this lane has been moved
-        if move_to_new_position
-          unless found_moved_lane
-            moved_heat = previous_heat_lanes[index][0]
-            moved_lane = previous_heat_lanes[index][1]
-            found_moved_lane = true
-          end
-          if found_moved_lane && la.heat == moved_heat && la.lane == moved_lane
-            # this is the lane that we moved
-            la.update_attribute(:heat, previous_heat_lanes[index][0])
-            la.update_attribute(:lane, previous_heat_lanes[index][1] + 1)
-          end
-        else
-          la.update_attribute(:heat, previous_heat_lanes[index][0])
-          la.update_attribute(:lane, previous_heat_lanes[index][1])
-        end
-      end
-      new_lanes << la
-    end
-    @lane_assignments = new_lanes
+    sorter = HeatLaneSorter.new(params[:age_group_entry], move_lane: params[:move_lane])
+    @lane_assignments = sorter.sort
     respond_to do |format|
       format.js {}
     end
