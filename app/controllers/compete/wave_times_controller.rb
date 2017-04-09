@@ -26,7 +26,7 @@ class Compete::WaveTimesController < ApplicationController
       flash[:notice] = "Wave Time Created"
       redirect_to competition_wave_times_path(@competition)
     else
-      flash[:alert] = "Unable to create Wave Time"
+      flash.now[:alert] = "Unable to create Wave Time"
       @wave_times = @competition.wave_times
       render :index
     end

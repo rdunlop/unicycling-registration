@@ -69,15 +69,6 @@ class Importers::TwoAttemptEntryAdvancedImporter < Importers::BaseImporter
   end
 
   def translate_status_column(data)
-    case data
-    when "", nil
-      nil
-    when "disq"
-      "DQ"
-    when "abgem"
-      "DQ"
-    else
-      "active"
-    end
+    Importers::StatusTranslation::German.translate(data)
   end
 end

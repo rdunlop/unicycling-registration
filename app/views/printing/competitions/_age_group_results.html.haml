@@ -32,6 +32,7 @@
               %td.place= competitor.send(place_function)
               %td= competitor.bib_number
               %td
+                // similar to name_with_team function
                 - if competitor.team_name.present?
                   %b= competitor.team_name
                   %br

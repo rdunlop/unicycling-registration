@@ -25,7 +25,7 @@ require 'spec_helper'
 require 'cgi'
 
 describe Payment do
-  before(:each) do
+  before do
     @pay = FactoryGirl.create(:payment)
   end
 
@@ -49,7 +49,7 @@ describe Payment do
   end
 
   describe "with payment details" do
-    before(:each) do
+    before do
       @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: 57.49)
       @pay.reload
     end
@@ -130,7 +130,7 @@ describe Payment do
   end
 
   describe "with a completed payment" do
-    let (:payment) { FactoryGirl.create(:payment, completed: true) }
+    let(:payment) { FactoryGirl.create(:payment, completed: true) }
 
     it "can determine the total received" do
       FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)

@@ -395,6 +395,11 @@ class Competition < ApplicationRecord
     end
   end
 
+  def results_displayer
+    # @results_displayer ||= ScoringClass.for(event_class, self)[:results_displayer]
+    ResultDisplayer::TimeResult.new(self)
+  end
+
   def exporter
     @exporter ||= ScoringClass.for(event_class, self)[:exporter]
   end

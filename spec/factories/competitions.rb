@@ -69,6 +69,11 @@ FactoryGirl.define do
       age_group_type # factory Girl
     end
 
+    factory :timed_laps_competition do
+      scoring_class "Timed Multi-Lap"
+      age_group_type # factory Girl
+    end
+
     factory :ranked_competition do
       scoring_class "Points Low to High"
       age_group_type # factory Girl
@@ -89,12 +94,12 @@ FactoryGirl.define do
     end
 
     trait :locked do
-      locked_at DateTime.now
+      locked_at DateTime.current
     end
 
     trait :published do
       locked
-      published_at DateTime.now
+      published_at DateTime.current
     end
   end
 end

@@ -17,7 +17,7 @@ RSpec::Matchers.define :match_seconds do |_expected|
   include TimeMatcherHelpers
 
   def round_to(time)
-    Time.at(time.to_i)
+    Time.zone.at(time.to_i)
   end
 
   def precision

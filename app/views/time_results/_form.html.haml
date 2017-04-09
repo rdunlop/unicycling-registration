@@ -4,39 +4,26 @@
     %thead
       %tr
         %th= f.label :competitor_id
-        - if @competition.data_entry_format.hours?
-          %th= f.label :facade_hours
-        %th= f.label :minutes
-        %th= f.label :seconds
-        - if @competition.data_entry_format.hundreds?
-          %th= f.label :hundreds
-        - if @competition.data_entry_format.thousands?
-          %th= f.label :thousands
+
+        - displayer = @competition.results_displayer
+        - displayer.form_label_symbols.each do |label_symbol|
+          %th= f.label label_symbol
+
         %th= f.label :status
         %th= f.label :status_description
         %th= f.label :comments
         %th= f.label :comments_by
-        - if @competition.has_num_laps?
-          %th= f.label :number_of_laps
         %th
     %tbody
       %tr
         %td.ui-widget
           = competitor_select_box(f, @competition)
-        - if @competition.data_entry_format.hours?
-          %td= f.number_field :facade_hours, {min: 0}
-          %td= f.number_field :facade_minutes, {min: 0}
-        - else
-          %td= f.number_field :minutes, {min: 0}
-        %td= f.number_field :seconds, {min: 0}
-        - if @competition.data_entry_format.hundreds?
-          %td= f.number_field :facade_hundreds, {min: 0}
-        - if @competition.data_entry_format.thousands?
-          %td= f.number_field :thousands, {min: 0}
+
+        - displayer.form_inputs.each do |input_symbol, input_options|
+          %th= f.number_field input_symbol, input_options
+
         %td= f.select :status, TimeResult.status_values, include_blank: false
         %td= f.text_field :status_description
         %td= f.text_field :comments
         %td= f.text_field :comments_by
-        - if @competition.has_num_laps?
-          %td= f.number_field :number_of_laps, {min: 1}
         %td= f.button :submit

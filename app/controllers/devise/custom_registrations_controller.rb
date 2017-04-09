@@ -6,7 +6,7 @@ class Devise::CustomRegistrationsController < Devise::RegistrationsController
   def create
     if skip_user_creation_confirmation?
       devise_parameter_sanitizer.permit(:sign_up, keys: [:confirmed_at])
-      params[:user][:confirmed_at] = DateTime.now
+      params[:user][:confirmed_at] = DateTime.current
     end
 
     super

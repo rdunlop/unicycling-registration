@@ -4,18 +4,11 @@
     %th ID
     %th Name
     %th Competitor Exists?
-    - if @competition.data_entry_format.hours?
-      %th Hours
-    %th Minutes
-    %th Seconds
-    - if @competition.data_entry_format.thousands?
-      %th Thousands
-    - if @competition.data_entry_format.hundreds?
-      %th Hundreds
-    - if @competition.has_penalty?
-      %th Penalties
-    - if @competition.has_num_laps?
-      %th # Laps
+
+    - displayer = @competition.results_displayer
+    - displayer.headings.each do |heading|
+      %th= heading
+
     %th Disqualified
     %th
     %th

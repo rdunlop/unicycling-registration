@@ -8,12 +8,11 @@
         %th ID
         %th Name
         %th Competitor Exists?
-        - if @competition.imports_times?
-          %th Time
-        - else
-          %th Points
-        - if @competition.has_num_laps?
-          %th # Laps
+
+        - displayer = @competition.results_displayer
+        - displayer.summary_headings.each do |heading|
+          %th= heading
+
         %th Disqualified
         %th Entered At
   %tbody
@@ -25,12 +24,10 @@
           %td= index + 1
           %td= result.bib_number
           = render partial: "matching_registrant_cell", locals: { import_result: result }
-          - if @competition.imports_times?
-            %td= result.full_time
-          - else
-            %td= result.points
-          - if @competition.has_num_laps?
-            %Td= result.number_of_laps
+
+          - displayer.summary_result_data(result).each do |summary_data|
+            %td= summary_data
+
           %td= result.disqualified? ? "yes" : ""
           %td= result.created_at.to_formatted_s(:short)
 

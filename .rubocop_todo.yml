@@ -12,26 +12,6 @@ Lint/HandleExceptions:
     - 'config/unicorn/production.rb'
     - 'config/unicorn/stage.rb'
 
-# Offense count: 1
-Lint/IneffectiveAccessModifier:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
-
-# Offense count: 14
-Lint/ParenthesesAsGroupedExpression:
-  Exclude:
-    - 'spec/controllers/award_labels_controller_spec.rb'
-    - 'spec/controllers/distance_attempts_controller_spec.rb'
-    - 'spec/controllers/scores_controller_spec.rb'
-    - 'spec/controllers/standard_skill_routines_controller_spec.rb'
-    - 'spec/controllers/standard_skill_scores_controller_spec.rb'
-    - 'spec/controllers/street_scores_controller_spec.rb'
-    - 'spec/lib/upload_spec.rb'
-    - 'spec/models/competitor_spec.rb'
-    - 'spec/models/payment_spec.rb'
-    - 'spec/models/score_spec.rb'
-    - 'spec/views/payments/show.html.erb_spec.rb'
-
 # Offense count: 10
 Lint/RescueException:
   Exclude:
@@ -42,18 +22,6 @@ Lint/RescueException:
     - 'app/controllers/import_results_controller.rb'
     - 'app/controllers/payment_adjustments_controller.rb'
     - 'app/controllers/two_attempt_entries_controller.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/UnneededDisable:
-  Exclude:
-    - 'spec/support/pundit_view_policy.rb'
-
-# Offense count: 2
-Lint/UselessAccessModifier:
-  Exclude:
-    - 'app/controllers/admin/reg_fees_controller.rb'
-    - 'app/models/competitor.rb'
 
 # Offense count: 150
 Metrics/AbcSize:
@@ -111,7 +79,7 @@ Rails/HasAndBelongsToMany:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: strict, flexible
 Rails/TimeZone:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 3
 Style/AccessorMethodName:

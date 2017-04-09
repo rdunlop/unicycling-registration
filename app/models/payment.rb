@@ -144,7 +144,7 @@ class Payment < ApplicationRecord
     payment = Payment.new(
       completed: true,
       note: options[:note],
-      completed_date: DateTime.now
+      completed_date: DateTime.current
     )
     payment.payment_details.build(
       registrant: options[:registrant],

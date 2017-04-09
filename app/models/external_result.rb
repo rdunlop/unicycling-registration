@@ -56,17 +56,6 @@ class ExternalResult < ApplicationRecord
     status == "DQ"
   end
 
-  # from CSV to import_result
-  def self.build_and_save_imported_result(raw, _raw_data, user, competition)
-    ExternalResult.preliminary.create(
-      competitor: CompetitorFinder.new(competition).find_by_bib_number(raw[0]),
-      points: raw[1],
-      details: raw[2],
-      status: "active",
-      entered_at: DateTime.now,
-      entered_by: user)
-  end
-
   def result
     points
   end

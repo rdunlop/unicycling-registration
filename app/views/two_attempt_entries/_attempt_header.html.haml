@@ -1,10 +1,6 @@
-- if @competition.data_entry_format.hours?
-  %th Hours
-%th Minutes
-%th Seconds
-- if @competition.data_entry_format.thousands?
-  %th Thousands
-- if @competition.data_entry_format.hundreds?
-  %th Hundreds
+- displayer = @competition.results_displayer
+- displayer.headings.each do |heading|
+  %th= heading
+
 %th DQ
 %th

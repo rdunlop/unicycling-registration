@@ -12,9 +12,9 @@ class ExpenseItemFreeChecker
 
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"
-      return !has_chosen_free_item_from_expense_group(expense_item.expense_group)
+      return !chosen_free_item_from_expense_group?(expense_item.expense_group)
     when "One Free of Each In Group"
-      return !has_chosen_free_item_of_expense_item(expense_item)
+      return !chosen_free_item_of_expense_item?(expense_item)
     else
       return false
     end
@@ -26,12 +26,12 @@ class ExpenseItemFreeChecker
 
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"
-      if has_chosen_free_item_from_expense_group(expense_item.expense_group)
+      if chosen_free_item_from_expense_group?(expense_item.expense_group)
         @error_message = "Only 1 free item is permitted in this expense_group"
         return true
       end
     when "One Free of Each In Group"
-      if has_chosen_free_item_of_expense_item(expense_item)
+      if chosen_free_item_of_expense_item?(expense_item)
         @error_message = "Only 1 free item of this item is permitted"
         return true
       end
@@ -44,7 +44,7 @@ class ExpenseItemFreeChecker
 
   # return true if user has chosen or paid for an expense item
   # given a block which defines what we are comparing to
-  def has_chosen_free_item?
+  def chosen_free_item?
     registrant_expense_items.each do |rei|
       next unless rei.free
       if yield(rei.expense_item)
@@ -63,11 +63,11 @@ class ExpenseItemFreeChecker
   end
 
   # return true/false to show whether an expense_group has been chosen by this registrant
-  def has_chosen_free_item_from_expense_group(expense_group)
-    has_chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
+  def chosen_free_item_from_expense_group?(expense_group)
+    chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
   end
 
-  def has_chosen_free_item_of_expense_item(target_expense_item)
-    has_chosen_free_item?{ |expense_item| expense_item == target_expense_item }
+  def chosen_free_item_of_expense_item?(target_expense_item)
+    chosen_free_item?{ |expense_item| expense_item == target_expense_item }
   end
 end

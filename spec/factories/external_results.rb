@@ -24,7 +24,7 @@ FactoryGirl.define do
   factory :external_result do
     association :competitor, factory: :event_competitor
     association :entered_by, factory: :user
-    entered_at DateTime.now
+    entered_at DateTime.current
     details "MyString"
     points 1
     status "active"

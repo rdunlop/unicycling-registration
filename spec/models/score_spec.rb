@@ -59,7 +59,7 @@ describe Score do
 end
 
 describe Score do
-  before (:each) do
+  before do
     @judge = FactoryGirl.create(:judge)
   end
 

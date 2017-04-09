@@ -213,7 +213,7 @@ class AwardLabelsController < ApplicationController
       pdf.text name, align: :center, inline_format: true, valign: :center
     end
 
-    send_data labels, filename: "labels-#{DateTime.now}.pdf", type: "application/pdf"
+    send_data labels, filename: "labels-#{DateTime.current}.pdf", type: "application/pdf"
   end
 
   def announcer_sheet

@@ -19,12 +19,7 @@
           %tr
             %td= comp.bib_number
             %td
-              - if comp.team_name.present?
-                %b= comp.team_name
-                %br
-              - comp.members.each do |member|
-                = member
-                %br
+              = name_with_team(comp)
             - if @competition.age_group_type
               %td= comp.age_group_entry_description
             %td= comp.state_or_country

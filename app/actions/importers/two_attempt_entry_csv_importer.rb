@@ -13,8 +13,8 @@ class Importers::TwoAttemptEntryCsvImporter < Importers::BaseImporter
       raw_data.each do |raw|
         # 101,1,30,0,,10,45,0,
         # 102,2,30,239,DQ,11,0,0,
-        status_1 = (raw[4] == "DQ") ? "DQ" : "active"
-        status_2 = (raw[8] == "DQ") ? "DQ" : "active"
+        status_1 = Importers::StatusTranslation::DqOrDnfOnly.translate(raw[4])
+        status_2 = Importers::StatusTranslation::DqOrDnfOnly.translate(raw[8])
         entry = TwoAttemptEntry.new(
           competition: competition,
           user: user,
