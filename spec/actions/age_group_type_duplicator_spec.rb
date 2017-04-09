@@ -5,7 +5,7 @@ RSpec.describe AgeGroupTypeDuplicator do
   let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
 
   def do_action
-    described_class.new(age_group_type).duplicate
+    described_class.new(age_group_type.reload).duplicate
   end
 
   it 'can duplicate an age group' do

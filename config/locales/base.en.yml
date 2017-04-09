@@ -40,3 +40,5 @@ en:
     music: Music
     set_wheel_sizes: Wheel Sizes
   'yes': 'Yes'
+  validations:
+    duplicate: "Must be unique"

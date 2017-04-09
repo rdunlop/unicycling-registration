@@ -16,6 +16,7 @@ describe CompetitionSignUp do
   let(:competition) { FactoryGirl.create(:competition, age_group_type: agt) }
   let(:competition_sign_up) { described_class.new(competition) }
   before do
+    agt.reload # load the age_group_entries
     allow(competition).to receive(:signed_up_registrants).and_return([young_registrant, middle_registrant, old_registrant])
   end
 
