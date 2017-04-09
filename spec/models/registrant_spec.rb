@@ -66,6 +66,37 @@ describe Registrant do
     end
   end
 
+  describe "with a contact_detail with club, state, country" do
+    let(:contact_detail) { FactoryGirl.build(:contact_detail, state_code: "IL", country_representing: "US", club: "My Club") }
+    let(:registrant) { FactoryGirl.build(:competitor, contact_detail: contact_detail) }
+
+    describe "when EventConfiguration wants to display the state" do
+      before do
+        EventConfiguration.singleton.update(usa: true)
+      end
+
+      it "displays the associated state" do
+        expect(registrant.state_or_country).to eq("Illinois")
+      end
+    end
+
+    describe "when EventConfiguration wants to display the country" do
+      before do
+        EventConfiguration.singleton.update(usa: false)
+      end
+
+      it "displays the associated representing-country" do
+        expect(registrant.state_or_country).to eq("United States")
+      end
+    end
+
+    describe "when EventConfiguration wants to display the club" do
+      pending "displays the associated club" do
+        expect(registrant.state_or_country).to eq("My Club")
+      end
+    end
+  end
+
   describe "with an event configuration starting date" do
     before(:each) do
       EventConfiguration.singleton.update(start_date: Date.new(2012, 5, 20))

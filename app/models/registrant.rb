@@ -324,8 +324,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   delegate :country_code, :country, :state, :club, to: :contact_detail, allow_nil: true
 
   # TODO: Extract into ContactDetail?
-  def state_or_country(state = EventConfiguration.singleton.state?)
-    if state
+  def state_or_country(display_state = EventConfiguration.singleton.state?)
+    if display_state
       state
     else
       country
