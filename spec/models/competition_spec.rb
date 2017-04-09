@@ -127,12 +127,12 @@ describe Competition do
 
   it "Cannot be published until it is locked" do
     @ec.locked_at = nil
-    @ec.published_at = DateTime.now
+    @ec.published_at = DateTime.current
     expect(@ec).to be_invalid
   end
 
   it "Cannot be awarded until it is published" do
-    @ec.locked_at = DateTime.now
+    @ec.locked_at = DateTime.current
     @ec.published_at = nil
     @ec.awarded = true
     expect(@ec).to be_invalid

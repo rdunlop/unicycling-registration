@@ -29,6 +29,6 @@ class PublishedAgeGroupEntry < ApplicationRecord
   private
 
   def set_published_at_date
-    self.published_at = DateTime.now
+    self.published_at = DateTime.current
   end
 end

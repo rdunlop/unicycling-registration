@@ -79,7 +79,7 @@ Rails/HasAndBelongsToMany:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: strict, flexible
 Rails/TimeZone:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 3
 Style/AccessorMethodName:

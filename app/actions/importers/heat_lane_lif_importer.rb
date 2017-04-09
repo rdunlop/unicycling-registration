@@ -16,7 +16,7 @@ class Importers::HeatLaneLifImporter < Importers::BaseImporter
 
           result = HeatLaneResult.new(
             entered_by: @user,
-            entered_at: DateTime.now,
+            entered_at: DateTime.current,
             heat: heat,
             lane: lane,
             raw_data: raw,

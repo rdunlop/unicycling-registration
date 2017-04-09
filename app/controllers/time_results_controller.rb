@@ -61,7 +61,7 @@ class TimeResultsController < ApplicationController
     @time_result = TimeResult.new(time_result_params)
     respond_to do |format|
       @time_result.entered_by = current_user
-      @time_result.entered_at = DateTime.now
+      @time_result.entered_at = DateTime.current
       if @time_result.save
         format.html { redirect_to(competition_time_results_path(@time_result.competition), notice: 'Time result was successfully created.') }
         format.json { render json: @time_result, status: :created, location: @time_result.event }

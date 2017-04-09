@@ -50,7 +50,7 @@ describe GlobalUserMigrator do
     let(:ga_name) { }
     let(:ga_guest) { false }
     let(:ga_created_at) { 1.day.ago }
-    let(:ga_updated_at) { DateTime.now }
+    let(:ga_updated_at) { DateTime.current }
 
     before do
       GlobalUserMigrator::GlobalUser.create!(
@@ -116,16 +116,16 @@ describe GlobalUserMigrator do
 
       context "when the global_user has WORSE attributes at every turn" do
         let(:ga_reset_password_token) { "ga_reset_password_token" }
-        let(:ga_reset_password_sent_at) { DateTime.now - 10.days }
-        let(:ga_remember_created_at) { DateTime.now - 10.days }
+        let(:ga_reset_password_sent_at) { DateTime.current - 10.days }
+        let(:ga_remember_created_at) { DateTime.current - 10.days }
         let(:ga_sign_in_count) { 10 }
-        let(:ga_current_sign_in_at) { DateTime.now - 10.days }
-        let(:ga_last_sign_in_at) { DateTime.now - 10.days }
+        let(:ga_current_sign_in_at) { DateTime.current - 10.days }
+        let(:ga_last_sign_in_at) { DateTime.current - 10.days }
         let(:ga_current_sign_in_ip) { "4.4.4.4" }
         let(:ga_last_sign_in_ip) { "3.3.3.3" }
         let(:ga_confirmation_token) { "ga_token" }
-        let(:ga_confirmed_at) { DateTime.now }
-        let(:ga_confirmation_sent_at) { DateTime.now - 10.days }
+        let(:ga_confirmed_at) { DateTime.current }
+        let(:ga_confirmation_sent_at) { DateTime.current - 10.days }
         let(:ga_name) { "" }
 
         it "does not update the global_user attributes", :aggregate_failures do
@@ -153,19 +153,19 @@ describe GlobalUserMigrator do
 
       context "when the global_user has BETTER attributes at every turn" do
         let(:ga_reset_password_token) { "ga_reset_password_token" }
-        let(:ga_reset_password_sent_at) { DateTime.now.in_time_zone }
-        let(:ga_remember_created_at) { DateTime.now.in_time_zone }
+        let(:ga_reset_password_sent_at) { DateTime.current }
+        let(:ga_remember_created_at) { DateTime.current }
         let(:ga_sign_in_count) { 10 }
-        let(:ga_current_sign_in_at) { DateTime.now.in_time_zone }
-        let(:ga_last_sign_in_at) { DateTime.now.in_time_zone }
+        let(:ga_current_sign_in_at) { DateTime.current }
+        let(:ga_last_sign_in_at) { DateTime.current }
         let(:ga_current_sign_in_ip) { "4.4.4.4" }
         let(:ga_last_sign_in_ip) { "3.3.3.3" }
         let(:ga_confirmation_token) { "ga_token" }
-        let(:ga_confirmed_at) { 10.days.ago.in_time_zone }
-        let(:ga_confirmation_sent_at) { DateTime.now.in_time_zone }
+        let(:ga_confirmed_at) { 10.days.ago }
+        let(:ga_confirmation_sent_at) { DateTime.current }
         let(:ga_name) { "ga_name" }
         let(:ga_guest) { false }
-        let(:ga_created_at) { 10.days.ago.in_time_zone }
+        let(:ga_created_at) { 10.days.ago }
 
         it "does not update the global_user attributes", :aggregate_failures do
           global_user = GlobalUserMigrator::GlobalUser.first

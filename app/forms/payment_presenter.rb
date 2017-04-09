@@ -157,7 +157,7 @@ class PaymentPresenter
       build_payment_detail(payment, nd)
     end
     payment.completed = true
-    payment.completed_date = DateTime.now
+    payment.completed_date = DateTime.current
     payment.user = user
     payment
   end

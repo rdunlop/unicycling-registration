@@ -28,7 +28,7 @@ class Importers::ExternalResultImporter < Importers::BaseImporter
       points: raw[1],
       details: raw[2],
       status: "active",
-      entered_at: DateTime.now,
+      entered_at: DateTime.current,
       entered_by: user)
   end
 end

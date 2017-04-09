@@ -141,7 +141,7 @@ describe ScoresController do
 
   describe "when the competition is locked" do
     before do
-      @comp.competition.locked_at = DateTime.now
+      @comp.competition.locked_at = DateTime.current
       @comp.competition.save!
     end
     it "should not be allowed to create scores" do

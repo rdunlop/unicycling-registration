@@ -47,7 +47,7 @@ class ExternalResultsController < ApplicationController
     respond_to do |format|
       @external_result.preliminary = false
       @external_result.entered_by = current_user
-      @external_result.entered_at = DateTime.now
+      @external_result.entered_at = DateTime.current
       if @external_result.save
         format.html { redirect_to competition_external_results_path(@competition), notice: 'External result was successfully created.' }
         format.json { render json: @external_result, status: :created, location: @external_result }

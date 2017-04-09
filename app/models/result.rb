@@ -44,11 +44,11 @@ class Result < ApplicationRecord
     joins(competitor: [:competition]).merge(Competition.awarded)
   end
 
-  def self.update_last_data_update_time(competition, datetime = DateTime.now)
+  def self.update_last_data_update_time(competition, datetime = DateTime.current)
     Rails.cache.write("/competition/#{competition.id}/last_data_update_time", datetime)
   end
 
-  def self.update_last_calc_places_time(competition, datetime = DateTime.now)
+  def self.update_last_calc_places_time(competition, datetime = DateTime.current)
     Rails.cache.write("/competition/#{competition.id}/last_calc_places_time", datetime)
   end
 
