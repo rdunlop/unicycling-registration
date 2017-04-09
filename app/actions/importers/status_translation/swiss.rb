@@ -1,7 +1,9 @@
 class Importers::StatusTranslation::Swiss
   def self.translate(status)
-    case status.downcase
+    case status.try(:downcase)
     when "gestürzt", "scratched", "nicht am start", "disq. rot", "disq. rot agh", "disqualifiziert", "disq. blau", "nicht im ziel"
+      "DQ"
+    when nil
       "DQ"
     else
       "active" # New behavior
@@ -9,7 +11,7 @@ class Importers::StatusTranslation::Swiss
   end
 
   def self.dq_description(status)
-    case status.downcase
+    case status.try(:downcase)
     when "gestürzt"
       "Dismount"
     when "scratched"
@@ -26,6 +28,8 @@ class Importers::StatusTranslation::Swiss
       "5m Line"
     when "nicht im ziel"
       "DNF"
+    when nil
+      "No Data"
     end
   end
 end

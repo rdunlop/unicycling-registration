@@ -29,4 +29,10 @@ describe SwissHeatResult do
     expect(result.status).to eq("DQ")
     expect(result.status_description).to eq("Restart")
   end
+
+  it "can parse a row without a time" do
+    result = described_class.from_string("DNK\t\t555\t1", 14)
+    expect(result.status).to eq("DQ")
+    expect(result.status_description).to eq("No Data")
+  end
 end
