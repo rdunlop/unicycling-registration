@@ -1,13 +1,20 @@
 class HeatLaneCalculator
   DEFAULT_LANE_ASSIGNMENT_ORDER = [1, 2, 3, 4, 5, 6, 7, 8].freeze
-  attr_accessor :num_lanes, :lane_assignment_order
+  attr_accessor :num_lanes, :lane_assignment_order, :error
 
   # lane_assignment_order is the order in which the lanes are best
   # ie: the best-seeded competitor should be given the first lane, etc etc
   def initialize(num_lanes, lane_assignment_order: DEFAULT_LANE_ASSIGNMENT_ORDER)
     @num_lanes = num_lanes
     @lane_assignment_order = lane_assignment_order.take(num_lanes)
-    raise "Unable to process with lane order fewer than number of lanes" if lane_assignment_order.count < num_lanes
+
+    if lane_assignment_order.count < num_lanes
+      @error = "Unable to assign #{num_lanes} lanes with only #{lane_assignment_order.count} positions specified"
+    end
+  end
+
+  def valid?
+    @error.blank?
   end
 
   def heat_lane_list(num_competitors, first_heat_number)

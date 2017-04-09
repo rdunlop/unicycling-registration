@@ -32,11 +32,15 @@ class HeatsController < ApplicationController
       flash[:alert] = "Error: Cannot auto-assign with existing Lane Assignments"
     else
       calculator = HeatLaneCalculator.new(max_lane_number, lane_assignment_order: lane_assignment_order)
-      creator = HeatAssignmentCreator.new(@competition, calculator)
-      if creator.perform
-        flash[:notice] = "Created Heats/Lanes from Competitors"
+      if calculator.valid?
+        creator = HeatAssignmentCreator.new(@competition, calculator)
+        if creator.perform
+          flash[:notice] = "Created Heats/Lanes from Competitors"
+        else
+          flash[:alert] = "error: #{creator.error}"
+        end
       else
-        flash[:alert] = "error: #{creator.error}"
+        flash[:alert] = "error: #{calculator.error}"
       end
     end
 
