@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    attributes:
+      representation_type:
+        club: Team
+        country: Land
+        state: Bundesland

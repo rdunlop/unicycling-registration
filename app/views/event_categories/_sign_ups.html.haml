@@ -7,7 +7,7 @@
       %th Age
       %th Gender
       %th Event Category
-      %th= Competitor.state_or_country_description
+      %th= RepresentationType.description
       %th Details
   %tbody
     - sign_ups.each do |resu|
@@ -18,5 +18,5 @@
         %td= resu.registrant.age
         %td= resu.registrant.gender
         %td= resu.event_category.name
-        %td= resu.registrant.state_or_country
+        %td= resu.registrant.representation
         %td= resu.registrant.describe_event_hash(event)[:additional]

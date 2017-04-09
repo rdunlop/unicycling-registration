@@ -1,0 +1,7 @@
+---
+es:
+  activerecord:
+    attributes:
+      representation_type:
+        club: Equipo
+        country: País

@@ -93,7 +93,7 @@ en:
         start_date: "Unless the Age Calculation Base Date is specified, Registrant Ages are calculated based on this date. This date is the default presented on calendars when configuring the system"
         age_calculation_base_date: Registrant Ages are calculated based on this date (optional)
         usa: |
-          This prioritizes USA and Canada in the Country select-boxes, and causes the state to be displayed.
+          This prioritizes USA and Canada in the Country select-boxes, and causes the state to be required.
           It also allows last-minute sign-up of competitors (by data-entry people)
         iuf: Enabling this allows IUF membership questions.
         display_confirmed_events: Enabling this displays the confirmed events/unconfirmed events on the Registrant-summary page.

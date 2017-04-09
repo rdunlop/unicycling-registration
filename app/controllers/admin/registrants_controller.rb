@@ -101,7 +101,7 @@ class Admin::RegistrantsController < ApplicationController
 
     names = []
     @registrants.each do |reg|
-      names << "\n <b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.state_or_country} \n #{reg.registrant_type.capitalize}"
+      names << "\n <b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.representation} \n #{reg.registrant_type.capitalize}"
     end
 
     labels = Prawn::Labels.render(names, type: "Avery5160") do |pdf, name|

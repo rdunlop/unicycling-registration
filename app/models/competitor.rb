@@ -28,6 +28,7 @@
 
 class Competitor < ApplicationRecord
   include Eligibility
+  include Representable
   include Slugify
 
   with_options dependent: :destroy do
@@ -325,22 +326,6 @@ class Competitor < ApplicationRecord
     end
   end
 
-  def self.state_or_country_description(display_state = EventConfiguration.singleton.state?)
-    if display_state
-      "State"
-    else
-      "Country"
-    end
-  end
-
-  def state_or_country(display_state = EventConfiguration.singleton.state?)
-    if display_state
-      state
-    else
-      country
-    end
-  end
-
   def state
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/state") do
       if members.empty?
@@ -438,10 +423,10 @@ class Competitor < ApplicationRecord
     if members.empty?
       "(No registrants)"
     else
-      if members.size > 1
-        ""
-      else
+      if members.size == 1
         members.first.club
+      else
+        "" # TODO: Change this to be multi-person?
       end
     end
   end
