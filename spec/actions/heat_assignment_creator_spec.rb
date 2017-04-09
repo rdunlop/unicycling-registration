@@ -22,6 +22,9 @@ describe HeatAssignmentCreator do
 
   describe "with a single age group" do
     let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+    before do
+      competition.reload # to load the age_group_entries
+    end
 
     it "assigns the competitors by their returned order" do
       expect{ perform }.to change(LaneAssignment, :count).by(3)
