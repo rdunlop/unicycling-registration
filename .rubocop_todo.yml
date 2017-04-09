@@ -12,11 +12,6 @@ Lint/HandleExceptions:
     - 'config/unicorn/production.rb'
     - 'config/unicorn/stage.rb'
 
-# Offense count: 1
-Lint/IneffectiveAccessModifier:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
-
 # Offense count: 14
 Lint/ParenthesesAsGroupedExpression:
   Exclude:

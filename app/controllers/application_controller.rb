@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
 
   # so that devise routes are properly including the locale
   # https://github.com/plataformatec/devise/wiki/How-To:--Redirect-with-locale-after-authentication-failure
-  def self.default_url_options(options = {})
+  public def self.default_url_options(options = {})
     options.merge(locale: I18n.locale)
   end
 
