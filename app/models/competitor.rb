@@ -325,16 +325,16 @@ class Competitor < ApplicationRecord
     end
   end
 
-  def self.state_or_country_description(state = EventConfiguration.singleton.state?)
-    if state
+  def self.state_or_country_description(display_state = EventConfiguration.singleton.state?)
+    if display_state
       "State"
     else
       "Country"
     end
   end
 
-  def state_or_country(state = EventConfiguration.singleton.state?)
-    if state
+  def state_or_country(display_state = EventConfiguration.singleton.state?)
+    if display_state
       state
     else
       country

@@ -73,6 +73,7 @@ describe Competitor do
       end
     end
   end
+
   describe "when there are multiple start and end times" do
     before do
       @start1 = FactoryGirl.build_stubbed(:time_result, is_start_time: true, minutes: 1)
@@ -116,6 +117,40 @@ describe Competitor do
 
     it "has the correct best_time_in_thousands" do
       expect(@comp.best_time_in_thousands).to eq(150000)
+    end
+  end
+
+  describe "with a contact_detail with club, state, country" do
+    let(:contact_detail) { FactoryGirl.build(:contact_detail, state_code: "IL", country_representing: "US", club: "My Club") }
+    let(:registrant) { FactoryGirl.build(:competitor, contact_detail: contact_detail) }
+    before do
+      allow(@comp).to receive(:members).and_return([registrant])
+    end
+
+    describe "when EventConfiguration wants to display the state" do
+      before do
+        EventConfiguration.singleton.update(usa: true)
+      end
+
+      it "displays the associated state" do
+        expect(@comp.state_or_country).to eq("Illinois")
+      end
+    end
+
+    describe "when EventConfiguration wants to display the country" do
+      before do
+        EventConfiguration.singleton.update(usa: false)
+      end
+
+      it "displays the associated representing-country" do
+        expect(@comp.state_or_country).to eq("United States")
+      end
+    end
+
+    describe "when EventConfiguration wants to display the club" do
+      pending "displays the associated club" do
+        expect(@comp.state_or_country).to eq("My Club")
+      end
     end
   end
 end
