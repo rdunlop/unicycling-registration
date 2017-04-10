@@ -9,10 +9,6 @@
         %th= t(".registrant_type")
         %th= t(".club")
         %th= RepresentationType.description
-        - if @config.state?
-          %th= t(".state")
-        - else
-          %th= t(".country")
     %tbody
       - @registrants.find_each(batch_size: 100) do |registrant|
         %tr
