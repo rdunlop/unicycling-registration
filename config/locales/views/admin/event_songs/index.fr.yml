@@ -3,6 +3,7 @@ fr:
   admin:
     event_songs:
       index:
+        add_new_song: Ajouter une nouvelle chanson pour un inscrit
         all_songs_together: Toutes les chansons sur une page
         by_competition: Par Compétition
         by_competition_description: Une fois que les compétitions et les compétiteurs

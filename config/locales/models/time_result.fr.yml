@@ -3,6 +3,7 @@ fr:
   activerecord:
     attributes:
       time_result:
+        facade_hours: Heures
         minutes: Minutes
         seconds: Secondes
         thousands: Milliers

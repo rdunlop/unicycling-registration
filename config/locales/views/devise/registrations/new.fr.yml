@@ -8,3 +8,5 @@ fr:
         header: S'inscrire
         password_min_length: "(minimum de 6 caractères)"
         sign_up: S'inscrire
+        subheader: Ce compte sera utilisé pour toutes les rencontres monocyclistes
+          gérées par ce système.

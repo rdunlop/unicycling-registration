@@ -22,6 +22,7 @@ fr:
         location: Lieu
         logo_file: Logo
         long_name: Nom complet
+        max_registrants: Nombre maximum d'inscrits au total
         music_submission_end_date: Dernier jour pour uploader de la musique
         noncompetitor: Non-compétiteur
         noncompetitor_benefits: Avantages des Non-Compétiteurs

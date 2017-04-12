@@ -10,11 +10,16 @@ fr:
       login_help: Une fois votre inscription terminée, vérifiez vos courriel pour
         un message de confirmation. Vérifiez vos pourriel/spam. Cliquez "Renvoyer
         le e-mail de confirmation" si vous ne pouvez pas trouver le courriel.
+      password_account_details: Une fois que vous vous êtes inscrit pour votre première
+        convention de monocycle, vous pouvez utiliser le même email / mot de passe
+        pour vous connectez pour les futures conventions. Pour plus de détails, voir
+        %{link}.
       registration: Comment s'inscrire
       registration_help: "Une fois que vous vous êtes identifié, cliquez sur «Créer
         un nouveau compétiteur» ou «Créer un nouveau non-compétiteur» et remplissez
         les informations requises.\r\nPayez pour les participants afin d'assurer les
         inscriptions."
+      shared_password: Dois-je m'inscrire tous les ans ?
       sharing_link: Demander l'accès des inscriptions de votre équipe en suivant ce
         lien %{link}
       sharing_registration_details: Comment partager les détails d'inscription
@@ -22,6 +27,7 @@ fr:
         de club, vous pouvez demander un accès spécial afin de pouvoir payer pour
         les inscriptions de vos membre ainsi que les événement ou ils sont inscris.
       subheader: Ce site est pour -  %{domain} - Inscription pour convention de monocycle
+      this_link: ce lien
       translation_help: Si vous avez trouver une traduction manquante, une erreur,
         ou si vous désirez devenir un traducteur, veuillez nous envoyer un message
         en cliquant sur «Envoyez un commentaire» au bas de la page.

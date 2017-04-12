@@ -3,6 +3,7 @@ fr:
   admin:
     registrants:
       manage_one:
+        change_registrant_user: Changer l'utilisateur pour un enregistrement d'inscrit
         edit_summary: Modifier / résumer
         full_registrant_list: Liste complète
         summary: Résumé
