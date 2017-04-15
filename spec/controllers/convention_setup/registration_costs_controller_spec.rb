@@ -105,6 +105,22 @@ describe ConventionSetup::RegistrationCostsController do
       end
     end
 
+    describe "with min and max ages" do
+      it "creates new registration_cost_entry" do
+        params =  valid_attributes.deep_merge(
+          registration_cost_entries_attributes: {
+            "1" => {
+              min_age: 10,
+              max_age: 50
+            }
+          })
+        post :create, params: { registration_cost: params }
+        rce = RegistrationCostEntry.first
+        expect(rce.min_age).to eq(10)
+        expect(rce.max_age).to eq(50)
+      end
+    end
+
     describe "with invalid params" do
       it "does not create a new registration_cost" do
         # Trigger the behavior that occurs when invalid params are submitted

@@ -27,6 +27,6 @@
   #registration_cost_entries
     = f.simple_fields_for :registration_cost_entries do |member_f|
       = render "registration_cost_entry_fields", f: member_f
-  = link_to_add_association 'add new', f, :registration_cost_entries, data: { association_insertion_node: "#registration_cost_entries", association_insertion_method: "append" }, wrap_object: Proc.new {|p| p.build_expense_item }
+  = link_to_add_association 'add new', f, :registration_cost_entries, data: { association_insertion_node: "#registration_cost_entries", association_insertion_method: "append" }, wrap_object: Proc.new {|p| p.build_expense_item; p }
   .row
     = f.button :submit

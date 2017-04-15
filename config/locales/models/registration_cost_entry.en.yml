@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      registration_cost_entry:
+        min_age: Min Age
+        max_age: Max Age
+    models:
+      registration_cost_entry:
+        one: Registration Cost Entry
+        other: Registration Cost Entries

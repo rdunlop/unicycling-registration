@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe RegistrationCostEntry do
-  let(:registration_cost_entry) { FactoryGirl.build(:registration_cost_entry) }
+  let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor) }
+  let(:registration_cost_entry) { FactoryGirl.build(:registration_cost_entry, registration_cost: registration_cost) }
 
   it "is valid from FactoryGirl" do
     expect(registration_cost_entry.valid?).to eq(true)
@@ -12,10 +13,27 @@ describe RegistrationCostEntry do
     expect(registration_cost_entry).not_to be_valid
   end
 
+  context "as a competitor type" do
+    let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor) }
+
+    it "can have ages" do
+      registration_cost_entry.min_age = 10
+      expect(registration_cost_entry).to be_valid
+    end
+  end
+
+  context "as a noncompetitor type" do
+    let(:registration_cost) { FactoryGirl.build(:registration_cost, :noncompetitor) }
+
+    it "Cannot have ages" do
+      registration_cost_entry.min_age = 10
+      expect(registration_cost_entry).not_to be_valid
+    end
+  end
+
   describe "with associated expense_items" do
     it "removes the expense item on RegistrationCost deletion" do
       registration_cost_entry.save!
-      expense_item = registration_cost_entry.expense_item
       expect do
         registration_cost_entry.destroy
       end.to change(ExpenseItem, :count).by(-1)

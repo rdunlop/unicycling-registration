@@ -91,6 +91,8 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
       :end_date, :name, :registrant_type, :start_date, :onsite,
       registration_cost_entries_attributes: [
         :id,
+        :min_age,
+        :max_age,
         :expense_item_id,
         :_destroy,
         expense_item_attributes: [:id, :cost, :tax]
