@@ -1,0 +1,7 @@
+---
+fr:
+  devise:
+    failure:
+      invalid: "%{authentication_keys} ou mot de passe invalide. Des comptes plus
+        anciens peuvent maintenant être accédés avec votre mot de passe actuel. Voir
+        l'Aide pour plus de détails"

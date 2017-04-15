@@ -1,0 +1,7 @@
+---
+fr:
+  admin:
+    registrants:
+      change_registrant_user:
+        change_associated_user: Changer l'utilisateur associé
+        header: Changer l'utilisateur inscrit

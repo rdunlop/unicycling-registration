@@ -23,6 +23,9 @@ fr:
           cette compétition concerne seulement des experts, alors ne cochez pas cette
           case, ils seront placé dans un seul groupe / résultat.\r\nVous DEVEZ aussi
           avoir une tranche d'âge spécifiée."
+        import_results_into_other_competition: A l'import de résultats, si l'inscrit
+          n'est pas assigné à cette compétition, mais à une autre compétition du même
+          événement, cela importera les résultats ici après approbation.
         num_members_per_competitor: Pour la plupart des événements, ceci sera «Un»
         penalty_seconds: Est-il possible de pénaliser un compétiteur de "X" secondes
           pour une infraction (une chute par exemple) ?
@@ -92,6 +95,9 @@ fr:
         logo_file: Les logos doivent faire 93px x 38px
         max_award_place: Ceci configure la place maximum pour laquelle il faut imprimer
           les récompenses. (s'applique à la fois aux catégories d'âge et aux experts)
+        max_registrants: Les utilisateurs ne pourront pas créer de nouvelle inscription
+          une fois que ce nombre d'inscriptions (payées ou pas) existeront. Saisissez
+          0 pour désactiver cette fonction.
         music_submission_end_date: La date limite jusqu'à laquelle les musiques pourront
           être chargées
         noncompetitor_benefits: Apparaît sur la page d'accueil de l'inscription, décrit
@@ -136,8 +142,8 @@ fr:
         position: Trier les pages sous une seule page parente
         slug: L'url facile à comprendre, utilisez des charactères normaux (pas d'espace)
       payment:
-        note: 'Décrivez le paiement s''il vous plait. Exemples : Espèces,
-          Chèque # 123'
+        note: 'Décrivez le paiement s''il vous plait. Exemples : Espèces, Chèque #
+          123'
       registrant_best_times:
         source_location: Saisissez Nom et Date
       registrant:

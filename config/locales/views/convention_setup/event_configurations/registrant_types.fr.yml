@@ -3,6 +3,7 @@ fr:
   convention_setup:
     event_configurations:
       registrant_types:
+        current_num_registrants: Il y a actuellement %{num} inscrits
         header: Type d'inscription
         noncompetitor_description: Les non-compétiteurs ne peuvent pas s'inscrire
           à des événements

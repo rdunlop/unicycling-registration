@@ -131,8 +131,7 @@ de:
         position: Ordne die Seiten unter einer einzelnen Über Seite an
         slug: Der URL Text, verwende nur normale Buchstaben und keine Leerzeichen
       payment:
-        note: "'Bitte beschreibe die Zahlungsmethode. Beispiele: Bar,
-          Scheck #123'"
+        note: "'Bitte beschreibe die Zahlungsmethode. Beispiele: Bar, Scheck #123'"
       registrant_best_times:
         source_location: Trage Name und Datum ein
       registrant:

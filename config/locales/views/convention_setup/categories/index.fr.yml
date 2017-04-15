@@ -3,6 +3,9 @@ fr:
   convention_setup:
     categories:
       index:
+        copy_from_previous:
+          header: Copier les Evénements et Catégories à partir d'une rencontre précédente
+          link: Choisissez une rencontre précédente et copiez ses événements
         description: 'Les événements sont groupés en différentes catégories d''événements.
           Ex : Sports collectifs, Artistique, MUni'
         existing_categories: Catégories existantes

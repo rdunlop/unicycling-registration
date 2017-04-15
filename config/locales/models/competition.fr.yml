@@ -8,6 +8,8 @@ fr:
         combined_competition_id: Calcul du champion global
         end_data_type: Donnée de ligne d'arrivée
         has_experts: Calculer les experts également
+        import_results_into_other_competition: Importer les résultats dans une autre
+          compétitions
         name: Nom de la compétition
         num_members_per_competitor: Taille de l'équipe
         penalty_seconds: Secondes par pénalités
