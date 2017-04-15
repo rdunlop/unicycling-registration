@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409221325) do
+ActiveRecord::Schema.define(version: 20170415002025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,7 +162,6 @@ ActiveRecord::Schema.define(version: 20170409221325) do
     t.integer  "wheel_size_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["registrant_id", "event_id"], name: "index_competition_wheel_sizes_on_registrant_id_and_event_id", unique: true, using: :btree
     t.index ["registrant_id", "event_id"], name: "index_competition_wheel_sizes_registrant_id_event_id", using: :btree
   end
 
@@ -246,7 +245,6 @@ ActiveRecord::Schema.define(version: 20170409221325) do
     t.string   "italian_fiscal_code",                        limit: 255
     t.boolean  "organization_membership_system_confirmed",               default: false, null: false
     t.string   "organization_membership_system_status"
-    t.index ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree
     t.index ["registrant_id"], name: "index_contact_details_registrant_id", using: :btree
   end
 
@@ -549,7 +547,6 @@ ActiveRecord::Schema.define(version: 20170409221325) do
     t.integer  "heat"
     t.integer  "lane"
     t.integer  "number_of_penalties"
-    t.index ["user_id"], name: "index_import_results_on_user_id", using: :btree
     t.index ["user_id"], name: "index_imported_results_user_id", using: :btree
   end
 
@@ -821,6 +818,16 @@ ActiveRecord::Schema.define(version: 20170409221325) do
     t.index ["user_id"], name: "index_registrants_on_user_id", using: :btree
   end
 
+  create_table "registration_cost_entries", force: :cascade do |t|
+    t.integer  "registration_cost_id", null: false
+    t.integer  "expense_item_id",      null: false
+    t.integer  "min_age"
+    t.integer  "max_age"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["registration_cost_id"], name: "index_registration_cost_entries_on_registration_cost_id", using: :btree
+  end
+
   create_table "registration_cost_translations", force: :cascade do |t|
     t.integer  "registration_cost_id", null: false
     t.string   "locale",               null: false
@@ -834,7 +841,6 @@ ActiveRecord::Schema.define(version: 20170409221325) do
   create_table "registration_costs", force: :cascade do |t|
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "expense_item_id"
     t.string   "registrant_type",                 null: false
     t.boolean  "onsite",          default: false, null: false
     t.boolean  "current_period",  default: false, null: false
@@ -852,17 +858,6 @@ ActiveRecord::Schema.define(version: 20170409221325) do
     t.string   "name",                   limit: 255
     t.index ["locale"], name: "index_registration_period_translations_on_locale", using: :btree
     t.index ["registration_period_id"], name: "index_43f042772e959a61bb6b1fedb770048039229050", using: :btree
-  end
-
-  create_table "registration_periods", force: :cascade do |t|
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "competitor_expense_item_id"
-    t.integer  "noncompetitor_expense_item_id"
-    t.boolean  "onsite",                        default: false, null: false
-    t.boolean  "current_period",                default: false, null: false
   end
 
   create_table "reports", force: :cascade do |t|
@@ -1014,7 +1009,6 @@ ActiveRecord::Schema.define(version: 20170409221325) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["competitor_id", "judge_id"], name: "index_tie_break_adjustments_on_competitor_id_and_judge_id", unique: true, using: :btree
-    t.index ["competitor_id"], name: "index_tie_break_adjustments_competitor_id", using: :btree
     t.index ["competitor_id"], name: "index_tie_break_adjustments_on_competitor_id", unique: true, using: :btree
     t.index ["judge_id"], name: "index_tie_break_adjustments_judge_id", using: :btree
   end

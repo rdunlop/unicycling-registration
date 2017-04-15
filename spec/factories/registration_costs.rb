@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  start_date      :date
 #  end_date        :date
-#  expense_item_id :integer
 #  registrant_type :string           not null
 #  onsite          :boolean          default(FALSE), not null
 #  current_period  :boolean          default(FALSE), not null
@@ -24,7 +23,26 @@ FactoryGirl.define do
   factory :registration_cost do
     start_date Date.new(2012, 11, 3)
     end_date Date.new(2022, 11, 27)
-    association :expense_item, cost: 100
+
+    transient do
+      build_entries true
+      # if specified,we will build the first entry with this expense_item
+      expense_item nil
+    end
+
+    trait :without_entries do
+      build_entries false
+    end
+
+    after(:build) do |registration_cost, evaluator|
+      if evaluator.build_entries
+        registration_cost.registration_cost_entries << if evaluator.expense_item.nil?
+                                                         build(:registration_cost_entry, registration_cost: registration_cost)
+                                                       else
+                                                         build(:registration_cost_entry, registration_cost: registration_cost, expense_item: evaluator.expense_item)
+        end
+      end
+    end
     sequence(:name) { |n| "Early Registration #{n}" }
     onsite false
     registrant_type "competitor"

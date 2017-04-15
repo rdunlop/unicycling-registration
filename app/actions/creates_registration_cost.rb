@@ -6,11 +6,13 @@ class CreatesRegistrationCost
   end
 
   def perform
-    return false if registration_cost.expense_item.nil?
+    return false if registration_cost.registration_cost_entries.none?
 
-    if registration_cost.expense_item.new_record?
-      cei = registration_cost.expense_item
-      set_details(cei, "#{registration_cost.registrant_type} - #{registration_cost.name}")
+    registration_cost.registration_cost_entries.each do |rce|
+      if rce.expense_item.new_record?
+        cei = rce.expense_item
+        set_details(cei, "#{registration_cost.registrant_type} - #{registration_cost.name}")
+      end
     end
 
     registration_cost.save

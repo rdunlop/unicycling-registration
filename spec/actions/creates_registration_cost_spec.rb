@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe CreatesRegistrationCost do
   let(:comp_expense_item) { ExpenseItem.new cost: 100, tax: 0 }
-  let(:reg_period) { FactoryGirl.build :registration_cost, expense_item: comp_expense_item }
+  let(:rce) { RegistrationCostEntry.new(expense_item: comp_expense_item) }
+  let(:reg_period) { FactoryGirl.build :registration_cost, :without_entries, registration_cost_entries: [rce] }
 
   def perform
     described_class.new(reg_period).perform
@@ -28,7 +29,7 @@ describe CreatesRegistrationCost do
       expect { perform }.not_to change(ExpenseGroup, :count)
     end
 
-    it "creates two new expense items" do
+    it "creates one new expense items" do
       expect { perform }.to change(ExpenseItem, :count).by(1)
     end
   end

@@ -19,9 +19,14 @@ describe ConventionSetup::RegistrationCostsController do
       onsite: false,
       name: "Early Competitor",
       registrant_type: "competitor",
-      expense_item_attributes: {
-        cost: @comp_exp.cost,
-        tax: @comp_exp.tax
+      registration_cost_entries_attributes: {
+        "1" => {
+          expense_item_attributes: {
+            cost: @comp_exp.cost,
+            tax: @comp_exp.tax
+          }
+        }
+
       }
     }
   end
@@ -127,7 +132,15 @@ describe ConventionSetup::RegistrationCostsController do
       end
 
       it "redirects to the registration_cost" do
-        params = valid_attributes.merge(expense_item_attributes: { id: registration_cost.expense_item.id })
+        params = valid_attributes.deep_merge(
+          registration_cost_entries_attributes: {
+            "1" => {
+              expense_item_attributes: {
+                id: registration_cost.expense_items.first.id
+              },
+              id: registration_cost.registration_cost_entries.first.id
+            }
+          })
         put :update, params: { id: registration_cost.to_param, registration_cost: params }
         expect(response).to redirect_to(registration_costs_path)
       end

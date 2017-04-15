@@ -52,7 +52,7 @@ describe User do
     before(:each) do
       @rp = FactoryGirl.create(:registration_cost, :competitor)
       @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor)
-      ei = @noncomp_reg_cost.expense_item
+      ei = @noncomp_reg_cost.expense_items.first
       ei.update!(cost: 50)
     end
 

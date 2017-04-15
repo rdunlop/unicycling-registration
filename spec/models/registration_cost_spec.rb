@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  start_date      :date
 #  end_date        :date
-#  expense_item_id :integer
 #  registrant_type :string           not null
 #  onsite          :boolean          default(FALSE), not null
 #  current_period  :boolean          default(FALSE), not null
@@ -37,11 +36,6 @@ describe RegistrationCost do
     expect(registration_cost.valid?).to eq(false)
   end
 
-  it "must have an expense_item" do
-    registration_cost.expense_item = nil
-    expect(registration_cost.valid?).to eq(false)
-  end
-
   it "must have onsite set" do
     registration_cost.onsite = nil
     expect(registration_cost.valid?).to eq(false)
@@ -58,18 +52,18 @@ describe RegistrationCost do
   end
 
   describe "with associated expense_items" do
-    let!(:expense_item) { registration_cost.expense_item }
-
     it "removes the expense item on RegistrationCost deletion" do
       registration_cost.save!
-      registration_cost.destroy
-      expect(expense_item).to be_destroyed
+      expense_item = registration_cost.expense_items.first
+      expect do
+        registration_cost.destroy
+      end.to change(ExpenseItem, :count).by(-1)
     end
 
     describe "when the expense_item has a payment" do
       before do
         registration_cost.save!
-        FactoryGirl.create :payment_detail, expense_item: registration_cost.expense_item
+        FactoryGirl.create :payment_detail, expense_item: registration_cost.expense_items.first
       end
 
       it "can't remove the RegistrationCost on deletion" do
@@ -94,12 +88,12 @@ describe RegistrationCost do
 
     it "can retrieve the expense items for only a set of the registration_costs" do
       expect(RegistrationCost.for_type("competitor").all_registration_expense_items).to match_array([
-                                                                                                      comp_registration_cost1.expense_item,
-                                                                                                      comp_registration_cost2.expense_item
+                                                                                                      comp_registration_cost1.expense_items.first,
+                                                                                                      comp_registration_cost2.expense_items.first
                                                                                                     ])
       expect(RegistrationCost.for_type("noncompetitor").all_registration_expense_items).to match_array([
-                                                                                                         noncomp_registration_cost1.expense_item,
-                                                                                                         noncomp_registration_cost2.expense_item
+                                                                                                         noncomp_registration_cost1.expense_items.first,
+                                                                                                         noncomp_registration_cost2.expense_items.first
                                                                                                        ])
     end
 
@@ -174,9 +168,9 @@ describe "when testing the update function for registration costs", caching: tru
     @reg.reload
     @nc_reg.reload
     expect(@reg.registrant_expense_items.count).to eq(1)
-    expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost1.expense_item)
+    expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost1.expense_items.first)
     expect(@nc_reg.registrant_expense_items.count).to eq(1)
-    expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@noncomp_registration_cost1.expense_item)
+    expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@noncomp_registration_cost1.expense_items.first)
   end
 
   it "sends an e-mail when it changes the reg period" do
@@ -229,11 +223,11 @@ describe "when testing the update function for registration costs", caching: tru
     it "changes the registrant's item to the new period" do
       @reg.reload
       expect(@reg.registrant_expense_items.count).to eq(1)
-      expect(@reg.registrant_expense_items.first.expense_item).to eq(comp_registration_cost2.expense_item)
+      expect(@reg.registrant_expense_items.first.expense_item).to eq(comp_registration_cost2.expense_items.first)
 
       @nc_reg.reload
       expect(@nc_reg.registrant_expense_items.count).to eq(1)
-      expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(noncomp_registration_cost2.expense_item)
+      expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(noncomp_registration_cost2.expense_items.first)
     end
   end
 
@@ -293,11 +287,11 @@ describe "when testing the update function for registration costs", caching: tru
       it "changes the registrant's item to the new period" do
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
-        expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost2.expense_item)
+        expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost2.expense_items.first)
 
         @nc_reg.reload
         expect(@nc_reg.registrant_expense_items.count).to eq(1)
-        expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@noncomp_registration_cost2.expense_item)
+        expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@noncomp_registration_cost2.expense_items.first)
       end
     end
   end

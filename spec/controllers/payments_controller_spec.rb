@@ -195,18 +195,18 @@ describe PaymentsController do
       it "sets the amount to the owing amount" do
         expect(@user.registrants.count).to eq(1)
         get :new
-        assert_select "input[type=hidden][value=?]", @reg_period.expense_item.cost.to_s
+        assert_select "input[type=hidden][value=?]", @reg_period.expense_items.first.cost.to_s
       end
 
       it "associates the payment_detail with the expense_item" do
         get :new
-        assert_select "input[type=hidden][value=?]", @reg_period.expense_item.id.to_s
+        assert_select "input[type=hidden][value=?]", @reg_period.expense_items.first.id.to_s
       end
 
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, user: @user)
         @payment = FactoryGirl.create(:payment)
-        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_item)
+        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_items.first)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -218,7 +218,7 @@ describe PaymentsController do
         before(:each) do
           @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
           @payment = FactoryGirl.create(:payment)
-          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_item)
+          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_items.first)
           @payment.reload
           @payment.completed = true
           @payment.save

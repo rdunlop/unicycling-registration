@@ -20,7 +20,8 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
   def new
     @registration_cost = RegistrationCost.new
     add_breadcrumb "New Registration Cost"
-    @registration_cost.build_expense_item
+    rce = @registration_cost.registration_cost_entries.build
+    rce.build_expense_item
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -87,9 +88,14 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
 
   def registration_cost_params
     params.require(:registration_cost).permit(
-      :expense_item_id, :end_date, :name, :registrant_type, :start_date, :onsite,
-      translations_attributes: [:id, :locale, :name],
-      expense_item_attributes: [:id, :cost, :tax]
+      :end_date, :name, :registrant_type, :start_date, :onsite,
+      registration_cost_entries_attributes: [
+        :id,
+        :expense_item_id,
+        :_destroy,
+        expense_item_attributes: [:id, :cost, :tax]
+      ],
+      translations_attributes: [:id, :locale, :name]
     )
   end
 

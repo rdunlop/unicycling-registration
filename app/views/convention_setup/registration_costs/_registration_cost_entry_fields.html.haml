@@ -1,0 +1,10 @@
+.row.item.nested-fields
+  = f.simple_fields_for :expense_item do |ce|
+    .small-4.columns
+      = ce.input :cost, input_html: { class: "js--costInput" }
+    .small-4.columns
+      = ce.input :tax, input_html: { class: "js--costInput" }
+    .small-4.columns
+      = ExpenseItem.human_attribute_name(:total)
+      = text_field_tag :total_comp, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
+    = link_to_remove_association t("delete"), f, { data: { confirm: t("are_you_sure") } }
