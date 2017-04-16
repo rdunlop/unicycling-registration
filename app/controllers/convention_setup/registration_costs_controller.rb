@@ -38,12 +38,10 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
     @registration_cost = RegistrationCost.new(registration_cost_params)
     creator = CreatesRegistrationCost.new(@registration_cost)
 
-    respond_to do |format|
-      if creator.perform
-        format.html { redirect_to registration_costs_path, notice: 'Registration cost was successfully created.' }
-      else
-        format.html { render action: "new" }
-      end
+    if creator.perform
+      format.html { redirect_to registration_costs_path, notice: 'Registration cost was successfully created.' }
+    else
+      format.html { render action: "new" }
     end
   end
 
@@ -51,7 +49,9 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
   # PUT /registration_costs/1.json
   def update
     respond_to do |format|
-      if @registration_cost.update_attributes(registration_cost_params)
+      @registration_cost.assign_attributes(registration_cost_params)
+      creator = CreatesRegistrationCost.new(@registration_cost)
+      if creator.perform
         format.html { redirect_to registration_costs_path, notice: 'Registration cost was successfully updated.' }
       else
         format.html { render action: "edit" }

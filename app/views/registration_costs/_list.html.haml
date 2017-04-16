@@ -18,9 +18,9 @@
               %td= l cost.end_date, format: :registration_date_format
             %td
               %b
-                - cost.registration_cost_entries.each do |entry|
-                  = entry.to_s
-                  = print_formatted_currency(entry.expense_item.cost)
+                - RegistrationCostPresenter.new(cost).describe_entries do |entry_string|
+                  = entry_string
+                  %br
 
           - if cost.last_online_period?
             %tr

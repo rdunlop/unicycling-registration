@@ -5,9 +5,9 @@
     - reg_cost = RegistrationCost.for_type("competitor").current_period
     - if reg_cost && reg_cost.expense_items.any?
       .current_price
-        - reg_cost.registration_cost_entries.each do |entry|
-          = entry.to_s
-          = print_formatted_currency(entry.expense_item.cost)
+        - RegistrationCostPresenter.new(reg_cost).describe_entries do |entry_string|
+          = entry_string
+          %br
       .price_note= print_time_until_prices_increase(reg_cost)
     %ul.price_details
       - EventConfiguration.singleton.competitor_benefits_list.each do |item|
@@ -20,9 +20,9 @@
       - reg_cost = RegistrationCost.for_type("noncompetitor").current_period
       - if reg_cost && reg_cost.expense_items.any?
         .current_price
-          - reg_cost.registration_cost_entries.each do |entry|
-            = entry.to_s
-            = print_formatted_currency(entry.expense_item.cost)
+          - RegistrationCostPresenter.new(reg_cost).describe_entries do |entry_string|
+            = entry_string
+            %br
         .price_note= print_time_until_prices_increase(reg_cost)
       %ul.price_details
         - EventConfiguration.singleton.noncompetitor_benefits_list.each do |item|

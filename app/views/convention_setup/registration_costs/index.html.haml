@@ -28,9 +28,9 @@
         %td= registration_cost.start_date
         %td= registration_cost.end_date
         %td
-          - registration_cost.registration_cost_entries.each do |entry|
-            = entry.to_s
-            = entry.expense_item.cost
+          - RegistrationCostPresenter.new(registration_cost).describe_entries do |entry_string|
+            = entry_string
+            %br
         %td= link_to t("edit"), edit_registration_cost_path(registration_cost)
 
 %br
