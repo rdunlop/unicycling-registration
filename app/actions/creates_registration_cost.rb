@@ -10,10 +10,11 @@ class CreatesRegistrationCost
 
     registration_cost.registration_cost_entries.each do |rce|
       cei = rce.expense_item
-      set_details(cei, rce.to_s)
+      cei.expense_group = reg_expense_group
+      cei.name = rce.to_s
 
       if rce.expense_item.new_record?
-        set_position(cei)
+        cei.position = (reg_expense_group.expense_items.map(&:position).max || 0) + 1
       end
     end
 
@@ -21,15 +22,6 @@ class CreatesRegistrationCost
   end
 
   private
-
-  def set_details(expense_item, name)
-    expense_item.expense_group = reg_expense_group
-    expense_item.name = name
-  end
-
-  def set_position(expense_item)
-    expense_item.position = (reg_expense_group.expense_items.map(&:position).max || 0) + 1
-  end
 
   # create the expense_group if necessary
   def reg_expense_group
