@@ -71,69 +71,9 @@ class RegistrationCost < ApplicationRecord
     find_by(current_period: true)
   end
 
-  def self.update_registration_periods
-    Apartment.tenant_names.each do |tenant|
-      Apartment::Tenant.switch(tenant) do
-        update_current_period("competitor")
-        update_current_period("noncompetitor")
-      end
-    end
-  end
-
   # determine the appropriate expense_item based on the registrant
   def expense_item_for(registrant)
     registration_cost_entries.find{ |rce| rce.valid_for?(registrant.age) }.try(:expense_item)
-  end
-
-  # run by the scheduler in order to update the current RegistrationCost,
-  # Removes all unpaid reg-items for the old period, and creating ones for the new period
-  def self.update_current_period(registrant_type, date = Date.today)
-    now_period = relevant_period(registrant_type, date)
-
-    old_period = for_type(registrant_type).current_period
-
-    # update the last-run date, even if we aren't going to change periods
-    Rails.cache.write("/registration_cost/#{registrant_type}/last_update_run_date", date)
-
-    if now_period == old_period
-      return false
-    end
-
-    Notifications.updated_current_reg_period(old_period.try(:name), now_period.try(:name)).deliver_later
-
-    missing_regs = []
-
-    unless now_period.nil?
-      Registrant.where(registrant_type: registrant_type).all.find_each do |reg|
-        new_item = now_period.expense_item_for(reg)
-
-        next if new_item.nil?
-
-        unless reg.set_registration_item_expense(new_item, false)
-          missing_regs << reg.bib_number
-        end
-      end
-    end
-
-    if missing_regs.any?
-      Notifications.missing_old_reg_items(missing_regs).deliver_later
-    end
-
-    old_period.update_attribute(:current_period, false) unless old_period.nil?
-    now_period.update_attribute(:current_period, true) unless now_period.nil?
-
-    true
-  end
-
-  def self.update_checked_recently?(date = Date.today)
-    update_type_recently?("competitor", date) || update_type_recently?("noncompetitor", date)
-  end
-
-  def self.update_type_recently?(registrant_type, date)
-    last_update_date = Rails.cache.fetch("/registration_cost/#{registrant_type}/last_update_run_date")
-    return false if last_update_date.nil?
-
-    last_update_date + 2.days >= date
   end
 
   # ##################### Instance Level ###########
@@ -163,6 +103,6 @@ class RegistrationCost < ApplicationRecord
 
   def clear_cache
     Rails.cache.delete("/registration_cost/by_date/#{registrant_type}/#{Date.today}")
-    RegistrationCost.update_current_period(registrant_type)
+    RegistrationCostUpdater.new(registrant_type).update_current_period
   end
 end

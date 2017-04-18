@@ -1,4 +1,4 @@
-- if user_signed_in? && current_user.has_role?(:super_admin) && !RegistrationCost.update_checked_recently?
+- if user_signed_in? && current_user.has_role?(:super_admin) && !RegistrationCostUpdater.update_checked_recently?
   .alert-box.callout.alert.top_banner.non_printable
     No Registration-Period update has occurred in the past 3 days. Please check your scheduler.
 
