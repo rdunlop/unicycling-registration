@@ -289,7 +289,7 @@ describe ExpenseItem do
     before(:each) do
       @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, expense_item: @item)
       @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor)
-      @nc_item = @noncomp_reg_cost.expense_item
+      @nc_item = @noncomp_reg_cost.expense_items.first
     end
     describe "with a single competitor" do
       before(:each) do

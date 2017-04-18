@@ -1,7 +1,7 @@
 // Note: the associated expense_item
 // is also necessary, but doesn't cache-invalidete
 - cache_i18n [registrant_type, RegistrationCost], expires_in: 30.minutes do
-  - registrant_costs = RegistrationCost.for_type(registrant_type).includes(:expense_item).includes(:translations)
+  - registrant_costs = RegistrationCost.for_type(registrant_type).includes(registration_cost_entries: :expense_item).includes(:translations)
   - if registrant_costs.any?
     %fieldset.registration_period_block
       %legend= t(".#{registrant_type}_registration_cost")
@@ -18,7 +18,9 @@
               %td= l cost.end_date, format: :registration_date_format
             %td
               %b
-                = print_formatted_currency(cost.expense_item.cost)
+                - RegistrationCostPresenter.new(cost).describe_entries do |entry_string|
+                  = entry_string
+                  %br
 
           - if cost.last_online_period?
             %tr

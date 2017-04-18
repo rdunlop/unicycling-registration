@@ -9,10 +9,6 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
   # GET /registration_costs.json
   def index
     @registration_costs = RegistrationCost.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
 
   # GET /registration_costs/new
@@ -20,10 +16,8 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
   def new
     @registration_cost = RegistrationCost.new
     add_breadcrumb "New Registration Cost"
-    @registration_cost.build_expense_item
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    rce = @registration_cost.registration_cost_entries.build
+    rce.build_expense_item
   end
 
   # GET /registration_costs/1/edit
@@ -37,24 +31,22 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
     @registration_cost = RegistrationCost.new(registration_cost_params)
     creator = CreatesRegistrationCost.new(@registration_cost)
 
-    respond_to do |format|
-      if creator.perform
-        format.html { redirect_to registration_costs_path, notice: 'Registration cost was successfully created.' }
-      else
-        format.html { render action: "new" }
-      end
+    if creator.perform
+      redirect_to registration_costs_path, notice: 'Registration cost was successfully created.'
+    else
+      render :new
     end
   end
 
   # PUT /registration_costs/1
   # PUT /registration_costs/1.json
   def update
-    respond_to do |format|
-      if @registration_cost.update_attributes(registration_cost_params)
-        format.html { redirect_to registration_costs_path, notice: 'Registration cost was successfully updated.' }
-      else
-        format.html { render action: "edit" }
-      end
+    @registration_cost.assign_attributes(registration_cost_params)
+    creator = CreatesRegistrationCost.new(@registration_cost)
+    if creator.perform
+      redirect_to registration_costs_path, notice: 'Registration cost was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -87,9 +79,16 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
 
   def registration_cost_params
     params.require(:registration_cost).permit(
-      :expense_item_id, :end_date, :name, :registrant_type, :start_date, :onsite,
-      translations_attributes: [:id, :locale, :name],
-      expense_item_attributes: [:id, :cost, :tax]
+      :end_date, :name, :registrant_type, :start_date, :onsite,
+      registration_cost_entries_attributes: [
+        :id,
+        :min_age,
+        :max_age,
+        :expense_item_id,
+        :_destroy,
+        expense_item_attributes: [:id, :cost, :tax]
+      ],
+      translations_attributes: [:id, :locale, :name]
     )
   end
 

@@ -10,7 +10,7 @@ class RequiredExpenseItemCreator
   def create
     # add the registration_cost expense_item
     unless registrant.reg_paid?
-      registrant.build_registration_item(registration_item)
+      registrant.build_registration_item(registration_item(registrant))
     end
 
     required_expense_items.each do |ei|
@@ -23,8 +23,8 @@ class RequiredExpenseItemCreator
   # TODO: move Registrant#set_registration_item_expense to here
   private
 
-  def registration_item
-    RegistrationCost.relevant_period(registrant.registrant_type, Date.today).try(:expense_item)
+  def registration_item(registrant)
+    RegistrationCost.relevant_period(registrant.registrant_type, Date.today).try(:expense_item_for, registrant)
   end
 
   # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)

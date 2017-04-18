@@ -22,7 +22,7 @@ describe Admin::RegFeesController do
 
     it "initially has a reg fee from rp2" do
       expect(@reg.owing_expense_items.count).to eq(1)
-      expect(@reg.owing_expense_items.first).to eq(@rp2.expense_item)
+      expect(@reg.owing_expense_items.first).to eq(@rp2.expense_items.first)
     end
 
     it "can be changed to a different reg period" do
@@ -30,7 +30,7 @@ describe Admin::RegFeesController do
       expect(response).to redirect_to set_reg_fees_path
       @reg.reload
       expect(@reg.owing_expense_items.count).to eq(1)
-      expect(@reg.owing_expense_items.first).to eq(@rp1.expense_item)
+      expect(@reg.owing_expense_items.first).to eq(@rp1.expense_items.first)
       expect(@reg.registrant_expense_items.first.locked).to eq(true)
     end
 
@@ -39,7 +39,7 @@ describe Admin::RegFeesController do
       post :update_reg_fee, params: { reg_fee: {registrant_id: @reg.id, registration_cost_id: @rp2.id } }
       @reg.reload
       expect(@reg.owing_expense_items.count).to eq(1)
-      expect(@reg.owing_expense_items.first).to eq(@rp2.expense_item)
+      expect(@reg.owing_expense_items.first).to eq(@rp2.expense_items.first)
       expect(@reg.registrant_expense_items.first.locked).to eq(true)
     end
 

@@ -3,8 +3,11 @@
     %h3.recommended_title= t('.recommended')
     %h3.title= t('competitor')
     - reg_cost = RegistrationCost.for_type("competitor").current_period
-    - if reg_cost && reg_cost.expense_item
-      .current_price= print_formatted_currency(reg_cost.expense_item.cost)
+    - if reg_cost && reg_cost.expense_items.any?
+      .current_price
+        - RegistrationCostPresenter.new(reg_cost).describe_entries do |entry_string|
+          = entry_string
+          %br
       .price_note= print_time_until_prices_increase(reg_cost)
     %ul.price_details
       - EventConfiguration.singleton.competitor_benefits_list.each do |item|
@@ -15,8 +18,11 @@
     .pricing_option.non-competitor_sign_up
       %h3.title= t('noncompetitor')
       - reg_cost = RegistrationCost.for_type("noncompetitor").current_period
-      - if reg_cost && reg_cost.expense_item
-        .current_price= print_formatted_currency(reg_cost.expense_item.cost)
+      - if reg_cost && reg_cost.expense_items.any?
+        .current_price
+          - RegistrationCostPresenter.new(reg_cost).describe_entries do |entry_string|
+            = entry_string
+            %br
         .price_note= print_time_until_prices_increase(reg_cost)
       %ul.price_details
         - EventConfiguration.singleton.noncompetitor_benefits_list.each do |item|

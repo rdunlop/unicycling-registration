@@ -6,23 +6,22 @@ class CreatesRegistrationCost
   end
 
   def perform
-    return false if registration_cost.expense_item.nil?
+    return false if registration_cost.registration_cost_entries.none?
 
-    if registration_cost.expense_item.new_record?
-      cei = registration_cost.expense_item
-      set_details(cei, "#{registration_cost.registrant_type} - #{registration_cost.name}")
+    registration_cost.registration_cost_entries.each do |rce|
+      cei = rce.expense_item
+      cei.expense_group = reg_expense_group
+      cei.name = rce.to_s
+
+      if rce.expense_item.new_record?
+        cei.position = (reg_expense_group.expense_items.map(&:position).max || 0) + 1
+      end
     end
 
     registration_cost.save
   end
 
   private
-
-  def set_details(expense_item, name)
-    expense_item.expense_group = reg_expense_group
-    expense_item.name = name
-    expense_item.position = (reg_expense_group.expense_items.map(&:position).max || 0) + 1
-  end
 
   # create the expense_group if necessary
   def reg_expense_group

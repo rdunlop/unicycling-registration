@@ -28,7 +28,7 @@ class RegFee
   end
 
   def new_registration_item
-    RegistrationCost.for_type(registrant.registrant_type).find_by(id: registration_cost_id).try(:expense_item)
+    RegistrationCost.for_type(registrant.registrant_type).find_by(id: registration_cost_id).try(:expense_item_for, registrant)
   end
 
   private

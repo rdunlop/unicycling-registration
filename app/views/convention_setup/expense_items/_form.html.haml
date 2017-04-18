@@ -3,10 +3,10 @@
 
   = f.input :name
   %hr
-  = f.input :cost, input_html: { class: "js--costInput" }
-  = f.input :tax, input_html: { class: "js--costInput" }
+  = f.input :cost, input_html: { data: { cost_element: true } }
+  = f.input :tax, input_html: { data: { cost_element: true } }
   Total
-  = text_field_tag :total, nil, class: 'js--totalCost', disabled: true, data: { costSources: "js--costInput" }
+  = text_field_tag :total, nil, disabled: true, data: { cost_total_ancestor: "form" }
 
   %hr
   %h4= t(".advanced_options")

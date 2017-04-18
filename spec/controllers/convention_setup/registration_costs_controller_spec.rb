@@ -19,9 +19,14 @@ describe ConventionSetup::RegistrationCostsController do
       onsite: false,
       name: "Early Competitor",
       registrant_type: "competitor",
-      expense_item_attributes: {
-        cost: @comp_exp.cost,
-        tax: @comp_exp.tax
+      registration_cost_entries_attributes: {
+        "1" => {
+          expense_item_attributes: {
+            cost: @comp_exp.cost,
+            tax: @comp_exp.tax
+          }
+        }
+
       }
     }
   end
@@ -100,6 +105,22 @@ describe ConventionSetup::RegistrationCostsController do
       end
     end
 
+    describe "with min and max ages" do
+      it "creates new registration_cost_entry" do
+        params =  valid_attributes.deep_merge(
+          registration_cost_entries_attributes: {
+            "1" => {
+              min_age: 10,
+              max_age: 50
+            }
+          })
+        post :create, params: { registration_cost: params }
+        rce = RegistrationCostEntry.first
+        expect(rce.min_age).to eq(10)
+        expect(rce.max_age).to eq(50)
+      end
+    end
+
     describe "with invalid params" do
       it "does not create a new registration_cost" do
         # Trigger the behavior that occurs when invalid params are submitted
@@ -127,7 +148,15 @@ describe ConventionSetup::RegistrationCostsController do
       end
 
       it "redirects to the registration_cost" do
-        params = valid_attributes.merge(expense_item_attributes: { id: registration_cost.expense_item.id })
+        params = valid_attributes.deep_merge(
+          registration_cost_entries_attributes: {
+            "1" => {
+              expense_item_attributes: {
+                id: registration_cost.expense_items.first.id
+              },
+              id: registration_cost.registration_cost_entries.first.id
+            }
+          })
         put :update, params: { id: registration_cost.to_param, registration_cost: params }
         expect(response).to redirect_to(registration_costs_path)
       end
