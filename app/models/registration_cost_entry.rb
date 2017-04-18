@@ -25,6 +25,10 @@ class RegistrationCostEntry < ApplicationRecord
   belongs_to :expense_item, dependent: :destroy
   accepts_nested_attributes_for :expense_item
 
+  def to_s
+    [registration_cost.to_s_with_type, age_description].compact.join(" ")
+  end
+
   def valid_for?(age)
     return true if min_age.blank? && max_age.blank?
 
@@ -34,6 +38,16 @@ class RegistrationCostEntry < ApplicationRecord
       min_age <= age
     else
       min_age <= age && age <= max_age
+    end
+  end
+
+  def age_description
+    if min_age.present? && max_age.present?
+      "(Ages #{min_age}-#{max_age})"
+    elsif min_age.present?
+      "(Ages #{min_age}+)"
+    elsif max_age.present?
+      "(Ages < #{max_age})"
     end
   end
 end

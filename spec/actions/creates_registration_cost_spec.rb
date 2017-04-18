@@ -33,4 +33,14 @@ describe CreatesRegistrationCost do
       expect { perform }.to change(ExpenseItem, :count).by(1)
     end
   end
+
+  describe "when registration_cost is saved and is being updated" do
+    before { perform }
+    it "updates the name of the expense_item" do
+      existing_rce = reg_period.registration_cost_entries.first
+      existing_rce.min_age = 10
+      perform
+      expect(comp_expense_item.reload.name).to eq("competitor - #{reg_period.name} (Ages 10+)")
+    end
+  end
 end

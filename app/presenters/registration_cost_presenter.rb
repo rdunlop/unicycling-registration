@@ -9,7 +9,7 @@ class RegistrationCostPresenter
 
   def describe_entries
     registration_cost.registration_cost_entries.map do |entry|
-      results = [print_formatted_currency(entry.expense_item.cost), age_description(entry)]
+      results = [print_formatted_currency(entry.expense_item.cost), entry.age_description]
       string = results.compact.join(" ")
       if block_given?
         yield(string)
@@ -17,17 +17,5 @@ class RegistrationCostPresenter
         string
       end
     end.join(", ")
-  end
-
-  private
-
-  def age_description(entry)
-    if entry.min_age.present? && entry.max_age.present?
-      "(Ages #{entry.min_age}-#{entry.max_age})"
-    elsif entry.min_age.present?
-      "(Ages #{entry.min_age}+"
-    elsif entry.max_age.present?
-      "(Ages < #{entry.max_age}"
-    end
   end
 end

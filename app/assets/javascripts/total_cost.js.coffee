@@ -1,27 +1,24 @@
 # Total up the floats in each of the elements
 # usage:
 #  target element:
-#    class: 'js--totalCost'
-#    data: 'costsources' - the class of the source elements
+#    data: 'cost-total-ancestor' - the class of the an ancestor, from which to search for the data-cost-elements
 #
 # source element:
-#    class: class matching the costsources class
+#    data: cost-element (set this attribute to true)
 
 class @TotalCostDisplayer
 
   constructor: (@target)->
-    @bindSources()
     @recalculateTotal()
 
   sourceClass: ->
-    @target.data("costsources")
+    @target.data("cost-total-ancestor")
 
   sourceElements: ->
-    $(".#{@sourceClass()}")
+    $(@ancestorElement()).find("[data-cost-element]")
 
-  bindSources: ->
-    @sourceElements().on 'change', =>
-      @recalculateTotal()
+  ancestorElement: ->
+    @target.closest(@target.data("cost-total-ancestor"))
 
   recalculateTotal: ->
     total = 0
@@ -30,5 +27,10 @@ class @TotalCostDisplayer
     @target.val(total)
 
 $ ->
-  $(".js--totalCost").each (_, element) ->
-    new TotalCostDisplayer($(element))
+  $(document).on 'change', '[data-cost-element]', (element) =>
+    $('[data-cost-total-ancestor]').each ->
+      new TotalCostDisplayer($(this))
+
+  # initial load
+  $('[data-cost-total-ancestor]').each ->
+    new TotalCostDisplayer($(this))
