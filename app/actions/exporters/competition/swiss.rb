@@ -7,7 +7,7 @@
 # nil nil 364 4 Larkin Cara Kornelia  Switzerland 30+ w
 # nil nil 81  5 Hills Raegan  Italy 30+ w
 # nil nil 498 6 Walter Yvette  Germany 30+ w
-class Exporters::Swiss
+class Exporters::Competition::Swiss
   attr_accessor :heat, :competition
 
   def initialize(competition, heat)

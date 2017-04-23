@@ -13,8 +13,12 @@ class HeatExportsController < ApplicationController
   # GET /competitions/1/heat_exports/download_evt
   def download_evt
     csv_string = CSV.generate do |csv|
-      @competition.heat_numbers.each do |heat_number|
-        create_heat_evt(csv, heat_number)
+      competition.heat_numbers.each do |heat_number|
+        exporter = Exporters::Competition::FinishLynx.new(@competition, heat_number)
+        csv << exporter.headers
+        exporter.rows.each do |row|
+          csv << row
+        end
       end
     end
 
@@ -30,17 +34,11 @@ class HeatExportsController < ApplicationController
   # 2;Durgan;Whitney;USA;f;30+
   # 3;Crist;Amely;USA;f;30+
   def download_competitor_list_ssv
+    exporter = Exporters::Competition::Simple.new(@competition)
     csv_string = CSV.generate(col_sep: ";") do |csv|
-      csv << ["ID", "LastName", "FirstName", "Country", "Gender", "Age Group"]
-      @competition.competitors.each do |competitor|
-        csv << [
-          competitor.bib_number,
-          nil,
-          ActiveSupport::Inflector.transliterate(competitor.name),
-          competitor.country,
-          competitor.gender,
-          competitor.age_group_entry_description
-        ]
+      csv << exporter.headers
+      exporter.rows.each do |row|
+        csv << row
       end
     end
 
@@ -69,7 +67,7 @@ class HeatExportsController < ApplicationController
   # returns a single file for the heat
   def download_heat_tsv
     heat = params[:heat_number]
-    exporter = Exporters::Swiss.new(@competition, heat)
+    exporter = Exporters::Competition::Swiss.new(@competition, heat)
     csv_string = TsvGenerator.new(exporter).generate
 
     filename = "#{@competition.to_s.parameterize}_heat_#{heat}.txt"
@@ -90,25 +88,6 @@ class HeatExportsController < ApplicationController
   end
 
   private
-
-  def create_heat_evt(csv, heat)
-    lane_assignments = LaneAssignment.where(heat: heat, competition: @competition)
-    csv << [@competition.id, 1, heat, @competition]
-    lane_assignments.each do |lane_assignment|
-      member = lane_assignment.competitor.members.first.registrant
-      country = if member.country.nil?
-                  nil
-                else
-                  ActiveSupport::Inflector.transliterate(member.country)
-                end
-      csv << [nil,
-              lane_assignment.competitor.lowest_member_bib_number,
-              lane_assignment.lane,
-              ActiveSupport::Inflector.transliterate(member.last_name),
-              ActiveSupport::Inflector.transliterate(member.first_name),
-              country]
-    end
-  end
 
   def authorize_competition
     authorize @competition, :heat_recording?
