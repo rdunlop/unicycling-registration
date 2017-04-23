@@ -7,7 +7,7 @@ describe Importers::CsvExtractor do
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
-    data = subject.extract_csv(sample_input)
+    data = subject.extract_csv
 
     expect(data.count).to eq(1)
   end
@@ -17,7 +17,7 @@ describe Importers::CsvExtractor do
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
-    data = subject.extract_csv(sample_input)
+    data = subject.extract_csv
 
     expect(data.count).to eq(9) # includes header row
   end
@@ -27,7 +27,7 @@ describe Importers::CsvExtractor do
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
-    data = subject.extract_csv(sample_input)
+    data = subject.extract_csv
 
     expect(data.count).to eq(5) # 5 lnes, including header
   end

@@ -1,42 +1,32 @@
-class Importers::ImportResultChipImporter < Importers::BaseImporter
-  # Create ImportResult records from a file.
-  # File Format, separated by ';', includes a blank line.
-  def process(file, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
-    return false unless valid_file?(file)
+class Importers::ImportResultChipImporter
+  attr_reader :bib_number_column_number, :time_column_number, :number_of_decimal_places, :lap_column_number
 
-    upload = Upload.new(bib_number_column_number, time_column_number, lap_column_number)
-    raw_data = Importers::CsvExtractor.new(file, ';').extract_csv
-    self.num_rows_processed = 0
-    self.errors = nil
+  def initialize(bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
+    @bib_number_column_number = bib_number_column_number
+    @time_column_number = time_column_number
+    @number_of_decimal_places = number_of_decimal_places
+    @lap_column_number = lap_column_number
+  end
+
+  def extract_file(file)
+    # File Format, separated by ';', includes a blank line.
+    raw_data = Importers::CsvExtractor.new(file, separator: ';').extract_csv
     # drop the first (title) line
-    raw_data = raw_data.drop(1)
-    begin
-      ImportResult.transaction do
-        raw_data.each do |raw|
-          str = upload.convert_array_to_string(raw)
-          next if upload.is_blank_line(raw) || raw.count == 0
-          chip_hash = upload.convert_timing_csv_to_hash(raw)
-          result = ImportResult.new(
-            bib_number: chip_hash[:bib],
-            status: chip_hash[:status],
-            minutes: chip_hash[:minutes],
-            seconds: chip_hash[:seconds],
-            number_of_laps: chip_hash[:laps],
-            thousands: convert_to_thousands(chip_hash[:thousands].to_i, number_of_decimal_places)
-          )
-          result.raw_data = str
-          result.user = @user
-          result.competition = @competition
-          result.is_start_time = false
-          if result.save!
-            self.num_rows_processed += 1
-          end
-        end
-      end
-    rescue ActiveRecord::RecordInvalid => invalid
-      @errors = invalid
-      return false
-    end
+    raw_data.drop(1)
+  end
+
+  def process_row(row)
+    upload = Upload.new(bib_number_column_number, time_column_number, lap_column_number)
+
+    chip_hash = upload.convert_timing_csv_to_hash(row)
+    {
+      bib_number: chip_hash[:bib],
+      seconds: chip_hash[:seconds],
+      minutes: chip_hash[:minutes],
+      thousands: convert_to_thousands(chip_hash[:thousands].to_i, number_of_decimal_places),
+      status: chip_hash[:status],
+      number_of_laps: chip_hash[:laps]
+    }
   end
 
   private

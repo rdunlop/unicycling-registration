@@ -127,13 +127,16 @@ class ImportResultsController < ApplicationController
   end
 
   def import_chip
-    importer = Importers::ImportResultChipImporter.new(@competition, @user)
+    importer = Importers::ImportResultImporter.new(@competition, @user)
+    processor = Importers::ImportResultChipImporter.new(
+      params[:bib_number_column_number].to_i - 1,
+      params[:time_column_number].to_i - 1,
+      params[:number_of_decimal_places].to_i,
+      params[:lap_column_number].to_i - 1)
 
     if importer.process(params[:file],
-                        params[:bib_number_column_number].to_i - 1,
-                        params[:time_column_number].to_i - 1,
-                        params[:number_of_decimal_places].to_i,
-                        params[:lap_column_number].to_i - 1)
+                        false,
+                        processor)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
@@ -147,9 +150,10 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
-    importer = Importers::ImportResultCsvImporter.new(@competition, @user)
+    importer = Importers::ImportResultImporter.new(@competition, @user)
+    processor = Importers::ImportResultCsvImporter.new(read_num_laps: @competition.has_num_laps?)
 
-    if importer.process(params[:file], @is_start_time)
+    if importer.process(params[:file], @is_start_time, processor)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

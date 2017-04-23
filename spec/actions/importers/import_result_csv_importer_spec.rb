@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Importers::ImportResultCsvImporter do
-  let(:admin_user) { FactoryGirl.create(:super_admin_user) }
-  let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
-  let(:importer) { described_class.new(competition, admin_user) }
+  let(:importer) { described_class.new }
 
   let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
@@ -11,49 +9,40 @@ describe Importers::ImportResultCsvImporter do
   describe "when importing CSV data" do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101.txt' }
 
-    it "creates a competitor" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
-
-      expect do
-        importer.process(sample_input, false)
-      end.to change(ImportResult, :count).by(1)
-
-      expect(ImportResult.count).to eq(1)
-      ir = ImportResult.first
-      expect(ir.bib_number).to eq(101)
-      expect(ir.minutes).to eq(1)
-      expect(ir.seconds).to eq(2)
-      expect(ir.thousands).to eq(300)
-      expect(ir.disqualified?).to eq(false)
-      expect(ir.competition).to eq(competition)
-      expect(ir.is_start_time).to eq(false)
+    it "reads the line" do
+      expect(importer.extract_file(test_file)).to eq([["101", "1", "2", "300", "0"]])
     end
 
-    it "can import start times" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
+    it "returns competitor data" do
+      input_data = importer.process_row(["101", "1", "2", "300", "0"])
 
-      expect do
-        importer.process(sample_input, true)
-      end.to change(ImportResult, :count).by(1)
+      expect(input_data[:bib_number]).to eq("101")
+      expect(input_data[:minutes]).to eq("1")
+      expect(input_data[:seconds]).to eq("2")
+      expect(input_data[:thousands]).to eq("300")
+      expect(input_data[:number_of_laps]).to be_nil
+      expect(input_data[:status]).to eq("active")
+    end
 
-      expect(ImportResult.count).to eq(1)
-      ir = ImportResult.first
-      expect(ir.is_start_time).to eq(true)
+    it "reads num_laps, if configured" do
+      importer = described_class.new(read_num_laps: true)
+
+      input_data = importer.process_row(["101", "1", "2", "300", "0", "4"])
+
+      expect(input_data[:number_of_laps]).to eq("4")
     end
   end
 
   describe "when importing dq-results" do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101_dq.txt' }
 
-    it "creates a dq competitor" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
+    it "reads the line" do
+      expect(importer.extract_file(test_file)).to eq([["101", "0", "0", "0", "DQ"]])
+    end
 
-      expect do
-        importer.process(sample_input, true)
-      end.to change(ImportResult, :count).by(1)
-
-      expect(ImportResult.count).to eq(1)
-      expect(ImportResult.first.disqualified?).to eq(true)
+    it "returns dq data" do
+      input_data = importer.process_row(["101", "0", "0", "0", "DQ"])
+      expect(input_data[:status]).to eq("DQ")
     end
   end
 end

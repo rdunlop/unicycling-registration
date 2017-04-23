@@ -8,7 +8,7 @@ class Importers::CsvExtractor
     @separator = separator
   end
 
-  def extract_csv(file)
+  def extract_csv
     if file.respond_to?(:tempfile)
       upload_file = file.tempfile
     else
