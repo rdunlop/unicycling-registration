@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Exporters::SwissTsv do
+describe Exporters::Swiss do
   let(:exporter) { described_class.new(competition.reload, heat) }
   let(:competition) { FactoryGirl.create(:timed_competition) }
   let(:heat) { nil }

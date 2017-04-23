@@ -69,7 +69,8 @@ class HeatExportsController < ApplicationController
   # returns a single file for the heat
   def download_heat_tsv
     heat = params[:heat_number]
-    csv_string = HeatTsvGenerator.new(@competition, heat).generate
+    exporter = Exporters::Swiss.new(@competition, heat)
+    csv_string = TsvGenerator.new(exporter).generate
 
     filename = "#{@competition.to_s.parameterize}_heat_#{heat}.txt"
     send_data(csv_string,

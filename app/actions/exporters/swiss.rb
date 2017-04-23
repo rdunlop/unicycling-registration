@@ -1,4 +1,4 @@
-# Return a list of each heat
+# Return a list of each heat, if specified
 # Example:
 #
 # nil nil 698 1 Durgan Whitney  Germany 30+ w
@@ -7,7 +7,7 @@
 # nil nil 364 4 Larkin Cara Kornelia  Switzerland 30+ w
 # nil nil 81  5 Hills Raegan  Italy 30+ w
 # nil nil 498 6 Walter Yvette  Germany 30+ w
-class Exporters::SwissTsv
+class Exporters::Swiss
   attr_accessor :heat, :competition
 
   def initialize(competition, heat)
