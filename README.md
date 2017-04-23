@@ -519,7 +519,7 @@ Amazon Server Setup
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user` (`chown ec2-user /etc/nginx/nginx.conf`)
   - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake update_nginx_config`
-  - `sudo service start nginx`
+  - `sudo service nginx start`
 - At this point, point your DNS to this server, so that all requests go through this server
 - Set up the server to automatically start eye on restart
   + Copy the `server_config/registration` file to `/etc/init.d/registration`
