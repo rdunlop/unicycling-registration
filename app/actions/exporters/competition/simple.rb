@@ -15,7 +15,7 @@ class Exporters::Competition::Simple
   end
 
   def rows
-    @competition.competitors.map do |competitor|
+    @competition.competitors.includes(:age_group_entry, members: [registrant: :contact_detail]).map do |competitor|
       [
         competitor.bib_number,
         nil,

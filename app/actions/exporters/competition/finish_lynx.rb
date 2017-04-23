@@ -12,12 +12,12 @@ class Exporters::Competition::FinishLynx
   end
 
   def headers
-    [competition.id, 1, heat, competition]
+    [competition.id, 1, heat, competition.to_s]
   end
 
   def rows
     lane_assignments = LaneAssignment.where(heat: heat, competition: @competition)
-    lane_assignments.each do |lane_assignment|
+    lane_assignments.map do |lane_assignment|
       member = lane_assignment.competitor.members.first.registrant
       country = if member.country.nil?
                   nil

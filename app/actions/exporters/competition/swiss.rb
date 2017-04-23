@@ -30,7 +30,7 @@ class Exporters::Competition::Swiss
   private
 
   def all_competitor_rows
-    competition.competitors.map do |competitor|
+    competition.competitors.includes(:age_group_entry, members: [:registrant]).map do |competitor|
       row(competitor, nil)
     end
   end
