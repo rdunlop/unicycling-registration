@@ -1,5 +1,3 @@
-require 'csv'
-
 class Upload
   def initialize(separator = ',', bib_number_column_number = 1, time_column_number = nil, laps_column = nil)
     @sep = separator
@@ -9,24 +7,7 @@ class Upload
   end
 
   def extract_csv(file)
-    if file.respond_to?(:tempfile)
-      upload_file = file.tempfile
-    else
-      upload_file = file
-    end
-
-    results = []
-    File.open(upload_file, 'r:ISO-8859-1') do |f|
-      f.each do |line|
-        row = convert_line_to_array(line)
-        results << row
-      end
-    end
-    results
-  end
-
-  def convert_line_to_array(line)
-    CSV.parse_line(line, col_sep: @sep)
+    Importers::CsvExtractor.new(file, separator: @sep).extract_csv
   end
 
   def convert_array_to_string(arr)
