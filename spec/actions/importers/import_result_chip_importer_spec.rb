@@ -1,15 +1,6 @@
 require 'spec_helper'
 
 describe Importers::ImportResultChipImporter do
-  def create_competitor(competition, bib_number, heat, lane)
-    competitor = FactoryGirl.create(:event_competitor, competition: competition)
-    reg = competitor.members.first.registrant
-    reg.update_attribute(:bib_number, bib_number)
-    if heat && lane
-      FactoryGirl.create(:lane_assignment, competition: competition, competitor: competitor, heat: heat, lane: lane)
-    end
-  end
-
   let(:admin_user) { FactoryGirl.create(:super_admin_user) }
   let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
   let(:importer) { described_class.new(competition, admin_user) }

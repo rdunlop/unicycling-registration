@@ -7,7 +7,7 @@ class ExportController < ApplicationController
   end
 
   def download_competitors_for_timers
-    exporter = Exporters::CompetitorsExporter.new
+    exporter = Exporters::AllCompetitors.new
     csv_string = CSV.generate do |csv|
       csv << exporter.headers
       exporter.rows.each do |row|
