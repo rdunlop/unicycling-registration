@@ -11,7 +11,7 @@ describe Exporters::Competition::FinishLynx do
 
   it "sets headers" do
     headers = exporter.headers
-    expect(headers).to eq([1, 1, 1, competition.to_s])
+    expect(headers).to eq([competition.id, 1, 1, competition.to_s])
   end
 
   describe "with a lane_assignment" do
