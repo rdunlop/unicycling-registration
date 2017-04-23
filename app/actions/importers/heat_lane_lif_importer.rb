@@ -3,7 +3,7 @@ class Importers::HeatLaneLifImporter < Importers::BaseImporter
     return false unless valid_file?(file)
 
     upload = Upload.new
-    raw_data = upload.extract_csv(file)
+    raw_data = Importers::CsvExtractor.new(file).extract_csv
     raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
     self.num_rows_processed = 0
     self.errors = nil

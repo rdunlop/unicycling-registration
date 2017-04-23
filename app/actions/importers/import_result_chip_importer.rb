@@ -4,8 +4,8 @@ class Importers::ImportResultChipImporter < Importers::BaseImporter
   def process(file, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
     return false unless valid_file?(file)
 
-    upload = Upload.new(';', bib_number_column_number, time_column_number, lap_column_number)
-    raw_data = upload.extract_csv(file)
+    upload = Upload.new(bib_number_column_number, time_column_number, lap_column_number)
+    raw_data = Importers::CsvExtractor.new(file, ';').extract_csv
     self.num_rows_processed = 0
     self.errors = nil
     # drop the first (title) line

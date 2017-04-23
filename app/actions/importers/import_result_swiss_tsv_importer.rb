@@ -2,9 +2,9 @@ class Importers::ImportResultSwissTsvImporter < Importers::BaseImporter
   def process(file, start_times)
     return false unless valid_file?(file)
 
-    upload = Upload.new("\t")
+    upload = Upload.new
     # FOR EXCEL DATA:
-    raw_data = upload.extract_csv(file)
+    raw_data = Importers::CsvExtractor.new(file, "\t").extract_csv
     self.num_rows_processed = 0
     self.errors = nil
     is_start_time = start_times || false

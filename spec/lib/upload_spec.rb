@@ -81,7 +81,7 @@ describe Upload do
   end
 
   it "can convert an array of data from the timing guys" do
-    up = Upload.new(';')
+    up = Upload.new
 
     arr = [
       "22",
@@ -108,7 +108,7 @@ describe Upload do
   end
 
   it "handles times longer than an hour" do
-    up = Upload.new(';')
+    up = Upload.new
 
     arr = [
       "335",
@@ -135,7 +135,7 @@ describe Upload do
   end
 
   it "handles very short times" do
-    up = Upload.new(';')
+    up = Upload.new
 
     arr = [
       "1",

@@ -1,13 +1,8 @@
 class Upload
-  def initialize(separator = ',', bib_number_column_number = 1, time_column_number = nil, laps_column = nil)
-    @sep = separator
+  def initialize(bib_number_column_number = 1, time_column_number = nil, laps_column = nil)
     @time_column_number = time_column_number
     @bib_number_column_number = bib_number_column_number
     @laps_column = laps_column
-  end
-
-  def extract_csv(file)
-    Importers::CsvExtractor.new(file, separator: @sep).extract_csv
   end
 
   def convert_array_to_string(arr)
