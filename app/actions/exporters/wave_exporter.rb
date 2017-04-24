@@ -9,7 +9,7 @@ class Exporters::WaveExporter
 
   def rows
     results = []
-    @competitors.each.with_index(1) do |comp, _row_number|
+    @competitors.each do |comp|
       results << [
         comp.lowest_member_bib_number,
         comp.wave,

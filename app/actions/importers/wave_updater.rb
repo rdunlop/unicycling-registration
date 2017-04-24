@@ -6,7 +6,6 @@ class Importers::WaveUpdater < Importers::BaseImporter
     self.num_rows_processed = 0
     self.errors = nil
 
-    current_row = nil
     begin
       TimeResult.transaction do
         rows.each do |row|
@@ -18,7 +17,7 @@ class Importers::WaveUpdater < Importers::BaseImporter
         end
       end
     rescue ActiveRecord::RecordInvalid, Exception => invalid
-      @errors = "#{invalid} -> Original: #{current_row.bib_number} #{current_row.raw}"
+      @errors = "Error #{invalid}"
       return false
     end
   end

@@ -32,7 +32,7 @@ class Importers::TwoAttemptEntryImporter < Importers::BaseImporter
       status_1: hash[:status_1],
 
       minutes_2: hash[:minutes_2],
-      seconds_2: hash[:seconds_],
+      seconds_2: hash[:seconds_2],
       thousands_2: hash[:thousands_2],
       status_2: hash[:status_2],
 
