@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'upload'
 
 describe Importers::CsvExtractor do
   it "can extract csv for normal race results" do

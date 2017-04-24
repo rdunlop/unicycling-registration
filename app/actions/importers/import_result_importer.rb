@@ -29,9 +29,20 @@ class Importers::ImportResultImporter < Importers::BaseImporter
       thousands: hash[:thousands],
       number_of_laps: hash[:number_of_laps],
       status: hash[:status],
-      raw_data: Upload.new.convert_array_to_string(raw),
+      raw_data: convert_array_to_string(raw),
       user: user,
       competition: competition,
       is_start_time: is_start_time)
+  end
+
+  private
+
+  def convert_array_to_string(arr)
+    str = "["
+    arr.each do |el|
+      str += "#{el},"
+    end
+    str += "]"
+    str
   end
 end

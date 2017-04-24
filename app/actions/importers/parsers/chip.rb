@@ -16,9 +16,7 @@ class Importers::Parsers::Chip
   end
 
   def process_row(row)
-    upload = Upload.new(bib_number_column_number, time_column_number, lap_column_number)
-
-    chip_hash = upload.convert_timing_csv_to_hash(row)
+    chip_hash = convert_timing_csv_to_hash(row)
     {
       bib_number: chip_hash[:bib],
       seconds: chip_hash[:seconds],
@@ -29,12 +27,48 @@ class Importers::Parsers::Chip
     }
   end
 
+  def convert_timing_csv_to_hash(arr)
+    results = {}
+
+    results[:bib] = arr[@bib_number_column_number].to_i
+    results[:laps] = get_laps_count(arr)
+
+    full_time = find_full_time(arr)
+
+    convert_full_time_to_hash(results, full_time)
+
+    results
+  end
+
   private
+
+  def get_laps_count(arr)
+    arr[@lap_column_number] unless @lap_column_number.nil?
+  end
+
+  def convert_full_time_to_hash(results, full_time)
+    if full_time == "DQ" || full_time == "DSQ"
+      results[:status] = "DQ"
+    else
+      results[:status] = nil
+      results.merge!(TimeParser.new(full_time).result)
+    end
+
+    results
+  end
+
+  def find_full_time(arr)
+    return arr[@time_column_number] unless @time_column_number.nil?
+
+    arr[5] # magically choose the 6th column if not specified
+  end
 
   def convert_to_thousands(imported_time, number_of_decimal_places)
     case number_of_decimal_places
     when 1
-      imported_time # don't convert because of Upload.rb convert_full_time_to_hash has special handling..
+      # We should multiply "* 100", but we don't, because
+      # TimeParser will do this when it finds only a single "thousands" point.
+      imported_time
     when 2
       imported_time * 10
     when 3

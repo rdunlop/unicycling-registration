@@ -4,8 +4,6 @@ class Importers::Parsers::ExternalResultCsv
   end
 
   def process_row(raw)
-    data = Upload.new.convert_array_to_string(raw)
-
     {
       bib_number: raw[0],
       points: raw[1],

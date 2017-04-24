@@ -5,7 +5,7 @@ class Importers::Parsers::Lif
   end
 
   def process_row(raw)
-    lif_hash = Upload.new.convert_lif_to_hash(raw)
+    lif_hash = convert_lif_to_hash(raw)
 
     {
       lane: lif_hash[:lane],
@@ -14,5 +14,28 @@ class Importers::Parsers::Lif
       thousands: lif_hash[:thousands],
       status: (lif_hash[:disqualified] ? "DQ" : "active")
     }
+  end
+
+  def convert_lif_to_hash(arr)
+    results = {}
+
+    results[:lane] = arr[2]
+
+    full_time = arr[6].to_s
+    # TODO: Extract this into a StatusTranslation
+    if full_time == "DQ" || arr[0] == "DQ" || arr[0] == "DNS" || arr[0] == "DNF"
+      results[:disqualified] = true
+      results[:minutes] = 0
+      results[:seconds] = 0
+      results[:thousands] = 0
+    else
+      results[:disqualified] = false
+
+      time_result = TimeParser.new(full_time).result
+      results[:minutes] = time_result[:minutes]
+      results[:seconds] = time_result[:seconds]
+      results[:thousands] = time_result[:thousands]
+    end
+    results
   end
 end
