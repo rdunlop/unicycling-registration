@@ -1,18 +1,19 @@
 class Importers::SwissResultImporter < Importers::BaseImporter
   # Create ImportResult records from a file.
-  def process(file, heat)
+  def process(file, heat, processor)
     return false unless valid_file?(file)
 
-    swiss_results = SwissHeatResult.from_file(file, heat)
+    swiss_results = processor.extract_file(file)
     self.num_rows_processed = 0
     self.errors = nil
 
     current_row = nil
     begin
       TimeResult.transaction do
-        swiss_results.each do |swiss_result|
-          current_row = swiss_result
-          process_single_swiss_result(swiss_result, heat)
+        rows.each do |row|
+          current_row = row
+          row_hash = processor.process_row(row)
+          process_single_swiss_result(row_hash, row, heat)
         end
       end
     rescue ActiveRecord::RecordInvalid => invalid
@@ -23,28 +24,28 @@ class Importers::SwissResultImporter < Importers::BaseImporter
 
   private
 
-  def process_single_swiss_result(swiss_result, heat)
-    competitor = FindCompetitorForCompetition.new(swiss_result.bib_number, competition).competitor
+  def process_single_swiss_result(row_hash, _raw, heat)
+    competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], competition).competitor
 
     heat_lane_result = HeatLaneResult.new(
       competition: competition,
       heat: heat,
-      lane: swiss_result.lane,
-      status: swiss_result.status,
-      minutes: swiss_result.minutes,
-      seconds: swiss_result.seconds,
-      thousands: swiss_result.thousands,
-      raw_data: swiss_result.raw,
+      lane: row_hash[:lane],
+      status: row_hash[:status],
+      minutes: row_hash[:minutes],
+      seconds: row_hash[:seconds],
+      thousands: row_hash[:thousands],
+      raw_data: row_hash[:raw_time],
       entered_at: DateTime.current,
       entered_by: @user
     )
     result = TimeResult.new(
       competitor: competitor,
-      status: swiss_result.status,
-      status_description: swiss_result.status_description,
-      minutes: swiss_result.minutes,
-      seconds: swiss_result.seconds,
-      thousands: swiss_result.thousands,
+      status: row_hash[:status],
+      status_description: row_hash[:status_description],
+      minutes: row_hash[:minutes],
+      seconds: row_hash[:seconds],
+      thousands: row_hash[:thousands],
       is_start_time: false,
       entered_at: DateTime.current,
       entered_by: @user,

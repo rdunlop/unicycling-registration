@@ -1,16 +1,14 @@
 class Importers::ExternalResultImporter < Importers::BaseImporter
-  def process(file)
+  def process(file, processor)
     return false unless valid_file?(file)
 
-    upload = Upload.new
     # FOR EXCEL DATA:
-    raw_data = upload.extract_csv(file)
+    raw_data = processor.extract_file(file)
     self.num_rows_processed = 0
     self.errors = nil
     ExternalResult.transaction do
       raw_data.each do |raw|
-        data = upload.convert_array_to_string(raw)
-        if build_and_save_imported_result(raw, data, @user, @competition)
+        if build_and_save_imported_result(processor.process_row(raw), @user, @competition)
           self.num_rows_processed += 1
         end
       end
@@ -22,12 +20,12 @@ class Importers::ExternalResultImporter < Importers::BaseImporter
   end
 
   # from CSV to import_result
-  def build_and_save_imported_result(raw, _raw_data, user, competition)
+  def build_and_save_imported_result(row_hash, user, competition)
     ExternalResult.preliminary.create(
-      competitor: CompetitorFinder.new(competition).find_by_bib_number(raw[0]),
-      points: raw[1],
-      details: raw[2],
-      status: "active",
+      competitor: CompetitorFinder.new(competition).find_by_bib_number(row_hash[:bib_number]),
+      points: row_hash[:points],
+      details: row_hash[:details],
+      status: row_hash[:status],
       entered_at: DateTime.current,
       entered_by: user)
   end

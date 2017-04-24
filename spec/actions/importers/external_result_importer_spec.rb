@@ -13,16 +13,24 @@ describe Importers::ExternalResultImporter do
 
   let(:test_file) { fixture_path + '/external_results.csv' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
+  let(:processor) do
+    double(
+      extract_file: ["a line"],
+      process_row: {
+        bib_number: "101",
+        points: "1.2",
+        details: nil,
+        status: "active"
+      }
+    )
+  end
 
   it "can process external result csv file" do
     create_competitor(competition, 101)
-    create_competitor(competition, 102)
-    create_competitor(competition, 103)
-    create_competitor(competition, 104)
 
     expect do
-      expect(importer.process(sample_input)).to be_truthy
-    end.to change(ExternalResult, :count).by(4)
-    expect(importer.num_rows_processed).to eq(4)
+      expect(importer.process(sample_input, processor)).to be_truthy
+    end.to change(ExternalResult, :count).by(1)
+    expect(importer.num_rows_processed).to eq(1)
   end
 end
