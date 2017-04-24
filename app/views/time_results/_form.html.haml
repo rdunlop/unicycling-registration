@@ -1,11 +1,11 @@
 = simple_form_for(@time_result.new_record? ? [@competition, @time_result] : [@time_result]) do |f|
   = render partial: "/shared/error_messages", object: @time_result
   %table
+    - displayer = @competition.results_displayer
     %thead
       %tr
         %th= f.label :competitor_id
 
-        - displayer = @competition.results_displayer
         - displayer.form_label_symbols.each do |label_symbol|
           %th= f.label label_symbol
 
