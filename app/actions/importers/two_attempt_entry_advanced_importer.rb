@@ -1,32 +1,13 @@
-class Importers::TwoAttemptEntryAdvancedImporter < Importers::BaseImporter
-  # Create TwoAttemptEntry records from a file.
-  def process(file, start_times)
-    return false unless valid_file?(file)
-
-    raw_data = Importers::CsvExtractor.new(file, ';').extract_csv
-    self.num_rows_processed = 0
-    self.errors = nil
-    is_start_time = start_times || false
-    TwoAttemptEntry.transaction do
-      raw_data.each do |raw|
-        entry = build_entry(is_start_time, raw)
-
-        if entry.present? && entry.save!
-          self.num_rows_processed += 1
-        end
-      end
-    end
-    true
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
-    return false
+class Importers::TwoAttemptEntryAdvancedImporter
+  def extract_file(file)
+    Importers::CsvExtractor.new(file, separator: ';').extract_csv
   end
 
   # Example data
   # 30;Smith;Ramona;19,64;19,40;Switzerland;23;w;IUF-Slalom
   # 65;Rondeau;Antoine;24,66;disq;France;22;m;IUF-Slalom
   # 268;Jorgensen;Jonas ;abgem;abgem;Denmark;20;m;IUF-Slalom
-  def build_entry(is_start_time, raw)
+  def process_row(raw)
     time_one = raw[3]
     time_two = raw[4]
     status_1 = translate_status_column(time_one)
@@ -50,9 +31,7 @@ class Importers::TwoAttemptEntryAdvancedImporter < Importers::BaseImporter
       thousands_2 = broken_apart[1].to_i * 10
     end
 
-    TwoAttemptEntry.new(
-      competition: competition,
-      user: user,
+    {
       bib_number: raw[0],
       minutes_1: minutes_1,
       seconds_1: seconds_1,
@@ -62,9 +41,8 @@ class Importers::TwoAttemptEntryAdvancedImporter < Importers::BaseImporter
       minutes_2: minutes_2,
       seconds_2: seconds_2,
       thousands_2: thousands_2,
-      status_2: status_2,
-      is_start_time: is_start_time
-    )
+      status_2: status_2
+    }
   end
 
   def translate_status_column(data)
