@@ -1,9 +1,9 @@
 class Importers::SwissResultImporter < Importers::BaseImporter
   # Create ImportResult records from a file.
-  def process(file, heat, processor)
+  def process(file, heat, processor, heats: true)
     return false unless valid_file?(file)
 
-    swiss_results = processor.extract_file(file)
+    rows = processor.extract_file(file)
     self.num_rows_processed = 0
     self.errors = nil
 
@@ -13,20 +13,25 @@ class Importers::SwissResultImporter < Importers::BaseImporter
         rows.each do |row|
           current_row = row
           row_hash = processor.process_row(row)
-          process_single_swiss_result(row_hash, row, heat)
+
+          heat_lane_result = nil
+          if heats
+            heat_lane_result = create_heat_lane_result(row_hash, heat)
+          end
+          create_time_result(row_hash, heat_lane_result)
+
+          self.num_rows_processed += 1
         end
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      @errors = "#{invalid} -> Original: #{current_row.bib_number} #{current_row.raw}"
+      @errors = "#{invalid} -> current row: #{current_row}"
       return false
     end
   end
 
   private
 
-  def process_single_swiss_result(row_hash, _raw, heat)
-    competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], competition).competitor
-
+  def create_heat_lane_result(row_hash, heat)
     heat_lane_result = HeatLaneResult.new(
       competition: competition,
       heat: heat,
@@ -39,6 +44,12 @@ class Importers::SwissResultImporter < Importers::BaseImporter
       entered_at: DateTime.current,
       entered_by: @user
     )
+    heat_lane_result.save!
+    heat_lane_result
+  end
+
+  def create_time_result(row_hash, heat_lane_result)
+    competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], competition).competitor
     result = TimeResult.new(
       competitor: competitor,
       status: row_hash[:status],
@@ -52,8 +63,6 @@ class Importers::SwissResultImporter < Importers::BaseImporter
       preliminary: true,
       heat_lane_result: heat_lane_result
     )
-    if result.save!
-      self.num_rows_processed += 1
-    end
+    result.save!
   end
 end
