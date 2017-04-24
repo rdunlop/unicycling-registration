@@ -1,4 +1,5 @@
 class Compete::WaveAssignmentsController < ApplicationController
+  include ExcelOutputter
   layout "competition_management"
   before_action :authenticate_user!
   before_action :load_competition

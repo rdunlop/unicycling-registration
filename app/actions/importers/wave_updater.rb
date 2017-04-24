@@ -2,7 +2,7 @@ class Importers::WaveUpdater < Importers::BaseImporter
   def process(file, processor)
     return false unless valid_file?(file)
 
-    swiss_results = processor.extract_file(file)
+    rows = processor.extract_file(file)
     self.num_rows_processed = 0
     self.errors = nil
 
