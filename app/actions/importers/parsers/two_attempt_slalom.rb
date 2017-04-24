@@ -1,4 +1,4 @@
-class Importers::TwoAttemptEntryAdvancedImporter
+class Importers::Parsers::TwoAttemptSlalom
   def extract_file(file)
     Importers::CsvExtractor.new(file, separator: ';').extract_csv
   end

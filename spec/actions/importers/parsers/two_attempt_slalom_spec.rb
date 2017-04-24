@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Importers::TwoAttemptEntryAdvancedImporter do
+describe Importers::Parsers::TwoAttemptSlalom do
   describe "when importing IUF-style data" do
     it "can process a normal single line", :aggregate_failures do
       obj = described_class.new

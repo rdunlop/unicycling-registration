@@ -103,13 +103,13 @@ class TwoAttemptEntriesController < ApplicationController
   def import_csv
     success = false
     importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
-    processor = if params[:advanced]
-                  Importers::TwoAttemptEntryAdvancedImporter.new
-                else
-                  Importers::TwoAttemptEntryCsvImporter.new
-                end
+    parser = if params[:advanced]
+               Importers::Parsers::TwoAttemptSlalom.new
+             else
+               Importers::Parsers::TwoAttemptCsv.new
+             end
 
-    if importer.process(params[:file], @is_start_time, processor)
+    if importer.process(params[:file], @is_start_time, parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

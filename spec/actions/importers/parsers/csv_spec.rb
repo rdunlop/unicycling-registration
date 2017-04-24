@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Importers::ImportResultCsvImporter do
+describe Importers::Parsers::Csv do
   let(:importer) { described_class.new }
 
   let(:test_file) { fixture_path + '/800m14.lif' }

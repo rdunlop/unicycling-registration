@@ -1,4 +1,4 @@
-class Importers::ImportResultChipImporter
+class Importers::Parsers::Chip
   attr_reader :bib_number_column_number, :time_column_number, :number_of_decimal_places, :lap_column_number
 
   def initialize(bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)

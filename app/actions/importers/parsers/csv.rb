@@ -1,4 +1,4 @@
-class Importers::ImportResultCsvImporter
+class Importers::Parsers::Csv
   attr_reader :read_num_laps
 
   def initialize(read_num_laps: false)

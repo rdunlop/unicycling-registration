@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Importers::TwoAttemptEntryCsvImporter do
+describe Importers::Parsers::TwoAttemptCsv do
   let(:importer) { described_class.new }
 
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
