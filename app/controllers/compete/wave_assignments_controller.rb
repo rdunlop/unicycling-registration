@@ -1,4 +1,3 @@
-require 'csv'
 class Compete::WaveAssignmentsController < ApplicationController
   layout "competition_management"
   before_action :authenticate_user!
@@ -14,21 +13,10 @@ class Compete::WaveAssignmentsController < ApplicationController
     @competitors = @competition.competitors
     respond_to do |format|
       format.xls do
-        s = Spreadsheet::Workbook.new
-
-        sheet = s.create_worksheet
-        sheet[0, 0] = "ID"
-        sheet[0, 1] = "Wave"
-        sheet[0, 2] = "Name"
-        @competitors.each.with_index(1) do |comp, row_number|
-          sheet[row_number, 0] = comp.lowest_member_bib_number
-          sheet[row_number, 1] = comp.wave
-          sheet[row_number, 2] = comp.detailed_name
-        end
-
-        report = StringIO.new
-        s.write report
-        send_data report.string, filename: "#{@competition.slug}-waves-draft-#{Date.today}.xls"
+        exporter = Exporters::WaveExporter.new(@competitors)
+        headers = exporter.headers
+        data = exporter.rows
+        output_spreadsheet(headers, data, "#{@competition.slug}-waves-draft-#{Date.today}")
       end
       format.html {} # normal
     end
@@ -43,25 +31,13 @@ class Compete::WaveAssignmentsController < ApplicationController
       file = params[:file]
     end
 
-    begin
-      Competitor.transaction do
-        File.open(file, 'r:ISO-8859-1') do |f|
-          f.each_with_index do |line, index|
-            next if index == 0
-            row = CSV.parse_line line
-            bib_number = row[0]
-            wave = row[1]
-            # skip blank lines
-            next if bib_number.nil? && wave.nil?
-            competitor = @competition.competitors.where(lowest_member_bib_number: bib_number).first
-            raise "Unable to find competitor #{bib_number}" if competitor.nil?
-            competitor.update_attribute(:wave, wave)
-          end
-        end
-      end
-      flash[:notice] = "Waves Configured"
-    rescue Exception => ex
-      flash[:alert] = "Error processing file #{ex}"
+    parser = Importers::Parsers::Wave.new
+    updater = Importers::WaveUpdater.new(@competition, current_user)
+
+    if updater.process(file, parser)
+      flash[:notice] = "{importer.num_rows_processed} Waves Configured"
+    else
+      flash[:alert] = "Error processing file #{updater.errors}"
     end
 
     redirect_to competition_waves_path(@competition)
