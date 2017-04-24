@@ -1,6 +1,7 @@
 %h1
   Listing Time Results for #{@competition}
 %table.sortable
+  - displayer = @competition.results_displayer
   %thead
     %tr
       %th{:colspan => "2"} Competitor
@@ -13,7 +14,6 @@
       %th Name
       %th Start Time?
 
-      - displayer = @competition.results_displayer
       - displayer.headings.each do |heading|
         %th= heading
 

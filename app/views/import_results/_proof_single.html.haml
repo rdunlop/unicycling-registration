@@ -1,4 +1,5 @@
 %table.import_results.sortable
+  - displayer = @competition.results_displayer
   - cache [@competition, display_username] do
     %thead
       %tr
@@ -9,7 +10,6 @@
         %th Name
         %th Competitor Exists?
 
-        - displayer = @competition.results_displayer
         - displayer.summary_headings.each do |heading|
           %th= heading
 
