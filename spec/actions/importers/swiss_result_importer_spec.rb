@@ -6,19 +6,19 @@ describe Importers::SwissResultImporter do
   let(:importer) { described_class.new(competition, admin_user) }
 
   describe "when importing data" do
-    let(:test_file) { fixture_path + '/sample_chip_data.csv' }
+    let(:test_file) { fixture_path + '/swiss_heat.tsv' }
     let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
     let(:processor) do
       double(extract_file: [["row_1"]],
              process_row: {
                bib_number: 101,
-               minutes: 1,
-               seconds: 34,
-               thousands: 390,
+               minutes: 00,
+               seconds: 13,
+               thousands: 973,
+               lane: 1,
                status: "active",
                status_description: nil,
-               lane: 2,
-               raw_time: "1:34.39"
+               raw_time: "00:00:13.973"
              }
             )
     end
@@ -41,9 +41,9 @@ describe Importers::SwissResultImporter do
         expect(result.number_of_laps).to be_nil
 
         # 0:1:34.39
-        expect(result.minutes).to eq(1)
-        expect(result.seconds).to eq(34)
-        expect(result.thousands).to eq(390)
+        expect(result.minutes).to eq(0)
+        expect(result.seconds).to eq(13)
+        expect(result.thousands).to eq(973)
       end
     end
 
@@ -51,10 +51,12 @@ describe Importers::SwissResultImporter do
       it "does not create Heat Lane result" do
         @competitor = FactoryGirl.create(:event_competitor, competition: competition)
         @reg = @competitor.members.first.registrant
-
+        @reg.update(bib_number: 101)
+        competition.reload
         expect do
           importer.process(sample_input, 1, processor, heats: false)
         end.not_to change(HeatLaneResult, :count)
+        expect(TimeResult.count).to eq(1)
       end
     end
   end
