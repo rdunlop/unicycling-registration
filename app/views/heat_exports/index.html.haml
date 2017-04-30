@@ -13,7 +13,7 @@
     %pre
       nil,2,5,Dunlop,Robin,Canada
 
-    = link_to "Competitor List EVT", download_evt_competition_heat_exports_path(@competition)
+    = link_to "Competitor List EVT", download_evt_competition_heat_exports_path(@competition), class: "button"
 
 %hr
 
@@ -23,14 +23,14 @@
 
     %b Example:
 
-    %b id, last_name, first_name, country, gender, age_group
+    %p id, last_name, first_name, country, gender, age_group
 
     %pre
       StartNr;Nachname;Vorname;Land;Geschlecht;AK
       2;Durgan;Whitney;USA;f;30+
       3;Crist;Amely;USA;f;30+
 
-    = link_to "Competitor List TSV", download_competitor_list_ssv_competition_heat_exports_path(@competition)
+    = link_to "Competitor List SSV", download_competitor_list_ssv_competition_heat_exports_path(@competition), class: "button"
 
 %hr
 
@@ -40,7 +40,7 @@
 
     %b Example:
 
-    %b nil nil ID lane-number name country age group gender
+    %p nil nil ID lane-number name country age group gender
 
     %b Note: The "nil" are actually not present
 
@@ -52,7 +52,6 @@
       nil nil 81  5 Hills Raegan  Italy 30+ w
       nil nil 498 6 Walter Yvette  Germany 30+ w
 
-
     %h4 Download a Single Heat File
     = form_tag(download_heat_tsv_competition_heat_exports_path(@competition)) do
       .row
@@ -61,7 +60,28 @@
         .small-6.medium-3.columns
           = text_field_tag :heat_number
         .small-12.medium-6.columns
-          = submit_tag "Download Single Heat TSV", data: { disable_with: false }
+          = submit_tag "Download Single Heat TSV", data: { disable_with: false }, class: "button"
     %h4 Download All Heat Files
     %br
-    = link_to "Competitor ALL List Heat files (zip)", download_all_heats_tsv_competition_heat_exports_path(@competition), method: :post
+    = link_to "Competitor ALL List Heat files (zip)", download_all_heats_tsv_competition_heat_exports_path(@competition), method: :post, class: "button"
+%hr
+
+.row
+  .small-12.columns.left_aligned
+    %h2 Heat-less Swiss-Timing file export
+
+    %b Example:
+
+    %p nil nil ID nil name country age group gender
+
+    %b Note: The "nil" are actually not present
+
+    %pre
+      nil nil 698 nil Durgan Whitney  Germany 30+ w
+      nil nil 92  nil Crist Amely Italy 30+ w
+      nil nil 543 nil Spinka Hank  Germany 30+ w
+      nil nil 364 nil Larkin Cara Kornelia  Switzerland 30+ w
+      nil nil 81  nil Hills Raegan  Italy 30+ w
+      nil nil 498 nil Walter Yvette  Germany 30+ w
+
+    = link_to "Download TSV", download_competitor_list_competition_heat_exports_path(@competition), class: "button"

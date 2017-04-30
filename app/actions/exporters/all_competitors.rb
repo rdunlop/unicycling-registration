@@ -1,4 +1,4 @@
-class Exporters::CompetitorsExporter
+class Exporters::AllCompetitors
   def headers
     ['bib_number', 'last_name', 'first_name', 'country']
   end

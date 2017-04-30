@@ -1,30 +1,27 @@
 class Importers::HeatLaneLifImporter < Importers::BaseImporter
-  def process(file, heat)
+  def process(file, heat, processor)
     return false unless valid_file?(file)
 
-    upload = Upload.new
-    raw_data = upload.extract_csv(file)
+    raw_data = processor.extract_file(file)
     raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
     self.num_rows_processed = 0
     self.errors = nil
-    raw_data.shift # drop header row
     begin
       HeatLaneResult.transaction do
         raw_data.each do |raw|
-          lif_hash = upload.convert_lif_to_hash(raw)
-          lane = lif_hash[:lane]
+          input_row = processor.process_row(raw)
 
           result = HeatLaneResult.new(
             entered_by: @user,
             entered_at: DateTime.current,
             heat: heat,
-            lane: lane,
+            lane: input_row[:lane],
             raw_data: raw,
             competition: @competition,
-            minutes: lif_hash[:minutes],
-            seconds: lif_hash[:seconds],
-            thousands: lif_hash[:thousands],
-            status: (lif_hash[:disqualified] ? "DQ" : "active")
+            minutes: input_row[:minutes],
+            seconds: input_row[:seconds],
+            thousands: input_row[:thousands],
+            status: input_row[:status]
           )
           if result.save!
             self.num_rows_processed += 1

@@ -1,58 +1,68 @@
 class Importers::SwissResultImporter < Importers::BaseImporter
   # Create ImportResult records from a file.
-  def process(file, heat)
+  def process(file, heat, processor, heats: true)
     return false unless valid_file?(file)
 
-    swiss_results = SwissHeatResult.from_file(file, heat)
+    rows = processor.extract_file(file)
     self.num_rows_processed = 0
     self.errors = nil
 
     current_row = nil
     begin
       TimeResult.transaction do
-        swiss_results.each do |swiss_result|
-          current_row = swiss_result
-          process_single_swiss_result(swiss_result, heat)
+        rows.each do |row|
+          current_row = row
+          row_hash = processor.process_row(row)
+
+          heat_lane_result = nil
+          if heats
+            heat_lane_result = create_heat_lane_result(row_hash, heat)
+          end
+          create_time_result(row_hash, heat_lane_result)
+
+          self.num_rows_processed += 1
         end
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      @errors = "#{invalid} -> Original: #{current_row.bib_number} #{current_row.raw}"
+      @errors = "#{invalid} -> current row: #{current_row}"
       return false
     end
   end
 
   private
 
-  def process_single_swiss_result(swiss_result, heat)
-    competitor = FindCompetitorForCompetition.new(swiss_result.bib_number, competition).competitor
-
+  def create_heat_lane_result(row_hash, heat)
     heat_lane_result = HeatLaneResult.new(
       competition: competition,
       heat: heat,
-      lane: swiss_result.lane,
-      status: swiss_result.status,
-      minutes: swiss_result.minutes,
-      seconds: swiss_result.seconds,
-      thousands: swiss_result.thousands,
-      raw_data: swiss_result.raw,
+      lane: row_hash[:lane],
+      status: row_hash[:status],
+      minutes: row_hash[:minutes],
+      seconds: row_hash[:seconds],
+      thousands: row_hash[:thousands],
+      raw_data: row_hash[:raw_time],
       entered_at: DateTime.current,
       entered_by: @user
     )
+    heat_lane_result.save!
+    heat_lane_result
+  end
+
+  def create_time_result(row_hash, heat_lane_result)
+    competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], competition).competitor
     result = TimeResult.new(
       competitor: competitor,
-      status: swiss_result.status,
-      status_description: swiss_result.status_description,
-      minutes: swiss_result.minutes,
-      seconds: swiss_result.seconds,
-      thousands: swiss_result.thousands,
+      status: row_hash[:status],
+      status_description: row_hash[:status_description],
+      minutes: row_hash[:minutes],
+      seconds: row_hash[:seconds],
+      thousands: row_hash[:thousands],
       is_start_time: false,
       entered_at: DateTime.current,
       entered_by: @user,
       preliminary: true,
       heat_lane_result: heat_lane_result
     )
-    if result.save!
-      self.num_rows_processed += 1
-    end
+    result.save!
   end
 end

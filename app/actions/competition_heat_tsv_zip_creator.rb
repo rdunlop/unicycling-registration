@@ -51,7 +51,8 @@ class CompetitionHeatTsvZipCreator
   end
 
   def heat_data_csv(heat)
-    HeatTsvGenerator.new(competition, heat).generate
+    exporter = Exporters::Competition::Swiss.new(competition, heat)
+    TsvGenerator.new(exporter).generate
   end
 
   # Create a formatted string,

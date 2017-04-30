@@ -7,19 +7,21 @@ describe Importers::HeatLaneLifImporter do
 
   let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
+  let(:processor) do
+    double(extract_file: ["line"],
+           process_row: {
+             lane: "1",
+             minutes: 2,
+             seconds: 35,
+             thousands: 190,
+             status: "active"
+           }
+          )
+  end
 
   it "can process lif files" do
-    create_competitor(competition, 101, 10, 1)
-    create_competitor(competition, 102, 10, 2)
-    create_competitor(competition, 103, 10, 3)
-    create_competitor(competition, 104, 10, 4)
-    create_competitor(competition, 105, 10, 5)
-    create_competitor(competition, 106, 10, 6)
-    create_competitor(competition, 107, 10, 7)
-    create_competitor(competition, 108, 10, 8)
-
     expect do
-      expect(importer.process(sample_input, 10)).to be_truthy
-    end.to change(HeatLaneResult, :count).by(8)
+      expect(importer.process(sample_input, 10, processor)).to be_truthy
+    end.to change(HeatLaneResult, :count).by(1)
   end
 end

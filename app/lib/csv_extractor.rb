@@ -1,4 +1,5 @@
 require 'csv'
+# NOTE: This returns an array of hashes, and is used by the ImportsTable/Imports controller
 class CsvExtractor
   attr_accessor :file
 

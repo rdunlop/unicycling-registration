@@ -626,6 +626,7 @@ Rails.application.routes.draw do
       resources :heat_exports, only: [:index] do
         collection do
           get :download_evt
+          get :download_competitor_list
           get :download_competitor_list_ssv
           post :download_heat_tsv
           post :download_all_heats_tsv
