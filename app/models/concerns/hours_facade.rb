@@ -10,7 +10,7 @@ module HoursFacade
   extend ActiveSupport::Concern
   # NOT YET fully tested to be working.
   def facade_minutes
-    return nil if self[:minutes].blank?
+    return nil if minutes.blank?
     minutes % 60
   end
 
@@ -19,7 +19,7 @@ module HoursFacade
   end
 
   def facade_hours
-    return nil if self[:minutes].blank?
+    return nil if minutes.blank?
     minutes / 60
   end
 
