@@ -8,25 +8,23 @@ class Importers::SwissResultImporter < Importers::BaseImporter
     self.errors = nil
 
     current_row = nil
-    begin
-      TimeResult.transaction do
-        rows.each do |row|
-          current_row = row
-          row_hash = processor.process_row(row)
+    TimeResult.transaction do
+      rows.each do |row|
+        current_row = row
+        row_hash = processor.process_row(row)
 
-          heat_lane_result = nil
-          if heats
-            heat_lane_result = create_heat_lane_result(row_hash, heat)
-          end
-          create_time_result(row_hash, heat_lane_result)
-
-          self.num_rows_processed += 1
+        heat_lane_result = nil
+        if heats
+          heat_lane_result = create_heat_lane_result(row_hash, heat)
         end
+        create_time_result(row_hash, heat_lane_result)
+
+        self.num_rows_processed += 1
       end
-    rescue ActiveRecord::RecordInvalid => invalid
-      @errors = "#{invalid} -> current row: #{current_row}"
-      return false
     end
+  rescue ActiveRecord::RecordInvalid => invalid
+    @errors = "#{invalid} -> current row: #{current_row}"
+    return false
   end
 
   private

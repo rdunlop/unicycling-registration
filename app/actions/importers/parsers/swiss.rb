@@ -17,6 +17,8 @@ class Importers::Parsers::Swiss
     row_hash
   end
 
+  private
+
   def process_time(full_time)
     if disqualification?(full_time)
       {

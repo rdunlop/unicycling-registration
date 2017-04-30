@@ -21,7 +21,9 @@ class Importers::TwoAttemptEntryImporter < Importers::BaseImporter
     return false
   end
 
-  # Public: Create an ImportResult object.
+  private
+
+  # Create an ImportResult object.
   # Throws an exception if not valid
   def build_and_save_imported_result(hash, user, competition, is_start_time)
     TwoAttemptEntry.create!(

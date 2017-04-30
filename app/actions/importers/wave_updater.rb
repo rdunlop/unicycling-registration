@@ -6,19 +6,17 @@ class Importers::WaveUpdater < Importers::BaseImporter
     self.num_rows_processed = 0
     self.errors = nil
 
-    begin
-      TimeResult.transaction do
-        rows.each do |row|
-          row_hash = processor.process_row(row)
-          competitor = competition.competitors.where(lowest_member_bib_number: row_hash[:bib_number]).first
-          raise "Unable to find competitor #{bib_number}" if competitor.nil?
-          competitor.update_attribute(:wave, row_hash[:wave])
-          self.num_rows_processed += 1
-        end
+    TimeResult.transaction do
+      rows.each do |row|
+        row_hash = processor.process_row(row)
+        competitor = competition.competitors.where(lowest_member_bib_number: row_hash[:bib_number]).first
+        raise "Unable to find competitor #{bib_number}" if competitor.nil?
+        competitor.update_attribute(:wave, row_hash[:wave])
+        self.num_rows_processed += 1
       end
-    rescue ActiveRecord::RecordInvalid, Exception => invalid
-      @errors = "Error #{invalid}"
-      return false
     end
+  rescue ActiveRecord::RecordInvalid, Exception => invalid
+    @errors = "Error #{invalid}"
+    return false
   end
 end

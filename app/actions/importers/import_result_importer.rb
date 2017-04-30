@@ -19,7 +19,9 @@ class Importers::ImportResultImporter < Importers::BaseImporter
     return false
   end
 
-  # Public: Create an ImportResult object.
+  private
+
+  # Create an ImportResult object.
   # Throws an exception if not valid
   def build_and_save_imported_result(hash, raw, user, competition, is_start_time)
     ImportResult.create!(
@@ -34,8 +36,6 @@ class Importers::ImportResultImporter < Importers::BaseImporter
       competition: competition,
       is_start_time: is_start_time)
   end
-
-  private
 
   def convert_array_to_string(arr)
     str = "["

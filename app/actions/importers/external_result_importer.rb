@@ -19,6 +19,8 @@ class Importers::ExternalResultImporter < Importers::BaseImporter
     return false
   end
 
+  private
+
   # from CSV to import_result
   def build_and_save_imported_result(row_hash, user, competition)
     ExternalResult.preliminary.create(
