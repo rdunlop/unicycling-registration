@@ -5,6 +5,7 @@ class BibNumberUpdater
 
   # set a user to the new bib number
   def self.update_bib_number(registrant, new_bib_number)
+    return false unless valid_new_bib_number(registrant, new_bib_number)
     free_bib_number(new_bib_number)
     registrant.update(bib_number: new_bib_number)
   end
