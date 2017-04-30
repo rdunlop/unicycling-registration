@@ -1,5 +1,7 @@
 class RegistrantType
   class Noncompetitor
+    INITIAL = 2001
+
     def free_options(expense_group)
       expense_group.noncompetitor_free_options
     end
@@ -18,7 +20,7 @@ class RegistrantType
       return (max_bib_number + 1) if max_bib_number.present?
 
       # defaults
-      2001
+      INITIAL
     end
 
     private

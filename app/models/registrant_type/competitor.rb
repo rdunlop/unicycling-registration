@@ -1,5 +1,6 @@
 class RegistrantType
   class Competitor
+    INITIAL = 1
     def free_options(expense_group)
       expense_group.competitor_free_options
     end
@@ -18,7 +19,7 @@ class RegistrantType
       return (max_bib_number + 1) if max_bib_number.present?
 
       # defaults
-      1
+      INITIAL
     end
 
     private

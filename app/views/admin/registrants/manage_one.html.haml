@@ -4,7 +4,7 @@
     .small-12.medium-6.columns.text-right
       = label_tag :registrant_id, Registrant.model_name.human
     .small-12.medium-6.columns
-      = select_tag :registrant_id, options_for_select(Registrant.all_select_box_options), :include_blank => true, class: 'chosen-select js--autoFocus'
+      = no_form_all_registrants(additional_classes: "js--autoFocus")
 
   .row
     .small-12.medium-6.columns.text-right
@@ -20,3 +20,7 @@
 - if policy(current_user).change_registrant_user?
   %br
   = link_to t(".change_registrant_user"), change_registrant_user_registrants_path
+
+- if policy(current_user).registrant_information?
+  %br
+  = link_to "Update Bib Number", bib_numbers_path
