@@ -35,8 +35,9 @@
         = @entered_heats.join(", ")
   .row
     .small-6.medium-3.columns
-      = label_tag :heats, "Import Heats"
       = check_box_tag :heats, nil, {}, class: "js--inputEnable", data: { targets: "js--heat" }
+      = label_tag :heats, "Import Heats"
+      .help_bubble{ title: "Disable this in order to import Swiss tab-separated files which are not heat-specific. (e.g. if you run photo finish on a non-heat/lane event)." }
 
   = submit_tag "Load Data File to Temp Table", class: "button"
 
