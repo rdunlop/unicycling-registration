@@ -17,7 +17,7 @@
         %tbody#age_group_entries
           = f.simple_fields_for :age_group_entries do |member_f|
             = render "age_group_entry_fields", f: member_f
-      .text--right.links
+      .right_aligned.links
         = link_to_add_association 'add new', f, :age_group_entries, { data: { association_insertion_node: "#age_group_entries", association_insertion_method: "append" } }
     = f.button :submit
 

@@ -1,0 +1,26 @@
+%h1 Manage Bib Numbers
+
+%p Update the bib number of any registrant
+
+.left_aligned
+  %p
+    %b Please be careful with this power
+    %ul
+      %li Be aware that competitors MAY be confused if their bib number changes
+      %li Any printed materials will probably have the wrong bib numbers
+      %li There is NO WAY to identify which bib numbers have been changed, when, by whom.
+%hr
+
+= form_tag url: bib_numbers_path, method: :post do
+  .row
+    .small-12.medium-6.columns
+      = no_form_all_registrants
+    .small-12.medium-6.columns
+      .row
+        .small-6.columns.right_aligned
+          = label_tag :new_bib_number, "New Bib Number"
+        .small-6.columns
+          = text_field_tag :new_bib_number, nil
+  .row
+    .small-12.medium-6.columns
+      = submit_tag "Update", class: "button"

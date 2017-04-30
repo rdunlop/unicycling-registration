@@ -357,6 +357,8 @@ Rails.application.routes.draw do
           delete :really_destroy
         end
       end
+
+      resources :bib_numbers, only: [:index, :create]
       resources :reports, only: [:index]
       resources :competition_songs, only: [:show, :create], param: :competition_id do
         member do
