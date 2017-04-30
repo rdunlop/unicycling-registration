@@ -33,7 +33,7 @@ describe HeatReviewController do
       let(:test_file) { "stubbed" }
 
       it "calls the creator" do
-        allow_any_instance_of(Importers::HeatLaneLifImporter).to receive(:process).and_return(true)
+        allow_any_instance_of(Importers::BaseImporter).to receive(:process).and_return(true)
         post :import_lif, params: { heat: 1, competition_id: @competition.id, file: test_file }
 
         expect(flash[:notice]).to match(/Successfully imported/)
