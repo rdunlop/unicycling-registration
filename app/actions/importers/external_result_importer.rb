@@ -1,22 +1,10 @@
 class Importers::ExternalResultImporter < Importers::BaseImporter
   def process(file, processor)
-    return false unless valid_file?(file)
+    process_all_rows(file, processor, self)
+  end
 
-    # FOR EXCEL DATA:
-    raw_data = processor.extract_file(file)
-    self.num_rows_processed = 0
-    self.errors = nil
-    ExternalResult.transaction do
-      raw_data.each do |raw|
-        if build_and_save_imported_result(processor.process_row(raw), @user, @competition)
-          self.num_rows_processed += 1
-        end
-      end
-    end
-
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
-    return false
+  def save(row_hash, _)
+    build_and_save_imported_result(row_hash, @user, @competition)
   end
 
   private

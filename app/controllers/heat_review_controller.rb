@@ -27,6 +27,12 @@ class HeatReviewController < ApplicationController
   # FOR LIF (track racing) data:
   # POST /competitions/#/heat_review/:heat/import_lif
   def import_lif
+    unless @competition.uses_lane_assignments?
+      flash[:alert] = "Competition does not use lane assignments"
+      redirect_to competition_heat_review_path(@competition, @heat)
+      return
+    end
+
     parser = Importers::Parsers::Lif.new
     importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
     if params[:file].blank?

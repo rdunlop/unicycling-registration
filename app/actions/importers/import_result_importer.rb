@@ -1,22 +1,11 @@
 class Importers::ImportResultImporter < Importers::BaseImporter
   def process(file, start_times, processor)
-    return false unless valid_file?(file)
+    @is_start_time = start_times || false
+    process_all_rows(file, processor, self)
+  end
 
-    raw_data = processor.extract_file(file)
-    self.num_rows_processed = 0
-    self.errors = nil
-    is_start_time = start_times || false
-    ImportResult.transaction do
-      raw_data.each do |raw|
-        if build_and_save_imported_result(processor.process_row(raw), raw, @user, @competition, is_start_time)
-          self.num_rows_processed += 1
-        end
-      end
-    end
-
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
-    return false
+  def save(row_hash, row)
+    build_and_save_imported_result(row_hash, row, @user, @competition, @is_start_time)
   end
 
   private

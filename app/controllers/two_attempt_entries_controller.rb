@@ -101,7 +101,6 @@ class TwoAttemptEntriesController < ApplicationController
 
   # POST /users/#/competitions/#/two_attempt_entries/import_csv?is_start_times=true
   def import_csv
-    success = false
     importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
     parser = if params[:advanced]
                Importers::Parsers::TwoAttemptSlalom.new

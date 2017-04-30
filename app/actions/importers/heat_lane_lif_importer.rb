@@ -1,35 +1,28 @@
 class Importers::HeatLaneLifImporter < Importers::BaseImporter
   def process(file, heat, processor)
-    return false unless valid_file?(file)
+    @heat = heat
+    process_all_rows(file, processor, self)
+  end
 
-    raw_data = processor.extract_file(file)
-    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
-    self.num_rows_processed = 0
-    self.errors = nil
-    HeatLaneResult.transaction do
-      raw_data.each do |raw|
-        input_row = processor.process_row(raw)
+  def save(row_hash, row)
+    build_and_save_imported_result(row_hash, row, @heat)
+  end
 
-        result = HeatLaneResult.new(
-          entered_by: @user,
-          entered_at: DateTime.current,
-          heat: heat,
-          lane: input_row[:lane],
-          raw_data: raw,
-          competition: @competition,
-          minutes: input_row[:minutes],
-          seconds: input_row[:seconds],
-          thousands: input_row[:thousands],
-          status: input_row[:status]
-        )
-        if result.save!
-          self.num_rows_processed += 1
-        end
-      end
-    end
-    true
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
-    return false
+  private
+
+  def build_and_save_imported_result(input_row, row, heat)
+    result = HeatLaneResult.new(
+      entered_by: @user,
+      entered_at: DateTime.current,
+      heat: heat,
+      lane: input_row[:lane],
+      raw_data: row,
+      competition: @competition,
+      minutes: input_row[:minutes],
+      seconds: input_row[:seconds],
+      thousands: input_row[:thousands],
+      status: input_row[:status]
+    )
+    result.save!
   end
 end

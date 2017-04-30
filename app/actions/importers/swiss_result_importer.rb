@@ -1,33 +1,23 @@
 class Importers::SwissResultImporter < Importers::BaseImporter
-  # Create ImportResult records from a file.
   def process(file, heat, processor, heats: true)
-    return false unless valid_file?(file)
+    @heats = heats
+    @heat = heat
+    process_all_rows(file, processor, self)
+  end
 
-    rows = processor.extract_file(file)
-    self.num_rows_processed = 0
-    self.errors = nil
-
-    current_row = nil
-    TimeResult.transaction do
-      rows.each do |row|
-        current_row = row
-        row_hash = processor.process_row(row)
-
-        heat_lane_result = nil
-        if heats
-          heat_lane_result = create_heat_lane_result(row_hash, heat)
-        end
-        create_time_result(row_hash, heat_lane_result)
-
-        self.num_rows_processed += 1
-      end
-    end
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = "#{invalid} -> current row: #{current_row}"
-    return false
+  def save(row_hash, _row)
+    build_and_save_imported_result(row_hash, @heat, @heats)
   end
 
   private
+
+  def build_and_save_imported_result(row_hash, heat, heats)
+    heat_lane_result = nil
+    if heats
+      heat_lane_result = create_heat_lane_result(row_hash, heat)
+    end
+    create_time_result(row_hash, heat_lane_result)
+  end
 
   def create_heat_lane_result(row_hash, heat)
     heat_lane_result = HeatLaneResult.new(
