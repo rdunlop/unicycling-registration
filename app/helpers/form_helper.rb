@@ -44,6 +44,10 @@ module FormHelper
     form.select :registrant_id, Registrant.select_box_options, {include_blank: true}, {class: 'chosen-select'}
   end
 
+  def no_form_all_registrants(selected: nil, additional_classes: nil)
+    select_tag :registrant_id, options_for_select(Registrant.all_select_box_options, selected), include_blank: true, class: "chosen-select #{additional_classes}"
+  end
+
   def wizard_progress_bar(allow_navigation = false)
     content_tag(:ul, class: "progress_wizard") do
       wizard_steps.collect do |every_step|

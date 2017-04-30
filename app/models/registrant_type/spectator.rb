@@ -1,5 +1,6 @@
 class RegistrantType
   class Spectator
+    INITIAL = 2001
     def free_options(_expense_group)
       nil
     end
@@ -18,7 +19,7 @@ class RegistrantType
       return (max_bib_number + 1) if max_bib_number.present?
 
       # defaults
-      2001
+      INITIAL
     end
 
     private
