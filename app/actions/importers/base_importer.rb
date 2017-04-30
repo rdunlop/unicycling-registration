@@ -1,27 +1,20 @@
 class Importers::BaseImporter
-  attr_accessor :competition, :user, :num_rows_processed, :num_rows_skipped, :errors
+  attr_accessor :num_rows_processed, :num_rows_skipped, :errors
+  attr_reader :file, :process, :record_creator
 
-  def initialize(competition, user)
-    @competition = competition
-    @user = user
+  def initialize(file, processor, record_creator)
+    @file = file
+    @processor = processor
+    @record_creator = record_creator
+    @num_rows_processed = 0
+    @num_rows_skipped = 0
+    @errors = nil
   end
 
-  def valid_file?(file)
-    if file.blank?
-      @errors = "File not found"
-      return false
-    end
-
-    true
-  end
-
-  def process_all_rows(file, processor, record_creator)
-    return false unless valid_file?(file)
+  def process
+    return false unless valid_file?
 
     rows = processor.extract_file(file)
-    self.num_rows_processed = 0
-    self.num_rows_skipped = 0
-    self.errors = nil
 
     current_row = nil
     TwoAttemptEntry.transaction do
@@ -40,5 +33,16 @@ class Importers::BaseImporter
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = "#{invalid} -> current row: #{current_row}"
     return false
+  end
+
+  private
+
+  def valid_file?
+    if file.blank?
+      @errors = "File not found"
+      return false
+    end
+
+    true
   end
 end

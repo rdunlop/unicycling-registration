@@ -34,14 +34,15 @@ class HeatReviewController < ApplicationController
     end
 
     parser = Importers::Parsers::Lif.new
-    importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
+    record_creator = Importers::RecordCreators::HeatLaneResult.new(@competition, current_user, @heat)
     if params[:file].blank?
       flash[:alert] = "Please specify a file"
       redirect_to competition_heat_review_path(@competition, @heat)
       return
     end
+    importer = Importers::BaseImporter.new(params[:file], parser, record_creator)
 
-    if importer.process(params[:file], @heat, parser)
+    if importer.process
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

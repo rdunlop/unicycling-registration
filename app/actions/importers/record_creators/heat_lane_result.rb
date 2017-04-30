@@ -1,7 +1,8 @@
-class Importers::HeatLaneLifImporter < Importers::BaseImporter
-  def process(file, heat, processor)
+class Importers::RecordCreators::HeatLaneResult
+  def initialize(competition, user, heat)
+    @competition = competition
+    @user = user
     @heat = heat
-    process_all_rows(file, processor, self)
   end
 
   def save(row_hash, row)

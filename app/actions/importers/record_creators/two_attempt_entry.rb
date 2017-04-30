@@ -1,7 +1,8 @@
-class Importers::TwoAttemptEntryImporter < Importers::BaseImporter
-  def process(file, start_times, processor)
+class Importers::RecordCreators::TwoAttemptEntry
+  def initialize(competition, user, start_times)
+    @competition = competition
+    @user = user
     @is_start_time = start_times || false
-    process_all_rows(file, processor, self)
   end
 
   def save(row_hash, _row)

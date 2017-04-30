@@ -1,26 +1,22 @@
 require 'spec_helper'
 
-describe Importers::SwissResultImporter do
+describe Importers::RecordCreators::HeatLaneAndTimeResult do
   let(:admin_user) { FactoryGirl.create(:super_admin_user) }
   let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
-  let(:importer) { described_class.new(competition, admin_user) }
+  let(:creator) { described_class.new(competition, admin_user, 1) }
 
   describe "when importing data" do
-    let(:test_file) { fixture_path + '/swiss_heat.tsv' }
-    let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
-    let(:processor) do
-      double(extract_file: [["row_1"]],
-             process_row: {
-               bib_number: 101,
-               minutes: 00,
-               seconds: 13,
-               thousands: 973,
-               lane: 1,
-               status: "active",
-               status_description: nil,
-               raw_time: "00:00:13.973"
-             }
-            )
+    let(:row) do
+      {
+        bib_number: 101,
+        minutes: 00,
+        seconds: 13,
+        thousands: 973,
+        lane: 1,
+        status: "active",
+        status_description: nil,
+        raw_time: "00:00:13.973"
+      }
     end
 
     context "when importing heats" do
@@ -30,7 +26,7 @@ describe Importers::SwissResultImporter do
         @reg.update(bib_number: 101)
 
         expect do
-          importer.process(sample_input, 1, processor)
+          creator.save(row, "raw")
         end.to change(HeatLaneResult, :count).by(1)
 
         expect(TimeResult.count).to eq(1)
@@ -48,32 +44,18 @@ describe Importers::SwissResultImporter do
     end
 
     context "When importing without heats" do
+      let(:creator) { described_class.new(competition, admin_user, 1, heats: false) }
+
       it "does not create Heat Lane result" do
         @competitor = FactoryGirl.create(:event_competitor, competition: competition)
         @reg = @competitor.members.first.registrant
         @reg.update(bib_number: 101)
         competition.reload
         expect do
-          importer.process(sample_input, 1, processor, heats: false)
+          creator.save(row, "Raw")
         end.not_to change(HeatLaneResult, :count)
         expect(TimeResult.count).to eq(1)
       end
-    end
-  end
-
-  context "when a file is not specified" do
-    let(:sample_input) { nil }
-
-    it "returns an error message" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
-
-      result = nil
-      expect do
-        result = importer.process(sample_input, false, nil)
-      end.not_to change(TimeResult, :count)
-
-      expect(result).to be_falsey
-      expect(importer.errors).to eq("File not found")
     end
   end
 end

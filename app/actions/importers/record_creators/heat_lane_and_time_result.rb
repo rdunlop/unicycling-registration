@@ -1,8 +1,9 @@
-class Importers::SwissResultImporter < Importers::BaseImporter
-  def process(file, heat, processor, heats: true)
-    @heats = heats
+class Importers::RecordCreators::HeatLaneAndTimeResult
+  def initialize(competition, user, heat, heats: true)
+    @competition = competition
+    @user = user
     @heat = heat
-    process_all_rows(file, processor, self)
+    @heats = heats
   end
 
   def save(row_hash, _row)
@@ -21,7 +22,7 @@ class Importers::SwissResultImporter < Importers::BaseImporter
 
   def create_heat_lane_result(row_hash, heat)
     heat_lane_result = HeatLaneResult.new(
-      competition: competition,
+      competition: @competition,
       heat: heat,
       lane: row_hash[:lane],
       status: row_hash[:status],
@@ -37,7 +38,7 @@ class Importers::SwissResultImporter < Importers::BaseImporter
   end
 
   def create_time_result(row_hash, heat_lane_result)
-    competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], competition).competitor
+    competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], @competition).competitor
     result = TimeResult.new(
       competitor: competitor,
       status: row_hash[:status],

@@ -1,7 +1,8 @@
-class Importers::ImportResultImporter < Importers::BaseImporter
-  def process(file, start_times, processor)
+class Importers::RecordCreators::ImportResult
+  def initialize(competition, user, start_times)
+    @competition = competition
+    @user = user
     @is_start_time = start_times || false
-    process_all_rows(file, processor, self)
   end
 
   def save(row_hash, row)
@@ -21,8 +22,8 @@ class Importers::ImportResultImporter < Importers::BaseImporter
       number_of_laps: hash[:number_of_laps],
       status: hash[:status],
       raw_data: convert_array_to_string(raw),
-      user: user,
-      competition: competition,
+      user: @user,
+      competition: @competition,
       is_start_time: is_start_time)
   end
 

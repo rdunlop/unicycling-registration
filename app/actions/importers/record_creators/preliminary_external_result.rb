@@ -1,6 +1,7 @@
-class Importers::ExternalResultImporter < Importers::BaseImporter
-  def process(file, processor)
-    process_all_rows(file, processor, self)
+class Importers::RecordCreators::PreliminaryExternalResult
+  def initialize(competition, user)
+    @competition = competition
+    @user = user
   end
 
   def save(row_hash, _)
