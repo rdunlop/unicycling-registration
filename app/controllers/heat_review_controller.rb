@@ -33,13 +33,13 @@ class HeatReviewController < ApplicationController
       return
     end
 
-    parser = Importers::Parsers::Lif.new
-    record_creator = Importers::RecordCreators::HeatLaneResult.new(@competition, current_user, @heat)
     if params[:file].blank?
       flash[:alert] = "Please specify a file"
       redirect_to competition_heat_review_path(@competition, @heat)
       return
     end
+    parser = Importers::Parsers::Lif.new
+    record_creator = Importers::RecordCreators::HeatLaneResult.new(@competition, current_user, @heat)
     importer = Importers::BaseImporter.new(params[:file], parser, record_creator)
 
     if importer.process
