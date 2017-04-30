@@ -62,6 +62,10 @@ RSpec.describe BibNumberUpdater do
   end
 
   describe "#valid_new_bib_number" do
+    it "allows strings to be passed in" do
+      expect(described_class.valid_new_bib_number(competitor1, "1")).to be_truthy
+    end
+
     it "does not allow setting a bib_number outside the competitor range" do
       expect(described_class.valid_new_bib_number(competitor1, 10000)).to be_falsey
     end
