@@ -15,7 +15,7 @@ class BibNumberUpdater
     max_possible_bib_number = registrant.registrant_type_model.next_available_bib_number
     min_possible_bib_number = registrant.registrant_type_model.class::INITIAL
 
-    min_possible_bib_number <= new_bib_number && new_bib_number <= max_possible_bib_number
+    min_possible_bib_number <= new_bib_number.to_i && new_bib_number.to_i <= max_possible_bib_number
   end
 
   # clean out a bib number, if anyone currently occupies it
