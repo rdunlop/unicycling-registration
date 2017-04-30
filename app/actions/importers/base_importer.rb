@@ -1,6 +1,6 @@
 class Importers::BaseImporter
   attr_accessor :num_rows_processed, :num_rows_skipped, :errors
-  attr_reader :file, :process, :record_creator
+  attr_reader :file, :processor, :record_creator
 
   def initialize(file, processor, record_creator)
     @file = file
