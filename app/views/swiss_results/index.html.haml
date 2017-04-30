@@ -25,7 +25,7 @@
       = file_field_tag :file
     .small-6.medium-3.columns
       = label_tag :heat
-      = number_field_tag :heat, nil, autocomplete: "off"
+      = number_field_tag :heat, nil, autocomplete: "off", class: "js--heat"
     .small-6.medium-6.columns
       %b Stored Heats:
       - if @entered_heats.count > 10
@@ -33,6 +33,12 @@
           = @entered_heats.last(10).join(", ")
       - else
         = @entered_heats.join(", ")
+  .row
+    .small-6.medium-3.columns
+      = check_box_tag :heats, nil, {}, class: "js--inputEnable", data: { targets: "js--heat" }
+      = label_tag :heats, "Import Heats"
+      .help_bubble{ title: "Disable this in order to import Swiss tab-separated files which are not heat-specific. (e.g. if you run photo finish on a non-heat/lane event)." }
+
   = submit_tag "Load Data File to Temp Table", class: "button"
 
 %hr

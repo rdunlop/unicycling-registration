@@ -20,7 +20,7 @@ class SwissResultsController < ApplicationController
     parser = Importers::Parsers::Swiss.new
     importer = Importers::SwissResultImporter.new(@competition, @user)
 
-    if importer.process(params[:file], params[:heat], parser)
+    if importer.process(params[:file], params[:heat], parser, heats: params[:heats] == "on")
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}"
