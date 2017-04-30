@@ -11,6 +11,8 @@ class Importers::Parsers::Swiss
     lane = row[3].to_i
     raw_time = row[1]
     row_hash = process_time(raw_time)
+    return nil if row_hash.nil?
+
     row_hash[:bib_number] = bib_number
     row_hash[:lane] = lane
     row_hash[:raw_time] = raw_time
@@ -30,6 +32,7 @@ class Importers::Parsers::Swiss
       }
     else
       time_result = TimeParser.new(full_time).result
+      return if time_result.nil?
 
       {
         status: "active",

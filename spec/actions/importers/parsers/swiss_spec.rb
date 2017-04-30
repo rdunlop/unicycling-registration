@@ -34,4 +34,10 @@ describe Importers::Parsers::Swiss do
     expect(result[:status]).to eq("DQ")
     expect(result[:status_description]).to eq("No Data")
   end
+
+  describe "when given an invalid row" do
+    it "returns nil" do
+      expect(described_class.new.process_row(["", "", ""])).to be_nil
+    end
+  end
 end

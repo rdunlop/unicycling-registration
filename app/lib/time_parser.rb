@@ -25,6 +25,8 @@ class TimeParser
     end
 
     index = seconds_and_hundreds.index(".")
+    return nil if index.nil? # no decimal place found
+
     results[:seconds] = seconds_and_hundreds[0..(index - 1)].to_i
 
     thous = seconds_and_hundreds[(index + 1)..-1]
