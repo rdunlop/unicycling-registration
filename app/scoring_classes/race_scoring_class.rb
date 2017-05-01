@@ -62,22 +62,6 @@ class RaceScoringClass < BaseScoringClass
     competition_time_results_path(competition)
   end
 
-  def build_result_from_imported(import_result)
-    status = import_result.status.nil? ? "active" : import_result.status
-    TimeResult.new(
-      minutes: import_result.minutes,
-      seconds: import_result.seconds,
-      thousands: import_result.thousands,
-      number_of_penalties: import_result.number_of_penalties,
-      status: status,
-      comments: import_result.comments,
-      comments_by: import_result.comments_by,
-      number_of_laps: import_result.number_of_laps,
-      is_start_time: import_result.is_start_time,
-      entered_at: import_result.created_at,
-      entered_by: import_result.user)
-  end
-
   def imports_times?
     true
   end

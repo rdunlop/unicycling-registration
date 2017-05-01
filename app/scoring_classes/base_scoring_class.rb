@@ -54,10 +54,6 @@ class BaseScoringClass
     false
   end
 
-  def build_result_from_imported(_import_result)
-    raise NotImplementedError
-  end
-
   def requires_age_groups
     true
   end

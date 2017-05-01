@@ -82,7 +82,7 @@ class ImportResult < ApplicationRecord
       competitor = target_competition.find_competitor_with_bib_number(bib_number)
     end
 
-    tr = target_competition.build_result_from_imported(self)
+    tr = build_time_result
     tr.competitor = competitor
     tr.save!
   end
@@ -92,6 +92,22 @@ class ImportResult < ApplicationRecord
   end
 
   private
+
+  def build_time_result
+    calc_status = status.nil? ? "active" : status
+    TimeResult.new(
+      minutes: minutes,
+      seconds: seconds,
+      thousands: thousands,
+      number_of_penalties: number_of_penalties,
+      status: calc_status,
+      comments: comments,
+      comments_by: comments_by,
+      number_of_laps: number_of_laps,
+      is_start_time: is_start_time,
+      entered_at: created_at,
+      entered_by: user)
+  end
 
   # Set thousands to 0 if there is no way to enter anything that precise
   def set_zeros
