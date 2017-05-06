@@ -1,3 +1,7 @@
+dependencies:
+  pre:
+    - gem install bundler
+
 test:
   pre:
     - cp config/secrets.yml.template config/secrets.yml:
