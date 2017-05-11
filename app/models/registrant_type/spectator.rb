@@ -1,6 +1,8 @@
 class RegistrantType
   class Spectator
     INITIAL = 2001
+    MAXIMUM = 9999
+
     def free_options(_expense_group)
       nil
     end
