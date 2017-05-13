@@ -250,6 +250,11 @@ describe Registrant do
       @reg2 = FactoryGirl.create(:competitor)
       expect(@reg2.external_id).to eq(2)
     end
+
+    it "cannot have the same bib_number" do
+      @reg2 = FactoryGirl.build(:competitor, bib_number: @reg.bib_number)
+      expect(@reg2).to be_invalid
+    end
   end
 
   describe "with an expense_item" do

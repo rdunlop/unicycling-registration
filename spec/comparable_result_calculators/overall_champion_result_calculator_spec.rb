@@ -3,7 +3,7 @@ require 'spec_helper'
 describe OverallChampionResultCalculator do
   def build_competitor(options = {})
     competition = (options[:competition]) || FactoryGirl.create(:competition, :published)
-    reg = FactoryGirl.create(:registrant, bib_number: options[:bib_number], gender: "Male")
+    reg = Registrant.find_by(bib_number: options[:bib_number]) || FactoryGirl.create(:registrant, bib_number: options[:bib_number], gender: "Male")
     comp = FactoryGirl.create(:event_competitor, competition: competition)
     FactoryGirl.create(:result, competitor: comp, place: options[:place], result_type: "Overall")
     mem = comp.members.first
