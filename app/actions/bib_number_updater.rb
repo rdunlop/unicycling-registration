@@ -1,8 +1,4 @@
 class BibNumberUpdater
-  def self.duplicates
-    Registrant.select(:bib_number).group(:bib_number).having("count(*) > 1").map(&:bib_number)
-  end
-
   # set a user to the new bib number
   def self.update_bib_number(registrant, new_bib_number)
     return false unless valid_new_bib_number(registrant, new_bib_number)

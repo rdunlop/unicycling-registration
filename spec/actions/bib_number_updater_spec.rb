@@ -9,16 +9,6 @@ RSpec.describe BibNumberUpdater do
   let!(:noncompetitor2) { FactoryGirl.create(:noncompetitor) }
   let!(:noncompetitor3) { FactoryGirl.create(:noncompetitor) }
 
-  describe "#duplicates" do
-    before do
-      competitor2.update(bib_number: competitor1.bib_number)
-    end
-
-    it "finds the duplicate" do
-      expect(described_class.duplicates).to eq([competitor1.bib_number])
-    end
-  end
-
   describe "#free_bib_number" do
     context "with a competitor" do
       it "changes the competitor's bib number" do
