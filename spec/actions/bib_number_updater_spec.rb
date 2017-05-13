@@ -70,8 +70,8 @@ RSpec.describe BibNumberUpdater do
       expect(described_class.valid_new_bib_number(competitor1, 10000)).to be_falsey
     end
 
-    it "disallows a competitor above the current max number" do
-      expect(described_class.valid_new_bib_number(competitor1, competitor1.bib_number + 100)).to be_falsey
+    it "allows a competitor above the current max number" do
+      expect(described_class.valid_new_bib_number(competitor1, competitor1.bib_number + 100)).to be_truthy
     end
 
     it "allows a competitor in normal range" do

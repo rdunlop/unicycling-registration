@@ -1,6 +1,8 @@
 class RegistrantType
   class Competitor
     INITIAL = 1
+    MAXIMUM = 1999
+
     def free_options(expense_group)
       expense_group.competitor_free_options
     end
@@ -15,17 +17,9 @@ class RegistrantType
     end
 
     def next_available_bib_number
-      max_bib_number = current_max_bib_number
-      return (max_bib_number + 1) if max_bib_number.present?
-
-      # defaults
-      INITIAL
-    end
-
-    private
-
-    def current_max_bib_number
-      Registrant.competitor.maximum("bib_number")
+      (INITIAL..MAXIMUM).each do |number|
+        return number if Registrant.where(bib_number: number).none?
+      end
     end
   end
 end
