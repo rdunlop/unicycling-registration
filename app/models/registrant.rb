@@ -12,7 +12,7 @@
 #  updated_at               :datetime
 #  user_id                  :integer
 #  deleted                  :boolean          default(FALSE), not null
-#  bib_number               :integer
+#  bib_number               :integer          not null
 #  wheel_size_id            :integer
 #  age                      :integer
 #  ineligible               :boolean          default(FALSE), not null
@@ -28,6 +28,7 @@
 # Indexes
 #
 #  index_registrants_deleted             (deleted)
+#  index_registrants_on_bib_number       (bib_number) UNIQUE
 #  index_registrants_on_registrant_type  (registrant_type)
 #  index_registrants_on_user_id          (user_id)
 #
@@ -98,6 +99,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # always present validations
   before_validation :set_bib_number, on: :create
   validates :bib_number, presence: true
+  validates :bib_number, uniqueness: true
   validates :registrant_type, inclusion: { in: RegistrantType::TYPES }, presence: true
   validates :ineligible, :deleted, inclusion: { in: [true, false] } # because it's a boolean
   validate :no_payments_when_deleted

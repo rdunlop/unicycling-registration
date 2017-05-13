@@ -12,7 +12,7 @@
 #  updated_at               :datetime
 #  user_id                  :integer
 #  deleted                  :boolean          default(FALSE), not null
-#  bib_number               :integer
+#  bib_number               :integer          not null
 #  wheel_size_id            :integer
 #  age                      :integer
 #  ineligible               :boolean          default(FALSE), not null
@@ -28,6 +28,7 @@
 # Indexes
 #
 #  index_registrants_deleted             (deleted)
+#  index_registrants_on_bib_number       (bib_number) UNIQUE
 #  index_registrants_on_registrant_type  (registrant_type)
 #  index_registrants_on_user_id          (user_id)
 #
@@ -248,6 +249,11 @@ describe Registrant do
     it "can build a competitor" do
       @reg2 = FactoryGirl.create(:competitor)
       expect(@reg2.external_id).to eq(2)
+    end
+
+    it "cannot have the same bib_number" do
+      @reg2 = FactoryGirl.build(:competitor, bib_number: @reg.bib_number)
+      expect(@reg2).to be_invalid
     end
   end
 

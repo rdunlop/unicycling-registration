@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415002025) do
+ActiveRecord::Schema.define(version: 20170513193105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170415002025) do
     t.integer  "wheel_size_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["registrant_id", "event_id"], name: "index_competition_wheel_sizes_on_registrant_id_and_event_id", unique: true, using: :btree
     t.index ["registrant_id", "event_id"], name: "index_competition_wheel_sizes_registrant_id_event_id", using: :btree
   end
 
@@ -245,6 +246,7 @@ ActiveRecord::Schema.define(version: 20170415002025) do
     t.string   "italian_fiscal_code",                        limit: 255
     t.boolean  "organization_membership_system_confirmed",               default: false, null: false
     t.string   "organization_membership_system_status"
+    t.index ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true, using: :btree
     t.index ["registrant_id"], name: "index_contact_details_registrant_id", using: :btree
   end
 
@@ -547,6 +549,7 @@ ActiveRecord::Schema.define(version: 20170415002025) do
     t.integer  "heat"
     t.integer  "lane"
     t.integer  "number_of_penalties"
+    t.index ["user_id"], name: "index_import_results_on_user_id", using: :btree
     t.index ["user_id"], name: "index_imported_results_user_id", using: :btree
   end
 
@@ -801,7 +804,7 @@ ActiveRecord::Schema.define(version: 20170415002025) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "deleted",                              default: false,        null: false
-    t.integer  "bib_number"
+    t.integer  "bib_number",                                                  null: false
     t.integer  "wheel_size_id"
     t.integer  "age"
     t.boolean  "ineligible",                           default: false,        null: false
@@ -813,6 +816,7 @@ ActiveRecord::Schema.define(version: 20170415002025) do
     t.string   "registrant_type",          limit: 255, default: "competitor"
     t.boolean  "rules_accepted",                       default: false,        null: false
     t.boolean  "online_waiver_acceptance",             default: false,        null: false
+    t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true, using: :btree
     t.index ["deleted"], name: "index_registrants_deleted", using: :btree
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type", using: :btree
     t.index ["user_id"], name: "index_registrants_on_user_id", using: :btree
@@ -1009,6 +1013,7 @@ ActiveRecord::Schema.define(version: 20170415002025) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["competitor_id", "judge_id"], name: "index_tie_break_adjustments_on_competitor_id_and_judge_id", unique: true, using: :btree
+    t.index ["competitor_id"], name: "index_tie_break_adjustments_competitor_id", using: :btree
     t.index ["competitor_id"], name: "index_tie_break_adjustments_on_competitor_id", unique: true, using: :btree
     t.index ["judge_id"], name: "index_tie_break_adjustments_judge_id", using: :btree
   end
