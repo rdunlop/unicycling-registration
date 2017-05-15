@@ -1,8 +1,4 @@
 class BibNumberUpdater
-  def self.duplicates
-    Registrant.select(:bib_number).group(:bib_number).having("count(*) > 1").map(&:bib_number)
-  end
-
   # set a user to the new bib number
   def self.update_bib_number(registrant, new_bib_number)
     return false unless valid_new_bib_number(registrant, new_bib_number)
@@ -12,7 +8,7 @@ class BibNumberUpdater
 
   # Check to see whether a given bib number is valid for the given registrant
   def self.valid_new_bib_number(registrant, new_bib_number)
-    max_possible_bib_number = registrant.registrant_type_model.next_available_bib_number
+    max_possible_bib_number = registrant.registrant_type_model.class::MAXIMUM
     min_possible_bib_number = registrant.registrant_type_model.class::INITIAL
 
     min_possible_bib_number <= new_bib_number.to_i && new_bib_number.to_i <= max_possible_bib_number
