@@ -17,6 +17,6 @@ class ExportPolicy < ApplicationPolicy
   end
 
   def results?
-    super_admin?
+    competition_admin? || super_admin?
   end
 end
