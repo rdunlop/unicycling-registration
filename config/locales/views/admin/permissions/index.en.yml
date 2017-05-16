@@ -50,6 +50,7 @@ en:
             Can View all Event Sign Ups
             Can Manage all Competition Competitors (while competition is unlocked)
             Can Lock/Unlock Competition
+            Can Export Results
           director: |
             Able to assign registrants to competitors
             Can create judges, volunteers
