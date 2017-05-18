@@ -88,7 +88,7 @@ describe AgeGroupType do
     end
 
     it "returns mixed_gender_age_groups?" do
-      expect(@agt.mixed_gender_age_groups?).to be_truthy
+      expect(@agt.reload.mixed_gender_age_groups?).to be_truthy
     end
   end
 
