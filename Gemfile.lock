@@ -117,7 +117,7 @@ GEM
       sidekiq (>= 2.11)
     arel (7.1.4)
     ast (2.3.0)
-    autoprefixer-rails (6.7.6)
+    autoprefixer-rails (7.1.0)
       execjs
     aws-sdk (2.6.1)
       aws-sdk-resources (= 2.6.1)
