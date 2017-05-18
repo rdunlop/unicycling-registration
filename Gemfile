@@ -30,7 +30,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jquery-datetimepicker-rails'
 gem "jc-validates_timeliness"
 gem 'foundation-rails'
-gem 'haml'
+gem 'haml-rails'
 gem "autoprefixer-rails"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
