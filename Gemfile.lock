@@ -52,6 +52,25 @@ GIT
       safe_yaml (>= 0.8.6)
 
 GIT
+  remote: git://github.com/sferik/rails_admin.git
+  revision: 2ec766e804870503f96cddac15fca603e3dd76c9
+  branch: master
+  specs:
+    rails_admin (1.1.1)
+      builder (~> 3.1)
+      coffee-rails (~> 4.0)
+      font-awesome-rails (>= 3.0, < 5)
+      haml (>= 4.0, < 6)
+      jquery-rails (>= 3.0, < 5)
+      jquery-ui-rails (~> 5.0)
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rack-pjax (>= 0.7)
+      rails (>= 4.0, < 6)
+      remotipart (~> 1.3)
+      sass-rails (>= 4.0, < 6)
+
+GIT
   remote: git://github.com/sudosu/rails_admin_pundit.git
   revision: 285e3e79a37242cf7a527053e9b438782801557a
   specs:
@@ -212,7 +231,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.10.0)
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     consistency_fail (0.3.5)
@@ -255,8 +274,8 @@ GEM
       i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
-    font-awesome-rails (4.6.3.1)
-      railties (>= 3.2, < 5.1)
+    font-awesome-rails (4.7.0.2)
+      railties (>= 3.2, < 5.2)
     foreman (0.84.0)
       thor (~> 0.19.1)
     foundation-rails (6.3.0.0)
@@ -267,20 +286,10 @@ GEM
       rails (>= 4.0.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    haml (4.0.7)
+    haml (5.0.1)
+      temple (>= 0.8.0)
       tilt
-    haml-rails (0.9.0)
-      actionpack (>= 4.0.1)
-      activesupport (>= 4.0.1)
-      haml (>= 4.0.6, < 5.0)
-      html2haml (>= 1.0.1)
-      railties (>= 4.0.1)
     hitimes (1.2.4)
-    html2haml (2.2.0)
-      erubis (~> 2.7.0)
-      haml (>= 4.0, < 6)
-      nokogiri (>= 1.6.0)
-      ruby_parser (~> 3.5)
     http_accept_language (2.1.0)
     i18n (0.7.0)
     i18n_data (0.7.0)
@@ -294,7 +303,7 @@ GEM
       railties (>= 3.1)
       sass-rails
     jquery-datetimepicker-rails (2.4.1.0)
-    jquery-rails (4.2.2)
+    jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -307,9 +316,18 @@ GEM
       multi_json (>= 1.3)
       securecompare
       url_safe_base64
-    kaminari (0.17.0)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    kaminari (1.0.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.1)
+      kaminari-activerecord (= 1.0.1)
+      kaminari-core (= 1.0.1)
+    kaminari-actionview (1.0.1)
+      actionview
+      kaminari-core (= 1.0.1)
+    kaminari-activerecord (1.0.1)
+      activerecord
+      kaminari-core (= 1.0.1)
+    kaminari-core (1.0.1)
     kgio (2.11.0)
     libv8 (3.16.14.17)
     loofah (2.0.3)
@@ -399,19 +417,6 @@ GEM
     rails-i18n (5.0.0)
       i18n (~> 0.7)
       railties (~> 5.0)
-    rails_admin (1.0.0.rc)
-      builder (~> 3.1)
-      coffee-rails (~> 4.0)
-      font-awesome-rails (>= 3.0, < 5)
-      haml (~> 4.0)
-      jquery-rails (>= 3.0, < 5)
-      jquery-ui-rails (~> 5.0)
-      kaminari (~> 0.14)
-      nested_form (~> 0.3)
-      rack-pjax (>= 0.7)
-      rails (>= 4.0, < 6)
-      remotipart (~> 1.0)
-      sass-rails (>= 4.0, < 6)
     railties (5.0.3)
       actionpack (= 5.0.3)
       activesupport (= 5.0.3)
@@ -443,7 +448,7 @@ GEM
     redis-store (1.3.0)
       redis (>= 2.2)
     ref (2.0.0)
-    remotipart (1.3.0)
+    remotipart (1.3.1)
     request_store (1.3.1)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -485,8 +490,6 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-ole (1.2.12)
     ruby-progressbar (1.8.1)
-    ruby_parser (3.9.0)
-      sexp_processor (~> 4.1)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
     sass (3.4.23)
@@ -499,7 +502,6 @@ GEM
     securecompare (1.0.0)
     select2-rails (4.0.3)
       thor (~> 0.14)
-    sexp_processor (4.9.0)
     shoulda-matchers (3.0.1)
       activesupport (>= 4.0.0)
     sidekiq (4.2.9)
@@ -541,6 +543,7 @@ GEM
       railties (>= 3.2.5, < 6)
     teaspoon-jasmine (2.3.4)
       teaspoon (>= 1.0.0)
+    temple (0.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -626,7 +629,7 @@ DEPENDENCIES
   foundation-rails
   gaffe
   globalize!
-  haml-rails (~> 0.9)
+  haml
   http_accept_language
   jc-validates_timeliness
   jquery-datatables-rails
@@ -645,7 +648,7 @@ DEPENDENCIES
   pundit
   rails
   rails-i18n
-  rails_admin (= 1.0.0.rc)
+  rails_admin!
   rails_admin_pundit!
   rake
   recaptcha

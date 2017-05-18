@@ -30,7 +30,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'jquery-datetimepicker-rails'
 gem "jc-validates_timeliness"
 gem 'foundation-rails'
-gem "haml-rails", "~> 0.9"
+gem 'haml'
 gem "autoprefixer-rails"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -42,7 +42,7 @@ gem 'paper_trail'
 gem 'rollbar'
 gem 'redis-store'
 gem 'redis-rails'
-gem 'rails_admin', '= 1.0.0.rc' # pre-release necessary to support rails 5
+gem 'rails_admin', github: "sferik/rails_admin", branch: 'master' # Need version > 1.1.1 for haml version loosening
 gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
 gem 'aws-sdk-rails'
 gem 'http_accept_language'
