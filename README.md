@@ -217,15 +217,6 @@ Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
 
 Paypal Settings required for proper integration:
 
-Instant Payment Notification (IPN)
-
-We used to think that the Paypal account had to have IPN settings enabled through the UI (Instructions from paypal: https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/).
-
-  The <notification url> will be the hosted website URL, with /payments/notification at the end.
-  Example: https://registrationtest.unicycling-software.com/payments/notification
-
-NOTE: We no longer believe that this is necessary. When a user is sent to paypal to pay, that request includes the necessary IPN `notify_url` so that we will receive a message. The following settings may be necessary though:
-
 Auto-Return
 
 Enable Auto Return:
