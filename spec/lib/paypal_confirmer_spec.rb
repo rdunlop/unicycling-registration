@@ -23,7 +23,7 @@ describe PaypalConfirmer do
   it "is sent the correct paypal account even when the account was specified with upper-case characters" do
     expect(EventConfiguration.singleton.paypal_account).to eq("ROBIN+merchant@dunlopweb.com")
     params = {
-      "receiver_email" => "robin+merchant@dunlopweb.com"
+      "receiver_email" => "ROBIN+merchant@dunlopweb.com"
     }
     confirmer = PaypalConfirmer.new(params, {})
     expect(confirmer.correct_paypal_account?).to eq(true)
