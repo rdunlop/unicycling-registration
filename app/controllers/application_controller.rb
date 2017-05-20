@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   # a true rails_admin_controller? method was removed from rails_admin:
   # https://github.com/sferik/rails_admin/issues/2268
   def rails_admin_controller?
-    (self.class.to_s =~ /RailsAdmin::/).zero?
+    (self.class.to_s =~ /RailsAdmin::/) == 0 # rubocop:disable Style/NumericPredicate
   end
 
   # Override the default pundit_user so that we can pass additional state to the policies
