@@ -225,7 +225,7 @@ class Competition < ApplicationRecord
   end
 
   def end_time_to_s
-    scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
+    scheduled_completion_at&.to_formatted_s(:short)
   end
 
   def to_s_with_event_class
@@ -327,9 +327,7 @@ class Competition < ApplicationRecord
     ScoringClass.for(event_class, self)[:tiers_enabled]
   end
 
-  def age_group_entries
-    age_group_type.age_group_entries unless age_group_type.nil?
-  end
+  delegate :age_group_entries, to: :age_group_type
 
   delegate :mixed_gender_age_groups?, to: :age_group_type, allow_nil: true
 

@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.4
   Exclude:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
@@ -27,4 +27,7 @@ Style/StringLiterals:
 Metrics/LineLength:
   # I would like to support this, but it's quite violated currently
   # Max: 120
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false

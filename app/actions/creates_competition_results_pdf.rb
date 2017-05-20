@@ -28,7 +28,7 @@ class CreatesCompetitionResultsPdf
 
   def unpublish!
     result = competition.competition_results.where(system_managed: true).first
-    result.destroy if result
+    result&.destroy
     true
   end
 

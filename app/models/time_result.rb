@@ -93,7 +93,7 @@ class TimeResult < ApplicationRecord
   end
 
   def entered_at_to_s
-    entered_at.to_formatted_s(:short) if entered_at
+    entered_at&.to_formatted_s(:short)
   end
 
   delegate :event, to: :competitor

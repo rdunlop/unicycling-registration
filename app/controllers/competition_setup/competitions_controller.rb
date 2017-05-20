@@ -78,7 +78,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
 
   def load_new_competition
     @competition = Competition.new(competition_params)
-    @competition.event = @event unless @competition.nil?
+    @competition&.event = @event
   end
 
   def load_event_from_competition

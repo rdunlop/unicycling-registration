@@ -40,7 +40,7 @@ class CompetitionResult < ApplicationRecord
   end
 
   def published_date_to_s
-    published_date.to_formatted_s(:short) if published_date
+    published_date&.to_formatted_s(:short)
   end
 
   def to_s
