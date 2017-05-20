@@ -49,7 +49,7 @@ class AgeGroupEntry < ApplicationRecord
 
     earlier_neighbour = entries[current_index - 1]
     next_neighbour = entries[current_index + 1]
-    if current_index == 0
+    if current_index.zero?
       # first entry has no earlier neighbour
       return next_neighbour
     elsif current_index == entries.count - 1

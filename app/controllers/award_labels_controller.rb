@@ -287,7 +287,7 @@ class AwardLabelsController < ApplicationController
       place = competitor.place
     end
     return false if place.nil?
-    return false if place == 0
+    return false if place.zero?
     return false if place < min_place
     return false if place > max_place
 

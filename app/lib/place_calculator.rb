@@ -30,7 +30,7 @@ class PlaceCalculator
     ineligible = options[:ineligible]
     tie_break_points = options[:tie_break_points]
 
-    if dq || current_points == 0
+    if dq || current_points.zero?
       return "DQ"
     end
 
@@ -38,7 +38,7 @@ class PlaceCalculator
     if @previous_points == current_points && @previous_tie_points == tie_break_points
       # set the tied place, if this is a new tie
       # return the tied place, which doesn't increase
-      @tied_place = @count - 1 if @tied_place == 0
+      @tied_place = @count - 1 if @tied_place.zero?
       place = @tied_place
     else
       # not the same score as the previous, so reset the ties counter

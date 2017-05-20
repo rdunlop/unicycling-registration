@@ -173,7 +173,7 @@ class Competitor < ApplicationRecord
         error += "Registrant #{member} is not in the default list for this competition<br>"
       end
     end
-    error.html_safe
+    error.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   def best_time
@@ -262,7 +262,7 @@ class Competitor < ApplicationRecord
   delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count > 0
+    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count.positive?
   end
 
   def team_name
@@ -446,7 +446,7 @@ class Competitor < ApplicationRecord
     return false unless has_result?
     return false if search_gender != gender
 
-    overall_place.to_i > 0 && overall_place.to_i <= 10
+    overall_place.to_i > 0 && overall_place.to_i <= 10 # rubocop:disable Style/NumericPredicate
   end
 
   def self.single_selection_text

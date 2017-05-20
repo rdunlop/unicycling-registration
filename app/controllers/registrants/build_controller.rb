@@ -36,10 +36,10 @@ class Registrants::BuildController < ApplicationController
     authorize @registrant, "#{wizard_value(step)}?".to_sym
 
     case wizard_value(step)
-    when :add_name
+    when :add_name # rubocop:disable Lint/EmptyWhen
     when :add_events
       skip_step unless @registrant.competitor?
-    when :add_volunteers
+    when :add_volunteers # rubocop:disable Lint/EmptyWhen
     end
 
     render_wizard
@@ -52,7 +52,7 @@ class Registrants::BuildController < ApplicationController
       @registrant.status = "base_details" if @registrant.status == "blank"
     when :add_events
       @registrant.status = "events" if @registrant.status == "base_details"
-    when :add_volunteers
+    when :add_volunteers # rubocop:disable Lint/EmptyWhen
     when :add_contact_details
       @registrant.status = "contact_details" if @registrant.status == "events" || @registrant.status == "base_details"
     end

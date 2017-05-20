@@ -34,7 +34,7 @@ class DistanceError::SucceedAtEach
   private
 
   def fault?
-    if distance_attempts.count > 0
+    if distance_attempts.count.positive?
       distance_attempts.first.fault?
     else
       false

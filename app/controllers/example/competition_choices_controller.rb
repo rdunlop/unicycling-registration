@@ -41,7 +41,7 @@ class Example::CompetitionChoicesController < ApplicationController
     filename = validate_file(params[:filename])
     return if filename.blank?
     send_file(
-      "#{Rails.root}/public/sample_data/#{filename}",
+      Rails.root.join("public", "sample_data", filename),
       filename: filename
     )
   end
