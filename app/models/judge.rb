@@ -52,7 +52,7 @@ class Judge < ApplicationRecord
   end
 
   def num_scored_competitors
-    if active_scores.count > 0
+    if active_scores.count.positive?
       active_scores.count
     else
       distance_attempts.count("DISTINCT competitor_id")
@@ -89,11 +89,11 @@ class Judge < ApplicationRecord
 
   # Note, this appears to be duplicated in ability.rb
   def check_for_scores
-    if active_scores.count > 0
+    if active_scores.count.positive?
       errors.add(:base, "cannot delete judge containing a score")
       return false
     end
-    if distance_attempts.count > 0
+    if distance_attempts.count.positive?
       errors.add(:base, "cannot delete judge containing distance attempts")
       return false
     end

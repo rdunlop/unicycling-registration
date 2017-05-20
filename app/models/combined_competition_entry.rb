@@ -55,7 +55,7 @@ class CombinedCompetitionEntry < ApplicationRecord
   end
 
   def bonus_for_place(place)
-    if place > 0 && place <= 10
+    if place > 0 && place <= 10 # rubocop:disable Style/NumericPredicate
       send("points_#{place}")
     else
       0

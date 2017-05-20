@@ -279,7 +279,7 @@ class EventConfiguration < ApplicationRecord
 
   def new_registration_closed?
     return true if registration_closed?
-    return false if max_registrants == 0
+    return false if max_registrants.zero?
 
     Registrant.not_deleted.count >= max_registrants
   end

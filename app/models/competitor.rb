@@ -218,7 +218,7 @@ class Competitor < ApplicationRecord
   def place_formatted
     return scoring_helper.competitor_dq_status_description(self) if disqualified?
 
-    if place == 0 || place.nil?
+    if place.zero? || place.nil?
       return "Unknown"
     else
       place
@@ -233,7 +233,7 @@ class Competitor < ApplicationRecord
   def overall_place_formatted
     return "DQ" if disqualified?
 
-    if overall_place == 0
+    if overall_place.zero?
       return "Unknown"
     else
       overall_place

@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   # a true rails_admin_controller? method was removed from rails_admin:
   # https://github.com/sferik/rails_admin/issues/2268
   def rails_admin_controller?
-    (self.class.to_s =~ /RailsAdmin::/) == 0
+    (self.class.to_s =~ /RailsAdmin::/).zero?
   end
 
   # Override the default pundit_user so that we can pass additional state to the policies
@@ -115,10 +115,10 @@ class ApplicationController < ActionController::Base
   # Prawn-Labels font setting
   def set_font(pdf)
     pdf.font_families.update("OpenSans" => {
-                               normal: "#{Rails.root}/app/assets/fonts/OpenSans-Regular.ttf",
-                               italic: "#{Rails.root}/app/assets/fonts/OpenSans-Italic.ttf",
-                               bold: "#{Rails.root}/app/assets/fonts/OpenSans-Bold.ttf",
-                               bold_italic: "#{Rails.root}/app/assets/fonts/OpenSans-BoldItalic.ttf"
+                               normal: Rails.root.join("app", "assets", "fonts", "OpenSans-Regular.ttf"),
+                               italic: Rails.root.join("app", "assets", "fonts", "OpenSans-Italic.ttf"),
+                               bold: Rails.root.join("app", "assets", "fonts", "OpenSans-Bold.ttf"),
+                               bold_italic: Rails.root.join("app", "assets", "fonts", "OpenSans-BoldItalic.ttf")
                              })
     pdf.font "OpenSans"
   end

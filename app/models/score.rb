@@ -38,7 +38,7 @@ class Score < ApplicationRecord
   delegate :judge_score_calculator, to: :competition
 
   def display_score?(score_number)
-    judge_type.send("val_#{score_number}_max") > 0
+    judge_type.send("val_#{score_number}_max").positive?
   end
 
   # Sum of all entered values for this score.

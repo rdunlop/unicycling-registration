@@ -635,7 +635,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def no_payments_when_deleted
-    if paid_details.count > 0 && deleted?
+    if paid_details.count.positive? && deleted?
       errors.add(:base, "Cannot delete a registration which has completed payments (refund them before deleting the registrant)")
     end
   end

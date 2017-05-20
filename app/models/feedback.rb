@@ -39,7 +39,7 @@ class Feedback < ApplicationRecord
 
   def user_first_registrant_name
     return "unknown" unless user
-    return user.registrants.first.name if user.registrants.count > 0
+    return user.registrants.first.name if user.registrants.count.positive?
     "unknown"
   end
 

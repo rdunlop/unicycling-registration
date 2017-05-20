@@ -40,7 +40,7 @@ class CouponCode < ApplicationRecord
   end
 
   def max_uses_reached?
-    return false if max_num_uses == 0
+    return false if max_num_uses.zero?
 
     num_uses >= max_num_uses
   end

@@ -505,7 +505,7 @@ class Competition < ApplicationRecord
   end
 
   def no_competition_sources_when_overall_calculation
-    if scoring_class == "Overall Champion" && competition_sources.size > 0
+    if scoring_class == "Overall Champion" && competition_sources.size.positive?
       errors.add(:competiton_sources_attributes, "unable to specify competition sources when using Overall Champion")
     end
   end

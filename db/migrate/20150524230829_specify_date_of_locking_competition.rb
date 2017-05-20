@@ -11,7 +11,7 @@ class SpecifyDateOfLockingCompetition < ActiveRecord::Migration
   end
 
   def down
-    add_column :competitions, :locked, :boolean, defailt: false, null: false
+    add_column :competitions, :locked, :boolean, default: false, null: false
     add_column :competitions, :published, :boolean, default: false, null: false
 
     execute "UPDATE competitions SET locked = true WHERE locked_at IS NOT NULL"

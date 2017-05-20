@@ -39,7 +39,7 @@ class CreateCompetitionResults < ActiveRecord::Migration
     CompetitionResult.reset_column_information
     Competition.reset_column_information
 
-    if CompetitionResult.where(system_managed: false).count > 0
+    if CompetitionResult.where(system_managed: false).count.positive?
       raise "Unable to revert with non-system results"
     end
 

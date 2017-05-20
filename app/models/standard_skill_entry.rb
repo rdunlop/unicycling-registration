@@ -46,6 +46,7 @@ class StandardSkillEntry < ApplicationRecord
   def skill_speed_class
     case skill_speed
     when "Slow"
+      # no class
     when "Medium"
       "standard_skill_row--medium"
     when "Fast"
