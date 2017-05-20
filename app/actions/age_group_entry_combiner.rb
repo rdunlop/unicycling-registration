@@ -36,7 +36,7 @@ class AgeGroupEntryCombiner
   private
 
   def age_group_type
-    return nil unless first_age_group_entry.present?
+    return nil if first_age_group_entry.blank?
 
     first_age_group_entry.age_group_type
   end

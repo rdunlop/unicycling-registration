@@ -1,5 +1,5 @@
 class ConventionSetup::CouponCodesController < ConventionSetup::BaseConventionSetupController
-  before_action :load_coupon_code, except: [:index, :create]
+  before_action :load_coupon_code, except: %i[index create]
   before_action :authorize_setup
 
   before_action :set_breadcrumbs

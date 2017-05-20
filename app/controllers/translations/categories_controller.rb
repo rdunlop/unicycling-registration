@@ -6,8 +6,7 @@ class Translations::CategoriesController < Admin::TranslationsController
   end
 
   # GET /translations/categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations//categories/1
   def update
@@ -26,6 +25,6 @@ class Translations::CategoriesController < Admin::TranslationsController
   end
 
   def category_params
-    params.require(:category).permit(translations_attributes: [:id, :locale, :name])
+    params.require(:category).permit(translations_attributes: %i[id locale name])
   end
 end

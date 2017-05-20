@@ -256,8 +256,7 @@ class OverallChampionResultCalculator
     result
   end
 
-  def adjust_ties_by_tie_breaker(_scores)
-  end
+  def adjust_ties_by_tie_breaker(_scores); end
 
   def num_firsts(gender, bib_number)
     registrants(gender)[bib_number].count{ |comp| get_place(comp) == 1}

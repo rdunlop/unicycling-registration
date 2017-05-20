@@ -1,8 +1,7 @@
 class Translations::EventConfigurationsController < Admin::TranslationsController
   before_action :load_event_configuration
 
-  def edit
-  end
+  def edit; end
 
   def update
     @event_configuration.assign_attributes(translation_attributes)
@@ -19,8 +18,9 @@ class Translations::EventConfigurationsController < Admin::TranslationsControlle
   end
 
   def translation_attributes
-    params.require(:event_configuration).permit(translations_attributes: [
-                                                  :id, :locale, :short_name, :long_name, :location, :dates_description,
-                                                  :competitor_benefits, :noncompetitor_benefits, :spectator_benefits])
+    params.require(:event_configuration).permit(translations_attributes: %i[
+                                                  id locale short_name long_name location dates_description
+                                                  competitor_benefits noncompetitor_benefits spectator_benefits
+                                                ])
   end
 end

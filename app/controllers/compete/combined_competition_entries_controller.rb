@@ -3,7 +3,7 @@ class Compete::CombinedCompetitionEntriesController < ApplicationController
   before_action :authenticate_ability
 
   before_action :load_combined_competition
-  before_action :set_combined_competition_entry, only: [:edit, :update, :destroy]
+  before_action :set_combined_competition_entry, only: %i[edit update destroy]
 
   respond_to :html
 
@@ -18,8 +18,7 @@ class Compete::CombinedCompetitionEntriesController < ApplicationController
   end
 
   # GET /combined_competition_entries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /combined_competition_entries
   def create

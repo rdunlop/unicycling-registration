@@ -219,13 +219,11 @@ describe Registrants::BuildController do
                                              registrant_event_sign_ups_attributes: [
                                                { signed_up: "1",
                                                  event_category_id: @ev.event_categories.first.id,
-                                                 event_id: @ev.id
-                                               }
+                                                 event_id: @ev.id}
                                              ],
                                              registrant_choices_attributes: [
                                                { event_choice_id: @ec.id,
-                                                 value: "1"
-                                               }
+                                                 value: "1"}
                                              ])
       end
 
@@ -257,15 +255,13 @@ describe Registrants::BuildController do
                                              registrant_event_sign_ups_attributes: [
                                                { event_category_id: @ecat.id,
                                                  event_id: @ecat.event.id,
-                                                 signed_up: "1"
-                                           }
+                                                 signed_up: "1"}
                                              ])
         @new_attributes = valid_attributes.merge(registrant_type: 'competitor',
                                                  registrant_event_sign_ups_attributes: [
                                                    { event_category_id: @ecat.id,
                                                      event_id: @ecat.event.id,
-                                                     signed_up: "0"
-                                               }
+                                                     signed_up: "0"}
                                                  ])
       end
 

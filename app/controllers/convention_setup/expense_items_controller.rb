@@ -2,7 +2,7 @@ class ConventionSetup::ExpenseItemsController < ConventionSetup::BaseConventionS
   include SortableObject
 
   before_action :load_expense_group, except: :update_row_order
-  before_action :load_expense_item, except: [:index, :create]
+  before_action :load_expense_item, except: %i[index create]
   before_action :authorize_setup
 
   before_action :set_breadcrumbs
@@ -90,6 +90,6 @@ class ConventionSetup::ExpenseItemsController < ConventionSetup::BaseConventionS
   def expense_item_params
     params.require(:expense_item).permit(:cost, :name, :has_details,
                                          :has_custom_cost, :details_label, :maximum_available, :maximum_per_registrant, :tax,
-                                         translations_attributes: [:id, :locale, :name, :details_label])
+                                         translations_attributes: %i[id locale name details_label])
   end
 end

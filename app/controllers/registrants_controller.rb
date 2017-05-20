@@ -37,9 +37,9 @@ class RegistrantsController < ApplicationController
 
   before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
-  before_action :load_registrant_by_bib_number, only: [:show, :results, :refresh_usa_status, :copy_to_competitor, :copy_to_noncompetitor, :destroy, :waiver]
-  before_action :authorize_registrant, only: [:show, :destroy, :refresh_usa_status, :waiver]
-  before_action :authorize_logged_in, only: [:all, :empty_waiver, :subregion_options]
+  before_action :load_registrant_by_bib_number, only: %i[show results refresh_usa_status copy_to_competitor copy_to_noncompetitor destroy waiver]
+  before_action :authorize_registrant, only: %i[show destroy refresh_usa_status waiver]
+  before_action :authorize_logged_in, only: %i[all empty_waiver subregion_options]
   before_action :skip_authorization, only: [:results]
 
   before_action :set_registrants_breadcrumb

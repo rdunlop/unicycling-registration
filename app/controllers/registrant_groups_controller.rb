@@ -17,7 +17,7 @@ class RegistrantGroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_new_registrant_group, only: [:create]
 
-  before_action :load_registrant_group, only: [:address_labels, :edit, :show, :update, :destroy]
+  before_action :load_registrant_group, only: %i[address_labels edit show update destroy]
   before_action :authorize_user
 
   # GET /registrant_groups
@@ -71,8 +71,7 @@ class RegistrantGroupsController < ApplicationController
   end
 
   # GET /registrant_groups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /registrant_groups
   # POST /registrant_groups.json
@@ -130,6 +129,6 @@ class RegistrantGroupsController < ApplicationController
 
   def registrant_group_params
     params.require(:registrant_group).permit(:name, :registrant_id,
-                                             registrant_group_members_attributes: [:registrant_id, :_destroy, :id])
+                                             registrant_group_members_attributes: %i[registrant_id _destroy id])
   end
 end

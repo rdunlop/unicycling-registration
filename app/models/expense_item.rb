@@ -124,7 +124,7 @@ class ExpenseItem < ApplicationRecord
            else
              registrant_expense_items.includes(:registrant).joins(:registrant).merge(Registrant.active)
            end
-    reis.free.select{ |rei| !rei.registrant.reg_paid? } + reis.where(free: false)
+    reis.free.reject{ |rei| rei.registrant.reg_paid? } + reis.where(free: false)
   end
 
   def num_unpaid(include_incomplete_registrants: false)
@@ -161,7 +161,7 @@ class ExpenseItem < ApplicationRecord
   def check_for_payment_details
     if payment_details.count > 0
       errors.add(:base, "cannot delete expense_item containing a matching payment")
-      return false
+      false
     end
   end
 

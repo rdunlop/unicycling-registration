@@ -4,8 +4,7 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetup::BaseCo
   before_action :set_breadcrumb
   before_action :authorize_event_configuration
 
-  def edit
-  end
+  def edit; end
 
   def update
     @event_configuration.assign_attributes(event_configuration_params)
@@ -33,6 +32,7 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetup::BaseCo
   def event_configuration_params
     params.require(:event_configuration).permit(
       :artistic_score_elimination_mode_naucc,
-      :max_award_place)
+      :max_award_place
+    )
   end
 end

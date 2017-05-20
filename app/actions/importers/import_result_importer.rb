@@ -13,7 +13,6 @@ class Importers::ImportResultImporter < Importers::BaseImporter
         end
       end
     end
-
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid
     return false
@@ -32,7 +31,8 @@ class Importers::ImportResultImporter < Importers::BaseImporter
       raw_data: convert_array_to_string(raw),
       user: user,
       competition: competition,
-      is_start_time: is_start_time)
+      is_start_time: is_start_time
+    )
   end
 
   private

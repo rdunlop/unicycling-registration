@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   before_action :set_home_breadcrumb, unless: :rails_admin_controller?
 
   # after_action :verify_authorized, :except => :index
-  after_action :verify_authorized, unless: [:devise_controller?, :rails_admin_controller?]
+  after_action :verify_authorized, unless: %i[devise_controller? rails_admin_controller?]
 
   before_action :skip_authorization, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
            margin: {top: 15, bottom: 10, left: 7, right: 7},
            show_as_html: params[:debug].present?,
            footer: default_footer,
-           formats: [:pdf, :html],
+           formats: %i[pdf html],
            orientation: orientation,
            disposition: disposition,
            layout: layout_html
@@ -126,9 +126,9 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     if rails_admin_controller?
-      redirect_to(request.referrer || "/")
+      redirect_to(request.referer || "/")
     else
-      redirect_to(request.referrer || root_path)
+      redirect_to(request.referer || root_path)
     end
   end
 

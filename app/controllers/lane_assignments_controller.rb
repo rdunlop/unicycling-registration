@@ -18,12 +18,12 @@
 
 class LaneAssignmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_and_authorize_competition, except: [:edit, :update, :destroy]
-  before_action :load_lane_assignments, except: [:edit, :update, :destroy, :index, :create]
-  before_action :load_lane_assignment, only: [:edit, :update, :destroy]
-  before_action :authorize_competition, only: [:edit, :update, :destroy]
+  before_action :load_and_authorize_competition, except: %i[edit update destroy]
+  before_action :load_lane_assignments, except: %i[edit update destroy index create]
+  before_action :load_lane_assignment, only: %i[edit update destroy]
+  before_action :authorize_competition, only: %i[edit update destroy]
 
-  before_action :set_parent_breadcrumbs, only: [:index, :create]
+  before_action :set_parent_breadcrumbs, only: %i[index create]
 
   def review
     @heat_numbers = @lane_assignments.map(&:heat).uniq.sort

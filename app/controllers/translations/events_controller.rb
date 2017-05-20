@@ -6,8 +6,7 @@ class Translations::EventsController < Admin::TranslationsController
   end
 
   # GET /translations/events/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations/events/1
   def update
@@ -26,6 +25,6 @@ class Translations::EventsController < Admin::TranslationsController
   end
 
   def event_params
-    params.require(:event).permit(translations_attributes: [:id, :locale, :name])
+    params.require(:event).permit(translations_attributes: %i[id locale name])
   end
 end

@@ -59,6 +59,6 @@ describe Song do
     it { is_expected.to validate_presence_of(:event_id) }
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_uniqueness_of(:competitor_id).with_message("Cannot assign more than 1 song to the same competitor for this competition") }
-    it { is_expected.to validate_uniqueness_of(:event_id).scoped_to([:user_id, :registrant_id]).with_message("cannot have multiple songs associated. Remove and re-add.") }
+    it { is_expected.to validate_uniqueness_of(:event_id).scoped_to(%i[user_id registrant_id]).with_message("cannot have multiple songs associated. Remove and re-add.") }
   end
 end

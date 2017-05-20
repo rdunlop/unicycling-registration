@@ -23,9 +23,9 @@
 class AwardLabelsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_ability
-  before_action :load_award_label, only: [:edit, :update, :destroy]
+  before_action :load_award_label, only: %i[edit update destroy]
 
-  before_action :load_user, except: [:edit, :update, :destroy]
+  before_action :load_user, except: %i[edit update destroy]
 
   # GET /users/#/award_labels
   def index

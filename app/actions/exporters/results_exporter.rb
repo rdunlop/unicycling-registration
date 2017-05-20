@@ -8,11 +8,13 @@ class Exporters::ResultsExporter
     Result.includes(
       competitor: [competition: [],
                    members: [
-                     registrant: [:competition_wheel_sizes]],
+                     registrant: [:competition_wheel_sizes]
+                   ],
                    external_result: [],
                    time_results: [],
                    distance_attempts: [],
-                   scores: []]).all.find_each(batch_size: 100) do |result|
+                   scores: []]
+    ).all.find_each(batch_size: 100) do |result|
       data << [
         result.competitor.bib_number,
         result.competitor.to_s,

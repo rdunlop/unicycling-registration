@@ -8,6 +8,6 @@ class CreateTenantAliases < ActiveRecord::Migration
     end
 
     add_index :tenant_aliases, :website_alias
-    add_index :tenant_aliases, [:tenant_id, :primary_domain]
+    add_index :tenant_aliases, %i[tenant_id primary_domain]
   end
 end

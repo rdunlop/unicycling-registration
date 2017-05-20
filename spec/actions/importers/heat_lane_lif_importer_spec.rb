@@ -15,8 +15,7 @@ describe Importers::HeatLaneLifImporter do
              seconds: 35,
              thousands: 190,
              status: "active"
-           }
-          )
+           })
   end
 
   it "can process lif files" do

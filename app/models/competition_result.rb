@@ -17,7 +17,7 @@ class CompetitionResult < ApplicationRecord
   belongs_to :competition, inverse_of: :competition_results, touch: true
 
   validates :competition, :published_date, :results_file, presence: true
-  validates :system_managed, uniqueness: { scope: [:competition_id] }, if:  proc{ |f| f.system_managed? }
+  validates :system_managed, uniqueness: { scope: [:competition_id] }, if: proc{ |f| f.system_managed? }
 
   before_destroy :remove_uploaded_file
 

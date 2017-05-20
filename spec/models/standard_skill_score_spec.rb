@@ -65,8 +65,7 @@ describe StandardSkillScore do
                          wave: 1,
                          line: 2,
                          cross: 3,
-                         circle: 4
-                        )
+                         circle: 4)
     end
     let!(:standard_skill_score_entry_3) do
       FactoryGirl.create(:standard_skill_score_entry,
@@ -74,8 +73,7 @@ describe StandardSkillScore do
                          wave: 1,
                          line: 2,
                          cross: 3,
-                         circle: 4
-                        )
+                         circle: 4)
     end
 
     describe "#wave_count" do

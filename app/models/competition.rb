@@ -355,7 +355,7 @@ class Competition < ApplicationRecord
   end
 
   def expert_results_list(gender)
-    competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
+    competitors_with_results.select{|comp| comp.gender == gender}.sort_by(&:sorting_overall_place)
   end
 
   def results_list_for(ag_entry)

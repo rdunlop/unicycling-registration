@@ -19,8 +19,7 @@ class PaypalConfirmer
     unless Rails.env.test?
       response = http.post(uri.request_uri, @raw,
                            'Content-Length' => @raw.size.to_s,
-                           'User-Agent' => "My custom user agent"
-                          ).body
+                           'User-Agent' => "My custom user agent").body
 
       raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
       raise StandardError.new("Invalid IPN: #{response}") unless response == "VERIFIED"

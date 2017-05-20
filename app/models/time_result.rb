@@ -82,7 +82,7 @@ class TimeResult < ApplicationRecord
 
   def as_json(options = {})
     options = {
-      except: [:id, :created_at, :updated_at, :competitor_id],
+      except: %i[id created_at updated_at competitor_id],
       methods: [:bib_number]
     }
     super(options)

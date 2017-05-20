@@ -2,8 +2,7 @@ class ImportsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_action
 
-  def new
-  end
+  def new; end
 
   def create
     class_name = params[:class_name].constantize

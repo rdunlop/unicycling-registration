@@ -4,8 +4,7 @@ class Admin::BibNumbersController < ApplicationController
   before_action :authorize_admin
 
   # GET /bib_numbers
-  def index
-  end
+  def index; end
 
   def create
     registrant = Registrant.find(params[:registrant_id])

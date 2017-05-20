@@ -1,8 +1,8 @@
 class ConventionSetup::EventsController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
-  before_action :load_category, only: [:index, :create]
-  before_action :load_event, except: [:index, :create]
+  before_action :load_category, only: %i[index create]
+  before_action :load_event, except: %i[index create]
   before_action :authorize_setup
   before_action :set_categories_breadcrumb
   before_action :set_events_breadcrumb
@@ -82,8 +82,8 @@ class ConventionSetup::EventsController < ConventionSetup::BaseConventionSetupCo
   def event_params
     params.require(:event).permit(:category_id, :name, :cost, :visible, :artistic, :accepts_music_uploads,
                                   :accepts_wheel_size_override, :best_time_format, :standard_skill,
-                                  event_choices_attributes: [:cell_type, :label, :multiple_values, :id],
-                                  event_categories_attributes: [:name, :id])
+                                  event_choices_attributes: %i[cell_type label multiple_values id],
+                                  event_categories_attributes: %i[name id])
   end
 
   def load_category

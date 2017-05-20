@@ -18,7 +18,7 @@ class Feedback < ApplicationRecord
   belongs_to :user
   belongs_to :resolved_by, class_name: "User"
 
-  validates :status, inclusion: { in: %w(new resolved) }
+  validates :status, inclusion: { in: %w[new resolved] }
 
   validates :message, presence: true
   validates :entered_email, presence: true, unless: :signed_in?

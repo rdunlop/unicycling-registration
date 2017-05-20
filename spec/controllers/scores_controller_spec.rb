@@ -40,7 +40,8 @@ describe ScoresController do
 
     @signed_in_scores = [
       FactoryGirl.create(:score, judge: @judge, competitor: @comp, val_1: 3.22),
-      FactoryGirl.create(:score, judge: @judge, competitor: @comp2, val_1: 2.33)]
+      FactoryGirl.create(:score, judge: @judge, competitor: @comp2, val_1: 2.33)
+    ]
 
     # director
     @user.add_role :director, @judge.competition
@@ -56,8 +57,7 @@ describe ScoresController do
       val_2: 2.2,
       val_3: 3.3,
       val_4: 4.4,
-      notes: "hi"
-    }
+      notes: "hi"}
   end
 
   describe "GET index" do

@@ -13,8 +13,7 @@ describe Importers::WaveUpdater do
              process_row: {
                bib_number: "101",
                wave: "1"
-             }
-            )
+             })
     end
 
     it "updates the waves" do

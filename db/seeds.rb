@@ -1540,7 +1540,8 @@ if StandardSkillEntry.find_by(number: 1, letter: 'a').friendly_description.blank
       additional_description_id: additional_description_id,
       skill_speed: skill_speed_description,
       skill_before_id: skill_before_id,
-      skill_after_id: skill_after_id)
+      skill_after_id: skill_after_id
+    )
   end
 
   skill_data.each do |skill_data_row|

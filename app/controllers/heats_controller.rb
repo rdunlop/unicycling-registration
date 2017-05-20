@@ -2,7 +2,7 @@ class HeatsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
   before_action :set_parent_breadcrumbs
-  before_action :load_age_group_entry, only: [:sort, :set_sort]
+  before_action :load_age_group_entry, only: %i[sort set_sort]
   before_action :authorize_competition
 
   respond_to :html

@@ -6,7 +6,7 @@ class EnteredDataExporter::MaxDistance
   end
 
   def headers
-    %w(registrant_external_id distance)
+    %w[registrant_external_id distance]
   end
 
   def data

@@ -16,7 +16,7 @@ class AddVolunteerTable < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :volunteer_choices, [:registrant_id, :volunteer_opportunity_id], unique: true, name: "volunteer_choices_reg_vol_opt_unique"
+    add_index :volunteer_choices, %i[registrant_id volunteer_opportunity_id], unique: true, name: "volunteer_choices_reg_vol_opt_unique"
     add_index :volunteer_choices, [:registrant_id]
     add_index :volunteer_choices, [:volunteer_opportunity_id]
   end

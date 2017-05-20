@@ -72,15 +72,15 @@ Rails.application.routes.draw do
     get '/translations', to: 'admin/translations#index'
     delete '/translations/cache', to: 'admin/translations#clear_cache'
     namespace :translations do
-      resource :event_configuration, only: [:edit, :update]
-      resources :categories, only: [:index, :edit, :update]
-      resources :events, only: [:index, :edit, :update]
-      resources :event_categories, only: [:index, :edit, :update]
-      resources :event_choices, only: [:index, :edit, :update]
-      resources :pages, only: [:index, :edit, :update]
-      resources :expense_groups, only: [:index, :edit, :update]
-      resources :expense_items, only: [:index, :edit, :update]
-      resources :registration_costs, only: [:index, :edit, :update]
+      resource :event_configuration, only: %i[edit update]
+      resources :categories, only: %i[index edit update]
+      resources :events, only: %i[index edit update]
+      resources :event_categories, only: %i[index edit update]
+      resources :event_choices, only: %i[index edit update]
+      resources :pages, only: %i[index edit update]
+      resources :expense_groups, only: %i[index edit update]
+      resources :expense_items, only: %i[index edit update]
+      resources :registration_costs, only: %i[index edit update]
     end
 
     namespace :export do
@@ -93,7 +93,7 @@ Rails.application.routes.draw do
       get :download_competitors_for_timers
       get :results
     end
-    resource :import, only: [:new, :create]
+    resource :import, only: %i[new create]
 
     resources :standard_skill_entries, only: [:index]
 
@@ -109,7 +109,7 @@ Rails.application.routes.draw do
 
     resources :expense_groups, except: [:show], controller: "convention_setup/expense_groups" do
       post :update_row_order, on: :collection
-      resources :expense_items, except: [:new, :show], controller: "convention_setup/expense_items"
+      resources :expense_items, except: %i[new show], controller: "convention_setup/expense_items"
     end
 
     resources :expense_items, only: [], controller: "convention_setup/expense_items" do
@@ -137,7 +137,7 @@ Rails.application.routes.draw do
     get  "/payments/set_reg_fees", controller: "admin/reg_fees", action: :index, as: "set_reg_fees"
     post "/payments/update_reg_fee", controller: "admin/reg_fees", action: :update_reg_fee, as: "update_reg_fee"
 
-    resources :payments, except: [:index, :edit, :update, :destroy] do
+    resources :payments, except: %i[index edit update destroy] do
       collection do
         get :summary
         post :notification, controller: "paypal_payments"
@@ -158,12 +158,12 @@ Rails.application.routes.draw do
         post :pay
       end
     end
-    resources :manual_payments, only: [:new, :create], controller: "admin/manual_payments" do
+    resources :manual_payments, only: %i[new create], controller: "admin/manual_payments" do
       collection do
         get :choose
       end
     end
-    resources :manual_refunds, only: [:new, :create], controller: "admin/manual_refunds" do
+    resources :manual_refunds, only: %i[new create], controller: "admin/manual_refunds" do
       collection do
         get :choose
       end
@@ -197,7 +197,7 @@ Rails.application.routes.draw do
           end
         end
       end
-      resources :tenant_aliases, only: [:index, :create, :destroy] do
+      resources :tenant_aliases, only: %i[index create destroy] do
         member do
           get :verify
           post :activate
@@ -257,7 +257,7 @@ Rails.application.routes.draw do
         get :sign_ups
       end
       scope module: "competition_setup" do
-        resources :competitions, only: [:new, :create]
+        resources :competitions, only: %i[new create]
         concerns :competition_choosable
       end
     end
@@ -265,35 +265,35 @@ Rails.application.routes.draw do
       member do
         get :sign_ups
       end
-      resources :best_times, only: [:index, :update, :destroy]
+      resources :best_times, only: %i[index update destroy]
     end
 
     get '/convention_setup', to: 'convention_setup/convention_setup#index'
     get '/convention_setup/costs', to: 'convention_setup/convention_setup#costs'
     namespace :convention_setup do
-      resources :categories, except: [:new, :show] do
+      resources :categories, except: %i[new show] do
         post :update_row_order, on: :collection
-        resources :events, only: [:index, :create]
+        resources :events, only: %i[index create]
       end
-      resources :events, except: [:index, :new, :create] do
+      resources :events, except: %i[index new create] do
         post :update_row_order, on: :collection
 
-        resources :event_choices, only: [:index, :create] do
+        resources :event_choices, only: %i[index create] do
           post :update_row_order, on: :collection
         end
 
-        resources :event_categories, only: [:index, :create] do
+        resources :event_categories, only: %i[index create] do
           post :update_row_order, on: :collection
         end
       end
-      resources :event_choices, except: [:index, :create, :new, :show]
-      resources :event_categories, except: [:index, :create, :new, :show]
+      resources :event_choices, except: %i[index create new show]
+      resources :event_categories, except: %i[index create new show]
 
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
       end
       resources :pages do
-        resources :images, only: [:index, :create, :destroy]
+        resources :images, only: %i[index create destroy]
       end
     end
     scope "convention_setup", module: "convention_setup" do
@@ -302,11 +302,11 @@ Rails.application.routes.draw do
 
     get '/competition_setup', to: 'competition_setup#index'
     namespace :competition_setup do
-      resource :event_configuration, only: [:edit, :update]
+      resource :event_configuration, only: %i[edit update]
     end
 
     scope module: "competition_setup" do
-      resources :directors, only: [:index, :create, :destroy]
+      resources :directors, only: %i[index create destroy]
     end
 
     get '/onsite_registration', to: 'onsite_registration#index'
@@ -321,7 +321,7 @@ Rails.application.routes.draw do
     # backwards-compatible URL
     get '/registrants/:id/items', to: redirect('/registrants/%{id}/registrant_expense_items')
 
-    resources :emails, only: [:index, :create] do
+    resources :emails, only: %i[index create] do
       collection do
         get :list
         get :download
@@ -334,7 +334,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :feedback, only: [:index, :show, :new, :create] do
+      resources :feedback, only: %i[index show new create] do
         member do
           put :resolve
         end
@@ -358,14 +358,14 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :bib_numbers, only: [:index, :create]
+      resources :bib_numbers, only: %i[index create]
       resources :reports, only: [:index]
-      resources :competition_songs, only: [:show, :create], param: :competition_id do
+      resources :competition_songs, only: %i[show create], param: :competition_id do
         member do
           get :download_zip
         end
       end
-      resources :event_songs, only: [:index, :show, :create] do
+      resources :event_songs, only: %i[index show create] do
         collection do
           get :all
         end
@@ -379,8 +379,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :registrants, only: [:new, :show, :destroy] do
-      resources :build, controller: 'registrants/build', only: [:index, :show, :update, :create] do
+    resources :registrants, only: %i[new show destroy] do
+      resources :build, controller: 'registrants/build', only: %i[index show update create] do
         collection do
           post :create_from_previous
           delete :drop_event
@@ -401,13 +401,13 @@ Rails.application.routes.draw do
         post :copy_to_competitor
         post :copy_to_noncompetitor
       end
-      resources :registrant_expense_items, only: [:create, :destroy]
+      resources :registrant_expense_items, only: %i[create destroy]
       resources :standard_skill_routines, only: [:create]
       member do
         get :payments, to: "payments#registrant_payments"
       end
-      resources :songs, only: [:index, :create]
-      resources :competition_wheel_sizes, only: [:index, :create, :destroy]
+      resources :songs, only: %i[index create]
+      resources :competition_wheel_sizes, only: %i[index create destroy]
     end
 
     resources :songs, only: [:destroy] do
@@ -417,13 +417,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :standard_skill_routines, only: [:show, :index] do
+    resources :standard_skill_routines, only: %i[show index] do
       member do
         get :writing_judge
         get :difficulty_judge
         get :execution_judge
       end
-      resources :standard_skill_routine_entries, only: [:destroy, :create]
+      resources :standard_skill_routine_entries, only: %i[destroy create]
     end
     resources :standard_skill_entries, only: [:index]
 
@@ -447,7 +447,7 @@ Rails.application.routes.draw do
       end
     end
     # get "results", to: "results#index"
-    resource :feedback, only: [:new, :create]
+    resource :feedback, only: %i[new create]
     resource :welcome, only: [], controller: "welcome" do
       collection do
         get :changelog
@@ -465,14 +465,14 @@ Rails.application.routes.draw do
     resources :users, only: [] do
       resources :registrants, only: [:index]
       resources :payments, only: [:index]
-      resources :additional_registrant_accesses, only: [:index, :new, :create] do
+      resources :additional_registrant_accesses, only: %i[index new create] do
         collection do
           get :invitations
         end
       end
       resources :competition, only: [] do
         # resources :single_attempt_entries, only: [:index, :create]
-        resources :two_attempt_entries, only: [:index, :create] do
+        resources :two_attempt_entries, only: %i[index create] do
           collection do
             get :proof
             post :approve
@@ -504,7 +504,7 @@ Rails.application.routes.draw do
           patch :dq_single
         end
       end
-      resources :award_labels, shallow: true, except: [:new, :show] do
+      resources :award_labels, shallow: true, except: %i[new show] do
         collection do
           post :create_by_competition
           post :create_generic_by_competition
@@ -527,24 +527,24 @@ Rails.application.routes.draw do
         delete :decline
       end
     end
-    resources :import_results, only: [:edit, :update, :destroy]
-    resources :two_attempt_entries, only: [:edit, :update, :destroy]
+    resources :import_results, only: %i[edit update destroy]
+    resources :two_attempt_entries, only: %i[edit update destroy]
 
     ###############################################
     ### For event-data-gathering/reporting purposes
     ###############################################
 
-    resources :competitors, only: [:edit, :update, :destroy] do
+    resources :competitors, only: %i[edit update destroy] do
       put :withdraw, on: :member
       post :update_row_order, on: :collection
     end
 
     scope module: "compete" do
-      resources :ineligible_registrants, only: [:index, :create, :destroy]
+      resources :ineligible_registrants, only: %i[index create destroy]
     end
 
     scope module: "competition_setup" do
-      resources :competitions, only: [:edit, :update, :destroy]
+      resources :competitions, only: %i[edit update destroy]
     end
     resources :competitions, only: [:show] do
       member do
@@ -567,8 +567,8 @@ Rails.application.routes.draw do
         delete :award
         post :create_last_minute_competitor
       end
-      resources :competition_results, only: [:index, :create, :destroy]
-      resources :competitors, only: [:index, :new, :create] do
+      resources :competition_results, only: %i[index create destroy]
+      resources :competitors, only: %i[index new create] do
         collection do
           post :add
           post :add_all
@@ -581,10 +581,10 @@ Rails.application.routes.draw do
         end
       end
       scope module: "compete" do
-        resource :sign_ins, only: [:show, :edit, :update]
-        resource :wave_assignments, only: [:show, :update]
-        resource :tier_assignments, only: [:show, :update]
-        resources :wave_times, except: [:new, :show]
+        resource :sign_ins, only: %i[show edit update]
+        resource :wave_assignments, only: %i[show update]
+        resource :tier_assignments, only: %i[show update]
+        resources :wave_times, except: %i[new show]
         resource :age_groups, only: [:show] do
           member do
             post :duplicate_type
@@ -594,7 +594,7 @@ Rails.application.routes.draw do
       end
 
       resources :waves, only: [:index]
-      resources :heats, only: [:index, :new, :create] do
+      resources :heats, only: %i[index new create] do
         collection do
           # Track (LaneAssignments)
           delete :destroy_all
@@ -604,21 +604,21 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :data_entry_volunteers, only: [:index, :create]
-      resources :volunteers, only: [:index, :destroy] do
+      resources :data_entry_volunteers, only: %i[index create]
+      resources :volunteers, only: %i[index destroy] do
         collection do
           post ":volunteer_type", action: :create, as: :create
           delete ":volunteer_type", action: :destroy, as: :destroy
         end
       end
 
-      resources :judges, only: [:index, :create, :destroy] do
+      resources :judges, only: %i[index create destroy] do
         collection do
           post :copy_judges
         end
       end
-      resources :time_results, only: [:index, :create]
-      resources :lane_assignments, only: [:index, :create] do
+      resources :time_results, only: %i[index create]
+      resources :lane_assignments, only: %i[index create] do
         collection do
           get :view_heat
           post :dq_competitor
@@ -635,7 +635,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :heat_review, param: :heat, only: [:index, :show, :destroy] do
+      resources :heat_review, param: :heat, only: %i[index show destroy] do
         member do
           post :approve_heat
           post :import_lif
@@ -646,14 +646,14 @@ Rails.application.routes.draw do
           get :list
         end
       end
-      resources :heat_lane_results, shallow: true, only: [:edit, :update, :create, :destroy]
+      resources :heat_lane_results, shallow: true, only: %i[edit update create destroy]
       resources :heat_lane_judge_notes, only: [] do
         member do
           put :merge
         end
       end
-      resources :external_results, shallow: true, except: [:new, :show]
-      resources :preliminary_external_results, shallow: true, except: [:new, :show] do
+      resources :external_results, shallow: true, except: %i[new show]
+      resources :preliminary_external_results, shallow: true, except: %i[new show] do
         collection do
           get :review
           post :approve
@@ -667,9 +667,9 @@ Rails.application.routes.draw do
         end
       end
     end
-    resources :lane_assignments, except: [:new, :index, :create, :show]
+    resources :lane_assignments, except: %i[new index create show]
 
-    resources :time_results, except: [:index, :new, :show, :create]
+    resources :time_results, except: %i[index new show create]
 
     resources :judges, only: [] do
       member do
@@ -677,22 +677,22 @@ Rails.application.routes.draw do
       end
 
       resources :competitors, only: [] do
-        resources :scores, only: [:new, :create]
+        resources :scores, only: %i[new create]
 
         # display chosen competitors current scores, and update them
-        resources :standard_skill_scores, only: [:new, :create, :edit, :update, :destroy]
+        resources :standard_skill_scores, only: %i[new create edit update destroy]
       end
 
       # choose the desired competitor to add scores to
       resources :scores, only: [:index]
       resources :standard_skill_scores, only: [:index]
-      resources :distance_attempts, only: [:index, :create] do
+      resources :distance_attempts, only: %i[index create] do
         collection do
           get :competitor_details
         end
       end
-      resources :tie_break_adjustments, only: [:index, :create]
-      resources :street_scores, only: [:index, :destroy] do
+      resources :tie_break_adjustments, only: %i[index create]
+      resources :street_scores, only: %i[index destroy] do
         collection do
           post :update_order
           post :set_rank
@@ -703,12 +703,12 @@ Rails.application.routes.draw do
     resources :tie_break_adjustments, only: [:destroy]
   end
 
-  resources :admin_upgrades, only: [:new, :create]
-  resources :tenants, only: [:index, :new, :create]
+  resources :admin_upgrades, only: %i[new create]
+  resources :tenants, only: %i[index new create]
 
   namespace :sample_data do
-    resources :registrants, only: [:index, :create]
-    resources :competitions, only: [:index, :create]
+    resources :registrants, only: %i[index create]
+    resources :competitions, only: %i[index create]
   end
 
   namespace :example do

@@ -6,7 +6,7 @@ class UpdateUsaMembershipStatusWorker
 
   # Query the USA membership API, and update the registrant record with the result
   def perform(registrant_id)
-    return unless server.present?
+    return if server.blank?
     return unless event_is_usa?
 
     Rails.logger.debug "USA membership check for #{registrant_id}"

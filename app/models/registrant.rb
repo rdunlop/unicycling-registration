@@ -129,13 +129,13 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # necessary for comp/non-comp only (not spectators):
   with_options if: :comp_noncomp_past_step_1? do
     validates :birthday, :gender, presence: true
-    validates :gender, inclusion: {in: %w(Male Female), message: "%{value} must be either 'Male' or 'Female'"}
+    validates :gender, inclusion: {in: %w[Male Female], message: "%{value} must be either 'Male' or 'Female'"}
     validate  :gender_present
     before_validation :set_age
     validates :age, presence: true
   end
 
-  with_options if: [:registrants_should_specify_default_wheel_size?, :comp_noncomp_past_step_1?] do
+  with_options if: %i[registrants_should_specify_default_wheel_size? comp_noncomp_past_step_1?] do
     before_validation :set_default_wheel_size
     validates :default_wheel_size, presence: true
     validate :check_default_wheel_size_for_age
@@ -648,9 +648,9 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def set_default_wheel_size
     if default_wheel_size.nil?
       if young_enough_to_choose_wheel_size?
-        self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
+        self.default_wheel_size = WheelSize.find_by(description: "20\" Wheel")
       else
-        self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
+        self.default_wheel_size = WheelSize.find_by(description: "24\" Wheel")
       end
     end
   end

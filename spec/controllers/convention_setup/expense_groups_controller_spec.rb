@@ -20,7 +20,8 @@ describe ConventionSetup::ExpenseGroupsController do
         "1" => {
           "locale" => "en",
           "group_name" => "group_en"
-        }}
+        }
+      }
     }
   end
 

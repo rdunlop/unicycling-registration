@@ -1,7 +1,6 @@
 class SampleData::CompetitionsController < SampleData::BaseController
   # GET /sample_data/competitions
-  def index
-  end
+  def index; end
 
   # Create a fake competition
   # POST /sample_data/competitions

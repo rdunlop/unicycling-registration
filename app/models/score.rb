@@ -24,7 +24,7 @@ class Score < ApplicationRecord
   include Judgeable
 
   def self.score_fields
-    [:val_1, :val_2, :val_3, :val_4]
+    %i[val_1 val_2 val_3 val_4]
   end
 
   score_fields.each do |sym|

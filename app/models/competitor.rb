@@ -66,7 +66,7 @@ class Competitor < ApplicationRecord
   validates :tier_number, presence: true
   validates :tier_number, numericality: { greater_than_or_equal_to: 1, less_than: 10 }
 
-  enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
+  enum status: %i[active not_qualified dns withdrawn dnf]
   after_save :touch_members
   after_save :update_age_group_entry
   after_touch :update_age_group_entry
@@ -107,7 +107,7 @@ class Competitor < ApplicationRecord
   end
 
   def must_have_3_members_for_custom_name
-    if (members.size < 3) && !custom_name.blank?
+    if (members.size < 3) && custom_name.present?
       errors.add(:base, "Must have at least 3 members to specify a custom name")
     end
   end
@@ -466,7 +466,7 @@ class Competitor < ApplicationRecord
     res << "Geared" if geared
     res << "#{riding_wheel_size}\"" if riding_wheel_size
     res << "#{riding_crank_size}mm" if riding_crank_size
-    res << notes unless notes.blank?
+    res << notes if notes.present?
     res.join(", ")
   end
 

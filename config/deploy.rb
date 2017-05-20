@@ -1,14 +1,14 @@
 set :eye_env, -> { {rails_env: fetch(:rails_env)} }
 set :application, 'unicycling-registration'
 set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
-set :stages, %w(prod)
+set :stages, %w[prod]
 
 # Default value for :linked_files is []
-set :linked_files, %w(config/eye.yml config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt)
+set :linked_files, %w[config/eye.yml config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt]
 
 # Default value for linked_dirs is []
 # .well-known is for letsencrypt
-set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known)
+set :linked_dirs, %w[bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known]
 
 namespace :deploy do
   task install_translations: [:set_rails_env] do
@@ -42,9 +42,9 @@ namespace :translation do
   end
 end
 
-set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
+set :whenever_command,      ->{ %i[bundle exec whenever] }
 set :whenever_environment,  ->{ fetch :rails_env }
 set :whenever_identifier,   ->{ fetch :application }
-set :whenever_roles,        ->{ [:db, :app] }
+set :whenever_roles,        ->{ %i[db app] }
 
 set :deploytag_time_format, "%Y%m%d%H%M%S"

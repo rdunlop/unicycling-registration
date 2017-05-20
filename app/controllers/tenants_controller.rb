@@ -16,8 +16,7 @@ class TenantsController < ApplicationController
   before_action :skip_authorization
   layout "global"
 
-  def index
-  end
+  def index; end
 
   def new
     @new_tenant = Tenant.new

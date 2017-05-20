@@ -33,7 +33,8 @@ class HeatAssignmentCreator
         competitor: competitor,
         heat: heat_lane_list[i][:heat],
         lane: heat_lane_list[i][:lane],
-        competition: competitor.competition)
+        competition: competitor.competition
+      )
     end
   end
 

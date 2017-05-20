@@ -10,7 +10,8 @@ class UpgradeJudgingTypesToNewRules < ActiveRecord::Migration
         val_1_max: 10,
         val_2_max: 15,
         val_3_max: 15,
-        val_4_max: 10)
+        val_4_max: 10
+      )
       jt.save!
     end
 
