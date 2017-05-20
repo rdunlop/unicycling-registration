@@ -56,4 +56,5 @@
         = link_to export_download_competitors_for_timers_path do
           Download All competitors in CSV (file)
           / Add Icon here
-      %li= link_to "Download Data file(s) for Timers", competition_heat_exports_path(competition)
+  - if policy(competition).heat_recording?
+    %li= link_to "Download Data file(s) for Timers", competition_heat_exports_path(competition)
