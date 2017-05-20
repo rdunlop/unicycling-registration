@@ -25,7 +25,7 @@ class Tenant < ApplicationRecord
   accepts_nested_attributes_for :tenant_aliases, allow_destroy: true
 
   def self.find_tenant_by_hostname(hostname)
-    TenantAlias.find_by(website_alias: hostname).try(:tenant) || find_by(first_subdomain: hostname)
+    TenantAlias.find_by(website_alias: hostname).try(:tenant) || by_first_subdomain(hostname)
   end
 
   def to_s
@@ -41,7 +41,7 @@ class Tenant < ApplicationRecord
     "#{subdomain}.#{Rails.application.secrets.domain}"
   end
 
-  def self.find_by_first_subdomain(hostname)
+  def self.by_first_subdomain(hostname)
     find_by(subdomain: hostname.split('.')[0])
   end
 
