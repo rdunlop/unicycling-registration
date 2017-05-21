@@ -6,6 +6,3 @@ en:
         header: Payment Settings
         description: |
           If you would like to receive payment via PayPal, enter your paypal account e-mail here.
-          You will also need to set up an IPN so that the registration website is informed of
-          payments.
-        ipn_url: The URL for the IPN should be %{url}
