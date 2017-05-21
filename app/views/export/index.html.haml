@@ -1,7 +1,7 @@
 %h1 Export Menu
 
 %hr
-- if policy(:export).download_payment_details?
+- if policy(:export).download_payment_details? && ExpenseItem.any?
   = simple_form_for :data, :url => export_download_payment_details_path(:format => :xls), :method => :get do |f|
     .row
       .small-4.columns
