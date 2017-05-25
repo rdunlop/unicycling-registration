@@ -104,7 +104,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
-    airbrussh (1.1.2)
+    airbrussh (1.2.0)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
@@ -143,18 +143,16 @@ GEM
     bullet (5.5.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
-    capistrano (3.6.1)
+    capistrano (3.8.1)
       airbrussh (>= 1.0.0)
-      capistrano-harrow
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
     capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-deploytags (1.0.6)
-      capistrano (>= 3.2.0)
-    capistrano-harrow (0.5.3)
+    capistrano-deploytags (1.0.7)
+      capistrano (>= 3.7.0)
     capistrano-rails (1.2.2)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -338,7 +336,7 @@ GEM
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (4.0.1)
+    net-ssh (4.1.0)
     newrelic_rpm (3.18.1.330)
     nio4r (2.0.0)
     nokogiri (1.7.2)
@@ -533,7 +531,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.11.5)
+    sshkit (1.13.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     state_machines (0.4.0)
@@ -599,7 +597,7 @@ DEPENDENCIES
   aws-sdk-rails
   breadcrumbs_on_rails
   bullet
-  capistrano (= 3.6.1)
+  capistrano
   capistrano-bundler
   capistrano-deploytags
   capistrano-rails
