@@ -602,7 +602,6 @@ DEPENDENCIES
   breadcrumbs_on_rails
   bullet
   capistrano
-  capistrano-bundler
   capistrano-deploytags
   capistrano-rails
   capistrano-rvm

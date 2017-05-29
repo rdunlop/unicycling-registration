@@ -17,7 +17,7 @@ class AgeGroupType < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   has_many :age_group_entries, -> {order "age_group_entries.position"}, dependent: :destroy, inverse_of: :age_group_type
-  has_many :competitions, dependent: :nullify
+  has_many :competitions, dependent: :restrict_with_error
 
   accepts_nested_attributes_for :age_group_entries, allow_destroy: true
   validates_uniqueness :age_group_entries, attribute_name: :short_description

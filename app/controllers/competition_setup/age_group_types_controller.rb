@@ -41,8 +41,12 @@ class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetit
   end
 
   def destroy
-    @age_group_type.destroy
-    respond_with(@age_group_type)
+    if @age_group_type.destroy
+      flash[:notice] = "Age Group deleted"
+    else
+      flash[:alert] = "Unable to delete age group (in use)"
+    end
+    redirect_to age_group_types_path
   end
 
   def edit; end
