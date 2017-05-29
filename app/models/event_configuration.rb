@@ -117,7 +117,7 @@ class EventConfiguration < ApplicationRecord
 
   validates :paypal_mode, inclusion: { in: paypal_modes }
 
-  before_validation :clear_of_blank_strings
+  nilify_blanks only: %i(rulebook_url event_url), before: :validation
 
   mount_uploader :rules_file_name, PdfUploader
 
@@ -350,11 +350,6 @@ class EventConfiguration < ApplicationRecord
   def is_date_in_the_past?(date)
     return false if date.nil?
     date < Date.today
-  end
-
-  def clear_of_blank_strings
-    self.rulebook_url = nil if rulebook_url.blank?
-    self.event_url = nil if event_url.blank?
   end
 
   def benefits_list(text)

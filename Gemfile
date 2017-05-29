@@ -79,6 +79,7 @@ gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
+gem 'nilify_blanks'
 gem 'validates_email_format_of'
 gem 'virtus'
 gem "wicked"
@@ -88,12 +89,11 @@ gem 'faker' # to support 'sample_data'
 gem 'pg'
 
 # deployment
-gem 'capistrano', '=3.6.1' # 3.7.1 seems to cause a deploy error on production (strategy)
-gem 'capistrano-bundler'
+gem 'capistrano', require: false
 gem "capistrano-deploytags", require: false
-gem 'capistrano-rails'
-gem 'capistrano-rvm'
-gem 'capistrano3-unicorn'
+gem 'capistrano-rails', require: false
+gem 'capistrano-rvm', require: false
+gem 'capistrano3-unicorn', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
