@@ -81,7 +81,6 @@ class Competition < ApplicationRecord
     ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing", "Swiss Track"]
   end
 
-  before_validation :clear_data_types_of_strings
   validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }
 
   def self.scoring_classes
@@ -110,7 +109,7 @@ class Competition < ApplicationRecord
   def self.num_member_options
     ["One", "Two", "Three or more"]
   end
-  before_validation :clear_num_members_per_compeititor_of_strings
+  nilify_blanks only: %i(num_members_per_competitor time_entry_columns start_data_type end_data_type), before: :validation
   validates :num_members_per_competitor, inclusion: { in: num_member_options, allow_nil: true }
 
   validate :automatic_competitor_creation_only_with_one
@@ -124,7 +123,7 @@ class Competition < ApplicationRecord
   validates :combined_competition, absence: true, unless: proc{ |f| f.scoring_class == "Overall Champion" }
 
   TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "hours_minutes_seconds"].freeze
-  validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }
+  validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }, allow_nil: true
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
@@ -483,15 +482,6 @@ class Competition < ApplicationRecord
 
   def no_source_selected(attributes)
     attributes['event_category_id'].blank? && attributes['competition_id'].blank?
-  end
-
-  def clear_num_members_per_compeititor_of_strings
-    self.num_members_per_competitor = nil if num_members_per_competitor == ""
-  end
-
-  def clear_data_types_of_strings
-    self.start_data_type = nil if start_data_type == ""
-    self.end_data_type = nil if end_data_type == ""
   end
 
   def published_only_when_locked
