@@ -3,6 +3,6 @@ de:
   convention_setup:
     event_configurations:
       payment_settings:
-        description: "Wenn du Zahlungen via PayPal empfangen möchtest, trage hier
-          deine paypal account email adresse ein."
+        description: Wenn du Zahlungen via PayPal empfangen möchtest, trage hier deine
+          paypal account email adresse ein.
         header: Zahlungs Einstellungen

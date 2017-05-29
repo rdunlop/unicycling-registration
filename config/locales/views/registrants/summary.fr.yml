@@ -2,7 +2,7 @@
 fr:
   registrants:
     summary:
-      age: "Âge"
+      age: Âge
       birthday: Date de naissance
       default_wheel_size: Default Wheel Size
       gender: Sexe

@@ -3,6 +3,6 @@ fr:
   activerecord:
     attributes:
       representation_type:
-        club: "Équipe"
+        club: Équipe
         country: Pays
         state: Etat

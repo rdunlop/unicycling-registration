@@ -11,5 +11,5 @@ fr:
         visible: Visible
     models:
       event:
-        one: "Événement"
-        other: "Événements"
+        one: Événement
+        other: Événements
