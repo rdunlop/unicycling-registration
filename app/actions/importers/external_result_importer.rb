@@ -13,7 +13,6 @@ class Importers::ExternalResultImporter < Importers::BaseImporter
         end
       end
     end
-
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid
     return false
@@ -22,11 +21,12 @@ class Importers::ExternalResultImporter < Importers::BaseImporter
   # from CSV to import_result
   def build_and_save_imported_result(row_hash, user, competition)
     ExternalResult.preliminary.create(
-      competitor: CompetitorFinder.new(competition).find_by_bib_number(row_hash[:bib_number]),
+      competitor: CompetitorFinder.new(competition).find_by(bib_number: row_hash[:bib_number]),
       points: row_hash[:points],
       details: row_hash[:details],
       status: row_hash[:status],
       entered_at: DateTime.current,
-      entered_by: user)
+      entered_by: user
+    )
   end
 end

@@ -6,8 +6,7 @@ class Translations::RegistrationCostsController < Admin::TranslationsController
   end
 
   # GET /translations/registration_costs/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations/registration_costs/1
   def update
@@ -26,6 +25,6 @@ class Translations::RegistrationCostsController < Admin::TranslationsController
   end
 
   def registration_cost_params
-    params.require(:registration_cost).permit(translations_attributes: [:id, :locale, :name])
+    params.require(:registration_cost).permit(translations_attributes: %i[id locale name])
   end
 end

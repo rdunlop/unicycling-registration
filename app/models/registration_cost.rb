@@ -55,7 +55,7 @@ class RegistrationCost < ApplicationRecord
 
   def self.relevant_period(registrant_type, date)
     rp_id = Rails.cache.fetch("/registration_cost/by_date/#{registrant_type}/#{date}")
-    cached_rp = find_by_id(rp_id)
+    cached_rp = find_by(id: rp_id)
     return cached_rp unless cached_rp.nil?
 
     RegistrationCost.for_type(registrant_type).includes(registration_cost_entries: :expense_item).each do |rp|

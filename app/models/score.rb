@@ -24,7 +24,7 @@ class Score < ApplicationRecord
   include Judgeable
 
   def self.score_fields
-    [:val_1, :val_2, :val_3, :val_4]
+    %i[val_1 val_2 val_3 val_4]
   end
 
   score_fields.each do |sym|
@@ -38,7 +38,7 @@ class Score < ApplicationRecord
   delegate :judge_score_calculator, to: :competition
 
   def display_score?(score_number)
-    judge_type.send("val_#{score_number}_max") > 0
+    judge_type.send("val_#{score_number}_max").positive?
   end
 
   # Sum of all entered values for this score.

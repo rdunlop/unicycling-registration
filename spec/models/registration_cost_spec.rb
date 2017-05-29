@@ -74,7 +74,7 @@ describe RegistrationCost do
   describe "with existing periods" do
     let!(:comp_registration_cost1) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
     let!(:noncomp_registration_cost1) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
-    let!(:comp_registration_cost2) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 02, 3), end_date: Date.new(2012, 4, 4)) }
+    let!(:comp_registration_cost2) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 0o2, 3), end_date: Date.new(2012, 4, 4)) }
     let!(:noncomp_registration_cost2) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 2, 3), end_date: Date.new(2012, 4, 4)) }
 
     it "can retrieve only the competitor periods" do

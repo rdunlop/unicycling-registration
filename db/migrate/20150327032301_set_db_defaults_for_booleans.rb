@@ -1,5 +1,5 @@
 class SetDbDefaultsForBooleans < ActiveRecord::Migration
-  def change
+  def up
     change_column_default :additional_registrant_accesses, :declined, false
     change_column_default :additional_registrant_accesses, :accepted_readonly, false
     change_column_null :additional_registrant_accesses, :declined, false
@@ -92,5 +92,9 @@ class SetDbDefaultsForBooleans < ActiveRecord::Migration
     change_column_null :time_results, :is_start_time, false, false
     change_column_null :two_attempt_entries, :is_start_time, false, false
     change_column_null :users, :guest, false, false
+  end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
   end
 end

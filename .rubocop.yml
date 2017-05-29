@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.4
   Exclude:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
@@ -27,4 +27,22 @@ Style/StringLiterals:
 Metrics/LineLength:
   # I would like to support this, but it's quite violated currently
   # Max: 120
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+# Until Rubocop > 0.48.1, this has a bug:
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+# We do a lot of this, but on purpose
+Rails/SkipsModelValidations:
+  Enabled: false
+
+# I like my variable names just fine thanks.
+Style/VariableNumber:
   Enabled: false

@@ -30,15 +30,15 @@ class RegistrantChoice < ApplicationRecord
   def has_value?
     case event_choice.cell_type
     when "boolean"
-      return value != "0"
+      value != "0"
     when "multiple"
-      return value != ""
+      value != ""
     when "text"
-      return value != ""
+      value != ""
     when "best_time"
-      return value != ""
+      value != ""
     else
-      return false
+      false
     end
   end
 

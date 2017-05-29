@@ -1,9 +1,9 @@
 class Printing::CompetitionsController < ApplicationController
-  before_action :authenticate_user!, except: [:announcer, :start_list]
+  before_action :authenticate_user!, except: %i[announcer start_list]
   before_action :load_competition
-  before_action :skip_authorization, only: [:announcer, :start_list]
+  before_action :skip_authorization, only: %i[announcer start_list]
 
-  before_action :set_breadcrumbs, only: [:announcer, :results]
+  before_action :set_breadcrumbs, only: %i[announcer results]
 
   def announcer
     add_breadcrumb "Competitor List"

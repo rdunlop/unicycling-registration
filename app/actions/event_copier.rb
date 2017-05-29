@@ -74,7 +74,7 @@ class EventCopier
           new_ec.optional_if_event_choice = new_event.event_choices.find_by(label: optional_ec.label)
           new_ec.save
         end
-        next unless ec.required_if_event_choice_id.present?
+        next if ec.required_if_event_choice_id.blank?
 
         required_ec = source_event.event_choices.find { |search_ec| search_ec.id == ec.required_if_event_choice_id }
         new_ec.required_if_event_choice = new_event.event_choices.find_by(label: required_ec.label)

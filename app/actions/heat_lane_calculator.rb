@@ -52,7 +52,7 @@ class HeatLaneCalculator
   # of competitors for that heat.
   # it should be as balanced as possible
   def competitors_per_heat(num_competitors)
-    return [] if num_competitors == 0
+    return [] if num_competitors.zero?
     num_heats = (num_competitors.to_f / num_lanes).ceil
 
     # uses the Rails `in_groups` function to equally split into num_heats

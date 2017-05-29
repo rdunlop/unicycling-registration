@@ -7,7 +7,7 @@ class CreateStandardSkillScores < ActiveRecord::Migration
     end
 
     add_index :standard_skill_scores, [:competitor_id]
-    add_index :standard_skill_scores, [:judge_id, :competitor_id]
+    add_index :standard_skill_scores, %i[judge_id competitor_id]
 
     create_table :standard_skill_score_entries do |t|
       t.integer :standard_skill_score_id, null: false
@@ -20,7 +20,7 @@ class CreateStandardSkillScores < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :standard_skill_score_entries, [:standard_skill_score_id, :standard_skill_routine_entry_id], unique: true, name: "standard_skill_entries_unique"
+    add_index :standard_skill_score_entries, %i[standard_skill_score_id standard_skill_routine_entry_id], unique: true, name: "standard_skill_entries_unique"
 
     drop_table :standard_difficulty_scores
     drop_table :standard_execution_scores

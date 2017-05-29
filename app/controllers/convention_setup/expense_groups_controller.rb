@@ -2,7 +2,7 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetup::BaseConvention
   include SortableObject
 
   before_action :authorize_permissions
-  before_action :load_expense_group, only: [:edit, :update, :destroy]
+  before_action :load_expense_group, only: %i[edit update destroy]
   before_action :set_breadcrumbs
 
   # GET /expense_groups
@@ -76,6 +76,6 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetup::BaseConvention
   def expense_group_params
     params.require(:expense_group).permit(:group_name, :info_url, :info_page_id,
                                           :competitor_free_options, :noncompetitor_free_options,
-                                          :competitor_required, :noncompetitor_required, translations_attributes: [:id, :locale, :group_name])
+                                          :competitor_required, :noncompetitor_required, translations_attributes: %i[id locale group_name])
   end
 end

@@ -2,7 +2,7 @@ class Admin::FeedbackController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_user
 
-  before_action :load_feedback, only: [:show, :resolve]
+  before_action :load_feedback, only: %i[show resolve]
   before_action :add_index_breadcrumb, except: [:index]
 
   # GET /admin/feedback/
@@ -34,8 +34,7 @@ class Admin::FeedbackController < ApplicationController
   end
 
   # GET /admin/feedback/:id
-  def show
-  end
+  def show; end
 
   # PUT /admin/feedback/:id
   def resolve

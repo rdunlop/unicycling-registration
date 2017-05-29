@@ -2,7 +2,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetup::BaseC
   include SortableObject
 
   before_action :authorize_setup
-  before_action :load_volunteer_opportunity, except: [:index, :new, :create]
+  before_action :load_volunteer_opportunity, except: %i[index new create]
   before_action :add_breadcrumbs
 
   def index

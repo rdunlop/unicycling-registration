@@ -16,7 +16,7 @@ class Importers::WaveUpdater < Importers::BaseImporter
           self.num_rows_processed += 1
         end
       end
-    rescue ActiveRecord::RecordInvalid, Exception => invalid
+    rescue ActiveRecord::RecordInvalid, StandardException => invalid
       @errors = "Error #{invalid}"
       return false
     end

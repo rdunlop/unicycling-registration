@@ -22,7 +22,7 @@ class LaneAssignment < ApplicationRecord
   include CompetitorAutoCreation
 
   validates :competition, :competitor, :heat, :lane, presence: true
-  validates :heat, uniqueness: {scope: [:competition_id, :lane] }
+  validates :heat, uniqueness: {scope: %i[competition_id lane] }
 
   default_scope { order(:heat, :lane) }
 

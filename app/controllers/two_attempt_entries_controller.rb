@@ -27,13 +27,13 @@ class TwoAttemptEntriesController < ApplicationController
   include IsStartTimeAction
 
   before_action :authenticate_user!
-  before_action :load_user, only: [:index, :create, :proof, :approve, :display_csv, :import_csv]
-  before_action :load_competition, only: [:index, :proof, :create, :approve, :display_csv, :import_csv]
+  before_action :load_user, only: %i[index create proof approve display_csv import_csv]
+  before_action :load_competition, only: %i[index proof create approve display_csv import_csv]
   before_action :load_new_two_attempt_entry, only: [:create]
-  before_action :set_is_start_time, only: [:index, :proof, :approve, :display_csv, :import_csv]
-  before_action :load_two_attempt_entries, only: [:index, :proof, :approve, :display_csv]
+  before_action :set_is_start_time, only: %i[index proof approve display_csv import_csv]
+  before_action :load_two_attempt_entries, only: %i[index proof approve display_csv]
 
-  before_action :load_two_attempt_entry, only: [:edit, :update, :destroy]
+  before_action :load_two_attempt_entry, only: %i[edit update destroy]
   before_action :authorize_data_entry, except: [:index]
 
   before_action :set_breadcrumbs
@@ -52,8 +52,7 @@ class TwoAttemptEntriesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     respond_to do |format|
@@ -101,7 +100,6 @@ class TwoAttemptEntriesController < ApplicationController
 
   # POST /users/#/competitions/#/two_attempt_entries/import_csv?is_start_times=true
   def import_csv
-    success = false
     importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
     parser = if params[:advanced]
                Importers::Parsers::TwoAttemptSlalom.new
@@ -168,8 +166,7 @@ class TwoAttemptEntriesController < ApplicationController
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
                                               first_attempt: [*HoursFacade::PERMITTED_PARAMS, :status],
-                                              second_attempt: [*HoursFacade::PERMITTED_PARAMS, :status]
-                                             )
+                                              second_attempt: [*HoursFacade::PERMITTED_PARAMS, :status])
   end
 
   def load_competition

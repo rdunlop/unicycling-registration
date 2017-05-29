@@ -6,7 +6,7 @@ class EnteredDataExporter::Time
   end
 
   def headers
-    %w(registrant_external_id gender age heat lane thousands result)
+    %w[registrant_external_id gender age heat lane thousands result]
   end
 
   def data

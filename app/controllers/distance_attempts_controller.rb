@@ -18,14 +18,14 @@
 
 class DistanceAttemptsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_and_authorize_judge, only: [:index, :create, :new, :competitor_details]
+  before_action :load_and_authorize_judge, only: %i[index create new competitor_details]
   before_action :load_distance_attempt, only: [:destroy]
 
-  before_action :load_competition, only: [:index, :create]
+  before_action :load_competition, only: %i[index create]
   before_action :skip_authorization, only: :competitor_details
-  before_action :load_new_distance_attempt, only: [:index, :competitor_details]
+  before_action :load_new_distance_attempt, only: %i[index competitor_details]
 
-  before_action :set_judge_breadcrumb, only: [:index, :create]
+  before_action :set_judge_breadcrumb, only: %i[index create]
 
   respond_to :html
   # feature "check competitor status"

@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   has_paper_trail meta: {user_id: :id }
 
-  has_many :registrants, -> { includes [:registrant_expense_items, :payment_details] }
+  has_many :registrants, -> { includes %i[registrant_expense_items payment_details] }
 
   has_many :additional_registrant_accesses, dependent: :destroy
   has_many :invitations, through: :registrants, class_name: "AdditionalRegistrantAccess", source: :additional_registrant_accesses
@@ -86,8 +86,8 @@ class User < ApplicationRecord
   # NOTE: When adding roles Please be sure to add a description in the permissions/index.en.yml
   def self.roles
     # these should be sorted in order of least-priviledge -> Most priviledge
-    [:late_registrant, :export_payment_lists, :music_dj, :awards_admin, :event_planner, :translator,
-     :membership_admin, :competition_admin, :payment_admin, :convention_admin, :super_admin]
+    %i[late_registrant export_payment_lists music_dj awards_admin event_planner translator
+       membership_admin competition_admin payment_admin convention_admin super_admin]
   end
 
   # Public: List of roles available for easy-switching on the staging server
@@ -99,10 +99,10 @@ class User < ApplicationRecord
   def self.role_transfer_permissions
     {
       super_admin: [*roles],
-      convention_admin: [:convention_admin, :payment_admin, :event_planner, :music_dj, :membership_admin, :export_payment_lists, :competition_admin],
-      competition_admin: [:competition_admin, :awards_admin],
+      convention_admin: %i[convention_admin payment_admin event_planner music_dj membership_admin export_payment_lists competition_admin],
+      competition_admin: %i[competition_admin awards_admin],
       director: [],
-      payment_admin: [:payment_admin, :late_registrant, :export_payment_lists],
+      payment_admin: %i[payment_admin late_registrant export_payment_lists],
       event_planner: [:event_planner],
       music_dj: [:music_dj]
     }
@@ -127,7 +127,7 @@ class User < ApplicationRecord
   # Public: A list of all possible data-entry roles, what is used on each
   # competition is dependent upon the type of competition
   # NOTE: When adding a role here, please be sure to also add a description to the volunteers.manage_volunteer_type.en.yml
-  POSSIBLE_DATA_VOLUNTEERS = [:race_official, :data_recording_volunteer, :track_data_importer].freeze
+  POSSIBLE_DATA_VOLUNTEERS = %i[race_official data_recording_volunteer track_data_importer].freeze
 
   def self.data_entry_volunteer
     with_role(:data_entry_volunteer).reorder(:name)

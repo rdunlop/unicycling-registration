@@ -78,7 +78,8 @@ describe ConventionSetup::EventsController do
                                         event_categories_attributes: [
                                           {
                                             name: "The Categorie"
-                                          }] } }
+                                          }
+                                        ] } }
         ev = Event.last
         expect(ev.event_categories.first.name).to eq("The Categorie")
         expect(ev.event_categories.count).to eq(1)
@@ -151,7 +152,9 @@ describe ConventionSetup::EventsController do
                 cell_type: "boolean",
                 label: "My event Choice",
                 multiple_values: "m2"
-              }] } }
+              }
+            ]
+          } }
         end.to change(EventChoice, :count).by(1)
         ec = EventChoice.last
         expect(ec.cell_type).to eq("boolean")
@@ -167,7 +170,9 @@ describe ConventionSetup::EventsController do
               cell_type: "boolean",
               label: "My event Choice",
               multiple_values: "m2"
-            }] } }
+            }
+          ]
+        } }
         ec = EventChoice.last
 
         expect do
@@ -178,7 +183,9 @@ describe ConventionSetup::EventsController do
                 label: "new Label",
                 multiple_values: ec.multiple_values,
                 id: ec.id
-              }] } }
+              }
+            ]
+          } }
         end.to change(EventChoice, :count).by(0)
         ec.reload
         expect(ec.label).to eq("new Label")
@@ -199,7 +206,9 @@ describe ConventionSetup::EventsController do
               {
                 name: "New Name",
                 id: ecat.id
-              }] } }
+              }
+            ]
+          } }
         end.to change(EventCategory, :count).by(0)
         ecat.reload
         expect(ecat.name).to eq("New Name")

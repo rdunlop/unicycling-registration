@@ -1,8 +1,7 @@
 class PermissionsController < ApplicationController
   before_action :skip_authorization
 
-  def acl
-  end
+  def acl; end
 
   def set_acl
     if params[:access_key].to_i == modification_access_key
@@ -15,8 +14,7 @@ class PermissionsController < ApplicationController
     redirect_to acl_permissions_path
   end
 
-  def code
-  end
+  def code; end
 
   def use_code
     if code_is_valid(params[:registrant_id], params[:code])

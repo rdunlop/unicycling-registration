@@ -52,10 +52,10 @@ class JudgeType < ApplicationRecord
 
   def num_columns
     res = 0
-    res += 1 if val_1_max > 0
-    res += 1 if val_2_max > 0
-    res += 1 if val_3_max > 0
-    res += 1 if val_4_max > 0
+    res += 1 if val_1_max.positive?
+    res += 1 if val_2_max.positive?
+    res += 1 if val_3_max.positive?
+    res += 1 if val_4_max.positive?
     res
   end
 

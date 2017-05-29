@@ -40,7 +40,7 @@ class CompetitionsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
 
-  before_action :add_competition_setup_breadcrumb, only: [:show, :set_sort]
+  before_action :add_competition_setup_breadcrumb, only: %i[show set_sort]
 
   respond_to :html, :js
 

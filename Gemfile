@@ -11,51 +11,51 @@ gem 'pundit'
 gem 'rolify'
 
 # Output reports
+gem 'prawn-labels'
+gem 'spreadsheet'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'spreadsheet'
-gem 'prawn-labels'
 
 # Front-end
-gem 'simple_form'
-gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # necessary to be able to specify non-ISO3166 countries
-gem 'country_select'
-gem 'money-rails'
-gem 'select2-rails'
+gem "autoprefixer-rails"
 gem 'breadcrumbs_on_rails'
 gem 'cocoon' # for nested forms
+gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # necessary to be able to specify non-ISO3166 countries
+gem 'country_select'
 gem 'fancybox2-rails', github: 'rdunlop/fancybox2-rails', branch: "rails5" # for rails 5 support
-gem 'tinymce-rails'
-gem 'recaptcha', require: 'recaptcha/rails'
-gem 'jquery-datetimepicker-rails'
-gem "jc-validates_timeliness"
 gem 'foundation-rails'
 gem "haml-rails", "~> 0.9"
-gem "autoprefixer-rails"
+gem "jc-validates_timeliness"
+gem 'jquery-datatables-rails'
+gem 'jquery-datetimepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails'
+gem 'money-rails'
+gem 'recaptcha', require: 'recaptcha/rails'
+gem 'select2-rails'
+gem 'simple_form'
+gem 'tinymce-rails'
 
 # system utils
-gem 'rake'
-gem 'paper_trail'
-gem 'rollbar'
-gem 'redis-store'
-gem 'redis-rails'
-gem 'rails_admin', '= 1.0.0.rc' # pre-release necessary to support rails 5
-gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
+gem 'acme-client'
 gem 'aws-sdk-rails'
+gem 'eye-patch', require: false
+gem 'gaffe'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
+gem 'order_as_specified'
+gem 'paper_trail'
+gem 'rails_admin', '= 1.0.0.rc' # pre-release necessary to support rails 5
+gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
+gem 'rake'
 gem 'redis-namespace'
+gem 'redis-rails'
+gem 'redis-store'
+gem 'rollbar'
+gem 'rubyzip'
 gem 'sidekiq', '< 5'
 gem 'unicorn', require: false
 gem 'whenever'
-gem 'gaffe'
-gem 'rubyzip'
-gem 'acme-client'
-gem 'eye-patch', require: false
-gem 'order_as_specified'
 
 # determined we are over IE8 CSS limits using
 # http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
@@ -66,9 +66,9 @@ gem 'css_splitter' # support ie9 css rule limits
 #  fixed the Pagination-Load issue
 #  specific import/export functions to match the translation-file structure used
 # also, the released version of tolk does not yet support rails 5. (need to use `master`)
-gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
 gem 'apartment'
@@ -79,22 +79,21 @@ gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
-gem "nilify_blanks"
+gem 'nilify_blanks'
+gem 'validates_email_format_of'
 gem 'virtus'
 gem "wicked"
-gem 'validates_email_format_of'
 
 gem 'faker' # to support 'sample_data'
 
 gem 'pg'
 
 # deployment
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano-rvm'
-gem 'capistrano-bundler'
-gem 'capistrano3-unicorn'
+gem 'capistrano', require: false
 gem "capistrano-deploytags", require: false
+gem 'capistrano-rails', require: false
+gem 'capistrano-rvm', require: false
+gem 'capistrano3-unicorn', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
@@ -102,11 +101,11 @@ group :naucc, :development, :caching do
 end
 
 group :test do
+  gem 'capybara', github: 'jnicklas/capybara'
   gem 'codeclimate_circle_ci_coverage'
   gem 'database_cleaner'
-  gem 'capybara', github: 'jnicklas/capybara'
-  gem 'poltergeist'
   gem 'factory_girl_rails', '4.7.0' # https://github.com/thoughtbot/factory_girl/pull/982
+  gem 'poltergeist'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
 
@@ -125,15 +124,15 @@ group :unicon, :naucc, :development, :test, :cucumber, :caching do
   gem 'annotate'
   gem 'bullet'
   # gem 'brakeman'
-  gem 'watchr'
   gem 'foreman'
   gem 'pry'
+  gem 'watchr'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'sass-rails'
 gem 'coffee-rails'
+gem 'sass-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # Necessary so that the uglifier can process/compress the assets

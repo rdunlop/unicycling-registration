@@ -2,8 +2,7 @@ class AdminUpgradesController < ApplicationController
   before_action :authenticate_user!
   before_action :skip_authorization
 
-  def new
-  end
+  def new; end
 
   def create
     raise Pundit::NotAuthorizedError.new("Incorrect Access code") unless params[:access_code] == @tenant.admin_upgrade_code

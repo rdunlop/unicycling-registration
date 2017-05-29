@@ -31,7 +31,7 @@ class RaceScoringClass < BaseScoringClass
   # Determine whether a competitor is disqualified
   # NOTE: this should be improved to indicate DNS/DNF/DQ, if at all possible
   def competitor_dq?(competitor)
-    competitor.has_result? && (competitor.time_results.all?(&:disqualified?) || competitor.best_time_in_thousands == 0)
+    competitor.has_result? && (competitor.time_results.all?(&:disqualified?) || competitor.best_time_in_thousands.zero?)
   end
 
   def competitor_dq_status_description(competitor)
@@ -55,7 +55,7 @@ class RaceScoringClass < BaseScoringClass
   end
 
   def uses_volunteers
-    [:data_recording_volunteer, :race_official, :track_data_importer]
+    %i[data_recording_volunteer race_official track_data_importer]
   end
 
   def results_path
@@ -75,7 +75,8 @@ class RaceScoringClass < BaseScoringClass
       number_of_laps: import_result.number_of_laps,
       is_start_time: import_result.is_start_time,
       entered_at: import_result.created_at,
-      entered_by: import_result.user)
+      entered_by: import_result.user
+    )
   end
 
   def imports_times?

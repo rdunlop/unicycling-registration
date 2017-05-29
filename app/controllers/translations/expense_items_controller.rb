@@ -6,8 +6,7 @@ class Translations::ExpenseItemsController < Admin::TranslationsController
   end
 
   # GET /translations/expense_items/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations/expense_items/1
   def update
@@ -26,6 +25,6 @@ class Translations::ExpenseItemsController < Admin::TranslationsController
   end
 
   def expense_item_params
-    params.require(:expense_item).permit(translations_attributes: [:id, :locale, :name, :details_label])
+    params.require(:expense_item).permit(translations_attributes: %i[id locale name details_label])
   end
 end

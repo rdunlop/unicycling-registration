@@ -63,8 +63,8 @@ class EventConfiguration < ApplicationRecord
   mount_uploader :logo_file, LogoUploader
 
   validates :short_name, :long_name, presence: true, if: :name_logo_applied?
-  validates :event_url, format: URI.regexp(%w(http https)), unless: "event_url.nil?"
-  validates :comp_noncomp_url, format: URI.regexp(%w(http https)), unless: "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
+  validates :event_url, format: URI.regexp(%w[http https]), unless: "event_url.nil?"
+  validates :comp_noncomp_url, format: URI.regexp(%w[http https]), unless: "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
   validates :enabled_locales, presence: true
   validate :only_one_info_type
 
@@ -168,7 +168,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def can_only_drop_or_modify_events?
-    return false unless add_event_end_date.present?
+    return false if add_event_end_date.blank?
     is_date_in_the_past?(add_event_end_date)
   end
 
@@ -189,7 +189,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def waiver_text
-    return custom_waiver_text unless custom_waiver_text.blank?
+    return custom_waiver_text if custom_waiver_text.present?
     self.class.default_waiver_text
   end
 
@@ -279,7 +279,7 @@ class EventConfiguration < ApplicationRecord
 
   def new_registration_closed?
     return true if registration_closed?
-    return false if max_registrants == 0
+    return false if max_registrants.zero?
 
     Registrant.not_deleted.count >= max_registrants
   end
@@ -325,7 +325,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def self.all_available_languages
-    [:en, :fr, :de, :es]
+    %i[en fr de es]
   end
 
   # Public: What is the maximum age that we should allow users to configure

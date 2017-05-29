@@ -48,8 +48,8 @@ class RegistrationCostUpdater
       Notifications.missing_old_reg_items(missing_regs).deliver_later
     end
 
-    old_period.update_attribute(:current_period, false) unless old_period.nil?
-    now_period.update_attribute(:current_period, true) unless now_period.nil?
+    old_period&.update_attribute(:current_period, false)
+    now_period&.update_attribute(:current_period, true)
 
     true
   end

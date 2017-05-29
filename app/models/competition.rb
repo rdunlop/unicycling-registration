@@ -224,7 +224,7 @@ class Competition < ApplicationRecord
   end
 
   def end_time_to_s
-    scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
+    scheduled_completion_at&.to_formatted_s(:short)
   end
 
   def to_s_with_event_class
@@ -326,9 +326,7 @@ class Competition < ApplicationRecord
     ScoringClass.for(event_class, self)[:tiers_enabled]
   end
 
-  def age_group_entries
-    age_group_type.age_group_entries unless age_group_type.nil?
-  end
+  delegate :age_group_entries, to: :age_group_type
 
   delegate :mixed_gender_age_groups?, to: :age_group_type, allow_nil: true
 
@@ -354,7 +352,7 @@ class Competition < ApplicationRecord
   end
 
   def expert_results_list(gender)
-    competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
+    competitors_with_results.select{|comp| comp.gender == gender}.sort_by(&:sorting_overall_place)
   end
 
   def results_list_for(ag_entry)
@@ -497,7 +495,7 @@ class Competition < ApplicationRecord
   end
 
   def no_competition_sources_when_overall_calculation
-    if scoring_class == "Overall Champion" && competition_sources.size > 0
+    if scoring_class == "Overall Champion" && competition_sources.size.positive?
       errors.add(:competiton_sources_attributes, "unable to specify competition sources when using Overall Champion")
     end
   end

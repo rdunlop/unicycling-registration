@@ -48,7 +48,7 @@ class RegistrantEventSignUp < ApplicationRecord
 
   # Create a registrantExpenseItem to pay for this event sign up
   def create_reg_item
-    return unless event.expense_item.present?
+    return if event.expense_item.blank?
 
     # clean_registrant, otherwise we get ActiveRecord::ReadOnlyRecord due to the
     # .signed_up scope causing a join

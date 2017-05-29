@@ -2,14 +2,14 @@ class Registrants::BuildController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!
 
-  before_action :load_registrant_by_bib_number, except: [:create, :create_from_previous]
+  before_action :load_registrant_by_bib_number, except: %i[create create_from_previous]
   before_action :set_steps, except: [:drop_event]
   before_action :setup_wizard, except: [:drop_event]
 
-  before_action :load_categories, only: [:show, :update, :add_events]
+  before_action :load_categories, only: %i[show update add_events]
   layout "wizard"
 
-  ALL_STEPS = [:add_name, :add_events, :set_wheel_sizes, :add_volunteers, :add_contact_details, :expenses].freeze
+  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details expenses].freeze
 
   rescue_from Wicked::Wizard::InvalidStepError, with: :step_not_found
 
@@ -36,10 +36,10 @@ class Registrants::BuildController < ApplicationController
     authorize @registrant, "#{wizard_value(step)}?".to_sym
 
     case wizard_value(step)
-    when :add_name
+    when :add_name # rubocop:disable Lint/EmptyWhen
     when :add_events
       skip_step unless @registrant.competitor?
-    when :add_volunteers
+    when :add_volunteers # rubocop:disable Lint/EmptyWhen
     end
 
     render_wizard
@@ -52,7 +52,7 @@ class Registrants::BuildController < ApplicationController
       @registrant.status = "base_details" if @registrant.status == "blank"
     when :add_events
       @registrant.status = "events" if @registrant.status == "base_details"
-    when :add_volunteers
+    when :add_volunteers # rubocop:disable Lint/EmptyWhen
     when :add_contact_details
       @registrant.status = "contact_details" if @registrant.status == "events" || @registrant.status == "base_details"
     end
@@ -162,16 +162,15 @@ class Registrants::BuildController < ApplicationController
     [:first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
      :online_waiver_signature, :online_waiver_acceptance, :wheel_size_id, :rules_accepted,
      volunteer_opportunity_ids: [],
-     registrant_choices_attributes: [:event_choice_id, :value, :id],
-     registrant_event_sign_ups_attributes: [:event_category_id, :signed_up, :event_id, :id],
-     registrant_best_times_attributes: [:source_location, :formatted_value, :event_id, :id],
-     contact_detail_attributes: [:id, :email,
-                                 :birthplace, :italian_fiscal_code,
-                                 :address, :city, :country_residence, :country_representing,
-                                 :mobile, :phone, :state_code, :zip, :club, :club_contact, :organization_member_number,
-                                 :emergency_name, :emergency_relationship, :emergency_attending, :emergency_primary_phone, :emergency_other_phone,
-                                 :responsible_adult_name, :responsible_adult_phone]
-    ]
+     registrant_choices_attributes: %i[event_choice_id value id],
+     registrant_event_sign_ups_attributes: %i[event_category_id signed_up event_id id],
+     registrant_best_times_attributes: %i[source_location formatted_value event_id id],
+     contact_detail_attributes: %i[id email
+                                   birthplace italian_fiscal_code
+                                   address city country_residence country_representing
+                                   mobile phone state_code zip club club_contact organization_member_number
+                                   emergency_name emergency_relationship emergency_attending emergency_primary_phone emergency_other_phone
+                                   responsible_adult_name responsible_adult_phone]]
   end
 
   def registrant_params

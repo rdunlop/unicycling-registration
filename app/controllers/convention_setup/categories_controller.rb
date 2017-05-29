@@ -2,7 +2,7 @@ class ConventionSetup::CategoriesController < ConventionSetup::BaseConventionSet
   include SortableObject
 
   before_action :authorize_setup
-  before_action :load_category, except: [:index, :create]
+  before_action :load_category, except: %i[index create]
   before_action :set_categories_breadcrumb
 
   # GET /categories
@@ -13,8 +13,7 @@ class ConventionSetup::CategoriesController < ConventionSetup::BaseConventionSet
   end
 
   # GET /categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /categories
   # POST /categories.json
@@ -66,6 +65,6 @@ class ConventionSetup::CategoriesController < ConventionSetup::BaseConventionSet
 
   def category_params
     params.require(:category).permit(:name, :info_url, :info_page_id,
-                                     translations_attributes: [:id, :locale, :name])
+                                     translations_attributes: %i[id locale name])
   end
 end

@@ -40,8 +40,8 @@ describe Registrant do
     @reg = FactoryGirl.build(:registrant)
     @ws20 = FactoryGirl.build_stubbed(:wheel_size_20)
     @ws24 = FactoryGirl.build_stubbed(:wheel_size_24)
-    allow(WheelSize).to receive(:find_by_description).with("20\" Wheel").and_return(@ws20)
-    allow(WheelSize).to receive(:find_by_description).with("24\" Wheel").and_return(@ws24)
+    allow(WheelSize).to receive(:find_by).with(description: "20\" Wheel").and_return(@ws20)
+    allow(WheelSize).to receive(:find_by).with(description: "24\" Wheel").and_return(@ws24)
   end
 
   describe "with a 10 year old registrant" do

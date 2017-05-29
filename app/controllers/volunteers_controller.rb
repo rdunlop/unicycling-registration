@@ -8,8 +8,8 @@ class VolunteersController < ApplicationController
   before_action :load_competition
   before_action :authorize_competition
 
-  before_action :load_user, only: [:create, :destroy]
-  before_action :load_and_validate_volunteer_type, only: [:create, :destroy]
+  before_action :load_user, only: %i[create destroy]
+  before_action :load_and_validate_volunteer_type, only: %i[create destroy]
 
   def index
     add_to_competition_breadcrumb(@competition)

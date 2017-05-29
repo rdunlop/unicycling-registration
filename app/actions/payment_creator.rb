@@ -14,7 +14,8 @@ class PaymentCreator
         amount: reg_item.total_cost,
         expense_item: reg_item.expense_item,
         details: reg_item.details,
-        free: reg_item.free)
+        free: reg_item.free
+      )
     end
   end
 end

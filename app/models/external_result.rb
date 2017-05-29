@@ -63,6 +63,6 @@ class ExternalResult < ApplicationRecord
   private
 
   def set_details_if_empty
-    self.details = "#{points} pts" unless details.present?
+    self.details = "#{points} pts" if details.blank?
   end
 end

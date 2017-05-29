@@ -1,8 +1,8 @@
 class ConventionSetup::EventChoicesController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
-  before_action :load_event, only: [:index, :create]
-  before_action :load_event_choice, except: [:index, :create]
+  before_action :load_event, only: %i[index create]
+  before_action :load_event_choice, except: %i[index create]
   before_action :authorize_setup
 
   before_action :set_breadcrumbs
@@ -86,6 +86,6 @@ class ConventionSetup::EventChoicesController < ConventionSetup::BaseConventionS
   def event_choice_params
     params.require(:event_choice).permit(:cell_type, :label, :multiple_values, :optional, :tooltip,
                                          :optional_if_event_choice_id, :required_if_event_choice_id,
-                                         translations_attributes: [:id, :label, :tooltip, :locale])
+                                         translations_attributes: %i[id label tooltip locale])
   end
 end

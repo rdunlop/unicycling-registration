@@ -66,7 +66,7 @@ class Competitor < ApplicationRecord
   validates :tier_number, presence: true
   validates :tier_number, numericality: { greater_than_or_equal_to: 1, less_than: 10 }
 
-  enum status: [:active, :not_qualified, :dns, :withdrawn, :dnf]
+  enum status: %i[active not_qualified dns withdrawn dnf]
   after_save :touch_members
   after_save :update_age_group_entry
   after_touch :update_age_group_entry
@@ -107,7 +107,7 @@ class Competitor < ApplicationRecord
   end
 
   def must_have_3_members_for_custom_name
-    if (members.size < 3) && !custom_name.blank?
+    if (members.size < 3) && custom_name.present?
       errors.add(:base, "Must have at least 3 members to specify a custom name")
     end
   end
@@ -173,7 +173,7 @@ class Competitor < ApplicationRecord
         error += "Registrant #{member} is not in the default list for this competition<br>"
       end
     end
-    error.html_safe
+    error.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   def best_time
@@ -218,7 +218,7 @@ class Competitor < ApplicationRecord
   def place_formatted
     return scoring_helper.competitor_dq_status_description(self) if disqualified?
 
-    if place == 0 || place.nil?
+    if place.nil? || place.zero?
       return "Unknown"
     else
       place
@@ -233,7 +233,7 @@ class Competitor < ApplicationRecord
   def overall_place_formatted
     return "DQ" if disqualified?
 
-    if overall_place == 0
+    if overall_place.nil? || overall_place.zero?
       return "Unknown"
     else
       overall_place
@@ -262,7 +262,7 @@ class Competitor < ApplicationRecord
   delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count > 0
+    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count.positive?
   end
 
   def team_name
@@ -446,7 +446,7 @@ class Competitor < ApplicationRecord
     return false unless has_result?
     return false if search_gender != gender
 
-    overall_place.to_i > 0 && overall_place.to_i <= 10
+    overall_place.to_i > 0 && overall_place.to_i <= 10 # rubocop:disable Style/NumericPredicate
   end
 
   def self.single_selection_text
@@ -466,7 +466,7 @@ class Competitor < ApplicationRecord
     res << "Geared" if geared
     res << "#{riding_wheel_size}\"" if riding_wheel_size
     res << "#{riding_crank_size}mm" if riding_crank_size
-    res << notes unless notes.blank?
+    res << notes if notes.present?
     res.join(", ")
   end
 

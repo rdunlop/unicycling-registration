@@ -24,7 +24,8 @@ class CreateCompetitionResults < ActiveRecord::Migration
         published_date: competition.published_date,
         system_managed: true,
         published: true,
-        results_file: competition.published_results_file)
+        results_file: competition.published_results_file
+      )
     end
 
     remove_column :competitions, :published_date
@@ -38,7 +39,7 @@ class CreateCompetitionResults < ActiveRecord::Migration
     CompetitionResult.reset_column_information
     Competition.reset_column_information
 
-    if CompetitionResult.where(system_managed: false).count > 0
+    if CompetitionResult.where(system_managed: false).count.positive?
       raise "Unable to revert with non-system results"
     end
 
@@ -46,7 +47,8 @@ class CreateCompetitionResults < ActiveRecord::Migration
       competition = Competition.find(competition_result.competition_id)
       competition.update_attributes(
         published_results_file: competition_result.results_file,
-        published_date: competition_result.published_date)
+        published_date: competition_result.published_date
+      )
     end
     drop_table :competition_results
   end

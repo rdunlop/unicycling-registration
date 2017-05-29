@@ -35,8 +35,7 @@ describe RegistrantExpenseItemsController do
   def valid_attributes
     { free: false,
       details: nil,
-      expense_item_id: @exp.id
-    }
+      expense_item_id: @exp.id}
   end
 
   describe "POST create" do

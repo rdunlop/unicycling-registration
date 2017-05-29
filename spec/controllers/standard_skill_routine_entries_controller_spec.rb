@@ -56,7 +56,8 @@ describe StandardSkillRoutineEntriesController do
           post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
             standard_skill_routine_id: @routine.id,
             standard_skill_entry_id: skill.id,
-            position: 1 } }
+            position: 1
+          } }
           expect(response).to redirect_to(standard_skill_routine_path(@routine))
         end
 
@@ -64,7 +65,8 @@ describe StandardSkillRoutineEntriesController do
           skill = FactoryGirl.create(:standard_skill_entry)
           post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {
             standard_skill_routine_id: @routine.id,
-            standard_skill_entry_id: skill.id } }
+            standard_skill_entry_id: skill.id
+          } }
           expect(response).to redirect_to(standard_skill_routine_path(@routine))
           # 1 initial, + 5 + 1 == 7
           expect(StandardSkillRoutineEntry.last.position).to eq(7)

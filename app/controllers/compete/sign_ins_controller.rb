@@ -4,7 +4,7 @@ class Compete::SignInsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
   before_action :set_parent_breadcrumbs
-  before_action :load_competitors_by_order, only: [:show, :edit, :update]
+  before_action :load_competitors_by_order, only: %i[show edit update]
 
   respond_to :html
 
@@ -54,7 +54,7 @@ class Compete::SignInsController < ApplicationController
   end
 
   def update_competitors_params
-    params.require(:competition).permit(competitors_attributes: [:id, :status, :wave, :geared, :riding_wheel_size, :riding_crank_size, :notes])
+    params.require(:competition).permit(competitors_attributes: %i[id status wave geared riding_wheel_size riding_crank_size notes])
   end
 
   def set_parent_breadcrumbs

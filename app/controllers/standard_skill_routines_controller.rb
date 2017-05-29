@@ -15,7 +15,7 @@
 class StandardSkillRoutinesController < ApplicationController
   before_action :authenticate_user!
   before_action :load_registrant, only: [:create]
-  before_action :load_standard_skill_routine, only: [:show, :writing_judge, :difficulty_judge, :execution_judge]
+  before_action :load_standard_skill_routine, only: %i[show writing_judge difficulty_judge execution_judge]
 
   # GET /standard_skill_routines
   def index

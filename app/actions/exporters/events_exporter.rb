@@ -7,11 +7,12 @@ class Exporters::EventsExporter
       "Birthday",
       "Age",
       "Gender",
-      "Club"] + event_categories_titles + event_titles
+      "Club"
+    ] + event_categories_titles + event_titles
   end
 
   def event_choices
-    @event_choices ||= Event.includes(event_choices: [:event, :translations]).flat_map{ |ev| ev.event_choices }
+    @event_choices ||= Event.includes(event_choices: %i[event translations]).flat_map{ |ev| ev.event_choices }
   end
 
   def event_titles
@@ -19,7 +20,7 @@ class Exporters::EventsExporter
   end
 
   def event_categories
-    @event_categories ||= Event.includes(event_categories: [:event, :translations]).flat_map{ |ev| ev.event_categories }
+    @event_categories ||= Event.includes(event_categories: %i[event translations]).flat_map{ |ev| ev.event_categories }
   end
 
   def event_categories_titles

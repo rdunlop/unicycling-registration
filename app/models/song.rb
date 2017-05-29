@@ -31,7 +31,7 @@ class Song < ApplicationRecord
   validates :registrant_id, :user_id, :event_id, :description, presence: true
   validates :competitor_id, uniqueness: { message: "Cannot assign more than 1 song to the same competitor for this competition" }, allow_nil: true
 
-  validates :event_id, uniqueness: { scope: [:user_id, :registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
+  validates :event_id, uniqueness: { scope: %i[user_id registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
   validate :song_size_validation
 
   def human_name

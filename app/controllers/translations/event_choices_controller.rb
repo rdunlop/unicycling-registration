@@ -6,8 +6,7 @@ class Translations::EventChoicesController < Admin::TranslationsController
   end
 
   # GET /translations/event_choices/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations/event_choices/1
   def update
@@ -26,6 +25,6 @@ class Translations::EventChoicesController < Admin::TranslationsController
   end
 
   def event_choice_params
-    params.require(:event_choice).permit(translations_attributes: [:id, :locale, :label, :tooltip])
+    params.require(:event_choice).permit(translations_attributes: %i[id locale label tooltip])
   end
 end

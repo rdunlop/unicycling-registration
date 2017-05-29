@@ -45,10 +45,10 @@
 class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConventionSetupController
   before_action :authenticate_user!
   before_action :load_event_configuration
-  before_action :authorize_cache, only: [:cache, :clear_cache, :clear_counter_cache]
+  before_action :authorize_cache, only: %i[cache clear_cache clear_counter_cache]
   before_action :authorize_advanced_settings, only: [:advanced_settings]
 
-  EVENT_CONFIG_PAGES = [:registrant_types, :rules_waiver, :name_logo, :organization_membership, :important_dates, :registration_questions, :volunteers, :payment_settings, :advanced_settings, :go_live].freeze
+  EVENT_CONFIG_PAGES = %i[registrant_types rules_waiver name_logo organization_membership important_dates registration_questions volunteers payment_settings advanced_settings go_live].freeze
 
   before_action :authorize_convention_setup, only: EVENT_CONFIG_PAGES
 
@@ -63,8 +63,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
     end
   end
 
-  def cache
-  end
+  def cache; end
 
   def clear_cache
     Rails.cache.clear
@@ -157,8 +156,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
                                                 :iuf,
                                                 :test_mode, :usa,
                                                 :display_confirmed_events,
-                                                :add_event_end_date
-                                               )
+                                                :add_event_end_date)
   end
 
   def name_logo_params
@@ -170,8 +168,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
                                                 :location,
                                                 :contact_email,
                                                 :style_name,
-                                                enabled_locales: []
-                                               )
+                                                enabled_locales: [])
   end
 
   def organization_membership_params

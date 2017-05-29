@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Example::ConventionChoicesController do
-  actions = [
-    :index,
-    :standard_skill
+  actions = %i[
+    index
+    standard_skill
   ]
 
   actions.each do |action|

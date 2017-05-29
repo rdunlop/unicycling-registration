@@ -41,6 +41,6 @@ class Compete::TierAssignmentsController < ApplicationController
   end
 
   def update_competitors_params
-    params.require(:competition).permit(competitors_attributes: [:id, :tier_number, :tier_description])
+    params.require(:competition).permit(competitors_attributes: %i[id tier_number tier_description])
   end
 end

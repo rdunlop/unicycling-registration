@@ -18,7 +18,7 @@ class TimeResultCalculator
     finish_times.each do |ft|
       total_time = adjusted_time(ft)
 
-      if best_finish_time == 0 || (total_time == better_time(best_finish_time, total_time))
+      if best_finish_time.zero? || (total_time == better_time(best_finish_time, total_time))
         best_finish_time = total_time
       end
     end

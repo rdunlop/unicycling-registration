@@ -43,7 +43,7 @@ class CombinedCompetitionEntry < ApplicationRecord
 
   def competitors(gender)
     @competitors ||= {}
-    @competitors[gender] ||= competition.results.overall.includes(competitor: [:age_group_result, :overall_result, :competition]).where("place > 0").map(&:competitor).select{|comp| comp.gender == gender}
+    @competitors[gender] ||= competition.results.overall.includes(competitor: %i[age_group_result overall_result competition]).where("place > 0").map(&:competitor).select{|comp| comp.gender == gender}
   end
 
   def male_competitors
@@ -55,7 +55,7 @@ class CombinedCompetitionEntry < ApplicationRecord
   end
 
   def bonus_for_place(place)
-    if place > 0 && place <= 10
+    if place > 0 && place <= 10 # rubocop:disable Style/NumericPredicate
       send("points_#{place}")
     else
       0

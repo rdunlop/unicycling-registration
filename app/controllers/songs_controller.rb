@@ -21,15 +21,15 @@
 
 class SongsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_and_authorize_song, only: [:add_file, :file_complete, :destroy]
+  before_action :load_and_authorize_song, only: %i[add_file file_complete destroy]
 
-  before_action :load_registrant_by_bib_number, only: [:index, :create]
-  before_action :load_songs, only: [:index, :create]
+  before_action :load_registrant_by_bib_number, only: %i[index create]
+  before_action :load_songs, only: %i[index create]
 
-  before_action :load_user, only: [:my_songs, :create_guest_song]
-  before_action :load_user_songs, only: [:my_songs, :create_guest_song]
+  before_action :load_user, only: %i[my_songs create_guest_song]
+  before_action :load_user_songs, only: %i[my_songs create_guest_song]
 
-  before_action :set_breadcrumbs, except: [:my_songs, :create_guest_song]
+  before_action :set_breadcrumbs, except: %i[my_songs create_guest_song]
 
   # GET /registrants/1/songs
   def index

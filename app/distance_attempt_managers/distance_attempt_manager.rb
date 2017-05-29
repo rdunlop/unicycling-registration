@@ -118,7 +118,7 @@ class DistanceAttemptManager
 
   def single_fault?
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
-      if distance_attempts.count > 0
+      if distance_attempts.count.positive?
         distance_attempts.first.fault?
       else
         false

@@ -158,7 +158,7 @@ class OverallChampionResultCalculator
     # store the number of placing points for each competitor
     registrant_bib_numbers(gender).each do |bib_number|
       results[bib_number] = create_registrant_entry(bib_number, gender)
-      next if results[bib_number][:total_points] == 0
+      next if results[bib_number][:total_points].zero?
       store_score(results[bib_number][:total_points], bib_number)
     end
 
@@ -256,8 +256,7 @@ class OverallChampionResultCalculator
     result
   end
 
-  def adjust_ties_by_tie_breaker(_scores)
-  end
+  def adjust_ties_by_tie_breaker(_scores); end
 
   def num_firsts(gender, bib_number)
     registrants(gender)[bib_number].count{ |comp| get_place(comp) == 1}

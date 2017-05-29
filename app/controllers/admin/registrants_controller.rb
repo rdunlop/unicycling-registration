@@ -1,7 +1,7 @@
 class Admin::RegistrantsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_registrants_breadcrumb
-  before_action :load_registrant, only: [:really_destroy, :undelete]
+  before_action :load_registrant, only: %i[really_destroy undelete]
 
   # GET /registrants/manage_all
   def manage_all

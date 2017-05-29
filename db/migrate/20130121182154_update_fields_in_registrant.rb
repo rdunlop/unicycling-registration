@@ -17,6 +17,5 @@ class UpdateFieldsInRegistrant < ActiveRecord::Migration
     add_column :registrants, :responsible_adult_phone, :string
   end
 
-  def down
-  end
+  def down; end
 end

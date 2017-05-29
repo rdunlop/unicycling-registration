@@ -25,7 +25,8 @@ describe ConventionSetup::EventChoicesController do
           "id" => "",
           "locale" => "fr",
           "label" => "label_fr",
-          "tooltip" => "tool_fr"}
+          "tooltip" => "tool_fr"
+        }
       }
     }
   end
@@ -116,7 +117,8 @@ describe ConventionSetup::EventChoicesController do
               "id" => "",
               "locale" => "fr",
               "label" => "label_fr",
-              "tooltip" => "tool_fr"}
+              "tooltip" => "tool_fr"
+            }
           },
           "optional" => "0",
           "optional_if_event_choice_id" => ""

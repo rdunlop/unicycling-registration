@@ -24,20 +24,20 @@
 require 'spec_helper'
 
 describe Example::CompetitionChoicesController do
-  actions = [
-    :index,
-    :freestyle,
-    :individual,
-    :pairs,
-    :group,
-    :standard_skill,
-    :high_long,
-    :timed,
-    :points,
-    :flatland,
-    :street,
-    :overall_champion,
-    :custom
+  actions = %i[
+    index
+    freestyle
+    individual
+    pairs
+    group
+    standard_skill
+    high_long
+    timed
+    points
+    flatland
+    street
+    overall_champion
+    custom
   ]
 
   context "as public" do

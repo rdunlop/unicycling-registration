@@ -17,8 +17,7 @@ describe Importers::ImportResultImporter do
                thousands: 390,
                number_of_laps: 2,
                status: "active"
-             }
-            )
+             })
     end
     it "creates a competitor" do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)

@@ -24,7 +24,7 @@ class AgeGroupEntry < ApplicationRecord
   validates :age_group_type, :short_description, :start_age, :end_age, presence: true
   validates :start_age, :end_age, numericality: {greater_than_or_equal_to: 0}
   validates :short_description, uniqueness: {scope: :age_group_type_id}
-  validates :gender, inclusion: {in: %w(Male Female Mixed), message: "%{value} must be either 'Male', 'Female' or 'Mixed'"}
+  validates :gender, inclusion: {in: %w[Male Female Mixed], message: "%{value} must be either 'Male', 'Female' or 'Mixed'"}
 
   belongs_to :age_group_type, touch: true, inverse_of: :age_group_entries
   belongs_to :wheel_size
@@ -49,7 +49,7 @@ class AgeGroupEntry < ApplicationRecord
 
     earlier_neighbour = entries[current_index - 1]
     next_neighbour = entries[current_index + 1]
-    if current_index == 0
+    if current_index.zero?
       # first entry has no earlier neighbour
       return next_neighbour
     elsif current_index == entries.count - 1
@@ -67,7 +67,7 @@ class AgeGroupEntry < ApplicationRecord
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
   def as_json(options = {})
     options ||= {}
-    options[:except] = [:id, :age_group_type_id, :created_at, :updated_at, :wheel_size_id]
+    options[:except] = %i[id age_group_type_id created_at updated_at wheel_size_id]
     options[:methods] = [:wheel_size_name]
     super(options)
   end

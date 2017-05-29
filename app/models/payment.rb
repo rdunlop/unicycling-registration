@@ -52,11 +52,11 @@ class Payment < ApplicationRecord
   def details
     return "(Offline Payment Pending)" if offline_pending?
 
-    unless transaction_id.blank?
+    if transaction_id.present?
       return transaction_id
     end
 
-    unless note.blank?
+    if note.present?
       return note
     end
 

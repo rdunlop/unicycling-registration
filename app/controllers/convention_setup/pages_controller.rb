@@ -1,5 +1,5 @@
 class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupController
-  before_action :load_page, except: [:index, :new, :create]
+  before_action :load_page, except: %i[index new create]
   before_action :authorize_setup
 
   before_action :set_breadcrumbs
@@ -30,8 +30,7 @@ class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupCon
   end
 
   # GET /pages/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /event_choices/1
   def update
@@ -69,6 +68,6 @@ class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupCon
 
   def page_params
     params.require(:page).permit(:slug, :title, :body, :position, :parent_page_id,
-                                 translations_attributes: [:id, :locale, :title, :body])
+                                 translations_attributes: %i[id locale title body])
   end
 end

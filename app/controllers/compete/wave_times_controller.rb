@@ -5,7 +5,7 @@ class Compete::WaveTimesController < ApplicationController
   before_action :load_competition
   before_action :authorize_data_entry, except: [:index]
 
-  before_action :load_wave_time, only: [:edit, :update, :destroy]
+  before_action :load_wave_time, only: %i[edit update destroy]
 
   before_action :set_parent_breadcrumbs
 
@@ -32,8 +32,7 @@ class Compete::WaveTimesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @wave_time.update_attributes(wave_time_params)
