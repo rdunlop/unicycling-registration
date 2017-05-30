@@ -15,5 +15,5 @@ fr:
         total_cost: Total (calculé)
     models:
       expense_item:
-        one: "Élément de dépense"
-        other: "Éléments de dépenses"
+        one: Élément de dépense
+        other: Éléments de dépenses

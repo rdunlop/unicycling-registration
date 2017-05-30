@@ -4,7 +4,7 @@ fr:
     translations:
       common_translations:
         access_not_enabled: Vous n'avez pas accès au système de traduction commun
-        common_example_1: "Étiquettes de la bar de navigation"
+        common_example_1: Étiquettes de la bar de navigation
         common_example_2: Texte d'e-mail automatique
         common_example_3: 'Noms de champ (ex : Prénom, Téléphone)'
         common_translations: Traductions communes

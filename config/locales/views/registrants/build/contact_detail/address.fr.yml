@@ -10,5 +10,5 @@ fr:
             de celui où vous résidez, entrez-le ici
           email_tooltip: Inscrivez votre adresse e-mail pour recevoir des mises à
             jour sur les inscriptions, le calendrier et les nouveaux événements.
-          state: "État"
-          state_province: "État/Province"
+          state: État
+          state_province: État/Province

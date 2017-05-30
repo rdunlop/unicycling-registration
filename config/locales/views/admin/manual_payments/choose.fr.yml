@@ -4,7 +4,7 @@ fr:
     manual_payments:
       choose:
         choose_items: Cochez les éléments que vous souhaitez marquer comme payés
-        chosen_and_unpaid_items: "Éléments choisis (mais non payés)"
+        chosen_and_unpaid_items: Éléments choisis (mais non payés)
         description: Un email sera envoyé au compte utilisateur associé quand le paiement
           sera arrivé.
         details_note: "(seulement requis pour certains éléments)"

@@ -9,5 +9,5 @@ fr:
         details_note: "(seulement requis pour certains éléments)"
         header: Créer un remboursement
         mark_this_item: Marquer cette élément comme remboursé
-        paid_items: "Éléments payés"
+        paid_items: Éléments payés
         submit: Créer un enregistrement de remboursement
