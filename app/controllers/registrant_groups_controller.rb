@@ -15,108 +15,119 @@
 
 class RegistrantGroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_new_registrant_group, only: [:create]
 
-  before_action :load_registrant_group, only: %i[address_labels edit show update destroy]
-  before_action :authorize_user
+  before_action :load_registrant_group, except: [:index]
+  before_action :authorize_user, except: [:index]
 
   # GET /registrant_groups
-  # GET /registrant_groups.json
   def index
+    authorize RegistrantGroup
     @registrant_groups = RegistrantGroup.all
+  end
+
+  # GET /registrant_groups/new
+  def new
     @registrant_group = RegistrantGroup.new
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @registrant_groups }
-    end
-  end
-
-  def list
-    @registrant_groups = RegistrantGroup.all
-
-    respond_to do |format|
-      format.html
-      format.pdf { render_common_pdf("list") }
-    end
-  end
-
-  def address_labels
-    registrants = @registrant_group.sorted_registrants
-    label_text = []
-    registrants.each do |registrant|
-      text = "#{registrant.name}\n"
-      text += "#{registrant.contact_detail.address}\n"
-      text += "#{registrant.contact_detail.city}, #{registrant.contact_detail.state}\n"
-      text += "#{registrant.contact_detail.country_residence}\n"
-      text += "#{registrant.contact_detail.zip}\n"
-      label_text << text
-    end
-
-    labels = Prawn::Labels.render(label_text, type: "Avery5160", shrink_to_fit: true) do |pdf, name|
-      set_font(pdf)
-      pdf.text name, align: :center, valign: :center, inline_format: true
-    end
-
-    send_data labels, filename: "address-labels-#{Date.today}.pdf"
   end
 
   # GET /registrant_groups/1
-  # GET /registrant_groups/1.json
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @registrant_group }
-    end
-  end
-
-  # GET /registrant_groups/1/edit
-  def edit; end
+  def show; end
 
   # POST /registrant_groups
-  # POST /registrant_groups.json
   def create
-    respond_to do |format|
-      if @registrant_group.save
-        format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully created.' }
-        format.json { render json: @registrant_group, status: :created, location: @registrant_group }
-      else
-        @registrant_groups = RegistrantGroup.all
-        format.html { render action: "index" }
-        format.json { render json: @registrant_group.errors, status: :unprocessable_entity }
-      end
+    if @registrant_group.save
+      redirect_to @registrant_group, notice: 'Registrant group was successfully created.'
+    else
+      render :new
     end
   end
 
   # PUT /registrant_groups/1
-  # PUT /registrant_groups/1.json
   def update
-    respond_to do |format|
-      if @registrant_group.update_attributes(registrant_group_params)
-        format.html { redirect_to @registrant_group, notice: 'Registrant group was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @registrant_group.errors, status: :unprocessable_entity }
-      end
+    if @registrant_group.update_attributes(registrant_group_params)
+      redirect_to @registrant_group, notice: 'Registrant group was successfully updated.'
+    else
+      render :show
     end
   end
 
   # DELETE /registrant_groups/1
-  # DELETE /registrant_groups/1.json
   def destroy
     @registrant_group.destroy
 
-    respond_to do |format|
-      format.html { redirect_to registrant_groups_url }
-      format.json { head :no_content }
+    redirect_to registrant_groups_url
+  end
+
+  # POST /registrant_groups/1/join
+  def join
+    if true
+      flash[:alert] = "Unable to join group"
+    else
+      flash[:notice] = "Joined Group"
     end
+
+    redirect_to @registrant_group
+  end
+
+  # POST /registrant_groups/1/add_member
+  def add_member
+    if true
+      flash[:alert] = "Unable to add member"
+    else
+      flash[:notice] = "Added Member to Group"
+    end
+
+    redirect_to @registrant_group
+  end
+
+  # DELETE /registrant_groups/1/remove_member
+  def remove_member
+    if true
+      flash[:alert] = "Unable to remove member"
+    else
+      flash[:notice] = "Removed Member from Group"
+    end
+
+    redirect_to @registrant_group
+  end
+
+  # POST /registrant_groups/1/promote
+  def promote
+    if true
+      flash[:alert] = "Unable to promote member"
+    else
+      flash[:notice] = "Promoted Member to Leader"
+    end
+
+    redirect_to @registrant_group
+  end
+
+  # DELETE /registrant_groups/1/leave
+  def leave
+    if true
+      flash[:alert] = "Unable to leave group"
+    else
+      flash[:notice] = "Left Group"
+    end
+
+    redirect_to registrant_groups_path
+  end
+
+  # POST /registrant_groups/1/request_leader
+  def request_leader
+    if true
+      flash[:alert] = "Unable to request leader"
+    else
+      flash[:notice] = "Requested leader for group"
+    end
+
+    redirect_to @registrant_group
   end
 
   private
 
   def authorize_user
-    authorize current_user, :under_development?
+    authorize @registrant_group
   end
 
   def load_registrant_group
