@@ -2,22 +2,24 @@
 #
 # Table name: registrant_groups
 #
-#  id            :integer          not null, primary key
-#  name          :string(255)
-#  registrant_id :integer
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id                       :integer          not null, primary key
+#  name                     :string
+#  registrant_id            :integer
+#  created_at               :datetime
+#  updated_at               :datetime
+#  registrant_group_type_id :integer
 #
 # Indexes
 #
-#  index_registrant_groups_registrant_id  (registrant_id)
+#  index_registrant_groups_on_registrant_group_type_id  (registrant_group_type_id)
+#  index_registrant_groups_on_registrant_id             (registrant_id)
 #
 
 class RegistrantGroup < ApplicationRecord
-  belongs_to :contact_person, class_name: "Registrant", foreign_key: "registrant_id"
+  belongs_to :leader, class_name: "Registrant", foreign_key: "registrant_id"
+  belongs_to :registrant_group_type
 
   has_many :registrant_group_members, dependent: :destroy, inverse_of: :registrant_group
-  accepts_nested_attributes_for :registrant_group_members, allow_destroy: true
   has_many :registrants, through: :registrant_group_members
 
   def sorted_registrants
