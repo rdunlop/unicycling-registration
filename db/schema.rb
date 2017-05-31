@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513193105) do
+ActiveRecord::Schema.define(version: 20170531201550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -781,9 +781,20 @@ ActiveRecord::Schema.define(version: 20170513193105) do
     t.integer  "registrant_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "additional_details_type"
+    t.integer  "additional_details_id"
     t.index ["registrant_group_id"], name: "index_registrant_group_mumbers_registrant_group_id", using: :btree
     t.index ["registrant_id", "registrant_group_id"], name: "reg_group_reg_group", unique: true, using: :btree
     t.index ["registrant_id"], name: "index_registrant_group_mumbers_registrant_id", using: :btree
+  end
+
+  create_table "registrant_group_types", force: :cascade do |t|
+    t.string   "source_element_type",   null: false
+    t.integer  "source_element_id",     null: false
+    t.string   "notes"
+    t.integer  "max_members_per_group"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "registrant_groups", force: :cascade do |t|
@@ -791,6 +802,8 @@ ActiveRecord::Schema.define(version: 20170513193105) do
     t.integer  "registrant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "registrant_group_type_id"
+    t.index ["registrant_group_type_id"], name: "index_registrant_groups_on_registrant_group_type_id", using: :btree
     t.index ["registrant_id"], name: "index_registrant_groups_registrant_id", using: :btree
   end
 

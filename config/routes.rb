@@ -11,12 +11,15 @@ Rails.application.routes.draw do
   get '500', to: 'errors#internal_server_error'
 
   scope "(:locale)" do
-    resources :registrant_groups, except: [:new] do
-      collection do
-        get :list
-      end
+    resources :registrant_group_types
+    resources :registrant_groups, except: [:edit] do
       member do
-        get :address_labels
+        post :join
+        post :add_member
+        delete :remove_member
+        post :promote
+        delete :leave
+        post :request_leader
       end
     end
 
