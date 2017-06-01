@@ -1,1 +1,27 @@
 %h1 Registrant Group Types
+
+%p
+  Creating a Registrant Group Type allows registrants to specify groups for the event/item.
+
+%p
+  Examples:
+  %ul
+    %li 4x100 Relay Team Members
+    %li Lodging Roommates
+
+%table
+  %thead
+    %tr
+      %th Source Element
+      %th Created At
+      %th Actions
+  %tbody
+    - @registrant_group_types.each do |reg_group_type|
+      %tr
+        %td= reg_group_type.source_element
+        %td= l reg_group_type.created_at
+        %td
+          = link_to edit_registrant_group_type_path(reg_group_type), "Edit"
+          = link_to registrant_group_type_path(reg_group_type), "Delete", method: :delete, data: { confirm: "Are you sure?" }
+
+= link_to "New Registrant Group Type", new_registrant_group_type_path, class: "button"

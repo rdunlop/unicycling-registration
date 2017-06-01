@@ -1,0 +1,18 @@
+= form_for(@registrant_group_type) do |f|
+  .row
+    .small-12.medium-5.columns
+      %label Source Element
+    .small-12.medium-7.columns
+      = select_tag :source_element_event, options_from_collection_for_select(Event.all, :id, :to_s), include_blank: true, class: "chosen-select"
+      OR
+      = select_tag :source_element_expense_item, options_from_collection_for_select(ExpenseItem.all, :id, :to_s), include_blank: true, class: "chosen-select"
+  .row
+    .small-12.medium-6.columns.text-right
+      = f.label :notes
+      = f.text_field :notes
+    .small-12.medium-6.columns.text-right
+      = f.label :max_members_per_group
+      = f.number_field :max_members_per_group
+
+  %div
+    = f.submit class: "button"
