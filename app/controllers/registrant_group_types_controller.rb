@@ -17,6 +17,7 @@ class RegistrantGroupTypesController < ApplicationController
   before_action :load_registrant_group_type, except: %i[index new create]
   before_action :authorize_user, except: %i[index new create]
   before_action :authorize_collection, only: %i[index new]
+  before_action :add_breadcrumbs
 
   # GET /registrant_group_types
   def index
@@ -85,5 +86,9 @@ class RegistrantGroupTypesController < ApplicationController
       :notes,
       :max_members_per_group
     )
+  end
+
+  def add_breadcrumbs
+    add_breadcrumb "Registrant Group Types", registrant_group_types_path
   end
 end

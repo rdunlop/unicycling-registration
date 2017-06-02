@@ -66,4 +66,22 @@ describe RegistrantGroupTypesController do
       end.to change(RegistrantGroupType, :count).by(-1)
     end
   end
+
+  describe "GET show" do
+    let(:registrant_group_type) { FactoryGirl.create(:registrant_group_type) }
+
+    it "succeeds" do
+      get :show, params: { id: registrant_group_type.to_param }
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET edit" do
+    let(:registrant_group_type) { FactoryGirl.create(:registrant_group_type) }
+
+    it "succeeds" do
+      get :edit, params: { id: registrant_group_type.to_param }
+      expect(response).to be_success
+    end
+  end
 end

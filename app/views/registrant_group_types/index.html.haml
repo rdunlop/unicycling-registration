@@ -18,10 +18,10 @@
   %tbody
     - @registrant_group_types.each do |reg_group_type|
       %tr
-        %td= reg_group_type.source_element
+        %td= link_to reg_group_type.source_element, reg_group_type
         %td= l reg_group_type.created_at
         %td
-          = link_to edit_registrant_group_type_path(reg_group_type), "Edit"
-          = link_to registrant_group_type_path(reg_group_type), "Delete", method: :delete, data: { confirm: "Are you sure?" }
+          = link_to "Edit", edit_registrant_group_type_path(reg_group_type)
+          = link_to "Delete", registrant_group_type_path(reg_group_type), method: :delete, data: { confirm: "Are you sure?" }
 
 = link_to "New Registrant Group Type", new_registrant_group_type_path, class: "button"
