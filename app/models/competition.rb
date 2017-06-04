@@ -87,6 +87,7 @@ class Competition < ApplicationRecord
     [
       "Freestyle",
       "Artistic Freestyle IUF 2015",
+      "Artistic Freestyle IUF 2017",
       "High/Long",
       "High/Long Preliminary IUF 2015",
       "High/Long Final IUF 2015",

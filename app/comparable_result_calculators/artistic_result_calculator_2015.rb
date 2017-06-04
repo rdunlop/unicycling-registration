@@ -31,7 +31,7 @@ class ArtisticResultCalculator_2015
 
   # Calculate the total number of points for a given competitor
   # judge_type: if specified, limit the results to a given judge_type.
-  # NOTE: This function takes into account the "removed scores" by chief judge
+  # NOTE: This function takes into account the "removed scores" by chief judge (eliminates them)
   #
   # return a numeric
   def total_points(competitor, judge_type = nil)

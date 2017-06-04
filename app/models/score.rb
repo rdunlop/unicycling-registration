@@ -45,7 +45,7 @@ class Score < ApplicationRecord
   def total
     return nil if invalid? || competitor.ineligible?
 
-    self.class.score_fields.inject(0){ |sum, sym| sum + send(sym) }
+    judge_score_calculator.score_weight_calculator.total(self)
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge

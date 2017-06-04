@@ -53,6 +53,13 @@ class ScoringClass
         judge_score_calculator: Freestyle_2015_JudgePointsCalculator.new,
         helper: ArtisticScoringClass_2015.new(competition)
       }
+    when "Artistic Freestyle IUF 2017"
+      {
+        calculator: ArtisticResultCalculator_2015.new,
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: Freestyle2017JudgePointsCalculator.new,
+        helper: ArtisticScoringClass_2015.new(competition)
+      }
     when "Flatland"
       scoring_helper = FlatlandScoringClass.new(competition)
       {
