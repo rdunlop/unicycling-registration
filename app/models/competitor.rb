@@ -439,7 +439,7 @@ class Competitor < ApplicationRecord
            to: :distance_manager
 
   def distance_manager
-    @distance_manager ||= competition.distance_attempt_manager.new(self)
+    @distance_manager ||= competition.distance_attempt_manager.build(self)
   end
 
   def is_top?(search_gender)

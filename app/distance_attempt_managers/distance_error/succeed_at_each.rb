@@ -1,5 +1,4 @@
 # Competitor must jump at the same distance as their previous fault
-# Once a Competitor faults 3 attempts at the same distance, they are done, and their previous successful distance stands.
 # After a fault, the next attempt must be at the same distance (no further), until they succeed, or are finished.
 class DistanceError::SucceedAtEach
   attr_reader :distance_attempts, :distance
@@ -7,10 +6,6 @@ class DistanceError::SucceedAtEach
   def initialize(distance_attempts, distance)
     @distance_attempts = distance_attempts
     @distance = distance
-  end
-
-  def acceptable_distance?
-    acceptable_distance_error(distance).nil?
   end
 
   def acceptable_distance_error
@@ -21,17 +16,30 @@ class DistanceError::SucceedAtEach
       max_attempt = distance_attempts.first
       if max_attempt.present? && !max_attempt.fault?
         # no fault
-        check_current_attempt_is_longer_than_previous_attempt(distance, max_attempt.distance)
+        check_current_attempt_is_longer_than_previous_attempt(max_attempt.distance)
       end
     end
   end
 
-  def single_fault_message(distance)
+  def self.single_fault_message(max_attempted_distance)
     # doesn't have the "+" sign on the message
-    "Fault. Next Distance #{distance}cm"
+    "Fault. Next Distance #{max_attempted_distance}cm"
   end
 
   private
+
+  def max_attempted_distance
+    return 0 unless distance_attempts.any?
+
+    distance_attempts.first.distance
+  end
+
+  # DUPLICATED, I know..
+  def check_current_attempt_is_longer_than_previous_attempt(max_distance)
+    if distance <= max_distance
+      "New Distance (#{distance}cm) must be greater than #{max_distance}cm"
+    end
+  end
 
   def fault?
     if distance_attempts.count.positive?
