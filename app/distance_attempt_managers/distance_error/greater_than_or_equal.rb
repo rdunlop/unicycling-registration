@@ -1,3 +1,4 @@
+# Each jump attempt must be the same, or greater distance from their previous attempt
 class DistanceError::GreaterThanOrEqual
   attr_reader :distance_attempts, :distance
 

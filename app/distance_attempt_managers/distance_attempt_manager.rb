@@ -26,6 +26,7 @@ class DistanceAttemptManager
     acceptable_distance_checker_object(distance).acceptable_distance_error
   end
 
+  # Duplicated in DistanceError::SucceedAtEach
   def max_attempted_distance
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_attempted_distance") do
       return 0 unless distance_attempts.any?

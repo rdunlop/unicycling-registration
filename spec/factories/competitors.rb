@@ -38,6 +38,10 @@ FactoryGirl.define do
       bib_number nil
     end
 
+    trait :with_high_jump_competition do
+      association :competition, factory: :distance_competition
+    end
+
     after(:create) do |comp, evaluator|
       member = FactoryGirl.create(:member, competitor: comp)
       reg = member.registrant
