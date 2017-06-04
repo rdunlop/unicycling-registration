@@ -30,24 +30,17 @@ class RegistrantGroupsController < ApplicationController
     @registrant_group = RegistrantGroup.new
   end
 
+  def edit; end
+
   # GET /registrant_groups/1
   def show; end
-
-  # POST /registrant_groups
-  def create
-    if @registrant_group.save
-      redirect_to @registrant_group, notice: 'Registrant group was successfully created.'
-    else
-      render :new
-    end
-  end
 
   # PUT /registrant_groups/1
   def update
     if @registrant_group.update_attributes(registrant_group_params)
       redirect_to @registrant_group, notice: 'Registrant group was successfully updated.'
     else
-      render :show
+      render :edit
     end
   end
 

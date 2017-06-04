@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)" do
     resources :registrant_group_types
-    resources :registrant_groups, except: [:edit] do
+    resources :registrant_groups do
       member do
         post :join
         post :add_member

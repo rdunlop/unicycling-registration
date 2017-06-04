@@ -22,6 +22,8 @@ class RegistrantGroup < ApplicationRecord
   has_many :registrant_group_members, dependent: :destroy, inverse_of: :registrant_group
   has_many :registrants, through: :registrant_group_members
 
+  validates :name, uniqueness: { scope: :registrant_group_type_id }, allow_blank: true
+
   def sorted_registrants
     registrants.sort{|a, b| a.contact_detail.address <=> b.contact_detail.address }
   end

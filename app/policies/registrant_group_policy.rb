@@ -1,37 +1,41 @@
 class RegistrantGroupPolicy < ApplicationPolicy
   def index?
-    true
+    super_admin?
   end
 
   def new?
-    true
+    super_admin?
   end
 
   def join?
-    true
+    super_admin?
   end
 
   def update?
-    true
+    super_admin?
+  end
+
+  def destroy?
+    super_admin?
   end
 
   def add_member?
-    true
+    super_admin?
   end
 
   def remove_member?
-    true
+    super_admin?
   end
 
   def promote?
-    true
+    super_admin?
   end
 
   def leave?
-    true
+    super_admin?
   end
 
   def request_leader?
-    true
+    super_admin?
   end
 end

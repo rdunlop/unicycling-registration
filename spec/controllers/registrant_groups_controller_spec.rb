@@ -58,45 +58,6 @@ describe RegistrantGroupsController do
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new RegistrantGroup" do
-        expect do
-          post :create, params: { registrant_group: valid_attributes }
-        end.to change(RegistrantGroup, :count).by(1)
-      end
-
-      it "creates a new RegistrantGroup and nested member" do
-        reg = FactoryGirl.create(:registrant)
-        expect do
-          post :create, params: { registrant_group: { name: "Fun1", registrant_group_members_attributes: [{registrant_id: reg.id }] } }
-        end.to change(RegistrantGroupMember, :count).by(1)
-      end
-
-      it "redirects to the created registrant_group" do
-        post :create, params: { registrant_group: valid_attributes }
-        expect(response).to redirect_to(RegistrantGroup.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "does no create a new registrant_group" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
-        expect do
-          post :create, params: { registrant_group: { name: "invalid value" } }
-        end.not_to change(RegistrantGroup, :count)
-      end
-
-      it "re-renders the 'index' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
-        post :create, params: { registrant_group: { "name" => "invalid value" } }
-        assert_select "h1", "Listing Registrant Groups"
-      end
-    end
-  end
-
   describe "PUT update" do
     describe "with valid params" do
       it "updates the registrant_group" do
@@ -114,21 +75,19 @@ describe RegistrantGroupsController do
     end
 
     describe "with invalid params" do
+      let!(:existing_reg_group) { FactoryGirl.create(:registrant_group)}
       it "does not update the registrant_group" do
-        registrant_group = RegistrantGroup.create! valid_attributes
+        registrant_group = FactoryGirl.create(:registrant_group, registrant_group_type: existing_reg_group.registrant_group_type)
         # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: registrant_group.to_param, registrant_group: { name: "invalid value" } }
+          put :update, params: { id: registrant_group.to_param, registrant_group: { name: existing_reg_group.name } }
         end.not_to change { registrant_group.reload.name }
       end
 
       it "re-renders the 'edit' template" do
-        registrant_group = RegistrantGroup.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(RegistrantGroup).to receive(:save).and_return(false)
-        put :update, params: { id: registrant_group.to_param, registrant_group: { "name" => "invalid value" } }
-        assert_select "h1", "Editing registrant_group"
+        registrant_group = FactoryGirl.create(:registrant_group, registrant_group_type: existing_reg_group.registrant_group_type)
+        put :update, params: { id: registrant_group.to_param, registrant_group: { name: existing_reg_group.name } }
+        assert_select "h1", "Edit Registrant Group"
       end
     end
   end

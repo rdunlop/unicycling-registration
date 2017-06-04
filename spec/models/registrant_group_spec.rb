@@ -31,6 +31,14 @@ describe RegistrantGroup do
     expect(@rg.valid?).to eq(true)
   end
 
+  context "with an existing registrant_group" do
+    let!(:reg_group) { FactoryGirl.create(:registrant_group, name: "My Name") }
+    it "does not allow the same name again" do
+      new_reg_group = FactoryGirl.build(:registrant_group, registrant_group_type: reg_group.registrant_group_type, name: "My Name")
+      expect(new_reg_group).to be_invalid
+    end
+  end
+
   it "has a leader" do
     expect(@rg.leader).not_to be_nil
   end

@@ -19,7 +19,7 @@
 
 FactoryGirl.define do
   factory :registrant_group do
-    name "MyString"
+    sequence(:name) { |n| "MyString #{n}" }
     association :leader, factory: :registrant
     association :registrant_group_type, factory: :registrant_group_type
   end
