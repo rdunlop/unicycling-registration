@@ -6,10 +6,6 @@ class DistanceError::GreaterThanOrEqual
     @distance = distance
   end
 
-  def acceptable_distance?
-    acceptable_distance_error.nil?
-  end
-
   def acceptable_distance_error
     max_attempt = distance_attempts.first
     if max_attempt.present?
@@ -22,6 +18,10 @@ class DistanceError::GreaterThanOrEqual
         check_current_attempt_is_longer_than_previous_attempt(max_attempt.distance)
       end
     end
+  end
+
+  def self.single_fault_message(max_attempted_distance)
+    "Fault. Next Distance #{max_attempted_distance}cm+"
   end
 
   private

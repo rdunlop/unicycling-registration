@@ -1,7 +1,5 @@
-class DistanceAttemptPreliminaryManager < DistanceAttemptManager
-  MAX_ATTEMPTS = 12
-
-  def no_more_jumps?
-    distance_attempts.count >= MAX_ATTEMPTS
+class DistanceAttemptPreliminaryManager
+  def self.build(competitor)
+    DistanceAttemptManager.new(competitor, JumpLimit::Attempts12.new, DistanceError::GreaterThanOrEqual)
   end
 end
