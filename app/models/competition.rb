@@ -468,7 +468,7 @@ class Competition < ApplicationRecord
     if sc.nil?
       0
     else
-      sc.total_points(competitor, judge_type)
+      sc.total_points_for_judge_type(competitor, judge_type)
     end
   end
 

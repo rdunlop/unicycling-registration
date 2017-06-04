@@ -45,7 +45,7 @@ class Score < ApplicationRecord
   def total
     return nil if invalid? || competitor.ineligible?
 
-    judge_score_calculator.score_weight_calculator.total(self)
+    judge_score_calculator.calculate_score_total(self)
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge
@@ -61,6 +61,14 @@ class Score < ApplicationRecord
     return nil if invalid? || competitor.ineligible?
 
     judge_score_calculator.judged_points(judge.score_totals, total)
+  end
+
+  def raw_scores
+    (1..4).map do |score_number|
+      unless display_score?(score_number)
+        send("val_#{score_number}")
+      end
+    end.compact
   end
 
   private

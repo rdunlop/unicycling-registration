@@ -8,12 +8,12 @@ class Freestyle_2015_JudgePointsCalculator
   # Return the calculated total points for this score
   # which will probably be related to the other scores by this judge
   #
-  # returns a numeric (probably afraction)
+  # returns a numeric (probably a fraction)
   def judged_points(all_scores, score)
     ((score.to_f / all_scores.sum) * 100).round(2)
   end
 
-  def score_weight_calculator
-    ScoreWeightCalculator::Equal.new
+  def calculate_score_total(score)
+    ScoreWeightCalculator::Equal.new.total(score.raw_scores)
   end
 end

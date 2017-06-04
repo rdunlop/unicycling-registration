@@ -11,8 +11,8 @@ class GenericPlacingPointsCalculator
     @lower_is_better = options[:lower_is_better] || false
   end
 
-  def score_weight_calculator
-    ScoreWeightCalculator::Equal.new
+  def calculate_score_total(score)
+    ScoreWeightCalculator::Equal.new.total(score.raw_scores)
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge

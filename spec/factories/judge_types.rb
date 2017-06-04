@@ -44,5 +44,16 @@ FactoryGirl.define do
       val_3_max 0
       val_4_max 0
     end
+
+    trait :artistic_tech_judge do
+      val_1_description "Presence/Execution"
+      val_2_description "Composition/Choreography"
+      val_3_description "Interpretation of the Music/Timing"
+      val_4_description "N/A"
+      val_1_max 10
+      val_2_max 10
+      val_3_max 10
+      val_4_max 0
+    end
   end
 end

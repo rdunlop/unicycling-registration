@@ -13,11 +13,15 @@ class Freestyle2017JudgePointsCalculator
     ((score.to_f / all_scores.sum) * 100).round(2)
   end
 
-  def score_weight_calculator(judge_type)
-    if judge_type == "Technical"
-      ScoreWeightCalculator::Weighted.new([25, 37.5, 37.5])
-    elsif judge_type == "Presentation"
-      ScoreWeightCalculator::Weighted.new([33.3, 33.3, 33.3])
-    end
+  def calculate_score_total(score)
+    calculator = case score.judge_type.name
+                 when "Technical"
+                   ScoreWeightCalculator::Weighted.new([25, 37.5, 37.5])
+                 when "Presentation"
+                   ScoreWeightCalculator::Equal.new
+                 when "Dismount"
+                   ScoreWeightCalculator::Dismount.new(score.competitor.members.size)
+                 end
+    calculator.total(score.raw_scores)
   end
 end
