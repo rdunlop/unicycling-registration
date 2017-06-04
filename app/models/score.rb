@@ -65,7 +65,7 @@ class Score < ApplicationRecord
 
   def raw_scores
     (1..4).map do |score_number|
-      unless display_score?(score_number)
+      if display_score?(score_number)
         send("val_#{score_number}")
       end
     end.compact
