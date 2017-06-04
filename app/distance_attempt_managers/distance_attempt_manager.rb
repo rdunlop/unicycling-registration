@@ -1,16 +1,22 @@
 # Base Class for all Distance Attempt Managers
-# Helps determine the successful, unsucessful distance for a competitor
+# Helps determine the successful, unsuccessful distance for a competitor
 class DistanceAttemptManager
   attr_accessor :competitor
+  attr_reader :jump_limit
 
-  def initialize(competitor)
+  def self.build(competitor) # temporary override
+    new(competitor)
+  end
+
+  def initialize(competitor, jump_limit = nil)
     @competitor = competitor
+    @jump_limit = jump_limit
   end
 
   delegate :distance_attempts, to: :competitor
 
   def no_more_jumps?
-    raise NotImplementedError
+    jump_limit || raise(NotImplementedError)
   end
 
   def acceptable_distance?(distance)

@@ -90,6 +90,7 @@ class Competition < ApplicationRecord
       "High/Long",
       "High/Long Preliminary IUF 2015",
       "High/Long Final IUF 2015",
+      "High/Long Preliminary IUF 2017",
       "Flatland",
       "Street",
       "Street Final",
@@ -109,7 +110,7 @@ class Competition < ApplicationRecord
   def self.num_member_options
     ["One", "Two", "Three or more"]
   end
-  nilify_blanks only: %i(num_members_per_competitor time_entry_columns start_data_type end_data_type), before: :validation
+  nilify_blanks only: %i[num_members_per_competitor time_entry_columns start_data_type end_data_type], before: :validation
   validates :num_members_per_competitor, inclusion: { in: num_member_options, allow_nil: true }
 
   validate :automatic_competitor_creation_only_with_one
@@ -449,6 +450,8 @@ class Competition < ApplicationRecord
       DistanceAttemptPreliminaryManager
     when "High/Long Final IUF 2015"
       DistanceAttemptFinal_2015_Manager
+    when "High/Long Preliminary IUF 2017"
+      DistanceAttemptPreliminary2017Manager
     else
       raise NotImplementedError
     end
