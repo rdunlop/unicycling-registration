@@ -35,11 +35,9 @@ class ArtisticResultCalculator2017
   #
   # return a numeric
   def total_points(competitor)
-    total = 0
-    competitor.competition.judge_types.uniq.each do |jt|
-      total += total_points_for_judge_type(competitor, jt)
-    end
-    total
+    type_results = results_by_judge_type(competitor)
+
+    calculate_weighted_total(type_results)
   end
 
   def total_points_for_judge_type(competitor, judge_type)
@@ -48,5 +46,26 @@ class ArtisticResultCalculator2017
     active_scores = scores.map(&:placing_points).compact
 
     (active_scores.sum / active_scores.count.to_f).round(2)
+  end
+
+  def results_by_judge_type(competitor)
+    competitor.competition.judge_types.uniq.map do |jt|
+      {
+        type: jt.name,
+        total: total_points_for_judge_type(competitor, jt)
+      }
+    end
+  end
+
+  def calculate_weighted_total(type_results)
+    weights = {
+      "Presentation" => 45,
+      "Technical" => 45,
+      "Dismount" => 10
+    }.freeze
+
+    type_results.map do |tr_entry|
+      weights[tr_entry[:type]] * tr_entry[:total]
+    end.sum / 100.0
   end
 end
