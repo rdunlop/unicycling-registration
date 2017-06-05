@@ -37,10 +37,6 @@ describe RegistrantGroup do
     end
   end
 
-  it "has a leader" do
-    expect(@rg.leader).not_to be_nil
-  end
-
   it "has multiple registrant_group_members" do
     FactoryGirl.create(:registrant_group_member, registrant_group: @rg)
     FactoryGirl.create(:registrant_group_member, registrant_group: @rg)
@@ -49,9 +45,9 @@ describe RegistrantGroup do
   end
 
   it "can assign a registrant to the leader" do
-    @reg = FactoryGirl.create(:noncompetitor)
-    @rg.leader = @reg
-    expect(@rg.leader).to eq(@reg)
+    @leader = FactoryGirl.create(:registrant_group_leader, registrant_group: @rg)
+    @rg.reload
+    expect(@rg.registrant_group_leaders).to eq([@leader])
   end
 
   it "can be found via the registrant" do

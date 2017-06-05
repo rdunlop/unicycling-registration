@@ -1,41 +1,22 @@
 class RegistrantGroupPolicy < ApplicationPolicy
   def index?
+    # must be signed in
     super_admin?
   end
 
   def new?
-    super_admin?
-  end
-
-  def join?
+    # must be signed in
     super_admin?
   end
 
   def update?
+    # must be leader, or convention_admin event-director (if event) or super_admin
     super_admin?
   end
 
   def destroy?
-    super_admin?
-  end
-
-  def add_member?
-    super_admin?
-  end
-
-  def remove_member?
-    super_admin?
-  end
-
-  def promote?
-    super_admin?
-  end
-
-  def leave?
-    super_admin?
-  end
-
-  def request_leader?
+    # NOT NEEDED?
+    # must be leader, or convention_admin event-director (if event) or super_admin
     super_admin?
   end
 end

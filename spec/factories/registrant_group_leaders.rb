@@ -16,8 +16,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :registrant_group do
-    sequence(:name) { |n| "MyString #{n}" }
-    association :registrant_group_type, factory: :registrant_group_type
+  factory :registrant_group_leader do
+    association :user, factory: :user
+    association :registrant_group, factory: :registrant_group
   end
 end

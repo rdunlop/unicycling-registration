@@ -1,19 +1,16 @@
-%h1 Listing Registrant Groups
+%h1 Listing #{@registrant_group_type} Groups
 %br
 %table.sortable
   %thead
     %tr
       %th= RegistrantGroup.human_attribute_name(:name)
-      %th= RegistrantGroup.human_attribute_name(:registrant_id)
-      %th
-      %th
-      %th
+      %th Leaders
       %th
   %tbody
     - @registrant_groups.each do |registrant_group|
       %tr
-        %td= registrant_group.name
-        %td= registrant_group.leader
+        %td= link_to registrant_group.name, registrant_group
+        %td= registrant_group.leaders
         %td= link_to 'Show', registrant_group
-        %td= link_to t("edit"), edit_registrant_group_path(registrant_group)
-        %td= link_to t("delete"), registrant_group, method: :delete, data: { confirm: t("are_you_sure") }
+
+= link_to "New Group", new_registrant_group_type_registrant_group_path(@registrant_group_type)

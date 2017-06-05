@@ -11,15 +11,17 @@ Rails.application.routes.draw do
   get '500', to: 'errors#internal_server_error'
 
   scope "(:locale)" do
-    resources :registrant_group_types
-    resources :registrant_groups do
-      member do
-        post :join
-        post :add_member
-        delete :remove_member
-        post :promote
-        delete :leave
-        post :request_leader
+    resources :registrant_group_types, only: [:index] do
+      shallow do
+        resources :registrant_groups do
+          resources :registrant_group_members, only: %i[create destroy] do
+            member do
+              post :promote
+              post :request_leader
+            end
+          end
+          resources :registrant_group_leaders, only: %i[create destroy]
+        end
       end
     end
 
@@ -291,6 +293,8 @@ Rails.application.routes.draw do
       end
       resources :event_choices, except: %i[index create new show]
       resources :event_categories, except: %i[index create new show]
+
+      resources :registrant_group_types
 
       resources :volunteer_opportunities, except: [:show] do
         post :update_row_order, on: :collection
