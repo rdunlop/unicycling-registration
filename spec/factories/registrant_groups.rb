@@ -4,7 +4,6 @@
 #
 #  id                       :integer          not null, primary key
 #  name                     :string
-#  registrant_id            :integer
 #  created_at               :datetime
 #  updated_at               :datetime
 #  registrant_group_type_id :integer
@@ -12,7 +11,6 @@
 # Indexes
 #
 #  index_registrant_groups_on_registrant_group_type_id  (registrant_group_type_id)
-#  index_registrant_groups_on_registrant_id             (registrant_id)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

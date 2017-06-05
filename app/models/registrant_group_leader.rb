@@ -1,20 +1,18 @@
 # == Schema Information
 #
-# Table name: registrant_group_members
+# Table name: registrant_group_leaders
 #
-#  id                      :integer          not null, primary key
-#  registrant_id           :integer
-#  registrant_group_id     :integer
-#  created_at              :datetime
-#  updated_at              :datetime
-#  additional_details_type :string
-#  additional_details_id   :integer
+#  id                  :integer          not null, primary key
+#  registrant_group_id :integer          not null
+#  user_id             :integer          not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 # Indexes
 #
-#  index_registrant_group_members_on_registrant_group_id  (registrant_group_id)
-#  index_registrant_group_members_on_registrant_id        (registrant_id)
-#  reg_group_reg_group                                    (registrant_id,registrant_group_id) UNIQUE
+#  index_registrant_group_leaders_on_registrant_group_id  (registrant_group_id)
+#  index_registrant_group_leaders_on_user_id              (user_id)
+#  registrant_group_leaders_uniq                          (registrant_group_id,user_id) UNIQUE
 #
 
 class RegistrantGroupLeader < ApplicationRecord
