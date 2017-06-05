@@ -776,6 +776,16 @@ ActiveRecord::Schema.define(version: 20170531201550) do
     t.index ["registrant_id"], name: "index_registrant_expense_items_registrant_id", using: :btree
   end
 
+  create_table "registrant_group_leaders", force: :cascade do |t|
+    t.integer  "registrant_group_id", null: false
+    t.integer  "user_id",             null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["registrant_group_id", "user_id"], name: "registrant_group_leaders_uniq", unique: true, using: :btree
+    t.index ["registrant_group_id"], name: "index_registrant_group_leaders_on_registrant_group_id", using: :btree
+    t.index ["user_id"], name: "index_registrant_group_leaders_on_user_id", using: :btree
+  end
+
   create_table "registrant_group_members", force: :cascade do |t|
     t.integer  "registrant_id"
     t.integer  "registrant_group_id"
@@ -799,12 +809,10 @@ ActiveRecord::Schema.define(version: 20170531201550) do
 
   create_table "registrant_groups", force: :cascade do |t|
     t.string   "name"
-    t.integer  "registrant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "registrant_group_type_id"
     t.index ["registrant_group_type_id"], name: "index_registrant_groups_on_registrant_group_type_id", using: :btree
-    t.index ["registrant_id"], name: "index_registrant_groups_registrant_id", using: :btree
   end
 
   create_table "registrants", force: :cascade do |t|
