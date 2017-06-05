@@ -35,13 +35,11 @@ class ArtisticResultCalculator_2015
   #
   # return a numeric
   def total_points(competitor)
-    scores = competitor.scores.joins(:judge).merge(Judge.active)
-    # XXX need to gather the results by judge_type, so that I can average them?
+    total_results = competitor.competition.judge_types.uniq.map do |jt|
+      total_points_for_judge_type(competitor, jt)
+    end
 
-    # this currently gives equal weight to each of the scores.
-    active_scores = scores.map(&:placing_points).compact
-
-    (active_scores.sum / active_scores.count.to_f).round(2)
+    (total_results.sum / competitor.competition.judge_types.uniq.count.to_f).round(2)
   end
 
   def total_points_for_judge_type(competitor, judge_type)

@@ -7,7 +7,7 @@ class ScoreWeightCalculator::Dismount
 
   def total(score)
     calc_total = if group_size < 3
-                   10 - score.val_1 - (0.5 * score.val_1)
+                   10 - mistake_score(score)
                  else
                    10 - (mistake_score(score) / Math.sqrt(group_size))
                  end

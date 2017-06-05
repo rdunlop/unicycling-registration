@@ -38,6 +38,8 @@ class ScoringClass
         helper: PointsScoringClass.new(competition, false)
       }
     when "Freestyle"
+      # this (unicon_scoring) feature was set to FALSE used by naucc2015.
+      # all other conventions have this set to TRUE
       unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
       {
         calculator: ArtisticResultCalculator.new(unicon_scoring),

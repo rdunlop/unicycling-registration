@@ -20,7 +20,7 @@ class Freestyle2017JudgePointsCalculator
                  when "Presentation"
                    ScoreWeightCalculator::Equal.new
                  when "Dismount"
-                   ScoreWeightCalculator::Dismount.new(score.competitor.members.size)
+                   ScoreWeightCalculator::Dismount.new(score.competitor.active_members.size)
                  end
     calculator.total(score.raw_scores)
   end
