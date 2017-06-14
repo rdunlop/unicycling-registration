@@ -26,23 +26,32 @@ class Exporters::PaymentDetailsExporter
     data = []
     expense_item.payment_details.includes(:payment).each do |payment_detail|
       next unless payment_detail.payment.completed
-      reg = payment_detail.registrant
-      data << [
-        payment_detail.expense_item.to_s,
-        payment_detail.details,
-        reg.bib_number,
-        reg.first_name,
-        reg.last_name,
-        reg.age,
-        reg.contact_detail.city,
-        reg.contact_detail.state,
-        reg.contact_detail.country_residence,
-        reg.contact_detail.country_representing,
-        reg.contact_detail.email,
-        reg.club
-      ]
+      data << add_element(payment_detail)
+    end
+    expense_item.free_items_with_reg_paid.each do |registrant_expense_item|
+      data << add_element(registrant_expense_item)
     end
 
     data
+  end
+
+  private
+
+  def add_element(element)
+    reg = element.registrant
+    [
+      element.expense_item.to_s,
+      element.details,
+      reg.bib_number,
+      reg.first_name,
+      reg.last_name,
+      reg.age,
+      reg.contact_detail.city,
+      reg.contact_detail.state,
+      reg.contact_detail.country_residence,
+      reg.contact_detail.country_representing,
+      reg.contact_detail.email,
+      reg.club
+    ]
   end
 end
