@@ -22,7 +22,7 @@ class Notifications < TenantAwareMailer
   def send_mass_email(subject, body, addresses)
     @body = body
 
-    mail bcc: addresses, subject: subject
+    mail bcc: addresses, subject: subject, reply_to: EventConfiguration.singleton.contact_email
   end
 
   ######### ADMIN

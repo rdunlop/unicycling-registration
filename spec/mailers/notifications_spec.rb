@@ -25,6 +25,16 @@ describe Notifications do
     end
   end
 
+  describe "send_mass_email" do
+    let(:mail) do
+      Notifications.send_mass_email("subejct", "Body", ["a@b.com"])
+    end
+
+    it "sets the reply-to address" do
+      expect(mail.reply_to).to match(["guy@convention.com"])
+    end
+  end
+
   describe "send_feedback" do
     let(:feedback) { FactoryGirl.create(:feedback, message: "This is some feedback", entered_email: "test@complaint.com") }
     let(:mail) do
