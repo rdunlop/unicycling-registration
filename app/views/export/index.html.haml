@@ -7,7 +7,7 @@
       .small-4.columns
         %b Download Details on registrants who bought:
       .small-4.columns
-        = f.select :expense_item_id, ExpenseItem.all.map { |ei| [ei, ei.id] }
+        = f.select :expense_item_id, ExpenseItem.ordered.all.map { |ei| [ei, ei.id] }
       .small-4.columns
         = f.button :submit, "Export Registrants who bought this item", :class => "button", data: { disable_with: false }
 

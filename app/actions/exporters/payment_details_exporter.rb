@@ -18,7 +18,8 @@ class Exporters::PaymentDetailsExporter
       "Country of Residence",
       "Country Representing",
       "Email",
-      "Club"
+      "Club",
+      "Free with registration?"
     ]
   end
 
@@ -26,10 +27,10 @@ class Exporters::PaymentDetailsExporter
     data = []
     expense_item.payment_details.includes(:payment).each do |payment_detail|
       next unless payment_detail.payment.completed
-      data << add_element(payment_detail)
+      data << add_element(payment_detail, "No")
     end
     expense_item.free_items_with_reg_paid.each do |registrant_expense_item|
-      data << add_element(registrant_expense_item)
+      data << add_element(registrant_expense_item, "Yes")
     end
 
     data
@@ -37,7 +38,7 @@ class Exporters::PaymentDetailsExporter
 
   private
 
-  def add_element(element)
+  def add_element(element, free_with_reg)
     reg = element.registrant
     [
       element.expense_item.to_s,
@@ -51,7 +52,8 @@ class Exporters::PaymentDetailsExporter
       reg.contact_detail.country_residence,
       reg.contact_detail.country_representing,
       reg.contact_detail.email,
-      reg.club
+      reg.club,
+      free_with_reg
     ]
   end
 end
