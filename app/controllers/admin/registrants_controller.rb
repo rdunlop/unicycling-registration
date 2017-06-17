@@ -7,7 +7,7 @@ class Admin::RegistrantsController < ApplicationController
   def manage_all
     authorize current_user, :registrant_information?
 
-    @registrants = Registrant.includes(:user, :contact_detail)
+    @registrants = Registrant.includes(:user, :contact_detail).order(:bib_number)
     respond_to do |format|
       format.html { render "manage_all" }
       format.pdf { render pdf: "manage_all", template: "admin/registrants/manage_all.html.haml", formats: [:html], layout: "pdf.html" }

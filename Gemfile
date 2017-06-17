@@ -51,6 +51,7 @@ gem 'rake'
 gem 'redis-namespace'
 gem 'redis-rails'
 gem 'redis-store'
+gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sidekiq', '< 5'

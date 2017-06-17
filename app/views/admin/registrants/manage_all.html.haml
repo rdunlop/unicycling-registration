@@ -3,12 +3,13 @@
 
 %h1= t(".header")
 
-%p
-  Next Registrant Bib Numbers:
-  %br
-  Competitor #{RegistrantType.for('competitor').next_available_bib_number}
-  %br
-  NonCompetitor #{RegistrantType.for('noncompetitor').next_available_bib_number}
+- cache [Registrant] do
+  %p
+    Next Registrant Bib Numbers:
+    %br
+    Competitor #{RegistrantType.for('competitor').next_available_bib_number}
+    %br
+    NonCompetitor #{RegistrantType.for('noncompetitor').next_available_bib_number}
 - can_undelete = policy(Registrant).undelete?
 %table.sortable.searchable
   %thead
@@ -30,7 +31,7 @@
   %tbody
     // # includes 'current_user' because of the 'can? Calls
     - cache_i18n ['index_all.registrant', Registrant, current_user, @config ], expires_in: 1.minute do
-      - @registrants.find_each(batch_size: 100) do |registrant|
+      - @registrants.each do |registrant|
 
         -# Uses javascript to show/hide elements on the page so that better caching can be applied.
         - if registrant.competitor?

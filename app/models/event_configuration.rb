@@ -117,7 +117,7 @@ class EventConfiguration < ApplicationRecord
 
   validates :paypal_mode, inclusion: { in: paypal_modes }
 
-  nilify_blanks only: %i(rulebook_url event_url), before: :validation
+  nilify_blanks only: %i[rulebook_url event_url], before: :validation
 
   mount_uploader :rules_file_name, PdfUploader
 
@@ -220,7 +220,7 @@ class EventConfiguration < ApplicationRecord
     # Use the request-level EventConfiguration, if it is defined, otherwise, fall-back
     # to fetching from the DB
     return @config if defined?(@config)
-    @singleton = EventConfiguration.includes(:translations).first || EventConfiguration.new
+    RequestStore.store[:ec_singleton] ||= EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
   def self.paypal_base_url
