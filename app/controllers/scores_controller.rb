@@ -24,7 +24,7 @@ class ScoresController < ApplicationController
   before_action :authenticate_user!
   before_action :load_judge
   before_action :find_competitor, except: [:index]
-  before_action :find_or_create_score, only: [:create, :new] # must be performed before load_and_auth_resource
+  before_action :find_or_create_score, only: %i[create new] # must be performed before load_and_auth_resource
 
   before_action :set_judge_breadcrumb
 

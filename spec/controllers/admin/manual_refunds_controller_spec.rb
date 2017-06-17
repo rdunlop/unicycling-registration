@@ -47,7 +47,8 @@ describe Admin::ManualRefundsController do
             "0" => {
               paid_detail_id: @pd.id,
               refund: true
-            }}
+            }
+          }
         } }
       end.to change(RefundDetail, :count).by(1)
       r = Refund.last

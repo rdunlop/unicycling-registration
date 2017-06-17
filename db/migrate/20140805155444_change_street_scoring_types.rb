@@ -24,8 +24,7 @@ class ChangeStreetScoringTypes < ActiveRecord::Migration
                        val_2_max: 0,
                        val_3_max: 0,
                        val_4_max: 0,
-                       event_class: "Street"
-                      )
+                       event_class: "Street")
       JudgeType.create(name: "Street Judge Zone 3",
                        val_1_description: "Score",
                        val_2_description: "n/a",
@@ -35,8 +34,7 @@ class ChangeStreetScoringTypes < ActiveRecord::Migration
                        val_2_max: 0,
                        val_3_max: 0,
                        val_4_max: 0,
-                       event_class: "Street"
-                      )
+                       event_class: "Street")
     end
   end
 

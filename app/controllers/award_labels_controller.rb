@@ -23,9 +23,9 @@
 class AwardLabelsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_ability
-  before_action :load_award_label, only: [:edit, :update, :destroy]
+  before_action :load_award_label, only: %i[edit update destroy]
 
-  before_action :load_user, except: [:edit, :update, :destroy]
+  before_action :load_user, except: %i[edit update destroy]
 
   # GET /users/#/award_labels
   def index
@@ -287,7 +287,7 @@ class AwardLabelsController < ApplicationController
       place = competitor.place
     end
     return false if place.nil?
-    return false if place == 0
+    return false if place.zero?
     return false if place < min_place
     return false if place > max_place
 

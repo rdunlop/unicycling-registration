@@ -2,10 +2,9 @@ class OrganizationMembershipsController < ApplicationController
   include ExcelOutputter
   before_action :authenticate_user!
   before_action :authorize_admin
-  before_action :load_registrants, only: [:index, :export]
+  before_action :load_registrants, only: %i[index export]
 
-  def index
-  end
+  def index; end
 
   def toggle_confirm
     @registrant = Registrant.find(params[:id])

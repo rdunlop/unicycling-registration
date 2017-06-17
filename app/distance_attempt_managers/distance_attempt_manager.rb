@@ -1,16 +1,21 @@
 # Base Class for all Distance Attempt Managers
-# Helps determine the successful, unsucessful distance for a competitor
+# Helps determine the successful, unsuccessful distance for a competitor
 class DistanceAttemptManager
   attr_accessor :competitor
+  attr_reader :jump_limit_checker, :acceptable_distance_checker_class
 
-  def initialize(competitor)
+  def initialize(competitor, jump_limit_checker, acceptable_distance_checker_class)
     @competitor = competitor
+    @jump_limit_checker = jump_limit_checker
+    @acceptable_distance_checker_class = acceptable_distance_checker_class
   end
 
   delegate :distance_attempts, to: :competitor
 
   def no_more_jumps?
-    raise NotImplementedError
+    Rails.cache.fetch("#{distance_attempt_cache_key_base}/no_more_jumps") do
+      jump_limit_checker.no_more_jumps?(distance_attempts)
+    end
   end
 
   def acceptable_distance?(distance)
@@ -18,20 +23,10 @@ class DistanceAttemptManager
   end
 
   def acceptable_distance_error(distance)
-    max_attempt = distance_attempts.first
-    if max_attempt.present?
-      if max_attempt.fault?
-        if distance < max_attempt.distance
-          "New Distance (#{distance}cm) must be greater than or equal to #{max_attempt.distance}cm"
-        end
-      else
-        # no fault
-        check_current_attempt_is_longer_than_previous_attempt(distance, max_attempt.distance)
-
-      end
-    end
+    acceptable_distance_checker_object(distance).acceptable_distance_error
   end
 
+  # Duplicated in DistanceError::SucceedAtEach
   def max_attempted_distance
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/max_attempted_distance") do
       return 0 unless distance_attempts.any?
@@ -65,8 +60,8 @@ class DistanceAttemptManager
   end
 
   def distance_attempt_status_code
-    if double_fault?
-      "double_fault"
+    if no_more_jumps?
+      "cannot_attempt"
     else
       if single_fault?
         "single_fault"
@@ -84,7 +79,7 @@ class DistanceAttemptManager
         "Finished. Final Score #{max_successful_distance}cm"
       else
         if single_fault?
-          single_fault_message(max_attempted_distance)
+          acceptable_distance_checker_class.single_fault_message(max_attempted_distance)
         else
           "Success. Next Distance #{max_attempted_distance + 1}cm +"
         end
@@ -94,41 +89,21 @@ class DistanceAttemptManager
 
   private
 
-  def single_fault_message(distance)
-    "Fault. Next Distance #{distance}cm+"
+  def acceptable_distance_checker_object(distance)
+    acceptable_distance_checker_class.new(distance_attempts, distance)
   end
 
   def distance_attempt_cache_key_base
     "/competitor/#{competitor.id}-#{competitor.updated_at}/#{DistanceAttempt.cache_key_for_set(competitor.id)}/"
   end
 
-  # for distance_attempt logic, there are certain 'states' that a competitor can get into
-  def double_fault?
-    Rails.cache.fetch("#{distance_attempt_cache_key_base}/double_fault") do
-      df = false
-      if distance_attempts.count > 1
-        if distance_attempts[0].fault? && distance_attempts[1].fault? && distance_attempts[0].distance == distance_attempts[1].distance
-          df = true
-        end
-      end
-
-      df
-    end
-  end
-
   def single_fault?
     Rails.cache.fetch("#{distance_attempt_cache_key_base}/single_fault?") do
-      if distance_attempts.count > 0
+      if distance_attempts.count.positive?
         distance_attempts.first.fault?
       else
         false
       end
-    end
-  end
-
-  def check_current_attempt_is_longer_than_previous_attempt(distance, max_distance)
-    if distance <= max_distance
-      "New Distance (#{distance}cm) must be greater than #{max_distance}cm"
     end
   end
 end

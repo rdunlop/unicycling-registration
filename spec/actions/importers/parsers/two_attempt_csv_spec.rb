@@ -11,7 +11,8 @@ describe Importers::Parsers::TwoAttemptCsv do
     expect(importer.extract_file(test_file)).to eq(
       [
         ["101", "1", "30", "0", nil, "10", "45", "0", nil],
-        ["102", "2", "30", "239", "DQ", "11", "0", "0", nil]]
+        ["102", "2", "30", "239", "DQ", "11", "0", "0", nil]
+      ]
     )
   end
 
@@ -19,7 +20,6 @@ describe Importers::Parsers::TwoAttemptCsv do
     input_data = importer.process_row(["101", "1", "30", "0", nil, "10", "45", "0"])
 
     # 101,1,30,0,,10,45,0,
-    result = TwoAttemptEntry.first
     expect(input_data[:bib_number]).to eq("101")
 
     expect(input_data[:minutes_1]).to eq("1")

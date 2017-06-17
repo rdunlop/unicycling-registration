@@ -37,7 +37,7 @@ RSpec.describe ResultDisplayer::TimeResult do
     end
 
     it "form_label_symbols" do
-      expect(subject.form_label_symbols).to eq([:minutes, :seconds, :thousands])
+      expect(subject.form_label_symbols).to eq(%i[minutes seconds thousands])
     end
 
     it "form_inputs" do
@@ -70,7 +70,7 @@ RSpec.describe ResultDisplayer::TimeResult do
     end
 
     it "form_label_symbols" do
-      expect(subject.form_label_symbols).to eq([:minutes, :seconds, :thousands, :number_of_laps])
+      expect(subject.form_label_symbols).to eq(%i[minutes seconds thousands number_of_laps])
     end
 
     it "form_inputs" do

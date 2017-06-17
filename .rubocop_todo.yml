@@ -168,7 +168,7 @@ Style/IfUnlessModifier:
 
 # Offense count: 4
 # Cop supports --auto-correct.
-Style/MethodCallParentheses:
+Style/MethodCallWithoutArgsParentheses:
   Exclude:
     - 'app/controllers/standard_skill_routines_controller.rb'
     - 'app/models/manual_refund.rb'

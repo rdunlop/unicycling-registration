@@ -21,9 +21,9 @@ class SetRegistrantDefaultWheelSize < ActiveRecord::Migration
     def set_default_wheel_size
       if default_wheel_size.nil?
         if age > 10
-          self.default_wheel_size = WheelSize.find_by_description("24\" Wheel")
+          self.default_wheel_size = WheelSize.find_by(description: "24\" Wheel")
         else
-          self.default_wheel_size = WheelSize.find_by_description("20\" Wheel")
+          self.default_wheel_size = WheelSize.find_by(description: "20\" Wheel")
         end
       end
     end

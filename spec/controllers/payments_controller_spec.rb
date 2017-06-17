@@ -271,7 +271,8 @@ describe PaymentsController do
                 details: "Additional Details",
                 free: true,
                 amount: 100
-              }]
+              }
+            ]
           } }
           expect(PaymentDetail.count).to eq(1)
           expect(PaymentDetail.last.refunded?).to eq(false)
@@ -297,7 +298,8 @@ describe PaymentsController do
                 free: true,
                 amount: 100,
                 _destroy: "1"
-              }]
+              }
+            ]
           } }
           expect(PaymentDetail.count).to eq(1)
           expect(PaymentDetail.last.refunded?).to eq(false)
@@ -352,7 +354,7 @@ describe PaymentsController do
 
     context "without a valid coupon" do
       it "renders" do
-        post :apply_coupon, params:  { id: payment.id }
+        post :apply_coupon, params: { id: payment.id }
       end
     end
 

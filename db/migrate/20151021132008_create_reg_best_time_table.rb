@@ -8,7 +8,7 @@ class CreateRegBestTimeTable < ActiveRecord::Migration
       t.integer :value, null: false
       t.timestamps
     end
-    add_index :registrant_best_times, [:event_id, :registrant_id], unique: true
+    add_index :registrant_best_times, %i[event_id registrant_id], unique: true
     add_index :registrant_best_times, [:registrant_id]
   end
 end

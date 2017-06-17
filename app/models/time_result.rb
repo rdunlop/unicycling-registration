@@ -82,7 +82,7 @@ class TimeResult < ApplicationRecord
 
   def as_json(options = {})
     options = {
-      except: [:id, :created_at, :updated_at, :competitor_id],
+      except: %i[id created_at updated_at competitor_id],
       methods: [:bib_number]
     }
     super(options)
@@ -93,7 +93,7 @@ class TimeResult < ApplicationRecord
   end
 
   def entered_at_to_s
-    entered_at.to_formatted_s(:short) if entered_at
+    entered_at&.to_formatted_s(:short)
   end
 
   delegate :event, to: :competitor

@@ -1,6 +1,6 @@
 class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConventionSetupController
   before_action :authorize_setup
-  before_action :load_registration_cost, except: [:index, :new, :create]
+  before_action :load_registration_cost, except: %i[index new create]
   before_action :load_available_registrant_types, except: [:index]
 
   before_action :set_breadcrumbs
@@ -86,9 +86,9 @@ class ConventionSetup::RegistrationCostsController < ConventionSetup::BaseConven
         :max_age,
         :expense_item_id,
         :_destroy,
-        expense_item_attributes: [:id, :cost, :tax]
+        expense_item_attributes: %i[id cost tax]
       ],
-      translations_attributes: [:id, :locale, :name]
+      translations_attributes: %i[id locale name]
     )
   end
 

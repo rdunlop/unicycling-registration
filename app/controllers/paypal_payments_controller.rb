@@ -27,6 +27,5 @@ class PaypalPaymentsController < ApplicationController
   end
 
   # PayPal return endpoint
-  def success
-  end
+  def success; end
 end

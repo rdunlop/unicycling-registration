@@ -4,6 +4,6 @@ class AddOrderAndParentsToPages < ActiveRecord::Migration
     add_column :pages, :parent_page_id, :integer
 
     add_index :pages, [:position]
-    add_index :pages, [:parent_page_id, :position]
+    add_index :pages, %i[parent_page_id position]
   end
 end

@@ -29,7 +29,7 @@ class CompetitorOrderer
     end
 
     res = first_competitor.comparable_score <=> second_competitor.comparable_score
-    if res == 0
+    if res.zero?
       if score_is_invalid(a.comparable_tie_break_score) || score_is_invalid(b.comparable_tie_break_score)
         return incorrect_scores_last(a.comparable_tie_break_score, b.comparable_tie_break_score)
       end

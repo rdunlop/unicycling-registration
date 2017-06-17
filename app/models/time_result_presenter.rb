@@ -30,7 +30,7 @@ class TimeResultPresenter
   # of 100, we assume that we only have 0.1 second precision,
   # and thus we only print ".X"
   def thousands_string
-    if thousands == 0
+    if thousands.zero?
       if display_thousands
         return ".000"
       else
@@ -38,7 +38,7 @@ class TimeResultPresenter
       end
     end
 
-    if thousands % 100 == 0 && !display_thousands
+    if (thousands % 100).zero? && !display_thousands
       ".#{(thousands / 100)}"
     else
       ".#{thousands.to_s.rjust(3, '0')}"
@@ -47,7 +47,7 @@ class TimeResultPresenter
 
   def hours_minutes_string
     hours = minutes / 60
-    if hours > 0 || display_hours
+    if hours.positive? || display_hours
       remaining_minutes = minutes % 60
       "#{hours}:#{remaining_minutes.to_s.rjust(2, '0')}"
     else

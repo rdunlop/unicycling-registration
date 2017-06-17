@@ -35,8 +35,7 @@ describe AwardLabelsController do
   # update the return value of this method accordingly.
   def valid_attributes
     { "registrant_id" => @registrant.id,
-      "place" => 1
-    }
+      "place" => 1}
   end
 
   describe "GET index" do
@@ -57,8 +56,7 @@ describe AwardLabelsController do
                                     line_4: "Adults",
                                     line_5: "Winner",
                                     place: 2,
-                                    user: @admin_user
-                                   )
+                                    user: @admin_user)
       get :index, params: { user_id: @admin_user }
       assert_select "td", aw_label.line_1
 

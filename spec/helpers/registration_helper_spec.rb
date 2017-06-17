@@ -32,7 +32,8 @@ describe RegistrationHelper do
     context "with a registrant from a previous convention" do
       before do
         @old_registrant = create_registrant_in_previous_convention(
-          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith" })
+          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith" }
+        )
       end
 
       it "returns the registrants with subdomain keys" do
@@ -47,7 +48,8 @@ describe RegistrationHelper do
         before do
           travel(- 2.months) do
             @older_registrant = create_registrant_in_previous_convention(
-              subdomain: "older", user_attributes: { first_name: "Robert", last_name: "Smith" })
+              subdomain: "older", user_attributes: { first_name: "Robert", last_name: "Smith" }
+            )
           end
         end
 
@@ -65,7 +67,8 @@ describe RegistrationHelper do
     context "with an incomplete registrant in a previous convention" do
       before do
         @old_registrant = create_registrant_in_previous_convention(
-          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith", status: "events" })
+          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith", status: "events" }
+        )
       end
 
       it_should_behave_like "return an empty array"
@@ -74,7 +77,8 @@ describe RegistrationHelper do
     context "with a deleted registrant in a previous convention" do
       before do
         @old_registrant = create_registrant_in_previous_convention(
-          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith", deleted: true})
+          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith", deleted: true}
+        )
       end
 
       it_should_behave_like "return an empty array"

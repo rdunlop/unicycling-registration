@@ -2,7 +2,7 @@ class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetit
   before_action :authenticate_user!
   before_action :authorize_admin
   before_action :add_breadcrumbs
-  before_action :load_age_group_type, only: [:edit, :show, :update, :destroy, :duplicate]
+  before_action :load_age_group_type, only: %i[edit show update destroy duplicate]
 
   respond_to :html
 
@@ -41,12 +41,15 @@ class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetit
   end
 
   def destroy
-    @age_group_type.destroy
-    respond_with(@age_group_type)
+    if @age_group_type.destroy
+      flash[:notice] = "Age Group deleted"
+    else
+      flash[:alert] = "Unable to delete age group (in use)"
+    end
+    redirect_to age_group_types_path
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @age_group_type.update_attributes(age_group_type_params)
@@ -71,6 +74,6 @@ class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetit
 
   def age_group_type_params
     params.require(:age_group_type).permit(:name, :description,
-                                           age_group_entries_attributes: [:id, :_destroy, :end_age, :gender, :short_description, :start_age, :wheel_size_id])
+                                           age_group_entries_attributes: %i[id _destroy end_age gender short_description start_age wheel_size_id])
   end
 end

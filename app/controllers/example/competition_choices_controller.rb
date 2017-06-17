@@ -4,11 +4,9 @@ class Example::CompetitionChoicesController < ApplicationController
   before_action :set_action_breadcrumb, unless: :index
 
   # GET /competition_setup/events/1/competition_choices
-  def index
-  end
+  def index; end
 
-  def freestyle
-  end
+  def freestyle; end
 
   def individual
     add_breadcrumb "Freestyle", freestyle_example_competition_choices_path
@@ -22,36 +20,28 @@ class Example::CompetitionChoicesController < ApplicationController
     add_breadcrumb "Freestyle", freestyle_example_competition_choices_path
   end
 
-  def standard_skill
-  end
+  def standard_skill; end
 
-  def high_long
-  end
+  def high_long; end
 
-  def timed
-  end
+  def timed; end
 
-  def points
-  end
+  def points; end
 
-  def flatland
-  end
+  def flatland; end
 
-  def street
-  end
+  def street; end
 
-  def overall_champion
-  end
+  def overall_champion; end
 
-  def custom
-  end
+  def custom; end
 
   # Download a sample data file.
   def download_file
     filename = validate_file(params[:filename])
-    return unless filename.present?
+    return if filename.blank?
     send_file(
-      "#{Rails.root}/public/sample_data/#{filename}",
+      Rails.root.join("public", "sample_data", filename),
       filename: filename
     )
   end

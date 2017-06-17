@@ -26,10 +26,10 @@ class CompetitorsController < ApplicationController
   include SortableObject
 
   before_action :authenticate_user!
-  before_action :load_competition, except: [:edit, :update, :destroy, :withdraw, :update_row_order]
-  before_action :load_competitor, only:    [:edit, :update, :destroy, :withdraw, :update_row_order]
+  before_action :load_competition, except: %i[edit update destroy withdraw update_row_order]
+  before_action :load_competitor, only:    %i[edit update destroy withdraw update_row_order]
 
-  before_action :set_parent_breadcrumbs, only: [:index, :new, :edit]
+  before_action :set_parent_breadcrumbs, only: %i[index new edit]
   before_action :authorize_sort, only: :update_row_order
 
   # GET /competitions/:competition_id/1/competitors/new
@@ -171,7 +171,7 @@ class CompetitorsController < ApplicationController
   end
 
   def competitor_params
-    params.require(:competitor).permit(:status, :custom_name, members_attributes: [:registrant_id, :id, :alternate, :_destroy])
+    params.require(:competitor).permit(:status, :custom_name, members_attributes: %i[registrant_id id alternate _destroy])
   end
 
   def load_competition

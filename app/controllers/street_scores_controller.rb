@@ -22,7 +22,7 @@ class StreetScoresController < ApplicationController
     authorize @score, :create?
     # row_order_position is from '0', but must be from '1'
     set_competitor_rank_score(@score, params[:row_order_position].to_i + 1)
-    @street_scores = @judge.reload.scores.sort {|a, b| a.val_1 <=> b.val_1 }
+    @street_scores = @judge.reload.scores.sort_by(&:val_1)
     respond_to do |format|
       format.js
     end
@@ -40,7 +40,7 @@ class StreetScoresController < ApplicationController
     if set_competitor_rank_score(@score, params[:rank].to_i - 1)
       flash[:notice] = "Ok"
     end
-    @street_scores = @judge.reload.scores.sort {|a, b| a.val_1 <=> b.val_1 }
+    @street_scores = @judge.reload.scores.sort_by(&:val_1)
     respond_to do |format|
       format.js
     end
@@ -102,6 +102,6 @@ class StreetScoresController < ApplicationController
   def load_competition
     @judge = Judge.find(params[:judge_id])
     @competition = @judge.competition
-    @street_scores = @judge.scores.sort {|a, b| a.val_1 <=> b.val_1 }
+    @street_scores = @judge.scores.sort_by(&:val_1)
   end
 end

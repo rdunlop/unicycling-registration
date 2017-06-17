@@ -13,7 +13,7 @@
 
 class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConventionSetupController
   before_action :authenticate_user!, except: [:verify]
-  before_action :load_tenant_alias, only: [:activate, :destroy]
+  before_action :load_tenant_alias, only: %i[activate destroy]
 
   before_action :authorize_setup, except: [:verify]
   before_action :skip_authorization, only: [:verify]

@@ -113,7 +113,8 @@ describe ConventionSetup::RegistrationCostsController do
               min_age: 10,
               max_age: 50
             }
-          })
+          }
+        )
         post :create, params: { registration_cost: params }
         rce = RegistrationCostEntry.first
         expect(rce.min_age).to eq(10)
@@ -156,7 +157,8 @@ describe ConventionSetup::RegistrationCostsController do
               },
               id: registration_cost.registration_cost_entries.first.id
             }
-          })
+          }
+        )
         put :update, params: { id: registration_cost.to_param, registration_cost: params }
         expect(response).to redirect_to(registration_costs_path)
       end

@@ -33,15 +33,15 @@ class ImportResultsController < ApplicationController
   include IsStartTimeAction
 
   before_action :authenticate_user!
-  before_action :load_user, except: [:edit, :update, :destroy]
-  before_action :load_competition, except: [:edit, :update, :destroy]
-  before_action :load_import_result, only: [:edit, :update, :destroy]
+  before_action :load_user, except: %i[edit update destroy]
+  before_action :load_competition, except: %i[edit update destroy]
+  before_action :load_import_result, only: %i[edit update destroy]
 
   before_action :load_new_import_result, only: [:create]
-  before_action :load_import_results, only: [:data_entry, :display_csv, :display_chip, :index]
-  before_action :load_results_for_competition, only: [:review, :approve]
-  before_action :filter_import_results_by_start_times, only: [:data_entry, :display_csv, :review, :approve]
-  before_action :set_is_start_time, only: [:display_csv, :import_csv]
+  before_action :load_import_results, only: %i[data_entry display_csv display_chip index]
+  before_action :load_results_for_competition, only: %i[review approve]
+  before_action :filter_import_results_by_start_times, only: %i[data_entry display_csv review approve]
+  before_action :set_is_start_time, only: %i[display_csv import_csv]
 
   before_action :authorize_competition_data, except: [:approve]
 
@@ -132,7 +132,8 @@ class ImportResultsController < ApplicationController
       params[:bib_number_column_number].to_i - 1,
       params[:time_column_number].to_i - 1,
       params[:number_of_decimal_places].to_i,
-      params[:lap_column_number].to_i - 1)
+      params[:lap_column_number].to_i - 1
+    )
 
     if importer.process(params[:file],
                         false,
@@ -202,7 +203,8 @@ class ImportResultsController < ApplicationController
     params.require(:import_result).permit(
       :bib_number, :status, :raw_data,
       :number_of_laps, :number_of_penalties, :points, :details, :is_start_time,
-      *HoursFacade::PERMITTED_PARAMS)
+      *HoursFacade::PERMITTED_PARAMS
+    )
   end
 
   def load_user

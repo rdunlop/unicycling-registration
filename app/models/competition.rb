@@ -81,7 +81,6 @@ class Competition < ApplicationRecord
     ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing", "Swiss Track"]
   end
 
-  before_validation :clear_data_types_of_strings
   validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }
 
   def self.scoring_classes
@@ -91,6 +90,7 @@ class Competition < ApplicationRecord
       "High/Long",
       "High/Long Preliminary IUF 2015",
       "High/Long Final IUF 2015",
+      "High/Long Preliminary IUF 2017",
       "Flatland",
       "Street",
       "Street Final",
@@ -110,7 +110,7 @@ class Competition < ApplicationRecord
   def self.num_member_options
     ["One", "Two", "Three or more"]
   end
-  before_validation :clear_num_members_per_compeititor_of_strings
+  nilify_blanks only: %i[num_members_per_competitor time_entry_columns start_data_type end_data_type], before: :validation
   validates :num_members_per_competitor, inclusion: { in: num_member_options, allow_nil: true }
 
   validate :automatic_competitor_creation_only_with_one
@@ -124,7 +124,7 @@ class Competition < ApplicationRecord
   validates :combined_competition, absence: true, unless: proc{ |f| f.scoring_class == "Overall Champion" }
 
   TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "hours_minutes_seconds"].freeze
-  validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }
+  validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }, allow_nil: true
 
   scope :event_order, -> { includes(:event).order("events.name") }
 
@@ -225,7 +225,7 @@ class Competition < ApplicationRecord
   end
 
   def end_time_to_s
-    scheduled_completion_at.to_formatted_s(:short) if scheduled_completion_at
+    scheduled_completion_at&.to_formatted_s(:short)
   end
 
   def to_s_with_event_class
@@ -327,9 +327,7 @@ class Competition < ApplicationRecord
     ScoringClass.for(event_class, self)[:tiers_enabled]
   end
 
-  def age_group_entries
-    age_group_type.age_group_entries unless age_group_type.nil?
-  end
+  delegate :age_group_entries, to: :age_group_type
 
   delegate :mixed_gender_age_groups?, to: :age_group_type, allow_nil: true
 
@@ -355,7 +353,7 @@ class Competition < ApplicationRecord
   end
 
   def expert_results_list(gender)
-    competitors_with_results.select{|comp| comp.gender == gender}.sort{|a, b| a.sorting_overall_place <=> b.sorting_overall_place }
+    competitors_with_results.select{|comp| comp.gender == gender}.sort_by(&:sorting_overall_place)
   end
 
   def results_list_for(ag_entry)
@@ -452,6 +450,8 @@ class Competition < ApplicationRecord
       DistanceAttemptPreliminaryManager
     when "High/Long Final IUF 2015"
       DistanceAttemptFinal_2015_Manager
+    when "High/Long Preliminary IUF 2017"
+      DistanceAttemptPreliminary2017Manager
     else
       raise NotImplementedError
     end
@@ -485,15 +485,6 @@ class Competition < ApplicationRecord
     attributes['event_category_id'].blank? && attributes['competition_id'].blank?
   end
 
-  def clear_num_members_per_compeititor_of_strings
-    self.num_members_per_competitor = nil if num_members_per_competitor == ""
-  end
-
-  def clear_data_types_of_strings
-    self.start_data_type = nil if start_data_type == ""
-    self.end_data_type = nil if end_data_type == ""
-  end
-
   def published_only_when_locked
     if published? && !locked?
       errors.add(:base, "Cannot Publish an unlocked Competition")
@@ -507,7 +498,7 @@ class Competition < ApplicationRecord
   end
 
   def no_competition_sources_when_overall_calculation
-    if scoring_class == "Overall Champion" && competition_sources.size > 0
+    if scoring_class == "Overall Champion" && competition_sources.size.positive?
       errors.add(:competiton_sources_attributes, "unable to specify competition sources when using Overall Champion")
     end
   end

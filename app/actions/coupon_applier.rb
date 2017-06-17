@@ -19,7 +19,7 @@ class CouponApplier
       end
     end
 
-    if applied_count == 0
+    if applied_count.zero?
       self.error ||= "Coupon Code not applicable to this order"
     end
 

@@ -29,7 +29,7 @@ class ErrorsController < ApplicationController
   # in controllers to return a list of any of:
   # :html, :css, :js, :json, :pdf, :all
   def respond_to_formats
-    [:html, :all]
+    %i[html all]
   end
 
   def set_default_content_type

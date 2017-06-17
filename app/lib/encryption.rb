@@ -33,7 +33,8 @@ class Encryption
     # Initialize the client
     new_client = Acme::Client.new(
       private_key: private_key,
-      endpoint: server_endpoint)
+      endpoint: server_endpoint
+    )
 
     # If the private key is not known to the server, we need to register it for the first time.
     registration = new_client.register(contact: "mailto:#{Rails.application.secrets.server_admin_email}")
@@ -127,7 +128,8 @@ class Encryption
   def client
     @client ||= Acme::Client.new(
       private_key: private_key_from_s3,
-      endpoint: server_endpoint)
+      endpoint: server_endpoint
+    )
   end
 
   private

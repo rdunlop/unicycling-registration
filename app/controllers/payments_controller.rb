@@ -174,7 +174,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(payment_details_attributes: [:amount, :registrant_id, :expense_item_id, :details, :free, :_destroy])
+    params.require(:payment).permit(payment_details_attributes: %i[amount registrant_id expense_item_id details free _destroy])
   end
 
   def set_payments_breadcrumb

@@ -4,28 +4,23 @@ class WelcomeController < ApplicationController
 
   before_action :check_acceptable_format
 
-  def help_translate
-  end
+  def help_translate; end
 
   def help
     @user = current_user
   end
 
   # GET /welcome/usa_membership
-  def usa_membership
-  end
+  def usa_membership; end
 
   # GET /welcome/changelog
-  def changelog
-  end
+  def changelog; end
 
   # GET /welcome/confirm
   # The path where users are directed after signing up
-  def confirm
-  end
+  def confirm; end
 
-  def passwords
-  end
+  def passwords; end
 
   # This is the "root_path", and redirects the user to different places
   # depending on the configuration of the server.

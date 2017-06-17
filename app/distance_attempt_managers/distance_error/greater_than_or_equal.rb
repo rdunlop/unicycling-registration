@@ -1,13 +1,10 @@
+# Each jump attempt must be the same, or greater distance from their previous attempt
 class DistanceError::GreaterThanOrEqual
   attr_reader :distance_attempts, :distance
 
   def initialize(distance_attempts, distance)
     @distance_attempts = distance_attempts
     @distance = distance
-  end
-
-  def acceptable_distance?
-    acceptable_distance_error.nil?
   end
 
   def acceptable_distance_error
@@ -22,6 +19,10 @@ class DistanceError::GreaterThanOrEqual
         check_current_attempt_is_longer_than_previous_attempt(max_attempt.distance)
       end
     end
+  end
+
+  def self.single_fault_message(max_attempted_distance)
+    "Fault. Next Distance #{max_attempted_distance}cm+"
   end
 
   private

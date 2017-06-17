@@ -9,7 +9,7 @@ class AddEnteredUserToExternalResult < ActiveRecord::Migration
     add_column :external_results, :status, :string
     change_column_null :external_results, :status, false, "active"
     results = execute("select ur.user_id from users_roles ur, roles r where ur.role_id = r.id AND r.name='super_admin'")
-    super_user_id = results.count > 0 ? results[0]["user_id"] : nil
+    super_user_id = results.count.positive? ? results[0]["user_id"] : nil
     change_column_null :external_results, :entered_by_id, false, super_user_id
 
     add_column :time_results, :entered_by_id, :integer

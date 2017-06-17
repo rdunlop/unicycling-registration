@@ -3,8 +3,7 @@ class ExportController < ApplicationController
   before_action :authorize_action
   include ExcelOutputter
 
-  def index
-  end
+  def index; end
 
   def download_competitors_for_timers
     exporter = Exporters::AllCompetitors.new

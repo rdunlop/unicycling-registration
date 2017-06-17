@@ -40,7 +40,7 @@ FactoryGirl.define do
                                                          build(:registration_cost_entry, registration_cost: registration_cost)
                                                        else
                                                          build(:registration_cost_entry, registration_cost: registration_cost, expense_item: evaluator.expense_item)
-        end
+                                                       end
       end
     end
     sequence(:name) { |n| "Early Registration #{n}" }

@@ -6,8 +6,7 @@ class Translations::PagesController < Admin::TranslationsController
   end
 
   # GET /translations/pages/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations/pages/1
   def update
@@ -26,6 +25,6 @@ class Translations::PagesController < Admin::TranslationsController
   end
 
   def page_params
-    params.require(:page).permit(translations_attributes: [:id, :locale, :title, :body])
+    params.require(:page).permit(translations_attributes: %i[id locale title body])
   end
 end

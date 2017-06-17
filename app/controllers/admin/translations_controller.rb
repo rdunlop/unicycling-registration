@@ -3,8 +3,7 @@ class Admin::TranslationsController < ApplicationController
   before_action :authorize_setup, except: [:clear_cache]
   before_action :add_breadcrumbs
 
-  def index
-  end
+  def index; end
 
   def clear_cache
     authorize :translation, :clear_cache?

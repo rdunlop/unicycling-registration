@@ -19,7 +19,7 @@ class SplitRegistrationPeriodInTwo < ActiveRecord::Migration
     end
 
     add_index :registration_costs, [:current_period]
-    add_index :registration_costs, [:registrant_type, :current_period]
+    add_index :registration_costs, %i[registrant_type current_period]
 
     create_table :registration_cost_translations do |t|
       t.integer :registration_cost_id, null: false

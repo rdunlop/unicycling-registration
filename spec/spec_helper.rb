@@ -19,12 +19,12 @@ require "shoulda/matchers"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].each {|f| require f}
 
 # This is required by CI because sometimes it runs the model specs before
 # other rails specs (which would have initialized/created the following directories)
 require 'fileutils'
-FileUtils.mkdir_p "#{Rails.root}/tmp/cache"
+FileUtils.mkdir_p Rails.root.join("tmp", "cache")
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -91,9 +91,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    if EventConfiguration.instance_variable_defined?(:@singleton)
-      EventConfiguration.remove_instance_variable(:@singleton)
-    end
+    RequestStore.clear!
   end
 
   config.before(:each, type: :view) do

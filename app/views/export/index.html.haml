@@ -1,13 +1,13 @@
 %h1 Export Menu
 
 %hr
-- if policy(:export).download_payment_details?
+- if policy(:export).download_payment_details? && ExpenseItem.any?
   = simple_form_for :data, :url => export_download_payment_details_path(:format => :xls), :method => :get do |f|
     .row
       .small-4.columns
         %b Download Details on registrants who bought:
       .small-4.columns
-        = f.select :expense_item_id, ExpenseItem.all.map { |ei| [ei, ei.id] }
+        = f.select :expense_item_id, ExpenseItem.ordered.all.map { |ei| [ei, ei.id] }
       .small-4.columns
         = f.button :submit, "Export Registrants who bought this item", :class => "button", data: { disable_with: false }
 

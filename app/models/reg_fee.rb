@@ -23,7 +23,7 @@ class RegFee
   end
 
   def registrant
-    return nil unless registrant_id.present?
+    return nil if registrant_id.blank?
     @registrant ||= Registrant.find(registrant_id)
   end
 
@@ -34,12 +34,12 @@ class RegFee
   private
 
   def registrant_is_not_paid
-    return unless registrant.present?
+    return if registrant.blank?
     errors.add(:base, "This registrant is already paid") if registrant.reg_paid?
   end
 
   def registrant_type_matches_registration_cost
-    return unless registrant.present?
+    return if registrant.blank?
     if new_registration_item.nil?
       errors.add(:base, "Registrant is #{registrant.registrant_type}, doesn't match RegistrationCost type")
     end

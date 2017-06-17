@@ -4,7 +4,7 @@ fr:
     index:
       add_songs_for_others: Ajouter une musique pour un autre participant
       new_song: Nouvelle musique (Étape 1)
-      step_1: "Étape 1"
-      step_2: "Étape 2"
+      step_1: Étape 1
+      step_2: Étape 2
       title: La musique de %{name}
       upload_file: Soumettre votre musique

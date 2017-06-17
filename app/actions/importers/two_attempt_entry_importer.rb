@@ -15,7 +15,6 @@ class Importers::TwoAttemptEntryImporter < Importers::BaseImporter
         end
       end
     end
-
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid
     return false

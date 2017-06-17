@@ -2,8 +2,7 @@ class Example::ConventionChoicesController < ApplicationController
   before_action :skip_authorization
   before_action :add_breadcrumbs
 
-  def index
-  end
+  def index; end
 
   private
 

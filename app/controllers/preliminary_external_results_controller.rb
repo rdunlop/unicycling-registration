@@ -1,10 +1,10 @@
 class PreliminaryExternalResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_competition, except: [:edit, :update, :destroy]
+  before_action :load_competition, except: %i[edit update destroy]
   before_action :load_new_external_result, only: [:create]
-  before_action :load_external_result, only: [:edit, :update, :destroy]
+  before_action :load_external_result, only: %i[edit update destroy]
   before_action :authorize_res
-  before_action :load_external_results, only: [:index, :review, :approve, :display_csv, :import_csv]
+  before_action :load_external_results, only: %i[index review approve display_csv import_csv]
 
   before_action :set_breadcrumbs
 

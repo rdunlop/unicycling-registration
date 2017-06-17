@@ -45,7 +45,7 @@ class StandardSkillEntry < ApplicationRecord
 
   def skill_speed_class
     case skill_speed
-    when "Slow"
+    when "Slow" # rubocop:disable Lint/EmptyWhen
     when "Medium"
       "standard_skill_row--medium"
     when "Fast"

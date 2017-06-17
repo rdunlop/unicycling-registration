@@ -50,7 +50,8 @@ class PaymentAdjustmentsController < ApplicationController
         refund = Refund.build_from_details(
           note: note,
           registrant: registrant,
-          item: old_item)
+          item: old_item
+        )
         refunded_pd = refund.refund_details.first.payment_detail
         raise "Unable to find matching paid expense item" unless refunded_pd
         payment = Payment.build_from_details(
@@ -58,7 +59,8 @@ class PaymentAdjustmentsController < ApplicationController
           registrant: registrant,
           details: refunded_pd.details,
           amount: new_item.total_cost,
-          item: new_item)
+          item: new_item
+        )
         Refund.transaction do
           refund.user = current_user
           payment.user = current_user

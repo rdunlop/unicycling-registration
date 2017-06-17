@@ -14,7 +14,7 @@ class CreateRegistrantEventSignUp < ActiveRecord::Migration
     EventCategory.reset_column_information
 
     Event.all.each do |ev|
-      if ev.event_categories.count == 0
+      if ev.event_categories.count.zero?
         EventCategory.create! event_id: ev.id, position: 1, name: "All"
       end
     end

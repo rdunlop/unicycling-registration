@@ -21,7 +21,7 @@
 class JudgesController < ApplicationController
   layout "competition_management"
   before_action :authenticate_user!
-  before_action :load_competition, only: [:index, :create, :destroy, :copy_judges]
+  before_action :load_competition, only: %i[index create destroy copy_judges]
 
   # POST /competitions/#/judges
   # POST /competitions/#/judges.json

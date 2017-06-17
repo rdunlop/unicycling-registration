@@ -3,8 +3,6 @@ de:
   convention_setup:
     event_configurations:
       payment_settings:
-        description: "Wenn du Zahlungen via PayPal empfangen möchtest, trage hier
-          deine paypal account email adresse ein.\r\nDu musst auch einen IPN konfigurieren
-          damit die Anmeldeseite über Zahlungen informiert ist."
+        description: Wenn du Zahlungen via PayPal empfangen möchtest, trage hier deine
+          paypal account email adresse ein.
         header: Zahlungs Einstellungen
-        ipn_url: Die URL für den IPN sollte %{url} sein

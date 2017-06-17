@@ -28,8 +28,8 @@
 
 class TimeResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_competition, except: [:edit, :destroy, :update]
-  before_action :load_time_result, only: [:edit, :update, :destroy]
+  before_action :load_competition, except: %i[edit destroy update]
+  before_action :load_time_result, only: %i[edit update destroy]
   before_action :authorize_data_entry, except: [:index]
 
   before_action :set_breadcrumbs, only: :index
@@ -121,6 +121,7 @@ class TimeResultsController < ApplicationController
     params.require(:time_result).permit(
       :number_of_laps, :number_of_penalties, :comments, :comments_by,
       :status, :status_description,
-      :competitor_id, *HoursFacade::PERMITTED_PARAMS)
+      :competitor_id, *HoursFacade::PERMITTED_PARAMS
+    )
   end
 end

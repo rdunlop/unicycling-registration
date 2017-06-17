@@ -42,7 +42,8 @@ describe Admin::ManualPaymentsController do
             "0" => {
               registrant_expense_item_id: rei.id,
               pay_for: "1"
-            }}
+            }
+          }
         } }
       end.to change(Payment, :count).by(1)
       p = Payment.last

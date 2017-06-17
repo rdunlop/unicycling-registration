@@ -1,6 +1,6 @@
 ---
 fr:
-  are_you_sure: "Êtes-vous certain?"
+  are_you_sure: Êtes-vous certain?
   back: Retour
   breadcrumbs:
     home: Accueil
@@ -31,6 +31,8 @@ fr:
   prices_increase_soon: Les prix augmentent en moins d'un jour
   show: Montrer
   spectator: Spectateur
+  validations:
+    duplicate: Doit être unique
   wizard:
     add_contact_details: Coordonnées
     add_events: Compétitions

@@ -196,7 +196,7 @@ describe Competitor do
         expect do
           registrant.birthday -= 2.years
           registrant.save
-        end.to change{ registrant.reload.age }
+        end.to change { registrant.reload.age }
       end
 
       expect(@comp.reload.age).to eq(registrant.age)

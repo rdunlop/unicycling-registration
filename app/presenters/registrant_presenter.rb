@@ -27,7 +27,7 @@ class RegistrantPresenter
 
     resu = signed_up_events.detect { |sue| sue.event_id == event.id }
     # only add the Category if there are more than 1
-    results[:category] = (resu.event_category_name unless resu.nil?)
+    results[:category] = (resu&.event_category_name)
 
     results[:additional] = describe_additional_selection(event)
 

@@ -24,11 +24,11 @@ class CreateTolkTables < ActiveRecord::Migration
       t.datetime :updated_at
     end
 
-    add_index :tolk_translations, [:phrase_id, :locale_id], unique: true
+    add_index :tolk_translations, %i[phrase_id locale_id], unique: true
   end
 
   def self.down
-    remove_index :tolk_translations, column: [:phrase_id, :locale_id]
+    remove_index :tolk_translations, column: %i[phrase_id locale_id]
     remove_index :tolk_locales, column: :name
 
     drop_table :tolk_translations

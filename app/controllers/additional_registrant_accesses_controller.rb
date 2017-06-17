@@ -20,9 +20,9 @@
 
 class AdditionalRegistrantAccessesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_user, only: [:create, :index, :new, :invitations]
-  before_action :load_additional_registrant_accesses, only: [:create, :index, :new, :invitations]
-  before_action :load_additional_registrant_access, except: [:create, :index, :new, :invitations]
+  before_action :load_user, only: %i[create index new invitations]
+  before_action :load_additional_registrant_accesses, only: %i[create index new invitations]
+  before_action :load_additional_registrant_access, except: %i[create index new invitations]
   before_action :load_new_additional_registrant_access, only: [:create]
   before_action :authorize_access, except: :new
 

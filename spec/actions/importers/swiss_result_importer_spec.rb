@@ -12,15 +12,14 @@ describe Importers::SwissResultImporter do
       double(extract_file: [["row_1"]],
              process_row: {
                bib_number: 101,
-               minutes: 00,
+               minutes: 0o0,
                seconds: 13,
                thousands: 973,
                lane: 1,
                status: "active",
                status_description: nil,
                raw_time: "00:00:13.973"
-             }
-            )
+             })
     end
 
     context "when importing heats" do

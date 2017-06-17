@@ -4,8 +4,7 @@ class Admin::BibNumbersController < ApplicationController
   before_action :authorize_admin
 
   # GET /bib_numbers
-  def index
-  end
+  def index; end
 
   def create
     registrant = Registrant.find(params[:registrant_id])
@@ -13,12 +12,10 @@ class Admin::BibNumbersController < ApplicationController
     if new_bib_number.nil?
       flash[:alert] = "Please specify a new bib number"
       redirect_to bib_numbers_path
+    elsif BibNumberUpdater.update_bib_number(registrant, new_bib_number)
+      flash[:notice] = "Registrant #{registrant} set to #{new_bib_number}"
     else
-      if BibNumberUpdater.update_bib_number(registrant, new_bib_number)
-        flash[:notice] = "Registrant #{registrant} set to #{new_bib_number}"
-      elsif
-        flash[:alert] = "Error setting bib number. Is it in range for the registrant-type?"
-      end
+      flash[:alert] = "Error setting bib number. Is it in range for the registrant-type?"
     end
 
     redirect_to bib_numbers_path

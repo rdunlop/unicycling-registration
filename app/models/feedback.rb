@@ -18,7 +18,7 @@ class Feedback < ApplicationRecord
   belongs_to :user
   belongs_to :resolved_by, class_name: "User"
 
-  validates :status, inclusion: { in: %w(new resolved) }
+  validates :status, inclusion: { in: %w[new resolved] }
 
   validates :message, presence: true
   validates :entered_email, presence: true, unless: :signed_in?
@@ -39,7 +39,7 @@ class Feedback < ApplicationRecord
 
   def user_first_registrant_name
     return "unknown" unless user
-    return user.registrants.first.name if user.registrants.count > 0
+    return user.registrants.first.name if user.registrants.count.positive?
     "unknown"
   end
 

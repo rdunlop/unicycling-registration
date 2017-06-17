@@ -31,7 +31,7 @@ class TwoAttemptEntry < ApplicationRecord
   validates :minutes_1, :seconds_1, :thousands_1, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :minutes_2, :seconds_2, :thousands_2, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
-  before_validation :clear_status_of_string
+  nilify_blanks only: %i(status_1 status_2), before: :validation
   validates :status_1, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :status_2, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :is_start_time, inclusion: { in: [true, false] }
@@ -81,7 +81,7 @@ class TwoAttemptEntry < ApplicationRecord
   delegate :find_competitor_with_bib_number, to: :competition
 
   def registrant_name
-    Registrant.find_by_bib_number(bib_number)
+    Registrant.find_by(bib_number: bib_number)
   end
 
   # import the result in the results table, raise an exception on failure
@@ -143,12 +143,5 @@ class TwoAttemptEntry < ApplicationRecord
 
   def full_time_2
     TimeResultPresenter.new(minutes_2, seconds_2, thousands_2).full_time
-  end
-
-  private
-
-  def clear_status_of_string
-    self.status_1 = nil if status_1 == ""
-    self.status_2 = nil if status_2 == ""
   end
 end

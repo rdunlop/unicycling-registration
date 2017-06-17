@@ -23,7 +23,8 @@ describe StandardSkillRoutine do
     skill = FactoryGirl.create(:standard_skill_entry)
     @routine.standard_skill_routine_entries.build(
       position: 1,
-      standard_skill_entry_id: skill.id)
+      standard_skill_entry_id: skill.id
+    )
     expect(@routine.valid?).to eq(true)
   end
   it "should not be able to save more than 18 entries per user" do
@@ -45,7 +46,8 @@ describe StandardSkillRoutine do
         skill = FactoryGirl.create(:standard_skill_entry, number: (100 + i))
         @routine.standard_skill_routine_entries.create(
           position: i,
-          standard_skill_entry_id: skill.id)
+          standard_skill_entry_id: skill.id
+        )
       end
     end
     it "should not allow a 13th entry with skill > 100" do
@@ -67,13 +69,15 @@ describe StandardSkillRoutine do
     skill = FactoryGirl.create(:standard_skill_entry)
     @routine.standard_skill_routine_entries.create(
       position: 1,
-      standard_skill_entry_id: skill.id)
+      standard_skill_entry_id: skill.id
+    )
 
     expect(@routine.valid?).to eq(true)
 
     ssre = @routine.standard_skill_routine_entries.build(
       position: 2,
-      standard_skill_entry_id: skill.id)
+      standard_skill_entry_id: skill.id
+    )
 
     expect(ssre.valid?).to eq(false)
     expect(@routine.valid?).to eq(false)
@@ -84,13 +88,15 @@ describe StandardSkillRoutine do
     skill2 = FactoryGirl.create(:standard_skill_entry, number: 1, letter: 'b')
     @routine.standard_skill_routine_entries.create!(
       position: 1,
-      standard_skill_entry_id: skill1.id)
+      standard_skill_entry_id: skill1.id
+    )
 
     expect(@routine.valid?).to eq(true)
 
     ssre = @routine.standard_skill_routine_entries.build(
       position: 2,
-      standard_skill_entry_id: skill2.id)
+      standard_skill_entry_id: skill2.id
+    )
 
     expect(ssre.valid?).to eq(false)
     expect(@routine.valid?).to eq(false)
@@ -102,10 +108,12 @@ describe StandardSkillRoutine do
     skill2 = FactoryGirl.create(:standard_skill_entry, points: 2.2)
     @routine.standard_skill_routine_entries.create(
       position: 1,
-      standard_skill_entry_id: skill1.id)
+      standard_skill_entry_id: skill1.id
+    )
     @routine.standard_skill_routine_entries.create(
       position: 2,
-      standard_skill_entry_id: skill2.id)
+      standard_skill_entry_id: skill2.id
+    )
 
     expect(@routine.valid?).to eq(true)
 

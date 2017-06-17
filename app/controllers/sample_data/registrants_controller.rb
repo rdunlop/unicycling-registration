@@ -1,7 +1,6 @@
 class SampleData::RegistrantsController < SampleData::BaseController
   # GET /sample_data/registrants
-  def index
-  end
+  def index; end
 
   # Create a number of fake registrants
   # POST /sample_data/registrants

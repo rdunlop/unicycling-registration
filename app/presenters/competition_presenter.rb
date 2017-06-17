@@ -25,8 +25,8 @@ class CompetitionPresenter
   end
 
   def status_code
-    return "no_competitors" if competition.competitors.count == 0
-    return "no_results" if competition.num_results == 0
+    return "no_competitors" if competition.competitors.count.zero?
+    return "no_results" if competition.num_results.zero?
     return "incomplete" unless competition.locked?
     return "complete" unless competition.published?
     return "published" if competition.published? && !competition.awarded?

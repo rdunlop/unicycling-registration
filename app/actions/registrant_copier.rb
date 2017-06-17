@@ -44,19 +44,18 @@ class RegistrantCopier
       previous_reg = Registrant.find(previous_id)
       if previous_reg.contact_detail.present?
         contact_detail = previous_reg.contact_detail
-        [:address,
-         :city,
-         :state_code,
-         :zip,
-         :country_residence,
-         :country_representing,
-         :phone,
-         :mobile,
-         :email,
-         :club,
-         :club_contact,
-         :organization_member_number
-         ].each do |attribute|
+        %i[address
+           city
+           state_code
+           zip
+           country_residence
+           country_representing
+           phone
+           mobile
+           email
+           club
+           club_contact
+           organization_member_number].each do |attribute|
           contact_attributes[attribute] = contact_detail.send(attribute)
         end
       end

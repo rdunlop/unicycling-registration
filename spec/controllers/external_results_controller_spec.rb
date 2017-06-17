@@ -35,8 +35,7 @@ describe ExternalResultsController do
     { "competitor_id" => @competitor.id,
       "details" => "soomething",
       "status" => "active",
-      "points" => 1
-    }
+      "points" => 1}
   end
 
   describe "GET index" do

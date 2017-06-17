@@ -6,8 +6,7 @@ class Translations::EventCategoriesController < Admin::TranslationsController
   end
 
   # GET /translations/event_categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # PUT /translations/event_categories/1
   def update
@@ -26,6 +25,6 @@ class Translations::EventCategoriesController < Admin::TranslationsController
   end
 
   def event_category_params
-    params.require(:event_category).permit(translations_attributes: [:id, :locale, :name])
+    params.require(:event_category).permit(translations_attributes: %i[id locale name])
   end
 end

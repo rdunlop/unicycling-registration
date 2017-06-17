@@ -22,8 +22,7 @@ describe Importers::TwoAttemptEntryImporter do
                seconds_2: 24,
                thousands_2: 290,
                status_2: "active"
-             }
-            )
+             })
     end
 
     it "creates an entry" do

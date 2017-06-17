@@ -2,8 +2,8 @@ class ConventionSetup::EventCategoriesController < ConventionSetup::BaseConventi
   include SortableObject
 
   before_action :authorize_setup
-  before_action :load_event_category, except: [:index, :create]
-  before_action :load_event, only: [:index, :create]
+  before_action :load_event_category, except: %i[index create]
+  before_action :load_event, only: %i[index create]
   before_action :set_breadcrumbs
 
   respond_to :html
@@ -18,8 +18,7 @@ class ConventionSetup::EventCategoriesController < ConventionSetup::BaseConventi
   end
 
   # GET /event_categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /event_categories
   # POST /event_categories.json

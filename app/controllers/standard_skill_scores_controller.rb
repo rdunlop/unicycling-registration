@@ -19,8 +19,8 @@ class StandardSkillScoresController < ApplicationController
 
   before_action :find_judge
   before_action :find_competitor, except: [:index]
-  before_action :load_standard_skill_score, only: [:edit, :update, :destroy]
-  before_action :authorize_score, except: [:index, :new, :create]
+  before_action :load_standard_skill_score, only: %i[edit update destroy]
+  before_action :authorize_score, except: %i[index new create]
   before_action :add_breadcrumbs
 
   # GET /judges/29/standard_skill_scores
@@ -57,8 +57,7 @@ class StandardSkillScoresController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   # this is used to update standard_skill_score_entries
   # PUT /judges/29/competitors/4/standard_skill_score/1
@@ -104,8 +103,8 @@ class StandardSkillScoresController < ApplicationController
   end
 
   def standard_skill_score_params
-    params.require(:standard_skill_score).permit(standard_skill_score_entries_attributes: [
-                                                   :id, :standard_skill_routine_entry_id, :difficulty_devaluation_percent, :wave, :line, :cross, :circle]
-                                                )
+    params.require(:standard_skill_score).permit(standard_skill_score_entries_attributes: %i[
+                                                   id standard_skill_routine_entry_id difficulty_devaluation_percent wave line cross circle
+                                                 ])
   end
 end

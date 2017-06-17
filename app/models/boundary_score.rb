@@ -46,7 +46,7 @@ class BoundaryScore < ApplicationRecord
 
     result = 10 - (((major_dismount * major_dismount_devalue) + (major_boundary * major_boundary_devalue) + (minor_dismount * minor_dismount_devalue) + (minor_boundary * minor_boundary_devalue)) / people_scale)
 
-    if result < 0
+    if result.negative?
       0
     else
       result

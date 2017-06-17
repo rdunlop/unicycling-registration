@@ -1,13 +1,13 @@
 class Admin::RegistrantsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_registrants_breadcrumb
-  before_action :load_registrant, only: [:really_destroy, :undelete]
+  before_action :load_registrant, only: %i[really_destroy undelete]
 
   # GET /registrants/manage_all
   def manage_all
     authorize current_user, :registrant_information?
 
-    @registrants = Registrant.includes(:user, :contact_detail)
+    @registrants = Registrant.includes(:user, :contact_detail).order(:bib_number)
     respond_to do |format|
       format.html { render "manage_all" }
       format.pdf { render pdf: "manage_all", template: "admin/registrants/manage_all.html.haml", formats: [:html], layout: "pdf.html" }

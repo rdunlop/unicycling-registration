@@ -20,7 +20,7 @@ class JudgePolicy < ApplicationPolicy
   end
 
   def update?
-    (record.scores.count == 0) && record.competition.unlocked? && (director?(record.event) || super_admin?)
+    record.scores.count.zero? && record.competition.unlocked? && (director?(record.event) || super_admin?)
   end
 
   def destroy?

@@ -69,7 +69,7 @@ If we want to add a new language to the list of possible translations:
 4. Add the language to the select2_locale_* in application.js
 4. Choose the language in your Event Configuration.
 
-* app/views/layouts/application.rb - Ensure that the 'lang' attribute is appropriately set.
+* app/views/layouts/application.html.haml - Ensure that the 'lang' attribute is appropriately set.
 
 * app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
 
@@ -216,15 +216,6 @@ Specify whether to use the LIVE or TEST PAYPAL Site (default: Test)
     Paypal Test Mode
 
 Paypal Settings required for proper integration:
-
-Instant Payment Notification (IPN)
-
-We used to think that the Paypal account had to have IPN settings enabled through the UI (Instructions from paypal: https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/).
-
-  The <notification url> will be the hosted website URL, with /payments/notification at the end.
-  Example: https://registrationtest.unicycling-software.com/payments/notification
-
-NOTE: We no longer believe that this is necessary. When a user is sent to paypal to pay, that request includes the necessary IPN `notify_url` so that we will receive a message. The following settings may be necessary though:
 
 Auto-Return
 

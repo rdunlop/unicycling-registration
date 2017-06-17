@@ -6,7 +6,7 @@ class CompetitorFinder
   end
 
   # Returns a Competitor, or raises an exception
-  def find_by_bib_number(bib_number)
+  def find_by(bib_number:)
     registrant = Registrant.find_by!(bib_number: bib_number)
     registrant.competitors.find_by!(competition: competition)
   end
