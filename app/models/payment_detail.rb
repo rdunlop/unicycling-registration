@@ -31,7 +31,7 @@ class PaymentDetail < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :registrant, touch: true
+  belongs_to :registrant, touch: true, inverse_of: :payment_details
   belongs_to :payment, inverse_of: :payment_details
   belongs_to :expense_item
   has_one :refund_detail
@@ -50,6 +50,15 @@ class PaymentDetail < ApplicationRecord
   scope :refunded, -> { completed.where(refunded: true) }
 
   scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil }) }
+
+  after_save :update_reg_if_paid
+  # Payments may get created AFTER the payment_detail, and then 'touch'
+  # Refund Details 'touch' this
+  after_touch :update_reg_if_paid
+
+  def update_reg_if_paid
+    registrant.recalculate_paid!
+  end
 
   def self.cache_set_field
     :expense_item_id

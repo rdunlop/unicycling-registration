@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513193105) do
+ActiveRecord::Schema.define(version: 20170618133407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -816,6 +816,7 @@ ActiveRecord::Schema.define(version: 20170513193105) do
     t.string   "registrant_type",          limit: 255, default: "competitor"
     t.boolean  "rules_accepted",                       default: false,        null: false
     t.boolean  "online_waiver_acceptance",             default: false,        null: false
+    t.boolean  "paid",                                 default: false,        null: false
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true, using: :btree
     t.index ["deleted"], name: "index_registrants_deleted", using: :btree
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type", using: :btree

@@ -9,7 +9,7 @@ class RequiredExpenseItemCreator
 
   def create
     # add the registration_cost expense_item
-    unless registrant.reg_paid?
+    unless registrant.calculated_paid_status?
       registrant.build_registration_item(registration_item(registrant))
     end
 
