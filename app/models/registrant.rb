@@ -55,7 +55,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     has_many :registrant_choices, inverse_of: :registrant
     has_many :registrant_event_sign_ups, inverse_of: :registrant
     has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, autosave: true
-    has_many :payment_details, -> {includes :payment}
+    has_many :payment_details, -> {includes :payment}, inverse_of: :registrant
     has_many :additional_registrant_accesses
     has_many :registrant_group_members
     has_many :songs
@@ -344,10 +344,21 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?
     return true if spectator?
-    Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
-      registration_cost_items = RegistrationCost.all_registration_expense_items
-      paid_or_pending_expense_items.any? { |item| registration_cost_items.include?(item) }
-    end
+
+    paid? # read from the db column
+  end
+
+  def calculated_paid_status?
+    return true if spectator?
+
+    registration_cost_items = RegistrationCost.all_registration_expense_items
+    paid_or_pending_expense_items.any? { |item| registration_cost_items.include?(item) }
+  end
+
+  # store the paid/not-paid status in a column, to make it MUCH easier to query
+  def recalculate_paid!
+    has_paid = calculated_paid_status?
+    update(paid: has_paid) if paid != has_paid
   end
 
   # return a list of _ALL_ of the expense_items for this registrant
