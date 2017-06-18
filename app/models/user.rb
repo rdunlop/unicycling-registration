@@ -60,7 +60,7 @@ class User < ApplicationRecord
   has_many :user_conventions
 
   scope :confirmed, -> { where('confirmed_at IS NOT NULL') }
-  scope :all_with_registrants, -> { where('id IN (SELECT DISTINCT(user_id) FROM registrants)') }
+  scope :all_with_registrants, -> { where('users.id IN (SELECT DISTINCT(user_id) FROM registrants)') }
   scope :this_tenant, -> { joins(:user_conventions).merge(UserConvention.where(subdomain: Apartment::Tenant.current)) }
 
   def touch_for_role(_role)
@@ -75,7 +75,7 @@ class User < ApplicationRecord
 
   # get all users who have registrants with unpaid fees
   def self.unpaid_reg_fees
-    registrants = Registrant.active.reject(&:reg_paid?)
+    registrants = Registrant.active.includes(:user).reject(&:reg_paid?)
     registrants.map(&:user).flatten.uniq
   end
 

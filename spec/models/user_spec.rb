@@ -79,8 +79,12 @@ describe User do
         @other_user = FactoryGirl.create(:user)
       end
 
-      it "lists only users who have registranst" do
+      it "lists only users who have registrants" do
         expect(User.all_with_registrants).to eq([@user])
+      end
+
+      it "lists those users in unpaid_reg_fees" do
+        expect(User.unpaid_reg_fees).to eq([@user])
       end
     end
     describe "with a user who is not confirmed" do
