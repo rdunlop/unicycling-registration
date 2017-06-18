@@ -3,7 +3,7 @@
 # After a fault, the next attempt must be at the same distance (no further), until they succeed, or are finished.
 # Maximum of 12 attempts total
 class DistanceAttemptPreliminary2017Manager
-  def build(competitor)
+  def self.build(competitor)
     DistanceAttemptManager.new(competitor, JumpLimit::TripleFaultOrMaxAttempts12.new, DistanceError::SucceedAtEach)
   end
 end
