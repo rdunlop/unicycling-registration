@@ -3,12 +3,12 @@ class RegistrantType
     INITIAL = 2001
     MAXIMUM = 9999
 
-    def free_options(_expense_group)
+    def free_options(_expense_group, _registrant)
       nil
     end
 
     # Returns a collection of ExpenseGroups which are required to have items selected
-    def required_free_expense_groups
+    def required_free_expense_groups(_registrant_age)
       []
     end
 

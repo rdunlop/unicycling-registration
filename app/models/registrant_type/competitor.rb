@@ -3,13 +3,15 @@ class RegistrantType
     INITIAL = 1
     MAXIMUM = 1999
 
-    def free_options(expense_group)
-      expense_group.competitor_free_options
+    # Finds the free-option setting, if one is found for this registrant
+    def free_options(expense_group, registrant)
+      expense_group.expense_group_free_options.for("competitor", registrant.age).first.try(:free_option)
     end
 
     # Returns a collection of ExpenseGroups which are required to have items selected
-    def required_free_expense_groups
-      ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
+    def required_free_expense_groups(registrant_age)
+      ExpenseGroupFreeOption.where(free_option: "One Free In Group REQUIRED").for("competitor", registrant_age).map(&:expense_group)
+      # ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
     end
 
     def required_expense_groups

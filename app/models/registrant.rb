@@ -614,7 +614,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def has_necessary_free_items
-    free_groups_required = registrant_type_model.required_free_expense_groups
+    free_groups_required = registrant_type_model.required_free_expense_groups(age)
 
     free_groups_required.each do |expense_group|
       if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
