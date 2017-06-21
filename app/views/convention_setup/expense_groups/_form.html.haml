@@ -6,11 +6,16 @@
   = f.input :info_page_id, collection: Page.ordinary
 
   %h3= t(".competitor_get_one_free")
-  = f.input :competitor_free_options, collection: ExpenseGroup.free_options
   = f.input :competitor_required
 
   %h3= t(".noncompetitor_get_one_free")
-  = f.input :noncompetitor_free_options, collection: ExpenseGroup.free_options
   = f.input :noncompetitor_required
 
+  %hr
+  #expense_group_free_options
+    = f.simple_fields_for :expense_group_free_options do |member_f|
+      = render "expense_group_free_option_fields", f: member_f
+  = link_to_add_association 'add new required-element', f, :expense_group_free_options, data: { association_insertion_node: "#expense_group_free_options", association_insertion_method: "append" }
+  %br
+  %br
   = f.button :submit

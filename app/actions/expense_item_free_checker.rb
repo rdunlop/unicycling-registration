@@ -8,7 +8,7 @@ class ExpenseItemFreeChecker
   end
 
   def expense_item_is_free?
-    free_options = registrant_type_model.free_options(expense_item.expense_group)
+    free_options = registrant_type_model.free_options(expense_item.expense_group, registrant)
 
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"
@@ -22,7 +22,7 @@ class ExpenseItemFreeChecker
 
   # Return true on failure, and set :error_message
   def free_item_already_exists?
-    free_options = registrant_type_model.free_options(expense_item.expense_group)
+    free_options = registrant_type_model.free_options(expense_item.expense_group, registrant)
 
     case free_options
     when "One Free In Group", "One Free In Group REQUIRED"

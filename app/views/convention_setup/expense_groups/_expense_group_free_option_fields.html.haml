@@ -1,0 +1,10 @@
+.row.item.nested-fields
+  .small-6.columns
+    = f.input :free_option, collection: ExpenseGroupFreeOption.free_options, include_blank: false
+  .small-2.columns
+    = f.input :registrant_type, collection: ["competitor", "noncompetitor"], include_blank: false
+  .small-2.columns
+    = f.input :min_age
+  .small-2.columns
+    = f.input :max_age
+  = link_to_remove_association t("delete"), f, { data: { confirm: t("are_you_sure") } }

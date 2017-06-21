@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531201550) do
+ActiveRecord::Schema.define(version: 20170621063801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,6 +423,18 @@ ActiveRecord::Schema.define(version: 20170531201550) do
     t.index ["category_id"], name: "index_events_category_id", using: :btree
   end
 
+  create_table "expense_group_free_options", force: :cascade do |t|
+    t.integer  "expense_group_id", null: false
+    t.string   "registrant_type",  null: false
+    t.string   "free_option",      null: false
+    t.integer  "min_age"
+    t.integer  "max_age"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["expense_group_id", "registrant_type"], name: "free_options_group_reg_type", unique: true, using: :btree
+    t.index ["expense_group_id"], name: "index_expense_group_free_options_on_expense_group_id", using: :btree
+  end
+
   create_table "expense_group_translations", force: :cascade do |t|
     t.integer  "expense_group_id", null: false
     t.string   "locale",           null: false
@@ -434,18 +446,16 @@ ActiveRecord::Schema.define(version: 20170531201550) do
   end
 
   create_table "expense_groups", force: :cascade do |t|
-    t.boolean  "visible",                    default: true,  null: false
+    t.boolean  "visible",                default: true,  null: false
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "info_url"
-    t.string   "competitor_free_options"
-    t.string   "noncompetitor_free_options"
-    t.boolean  "competitor_required",        default: false, null: false
-    t.boolean  "noncompetitor_required",     default: false, null: false
-    t.boolean  "registration_items",         default: false, null: false
+    t.boolean  "competitor_required",    default: false, null: false
+    t.boolean  "noncompetitor_required", default: false, null: false
+    t.boolean  "registration_items",     default: false, null: false
     t.integer  "info_page_id"
-    t.boolean  "system_managed",             default: false, null: false
+    t.boolean  "system_managed",         default: false, null: false
   end
 
   create_table "expense_item_translations", force: :cascade do |t|
