@@ -30,7 +30,7 @@ class RegistrationCost < ApplicationRecord
   accepts_nested_attributes_for :translations
 
   has_many :registration_cost_entries, dependent: :destroy, autosave: true, inverse_of: :registration_cost
-  accepts_nested_attributes_for :registration_cost_entries
+  accepts_nested_attributes_for :registration_cost_entries, allow_destroy: true
   has_many :expense_items, through: :registration_cost_entries
 
   validates :onsite, inclusion: { in: [true, false] } # because it's a boolean

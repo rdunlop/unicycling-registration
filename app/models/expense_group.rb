@@ -2,19 +2,17 @@
 #
 # Table name: expense_groups
 #
-#  id                         :integer          not null, primary key
-#  visible                    :boolean          default(TRUE), not null
-#  position                   :integer
-#  created_at                 :datetime
-#  updated_at                 :datetime
-#  info_url                   :string(255)
-#  competitor_free_options    :string(255)
-#  noncompetitor_free_options :string(255)
-#  competitor_required        :boolean          default(FALSE), not null
-#  noncompetitor_required     :boolean          default(FALSE), not null
-#  registration_items         :boolean          default(FALSE), not null
-#  info_page_id               :integer
-#  system_managed             :boolean          default(FALSE), not null
+#  id                     :integer          not null, primary key
+#  visible                :boolean          default(TRUE), not null
+#  position               :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#  info_url               :string(255)
+#  competitor_required    :boolean          default(FALSE), not null
+#  noncompetitor_required :boolean          default(FALSE), not null
+#  registration_items     :boolean          default(FALSE), not null
+#  info_page_id           :integer
+#  system_managed         :boolean          default(FALSE), not null
 #
 
 class ExpenseGroup < ApplicationRecord
@@ -24,16 +22,11 @@ class ExpenseGroup < ApplicationRecord
   validates :visible, :competitor_required, :noncompetitor_required, inclusion: { in: [true, false] } # because it's a boolean
 
   has_many :expense_items, -> {order "expense_items.position"}, inverse_of: :expense_group
+  has_many :expense_group_free_options, inverse_of: :expense_group
 
   translates :group_name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
-
-  def self.free_options
-    ["None Free", "One Free In Group", "One Free In Group REQUIRED", "One Free of Each In Group"]
-  end
-
-  validates :competitor_free_options, inclusion: { in: free_options, allow_blank: true }
-  validates :noncompetitor_free_options, inclusion: { in: free_options, allow_blank: true }
+  accepts_nested_attributes_for :expense_group_free_options, allow_destroy: true
 
   default_scope { order(:position) }
   scope :visible, -> { where(visible: true).not_a_required_item_group }

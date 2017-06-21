@@ -4,7 +4,6 @@ fr:
     attributes:
       registrant_group:
         name: Nom de groupe
-        registrant_id: Nom du contact
     models:
       registrant_group:
         one: Groupe d'inscrits

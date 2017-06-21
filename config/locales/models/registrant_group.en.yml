@@ -4,7 +4,6 @@ en:
     attributes:
       registrant_group:
         name: Group Name
-        registrant_id: Contact Person
     models:
       registrant_group:
         one: Registrant Group

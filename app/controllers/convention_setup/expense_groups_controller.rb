@@ -75,7 +75,8 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetup::BaseConvention
 
   def expense_group_params
     params.require(:expense_group).permit(:group_name, :info_url, :info_page_id,
-                                          :competitor_free_options, :noncompetitor_free_options,
-                                          :competitor_required, :noncompetitor_required, translations_attributes: %i[id locale group_name])
+                                          :competitor_required, :noncompetitor_required,
+                                          translations_attributes: %i[id locale group_name],
+                                          expense_group_free_options_attributes: %i[id free_option min_age max_age registrant_type _destroy])
   end
 end
