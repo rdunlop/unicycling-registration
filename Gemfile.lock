@@ -654,7 +654,6 @@ DEPENDENCIES
   redis-namespace
   redis-rails
   redis-store
-  request_store
   rolify
   rollbar
   rspec-instafail

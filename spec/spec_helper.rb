@@ -91,7 +91,9 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    RequestStore.clear!
+    if EventConfiguration.instance_variable_defined?(:@singleton)
+      EventConfiguration.remove_instance_variable(:@singleton)
+    end
   end
 
   config.before(:each, type: :view) do

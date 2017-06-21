@@ -220,7 +220,7 @@ class EventConfiguration < ApplicationRecord
     # Use the request-level EventConfiguration, if it is defined, otherwise, fall-back
     # to fetching from the DB
     return @config if defined?(@config)
-    RequestStore.store[:ec_singleton] ||= EventConfiguration.includes(:translations).first || EventConfiguration.new
+    @singleton = EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
   def self.paypal_base_url

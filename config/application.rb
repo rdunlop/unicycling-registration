@@ -26,7 +26,7 @@ module Workspace
 
     # These are the default list of available languages.
     # Note: this is overwritten in application_controller.rb once an EventConfiguration is loaded.
-    config.i18n.available_locales = %i[en fr de hu es ja, ko]
+    config.i18n.available_locales = %i[en fr de hu es ja ko]
 
     config.encoding = "utf-8"
 
