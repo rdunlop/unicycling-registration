@@ -12,8 +12,6 @@ describe ConventionSetup::ExpenseGroupsController do
   def valid_attributes
     {
       info_url: "http://google.com",
-      competitor_free_options: nil,
-      noncompetitor_free_options: nil,
       competitor_required: false,
       noncompetitor_required: false,
       "translations_attributes" => {

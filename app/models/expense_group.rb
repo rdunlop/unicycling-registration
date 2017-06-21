@@ -28,6 +28,7 @@ class ExpenseGroup < ApplicationRecord
 
   translates :group_name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
+  accepts_nested_attributes_for :expense_group_free_options, allow_destroy: true
 
   # def self.free_options
   #   ["None Free", "One Free In Group", "One Free In Group REQUIRED", "One Free of Each In Group"]
