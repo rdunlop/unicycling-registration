@@ -1,0 +1,8 @@
+%h1 Registrant Group Types
+
+%p
+  Please choose an Event to set up your membership
+
+%ul
+  - @registrant_group_types.each do |reg_group_type|
+    %li= link_to reg_group_type.source_element, registrant_group_type_registrant_groups_path(reg_group_type)

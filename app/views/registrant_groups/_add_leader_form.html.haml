@@ -1,0 +1,9 @@
+%h2 Add Leader
+= simple_form_for(RegistrantGroupLeader.new, url: registrant_group_registrant_group_leaders_path(@registrant_group)) do |f|
+  .field
+    = f.label :user_id, "Leader"
+    %br
+    = f.select :user_id, User.all, include_blank: true
+  %br
+  .actions
+    = f.button :submit

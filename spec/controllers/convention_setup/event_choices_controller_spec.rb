@@ -147,7 +147,7 @@ describe ConventionSetup::EventChoicesController do
     describe "with valid params" do
       it "updates the requested event_choice" do
         expect do
-          put :update, params: { id: event_choice.to_param, event_choice: valid_attributes.merge(label: "NeW Label") }
+          put :update, params: { id: event_choice.to_param, event_choice: { label: "NeW Label" } }
         end.to change { event_choice.reload.label }
       end
 

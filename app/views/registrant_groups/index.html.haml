@@ -1,24 +1,16 @@
-%h1 Listing Registrant Groups
-= link_to "Show Registrant Groups", list_registrant_groups_path
-= link_to "(pdf)", list_registrant_groups_path(:format => :pdf)
+%h1 Listing #{@registrant_group_type} Groups
 %br
 %table.sortable
   %thead
     %tr
       %th= RegistrantGroup.human_attribute_name(:name)
-      %th= RegistrantGroup.human_attribute_name(:registrant_id)
-      %th
-      %th
-      %th
+      %th Leaders
       %th
   %tbody
     - @registrant_groups.each do |registrant_group|
       %tr
-        %td= registrant_group.name
-        %td= registrant_group.contact_person
+        %td= link_to registrant_group.name, registrant_group
+        %td= registrant_group.leaders
         %td= link_to 'Show', registrant_group
-        %td= link_to 'Address Labels', address_labels_registrant_group_path(registrant_group)
-        %td= link_to t("edit"), edit_registrant_group_path(registrant_group)
-        %td= link_to t("delete"), registrant_group, method: :delete, data: { confirm: t("are_you_sure") }
-%h1 New Registrant Group
-= render :partial => "form"
+
+= link_to "New Group", new_registrant_group_type_registrant_group_path(@registrant_group_type)

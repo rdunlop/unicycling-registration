@@ -1,0 +1,14 @@
+%h1 Registrant Group Type - #{@registrant_group_type}
+
+%h2 Groups
+
+%table
+  %thead
+    %tr
+      %th Group Name
+      %th Size
+  %tbody
+    - @registrant_group_type.registrant_groups.each do |group|
+      %tr
+        %th= link_to group.to_s, group
+        %th= group.registrant_group_members.size
