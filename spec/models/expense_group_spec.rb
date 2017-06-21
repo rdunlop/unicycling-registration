@@ -60,15 +60,6 @@ describe ExpenseGroup do
     ExpenseGroup.visible == [group]
   end
 
-  it "can have an expense_group without a free_option value" do
-    group.competitor_free_options = nil
-    expect(group).to be_valid
-  end
-  it "can have an expense_group without a free_option value" do
-    group.noncompetitor_free_options = nil
-    expect(group).to be_valid
-  end
-
   it "defaults to not required" do
     group = ExpenseGroup.new
     expect(group.competitor_required).to eq(false)

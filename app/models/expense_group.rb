@@ -30,13 +30,6 @@ class ExpenseGroup < ApplicationRecord
   accepts_nested_attributes_for :translations
   accepts_nested_attributes_for :expense_group_free_options, allow_destroy: true
 
-  # def self.free_options
-  #   ["None Free", "One Free In Group", "One Free In Group REQUIRED", "One Free of Each In Group"]
-  # end
-
-  # validates :competitor_free_options, inclusion: { in: free_options, allow_blank: true }
-  # validates :noncompetitor_free_options, inclusion: { in: free_options, allow_blank: true }
-
   default_scope { order(:position) }
   scope :visible, -> { where(visible: true).not_a_required_item_group }
 

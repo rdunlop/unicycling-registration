@@ -11,7 +11,6 @@ class RegistrantType
     # Returns a collection of ExpenseGroups which are required to have items selected
     def required_free_expense_groups(registrant_age)
       ExpenseGroupFreeOption.where(free_option: "One Free In Group REQUIRED").for("competitor", registrant_age).map(&:expense_group)
-      # ExpenseGroup.where(competitor_free_options: "One Free In Group REQUIRED")
     end
 
     def required_expense_groups

@@ -34,12 +34,12 @@ class ExpenseGroupFreeOption < ApplicationRecord
     end
   end
 
-  def has_no_ages?
+  def no_ages?
     min_age.blank? && max_age.blank?
   end
 
   def valid_for?(registrant_age)
-    return true if has_no_ages?
+    return true if no_ages?
 
     return false if min_age.present? && registrant_age < min_age
     return false if max_age.present? && max_age < registrant_age
