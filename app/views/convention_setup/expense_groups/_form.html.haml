@@ -5,17 +5,18 @@
   = link_to 'Test this URL', '#', class: "fancybox js--dynamicFancybox"
   = f.input :info_page_id, collection: Page.ordinary
 
-  %h3= t(".competitor_get_one_free")
+  %h3= t(".competitor_auto_assign")
   = f.input :competitor_required
 
-  %h3= t(".noncompetitor_get_one_free")
+  %h3= t(".noncompetitor_auto_assign")
   = f.input :noncompetitor_required
 
-  %hr
+  %h3= t(".free_elements")
+  %p Specify whether items from this Expense Group should be provided for free to registrants.
   #expense_group_free_options
     = f.simple_fields_for :expense_group_free_options do |member_f|
       = render "expense_group_free_option_fields", f: member_f
-  = link_to_add_association 'add new required-element', f, :expense_group_free_options, data: { association_insertion_node: "#expense_group_free_options", association_insertion_method: "append" }
+  = link_to_add_association 'add new free-element', f, :expense_group_free_options, data: { association_insertion_node: "#expense_group_free_options", association_insertion_method: "append" }
   %br
   %br
   = f.button :submit

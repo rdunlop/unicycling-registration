@@ -2,5 +2,6 @@ en:
   convention_setup:
     expense_groups:
       form:
-        competitor_get_one_free: Does a Competitor get one free?
-        noncompetitor_get_one_free: Does a NonCompetitor get one free?
+        competitor_auto_assign: Automatically Assign to Competitor?
+        noncompetitor_auto_assign: Automatically Assign to Non-Competitor?
+        free_elements: Free Elements
