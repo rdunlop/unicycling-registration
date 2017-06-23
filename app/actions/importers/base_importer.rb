@@ -1,8 +1,7 @@
 class Importers::BaseImporter
-  attr_accessor :competition, :user, :num_rows_processed, :errors
+  attr_accessor :user, :num_rows_processed, :errors
 
-  def initialize(competition, user)
-    @competition = competition
+  def initialize(user)
     @user = user
   end
 

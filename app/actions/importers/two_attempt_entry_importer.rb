@@ -1,4 +1,4 @@
-class Importers::TwoAttemptEntryImporter < Importers::BaseImporter
+class Importers::TwoAttemptEntryImporter < Importers::CompetitionDataImporter
   def process(file, start_times, processor)
     return false unless valid_file?(file)
 

@@ -1,4 +1,4 @@
-class Importers::ExternalResultImporter < Importers::BaseImporter
+class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
   def process(file, processor)
     return false unless valid_file?(file)
 
