@@ -113,7 +113,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
     event = Event.find_by!(name: event_hash[:name])
     resu = registrant.registrant_event_sign_ups.build(event: event)
     resu.signed_up = event_hash[:signed_up]
-    resu.event_category = event.event_categories.first
+    resu.event_category = event.event_categories.find{|event_category| event_category.name == event_hash[:category] }
     resu.save!
   end
 

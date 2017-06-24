@@ -50,6 +50,7 @@ describe Importers::RegistrantDataImporter do
     let(:event_hash) do
       {
         name: "100m",
+        category: "All",
         signed_up: true,
         best_time: "20.03",
         choices: [
@@ -99,6 +100,7 @@ describe Importers::RegistrantDataImporter do
         events: [
           {
             name: "100m",
+            category: "All",
             signed_up: true,
             best_time: "20.03",
             choices: [
