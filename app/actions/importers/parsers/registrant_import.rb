@@ -38,25 +38,11 @@ class Importers::Parsers::RegistrantImport
 
   def extract_file(file)
     arrays = Importers::CsvExtractor.new(file).extract_csv
-    [
-      {
-        id: "1",
-        first_name: "Bob",
-        last_name: "Smith",
-        birthday: "10/4/76",
-        gender: "m",
-        events: [
-          {
-            name: "100m",
-            signed_up: true,
-            best_time: "20.03",
-            choices: [
-              { "Team Name" => "100m" }
-            ]
-          }
-        ]
-      }
-    ]
+    headers = arrays[0]
+    rows = arrays[1..-1]
+    rows.map do |row|
+      convert_row(headers, row)
+    end
   end
 
   def validate_headers
@@ -67,6 +53,10 @@ class Importers::Parsers::RegistrantImport
     end
   end
 
+  def events
+    @events ||= Event.all.order(:id).includes(:event_categories, :event_choices)
+  end
+
   def convert_row(header, row)
     element_finder = ElementFinder.new(header, row)
     base_data = {
@@ -75,23 +65,28 @@ class Importers::Parsers::RegistrantImport
       last_name: element_finder.find("Last Name"),
       birthday: element_finder.find("Birthday (dd/mm/yy)"),
       gender: element_finder.find("Sex (m/f)"),
-      events: []
+      events: event_data(element_finder)
     }
-    # EV: 100m - Signed Up (Y/N)
-    # EV: 100m - Category (All)
-    # EV: 100m - Best Time ((m)m:ss.xx)
-    # EV: 100m - Choice: Team Name
+  end
 
-    # {
-    #   name: "100m",
-    #   category: "All"
-    #   signed_up: true,
-    #   best_time: "20.03",
-    #   choices: [
-    #     { "Team Name" => "100m Team" }
-    #   ]
-    # }
-    Event.all.each do |event|
+  # Input columns:
+  # EV: 100m - Signed Up (Y/N)
+  # EV: 100m - Category (All)
+  # EV: 100m - Best Time ((m)m:ss.xx)
+  # EV: 100m - Choice: Team Name
+
+  # Output Data:
+  # {
+  #   name: "100m",
+  #   category: "All"
+  #   signed_up: true,
+  #   best_time: "20.03",
+  #   choices: [
+  #     { "Team Name" => "100m Team" }
+  #   ]
+  # }
+  def event_data(element_finder)
+    events.map do |event|
       event_hash = {
         name: event.name,
         category: element_finder.find("EV: #{event.name} - Category (All)"),
@@ -106,9 +101,7 @@ class Importers::Parsers::RegistrantImport
       end
 
       event_hash[:choices] << choices
-      base_data[:events] << event_hash
+      event_hash
     end
-
-    base_data
   end
 end

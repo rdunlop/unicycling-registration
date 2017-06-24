@@ -6,7 +6,7 @@ describe Importers::Parsers::RegistrantImport do
 
   describe "#convert_row" do
     let(:registrant_headers) { ["ID", "First Name", "Last Name", "Birthday (dd/mm/yy)", "Sex (m/f)"] }
-    let(:registrant_row) { ["1", "Robin", "Dunlop", "20/05/20", "m"] }
+    let(:registrant_row) { ["1", "Robin", "Dunlop", "20/05/82", "m"] }
 
     context "with no events" do
       it "creates the registrant hash" do
@@ -14,7 +14,7 @@ describe Importers::Parsers::RegistrantImport do
           id: "1",
           first_name: "Robin",
           last_name: "Dunlop",
-          birthday: "20/05/20",
+          birthday: "20/05/82",
           gender: "m"
         )
       end
@@ -31,7 +31,7 @@ describe Importers::Parsers::RegistrantImport do
           id: "1",
           first_name: "Robin",
           last_name: "Dunlop",
-          birthday: "20/05/20",
+          birthday: "20/05/82",
           gender: "m",
           events: [
             {
@@ -46,6 +46,55 @@ describe Importers::Parsers::RegistrantImport do
           ]
         )
       end
+    end
+  end
+
+  describe "#extract_file" do
+    let!(:event) { FactoryGirl.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
+    let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, cell_type: "text", label: "Team Name") }
+
+    let(:test_file) { fixture_path + '/registrants.csv' }
+    let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
+
+    it "read the registrant file" do
+      input_data = described_class.new.extract_file(sample_input)
+      expect(input_data.count).to eq(2)
+      expect(input_data[0]).to eq(
+        id: "1",
+        first_name: "Robin",
+        last_name: "Dunlop",
+        birthday: "20/05/82",
+        gender: "m",
+        events: [
+          {
+            name: "100m",
+            category: "All",
+            signed_up: true,
+            best_time: "20.03",
+            choices: [
+              { "Team Name" => "100m Team" }
+            ]
+          }
+        ]
+      )
+      expect(input_data[1]).to eq(
+        id: "2",
+        first_name: "Scott",
+        last_name: "Wilton",
+        birthday: "28/02/95",
+        gender: "m",
+        events: [
+          {
+            name: "100m",
+            category: "All",
+            signed_up: true,
+            best_time: "12.33",
+            choices: [
+              { "Team Name" => "Best Team" }
+            ]
+          }
+        ]
+      )
     end
   end
 end
