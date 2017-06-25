@@ -5,7 +5,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
 
     registrant_data = processor.extract_file(file)
     self.num_rows_processed = 0
-    self.errors = nil
+    self.errors = []
     Registrant.transaction do
       registrant_data.each do |registrant_hash|
         # CsvExtractor converts from file into array-of-arrays
@@ -39,14 +39,19 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
         #       if value is formatted with a ":", enter it as minutes/seconds.
         #       if value is formatted with a ".", enter it as seconds/thousands
 
-        if build_and_save_imported_result(registrant_hash, @user)
-          self.num_rows_processed += 1
+        begin
+          if build_and_save_imported_result(registrant_hash, @user)
+            self.num_rows_processed += 1
+          end
+        rescue ActiveRecord::RecordInvalid => invalid
+          invalid.record.errors.full_messages.each do |error_message|
+            @errors << "#{invalid.record}: #{error_message}"
+          end
         end
       end
     end
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
-    return false
+
+    @errors.none?
   end
 
   # Public: Create an Registrant object.
@@ -59,12 +64,11 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
                           "Female"
                         end
     registrant.user = user
-
+    registrant.status = "base_details"
+    registrant.save!
     set_events_sign_ups(registrant, registrant_hash[:events])
     set_events_best_times(registrant, registrant_hash[:events])
     set_events_choices(registrant, registrant_hash[:events])
-    registrant.status = "base_details"
-    registrant.save!
   end
 
   # finds existing registrant, or initializes a new one
@@ -150,7 +154,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   end
 
   def parse_birthday(birthday, day_first: true)
-    fmt = day_first ? "%d/%m/%y" : "%m/%d/%y"
+    fmt = day_first ? "%d/%m/%Y" : "%m/%d/%Y"
 
     Date.strptime(birthday, fmt)
   end

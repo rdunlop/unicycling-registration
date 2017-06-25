@@ -1,3 +1,3 @@
-ID,First Name,Last Name,Birthday (dd/mm/yy),Sex (m/f),EV: 100m - Signed Up (Y/N),EV: 100m - Category (All),EV: 100m - Best Time ((m)m:ss.xx),EV: 100m - Choice: Team Name
-1,Robin,Dunlop,20/05/82,m,Y,All,20.03,100m Team
-2,Scott,Wilton,28/02/95,m,Y,All,12.33,Best Team
+ID,First Name,Last Name,Birthday (dd/mm/yyyy),Sex (m/f),EV: 100m - Signed Up (Y/N),EV: 100m - Category (All),EV: 100m - Best Time ((m)m:ss.xx),EV: 100m - Choice: Team Name
+1,Robin,Dunlop,20/05/1982,m,Y,All,20.03,100m Team
+2,Scott,Wilton,28/02/1995,m,Y,All,12.33,Best Team

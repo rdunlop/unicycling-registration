@@ -5,8 +5,8 @@ describe Importers::Parsers::RegistrantImport do
   end
 
   describe "#convert_row" do
-    let(:registrant_headers) { ["ID", "First Name", "Last Name", "Birthday (dd/mm/yy)", "Sex (m/f)"] }
-    let(:registrant_row) { ["1", "Robin", "Dunlop", "20/05/82", "m"] }
+    let(:registrant_headers) { ["ID", "First Name", "Last Name", "Birthday (dd/mm/yyyy)", "Sex (m/f)"] }
+    let(:registrant_row) { ["1", "Robin", "Dunlop", "20/05/1982", "m"] }
 
     context "with no events" do
       it "creates the registrant hash" do
@@ -14,7 +14,7 @@ describe Importers::Parsers::RegistrantImport do
           id: "1",
           first_name: "Robin",
           last_name: "Dunlop",
-          birthday: "20/05/82",
+          birthday: "20/05/1982",
           gender: "m"
         )
       end
@@ -31,7 +31,7 @@ describe Importers::Parsers::RegistrantImport do
           id: "1",
           first_name: "Robin",
           last_name: "Dunlop",
-          birthday: "20/05/82",
+          birthday: "20/05/1982",
           gender: "m",
           events: [
             {
@@ -63,7 +63,7 @@ describe Importers::Parsers::RegistrantImport do
         id: "1",
         first_name: "Robin",
         last_name: "Dunlop",
-        birthday: "20/05/82",
+        birthday: "20/05/1982",
         gender: "m",
         events: [
           {
@@ -81,7 +81,7 @@ describe Importers::Parsers::RegistrantImport do
         id: "2",
         first_name: "Scott",
         last_name: "Wilton",
-        birthday: "28/02/95",
+        birthday: "28/02/1995",
         gender: "m",
         events: [
           {

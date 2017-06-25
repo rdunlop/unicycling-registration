@@ -2,6 +2,7 @@ class ExportController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_action
   include ExcelOutputter
+  include CsvOutputter
 
   def index; end
 
@@ -9,21 +10,13 @@ class ExportController < ApplicationController
     exporter = Exporters::RegistrantExporter.new
     headers = exporter.headers
     data = exporter.rows
-    output_spreadsheet(headers, data, "download_registrants_#{Date.today}")
+    output_csv(headers, data, "download_registrants_#{Date.today}")
   end
 
   def download_competitors_for_timers
     exporter = Exporters::AllCompetitors.new
-    csv_string = CSV.generate do |csv|
-      csv << exporter.headers
-      exporter.rows.each do |row|
-        csv << row
-      end
-    end
     filename = @config.short_name.downcase.gsub(/[^0-9a-z]/, "_") + "_registrants.csv"
-    send_data(csv_string,
-              type: 'text/csv; charset=utf-8; header=present',
-              filename: filename)
+    output_csv(exporter.headers, exporter.rows, filename)
   end
 
   def download_events

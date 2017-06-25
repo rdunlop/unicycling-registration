@@ -12,7 +12,7 @@ class Exporters::RegistrantExporter
 
   def rows
     Registrant.all.includes(:registrant_best_times, :registrant_choices, registrant_event_sign_ups: [event_category: [:translations]]).map do |registrant|
-      birthday = registrant.birthday&.strftime("%d/%m/%y") || ""
+      birthday = registrant.birthday&.strftime("%d/%m/%Y") || ""
       gender = if registrant.gender.present?
                  registrant.gender == "Male" ? "m" : "f"
                else

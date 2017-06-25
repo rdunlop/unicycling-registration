@@ -54,7 +54,7 @@ describe Exporters::RegistrantExporter do
         registrant.bib_number.to_s,
         registrant.first_name,
         registrant.last_name,
-        "20/04/98",
+        "20/04/1998",
         "m"
       ]
     end

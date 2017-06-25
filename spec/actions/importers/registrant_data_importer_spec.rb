@@ -9,7 +9,7 @@ describe Importers::RegistrantDataImporter do
       {
         first_name: "Bob",
         last_name: "Smith",
-        birthday: "20/01/07"
+        birthday: "20/01/2007"
       }
     end
 
@@ -38,10 +38,10 @@ describe Importers::RegistrantDataImporter do
 
   describe "#parse_birthday" do
     it "handles 98 and 2000 birthdays", :aggregate_failures do
-      expect(importer.parse_birthday("10/28/91", day_first: false)).to eq(Date.new(1991, 10, 28))
-      expect(importer.parse_birthday("4/08/00", day_first: false)).to eq(Date.new(2000, 4, 8))
-      expect(importer.parse_birthday("12/06/01", day_first: false)).to eq(Date.new(2001, 12, 6))
-      expect(importer.parse_birthday("4/14/07", day_first: false)).to eq(Date.new(2007, 4, 14))
+      expect(importer.parse_birthday("10/28/1991", day_first: false)).to eq(Date.new(1991, 10, 28))
+      expect(importer.parse_birthday("4/08/2000", day_first: false)).to eq(Date.new(2000, 4, 8))
+      expect(importer.parse_birthday("12/06/2001", day_first: false)).to eq(Date.new(2001, 12, 6))
+      expect(importer.parse_birthday("4/14/2007", day_first: false)).to eq(Date.new(2007, 4, 14))
     end
   end
 
@@ -139,7 +139,7 @@ describe Importers::RegistrantDataImporter do
         id: "1",
         first_name: "Bob",
         last_name: "Smith",
-        birthday: "10/4/76",
+        birthday: "10/4/1976",
         gender: "m",
         events: [
           {

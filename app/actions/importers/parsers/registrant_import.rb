@@ -63,7 +63,7 @@ class Importers::Parsers::RegistrantImport
       id: element_finder.find("ID"),
       first_name: element_finder.find("First Name"),
       last_name: element_finder.find("Last Name"),
-      birthday: element_finder.find("Birthday (dd/mm/yy)"),
+      birthday: element_finder.find("Birthday (dd/mm/yyyy)"),
       gender: element_finder.find("Sex (m/f)"),
       events: event_data(element_finder)
     }
