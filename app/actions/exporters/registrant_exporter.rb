@@ -32,7 +32,7 @@ class Exporters::RegistrantExporter
     result = []
     events.map do |event|
       result << "EV: #{event.name} - Signed Up (Y/N)"
-      result << "EV: #{event.name} - Best Time (none)"
+      result << "EV: #{event.name} - Best Time (#{event.best_time_format})"
 
       category_names = event.event_categories.map(&:name).join("/")
       result << "EV: #{event.name} - Category (#{category_names})"
