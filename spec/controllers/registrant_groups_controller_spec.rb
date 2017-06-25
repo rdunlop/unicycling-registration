@@ -40,7 +40,7 @@ describe RegistrantGroupsController do
     it "shows the requested registrant_group" do
       registrant_group = FactoryGirl.create(:registrant_group)
       get :new, params: { registrant_group_type_id: registrant_group.registrant_group_type.to_param }
-      assert_match(/#{registrant_group.name}/, response.body)
+      assert_match(/#{registrant_group.registrant_group_type.to_s}/, response.body)
     end
   end
 
