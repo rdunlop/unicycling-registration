@@ -33,8 +33,16 @@ class RegistrantGroupsController < ApplicationController
   end
 
   def create
-    @registrant_group = RegistrantGroup.new
+    @registrant_group = RegistrantGroup.new(registrant_group_params)
+    @registrant_group.registrant_group_type = @registrant_group_type
     authorize @registrant_group
+    if @registrant_group.save
+      flash[:notice] = "Group created"
+      redirect_to @registrant_group
+    else
+      flash.now[:alert] = "Error creating group"
+      render :new
+    end
   end
 
   # update the name of the group

@@ -22,4 +22,6 @@ class RegistrantGroupLeader < ApplicationRecord
   validates :registrant_group_id, uniqueness: {scope: [:user_id]}
   validates :registrant_group, presence: true
   validates :user, presence: true
+
+  delegate :to_s, to: :user
 end
