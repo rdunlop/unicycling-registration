@@ -87,9 +87,10 @@ class Importers::Parsers::RegistrantImport
   # }
   def event_data(element_finder)
     events.map do |event|
+      category_names = event.event_categories.map(&:name).join("/")
       event_hash = {
         name: event.name,
-        category: element_finder.find("EV: #{event.name} - Category (All)"),
+        category: element_finder.find("EV: #{event.name} - Category (#{category_names})"),
         signed_up: (element_finder.find("EV: #{event.name} - Signed Up (Y/N)") == "Y"),
         best_time: element_finder.find("EV: #{event.name} - Best Time (#{event.best_time_format})")
       }

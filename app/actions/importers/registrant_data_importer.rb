@@ -106,6 +106,14 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
     end
   end
 
+  def event_by_name(name)
+    if @events.nil?
+      @events = Event.all.includes(event_categories: [:translations], event_choices: [:translations])
+    end
+
+    @events.find{|ev| ev.name == name }
+  end
+
   # {
   #   name: "100m",
   #   category: "All",
@@ -116,7 +124,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   #   ],
   # }
   def set_event_sign_up(registrant, event_hash)
-    event = Event.find_by!(name: event_hash[:name])
+    event = event_by_name(event_hash[:name])
     resu = registrant.registrant_event_sign_ups.find_or_initialize_by(event: event)
     resu.signed_up = event_hash[:signed_up]
     resu.event_category = event.event_categories.find{|event_category| event_category.name == event_hash[:category] }
@@ -124,7 +132,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   end
 
   def set_event_choice(registrant, event_hash)
-    event = Event.find_by!(name: event_hash[:name])
+    event = event_by_name(event_hash[:name])
     event.event_choices.each do |event_choice|
       resu = registrant.registrant_choices.find_or_initialize_by(event_choice: event_choice)
       resu.value = event_hash[:choices][event_choice.label]
@@ -133,7 +141,8 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   end
 
   def set_event_best_time(registrant, event_hash)
-    event = Event.find_by!(name: event_hash[:name])
+    return if event_hash[:best_time].blank?
+    event = event_by_name(event_hash[:name])
     rebt = registrant.registrant_best_times.find_or_initialize_by(event: event)
     rebt.formatted_value = event_hash[:best_time]
     rebt.source_location = "N/A"

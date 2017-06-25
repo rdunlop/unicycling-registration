@@ -99,7 +99,11 @@ Rails.application.routes.draw do
       get :download_registrants
       get :results
     end
-    resource :import, only: %i[new create]
+    resources :imports, only: %i[index new create] do
+      collection do
+        post :import_registrants
+      end
+    end
 
     resources :standard_skill_entries, only: [:index]
 
