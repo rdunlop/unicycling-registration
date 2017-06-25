@@ -50,6 +50,8 @@ class RegistrantGroupsController < ApplicationController
 
   # GET /registrant_groups/1
   def show
+    type = @registrant_group.registrant_group_type
+    add_breadcrumb "Registrant Groups: #{type}", registrant_group_type_registrant_groups_path(type)
     @registrant_group_members = @registrant_group.registrant_group_members
     @registrant_group_leaders = @registrant_group.registrant_group_leaders
   end

@@ -1,5 +1,5 @@
 - if policy(current_user).under_development?
-  %li= link_to 'Registrant Groups', registrant_group_types_path
+  %li= link_to 'Registrant Groups',convention_setup_registrant_group_types_path
 - if policy(:export).index?
   %li= link_to t('.export_data'), export_index_path
 - if policy(current_user).under_development?
