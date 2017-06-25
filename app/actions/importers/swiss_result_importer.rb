@@ -1,4 +1,4 @@
-class Importers::SwissResultImporter < Importers::BaseImporter
+class Importers::SwissResultImporter < Importers::CompetitionDataImporter
   # Create ImportResult records from a file.
   def process(file, heat, processor, heats: true)
     return false unless valid_file?(file)

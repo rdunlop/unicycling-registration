@@ -1,6 +1,10 @@
 class ExportPolicy < ApplicationPolicy
   def index?
-    download_payment_details? || results?
+    download_payment_details? || results? || download_events?
+  end
+
+  def download_registrants?
+    event_planner? || super_admin?
   end
 
   def download_competitors_for_timers?

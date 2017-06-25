@@ -96,9 +96,14 @@ Rails.application.routes.draw do
       get :download_summaries, controller: "/export_registrants"
       get :download_events
       get :download_competitors_for_timers
+      get :download_registrants
       get :results
     end
-    resource :import, only: %i[new create]
+    resources :imports, only: %i[index new create] do
+      collection do
+        post :import_registrants
+      end
+    end
 
     resources :standard_skill_entries, only: [:index]
 

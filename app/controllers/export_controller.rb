@@ -5,6 +5,13 @@ class ExportController < ApplicationController
 
   def index; end
 
+  def download_registrants
+    exporter = Exporters::RegistrantExporter.new
+    headers = exporter.headers
+    data = exporter.rows
+    output_spreadsheet(headers, data, "download_registrants_#{Date.today}")
+  end
+
   def download_competitors_for_timers
     exporter = Exporters::AllCompetitors.new
     csv_string = CSV.generate do |csv|
@@ -23,7 +30,7 @@ class ExportController < ApplicationController
     exporter = Exporters::EventsExporter.new
     headers = exporter.headers
     data = exporter.rows
-    output_spreadsheet(headers, data, "download_events#{Date.today}")
+    output_spreadsheet(headers, data, "download_events_#{Date.today}")
   end
 
   def download_payment_details
