@@ -11,7 +11,7 @@ class Exporters::RegistrantExporter
   end
 
   def rows
-    Registrant.all.map do |registrant|
+    Registrant.all.includes(:registrant_best_times, :registrant_choices, registrant_event_sign_ups: [event_category: [:translations]]).map do |registrant|
       [
         registrant.bib_number.to_s,
         registrant.first_name,
@@ -25,7 +25,7 @@ class Exporters::RegistrantExporter
   private
 
   def events
-    @events ||= Event.all.order(:id).includes(:event_categories, :event_choices)
+    @events ||= Event.all.order(:id).includes(:translations, event_choices: [:translations], event_categories: [:translations])
   end
 
   def event_headers
@@ -49,11 +49,11 @@ class Exporters::RegistrantExporter
     result = []
 
     events.map do |event|
-      resu = registrant.registrant_event_sign_ups.find{ |resup| resup.event == event }
+      resu = registrant.registrant_event_sign_ups.find{ |resup| resup.event_id == event.id }
       if resu&.signed_up?
         result << "Y"
 
-        rbt = registrant.registrant_best_times.find{|rbtime| rbtime.event == event }
+        rbt = registrant.registrant_best_times.find{|rbtime| rbtime.event_id == event.id }
         if rbt
           result << rbt.formatted_value
         else
@@ -62,8 +62,12 @@ class Exporters::RegistrantExporter
 
         result << resu.event_category.name
         event.event_choices.each do |event_choice|
-          rc = registrant.registrant_choices.find{|rchoice| rchoice.event_choice == event_choice }
-          result << rc.value
+          rc = registrant.registrant_choices.find{|rchoice| rchoice.event_choice_id == event_choice.id }
+          if rc
+            result << rc.value
+          else
+            result << ""
+          end
         end
       else
         result << "N"

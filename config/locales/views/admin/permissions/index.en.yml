@@ -68,6 +68,7 @@ en:
           event_planner: |
             Able to view/review the event sign_ups.
             Able to SEARCH & MODIFY any registration.
+            Able to Bulk Import/Export Registration data (including event sign ups)
             Able to update bib number for registrants.
             Able to Add/Modify event choices, at all times.
             Able to view/send emails to all registrants

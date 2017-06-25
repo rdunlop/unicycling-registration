@@ -19,3 +19,8 @@
 
 - if policy(:export).results?
   = link_to "Download all results", export_results_path(format: :xls)
+  %br
+
+- if policy(:export).download_registrants?
+  = link_to "Download Registrants and Event Sign ups", export_download_registrants_path(format: :xls)
+  %br

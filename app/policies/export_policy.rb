@@ -3,6 +3,10 @@ class ExportPolicy < ApplicationPolicy
     download_payment_details? || results?
   end
 
+  def download_registrants?
+    event_planner? || super_admin?
+  end
+
   def download_competitors_for_timers?
     user.has_role?(:race_official, :any) || competition_admin? || super_admin?
   end

@@ -63,23 +63,40 @@ describe Exporters::RegistrantExporter do
       expect(rows.first).to eq(expected_row)
     end
 
-    context "with an event" do
+    context "with an event with choices" do
       let!(:event) { FactoryGirl.create(:event, best_time_format: "none", name: "100m") }
       let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, label: "Team") }
 
       let!(:resu) { FactoryGirl.create(:registrant_event_sign_up, registrant: registrant, signed_up: true, event_category: event.event_categories.first) }
-      let!(:rc) { FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: event_choice, value: "My Team") }
 
-      let(:expected_row) do
-        [
-          "Y",
-          "All",
-          "",
-          "My Team"
-        ]
+      context "when registrant does not have the choice" do
+        let(:expected_row) do
+          [
+            "Y",
+            "All",
+            "",
+            ""
+          ]
+        end
+        it "includes the event sign up details" do
+          expect(rows.first).to include(*expected_row)
+        end
       end
-      it "includes the event sign up details" do
-        expect(rows.first).to include(*expected_row)
+
+      context "When registrant has the choice" do
+        let!(:rc) { FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: event_choice, value: "My Team") }
+
+        let(:expected_row) do
+          [
+            "Y",
+            "All",
+            "",
+            "My Team"
+          ]
+        end
+        it "includes the event sign up details" do
+          expect(rows.first).to include(*expected_row)
+        end
       end
     end
   end
