@@ -3,13 +3,13 @@ class RegistrantType
     INITIAL = 2001
     MAXIMUM = 9999
 
-    def free_options(expense_group, _registrant)
-      expense_group.expense_group_free_options.where(registrant_type: "noncompetitor").first.try(:free_option)
+    def free_options(expense_group, registrant)
+      expense_group.expense_group_free_options.for("noncompetitor", registrant.age).first.try(:free_option)
     end
 
     # Returns a collection of ExpenseGroups which are required to have items selected
-    def required_free_expense_groups(_registrant_age)
-      ExpenseGroupFreeOption.where(registrant_type: "noncompetitor", free_option: "One Free In Group REQUIRED").map(&:expense_group)
+    def required_free_expense_groups(registrant_age)
+      ExpenseGroupFreeOption.where(free_option: "One Free In Group REQUIRED").for("noncompetitor", registrant_age).map(&:expense_group)
     end
 
     def required_expense_groups
