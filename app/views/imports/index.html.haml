@@ -1,0 +1,9 @@
+%h1 Import Registrant Data & events
+
+%p
+  Note: The format of this CSV file MUST be the same as the "Export Registrants and data" from the
+  = link_to "Exports page", export_index_path
+
+= form_tag import_registrants_imports_path, method: :post, multipart: true do
+  = file_field_tag :file
+  = submit_tag
