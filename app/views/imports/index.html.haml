@@ -5,5 +5,10 @@
   = link_to "Exports page", export_index_path
 
 = form_tag import_registrants_imports_path, method: :post, multipart: true do
-  = file_field_tag :file
-  = submit_tag
+  .row
+    .small-6.columns
+      = label_tag :file, "Registrants file"
+    .small-6.columns
+      = file_field_tag :file
+  .row
+    = submit_tag "Import Registrants"
