@@ -26,7 +26,7 @@ class ExpenseGroupFreeOption < ApplicationRecord
   end
 
   validates :free_option, inclusion: { in: free_options }
-  validates :min_age, :max_age, absence: true, if: proc { |el| el.registrant_type != "competitor" }
+  validates :min_age, :max_age, absence: true, if: proc { |el| el.registrant_type == "spectator" }
 
   def self.for(registrant_type, registrant_age)
     where(registrant_type: registrant_type).select do |group_free_option|
