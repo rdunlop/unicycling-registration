@@ -5,7 +5,7 @@ class Exporters::RegistrantExporter
       "ID",
       "First Name",
       "Last Name",
-      "Birthday (dd/mm/yy)",
+      "Birthday (dd/mm/yyyy)",
       "Sex (m/f)"
     ] + event_headers
   end

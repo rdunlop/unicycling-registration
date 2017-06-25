@@ -8,7 +8,7 @@ describe Exporters::RegistrantExporter do
         "ID",
         "First Name",
         "Last Name",
-        "Birthday (dd/mm/yy)",
+        "Birthday (dd/mm/yyyy)",
         "Sex (m/f)"
       ]
     end
