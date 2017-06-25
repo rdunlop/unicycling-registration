@@ -2,6 +2,21 @@ class ImportsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_action
 
+  def index; end
+
+  def import_registrants
+    file = params[:file]
+    importer = Importers::RegistrantDataImporter.new(current_user)
+    parser = Importers::Parsers::RegistrantImport.new
+
+    if importer.process(params[:file], parser)
+      flash[:notice] = "Import Successful"
+    else
+      flash[:alert] = "#{importer.num_rows_processed} rows imported. Import errors #{importer.errors}"
+    end
+    redirect_to imports_path
+  end
+
   def new; end
 
   def create

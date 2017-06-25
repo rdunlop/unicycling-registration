@@ -9,6 +9,10 @@ class RegistrantGroupPolicy < ApplicationPolicy
     super_admin?
   end
 
+  def create?
+    new?
+  end
+
   def update?
     # must be leader, or convention_admin event-director (if event) or super_admin
     super_admin?

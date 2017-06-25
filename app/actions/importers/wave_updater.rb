@@ -1,4 +1,4 @@
-class Importers::WaveUpdater < Importers::BaseImporter
+class Importers::WaveUpdater < Importers::CompetitionDataImporter
   def process(file, processor)
     return false unless valid_file?(file)
 

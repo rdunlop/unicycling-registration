@@ -14,10 +14,10 @@ class RegistrantGroupManager
   end
 
   def promote(existing_member)
-    member = registrant_group.registrant_group_members.find_by(registrant: existing_member)
+    member = registrant_group.registrant_group_members.find_by(registrant: existing_member.registrant)
     return false unless member
 
-    registrant_group.registrant_group_leaders.create(user: member.user)
+    registrant_group.registrant_group_leaders.create(user: existing_member.registrant.user)
   end
 
   def leave_leader(user)

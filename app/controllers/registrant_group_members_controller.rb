@@ -44,6 +44,7 @@ class RegistrantGroupMembersController < ApplicationController
 
   # POST /registrant_group_members/1/promote
   def promote
+    @registrant_group = @registrant_group_member.registrant_group
     if RegistrantGroupManager.new(@registrant_group).promote(@registrant_group_member)
       flash[:alert] = "Unable to promote member"
     else
@@ -55,6 +56,7 @@ class RegistrantGroupMembersController < ApplicationController
 
   # POST /registrant_group_members/1/request_leader
   def request_leader
+    @registrant_group = @registrant_group_member.registrant_group
     if RegistrantGroupManager.new(@registrant_group).request_leader(@registrant_group_member)
       flash[:alert] = "Unable to request leader"
     else
