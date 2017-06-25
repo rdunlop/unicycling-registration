@@ -19,7 +19,5 @@ class RegistrantGroupType < ApplicationRecord
 
   validates :source_element, presence: true
 
-  def to_s
-    source_element
-  end
+  delegate :to_s, to: :source_element
 end

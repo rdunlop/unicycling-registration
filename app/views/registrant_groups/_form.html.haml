@@ -1,5 +1,5 @@
 %h2 All Registrants
-= simple_form_for(setup_registrant_group(@registrant_group)) do |f|
+= simple_form_for([@registrant_group_type, setup_registrant_group(@registrant_group)]) do |f|
   - if @registrant_group.errors.any?
     #error_explanation
       %h2
@@ -12,10 +12,6 @@
     = f.label :name
     %br
     = f.text_field :name
-  .field
-    = f.label :registrant_id, "Contact Person"
-    %br
-    = f.select :registrant_id, Registrant.select_box_options, include_blank: true
   %br
   .actions
     = f.button :submit

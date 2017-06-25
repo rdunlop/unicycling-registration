@@ -10,7 +10,7 @@
     - @registrant_groups.each do |registrant_group|
       %tr
         %td= link_to registrant_group.name, registrant_group
-        %td= registrant_group.leaders
+        %td= registrant_group.leaders.map(&:to_s)
         %td= link_to 'Show', registrant_group
 
 = link_to "New Group", new_registrant_group_type_registrant_group_path(@registrant_group_type)

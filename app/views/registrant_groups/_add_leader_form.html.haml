@@ -3,7 +3,7 @@
   .field
     = f.label :user_id, "Leader"
     %br
-    = f.select :user_id, User.all, include_blank: true
+    = f.select :user_id, User.all.map{ |user| [user, user.id] }, {include_blank: true}, class: "chosen-select"
   %br
   .actions
     = f.button :submit

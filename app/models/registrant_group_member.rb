@@ -26,5 +26,5 @@ class RegistrantGroupMember < ApplicationRecord
   validates :registrant_id, uniqueness: {scope: [:registrant_group_id]}
   validates :registrant_group, presence: true
 
-  delegate :to_s, to: :registrant_group
+  delegate :to_s, to: :registrant
 end

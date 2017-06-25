@@ -40,7 +40,7 @@ describe RegistrantGroupMember do
   end
 
   it "describes itself as the group" do
-    expect(@rgm.to_s).to eq(@rg.name)
+    expect(@rgm.to_s).to eq(@rgm.registrant.to_s)
   end
 
   it "cannot have the same member twice in the same group" do

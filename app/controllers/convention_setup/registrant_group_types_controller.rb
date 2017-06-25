@@ -62,8 +62,11 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
 
   # DELETE /registrant_group_types/1
   def destroy
-    @registrant_group_type.destroy
-
+    if @registrant_group_type.destroy
+      flash[:notice] = "Removed Registration Group Type"
+    else
+      flash[:alert] = "Unable to remove registration group type. Remove groups first"
+    end
     redirect_to convention_setup_registrant_group_types_url
   end
 

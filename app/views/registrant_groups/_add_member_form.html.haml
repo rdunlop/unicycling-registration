@@ -3,7 +3,7 @@
   .field
     = f.label :registrant_id, "Member"
     %br
-    = f.select :registrant_id, Registrant.select_box_options, include_blank: true
+    = f.select :registrant_id, Registrant.select_box_options, {include_blank: true}, class: 'chosen-select'
   %br
   .actions
     = f.button :submit

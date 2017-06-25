@@ -8,7 +8,7 @@
 
 %p
   %b Leaders:
-  = @registrant_group.leaders
+  = @registrant_group.leaders.join(", ")
 
 %h3 Members
 
@@ -24,10 +24,10 @@
         %td= member
         %td= member.registrant.bib_number
         %td
-          - if policy(member).leave?
-            = link_to "Leave", "#"
+          - if policy(member).destroy?
+            = link_to "Leave", registrant_group_member_path(member), method: :delete
           - if policy(member).promote?
-            = link_to "Promote", "#"
+            = link_to "Promote", promote_registrant_group_member_path(member), method: :post
 
 = render "add_member_form"
 
@@ -45,8 +45,8 @@
       %tr
         %td= leader
         %td
-          - if policy(leader).remove?
-            = link_to "Remove", "#"
+          - if policy(leader).destroy?
+            = link_to "Remove", registrant_group_leader_path(leader), method: :delete
 
 = render "add_leader_form"
 
