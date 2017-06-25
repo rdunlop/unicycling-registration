@@ -60,18 +60,11 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
                         end
     registrant.user = user
 
-    set_event_sign_ups(registrant, registrant_hash[:events])
+    set_events_sign_ups(registrant, registrant_hash[:events])
+    set_events_best_times(registrant, registrant_hash[:events])
+    set_events_choices(registrant, registrant_hash[:events])
+    registrant.status = "base_details"
     registrant.save!
-    # if we already have a registrant matching this name+birthday+gender
-    # else create a new registrant with this name+birthday+gender
-
-    # for each remaining column in the import, search for the matching Event
-    # format of column headers:
-    # Event: <name>
-    # Event Best Time: <name>
-    # Event Choice: <name>. Choice: <choice name>
-
-    Registrant.create!(user: user)
   end
 
   # finds existing registrant, or initializes a new one
@@ -95,14 +88,27 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
     )
   end
 
-  def set_event_sign_ups(registrant, events_hash)
+  def set_events_sign_ups(registrant, events_hash)
     events_hash.each do |event_hash|
       set_event_sign_up(registrant, event_hash)
     end
   end
 
+  def set_events_choices(registrant, events_hash)
+    events_hash.each do |event_hash|
+      set_event_choice(registrant, event_hash)
+    end
+  end
+
+  def set_events_best_times(registrant, events_hash)
+    events_hash.each do |event_hash|
+      set_event_best_time(registrant, event_hash)
+    end
+  end
+
   # {
   #   name: "100m",
+  #   category: "All",
   #   signed_up: true,
   #   best_time: "20.03",
   #   choices: [
@@ -111,10 +117,27 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   # }
   def set_event_sign_up(registrant, event_hash)
     event = Event.find_by!(name: event_hash[:name])
-    resu = registrant.registrant_event_sign_ups.build(event: event)
+    resu = registrant.registrant_event_sign_ups.find_or_initialize_by(event: event)
     resu.signed_up = event_hash[:signed_up]
     resu.event_category = event.event_categories.find{|event_category| event_category.name == event_hash[:category] }
     resu.save!
+  end
+
+  def set_event_choice(registrant, event_hash)
+    event = Event.find_by!(name: event_hash[:name])
+    event.event_choices.each do |event_choice|
+      resu = registrant.registrant_choices.find_or_initialize_by(event_choice: event_choice)
+      resu.value = event_hash[:choices][event_choice.label]
+      resu.save!
+    end
+  end
+
+  def set_event_best_time(registrant, event_hash)
+    event = Event.find_by!(name: event_hash[:name])
+    rebt = registrant.registrant_best_times.find_or_initialize_by(event: event)
+    rebt.formatted_value = event_hash[:best_time]
+    rebt.source_location = "N/A"
+    rebt.save!
   end
 
   def parse_birthday(birthday, day_first: true)

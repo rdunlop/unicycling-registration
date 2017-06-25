@@ -91,8 +91,7 @@ class Importers::Parsers::RegistrantImport
         name: event.name,
         category: element_finder.find("EV: #{event.name} - Category (All)"),
         signed_up: (element_finder.find("EV: #{event.name} - Signed Up (Y/N)") == "Y"),
-        best_time: element_finder.find("EV: #{event.name} - Best Time (#{event.best_time_format})"),
-        choices: []
+        best_time: element_finder.find("EV: #{event.name} - Best Time (#{event.best_time_format})")
       }
 
       choices = {}
@@ -100,7 +99,7 @@ class Importers::Parsers::RegistrantImport
         choices[event_choice.label] = element_finder.find("EV: #{event.name} - Choice: #{event_choice.label}")
       end
 
-      event_hash[:choices] << choices
+      event_hash[:choices] = choices
       event_hash
     end
   end

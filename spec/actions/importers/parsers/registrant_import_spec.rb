@@ -39,9 +39,9 @@ describe Importers::Parsers::RegistrantImport do
               category: "All",
               signed_up: true,
               best_time: "20.03",
-              choices: [
-                { "Team Name" => "100m Team" }
-              ]
+              choices: {
+                "Team Name" => "100m Team"
+              }
             }
           ]
         )
@@ -71,9 +71,9 @@ describe Importers::Parsers::RegistrantImport do
             category: "All",
             signed_up: true,
             best_time: "20.03",
-            choices: [
-              { "Team Name" => "100m Team" }
-            ]
+            choices: {
+              "Team Name" => "100m Team"
+            }
           }
         ]
       )
@@ -89,9 +89,9 @@ describe Importers::Parsers::RegistrantImport do
             category: "All",
             signed_up: true,
             best_time: "12.33",
-            choices: [
-              { "Team Name" => "Best Team" }
-            ]
+            choices: {
+              "Team Name" => "Best Team"
+            }
           }
         ]
       )
