@@ -35,6 +35,7 @@
 require 'csv'
 class CompetitionsController < ApplicationController
   include EventsHelper
+  include CsvOutputter
   layout "competition_management"
 
   before_action :authenticate_user!
@@ -117,17 +118,8 @@ class CompetitionsController < ApplicationController
   def export
     authorize @competition
     exporter = @competition.exporter
-    csv_string = CSV.generate do |csv|
-      csv << exporter.headers
-      exporter.data.each do |row|
-        csv << row
-      end
-    end
-
     filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
-    send_data(csv_string,
-              type: 'text/csv; charset=utf-8; header=present',
-              filename: filename)
+    output_csv(exporter.headers, exporter.data, filename)
   end
 
   def lock

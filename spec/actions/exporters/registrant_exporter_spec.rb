@@ -54,13 +54,31 @@ describe Exporters::RegistrantExporter do
         registrant.bib_number.to_s,
         registrant.first_name,
         registrant.last_name,
-        "20/04/98",
+        "20/04/1998",
         "m"
       ]
     end
 
     it "includes the base information" do
       expect(rows.first).to eq(expected_row)
+    end
+
+    context "when the registrant is a spectator (no birthday)" do
+      let!(:registrant) { FactoryGirl.create(:spectator, birthday: nil, gender: nil) }
+
+      let(:expected_row) do
+        [
+          registrant.bib_number.to_s,
+          registrant.first_name,
+          registrant.last_name,
+          "",
+          ""
+        ]
+      end
+
+      it "includes the base information" do
+        expect(rows.first).to eq(expected_row)
+      end
     end
 
     context "with an event with choices" do
