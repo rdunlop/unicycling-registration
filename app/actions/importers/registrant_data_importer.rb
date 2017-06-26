@@ -136,6 +136,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   end
 
   def set_event_choice(registrant, event_hash)
+    return unless event_hash[:signed_up]
     event = event_by_name(event_hash[:name])
     event.event_choices.each do |event_choice|
       resu = registrant.registrant_choices.find_or_initialize_by(event_choice: event_choice)
@@ -145,8 +146,10 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   end
 
   def set_event_best_time(registrant, event_hash)
+    return unless event_hash[:signed_up]
     return if event_hash[:best_time].blank?
     event = event_by_name(event_hash[:name])
+    return if event.best_time_format == "none"
     rebt = registrant.registrant_best_times.find_or_initialize_by(event: event)
     rebt.formatted_value = event_hash[:best_time]
     rebt.source_location = "N/A"
