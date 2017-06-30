@@ -6,10 +6,7 @@ de:
       manage_memberships: Einrad Verbands Mitgliedschaft verwalten
       manage_standard_skill_entries: Standard Skill Einträge
       on_site_registration: Vor Ort Anmeldung
-      registrant_bag_labels: Teilnehmer Taschen Label )pdf)
-      registrant_summaries_by_id: Zusammenfassung aller Teilnehmer sortiert nach ID
-        (pdf)
-      registrant_summaries_by_last_name: Zusammenfassung aller Teilnehmer sortiert
-        nach Nachnahme (pdf)
+      registrant_bag_labels: Teilnehmer Taschen Label
+      registrant_summaries: Zusammenfassung aller Teilnehmer
       send_email_to_registrants: Teilnehmer (email)
       translations: Übersetzungen

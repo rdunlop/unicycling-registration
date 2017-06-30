@@ -1,0 +1,8 @@
+---
+fr:
+  admin:
+    registrant_summaries:
+      index:
+        registrant_summaries_by_id: Tous les résumés d'inscriptions triés par ID (pdf)
+        registrant_summaries_by_last_name: Tous les résumés d'inscription triés par
+          nom (pdf)

@@ -8,6 +8,5 @@ en:
       manage_memberships: Unicycling Society/Federation Membership Management
       manage_standard_skill_entries: Standard Skill Entries
       manage_cache: Cache Management
-      registrant_bag_labels: 'Registrants Bag Labels (pdf)'
-      registrant_summaries_by_last_name: "All Registrants Summaries Sorted By Last Name (pdf)"
-      registrant_summaries_by_id: "All Registrants Summaries Sorted By ID (pdf)"
+      registrant_bag_labels: 'Registrants Bag Labels'
+      registrant_summaries: "All Registrants Summaries"

@@ -1,0 +1,34 @@
+%h1 Registrant Summaries
+
+%p Print the Registrant Summaries, in bulk.
+
+%p
+  %b Note
+  This page will create the PDF in the background, and then provide a link to download it on the
+  = link_to "Reports page", reports_path
+
+%ul
+  %li= link_to t('.registrant_summaries_by_last_name'), registrant_summaries_path(format: :pdf)
+  %li= link_to t('.registrant_summaries_by_id'), registrant_summaries_path(order: :id, format: :pdf)
+
+= form_tag url: registrant_summaries_path, method: :post do
+  .row
+    .small-12.medium-6.columns
+      = label_tag :order, "Order"
+      = select_tag :order, options_for_select(["name", "id"])
+    .small-12.medium-6.columns
+      .row
+        If no offset and limit are specified, creates ALL Summaries at once.
+        Use the offset and limit to create smaller PDFs.
+      .row
+        .small-6.medium-3.columns.right_aligned
+          = label_tag :offset, "Offset"
+        .small-6.medium-3.columns
+          = text_field_tag :offset
+        .small-6.medium-3.columns.right_aligned
+          = label_tag :limit, "Limit"
+        .small-6.medium-3.columns
+          = text_field_tag :limit
+  .row
+    .small-12.medium-6.columns
+      = submit_tag "Create PDF", class: "button", data: { disable_with: false }

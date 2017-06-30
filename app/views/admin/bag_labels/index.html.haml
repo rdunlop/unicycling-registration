@@ -1,0 +1,15 @@
+%h1 Print Bag Numbers
+
+%p Print labels for applying to registration bags
+
+%p The label format is Avery 5160
+
+= form_tag url: bag_labels_path, method: :post do
+  .row
+    .small-10.columns.right_aligned
+      = label_tag :display_expenses, "Display Expenses On Label"
+    .small-2.columns
+      = check_box_tag :display_expenses, false
+  .row
+    .small-12.columns
+      = submit_tag "Create PDF", class: "button", data: { disable_with: false }
