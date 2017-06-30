@@ -5,14 +5,13 @@ class ImportsController < ApplicationController
   def index; end
 
   def import_registrants
-    file = params[:file]
     importer = Importers::RegistrantDataImporter.new(current_user)
     parser = Importers::Parsers::RegistrantImport.new
 
     if importer.process(params[:file], parser)
       flash[:notice] = "Import Successful"
     else
-      flash[:alert] = "#{importer.num_rows_processed} rows imported. Import errors #{importer.errors}"
+      flash[:alert] = "#{importer.num_rows_processed} rows imported. Some Import errors: #{importer.errors[0..10]}"
     end
     redirect_to imports_path
   end
