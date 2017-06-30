@@ -1,4 +1,5 @@
 class WavesController < ApplicationController
+  include WaveBestTimeEagerLoader
   before_action :authenticate_user!
   before_action :load_competition
   before_action :authorize_competition
@@ -10,7 +11,7 @@ class WavesController < ApplicationController
   # GET /competitions/1/waves
   def index
     add_breadcrumb "Current Waves"
-    @competitors = @competition.competitors
+    @competitors = eager_load_competitors_relations(@competition.competitors)
   end
 
   private
