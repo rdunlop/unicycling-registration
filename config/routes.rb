@@ -356,8 +356,6 @@ Rails.application.routes.draw do
     scope module: "admin" do
       resources :registrants, only: [] do
         collection do
-          get :bag_labels
-          get :show_all
           get :manage_all # How do I use cancan on this, if I were to name the action 'index'?
           get :manage_one
           post :choose_one
@@ -370,6 +368,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :bag_labels, only: %i[index create]
+      resources :registrant_summaries, only: %i[index create]
       resources :bib_numbers, only: %i[index create]
       resources :reports, only: [:index]
       resources :competition_songs, only: %i[show create], param: :competition_id do

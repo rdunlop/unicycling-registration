@@ -72,35 +72,6 @@ describe Admin::RegistrantsController do
       end
     end
 
-    context "with some registrants" do
-      before do
-        FactoryGirl.create_list(:registrant, 3)
-      end
-      describe "GET show_all" do
-        it "renders in normal order" do
-          get :show_all, format: :pdf
-          expect(response).to redirect_to(reports_path)
-        end
-
-        it "renders in id order" do
-          get :show_all, params: { order: "id" }, format: :pdf
-          expect(response).to redirect_to(reports_path)
-        end
-
-        it "renders in id order with offset" do
-          get :show_all, params: { order: "id", offset: "20", max: "5"}, format: :pdf
-          expect(response).to redirect_to(reports_path)
-        end
-      end
-
-      describe "GET bag_labels" do
-        it "renders" do
-          get :bag_labels
-          expect(response).to be_success
-        end
-      end
-    end
-
     describe "POST undelete" do
       before(:each) do
         FactoryGirl.create(:registration_cost)

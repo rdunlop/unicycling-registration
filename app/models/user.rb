@@ -136,6 +136,15 @@ class User < ApplicationRecord
   def to_s
     name.presence || email
   end
+
+  def to_s_with_email
+    if name.present?
+      "#{name} (#{email})"
+    else
+      email
+    end
+  end
+
   #   def additional_editable_registrants
   #     Registrant.active_or_incomplete.joins(:additional_registrant_accesses).merge(additional_registrant_accesses.full_access)
   #   end

@@ -4,7 +4,7 @@ class Exporters::WaveExporter
   end
 
   def headers
-    ["ID", "Wave", "Name"]
+    ["ID", "Wave", "Name", "Age", "Gender", "Age Group", "Best Time"]
   end
 
   def rows
@@ -13,7 +13,11 @@ class Exporters::WaveExporter
       results << [
         comp.lowest_member_bib_number,
         comp.wave,
-        comp.detailed_name
+        comp.detailed_name,
+        comp.age,
+        comp.gender,
+        comp.age_group_entry_description,
+        comp.best_time
       ]
     end
 
