@@ -11,12 +11,17 @@ class Importers::WaveUpdater < Importers::CompetitionDataImporter
         rows.each do |row|
           row_hash = processor.process_row(row)
           competitor = competition.competitors.where(lowest_member_bib_number: row_hash[:bib_number]).first
-          raise "Unable to find competitor #{bib_number}" if competitor.nil?
+
+          if competitor.nil?
+            @errors = "Unable to find competitor #{row_hash[:bib_number]}"
+            raise ActiveRecord::Rollback
+          end
+
           competitor.update_attribute(:wave, row_hash[:wave])
           self.num_rows_processed += 1
         end
       end
-    rescue ActiveRecord::RecordInvalid, StandardException => invalid
+    rescue ActiveRecord::RecordInvalid, RuntimeError => invalid
       @errors = "Error #{invalid}"
       return false
     end

@@ -23,5 +23,14 @@ describe Importers::WaveUpdater do
 
       expect(competitor1.reload.wave).to eq(1)
     end
+
+    context "When searching for a bib_number which is not found" do
+      before { competitor1.destroy }
+      it "returns an error" do
+        importer = described_class.new(competition, nil)
+        expect(importer.process(wave_data_file, processor)).to be_falsey
+        expect(importer.errors).to eq("Unable to find competitor 101")
+      end
+    end
   end
 end
