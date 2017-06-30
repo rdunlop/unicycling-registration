@@ -33,7 +33,7 @@ class Compete::WaveAssignmentsController < ApplicationController
     updater = Importers::WaveUpdater.new(@competition, current_user)
 
     if updater.process(params[:file], parser)
-      flash[:notice] = "#{importer.num_rows_processed} Waves Configured"
+      flash[:notice] = "#{updater.num_rows_processed} Waves Configured"
     else
       flash[:alert] = "Error processing file #{updater.errors}"
     end
