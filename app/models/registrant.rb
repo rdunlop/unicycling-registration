@@ -54,7 +54,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     has_many :registrant_best_times, inverse_of: :registrant
     has_many :registrant_choices, inverse_of: :registrant
     has_many :registrant_event_sign_ups, inverse_of: :registrant
-    has_many :registrant_expense_items, -> { includes(expense_item: [expense_group: :translations, translations: []]) }, autosave: true
+    has_many :registrant_expense_items, -> { includes(expense_item: [:translations, expense_group: :translations]) }, autosave: true
     has_many :payment_details, -> {includes :payment}
     has_many :additional_registrant_accesses
     has_many :registrant_group_members

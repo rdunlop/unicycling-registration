@@ -95,33 +95,6 @@ class Admin::RegistrantsController < ApplicationController
     end
   end
 
-  def bag_labels
-    authorize current_user, :registrant_information?
-    @registrants = Registrant.includes(:contact_detail).reorder(:sorted_last_name, :first_name).active.all
-
-    names = []
-    @registrants.each do |reg|
-      names << "\n <b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name} \n #{reg.representation} \n #{reg.registrant_type.capitalize}"
-    end
-
-    labels = Prawn::Labels.render(names, type: "Avery5160") do |pdf, name|
-      set_font(pdf)
-
-      pdf.text name, align: :center, size: 12, inline_format: true
-    end
-
-    send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
-  end
-
-  # GET /registrants/show_all.pdf
-  def show_all
-    authorize current_user, :registrant_information?
-    report = Report.create!(report_type: "registration_summary")
-    ShowAllRegistrantsPdfJob.perform_later(report.id, params[:order], params[:offset], params[:max], current_user)
-
-    redirect_to reports_path, notice: "Report Generation started. Check back in a few minutes"
-  end
-
   private
 
   def set_registrants_breadcrumb

@@ -1,0 +1,9 @@
+---
+de:
+  admin:
+    registrant_summaries:
+      index:
+        registrant_summaries_by_id: Zusammenfassung aller Teilnehmer sortiert nach ID
+          (pdf)
+        registrant_summaries_by_last_name: Zusammenfassung aller Teilnehmer sortiert
+          nach Nachnahme (pdf)

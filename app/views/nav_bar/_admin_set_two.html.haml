@@ -11,7 +11,6 @@
 - if policy(@config).manage_cache?
   %li= link_to t('.manage_cache'), cache_event_configuration_path
 - if policy(current_user).registrant_information?
-  %li= link_to t('.registrant_bag_labels'), bag_labels_registrants_path(:format => :pdf)
+  %li= link_to t('.registrant_bag_labels'), bag_labels_path
 - if policy(current_user).registrant_information?
-  %li= link_to t('.registrant_summaries_by_last_name'), show_all_registrants_path(:format => :pdf)
-  %li= link_to t('.registrant_summaries_by_id'), show_all_registrants_path(order: :id, :format => :pdf)
+  %li= link_to t('.registrant_summaries'), registrant_summaries_path

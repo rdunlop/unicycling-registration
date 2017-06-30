@@ -25,7 +25,7 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
       @registrants = Registrant.active.reorder(:sorted_last_name, :first_name)
     end
 
-    if offset
+    if offset.present? && max.present?
       @registrants = @registrants.limit(max).offset(offset)
     end
 

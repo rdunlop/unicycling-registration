@@ -1,0 +1,7 @@
+---
+en:
+  admin:
+    registrant_summaries:
+      index:
+        registrant_summaries_by_last_name: "All Registrants Summaries Sorted By Last Name (pdf)"
+        registrant_summaries_by_id: "All Registrants Summaries Sorted By ID (pdf)"
