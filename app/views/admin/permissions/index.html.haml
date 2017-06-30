@@ -38,7 +38,7 @@
   %tbody
     - User.this_tenant.with_any_role(*@available_roles).each do |user|
       %tr
-        %th= user
+        %th= user.to_s_with_email
         - @available_roles.each do |role|
           %td
             = user.has_role?(role)
