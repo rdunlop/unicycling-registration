@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Csv do
-  let(:importer) { described_class.new }
+  let(:importer) { described_class.new(test_file) }
 
   let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
@@ -10,7 +10,7 @@ describe Importers::Parsers::Csv do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101.txt' }
 
     it "reads the line" do
-      expect(importer.extract_file(test_file)).to eq([["101", "1", "2", "300", "0"]])
+      expect(importer.extract_file).to eq([["101", "1", "2", "300", "0"]])
     end
 
     it "returns competitor data" do
@@ -25,7 +25,7 @@ describe Importers::Parsers::Csv do
     end
 
     it "reads num_laps, if configured" do
-      importer = described_class.new(read_num_laps: true)
+      importer = described_class.new(test_file, read_num_laps: true)
 
       input_data = importer.process_row(["101", "1", "2", "300", "0", "4"])
 
@@ -37,7 +37,7 @@ describe Importers::Parsers::Csv do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101_dq.txt' }
 
     it "reads the line" do
-      expect(importer.extract_file(test_file)).to eq([["101", "0", "0", "0", "DQ"]])
+      expect(importer.extract_file).to eq([["101", "0", "0", "0", "DQ"]])
     end
 
     it "returns dq data" do

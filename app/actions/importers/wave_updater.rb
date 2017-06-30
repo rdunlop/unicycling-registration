@@ -1,10 +1,13 @@
 class Importers::WaveUpdater < Importers::CompetitionDataImporter
-  def process(file, processor)
-    return false unless valid_file?(file)
+  def process(processor)
+    unless processor.valid_file?
+      @errors = processor.errors
+      return false
+    end
 
-    rows = processor.extract_file(file)
+    rows = processor.file_contents
     self.num_rows_processed = 0
-    self.errors = nil
+    @errors = []
 
     begin
       TimeResult.transaction do
@@ -13,7 +16,7 @@ class Importers::WaveUpdater < Importers::CompetitionDataImporter
           competitor = competition.competitors.where(lowest_member_bib_number: row_hash[:bib_number]).first
 
           if competitor.nil?
-            @errors = "Unable to find competitor #{row_hash[:bib_number]}"
+            @errors << "Unable to find competitor #{row_hash[:bib_number]}"
             raise ActiveRecord::Rollback
           end
 
@@ -22,7 +25,7 @@ class Importers::WaveUpdater < Importers::CompetitionDataImporter
         end
       end
     rescue ActiveRecord::RecordInvalid, RuntimeError => invalid
-      @errors = "Error #{invalid}"
+      @errors << "Error #{invalid}"
       return false
     end
   end

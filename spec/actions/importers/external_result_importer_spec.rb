@@ -11,11 +11,10 @@ describe Importers::ExternalResultImporter do
   let(:competition) { FactoryGirl.create(:ranked_competition) }
   let(:importer) { described_class.new(competition, admin_user) }
 
-  let(:test_file) { fixture_path + '/external_results.csv' }
-  let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
   let(:processor) do
     double(
-      extract_file: ["a line"],
+      file_contents: ["a line"],
+      valid_file?: true,
       process_row: {
         bib_number: "101",
         points: "1.2",
@@ -29,7 +28,7 @@ describe Importers::ExternalResultImporter do
     create_competitor(competition, 101)
 
     expect do
-      expect(importer.process(sample_input, processor)).to be_truthy
+      expect(importer.process(processor)).to be_truthy
     end.to change(ExternalResult, :count).by(1)
     expect(importer.num_rows_processed).to eq(1)
   end

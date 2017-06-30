@@ -6,10 +6,9 @@ describe Importers::TwoAttemptEntryImporter do
   let(:importer) { described_class.new(competition, admin_user) }
 
   describe "when importing data" do
-    let(:test_file) { fixture_path + '/sample_muni_downhill_start_times.txt' }
-    let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
     let(:processor) do
-      double(extract_file: [["row_1"]],
+      double(file_contents: [["row_1"]],
+             valid_file?: true,
              process_row: {
                bib_number: 101,
 
@@ -29,7 +28,7 @@ describe Importers::TwoAttemptEntryImporter do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect do
-        importer.process(sample_input, false, processor)
+        importer.process(false, processor)
       end.to change(TwoAttemptEntry, :count).by(1)
 
       expect(TwoAttemptEntry.count).to eq(1)

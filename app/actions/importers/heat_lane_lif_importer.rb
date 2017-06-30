@@ -1,11 +1,14 @@
 class Importers::HeatLaneLifImporter < Importers::CompetitionDataImporter
-  def process(file, heat, processor)
-    return false unless valid_file?(file)
+  def process(heat, processor)
+    unless processor.valid_file?
+      @errors = processor.errors
+      return false
+    end
 
-    raw_data = processor.extract_file(file)
+    raw_data = processor.file_contents
     raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
     self.num_rows_processed = 0
-    self.errors = nil
+    @errors = []
     begin
       HeatLaneResult.transaction do
         raw_data.each do |raw|
@@ -29,7 +32,7 @@ class Importers::HeatLaneLifImporter < Importers::CompetitionDataImporter
         end
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      @errors = invalid
+      @errors << invalid.message
       return false
     end
     true

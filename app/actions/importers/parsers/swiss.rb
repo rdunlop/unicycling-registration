@@ -1,5 +1,5 @@
-class Importers::Parsers::Swiss
-  def extract_file(file)
+class Importers::Parsers::Swiss < Importers::Parsers::Base
+  def extract_file
     Importers::CsvExtractor.new(file, separator: "\t").extract_csv
   end
 

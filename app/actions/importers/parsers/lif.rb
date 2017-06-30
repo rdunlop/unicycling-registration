@@ -1,5 +1,5 @@
-class Importers::Parsers::Lif
-  def extract_file(file)
+class Importers::Parsers::Lif < Importers::Parsers::Base
+  def extract_file
     data = Importers::CsvExtractor.new(file).extract_csv
     data.drop(1) # drop header row
   end

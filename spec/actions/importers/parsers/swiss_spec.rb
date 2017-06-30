@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Swiss do
+  context "#extract_file" do
+    let(:test_file) { fixture_path + '/swiss_heat.tsv' }
+    let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
+
+    let(:importer) { described_class.new(test_file) }
+
+    it "Can read from file" do
+      expect(importer.extract_file).to eq(
+        [
+          ["3", "00:00:13.973", "277", "1", "Monika Sveistrup", "0-10 20\"\tFemale, 20\" Wheel", "Female", "00:00:00.186"],
+          ["5", "00:00:14.302", "660", "2", "Eva Maria Prader", "0-10 20\"\tFemale, 20\" Wheel", "Female", "00:00:00.515"]
+        ]
+      )
+    end
+  end
+
   it "can parse a simple time", :aggregate_failures do
     result = described_class.new.process_row(["DNK", "00:00:14.404", "555", "1"])
     expect(result[:lane]).to eq(1)

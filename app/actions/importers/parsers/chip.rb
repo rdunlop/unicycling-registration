@@ -1,14 +1,15 @@
-class Importers::Parsers::Chip
+class Importers::Parsers::Chip < Importers::Parsers::Base
   attr_reader :bib_number_column_number, :time_column_number, :number_of_decimal_places, :lap_column_number
 
-  def initialize(bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
+  def initialize(file, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number)
+    super(file)
     @bib_number_column_number = bib_number_column_number
     @time_column_number = time_column_number
     @number_of_decimal_places = number_of_decimal_places
     @lap_column_number = lap_column_number
   end
 
-  def extract_file(file)
+  def extract_file
     # File Format, separated by ';', includes a blank line.
     raw_data = Importers::CsvExtractor.new(file, separator: ';').extract_csv
     # drop the first (title) line

@@ -1,5 +1,5 @@
-class Importers::Parsers::ExternalResultCsv
-  def extract_file(file)
+class Importers::Parsers::ExternalResultCsv < Importers::Parsers::Base
+  def extract_file
     Importers::CsvExtractor.new(file).extract_csv
   end
 
