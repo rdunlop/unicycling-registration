@@ -1,5 +1,6 @@
 class Compete::WaveAssignmentsController < ApplicationController
-  include ExcelOutputter
+  include CsvOutputter
+  include WaveBestTimeEagerLoader
   layout "competition_management"
   before_action :authenticate_user!
   before_action :load_competition
@@ -11,13 +12,14 @@ class Compete::WaveAssignmentsController < ApplicationController
   def show
     authorize @competition, :show?
     add_breadcrumb "Current Waves"
-    @competitors = @competition.competitors
+    @competitors = eager_load_competitors_relations(@competition.competitors)
+
     respond_to do |format|
-      format.xls do
+      format.csv do
         exporter = Exporters::WaveExporter.new(@competitors)
         headers = exporter.headers
         data = exporter.rows
-        output_spreadsheet(headers, data, "#{@competition.slug}-waves-draft-#{Date.today}")
+        output_csv(headers, data, "#{@competition.slug}-waves-draft-#{Date.today}.csv")
       end
       format.html {} # normal
     end
@@ -26,17 +28,12 @@ class Compete::WaveAssignmentsController < ApplicationController
   # PUT /competitions/1/waves
   def update
     authorize @competition, :modify_result_data?
-    if params[:file].respond_to?(:tempfile)
-      file = params[:file].tempfile
-    else
-      file = params[:file]
-    end
 
     parser = Importers::Parsers::Wave.new
     updater = Importers::WaveUpdater.new(@competition, current_user)
 
-    if updater.process(file, parser)
-      flash[:notice] = "{importer.num_rows_processed} Waves Configured"
+    if updater.process(params[:file], parser)
+      flash[:notice] = "#{updater.num_rows_processed} Waves Configured"
     else
       flash[:alert] = "Error processing file #{updater.errors}"
     end

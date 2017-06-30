@@ -7,12 +7,12 @@
   Instead of importing a the wave assignments, you can also use the "Enter Sign-Ins" page to enter/update
   The Wave Number of each competitor.
 
-%h2 Step 1 Download Wave Assignment Spreadsheet
+%h2 Step 1 Download Wave Assignment Spreadsheet (CSV)
 
 %p
   You will need a spreadsheet with the Registrant ID, and wave (with a header row).
   To make it easier for you, we provide a
-  = link_to "Draft Assignments xls", competition_wave_assignments_path(@competition, format: :xls), class: "button tiny"
+  = link_to "Draft Assignments CSV", competition_wave_assignments_path(@competition, format: :csv), class: "button tiny"
   file.
   %br
   %b Note
@@ -27,6 +27,9 @@
     %br
     %b Note
     Each row must contain a valid Registrant ID and Wave.
+    %br
+    %b Note
+    The file must be a CSV file-format
 
   = form_tag competition_wave_assignments_path(@competition), method: :put, multipart: true do
     = file_field_tag :file

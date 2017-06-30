@@ -15,9 +15,9 @@ describe Compete::WaveAssignmentsController do
       expect(response).to be_success
     end
 
-    it "downloads the xls" do
-      get :show, params: { competition_id: competition.id, format: :xls }
-      expect(response.content_type.to_s).to eq("application/vnd.ms-excel")
+    it "downloads the csv" do
+      get :show, params: { competition_id: competition.id, format: :csv }
+      expect(response.content_type.to_s).to eq("text/csv")
     end
   end
 
