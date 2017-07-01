@@ -28,7 +28,7 @@ class HeatReviewController < ApplicationController
   # POST /competitions/#/heat_review/:heat/import_lif
   def import_lif
     unless @competition.uses_lane_assignments?
-      flahs[:alert] = "Competition not set for lane assignments"
+      flash[:alert] = "Competition not set for lane assignments"
       redirect_to competition_heat_review_path(@competition, @heat)
       return
     end
