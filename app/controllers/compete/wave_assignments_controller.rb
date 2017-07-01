@@ -29,16 +29,16 @@ class Compete::WaveAssignmentsController < ApplicationController
   def update
     authorize @competition, :modify_result_data?
 
-    parser = Importers::Parsers::Wave.new
+    parser = Importers::Parsers::Wave.new(params[:file])
     updater = Importers::WaveUpdater.new(@competition, current_user)
 
-    if updater.process(params[:file], parser)
+    if updater.process(parser)
       flash[:notice] = "#{updater.num_rows_processed} Waves Configured"
+      redirect_to competition_waves_path(@competition)
     else
       flash[:alert] = "Error processing file #{updater.errors}"
+      redirect_back(fallback_location: competition_waves_path(@competition))
     end
-
-    redirect_to competition_waves_path(@competition)
   end
 
   private

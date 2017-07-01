@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Importers::Parsers::TwoAttemptCsv do
-  let(:importer) { described_class.new }
+  let(:importer) { described_class.new(test_file) }
 
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   let(:test_file) { fixture_path + '/sample_muni_downhill_start_times.txt' }
 
   it "Can read from file" do
-    expect(importer.extract_file(test_file)).to eq(
+    expect(importer.extract_file).to eq(
       [
         ["101", "1", "30", "0", nil, "10", "45", "0", nil],
         ["102", "2", "30", "239", "DQ", "11", "0", "0", nil]

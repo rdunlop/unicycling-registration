@@ -1,5 +1,5 @@
-class Importers::Parsers::Wave
-  def extract_file(file)
+class Importers::Parsers::Wave < Importers::Parsers::Base
+  def extract_file
     contents = Importers::CsvExtractor.new(file).extract_csv
     contents.drop(1) # skip header row
   end

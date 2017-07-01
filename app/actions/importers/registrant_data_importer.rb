@@ -1,11 +1,14 @@
 # Import the registrant-sign-up and details
 class Importers::RegistrantDataImporter < Importers::BaseImporter
-  def process(file, processor)
-    return false unless valid_file?(file)
+  def process(processor)
+    unless processor.valid_file?
+      @errors = processor.errors
+      return false
+    end
 
-    registrant_data = processor.extract_file(file)
+    registrant_data = processor.file_contents
     self.num_rows_processed = 0
-    self.errors = []
+    @errors = []
     Registrant.transaction do
       registrant_data.each do |registrant_hash|
         # CsvExtractor converts from file into array-of-arrays

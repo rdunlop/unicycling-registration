@@ -1,5 +1,5 @@
-class Importers::Parsers::TwoAttemptCsv
-  def extract_file(file)
+class Importers::Parsers::TwoAttemptCsv < Importers::Parsers::Base
+  def extract_file
     Importers::CsvExtractor.new(file).extract_csv
   end
 

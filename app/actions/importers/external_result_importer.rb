@@ -1,11 +1,14 @@
 class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
-  def process(file, processor)
-    return false unless valid_file?(file)
+  def process(processor)
+    unless processor.valid_file?
+      @errors = processor.errors
+      return false
+    end
 
     # FOR EXCEL DATA:
-    raw_data = processor.extract_file(file)
+    raw_data = processor.file_contents
     self.num_rows_processed = 0
-    self.errors = nil
+    @errors = []
     ExternalResult.transaction do
       raw_data.each do |raw|
         if build_and_save_imported_result(processor.process_row(raw), @user, @competition)
@@ -14,7 +17,7 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
       end
     end
   rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
+    @errors << invalid.message
     return false
   end
 

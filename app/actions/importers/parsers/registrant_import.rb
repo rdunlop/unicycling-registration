@@ -17,7 +17,7 @@
 #      }
 #   ]
 # }
-class Importers::Parsers::RegistrantImport
+class Importers::Parsers::RegistrantImport < Importers::Parsers::Base
   class ElementFinder
     def initialize(headers, row)
       @headers = headers
@@ -30,19 +30,21 @@ class Importers::Parsers::RegistrantImport
     end
   end
 
-  attr_reader :errors
-
-  def initialize
-    @errors = []
+  def initialize(file = nil)
+    super(file)
   end
 
-  def extract_file(file)
+  def extract_file
     arrays = Importers::CsvExtractor.new(file).extract_csv
     headers = arrays[0]
     rows = arrays[1..-1]
     rows.map do |row|
       convert_row(headers, row)
     end
+  end
+
+  def validate_contents
+    validate_headers
   end
 
   def validate_headers

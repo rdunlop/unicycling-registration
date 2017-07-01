@@ -129,15 +129,14 @@ class ImportResultsController < ApplicationController
   def import_chip
     importer = Importers::ImportResultImporter.new(@competition, @user)
     parser = Importers::Parsers::Chip.new(
+      params[:file],
       params[:bib_number_column_number].to_i - 1,
       params[:time_column_number].to_i - 1,
       params[:number_of_decimal_places].to_i,
       params[:lap_column_number].to_i - 1
     )
 
-    if importer.process(params[:file],
-                        false,
-                        parser)
+    if importer.process(false, parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
@@ -152,9 +151,9 @@ class ImportResultsController < ApplicationController
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
     importer = Importers::ImportResultImporter.new(@competition, @user)
-    parser = Importers::Parsers::Csv.new(read_num_laps: @competition.has_num_laps?)
+    parser = Importers::Parsers::Csv.new(params[:file], read_num_laps: @competition.has_num_laps?)
 
-    if importer.process(params[:file], @is_start_time, parser)
+    if importer.process(@is_start_time, parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

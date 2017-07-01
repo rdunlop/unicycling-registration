@@ -57,7 +57,7 @@ describe Importers::Parsers::RegistrantImport do
     let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
     it "read the registrant file" do
-      input_data = described_class.new.extract_file(sample_input)
+      input_data = described_class.new(sample_input).extract_file
       expect(input_data.count).to eq(2)
       expect(input_data[0]).to eq(
         id: "1",

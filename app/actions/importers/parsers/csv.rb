@@ -1,11 +1,12 @@
-class Importers::Parsers::Csv
+class Importers::Parsers::Csv < Importers::Parsers::Base
   attr_reader :read_num_laps
 
-  def initialize(read_num_laps: false)
+  def initialize(file, read_num_laps: false)
+    super(file)
     @read_num_laps = read_num_laps
   end
 
-  def extract_file(file)
+  def extract_file
     Importers::CsvExtractor.new(file).extract_csv
   end
 

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Importers::Parsers::ExternalResultCsv do
-  let(:importer) { described_class.new }
+  let(:importer) { described_class.new(sample_input) }
 
   let(:test_file) { fixture_path + '/external_results.csv' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   it "can process external result csv file" do
-    input_data = importer.extract_file(sample_input)
+    input_data = importer.extract_file
     expect(input_data.count).to eq(4)
 
     expect(input_data[0]).to eq(["101", "27.60616904"])

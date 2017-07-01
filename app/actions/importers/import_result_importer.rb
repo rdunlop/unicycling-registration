@@ -1,10 +1,13 @@
 class Importers::ImportResultImporter < Importers::CompetitionDataImporter
-  def process(file, start_times, processor)
-    return false unless valid_file?(file)
+  def process(start_times, processor)
+    unless processor.valid_file?
+      @errors = processor.errors
+      return false
+    end
 
-    raw_data = processor.extract_file(file)
+    raw_data = processor.file_contents
     self.num_rows_processed = 0
-    self.errors = nil
+    @errors = []
     is_start_time = start_times || false
     ImportResult.transaction do
       raw_data.each do |raw|
@@ -14,7 +17,7 @@ class Importers::ImportResultImporter < Importers::CompetitionDataImporter
       end
     end
   rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid
+    @errors << invalid.message
     return false
   end
 
