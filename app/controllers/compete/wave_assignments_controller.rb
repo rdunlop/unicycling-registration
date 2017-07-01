@@ -34,11 +34,11 @@ class Compete::WaveAssignmentsController < ApplicationController
 
     if updater.process(parser)
       flash[:notice] = "#{updater.num_rows_processed} Waves Configured"
+      redirect_to competition_waves_path(@competition)
     else
       flash[:alert] = "Error processing file #{updater.errors}"
+      redirect_back(fallback_location: competition_waves_path(@competition))
     end
-
-    redirect_to competition_waves_path(@competition)
   end
 
   private
