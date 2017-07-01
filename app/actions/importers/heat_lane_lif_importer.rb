@@ -6,7 +6,6 @@ class Importers::HeatLaneLifImporter < Importers::CompetitionDataImporter
     end
 
     raw_data = processor.file_contents
-    raise StandardError.new("Competition not set for lane assignments") unless @competition.uses_lane_assignments?
     self.num_rows_processed = 0
     @errors = []
     begin
