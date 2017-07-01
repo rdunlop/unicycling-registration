@@ -84,10 +84,10 @@ class PreliminaryExternalResultsController < ApplicationController
 
   # POST /competitions/#/preliminary_external_results/import_csv
   def import_csv
-    parser = Importers::Parsers::ExternalResultCsv.new
+    parser = Importers::Parsers::ExternalResultCsv.new(params[:file])
     importer = Importers::ExternalResultImporter.new(@competition, current_user)
 
-    if importer.process(params[:file], parser)
+    if importer.process(parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

@@ -1,11 +1,14 @@
 class Importers::SwissResultImporter < Importers::CompetitionDataImporter
   # Create ImportResult records from a file.
-  def process(file, heat, processor, heats: true)
-    return false unless valid_file?(file)
+  def process(heat, processor, heats: true)
+    unless processor.valid_file?
+      @errors = processor.errors
+      return false
+    end
 
-    rows = processor.extract_file(file)
+    rows = processor.file_contents
     self.num_rows_processed = 0
-    self.errors = nil
+    @errors = []
 
     current_row = nil
     begin
@@ -24,7 +27,7 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
         end
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      @errors = "#{invalid} -> current row: #{current_row}"
+      @errors << "#{invalid.message} -> current row: #{current_row}"
       return false
     end
   end

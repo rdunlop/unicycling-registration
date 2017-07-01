@@ -6,10 +6,9 @@ describe Importers::ImportResultImporter do
   let(:importer) { described_class.new(competition, admin_user) }
 
   describe "when importing data" do
-    let(:test_file) { fixture_path + '/sample_chip_data.csv' }
-    let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
     let(:processor) do
-      double(extract_file: [["row_1"]],
+      double(file_contents: [["row_1"]],
+             valid_file?: true,
              process_row: {
                bib_number: 101,
                minutes: 1,
@@ -23,7 +22,7 @@ describe Importers::ImportResultImporter do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       expect do
-        importer.process(sample_input, false, processor)
+        importer.process(false, processor)
       end.to change(ImportResult, :count).by(1)
 
       expect(ImportResult.count).to eq(1)
@@ -41,14 +40,14 @@ describe Importers::ImportResultImporter do
   end
 
   context "when a file is not specified" do
-    let(:sample_input) { nil }
+    let(:processor) { double(valid_file?: false, errors: ["File not found"]) }
 
     it "returns an error message" do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       result = nil
       expect do
-        result = importer.process(sample_input, false, nil)
+        result = importer.process(false, processor)
       end.not_to change(ImportResult, :count)
 
       expect(result).to be_falsey

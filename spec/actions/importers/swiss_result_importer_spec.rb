@@ -6,10 +6,9 @@ describe Importers::SwissResultImporter do
   let(:importer) { described_class.new(competition, admin_user) }
 
   describe "when importing data" do
-    let(:test_file) { fixture_path + '/swiss_heat.tsv' }
-    let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
     let(:processor) do
-      double(extract_file: [["row_1"]],
+      double(file_contents: [["row_1"]],
+             valid_file?: true,
              process_row: {
                bib_number: 101,
                minutes: 0o0,
@@ -29,7 +28,7 @@ describe Importers::SwissResultImporter do
         @reg.update(bib_number: 101)
 
         expect do
-          importer.process(sample_input, 1, processor)
+          importer.process(1, processor)
         end.to change(HeatLaneResult, :count).by(1)
 
         expect(TimeResult.count).to eq(1)
@@ -53,7 +52,7 @@ describe Importers::SwissResultImporter do
         @reg.update(bib_number: 101)
         competition.reload
         expect do
-          importer.process(sample_input, 1, processor, heats: false)
+          importer.process(1, processor, heats: false)
         end.not_to change(HeatLaneResult, :count)
         expect(TimeResult.count).to eq(1)
       end
@@ -61,14 +60,14 @@ describe Importers::SwissResultImporter do
   end
 
   context "when a file is not specified" do
-    let(:sample_input) { nil }
+    let(:processor) { double(valid_file?: false, errors: ["File not found"]) }
 
     it "returns an error message" do
       @reg = FactoryGirl.create(:registrant, bib_number: 101)
 
       result = nil
       expect do
-        result = importer.process(sample_input, false, nil)
+        result = importer.process(false, processor)
       end.not_to change(TimeResult, :count)
 
       expect(result).to be_falsey

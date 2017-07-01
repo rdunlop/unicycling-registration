@@ -27,15 +27,22 @@ class HeatReviewController < ApplicationController
   # FOR LIF (track racing) data:
   # POST /competitions/#/heat_review/:heat/import_lif
   def import_lif
-    parser = Importers::Parsers::Lif.new
-    importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
+    unless @competition.uses_lane_assignments?
+      flash[:alert] = "Competition not set for lane assignments"
+      redirect_to competition_heat_review_path(@competition, @heat)
+      return
+    end
+
     if params[:file].blank?
       flash[:alert] = "Please specify a file"
       redirect_to competition_heat_review_path(@competition, @heat)
       return
     end
 
-    if importer.process(params[:file], @heat, parser)
+    parser = Importers::Parsers::Lif.new(params[:file])
+    importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
+
+    if importer.process(@heat, parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
     else
       flash[:alert] = "Error importing rows. Errors: #{importer.errors}."

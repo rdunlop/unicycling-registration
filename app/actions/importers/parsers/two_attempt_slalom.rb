@@ -1,5 +1,6 @@
-class Importers::Parsers::TwoAttemptSlalom
-  def extract_file(file)
+class Importers::Parsers::TwoAttemptSlalom < Importers::Parsers::Base
+  def extract_file
+    # need a spec
     Importers::CsvExtractor.new(file, separator: ';').extract_csv
   end
 
