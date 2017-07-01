@@ -8,7 +8,7 @@
   %hr
   - if competitors.count == 0
     %h3 No Competitors
-  - elsif competitors.first.members.count > 2
+  - elsif competitors.first.active_members.count > 2
     - # Group event, list the members
     - competitors.each do |competitor|
       %h3
@@ -19,7 +19,7 @@
             %th ID
             %th Name
         %tbody
-          - competitor.members.each do |member|
+          - competitor.active_members.each do |member|
             %tr
               %td= member.registrant.bib_number
               %td= member.registrant

@@ -45,7 +45,7 @@ class Member < ApplicationRecord
     :registrant_id
   end
 
-  def self.active # Need to applyi this everywhere..for dismount calculation, etc.
+  def self.active # Need to apply this everywhere..for dismount calculation, etc.
     where(alternate: false)
   end
 
@@ -84,7 +84,7 @@ class Member < ApplicationRecord
     return if no_touch_cascade
     comp = competitor.reload
     return if comp.nil?
-    lowest_bib_number = comp.members.includes(:registrant).minimum("registrants.bib_number")
+    lowest_bib_number = comp.active_members.includes(:registrant).minimum("registrants.bib_number")
     competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
   end
 
