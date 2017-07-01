@@ -21,7 +21,7 @@
 #  style_name                                    :string(255)
 #  custom_waiver_text                            :text
 #  music_submission_end_date                     :date
-#  artistic_score_elimination_mode_naucc         :boolean          default(TRUE), not null
+#  artistic_score_elimination_mode_naucc         :boolean          default(FALSE), not null
 #  logo_file                                     :string(255)
 #  max_award_place                               :integer          default(5)
 #  display_confirmed_events                      :boolean          default(FALSE), not null

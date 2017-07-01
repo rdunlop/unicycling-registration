@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170621063801) do
+ActiveRecord::Schema.define(version: 20170701143335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,7 +366,7 @@ ActiveRecord::Schema.define(version: 20170621063801) do
     t.string   "style_name"
     t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
-    t.boolean  "artistic_score_elimination_mode_naucc",         default: true,       null: false
+    t.boolean  "artistic_score_elimination_mode_naucc",         default: false,       null: false
     t.string   "logo_file"
     t.integer  "max_award_place",                               default: 5
     t.boolean  "display_confirmed_events",                      default: false,      null: false
