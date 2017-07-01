@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Importers::Parsers::Csv do
   let(:importer) { described_class.new(test_file) }
 
-  let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   describe "when importing CSV data" do
