@@ -25,7 +25,7 @@ class Importers::WaveUpdater < Importers::CompetitionDataImporter
         end
       end
     rescue ActiveRecord::RecordInvalid, RuntimeError => invalid
-      @errors << "Error #{invalid}"
+      @errors << "Error #{invalid.message}"
       return false
     end
   end
