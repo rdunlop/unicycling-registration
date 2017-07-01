@@ -73,6 +73,16 @@ class Printing::CompetitionsController < ApplicationController
     end
   end
 
+  def freestyle_summary
+    authorize @competition
+    name = "#{@config.short_name.tr(' ', '_')}_#{@competition.name.tr(' ', '_')}_freestyle_summary"
+    attachment = true unless params[:attachment].nil?
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf(name, "Portrait", attachment) }
+    end
+  end
+
   private
 
   def load_competition

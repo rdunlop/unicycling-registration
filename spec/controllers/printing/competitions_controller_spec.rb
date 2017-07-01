@@ -49,4 +49,12 @@ describe Printing::CompetitionsController do
       expect(response).to be_success
     end
   end
+
+  describe "GET freestyle_summary" do
+    let(:competition) { FactoryGirl.create(:competition, :freestyle_2017) }
+    it "renders" do
+      get :freestyle_summary, params: { id: competition.id }
+      expect(response).to be_success
+    end
+  end
 end

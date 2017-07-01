@@ -88,6 +88,11 @@ class CompetitionPolicy < ApplicationPolicy
     (record.imports_times? || record.imports_points?) && create_preliminary_result?
   end
 
+  def freestyle_summary?
+    return false unless record.freestyle_summary?
+    results?
+  end
+
   # PRINTING
   def heat_recording?
     view_access?

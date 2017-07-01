@@ -93,6 +93,10 @@ FactoryGirl.define do
       combined_competition # Factory Girl
     end
 
+    trait :freestyle_2017 do
+      scoring_class "Artistic Freestyle IUF 2017"
+    end
+
     trait :locked do
       locked_at DateTime.current
     end

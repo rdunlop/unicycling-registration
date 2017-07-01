@@ -45,7 +45,10 @@
         %li
           = link_to "Preview Results", results_printing_competition_path(@competition)
           = link_to "(pdf)", results_printing_competition_path(@competition, :format => :pdf)
-
+      - if policy(@competition).freestyle_summary?
+        %li
+          = link_to "Freestyle Judging Summary", freestyle_summary_printing_competition_path(@competition)
+          = link_to "(pdf)", freestyle_summary_printing_competition_path(@competition, :format => :pdf)
   #side_content
     = yield
 
