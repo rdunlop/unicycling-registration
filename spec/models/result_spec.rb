@@ -60,7 +60,7 @@ describe Result do
 
     it "displays both names if in a pair" do
       @reg2 = FactoryGirl.build_stubbed(:competitor, first_name: "Bob", last_name: "Smith")
-      allow(@comp).to receive_message_chain(:members, :size).and_return(2)
+      allow(@comp).to receive_message_chain(:active_members, :size).and_return(2)
       allow(@comp).to receive(:registrants).and_return([@reg, @reg2])
       expect(@al.competitor_name(@reg)).to eq("#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}")
     end
