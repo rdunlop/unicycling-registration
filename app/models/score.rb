@@ -12,6 +12,7 @@
 #  judge_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  val_5         :decimal(5, 3)
 #
 # Indexes
 #
@@ -23,8 +24,10 @@
 class Score < ApplicationRecord
   include Judgeable
 
+  SCORES_RANGE = (1..5).freeze
+
   def self.score_fields
-    %i[val_1 val_2 val_3 val_4]
+    SCORES_RANGE.map{|i| "val_#{i}".to_sym }
   end
 
   score_fields.each do |sym|
@@ -38,7 +41,7 @@ class Score < ApplicationRecord
   delegate :judge_score_calculator, to: :competition
 
   def display_score?(score_number)
-    judge_type.send("val_#{score_number}_max").positive?
+    judge_type.score_column_enabled?(score_number)
   end
 
   # Sum of all entered values for this score.
@@ -63,13 +66,19 @@ class Score < ApplicationRecord
     judge_score_calculator.judged_points(judge.score_totals, total)
   end
 
+  def score_symbol(score_number)
+    "val_#{score_number}".to_sym
+  end
+
+  def score_value(score_number)
+    send(score_symbol(score_number))
+  end
+
   def raw_scores
     @raw_scores = []
 
-    (1..4).each do |score_number|
-      if display_score?(score_number)
-        @raw_scores << send("val_#{score_number}")
-      end
+    judge_type.score_numbers.each do |score_number|
+      @raw_scores << score_value(score_number)
     end
 
     @raw_scores
@@ -79,7 +88,7 @@ class Score < ApplicationRecord
 
   def set_zero_for_non_applicable_scores
     if judge && judge_type
-      (1..4).each do |score_number|
+      SCORES_RANGE.each do |score_number|
         unless display_score?(score_number)
           send("val_#{score_number}=", 0)
         end
@@ -90,18 +99,19 @@ class Score < ApplicationRecord
   def values_within_judge_type_bounds
     if judge && judge.judge_type && all_values_present
       jt = judge.judge_type
-      self.class.score_fields.each do |sym|
-        validate_judge_score(sym, jt.send("#{sym}_max"))
+      self.class::SCORES_RANGE.each do |score_number|
+        validate_judge_score(score_number, jt.max_score_for(score_number))
       end
     end
   end
 
   def all_values_present
-    self.class.score_fields.all? { |sym| send(sym) }
+    self.class::SCORES_RANGE.all? { |score_number| score_value(score_number) }
   end
 
-  def validate_judge_score(value_sym, max_score)
-    if send(value_sym) > max_score
+  def validate_judge_score(score_number, max_score)
+    if score_value(score_number) > max_score
+      value_sym = score_symbol(score_number)
       errors[value_sym] << "#{value_sym} must be <= #{max_score}"
     end
   end

@@ -12,6 +12,7 @@
 #  judge_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  val_5         :decimal(5, 3)
 #
 # Indexes
 #
@@ -30,6 +31,7 @@ FactoryGirl.define do
     val_2 1.2
     val_3 1.3
     val_4 1.4
+    val_5 0
     notes 'this is a factory score'
   end
 end

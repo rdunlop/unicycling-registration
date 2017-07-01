@@ -16,6 +16,8 @@
 #  updated_at                   :datetime
 #  event_class                  :string(255)
 #  boundary_calculation_enabled :boolean          default(FALSE), not null
+#  val_5_description            :string
+#  val_5_max                    :integer
 #
 # Indexes
 #
@@ -33,16 +35,19 @@ FactoryGirl.define do
     val_2_description "Intepretation"
     val_3_description "Mastery"
     val_4_description "Magic"
+    val_5_description "N/A"
     val_1_max 10
     val_2_max 10
     val_3_max 10
     val_4_max 10
+    val_5_max 0
     boundary_calculation_enabled false
 
     trait :street_judge do
       val_2_max 0
       val_3_max 0
       val_4_max 0
+      val_5_max 0
     end
 
     trait :artistic_tech_judge do
@@ -50,10 +55,12 @@ FactoryGirl.define do
       val_2_description "Composition/Choreography"
       val_3_description "Interpretation of the Music/Timing"
       val_4_description "N/A"
+      val_5_description "N/A"
       val_1_max 10
       val_2_max 10
       val_3_max 10
       val_4_max 0
+      val_5_max 0
     end
   end
 end

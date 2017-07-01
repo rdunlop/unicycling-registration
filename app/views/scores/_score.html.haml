@@ -2,10 +2,9 @@
   %td= score.competitor.position
   %td= score.competitor.bib_number
   %td= score.competitor.name
-  %td= score.val_1
-  %td= score.val_2
-  %td= score.val_3
-  %td= score.val_4
+  - score.judge_type.score_numbers.each do |score_number|
+    %td= score.score_value(score_number)
+
   %td= score.total
   %td= score.judge_points
   %td= score.notes

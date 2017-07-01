@@ -12,6 +12,7 @@
 #  judge_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  val_5         :decimal(5, 3)
 #
 # Indexes
 #

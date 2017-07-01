@@ -6,9 +6,9 @@
   - judges.each do |judge|
     - score = competitor.scores.find{ |score| score.judge_id == judge.id}
     - if !score.nil?
-      - judge.judge_type.num_columns.times do |i|
+      - judge.judge_type.score_numbers.each do |score_number|
         %td
-          = score.send("val_#{i + 1}")
+          = score.score_value(score_number)
       %td.derived
         = score.total
         %br
