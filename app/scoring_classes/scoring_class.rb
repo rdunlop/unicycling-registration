@@ -38,7 +38,14 @@ class ScoringClass
         helper: PointsScoringClass.new(competition, false)
       }
     when "Freestyle"
-      # this (unicon_scoring) feature was set to FALSE used by naucc2015.
+      # TENANT with freestyle events - artistic_score_elimination_mode_naucc?
+      #
+      # naucc2013                    - TRUE
+      # naucc2014                    - TRUE
+      # naucc2015                    - false
+      # unicon2014                   - false
+
+      # the unicon_scoring feature was set to FALSE used by naucc2014/naucc2013.
       # all other conventions have this set to TRUE
       unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
       {
