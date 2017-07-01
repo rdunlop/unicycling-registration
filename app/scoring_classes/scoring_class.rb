@@ -38,6 +38,8 @@ class ScoringClass
         helper: PointsScoringClass.new(competition, false)
       }
     when "Freestyle"
+      # this (unicon_scoring) feature was set to FALSE used by naucc2015.
+      # all other conventions have this set to TRUE
       unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
       {
         calculator: ArtisticResultCalculator.new(unicon_scoring),
@@ -52,6 +54,13 @@ class ScoringClass
         exporter: EnteredDataExporter::Score.new(competition),
         judge_score_calculator: Freestyle_2015_JudgePointsCalculator.new,
         helper: ArtisticScoringClass_2015.new(competition)
+      }
+    when "Artistic Freestyle IUF 2017"
+      {
+        calculator: ArtisticResultCalculator2017.new,
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: Freestyle2017JudgePointsCalculator.new,
+        helper: ArtisticScoringClass2017.new(competition)
       }
     when "Flatland"
       scoring_helper = FlatlandScoringClass.new(competition)

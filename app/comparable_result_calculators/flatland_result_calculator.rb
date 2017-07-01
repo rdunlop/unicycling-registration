@@ -31,7 +31,7 @@ class FlatlandResultCalculator
   # Return the resulting score for this competitor
   # after having eliminated the highest and lowest total score
   # Note: There is only 1 judge-type for flatland
-  def total_points(competitor, _judge_type = nil)
+  def total_points(competitor)
     scores = competitor.scores.map(&:total).compact
 
     if scores.count <= 2
@@ -44,6 +44,10 @@ class FlatlandResultCalculator
     total_points = scores.reduce(:+) # sum the remaining values
 
     total_points - min - max
+  end
+
+  def total_points_for_judge_type(competitor, _judge_type)
+    total_points(competitor)
   end
 
   private

@@ -52,6 +52,7 @@ class Competitor < ApplicationRecord
   has_many :start_time_results, -> { merge(TimeResult.start_times) }, class_name: "TimeResult"
   has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
   has_many :registrants, through: :members
+  has_many :active_members, -> { merge(Member.active) }, class_name: "Member"
 
   belongs_to :competition, touch: true, inverse_of: :competitors
   belongs_to :age_group_entry

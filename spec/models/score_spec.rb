@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe Score do
   let(:judge) { FactoryGirl.build_stubbed(:judge) }
-  let(:subject) { FactoryGirl.build_stubbed(:score, val_1: 10, judge: judge) }
+  let(:subject) { FactoryGirl.build_stubbed(:score, val_1: 10, val_2: 1.2, judge: judge) }
 
   describe "when the score is invalid" do
     before(:each) do
@@ -37,6 +37,17 @@ describe Score do
 
     it "says that it has a judge_points of 0" do
       expect(subject.placing_points).to be_nil
+    end
+  end
+
+  describe "#raw_scores" do
+    context "when judge_type specifies 2 valid scores" do
+      let(:judge_type) { FactoryGirl.build_stubbed(:judge_type, val_1_max: 10, val_2_max: 10, val_3_max: 0, val_4_max: 0) }
+      let(:judge) { FactoryGirl.build_stubbed(:judge, judge_type: judge_type) }
+
+      it "returns only 2 scores" do
+        expect(subject.raw_scores).to eq([10.0, 1.2])
+      end
     end
   end
 

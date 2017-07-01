@@ -1,4 +1,4 @@
-class ArtisticResultCalculator_2015
+class ArtisticResultCalculator2017
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?
@@ -20,7 +20,7 @@ class ArtisticResultCalculator_2015
 
   def competitor_tie_break_comparable_result(competitor)
     jt = JudgeType.find_by(name: "Technical", event_class: competitor.competition.event_class) # TODO: this should be properly identified
-    total_points(competitor, jt)
+    total_points_for_judge_type(competitor, jt)
   end
 
   def eager_load_results_relations(competitors)
@@ -35,19 +35,37 @@ class ArtisticResultCalculator_2015
   #
   # return a numeric
   def total_points(competitor)
-    total_results = competitor.competition.judge_types.uniq.map do |jt|
-      total_points_for_judge_type(competitor, jt)
-    end
+    type_results = results_by_judge_type(competitor)
 
-    (total_results.sum / competitor.competition.judge_types.uniq.count.to_f).round(2)
+    calculate_weighted_total(type_results)
   end
 
   def total_points_for_judge_type(competitor, judge_type)
     scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
 
-    # this currently gives equal weight to each of the scores.
     active_scores = scores.map(&:placing_points).compact
 
     (active_scores.sum / active_scores.count.to_f).round(2)
+  end
+
+  def results_by_judge_type(competitor)
+    competitor.competition.judge_types.uniq.map do |jt|
+      {
+        type: jt.name,
+        total: total_points_for_judge_type(competitor, jt)
+      }
+    end
+  end
+
+  def calculate_weighted_total(type_results)
+    weights = {
+      "Presentation" => 45,
+      "Technical" => 45,
+      "Dismount" => 10
+    }.freeze
+
+    type_results.map do |tr_entry|
+      weights[tr_entry[:type]] * tr_entry[:total]
+    end.sum / 100.0
   end
 end

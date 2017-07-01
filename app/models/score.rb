@@ -45,7 +45,7 @@ class Score < ApplicationRecord
   def total
     return nil if invalid? || competitor.ineligible?
 
-    self.class.score_fields.inject(0){ |sum, sym| sum + send(sym) }
+    judge_score_calculator.calculate_score_total(self)
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge
@@ -61,6 +61,18 @@ class Score < ApplicationRecord
     return nil if invalid? || competitor.ineligible?
 
     judge_score_calculator.judged_points(judge.score_totals, total)
+  end
+
+  def raw_scores
+    @raw_scores = []
+
+    (1..4).each do |score_number|
+      if display_score?(score_number)
+        @raw_scores << send("val_#{score_number}")
+      end
+    end
+
+    @raw_scores
   end
 
   private

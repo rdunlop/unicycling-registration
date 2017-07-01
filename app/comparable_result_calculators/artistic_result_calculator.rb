@@ -24,7 +24,7 @@ class ArtisticResultCalculator
 
   def competitor_tie_break_comparable_result(competitor)
     jt = JudgeType.find_by(name: "Technical", event_class: competitor.competition.event_class) # TODO: this should be properly identified
-    total_points(competitor, jt)
+    total_points_for_judge_type(competitor, jt)
   end
 
   def eager_load_results_relations(competitors)
@@ -34,24 +34,18 @@ class ArtisticResultCalculator
   end
 
   # Must be 'public' so that we can show calculation steps on the chief-judge view
-  def total_points(competitor, judge_type = nil)
-    if judge_type.nil?
-      if @unicon_scoring
-        total = 0
-        competitor.competition.judge_types.uniq.each do |jt|
-          total += total_points_for_judge_type(competitor, jt)
-        end
-      else
-        total = total_points_for_judge_type(competitor, nil)
+  def total_points(competitor)
+    if @unicon_scoring
+      total = 0
+      competitor.competition.judge_types.uniq.each do |jt|
+        total += total_points_for_judge_type(competitor, jt)
       end
     else
-      total = total_points_for_judge_type(competitor, judge_type)
+      total = total_points_for_judge_type(competitor, nil)
     end
 
     total
   end
-
-  private
 
   def total_points_for_judge_type(competitor, judge_type)
     scores = get_placing_points_for_judge_type(competitor, judge_type)
@@ -67,6 +61,8 @@ class ArtisticResultCalculator
 
     (total_points - min - max)
   end
+
+  private
 
   def get_placing_points_for_judge_type(competitor, judge_type)
     if judge_type.nil?

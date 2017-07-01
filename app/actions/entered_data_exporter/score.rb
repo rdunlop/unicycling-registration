@@ -6,7 +6,7 @@ class EnteredDataExporter::Score
   end
 
   def headers
-    %w[judge_id judge_type_id registrant_external_id val1 val2 val3 val4]
+    %w[judge_id judge_type registrant_external_id val1 val2 val3 val4]
   end
 
   def data

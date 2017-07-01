@@ -87,6 +87,7 @@ class Competition < ApplicationRecord
     [
       "Freestyle",
       "Artistic Freestyle IUF 2015",
+      "Artistic Freestyle IUF 2017",
       "High/Long",
       "High/Long Preliminary IUF 2015",
       "High/Long Final IUF 2015",
@@ -467,7 +468,7 @@ class Competition < ApplicationRecord
     if sc.nil?
       0
     else
-      sc.total_points(competitor, judge_type)
+      sc.total_points_for_judge_type(competitor, judge_type)
     end
   end
 
