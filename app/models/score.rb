@@ -64,11 +64,15 @@ class Score < ApplicationRecord
   end
 
   def raw_scores
-    (1..4).map do |score_number|
+    @raw_scores = []
+
+    (1..4).each do |score_number|
       if display_score?(score_number)
-        send("val_#{score_number}")
+        @raw_scores << send("val_#{score_number}")
       end
-    end.compact
+    end
+
+    @raw_scores
   end
 
   private
