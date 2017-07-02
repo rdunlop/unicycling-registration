@@ -18,7 +18,7 @@
       %tr{:id => "competitor#{competitor.id}"}
         - score = @judge.scores.where(:competitor_id => competitor.id).first
         - if @score.nil? || @score.competitor_id != competitor.id
-          = render :partial => "/competitors/single_competitor", :locals => {competitor: competitor, score: score, show_update: @score.nil? }
+          = render :partial => "/competitors/single_competitor", :locals => {competitor: competitor, score: score, show_update: @score.nil?, judge_type: @judge.judge_type }
         - else
           = simple_form_for(@score, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
             = render :partial => "/competitors/competitor_basic", :object => competitor

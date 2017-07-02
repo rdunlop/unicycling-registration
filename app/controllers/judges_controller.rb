@@ -89,7 +89,7 @@ class JudgesController < ApplicationController
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb "Manage Judges", competition_judges_path(@competition)
 
-    @judge_types = JudgeType.order(:name).where(event_class: @competition.uses_judges)
+    @judge_types = JudgeType.order(:id).where(event_class: @competition.uses_judges)
     @all_data_entry_volunteers = User.this_tenant.data_entry_volunteer
 
     @judges = @competition.judges

@@ -25,8 +25,9 @@
         %td= @competition.competitor_placing_points(competitor, performance_judge_type)
         %td= @competition.competitor_placing_points(competitor, technical_judge_type)
         - if dismount_judge_type
-          %td
-          %td
+          - dismounts = @competition.scoring_calculator.dismount_points_for_competitor(competitor, dismount_judge_type)
+          %td= dismounts[:major_dismounts]
+          %td= dismounts[:minor_dismounts]
         %td= competitor.comparable_score #@competition.competitor_placing_points(competitor, nil)
         %td= competitor.overall_place
   %tfoot
