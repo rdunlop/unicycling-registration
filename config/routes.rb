@@ -38,6 +38,7 @@ Rails.application.routes.draw do
           get :single_attempt_recording
           get :two_attempt_recording
           get :results
+          get :freestyle_summary
         end
       end
       resources :events, only: [] do

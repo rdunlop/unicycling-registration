@@ -1,4 +1,4 @@
-class Freestyle2017JudgePointsCalculator
+class Freestyle_2017_JudgePointsCalculator
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   def judged_place(all_scores, score)
     better_scores = all_scores.count { |each_score| each_score > score }
@@ -17,7 +17,7 @@ class Freestyle2017JudgePointsCalculator
     calculator = case score.judge_type.name
                  when "Technical"
                    ScoreWeightCalculator::Weighted.new([25, 37.5, 37.5])
-                 when "Presentation"
+                 when "Performance"
                    ScoreWeightCalculator::Equal.new
                  when "Dismount"
                    ScoreWeightCalculator::Dismount.new(score.competitor.active_members.size)

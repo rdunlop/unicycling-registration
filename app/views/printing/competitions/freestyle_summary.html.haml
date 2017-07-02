@@ -1,0 +1,47 @@
+%h1 #{@competition}
+
+- event_class = @competition.scoring_class # "Artistic Freestyle IUF 2017"
+- performance_judge_type = JudgeType.where(event_class: event_class).find_by(name: "Performance")
+- technical_judge_type = JudgeType.where(event_class: event_class).find_by(name: "Technical")
+- dismount_judge_type = JudgeType.where(event_class: event_class).find_by(name: "Dismount")
+%table
+  %thead
+    %tr
+      %th{ rowspan: 2 } Name
+      %th{ rowspan: 2 } Performance [%]
+      %th{ rowspan: 2 } Technical [%]
+      - if dismount_judge_type
+        %th{ colspan: 2 } Dismounts [#]
+      %th{ rowspan: 2 } Total [%]
+      %th{ rowspan: 2 } Place
+    - if dismount_judge_type
+      %tr
+        %th Major
+        %th Minor
+  %tbody
+    - @competition.results_list.each do |competitor|
+      %tr
+        %td= competitor
+        %td= @competition.competitor_placing_points(competitor, performance_judge_type)
+        %td= @competition.competitor_placing_points(competitor, technical_judge_type)
+        - if dismount_judge_type
+          - dismounts = @competition.scoring_calculator.dismount_points_for_competitor(competitor, dismount_judge_type)
+          %td= dismounts[:major_dismounts]
+          %td= dismounts[:minor_dismounts]
+        %td= competitor.comparable_score #@competition.competitor_placing_points(competitor, nil)
+        %td= competitor.overall_place
+  %tfoot
+    %tr
+      %td Total
+      %td 100%
+      %td 100%
+      - if dismount_judge_type
+        %td -
+        %td -
+      %td 100%
+      %td
+
+%br
+%br
+.left-aligned
+  = render "freestyle_explanation"
