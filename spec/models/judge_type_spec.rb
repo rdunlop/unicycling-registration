@@ -16,6 +16,8 @@
 #  updated_at                   :datetime
 #  event_class                  :string(255)
 #  boundary_calculation_enabled :boolean          default(FALSE), not null
+#  val_5_description            :string
+#  val_5_max                    :integer
 #
 # Indexes
 #
@@ -31,6 +33,12 @@ describe JudgeType do
     jt.val_2_description = "Cherography & Style"
     jt.val_3_description = "Originality of Performance & Showmanship"
     jt.val_4_description = "Interpretation"
+    jt.val_5_description = "N/A"
+    jt.val_1_max = 10
+    jt.val_2_max = 10
+    jt.val_3_max = 10
+    jt.val_4_max = 10
+    jt.val_5_max = 10
     jt.name = "Presentation"
     jt.event_class = "Freestyle"
     jt.boundary_calculation_enabled = false
@@ -53,9 +61,14 @@ describe JudgeType do
     jt.val_2_description = "Cherography & Style"
     jt.val_3_description = "Originality of Performance & Showmanship"
     jt.val_4_description = "Interpretation"
+    jt.val_5_description = "N/A"
     jt.event_class = "Freestyle"
     jt.name = "Presentation"
     jt.val_1_max = nil
+    jt.val_2_max = 10
+    jt.val_3_max = 10
+    jt.val_4_max = 10
+    jt.val_5_max = 10
     jt.boundary_calculation_enabled = false
     expect(jt.valid?).to eq(false)
     jt.val_1_max = 15

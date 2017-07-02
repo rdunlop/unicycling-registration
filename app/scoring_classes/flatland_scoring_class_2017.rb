@@ -1,8 +1,7 @@
-class ArtisticScoringClass_2017 < BaseScoringClass
+class FlatlandScoringClass_2017 < BaseScoringClass
   def scoring_description
-    "Using the Freestyle scoring rules, multiple Performance and Technical judges
-    will score each competitor, and then the resulting points (converted to percentage of points) will be used to
-    calculate the winner. As per the IUF 2017 Rulebook" # changed
+    "A variation of the Artistic Scoring Class, we calculate last-trick
+    scores and follow the rulebook, As per the IUF 2017 Rulebook"
   end
 
   def lower_is_better
@@ -27,23 +26,23 @@ class ArtisticScoringClass_2017 < BaseScoringClass
     nil
   end
 
+  def compete_in_order?
+    true
+  end
+
   def uses_judges
-    "Artistic Freestyle IUF 2017" # changed
+    "Flatland IUF 2017"
   end
 
   def scoring_path(judge)
     judge_scores_path(judge)
   end
 
-  def compete_in_order?
+  def include_event_name
     true
   end
 
   def requires_age_groups
     false
-  end
-
-  def can_eliminate_judges?
-    true
   end
 end

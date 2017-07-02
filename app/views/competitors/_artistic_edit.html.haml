@@ -22,11 +22,8 @@
         - else
           = simple_form_for(@score, url: judge_competitor_scores_path(@judge, competitor), method: :post) do |f|
             = render :partial => "/competitors/competitor_basic", :object => competitor
-            %td.judging_category= f.number_field :val_1, {:min => 0, :max => @judge.judge_type.val_1_max, :step => 0.001, :autofocus => true }
-            %td.judging_category= f.number_field :val_2, {:min => 0, :max => @judge.judge_type.val_2_max, :step => 0.001 }
-            %td.judging_category= f.number_field :val_3, {:min => 0, :max => @judge.judge_type.val_3_max, :step => 0.001 }
-            - if @judge.judge_type.val_4_max > 0
-              %td.judging_category= f.number_field :val_4, {:min => 0, :max => @judge.judge_type.val_4_max, :step => 0.001 }
+            - @judge.judge_type.score_numbers.each_with_index do |score_number, index|
+              %td.judging_category= f.number_field @score.score_symbol(score_number), {:min => 0, :max => @judge.judge_type.description_for(score_number), :step => 0.001, :autofocus => (index == 0) }
             %td
             %td
             %td= f.button :submit, 'Save', class: 'action_button'

@@ -16,6 +16,8 @@
 #  updated_at                   :datetime
 #  event_class                  :string(255)
 #  boundary_calculation_enabled :boolean          default(FALSE), not null
+#  val_5_description            :string
+#  val_5_max                    :integer
 #
 # Indexes
 #
@@ -30,33 +32,41 @@ class JudgeType < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :event_class }
   validates :event_class, inclusion: { in: Competition.scoring_classes }
 
-  validates :val_1_description, presence: true
-  validates :val_2_description, presence: true
-  validates :val_3_description, presence: true
-  validates :val_4_description, presence: true
-
-  validates :val_1_max, presence: true
-  validates :val_2_max, presence: true
-  validates :val_3_max, presence: true
-  validates :val_4_max, presence: true
-  validates :boundary_calculation_enabled, inclusion: { in: [false] } # boundary calculations are disabled
-
-  after_initialize :init
-
-  def init
-    self.val_1_max ||= 10
-    self.val_2_max ||= 10
-    self.val_3_max ||= 10
-    self.val_4_max ||= 10
+  Score.score_fields.each do |sym|
+    validates "#{sym}_description", presence: true # val_1_description
+    validates "#{sym}_max", presence: true # val_1_max
   end
 
+  validates :boundary_calculation_enabled, inclusion: { in: [false] } # boundary calculations are disabled
+
   def num_columns
-    res = 0
-    res += 1 if val_1_max.positive?
-    res += 1 if val_2_max.positive?
-    res += 1 if val_3_max.positive?
-    res += 1 if val_4_max.positive?
-    res
+    score_numbers.count
+  end
+
+  def score_numbers
+    numbers = []
+    Score::SCORES_RANGE.each do |score_number|
+      # numbers << 1 if val_1_max.positive?
+      numbers << score_number if score_column_enabled?(score_number)
+    end
+
+    numbers
+  end
+
+  def score_attributes
+    score_numbers.map{|score_number| "val_#{score_number}".to_sym }
+  end
+
+  def description_for(score_number)
+    send("val_#{score_number}_description")
+  end
+
+  def max_score_for(score_number)
+    send("val_#{score_number}_max")
+  end
+
+  def score_column_enabled?(score_number)
+    max_score_for(score_number).positive?
   end
 
   def to_s

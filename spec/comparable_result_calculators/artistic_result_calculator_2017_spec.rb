@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe ArtisticResultCalculator2017 do
+RSpec.describe ArtisticResultCalculator_2017 do
   describe "#calculate_weighted_total" do
     let(:totals) do
       [

@@ -64,15 +64,23 @@ class ScoringClass
       }
     when "Artistic Freestyle IUF 2017"
       {
-        calculator: ArtisticResultCalculator2017.new,
+        calculator: ArtisticResultCalculator_2017.new,
         exporter: EnteredDataExporter::Score.new(competition),
         judge_score_calculator: Freestyle2017JudgePointsCalculator.new,
-        helper: ArtisticScoringClass2017.new(competition)
+        helper: ArtisticScoringClass_2017.new(competition)
       }
     when "Flatland"
       scoring_helper = FlatlandScoringClass.new(competition)
       {
         calculator: FlatlandResultCalculator.new,
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
+        helper: scoring_helper
+      }
+    when "Flatland IUF 2017"
+      scoring_helper = FlatlandScoringClass_2017.new(competition)
+      {
+        calculator: FlatlandResultCalculator_2017.new,
         exporter: EnteredDataExporter::Score.new(competition),
         judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
         helper: scoring_helper

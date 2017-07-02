@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701143335) do
+ActiveRecord::Schema.define(version: 20170701160944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,7 +366,7 @@ ActiveRecord::Schema.define(version: 20170701143335) do
     t.string   "style_name"
     t.text     "custom_waiver_text"
     t.date     "music_submission_end_date"
-    t.boolean  "artistic_score_elimination_mode_naucc",         default: false,       null: false
+    t.boolean  "artistic_score_elimination_mode_naucc",         default: false,      null: false
     t.string   "logo_file"
     t.integer  "max_award_place",                               default: 5
     t.boolean  "display_confirmed_events",                      default: false,      null: false
@@ -577,6 +577,8 @@ ActiveRecord::Schema.define(version: 20170701143335) do
     t.datetime "updated_at"
     t.string   "event_class"
     t.boolean  "boundary_calculation_enabled", default: false, null: false
+    t.string   "val_5_description"
+    t.integer  "val_5_max"
     t.index ["name", "event_class"], name: "index_judge_types_on_name_and_event_class", unique: true, using: :btree
   end
 
@@ -934,6 +936,7 @@ ActiveRecord::Schema.define(version: 20170701143335) do
     t.integer  "judge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "val_5",         precision: 5, scale: 3
     t.index ["competitor_id", "judge_id"], name: "index_scores_on_competitor_id_and_judge_id", unique: true, using: :btree
     t.index ["competitor_id"], name: "index_scores_competitor_id", using: :btree
     t.index ["judge_id"], name: "index_scores_judge_id", using: :btree

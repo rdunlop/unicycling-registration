@@ -3,25 +3,11 @@
     %th Order
     %th ID
     %th.competitor_name Name
-    %th.judging_category
-      = judge_header.val_1_description
-      %br
-      = "(0-" + judge_header.val_1_max.to_s + ")"
-    %th.judging_category
-      = judge_header.val_2_description
-      %br
-      = "(0-" + judge_header.val_2_max.to_s + ")"
-    %th.judging_category
-      = judge_header.val_3_description
-      %br
-      = "(0-" + judge_header.val_3_max.to_s + ")"
-    - if judge_header.val_4_max > 0
+    - judge_header.score_numbers.each do |score_number|
       %th.judging_category
-        = judge_header.val_4_description
+        = judge_header.description_for(score_number)
         %br
-        = "(0-" + judge_header.val_4_max.to_s + ")"
-    - else
-      %th
+        = "(0-" + judge_header.max_score_for(score_number).to_s + ")"
     %th.derived Total
     %th.derived Place
     %th Actions
