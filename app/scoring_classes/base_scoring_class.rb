@@ -49,6 +49,10 @@ class BaseScoringClass
     nil
   end
 
+  def freestyle_summary?
+    false
+  end
+
   # Do the competitors compete in a pre-defined order?
   def compete_in_order?
     false

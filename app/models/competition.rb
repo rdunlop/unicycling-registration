@@ -133,7 +133,7 @@ class Competition < ApplicationRecord
   validates :name, :award_title_name, presence: true
 
   delegate  :results_importable, :render_path, :uses_judges, :uses_volunteers, :build_result_from_imported,
-            :can_eliminate_judges?,
+            :can_eliminate_judges?, :freestyle_summary?,
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 

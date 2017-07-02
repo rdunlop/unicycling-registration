@@ -5,7 +5,7 @@ RSpec.describe ArtisticResultCalculator_2017 do
     let(:totals) do
       [
         {
-          type: "Presentation",
+          type: "Performance",
           total: 10
         },
         {

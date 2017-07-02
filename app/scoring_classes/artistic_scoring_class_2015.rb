@@ -18,6 +18,10 @@ class ArtisticScoringClass_2015 < BaseScoringClass
     "freestyle_scores"
   end
 
+  def freestyle_summary?
+    true
+  end
+
   def competitor_dq?(_competitor)
     false
   end

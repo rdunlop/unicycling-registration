@@ -2,7 +2,7 @@
 // the 'show_competitor' local is to prevent users from clicking away while mid-edit
 - if score.nil?
   = render :partial => "/competitors/competitor_basic", :object => competitor
-  = render :partial => "/scores/blank_score"
+  = render :partial => "/scores/blank_score", locals: { judge_type: judge_type }
 - else
   = render :partial => "/scores/score_with_total", :object => score
 - if show_update && policy(@judge).create_scores?

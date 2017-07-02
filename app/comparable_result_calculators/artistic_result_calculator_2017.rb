@@ -40,6 +40,25 @@ class ArtisticResultCalculator_2017
     calculate_weighted_total(type_results)
   end
 
+  def dismount_points_for_competitor(competitor, dismount_judge_type)
+    scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: dismount_judge_type.id }).merge(Judge.active)
+
+    majors = []
+    minors = []
+
+    scores.map do |score|
+      majors << score.val_1
+      minors << score.val_2
+    end
+
+    return { major_dismounts: 0, minor_dismounts: 0 } if majors.count.zero? || minors.count.zero?
+
+    {
+      major_dismounts: majors.sum / majors.count,
+      minor_dismounts: minors.sum / minors.count
+    }
+  end
+
   def total_points_for_judge_type(competitor, judge_type)
     scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
 
@@ -59,7 +78,7 @@ class ArtisticResultCalculator_2017
 
   def calculate_weighted_total(type_results)
     weights = {
-      "Presentation" => 45,
+      "Performance" => 45,
       "Technical" => 45,
       "Dismount" => 10
     }.freeze
