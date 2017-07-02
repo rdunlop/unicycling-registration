@@ -7,7 +7,7 @@ module CompetitorHelper
       ret << content_tag(:b, competitor.team_name)
       ret << tag(:br)
     end
-    competitor.members.each do |member|
+    competitor.active_members.each do |member|
       ret << member.to_s
       ret << tag(:br)
     end

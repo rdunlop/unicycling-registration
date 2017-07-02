@@ -28,12 +28,12 @@
       - next if competitor.new_record?
       %tr{:class => competitor.status == "active" ? "active" : "not_active", id: "row#{competitor.id}" }
         - event_category = nil
-        - registrant = competitor.members.first.registrant
+        - registrant = competitor.active_members.first.registrant
         - event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
         %td= competitor.bib_number
         %td= competitor.detailed_name
         - if display_group_size
-          %td= competitor.members.active.count
+          %td= competitor.active_members.count
         %td= competitor.age
         %td= competitor.gender
         %td= competitor.representation

@@ -57,7 +57,7 @@ RSpec.describe ArtisticResultCalculator do
       end
 
       it "has non-zero placing points for correct judge_type" do
-        expect(@calc.total_points(@comp1, @jt2)).to eq(5.0)
+        expect(@calc.total_points_for_judge_type(@comp1, @jt2)).to eq(5.0)
       end
 
       it "has total_points for both judge_types, after eliminating high-low from each type" do
@@ -70,9 +70,9 @@ RSpec.describe ArtisticResultCalculator do
         end
 
         it "has non-zero placing points for correct judge_type" do
-          expect(@calc.total_points(@comp1, @jt)).to eq(2.0)
+          expect(@calc.total_points_for_judge_type(@comp1, @jt)).to eq(2.0)
 
-          expect(@calc.total_points(@comp1, @jt2)).to eq(5.0)
+          expect(@calc.total_points_for_judge_type(@comp1, @jt2)).to eq(5.0)
         end
 
         it "has total_points for both judge_types, after eliminating high-low from all types" do

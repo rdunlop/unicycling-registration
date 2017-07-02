@@ -83,7 +83,7 @@ class Result < ApplicationRecord
 
   def competitor_name(registrant)
     res = "#{registrant.first_name} #{registrant.last_name}"
-    if competitor.members.size == 2
+    if competitor.active_members.size == 2
       partner = (competitor.registrants - [registrant]).first
 
       res += " & " + partner.first_name + " " + partner.last_name
@@ -99,7 +99,7 @@ class Result < ApplicationRecord
 
   def category_name
     if competition.has_experts? && !age_group_type?
-      if competitor.members.size > 1
+      if competitor.active_members.size > 1
         "Expert"
       else
         "Expert #{competitor.gender}"

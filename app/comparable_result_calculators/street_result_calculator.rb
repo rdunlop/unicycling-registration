@@ -28,12 +28,15 @@ class StreetResultCalculator
   end
 
   # must be exposed in order to allow displaying of per-judge-type points
-  def total_points(competitor, judge_type = nil)
-    if judge_type.nil?
-      scores = competitor.scores
-    else
-      scores = competitor.scores.select{ |score| score.judge_type == judge_type }
-    end
+  def total_points(competitor)
+    scores = competitor.scores
+
+    scores.map(&:placing_points).compact.reduce(:+) || 0
+  end
+
+  def total_points_for_judge_type(competitor, judge_type)
+    scores = competitor.scores.select{ |score| score.judge_type == judge_type }
+
     scores.map(&:placing_points).compact.reduce(:+) || 0
   end
 end

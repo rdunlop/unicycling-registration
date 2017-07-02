@@ -5,7 +5,7 @@ class CompetitorAgeGroupEntryUpdateJob < ApplicationJob
     competition = competitor.competition
     return if competition.age_group_type.blank?
 
-    if competitor.members.none?
+    if competitor.active_members.none?
       new_age_group_entry_id = nil
     else
       new_age_group_entry = competition.age_group_type.age_group_entry_for(competitor.age, competitor.gender, competitor.wheel_size)

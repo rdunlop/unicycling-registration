@@ -77,7 +77,7 @@ class ScoresController < ApplicationController
   end
 
   def score_params
-    params.require(:score).permit(:val_1, :val_2, :val_3, :val_4, :notes)
+    params.require(:score).permit(*Score.score_fields, :notes)
   end
 
   def boundary_score_params

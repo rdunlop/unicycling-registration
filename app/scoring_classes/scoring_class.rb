@@ -38,6 +38,15 @@ class ScoringClass
         helper: PointsScoringClass.new(competition, false)
       }
     when "Freestyle"
+      # TENANT with freestyle events - artistic_score_elimination_mode_naucc?
+      #
+      # naucc2013                    - TRUE
+      # naucc2014                    - TRUE
+      # naucc2015                    - false
+      # unicon2014                   - false
+
+      # the unicon_scoring feature was set to FALSE used by naucc2014/naucc2013.
+      # all other conventions have this set to TRUE
       unicon_scoring = !EventConfiguration.singleton.artistic_score_elimination_mode_naucc?
       {
         calculator: ArtisticResultCalculator.new(unicon_scoring),
@@ -53,10 +62,25 @@ class ScoringClass
         judge_score_calculator: Freestyle_2015_JudgePointsCalculator.new,
         helper: ArtisticScoringClass_2015.new(competition)
       }
+    when "Artistic Freestyle IUF 2017"
+      {
+        calculator: ArtisticResultCalculator_2017.new,
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: Freestyle2017JudgePointsCalculator.new,
+        helper: ArtisticScoringClass_2017.new(competition)
+      }
     when "Flatland"
       scoring_helper = FlatlandScoringClass.new(competition)
       {
         calculator: FlatlandResultCalculator.new,
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
+        helper: scoring_helper
+      }
+    when "Flatland IUF 2017"
+      scoring_helper = FlatlandScoringClass_2017.new(competition)
+      {
+        calculator: FlatlandResultCalculator_2017.new,
         exporter: EnteredDataExporter::Score.new(competition),
         judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
         helper: scoring_helper

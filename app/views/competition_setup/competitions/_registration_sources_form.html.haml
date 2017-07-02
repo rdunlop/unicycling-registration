@@ -2,4 +2,4 @@
   = f.simple_fields_for :competition_sources do |cs|
     = render "registrant_source_fields", f: cs, event: event
 .links
-  = link_to_add_association 'add entry', f, :competition_sources, partial: "registrant_source_fields", render_options: { locals: { event: event } }
+  = link_to_add_association 'add entry', f, :competition_sources, partial: "registrant_source_fields", render_options: { locals: { event: event } }, class: "button"

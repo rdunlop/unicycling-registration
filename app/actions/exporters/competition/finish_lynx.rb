@@ -18,7 +18,7 @@ class Exporters::Competition::FinishLynx
   def rows
     lane_assignments = LaneAssignment.where(heat: heat, competition: @competition)
     lane_assignments.map do |lane_assignment|
-      member = lane_assignment.competitor.members.first.registrant
+      member = lane_assignment.competitor.active_members.first.registrant
       country = if member.country.nil?
                   nil
                 else

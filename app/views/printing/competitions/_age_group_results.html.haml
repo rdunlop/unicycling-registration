@@ -36,7 +36,7 @@
                 - if competitor.team_name.present?
                   %b= competitor.team_name
                   %br
-                = competitor.members.map(&:to_s).join(", ")
+                = competitor.active_members.map(&:to_s).join(", ")
               - unless competition.result_description.nil?
                 %td.time= competitor.result
               - if competition.sign_in_list?
