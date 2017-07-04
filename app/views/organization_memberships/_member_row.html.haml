@@ -22,6 +22,8 @@
       - unless reg.organization_membership_confirmed?
         %br
         = reg.contact_detail.try!(:organization_membership_system_status)
+        - if @config.organization_membership_usa?
+          = link_to "Refresh USA status", refresh_usa_status_organization_membership_path(id: reg.id), remote: true, method: :post
     %td
       - if reg.contact_detail.organization_membership_system_confirmed?
         = "Confirmed by System"

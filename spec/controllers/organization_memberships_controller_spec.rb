@@ -56,4 +56,11 @@ describe OrganizationMembershipsController do
       expect(response.content_type.to_s).to eq("application/vnd.ms-excel")
     end
   end
+
+  describe "#refresh_usa_status" do
+    it "returns success" do
+      post :refresh_usa_status, params: { id: registrant.id }
+      expect(response).to be_success
+    end
+  end
 end
