@@ -49,6 +49,17 @@ class OrganizationMembershipsController < ApplicationController
     output_spreadsheet(exporter.headers, exporter.rows, "registrants_with_membership_details")
   end
 
+  # POST /organization_memberships/:id/refresh_usa_status
+  def refresh_usa_status
+    if @config.organization_membership_usa?
+      @registrant = Registrant.find(params[:id])
+      UpdateUsaMembershipStatusWorker.perform_async(@registrant.id)
+      head :ok
+    else
+      head :no_content
+    end
+  end
+
   private
 
   def authorize_admin

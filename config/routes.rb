@@ -444,6 +444,7 @@ Rails.application.routes.draw do
       member do
         put :toggle_confirm
         put :update_number
+        post :refresh_usa_status
       end
       collection do
         get :export
