@@ -1,26 +1,27 @@
 class RegistrantGroupPolicy < ApplicationPolicy
   def index?
-    # must be signed in
-    super_admin?
-  end
-
-  def new?
-    # must be signed in
-    super_admin?
+    signed_in?
   end
 
   def create?
-    new?
+    signed_in?
   end
 
   def update?
-    # must be leader, or convention_admin event-director (if event) or super_admin
-    super_admin?
+    super_admin? || group_leader?(record) || convention_admin? || director?(record.registrant_group_type.source_element)
   end
 
   def destroy?
-    # NOT NEEDED?
-    # must be leader, or convention_admin event-director (if event) or super_admin
-    super_admin?
+    update?
+  end
+
+  private
+
+  def signed_in?
+    true
+  end
+
+  def group_leader?(group)
+    group.registrant_group_leaders.any?{|grl| grl.user == user }
   end
 end
