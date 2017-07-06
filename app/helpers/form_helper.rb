@@ -22,6 +22,13 @@ module FormHelper
     end
   end
 
+  # return a list of registrants who have signed up for a given event
+  def signed_up_registrants(event)
+    Registrant.active.competitor
+              .joins(signed_up_events: :event).merge(Event.where(id: event.id))
+              .map{ |reg| [reg.with_id_to_s, reg.id] }
+  end
+
   # The form element which is used to enter data
   def competitor_select_box(form, competition, options = {})
     options[:autofocus] = true

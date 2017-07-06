@@ -29,8 +29,4 @@ class RegistrantGroup < ApplicationRecord
   def to_s
     name
   end
-
-  def leaders
-    registrant_group_leaders.map(&:user)
-  end
 end

@@ -46,9 +46,9 @@ class RegistrantGroupMembersController < ApplicationController
   def promote
     @registrant_group = @registrant_group_member.registrant_group
     if RegistrantGroupManager.new(@registrant_group).promote(@registrant_group_member)
-      flash[:alert] = "Unable to promote member"
-    else
       flash[:notice] = "Promoted Member to Leader"
+    else
+      flash[:alert] = "Unable to promote member"
     end
 
     redirect_to @registrant_group
@@ -58,9 +58,9 @@ class RegistrantGroupMembersController < ApplicationController
   def request_leader
     @registrant_group = @registrant_group_member.registrant_group
     if RegistrantGroupManager.new(@registrant_group).request_leader(@registrant_group_member)
-      flash[:alert] = "Unable to request leader"
-    else
       flash[:notice] = "Requested leader for group"
+    else
+      flash[:alert] = "Unable to request leader"
     end
 
     redirect_to @registrant_group

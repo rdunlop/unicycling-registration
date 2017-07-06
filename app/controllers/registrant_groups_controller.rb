@@ -23,7 +23,8 @@ class RegistrantGroupsController < ApplicationController
   # GET /registrant_group_types/:id/registrant_groups
   def index
     authorize RegistrantGroup
-    @registrant_groups = @registrant_group_type.registrant_groups.all
+    @all_registrant_groups = @registrant_group_type.registrant_groups.all
+    @registrants = current_user.registrants
   end
 
   # GET /registrant_group_types/:id/registrant_groups/new
@@ -50,10 +51,13 @@ class RegistrantGroupsController < ApplicationController
 
   # GET /registrant_groups/1
   def show
-    type = @registrant_group.registrant_group_type
-    add_breadcrumb "Registrant Groups: #{type}", registrant_group_type_registrant_groups_path(type)
+    @registrant_group_type = @registrant_group.registrant_group_type
+    add_breadcrumb "Registrant Groups: #{@registrant_group_type}", registrant_group_type_registrant_groups_path(@registrant_group_type)
     @registrant_group_members = @registrant_group.registrant_group_members
     @registrant_group_leaders = @registrant_group.registrant_group_leaders
+
+    @new_registrant_group_member = RegistrantGroupMember.new(registrant_group: @registrant_group)
+    @new_registrant_group_leader = RegistrantGroupLeader.new(registrant_group: @registrant_group)
   end
 
   # PUT /registrant_groups/1
@@ -71,6 +75,18 @@ class RegistrantGroupsController < ApplicationController
 
     redirect_to registrant_group_type_registrant_groups_path(@registrant_group.registrant_group_type)
   end
+
+  # is the registrant eligible to be in this group type?
+  def registrant_eligible_for?(registrant, registrant_group_type)
+    registrant.has_event?(registrant_group_type.source_element)
+  end
+  helper_method :registrant_eligible_for?
+
+  # list the registrant group for which this registrant is a member IN THIS GROUP TYPE
+  def registrant_group_for(registrant, registrant_group_type)
+    registrant.registrant_groups.merge(registrant_group_type.registrant_groups).first
+  end
+  helper_method :registrant_group_for
 
   private
 

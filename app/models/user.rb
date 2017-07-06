@@ -137,6 +137,14 @@ class User < ApplicationRecord
     name.presence || email
   end
 
+  def to_s_with_safe_email
+    if name.present?
+      name
+    else
+      email.first(8) + "..."
+    end
+  end
+
   def to_s_with_email
     if name.present?
       "#{name} (#{email})"

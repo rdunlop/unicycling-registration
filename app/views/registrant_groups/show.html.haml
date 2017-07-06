@@ -8,7 +8,7 @@
 
 %p
   %b Leaders:
-  = @registrant_group.leaders.join(", ")
+  = @registrant_group.registrant_group_leaders.join(", ")
 
 %h3 Members
 
@@ -29,7 +29,10 @@
           - if policy(member).promote?
             = link_to "Promote", promote_registrant_group_member_path(member), method: :post
 
-= render "add_member_form"
+- if policy(@new_registrant_group_member).create?
+  .row
+    .small-12.columns
+      = render "add_member_form", registrant_group: @registrant_group, event: @registrant_group.registrant_group_type.source_element
 
 %hr
 
@@ -48,7 +51,10 @@
           - if policy(leader).destroy?
             = link_to "Remove", registrant_group_leader_path(leader), method: :delete
 
-= render "add_leader_form"
+- if policy(@new_registrant_group_leader).create?
+  .row
+    .small-12.columns
+      = render "add_leader_form"
 
 %hr
-= link_to 'Back', registrant_group_type_registrant_groups_path(@registrant_group.registrant_group_type)
+= link_to 'Back', registrant_group_type_registrant_groups_path(@registrant_group.registrant_group_type), class: "button secondary"

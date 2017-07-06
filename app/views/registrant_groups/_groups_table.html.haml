@@ -1,0 +1,14 @@
+.row
+  .small-12.columns
+    %table.sortable
+      %thead
+        %tr
+          %th= RegistrantGroup.human_attribute_name(:name)
+          %th Leaders
+          %th
+      %tbody
+        - registrant_groups.each do |registrant_group|
+          %tr
+            %td= link_to registrant_group.name, registrant_group
+            %td= registrant_group.registrant_group_leaders.map(&:to_s)
+            %td= link_to 'Show', registrant_group

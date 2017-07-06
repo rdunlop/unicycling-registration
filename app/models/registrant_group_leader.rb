@@ -23,5 +23,7 @@ class RegistrantGroupLeader < ApplicationRecord
   validates :registrant_group, presence: true
   validates :user, presence: true
 
-  delegate :to_s, to: :user
+  def to_s
+    user.to_s_with_safe_email
+  end
 end

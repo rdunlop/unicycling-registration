@@ -1,9 +1,12 @@
 %h2 Add Member
-= simple_form_for(RegistrantGroupMember.new, url: registrant_group_registrant_group_members_path(@registrant_group)) do |f|
+= simple_form_for(@new_registrant_group_member, url: registrant_group_registrant_group_members_path(registrant_group)) do |f|
   .field
     = f.label :registrant_id, "Member"
     %br
-    = f.select :registrant_id, Registrant.select_box_options, {include_blank: true}, class: 'chosen-select'
+    = f.select :registrant_id, signed_up_registrants(event), {include_blank: true}, class: 'chosen-select'
   %br
+  %small
+    %b Note
+    Only registrants who have signed up for #{event} are listed here
   .actions
-    = f.button :submit
+    = f.button :submit, "Add Member"
