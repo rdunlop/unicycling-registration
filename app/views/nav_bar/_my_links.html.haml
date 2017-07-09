@@ -10,4 +10,6 @@
   %li= link_to t('.all_registrants'), all_registrants_path
   - if Competition.any?
     %li= link_to t('.results'), results_path
+  - if RegistrantGroupType.any?
+    %li= link_to t('.registrant_groups'), registrant_group_types_path
   %li= link_to t('.my_account'), edit_user_registration_path

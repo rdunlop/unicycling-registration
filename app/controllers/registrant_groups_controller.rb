@@ -63,7 +63,6 @@ class RegistrantGroupsController < ApplicationController
     @new_registrant_group_member = RegistrantGroupMember.new(registrant_group: @registrant_group)
     @new_registrant_group_leader = RegistrantGroupLeader.new(registrant_group: @registrant_group)
 
-    event = @registrant_group.registrant_group_type.source_element
     if params[:show_all_registrants]
       @show_all_registrants = true
       @new_member_registrants = Registrant.active.competitor
