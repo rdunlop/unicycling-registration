@@ -34,7 +34,7 @@ class RegistrantChoice < ApplicationRecord
     when "multiple"
       value != ""
     when "text"
-      value != ""
+      value.present?
     when "best_time"
       value != ""
     else

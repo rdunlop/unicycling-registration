@@ -86,6 +86,11 @@ describe RegistrantChoice do
       @rc.value = ""
       expect(@rc.has_value?).to eq(false)
     end
+
+    it "has no value with nil" do
+      @rc.value = nil
+      expect(@rc.has_value?).to eq(false)
+    end
   end
 
   # describe "When a best_time input has a value" do
