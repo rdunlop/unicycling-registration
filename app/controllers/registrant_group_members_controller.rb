@@ -21,12 +21,14 @@ class RegistrantGroupMembersController < ApplicationController
   before_action :load_registrant_group, only: %i[create]
 
   def create
+    manager = RegistrantGroupManager.new(@registrant_group)
     @registrant_group_member = @registrant_group.registrant_group_members.build(registrant_group_member_params)
+
     authorize @registrant_group_member
-    if @registrant_group_member.save
+    if manager.add_member(@registrant_group_member)
       flash[:notice] = "Created Group Member"
     else
-      flash[:alert] = "Error creating member"
+      flash[:alert] = "Error creating member. #{manager.errors}"
     end
     redirect_to registrant_group_path(@registrant_group_member.registrant_group)
   end
@@ -45,10 +47,11 @@ class RegistrantGroupMembersController < ApplicationController
   # POST /registrant_group_members/1/promote
   def promote
     @registrant_group = @registrant_group_member.registrant_group
-    if RegistrantGroupManager.new(@registrant_group).promote(@registrant_group_member)
+    manager = RegistrantGroupManager.new(@registrant_group)
+    if manager.promote(@registrant_group_member)
       flash[:notice] = "Promoted Member to Leader"
     else
-      flash[:alert] = "Unable to promote member"
+      flash[:alert] = "Unable to promote member. #{manager.errors}"
     end
 
     redirect_to @registrant_group
@@ -57,10 +60,11 @@ class RegistrantGroupMembersController < ApplicationController
   # POST /registrant_group_members/1/request_leader
   def request_leader
     @registrant_group = @registrant_group_member.registrant_group
-    if RegistrantGroupManager.new(@registrant_group).request_leader(@registrant_group_member)
+    manager = RegistrantGroupManager.new(@registrant_group)
+    if manager.request_leader(@registrant_group_member)
       flash[:notice] = "Requested leader for group"
     else
-      flash[:alert] = "Unable to request leader"
+      flash[:alert] = "Unable to request leader. #{manager.errors}"
     end
 
     redirect_to @registrant_group

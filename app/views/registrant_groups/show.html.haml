@@ -5,38 +5,44 @@
   = @registrant_group.name
   - if policy(@registrant_group).edit?
     = link_to "Edit Name", edit_registrant_group_path(@registrant_group)
+  - if policy(@registrant_group).destroy?
+    %br
+    = link_to "Delete Group", registrant_group_path(@registrant_group), method: :delete, data: { confirm: "Remove this group?" }
 
 %p
   %b Leaders:
   = @registrant_group.registrant_group_leaders.join(", ")
 
-%h3 Members
+%h3 Group Members
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th ID
-      %th Actions
-  %tbody
-    - @registrant_group.registrant_group_members.each do |member|
+- if @registrant_group.registrant_group_members.any?
+  %table
+    %thead
       %tr
-        %td= member
-        %td= member.registrant.bib_number
-        %td
-          - if policy(member).destroy?
-            = link_to "Leave", registrant_group_member_path(member), method: :delete
-          - if policy(member).promote?
-            = link_to "Promote", promote_registrant_group_member_path(member), method: :post
+        %th Name
+        %th ID
+        %th Actions
+    %tbody
+      - @registrant_group.registrant_group_members.each do |member|
+        %tr
+          %td= member
+          %td= member.registrant.bib_number
+          %td
+            - if policy(member).destroy?
+              = link_to "Remove from group", registrant_group_member_path(member), method: :delete, data: { confirm: "Remove this member from the group?" }
+              %br
+            - if policy(member).promote?
+              = link_to "Promote to Leader", promote_registrant_group_member_path(member), method: :post, data: { confirm: "Promote this member to a leader?" }
+- else
+  No Current Members
 
 - if policy(@new_registrant_group_member).create?
   .row
     .small-12.columns
       = render "add_member_form", registrant_group: @registrant_group, event: @registrant_group.registrant_group_type.source_element
-
 %hr
 
-%h3 Leaders
+%h3 Group Leaders
 
 %table
   %thead
@@ -49,7 +55,7 @@
         %td= leader
         %td
           - if policy(leader).destroy?
-            = link_to "Remove", registrant_group_leader_path(leader), method: :delete
+            = link_to "Remove", registrant_group_leader_path(leader), method: :delete, data: { confirm: "Remove Leader?" }
 
 - if policy(@new_registrant_group_leader).create?
   .row

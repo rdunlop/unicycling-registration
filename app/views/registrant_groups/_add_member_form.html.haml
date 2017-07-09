@@ -1,12 +1,17 @@
 %h2 Add Member
 = simple_form_for(@new_registrant_group_member, url: registrant_group_registrant_group_members_path(registrant_group)) do |f|
-  .field
-    = f.label :registrant_id, "Member"
-    %br
-    = f.select :registrant_id, signed_up_registrants(event), {include_blank: true}, class: 'chosen-select'
+  .field.row
+    .small-12.medium-6.columns
+      = f.label :registrant_id, "Member"
+      = f.select :registrant_id, filter_registrants_for_signed_up_event(@new_member_registrants, event).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, class: 'chosen-select'
+    .small-12.medium-6.columns
+      .actions
+        = f.button :submit, "Add Member"
   %br
   %small
     %b Note
-    Only registrants who have signed up for #{event} are listed here
-  .actions
-    = f.button :submit, "Add Member"
+    Only registrants who have signed up for #{event} are listed here.
+  - if @show_all_registrants
+    = link_to "Show only my registrants", registrant_group_path(registrant_group)
+  - else
+    = link_to "Allow me to add any registrant", registrant_group_path(registrant_group, show_all_registrants: true)

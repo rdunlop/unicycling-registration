@@ -11,9 +11,9 @@
   - if reg_group.present?
     %hr
     %h3 #{registrant} is in the following registrant group
-    = render "groups_table", registrant_groups: [group]
+    = render "groups_table", registrant_groups: [reg_group]
   - elsif eligible_group
-    %p
+    .callout.alert
       %b #{registrant} is not in any group, but should be in one
 
 %hr
