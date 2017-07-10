@@ -1,9 +1,9 @@
-%h2 Add Member
+%h2 Add Members
 = simple_form_for(@new_registrant_group_member, url: registrant_group_registrant_group_members_path(registrant_group)) do |f|
   .field.row
     .small-12.medium-6.columns
-      = f.label :registrant_id, "Member"
-      = f.select :registrant_id, filter_registrants_for_signed_up_event(@new_member_registrants, event).map{ |reg| [reg.with_id_to_s, reg.id] }, {include_blank: true}, class: 'chosen-select'
+      = label_tag :registrant_ids, "Member"
+      = select_tag :registrant_ids, options_from_collection_for_select(filter_registrants_for_signed_up_event(@new_member_registrants, event), "id", "with_id_to_s"),include_blank: true, multiple: true, class: 'chosen-select'
     .small-12.medium-6.columns
       .actions
         = f.button :submit, "Add Member"

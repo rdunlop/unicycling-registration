@@ -32,6 +32,10 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   # GET /registrant_group_types/1
   def show
     @registrant_groups = @registrant_group_type.registrant_groups
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf "show" }
+    end
   end
 
   # POST /registrant_group_types
