@@ -28,7 +28,7 @@ class RegistrantGroupMembersController < ApplicationController
     params[:registrant_ids].each do |registrant_id|
       registrant_group_member = @registrant_group.registrant_group_members.build
       registrant_group_member.registrant_id = registrant_id
-      manager.add_member(@registrant_group_member) # this may add to the 'erors'
+      manager.add_member(registrant_group_member) # this may add to the 'erors'
     end
 
     if manager.errors.blank?

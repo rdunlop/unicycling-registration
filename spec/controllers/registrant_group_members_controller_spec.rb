@@ -30,14 +30,14 @@ describe RegistrantGroupMembersController do
   describe "POST create" do
     describe "with valid params" do
       let(:params) do
-        {
-          registrant_id: FactoryGirl.create(:competitor).id
-        }
+        [
+          FactoryGirl.create(:competitor).id
+        ]
       end
 
       it "creates a new record" do
         expect do
-          post :create, params: { registrant_group_member: params, registrant_group_id: registrant_group.to_param }
+          post :create, params: { registrant_ids: params, registrant_group_id: registrant_group.to_param }
         end.to change(RegistrantGroupMember, :count).by(1)
       end
     end
