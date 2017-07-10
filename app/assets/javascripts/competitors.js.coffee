@@ -15,6 +15,23 @@ select_all_competitors = (check_on) ->
       el.trigger("click");
   return false
 
+$(document).on "click", ".reg_group_select", (e) ->
+  el = $(e.target)
+  ids = el.data("registrant-ids")
+  select_all_competitors(false);
+  select_group_competitors(ids)
+
+select_group_competitors = (reg_ids) ->
+  count = 0
+  $(".registrant_checkbox").each ->
+    el = $(this);
+    reg_id = parseInt(el.val())
+    if (reg_ids.includes(reg_id))
+      el.trigger("click");
+      count += 1
+  alert("selected " + count + " members")
+  return false
+
 $ ->
   new ChosenEnabler($(".chosen-select"))
 
