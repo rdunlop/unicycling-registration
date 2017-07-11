@@ -15,6 +15,11 @@ describe Importers::Parsers::Wave do
     )
   end
 
+  it "has valid headers" do
+    importer = described_class.new(wave_data_file)
+    expect(importer).to be_valid_file
+  end
+
   it "converts contents to hash" do
     expect(described_class.new.process_row(["101", "1"])).to eq(bib_number: "101", wave: "1")
   end

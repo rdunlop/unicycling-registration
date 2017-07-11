@@ -3,6 +3,12 @@ class Importers::Parsers::Swiss < Importers::Parsers::Base
     Importers::CsvExtractor.new(file, separator: "\t").extract_csv
   end
 
+  def validate_contents
+    if file_contents.first.count < 4
+      @errors << "Not enough columns. Are you sure this is a tab-separated file?"
+    end
+  end
+
   # Convert a file formatted like:
   # 3 00:00:13.973  277 1 Monika Sveistrup  "0-10 20"" Female, 20"" Wheel"  Female          00:00:00.186
   # 5 00:00:14.302  660 2 Eva Maria Prader  "0-10 20"" Female, 20"" Wheel"  Female          00:00:00.515

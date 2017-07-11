@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe Importers::Parsers::TwoAttemptSlalom do
+  let(:iuf_two_attempt_data_file_name) { fixture_path + '/sample_iuf_two_attempt.txt' }
+  let(:iuf_two_attempt_data_file) { Rack::Test::UploadedFile.new(iuf_two_attempt_data_file_name, "text/plain") }
+
+  it "extracts the file contents" do
+    expect(described_class.new(iuf_two_attempt_data_file).extract_file).to eq(
+      [
+        ["30", "Hürzeler", "Ramona", "19,64", "19,40", "Switzerland", "23", "w", "IUF-Slalom"]
+      ]
+    )
+  end
+
+  it "has valid headers" do
+    importer = described_class.new(iuf_two_attempt_data_file)
+    expect(importer).to be_valid_file
+  end
+
   describe "when importing IUF-style data" do
     it "can process a normal single line", :aggregate_failures do
       obj = described_class.new

@@ -14,6 +14,10 @@ describe Importers::Parsers::Chip do
     expect(importer.extract_file).to eq([["101", "fake", "0:1:34.39", "2"]])
   end
 
+  it "has valid headers" do
+    expect(importer).to be_valid_file
+  end
+
   it "creates a dq competitor" do
     read_input = importer.process_row(["101", "fake", "0:1:34.39", "2"])
     expect(read_input[:bib_number]).to eq(101)

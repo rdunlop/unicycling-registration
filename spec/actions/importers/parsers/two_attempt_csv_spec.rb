@@ -16,6 +16,10 @@ describe Importers::Parsers::TwoAttemptCsv do
     )
   end
 
+  it "has valid headers" do
+    expect(importer).to be_valid_file
+  end
+
   it "returns first row result", :aggregate_failures do
     input_data = importer.process_row(["101", "1", "30", "0", nil, "10", "45", "0"])
 

@@ -16,6 +16,14 @@ class Importers::Parsers::Chip < Importers::Parsers::Base
     raw_data.drop(1)
   end
 
+  def validate_contents
+    min_column = [bib_number_column_number.to_i, time_column_number.to_i, lap_column_number.to_i].max
+
+    if file_contents.first.count < (min_column + 1)
+      @errors << "Not enough columns. Are you sure this is a semicolon-separated file?"
+    end
+  end
+
   def process_row(row)
     chip_hash = convert_timing_csv_to_hash(row)
     {

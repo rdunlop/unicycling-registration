@@ -11,7 +11,7 @@ class ImportsController < ApplicationController
     if importer.process(parser)
       flash[:notice] = "Import Successful"
     else
-      flash[:alert] = "#{importer.num_rows_processed} rows imported. Some Import errors: #{importer.errors[0..10]}"
+      flash[:alert] = "#{importer.num_rows_processed} rows imported. Some Import errors: #{importer.errors.first(100)}..."
     end
     redirect_to imports_path
   end
