@@ -1,7 +1,7 @@
 class RegistrantGroupTypePolicy < ApplicationPolicy
   def index?
     # for normal users, must be signed in, that's it
-    manage?
+    true
   end
 
   def new?

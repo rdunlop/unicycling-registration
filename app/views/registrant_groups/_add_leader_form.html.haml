@@ -1,9 +1,9 @@
 %h2 Add Leader
-= simple_form_for(RegistrantGroupLeader.new, url: registrant_group_registrant_group_leaders_path(@registrant_group)) do |f|
+= simple_form_for(@new_registrant_group_leader, url: registrant_group_registrant_group_leaders_path(@registrant_group)) do |f|
   .field
     = f.label :user_id, "Leader"
     %br
-    = f.select :user_id, User.all.map{ |user| [user, user.id] }, {include_blank: true}, class: "chosen-select"
+    = f.select :user_id, User.all.map{ |user| [user.to_s_with_safe_email, user.id] }, {include_blank: true}, class: "chosen-select"
   %br
   .actions
-    = f.button :submit
+    = f.button :submit, "Add Leader"

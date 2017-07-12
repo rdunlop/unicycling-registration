@@ -1,16 +1,25 @@
-%h1 Listing #{@registrant_group_type} Groups
-%br
-%table.sortable
-  %thead
-    %tr
-      %th= RegistrantGroup.human_attribute_name(:name)
-      %th Leaders
-      %th
-  %tbody
-    - @registrant_groups.each do |registrant_group|
-      %tr
-        %td= link_to registrant_group.name, registrant_group
-        %td= registrant_group.leaders.map(&:to_s)
-        %td= link_to 'Show', registrant_group
+%h1 #{@registrant_group_type} Groups
 
-= link_to "New Group", new_registrant_group_type_registrant_group_path(@registrant_group_type)
+%p
+  This page lists all of the configured groups for #{@registrant_group_type}
+
+%p Please feel free to choose all of the members of your group.
+
+- @registrants.each do |registrant|
+  - reg_group = registrant_group_for(registrant, @registrant_group_type)
+  - eligible_group = registrant_eligible_for?(registrant, @registrant_group_type)
+  - if reg_group.present?
+    %hr
+    %h3 #{registrant} is in the following registrant group
+    = render "groups_table", registrant_groups: [reg_group]
+  - elsif eligible_group
+    .callout.alert
+      %b #{registrant} is not in any group, but should be in one
+
+%hr
+%h3 All Groups
+= render "groups_table", registrant_groups: @all_registrant_groups
+
+.row
+  .small-12.columns
+    = link_to "New Group", new_registrant_group_type_registrant_group_path(@registrant_group_type), class: "button"

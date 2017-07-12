@@ -1,4 +1,6 @@
 %h1 Registrant Group Type - #{@registrant_group_type}
+.non_printable
+  = link_to "(pdf)", convention_setup_registrant_group_type_path(@registrant_group_type, format: :pdf)
 
 %h2 Groups
 
@@ -6,9 +8,20 @@
   %thead
     %tr
       %th Group Name
+      %th Members
       %th Size
   %tbody
     - @registrant_group_type.registrant_groups.each do |group|
       %tr
-        %th= link_to group.to_s, group
+        %th
+          .non_printable
+            = link_to group.to_s, group
+          .only_printable
+            = group.to_s
+        %th
         %th= group.registrant_group_members.size
+      - group.registrant_group_members.each do |member|
+        %tr
+          %td= group.to_s
+          %td= member
+          %td

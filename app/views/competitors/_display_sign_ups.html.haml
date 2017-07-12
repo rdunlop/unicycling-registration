@@ -12,16 +12,35 @@
 
 - @remaining_registrants = @registrants - (@competition.competitors.map{ |comp| comp.registrants }.flatten)
 
+- group_types = RegistrantGroupType.where(source_element: @competition.event)
+- if group_types.any?
+  %table
+    %thead
+      %tr
+        %th Group name
+        %th # Members
+        %th Action
+    %tbody
+      - group_types.each do |group_type|
+        - group_type.registrant_groups.each do |group|
+          %tr
+            %td= group
+            %td= group.registrant_group_members.count
+            %td
+              - ids = group.registrant_group_member_registrant_ids
+              = link_to "Select members", "#", class: "reg_group_select", data: { registrant_ids: ids }
+
 - if @remaining_registrants.any?
   = form_tag(add_competition_competitors_path(@competition), {:method => :post}) do
+    %a#competitor_select_all{:href => "#"}> All
+    \/
+    %a#competitor_unselect_all{:href => "#"} None
+
     %table.sortable
       %caption Signed-up registrants who are not yet competitors
       %thead
         %tr
           %th
-            %a#competitor_select_all{:href => "#"}> All
-            \/
-            %a#competitor_unselect_all{:href => "#"} None
           %th ID
           %th Name
           %th Sign Up Details

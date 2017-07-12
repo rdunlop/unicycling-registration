@@ -21,12 +21,20 @@ class RegistrantGroupMembersController < ApplicationController
   before_action :load_registrant_group, only: %i[create]
 
   def create
-    @registrant_group_member = @registrant_group.registrant_group_members.build(registrant_group_member_params)
+    manager = RegistrantGroupManager.new(@registrant_group)
+    @registrant_group_member = @registrant_group.registrant_group_members.build
+
     authorize @registrant_group_member
-    if @registrant_group_member.save
+    params[:registrant_ids].each do |registrant_id|
+      registrant_group_member = @registrant_group.registrant_group_members.build
+      registrant_group_member.registrant_id = registrant_id
+      manager.add_member(registrant_group_member) # this may add to the 'erors'
+    end
+
+    if manager.errors.blank?
       flash[:notice] = "Created Group Member"
     else
-      flash[:alert] = "Error creating member"
+      flash[:alert] = "Error creating member. #{manager.errors}"
     end
     redirect_to registrant_group_path(@registrant_group_member.registrant_group)
   end
@@ -45,10 +53,11 @@ class RegistrantGroupMembersController < ApplicationController
   # POST /registrant_group_members/1/promote
   def promote
     @registrant_group = @registrant_group_member.registrant_group
-    if RegistrantGroupManager.new(@registrant_group).promote(@registrant_group_member)
-      flash[:alert] = "Unable to promote member"
-    else
+    manager = RegistrantGroupManager.new(@registrant_group)
+    if manager.promote(@registrant_group_member)
       flash[:notice] = "Promoted Member to Leader"
+    else
+      flash[:alert] = "Unable to promote member. #{manager.errors}"
     end
 
     redirect_to @registrant_group
@@ -57,10 +66,11 @@ class RegistrantGroupMembersController < ApplicationController
   # POST /registrant_group_members/1/request_leader
   def request_leader
     @registrant_group = @registrant_group_member.registrant_group
-    if RegistrantGroupManager.new(@registrant_group).request_leader(@registrant_group_member)
-      flash[:alert] = "Unable to request leader"
-    else
+    manager = RegistrantGroupManager.new(@registrant_group)
+    if manager.request_leader(@registrant_group_member)
       flash[:notice] = "Requested leader for group"
+    else
+      flash[:alert] = "Unable to request leader. #{manager.errors}"
     end
 
     redirect_to @registrant_group
@@ -78,9 +88,5 @@ class RegistrantGroupMembersController < ApplicationController
 
   def load_registrant_group
     @registrant_group = RegistrantGroup.find(params[:registrant_group_id])
-  end
-
-  def registrant_group_member_params
-    params.require(:registrant_group_member).permit(:registrant_id)
   end
 end
