@@ -7,7 +7,7 @@ describe Importers::Parsers::TwoAttemptSlalom do
   it "extracts the file contents" do
     expect(described_class.new(iuf_two_attempt_data_file).extract_file).to eq(
       [
-        ["30", "Hürzeler", "Ramona", "19,64", "19,40", "Switzerland", "23", "w", "IUF-Slalom"]
+        ["30", "Hurzeler", "Ramona", "19,64", "19,40", "Switzerland", "23", "w", "IUF-Slalom"]
       ]
     )
   end
