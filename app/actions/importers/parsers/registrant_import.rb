@@ -19,14 +19,18 @@
 # }
 class Importers::Parsers::RegistrantImport < Importers::Parsers::Base
   class ElementFinder
-    def initialize(headers, row)
+    def initialize(headers, row = nil)
       @headers = headers
       @row = row
     end
 
     def find(element_name)
-      target_index = @headers.find_index(element_name)
+      target_index = find_column(element_name)
       @row[target_index]
+    end
+
+    def find_column(element_name)
+      @headers.find_index(element_name)
     end
   end
 
@@ -36,11 +40,12 @@ class Importers::Parsers::RegistrantImport < Importers::Parsers::Base
 
   def extract_file
     arrays = Importers::CsvExtractor.new(file).extract_csv
-    headers = arrays[0]
-    rows = arrays[1..-1]
-    rows.map do |row|
-      convert_row(headers, row)
-    end
+    @headers = arrays[0]
+    arrays.drop(1)
+  end
+
+  def process_row(row)
+    convert_row(@headers, row)
   end
 
   def validate_contents
@@ -48,8 +53,9 @@ class Importers::Parsers::RegistrantImport < Importers::Parsers::Base
   end
 
   def validate_headers
+    element_finder = ElementFinder.new(@headers)
     Event.all.each do |event|
-      unless element_finder.find("EV: #{event.name} - Signed Up (Y/N)")
+      unless element_finder.find_column("EV: #{event.name} - Signed Up (Y/N)")
         @errors << "Unable to find event #{event.name}"
       end
     end
@@ -61,7 +67,7 @@ class Importers::Parsers::RegistrantImport < Importers::Parsers::Base
 
   def convert_row(header, row)
     element_finder = ElementFinder.new(header, row)
-    base_data = {
+    {
       id: element_finder.find("ID"),
       first_name: element_finder.find("First Name"),
       last_name: element_finder.find("Last Name"),

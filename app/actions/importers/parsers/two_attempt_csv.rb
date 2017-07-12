@@ -3,6 +3,12 @@ class Importers::Parsers::TwoAttemptCsv < Importers::Parsers::Base
     Importers::CsvExtractor.new(file).extract_csv
   end
 
+  def validate_contents
+    if file_contents.first.count < 9
+      @errors << "Not enough columns. Are you sure this is a comma-separated file?"
+    end
+  end
+
   def process_row(raw)
     # 101,1,30,0,,10,45,0,
     # 102,2,30,239,DQ,11,0,0,

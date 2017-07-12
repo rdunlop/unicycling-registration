@@ -12,6 +12,10 @@ describe Importers::Parsers::Csv do
       expect(importer.extract_file).to eq([["101", "1", "2", "300", "0"]])
     end
 
+    it "has valid headers" do
+      expect(importer).to be_valid_file
+    end
+
     it "returns competitor data" do
       input_data = importer.process_row(["101", "1", "2", "300", "0"])
 

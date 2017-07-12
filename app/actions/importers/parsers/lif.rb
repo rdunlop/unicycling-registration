@@ -4,6 +4,12 @@ class Importers::Parsers::Lif < Importers::Parsers::Base
     data.drop(1) # drop header row
   end
 
+  def validate_contents
+    if file_contents.first.count < 7
+      @errors << "Not enough columns. Are you sure this is a comma-separated file?"
+    end
+  end
+
   def process_row(raw)
     lif_hash = convert_lif_to_hash(raw)
 

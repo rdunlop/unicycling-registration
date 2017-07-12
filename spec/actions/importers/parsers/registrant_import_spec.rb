@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Importers::Parsers::RegistrantImport do
-  describe "#validate_columns" do
-  end
-
   describe "#convert_row" do
     let(:registrant_headers) { ["ID", "First Name", "Last Name", "Birthday (dd/mm/yyyy)", "Sex (m/f)"] }
     let(:registrant_row) { ["1", "Robin", "Dunlop", "20/05/1982", "m"] }
@@ -55,11 +52,23 @@ describe Importers::Parsers::RegistrantImport do
 
     let(:test_file) { fixture_path + '/registrants.csv' }
     let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
+    let(:importer) { described_class.new(sample_input) }
 
     it "read the registrant file" do
-      input_data = described_class.new(sample_input).extract_file
+      input_data = importer.extract_file
       expect(input_data.count).to eq(2)
-      expect(input_data[0]).to eq(
+      expect(input_data[0]).to eq(["1", "Robin", "Dunlop", "20/05/1982", "m", "Y", "All", "20.03", "100m Team"])
+      expect(input_data[1]).to eq(["2", "Scott", "Wilton", "28/02/1995", "m", "Y", "All", "12.33", "Best Team"])
+    end
+
+    it "has valid headers" do
+      expect(importer).to be_valid_file
+    end
+
+    it "converts the row entries" do
+      importer.extract_file
+      input_data = importer.process_row(["1", "Robin", "Dunlop", "20/05/1982", "m", "Y", "All", "20.03", "100m Team"])
+      expect(input_data).to eq(
         id: "1",
         first_name: "Robin",
         last_name: "Dunlop",
@@ -77,7 +86,8 @@ describe Importers::Parsers::RegistrantImport do
           }
         ]
       )
-      expect(input_data[1]).to eq(
+      input_data = importer.process_row(["2", "Scott", "Wilton", "28/02/1995", "m", "Y", "All", "12.33", "Best Team"])
+      expect(input_data).to eq(
         id: "2",
         first_name: "Scott",
         last_name: "Wilton",
@@ -95,6 +105,14 @@ describe Importers::Parsers::RegistrantImport do
           }
         ]
       )
+    end
+
+    describe "#validate_contents" do
+      it "validates the headers" do
+        importer.extract_file
+        importer.validate_headers
+        expect(importer.errors.count).to eq(0)
+      end
     end
   end
 end

@@ -13,6 +13,8 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
       raw_data.each do |raw|
         if build_and_save_imported_result(processor.process_row(raw), @user, @competition)
           self.num_rows_processed += 1
+        else
+          raise ActiveRecord::Rollback
         end
       end
     end
@@ -31,5 +33,8 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
       entered_at: DateTime.current,
       entered_by: user
     )
+  rescue ActiveRecord::RecordNotFound
+    @errors << "Unable to find registrant (#{row_hash})"
+    return false
   end
 end
