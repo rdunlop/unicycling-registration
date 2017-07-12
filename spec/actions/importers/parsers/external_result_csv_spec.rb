@@ -16,6 +16,10 @@ describe Importers::Parsers::ExternalResultCsv do
     expect(input_data[3]).to eq(["104", "62.36747621"])
   end
 
+  it "has valid headers" do
+    expect(importer).to be_valid_file
+  end
+
   it "can convert a row" do
     result = importer.process_row(["101", "27.60616904"])
 

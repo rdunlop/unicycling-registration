@@ -11,6 +11,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
     @errors = []
     Registrant.transaction do
       registrant_data.each do |registrant_hash|
+        row_hash = processor.process_row(registrant_hash)
         # CsvExtractor converts from file into array-of-arrays
         # Processor converts from array-of-arrays into array of hashes of form:
         # {
@@ -43,7 +44,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
         #       if value is formatted with a ".", enter it as seconds/thousands
 
         begin
-          if build_and_save_imported_result(registrant_hash, @user)
+          if build_and_save_imported_result(row_hash, @user)
             self.num_rows_processed += 1
           end
         rescue ActiveRecord::RecordInvalid => invalid

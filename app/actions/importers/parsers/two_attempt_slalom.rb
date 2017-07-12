@@ -4,6 +4,12 @@ class Importers::Parsers::TwoAttemptSlalom < Importers::Parsers::Base
     Importers::CsvExtractor.new(file, separator: ';').extract_csv
   end
 
+  def validate_contents
+    if file_contents.first.count < 5
+      @errors << "Not enough columns. Are you sure this is a semicolon-separated file?"
+    end
+  end
+
   # Example data
   # 30;Smith;Ramona;19,64;19,40;Switzerland;23;w;IUF-Slalom
   # 65;Rondeau;Antoine;24,66;disq;France;22;m;IUF-Slalom

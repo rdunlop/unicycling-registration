@@ -32,4 +32,12 @@ describe Importers::ExternalResultImporter do
     end.to change(ExternalResult, :count).by(1)
     expect(importer.num_rows_processed).to eq(1)
   end
+
+  it "Can process external result when registrant does not exist" do
+    expect do
+      expect(importer.process(processor)).to be_falsy
+    end.to change(ExternalResult, :count).by(0)
+    expect(importer.num_rows_processed).to eq(0)
+    expect(importer.errors).to eq("Unable to find registrant ({:bib_number=>\"101\", :points=>\"1.2\", :details=>nil, :status=>\"active\"})")
+  end
 end

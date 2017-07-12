@@ -55,3 +55,4 @@ Rails.application.secrets.mail_full_email = "from@example.com"
 Rails.application.secrets.secret_key_base = "somesecretstringisreallylongenoughtobesecurecheckpassing"
 Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
 Rails.application.secrets.server_admin_email = "robin+admin@dunlopweb.com"
+Rails.application.secrets.ssl_enabled = false

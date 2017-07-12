@@ -42,6 +42,7 @@ describe RegistrantGroupLeadersController do
   end
 
   describe "DELETE destroy" do
+    let!(:other_registrant_group_leader) { FactoryGirl.create(:registrant_group_leader, registrant_group: registrant_group) }
     let!(:registrant_group_leader) { FactoryGirl.create(:registrant_group_leader, registrant_group: registrant_group) }
     it "destroys the requested registrant_group_leader" do
       expect do

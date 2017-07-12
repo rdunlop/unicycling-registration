@@ -15,6 +15,10 @@ describe Importers::Parsers::Swiss do
         ]
       )
     end
+
+    it "Has valid headers" do
+      expect(importer).to be_valid_file
+    end
   end
 
   it "can parse a simple time", :aggregate_failures do

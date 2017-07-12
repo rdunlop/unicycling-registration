@@ -1,3 +1,7 @@
+.only_printable {
+  display: none;
+}
+
 // This would make the large grid function like a print grid
 @media print {
 
@@ -9,10 +13,16 @@
   .non_printable {
     display: none;
   }
+
+  .only_printable {
+    display: inline;
+  }
+
   .calc_needed {
     display: none;
   }
 }
+
 
 table.recording_form {
   border-collapse: collapse;

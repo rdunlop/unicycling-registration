@@ -34,10 +34,11 @@ class RegistrantGroupLeadersController < ApplicationController
   # DELETE /registrant_group_leaders/1
   def destroy
     authorize @registrant_group_leader
-    if @registrant_group_leader.destroy
+    manager = RegistrantGroupManager.new(@registrant_group_leader.registrant_group)
+    if manager.remove_leader(@registrant_group_leader)
       flash[:notice] = "Removed Leader"
     else
-      flash[:alert] = "Unable to remove leader"
+      flash[:alert] = "Unable to remove leader. #{manager.errors}"
     end
     redirect_to registrant_group_path(@registrant_group_leader.registrant_group)
   end

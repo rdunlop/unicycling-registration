@@ -1,8 +1,21 @@
 %h1 Registrant Group Types
 
 %p
-  Please choose an Event to set up your membership
+  Events which require multiple registrants to compete together as a group are listed here. Please use these pages to indicate who you will be competing with.
 
-%ul
-  - @registrant_group_types.each do |reg_group_type|
-    %li= link_to reg_group_type.source_element, registrant_group_type_registrant_groups_path(reg_group_type)
+%p
+  %b Note
+  The Event Director has final control over the membership of each group. These pages only indicate the
+  %i desired
+  group memberships.
+
+
+.row
+  .small-12.columns
+    .left-aligned
+      %p
+        Please choose an Event to start specifying membership for your registrant(s).
+
+      %ul
+        - @registrant_group_types.each do |reg_group_type|
+          %li= link_to reg_group_type.source_element, registrant_group_type_registrant_groups_path(reg_group_type)

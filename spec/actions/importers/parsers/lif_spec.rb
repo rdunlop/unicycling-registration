@@ -11,6 +11,11 @@ describe Importers::Parsers::Lif do
     expect(input_data[7]).to eq(["8", nil, "8", nil, nil, nil, "3:04.36", nil, "29.163", nil, nil, nil, nil, nil, nil])
   end
 
+  it "has valid headers" do
+    importer = described_class.new(sample_input)
+    expect(importer).to be_valid_file
+  end
+
   let(:up) { described_class.new }
 
   it "can convert a lif hash to data" do

@@ -26,11 +26,11 @@ class RegistrantGroup < ApplicationRecord
     registrants.sort{|a, b| a.contact_detail.address <=> b.contact_detail.address }
   end
 
-  def to_s
-    name
+  def registrant_group_member_registrant_ids
+    registrants.map(&:id)
   end
 
-  def leaders
-    registrant_group_leaders.map(&:user)
+  def to_s
+    name
   end
 end

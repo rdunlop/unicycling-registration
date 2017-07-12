@@ -32,6 +32,10 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   # GET /registrant_group_types/1
   def show
     @registrant_groups = @registrant_group_type.registrant_groups
+    respond_to do |format|
+      format.html
+      format.pdf { render_common_pdf "show" }
+    end
   end
 
   # POST /registrant_group_types
@@ -77,7 +81,8 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   end
 
   def authorize_collection
-    authorize RegistrantGroupType
+    # the :index? is used for the front-end controller, so we always use :new? here
+    authorize RegistrantGroupType, :new?
   end
 
   def load_registrant_group_type

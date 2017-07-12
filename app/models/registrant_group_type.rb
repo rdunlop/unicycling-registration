@@ -16,6 +16,7 @@ class RegistrantGroupType < ApplicationRecord
 
   has_many :registrant_groups, dependent: :restrict_with_error, inverse_of: :registrant_group_type
   has_many :registrants, through: :registrant_groups
+  has_many :registrant_group_members, through: :registrant_groups
 
   validates :source_element, presence: true
 

@@ -10,6 +10,12 @@ class Importers::Parsers::Csv < Importers::Parsers::Base
     Importers::CsvExtractor.new(file).extract_csv
   end
 
+  def validate_contents
+    if file_contents.first.count < 5
+      @errors << "Not enough columns. Are you sure this is the right format? (comma-separated)"
+    end
+  end
+
   def process_row(row)
     time_entry = row[4]
 
