@@ -7,10 +7,6 @@
   This page will create the PDF in the background, and then provide a link to download it on the
   = link_to "Reports page", reports_path
 
-%ul
-  %li= link_to t('.registrant_summaries_by_last_name'), registrant_summaries_path(format: :pdf)
-  %li= link_to t('.registrant_summaries_by_id'), registrant_summaries_path(order: :id, format: :pdf)
-
 = form_tag url: registrant_summaries_path, method: :post do
   .row
     .small-12.medium-6.columns
