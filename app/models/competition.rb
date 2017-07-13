@@ -441,22 +441,11 @@ class Competition < ApplicationRecord
   end
 
   def high_long_event?
-    ["High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"].include?(event_class)
+    ScoringClass.for(event_class, self)[:high_long_event?]
   end
 
   def distance_attempt_manager
-    case event_class
-    when "High/Long"
-      DistanceAttemptFinalManager
-    when "High/Long Preliminary IUF 2015"
-      DistanceAttemptPreliminaryManager
-    when "High/Long Final IUF 2015"
-      DistanceAttemptFinal_2015_Manager
-    when "High/Long Preliminary IUF 2017"
-      DistanceAttemptPreliminary2017Manager
-    else
-      raise NotImplementedError
-    end
+    @distance_attempt_manager ||= ScoringClass.for(event_class, self)[:distance_attempt_manager]
   end
 
   # ###########################
