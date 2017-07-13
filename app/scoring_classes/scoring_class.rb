@@ -1,5 +1,16 @@
 class ScoringClass
-  def self.for(scoring_class, competition) # rubocop:disable Metrics/MethodLength
+  attr_reader :scoring_class, :competition
+
+  def initialize(scoring_class, competition)
+    @scoring_class = scoring_class
+    @competition = competition
+  end
+
+  def self.for(scoring_class, competition)
+    new(scoring_class, competition).to_hash
+  end
+
+  def to_hash # rubocop:disable Metrics/MethodLength
     case scoring_class
     when "Shortest Time with Tiers"
       {
@@ -106,12 +117,14 @@ class ScoringClass
         ),
         helper: StreetScoringClass.new(competition, false) # this interacts with the judge_score_calculator
       }
-    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
-      {
-        calculator: DistanceResultCalculator.new,
-        exporter: EnteredDataExporter::MaxDistance.new(competition),
-        helper: DistanceScoringClass.new(competition)
-      }
+    when "High/Long"
+      high_long_type(DistanceAttemptFinalManager)
+    when "High/Long Preliminary IUF 2015"
+      high_long_type(DistanceAttemptPreliminaryManager)
+    when "High/Long Final IUF 2015"
+      high_long_type(DistanceAttemptFinal_2015_Manager)
+    when "High/Long Preliminary IUF 2017"
+      high_long_type(DistanceAttemptPreliminary2017Manager)
     when "Overall Champion"
       {
         calculator: OverallChampionResultCalculator.new(competition.combined_competition, competition),
@@ -129,5 +142,15 @@ class ScoringClass
         helper: nil
       }
     end
+  end
+
+  def high_long_type(distance_attempt_manager)
+    {
+      calculator: DistanceResultCalculator.new,
+      exporter: EnteredDataExporter::MaxDistance.new(competition),
+      helper: DistanceScoringClass.new(competition),
+      high_long_event?: true,
+      distance_attempt_manager: distance_attempt_manager
+    }
   end
 end
