@@ -106,7 +106,7 @@ class ScoringClass
         ),
         helper: StreetScoringClass.new(competition, false) # this interacts with the judge_score_calculator
       }
-    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015"
+    when "High/Long", "High/Long Preliminary IUF 2015", "High/Long Final IUF 2015", "High/Long Preliminary IUF 2017"
       {
         calculator: DistanceResultCalculator.new,
         exporter: EnteredDataExporter::MaxDistance.new(competition),
