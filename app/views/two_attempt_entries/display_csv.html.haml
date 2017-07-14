@@ -9,7 +9,7 @@
 
 Please import a Comma-Separated-File (Windows CSV Format) file with the following format:
 
-%ul
+%ul.left-aligned
   %li Column 1: ID
   %li Column 2: Minutes
   %li Column 3: Seconds
@@ -36,10 +36,18 @@ Please import a Comma-Separated-File (Windows CSV Format) file with the followin
 
 %h2 Advanced CSV Import
 
-%b Include NO Header row
+%b Include NO Header rows
 
 %p
-  Import a semi-colon separated file (UNICON 18 format)
+  Import a semi-colon separated file
+
+%ul.left-aligned
+  %li Column 1: ID
+  %li Column 4: Time 1 (german-style time, with comma for decimal. e.g. "19,64", "19,50")
+  %li Column 5: Time 2 (german-style time, with comma for decimal)
+  %li
+  %li Allowed values other than times: "disq", "abgem"
+
 = form_tag(import_csv_user_competition_two_attempt_entries_path(@user, @competition, advanced: true), {:method => :post, :multipart=>true}) do
   = hidden_field_tag :is_start_times, @is_start_time
   .row
