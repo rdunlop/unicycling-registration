@@ -243,7 +243,7 @@ class Competitor < ApplicationRecord
 
   def age_group_entry_description
     return unless members.any?
-    return "No Age Group for #{age}-#{gender}" if age_group_entry.nil?
+    return if age_group_entry.nil?
 
     age_group_entry.to_s
   end
