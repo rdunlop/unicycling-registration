@@ -37,6 +37,8 @@ class PermissionsController < ApplicationController
     return user if user
     user ||= User.this_tenant.create(name: "guest", guest: true, confirmed_at: Time.current, email: "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com")
     user.save!(validate: false)
+    user_convention = user.user_conventions.build(subdomain: Apartment::Tenant.current)
+    user_convention.save
     access = user.additional_registrant_accesses.build(accepted_readwrite: true, registrant: reg)
     access.save!
     user
