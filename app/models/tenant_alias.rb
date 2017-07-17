@@ -31,7 +31,12 @@ class TenantAlias < ApplicationRecord
   # Causes makes a request to a remote server (which should be THIS server)
   # and determines whether the request was properly received
   def properly_configured?
-    Net::HTTP.start(website_alias, open_timeout: 5) do |http|
+    options = {
+      open_timeout: 5,
+      use_ssl: true, # all connections are forced SSL now
+      verify_mode: OpenSSL::SSL::VERIFY_NONE # because we might not have a valid cert yet
+    }
+    Net::HTTP.start(website_alias, options) do |http|
       response = http.get("/tenant_aliases/#{id}/verify")
 
       return false unless response.is_a?(Net::HTTPSuccess)
