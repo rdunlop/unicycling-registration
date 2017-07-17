@@ -27,5 +27,7 @@ class Importers::CsvExtractor
 
   def convert_line_to_array(line)
     CSV.parse_line(line, col_sep: separator)
+  rescue ArgumentError
+    raise CSV::MalformedCSVError.new("Unable to parse line")
   end
 end
