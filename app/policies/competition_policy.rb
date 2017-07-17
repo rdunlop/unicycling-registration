@@ -93,6 +93,10 @@ class CompetitionPolicy < ApplicationPolicy
     results?
   end
 
+  def refresh_competitors?
+    set_places?
+  end
+
   # PRINTING
   def heat_recording?
     view_access?

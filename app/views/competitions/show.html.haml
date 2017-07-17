@@ -1,7 +1,8 @@
 %h1= @competition
 - if policy(@competition).update?
   (Scoring Class: #{@competition.event_class} #{link_to t("edit"), edit_competition_path(@competition)} )
-
+- if policy(@competition).refresh_competitors?
+  = link_to "refresh", refresh_competitors_competition_path(@competition), method: :put, data: { confirm: "refresh competitors?" }
 
 %p Manage Competitors, Judges, Volunteers and Results.
 
