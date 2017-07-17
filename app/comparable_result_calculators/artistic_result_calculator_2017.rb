@@ -10,9 +10,9 @@ class ArtisticResultCalculator_2017
   end
 
   # returns the result for this competitor
-  def competitor_comparable_result(competitor)
+  def competitor_comparable_result(competitor, with_ineligible: false)
     if competitor.has_result?
-      total_points(competitor)
+      total_points(competitor, with_ineligible: with_ineligible)
     else
       0
     end
@@ -20,7 +20,7 @@ class ArtisticResultCalculator_2017
 
   def competitor_tie_break_comparable_result(competitor)
     jt = JudgeType.find_by(name: "Technical", event_class: competitor.competition.event_class) # TODO: this should be properly identified
-    total_points_for_judge_type(competitor, jt)
+    total_points_for_judge_type(competitor, jt, with_ineligible: true)
   end
 
   def eager_load_results_relations(competitors)
@@ -34,7 +34,13 @@ class ArtisticResultCalculator_2017
   # NOTE: This function takes into account the "removed scores" by chief judge (eliminates them)
   #
   # return a numeric
-  def total_points(competitor)
+  def total_points(competitor, with_ineligible: false)
+    type_results = results_by_judge_type(competitor, with_ineligible: with_ineligible)
+
+    calculate_weighted_total(type_results)
+  end
+
+  def total_points_with_ineligible(competitor)
     type_results = results_by_judge_type(competitor)
 
     calculate_weighted_total(type_results)
@@ -59,19 +65,19 @@ class ArtisticResultCalculator_2017
     }
   end
 
-  def total_points_for_judge_type(competitor, judge_type)
+  def total_points_for_judge_type(competitor, judge_type, with_ineligible: false)
     scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
 
-    active_scores = scores.map(&:placing_points).compact
+    active_scores = scores.map{ |score| score.placing_points(with_ineligible: with_ineligible) }.compact
 
     (active_scores.sum / active_scores.count.to_f).round(2)
   end
 
-  def results_by_judge_type(competitor)
+  def results_by_judge_type(competitor, with_ineligible: false)
     competitor.competition.judge_types.uniq.map do |jt|
       {
         type: jt.name,
-        total: total_points_for_judge_type(competitor, jt)
+        total: total_points_for_judge_type(competitor, jt, with_ineligible: with_ineligible)
       }
     end
   end

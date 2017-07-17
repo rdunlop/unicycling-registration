@@ -12,7 +12,7 @@ class StandardSkillResultCalculator
   end
 
   # returns the result for this competitor
-  def competitor_comparable_result(competitor)
+  def competitor_comparable_result(competitor, with_ineligible: nil)
     if competitor.has_result?
       total_points(competitor)
     else

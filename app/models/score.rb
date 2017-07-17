@@ -46,24 +46,27 @@ class Score < ApplicationRecord
 
   # Sum of all entered values for this score.
   def total
-    return nil if invalid? || competitor.ineligible?
+    return nil if invalid?
 
     judge_score_calculator.calculate_score_total(self)
   end
 
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   def judged_place
-    return nil if invalid? || competitor.ineligible?
+    return nil if invalid?
 
     judge_score_calculator.judged_place(judge.score_totals, total)
   end
 
   # Return this score, after having converted it into placing points
   # which will require comparing it against the scores this judge gave other competitors
-  def placing_points
-    return nil if invalid? || competitor.ineligible?
+  def placing_points(with_ineligible: true)
+    return nil if invalid?
+    return nil if !with_ineligible && competitor.ineligible?
 
-    judge_score_calculator.judged_points(judge.score_totals, total)
+    score_totals = judge.score_totals(with_ineligible: with_ineligible)
+
+    judge_score_calculator.judged_points(score_totals, total)
   end
 
   def score_symbol(score_number)
