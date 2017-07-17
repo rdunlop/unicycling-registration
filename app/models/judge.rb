@@ -83,7 +83,8 @@ class Judge < ApplicationRecord
     if judge_type.event_class == "Standard Skill"
       standard_skill_scores.joins(:competitor).merge(Competitor.active)
     else
-      scores.joins(:competitor).merge(Competitor.active)
+      valid_competitors = competition.competitors.reject(&:ineligible?)
+      scores.joins(:competitor).merge(Competitor.where(id: valid_competitors))
     end
   end
 

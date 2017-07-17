@@ -23,7 +23,8 @@ require 'spec_helper'
 describe Judge do
   describe "when the judge has scores" do
     let(:judge) { FactoryGirl.create(:judge) }
-    let!(:score) { FactoryGirl.create(:score, judge: judge) }
+    let(:competitor) { FactoryGirl.create(:event_competitor, competition: judge.competition) }
+    let!(:score) { FactoryGirl.create(:score, competitor: competitor, judge: judge) }
 
     it "cannot destroy the judge" do
       expect(judge.destroy).to eq(false)
