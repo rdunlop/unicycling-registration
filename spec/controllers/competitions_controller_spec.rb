@@ -150,4 +150,14 @@ describe CompetitionsController do
       end
     end
   end
+
+  context "with a competitor and judge" do
+    let!(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+    let!(:judge) { FactoryGirl.create(:judge, competition: competition) }
+
+    it "can refresh" do
+      put :refresh_competitors, params: { id: competition.id }
+      expect(response).to redirect_to(competition)
+    end
+  end
 end

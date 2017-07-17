@@ -580,6 +580,7 @@ Rails.application.routes.draw do
         post :award
         delete :award
         post :create_last_minute_competitor
+        put :refresh_competitors
       end
       resources :competition_results, only: %i[index create destroy]
       resources :competitors, only: %i[index new create] do
