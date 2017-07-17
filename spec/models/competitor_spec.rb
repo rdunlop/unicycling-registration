@@ -559,7 +559,18 @@ describe Competitor do
     end
 
     it "should be ineligible itself" do
-      expect(@comp.ineligible?).to eq(true)
+      expect(@comp.ineligible?).to be_truthy
+    end
+
+    context "with a score_ineligible_competitors competition" do
+      before do
+        @comp.competition.update(score_ineligible_competitors: true)
+        @reg.reload
+      end
+
+      it "should be eligible" do
+        expect(@comp.ineligible?).to be_falsey
+      end
     end
   end
 end

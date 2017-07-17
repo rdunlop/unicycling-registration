@@ -401,6 +401,7 @@ class Competitor < ApplicationRecord
 
   def ineligible?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
+      return false if competition.score_ineligible_competitors?
       return true unless active?
 
       if members.empty?

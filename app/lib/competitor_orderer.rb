@@ -1,6 +1,9 @@
 class CompetitorOrderer
   attr_reader :competitors, :lower_is_better
 
+  # competitors must respond to:
+  #  - comparable_score
+  #  - comparable_tie_break_score
   def initialize(competitors, lower_is_better = true)
     @competitors = competitors
     @lower_is_better = lower_is_better
