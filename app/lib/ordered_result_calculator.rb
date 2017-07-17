@@ -38,17 +38,17 @@ class OrderedResultCalculator
   end
 
   def update_overall_results
+    competitors_in_sorted_order_with_ineligible = CompetitorOrderer.new(competitors, lower_is_better, use_with_ineligible_score: true).sort
+
     if competition.score_ineligible_competitors?
-      competitors_in_sorted_order = CompetitorOrderer.new(competitors, lower_is_better, use_with_ineligible_score: true).sort
-      competitors_in_sorted_order.each do |competitor|
+      competitors_in_sorted_order_with_ineligible.each do |competitor|
         gender_place_calc = get_place_calculator("Overall: #{competitor.gender}") # differentiate between Overall and an age group named "Male"
         new_place = gender_place_calc.place_next(competitor.comparable_score_with_ineligible, tie_break_points: competitor.comparable_tie_break_score, dq: competitor.disqualified?)
         Result.create_new!(competitor, new_place, "Overall")
       end
     else
       # score the ineligibles..for fake-y
-      competitors_in_sorted_order = CompetitorOrderer.new(competitors, lower_is_better, use_with_ineligible_score: true).sort
-      competitors_in_sorted_order.each do |competitor|
+      competitors_in_sorted_order_with_ineligible.each do |competitor|
         gender_place_calc = get_place_calculator("Overall Ineligible: #{competitor.gender}") # differentiate between Overall and an age group named "Male"
         new_place = gender_place_calc.place_next(competitor.comparable_score_with_ineligible, tie_break_points: competitor.comparable_tie_break_score, dq: competitor.disqualified?)
         Result.create_new!(competitor, new_place, "Overall") if competitor.ineligible?
@@ -73,17 +73,17 @@ class OrderedResultCalculator
   private
 
   def update_age_group_entry_results_with(selected_competitors)
+    competitors_in_sorted_order_with_ineligible = CompetitorOrderer.new(selected_competitors, lower_is_better, use_with_ineligible_score: true).sort
+
     if competition.score_ineligible_competitors?
-      competitors_in_sorted_order = CompetitorOrderer.new(selected_competitors, lower_is_better, use_with_ineligible_score: true).sort
-      competitors_in_sorted_order.each do |competitor|
+      competitors_in_sorted_order_with_ineligible.each do |competitor|
         gender_place_calc = get_place_calculator("AgeGroup: #{competitor.age_group_entry_description}")
         new_place = gender_place_calc.place_next(competitor.comparable_score_with_ineligible, tie_break_points: competitor.comparable_tie_break_score, dq: competitor.disqualified?)
         Result.create_new!(competitor, new_place, "AgeGroup", competitor.age_group_entry_description)
       end
     else
       # score the ineligibles..for fake-y
-      competitors_in_sorted_order = CompetitorOrderer.new(selected_competitors, lower_is_better, use_with_ineligible_score: true).sort
-      competitors_in_sorted_order.each do |competitor|
+      competitors_in_sorted_order_with_ineligible.each do |competitor|
         gender_place_calc = get_place_calculator("AgeGroup Ineligible: #{competitor.age_group_entry_description}")
         new_place = gender_place_calc.place_next(competitor.comparable_score_with_ineligible, tie_break_points: competitor.comparable_tie_break_score, dq: competitor.disqualified?)
         Result.create_new!(competitor, new_place, "AgeGroup", competitor.age_group_entry_description) if competitor.ineligible?
