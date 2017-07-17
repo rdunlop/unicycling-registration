@@ -193,8 +193,12 @@ class Competitor < ApplicationRecord
     end
   end
 
+  def comparable_score_with_ineligible
+    @comparable_score_with_ineligible ||= scoring_calculator.competitor_comparable_result(self, with_ineligible: true)
+  end
+
   def comparable_score
-    @comparable_score ||= scoring_calculator.competitor_comparable_result(self)
+    @comparable_score ||= scoring_calculator.competitor_comparable_result(self, with_ineligible: false)
   end
 
   def comparable_tie_break_score
@@ -401,7 +405,6 @@ class Competitor < ApplicationRecord
 
   def ineligible?
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
-      return false if competition.score_ineligible_competitors?
       return true unless active?
 
       if members.empty?

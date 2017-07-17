@@ -3,6 +3,7 @@ require 'spec_helper'
 describe OrderedResultCalculator do
   def recalc(calc = @calc)
     Rails.cache.clear
+    @competition.reload
     if @competition.has_age_group_entry_results?
       calc.update_age_group_results
     end
@@ -140,10 +141,10 @@ describe OrderedResultCalculator do
         end
 
         it "places the faster competitor first" do
-          expect(@tr2.competitor.place).to eq(1)
+          expect(@tr2.reload.competitor.place).to eq(1)
         end
         it "places the slower competitor (eligible) as 1st also" do
-          expect(@tr1.competitor.place).to eq(1)
+          expect(@tr1.reload.competitor.place).to eq(1)
         end
       end
     end

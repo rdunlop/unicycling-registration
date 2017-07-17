@@ -1,11 +1,7 @@
-# The PlaceCalculator acts as a sort af accumulator-state system for keeping track of poitns
+# The PlaceCalculator acts as a sort of accumulator-state system for keeping track of points
 # It MUST be called in the correct order, with the person who placed first being called first
 # Each time it is called with a new score, it compares it to the previous score
 # to determine whether this is a new place, or a tie for the place.
-#
-# If a call to 'place_next' is made for an 'ineligible' competitor,
-# that result will be returned "as if they were eligible", but their rank will not
-# affect any other ranks which are returned
 class PlaceCalculator
   def initialize
     reset
@@ -23,11 +19,9 @@ class PlaceCalculator
   # the calling function must ensure that they are ordered in descending order (best place first, etc)
   # Options:
   #  dq: Is this competitor disqualified?
-  #  ineligible: is this competitor ineligible to compete (thus they tie with the next-fastest eligible person)
   #  tie_break_points: if this score is a tie, is there a score which should be compared for tie-breaking purposes?
   def place_next(current_points, options = {})
     dq = options[:dq]
-    ineligible = options[:ineligible]
     tie_break_points = options[:tie_break_points]
 
     if dq || current_points.zero?
@@ -48,12 +42,9 @@ class PlaceCalculator
       place = @count
     end
 
-    unless ineligible
-      # only increase the number of scores if the time is eligible
-      @count += 1
-      @previous_points = current_points
-      @previous_tie_points = tie_break_points
-    end
+    @count += 1
+    @previous_points = current_points
+    @previous_tie_points = tie_break_points
 
     place
   end

@@ -15,7 +15,7 @@ class MultiLapResultCalculator
   # returns the result for this competitor
   # In this case, a lower number is a better number.
   # this is done so that the lap-time is properly taken into account
-  def competitor_comparable_result(competitor)
+  def competitor_comparable_result(competitor, with_ineligible: nil)
     if competitor.has_result?
       lap_time(competitor.num_laps) + competitor.best_time_in_thousands
     else
