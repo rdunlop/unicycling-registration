@@ -16,7 +16,7 @@ class Importers::CsvExtractor
     end
 
     results = []
-    File.open(upload_file, 'r:ISO-8859-1') do |f|
+    File.open(upload_file, 'r:UTF-8') do |f|
       f.each do |line|
         row = convert_line_to_array(line)
         results << row
