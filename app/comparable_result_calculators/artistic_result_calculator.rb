@@ -47,7 +47,7 @@ class ArtisticResultCalculator
     total
   end
 
-  def total_points_for_judge_type(competitor, judge_type)
+  def total_points_for_judge_type(competitor, judge_type, with_ineligible: nil)
     scores = get_placing_points_for_judge_type(competitor, judge_type)
 
     unless scores.count > 2

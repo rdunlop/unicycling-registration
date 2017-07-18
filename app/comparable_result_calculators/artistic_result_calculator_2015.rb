@@ -42,7 +42,7 @@ class ArtisticResultCalculator_2015
     (total_results.sum / competitor.competition.judge_types.uniq.count.to_f).round(2)
   end
 
-  def total_points_for_judge_type(competitor, judge_type)
+  def total_points_for_judge_type(competitor, judge_type, with_ineligible: nil)
     scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
 
     # this currently gives equal weight to each of the scores.
