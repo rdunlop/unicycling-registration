@@ -72,6 +72,15 @@ class CompetitionsController < ApplicationController
     redirect_to set_sort_competition_path(@competition)
   end
 
+  def refresh_competitors
+    authorize @competition, :refresh_competitors?
+
+    @competition.competitors.each(&:touch)
+    @competition.judges.each(&:touch)
+
+    redirect_to @competition, notice: "Updated all competitors and judges"
+  end
+
   def sort_random
     authorize @competition, :sort?
 

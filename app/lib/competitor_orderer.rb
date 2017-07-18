@@ -1,9 +1,13 @@
 class CompetitorOrderer
-  attr_reader :competitors, :lower_is_better
+  attr_reader :competitors, :lower_is_better, :use_with_ineligible_score
 
-  def initialize(competitors, lower_is_better = true)
+  # competitors must respond to:
+  #  - comparable_score
+  #  - comparable_tie_break_score
+  def initialize(competitors, lower_is_better = true, use_with_ineligible_score: true)
     @competitors = competitors
     @lower_is_better = lower_is_better
+    @use_with_ineligible_score = use_with_ineligible_score
   end
 
   def sort
@@ -12,12 +16,20 @@ class CompetitorOrderer
 
   private
 
+  def competitor_score(competitor)
+    if use_with_ineligible_score
+      competitor.comparable_score_with_ineligible
+    else
+      competitor.comparable_score
+    end
+  end
+
   # return 1 if first score is worse than the second score
   # return 0 if they are the same
   # return -1 if the first score is better than the second score
   def compare_competitors(a, b)
     if either_score_is_invalid(a, b)
-      return incorrect_scores_last(a.comparable_score, b.comparable_score)
+      return incorrect_scores_last(competitor_score(a), competitor_score(b))
     end
 
     if lower_is_better
@@ -28,7 +40,7 @@ class CompetitorOrderer
       second_competitor = a
     end
 
-    res = first_competitor.comparable_score <=> second_competitor.comparable_score
+    res = competitor_score(first_competitor) <=> competitor_score(second_competitor)
     if res.to_f.zero?
       if score_is_invalid(a.comparable_tie_break_score) || score_is_invalid(b.comparable_tie_break_score)
         return incorrect_scores_last(a.comparable_tie_break_score, b.comparable_tie_break_score)
@@ -40,8 +52,8 @@ class CompetitorOrderer
   end
 
   def either_score_is_invalid(a, b)
-    return true if score_is_invalid(a.comparable_score)
-    return true if score_is_invalid(b.comparable_score)
+    return true if score_is_invalid(competitor_score(a))
+    return true if score_is_invalid(competitor_score(b))
     false
   end
 

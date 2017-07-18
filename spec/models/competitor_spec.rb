@@ -559,7 +559,7 @@ describe Competitor do
     end
 
     it "should be ineligible itself" do
-      expect(@comp.ineligible?).to eq(true)
+      expect(@comp.ineligible?).to be_truthy
     end
   end
 end

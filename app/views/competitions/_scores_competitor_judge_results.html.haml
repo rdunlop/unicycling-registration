@@ -12,7 +12,9 @@
       %td.derived
         = score.total
         %br
-      %td.derived.right_edge= score.placing_points
+      %td.derived= score.placing_points(with_ineligible: false)
+      %td.derived.right_edge= score.placing_points(with_ineligible: true)
     - else
-      %td.empty.right_edge{:colspan => judge.judge_type.num_columns + 2} -
-  %td.derived= @competition.competitor_placing_points(competitor, judges.first.judge_type)
+      %td.empty.right_edge{:colspan => judge.judge_type.num_columns + num_total_columns} -
+  %td.derived= @competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: false)
+  %td.derived= @competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: true)

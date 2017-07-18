@@ -71,9 +71,15 @@ class Judge < ApplicationRecord
     name + " (" + judge_type.to_s + ")"
   end
 
-  def score_totals
-    Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
-      active_scores.map(&:total).compact
+  def score_totals(with_ineligible: false)
+    if with_ineligible
+      Rails.cache.fetch("/judge/#{id}-#{updated_at}/ineligible_score_totals") do
+        active_scores.map(&:total).compact
+      end
+    else
+      Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
+        active_scores.reject{ |score| score.competitor.ineligible? }.map(&:total).compact
+      end
     end
   end
 

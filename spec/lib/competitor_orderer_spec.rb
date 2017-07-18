@@ -3,10 +3,10 @@ require 'spec_helper'
 describe CompetitorOrderer do
   describe "competitors without tie break scores" do
     before do
-      @comp1 = double(:competitor, comparable_score: 1, comparable_tie_break_score: nil)
-      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: nil)
-      @comp3 = double(:competitor, comparable_score: 3, comparable_tie_break_score: nil)
-      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: nil)
+      @comp1 = double(:competitor, comparable_score_with_ineligible: 1, comparable_score: 1, comparable_tie_break_score: nil)
+      @comp2 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: nil)
+      @comp3 = double(:competitor, comparable_score_with_ineligible: 3, comparable_score: 3, comparable_tie_break_score: nil)
+      @comp4 = double(:competitor, comparable_score_with_ineligible: 4, comparable_score: 4, comparable_tie_break_score: nil)
     end
 
     subject { described_class.new([@comp1, @comp2, @comp3, @comp4]).sort }
@@ -18,10 +18,10 @@ describe CompetitorOrderer do
 
   describe "competitors with nil scores" do
     before do
-      @comp1 = double(:competitor, comparable_score: nil, comparable_tie_break_score: nil)
-      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: nil)
-      @comp3 = double(:competitor, comparable_score: 3, comparable_tie_break_score: nil)
-      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: nil)
+      @comp1 = double(:competitor, comparable_score_with_ineligible: nil, comparable_score: nil, comparable_tie_break_score: nil)
+      @comp2 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: nil)
+      @comp3 = double(:competitor, comparable_score_with_ineligible: 3, comparable_score: 3, comparable_tie_break_score: nil)
+      @comp4 = double(:competitor, comparable_score_with_ineligible: 4, comparable_score: 4, comparable_tie_break_score: nil)
     end
 
     subject { described_class.new([@comp1, @comp2, @comp3, @comp4]).sort }
@@ -33,10 +33,10 @@ describe CompetitorOrderer do
 
   describe "competitors without scores" do
     before do
-      @comp1 = double(:competitor, comparable_score: Float::NAN, comparable_tie_break_score: nil)
-      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: nil)
-      @comp3 = double(:competitor, comparable_score: 3, comparable_tie_break_score: nil)
-      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: nil)
+      @comp1 = double(:competitor, comparable_score_with_ineligible: Float::NAN, comparable_score: Float::NAN, comparable_tie_break_score: nil)
+      @comp2 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: nil)
+      @comp3 = double(:competitor, comparable_score_with_ineligible: 3, comparable_score: 3, comparable_tie_break_score: nil)
+      @comp4 = double(:competitor, comparable_score_with_ineligible: 4, comparable_score: 4, comparable_tie_break_score: nil)
     end
 
     subject { described_class.new([@comp1, @comp2, @comp3, @comp4]).sort }
@@ -48,10 +48,10 @@ describe CompetitorOrderer do
 
   describe "competitors with tie break scores" do
     before do
-      @comp1 = double(:competitor, comparable_score: 1, comparable_tie_break_score: 1)
-      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: 2)
-      @comp3 = double(:competitor, comparable_score: 2, comparable_tie_break_score: 1)
-      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: 3)
+      @comp1 = double(:competitor, comparable_score_with_ineligible: 1, comparable_score: 1, comparable_tie_break_score: 1)
+      @comp2 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: 2)
+      @comp3 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: 1)
+      @comp4 = double(:competitor, comparable_score_with_ineligible: 4, comparable_score: 4, comparable_tie_break_score: 3)
     end
 
     subject { described_class.new([@comp1, @comp2, @comp3, @comp4]).sort }
@@ -63,10 +63,10 @@ describe CompetitorOrderer do
 
   describe "competitors with tie break scores, and no tie break score" do
     before do
-      @comp1 = double(:competitor, comparable_score: 1, comparable_tie_break_score: nil)
-      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: nil)
-      @comp3 = double(:competitor, comparable_score: 2, comparable_tie_break_score: 1)
-      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: 3)
+      @comp1 = double(:competitor, comparable_score_with_ineligible: 1, comparable_score: 1, comparable_tie_break_score: nil)
+      @comp2 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: nil)
+      @comp3 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: 1)
+      @comp4 = double(:competitor, comparable_score_with_ineligible: 4, comparable_score: 4, comparable_tie_break_score: 3)
     end
 
     subject { described_class.new([@comp1, @comp2, @comp3, @comp4]).sort }
@@ -78,10 +78,10 @@ describe CompetitorOrderer do
 
   describe "when calculating the placing of higher-points-is-better races" do
     before :each do
-      @comp1 = double(:competitor, comparable_score: 1, comparable_tie_break_score: nil)
-      @comp2 = double(:competitor, comparable_score: 2, comparable_tie_break_score: nil)
-      @comp3 = double(:competitor, comparable_score: 3, comparable_tie_break_score: nil)
-      @comp4 = double(:competitor, comparable_score: 4, comparable_tie_break_score: nil)
+      @comp1 = double(:competitor, comparable_score_with_ineligible: 1, comparable_score: 1, comparable_tie_break_score: nil)
+      @comp2 = double(:competitor, comparable_score_with_ineligible: 2, comparable_score: 2, comparable_tie_break_score: nil)
+      @comp3 = double(:competitor, comparable_score_with_ineligible: 3, comparable_score: 3, comparable_tie_break_score: nil)
+      @comp4 = double(:competitor, comparable_score_with_ineligible: 4, comparable_score: 4, comparable_tie_break_score: nil)
     end
 
     subject { described_class.new([@comp1, @comp2, @comp3, @comp4], false).sort }

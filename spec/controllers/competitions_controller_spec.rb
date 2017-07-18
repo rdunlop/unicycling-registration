@@ -28,6 +28,7 @@
 #  time_entry_columns                    :string           default("minutes_seconds_thousands")
 #  import_results_into_other_competition :boolean          default(FALSE), not null
 #  base_age_group_type_id                :integer
+#  score_ineligible_competitors          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -147,6 +148,16 @@ describe CompetitionsController do
           post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }
         end.to change { @withdrawn_competitor.reload.status }.to("active")
       end
+    end
+  end
+
+  context "with a competitor and judge" do
+    let!(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+    let!(:judge) { FactoryGirl.create(:judge, competition: competition) }
+
+    it "can refresh" do
+      put :refresh_competitors, params: { id: competition.id }
+      expect(response).to redirect_to(competition)
     end
   end
 end

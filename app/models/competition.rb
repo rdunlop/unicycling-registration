@@ -28,6 +28,7 @@
 #  time_entry_columns                    :string           default("minutes_seconds_thousands")
 #  import_results_into_other_competition :boolean          default(FALSE), not null
 #  base_age_group_type_id                :integer
+#  score_ineligible_competitors          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -453,12 +454,12 @@ class Competition < ApplicationRecord
   # ###########################
 
   # COMPETITOR
-  def competitor_placing_points(competitor, judge_type)
+  def competitor_placing_points(competitor, judge_type, with_ineligible: false)
     sc = scoring_calculator
     if sc.nil?
       0
     else
-      sc.total_points_for_judge_type(competitor, judge_type)
+      sc.total_points_for_judge_type(competitor, judge_type, with_ineligible: with_ineligible)
     end
   end
 

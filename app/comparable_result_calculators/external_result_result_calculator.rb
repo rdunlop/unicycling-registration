@@ -11,7 +11,7 @@ class ExternalResultResultCalculator
     end
   end
 
-  def competitor_comparable_result(competitor)
+  def competitor_comparable_result(competitor, with_ineligible: nil)
     if competitor.has_result?
       competitor.external_result.points
     else

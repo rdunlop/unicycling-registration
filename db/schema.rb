@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701160944) do
+ActiveRecord::Schema.define(version: 20170717175728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20170701160944) do
     t.string   "time_entry_columns",                    default: "minutes_seconds_thousands"
     t.boolean  "import_results_into_other_competition", default: false,                       null: false
     t.integer  "base_age_group_type_id"
+    t.boolean  "score_ineligible_competitors",          default: false,                       null: false
     t.index ["base_age_group_type_id"], name: "index_competitions_on_base_age_group_type_id", using: :btree
     t.index ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true, using: :btree
     t.index ["event_id"], name: "index_competitions_event_id", using: :btree

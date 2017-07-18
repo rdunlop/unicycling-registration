@@ -10,7 +10,7 @@ class FlatlandResultCalculator_2017
   end
 
   # returns the result for this competitor
-  def competitor_comparable_result(competitor)
+  def competitor_comparable_result(competitor, with_ineligible: nil)
     if competitor.has_result?
       total_points(competitor)
     else
@@ -37,7 +37,7 @@ class FlatlandResultCalculator_2017
     scores.reduce(:+) # sum the values
   end
 
-  def total_points_for_judge_type(competitor, _judge_type)
+  def total_points_for_judge_type(competitor, _judge_type, with_ineligible: nil)
     total_points(competitor)
   end
 

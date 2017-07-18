@@ -9,7 +9,7 @@ class StreetResultCalculator
     nil
   end
 
-  def competitor_comparable_result(competitor)
+  def competitor_comparable_result(competitor, with_ineligible: nil)
     if competitor.has_result?
       total_points(competitor)
     else
@@ -34,7 +34,7 @@ class StreetResultCalculator
     scores.map(&:placing_points).compact.reduce(:+) || 0
   end
 
-  def total_points_for_judge_type(competitor, judge_type)
+  def total_points_for_judge_type(competitor, judge_type, with_ineligible: nil)
     scores = competitor.scores.select{ |score| score.judge_type == judge_type }
 
     scores.map(&:placing_points).compact.reduce(:+) || 0

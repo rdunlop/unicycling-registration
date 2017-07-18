@@ -34,6 +34,7 @@
   = f.input :scheduled_completion_at, as: :datetime_picker, include_blank: true
 
   = f.input :scoring_class, collection: Competition.scoring_classes, include_blank: true, input_html: { class: "js--blockVisibleSource" }
+  = f.input :score_ineligible_competitors, label: "Score Ineligible Competitors as normal riders (no automatic ties)"
   %hr
 
   / Hidden because this feature is not yet in use
