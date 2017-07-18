@@ -1,5 +1,5 @@
-// Locals: judges, judge_type, anonymous
-- total_judge_columns = 5 + (judges.count * (judge_type.num_columns + num_total_columns))
+// Locals: judges, judge_type, anonymous, competition
+- total_judge_columns = 5 + (judges.count * (judge_type.num_columns + num_total_columns(competition)))
 %tr
   %th.judge_type_header{ colspan: total_judge_columns }= judge_type
 %tr
@@ -8,7 +8,7 @@
   %th{ rowspan: 2 } Name
 
   - judges.each_with_index do |judge, index|
-    %th{ colspan: judge_type.num_columns + num_total_columns, class: "judge_status_#{judge.status}" }
+    %th{ colspan: judge_type.num_columns + num_total_columns(competition), class: "judge_status_#{judge.status}" }
       - if anonymous
         = "Judge #{index + 1}"
       - else
@@ -17,14 +17,16 @@
     Total
     %br
     Points
-  %th{ rowspan: 2 }
-    Total
-    %br
-    Points*
+  - if display_multiple_score_totals?(competition)
+    %th{ rowspan: 2 }
+      Total
+      %br
+      Points*
 %tr
   - judges.each do |judge|
     - judge_type.num_columns.times.each do |i|
       %th= i + 1
     %th Total
     %th Points
-    %th Points*
+    - if display_multiple_score_totals?(competition)
+      %th Points*
