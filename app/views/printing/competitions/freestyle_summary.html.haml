@@ -23,17 +23,13 @@
     - @competition.results_list.each do |competitor|
       %tr
         %td= competitor
-        %td= @competition.competitor_placing_points(competitor, performance_judge_type, with_ineligible: with_ineligible)
-        %td= @competition.competitor_placing_points(competitor, technical_judge_type, with_ineligible: with_ineligible)
+        %td= @competition.competitor_placing_points(competitor, performance_judge_type, with_ineligible: true)
+        %td= @competition.competitor_placing_points(competitor, technical_judge_type, with_ineligible: true)
         - if dismount_judge_type
           - dismounts = @competition.scoring_calculator.dismount_points_for_competitor(competitor, dismount_judge_type)
           %td= dismounts[:major_dismounts]
           %td= dismounts[:minor_dismounts]
-        %td
-          - if with_ineligible
-            = competitor.comparable_score_with_ineligible
-          - else
-            = competitor.comparable_score
+        %td= competitor.comparable_score_with_ineligible
         %td= competitor.overall_place
   %tfoot
     %tr
