@@ -232,6 +232,7 @@ class Competitor < ApplicationRecord
 
   def sorting_overall_place
     return 999 if disqualified? || overall_place.nil?
+    return 100 + overall_place if !competition.score_ineligible_competitors? && ineligible?
     overall_place
   end
 

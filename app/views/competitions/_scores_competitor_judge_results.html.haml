@@ -1,4 +1,4 @@
-// locals: competitor, judges
+// locals: competitor, judges, competition
 %tr
   %td= competitor.position
   %td= competitor.lowest_member_bib_number.to_s
@@ -12,9 +12,13 @@
       %td.derived
         = score.total
         %br
-      %td.derived= score.placing_points(with_ineligible: false)
-      %td.derived.right_edge= score.placing_points(with_ineligible: true)
+      - if display_multiple_score_totals?(competition)
+        %td.derived= score.placing_points(with_ineligible: false)
+        %td.derived.right_edge= score.placing_points(with_ineligible: true)
+      - else
+        %td.derived.right_edge= score.placing_points(with_ineligible: false)
     - else
-      %td.empty.right_edge{:colspan => judge.judge_type.num_columns + num_total_columns} -
-  %td.derived= @competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: false)
-  %td.derived= @competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: true)
+      %td.empty{:colspan => judge.judge_type.num_columns + num_total_columns(competition)} -
+  %td.derived= competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: false)
+  - if display_multiple_score_totals?(competition)
+    %td.derived= competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: true)
