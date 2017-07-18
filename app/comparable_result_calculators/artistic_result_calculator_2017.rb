@@ -70,6 +70,8 @@ class ArtisticResultCalculator_2017
 
     active_scores = scores.map{ |score| score.placing_points(with_ineligible: with_ineligible) }.compact
 
+    return 0 if active_scores.none?
+
     (active_scores.sum / active_scores.count.to_f).round(2)
   end
 
