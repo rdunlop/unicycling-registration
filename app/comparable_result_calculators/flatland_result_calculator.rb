@@ -46,7 +46,7 @@ class FlatlandResultCalculator
     total_points - min - max
   end
 
-  def total_points_for_judge_type(competitor, _judge_type)
+  def total_points_for_judge_type(competitor, _judge_type, with_ineligible: nil)
     total_points(competitor)
   end
 
