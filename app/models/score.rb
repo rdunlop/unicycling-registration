@@ -55,7 +55,7 @@ class Score < ApplicationRecord
   def judged_place
     return nil if invalid?
 
-    judge_score_calculator.judged_place(judge.score_totals, total)
+    judge_score_calculator.judged_place(judge.score_totals(with_ineligible: true), total)
   end
 
   # Return this score, after having converted it into placing points
