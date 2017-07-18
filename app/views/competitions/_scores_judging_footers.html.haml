@@ -1,11 +1,11 @@
-// Locals: judges, judge_type, anonymous
-- total_judge_columns = 5 + (judges.count * (judge_type.num_columns + num_total_columns))
+// Locals: judges, judge_type, anonymous, competition
+- total_judge_columns = 5 + (judges.count * (judge_type.num_columns + num_total_columns(competition)))
 
 %tr.is--hidden.non_printable{ id: "judge_dq#{judge_type.name}" }
   %th{ colspan: 3 }
 
   - judges.each_with_index do |judge, index|
-    %th{ colspan: judge_type.num_columns + num_total_columns, class: "judge_status_#{judge.status}" }
+    %th{ colspan: judge_type.num_columns + num_total_columns(competition), class: "judge_status_#{judge.status}" }
       = link_to "DQ Judge Scores", toggle_status_judge_path(judge), method: :put, class: "nonfocus_button", data: { confirm: "This will toggle whether the scores are included or not in the calculation. Continue?" }
   %th
   %th
