@@ -9,7 +9,7 @@ class Exporters::PaymentDetailsExporter
     [
       "Expense Item",
       "Details: #{expense_item.details_label}",
-      "ID",
+      "Id",
       "First Name",
       "Last Name",
       "Age",

@@ -5,7 +5,7 @@ describe Exporters::EventsExporter do
     @ev = FactoryGirl.create(:event)
   end
 
-  let(:base_headers) { ["ID", "First Name", "Last Name", "Birthday", "Age", "Gender", "Club"]}
+  let(:base_headers) { ["Id", "First Name", "Last Name", "Birthday", "Age", "Gender", "Club"]}
   let(:exporter) { described_class.new }
 
   it "sets the headers" do

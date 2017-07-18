@@ -1,6 +1,6 @@
 class Exporters::ResultsExporter
   def headers
-    ["ID", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result", "Details", "Age Group"]
+    ["Id", "Name", "Gender", "Age", "Competition", "Place", "Result Type", "Result", "Details", "Age Group"]
   end
 
   def rows

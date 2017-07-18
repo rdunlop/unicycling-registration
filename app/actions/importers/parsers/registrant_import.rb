@@ -68,7 +68,7 @@ class Importers::Parsers::RegistrantImport < Importers::Parsers::Base
   def convert_row(header, row)
     element_finder = ElementFinder.new(header, row)
     {
-      id: element_finder.find("ID"),
+      id: element_finder.find("Id"),
       first_name: element_finder.find("First Name"),
       last_name: element_finder.find("Last Name"),
       birthday: element_finder.find("Birthday (dd/mm/yyyy)"),
