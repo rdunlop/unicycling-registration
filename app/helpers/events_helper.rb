@@ -29,7 +29,7 @@ module EventsHelper
 
     judge_name = "#{judge.competition} - #{judge.judge_type.name}"
     case class_name
-    when 'High/Long', 'High/Long Preliminary IUF 2015', 'High/Long Final IUF 2015'
+    when 'High/Long', 'High/Long Preliminary IUF 2015', 'High/Long Final IUF 2015', 'High/Long Preliminary IUF 2017'
       link_to judge_name, judge_distance_attempts_path(judge), options
     when 'Freestyle', "Artistic Freestyle IUF 2015", "Artistic Freestyle IUF 2017"
       link_to judge_name, judge_scores_path(judge), options
