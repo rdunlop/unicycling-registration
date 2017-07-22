@@ -41,4 +41,15 @@ describe Importers::CsvExtractor do
     expect(data.count).to eq(2) # 2 lines, including header
     expect(data[1].count).to eq(4)
   end
+
+  it "can extract data for swiss data" do
+    sample_file = fixture_path + '/swiss_heat_with_dq.tsv'
+    sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
+
+    subject = described_class.new(sample_input, separator: "\t")
+    data = subject.extract_csv
+
+    expect(data.count).to eq(3) # 2 lines, including header
+    expect(data[1].count).to eq(8)
+  end
 end
