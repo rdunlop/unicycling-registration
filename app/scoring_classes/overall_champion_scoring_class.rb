@@ -16,7 +16,8 @@ class OverallChampionScoringClass < BaseScoringClass
 
   def build_competitors(bib_numbers)
     bib_numbers.each do |bib_number|
-      @competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil)
+      # must create competitors WITH age groups immediately, for the calculation to work correctly
+      @competition.create_competitor_from_registrants([Registrant.find_by(bib_number: bib_number)], nil, wait_for_age_group: true)
     end
     @competition.reload
   end
