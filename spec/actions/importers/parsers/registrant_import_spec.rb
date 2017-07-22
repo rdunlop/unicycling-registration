@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Importers::Parsers::RegistrantImport do
   describe "#convert_row" do
-    let(:registrant_headers) { ["ID", "First Name", "Last Name", "Birthday (dd/mm/yyyy)", "Sex (m/f)"] }
+    let(:registrant_headers) { ["Id", "First Name", "Last Name", "Birthday (dd/mm/yyyy)", "Sex (m/f)"] }
     let(:registrant_row) { ["1", "Robin", "Dunlop", "20/05/1982", "m"] }
 
     context "with no events" do

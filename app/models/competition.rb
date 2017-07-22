@@ -262,13 +262,16 @@ class Competition < ApplicationRecord
     nil
   end
 
-  def create_competitor_from_registrants(registrants, name, status = "active")
+  def create_competitor_from_registrants(registrants, name, status = "active", wait_for_age_group: false)
     competitor = competitors.build
     competitor.custom_name = name
     competitor.status = status
     registrants.each do |reg|
       member = competitor.members.build
       member.registrant = reg
+    end
+    if wait_for_age_group
+      competitor.wait_for_age_group = true
     end
     competitor.save!
     competitor

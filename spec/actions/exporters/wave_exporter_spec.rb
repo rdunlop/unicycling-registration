@@ -7,7 +7,7 @@ describe Exporters::WaveExporter do
   let(:exporter) { described_class.new([competitor]) }
 
   it "sets the headers" do
-    expect(exporter.headers).to eq(["ID", "Wave", "Name", "Age", "Gender", "Age Group", "Best Time"])
+    expect(exporter.headers).to eq(["Id", "Wave", "Name", "Age", "Gender", "Age Group", "Best Time"])
   end
 
   it "has the rows" do

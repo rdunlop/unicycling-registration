@@ -5,7 +5,7 @@ describe Exporters::RegistrantExporter do
     let(:headers) { described_class.new.headers }
     let(:expected_headers) do
       [
-        "ID",
+        "Id",
         "First Name",
         "Last Name",
         "Birthday (dd/mm/yyyy)",

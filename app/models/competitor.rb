@@ -71,6 +71,7 @@ class Competitor < ApplicationRecord
   after_save :touch_members
   after_save :update_age_group_entry
   after_touch :update_age_group_entry
+  attr_accessor :wait_for_age_group
 
   def touch_members
     members.each do |member|
@@ -497,6 +498,10 @@ class Competitor < ApplicationRecord
   delegate :lower_is_better, to: :scoring_helper
 
   def update_age_group_entry
-    CompetitorAgeGroupEntryUpdateJob.perform_later(id)
+    if wait_for_age_group
+      CompetitorAgeGroupEntryUpdateJob.perform_now(id)
+    else
+      CompetitorAgeGroupEntryUpdateJob.perform_later(id)
+    end
   end
 end

@@ -5,7 +5,7 @@ class Exporters::OrganizationMembershipsExporter
 
   def headers
     [
-      "ID",
+      "Id",
       "Organization Membership#",
       "First Name",
       "Last Name",
