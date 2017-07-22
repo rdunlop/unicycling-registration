@@ -1,7 +1,7 @@
 class Exporters::EventsExporter
   def headers
     [
-      "ID",
+      "Id",
       "First Name",
       "Last Name",
       "Birthday",

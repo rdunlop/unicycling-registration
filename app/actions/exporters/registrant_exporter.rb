@@ -2,7 +2,7 @@
 class Exporters::RegistrantExporter
   def headers
     [
-      "ID",
+      "Id",
       "First Name",
       "Last Name",
       "Birthday (dd/mm/yyyy)",

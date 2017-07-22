@@ -4,7 +4,7 @@ class Exporters::WaveExporter
   end
 
   def headers
-    ["ID", "Wave", "Name", "Age", "Gender", "Age Group", "Best Time"]
+    ["Id", "Wave", "Name", "Age", "Gender", "Age Group", "Best Time"]
   end
 
   def rows

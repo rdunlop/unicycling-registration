@@ -1,6 +1,6 @@
 class Exporters::AllCompetitors
   def headers
-    ['bib_number', 'last_name', 'first_name', 'country']
+    ['Id', 'last_name', 'first_name', 'country']
   end
 
   def rows
