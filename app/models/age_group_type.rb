@@ -22,7 +22,7 @@ class AgeGroupType < ApplicationRecord
   accepts_nested_attributes_for :age_group_entries, allow_destroy: true
   validates_uniqueness :age_group_entries, attribute_name: :short_description
 
-  after_save :update_competitor_age_group_entries
+  after_commit :update_competitor_age_group_entries, on: %i[create update]
   after_touch :update_competitor_age_group_entries
 
   default_scope { order(:name) }
