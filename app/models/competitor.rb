@@ -69,7 +69,7 @@ class Competitor < ApplicationRecord
 
   enum status: %i[active not_qualified dns withdrawn dnf]
   after_save :touch_members
-  after_save :update_age_group_entry
+  after_commit :update_age_group_entry, on: %i[create update]
   after_touch :update_age_group_entry
   attr_accessor :wait_for_age_group
 

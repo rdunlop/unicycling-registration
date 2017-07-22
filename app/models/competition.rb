@@ -138,7 +138,7 @@ class Competition < ApplicationRecord
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
 
-  after_save :update_age_group_if_necessary
+  after_commit :update_age_group_if_necessary, on: %i[create update]
 
   # Which columns do we expect to be presented during data-entry?
   # Not yet fully tested/working, see ImportResult:104
