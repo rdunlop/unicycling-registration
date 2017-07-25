@@ -58,6 +58,7 @@ class Competition < ApplicationRecord
     has_many :heat_lane_judge_notes, inverse_of: :competition
     has_many :heat_lane_results, inverse_of: :competition
     has_many :lane_assignments
+    has_many :uploaded_files
   end
 
   belongs_to :combined_competition

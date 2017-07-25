@@ -48,6 +48,11 @@
       = file_field_tag :file
   .row
     .small-6.columns
+      = label_tag :uploaded_file_id, "Previously Uploaded File"
+    .small-6.columns
+      = select_tag :uploaded_file_id, options_from_collection_for_select(@competition.uploaded_files, "id", "filename"), class: "chosen-select"
+  .row
+    .small-6.columns
       = label_tag :bib_number_column_number
     .small-6.columns
       = number_field_tag :bib_number_column_number
