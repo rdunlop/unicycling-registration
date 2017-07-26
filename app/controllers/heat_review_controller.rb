@@ -40,7 +40,7 @@ class HeatReviewController < ApplicationController
     end
 
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
-    parser = Importers::Parsers::Lif.new(uploaded_file.file)
+    parser = Importers::Parsers::Lif.new(uploaded_file.original_file.file)
     importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
 
     if importer.process(@heat, parser)

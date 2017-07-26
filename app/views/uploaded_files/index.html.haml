@@ -1,0 +1,12 @@
+%h1 Uploaded Files for #{@competition}
+
+%table
+  %thead
+    %tr
+      %th Filename
+      %th Uploaded at
+  %tbody
+    - @uploaded_files.each do |file|
+      %tr
+        %td= link_to file.filename, competition_uploaded_file_path(@competition, file)
+        %td= file.created_at

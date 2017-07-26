@@ -1,7 +1,6 @@
 %h3 Load Lif
 = form_tag(import_lif_competition_heat_review_path(@competition, @heat), {:method => :post, :multipart=>true}) do
+  = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
   .row
-    .small-6.columns
-      = file_field_tag "file", required: true
     .small-6.columns
       = submit_tag "Load LIF Data", class: "button"

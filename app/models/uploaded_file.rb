@@ -5,8 +5,8 @@
 #  id             :integer          not null, primary key
 #  competition_id :integer          not null
 #  user_id        :integer          not null
+#  original_file  :string           not null
 #  filename       :string           not null
-#  file           :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -17,7 +17,7 @@
 #
 
 class UploadedFile < ApplicationRecord
-  mount_uploader :file, ImportedFileUploader
+  mount_uploader :original_file, ImportedFileUploader
 
   belongs_to :user
   belongs_to :competition
@@ -30,11 +30,11 @@ class UploadedFile < ApplicationRecord
   def self.process_params(params, competition:, user:)
     if params[:file]
       uploaded_file = competition.uploaded_files.new(user: user)
-      uploaded_file.file = params[:file]
+      uploaded_file.original_file = params[:file]
       uploaded_file.filename = params[:file].original_filename
       uploaded_file.save!
       uploaded_file
-    else
+    elsif params[:uploaded_file_id].present?
       competition.uploaded_files.find(params[:uploaded_file_id])
     end
   end

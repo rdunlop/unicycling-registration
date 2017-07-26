@@ -130,7 +130,7 @@ class ImportResultsController < ApplicationController
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
     importer = Importers::ImportResultImporter.new(@competition, @user)
     parser = Importers::Parsers::Chip.new(
-      uploaded_file.file,
+      uploaded_file.original_file.file,
       params[:bib_number_column_number].to_i - 1,
       params[:time_column_number].to_i - 1,
       params[:number_of_decimal_places].to_i,
@@ -153,7 +153,7 @@ class ImportResultsController < ApplicationController
   def import_csv
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
     importer = Importers::ImportResultImporter.new(@competition, @user)
-    parser = Importers::Parsers::Csv.new(uploaded_file.file, read_num_laps: @competition.has_num_laps?)
+    parser = Importers::Parsers::Csv.new(uploaded_file.original_file.file, read_num_laps: @competition.has_num_laps?)
 
     if importer.process(@is_start_time, parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"

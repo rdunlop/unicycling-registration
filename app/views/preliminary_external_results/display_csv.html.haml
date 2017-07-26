@@ -15,9 +15,8 @@
     %b Include NO header row
 
 = form_tag(import_csv_competition_preliminary_external_results_path(@competition), {:method => :post, :multipart=>true}) do
+  = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
   .row
-    .small-6.columns
-      = file_field_tag "file"
     .small-6.columns
       = submit_tag "Import CSV", class: "button small"
 

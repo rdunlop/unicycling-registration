@@ -30,7 +30,7 @@ class Compete::WaveAssignmentsController < ApplicationController
     authorize @competition, :modify_result_data?
 
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
-    parser = Importers::Parsers::Wave.new(uploaded_file.file)
+    parser = Importers::Parsers::Wave.new(uploaded_file.original_file.file)
     updater = Importers::WaveUpdater.new(@competition, current_user)
 
     if updater.process(parser)

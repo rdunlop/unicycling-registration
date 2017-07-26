@@ -103,9 +103,9 @@ class TwoAttemptEntriesController < ApplicationController
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
     importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
     parser = if params[:advanced]
-               Importers::Parsers::TwoAttemptSlalom.new(uploaded_file.file)
+               Importers::Parsers::TwoAttemptSlalom.new(uploaded_file.original_file.file)
              else
-               Importers::Parsers::TwoAttemptCsv.new(uploaded_file.file)
+               Importers::Parsers::TwoAttemptCsv.new(uploaded_file.original_file.file)
              end
 
     if importer.process(@is_start_time, parser)
