@@ -5,21 +5,32 @@ class CreatesCompetitionResultsPdf
     @competition = competition
   end
 
-  def raw_pdf
-    @controller = ApplicationController.new
-    @controller.request = ActionDispatch::Request.new({})
-    html_string = @controller.render_to_string('printing/competitions/results', layout: 'pdf', locals: { :@competition => @competition })
-    WickedPdf.new.pdf_from_string(html_string)
+  def results_raw_pdf
+    renderer = PdfRenderer.new('printing/competitions/results', layout: 'pdf', locals: { :@competition => @competition })
+    renderer.raw_pdf
+  end
+
+  def freestyle_summary_raw_pdf
+    renderer = PdfRenderer.new('printing/competitions/freestyle_summary', layout: 'pdf', locals: { :@competition => @competition })
+    renderer.raw_pdf
   end
 
   def publish!
-    pdf = Tempfile.new(["#{sanitize(competition.to_s)}_results", '.pdf'], encoding: 'ascii-8bit')
-    pdf.write raw_pdf
+    publish_result("#{sanitize(competition.to_s)}_results", results_raw_pdf)
+    if competition.freestyle_summary?
+      publish_result("#{sanitize(competition.to_s)}_freestyle_summary", freestyle_summary_raw_pdf, "Freestyle Summary")
+    end
+  end
+
+  def publish_result(file_name, contents, custom_name = nil)
+    pdf = Tempfile.new([file_name, '.pdf'], encoding: 'ascii-8bit')
+    pdf.write contents
     new_result = competition.competition_results.build
     new_result.results_file = pdf
     new_result.published_date = DateTime.current
     new_result.system_managed = true
     new_result.published = true
+    new_result.name = custom_name
     new_result.save!
     pdf.close
     pdf.unlink
@@ -27,8 +38,8 @@ class CreatesCompetitionResultsPdf
   end
 
   def unpublish!
-    result = competition.competition_results.where(system_managed: true).first
-    result&.destroy
+    results = competition.competition_results.where(system_managed: true)
+    results.destroy_all
     true
   end
 

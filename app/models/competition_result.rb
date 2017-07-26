@@ -17,7 +17,6 @@ class CompetitionResult < ApplicationRecord
   belongs_to :competition, inverse_of: :competition_results, touch: true
 
   validates :competition, :published_date, :results_file, presence: true
-  validates :system_managed, uniqueness: { scope: [:competition_id] }, if: proc{ |f| f.system_managed? }
 
   before_destroy :remove_uploaded_file
 
@@ -44,10 +43,12 @@ class CompetitionResult < ApplicationRecord
   end
 
   def to_s
+    return name if name.present?
+
     if system_managed?
       "Results"
     else
-      name.presence || "Additional Results"
+      "Additional Results"
     end
   end
 end
