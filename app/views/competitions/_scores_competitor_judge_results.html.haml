@@ -3,9 +3,27 @@
   %td= competitor.position
   %td= competitor.lowest_member_bib_number.to_s
   %td.right_edge= competitor.name
+  - scores_without = []
+  - scores_with = []
+  - judges.map do |judge|
+    - score = competitor.scores.find{ |score| score.judge_id == judge.id}
+    - if score.present?
+      - scores_without << score.placing_points(with_ineligible: false)
+      - scores_with << score.placing_points(with_ineligible: true)
+  - standard_devation_without = StandardDeviation.new(scores_without.compact)
+  - standard_devation_with = StandardDeviation.new(scores_with.compact)
+
+  - if display_multiple_score_totals?(competition)
+    - # 2 column stuffs
+    - std_dev_presenter_without = StandardDeviationPresenter.new(standard_devation_without)
+    - std_dev_presenter_with = StandardDeviationPresenter.new(standard_devation_with)
+  - else
+    - # 1 column
+    - std_dev_presenter_without = StandardDeviationPresenter.new(standard_devation_without)
+
   - judges.each do |judge|
     - score = competitor.scores.find{ |score| score.judge_id == judge.id}
-    - if !score.nil?
+    - if score.present?
       - judge.judge_type.score_numbers.each do |score_number|
         %td
           = score.score_value(score_number)
@@ -13,10 +31,17 @@
         = score.total
         %br
       - if display_multiple_score_totals?(competition)
-        %td.derived= score.placing_points(with_ineligible: false)
-        %td.derived.right_edge= score.placing_points(with_ineligible: true)
+        - score_without_ineligible = score.placing_points(with_ineligible: false)
+        %td.derived{ std_dev_presenter_without.style_classes(score_without_ineligible) }
+          = score_without_ineligible
+        - score_with_ineligible = score.placing_points(with_ineligible: true)
+
+        %td.derived.right_edge{ std_dev_presenter_with.style_classes(score_with_ineligible) }
+          = score_with_ineligible
       - else
-        %td.derived.right_edge= score.placing_points(with_ineligible: false)
+        - score_without_ineligible = score.placing_points(with_ineligible: false)
+        %td.derived.right_edge{ std_dev_presenter_without.style_classes(score_without_ineligible) }
+          = score_without_ineligible
     - else
       %td.empty{:colspan => judge.judge_type.num_columns + num_total_columns(competition)} -
   %td.derived= competition.competitor_placing_points(competitor, judges.first.judge_type, with_ineligible: false)
