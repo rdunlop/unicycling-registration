@@ -3,8 +3,9 @@
     = label_tag :file, "Source File"
   .small-6.columns
     = file_field_tag :file
-.row
-  .small-6.columns
-    = label_tag :uploaded_file_id, "Previously Uploaded File"
-  .small-6.columns
-    = select_tag :uploaded_file_id, options_from_collection_for_select(competition.uploaded_files, "id", "filename"), include_blank: true, class: "chosen-select"
+- if policy(current_user).under_development?
+  .row
+    .small-6.columns
+      = label_tag :uploaded_file_id, "Previously Uploaded File"
+    .small-6.columns
+      = select_tag :uploaded_file_id, options_from_collection_for_select(competition.uploaded_files, "id", "filename"), include_blank: true, class: "chosen-select"
