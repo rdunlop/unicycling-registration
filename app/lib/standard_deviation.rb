@@ -6,13 +6,16 @@ class StandardDeviation
   end
 
   def standard_deviation
-    return 0.0 if array.length.zero?
-    Math.sqrt(sample_variance)
+    result = Math.sqrt(sample_variance)
+
+    return 0.0 if result.nan?
+
+    result
   end
 
   def num_standards_from_the_mean(value)
-    return 0 if value.nil?
-    return 0 if standard_deviation.nan? || standard_deviation.zero?
+    return 0.0 if value.nil?
+    return 0.0 if standard_deviation.zero?
     ((value - mean) / standard_deviation).abs
   end
 
@@ -21,6 +24,7 @@ class StandardDeviation
   end
 
   def mean
+    return 0.0 if array.length.zero?
     sum / array.length.to_f
   end
 
