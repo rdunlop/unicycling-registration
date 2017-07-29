@@ -9,6 +9,7 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
     rows = processor.file_contents
     self.num_rows_processed = 0
     @errors = []
+    @discarded_dqs = 0
 
     current_row = nil
     begin
@@ -30,6 +31,14 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
       @errors << "#{invalid.message} -> current row: #{current_row}"
       return false
     end
+
+    if @discarded_dqs.positive?
+      @errors << "#{num_rows_processed} rows processed. #{@discarded_dqs} results were not imported because " \
+               "the competitors do not exist and the import file lists their results as a DQ"
+      return false
+    end
+
+    true
   end
 
   private
@@ -53,6 +62,11 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
 
   def create_time_result(row_hash, heat_lane_result)
     competitor = FindCompetitorForCompetition.new(row_hash[:bib_number], competition).competitor
+    if competitor.nil? && row_hash[:status] != "active"
+      @discarded_dqs += 1
+      return
+    end
+
     result = TimeResult.new(
       competitor: competitor,
       status: row_hash[:status],
