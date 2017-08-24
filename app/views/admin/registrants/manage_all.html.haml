@@ -65,4 +65,4 @@
                   = link_to t(".undelete"), undelete_registrant_path(registrant), :method => :post, data: { confirm: t(".undelete_confirmation") }
                   %br
                   = link_to "Really Destroy", really_destroy_registrant_path(registrant), method: :delete, data: { confirm: t(".are_you_sure") }
-            %td.non_printable= registrant.user
+            %td.non_printable= registrant.user.to_s_with_email
