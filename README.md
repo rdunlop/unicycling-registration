@@ -515,6 +515,7 @@ Amazon Server Setup
 - Set up the server to automatically start eye on restart
   + Copy the `server_config/registration` file to `/etc/init.d/registration`
   + run `chkconfig registration on`
+- Set up nginx to start automatically `sudo chkconfig nginx on`
 
 Redis Configuration:
 - Adjust the redis.conf file so that it has a maxmemory of 256000000, and a eviction policy of volatile-lru.
