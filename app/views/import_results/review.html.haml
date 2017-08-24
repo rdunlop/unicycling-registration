@@ -15,6 +15,7 @@
 
   = link_to "Accept these Results", approve_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), method: :post, data: {:confirm => t("are_you_sure") }, class: "button success"
 
+  = link_to "Discard Results and start over", destroy_all_user_competition_import_results_path(@user, @competition), method: :delete, data: { confirm: t("are_you_sure") }, class: "button alert"
   %p
     %b= t("note")
     Once accepted, the results will no longer be visible here.
