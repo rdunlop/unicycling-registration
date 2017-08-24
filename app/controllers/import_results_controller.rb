@@ -164,7 +164,7 @@ class ImportResultsController < ApplicationController
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
     @user.import_results.where(competition_id: @competition).destroy_all
-    flash[:notice] = "All imported Results deleted for #{@competition}"
+    flash[:notice] = "All your imported Results deleted for #{@competition}"
     redirect_back(fallback_location: data_entry_user_competition_import_results_path(@user, @competition))
   end
 
