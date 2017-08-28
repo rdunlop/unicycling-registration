@@ -145,7 +145,10 @@ class LaneAssignmentsController < ApplicationController
   def load_and_authorize_competition
     @competition = Competition.find(params[:competition_id])
     authorize @competition, :manage_lane_assignments?
-    raise StandardError.new("Competition is not set to use lane assignments") unless @competition.uses_lane_assignments?
+    unless @competition.uses_lane_assignments?
+      flash[:alert] = "Competition is not set to use lane assignments"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def load_lane_assignments
