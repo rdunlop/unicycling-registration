@@ -1,0 +1,8 @@
+---
+it:
+  registrants:
+    build:
+      contact_detail:
+        emergency_contact:
+          emergency_contact: Contatto d'emergenza
+          in_case_of_emergency: In caso di emergenza

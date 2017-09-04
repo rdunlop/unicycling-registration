@@ -1,0 +1,6 @@
+---
+it:
+  admin:
+    manual_payments:
+      pending_payments:
+        items: Oggetti

@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    attributes:
+      registration_cost_entry:
+        max_age: Età massima
+        min_age: Età minima

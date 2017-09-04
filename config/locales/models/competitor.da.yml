@@ -1,0 +1,6 @@
+---
+da:
+  activerecord:
+    attributes:
+      competitor:
+        bib_number: ID

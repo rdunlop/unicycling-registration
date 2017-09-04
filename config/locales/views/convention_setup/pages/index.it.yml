@@ -1,0 +1,7 @@
+---
+it:
+  convention_setup:
+    pages:
+      index:
+        new_page: Nuova pagina
+        special_pages: Pagine speciali

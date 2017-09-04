@@ -1,0 +1,14 @@
+---
+it:
+  activerecord:
+    attributes:
+      time_result:
+        facade_hours: Ore
+        facade_hundreds: Cento
+        facade_minutes: Minuti
+        hours: Ore
+        minutes: Minuti
+        number_of_laps: "# Giri"
+        number_of_penalties: Penalità
+        seconds: Secondi
+        thousands: Mila

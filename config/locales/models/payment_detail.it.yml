@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      payment_detail:
+        details: Dettagli

@@ -1,0 +1,7 @@
+---
+it:
+  admin:
+    registrants:
+      manage_all:
+        deleted_question: Cancellato?
+        summary: Riassunto

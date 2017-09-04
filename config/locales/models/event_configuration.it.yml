@@ -1,0 +1,19 @@
+---
+it:
+  activerecord:
+    attributes:
+      event_configuration:
+        artistic_score_elimination_mode_naucc: Piccolo gruppo
+        competitor: Partecipante
+        logo_file: Logo
+        max_registrants: Numero massimo di iscritti
+        noncompetitor: Accompagnatore
+        rules_file_name: File regole PDF
+        spectator: Spettatore
+        start_date: Primo giorno di gare
+        under_construction: In Costruzione
+  helpers:
+    submit:
+      event_configuration:
+        create: Salva e continua
+        update: Salva e continua

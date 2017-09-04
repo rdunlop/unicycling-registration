@@ -1,0 +1,7 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      registration_questions:
+        contact_details_requested: Dettagli contatto
+        header: Domande da porre durante la registrazione

@@ -1,0 +1,9 @@
+---
+it:
+  activerecord:
+    attributes:
+      registrant:
+        bib_number: ID
+        first_name: Nome
+        last_name: Cognome
+        online_waiver_signature: Firma

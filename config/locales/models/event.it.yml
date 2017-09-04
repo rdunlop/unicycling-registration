@@ -1,0 +1,9 @@
+---
+it:
+  activerecord:
+    attributes:
+      event:
+        artistic: Artistico
+        id: ID
+        standard_skill: Standard Skill
+        visible: Visibile

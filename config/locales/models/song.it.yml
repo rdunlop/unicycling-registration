@@ -1,0 +1,8 @@
+---
+it:
+  activerecord:
+    attributes:
+      song:
+        description: Descrizione
+        song_file_name: Nome del file
+        uploaded_by_guest: Ospite?

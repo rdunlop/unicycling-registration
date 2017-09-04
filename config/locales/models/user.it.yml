@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      user:
+        name: Nome

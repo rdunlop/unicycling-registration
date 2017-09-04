@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      registrant_best_time:
+        formatted_value: Miglior tempo

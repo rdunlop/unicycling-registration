@@ -1,0 +1,7 @@
+---
+it:
+  songs:
+    songs_list:
+      add_song: Aggiungi brano
+      download: Download
+      remove: Rimuovi

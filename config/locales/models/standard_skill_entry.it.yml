@@ -1,0 +1,8 @@
+---
+it:
+  activerecord:
+    attributes:
+      standard_skill_entry:
+        description: Descrizione
+        letter: Lettera
+        points: Punti

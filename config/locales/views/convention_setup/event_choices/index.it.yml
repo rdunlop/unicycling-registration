@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    event_choices:
+      index:
+        example_2: Nome della squadra

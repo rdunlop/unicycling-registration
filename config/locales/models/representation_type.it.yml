@@ -1,0 +1,8 @@
+---
+it:
+  activerecord:
+    attributes:
+      representation_type:
+        club: Club
+        country: Nazione
+        state: Stato

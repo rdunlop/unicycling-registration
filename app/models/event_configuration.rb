@@ -325,7 +325,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def self.all_available_languages
-    %i[en fr de es]
+    %i[en fr de es it]
   end
 
   # Public: What is the maximum age that we should allow users to configure

@@ -1,0 +1,5 @@
+---
+it:
+  application:
+    subdomain:
+      welcome: Benvenuto in  %{subdomain}

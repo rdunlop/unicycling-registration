@@ -1,0 +1,5 @@
+---
+it:
+  payments:
+    show:
+      payment_summary: Riassunto pagamenti

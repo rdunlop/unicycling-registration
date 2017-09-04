@@ -1,0 +1,7 @@
+---
+it:
+  registrants:
+    registrant_events:
+      category: Categoria
+      event: Evento
+      events: Eventi
