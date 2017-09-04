@@ -1,0 +1,7 @@
+---
+it:
+  admin:
+    event_songs:
+      all:
+        download: Download
+        header: Tutti i brani

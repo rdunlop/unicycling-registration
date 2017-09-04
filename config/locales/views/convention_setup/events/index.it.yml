@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    events:
+      index:
+        new_event: Nuovo evento

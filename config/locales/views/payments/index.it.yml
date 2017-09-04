@@ -1,0 +1,6 @@
+---
+it:
+  payments:
+    index:
+      my_payments: I miei pagamenti
+      show_details: Mostra dettagli

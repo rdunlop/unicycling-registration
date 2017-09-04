@@ -1,0 +1,7 @@
+---
+it:
+  devise:
+    registrations:
+      new:
+        password_min_length: "(minimo 6 caratteri)"
+        sign_up: Iscriviti

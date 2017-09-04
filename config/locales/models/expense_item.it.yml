@@ -1,0 +1,12 @@
+---
+it:
+  activerecord:
+    attributes:
+      expense_item:
+        cost: Costo
+        details_label: Domanda
+        has_custom_cost: Donazione
+        name: Nome
+        tax: Tassa
+        total: Totale
+        total_cost: Totale (calcolato)

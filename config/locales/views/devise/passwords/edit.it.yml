@@ -1,0 +1,9 @@
+---
+it:
+  devise:
+    passwords:
+      edit:
+        action: Cambia la password
+        password_confirmation_label: Conferma la password
+        password_label: Nuova password
+        title: Cambia la tua password

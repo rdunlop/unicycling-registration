@@ -1,0 +1,6 @@
+---
+it:
+  payments:
+    form_contents:
+      select_all: Seleziona tutto
+      total_cost: Costi totali

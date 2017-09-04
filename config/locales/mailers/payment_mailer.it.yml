@@ -1,0 +1,7 @@
+---
+it:
+  payment_mailer:
+    manual_payment_completed:
+      subject: Pagamento ricevuto
+    payment_completed:
+      subject: Pagamento completato

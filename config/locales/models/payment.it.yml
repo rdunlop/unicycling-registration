@@ -1,0 +1,10 @@
+---
+it:
+  activerecord:
+    attributes:
+      payment:
+        details: Dettagli (txn/note)
+        note: Nota
+        offline_pending_date: Data
+        payment_id: Pagamento ID
+        total: Totale

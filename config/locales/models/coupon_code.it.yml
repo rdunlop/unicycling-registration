@@ -1,0 +1,9 @@
+---
+it:
+  activerecord:
+    attributes:
+      coupon_code:
+        code: Codice
+        description: Descrizione
+        name: Nome
+        price: Prezzo

@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    expense_items:
+      form:
+        advanced_options: Opzioni avanzate

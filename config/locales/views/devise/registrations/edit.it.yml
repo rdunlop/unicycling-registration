@@ -1,0 +1,10 @@
+---
+it:
+  devise:
+    registrations:
+      edit:
+        action: Aggiorna
+        change_header: Cambia Email o password
+        change_password: 'Cambia password:'
+        title: Il mio account
+        users_name: Nome utente

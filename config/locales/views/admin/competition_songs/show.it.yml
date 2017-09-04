@@ -1,0 +1,9 @@
+---
+it:
+  admin:
+    competition_songs:
+      show:
+        assign: Assegna
+        download: Download
+        download_zip: Download Zip dei brani
+        header: "%{competition} Brani"
