@@ -84,6 +84,17 @@ describe JudgesController do
 
       expect(@ec.judges.count).to eq(1)
     end
+
+    it "fails to copy judges from a different type of competition" do
+      competition = FactoryGirl.create(:distance_competition)
+      judge_type = FactoryGirl.create(:judge_type, event_class: "High/Long")
+      judge = FactoryGirl.create(:judge, judge_type: judge_type, competition: competition)
+
+      post :copy_judges, params: {competition_id: @ec.id, copy_judges: { competition_id: judge.competition.id} }
+      expect(@ec.judges.count).to eq(0)
+      expect(flash[:alert]).to eq("Judge type Not valid for competition")
+    end
+
     it "should fail when not an admin" do
       sign_out @super_admin
       sign_in @user

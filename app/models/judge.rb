@@ -40,6 +40,7 @@ class Judge < ApplicationRecord
   validates :judge_type_id, presence: true, uniqueness: {scope: %i[competition_id user_id] }
   validates :user_id, presence: true
   validates :status, inclusion: { in: ["active", "removed"] }
+  validate :judge_type_is_valid_for_competition
 
   delegate :event, to: :competition
 
@@ -102,6 +103,14 @@ class Judge < ApplicationRecord
     if distance_attempts.count.positive?
       errors.add(:base, "cannot delete judge containing distance attempts")
       return false
+    end
+  end
+
+  def judge_type_is_valid_for_competition
+    if competition.present? &&
+       judge_type.present? &&
+       judge_type.event_class != competition.uses_judges
+      errors.add(:judge_type_id, "Not valid for competition")
     end
   end
 end

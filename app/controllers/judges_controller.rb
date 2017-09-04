@@ -42,14 +42,22 @@ class JudgesController < ApplicationController
     authorize @competition, :copy_judges?
 
     @from_event = Competition.find(params[:copy_judges][:competition_id])
+    errors = []
     @from_event.judges.each do |source_judge|
       new_judge = @competition.judges.build
       new_judge.judge_type = source_judge.judge_type
       new_judge.user = source_judge.user
-      new_judge.save!
+      unless new_judge.save
+        errors += new_judge.errors.full_messages
+      end
     end
 
-    redirect_to competition_judges_path(@competition), notice: "Copied Judges"
+    if errors.any?
+      flash[:alert] = errors.join(", ")
+    else
+      flash[:notice] = "Copied Judges"
+    end
+    redirect_to competition_judges_path(@competition)
   end
 
   # this is used to toggle the active-status of a judge
