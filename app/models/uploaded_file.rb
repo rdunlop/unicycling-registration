@@ -7,6 +7,7 @@
 #  user_id        :integer          not null
 #  original_file  :string           not null
 #  filename       :string           not null
+#  content_type   :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

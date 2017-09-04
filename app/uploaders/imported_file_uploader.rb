@@ -10,4 +10,10 @@ class ImportedFileUploader < TenantUploader
   def store_dir
     "#{subdomain}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
+
+  process :save_content_type_in_model
+
+  def save_content_type_in_model
+    model.content_type = file.content_type if file.content_type
+  end
 end

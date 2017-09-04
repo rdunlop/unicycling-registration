@@ -1122,6 +1122,7 @@ ActiveRecord::Schema.define(version: 20170725140043) do
     t.integer  "user_id",        null: false
     t.string   "original_file",  null: false
     t.string   "filename",       null: false
+    t.string   "content_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["competition_id"], name: "index_uploaded_files_on_competition_id", using: :btree
