@@ -20,8 +20,6 @@
 #  index_standard_skill_entries_on_letter_and_number  (letter,number) UNIQUE
 #
 
-require 'csv'
-
 class StandardSkillEntriesController < ApplicationController
   before_action :skip_authorization
 

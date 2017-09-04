@@ -19,10 +19,8 @@
 %h3 Upload Data
 
 = form_tag(import_user_competition_swiss_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
+  = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
   .row
-    .small-6.medium-3.columns
-      = label_tag :file, "Source File"
-      = file_field_tag :file
     .small-6.medium-3.columns
       = label_tag :heat
       = number_field_tag :heat, nil, autocomplete: "off", class: "js--heat"

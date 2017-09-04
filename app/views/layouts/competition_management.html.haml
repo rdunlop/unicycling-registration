@@ -30,6 +30,8 @@
         %li= link_to "View Judge Results", competition_path(@competition, anchor: "view_judge_results")
       - if @competition.uses_volunteers
         %li= link_to "Volunteers", competition_volunteers_path(@competition)
+      - if @competition.uploaded_files.any?
+        %li= link_to "Uploaded Files", competition_uploaded_files_path(@competition)
       = render "/competitions/data_entry_links", competition: @competition
 
     %h4= Result.model_name.human(count: 2)

@@ -17,7 +17,8 @@ class SwissResultsController < ApplicationController
   end
 
   def import
-    parser = Importers::Parsers::Swiss.new(params[:file])
+    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
+    parser = Importers::Parsers::Swiss.new(uploaded_file.original_file.file)
     importer = Importers::SwissResultImporter.new(@competition, @user)
 
     if importer.process(params[:heat], parser, heats: params[:heats] == "on")

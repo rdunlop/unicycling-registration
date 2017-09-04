@@ -583,6 +583,7 @@ Rails.application.routes.draw do
         put :refresh_competitors
       end
       resources :competition_results, only: %i[index create destroy]
+      resources :uploaded_files, only: %i[index show]
       resources :competitors, only: %i[index new create] do
         collection do
           post :add

@@ -100,11 +100,12 @@ class TwoAttemptEntriesController < ApplicationController
 
   # POST /users/#/competitions/#/two_attempt_entries/import_csv?is_start_times=true
   def import_csv
+    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
     importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
     parser = if params[:advanced]
-               Importers::Parsers::TwoAttemptSlalom.new(params[:file])
+               Importers::Parsers::TwoAttemptSlalom.new(uploaded_file.original_file.file)
              else
-               Importers::Parsers::TwoAttemptCsv.new(params[:file])
+               Importers::Parsers::TwoAttemptCsv.new(uploaded_file.original_file.file)
              end
 
     if importer.process(@is_start_time, parser)
