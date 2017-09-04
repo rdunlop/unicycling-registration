@@ -30,7 +30,7 @@ class UploadedFile < ApplicationRecord
   # or
   # 'uploaded_file_id' -> read the stored file
   def self.process_params(params, competition:, user:)
-    if params[:file]
+    if params[:file].present?
       uploaded_file = competition.uploaded_files.new(user: user)
       uploaded_file.original_file = params[:file]
       uploaded_file.filename = params[:file].original_filename
