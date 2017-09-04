@@ -33,13 +33,14 @@ class HeatReviewController < ApplicationController
       return
     end
 
-    if params[:file].blank?
+    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
+
+    if uploaded_file.nil?
       flash[:alert] = "Please specify a file"
       redirect_to competition_heat_review_path(@competition, @heat)
       return
     end
 
-    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
     parser = Importers::Parsers::Lif.new(uploaded_file.original_file.file)
     importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
 

@@ -23,6 +23,7 @@ class UploadedFile < ApplicationRecord
   belongs_to :competition
   validates :filename, presence: true
 
+  scope :ordered, -> { order(:created_at) }
   # Read the params for either
   # 'file' -> Store the file and pass back a reference to the new stored file
   # or
@@ -37,5 +38,9 @@ class UploadedFile < ApplicationRecord
     elsif params[:uploaded_file_id].present?
       competition.uploaded_files.find(params[:uploaded_file_id])
     end
+  end
+
+  def to_s_with_date
+    "#{created_at.to_formatted_s(:short)} - #{filename} (#{user})"
   end
 end

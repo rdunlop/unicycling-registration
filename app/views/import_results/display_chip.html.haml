@@ -42,6 +42,7 @@
 
 = form_tag(import_chip_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
   = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
+  %hr
   .row
     .small-6.columns
       = label_tag :bib_number_column_number
