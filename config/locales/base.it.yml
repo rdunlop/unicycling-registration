@@ -10,9 +10,9 @@ it:
   competitor: Partecipante
   date:
     order:
-    - :mese
-    - :giorno
-    - :anno
+    - :month
+    - :day
+    - :year
   delete: Elimina
   edit: Modifica
   example: Esempio
