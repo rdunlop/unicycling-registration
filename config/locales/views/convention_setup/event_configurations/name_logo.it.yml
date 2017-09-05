@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      name_logo:
+        header: Nome e logo

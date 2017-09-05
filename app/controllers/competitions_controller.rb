@@ -32,7 +32,6 @@
 #  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 
-require 'csv'
 class CompetitionsController < ApplicationController
   include EventsHelper
   include CsvOutputter

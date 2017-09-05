@@ -1,0 +1,7 @@
+---
+it:
+  convention_setup:
+    categories:
+      index:
+        manage_events: Gestisci eventi
+        new_category: Nuova categoria

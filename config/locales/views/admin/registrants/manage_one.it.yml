@@ -1,0 +1,8 @@
+---
+it:
+  admin:
+    registrants:
+      manage_one:
+        edit_summary: Modificare/Riassunto
+        full_registrant_list: Lista completa
+        summary: Riassunto

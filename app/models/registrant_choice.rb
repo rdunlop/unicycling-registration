@@ -32,11 +32,11 @@ class RegistrantChoice < ApplicationRecord
     when "boolean"
       value != "0"
     when "multiple"
-      value != ""
+      value.present?
     when "text"
       value.present?
     when "best_time"
-      value != ""
+      value.present?
     else
       false
     end

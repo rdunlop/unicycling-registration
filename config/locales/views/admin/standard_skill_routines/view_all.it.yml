@@ -1,0 +1,6 @@
+---
+it:
+  admin:
+    standard_skill_routines:
+      view_all:
+        pdfs: PDF

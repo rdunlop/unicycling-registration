@@ -1,0 +1,7 @@
+---
+it:
+  registrants:
+    contact_summary:
+      emergency_contact_name: Nome del contatto d'emergenza
+      emergency_contact_phone: Numero telefono del contatto d'emergenza
+      emergency_contact_relationship: Relazione con il contatto d'emergenza

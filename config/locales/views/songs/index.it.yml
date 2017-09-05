@@ -1,0 +1,8 @@
+---
+it:
+  songs:
+    index:
+      add_songs_for_others: Aggiungi brani per altri iscritti
+      new_song: Nuovo brano (1° passo)
+      step_1: 1° passo
+      step_2: 2° passo

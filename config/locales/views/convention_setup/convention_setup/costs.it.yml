@@ -1,0 +1,7 @@
+---
+it:
+  convention_setup:
+    convention_setup:
+      costs:
+        discounts: Sconti
+        header: Costi

@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      event_choice:
+        label: Etichetta

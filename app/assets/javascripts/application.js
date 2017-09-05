@@ -30,6 +30,8 @@
 //= require select2_locale_es
 //= require select2_locale_ko
 //= require select2_locale_ja
+//= require select2_locale_it
+//= require select2_locale_da
 // NOTE: not available select2_locale_ja
 //= require fancybox
 //= require cocoon

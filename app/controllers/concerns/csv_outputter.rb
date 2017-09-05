@@ -1,4 +1,6 @@
 # Provides a way to output Csv files
+require 'csv'
+
 module CsvOutputter
   def output_csv(headers, rows, filename)
     csv_string = CSV.generate do |csv|

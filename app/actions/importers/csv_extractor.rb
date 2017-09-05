@@ -14,6 +14,8 @@ class Importers::CsvExtractor
   def extract_csv
     if file.respond_to?(:tempfile)
       upload_file = file.tempfile
+    elsif file.respond_to?(:file)
+      upload_file = file.file
     else
       upload_file = file
     end

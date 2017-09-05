@@ -97,6 +97,10 @@ class CompetitionPolicy < ApplicationPolicy
     set_places?
   end
 
+  def reuse_uploaded_files?
+    super_admin?
+  end
+
   # PRINTING
   def heat_recording?
     view_access?

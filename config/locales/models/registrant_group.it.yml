@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      registrant_group:
+        name: Nome del gruppo

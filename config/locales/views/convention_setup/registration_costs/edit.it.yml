@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    registration_costs:
+      edit:
+        header: Modifica %{registration_cost} prezzo registrazione

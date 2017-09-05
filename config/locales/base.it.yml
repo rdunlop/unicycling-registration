@@ -1,0 +1,36 @@
+---
+it:
+  are_you_sure: Sei sicuro?
+  back: Indietro
+  breadcrumbs:
+    home: Home
+    my_registrants: La mia registrazione
+    new_payment: Nuovo pagamento
+  cancel: Cancella
+  competitor: Partecipante
+  date:
+    order:
+    - :mese
+    - :giorno
+    - :anno
+  delete: Elimina
+  edit: Modifica
+  example: Esempio
+  language_name: Italian
+  'no': 'No'
+  noncompetitor: Accompagnatore
+  organization_membership_types:
+    french_federation: Federazione francese
+  pdf: "(pdf)"
+  spectator: Spettatore
+  validations:
+    duplicate: Deve essere unico
+  wizard:
+    add_contact_details: Dettagli contatto
+    add_events: Eventi
+    add_name: Nome
+    add_volunteers: Volontari
+    expenses: Costi
+    music: Musica
+    set_wheel_sizes: Dimensione ruota
+  'yes': sì

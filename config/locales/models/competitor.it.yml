@@ -1,0 +1,9 @@
+---
+it:
+  activerecord:
+    attributes:
+      competitor:
+        age: Etá
+        bib_number: ID
+        gender: Genere
+        name: Nome

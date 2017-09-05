@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      event_category:
+        name: Come

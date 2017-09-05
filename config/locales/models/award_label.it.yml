@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      award_label:
+        bib_number: ID

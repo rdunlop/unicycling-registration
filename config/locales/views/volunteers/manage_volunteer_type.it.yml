@@ -1,0 +1,6 @@
+---
+it:
+  volunteers:
+    manage_volunteer_type:
+      confirm_remove_volunteer: Rimuovi questo volontario
+      create_role: Crea nuovo %{role}

@@ -1,0 +1,10 @@
+---
+it:
+  registrants:
+    build:
+      contact_detail:
+        address:
+          address: Indirizzo
+          copy_from_other_registrant: Copia indirizzo da %{other_name}
+          state: Stato
+          state_province: Stato/provincia

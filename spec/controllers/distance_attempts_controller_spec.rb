@@ -20,6 +20,7 @@ require 'spec_helper'
 
 describe DistanceAttemptsController do
   let(:competition) { FactoryGirl.create(:distance_competition) }
+  let(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long")}
   let(:comp) { FactoryGirl.create(:event_competitor, competition: competition) }
   before do
     @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
@@ -28,7 +29,7 @@ describe DistanceAttemptsController do
 
   describe "GET index" do
     before do
-      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
+      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
     end
 
     it "should return a list of all distance_attempts" do
@@ -42,7 +43,7 @@ describe DistanceAttemptsController do
 
   describe "POST create" do
     before do
-      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
+      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
     end
     def valid_attributes
       {
@@ -72,7 +73,7 @@ describe DistanceAttemptsController do
 
   describe "GET list" do
     before do
-      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user)
+      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
     end
 
     it "should return the distance attempts" do

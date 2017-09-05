@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    attributes:
+      page:
+        position: Posizione
+        title: Titolo

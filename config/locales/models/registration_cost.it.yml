@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    attributes:
+      registration_cost:
+        name: Nome
+        start_date: Data d'inizio

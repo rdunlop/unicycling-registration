@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      age_group_entry:
+        gender: Genere

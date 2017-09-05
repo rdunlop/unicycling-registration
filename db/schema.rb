@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717175728) do
+ActiveRecord::Schema.define(version: 20170725140043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1115,6 +1115,18 @@ ActiveRecord::Schema.define(version: 20170717175728) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["competition_id", "is_start_time", "id"], name: "index_two_attempt_entries_ids", using: :btree
+  end
+
+  create_table "uploaded_files", force: :cascade do |t|
+    t.integer  "competition_id", null: false
+    t.integer  "user_id",        null: false
+    t.string   "original_file",  null: false
+    t.string   "filename",       null: false
+    t.string   "content_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["competition_id"], name: "index_uploaded_files_on_competition_id", using: :btree
+    t.index ["user_id"], name: "index_uploaded_files_on_user_id", using: :btree
   end
 
   create_table "user_conventions", force: :cascade do |t|

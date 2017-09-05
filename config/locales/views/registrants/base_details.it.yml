@@ -1,0 +1,7 @@
+---
+it:
+  registrants:
+    base_details:
+      birthday: Data di nascita
+      female: Femmina
+      male: Maschio

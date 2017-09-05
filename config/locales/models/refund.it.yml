@@ -1,0 +1,6 @@
+---
+it:
+  activerecord:
+    attributes:
+      refund:
+        details: Dettagli (note)

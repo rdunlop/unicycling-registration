@@ -23,10 +23,8 @@ Please import a Comma-Separated-File (Windows CSV Format) file with the followin
 
 = form_tag(import_csv_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
   = hidden_field_tag :is_start_times, @is_start_time
+  = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
   .row
-    .small-12.medium-6.columns
-      = label_tag :file, "Source File"
-      = file_field_tag :file
     .small-12.medium-6.columns
       = submit_tag "Import CSV", class: "button"
 

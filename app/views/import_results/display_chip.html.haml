@@ -41,11 +41,8 @@
 %h3 Upload Data
 
 = form_tag(import_chip_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
-  .row
-    .small-6.columns
-      = label_tag :file, "Source File"
-    .small-6.columns
-      = file_field_tag :file
+  = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
+  %hr
   .row
     .small-6.columns
       = label_tag :bib_number_column_number

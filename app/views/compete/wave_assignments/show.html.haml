@@ -32,7 +32,7 @@
     The file must be a CSV file-format
 
   = form_tag competition_wave_assignments_path(@competition), method: :put, multipart: true do
-    = file_field_tag :file
+    = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
     = submit_tag "Upload Wave assignments", class: "button"
 
 %table.competitor_statuses.sortable

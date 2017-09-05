@@ -1,0 +1,11 @@
+%h1 #{@competition} - Uploaded File
+
+%ol.left_aligned
+  %li Filename: #{@uploaded_file.filename}
+  %li Created At: #{@uploaded_file.created_at}
+  %li Uploaded by: #{@uploaded_file.user}
+
+= link_to "Download this file", competition_uploaded_file_path(@competition, @uploaded_file, download: true), class: "button"
+
+%pre
+  = @uploaded_file.original_file.file.read

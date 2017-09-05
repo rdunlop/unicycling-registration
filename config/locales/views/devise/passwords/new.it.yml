@@ -1,0 +1,6 @@
+---
+it:
+  devise:
+    passwords:
+      new:
+        title: Hai dimenticato la password?

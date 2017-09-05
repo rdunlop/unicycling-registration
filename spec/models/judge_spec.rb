@@ -30,4 +30,24 @@ describe Judge do
       expect(judge.destroy).to eq(false)
     end
   end
+
+  context "With a high/long competition" do
+    let(:competition) { FactoryGirl.create(:distance_competition) }
+    let(:judge) { FactoryGirl.build(:judge, competition: competition) }
+    let!(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long", name: "High/Long Judge Type")}
+
+    describe "when the judge type is valid for this competition" do
+      it "can save the judge" do
+        judge.judge_type = JudgeType.find_by(name: "High/Long Judge Type")
+        expect(judge).to be_valid
+      end
+    end
+
+    describe "when the judge type is not valid for this competition" do
+      it "cannot save the judge" do
+        judge.judge_type = JudgeType.find_by(name: "Flatland Judge Type")
+        expect(judge).not_to be_valid
+      end
+    end
+  end
 end

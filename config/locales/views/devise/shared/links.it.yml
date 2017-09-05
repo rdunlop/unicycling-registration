@@ -1,0 +1,7 @@
+---
+it:
+  devise:
+    shared:
+      links:
+        already_have_an_account: Hai già un account?
+        forgot_your_password: Hai dimenticato la tua password?

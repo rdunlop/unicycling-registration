@@ -24,6 +24,7 @@
 #  registrant_type          :string(255)      default("competitor")
 #  rules_accepted           :boolean          default(FALSE), not null
 #  online_waiver_acceptance :boolean          default(FALSE), not null
+#  paid                     :boolean          default(FALSE), not null
 #
 # Indexes
 #

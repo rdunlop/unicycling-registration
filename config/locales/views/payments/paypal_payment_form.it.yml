@@ -1,0 +1,5 @@
+---
+it:
+  payments:
+    paypal_payment_form:
+      pay_with_paypal: Paga con Paypal

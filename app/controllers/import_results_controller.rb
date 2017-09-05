@@ -127,19 +127,24 @@ class ImportResultsController < ApplicationController
   end
 
   def import_chip
-    importer = Importers::ImportResultImporter.new(@competition, @user)
-    parser = Importers::Parsers::Chip.new(
-      params[:file],
-      params[:bib_number_column_number].to_i - 1,
-      params[:time_column_number].to_i - 1,
-      params[:number_of_decimal_places].to_i,
-      params[:lap_column_number].to_i - 1
-    )
-
-    if importer.process(false, parser)
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
+    if uploaded_file.nil?
+      flash[:alert] = "File not found"
     else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      importer = Importers::ImportResultImporter.new(@competition, @user)
+      parser = Importers::Parsers::Chip.new(
+        uploaded_file.original_file.file,
+        params[:bib_number_column_number].to_i - 1,
+        params[:time_column_number].to_i - 1,
+        params[:number_of_decimal_places].to_i,
+        params[:lap_column_number].to_i - 1
+      )
+
+      if importer.process(false, parser)
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      end
     end
     redirect_to display_chip_user_competition_import_results_path(@user, @competition)
   end
@@ -150,8 +155,9 @@ class ImportResultsController < ApplicationController
 
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
+    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
     importer = Importers::ImportResultImporter.new(@competition, @user)
-    parser = Importers::Parsers::Csv.new(params[:file], read_num_laps: @competition.has_num_laps?)
+    parser = Importers::Parsers::Csv.new(uploaded_file.original_file.file, read_num_laps: @competition.has_num_laps?)
 
     if importer.process(@is_start_time, parser)
       flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
@@ -164,6 +170,7 @@ class ImportResultsController < ApplicationController
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
     @user.import_results.where(competition_id: @competition).destroy_all
+    flash[:notice] = "All your imported Results deleted for #{@competition}"
     redirect_back(fallback_location: data_entry_user_competition_import_results_path(@user, @competition))
   end
 
