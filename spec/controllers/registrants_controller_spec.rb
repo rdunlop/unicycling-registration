@@ -128,7 +128,7 @@ describe RegistrantsController do
   end
 
   describe "GET waiver" do
-    let(:registrant) { FactoryGirl.create(:minor_competitor, user: @user, birthday: Date.new(2000, 1, 2)) }
+    let(:registrant) { FactoryGirl.create(:registrant, :competitor, :minor, user: @user, birthday: Date.new(2000, 1, 2)) }
     let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 7, 21)) }
 
     it "shows the requested registrant" do

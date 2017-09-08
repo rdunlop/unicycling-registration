@@ -58,7 +58,7 @@ describe Registrant do
   end
 
   describe "when EventConfiguration does not require default wheel size" do
-    let(:registrant) { FactoryGirl.build(:minor_competitor, status: "base_details", contact_detail: nil) }
+    let(:registrant) { FactoryGirl.build(:registrant, :competitor, :minor, status: "base_details", contact_detail: nil) }
     before { EventConfiguration.singleton.update(registrants_should_specify_default_wheel_size: false) }
 
     it "does not set a default wheel size" do

@@ -209,11 +209,11 @@ describe RegistrantPolicy do
       end
 
       describe "for an adult" do
-        it { expect(subject).not_to permit(user_context, FactoryGirl.create(:minor_competitor, user: my_user, birthday: 11.years.ago)) }
+        it { expect(subject).not_to permit(user_context, FactoryGirl.create(:registrant, :competitor, :minor, user: my_user, birthday: 11.years.ago)) }
       end
 
       describe "for a child" do
-        it { expect(subject).to permit(user_context, FactoryGirl.create(:minor_competitor, user: my_user, birthday: 8.years.ago)) }
+        it { expect(subject).to permit(user_context, FactoryGirl.create(:registrant, :competitor, :minor, user: my_user, birthday: 8.years.ago)) }
       end
     end
   end

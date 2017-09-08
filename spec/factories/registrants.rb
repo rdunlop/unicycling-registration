@@ -48,6 +48,25 @@ FactoryGirl.define do
     ineligible false
     contact_detail # FactoryGirl
 
+    # New Way
+    trait :competitor do
+      registrant_type 'competitor'
+    end
+    trait :noncompetitor do
+      registrant_type 'noncompetitor'
+    end
+    trait :spectator do
+      registrant_type 'spectator'
+    end
+
+    trait :minor do
+      before(:create) do |reg|
+        reg.contact_detail.responsible_adult_name = "Bob Smith"
+        reg.contact_detail.responsible_adult_phone = "911"
+      end
+    end
+
+    # old way
     factory :competitor do
       registrant_type 'competitor'
     end
@@ -57,13 +76,8 @@ FactoryGirl.define do
     factory :spectator do
       registrant_type 'spectator'
     end
+    # end Old-way
 
-    factory :minor_competitor, parent: :competitor do
-      before(:create) do |reg|
-        reg.contact_detail.responsible_adult_name = "Bob Smith"
-        reg.contact_detail.responsible_adult_phone = "911"
-      end
-    end
     before(:create) do
       if WheelSize.count == 0
         @ws20 = FactoryGirl.create(:wheel_size_20)
