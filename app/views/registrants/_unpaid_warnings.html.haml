@@ -1,4 +1,4 @@
 - cache_i18n [@registrant, @config] do
-  - registrant.unpaid_warnings(@config).each do |warning|
+  - @registrant.unpaid_warnings(@config).each do |warning|
     .unpaid_warning
       = warning
