@@ -73,7 +73,7 @@ describe Importers::RegistrantDataImporter do
       end
 
       context "when resu already exists" do
-        let!(:registrant_event_sign_up) { FactoryGirl.create(:registrant_event_sign_up, registrant: registrant, event: event, event_category: event.event_categories.first, signed_up: false) }
+        let!(:registrant_event_sign_up) { FactoryGirl.create(:registrant_event_sign_up, registrant: registrant, event: event, signed_up: false) }
 
         it "does not create a new sign up" do
           expect do

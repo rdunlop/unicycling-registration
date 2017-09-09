@@ -1,4 +1,4 @@
-- form = RegistrantEventChoicesForm.new(registrant, event, current_user)
+- form = RegistrantEventChoicesForm.new(registrant, event, current_user, @config)
 %tr{class: "event #{form.disabled_event? ? 'disabled_event' : ''}" }
   = f.fields_for :registrant_event_sign_ups, form.registrant_event_sign_up do |resu|
     %td.event_choice

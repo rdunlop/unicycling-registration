@@ -129,6 +129,7 @@ describe Event do
     end
     it "will not count entries which are not selected" do
       @ec.signed_up = false
+      @ec.event_category = nil
       @ec.save
       expect(@ev.num_signed_up_registrants).to eq(0)
     end

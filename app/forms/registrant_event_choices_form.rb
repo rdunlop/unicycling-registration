@@ -1,12 +1,13 @@
 # Helper class for dealing with displaying an event-sign-up form
 # displaying all of the various sundry choices
 class RegistrantEventChoicesForm
-  attr_reader :registrant, :event, :current_user
+  attr_reader :registrant, :event, :current_user, :config
 
-  def initialize(registrant, event, current_user)
+  def initialize(registrant, event, current_user, config)
     @registrant = registrant
     @event = event
     @current_user = current_user
+    @config = config
   end
 
   def registrant_event_sign_up
@@ -20,7 +21,7 @@ class RegistrantEventChoicesForm
   end
 
   def disabled_event?
-    if !Pundit.policy(current_user, current_user).under_development? && @config.can_only_drop_or_modify_events? && !registrant_event_sign_up.signed_up?
+    if !Pundit.policy(current_user, current_user).under_development? && config.can_only_drop_or_modify_events? && !registrant_event_sign_up.signed_up?
       return true
     end
 
