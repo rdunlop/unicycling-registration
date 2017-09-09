@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class RegistrantPresenter
   attr_accessor :registrant
 

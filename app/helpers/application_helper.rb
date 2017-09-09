@@ -8,7 +8,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
     # Check to see that the user has a user_convention record after they have signed in
     subdomain = Apartment::Tenant.current
     unless user.user_conventions.where(subdomain: subdomain).any?
-      flash[:notice] = t("application.subdomain.welcome", subdomain: subdomain)
+      flash[:notice] = I18n.t("application.subdomain.welcome", subdomain: subdomain)
       # welcome: Welcome to %{subdomain}
       user.user_conventions.create!(subdomain: subdomain)
     end
@@ -76,18 +76,18 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def organization_membership_label(config)
-    organization_type = t("organization_membership_types.#{config.organization_membership_type}")
+    organization_type = I18n.t("organization_membership_types.#{config.organization_membership_type}")
 
-    [organization_type, t("membership_number")].join(" ")
+    [organization_type, I18n.t("membership_number")].join(" ")
   end
 
   def print_time_until_prices_increase(reg_cost)
     if EventConfiguration.singleton.online_payment?
       if DateTime.current > reg_cost.end_date
-        t("prices_increase_soon")
+        I18n.t("prices_increase_soon")
       else
         end_date = distance_of_time_in_words(DateTime.current, reg_cost.last_day) + " (" + (l reg_cost.last_day, format: :short) + ")"
-        t("prices_increase_at_date", end_date: end_date)
+        I18n.t("prices_increase_at_date", end_date: end_date)
       end
     end
   end
