@@ -31,7 +31,7 @@ class TwoAttemptEntry < ApplicationRecord
   validates :minutes_1, :seconds_1, :thousands_1, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :minutes_2, :seconds_2, :thousands_2, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
-  nilify_blanks only: %i(status_1 status_2), before: :validation
+  nilify_blanks only: %i[status_1 status_2], before: :validation
   validates :status_1, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :status_2, inclusion: { in: TimeResult.status_values, allow_nil: true }
   validates :is_start_time, inclusion: { in: [true, false] }
