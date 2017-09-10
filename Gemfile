@@ -48,7 +48,6 @@ gem 'newrelic_rpm'
 gem 'order_as_specified'
 gem 'paper_trail'
 gem 'rails_admin'
-gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
 gem 'rake'
 gem 'redis-namespace'
 gem 'redis-rails'

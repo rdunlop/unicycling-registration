@@ -51,14 +51,6 @@ GIT
       rails (>= 4.0, < 5.1)
       safe_yaml (>= 0.8.6)
 
-GIT
-  remote: https://github.com/sudosu/rails_admin_pundit.git
-  revision: 8e3e750a3df5ce41722480494079968915ae84ce
-  specs:
-    rails_admin_pundit (0.0.1)
-      pundit (>= 0.2.3)
-      rails_admin (>= 0.6.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -659,7 +651,6 @@ DEPENDENCIES
   rails (= 5.0.6)
   rails-i18n
   rails_admin
-  rails_admin_pundit!
   rake
   recaptcha
   redis-namespace
