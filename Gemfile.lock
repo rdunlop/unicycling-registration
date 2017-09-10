@@ -1,32 +1,32 @@
 GIT
-  remote: git://github.com/globalize/globalize.git
-  revision: 7d507472e4076c720d798736137eb28d169eb1a1
+  remote: https://github.com/globalize/globalize.git
+  revision: 35adbbd4928577fef701b0986f7d7d035b0d4340
   specs:
-    globalize (5.1.0)
-      activemodel (>= 4.2, < 5.1)
-      activerecord (>= 4.2, < 5.1)
+    globalize (5.1.0.beta2)
+      activemodel (>= 4.2, < 5.2)
+      activerecord (>= 4.2, < 5.2)
       request_store (~> 1.0)
 
 GIT
-  remote: git://github.com/jnicklas/capybara.git
-  revision: add7ae24e906b883c01d63882f96bf705d0d4b56
+  remote: https://github.com/jnicklas/capybara.git
+  revision: bf8d6e8c320db6f809301937fece58394c7e1349
   specs:
-    capybara (2.14.0)
+    capybara (2.15.1)
       addressable
-      mime-types (>= 1.16)
+      mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
 
 GIT
-  remote: git://github.com/rdunlop/acts_as_restful_list.git
+  remote: https://github.com/rdunlop/acts_as_restful_list.git
   revision: 913eb3030e170eaef8d1abc81e85cdc077166d03
   specs:
     acts_as_restful_list (0.6)
 
 GIT
-  remote: git://github.com/rdunlop/countries.git
+  remote: https://github.com/rdunlop/countries.git
   revision: 09024fbee43778159dcae393ecbe8353fb696c4f
   branch: iuf_country_changes
   specs:
@@ -35,7 +35,7 @@ GIT
       i18n_data (~> 0.7.0)
 
 GIT
-  remote: git://github.com/rdunlop/fancybox2-rails.git
+  remote: https://github.com/rdunlop/fancybox2-rails.git
   revision: 7e63203d9032846202e632771e817872471e9132
   branch: rails5
   specs:
@@ -43,7 +43,7 @@ GIT
       railties (>= 3.1.0, < 6.0)
 
 GIT
-  remote: git://github.com/rdunlop/tolk.git
+  remote: https://github.com/rdunlop/tolk.git
   revision: 1f9ffdeb888c79f8967d96b5cd7a5be0153b32b7
   branch: improve_import_export
   specs:
@@ -52,8 +52,8 @@ GIT
       safe_yaml (>= 0.8.6)
 
 GIT
-  remote: git://github.com/sudosu/rails_admin_pundit.git
-  revision: 285e3e79a37242cf7a527053e9b438782801557a
+  remote: https://github.com/sudosu/rails_admin_pundit.git
+  revision: 8e3e750a3df5ce41722480494079968915ae84ce
   specs:
     rails_admin_pundit (0.0.1)
       pundit (>= 0.2.3)
@@ -102,8 +102,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     airbrussh (1.2.0)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.7.1)
@@ -319,6 +319,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
+    mini_mime (0.1.4)
     mini_portile2 (2.1.0)
     minitest (5.10.2)
     monetize (1.6.0)
@@ -370,7 +371,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    public_suffix (2.0.5)
+    public_suffix (3.0.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.3)
@@ -587,7 +588,7 @@ GEM
       railties (>= 3.0.7)
     wicked_pdf (1.1.0)
     wkhtmltopdf-binary (0.12.3.1)
-    xpath (2.0.0)
+    xpath (2.1.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
