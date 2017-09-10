@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe CompetitionSignUp do
   let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.current) }
-  let!(:young_registrant) { FactoryGirl.create(:minor_competitor, birthday: 5.years.ago) }
-  let!(:middle_registrant) { FactoryGirl.create(:minor_competitor, birthday: 15.years.ago) }
+  let!(:young_registrant) { FactoryGirl.create(:registrant, :competitor, :minor, birthday: 5.years.ago) }
+  let!(:middle_registrant) { FactoryGirl.create(:registrant, :competitor, :minor, birthday: 15.years.ago) }
   let!(:old_registrant) { FactoryGirl.create(:competitor, birthday: 36.years.ago) }
 
   let(:agt) { FactoryGirl.create(:age_group_type) }
@@ -50,8 +50,8 @@ describe CompetitionSignUp do
   end
 
   describe "#not_signed_up_lists" do
-    let!(:other_young_registrant) { FactoryGirl.create(:minor_competitor, birthday: 5.years.ago) }
-    let!(:other_middle_registrant) { FactoryGirl.create(:minor_competitor, birthday: 15.years.ago) }
+    let!(:other_young_registrant) { FactoryGirl.create(:registrant, :competitor, :minor, birthday: 5.years.ago) }
+    let!(:other_middle_registrant) { FactoryGirl.create(:registrant, :competitor, :minor, birthday: 15.years.ago) }
     let!(:other_old_registrant) { FactoryGirl.create(:competitor, birthday: 36.years.ago) }
 
     context "within USA competitions" do

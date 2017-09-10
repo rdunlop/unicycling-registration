@@ -1,13 +1,4 @@
 - cache_i18n [@registrant, @config] do
-  - if @registrant.amount_owing > 0.to_money
-    .unpaid_warning
-      UNPAID?
-  - if @config.organization_membership_config? && !@registrant.organization_membership_confirmed? && !@registrant.spectator?
-    .unpaid_warning
-      = organization_membership_label(@config)
-  - if @registrant.competitor? && @registrant.age <= 10
-    .unpaid_warning
-      Age <= 10 (wheel size)
-  - @registrant.event_warnings.each do |warning|
+  - @registrant.unpaid_warnings(@config).each do |warning|
     .unpaid_warning
       = warning

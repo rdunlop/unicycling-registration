@@ -429,7 +429,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     active_competitors(event).first
   end
 
-  delegate :describe_event, :describe_event_hash, :describe_additional_selection, to: :presenter
+  delegate :unpaid_warnings, :describe_event, :describe_event_hash, :describe_additional_selection, to: :presenter
 
   def presenter
     RegistrantPresenter.new(self)

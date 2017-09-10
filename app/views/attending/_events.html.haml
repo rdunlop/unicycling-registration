@@ -13,4 +13,4 @@
       %table.events
         - category.events.each do |event|
           - next unless event.visible?
-          = render :partial => "/attending/event", :locals => {:f => f, :registrant => @registrant, :category => category}, :object => event
+          = render partial: "/attending/event", locals: {f: f, registrant: @registrant, category: category, event: event}, object: event
