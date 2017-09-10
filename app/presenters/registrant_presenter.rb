@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class RegistrantPresenter
   attr_accessor :registrant
 
@@ -49,5 +51,26 @@ class RegistrantPresenter
     end
 
     results.join(" - ") if results.any?
+  end
+
+  def unpaid_warnings(config)
+    warnings = []
+    if registrant.amount_owing > 0.to_money || registrant.amount_pending > 0.to_money
+      warnings << "UNPAID?"
+    end
+
+    if config.organization_membership_config? && !registrant.organization_membership_confirmed? && !registrant.spectator?
+      warnings << organization_membership_label(config)
+    end
+
+    if registrant.competitor? && registrant.age <= 10
+      warnings << "Age <= 10 (wheel size)"
+    end
+
+    registrant.event_warnings.each do |warning|
+      warnings << warning
+    end
+
+    warnings
   end
 end
