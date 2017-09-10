@@ -4,3 +4,7 @@ it:
     attributes:
       expense_group:
         group_name: Nome del gruppo
+    models:
+      expense_group:
+        one: Spese del gruppo
+        other: Spese dei gruppi

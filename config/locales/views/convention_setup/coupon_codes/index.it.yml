@@ -1,0 +1,9 @@
+---
+it:
+  convention_setup:
+    coupon_codes:
+      index:
+        description: I codici dei tagliandi possono essere creati in modo da fornire
+          un sconto (eventualmente gratuiti) su certi articoli.
+        header: Elenco di tutti i codici dei buoni
+        new_coupon_code: Nuovo codice tagliando

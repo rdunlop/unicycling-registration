@@ -1,0 +1,8 @@
+---
+it:
+  devise:
+    mailer:
+      confirmation_instructions:
+        action: Conferma il mio account
+        copy_paste_instructions: Se il link non funziona, si prega di copiare e incollare
+          l'url in un browser.

@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      score:
+        one: Punto
+        other: Punti

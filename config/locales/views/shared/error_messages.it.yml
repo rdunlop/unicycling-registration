@@ -1,0 +1,5 @@
+---
+it:
+  shared:
+    error_messages:
+      errors_prevented_object_from_being_saved: 'è vietato salvare questo articolo:'

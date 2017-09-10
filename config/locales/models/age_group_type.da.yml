@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      age_group_type:
+        description: Beskrivelse
+        name: Navn

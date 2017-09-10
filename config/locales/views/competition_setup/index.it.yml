@@ -1,0 +1,11 @@
+---
+it:
+  competition_setup:
+    index:
+      directors: Direttori
+      events_by_category: Eventi per categoria
+      header: Configurazione gara
+      instructions: La preghiamo di creare direttori per ogni evento. Lei (o il direttore)
+        può creare competizioni per ogni evento, il quale può stabilire le date del
+        raduno.
+      new_competition: Crea nuova competizione

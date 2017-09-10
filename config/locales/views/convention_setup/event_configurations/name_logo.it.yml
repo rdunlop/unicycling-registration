@@ -4,3 +4,7 @@ it:
     event_configurations:
       name_logo:
         header: Nome e logo
+        long_name_description: Il nome completo, il luogo e le date saranno usate
+          nella pagina web iniziale.
+        short_name_description: Il nome abbreviato verrà utilizzato quando lo spazio
+          è limitato (es. più PDF)

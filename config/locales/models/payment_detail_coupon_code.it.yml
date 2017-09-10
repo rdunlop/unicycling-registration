@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      payment_detail_coupon_code:
+        one: Codice del tagliando per il pagamento
+        other: Codici del tagliando per il pagamento

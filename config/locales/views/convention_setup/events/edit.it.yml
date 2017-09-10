@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    events:
+      edit:
+        header: Modifica evento

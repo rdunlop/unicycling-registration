@@ -2,4 +2,6 @@
 it:
   registrants:
     reg_closed_banner:
+      no_changes_permitted: Non è possibile apportare modifiche ai dettagli della
+        registrazione.
       online_registration_is_closed: Le iscrizioni online sono chiuse

@@ -1,0 +1,14 @@
+---
+it:
+  admin:
+    translations:
+      examples:
+        example_should_become: Dovrebbe diventare
+        leave_some_untranslated: 'Alcune parti non devono essere tradotte:'
+        performance_impact_warning: La preghiamo di utilizzare "Applica cambiamenti"
+          e "Cancella Cache traduzione" una volta che ha terminato, perché ci potrebbero
+          essere delle implicazioni.
+        text_translation_system: Sistema di traduzione testo
+        when_done_translating: Una volta terminate le traduzioni, dovrebbe premere
+          "Applica cambiamenti" presente nel "Sistema di traduzione testo" così da
+          applicare le modifiche al sito.

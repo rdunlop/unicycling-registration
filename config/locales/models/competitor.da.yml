@@ -3,4 +3,7 @@ da:
   activerecord:
     attributes:
       competitor:
+        age: Alder
         bib_number: ID
+        gender: Køn
+        name: Navn

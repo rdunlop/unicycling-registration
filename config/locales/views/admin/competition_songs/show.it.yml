@@ -4,6 +4,13 @@ it:
     competition_songs:
       show:
         assign: Assegna
+        assign_to_competitor: Ogni canzone dev'essere assegnata a un partecipante
+          così da essere inclusa nel download zip file.
+        description: "Questa pagina elenca tutte le canzoni che sono state caricate
+          per\r\n %{event} e l'iscritto è catalogato come partecipante."
         download: Download
         download_zip: Download Zip dei brani
         header: "%{competition} Brani"
+        zip_description: "Per rendere più semplice al DJ la programmazione musicale,\r\ni
+          files nella cartella Zip devono essere rinominati in modo che appaiano in
+          ordine d'entrata dei gareggianti."

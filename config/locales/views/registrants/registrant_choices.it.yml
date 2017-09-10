@@ -2,4 +2,8 @@
 it:
   registrants:
     registrant_choices:
+      create_new_competitor: Crea nuovo partecipante
+      create_new_noncompetitor: Crea nuovo accompagnatore
+      create_new_spectator: Crea nuovo spettatore
+      recommended: Raccomandato
       registration: Iscrizione

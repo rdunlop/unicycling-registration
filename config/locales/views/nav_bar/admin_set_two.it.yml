@@ -1,0 +1,8 @@
+---
+it:
+  nav_bar:
+    admin_set_two:
+      manage_cache: Gestione Cache
+      registrant_summaries: Riassunto di tutti gli iscritti
+      send_email_to_registrants: Iscritti (email)
+      translations: Traduzioni

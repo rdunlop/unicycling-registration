@@ -3,5 +3,19 @@ it:
   convention_setup:
     convention_setup:
       costs:
+        charge_by_event: Costo per evento
+        charge_by_event_example: "(es. 5€ per il singolo freestyle, 6€ per il grande
+          gruppo)"
+        charge_by_type: Costo per partecipante e per accompagnatore
+        charge_by_type_example: "(es. 50€ per i primi partecipanti, 100€ per i partecipanti
+          in ritardo)"
+        costs_settings: Il sistema di registrazione può essere configurato in modo
+          da caricare iscritti con impostazioni differenti
         discounts: Sconti
         header: Costi
+        how_much_to_charge: 'A quanto ammonta la tassa di iscrizione:'
+        how_to_charge_registrants: Come stabilire la tassa di iscrizione
+        money_through_bank_transfer: Ricevi soldi tramite bonifico bancario
+        money_through_paypal: Ricevi soldi tramite PayPal
+        other_items_for_sale: Altri articoli in vendita
+        wire_bank_transfer: Trasferimento/Bonifico bancario

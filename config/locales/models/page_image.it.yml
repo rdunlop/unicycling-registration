@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      page_image:
+        one: Immagine
+        other: Immagini

@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      distance_attempt:
+        distance: Distance
+        fault: Fejl

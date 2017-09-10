@@ -3,5 +3,7 @@ it:
   admin:
     event_songs:
       show:
+        description_html: "Questa pagina elenca tutte le canzoni che\r\n <b>non sono</b>\r\nsono
+          state finora assegnate a un partecipante"
         download: Download
         header: "%{event} Brani"

@@ -2,6 +2,8 @@
 it:
   registrants:
     base_details:
+      base_details: Dettagli base
       birthday: Data di nascita
       female: Femmina
       male: Maschio
+      required_fields: Campi obbligatori

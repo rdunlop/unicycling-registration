@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      competition_result:
+        one: Risultato supplementare
+        other: Risultati supplementari

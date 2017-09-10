@@ -1,0 +1,12 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      volunteers:
+        description: Durante la registrazione, possiamo chiedere ad ogni iscritto
+          se desiderano essere volontari (generici), oppure porre domande specifiche
+          (es. Vuole essere un volontario per le gare in pista?) (scelta), oppure
+          non porre loro nessuna domanda inerente il volontariato (nessuna).
+        header: Impostazioni per volontari
+        next_step: Dopo aver scelto "scelta", impostare le scelte nella pagina di
+          registrazione "Opportunità di volontariato"

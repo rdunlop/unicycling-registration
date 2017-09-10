@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      tenant:
+        one: Titolare
+        other: Titolari

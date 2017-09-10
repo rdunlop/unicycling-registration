@@ -1,0 +1,12 @@
+---
+it:
+  registrants:
+    summary:
+      age: Età
+      birthday: Data di compleanno
+      default_wheel_size: Dimensione ruota per difetto per le gare in pista
+      gender: Genere
+      name: Nome
+      registration_summary: Riassunto della registrazione
+      user_account_email: Account utente Email
+      volunteer: Volontario

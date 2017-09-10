@@ -6,4 +6,10 @@ it:
         bib_number: ID
         first_name: Nome
         last_name: Cognome
+        online_waiver_acceptance: Confermo di aver letto, capito e accettato i termini
         online_waiver_signature: Firma
+        wheel_size_id: Dimensione ruota per difetto per le gare in pista
+    models:
+      registrant:
+        one: Iscritto
+        other: Iscritti

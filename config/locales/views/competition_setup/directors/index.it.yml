@@ -1,0 +1,18 @@
+---
+it:
+  competition_setup:
+    directors:
+      index:
+        add_director: Aggiungi direttore
+        create_director: Crea direttore
+        description: I direttori sono assegnati a una classe d'eventi. Hanno la capacità
+          di creare/gestire liste di partenza, giudici e inserimento dati per i volontari
+          delle loro competizioni.
+        director: Direttore
+        header: Gestione direttori
+        note_1: Una competizione dev'essere configurata da un "Admin gare" (probabilmente
+          è lei) prima che i direttori possano gestire le liste di partenza per la
+          gara.
+        note_2: I direttori non possono creare competizioni per conto proprio in quanto
+          la scelta di particolari impostazioni per una gara è solitamente più complessa
+          di quanto i direttori possano aspettarsi.

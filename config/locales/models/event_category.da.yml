@@ -1,0 +1,8 @@
+---
+da:
+  activerecord:
+    attributes:
+      event_category:
+        age_range_end: Maksimal alde
+        age_range_start: Minimum alder
+        name: Navn

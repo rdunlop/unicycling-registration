@@ -6,5 +6,7 @@ it:
         address:
           address: Indirizzo
           copy_from_other_registrant: Copia indirizzo da %{other_name}
+          country_representing_description: Se vuole rappresentare una nazione differente
+            da quella in cui risiede, la inserisca qui
           state: Stato
           state_province: Stato/provincia

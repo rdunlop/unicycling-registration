@@ -1,0 +1,12 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      go_live:
+        header: Vai online
+        set_costs_warning: Dev'essere sicuro di impostare i costi di registrazione
+          o dell'evento prima che qualsiasi utente si iscriva.
+        system_live: Il sistema corrente è online
+        system_under_construction: Il sistema corrente è in costruzione
+        under_construction_description: Mettere "in costruzione" su Falso permetterà
+          agli utenti di creare iscrizioni.

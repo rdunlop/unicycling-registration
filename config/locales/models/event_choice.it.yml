@@ -3,4 +3,11 @@ it:
   activerecord:
     attributes:
       event_choice:
+        cell_type: Tipologia di cella
         label: Etichetta
+        optional_if_event_choice_id: Opzionale se questo event_choice è scelto
+        required_if_event_choice_id: Richiesto se questo event_choice è scelto
+    models:
+      event_choice:
+        one: Scelta dell'evento
+        other: Scelte dell'evento

@@ -1,0 +1,17 @@
+---
+it:
+  admin:
+    translations:
+      common_translations:
+        access_not_enabled: Non può accedere al sistema di traduzioni comuni.
+        common_example_1: Etichette della barra di navigazione
+        common_example_2: Testo per e-mail automatica
+        common_example_3: Nomi del campo (es. nome, numero di telefono)
+        common_translations: Traduzioni comuni
+        common_translations_detail: "Siccome le traduzioni comuni sono applicabili
+          a tutti i raduni, verosimilmente sono già completamente tradotti nella lingua
+          da lei desiderata. \r\nQualsiasi cambiamento fatto a questi testi verrà
+          applicato immediatamente a tutto il sistema."
+        examples_of_common_translations: Esempio di traduzioni comuni
+        follow_the_directions: segui le indicazioni
+        want_to_help: Se vi fa piacere aiutare nella traduzione di questo testo, prego

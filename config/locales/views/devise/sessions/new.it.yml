@@ -1,0 +1,7 @@
+---
+it:
+  devise:
+    sessions:
+      new:
+        action: Accedi all'iscrizione
+        use_access_code: Utilizza un codice d'accesso

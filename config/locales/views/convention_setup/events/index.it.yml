@@ -3,4 +3,19 @@ it:
   convention_setup:
     events:
       index:
+        age_limits_option: Gestire "Categorie di eventi" in modo da specificare i
+          limiti d'età (es. "età 0-10")
+        available_event_options: 'Una volta che un evento è stato creato, puoi specificare:'
+        description_html: "Ogni evento prevede qualcosa di differente in cui il partecipante
+          può gareggiare. \r\n<br>\r\nDifferenti categorie di competizione (es. Jr
+          Expert, Advanced, Expert) sono considerate \"Categorie d'evento\" se il
+          partecipante sceglie solamente una sola delle categorie.\r\n<br>\r\nSe un
+          partecipante gareggia in entrambe \"Beginner X\" e \"Advanced X\", esse
+          devono comparire come eventi separati."
+        event_categories_option: '"Categorie d''evento" supplementari (es. Advanced,
+          Expert)'
+        existing_events: Eventi esistenti  %{category}
+        header: 'Eventi in categoria: %{category}'
+        more_questions_option: Aggiungere "Scelte dell'evento" per porre più domande
+          se il partecipante si registra per un evento.
         new_event: Nuovo evento

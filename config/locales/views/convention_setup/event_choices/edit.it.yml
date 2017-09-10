@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    event_choices:
+      edit:
+        header: Modifica della scelta dell'evento

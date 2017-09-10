@@ -1,0 +1,8 @@
+---
+it:
+  convention_setup:
+    expense_groups:
+      form:
+        competitor_auto_assign: Assegnare automaticamente al partecipante?
+        free_elements: Elementi gratuiti
+        noncompetitor_auto_assign: Assegnare automaticamente a un accompagnatore?

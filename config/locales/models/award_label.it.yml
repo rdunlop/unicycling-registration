@@ -4,3 +4,8 @@ it:
     attributes:
       award_label:
         bib_number: ID
+        place: Piazzamento
+    models:
+      award_label:
+        one: Etichetta di riconoscimento
+        other: Etichette di riconoscimento

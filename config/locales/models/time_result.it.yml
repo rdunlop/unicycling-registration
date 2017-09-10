@@ -12,3 +12,7 @@ it:
         number_of_penalties: Penalità
         seconds: Secondi
         thousands: Mila
+    models:
+      time_result:
+        one: Risultato del tempo
+        other: Risultati dei tempi

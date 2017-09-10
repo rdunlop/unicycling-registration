@@ -1,0 +1,75 @@
+---
+it:
+  admin:
+    permissions:
+      index:
+        add_new_permission: Aggiungi nuovo permesso
+        different_users_different_roles: Il sistema d'iscrizione è separato in diverse
+          sezioni che vengono utilizzate da diverse persone.
+        directors_permissions_html: Per garantire l'accesso "direttore" di specifici
+          eventi, prego utilizzare la pagine %{link}
+        event_planned_example: Per vedere la lista degli iscritti in ogni evento,
+          dovrebbe avere il ruolo di "Organizzatore d'eventi"
+        header: Utente amministratore
+        other_roles_not_permitted_html: "Potrebbero esserci ulteriori ruoli nei quali
+          lei\r\n<u>non</u>\r\nha il permesso di vedere."
+        payment_admin_example: "Per vedere/gestire i pagamenti ricevuti (e provvedere
+          ai rimborsi),\r\ndeve avere il ruolo di \"Payment Admin\""
+        role_allows_access: Ogni ruolo abilita l'utente a vedere/utilizzare parti
+          differenti del sistema.
+        role_description:
+          awards_admin: "In grado di vedere i risultati\r\nIn grado di pubblicare
+            i risultati\r\nIn grado di indicare le gare come premiate"
+          competition_admin: "In grado di creare competizioni e regolare la loro configurazione\r\nIn
+            grado di creare/gestire i gruppi d'età\r\nPuò collocare gli iscritti come
+            non idonei\r\nPuò creare direttore, dato_inserimento_volontario\r\nPuò
+            ripristinare password utente\r\nPuò vedere gli iscritti a tutte le gare\r\nPuò
+            gestire tutte le competizioni e i partecipanti (quando la gara non è chiusa)\r\nPuò
+            aprire/chiudere gare\r\nPuò esportare i risultati"
+          convention_admin: "In grado di di configurare l'impostazione del raduno
+            considerando i parametri dell'iscrizione\r\nPuò impostare lo stile, il
+            nome del raduno e il dominio URL.\r\nPuò impostare l'ammontare del pagamento\r\nPuò
+            impostare i dettagli PayPal\r\nPuò impostare l'offerta degli eventi\r\nPuò
+            impostare le possibilità di volontariato \r\nPuò ripristinare password
+            utenti\r\nPuò impostare \"autorizza computer\" per l'uso d'iscrizione
+            on-site \r\nPuò creare utenti pagamento_admin, event_planner, and musica_dj"
+          director: "In grado di assegnare iscritti a gare\r\nPuò creare giudici,
+            volontari\r\nPuò ripristinare password utente"
+          event_planner: "In grado di esaminare/riesaminare gli iscritti all'evento.\r\nIn
+            grado di CERCARE e MODIFICARE qualsiasi registrazione.\r\nIn grado di
+            importare/esportare dati delle registrazioni (inclusi eventi registrati).\r\nIn
+            grado di caricare numeri dei pettorali per gli iscritti.\r\nIn grado di
+            aggiungere/modificare le scelte dell'evento in qualsiasi momento.\r\nIn
+            grado di esaminare/spedire emails a tutti i partecipanti\r\nIn grado di
+            gestire i feedback ricevuti tramite il sistema"
+          export_payment_lists: In grado di usare il menu di esportazione per scaricare
+            file excel degli iscritti che hanno pagato per l'alloggio
+          late_registrant: "In grado di accede al sistema di registrazione anche dopo
+            la chiusura delle iscrizioni. \r\nIn grado di creare nuove iscrizioni,
+            caricare iscrizioni già esistenti e effettuare pagamenti.\r\nDovrebbe
+            utilizzare questa impostazione con la funzione SetRegFee per specificare
+            la tassa che dev'essere caricata."
+          membership_admin: "In grado di visualizzare la pagina dei membri dell'associazione
+            USA.\r\nIn grado di caricare i numeri dei membri dell'associazione USA\r\nIn
+            grado di indicare se un utente ha già pagato la tassa sociale per l'associazione
+            USA"
+          music_dj: In grado di vedere/scaricare qualsiasi brano dalla pagine della
+            gestione musica
+          payment_admin: "In grado di vedere i pagamenti ricevuti \r\nIn grado di
+            vedere il numero totale di elementi pagati.\r\nIn grado di impostare le
+            tasse d'iscrizione per gli utenti\r\nIn grado di marcare il conto come
+            ricevuto\r\nIn grado di gestire i feedback ricevuti del sistema"
+          super_admin: "In grado di impostare ruoli di altre persone\r\nIn grado si
+            distruggere informazioni sul pagamento\r\nIn grado di configurare le impostazioni
+            del sito e dell'evento"
+          translator: "In grado di accedere al menu di traduzione.\r\nInserire nuove
+            traduzioni e applicale al sito"
+        role_descriptions: 'Descrizioni dei ruoli:'
+        roles_listed: "Elencate in questa questa pagina ci sono tutti i ruoli che
+          ha il permesso di vedere.\r\nPuò assegnare ruoli ad altre persone in modo
+          da garantire loro più accesso."
+        set_password: Imposta password utente
+        users_with_permissions: 'Utenti con permessi:'
+        you_have_roles: 'Attualmente ha il/i ruolo/i di:'
+        you_may_need_to_grant_yourself_roles: Potrebbe essere necessario assegnarsi
+          altri ruoli in modo da aggiungere accessi ad altre configurazioni del sistema.
