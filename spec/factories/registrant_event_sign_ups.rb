@@ -28,7 +28,7 @@ FactoryGirl.define do
     signed_up true
 
     before(:create) do |resu|
-      if resu.event.nil?
+      if resu.event.nil? && resu.signed_up?
         if resu.event_category.nil?
           ev = FactoryGirl.create(:event)
           resu.event_category = ev.event_categories.first

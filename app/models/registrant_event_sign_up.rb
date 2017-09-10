@@ -19,6 +19,7 @@
 #
 
 class RegistrantEventSignUp < ApplicationRecord
+  before_validation :update_category_if_only_one
   validates :event, :registrant, presence: true
   # The following should be re-enabled? first double-check to see which conventions have violating data.
   # also ensure that flow still works with this. (do we have any events which do not have event_categories?)
@@ -69,6 +70,16 @@ class RegistrantEventSignUp < ApplicationRecord
 
   private
 
+  def update_category_if_only_one
+    if event.event_categories.size == 1
+      if signed_up?
+        self.event_category = event.event_categories.first
+      else
+        self.event_category = nil
+      end
+    end
+  end
+
   def auto_create_competitor
     if signed_up
       event_category.competitions_being_fed(registrant).each do |competition|
@@ -107,8 +118,10 @@ class RegistrantEventSignUp < ApplicationRecord
   end
 
   def category_chosen_when_signed_up
-    if signed_up && event_category.nil?
+    if (signed_up && event_category.nil?) || (!signed_up && event_category.present?)
       errors.add(:base, "Cannot sign up for #{event.name} without choosing a category")
+      errors.add(:signed_up, "")
+      errors.add(:event_category_id, "")
     end
   end
 

@@ -88,7 +88,7 @@ describe ChoicesValidator do
       end
       it "should be invalid if we only check off the second_choice" do
         FactoryGirl.create(:registrant_choice, event_choice: @ec2, value: "1", registrant: registrant)
-        FactoryGirl.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: false, registrant: registrant)
+        FactoryGirl.create(:registrant_event_sign_up, event: @ev, signed_up: false, registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(false)
       end
@@ -160,14 +160,14 @@ describe ChoicesValidator do
         expect(registrant.valid?).to eq(true)
       end
       it "should be valid if we don't choose the event, and we don't fill in the event_choice" do
-        FactoryGirl.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: false, registrant: registrant)
+        FactoryGirl.create(:registrant_event_sign_up, event: @ev, signed_up: false, registrant: registrant)
         FactoryGirl.create(:registrant_choice, event_choice: @ec2, value: "", registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(true)
       end
       it "should be invalid if we fill in only the second_choice" do
         FactoryGirl.create(:registrant_choice, event_choice: @ec2, value: "goodbye", registrant: registrant)
-        FactoryGirl.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: false, registrant: registrant)
+        FactoryGirl.create(:registrant_event_sign_up, event: @ev, signed_up: false, registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(false)
       end

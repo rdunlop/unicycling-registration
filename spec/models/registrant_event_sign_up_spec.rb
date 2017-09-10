@@ -26,10 +26,6 @@ describe RegistrantEventSignUp do
   it "is valid from FactoryGirl" do
     expect(re.valid?).to eq(true)
   end
-  it "requires an event_category" do
-    re.event_category = nil
-    expect(re.valid?).to eq(false)
-  end
 
   it "requires a registrant" do
     re.registrant = nil
@@ -54,7 +50,7 @@ describe RegistrantEventSignUp do
 
       it "when I un-sign-up, it removes the registrant_expense_item" do
         expect do
-          @registrant_event_sign_up.update(signed_up: false)
+          @registrant_event_sign_up.update(signed_up: false, event_category: nil)
         end.to change(RegistrantExpenseItem, :count).by(-1)
       end
     end
@@ -122,7 +118,7 @@ describe "when a competition exists before a sign-up" do
   end
 
   it "adds the competition on change of state" do
-    @re = FactoryGirl.create(:registrant_event_sign_up, event_category: event_category, signed_up: false)
+    @re = FactoryGirl.create(:registrant_event_sign_up, event: event_category.event, signed_up: false)
     expect do
       expect(@re.save).to be_truthy
     end.to change(Competitor, :count).by(0)
@@ -141,7 +137,7 @@ describe "when a competition exists before a sign-up" do
     end
 
     it "doesn't add the competitor on change of state" do
-      @re = FactoryGirl.create(:registrant_event_sign_up, event_category: event_category, signed_up: false)
+      @re = FactoryGirl.create(:registrant_event_sign_up, event: event_category.event, signed_up: false)
       expect(@re.registrant.gender).to eq("Male")
 
       @re.signed_up = true
