@@ -3,4 +3,8 @@ it:
   admin:
     manual_payments:
       pending_payments:
+        description: "Questo iscritto è stato elencato nella lista di pagamento(i)
+          in sospeso.\r\nAvete ricevuto uno di questi pagamenti?"
+        header: Pagamenti in sospeso
         items: Oggetti
+        mark_as_received: 'Marca pagamento  #%{payment_number} come ricevuto'

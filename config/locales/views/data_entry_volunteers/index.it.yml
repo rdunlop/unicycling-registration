@@ -1,0 +1,7 @@
+---
+it:
+  data_entry_volunteers:
+    index:
+      assign_access: Assegna accesso supplementare
+      header: Accesso supplementare
+      users_with_access: Utenti con accesso supplementare

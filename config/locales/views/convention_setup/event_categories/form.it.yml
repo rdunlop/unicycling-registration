@@ -1,0 +1,7 @@
+---
+it:
+  convention_setup:
+    event_categories:
+      form:
+        details: Se vi è solamente una categoria_evento, l'utente non sarà presentato
+          con una casella di selezione.

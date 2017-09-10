@@ -3,5 +3,12 @@ it:
   activerecord:
     attributes:
       page:
+        body: Contenuti
+        parent_page_id: Pagina originale
         position: Posizione
+        slug: URL
         title: Titolo
+    models:
+      page:
+        one: Pagina
+        other: Pagine

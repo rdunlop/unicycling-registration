@@ -3,4 +3,11 @@ it:
   activerecord:
     attributes:
       event_category:
+        age_range_end: Fine dell'intervallo d'età
+        age_range_start: Inizio dell'intervallo d'età
         name: Come
+        warning_on_registration_summary: Avvertimento sul riassunto d'iscrizione
+    models:
+      event_category:
+        one: Categoria dell'evento
+        other: Categorie dell'evento

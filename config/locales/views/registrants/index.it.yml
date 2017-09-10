@@ -2,4 +2,13 @@
 it:
   registrants:
     index:
+      be_sure_to_submit_payment: Una volta che ha creato la sue registrazioni, assicuratevi
+        di inviare il pagamento.
+      can_change_events: Dopo aver terminato la sua iscrizione sarà ancora in grado
+        di cambiare le informazioni inerenti dell'evento.
       difference_tooltip: Clicca qui per avere più informazioni
+      link_end: pagina per i dettagli.
+      registrant_access_page_title: Accesso dell'iscritto
+      registration: Iscrizione
+      registration_time: La registrazione richiede circa 15 minuti.
+      whats_the_difference: Qual'è la differenza?

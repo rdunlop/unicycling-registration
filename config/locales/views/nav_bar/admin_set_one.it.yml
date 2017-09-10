@@ -1,0 +1,11 @@
+---
+it:
+  nav_bar:
+    admin_set_one:
+      convention_setup: Configurazione gara
+      manage_music: Gestisci musica
+      manage_payments: Pagamenti
+      manage_registrants: Iscritti (modifica/stampa)
+      search_by_id_button: Riassunto
+      search_by_id_label: ID# iscrizione
+      user_management: Gestione utenti

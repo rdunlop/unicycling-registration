@@ -1,0 +1,27 @@
+---
+da:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: Adresse
+        birthplace: Fødselssted
+        city: By
+        club: Hold- eller Klubnavn
+        club_contact: Hold- eller Klubkontakt
+        country: Land
+        country_representing: Represanter, Land
+        country_residence: Statsborgerskab
+        email: Email
+        emergency_name: Navn
+        emergency_other_phone: Anden Telefon
+        emergency_primary_phone: Telefon
+        emergency_relationship: Relation
+        italian_fiscal_code: Skattekodeks påkrævet for italienske deltagere
+        mobile: Mobiltelefon
+        organization_member_number: Unicykel organsition medlems nummer
+        organization_membership_system_status: Medlems status
+        phone: Telefon
+        responsible_adult_name: Navn
+        responsible_adult_phone: Primære telfon
+        state: Stat
+        zip: Postnummer

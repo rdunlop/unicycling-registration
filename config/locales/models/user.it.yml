@@ -3,4 +3,9 @@ it:
   activerecord:
     attributes:
       user:
+        email: Account utente Email
         name: Nome
+    models:
+      user:
+        one: Utente
+        other: Utenti

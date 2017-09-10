@@ -1,0 +1,6 @@
+---
+da:
+  activerecord:
+    attributes:
+      category:
+        name: Navn

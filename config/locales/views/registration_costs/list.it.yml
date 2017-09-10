@@ -1,0 +1,8 @@
+---
+it:
+  registration_costs:
+    list:
+      from: Da
+      noncompetitor_registration_cost: Costo dell'iscrizione per accompagnatore
+      online_registration_closes: Chiusura delle iscrizioni online
+      to: a

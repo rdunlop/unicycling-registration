@@ -3,8 +3,30 @@ it:
   welcome:
     help:
       frequently_asked_questions: Domande frequenti
+      general_help: Se ha problemi o domande inerenti alla registrazione, la invitiamo
+        ad inviarci un feedback
       header: Aiuto
       i_cannot_login: Non riesco ad accedere
+      login_help: Una volta iscritto riceverà una e-mail di conferma. Controlli la
+        posta elettronica e la spam. Se non ha ricevuto nessun messaggio scelga "
+        Invia nuovamente e-mail di conferma"
+      password_account_details: Una volta iscritto al suo primo evento di monociclo,
+        può utilizzare la medesima e-mail/password per registrarsi a raduni futuri.
+        Per avere più informazioni, vedi %{link}.
+      registration: Come faccio ad iscrivermi
+      registration_help: "Una volta registrati scelga tra \"crea nuovo partecipante\"
+        e \"crea nuovo accompagnatore\" e compili tutti le informazioni richieste.\r\nPaghi
+        per l'iscrizione così da assicurarsi la registrazione."
       shared_password: Devo iscrivermi ogni anno?
+      sharing_link: Richieda l'accesso alle registrazioni della tua squadra attraverso
+        il modulo  %{link}
+      sharing_registration_details: Come condividere i dettagli dell'iscrizione
+      sharing_registration_details_help: In qualità di capitano della squadra o presidente
+        del club può richiedere l'accesso in modo da poter pagare l'iscrizioni degli
+        altri membri e potrà inoltre vedere tutti gli eventi in cui si sono iscritti.
+      subheader: Questo sito è per le  %{domain} iscrizioni al raduno di monociclo
       this_link: questo link
+      translation_help: Ho trovato una mancanza/un errore nella traduzione. Invia
+        i dettagli della traduzione nel 'feedback', oppure richiedi di diventare un
+        traduttore e contribuisci alla traduzione.
       translations: Traduzioni

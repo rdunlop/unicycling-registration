@@ -6,6 +6,8 @@ it:
         address: Indirizzo
         birthplace: Luogo di nascita
         city: Città
+        club: Nome del club o del gruppo principale
+        club_contact: Contatto del club o del gruppo principale
         country: Nazione
         country_representing: Nazione rappresentata
         country_residence: Nazione di residenza
@@ -16,8 +18,14 @@ it:
         emergency_relationship: Relazione
         italian_fiscal_code: Numero fiscale (Obbligatorio per i partecipanti italiani)
         mobile: Cellulare
+        organization_member_number: Numero di membro dell'organizzazione monociclistica
+        organization_membership_system_status: Stato dell'associato
         phone: Telefono
         responsible_adult_name: Nome
         responsible_adult_phone: Numero di telefono principale
         state: Stato
         zip: CAP
+    models:
+      contact_detail:
+        one: Dettaglio di contatto
+        other: Dettagli di contatto

@@ -5,3 +5,7 @@ it:
       registration_cost_entry:
         max_age: Età massima
         min_age: Età minima
+    models:
+      registration_cost_entry:
+        one: Tariffa d'iscrizione
+        other: Tariffe d'iscrizione

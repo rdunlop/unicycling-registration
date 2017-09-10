@@ -1,0 +1,8 @@
+---
+da:
+  activerecord:
+    attributes:
+      event:
+        accepts_wheel_size_override: Accepter overskridelse af hjulstørelse
+        artistic: Artistisk
+        best_time_format: Beste tid format

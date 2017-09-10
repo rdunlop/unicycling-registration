@@ -3,7 +3,13 @@ it:
   activerecord:
     attributes:
       event:
+        accepts_wheel_size_override: Accettazione delle varie dimensioni di ruota
         artistic: Artistico
+        best_time_format: Format del miglior tempo
         id: ID
         standard_skill: Standard Skill
         visible: Visibile
+    models:
+      event:
+        one: Evento
+        other: Eventi

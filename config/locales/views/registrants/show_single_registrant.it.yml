@@ -1,0 +1,11 @@
+---
+it:
+  registrants:
+    show_single_registrant:
+      done: Fatto
+      edit_events: Modifica eventi
+      edit_items: Modifica voci
+      edit_registration: Modifica iscrizione
+      list_payments: Lista dei pagamenti
+      printable_pdf: Stampabile (PDF)
+      registration_summary: Riassunto della registrazione

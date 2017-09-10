@@ -1,0 +1,14 @@
+---
+it:
+  admin:
+    reg_fees:
+      index:
+        automatic_increase: Una volta specificato, il periodo di registrazione scelto
+          può essere "chiuso" per l'iscritto, il costo non aumenterà automaticamente
+          con il passare del tempo.
+        can_lock_again: Dopo la "chiusura" del costo di registrazione  per l'iscritto,
+          potete scegliere di "bloccare" il costo di questo iscritto, se lo si desidera.
+        description: Questa forma le permette di specificare il costo di registrazione
+          che vuole stabilire per l'iscritto.
+        header: Modifica la quota d'iscrizione
+        set_reg_fee: Imposta la tassa di registrazione

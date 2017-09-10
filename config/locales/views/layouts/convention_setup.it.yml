@@ -2,4 +2,15 @@
 it:
   layouts:
     convention_setup:
+      convention_setup: Impostazioni del raduno
+      costs: Costi
+      custom_domain: Impostazione del dominio
+      date_deadlines: Date importanti
+      go_live: Vai online
+      information_pages: Pagine di informazioni
+      items_for_sale: Articoli in vendita
       name_and_logo: Nome e logo
+      payment_settings: Impostazioni per pagamento
+      registration_costs: Costi di iscrizione
+      registration_questions: Domande di iscrizione
+      volunteer_settings: Impostazioni per volontari

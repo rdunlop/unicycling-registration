@@ -3,5 +3,16 @@ it:
   admin:
     event_songs:
       index:
+        add_new_song: Aggiungi un nuovo brano per un iscritto
+        all_songs_together: Tutti i brani su una pagina
+        by_competition: Musica, per gara
+        by_competition_description: "Dal momento che concorrenti e gare sono stati
+          decisi, utilizzi la seguente pagina per assegnare la musica ad ogni gareggiante.
+          \r\nDa questa pagina, può scaricare un file zip contenente la musica per
+          la gara, dove all'interno i files sono in ordine d'entrata per la gara."
+        by_event: Musica, per gara
+        by_event_description: Vedi la musica che è stata caricata per ogni gara/evento
+        description: Vedi download e la musica assegnata ai partecipanti da queste
+          pagine
         header: Gestione Musica
         num_songs: "# Carica Brani"

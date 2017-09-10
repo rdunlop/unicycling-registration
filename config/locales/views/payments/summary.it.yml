@@ -2,4 +2,8 @@
 it:
   payments:
     summary:
+      cost: Costo
+      payment_details: Dettagli del pagamento
       registrant: Iscritto
+      tax: Tassa
+      total_cost: Costo totale

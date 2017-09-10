@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      combined_competition:
+        percentage_based_calculations: Procent Baseret Udregning
+        use_age_group_places: Brug aldersgruppe placering

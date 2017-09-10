@@ -1,0 +1,6 @@
+---
+it:
+  coupon_code_summaries:
+    show:
+      coupon_applied_to: 'Applicato ai:'
+      header: "%{coupon_code} Codice tagliando"

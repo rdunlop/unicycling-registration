@@ -1,0 +1,22 @@
+---
+it:
+  activerecord:
+    attributes:
+      competition:
+        award_subtitle_name: Riconoscimento conseguito (sottotitolo)
+        award_title_name: Riconoscimento conseguito (titolo)
+        combined_competition_id: Calcolo globale del campione
+        end_data_type: Immissione dati del traguardo
+        has_experts: Calcola anche gli esperti
+        import_results_into_other_competition: Importa risultati in altre competizioni
+        name: Nome della competizione
+        num_members_per_competitor: Dimensione della squadra
+        penalty_seconds: Secondi di penalità
+        scheduled_completion_at: Orario finale previsto
+        scoring_class: Punteggio di categoria
+        start_data_type: Immissione dati della partenza
+        uses_lane_assignments: Gara in corsie/in batterie
+    models:
+      competition:
+        one: competizione
+        other: competizioni

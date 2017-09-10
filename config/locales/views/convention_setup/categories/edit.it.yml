@@ -3,5 +3,11 @@ it:
   convention_setup:
     categories:
       edit:
+        description: Gli eventi sono raggruppati in differenti categorie. Es. Sport
+          di squadre, Freestyle, Muni
+        existing_categories: Categorie esistenti
+        header: Modifica categoria dell'evento
         manage_events: Gestisci eventi
+        manage_events_note: Una volta creata una categoria, scelga "Gestisci eventi"
+          per creare gli eventi all'interno della categoria
         new_category: Nuova categoria

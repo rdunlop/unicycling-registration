@@ -1,0 +1,12 @@
+---
+da:
+  activerecord:
+    attributes:
+      coupon_code:
+        code: Kode
+        description: Beskrivelse
+        inform_emails: Email til at informere om ethvert brug af Kuponkoden
+        maximum_registrant_age: Maksimal alder for tilmelding
+        max_num_uses: Maksimalt antal brug
+        name: Navn
+        price: Pris

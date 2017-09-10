@@ -1,0 +1,9 @@
+---
+it:
+  convention_setup:
+    expense_groups:
+      index:
+        description: Se vuole vendere articoli (come magliette, alloggio, ecc.) deve
+          creare una spesa di gruppo per impostare gli articoli.
+        header: Articoli in vendita
+        new_expense_group: Nuova spesa di gruppo

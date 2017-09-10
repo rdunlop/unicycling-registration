@@ -5,3 +5,7 @@ it:
       form:
         cost_header: Prezzo
         header: Modifica %{registration_cost} prezzo registrazione
+        last_minute_note: Siccome molte persone pagano all'ultimo minuto, il prezzo
+          aumenterà automaticamente fino a 36 ore dalla scadenza della data d'iscrizione.
+          Questo permette agli ultimi che desiderano iscriversi una dilazione supplementare.
+          (e anche a molti iscritti ritardatari)

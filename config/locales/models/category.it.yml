@@ -4,3 +4,7 @@ it:
     attributes:
       category:
         name: Nome
+    models:
+      category:
+        one: Categoria
+        other: Categorie

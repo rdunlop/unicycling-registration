@@ -1,0 +1,8 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      payment_settings:
+        description: Se vuole ricevere il pagamento via PayPal, inserisca qui l'email
+          del suo account PayPal.
+        header: Impostazioni per pagamento

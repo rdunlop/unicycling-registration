@@ -3,6 +3,17 @@ it:
   convention_setup:
     event_configurations:
       rules_waiver:
+        current_iuf_rulebook_link: Può trovare il Rulebook IUF corrente a
+        description: Precisare la tipologia di deroga che vuole utilizzare durante
+          la registrazione.
+        header: Deroga e regole
         noncompetitor_description: Gli accompagnatori non possono iscriversi a questi
           eventi
+        online_waiver_description: 'Online: l''utente deve firmare la deroga'
+        print_waiver_description: 'Stampa: forniremo all''utente una deroga da stampare/firmare
+          all''evento. (disponibile in anticipo sul sito in modo che i minorenni possano
+          farla firmare ai genitori)'
+        rulebook: Rulebook
         rules: Regole
+        sub_description: Precisare le regole supplementari che si vogliono fornire
+          agli utenti (es. aggiustamenti dello IUF rulebook specifici per l'evento)

@@ -3,5 +3,12 @@ it:
   activerecord:
     attributes:
       registration_cost:
+        end_date: Data di fine
         name: Nome
+        onsite: In loco
+        registrant_type: Tipologia dell'iscritto
         start_date: Data d'inizio
+    models:
+      registration_cost:
+        one: Costo di registrazione
+        other: Costi di registrazione

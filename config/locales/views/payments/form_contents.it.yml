@@ -2,5 +2,9 @@
 it:
   payments:
     form_contents:
+      cost: Costo
+      details: Dettagli
       select_all: Seleziona tutto
+      start_payment: Inizia il pagamento
       total_cost: Costi totali
+      unselect_all: Deseleziona tutto

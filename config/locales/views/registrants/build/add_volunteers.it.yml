@@ -3,4 +3,6 @@ it:
   registrants:
     build:
       add_volunteers:
+        i_accept_to_be_contacted: Accetto di essere contattato via email dal team
+          di organizzatori
         i_am_interested_in_volunteering: Sono interessato al volontariato

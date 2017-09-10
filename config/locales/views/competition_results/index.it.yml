@@ -1,0 +1,10 @@
+---
+it:
+  competition_results:
+    index:
+      description: "Caricati i PDF come \"Risultati supplementari\" in modo da fornire
+        informazioni supplementari. \r\nEsempi: Risultati del giro di Robin, Risultati
+        della battle o altri risultati."
+      published_immediately_warning: Questi files verranno pubblicati online immediatamente.
+      upload_a_file: Carica file PDF con i risultati
+      upload_these_results: Carica questi risultati

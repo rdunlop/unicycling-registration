@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      wheel_size:
+        one: Dimensione ruota
+        other: Dimensioni ruote

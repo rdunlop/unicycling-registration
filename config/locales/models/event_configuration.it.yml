@@ -3,15 +3,52 @@ it:
   activerecord:
     attributes:
       event_configuration:
+        accept_rules: Regole che devono essere accettate
+        age_calculation_base_date: Dati base per il calcolo d'età
+        artistic_closed_date: Ultimo giorno per l'accettazione di iscrizioni artistiche
         artistic_score_elimination_mode_naucc: Piccolo gruppo
         competitor: Partecipante
+        competitor_benefits: Agevolazioni per il partecipante
+        comp_noncomp_page_id: Pagina di descrizione per partecipante vs accompagnatore
+        comp_noncomp_url: Spiegazione per partecipante/accompagnatore
+        contact_email: Email di contatto del raduno
+        currency_code: Codice della moneta
+        custom_waiver_text: Condizioni di partecipazione individuale
+        dates_description: Descrizione delle date
+        enabled_locales: Lingue attivate
+        event_sign_up_closed_date: Ultimo giorno per registrarsi agli eventi
+        event_url: Sito web principale
+        location: Ubicazione
         logo_file: Logo
+        long_name: Nome completo
         max_registrants: Numero massimo di iscritti
+        music_submission_end_date: Ultimo giorno per caricare il brano musicale
         noncompetitor: Accompagnatore
+        noncompetitor_benefits: Agevolazioni per accompagnatore
+        offline_payment: Fornire dettagli per il pagamento offline
+        offline_payment_description: Dettagli per il pagamento offline
+        paypal_account: Account email PayPal
+        paypal_mode: Modalità PayPal
+        registrants_should_specify_default_wheel_size: Gli iscritti devono specificare
+          la dimensione della ruota per difetto
+        request_address: Indirizzo richiesto
+        request_emergency_contact: Contatto d'emergenza richiesto
+        request_responsible_adult: Adulto responsabile richiesto
+        rulebook_url: Rulebook PDF URL
         rules_file_name: File regole PDF
+        short_name: Nome abbreviato
         spectator: Spettatore
+        spectator_benefits: Agevolazioni spettatore
+        standard_skill: Attivare il Standard Skill Submission System
+        standard_skill_closed_date: Ultimo giorno per presentare online le routine
+          Standard Skill
         start_date: Primo giorno di gare
+        style_name: Stile pagina web
         under_construction: In Costruzione
+    models:
+      event_configurations:
+        one: Configurazione evento
+        other: Configurazioni eventi
   helpers:
     submit:
       event_configuration:

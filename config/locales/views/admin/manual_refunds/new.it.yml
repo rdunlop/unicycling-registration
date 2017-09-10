@@ -1,0 +1,10 @@
+---
+it:
+  admin:
+    manual_refunds:
+      new:
+        description: Questo non restituisce i soldi, ma cambia soltanto il conteggio
+          all'interno del sistema di iscrizione.
+        header: Nuovo rimborso
+        select_registrants: 'Seleziona gli iscritti per il rimborso pagamenti per:'
+        start_process: Prossimo passo (scegli gli elementi)

@@ -1,0 +1,12 @@
+---
+it:
+  competition_setup:
+    event_configurations:
+      edit:
+        artistic_mode_description: Questo sceglie se eliminare i punteggi 1 alto,
+          1 basso di un giudice (Piccolo evento), 1 alto, 1 basso per ogni tipo di
+          giudice durante la valutazione (Grande evento).
+        artistic_scoring_mode: Modalità di punteggio artistico
+        description: Questa impostazione riguarda tutti gli eventi presenti all'interno
+          della competizione.
+        header: Impostazioni globali per la competizione

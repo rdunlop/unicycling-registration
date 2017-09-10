@@ -3,6 +3,7 @@ it:
   admin:
     registrants:
       manage_one:
+        change_registrant_user: Cambio utente per una registrazione d'iscrizione
         edit_summary: Modificare/Riassunto
         full_registrant_list: Lista completa
         summary: Riassunto

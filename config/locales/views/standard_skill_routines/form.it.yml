@@ -1,0 +1,7 @@
+---
+it:
+  standard_skill_routines:
+    form:
+      insert_at_position: Inserire nella posizione
+      insert_new: Inserire nuovo
+      skill: Skill
