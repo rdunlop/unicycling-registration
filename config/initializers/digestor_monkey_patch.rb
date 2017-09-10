@@ -32,6 +32,6 @@ module ActionView
 end
 
 # https://github.com/rails/rails/issues/28503
-unless Rails::VERSION::STRING == "5.0.3"
+unless Rails::VERSION::STRING == "5.0.6"
   raise "Check on Monkeypatch"
 end
