@@ -513,9 +513,8 @@ describe Competitor do
 
       it "should allow multiple faults, interspersed within the attempts" do
         FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
-        travel 2.seconds do
-          FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 25, fault: true)
-        end
+        # Created 2 seconds in the future:
+        FactoryGirl.create(:distance_attempt, competitor: @comp, distance: 25, fault: true, created_at: 2.seconds.from_now)
 
         da = FactoryGirl.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 
