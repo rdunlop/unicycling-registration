@@ -26,7 +26,7 @@ gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # ne
 gem 'country_select'
 gem 'fancybox2-rails', github: 'rdunlop/fancybox2-rails', branch: "rails5" # for rails 5 support
 gem 'foundation-rails'
-gem "haml-rails", "~> 0.9"
+gem "haml-rails"
 gem "jc-validates_timeliness"
 gem 'jquery-datatables-rails'
 gem 'jquery-datetimepicker-rails'
@@ -111,9 +111,7 @@ group :test do
   gem 'rspec-rails'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
 
-  # locked to 3.0.1 because https://github.com/thoughtbot/shoulda-matchers/issues/904
-  # causes is_expected.not_to validate_presence_of(:address) to fail with an obscure message
-  gem "shoulda-matchers", "= 3.0.1", require: false
+  gem "shoulda-matchers", require: false
 
   gem 'rspec-instafail', require: false
 end
