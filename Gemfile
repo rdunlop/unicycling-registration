@@ -111,9 +111,7 @@ group :test do
   gem 'rspec-rails'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
 
-  # locked to 3.0.1 because https://github.com/thoughtbot/shoulda-matchers/issues/904
-  # causes is_expected.not_to validate_presence_of(:address) to fail with an obscure message
-  gem "shoulda-matchers", "= 3.0.1", require: false
+  gem "shoulda-matchers", require: false
 
   gem 'rspec-instafail', require: false
 end
