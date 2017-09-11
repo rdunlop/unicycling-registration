@@ -26,7 +26,7 @@ gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # ne
 gem 'country_select'
 gem 'fancybox2-rails', github: 'rdunlop/fancybox2-rails', branch: "rails5" # for rails 5 support
 gem 'foundation-rails'
-gem "haml-rails", "~> 0.9"
+gem "haml-rails"
 gem "jc-validates_timeliness"
 gem 'jquery-datatables-rails'
 gem 'jquery-datetimepicker-rails'
