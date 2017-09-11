@@ -1,0 +1,17 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      organization_membership:
+        display_membership_pages: Visualizzazione delle pagine dell'insieme dei membri
+        french_behavior_description: Specificando "Federazione Francese" suggerirà
+          agli utenti il loro numero di socio della "Federazione Francese".
+        header: Registrazione dei membri dell'associazione
+        requests_membership_number: Questo presenta la Unicycling-Organization-Membership
+          che viene richiesto per ogni partecipante.
+        should_be_members: Gli iscritti devono essere membri di un'organizzazione
+          monociclistica?
+        usa_behavior_description: Specificando "USA" è necessaria la conferma nel
+          sistema che ogni partecipante è un membro USA con il controllo del database
+          USA.
+        which_organization: Quale organizzazione monociclistica?

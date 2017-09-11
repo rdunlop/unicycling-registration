@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      heat_lane_result:
+        one: Risultato batteria e corsia
+        other: Risultati batteria e corsia

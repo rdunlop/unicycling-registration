@@ -1,0 +1,7 @@
+---
+it:
+  payments:
+    add_coupon:
+      coupon_code: Codice tagliando
+      have_a_coupon: Ha un buono ?
+      submit: Applica codice tagliando

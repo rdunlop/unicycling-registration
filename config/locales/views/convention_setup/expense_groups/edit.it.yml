@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    expense_groups:
+      edit:
+        header: "%{expense_group} - Dettagli spese di gruppo"

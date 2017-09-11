@@ -5,4 +5,8 @@ it:
       song:
         description: Descrizione
         song_file_name: Nome del file
+        updated_at: Ultimo caricamento
         uploaded_by_guest: Ospite?
+    models:
+      song:
+        one: Brano

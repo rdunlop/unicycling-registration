@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| f.read.chomp }
 
-gem 'rails'
+git_source(:github) { |name| "https://github.com/#{name}.git" }
+
+gem 'rails', '~> 5.1.0'
 
 # Authentication
 gem 'devise'
@@ -45,8 +47,7 @@ gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'rails_admin', '= 1.0.0.rc' # pre-release necessary to support rails 5
-gem "rails_admin_pundit", github: "sudosu/rails_admin_pundit"
+gem 'rails_admin'
 gem 'rake'
 gem 'redis-namespace'
 gem 'redis-rails'

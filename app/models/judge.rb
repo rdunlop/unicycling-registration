@@ -98,11 +98,11 @@ class Judge < ApplicationRecord
   def check_for_scores
     if active_scores.count.positive?
       errors.add(:base, "cannot delete judge containing a score")
-      return false
+      throw(:abort)
     end
     if distance_attempts.count.positive?
       errors.add(:base, "cannot delete judge containing distance attempts")
-      return false
+      throw(:abort)
     end
   end
 

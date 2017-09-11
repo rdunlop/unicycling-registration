@@ -1,0 +1,11 @@
+---
+it:
+  convention_setup:
+    event_configurations:
+      registrant_types:
+        current_num_registrants: Attualmente ci sono %{num} iscritti
+        header: Tipologie dell'iscritto
+        noncompetitor_description: Gli accompagnatori non possono iscriversi a questi
+          eventi
+        offered_types: Tipologia di iscrizione disponibile
+        subheader: Tipologie dell'iscritto

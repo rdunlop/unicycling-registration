@@ -1,0 +1,9 @@
+---
+it:
+  admin:
+    registrant_summaries:
+      index:
+        registrant_summaries_by_id: Riepilogo di tutti gli iscritti ordinati per ID
+          (pdf)
+        registrant_summaries_by_last_name: Riepilogo di tutti gli iscritti ordinati
+          per cognome (pdf)

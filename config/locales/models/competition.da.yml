@@ -1,0 +1,18 @@
+---
+da:
+  activerecord:
+    attributes:
+      competition:
+        award_subtitle_name: Award Undertitel
+        award_title_name: Award Titel
+        combined_competition_id: Overall Champion Beregning
+        end_data_type: Finish Line Data Entry
+        has_experts: Beregn Expert placeringer
+        import_results_into_other_competition: Importer resultater til anden konkurence
+        name: Konrurence Navn
+        num_members_per_competitor: Hold Størelse
+        penalty_seconds: Secunder pr. Straf
+        scheduled_completion_at: Planlagt tidspunkt for afslutning
+        scoring_class: Scoring Type
+        start_data_type: Start Line Data Entry
+        uses_lane_assignments: Konkurer i baner/heats

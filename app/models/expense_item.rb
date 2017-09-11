@@ -161,7 +161,7 @@ class ExpenseItem < ApplicationRecord
   def check_for_payment_details
     if payment_details.count.positive?
       errors.add(:base, "cannot delete expense_item containing a matching payment")
-      false
+      throw(:abort)
     end
   end
 

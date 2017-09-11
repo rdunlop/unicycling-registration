@@ -5,3 +5,5 @@ it:
       new:
         password_min_length: "(minimo 6 caratteri)"
         sign_up: Iscriviti
+        subheader: Questo account verrà utilizzato per tutti i raduni di monociclo
+          generati da questo sistema.

@@ -1,0 +1,14 @@
+---
+it:
+  errors:
+    messages:
+      after: dev'essere dopo %{restriction}
+      before: dev'essere prima %{restriction}
+      is_at: dev'essere a %{restriction}
+      on_or_after: dev'essere su o dopo %{restriction}
+      on_or_before: dev'essere su o prima %{restriction}
+  validates_timeliness:
+    error_value_formats:
+      date: "%Y-%m-%d"
+      datetime: "%Y-%m-%d %H:%M:%S"
+      time: "%H:%M:%S"

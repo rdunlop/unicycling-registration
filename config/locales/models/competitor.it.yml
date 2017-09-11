@@ -7,3 +7,7 @@ it:
         bib_number: ID
         gender: Genere
         name: Nome
+    models:
+      competitor:
+        one: partecipante
+        other: partecipanti

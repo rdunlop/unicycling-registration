@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      refund_detail:
+        one: Dettaglio rimborso
+        other: Dettagli rimborso

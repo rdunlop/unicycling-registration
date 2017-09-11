@@ -1,0 +1,23 @@
+---
+it:
+  admin:
+    translations:
+      index:
+        avaliable_in_multiple_languages: L'iscrizione e il sistema gare è disponibile
+          in più lingue
+        clear_translation_action: Cancella Cache traduzione
+        clear_translation_cache: Cancella Cache dopo aver modificato la traduzione
+        clear_translation_confirm: È sicuro? Questo può avere un impatto in quanto
+          la cache viene ricostruita (la preghiamo di non farlo frequentemente)
+        clear_translation_description: Una volta finite le traduzioni dei vari files
+          (e ha "applicato i cambiamenti" se fatti nella parte comune), potrebbe aver
+          bisogno di pulire la pagina cache in modo che tutte le pagine vengano rinfrescate.
+        common_translations_set: Traduzioni comuni per tutti i raduni
+        convention_available_in_languages_html: "Il\r\n<b>%{convention}</b>\r\nraduno
+          è disponibile in \r\n%{languages}"
+        convention_translation_set: Traduzioni specifiche per ogni raduno
+        header: Tradurre il contenuto
+        thank_you_for_volunteering_html: "La ringraziamo per aver tradotto alcuni
+          contenuti.\r\nSe avesse qualche domanda o problema, la preghiamo contattarci
+          tramite %{link}"
+        two_sets_of_translations: 'Ci sono due insiemi differenti di traduzione:'

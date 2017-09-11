@@ -9,6 +9,8 @@ it:
   cancel: Cancella
   competitor: Partecipante
   date:
+    formats:
+      registration_date_format: "%b %d, %Y"
     order:
     - :month
     - :day
@@ -17,11 +19,17 @@ it:
   edit: Modifica
   example: Esempio
   language_name: Italian
+  membership_number: Numero d'adesione
   'no': 'No'
   noncompetitor: Accompagnatore
+  note: Nota
   organization_membership_types:
     french_federation: Federazione francese
+    usa: USA
   pdf: "(pdf)"
+  prices_increase_at_date: Il prezzo aumenta il %{end_date}
+  prices_increase_soon: Il prezzo aumenta in meno di 1 giorno
+  show: Mostrare
   spectator: Spettatore
   validations:
     duplicate: Deve essere unico

@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      combined_competition_entry:
+        base_points: Base Points
+        tie_breaker: Tie Breaker

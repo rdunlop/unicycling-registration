@@ -1,0 +1,11 @@
+---
+it:
+  admin:
+    permissions:
+      display_acl:
+        current_access_key: La chiave d'accesso di oggi è
+        description: Questo permette pure al computer di creare account utente senza
+          inviare una email di conferma
+        header: Imposta permessi speciali per il computer
+        instructions_html: Per autorizzare un computer, <u> su questo computer</u>
+          vai a %{url} e digita la chiave d'accesso

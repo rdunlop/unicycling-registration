@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      wave_time:
+        one: Orario ondata dei partecipanti
+        other: Orari ondate dei partecipanti

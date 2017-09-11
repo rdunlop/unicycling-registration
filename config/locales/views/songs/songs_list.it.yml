@@ -3,5 +3,11 @@ it:
   songs:
     songs_list:
       add_song: Aggiungi brano
+      changes_after_deadline: Se dopo la scadenza ha bisogno di cambiare la canzone,
+        la preghiamo di contattare il direttore di gara o gli organizzatori (oppure
+        utilizza 'aiuto' ->'Feedback').
       download: Download
+      guest: Questo canzone è stato caricato da un altro iscritto?
+      music_deadline: La musica può essere caricata fino al  %{end_date}
+      reg_name: Nome di registrazione
       remove: Rimuovi

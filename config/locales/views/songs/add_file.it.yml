@@ -1,0 +1,12 @@
+---
+it:
+  songs:
+    add_file:
+      max_file_size: Dimensione massima del file é %{size_mb} MB
+      note: 'NOTA:'
+      step_1: Passo 1
+      step_1_description: Inserisci evento/descrizione
+      step_2: Passo 2
+      title: Carica canzone (passo 2)
+      upload: Carica brano musicale
+      upload_music_file: Carica file musicale

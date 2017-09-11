@@ -3,3 +3,6 @@ it:
   feedbacks:
     form:
       email: La tua Email
+      header: Feedback
+      optional: Opzionale
+      submit: Invia feedback

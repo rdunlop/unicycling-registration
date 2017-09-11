@@ -3,4 +3,11 @@ it:
   admin:
     manual_payments:
       choose:
+        choose_items: Verifica le voci che devono essere marcate come pagate
+        chosen_and_unpaid_items: Articoli scelti (ma non pagati)
+        description: Verrà inviata una email all'account dell'utente associato quando
+          il pagamento viene completato.
+        details_note: "(richiesto solo per alcuni elementi)"
+        header: Pagamento ricevuto
         mark_this_item: Seleziona questo oggetto
+        submit: Creare una registrazione di pagamento

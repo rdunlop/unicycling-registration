@@ -4,4 +4,6 @@ it:
     event_configurations:
       registration_questions:
         contact_details_requested: Dettagli contatto
+        description: Utilizzi questa pagina se vuole porre agli iscritti meno domane.
         header: Domande da porre durante la registrazione
+        request_young_users_wheel_size: Richiesta dimensione ruota per difetto

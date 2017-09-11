@@ -3,8 +3,14 @@ it:
   activerecord:
     attributes:
       payment:
+        completed_date: Data completa
         details: Dettagli (txn/note)
         note: Nota
         offline_pending_date: Data
         payment_id: Pagamento ID
         total: Totale
+        transaction_id: Transazione ID
+    models:
+      registrant:
+        one: Iscritto
+        other: Iscritti

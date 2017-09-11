@@ -4,6 +4,7 @@ it:
     registrations:
       edit:
         action: Aggiorna
+        blank_notice: Lasciare in bianco se non si vuole modificare
         change_header: Cambia Email o password
         change_password: 'Cambia password:'
         title: Il mio account

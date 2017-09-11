@@ -3,4 +3,13 @@ it:
   convention_setup:
     event_choices:
       index:
+        description: Le scelte dell'evento sono delle domande supplementari che lei
+          può presentare ai suoi partecipanti in modo da raccogliere più informazioni
+          da loro.
+        example_1: Con cambio?
         example_2: Nome della squadra
+        example_3: Capitano della squadra
+        example_4: Nome del partner di coppia
+        existing_choices: Scelta dell'evento %{event} esistente
+        header: Elenco delle scelte dell'evento per %{event}
+        new_event_choice: Nuova scelta dell'evento

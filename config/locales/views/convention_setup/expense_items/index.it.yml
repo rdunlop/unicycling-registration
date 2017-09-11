@@ -1,0 +1,9 @@
+---
+it:
+  convention_setup:
+    expense_items:
+      index:
+        description: Creare una voce di spese per ogni tipo di articolo %{expense_group}
+          che desidera vendere. Es. Maglietta S...
+        header: Elenco delle voci di spesa  %{expense_group}
+        new_expense_item: Nuova voce di spesa

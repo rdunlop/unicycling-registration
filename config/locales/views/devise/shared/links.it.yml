@@ -5,3 +5,7 @@ it:
       links:
         already_have_an_account: Hai già un account?
         forgot_your_password: Hai dimenticato la tua password?
+        log_in_here: Accedi qui
+        need_confirmation_instructions: Non ha ricevuto istruzioni di conferma?
+        new_user: Sei un nuovo utente?
+        sign_up_here: Iscriviti qui

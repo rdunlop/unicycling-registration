@@ -1,0 +1,81 @@
+---
+it:
+  simple_form:
+    hints:
+      category:
+        info_url: Questo link appare nella pagina delle categorie e può servire come
+          collegamento per informazioni aggiuntive riguardanti gli eventi in questa
+          categoria.
+      competition:
+        award_title_name: "Testo che appare nei risultati ufficiali e nelle premiazioni\r\nEs.
+          Freestyle singolo"
+        num_members_per_competitor: Per la maggior parte degli eventi questo sarà
+          "uno"
+        penalty_seconds: È possibile penalizzare un competitore per "X" secondi a
+          causa di un'infrazione (come scendere dal monociclo)?
+        scheduled_completion_at: Utilizzato per ordinare i risultati nella panoramica
+          dell'amministratore
+        scoring_class: Scegli il sistema di calcolo
+      coupon_code:
+        expense_items: Scegli le voci di spesa che saranno scontate da questo codice
+          promozionale.
+        inform_emails: Elenco di indirizzi email separati da virgole che sarà informato
+          quando qualcuno utilizza questo codice promozionale
+      event_configuration:
+        age_calculation_base_date: L'età dell'iscritto viene calcolata in base a questa
+          data (opzionale)
+        competitor_benefits: Appare nella homepage della registrazione, descrive le
+          agevolazioni dei partecipanti iscritti
+        comp_noncomp_url: Specifica un link che spiega le differenze tra le tipologie
+          di iscrizione offerte
+        contact_email: Questo è l'obiettivo per tutte le mail  "Feedback" nella pagina
+          "aiuto".
+        dates_description: Questa descrizione appare nella pagina non-connessa e deve
+          descrivere le date del raduno.
+        event_sign_up_closed_date: Dopo questa data, SOLO gli amministratori potranno
+          aggiungere eventi alle registrazioni. (possono ancora rimuoverli)
+        event_url: Links dal logo della barra menu a questo URL.
+        logo_file: Il logo dovrebbe essere 93px x 38px
+        max_registrants: Gli utenti non saranno in grado di creare nuove registrazione
+          una volta che viene definito un numero massimo di iscritti (pagato o non).
+          Specificare 0 per disattivare questa funzione.
+        music_submission_end_date: L'ultima data in cui è permesso caricare la musica
+        noncompetitor_benefits: Appare nella homepage della registrazione, descrive
+          le agevolazioni degli accompagnatori iscritti
+        spectator_benefits: Appare nella homepage della registrazione, descrive le
+          agevolazioni degli spettatori iscritti
+      event:
+        cost: Specifica il costo d'iscrizione per questo evento (facoltativo).
+      expense_item:
+        has_custom_cost: Consenti all'iscritto di scegliere quanto pagare per questo
+          articolo
+        has_details: Domanda all'utente ulteriori dettagli quando si acquista questo
+          articolo
+      page:
+        slug: Nell'URL utilizzi solo caratteri normali (non può contenere spazi)
+      payment:
+        note: 'Descrivi il pagamento. Ad esempio: soldi, assegno bancario #123'
+      registrant_best_times:
+        source_location: Immettere nome e data
+      volunteer_opportunity:
+        inform_emails: quando qualcuno si iscrive come volontario sarà inviata una
+          email a questi indirizzi
+      wave_time:
+        scheduled_time: Es. 02:00, 03:00
+    labels:
+      event:
+        accepts_music_uploads: Richiedere musica da caricare
+    'no': 'No'
+    placeholders:
+      competitor_expense_item:
+        cost: es. 12.00
+      coupon_code:
+        code: Codice per utente da inserire
+      noncompetitor_expense_item:
+        cost: es. 12.00
+      volunteer_opportunity:
+        inform_emails: Elenco di indirizzi email separati da virgole
+    required:
+      mark: "*"
+      text: richiesto
+    'yes': Sì

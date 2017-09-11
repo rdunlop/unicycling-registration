@@ -1,0 +1,9 @@
+---
+it:
+  convention_setup:
+    tenant_aliases:
+      index:
+        alias_verified: Alias verificato
+        header: Impostazioni del dominio
+        set_as_primary_domain: Imposta alias come dominio primario
+        url_of_new_domain: Inserisci l'URL del nuovo dominio

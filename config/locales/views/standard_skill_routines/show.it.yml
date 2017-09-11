@@ -3,4 +3,8 @@ it:
   standard_skill_routines:
     show:
       download_my_routine: Scarica il pdf della mia routine
+      list_of_approved_skills_here: elenco di tutti gli skills approvati
+      see_list_of_skills_html: Può vedere un %{link}
+      skills_are_saved_automatically: La tua lista di skills si salva automaticamente
+        ogni volta che vengono fatte delle modifiche
       total: Totale

@@ -1,0 +1,19 @@
+---
+it:
+  admin:
+    translations:
+      convention_translations:
+        access_denied_html: Lei <b>non</b> ha accesso a tradurre il sito
+        access_enabled: Hai il permesso ad eseguire le traduzioni
+        assign_volunteers_html: Per assegnare dei volontari per la traduzione di informazioni
+          per il suo specifico evento utilizzi %{link} per assegnare loro il ruolo
+          di "traduttore".
+        convention_translations_detail: Siccome le traduzioni specifiche dipendono
+          dal testo che lei utilizza durante la configurazione del raduno, necessiteranno
+          di essere tradotte da ogni gruppo di raduno o da volontari.
+        example_1: Nome dell'articolo (es. Small T-Shirt)
+        example_2: Nome dell'evento (es. Flatland)
+        example_3: Scelte dell'evento (es. Jr. Expert)
+        examples_of_convention_translations: Esempi di traduzioni specifiche del raduno
+        header: Traduzioni specifiche del raduno
+        user_management: Gestione utente

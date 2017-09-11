@@ -4,4 +4,7 @@ it:
     registrants:
       manage_all:
         deleted_question: Cancellato?
+        header: Gestione gli iscritti
         summary: Riassunto
+        undelete: Non cancellabile
+        undelete_confirmation: Non cancellare questo iscritto?

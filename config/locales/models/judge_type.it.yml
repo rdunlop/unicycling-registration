@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      judge_type:
+        one: Tipologia del giudice
+        other: Tipologie del giudice

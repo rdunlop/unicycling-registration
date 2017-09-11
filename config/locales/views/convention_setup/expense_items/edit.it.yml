@@ -1,0 +1,6 @@
+---
+it:
+  convention_setup:
+    expense_items:
+      edit:
+        header: Modificare le spese degli articoli

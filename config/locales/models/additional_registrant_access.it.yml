@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      additional_registrant_access:
+        one: Accesso supplementare per l'iscritto
+        other: Accessi supplementari per l'iscritto

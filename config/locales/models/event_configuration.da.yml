@@ -1,0 +1,28 @@
+---
+da:
+  activerecord:
+    attributes:
+      event_configuration:
+        accept_rules: Skal acceptere reglerne
+        age_calculation_base_date: Dato for beregning af alder
+        artistic_closed_date: Sidste dag for tilmelding til artistiske dicipliner
+        competitor: Deltager
+        competitor_benefits: Fordele for Deltagere
+        comp_noncomp_page_id: Beskrivelse af Forskellen mellem Deltager og Ikke-Deltager
+        comp_noncomp_url: Deltager/Ikke-Deltager Forklaring
+        contact_email: Arangement Email
+        currency_code: Kurs
+        custom_waiver_text: Definer Ansvarsfraskrivelse
+        dates_description: Dato beskrivelse
+        enabled_locales: Mulige Sprog
+        event_sign_up_closed_date: Sidste dag for tilmelding til konkurencer
+        event_url: Hoved-Hjemmeside
+        location: Sted
+        logo_file: Logo
+        long_name: Langt navn
+        max_registrants: Maks antal deltagere
+        music_submission_end_date: Sidste frist for at uploade musik
+        offline_payment: Tillad offline betaling
+        offline_payment_description: Detaljer for offline betaling
+        paypal_account: Paypal Merchant Account Email
+        paypal_mode: Paypal Mode

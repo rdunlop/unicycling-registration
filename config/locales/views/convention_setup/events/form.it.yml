@@ -1,0 +1,18 @@
+---
+it:
+  convention_setup:
+    events:
+      form:
+        advanced_settings: Impostazioni avanzate
+        artistic_closed_date: La data di chiusura per le gare artistiche è %{artistic_closed_date}
+        event_category_hint: "Precisare 'tutti' se è presente una sola categoria\r\n(nota:
+          opzioni avanzate sono disponibili sotto 'categorie d'evento')"
+        header: Modifica evento
+        standard_skill_closed_date: La data di chiusura di accettazione degli Standard
+          Skill è  %{standard_skill_closed_date}
+        standard_skill_enabled: Il sistema di accettazione dello Standard Skill è
+          abilitato?  %{enabled}
+        wheel_size_override_only_when_default_wheel_size: Permettere agli utenti di
+          specificare la dimensione della ruota per un evento è possibile soltanto
+          se l'opzione "Richiesta dimensione ruota per difetto" è prevista nelle domande
+          di iscrizione.

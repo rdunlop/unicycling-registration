@@ -3,5 +3,15 @@ it:
   convention_setup:
     pages:
       index:
+        description: Creare pagine informative disponibili al pubblico (disponibili
+          anche senza registrazione)
+        header: Pagine di informazioni
+        home_page: Se vuole creare una pagina con lo slug `home`, diventerà la homepage
+          predefinita del raduno.
         new_page: Nuova pagina
+        pages_location_description: I link di queste pagine appariranno in alto nella
+          barra del menu
+        pages_structure_description: Può creare un struttura ad albero di pagine
+        privacy_policy_page: Se crea una pagina con lo slug `politica sulla riservatezza`,
+          apparirà a piè di pagina
         special_pages: Pagine speciali

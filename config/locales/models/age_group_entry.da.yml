@@ -1,0 +1,9 @@
+---
+da:
+  activerecord:
+    attributes:
+      age_group_entry:
+        end_age: Max Alder
+        gender: Køn
+        start_age: Minimum Alder
+        wheel_size: Hjul Størelse (valgfri)

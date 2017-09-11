@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      event_choice:
+        optional_if_event_choice_id: Valgfrig hvis dette event_choice er valgt
+        required_if_event_choice_id: Påkrævet hvis dette event_choice er valgt

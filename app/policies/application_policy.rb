@@ -164,13 +164,19 @@ class ApplicationPolicy
   class Scope
     attr_reader :user, :scope
 
-    def initialize(user, scope)
+    def initialize(user_context, scope)
+      if user_context.is_a?(UserContext)
+        @user = user_context.user
+      else
+        @user = user_context
+      end
+
       @user = user
       @scope = scope
     end
 
     def resolve
-      scope
+      scope.all
     end
   end
 end

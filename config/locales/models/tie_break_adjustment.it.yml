@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      tie_break_adjustment:
+        one: Adattamento dello spareggio
+        other: Adattamenti dello spareggio

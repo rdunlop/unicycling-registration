@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      standard_skill_score:
+        one: Punteggio Standard Skill
+        other: Punteggi Standard Skill

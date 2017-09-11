@@ -3,4 +3,6 @@ it:
   registrants:
     registrant_songs:
       event: Evento
+      header: Musica per la sua routine
+      instructions: Carica musica
       song: Brano

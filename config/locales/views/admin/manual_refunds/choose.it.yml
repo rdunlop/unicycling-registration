@@ -1,0 +1,13 @@
+---
+it:
+  admin:
+    manual_refunds:
+      choose:
+        choose_items: Verifica che le voci marcate sono state rimborsate
+        description: "Prego descrivere il rimborso.\r\nEsempio: \" Cancellato. Assente.\",\"Rimborsare,
+          organizzatore.\""
+        details_note: "(richiesto solo per alcuni elementi)"
+        header: Crea rimborso
+        mark_this_item: Segna questo articolo come rimborsato
+        paid_items: Articoli a pagamento
+        submit: Creare una registrazione di rimborso

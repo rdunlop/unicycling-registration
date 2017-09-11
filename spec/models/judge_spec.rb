@@ -27,7 +27,8 @@ describe Judge do
     let!(:score) { FactoryGirl.create(:score, competitor: competitor, judge: judge) }
 
     it "cannot destroy the judge" do
-      expect(judge.destroy).to eq(false)
+      judge.destroy
+      expect(judge.destroyed?).to eq(false)
     end
   end
 

@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    models:
+      judge:
+        one: Giudice
+        other: Giudici

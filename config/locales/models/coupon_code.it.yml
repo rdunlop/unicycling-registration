@@ -5,5 +5,12 @@ it:
       coupon_code:
         code: Codice
         description: Descrizione
+        inform_emails: E-mail su cui notificare l'uso dei buoni
+        maximum_registrant_age: Età massima dell'iscritto
+        max_num_uses: Numero massimo di utilizzi
         name: Nome
         price: Prezzo
+    models:
+      coupon_code:
+        one: Codice tagliando
+        other: Codici tagliando

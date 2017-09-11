@@ -3,4 +3,6 @@ it:
   admin:
     standard_skill_routines:
       view_all:
+        header: Tutte le routines Standard Skill
         pdfs: PDF
+        standard_skill_routine_created: È stata creata una routine Standard Skill?
