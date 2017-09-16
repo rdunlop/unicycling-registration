@@ -89,7 +89,7 @@ class Member < ApplicationRecord
   end
 
   def destroy_orphaned_competitors
-    if competitor && competitor.members.none?
+    if competitor&.members&.none?
       competitor.destroy
     end
   end

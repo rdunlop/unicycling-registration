@@ -15,7 +15,7 @@ class BestTimeFormatter::MinuteSecondFormatter
   def self.from_string(string)
     minutes, sec_hund = string.split(":")
     seconds, hundreds = sec_hund.split(".")
-    hundreds = hundreds.to_i * 10 if hundreds && hundreds.length == 1
+    hundreds = hundreds.to_i * 10 if hundreds&.length == 1
     (((minutes.to_i * 60) + seconds.to_i) * 100) + hundreds.to_i
   end
 

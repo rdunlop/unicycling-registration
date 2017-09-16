@@ -517,7 +517,7 @@ class Competition < ApplicationRecord
     end
 
     # requires_age_groups is true for discance and race scoring classes
-    if scoring_helper && scoring_helper.requires_age_groups && age_group_type.nil?
+    if scoring_helper&.requires_age_groups && age_group_type.nil?
       errors.add(:age_group_type_id, "Must specify an age group when using #{scoring_class} scoring class")
     end
   end

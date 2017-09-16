@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 # Tolk config file. Generated on April 14, 2015 21:06
 # See github.com/tolk/tolk for more informations
 

@@ -66,7 +66,7 @@ RSpec.configure do |config|
     # Truncating doesn't drop schemas, ensure we're clean here, app *may not* exist
     begin
       Apartment::Tenant.drop('testing')
-    rescue
+    rescue # rubocop:disable Lint/RescueWithoutErrorClass
       nil
     end
     # Create the default tenant for our tests

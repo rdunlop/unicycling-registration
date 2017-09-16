@@ -94,7 +94,7 @@ module RailsAdmin
     module Pundit
       class AuthorizationAdapter
         def authorize(action, abstract_model = nil, model_object = nil)
-          record = model_object || abstract_model && abstract_model.model
+          record = model_object || abstract_model&.model
           if action && !policy(record).send(*action_for_pundit(action)) # Added splat
             raise ::Pundit::NotAuthorizedError.new("not allowed to #{action} this #{record}")
           end
@@ -102,7 +102,7 @@ module RailsAdmin
         end
 
         def authorized?(action, abstract_model = nil, model_object = nil)
-          record = model_object || abstract_model && abstract_model.model
+          record = model_object || abstract_model&.model
           policy(record).send(*action_for_pundit(action)) if action # Added splat
         end
 

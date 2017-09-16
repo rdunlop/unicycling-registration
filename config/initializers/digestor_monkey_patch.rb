@@ -1,3 +1,4 @@
+# rubocop:disable all
 module ActionView
   class Digestor
     class << self

@@ -659,7 +659,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def check_default_wheel_size_for_age
     max_config_age = EventConfiguration.singleton.wheel_size_configuration_max_age
     unless young_enough_to_choose_wheel_size?
-      if default_wheel_size && default_wheel_size.description != "24\" Wheel"
+      if default_wheel_size&.description != "24\" Wheel"
         errors.add(:base, "You must choose a wheel size of 24\" if you are > #{max_config_age} years old")
       end
     end

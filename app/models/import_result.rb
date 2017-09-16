@@ -41,7 +41,7 @@ class ImportResult < ApplicationRecord
 
   validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
   before_validation :set_details_if_blank
-  validates :details, presence: true, if: "points?"
+  validates :details, presence: true, if: -> { points? }
   validates :is_start_time, inclusion: { in: [true, false] }
 
   belongs_to :user

@@ -63,8 +63,8 @@ class EventConfiguration < ApplicationRecord
   mount_uploader :logo_file, LogoUploader
 
   validates :short_name, :long_name, presence: true, if: :name_logo_applied?
-  validates :event_url, format: URI.regexp(%w[http https]), unless: "event_url.nil?"
-  validates :comp_noncomp_url, format: URI.regexp(%w[http https]), unless: "comp_noncomp_url.nil? or comp_noncomp_url.empty?"
+  validates :event_url, format: URI.regexp(%w[http https]), unless: -> { event_url.nil? }
+  validates :comp_noncomp_url, format: URI.regexp(%w[http https]), unless: -> { comp_noncomp_url.blank? }
   validates :enabled_locales, presence: true
   validate :only_one_info_type
 
@@ -89,7 +89,7 @@ class EventConfiguration < ApplicationRecord
   validates :representation_type, inclusion: { in: RepresentationType::TYPES }
 
   validates :standard_skill, inclusion: { in: [true, false] }
-  validates :standard_skill_closed_date, presence: true, unless: "standard_skill.nil? or standard_skill == false"
+  validates :standard_skill_closed_date, presence: true, unless: -> { standard_skill.nil? || (standard_skill == false) }
 
   validates :usa, :iuf, inclusion: { in: [true, false] }
   validates :test_mode, inclusion: { in: [true, false] }

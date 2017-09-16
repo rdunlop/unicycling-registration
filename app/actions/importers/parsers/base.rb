@@ -1,6 +1,6 @@
 class Importers::Parsers::Base
   attr_accessor :errors
-  attr_reader :file, :file_contents
+  attr_reader :file
 
   def initialize(file = nil)
     @file = file

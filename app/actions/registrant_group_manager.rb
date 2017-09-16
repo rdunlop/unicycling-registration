@@ -12,7 +12,7 @@ class RegistrantGroupManager
 
   def add_member(new_registrant_group_member)
     max_members = registrant_group.registrant_group_type.max_members_per_group.to_i
-    if max_members > 0 && registrant_group.registrant_group_members.count >= max_members
+    if max_members.positive? && registrant_group.registrant_group_members.count >= max_members
       @errors << "Unable to add more than #{max_members} to this group"
       return false
     end

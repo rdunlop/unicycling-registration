@@ -71,13 +71,13 @@ class ChoicesValidator
     if event_selected && !reg_choice_chosen
       return true if event_choice.cell_type == "boolean"
       @registrant.errors.add(:base, "#{event_choice} must be specified")
-      reg_choice.errors.add(:value, "") unless reg_choice.nil?
-      reg_choice.errors.add(:event_category_id, "") unless reg_choice.nil?
+      reg_choice&.errors&.add(:value, "")
+      reg_choice&.errors&.add(:event_category_id, "")
       return false
     elsif !event_selected && reg_choice_chosen
       @registrant.errors.add(:base, "#{event_choice} cannot be specified if the event isn't chosen")
-      reg_choice.errors.add(:value, "") unless reg_choice.nil?
-      reg_choice.errors.add(:event_category_id, "") unless reg_choice.nil?
+      reg_choice&.errors&.add(:value, "")
+      reg_choice&.errors&.add(:event_category_id, "")
       return false
     end
     true
@@ -132,6 +132,6 @@ class ChoicesValidator
 
   def mark_event_sign_up_as_error(event)
     primary_choice_selected = reg_sign_up_record_for(event)
-    primary_choice_selected.errors.add(:signed_up, "") unless primary_choice_selected.nil? # the primary checkbox
+    primary_choice_selected&.errors&.add(:signed_up, "") # the primary checkbox
   end
 end

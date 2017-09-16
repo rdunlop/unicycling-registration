@@ -10,6 +10,10 @@ class CachedModelTest
     name
   end
 
+  def recent_changes
+    changes
+  end
+
   def changes
     {}
   end

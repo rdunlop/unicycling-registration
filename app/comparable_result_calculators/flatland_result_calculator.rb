@@ -10,7 +10,7 @@ class FlatlandResultCalculator
   end
 
   # returns the result for this competitor
-  def competitor_comparable_result(competitor, with_ineligible: nil)
+  def competitor_comparable_result(competitor, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     if competitor.has_result?
       total_points(competitor)
     else
@@ -46,7 +46,7 @@ class FlatlandResultCalculator
     total_points - min - max
   end
 
-  def total_points_for_judge_type(competitor, _judge_type, with_ineligible: nil)
+  def total_points_for_judge_type(competitor, _judge_type, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     total_points(competitor)
   end
 

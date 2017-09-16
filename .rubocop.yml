@@ -44,9 +44,20 @@ Rails/SkipsModelValidations:
   Enabled: false
 
 # I like my variable names just fine thanks.
-Style/VariableNumber:
+Naming/VariableNumber:
   Enabled: false
 
 Rails/ApplicationRecord:
   Exclude:
     - "db/migrate/*"
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Performance/HashEachMethods:
+  # this encourages non-hash objects (like Parameters) to
+  # be re-written in invalid syntax
+  Enabled: false
