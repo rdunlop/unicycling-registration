@@ -1,4 +1,4 @@
-class FlatlandResultCalculator_2017 # rubocop:disable Style/ClassAndModuleCamelCase
+class FlatlandResultCalculator_2017 # rubocop:disable Naming/ClassAndModuleCamelCase
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?

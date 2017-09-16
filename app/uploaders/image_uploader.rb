@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class ImageUploader < TenantUploader
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

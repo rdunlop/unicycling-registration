@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class MusicUploader < TenantUploader
   # Choose what kind of storage to use for this uploader:
   # storage :file

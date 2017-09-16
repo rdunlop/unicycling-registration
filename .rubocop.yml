@@ -44,7 +44,7 @@ Rails/SkipsModelValidations:
   Enabled: false
 
 # I like my variable names just fine thanks.
-Style/VariableNumber:
+Naming/VariableNumber:
   Enabled: false
 
 Rails/ApplicationRecord:

@@ -1,7 +1,7 @@
 class UpgradeJudgingTypesToNewRules < ActiveRecord::Migration
   def up
     jt = JudgeType.find_by(name: "Presentation")
-    if jt && jt.val_1_description == "Mistakes"
+    if jt&.val_1_description == "Mistakes"
       jt.update_attributes(
         val_1_description: "Mistakes: Dismounts",
         val_2_description: "Choreography & Style",
@@ -16,7 +16,7 @@ class UpgradeJudgingTypesToNewRules < ActiveRecord::Migration
     end
 
     jt = JudgeType.find_by(name: "Technical")
-    if jt && jt.val_1_description == "Variety & Originality of Skills"
+    if jt&.val_1_description == "Variety & Originality of Skills"
       jt.update_attributes(
         val_1_description: "Quantity of Unicycling Skills & Transitions",
         val_2_description: "Mastery and Quality of Execution",
