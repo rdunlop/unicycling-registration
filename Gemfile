@@ -55,7 +55,7 @@ gem 'redis-store'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
-gem 'sidekiq', '< 5'
+gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
 gem 'unicorn', require: false
 gem 'whenever'
 

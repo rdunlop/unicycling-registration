@@ -515,11 +515,11 @@ GEM
     sexp_processor (4.10.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    sidekiq (4.2.10)
+    sidekiq (5.0.4)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
-      redis (~> 3.2, >= 3.2.1)
+      redis (~> 3.3, >= 3.3.3)
     sigar (0.7.3)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
@@ -676,7 +676,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   shoulda-matchers
-  sidekiq (< 5)
+  sidekiq (< 6)
   simple_form
   spreadsheet
   teaspoon-jasmine
