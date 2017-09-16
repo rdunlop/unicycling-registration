@@ -23,6 +23,8 @@ class Song < ApplicationRecord
   mount_uploader :song_file_name, MusicUploader
   include CachedModel
 
+  SONG_MAX_SIZE_MB = 40
+
   belongs_to :registrant, touch: true
   belongs_to :event
   belongs_to :user
@@ -33,14 +35,10 @@ class Song < ApplicationRecord
 
   validates :event_id, uniqueness: { scope: %i[user_id registrant_id], message: "cannot have multiple songs associated. Remove and re-add." }
   validate :song_size_validation
+  validates :song_file_name, presence: true
 
   def human_name
-    return nil unless has_file?
     File.basename(song_file_name.path)
-  end
-
-  def has_file?
-    song_file_name.present?
   end
 
   def uploaded_by_guest?
@@ -50,6 +48,6 @@ class Song < ApplicationRecord
   private
 
   def song_size_validation
-    errors.add(:song_file_name, "should be less than 40MB") if song_file_name.size > 40.megabytes
+    errors.add(:song_file_name, "should be less than #{SONG_MAX_SIZE_MB}MB") if song_file_name.size > SONG_MAX_SIZE_MB.megabytes
   end
 end

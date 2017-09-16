@@ -536,6 +536,18 @@ describe Competitor do
     end
   end
 
+  describe "has_music?" do
+    context "without a song" do
+      it { expect(@comp).not_to have_music }
+    end
+
+    context "with music" do
+      let!(:song) { FactoryGirl.create(:song, competitor: @comp) }
+
+      it { expect(@comp).to have_music }
+    end
+  end
+
   describe "when it has multiple time results" do
     describe "when there are DQs and live results" do
       before :each do

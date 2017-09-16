@@ -423,12 +423,7 @@ Rails.application.routes.draw do
       resources :competition_wheel_sizes, only: %i[index create destroy]
     end
 
-    resources :songs, only: [:destroy] do
-      member do
-        get :add_file
-        put :file_complete
-      end
-    end
+    resources :songs, only: [:destroy]
 
     resources :standard_skill_routines, only: %i[show index] do
       member do

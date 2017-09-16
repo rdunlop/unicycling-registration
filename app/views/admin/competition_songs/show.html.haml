@@ -35,8 +35,7 @@
           %td= song.human_name
           %td= song.updated_at
           %td.js--highlightIfBlank
-            - if song.has_file?
-              = link_to t(".download"), song.song_file_name_url, target: '_blank'
+            = link_to t(".download"), song.song_file_name_url, target: '_blank'
           %td.js--highlightIfBlank= song.competitor
           %td
             = form_tag(competition_songs_path, method: :post) do

@@ -1,0 +1,7 @@
+---
+it:
+  songs:
+    form:
+      max_file_size: Dimensione massima del file é %{size_mb} MB
+      note: 'NOTA:'
+      upload: Carica brano musicale

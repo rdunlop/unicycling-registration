@@ -50,7 +50,7 @@ describe Admin::CompetitionSongsController do
 
   describe "GET download_zip" do
     let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
-    let!(:song) { FactoryGirl.create(:song, competitor: competitor) }
+    # NOTE: on songs
 
     it "loads all songs" do
       get :download_zip, params: { competition_id: competition.to_param }

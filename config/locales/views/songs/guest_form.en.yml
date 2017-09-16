@@ -1,0 +1,7 @@
+---
+en:
+  songs:
+    guest_form:
+      max_file_size: Maximum file size is %{size_mb} MB
+      note: 'NOTE:'
+      upload: Upload Music

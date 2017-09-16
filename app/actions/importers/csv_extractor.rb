@@ -34,7 +34,11 @@ class Importers::CsvExtractor
   end
 
   def attempt_parse(upload_file, encoding)
-    CSV.read(upload_file, encoding: encoding, col_sep: separator)
+    if upload_file.is_a?(Aws::S3::Object)
+      CSV.parse(upload_file.get.body.string, encoding: encoding, col_sep: separator)
+    else
+      CSV.read(upload_file, encoding: encoding, col_sep: separator)
+    end
   rescue ArgumentError
     raise ParseError
   end

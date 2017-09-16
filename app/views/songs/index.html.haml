@@ -3,13 +3,9 @@
 %br
 
 %h1= t(".new_song")
-%fieldset.wizard
-  %legend= t(".step_1")
-  = render 'form'
-
-%fieldset.wizard.wizard_other_step
-  %legend= t(".step_2")
-  = t(".upload_file")
+.row
+  .small-12.columns
+    = render 'form'
 
 %br
 = link_to t(".add_songs_for_others"), my_songs_user_songs_path(current_user)
