@@ -53,3 +53,11 @@ Rails/ApplicationRecord:
 
 Style/FormatStringToken:
   EnforcedStyle: template
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Performance/HashEachMethods:
+  # this encourages non-hash objects (like Parameters) to
+  # be re-written in invalid syntax
+  Enabled: false

@@ -61,7 +61,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
 
   def numeric?(val)
     !Float(val).nil?
-  rescue
+  rescue # rubocop:disable Lint/RescueWithoutErrorClass
     false
   end
 
