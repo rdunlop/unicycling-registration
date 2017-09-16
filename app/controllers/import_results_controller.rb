@@ -156,14 +156,20 @@ class ImportResultsController < ApplicationController
   # POST /users/#/competitions/#/import_results/import_csv
   def import_csv
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
-    importer = Importers::ImportResultImporter.new(@competition, @user)
-    parser = Importers::Parsers::Csv.new(uploaded_file.original_file.file, read_num_laps: @competition.has_num_laps?)
 
-    if importer.process(@is_start_time, parser)
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    if uploaded_file.nil?
+      flash[:alert] = "File Not found"
     else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      importer = Importers::ImportResultImporter.new(@competition, @user)
+      parser = Importers::Parsers::Csv.new(uploaded_file.original_file.file, read_num_laps: @competition.has_num_laps?)
+
+      if importer.process(@is_start_time, parser)
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      end
     end
+
     redirect_to display_csv_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time)
   end
 
