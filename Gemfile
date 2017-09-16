@@ -55,7 +55,7 @@ gem 'redis-store'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
-gem 'sidekiq', '< 5'
+gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
 gem 'unicorn', require: false
 gem 'whenever'
 
@@ -74,7 +74,8 @@ gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
 gem 'apartment'
-gem 'apartment-sidekiq'
+gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 support
+# https://github.com/influitive/apartment-sidekiq/pull/19
 
 # Model utils
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
