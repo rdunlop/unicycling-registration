@@ -38,7 +38,7 @@ describe Song do
   end
 
   it "Must have a song file name" do
-    song.song_file_name = nil
+    song.remove_song_file_name!
     expect(song.valid?).to eq(false)
   end
 
