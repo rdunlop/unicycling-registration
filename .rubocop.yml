@@ -50,3 +50,6 @@ Style/VariableNumber:
 Rails/ApplicationRecord:
   Exclude:
     - "db/migrate/*"
+
+Style/FormatStringToken:
+  EnforcedStyle: template

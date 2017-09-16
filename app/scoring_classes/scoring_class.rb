@@ -10,7 +10,7 @@ class ScoringClass
     new(scoring_class, competition).to_hash
   end
 
-  def to_hash # rubocop:disable Metrics/MethodLength
+  def to_hash # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize
     case scoring_class
     when "Shortest Time with Tiers"
       {

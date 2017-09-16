@@ -1,4 +1,4 @@
-class Freestyle_2017_JudgePointsCalculator
+class Freestyle_2017_JudgePointsCalculator # rubocop:disable Style/ClassAndModuleCamelCase
   # Return the numeric place of this score, compared to the results of the other scores by this judge
   def judged_place(all_scores, score)
     better_scores = all_scores.count { |each_score| each_score > score }

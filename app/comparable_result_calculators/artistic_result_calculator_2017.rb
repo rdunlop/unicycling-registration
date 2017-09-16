@@ -1,4 +1,4 @@
-class ArtisticResultCalculator_2017
+class ArtisticResultCalculator_2017 # rubocop:disable Style/ClassAndModuleCamelCase
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?
