@@ -5,4 +5,9 @@
     = f.collection_select :event_id, @registrant.events_with_music_allowed, :id, :name
     = f.label :description
     = f.text_field :description
-  = f.button :submit, "Next Step"
+    %small
+      %b= t(".note")
+      = t(".max_file_size", size_mb: Song::SONG_MAX_SIZE_MB)
+      %br
+    = f.file_field :song_file_name
+  = f.button :submit, t(".upload")

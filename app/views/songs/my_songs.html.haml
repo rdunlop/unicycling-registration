@@ -3,14 +3,8 @@
 = render "songs_list"
 %br
 
-%h1 New song (Step 1)
-%fieldset.wizard
-  %legend Step 1
-  = render 'guest_form'
-
-%fieldset.wizard.wizard_other_step
-  %legend Step 2
-  Upload Music File
+%h1 New song
+= render 'guest_form'
 
 %hr
 = link_to "My Registrations", user_registrants_path(current_user), class: "button secondary"

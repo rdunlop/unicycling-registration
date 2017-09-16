@@ -37,6 +37,11 @@ describe Song do
     expect(song.valid?).to eq(false)
   end
 
+  it "Must have a song file name" do
+    song.song_file_name = nil
+    expect(song.valid?).to eq(false)
+  end
+
   describe "with a song created" do
     let(:registrant) { FactoryGirl.create(:registrant) }
     let!(:song1) { FactoryGirl.create(:song, registrant: registrant)}

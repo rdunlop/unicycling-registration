@@ -1,5 +1,5 @@
 class SongPolicy < ApplicationPolicy
-  %i[update destroy add_file my_songs create_guest_song file_complete].each do |sym|
+  %i[update destroy my_songs create_guest_song].each do |sym|
     define_method("#{sym}?") do
       # allow DJ to upload new music for other registrants
       music_management?
