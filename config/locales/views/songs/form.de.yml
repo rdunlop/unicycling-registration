@@ -1,0 +1,7 @@
+---
+de:
+  songs:
+    form:
+      max_file_size: Die maximale Dateigröße beträgt %{size_mb} MB
+      note: 'Hinweis:'
+      upload: Musik hochladen

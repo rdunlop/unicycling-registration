@@ -23,5 +23,4 @@
           %td= song.human_name
           %td= song.updated_at
           %td
-            - if song.has_file?
-              = link_to t('.download'), song.song_file_name_url, target: '_blank'
+            = link_to t('.download'), song.song_file_name_url, target: '_blank'

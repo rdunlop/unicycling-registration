@@ -1,0 +1,7 @@
+---
+fr:
+  songs:
+    form:
+      max_file_size: Taille maximum du fichier  %{size_mb} MB
+      note: 'NOTE:'
+      upload: Télécharger la musique

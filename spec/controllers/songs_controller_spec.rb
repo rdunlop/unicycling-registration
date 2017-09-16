@@ -33,7 +33,8 @@ describe SongsController do
   # Song. As you add validations to Song, be sure to
   # adjust the attributes here as well.
   let(:event) { FactoryGirl.create(:event) }
-  let(:valid_attributes) { { description: "MyString", event_id: event.id } }
+  let(:song_file) { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', 'example.mp3'), 'audio/mp3') }
+  let(:valid_attributes) { { description: "MyString", event_id: event.id, song_file_name: song_file } }
 
   describe "GET index" do
     it "hsows all songs for reg" do
@@ -63,7 +64,7 @@ describe SongsController do
 
       it "redirects to the song add_file page" do
         post :create, params: { song: valid_attributes, registrant_id: @reg.to_param }
-        expect(response).to redirect_to(add_file_song_path(Song.last))
+        expect(response).to redirect_to(registrant_songs_path(@reg))
       end
     end
 

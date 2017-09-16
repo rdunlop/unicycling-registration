@@ -423,7 +423,7 @@ class Competitor < ApplicationRecord
   end
 
   def has_music?
-    music_file.present? && music_file.has_file?
+    music_file.present?
   end
 
   def club

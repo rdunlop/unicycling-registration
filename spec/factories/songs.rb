@@ -24,7 +24,7 @@
 FactoryGirl.define do
   factory :song do
     description "MyString"
-    song_file_name "MyString"
+    song_file_name { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', 'example.mp3'), 'audio/mp3') }
     event
     registrant
     user
