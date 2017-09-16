@@ -9,8 +9,12 @@ module CachedModel
     end
   end
 
+  def recent_changes
+    saved_changes.transform_values(&:first)
+  end
+
   def update_last_modified_collection_cache
-    return unless (changes.keys - ignored_for_collection_invalidation_fields).any?
+    return unless (recent_changes.keys - ignored_for_collection_invalidation_fields).any?
     do_touch
   end
 

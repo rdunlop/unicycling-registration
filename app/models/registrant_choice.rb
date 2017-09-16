@@ -25,7 +25,7 @@ class RegistrantChoice < ApplicationRecord
   belongs_to :event_choice
   belongs_to :registrant, inverse_of: :registrant_choices, touch: true
 
-  validates :value, format: { with: /\A([0-9]{1,2}:)+[0-9]{2}\z/, message: "must be of the form hh:mm:ss or mm:ss"}, allow_blank: true, if: "event_choice.try(:cell_type) == 'best_time'"
+  validates :value, format: { with: /\A([0-9]{1,2}:)+[0-9]{2}\z/, message: "must be of the form hh:mm:ss or mm:ss"}, allow_blank: true, if: -> { event_choice.try(:cell_type) == 'best_time' }
 
   def has_value?
     case event_choice.cell_type
