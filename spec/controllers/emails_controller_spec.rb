@@ -6,11 +6,47 @@ describe EmailsController do
     sign_in @user
   end
 
+  describe "GET index" do
+    it "can view the page" do
+      get :index
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET list" do
+    it "can view the page" do
+      get :list, params: { filter_email: { filter: "confirmed_accounts" } }
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET download" do
+    it "can view the page" do
+      get :download
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET sent" do
+    it "can view the page" do
+      mass_email = FactoryGirl.create(:mass_email)
+      get :sent, params: { id: mass_email.id }
+      expect(response).to be_success
+    end
+  end
+
+  describe "GET all_sent" do
+    it "can view the page" do
+      get :all_sent
+      expect(response).to be_success
+    end
+  end
+
   describe "POST send_email" do
     it "can send an e-mail" do
       FactoryGirl.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] } }
+      post :create, params: { email: {subject: "Hello werld", body: "This is the body"}, filter: "confirmed_accounts", arguments: "" }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
       expect(MassEmail.count).to eq(1)
@@ -23,7 +59,7 @@ describe EmailsController do
         FactoryGirl.create(:user)
       end
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: {subject: "Hello werld", body: "This is the body", confirmed_accounts: true, competition_id: [] } }
+      post :create, params: { email: {subject: "Hello werld", body: "This is the body"}, filter: "confirmed_accounts", arguments: "" }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(2)
 

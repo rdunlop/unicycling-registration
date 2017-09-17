@@ -1,4 +1,4 @@
-class EmailFilters::Competitions
+class EmailFilters::Event
   attr_reader :arguments
 
   def initialize(arguments = nil)
@@ -6,60 +6,52 @@ class EmailFilters::Competitions
   end
 
   def self.filter
-    "competition"
+    "event"
   end
 
   def self.description
-    "Users who are assigned to a competition"
+    "Users who have SIGNED UP for an Event"
   end
 
   # Possible options :boolean, :select, :multi_select
   def self.input_type
-    :multi_select
+    :select
   end
 
   # For use in the input builder
   # Each of these objects should have a policy which
   # responds to `:contact_registrants?`
   def self.possible_arguments
-    Competition.event_order.all
+    ::Event.all
   end
 
   # For use in the input builder
   # Should return an array [descriptive_string, element_id]
   def self.show_argument(element)
-    [element, element.id]
+    ["#{element.category} - #{element}", element.id]
   end
 
   def detailed_description
-    "Emails of users/registrants associated with #{competitions.map(&:to_s).join(' ')}"
+    "Emails of users/registrants Signed up for the Event: #{event}"
   end
 
   def filtered_user_emails
-    competitions.map(&:registrants).flatten.map(&:user).map(&:email).compact.uniq
+    users = event.registrant_event_sign_ups.signed_up.map(&:registrant).map(&:user).uniq
+    users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    competitions.map(&:registrants).flatten.map(&:contact_detail).compact.map(&:email).compact.uniq
+    []
   end
 
   # object whose policy must respond to `:contact_registrants?`
   def authorization_object
-    competitions
+    event
   end
 
   private
 
-  def competitions
-    return @competitions if @competitions
-
-    @competitions = []
-    if arguments.present?
-      arguments.each do |cid|
-        @competitions << Competition.find(cid) if cid.present?
-      end
-    end
-
-    @competitions
+  def event
+    ::Event.find(arguments) if arguments.present?
   end
 end

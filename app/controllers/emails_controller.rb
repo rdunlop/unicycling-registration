@@ -1,11 +1,11 @@
 class EmailsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_contact
+  before_action :authorize_contact, only: %i[all_sent sent download]
+  before_action :authorize_some_contact, only: [:index]
   include ExcelOutputter
 
   def index
     set_email_breadcrumb
-    @email_form = Email.new
     @filters = filters
   end
 
@@ -37,23 +37,29 @@ class EmailsController < ApplicationController
   end
 
   def list
-    if params[:filter_email]
-      selected_filter = filters.find{|filter| filter.filter == params[:filter_email][:filter] }
-      @filter = selected_filter.new(params[:filter_email][:arguments])
+    if params[:filter_email].nil?
+      redirect_back(fallback_location: emails_path)
     end
+    @filter = create_filter(params[:filter_email])
+    check_auth(@filter.authorization_object)
+
     set_email_breadcrumb
-    @email_form = Email.new # (params[:email])
+    @email_form = Email.new
   end
 
   def create
+    @filter = create_filter(params)
+    check_auth(@filter.authorization_object)
+
     @email_form = Email.new(params[:email])
 
     if @email_form.valid?
       mass_email = MassEmail.new
       mass_email.subject = @email_form.subject
       mass_email.body = @email_form.body
-      mass_email.email_addresses = @email_form.filtered_combined_emails
-      mass_email.email_addresses_description = @email_form.filter_description
+      email_addresses = (@filter.filtered_user_emails + @filter.filtered_registrant_emails).uniq.compact
+      mass_email.email_addresses = email_addresses
+      mass_email.email_addresses_description = @filter.detailed_description
       mass_email.sent_by = current_user
       mass_email.sent_at = DateTime.current
       if mass_email.save
@@ -70,11 +76,28 @@ class EmailsController < ApplicationController
 
   private
 
+  def create_filter(params)
+    selected_filter = filters.find{|filter| filter.filter == params[:filter] }
+    selected_filter.new(params[:arguments])
+  end
+
   def filters
-    [
+    list = [
       EmailFilters::ConfirmedAccounts,
-      EmailFilters::Competitions
+      EmailFilters::UnpaidRegAccounts,
+      EmailFilters::PaidRegAccounts,
+      EmailFilters::NoRegAccounts,
+      EmailFilters::Competitions,
+      EmailFilters::Category,
+      EmailFilters::Event,
+      EmailFilters::SignedUpCategory,
+      EmailFilters::ExpenseItem
     ]
+    if config.organization_membership_config?
+      list + [EmailFilters::NonConfirmedOrganizationMembers]
+    else
+      list
+    end
   end
 
   def check_auth(auth_object)
@@ -89,6 +112,10 @@ class EmailsController < ApplicationController
 
   def authorize_contact
     authorize current_user, :contact_registrants?
+  end
+
+  def authorize_some_contact
+    authorize current_user, :contact_some_registrants?
   end
 
   def set_email_breadcrumb

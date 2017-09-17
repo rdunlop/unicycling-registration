@@ -1,4 +1,4 @@
-class EmailFilters::ConfirmedAccounts
+class EmailFilters::NonConfirmedOrganizationMembers
   attr_reader :arguments
 
   def initialize(arguments = nil)
@@ -6,15 +6,15 @@ class EmailFilters::ConfirmedAccounts
   end
 
   def self.filter
-    "confirmed_accounts"
+    "non_confirmed_organization_members"
   end
 
   def self.description
-    "All Confirmed User Accounts"
+    "User Accounts with Registrants who are not Unicycling-Organization-Members"
   end
 
   def self.input_type
-    :checkbox
+    :boolean
   end
 
   # Not necessary
@@ -28,11 +28,11 @@ class EmailFilters::ConfirmedAccounts
   end
 
   def detailed_description
-    "Confirmed User Accounts"
+    self.class.description
   end
 
   def filtered_user_emails
-    users = User.this_tenant.confirmed
+    users = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.all.reject(&:organization_membership_confirmed?).map(&:user).compact.uniq
     users.map(&:email).compact.uniq
   end
 

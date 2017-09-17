@@ -60,8 +60,14 @@ class UserPolicy < ApplicationPolicy
   end
 
   # send e-mails, etc
+  # to ALL registrants
   def contact_registrants?
     event_planner? || super_admin?
+  end
+
+  # able to contact ANY (possibly fewer) registrants
+  def contact_some_registrants?
+    director? || event_planner? || super_admin?
   end
 
   # the old way of doing manual payments

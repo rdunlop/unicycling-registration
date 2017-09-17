@@ -1,4 +1,4 @@
-class EmailFilters::ConfirmedAccounts
+class EmailFilters::NoRegAccounts
   attr_reader :arguments
 
   def initialize(arguments = nil)
@@ -6,15 +6,15 @@ class EmailFilters::ConfirmedAccounts
   end
 
   def self.filter
-    "confirmed_accounts"
+    "no_reg_accounts"
   end
 
   def self.description
-    "All Confirmed User Accounts"
+    "User Accounts with No Registrants"
   end
 
   def self.input_type
-    :checkbox
+    :boolean
   end
 
   # Not necessary
@@ -28,11 +28,11 @@ class EmailFilters::ConfirmedAccounts
   end
 
   def detailed_description
-    "Confirmed User Accounts"
+    self.class.description
   end
 
   def filtered_user_emails
-    users = User.this_tenant.confirmed
+    users = (User.this_tenant.confirmed - User.this_tenant.all_with_registrants)
     users.map(&:email).compact.uniq
   end
 
