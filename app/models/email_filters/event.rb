@@ -49,6 +49,10 @@ class EmailFilters::Event
     event
   end
 
+  def valid?
+    event
+  end
+
   private
 
   def event

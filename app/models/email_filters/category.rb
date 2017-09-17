@@ -49,6 +49,10 @@ class EmailFilters::Category
     category
   end
 
+  def valid?
+    category
+  end
+
   private
 
   def category

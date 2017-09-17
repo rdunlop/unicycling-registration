@@ -45,4 +45,8 @@ class EmailFilters::PaidRegAccounts
   def authorization_object
     nil
   end
+
+  def valid?
+    true
+  end
 end

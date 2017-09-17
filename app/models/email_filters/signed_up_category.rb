@@ -22,7 +22,7 @@ class EmailFilters::SignedUpCategory
   # Each of these objects should have a policy which
   # responds to `:contact_registrants?`
   def self.possible_arguments
-    Category.all
+    ::Category.all
   end
 
   # For use in the input builder
@@ -51,9 +51,13 @@ class EmailFilters::SignedUpCategory
     signed_up_category
   end
 
+  def valid?
+    signed_up_category
+  end
+
   private
 
   def signed_up_category
-    Category.find(arguments) if arguments.present?
+    ::Category.find(arguments) if arguments.present?
   end
 end

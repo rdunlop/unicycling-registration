@@ -49,6 +49,10 @@ class EmailFilters::ExpenseItem
     expense_item
   end
 
+  def valid?
+    expense_item
+  end
+
   private
 
   def expense_item

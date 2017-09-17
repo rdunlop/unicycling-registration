@@ -38,9 +38,18 @@ class EmailsController < ApplicationController
 
   def list
     if params[:filter_email].nil?
+      skip_authorization
+      flash[:alert] = "You must specify a filter"
       redirect_back(fallback_location: emails_path)
+      return
     end
     @filter = create_filter(params[:filter_email])
+    unless @filter&.valid?
+      skip_authorization
+      flash[:alert] = "You must specify arguments to this filter"
+      redirect_back(fallback_location: emails_path)
+      return
+    end
     check_auth(@filter.authorization_object)
 
     set_email_breadcrumb

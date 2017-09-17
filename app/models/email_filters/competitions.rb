@@ -48,6 +48,10 @@ class EmailFilters::Competitions
     competitions
   end
 
+  def valid?
+    competitions.any?
+  end
+
   private
 
   def competitions
