@@ -6,6 +6,7 @@ class EmailsController < ApplicationController
   def index
     set_email_breadcrumb
     @email_form = Email.new
+    @filters = filters
   end
 
   def all_sent
@@ -36,8 +37,12 @@ class EmailsController < ApplicationController
   end
 
   def list
+    if params[:filter_email]
+      selected_filter = filters.find{|filter| filter.filter == params[:filter_email][:filter] }
+      @filter = selected_filter.new(params[:filter_email][:arguments])
+    end
     set_email_breadcrumb
-    @email_form = Email.new(params[:email])
+    @email_form = Email.new # (params[:email])
   end
 
   def create
@@ -64,6 +69,23 @@ class EmailsController < ApplicationController
   end
 
   private
+
+  def filters
+    [
+      EmailFilters::ConfirmedAccounts,
+      EmailFilters::Competitions
+    ]
+  end
+
+  def check_auth(auth_object)
+    auth_object = current_user if auth_object.nil?
+
+    if auth_object.is_a?(Array)
+      auth_object.each { |auth| check_auth(auth) }
+    else
+      authorize auth_object, :contact_registrants?
+    end
+  end
 
   def authorize_contact
     authorize current_user, :contact_registrants?

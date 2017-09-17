@@ -19,6 +19,16 @@
 
 %b Only choose <u>One</u> Option for filtering. This page doesn't understand anything more complicated.
 
+- @filters.each do |filter|
+  %h4 #{filter.description}
+
+  = simple_form_for :filter_email, url: list_emails_path, method: :get do |f|
+    = f.hidden_field :filter, value: filter.filter
+    - if [:multi_select, :select].include?(filter.input_type)
+      - allowed_arguments = filter.possible_arguments.select{|el| policy(el).contact_registrants? }
+      = f.select :arguments, allowed_arguments.each {|el| filter.show_argument(el) }, {include_blank: true}, class: "chosen-select", multiple: (filter.input_type == :multi_select)
+    = f.button :submit, "Get Email List", class: "focus_button"
+
 %h4 Filter
 = render :partial => "/shared/error_messages", :object => @email_form
 = simple_form_for @email_form, url: list_emails_path, method: :get do |f|
