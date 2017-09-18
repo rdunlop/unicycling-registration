@@ -14,7 +14,7 @@ class EmailFilters::ConfirmedAccounts
   end
 
   def self.input_type
-    :checkbox
+    :boolean
   end
 
   # Not necessary
