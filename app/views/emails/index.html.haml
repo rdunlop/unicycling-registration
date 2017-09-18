@@ -2,14 +2,15 @@
 
 %p From this page, you can gather e-mail addresses for various sets of registrants.
 
-%hr
+- if policy(current_user).contact_registrants?
+  %hr
 
-%h2 Download all Registrant Emails
-= link_to "Download Registrant Emails", download_emails_path, class: "button"
+  %h2 Download all Registrant Emails
+  = link_to "Download Registrant Emails", download_emails_path, class: "button"
 
-%hr
+  %hr
 
-%h2= link_to "View sent e-mails", all_sent_emails_path, class: "button"
+  %h2= link_to "View sent e-mails", all_sent_emails_path, class: "button"
 
 %hr
 
