@@ -51,5 +51,12 @@ describe Admin::ManualPaymentsController do
       pd = PaymentDetail.last
       expect(pd.expense_item).to eq(rei.expense_item)
     end
+
+    context "with invalid params" do
+      it "redirects to new_manual_payment_path" do
+        post :create
+        expect(response).to redirect_to(new_manual_payment_path)
+      end
+    end
   end
 end

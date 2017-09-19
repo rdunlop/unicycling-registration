@@ -97,7 +97,7 @@ class CompetitionsController < ApplicationController
   def set_age_group_places
     authorize @competition
 
-    if params[:age_group_entry_id].empty?
+    if params[:age_group_entry_id].blank?
       flash[:alert] = "You must specify an age group entry"
     else
       age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])

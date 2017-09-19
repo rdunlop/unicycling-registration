@@ -74,9 +74,9 @@ class DistanceAttemptsController < ApplicationController
   end
 
   def destroy
+    authorize @distance_attempt.judge, :can_judge?
     flash[:notice] = "Distance Deleted"
     @distance_attempt.destroy
-    authorize @distance_attempt.judge, :can_judge?
 
     redirect_back(fallback_location: judge_distance_attempts_path(@distance_attempt.judge))
   end
