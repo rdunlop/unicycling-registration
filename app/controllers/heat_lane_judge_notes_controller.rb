@@ -30,11 +30,10 @@ class HeatLaneJudgeNotesController < ApplicationController
     lane = @heat_lane_judge_note.lane
     if @heat_lane_judge_note.merge
       flash[:notice] = "Updated Time Result for Lane #{lane}"
-      redirect_to :back
     else
       flash[:alert] = "Unable to update Time Result for Lane #{lane}. Check that it exists"
-      redirect_to :back
     end
+    redirect_back(fallback_location: competition_heat_review_path(@competition, @heat_lane_judge_note.heat))
   end
 
   private

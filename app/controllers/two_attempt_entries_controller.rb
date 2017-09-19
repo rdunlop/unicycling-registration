@@ -69,10 +69,12 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def destroy
+    user = @two_attempt_entry.user
+    competition = @two_attempt_entry.competition
     @two_attempt_entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: user_competition_two_attempt_entries_path(user, competition)) }
       format.json { head :no_content }
     end
   end
@@ -140,13 +142,12 @@ class TwoAttemptEntriesController < ApplicationController
       errors = ex
     end
 
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
-      end
+    if errors
+      flash[:alert] = "Errors: #{errors}"
+    else
+      flash[:notice] = "Added #{n} rows to #{@competition}."
     end
+    redirect_back(fallback_location: user_competition_two_attempt_entries_path(@user, @competition))
   end
 
   private

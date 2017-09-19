@@ -104,7 +104,7 @@ class CompetitionsController < ApplicationController
       @competition.place_age_group_entry(age_group_entry)
       flash[:notice] = "All Places updated for #{age_group_entry}"
     end
-    redirect_to :back
+    redirect_back(fallback_location: competition_path(@competition))
   end
 
   def set_places
@@ -164,7 +164,7 @@ class CompetitionsController < ApplicationController
     else
       flash[:alert] = 'Unable to publish competition age group entry'
     end
-    redirect_to :back
+    redirect_back(fallback_location: competition_path(@competition))
   end
 
   def publish

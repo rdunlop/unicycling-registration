@@ -28,7 +28,7 @@ class Registrants::BuildController < ApplicationController
       redirect_to registrant_build_path(@registrant, steps.first)
     else
       flash[:alert] = "Unable to Update any Registrant pages"
-      redirect_to :back
+      redirect_back(fallback_location: root_path)
     end
   end
 

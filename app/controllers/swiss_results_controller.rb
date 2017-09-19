@@ -33,7 +33,7 @@ class SwissResultsController < ApplicationController
   # DELETE /users/#/competitions/#/swiss_results/destroy_all
   def destroy_all
     @time_results.destroy_all
-    redirect_to :back
+    redirect_back(fallback_location: user_competition_swiss_results_path(@user, @competition))
   end
 
   # # POST /users/#/competitions/#/swiss_results/approve
@@ -52,13 +52,12 @@ class SwissResultsController < ApplicationController
       errors = ex
     end
 
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
-      end
+    if errors
+      flash[:alert] = "Errors: #{errors}"
+    else
+      flash[:notice] = "Added #{n} rows to #{@competition}."
     end
+    redirect_back(fallback_location: user_competition_swiss_results_path(@user, @competition))
   end
 
   def dq_single

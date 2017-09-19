@@ -78,7 +78,7 @@ class DistanceAttemptsController < ApplicationController
     @distance_attempt.destroy
     authorize @distance_attempt.judge, :can_judge?
 
-    redirect_to :back
+    redirect_back(fallback_location: judge_distance_attempts_path(@distance_attempt.judge))
   end
 
   # /competitions/#/distance_attempts/list

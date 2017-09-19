@@ -66,7 +66,7 @@ class HeatLaneResultsController < ApplicationController
     @heat_lane_result.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: competition_heat_review_path(@competition, @heat_lane_result.heat)) }
       format.json { head :no_content }
     end
   end

@@ -34,7 +34,7 @@ class Admin::ManualPaymentsController < ApplicationController
     else
       add_breadcrumb "Choose Payment Items"
       flash[:alert] = "Error: #{@manual_payment.error_message}"
-      redirect_to :back
+      redirect_back(fallback_location: new_manual_payment_path)
     end
   end
 
