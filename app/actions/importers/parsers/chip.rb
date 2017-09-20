@@ -56,7 +56,7 @@ class Importers::Parsers::Chip < Importers::Parsers::Base
   end
 
   def convert_full_time_to_hash(results, full_time)
-    if full_time == "DQ" || full_time == "DSQ"
+    if ["DQ", "DSQ"].include?(full_time)
       results[:status] = "DQ"
     else
       results[:status] = nil

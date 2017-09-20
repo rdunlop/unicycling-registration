@@ -69,10 +69,12 @@ class TwoAttemptEntriesController < ApplicationController
   end
 
   def destroy
+    user = @two_attempt_entry.user
+    competition = @two_attempt_entry.competition
     @two_attempt_entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: user_competition_two_attempt_entries_path(user, competition)) }
       format.json { head :no_content }
     end
   end
@@ -101,17 +103,21 @@ class TwoAttemptEntriesController < ApplicationController
   # POST /users/#/competitions/#/two_attempt_entries/import_csv?is_start_times=true
   def import_csv
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
-    importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
-    parser = if params[:advanced]
-               Importers::Parsers::TwoAttemptSlalom.new(uploaded_file.original_file.file)
-             else
-               Importers::Parsers::TwoAttemptCsv.new(uploaded_file.original_file.file)
-             end
-
-    if importer.process(@is_start_time, parser)
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    if uploaded_file.nil?
+      flash[:alert] = "Please specify a file"
     else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      importer = Importers::TwoAttemptEntryImporter.new(@competition, current_user)
+      parser = if params[:advanced]
+                 Importers::Parsers::TwoAttemptSlalom.new(uploaded_file.original_file.file)
+               else
+                 Importers::Parsers::TwoAttemptCsv.new(uploaded_file.original_file.file)
+               end
+
+      if importer.process(@is_start_time, parser)
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      end
     end
 
     redirect_to display_csv_user_competition_two_attempt_entries_path(@user, @competition, is_start_times: @is_start_time)
@@ -140,13 +146,12 @@ class TwoAttemptEntriesController < ApplicationController
       errors = ex
     end
 
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
-      end
+    if errors
+      flash[:alert] = "Errors: #{errors}"
+    else
+      flash[:notice] = "Added #{n} rows to #{@competition}."
     end
+    redirect_back(fallback_location: user_competition_two_attempt_entries_path(@user, @competition))
   end
 
   private

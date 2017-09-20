@@ -55,7 +55,7 @@ gem 'redis-store'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
-gem 'sidekiq', '< 5'
+gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
 gem 'unicorn', require: false
 gem 'whenever'
 
@@ -74,12 +74,14 @@ gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
 gem 'apartment'
-gem 'apartment-sidekiq'
+gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 support
+# https://github.com/influitive/apartment-sidekiq/pull/19
 
 # Model utils
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
 gem 'carrierwave'
 gem 'carrierwave-aws'
+gem 'carrierwave-i18n'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
 gem 'nilify_blanks'
 gem 'validates_email_format_of'

@@ -47,16 +47,15 @@ class LaneAssignmentsController < ApplicationController
     @heat_lane_judge_note.entered_at = DateTime.current
     @heat_lane_judge_note.status = "DQ"
 
-    respond_to do |format|
-      if @heat_lane_judge_note.save
-        format.html { redirect_to :back, notice: 'Competitor successfully dq.' }
-      else
-        flash.now[:alert] = "Error marking Heat #{@heat_lane_judge_note.heat} lane #{@heat_lane_judge_note.lane} as DQ"
-        add_breadcrumb "View Heat"
-        @heat = @heat_lane_judge_note.heat
-        @lane_assignments = @competition.lane_assignments.where(heat: @heat)
-        format.html { render action: "view_heat" }
-      end
+    if @heat_lane_judge_note.save
+      flash[:notice] = 'Competitor successfully dq.'
+      redirect_back(fallback_location: view_heat_competition_lane_assignments_path(@competition))
+    else
+      flash.now[:alert] = "Error marking Heat #{@heat_lane_judge_note.heat} lane #{@heat_lane_judge_note.lane} as DQ"
+      add_breadcrumb "View Heat"
+      @heat = @heat_lane_judge_note.heat
+      @lane_assignments = @competition.lane_assignments.where(heat: @heat)
+      render action: "view_heat"
     end
   end
 

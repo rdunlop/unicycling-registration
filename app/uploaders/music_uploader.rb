@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class MusicUploader < TenantUploader
   # Choose what kind of storage to use for this uploader:
   # storage :file
@@ -13,7 +11,7 @@ class MusicUploader < TenantUploader
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
+  def extension_whitelist
     %w[mp3]
   end
 end

@@ -68,12 +68,11 @@ class HeatReviewController < ApplicationController
       errors = ex
     end
 
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to competition_heat_review_path(@competition, @heat), notice: "Added Heat # #{@heat} results" }
-      end
+    if errors
+      flash[:alert] = "Errors: #{errors}"
+      redirect_back(fallback_location: competition_heat_review_path(@competition, @heat))
+    else
+      redirect_to competition_heat_review_path(@competition, @heat), notice: "Added Heat # #{@heat} results"
     end
   end
 

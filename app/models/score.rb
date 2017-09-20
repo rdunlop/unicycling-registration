@@ -100,7 +100,7 @@ class Score < ApplicationRecord
   end
 
   def values_within_judge_type_bounds
-    if judge && judge.judge_type && all_values_present
+    if judge&.judge_type && all_values_present
       jt = judge.judge_type
       self.class::SCORES_RANGE.each do |score_number|
         validate_judge_score(score_number, jt.max_score_for(score_number))

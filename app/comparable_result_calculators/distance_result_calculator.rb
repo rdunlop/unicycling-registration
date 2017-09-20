@@ -16,7 +16,7 @@ class DistanceResultCalculator
   # Public: a comparable result, for use when determining the relative ranking of a competitor
   #
   # Returns an integer. Returns 0 if the competitor has no result, or was disqualified/dnf/etc
-  def competitor_comparable_result(competitor, with_ineligible: nil)
+  def competitor_comparable_result(competitor, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     if competitor.has_result?
       competitor.max_successful_distance || 0
     else

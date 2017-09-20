@@ -26,7 +26,7 @@ class OverallChampionResultCalculator
   end
 
   # returns the result for this competitor
-  def competitor_comparable_result(competitor, with_ineligible: nil)
+  def competitor_comparable_result(competitor, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     if competitor.has_result?
       competitor_score(competitor)
     else

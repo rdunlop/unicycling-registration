@@ -26,7 +26,7 @@ class Importers::CsvExtractor
       # If it fails to parse the file as UTF-8, try again
       begin
         return attempt_parse(upload_file, "ISO-8859-1")
-      rescue ParseError
+      rescue ParseError # rubocop:disable Lint/HandleExceptions
       end
     end
 

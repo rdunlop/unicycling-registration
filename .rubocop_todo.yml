@@ -82,7 +82,7 @@ Rails/TimeZone:
   Enabled: true
 
 # Offense count: 3
-Style/AccessorMethodName:
+Naming/AccessorMethodName:
   Exclude:
     - 'app/controllers/application_controller.rb'
     - 'app/helpers/application_helper.rb'
@@ -95,7 +95,7 @@ Style/AsciiComments:
     - 'config/initializers/tolk.rb'
 
 # Offense count: 4
-Style/ClassAndModuleCamelCase:
+Naming/ClassAndModuleCamelCase:
   Exclude:
     - 'app/scoring_classes/artistic_scoring_class_2015.rb'
     - 'app/comparable_result_calculators/artistic_result_calculator_2015.rb'
@@ -178,7 +178,7 @@ Style/MethodCallWithoutArgsParentheses:
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: snake_case, camelCase
-Style/MethodName:
+Naming/MethodName:
   Enabled: false
 
 # Offense count: 13
@@ -210,7 +210,7 @@ Style/NumericLiterals:
 # NamePrefix: is_, has_, have_
 # NamePrefixBlacklist: is_, has_, have_
 # NameWhitelist: is_a?
-Style/PredicateName:
+Naming/PredicateName:
   Exclude:
     - 'app/models/combined_competition_entry.rb'
     - 'app/models/competition.rb'
@@ -258,21 +258,21 @@ Style/SingleLineBlockParams:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: space, no_space
-Style/SpaceBeforeBlockBraces:
+Layout/SpaceBeforeBlockBraces:
   Enabled: false
 
 # Offense count: 171
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
 # SupportedStyles: space, no_space
-Style/SpaceInsideBlockBraces:
+Layout/SpaceInsideBlockBraces:
   Enabled: false
 
 # Offense count: 343
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
 # SupportedStyles: space, no_space
-Style/SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 
 # Offense count: 6597

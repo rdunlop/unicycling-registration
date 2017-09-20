@@ -12,7 +12,7 @@ class Admin::PendingPaymentsController < ApplicationController
       redirect_to payment_path(payment)
     else
       flash[:alert] = "Unable to mark payment as received"
-      redirect_to :back
+      redirect_back(fallback_location: new_manual_payment_path)
     end
   end
 

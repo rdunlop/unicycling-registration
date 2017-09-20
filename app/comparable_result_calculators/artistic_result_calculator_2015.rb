@@ -10,7 +10,7 @@ class ArtisticResultCalculator_2015
   end
 
   # returns the result for this competitor
-  def competitor_comparable_result(competitor, with_ineligible: nil)
+  def competitor_comparable_result(competitor, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     if competitor.has_result?
       total_points(competitor)
     else
@@ -42,7 +42,7 @@ class ArtisticResultCalculator_2015
     (total_results.sum / competitor.competition.judge_types.uniq.count.to_f).round(2)
   end
 
-  def total_points_for_judge_type(competitor, judge_type, with_ineligible: nil)
+  def total_points_for_judge_type(competitor, judge_type, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
 
     # this currently gives equal weight to each of the scores.

@@ -18,13 +18,17 @@ class SwissResultsController < ApplicationController
 
   def import
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
-    parser = Importers::Parsers::Swiss.new(uploaded_file.original_file.file)
-    importer = Importers::SwissResultImporter.new(@competition, @user)
-
-    if importer.process(params[:heat], parser, heats: params[:heats] == "on")
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    if uploaded_file.nil?
+      flash[:alert] = "Please specify a file"
     else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}"
+      parser = Importers::Parsers::Swiss.new(uploaded_file.original_file.file)
+      importer = Importers::SwissResultImporter.new(@competition, @user)
+
+      if importer.process(params[:heat], parser, heats: params[:heats] == "on")
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}"
+      end
     end
 
     redirect_to user_competition_swiss_results_path(@user, @competition)
@@ -33,7 +37,7 @@ class SwissResultsController < ApplicationController
   # DELETE /users/#/competitions/#/swiss_results/destroy_all
   def destroy_all
     @time_results.destroy_all
-    redirect_to :back
+    redirect_back(fallback_location: user_competition_swiss_results_path(@user, @competition))
   end
 
   # # POST /users/#/competitions/#/swiss_results/approve
@@ -52,13 +56,12 @@ class SwissResultsController < ApplicationController
       errors = ex
     end
 
-    respond_to do |format|
-      if errors
-        format.html { redirect_to :back, alert: "Errors: #{errors}" }
-      else
-        format.html { redirect_to :back, notice: "Added #{n} rows to #{@competition}." }
-      end
+    if errors
+      flash[:alert] = "Errors: #{errors}"
+    else
+      flash[:notice] = "Added #{n} rows to #{@competition}."
     end
+    redirect_back(fallback_location: user_competition_swiss_results_path(@user, @competition))
   end
 
   def dq_single

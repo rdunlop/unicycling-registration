@@ -51,6 +51,14 @@ GIT
       rails (>= 5.0)
       safe_yaml (>= 0.8.6)
 
+GIT
+  remote: https://github.com/tmster/apartment-sidekiq.git
+  revision: 067313397b0e3c70387d0445559d8336141b6f1d
+  specs:
+    apartment-sidekiq (1.1.0)
+      apartment (~> 2.0)
+      sidekiq (>= 2.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -101,25 +109,25 @@ GEM
     annotate (2.7.2)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
-    apartment (1.2.0)
+    apartment (2.0.0)
       activerecord (>= 3.1.2, < 6.0)
+      public_suffix (~> 2.0.5)
       rack (>= 1.3.6)
-    apartment-sidekiq (1.1.0)
-      apartment (~> 1.0)
-      sidekiq (>= 2.11)
     arel (8.0.0)
     ast (2.3.0)
     autoprefixer-rails (7.1.4)
       execjs
-    aws-sdk (2.6.1)
-      aws-sdk-resources (= 2.6.1)
-    aws-sdk-core (2.6.1)
+    aws-sdk (2.10.47)
+      aws-sdk-resources (= 2.10.47)
+    aws-sdk-core (2.10.47)
+      aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
     aws-sdk-rails (1.0.1)
       aws-sdk-resources (~> 2)
       railties (>= 3)
-    aws-sdk-resources (2.6.1)
-      aws-sdk-core (= 2.6.1)
+    aws-sdk-resources (2.10.47)
+      aws-sdk-core (= 2.10.47)
+    aws-sigv4 (1.0.2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -153,15 +161,14 @@ GEM
       sshkit (~> 1.2)
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
-    carrierwave (0.11.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
+    carrierwave (1.1.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
       mime-types (>= 1.16)
-      mimemagic (>= 0.3.0)
-    carrierwave-aws (1.0.1)
-      aws-sdk (~> 2.0)
-      carrierwave (~> 0.7)
+    carrierwave-aws (1.2.0)
+      aws-sdk (~> 2.1)
+      carrierwave (>= 0.7, < 2.0)
+    carrierwave-i18n (0.2.0)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
@@ -221,7 +228,7 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.1.2)
+    devise-i18n (1.2.0)
     diff-lcs (1.3)
     docile (1.1.5)
     equalizer (0.0.11)
@@ -250,7 +257,7 @@ GEM
       railties (>= 3.2, < 5.2)
     foreman (0.84.0)
       thor (~> 0.19.1)
-    foundation-rails (6.3.0.0)
+    foundation-rails (6.4.1.2)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
@@ -274,7 +281,7 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     http_accept_language (2.1.1)
-    i18n (0.7.0)
+    i18n (0.8.6)
     i18n_data (0.7.0)
     ice_nine (0.11.2)
     jc-validates_timeliness (3.1.1)
@@ -292,7 +299,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    json (2.0.2)
+    json (2.1.0)
     json-jwt (1.5.2)
       activesupport
       bindata
@@ -321,19 +328,17 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
-    monetize (1.6.0)
-      money (~> 6.8)
-    money (6.8.1)
-      i18n (>= 0.6.4, <= 0.7.0)
-      sixarm_ruby_unaccent (>= 1.1.1, < 2)
-    money-rails (1.8.0)
+    monetize (1.7.0)
+      money (~> 6.9)
+    money (6.9.0)
+      i18n (>= 0.6.4, < 0.9)
+    money-rails (1.9.0)
       activesupport (>= 3.0)
-      monetize (~> 1.6.0)
-      money (~> 6.8.1)
+      monetize (~> 1.7.0)
+      money (~> 6.9.0)
       railties (>= 3.0)
     multi_json (1.12.2)
     multipart-post (2.0.0)
@@ -349,11 +354,11 @@ GEM
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
     numerizer (0.1.1)
-    order_as_specified (1.1)
-      activerecord (>= 4.0)
+    order_as_specified (1.3)
+      activerecord (>= 4.0.1)
     orm_adapter (0.5.0)
-    paper_trail (5.2.2)
-      activerecord (>= 3.0, < 6.0)
+    paper_trail (7.1.3)
+      activerecord (>= 4.0, < 5.2)
       request_store (~> 1.1)
     parallel (1.12.0)
     parser (2.4.0.0)
@@ -374,14 +379,14 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    public_suffix (3.0.0)
+    public_suffix (2.0.5)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.3)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
-    rack-protection (1.5.3)
+    rack-protection (2.0.0)
       rack
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
@@ -428,7 +433,7 @@ GEM
       rake
     raindrops (0.18.0)
     rake (12.1.0)
-    recaptcha (0.6.0)
+    recaptcha (4.4.1)
       json
     redis (3.3.3)
     redis-actionpack (5.0.1)
@@ -451,12 +456,12 @@ GEM
       redis (>= 2.2)
     ref (2.0.0)
     remotipart (1.3.1)
-    request_store (1.3.1)
+    request_store (1.3.2)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
     rolify (5.1.0)
-    rollbar (2.15.1)
+    rollbar (2.15.4)
       multi_json
     rspec (3.6.0)
       rspec-core (~> 3.6.0)
@@ -483,15 +488,15 @@ GEM
     rspec-support (3.6.0)
     rspec_junit_formatter (0.3.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (0.49.1)
+    rubocop (0.50.0)
       parallel (~> 1.10)
       parser (>= 2.3.3.1, < 3.0)
       powerpack (~> 0.1)
-      rainbow (>= 1.99.1, < 3.0)
+      rainbow (>= 2.2.2, < 3.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-ole (1.2.12)
-    ruby-progressbar (1.8.1)
+    ruby-progressbar (1.8.3)
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
     rubyzip (1.2.1)
@@ -509,11 +514,11 @@ GEM
     sexp_processor (4.10.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    sidekiq (4.2.9)
+    sidekiq (5.0.4)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
-      redis (~> 3.2, >= 3.2.1)
+      redis (~> 3.3, >= 3.3.3)
     sigar (0.7.3)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
@@ -523,7 +528,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    sixarm_ruby_unaccent (1.1.1)
     slop (3.6.0)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
@@ -558,7 +562,7 @@ GEM
     timeliness (0.3.8)
     timers (4.1.2)
       hitimes
-    tinymce-rails (4.6.6)
+    tinymce-rails (4.6.7)
       railties (>= 3.1.1)
     ttfunk (1.4.0)
     tzinfo (1.2.3)
@@ -602,7 +606,7 @@ DEPENDENCIES
   acts_as_restful_list!
   annotate
   apartment
-  apartment-sidekiq
+  apartment-sidekiq!
   autoprefixer-rails
   aws-sdk-rails
   breadcrumbs_on_rails
@@ -615,6 +619,7 @@ DEPENDENCIES
   capybara!
   carrierwave
   carrierwave-aws
+  carrierwave-i18n
   cocoon
   codeclimate_circle_ci_coverage
   coffee-rails
@@ -670,7 +675,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   shoulda-matchers
-  sidekiq (< 5)
+  sidekiq (< 6)
   simple_form
   spreadsheet
   teaspoon-jasmine
