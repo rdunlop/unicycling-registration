@@ -30,6 +30,14 @@ describe PreliminaryExternalResultsController do
     end
   end
 
+  describe "POST approve" do
+    it "redirects" do
+      # external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor, details: "My details")
+      post :approve, params: { competition_id: @competition.id }
+      expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
+    end
+  end
+
   describe "GET edit" do
     it "assigns the requested external_result as @external_result" do
       external_result = FactoryGirl.create(:external_result, :preliminary)

@@ -74,7 +74,7 @@ class PreliminaryExternalResultsController < ApplicationController
   def approve
     @external_results.map{ |er| er.update_attributes(preliminary: false) }
     flash[:notice] = "Results Approved"
-    redirect_to :back
+    redirect_back(fallback_location: competition_preliminary_external_results_path(@competition))
   end
 
   # GET /competitions/:competition_id/preliminary_external_results/display_csv

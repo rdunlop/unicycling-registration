@@ -25,13 +25,10 @@ describe DistanceAttemptsController do
   before do
     @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
     sign_in @data_entry_volunteer_user
+    @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
   end
 
   describe "GET index" do
-    before do
-      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
-    end
-
     it "should return a list of all distance_attempts" do
       get :index, params: { judge_id: @judge.id }
 
@@ -42,9 +39,6 @@ describe DistanceAttemptsController do
   end
 
   describe "POST create" do
-    before do
-      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
-    end
     def valid_attributes
       {
         registrant_id: comp.members.first.registrant.id,
@@ -72,10 +66,6 @@ describe DistanceAttemptsController do
   end
 
   describe "GET list" do
-    before do
-      @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
-    end
-
     it "should return the distance attempts" do
       da = FactoryGirl.create(:distance_attempt, judge: @judge, competitor: comp)
       get :list, params: { competition_id: competition.id }
@@ -97,16 +87,15 @@ describe DistanceAttemptsController do
     before do
       request.env["HTTP_REFERER"] = root_path
     end
+    let!(:distance_attempt) { FactoryGirl.create(:distance_attempt, competitor: comp, judge: @judge) }
 
     it "destroys the requested distance_attempt" do
-      distance_attempt = FactoryGirl.create(:distance_attempt, competitor: comp)
       expect do
         delete :destroy, params: { id: distance_attempt.to_param }
       end.to change(DistanceAttempt, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
-      distance_attempt = FactoryGirl.create(:distance_attempt, competitor: comp)
       delete :destroy, params: { id: distance_attempt.to_param }
       expect(response).to redirect_to(root_path)
     end

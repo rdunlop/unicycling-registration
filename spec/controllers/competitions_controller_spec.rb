@@ -80,6 +80,26 @@ describe CompetitionsController do
     end
   end
 
+  describe "#set_age_group_places" do
+    let(:competition) { FactoryGirl.create(:timed_competition) }
+    let(:age_group_type) { competition.age_group_type }
+    let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+
+    context "with valid params" do
+      it "renders" do
+        post :set_age_group_places, params: { id: competition.id, age_group_entry_id: age_group_entry.id }
+        expect(response).to redirect_to(competition_path(competition))
+      end
+    end
+
+    context "with invalid params" do
+      it "renders" do
+        post :set_age_group_places, params: { id: competition.id }
+        expect(response).to redirect_to(competition_path(competition))
+      end
+    end
+  end
+
   describe "#set_places" do
     it "renders" do
       post :set_places, params: { id: competition.id }
@@ -108,6 +128,26 @@ describe CompetitionsController do
       delete :unlock, params: { id: competition.to_param }
       competition.reload
       expect(competition.locked?).to eq(false)
+    end
+  end
+
+  describe "POST publish_age_group_entry" do
+    let(:competition) { FactoryGirl.create(:timed_competition, :locked) }
+    let(:age_group_type) { competition.age_group_type }
+    let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+
+    context "with valid params" do
+      it "publishes the age group entry" do
+        post :publish_age_group_entry, params: { id: competition.id, age_group_entry: age_group_entry.id }
+        expect(response).to redirect_to(competition_path(competition))
+      end
+    end
+
+    context "with invalid params" do
+      it "renders" do
+        post :publish_age_group_entry, params: { id: competition.id }
+        expect(response).to redirect_to(competition_path(competition))
+      end
     end
   end
 

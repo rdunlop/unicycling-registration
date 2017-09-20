@@ -6,12 +6,10 @@
       %th Full Time
       %th DQ
       %th
-      %th
   %tbody
     - @heat_lane_results.each do |heat_lane_result|
       %tr
         %td= heat_lane_result.lane
         %td= heat_lane_result.full_time
         %td= heat_lane_result.disqualified? ? "DQ" : ""
-        %td= link_to t("edit"), edit_heat_lane_result_path(heat_lane_result)
         %td= link_to t("delete"), heat_lane_result, method: :delete, data: { confirm: t("are_you_sure") }
