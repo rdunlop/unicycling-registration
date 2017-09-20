@@ -56,6 +56,29 @@ describe LaneAssignmentsController do
     end
   end
 
+  describe "GET view_heat" do
+    it "renders" do
+      get :view_heat, params: { competition_id: @competition.id }
+      expect(response).to be_success
+    end
+  end
+
+  describe "POST dq_competitor" do
+    let(:params) do
+      {
+        heat: 1,
+        lane: 2,
+        comments: "Hello",
+        status: "DQ"
+      }
+    end
+    it "marks the competitor as dq" do
+      expect do
+        post :dq_competitor, params: { competition_id: @competition.id, heat_lane_judge_note: params }
+      end.to change(HeatLaneJudgeNote, :count).by(1)
+    end
+  end
+
   describe "GET edit" do
     it "shows the requested lane_assignment form" do
       get :edit, params: { id: lane_assignment.to_param }

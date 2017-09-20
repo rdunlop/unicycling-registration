@@ -18,13 +18,17 @@ class SwissResultsController < ApplicationController
 
   def import
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
-    parser = Importers::Parsers::Swiss.new(uploaded_file.original_file.file)
-    importer = Importers::SwissResultImporter.new(@competition, @user)
-
-    if importer.process(params[:heat], parser, heats: params[:heats] == "on")
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    if uploaded_file.nil?
+      flash[:alert] = "Please specify a file"
     else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}"
+      parser = Importers::Parsers::Swiss.new(uploaded_file.original_file.file)
+      importer = Importers::SwissResultImporter.new(@competition, @user)
+
+      if importer.process(params[:heat], parser, heats: params[:heats] == "on")
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}"
+      end
     end
 
     redirect_to user_competition_swiss_results_path(@user, @competition)
