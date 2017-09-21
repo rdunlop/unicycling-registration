@@ -48,3 +48,7 @@ set :whenever_identifier,   ->{ fetch :application }
 set :whenever_roles,        ->{ %i[db app] }
 
 set :deploytag_time_format, "%Y%m%d%H%M%S"
+
+set :rollbar_token, ENV["ROLLBAR_ACCESS_TOKEN"]
+set :rollbar_env, proc { fetch :rails_env }
+set :rollbar_role, proc { :app }
