@@ -8,3 +8,13 @@ test:
         parallel: true
   post:
     - bundle exec report_coverage
+
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - bundle exec cap stage deploy
+  production:
+    branch: master
+    commands:
+      - bundle exec cap prod deploy
