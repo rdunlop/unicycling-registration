@@ -27,6 +27,7 @@ class Exporters::PaymentDetailsExporter
     data = []
     expense_item.payment_details.includes(:payment).each do |payment_detail|
       next unless payment_detail.payment.completed
+      next if payment_detail.refunded?
       data << add_element(payment_detail, "No")
     end
     expense_item.free_items_with_reg_paid.each do |registrant_expense_item|
