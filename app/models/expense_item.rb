@@ -210,6 +210,6 @@ class ExpenseItem < ApplicationRecord
   private
 
   def paid_free_items
-    paid_items.free
+    payment_details.completed.where(refunded: false).free
   end
 end
