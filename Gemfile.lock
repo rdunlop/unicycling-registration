@@ -8,18 +8,6 @@ GIT
       request_store (~> 1.0)
 
 GIT
-  remote: https://github.com/jnicklas/capybara.git
-  revision: 7f0141d1a053e3d8301ef9036a645e7a254c4193
-  specs:
-    capybara (2.15.1)
-      addressable
-      mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-
-GIT
   remote: https://github.com/rdunlop/acts_as_restful_list.git
   revision: 913eb3030e170eaef8d1abc81e85cdc077166d03
   specs:
@@ -161,6 +149,13 @@ GEM
       sshkit (~> 1.2)
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
+    capybara (2.15.1)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     carrierwave (1.1.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -614,7 +609,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano3-unicorn
-  capybara!
+  capybara
   carrierwave
   carrierwave-aws
   carrierwave-i18n
