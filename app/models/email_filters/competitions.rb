@@ -5,38 +5,13 @@ class EmailFilters::Competitions
     @arguments = arguments
   end
 
-  def self.filter
-    "competition"
-  end
-
-  def self.description
-    "Users who are assigned to a competition"
-  end
-
-  # Possible options :boolean, :select, :multi_select
-  def self.input_type
-    :multi_select
-  end
-
-  # For use in the input builder
-  # Each of these objects should have a policy which
-  # responds to `:contact_registrants?`
-  def self.possible_arguments
-    Competition.event_order.all
-  end
-
-  def self.allowed_arguments(user)
-    possible_arguments.select{|el| Pundit.policy(user, el).contact_registrants? }
-  end
-
-  def self.usable_by?(user)
-    allowed_arguments(user).any?
-  end
-
-  # For use in the input builder
-  # Should return an array [descriptive_string, element_id]
-  def self.show_argument(element)
-    [element, element.id]
+  def self.config
+    EmailFilters::SelectType.new(
+      filter: "competition",
+      description: "Users who are assigned to a competition",
+      possible_arguments: Competition.event_order.all,
+      input_type: :multi_select
+    )
   end
 
   def detailed_description

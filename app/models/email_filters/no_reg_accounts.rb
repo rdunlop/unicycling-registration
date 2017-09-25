@@ -5,34 +5,15 @@ class EmailFilters::NoRegAccounts
     @arguments = arguments
   end
 
-  def self.filter
-    "no_reg_accounts"
-  end
-
-  def self.description
-    "User Accounts with No Registrants"
-  end
-
-  def self.input_type
-    :boolean
-  end
-
-  # Not necessary
-  def self.possible_arguments
-    nil
-  end
-
-  def self.usable_by?(user)
-    Pundit.policy(user, user).contact_registrants?
-  end
-
-  # Not necessary
-  def self.show_argument(_element)
-    nil
+  def self.config
+    EmailFilters::BooleanType.new(
+      filter: "no_reg_accounts",
+      description: "User Accounts with No Registrants"
+    )
   end
 
   def detailed_description
-    self.class.description
+    self.class.config.description
   end
 
   def filtered_user_emails

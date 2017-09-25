@@ -5,38 +5,13 @@ class EmailFilters::ExpenseItem
     @arguments = arguments
   end
 
-  def self.filter
-    "expense_item"
-  end
-
-  def self.description
-    "Users who have PAID for a particular Expense Item"
-  end
-
-  # Possible options :boolean, :select, :multi_select
-  def self.input_type
-    :select
-  end
-
-  # For use in the input builder
-  # Each of these objects should have a policy which
-  # responds to `:contact_registrants?`
-  def self.possible_arguments
-    ::ExpenseItem.all
-  end
-
-  def self.allowed_arguments(user)
-    possible_arguments.select{|el| Pundit.policy(user, el).contact_registrants? }
-  end
-
-  def self.usable_by?(user)
-    allowed_arguments(user).any?
-  end
-
-  # For use in the input builder
-  # Should return an array [descriptive_string, element_id]
-  def self.show_argument(element)
-    [element.to_s, element.id]
+  def self.config
+    EmailFilters::SelectType.new(
+      filter: "expense_item",
+      description: "Users who have PAID for a particular Expense Item",
+      possible_arguments: ::ExpenseItem.all,
+      custom_show_argument: proc{|element| [element.to_s, element.id] }
+    )
   end
 
   def detailed_description

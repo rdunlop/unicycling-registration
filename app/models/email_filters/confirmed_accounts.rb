@@ -5,30 +5,11 @@ class EmailFilters::ConfirmedAccounts
     @arguments = arguments
   end
 
-  def self.filter
-    "confirmed_accounts"
-  end
-
-  def self.description
-    "All Confirmed User Accounts"
-  end
-
-  def self.input_type
-    :boolean
-  end
-
-  # Not necessary
-  def self.possible_arguments
-    nil
-  end
-
-  def self.usable_by?(user)
-    Pundit.policy(user, user).contact_registrants?
-  end
-
-  # Not necessary
-  def self.show_argument(_element)
-    nil
+  def self.config
+    EmailFilters::BooleanType.new(
+      filter: "confirmed_accounts",
+      description: "All Confirmed User Accounts"
+    )
   end
 
   def detailed_description

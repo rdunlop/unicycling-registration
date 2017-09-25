@@ -18,7 +18,8 @@
 
 %p You can use the options to choose a subset of user accounts to send e-mail to.
 
-- @filters.each do |filter|
+- @filters.each do |filter_class|
+  - filter = filter_class.config
   - next unless filter.usable_by?(current_user)
 
   = simple_form_for :filter_email, url: list_emails_path, method: :get do |f|

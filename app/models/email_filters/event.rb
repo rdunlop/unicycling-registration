@@ -5,38 +5,13 @@ class EmailFilters::Event
     @arguments = arguments
   end
 
-  def self.filter
-    "event"
-  end
-
-  def self.description
-    "Users who have SIGNED UP for an Event"
-  end
-
-  # Possible options :boolean, :select, :multi_select
-  def self.input_type
-    :select
-  end
-
-  # For use in the input builder
-  # Each of these objects should have a policy which
-  # responds to `:contact_registrants?`
-  def self.possible_arguments
-    ::Event.all
-  end
-
-  def self.allowed_arguments(user)
-    possible_arguments.select{|el| Pundit.policy(user, el).contact_registrants? }
-  end
-
-  def self.usable_by?(user)
-    allowed_arguments(user).any?
-  end
-
-  # For use in the input builder
-  # Should return an array [descriptive_string, element_id]
-  def self.show_argument(element)
-    ["#{element.category} - #{element}", element.id]
+  def self.config
+    EmailFilters::SelectType.new(
+      filter: "event",
+      description: "Users who have SIGNED UP for an Event",
+      possible_arguments: ::Event.all,
+      custom_show_argument: proc{|element| ["#{element.category} - #{element}", element.id] }
+    )
   end
 
   def detailed_description
