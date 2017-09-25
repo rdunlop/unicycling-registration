@@ -25,6 +25,14 @@ class EmailFilters::Competitions
     Competition.event_order.all
   end
 
+  def self.allowed_arguments(user)
+    possible_arguments.select{|el| Pundit.policy(user, el).contact_registrants? }
+  end
+
+  def self.usable_by?(user)
+    allowed_arguments(user).any?
+  end
+
   # For use in the input builder
   # Should return an array [descriptive_string, element_id]
   def self.show_argument(element)

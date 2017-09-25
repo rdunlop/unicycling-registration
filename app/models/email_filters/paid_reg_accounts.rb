@@ -22,6 +22,10 @@ class EmailFilters::PaidRegAccounts
     nil
   end
 
+  def self.usable_by?(user)
+    Pundit.policy(user, user).contact_registrants?
+  end
+
   # Not necessary
   def self.show_argument(_element)
     nil
