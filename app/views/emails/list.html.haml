@@ -33,7 +33,7 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
 = simple_form_for @email_form, url: emails_path do |f|
   <b>Note</b> This form will send to all the e-mails in BOTH of the columns above.
   %br
-  = hidden_field_tag :filter, @filter.class.filter
+  = hidden_field_tag :filter, @filter.class.config.filter
   - if @filter.arguments.is_a?(Array)
     - @filter.arguments.each do |arg|
       = hidden_field_tag "arguments[]", arg

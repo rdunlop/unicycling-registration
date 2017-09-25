@@ -86,7 +86,7 @@ class EmailsController < ApplicationController
   private
 
   def create_filter(params)
-    selected_filter = filters.find{|filter| filter.filter.filter == params[:filter] }
+    selected_filter = filters.find{|filter| filter.config.filter == params[:filter] }
     selected_filter.new(params[:arguments])
   end
 
