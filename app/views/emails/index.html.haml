@@ -2,14 +2,15 @@
 
 %p From this page, you can gather e-mail addresses for various sets of registrants.
 
-%hr
+- if policy(current_user).contact_registrants?
+  %hr
 
-%h2 Download all Registrant Emails
-= link_to "Download Registrant Emails", download_emails_path, class: "button"
+  %h2 Download all Registrant Emails
+  = link_to "Download Registrant Emails", download_emails_path, class: "button"
 
-%hr
+  %hr
 
-%h2= link_to "View sent e-mails", all_sent_emails_path, class: "button"
+  %h2= link_to "View sent e-mails", all_sent_emails_path, class: "button"
 
 %hr
 
@@ -17,12 +18,17 @@
 
 %p You can use the options to choose a subset of user accounts to send e-mail to.
 
-%b Only choose <u>One</u> Option for filtering. This page doesn't understand anything more complicated.
+- @filters.each do |filter_class|
+  - filter = filter_class.config
+  - next unless filter.usable_by?(current_user)
 
-%h4 Filter
-= render :partial => "/shared/error_messages", :object => @email_form
-= simple_form_for @email_form, url: list_emails_path, method: :get do |f|
-  = render partial: "form", locals: { f: f }
-  = f.button :submit, "Get Email List", :class => "focus_button"
-%hr
-
+  = simple_form_for :filter_email, url: list_emails_path, method: :get do |f|
+    = f.hidden_field :filter, value: filter.filter
+    .row
+      .small-9.columns
+        %h4 #{filter.description}
+      .small-3.columns
+        - if [:multi_select, :select].include?(filter.input_type)
+          = f.select :arguments, filter.allowed_arguments(current_user).map {|el| filter.show_argument(el) }, {include_blank: true}, class: "chosen-select", multiple: (filter.input_type == :multi_select)
+        = f.button :submit, "Get Email List", class: "focus_button"
+  %hr

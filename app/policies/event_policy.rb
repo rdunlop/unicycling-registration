@@ -19,6 +19,10 @@ class EventPolicy < ApplicationPolicy
     director?(record)
   end
 
+  def contact_registrants?
+    director?(record) || event_planner? || super_admin?
+  end
+
   private
 
   def manage?

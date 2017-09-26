@@ -93,6 +93,10 @@ class CompetitionPolicy < ApplicationPolicy
     results?
   end
 
+  def contact_registrants?
+    director?(record.event) || competition_admin? || super_admin?
+  end
+
   def refresh_competitors?
     set_places?
   end
