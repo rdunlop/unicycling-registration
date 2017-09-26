@@ -105,7 +105,7 @@ group :naucc, :development, :caching do
 end
 
 group :test do
-  gem 'capybara', github: 'jnicklas/capybara'
+  gem 'capybara'
   gem 'codeclimate_circle_ci_coverage'
   gem 'database_cleaner'
   gem 'factory_girl_rails', '4.7.0' # https://github.com/thoughtbot/factory_girl/pull/982
