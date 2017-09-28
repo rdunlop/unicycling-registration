@@ -2,7 +2,7 @@
 
 Scroll down to see the e-mail form
 
-%h3= @email_form.filter_description
+%h3= @filter.detailed_description
 
 Note: It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
 
@@ -12,25 +12,33 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
 %table.sortable
   %thead
     %tr
-      %th Filtered User E-mail addresses (#{@email_form.filtered_user_emails.count})
-      %th Filtered Registration E-mail Addresses (#{@email_form.filtered_registrant_emails.count})
+      %th
+        Filtered User E-mail addresses
+        (#{@filter.filtered_user_emails.count})
+      %th
+        Filtered Registration E-mail Addresses
+        (#{@filter.filtered_registrant_emails.count})
   %tbody
     %tr
       %td
-        - @email_form.filtered_user_emails.each do |email|
+        - @filter.filtered_user_emails.each do |email|
           = email
           %br
       %td
-        - @email_form.filtered_registrant_emails.each do |email|
+        - @filter.filtered_registrant_emails.each do |email|
           = email
           %br
 
 %hr
 = simple_form_for @email_form, url: emails_path do |f|
-  .hide
-    = render partial: "form", locals: { f: f }
   <b>Note</b> This form will send to all the e-mails in BOTH of the columns above.
   %br
+  = hidden_field_tag :filter, @filter.class.config.filter
+  - if @filter.arguments.is_a?(Array)
+    - @filter.arguments.each do |arg|
+      = hidden_field_tag "arguments[]", arg
+  - else
+    = hidden_field_tag "arguments", @filter.arguments
 
   = f.label :subject
   = f.text_field :subject
