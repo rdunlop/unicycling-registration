@@ -3,7 +3,7 @@ jobs:
   build:
     parallelism: 4
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.4.1
         environment:
           RAILS_ENV: test
           PGHOST: localhost
@@ -51,7 +51,7 @@ jobs:
 
       - deploy:
           name: Merge and copy coverage data
-          command: bundle exec report_coverage --branch try_ci_20
+          command: bundle exec report_coverage
 
       - deploy:
           name: Deploy develop branch to staging
