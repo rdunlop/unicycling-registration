@@ -14,6 +14,15 @@ GIT
     acts_as_restful_list (0.6)
 
 GIT
+  remote: https://github.com/rdunlop/codeclimate_circle_ci_coverage.git
+  revision: 05a48a23bfa5cb18124a6ef90a8c235bae4f43c2
+  branch: add_circle_ci_2_0_support
+  specs:
+    codeclimate_circle_ci_coverage (0.2.0)
+      codeclimate-test-reporter (< 2)
+      simplecov (~> 0.11)
+
+GIT
   remote: https://github.com/rdunlop/countries.git
   revision: 09024fbee43778159dcae393ecbe8353fb696c4f
   branch: iuf_country_changes
@@ -190,11 +199,8 @@ GEM
       numerizer (~> 0.1.1)
     cliver (0.3.2)
     cocoon (1.2.10)
-    codeclimate-test-reporter (0.5.0)
-      simplecov (>= 0.7.1, < 1.0.0)
-    codeclimate_circle_ci_coverage (0.1.2)
-      codeclimate-test-reporter (~> 0.5)
-      simplecov (~> 0.11)
+    codeclimate-test-reporter (1.0.8)
+      simplecov (<= 0.13)
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -517,11 +523,11 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
-    simplecov (0.12.0)
+    simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
+    simplecov-html (0.10.2)
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
     spreadsheet (1.1.4)
@@ -614,7 +620,7 @@ DEPENDENCIES
   carrierwave-aws
   carrierwave-i18n
   cocoon
-  codeclimate_circle_ci_coverage
+  codeclimate_circle_ci_coverage!
   coffee-rails
   consistency_fail
   countries!

@@ -106,7 +106,7 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'codeclimate_circle_ci_coverage'
+  gem 'codeclimate_circle_ci_coverage', github: "rdunlop/codeclimate_circle_ci_coverage", branch: "add_circle_ci_2_0_support"
   gem 'database_cleaner'
   gem 'factory_girl_rails', '4.7.0' # https://github.com/thoughtbot/factory_girl/pull/982
   gem 'poltergeist'
