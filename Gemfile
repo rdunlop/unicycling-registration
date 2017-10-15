@@ -94,7 +94,6 @@ gem 'pg'
 
 # deployment
 gem 'capistrano', require: false
-gem "capistrano-deploytags", require: false
 gem 'capistrano-rails', require: false
 gem 'capistrano-rvm', require: false
 gem 'capistrano3-unicorn', require: false
