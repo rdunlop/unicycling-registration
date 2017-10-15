@@ -1,0 +1,68 @@
+version: 2
+jobs:
+  build:
+    parallelism: 4
+    docker:
+      - image: circleci/ruby:2.4.1
+        environment:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: robindunlop
+      - image: circleci/postgres:9.4.12-alpine
+        environment:
+          POSTGRES_USER: robindunlop
+          POSTGRES_PASSWORD: password
+    steps:
+      - checkout
+
+      # Gems
+      - restore_cache:
+          key: unicycling-registration
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: unicycling-registration
+          paths:
+            - vendor/bundle
+
+      - run: cp config/secrets.yml.template config/secrets.yml
+      - run: cp config/database.yml.template config/database.yml
+
+      # Setup DB
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out test_results/rspec.xml \
+                            --format progress \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
+
+      # Save the test results to allow downloading them for CodeClimate Reporting
+      - store_artifacts:
+          path: coverage/.resultset.json
+          prefix: coverage
+
+      - deploy:
+          name: Merge and copy coverage data
+          command: bundle exec report_coverage
+
+      - deploy:
+          name: Deploy develop branch to staging
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              bundle exec cap stage deploy
+            fi
+
+      - deploy:
+          name: Deploy master branch to production
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              bundle exec cap prod deploy
+            fi

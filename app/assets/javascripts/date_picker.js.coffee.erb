@@ -4,6 +4,9 @@ $ ->
     $(el).datetimepicker(
       timepicker: false,
       format: "Y/m/d",
+      scrollMonth: false,
+      scrollTime: false,
+      scrollInput: false,
       defaultDate: '<%= EventConfiguration.singleton.start_date.try(:strftime, "%Y/%m/%d") %>'
       )
 

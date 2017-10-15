@@ -492,6 +492,7 @@ Amazon Server Setup
 - install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
 - install PostgreSQL `sudo yum install postgresql94 postgresql94-devel`
 - install bundler `gem install bundler`
+- Set up the RAILS_ENV `echo "export RAILS_ENV=production" >> ~/.bash_profile`
 - install a JavaScript runtime
   - See http://stackoverflow.com/questions/27350634/how-to-yum-install-node-js-on-amazon-linux#answer-32664598
   - e.g. `curl https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz > node.tgz`

@@ -13,6 +13,14 @@ shared_context 'user is logged in' do
   before :each do
     login_as user
     visit '/'
+    # The above "visit" call may fail with "wrong number of arguments (given 1, expected 0)"
+    # Research shows that this is probably a kaminari/capybara issue:
+    #
+    # https://stackoverflow.com/questions/30264355/capybara-visit-method-wrong-number-of-arguments
+    # https://stackoverflow.com/questions/11848688/kaminari-and-capybara-conflict
+    # https://github.com/rspec/rspec-rails/blob/master/Capybara.md
+    #
+    # We have not solved it yet
   end
 end
 
