@@ -17,10 +17,10 @@ jobs:
 
       # Gems
       - restore_cache:
-          key: unicycling-registration
+          key: unicycling-registration-{{ checksum "Gemfile.lock" }}
       - run: bundle install --path vendor/bundle
       - save_cache:
-          key: unicycling-registration
+          key: unicycling-registration-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
