@@ -33,3 +33,6 @@ dump.rdb
 # Ignore simplecov report
 /coverage
 /config/initializers/wicked_pdf_osx.rb
+/public/packs
+/public/packs-test
+/node_modules
