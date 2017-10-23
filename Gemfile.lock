@@ -301,18 +301,18 @@ GEM
       multi_json (>= 1.3)
       securecompare
       url_safe_base64
-    kaminari (1.1.0)
+    kaminari (1.1.1)
       activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.1.0)
-      kaminari-activerecord (= 1.1.0)
-      kaminari-core (= 1.1.0)
-    kaminari-actionview (1.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
       actionview
-      kaminari-core (= 1.1.0)
-    kaminari-activerecord (1.1.0)
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
       activerecord
-      kaminari-core (= 1.1.0)
-    kaminari-core (1.1.0)
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
     kgio (2.11.0)
     libv8 (3.16.14.17)
     loofah (2.1.1)
