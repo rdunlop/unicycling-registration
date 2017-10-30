@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 11f47cfee50d0442988b4e52f45eae4fce12f4e9
+  revision: 09a343a5ef3e44117bbc9fecc295fc78d4a52e43
   specs:
     globalize (5.1.0.beta2)
       activemodel (>= 4.2, < 5.2)
@@ -559,7 +559,7 @@ GEM
     tinymce-rails (4.7.1)
       railties (>= 3.1.1)
     ttfunk (1.4.0)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
