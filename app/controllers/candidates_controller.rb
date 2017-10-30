@@ -10,7 +10,11 @@ class CandidatesController < ApplicationController
   def index
     authorize @competition.competitors.new
     add_breadcrumb "Display Competition Candidates"
-    @competitors = @competition.signed_up_competitors
+    @competitors = if @competition.score_ineligible_competitors?
+                     @competition.signed_up_competitors
+                   else
+                     @competition.signed_up_competitors.reject(&:ineligible?)
+                   end
 
     if params[:sort]
       case params[:sort]
@@ -46,6 +50,7 @@ class CandidatesController < ApplicationController
         competitors.each do |_, competitor|
           reg = Registrant.find_by!(bib_number: competitor[:bib_number])
           lane_assignment = LaneAssignment.new(registrant_id: reg.id, lane: competitor[:lane].to_i, heat: heat, competition: @competition)
+          lane_assignment.allow_competitor_auto_creation = true
           lane_assignment.save!
         end
       end
