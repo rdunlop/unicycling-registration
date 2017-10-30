@@ -319,6 +319,16 @@ describe Competitor do
       expect(@comp.member_has_bib_number?(@reg2.bib_number)).to eq(true)
       expect(@comp.member_has_bib_number?(-1)).to eq(false)
     end
+
+    context "when a member is deleted" do
+      it "should no longer show the deleted competitor's name", :caching do
+        member1 = @comp.members.first
+        member2 = @comp.members.second
+        expect(@comp.registrants_names).to eq(member1.to_s + " - " + member2.to_s)
+        member2.destroy # must destroy the not-lowest-number competitor
+        expect(@comp.reload.registrants_names).to eq(member1.to_s)
+      end
+    end
   end
 
   describe "when a join pair exists" do
