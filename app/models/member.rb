@@ -27,10 +27,12 @@ class Member < ApplicationRecord
 
   after_touch :update_min_bib_number
   after_save :update_min_bib_number
-  after_save :touch_competitor
-  after_touch :touch_competitor
-
   after_destroy :update_min_bib_number
+
+  after_touch :touch_competitor
+  after_save :touch_competitor
+  after_destroy :touch_competitor
+
   after_destroy :destroy_orphaned_competitors
 
   # This is used by the Competitor, in order to update Members
@@ -38,7 +40,10 @@ class Member < ApplicationRecord
   attr_accessor :no_touch_cascade
 
   def touch_competitor
-    competitor.touch unless no_touch_cascade
+    return if no_touch_cascade
+    comp = competitor.reload
+    return if comp.nil?
+    competitor.touch
   end
 
   def self.cache_set_field
