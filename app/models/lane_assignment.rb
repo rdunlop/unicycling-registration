@@ -26,6 +26,8 @@ class LaneAssignment < ApplicationRecord
 
   default_scope { order(:heat, :lane) }
 
+  attr_accessor :allow_competitor_auto_creation # for use in causing CompetitorAutoCreation in expert heats
+
   def status
     matching_record.try(:status)
   end

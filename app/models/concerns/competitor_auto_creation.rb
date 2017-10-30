@@ -14,10 +14,18 @@ module CompetitorAutoCreation
       # does a competitor exist with this bib_number
       self.competitor = reg.competitors.find_by(competition: competition)
 
-      if !competitor && EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
+      if !competitor && should_create?
         # create a competitor if necessary
         self.competitor = competition.create_competitor_from_registrants([reg], nil)
       end
     end
+  end
+
+  private
+
+  def should_create?
+    return true if EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
+
+    respond_to?(:allow_competitor_auto_creation) && allow_competitor_auto_creation
   end
 end
