@@ -58,6 +58,7 @@ gem 'rubyzip'
 gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
 gem 'unicorn', require: false
 gem 'whenever'
+gem 'apartment_acme_client'
 
 # determined we are over IE8 CSS limits using
 # http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
@@ -80,7 +81,7 @@ gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 supp
 # Model utils
 gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
 gem 'carrierwave'
-gem 'carrierwave-aws'
+gem 'carrierwave-aws', '1.3.0'
 gem 'carrierwave-i18n'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
 gem 'nilify_blanks'

@@ -13,7 +13,7 @@
 
 class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConventionSetupController
   before_action :authenticate_user!, except: [:verify]
-  before_action :load_tenant_alias, only: %i[activate destroy]
+  before_action :load_tenant_alias, only: %i[activate destroy confirm_url]
 
   before_action :authorize_setup, except: [:verify]
   before_action :skip_authorization, only: [:verify]
@@ -29,12 +29,22 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
     @tenant_alias.verified = true
     if @tenant_alias.save
       flash[:notice] = "Created Alias"
-      flash[:notice] += "Alias Verified"
       redirect_to tenant_aliases_path
     else
       flash[:alert] = "Unable to create Alias"
       render :index
     end
+  end
+
+  def confirm_url
+    if tenant_alias.properly_configured?
+      tenant_alias.update(verified: true)
+      ApartmentAcmeClient::RenewalService.run!
+      flash[:notice] = "Alias verified"
+    else
+      flash[:alert] = "Alias failed to be verified"
+    end
+    redirect_to tenant_aliases_path
   end
 
   # A request is made to this endpoint to verify that the particular domain is
@@ -48,6 +58,7 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
   def verify
     tenant_alias = TenantAlias.find_by(id: params[:id])
     if tenant_alias.present? && tenant_alias.website_alias == request.host
+      flash[:notice] = "Alias Verified"
       render plain: "TRUE"
     else
       render plain: "FALSE"
@@ -55,8 +66,12 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
   end
 
   def activate
-    @tenant_alias.update_attribute(:primary_domain, true)
-    flash[:notice] = "Alias Activated"
+    if @tenant_alias.verified?
+      @tenant_alias.update_attribute(:primary_domain, true)
+      flash[:notice] = "Alias Activated"
+    else
+      flash[:alert] = "Unable to activate alias which has not been verified"
+    end
     redirect_to tenant_aliases_path
   end
 

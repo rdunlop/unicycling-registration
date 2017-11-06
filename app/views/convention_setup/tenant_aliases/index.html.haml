@@ -23,9 +23,12 @@
         = f.text_field :website_alias
         =# f.submit "Verify Alias CNAME Record"
         = f.button :submit, t(".submit")
-  -# %li
-    = label_tag :verified, t(".alias_verified")
-    = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
+  %li
+    %p
+      = label_tag :verified, t(".alias_verified")
+      = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
+    - unless @tenant_alias.verified?
+      = link_to "Verify this alias is internet-routable", confirm_url_tenant_alias_path(@tenant_alias), method: :put, class: "focus_button"
   %li
     - if @tenant_alias.persisted?
       - if @tenant_alias.primary_domain?
@@ -33,5 +36,4 @@
       - else
         = link_to t(".set_as_primary_domain"), activate_tenant_alias_path(@tenant_alias), method: :post, class: "focus_button"
     - else
-      -#Before you can activate the alias, you must verify it.
-      = t(".must_save_warning")
+      %p= t(".must_save_warning")
