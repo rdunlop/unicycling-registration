@@ -556,10 +556,10 @@ GEM
     timeliness (0.3.8)
     timers (4.1.2)
       hitimes
-    tinymce-rails (4.7.1)
+    tinymce-rails (4.7.2)
       railties (>= 3.1.1)
     ttfunk (1.4.0)
-    tzinfo (1.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
