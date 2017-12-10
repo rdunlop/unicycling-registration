@@ -24,11 +24,12 @@
         =# f.submit "Verify Alias CNAME Record"
         = f.button :submit, t(".submit")
   %li
-    %p
-      = label_tag :verified, t(".alias_verified")
-      = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
-    - unless @tenant_alias.verified?
-      = link_to "Verify this alias is internet-routable", confirm_url_tenant_alias_path(@tenant_alias), method: :put, class: "focus_button"
+    - if @tenant_alias.persisted?
+      %p
+        = label_tag :verified, t(".alias_verified")
+        = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
+      - unless @tenant_alias.verified?
+        = link_to "Verify this alias is internet-routable", confirm_url_tenant_alias_path(@tenant_alias), method: :put, class: "focus_button"
   %li
     - if @tenant_alias.persisted?
       - if @tenant_alias.primary_domain?
