@@ -3,5 +3,5 @@ every 1.day, at: '12am', roles: [:db] do
 end
 
 every 1.week, roles: [:db] do
-  rake "renew_and_update_certificate"
+  rake "encryption:renew_and_update_certificate"
 end
