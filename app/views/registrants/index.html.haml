@@ -8,18 +8,6 @@
 - elsif EventConfiguration.closed?
   = render "reg_closed_banner"
 
-- if policy(@registrant).create? # until registration is closed
-  - if @config.additional_info?
-    .sign_up_difference
-      = link_to t(".whats_the_difference"), additional_information_url(@config, I18n.locale, "comp_noncomp"), class: "fancybox", title: t(".difference_tooltip")
-  = render "registrant_choices"
-  = render "registrant_prices"
-- if @shared_registrants.count > 0
-  %div
-    = t(".registrants_includes_shared")
-    = link_to t(".registrant_access_page_title"), user_additional_registrant_accesses_path(@user)
-    = t(".link_end")
-
 = render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants}
 = render partial: "waiver_blank"
 - if @config.online_payment?
@@ -35,3 +23,16 @@
     %br
     = t(".onsite_restricted_events")
     %br
+  %hr
+
+- if policy(@registrant).create? # until registration is closed
+  - if @config.additional_info?
+    .sign_up_difference
+      = link_to t(".whats_the_difference"), additional_information_url(@config, I18n.locale, "comp_noncomp"), class: "fancybox", title: t(".difference_tooltip")
+  = render "registrant_choices"
+  = render "registrant_prices"
+- if @shared_registrants.count > 0
+  %div
+    = t(".registrants_includes_shared")
+    = link_to t(".registrant_access_page_title"), user_additional_registrant_accesses_path(@user)
+    = t(".link_end")
