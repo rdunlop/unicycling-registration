@@ -36,8 +36,8 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
 
   # verify that the Alias is properly configured on the internet.
   def confirm_url
-    if tenant_alias.properly_configured?
-      tenant_alias.update(verified: true)
+    if @tenant_alias.properly_configured?
+      @tenant_alias.update(verified: true)
       ApartmentAcmeClient::RenewalService.run!
       flash[:notice] = "Alias verified"
     else
