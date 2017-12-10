@@ -25,8 +25,6 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
 
   def create
     @tenant_alias = @tenant.tenant_aliases.build(tenant_alias_params)
-    # verify that the Alias is properly configured on the internet.
-    @tenant_alias.verified = true
     if @tenant_alias.save
       flash[:notice] = "Created Alias"
       redirect_to tenant_aliases_path
@@ -36,6 +34,7 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
     end
   end
 
+  # verify that the Alias is properly configured on the internet.
   def confirm_url
     if tenant_alias.properly_configured?
       tenant_alias.update(verified: true)
@@ -58,7 +57,6 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
   def verify
     tenant_alias = TenantAlias.find_by(id: params[:id])
     if tenant_alias.present? && tenant_alias.website_alias == request.host
-      flash[:notice] = "Alias Verified"
       render plain: "TRUE"
     else
       render plain: "FALSE"
