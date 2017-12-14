@@ -94,6 +94,7 @@ class EmailsController < ApplicationController
     list = [
       EmailFilters::ConfirmedAccounts,
       EmailFilters::UnpaidRegAccounts,
+      EmailFilters::IncompleteRegistrants,
       EmailFilters::PaidRegAccounts,
       EmailFilters::NoRegAccounts,
       EmailFilters::Competitions,
