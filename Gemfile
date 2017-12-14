@@ -40,6 +40,7 @@ gem 'tinymce-rails'
 
 # system utils
 gem 'acme-client'
+gem 'apartment_acme_client'
 gem 'aws-sdk-rails'
 gem 'eye-patch', require: false
 gem 'gaffe'
@@ -58,7 +59,6 @@ gem 'rubyzip'
 gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
 gem 'unicorn', require: false
 gem 'whenever'
-gem 'apartment_acme_client'
 
 # determined we are over IE8 CSS limits using
 # http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
