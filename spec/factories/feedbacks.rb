@@ -8,7 +8,7 @@ FactoryGirl.define do
     trait :resolved do
       status "resolved"
       association :resolved_by, factory: :user
-      resolved_at { DateTime.current }
+      resolved_at { Time.current }
       resolution "Sent him an e-mail"
     end
   end

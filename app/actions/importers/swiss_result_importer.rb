@@ -53,7 +53,7 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
       seconds: row_hash[:seconds],
       thousands: row_hash[:thousands],
       raw_data: row_hash[:raw_time],
-      entered_at: DateTime.current,
+      entered_at: Time.current,
       entered_by: @user
     )
     heat_lane_result.save!
@@ -75,7 +75,7 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
       seconds: row_hash[:seconds],
       thousands: row_hash[:thousands],
       is_start_time: false,
-      entered_at: DateTime.current,
+      entered_at: Time.current,
       entered_by: @user,
       preliminary: true,
       heat_lane_result: heat_lane_result

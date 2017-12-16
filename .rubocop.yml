@@ -61,3 +61,11 @@ Performance/HashEachMethods:
   # this encourages non-hash objects (like Parameters) to
   # be re-written in invalid syntax
   Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - stage
+    - naucc

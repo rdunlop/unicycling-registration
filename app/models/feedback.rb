@@ -44,7 +44,7 @@ class Feedback < ApplicationRecord
   end
 
   def resolve
-    self.resolved_at = DateTime.current
+    self.resolved_at = Time.current
     self.status = "resolved"
     save
   end

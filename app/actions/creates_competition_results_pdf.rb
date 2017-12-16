@@ -27,7 +27,7 @@ class CreatesCompetitionResultsPdf
     pdf.write contents
     new_result = competition.competition_results.build
     new_result.results_file = pdf
-    new_result.published_date = DateTime.current
+    new_result.published_date = Time.current
     new_result.system_managed = true
     new_result.published = true
     new_result.name = custom_name

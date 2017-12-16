@@ -29,7 +29,7 @@ FactoryGirl.define do
     sequence(:lane) { |n| n }
     status "active"
     raw_data "MyString"
-    entered_at DateTime.current
+    entered_at { Time.current }
     association :entered_by, factory: :user
 
     trait :disqualified do

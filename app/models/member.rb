@@ -50,7 +50,8 @@ class Member < ApplicationRecord
     :registrant_id
   end
 
-  def self.active # Need to apply this everywhere..for dismount calculation, etc.
+  # Need to apply this everywhere..for dismount calculation, etc.
+  def self.active
     where(alternate: false)
   end
 

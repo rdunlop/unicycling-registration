@@ -37,7 +37,7 @@ class CompetitionResultsController < ApplicationController
     @competition_result.name = params[:custom_name]
     @competition_result.system_managed = false
     @competition_result.published = true
-    @competition_result.published_date = DateTime.current
+    @competition_result.published_date = Time.current
 
     if @competition_result.save
       flash[:notice] = "Competition Result created successfully"

@@ -44,7 +44,7 @@ class LaneAssignmentsController < ApplicationController
 
     @heat_lane_judge_note.competition = @competition
     @heat_lane_judge_note.entered_by = current_user
-    @heat_lane_judge_note.entered_at = DateTime.current
+    @heat_lane_judge_note.entered_at = Time.current
     @heat_lane_judge_note.status = "DQ"
 
     if @heat_lane_judge_note.save

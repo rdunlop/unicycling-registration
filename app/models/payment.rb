@@ -65,7 +65,7 @@ class Payment < ApplicationRecord
 
   def complete(options = {})
     assign_attributes(options)
-    self.completed_date = DateTime.current
+    self.completed_date = Time.current
     self.completed = true
     self.offline_pending = false
     save
@@ -73,7 +73,7 @@ class Payment < ApplicationRecord
 
   # Mark this payment as "will be paid offline"
   def offline_pay
-    self.offline_pending_date = DateTime.current
+    self.offline_pending_date = Time.current
     self.offline_pending = true
     save
   end
@@ -144,7 +144,7 @@ class Payment < ApplicationRecord
     payment = Payment.new(
       completed: true,
       note: options[:note],
-      completed_date: DateTime.current
+      completed_date: Time.current
     )
     payment.payment_details.build(
       registrant: options[:registrant],

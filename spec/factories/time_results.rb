@@ -33,7 +33,7 @@ FactoryGirl.define do
   factory :time_result do
     association :competitor, factory: :event_competitor
     association :entered_by, factory: :user
-    entered_at DateTime.current
+    entered_at { Time.current }
     status "active"
     preliminary false
     is_start_time false
