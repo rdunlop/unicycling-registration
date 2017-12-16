@@ -63,8 +63,8 @@ describe PaypalPaymentsController do
           expect(@payment.transaction_id).to eq("12345")
         end
         it "sets the completed_date to today" do
-          travel_to DateTime.current do # freeze time
-            t = DateTime.current
+          travel_to Time.current do # freeze time
+            t = Time.current
             post :notification, params: attributes
             expect(response).to be_success
             @payment.reload

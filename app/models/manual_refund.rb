@@ -106,7 +106,7 @@ class ManualRefund
         detail.payment_detail_id = pd.paid_detail_id
       end
     end
-    refund.refund_date = DateTime.current
+    refund.refund_date = Time.current
     refund.user = user
     refund
   end

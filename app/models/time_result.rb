@@ -80,7 +80,7 @@ class TimeResult < ApplicationRecord
     !disqualified?
   end
 
-  def as_json(options = {})
+  def as_json(_options = {})
     options = {
       except: %i[id created_at updated_at competitor_id],
       methods: [:bib_number]

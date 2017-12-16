@@ -30,7 +30,7 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
       points: row_hash[:points],
       details: row_hash[:details],
       status: row_hash[:status],
-      entered_at: DateTime.current,
+      entered_at: Time.current,
       entered_by: user
     )
   rescue ActiveRecord::RecordNotFound

@@ -101,7 +101,7 @@ gem 'capistrano3-unicorn', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
-  gem 'rubocop', require: false
+  gem 'rubocop', '0.51', require: false
 end
 
 group :test do

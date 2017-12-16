@@ -1,6 +1,6 @@
-include ApplicationHelper
 
 class RegistrantPresenter
+  include ApplicationHelper
   attr_accessor :registrant
 
   def initialize(registrant)

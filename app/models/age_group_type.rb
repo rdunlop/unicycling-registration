@@ -56,7 +56,7 @@ class AgeGroupType < ApplicationRecord
     entries.first
   end
 
-  def as_json(options = {})
+  def as_json(_options = {})
     options = {
       except: %i[id updated_at created_at],
       methods: [:age_group_entries]

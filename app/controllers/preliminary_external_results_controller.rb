@@ -32,7 +32,7 @@ class PreliminaryExternalResultsController < ApplicationController
     respond_to do |format|
       @external_result.preliminary = true
       @external_result.entered_by = current_user
-      @external_result.entered_at = DateTime.current
+      @external_result.entered_at = Time.current
       if @external_result.save
         format.html { redirect_to competition_preliminary_external_results_path(@competition), notice: 'External result was successfully created.' }
       else

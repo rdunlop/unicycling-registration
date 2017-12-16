@@ -100,7 +100,7 @@ describe ScoresController do
     end
 
     it "doesn't show the update button if event is locked" do
-      @judge.competition.update(locked_at: DateTime.current)
+      @judge.competition.update(locked_at: Time.current)
 
       get :index, params: { judge_id: @judge.id }
 
@@ -108,7 +108,7 @@ describe ScoresController do
     end
 
     it "shows a 'this event is locked' message when the event is locked" do
-      @judge.competition.update(locked_at: DateTime.current)
+      @judge.competition.update(locked_at: Time.current)
 
       get :index, params: { judge_id: @judge.id }
 
@@ -142,7 +142,7 @@ describe ScoresController do
 
   describe "when the competition is locked" do
     before do
-      @comp.competition.locked_at = DateTime.current
+      @comp.competition.locked_at = Time.current
       @comp.competition.save!
     end
     it "should not be allowed to create scores" do
