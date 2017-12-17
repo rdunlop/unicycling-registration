@@ -1,0 +1,17 @@
+= simple_form_for([:convention_setup, @lodging_room_type]) do |f|
+  = render partial: "/shared/error_messages", object: @lodging_room_type
+  = f.input :name
+  = f.input :description
+  %table
+    %thead
+      %tr
+        %th Room Option Name
+        %th Room Option Price
+        %th
+    %tbody#lodging_room_options
+      = f.simple_fields_for :lodging_room_options do |member_f|
+        = render "lodging_room_option_fields", f: member_f
+
+  = link_to_add_association 'add new room option', f, :lodging_room_options, { data: { association_insertion_node: "#lodging_room_options", association_insertion_method: "append" } }
+
+  = f.button :submit

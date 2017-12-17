@@ -51,6 +51,10 @@ class RegistrantPolicy < ApplicationPolicy
     update?
   end
 
+  def lodging?
+    update? && config.has_lodging?
+  end
+
   def expenses?
     update? && config.has_expenses?
   end
@@ -61,7 +65,7 @@ class RegistrantPolicy < ApplicationPolicy
 
   # is there any action to which I am able to update?
   def update_any_data?
-    add_name? || add_events? || set_wheel_sizes? || add_volunteers? || add_contact_details? || expenses?
+    add_name? || add_events? || set_wheel_sizes? || add_volunteers? || add_contact_details? || lodging? || expenses?
   end
 
   # can I update any of my registration data?

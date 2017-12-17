@@ -1,0 +1,21 @@
+%h1 #{@lodging} - Room Types
+
+%p What types of rooms are available at #{@lodging}
+
+%table
+  %tr
+    %th= LodgingRoomType.human_attribute_name(:name)
+    %th= LodgingRoomType.human_attribute_name(:description)
+    %th
+    %th
+  - @lodging.lodging_room_types.each do |lodging_room_type|
+    %tr
+      %td= link_to lodging_room_type.name, convention_setup_lodging_room_type_path(lodging_room_type)
+      %td= lodging_room_type.name
+      %td= lodging_room_type.description
+      %td= lodging_room_type.lodging_room_options.map(&:to_s).join(", ")
+      %td= link_to t("edit"), edit_convention_setup_lodging_room_type_path(lodging_room_type)
+      %td= link_to t("delete"), convention_setup_lodging_room_type_path(lodging_room_type), method: :delete, data: { confirm: t("are_you_sure") }
+%br
+
+= link_to "New Lodging Room Type (via lodging#edit)", edit_convention_setup_lodging_path(@lodging)

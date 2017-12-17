@@ -607,6 +607,64 @@ ActiveRecord::Schema.define(version: 20171221025728) do
     t.index ["competition_id"], name: "index_lane_assignments_on_competition_id"
   end
 
+  create_table "lodging_days", force: :cascade do |t|
+    t.integer "lodging_room_option_id", null: false
+    t.date "date_offered", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lodging_room_option_id"], name: "index_lodging_days_on_lodging_room_option_id"
+  end
+
+  create_table "lodging_package_days", force: :cascade do |t|
+    t.integer "lodging_package_id", null: false
+    t.integer "lodging_day_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lodging_day_id"], name: "index_lodging_package_days_on_lodging_day_id"
+    t.index ["lodging_package_id", "lodging_day_id"], name: "lodging_package_unique", unique: true
+    t.index ["lodging_package_id"], name: "index_lodging_package_days_on_lodging_package_id"
+  end
+
+  create_table "lodging_packages", force: :cascade do |t|
+    t.integer "lodging_room_type_id", null: false
+    t.integer "lodging_room_option_id", null: false
+    t.integer "total_cost_cents", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lodging_room_option_id"], name: "index_lodging_packages_on_lodging_room_option_id"
+    t.index ["lodging_room_type_id"], name: "index_lodging_packages_on_lodging_room_type_id"
+  end
+
+  create_table "lodging_room_options", force: :cascade do |t|
+    t.integer "lodging_room_type_id", null: false
+    t.integer "position"
+    t.string "name", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lodging_room_type_id"], name: "index_lodging_room_options_on_lodging_room_type_id"
+  end
+
+  create_table "lodging_room_types", force: :cascade do |t|
+    t.integer "lodging_id", null: false
+    t.integer "position"
+    t.string "name", null: false
+    t.text "description"
+    t.boolean "visible", default: true, null: false
+    t.integer "maximum_available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lodging_id"], name: "index_lodging_room_types_on_lodging_id"
+  end
+
+  create_table "lodgings", force: :cascade do |t|
+    t.integer "position"
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "mass_emails", id: :serial, force: :cascade do |t|
     t.integer "sent_by_id", null: false
     t.datetime "sent_at"

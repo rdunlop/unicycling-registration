@@ -1,0 +1,20 @@
+%h1 #{@lodging_room_type} - Room Options
+
+%p What options for the #{@lodging_room_type} Room
+
+%table
+  %tr
+    %th= LodgingRoomOption.human_attribute_name(:name)
+    %th= LodgingRoomOption.human_attribute_name(:price)
+    %th
+    %th
+  - @lodging_room_type.lodging_room_options.each do |lodging_room_option|
+    %tr
+      %td= link_to lodging_room_option.name, convention_setup_lodging_room_option_path(lodging_room_option)
+      %td= lodging_room_option.name
+      %td= lodging_room_option.price
+      %td= link_to t("edit"), edit_convention_setup_lodging_room_option_path(lodging_room_option)
+      %td= link_to t("delete"), convention_setup_lodging_room_option_path(lodging_room_option), method: :delete, data: { confirm: t("are_you_sure") }
+%br
+
+= link_to "New Lodging Option Type (via lodging_room_type#edit)", edit_convention_setup_lodging_room_type_path(@lodging_room_type)

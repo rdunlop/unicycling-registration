@@ -11,6 +11,7 @@ en:
   date:
     formats:
       registration_date_format: "%b %d, %Y"
+      lodging_date_format: "%b %d, %Y"
     order:
     - :month
     - :day
@@ -36,6 +37,7 @@ en:
     add_events: Events
     add_name: Name
     add_volunteers: Volunteers
+    lodging: Lodging
     expenses: Expenses
     music: Music
     set_wheel_sizes: Wheel Sizes

@@ -1,0 +1,24 @@
+#{@registrant}'s chosen Lodging
+%table
+  %thead
+    %tr
+      %th Lodging Type
+      %th First day
+      %th Last day
+      %th
+  %tbody
+    - @paid_lodging.each do |lodging_form|
+      %tr
+        %td= lodging_form.lodging_type
+        %td= lodging_form.first_day
+        %td= lodging_form.last_day
+        %td Paid
+
+    - @selected_lodging.each do |lodging_form|
+      %tr
+        %td= lodging_form.lodging_type
+        %td= lodging_form.first_day
+        %td= lodging_form.last_day
+        %td
+          = link_to "Delete", registrant_lodging_path(@registrant.bib_number, lodging_form.lodging_type), data: { confirm: t("are_you_sure"), method: :delete }
+
