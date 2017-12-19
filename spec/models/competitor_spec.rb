@@ -324,7 +324,8 @@ describe Competitor do
       it "should no longer show the deleted competitor's name", :caching do
         member1 = @comp.members.first
         member2 = @comp.members.second
-        expect(@comp.registrants_names).to eq(member1.to_s + " - " + member2.to_s)
+        expect(@comp.registrants_names).to include(member1.to_s)
+        expect(@comp.registrants_names).to include(member2.to_s)
         member2.destroy # must destroy the not-lowest-number competitor
         expect(@comp.reload.registrants_names).to eq(member1.to_s)
       end

@@ -40,7 +40,7 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
       file.write doc_pdf
       file.close
       report.url = file
-      report.completed_at = DateTime.current
+      report.completed_at = Time.current
       report.save!
     ensure
       file.close

@@ -70,7 +70,7 @@ class EmailsController < ApplicationController
       mass_email.email_addresses = email_addresses
       mass_email.email_addresses_description = @filter.detailed_description
       mass_email.sent_by = current_user
-      mass_email.sent_at = DateTime.current
+      mass_email.sent_at = Time.current
       if mass_email.save
         mass_email.send_emails
         redirect_to emails_path, notice: 'Email sent successfully.'

@@ -99,12 +99,12 @@ FactoryGirl.define do
     end
 
     trait :locked do
-      locked_at DateTime.current
+      locked_at Time.current
     end
 
     trait :published do
       locked
-      published_at DateTime.current
+      published_at Time.current
     end
   end
 end

@@ -1,5 +1,5 @@
 class WithdrawCompetitor
   def self.perform(competitor)
-    competitor.update_attributes(status: "withdrawn", withdrawn_at: DateTime.current)
+    competitor.update_attributes(status: "withdrawn", withdrawn_at: Time.current)
   end
 end
