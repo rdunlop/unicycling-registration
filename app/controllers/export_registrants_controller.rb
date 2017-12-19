@@ -96,11 +96,12 @@ class ExportRegistrantsController < ApplicationController
       "Country",
       "Phone",
       "Email",
-      "Club"
+      "Club",
+      "User Email"
     ]
 
     data = []
-    Registrant.active.includes(:contact_detail).each do |reg|
+    Registrant.active.includes(:user, :contact_detail).each do |reg|
       row = [
         reg.bib_number,
         reg.contact_detail.organization_member_number,
@@ -114,7 +115,8 @@ class ExportRegistrantsController < ApplicationController
         reg.contact_detail.country_residence,
         reg.contact_detail.phone,
         reg.contact_detail.email,
-        reg.club
+        reg.club,
+        reg.user.email
       ]
 
       reg.paid_details.each do |pd|
