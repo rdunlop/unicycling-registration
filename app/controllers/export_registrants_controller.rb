@@ -120,7 +120,7 @@ class ExportRegistrantsController < ApplicationController
       ]
 
       reg.paid_details.each do |pd|
-        row << pd.expense_item.to_s
+        row << pd.line_item.to_s
         row << pd.details
       end
       data << row

@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  registrant_id     :integer
-#  expense_item_id   :integer
+#  line_item_id      :integer
 #  created_at        :datetime
 #  updated_at        :datetime
 #  details           :string(255)
@@ -12,11 +12,12 @@
 #  system_managed    :boolean          default(FALSE), not null
 #  locked            :boolean          default(FALSE), not null
 #  custom_cost_cents :integer
+#  line_item_type    :string
 #
 # Indexes
 #
-#  index_registrant_expense_items_expense_item_id  (expense_item_id)
-#  index_registrant_expense_items_registrant_id    (registrant_id)
+#  index_registrant_expense_items_registrant_id  (registrant_id)
+#  registrant_expense_items_line_item            (line_item_id,line_item_type)
 #
 
 require 'spec_helper'
@@ -35,7 +36,7 @@ describe RegistrantExpenseItemsController do
   def valid_attributes
     { free: false,
       details: nil,
-      expense_item_id: @exp.id}
+      line_item_id: @exp.id}
   end
 
   describe "POST create" do

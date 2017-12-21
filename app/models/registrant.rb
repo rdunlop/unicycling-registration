@@ -55,7 +55,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     has_many :registrant_best_times, inverse_of: :registrant
     has_many :registrant_choices, inverse_of: :registrant
     has_many :registrant_event_sign_ups, inverse_of: :registrant
-    has_many :registrant_expense_items, -> { includes(expense_item: [:translations, expense_group: :translations]) }, autosave: true
+    has_many :registrant_expense_items, -> { includes(line_item: [:translations, expense_group: :translations]) }, autosave: true
     has_many :payment_details, -> {includes :payment}
     has_many :additional_registrant_accesses
     has_many :registrant_group_members
@@ -71,7 +71,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :categories, through: :events
   has_many :volunteer_opportunities, through: :volunteer_choices
 
-  has_many :expense_items, through: :registrant_expense_items
+  has_many :expense_items, through: :registrant_expense_items, source: :line_item, source_type: "ExpenseItem"
 
   has_many :payments, through: :payment_details
   has_many :refund_details, through: :payment_details
@@ -153,8 +153,8 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_associated :contact_detail, if: :validated?
   validates_associated :registrant_best_times, if: :past_step_2?
 
-  # Expense items
-  validate :not_exceeding_expense_item_limits
+  # Expense items/LineItems
+  validate :not_exceeding_line_item_limits
   validates_associated :registrant_expense_items
   validate :has_necessary_free_items, if: :validated?
 
@@ -220,7 +220,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # Add a system-managed RegistrantExpenseItem, if it doesn't already exist
   def build_registration_item(reg_item)
     unless reg_item.nil? || has_expense_item?(reg_item)
-      registrant_expense_items.system_managed.build(expense_item: reg_item)
+      registrant_expense_items.system_managed.build(line_item: reg_item)
     end
   end
 
@@ -229,7 +229,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     unless reg_item.nil? || !has_expense_item?(reg_item)
       # registrant_expense_items.system_managed.find_by(expense_item_id: reg_item.id).destroy
       # use `.to_a` here so that we can use `mark_for_destruction` and it will be destroy on save
-      item_to_remove = registrant_expense_items.to_a.find { |rei| rei.system_managed? && rei.expense_item == reg_item}
+      item_to_remove = registrant_expense_items.to_a.find { |rei| rei.system_managed? && rei.line_item == reg_item}
       item_to_remove.mark_for_destruction
     end
   end
@@ -243,10 +243,10 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
       curr_rei = build_registration_item(expense_item)
     end
     return false if curr_rei.nil?
-    return true  if curr_rei.expense_item == expense_item && curr_rei.persisted?
+    return true  if curr_rei.line_item == expense_item && curr_rei.persisted?
     return true  if curr_rei.locked && !lock
 
-    curr_rei.expense_item = expense_item
+    curr_rei.line_item = expense_item
     curr_rei.locked = lock
     curr_rei.save
   end
@@ -270,7 +270,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def registration_item
     all_reg_items = RegistrationCost.all_registration_expense_items
-    registrant_expense_items.system_managed.find_by(expense_item_id: all_reg_items)
+    registrant_expense_items.system_managed.find_by(line_item: all_reg_items)
   end
 
   def wheel_size_id_for_event(event)
@@ -376,12 +376,12 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # returns a list of expense_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_expense_items
-    registrant_expense_items.map{|eid| eid.expense_item}
+    registrant_expense_items.map{|eid| eid.line_item}
   end
 
   # pass back the details too, so that we don't mis-associate them when building the payment
   def owing_expense_items_with_details
-    registrant_expense_items.map{|rei| [rei.expense_item, rei.details]}
+    registrant_expense_items.map{|rei| [rei.line_item, rei.details]}
   end
 
   def owing_registrant_expense_items
@@ -390,11 +390,11 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # returns a list of paid-for expense_items
   def paid_expense_items
-    paid_details.map{|pd| pd.expense_item }
+    paid_details.map{|pd| pd.line_item }
   end
 
   def pending_expense_items
-    pending_details.map{|pd| pd.expense_item }
+    pending_details.map{|pd| pd.line_item }
   end
 
   def paid_or_pending_expense_items
@@ -402,15 +402,15 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def paid_or_pending_details
-    payment_details.includes(expense_item: [:translations, expense_group: :translations]).completed_or_offline.not_refunded.clone
+    payment_details.completed_or_offline.not_refunded.clone
   end
 
   def paid_details
-    payment_details.includes(expense_item: [:translations, expense_group: :translations]).completed.not_refunded.clone
+    payment_details.completed.not_refunded.clone
   end
 
   def pending_details
-    payment_details.includes(expense_item: [:translations, expense_group: :translations]).offline_pending.not_refunded.clone
+    payment_details.offline_pending.not_refunded.clone
   end
 
   def amount_paid
@@ -604,10 +604,10 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def not_exceeding_expense_item_limits
-    expense_items = registrant_expense_items.select(&:new_record?).map(&:expense_item).reject(&:nil?)
-    expense_items.uniq.each do |ei|
-      num_ei = expense_items.count(ei)
+  def not_exceeding_line_item_limits
+    line_items = registrant_expense_items.select(&:new_record?).map(&:line_item).reject(&:nil?)
+    line_items.uniq.each do |ei|
+      num_ei = line_items.count(ei)
       unless ei.can_i_add?(num_ei)
         errors.add(:base, "There are not that many #{ei} available")
       end

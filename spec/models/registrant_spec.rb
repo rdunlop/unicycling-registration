@@ -261,7 +261,7 @@ describe Registrant do
   describe "with an expense_item" do
     before(:each) do
       @item = FactoryGirl.create(:expense_item)
-      @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @item)
+      @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, line_item: @item)
       @reg.registrant_expense_items << @rei
       @rei.save
       @reg.reload
@@ -297,12 +297,12 @@ describe Registrant do
     describe "having paid for the item once, but still having it as a registrant_expense_item" do
       before(:each) do
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg, amount: @item.cost, expense_item: @item)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg, amount: @item.cost, line_item: @item)
         @payment.reload
         @payment.completed = true
         @payment.save!
 
-        rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, expense_item: @item)
+        rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, line_item: @item)
         @reg.registrant_expense_items << rei
         rei.save
         @reg.reload
@@ -388,7 +388,7 @@ describe Registrant do
                                                                                    expense_item: @oldnoncomp_exp)
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 90, expense_item: @oldcomp_exp)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 90, line_item: @oldcomp_exp)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -407,7 +407,7 @@ describe Registrant do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, expense_item: @comp_exp)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, line_item: @comp_exp)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -423,7 +423,7 @@ describe Registrant do
         expect(@comp.amount_owing).to eq(0.to_money)
       end
       it "lists the paid_expense_items" do
-        expect(@comp.paid_expense_items).to eq([@payment_detail.expense_item])
+        expect(@comp.paid_expense_items).to eq([@payment_detail.line_item])
       end
       it "lists no items as an owing_expense_item" do
         expect(@comp.owing_expense_items).to eq([])
@@ -461,7 +461,7 @@ describe Registrant do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, expense_item: @comp_exp)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, line_item: @comp_exp)
       end
       it "should have associated payment_details" do
         expect(@comp.payment_details).to eq([@payment_detail])
@@ -497,7 +497,7 @@ describe Registrant do
 
     context "when it has the (free) expense item" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @ei, free: true)
+        FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @ei, free: true)
         @reg.reload
       end
 
@@ -531,7 +531,7 @@ describe Registrant do
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
-      expect(@reg.owing_registrant_expense_items.last.expense_item).to eq(@ei)
+      expect(@reg.owing_registrant_expense_items.last.line_item).to eq(@ei)
       expect(@reg.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
   end
@@ -544,14 +544,14 @@ describe Registrant do
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
-      expect(@reg2.owing_registrant_expense_items.last.expense_item).to eq(@ei)
+      expect(@reg2.owing_registrant_expense_items.last.line_item).to eq(@ei)
       expect(@reg2.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
 
     describe "when it has paid for the expense_item" do
       before(:each) do
         @payment = FactoryGirl.create(:payment)
-        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg2, amount: @ei.cost, expense_item: @ei)
+        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg2, amount: @ei.cost, line_item: @ei)
         @payment.reload
         @payment.completed = true
         @payment.save!

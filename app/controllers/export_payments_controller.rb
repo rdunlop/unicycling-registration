@@ -38,8 +38,8 @@ class ExportPaymentsController < ApplicationController
     PaymentDetail.paid.includes(:registrant).each do |payment_detail|
       data << [
         payment_detail.payment_id,
-        payment_detail.expense_item.id,
-        payment_detail.expense_item.to_s,
+        payment_detail.line_item.id,
+        payment_detail.line_item.to_s,
         payment_detail.amount.to_s,
         payment_detail.registrant.bib_number
       ]
@@ -48,8 +48,8 @@ class ExportPaymentsController < ApplicationController
       next unless rei.registrant.reg_paid?
       data << [
         "Free With Reg",
-        rei.expense_item.id,
-        rei.expense_item.to_s,
+        rei.line_item.id,
+        rei.line_item.to_s,
         "0",
         rei.registrant.bib_number
       ]

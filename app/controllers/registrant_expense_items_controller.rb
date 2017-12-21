@@ -27,6 +27,7 @@ class RegistrantExpenseItemsController < ApplicationController
 
   def create
     @registrant_expense_item = RegistrantExpenseItem.new(registrant_expense_item_params)
+    @registrant_expense_item.line_item_type = "ExpenseItem"
     @registrant_expense_item.registrant = @registrant
     authorize @registrant_expense_item
     if @registrant_expense_item.save
@@ -52,7 +53,7 @@ class RegistrantExpenseItemsController < ApplicationController
   private
 
   def registrant_expense_item_params
-    params.require(:registrant_expense_item).permit(:expense_item_id, :details, :custom_cost, :free)
+    params.require(:registrant_expense_item).permit(:line_item_id, :details, :custom_cost, :free)
   end
 
   def load_registrant

@@ -63,18 +63,18 @@ describe Payment do
     end
 
     it "has a list of unique_payment_deatils" do
-      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 1, amount: @pd.amount)])
+      expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.line_item_id, count: 1, amount: @pd.amount)])
     end
 
     describe "with mulitple payment_details of the same expense_item" do
       before(:each) do
-        @pd2 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, expense_item: @pd.expense_item)
-        @pd3 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, expense_item: @pd.expense_item)
+        @pd2 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
+        @pd3 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
       end
 
       it "only lists the element once" do
         expect(@pay.unique_payment_details.count).to eq(1)
-        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 3, amount: @pd.amount)])
+        expect(@pay.unique_payment_details).to eq([PaymentDetailSummary.new(expense_item_id: @pd.line_item_id, count: 3, amount: @pd.amount)])
       end
 
       describe "with payment_details of different expense_items" do
@@ -89,13 +89,13 @@ describe Payment do
 
       describe "with different amounts" do
         before(:each) do
-          @pdc = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: 99.98, details: @pd.details, expense_item: @pd.expense_item)
+          @pdc = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: 99.98, details: @pd.details, line_item: @pd.line_item)
         end
 
         it "does not group them together" do
           expect(@pay.unique_payment_details.count).to eq(2)
-          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 1, amount: @pdc.amount),
-                                                              PaymentDetailSummary.new(expense_item_id: @pd.expense_item_id, count: 3, amount: @pd2.amount)])
+          expect(@pay.unique_payment_details).to match_array([PaymentDetailSummary.new(expense_item_id: @pd.line_item_id, count: 1, amount: @pdc.amount),
+                                                              PaymentDetailSummary.new(expense_item_id: @pd.line_item_id, count: 3, amount: @pd2.amount)])
         end
       end
     end
@@ -114,7 +114,7 @@ describe Payment do
     pd = pay.payment_details.build()
     pd.registrant = FactoryGirl.create(:registrant)
     pd.amount = 100
-    pd.expense_item = FactoryGirl.create(:expense_item)
+    pd.line_item = FactoryGirl.create(:expense_item)
     expect(PaymentDetail.all.count).to eq(0)
     pay.save
     expect(PaymentDetail.all.count).to eq(1)
@@ -141,7 +141,7 @@ describe Payment do
     it "returns the set of paid expense_items" do
       pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
-      expect(Payment.paid_expense_items).to eq([pd.expense_item])
+      expect(Payment.paid_expense_items).to eq([pd.line_item])
     end
 
     describe "with a refund" do
@@ -169,16 +169,16 @@ describe Payment do
       @pd = FactoryGirl.create(:payment_detail, payment: @pay)
       @pay.reload
       @reg = @pd.registrant
-      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item, free: @pd.free, details: @pd.details)
+      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: @pd.free, details: @pd.details)
       @reg.reload
     end
 
     it "registrant owes for this item" do
-      expect(@reg.owing_expense_items).to eq([@rei.expense_item])
+      expect(@reg.owing_expense_items).to eq([@rei.line_item])
     end
     describe "when the user has a free t-shirt and a paid t-shirt" do
       before(:each) do
-        @rei_free = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item, free: true)
+        @rei_free = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: true)
         @reg.reload
       end
 
@@ -197,7 +197,7 @@ describe Payment do
     end
     describe "when the registrant has two t-shirts, who only differ by details" do
       before(:each) do
-        @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item, details: "for My Kid")
+        @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, details: "for My Kid")
         @reg.reload
       end
 
@@ -223,7 +223,7 @@ describe Payment do
         expect(@reg.reload.owing_expense_items).to eq([])
       end
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
+        expect(@reg.paid_expense_items).to eq([@pd.line_item])
       end
     end
 
@@ -239,11 +239,11 @@ describe Payment do
       end
 
       it "registrant still owes" do
-        expect(@reg.owing_expense_items).to eq([@rei.expense_item])
+        expect(@reg.owing_expense_items).to eq([@rei.line_item])
       end
 
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
+        expect(@reg.paid_expense_items).to eq([@pd.line_item])
       end
 
       it "should email the admin" do
@@ -268,7 +268,7 @@ describe Payment do
         expect(@reg.reload.owing_expense_items).to eq([])
       end
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
+        expect(@reg.paid_expense_items).to eq([@pd.line_item])
       end
     end
 
@@ -281,17 +281,17 @@ describe Payment do
         expect(@reg.owing_expense_items).to eq([])
       end
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.expense_item])
+        expect(@reg.paid_expense_items).to eq([@pd.line_item])
       end
 
       describe "when the payment is saved after being paid" do
         before(:each) do
-          @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, expense_item: @pd.expense_item)
+          @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item)
           @pay.save
           @reg.reload
         end
         it "doesn't remove more items from the registrant_expenses" do
-          expect(@reg.owing_expense_items).to eq([@rei2.expense_item])
+          expect(@reg.owing_expense_items).to eq([@rei2.line_item])
         end
       end
     end
@@ -304,13 +304,13 @@ describe Payment do
 
       @reg_with_reg_item = FactoryGirl.create(:competitor)
       @pd.registrant = @reg_with_reg_item
-      @pd.expense_item = @reg_cost.expense_items.first
+      @pd.line_item = @reg_cost.expense_items.first
       @pd.save
     end
 
     it "initially has the reg_item" do
       expect(@reg_with_reg_item.registrant_expense_items.count).to eq(1)
-      expect(@reg_with_reg_item.registrant_expense_items.first.expense_item).to eq(@reg_cost.expense_items.first)
+      expect(@reg_with_reg_item.registrant_expense_items.first.line_item).to eq(@reg_cost.expense_items.first)
     end
 
     it "sends no e-mail" do

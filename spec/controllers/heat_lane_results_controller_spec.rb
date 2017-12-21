@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: heat_lane_results
+#
+#  id             :integer          not null, primary key
+#  competition_id :integer          not null
+#  heat           :integer          not null
+#  lane           :integer          not null
+#  status         :string           not null
+#  minutes        :integer          not null
+#  seconds        :integer          not null
+#  thousands      :integer          not null
+#  raw_data       :string
+#  entered_at     :datetime         not null
+#  entered_by_id  :integer          not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 require 'spec_helper'
 
 describe HeatLaneResultsController do

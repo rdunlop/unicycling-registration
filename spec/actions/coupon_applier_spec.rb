@@ -12,7 +12,7 @@ describe CouponApplier do
   let!(:coupon_code_detail) { FactoryGirl.create(:coupon_code_expense_item, coupon_code: coupon_code, expense_item: expense_item)}
   let(:coupon_code_string) { coupon_code.code }
   let(:payment) { FactoryGirl.create(:payment, :completed) }
-  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, expense_item: expense_item) }
+  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, line_item: expense_item) }
   let(:subject) { described_class.new(payment.reload, coupon_code_string) }
   let(:do_action) { subject.perform }
 
@@ -53,7 +53,7 @@ describe CouponApplier do
       FactoryGirl.create(:payment_detail,
                          payment: payment,
                          registrant: registrant,
-                         expense_item: expense_item)
+                         line_item: expense_item)
     end
 
     context "on a 21 year old" do
@@ -88,7 +88,7 @@ describe CouponApplier do
     describe "when it has already reached its limit" do
       before { do_action }
       let(:new_payment) { FactoryGirl.create(:payment)}
-      let!(:new_payment_detail) { FactoryGirl.create(:payment_detail, payment: new_payment, expense_item: expense_item) }
+      let!(:new_payment_detail) { FactoryGirl.create(:payment_detail, payment: new_payment, line_item: expense_item) }
 
       it "doesn't allow being applied again" do
         act = described_class.new(new_payment.reload, coupon_code_string)

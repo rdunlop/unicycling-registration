@@ -62,7 +62,7 @@ describe RegistrationCost do
     describe "when the expense_item has a payment" do
       before do
         registration_cost.save!
-        FactoryGirl.create :payment_detail, expense_item: registration_cost.expense_items.first
+        FactoryGirl.create :payment_detail, line_item: registration_cost.expense_items.first
       end
 
       it "can't remove the RegistrationCost on deletion" do

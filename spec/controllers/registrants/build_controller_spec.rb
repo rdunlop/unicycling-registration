@@ -72,7 +72,7 @@ describe Registrants::BuildController do
 
       it "should render the details field, if enabled" do
         @item = FactoryGirl.create(:registrant_expense_item, registrant: registrant)
-        ei = @item.expense_item
+        ei = @item.line_item
         ei.has_details = true
         ei.details_label = "What is your family?"
         ei.save!

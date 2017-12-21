@@ -27,9 +27,9 @@ describe "when testing the update function for registration costs", caching: tru
     @reg.reload
     @nc_reg.reload
     expect(@reg.registrant_expense_items.count).to eq(1)
-    expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost1.expense_items.first)
+    expect(@reg.registrant_expense_items.first.line_item).to eq(@comp_registration_cost1.expense_items.first)
     expect(@nc_reg.registrant_expense_items.count).to eq(1)
-    expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@noncomp_registration_cost1.expense_items.first)
+    expect(@nc_reg.registrant_expense_items.first.line_item).to eq(@noncomp_registration_cost1.expense_items.first)
   end
 
   it "sends an e-mail when it changes the reg period" do
@@ -82,11 +82,11 @@ describe "when testing the update function for registration costs", caching: tru
     it "changes the registrant's item to the new period" do
       @reg.reload
       expect(@reg.registrant_expense_items.count).to eq(1)
-      expect(@reg.registrant_expense_items.first.expense_item).to eq(comp_registration_cost2.expense_items.first)
+      expect(@reg.registrant_expense_items.first.line_item).to eq(comp_registration_cost2.expense_items.first)
 
       @nc_reg.reload
       expect(@nc_reg.registrant_expense_items.count).to eq(1)
-      expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(noncomp_registration_cost2.expense_items.first)
+      expect(@nc_reg.registrant_expense_items.first.line_item).to eq(noncomp_registration_cost2.expense_items.first)
     end
   end
 
@@ -146,11 +146,11 @@ describe "when testing the update function for registration costs", caching: tru
       it "changes the registrant's item to the new period" do
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
-        expect(@reg.registrant_expense_items.first.expense_item).to eq(@comp_registration_cost2.expense_items.first)
+        expect(@reg.registrant_expense_items.first.line_item).to eq(@comp_registration_cost2.expense_items.first)
 
         @nc_reg.reload
         expect(@nc_reg.registrant_expense_items.count).to eq(1)
-        expect(@nc_reg.registrant_expense_items.first.expense_item).to eq(@noncomp_registration_cost2.expense_items.first)
+        expect(@nc_reg.registrant_expense_items.first.line_item).to eq(@noncomp_registration_cost2.expense_items.first)
       end
     end
   end

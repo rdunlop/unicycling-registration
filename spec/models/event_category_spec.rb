@@ -5,7 +5,6 @@
 #  id                              :integer          not null, primary key
 #  event_id                        :integer
 #  position                        :integer
-#  name                            :string(255)
 #  created_at                      :datetime
 #  updated_at                      :datetime
 #  age_range_start                 :integer          default(0)

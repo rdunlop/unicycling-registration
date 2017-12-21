@@ -10,7 +10,7 @@ class ManualRefundDetail
   validates :paid_detail_id, presence: true
 
   # these are derived from the REI
-  delegate :registrant_id, :expense_item_id, :free, :cost, :details, to: :paid_detail
+  delegate :registrant_id, :line_item, :free, :cost, :details, to: :paid_detail
 
   def initialize(params = {})
     params.each do |name, value|
@@ -24,10 +24,6 @@ class ManualRefundDetail
 
   def registrant
     Registrant.find(registrant_id)
-  end
-
-  def expense_item
-    ExpenseItem.find(expense_item_id)
   end
 
   def persisted?

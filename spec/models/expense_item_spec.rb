@@ -141,7 +141,7 @@ describe ExpenseItem do
 
   describe "when an associated payment has been created" do
     before(:each) do
-      @payment = FactoryGirl.create(:payment_detail, expense_item: @item)
+      @payment = FactoryGirl.create(:payment_detail, line_item: @item)
       @item.reload
     end
 
@@ -224,7 +224,7 @@ describe ExpenseItem do
         @re = FactoryGirl.create(:expense_item, expense_group: @rg)
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
-        expect(@reg.registrant_expense_items.first.expense_item).to eq(@re)
+        expect(@reg.registrant_expense_items.first.line_item).to eq(@re)
       end
       it "does not create extra entries if the expense_item is updated" do
         expect(@reg.registrant_expense_items.count).to eq(0)
@@ -232,14 +232,14 @@ describe ExpenseItem do
         @re.save
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
-        expect(@reg.registrant_expense_items.first.expense_item).to eq(@re)
+        expect(@reg.registrant_expense_items.first.line_item).to eq(@re)
       end
     end
   end
 
   describe "with associated registrant_expense_items" do
     before(:each) do
-      @rei = FactoryGirl.create(:registrant_expense_item, expense_item: @item)
+      @rei = FactoryGirl.create(:registrant_expense_item, line_item: @item)
     end
 
     it "should count the entry as a selected_item" do

@@ -13,7 +13,7 @@
     - @registrants.map(&:paid_details).flatten.each do |payment_detail|
       %tr
         %td= payment_detail.registrant
-        %td= payment_detail.expense_item
+        %td= payment_detail.line_item
         %td= payment_detail.amount
         %td= payment_detail.details
 %hr

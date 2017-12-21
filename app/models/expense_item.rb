@@ -31,9 +31,9 @@ class ExpenseItem < ApplicationRecord
   monetize :total_cost_cents
 
   # use Exception so that RegistrationCost is rolled back if it attempts to be destroyed
-  has_many :payment_details, dependent: :restrict_with_exception
+  has_many :payment_details, as: :line_item, dependent: :restrict_with_exception
 
-  has_many :registrant_expense_items, inverse_of: :expense_item, dependent: :restrict_with_exception
+  has_many :registrant_expense_items, as: :line_item, inverse_of: :line_item, dependent: :restrict_with_exception
   has_many :coupon_code_expense_items, dependent: :destroy
 
   translates :name, :details_label, fallbacks_for_empty_translations: true

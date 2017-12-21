@@ -2,22 +2,23 @@
 #
 # Table name: payment_details
 #
-#  id              :integer          not null, primary key
-#  payment_id      :integer
-#  registrant_id   :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  expense_item_id :integer
-#  details         :string(255)
-#  free            :boolean          default(FALSE), not null
-#  refunded        :boolean          default(FALSE), not null
-#  amount_cents    :integer
+#  id             :integer          not null, primary key
+#  payment_id     :integer
+#  registrant_id  :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  line_item_id   :integer
+#  details        :string(255)
+#  free           :boolean          default(FALSE), not null
+#  refunded       :boolean          default(FALSE), not null
+#  amount_cents   :integer
+#  line_item_type :string
 #
 # Indexes
 #
-#  index_payment_details_expense_item_id  (expense_item_id)
-#  index_payment_details_payment_id       (payment_id)
-#  index_payment_details_registrant_id    (registrant_id)
+#  index_payment_details_on_line_item_id_and_line_item_type  (line_item_id,line_item_type)
+#  index_payment_details_payment_id                          (payment_id)
+#  index_payment_details_registrant_id                       (registrant_id)
 #
 
 require 'spec_helper'
@@ -51,16 +52,16 @@ describe PaymentDetail do
     expect(@pd.valid?).to eq(false)
   end
   it "must have an item" do
-    @pd.expense_item = nil
+    @pd.line_item = nil
     expect(@pd.valid?).to eq(false)
   end
   it "has additional description if it is refunded" do
     expect(@pd.refunded?).to eq(false)
-    expect(@pd.to_s).to eq(@pd.expense_item.to_s)
+    expect(@pd.to_s).to eq(@pd.line_item.to_s)
     @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
     @pd.reload
     expect(@pd.refunded?).to eq(true)
-    expect(@pd.to_s).to eq("#{@pd.expense_item} (Refunded)")
+    expect(@pd.to_s).to eq("#{@pd.line_item} (Refunded)")
   end
 
   it "indicates that it is a refund if it has an associated refund_detail" do

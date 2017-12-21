@@ -55,7 +55,7 @@ describe PaymentAdjustmentsController do
       expect do
         post :exchange_create, params: { note: "exchange shirts",
                                          registrant_id: registrant.id,
-                                         old_item_id: payment_detail.expense_item.id,
+                                         old_item_id: payment_detail.line_item.id,
                                          new_item_id: new_expense_item.id }
       end.to change(RefundDetail, :count).by(1)
       r = Refund.last
@@ -65,7 +65,7 @@ describe PaymentAdjustmentsController do
       p = Payment.last
       expect(p.completed).to eq(true)
       expect(p.note).to eq("exchange shirts")
-      expect(p.payment_details.first.expense_item).to eq(new_expense_item)
+      expect(p.payment_details.first.line_item).to eq(new_expense_item)
     end
 
     it "doesn't create any refunds when there is not a matching paid expense item" do

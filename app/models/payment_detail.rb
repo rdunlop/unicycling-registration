@@ -2,29 +2,30 @@
 #
 # Table name: payment_details
 #
-#  id              :integer          not null, primary key
-#  payment_id      :integer
-#  registrant_id   :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  expense_item_id :integer
-#  details         :string(255)
-#  free            :boolean          default(FALSE), not null
-#  refunded        :boolean          default(FALSE), not null
-#  amount_cents    :integer
+#  id             :integer          not null, primary key
+#  payment_id     :integer
+#  registrant_id  :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  line_item_id   :integer
+#  details        :string(255)
+#  free           :boolean          default(FALSE), not null
+#  refunded       :boolean          default(FALSE), not null
+#  amount_cents   :integer
+#  line_item_type :string
 #
 # Indexes
 #
-#  index_payment_details_expense_item_id  (expense_item_id)
-#  index_payment_details_payment_id       (payment_id)
-#  index_payment_details_registrant_id    (registrant_id)
+#  index_payment_details_on_line_item_id_and_line_item_type  (line_item_id,line_item_type)
+#  index_payment_details_payment_id                          (payment_id)
+#  index_payment_details_registrant_id                       (registrant_id)
 #
 
 class PaymentDetail < ApplicationRecord
   include CachedSetModel
   include HasDetailsDescription
 
-  validates :payment, :registrant_id, :expense_item, presence: true
+  validates :payment, :registrant_id, :line_item, presence: true
   validate :registrant_must_be_valid
 
   monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
@@ -33,11 +34,11 @@ class PaymentDetail < ApplicationRecord
 
   belongs_to :registrant, touch: true
   belongs_to :payment, inverse_of: :payment_details
-  belongs_to :expense_item
+  belongs_to :line_item, polymorphic: true
   has_one :refund_detail
   has_one :payment_detail_coupon_code
 
-  delegate :has_details?, :details_label, to: :expense_item
+  delegate :has_details?, :details_label, to: :line_item
 
   scope :completed, -> { joins(:payment).merge(Payment.completed) }
   scope :offline_pending, -> { joins(:payment).merge(Payment.offline_pending) }
@@ -52,19 +53,19 @@ class PaymentDetail < ApplicationRecord
   scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil }) }
 
   def self.cache_set_field
-    :expense_item_id
+    :line_item_id # ????
   end
 
   def base_cost
     return 0 if free
 
-    expense_item.cost
+    line_item.cost
   end
 
   def tax
     return 0 if free
 
-    expense_item.tax
+    line_item.tax
   end
 
   def cost
@@ -81,7 +82,7 @@ class PaymentDetail < ApplicationRecord
   # update the amount owing for this payment_detail, based on the coupon code applied
   def recalculate!
     if payment_detail_coupon_code.nil?
-      update_attribute(:amount, expense_item.total_cost)
+      update_attribute(:amount, line_item.total_cost)
     else
       update_attribute(:amount, payment_detail_coupon_code.price)
     end
@@ -89,7 +90,7 @@ class PaymentDetail < ApplicationRecord
 
   def to_s
     res = ""
-    res += expense_item.to_s
+    res += line_item.to_s
     if refunded?
       res += " (Refunded)"
     end

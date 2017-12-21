@@ -7,7 +7,6 @@
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
-#  name                        :string(255)
 #  visible                     :boolean          default(TRUE), not null
 #  accepts_music_uploads       :boolean          default(FALSE), not null
 #  artistic                    :boolean          default(FALSE), not null
