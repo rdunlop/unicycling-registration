@@ -27,10 +27,10 @@ class LodgingForm
 
       success &&= package.save
 
-      # success &&= registrant.registrant_expense_items.build(
-      #   line_item: package,
-      #   system_managed: true,
-      # )
+      success &&= registrant.registrant_expense_items.create(
+        line_item: package,
+        system_managed: true
+      )
       unless success
         errors.add(:base, "Unable to save items. Are you trying to buy it a 2nd time?")
         raise ActiveRecord::Rollback
@@ -42,34 +42,11 @@ class LodgingForm
 
   # Return a set of LodgingForm objects for the lodging currently selected for this registrant
   def self.selected_for(registrant)
-    registrant.registrant_expense_items.none
-    # lodging_selected_from_set(registrant.owing_expense_items)
-  end
-
-  def self.lodging_selected_from_set(expense_items_scope)
-    LodgingRoomType.includes(lodging_room_options: :lodging_days).map do |lodging_room_type|
-      expense_items = lodging_room_type.lodging_days.map(&:expense_item)
-      found_expense_items = expense_items_scope & expense_items
-
-      next if found_expense_items.none?
-
-      selected_lodging_days = lodging_room_type.lodging_days.select do |lodging_day|
-        found_expense_items.any?{|expense_item| expense_item == lodging_day.expense_item }
-      end
-      first_day = selected_lodging_days.first
-      last_day = selected_lodging_days.last
-
-      LodgingForm.new(
-        lodging_room_type_id: lodging_room_type.id,
-        first_day: first_day.date_offered.strftime("%Y/%m/%d"),
-        last_day: last_day.date_offered.strftime("%Y/%m/%d")
-      )
-    end.compact
+    registrant.registrant_expense_items.where(line_item_type: "LodgingPackage").map(&:line_item)
   end
 
   def self.paid_for(registrant)
-    registrant.payment_details.none
-    # lodging_selected_from_set(registrant.paid_expense_items)
+    registrant.payment_details.where(line_item_type: "LodgingPackage").map(&:line_item)
   end
 
   def lodging_room_type

@@ -429,7 +429,8 @@ Rails.application.routes.draw do
         post :copy_to_noncompetitor
       end
       resources :registrant_expense_items, only: %i[create destroy]
-      resources :lodgings, only: %i[create destroy]
+      resources :lodgings, only: %i[create]
+      resources :lodging_packages, only: %(destroy)
       resources :standard_skill_routines, only: [:create]
       member do
         get :payments, to: "payments#registrant_payments"

@@ -14,11 +14,12 @@
         %td= lodging_form.last_day
         %td Paid
 
-    - @selected_lodging.each do |lodging_form|
+    - @selected_lodging.each do |lodging_package|
+      - presenter = LodgingPackagePresenter.new(lodging_package)
       %tr
-        %td= lodging_form.lodging_type
-        %td= lodging_form.first_day
-        %td= lodging_form.last_day
+        %td= lodging_package.lodging_room_type
+        %td= presenter.first_day
+        %td= presenter.last_day
         %td
-          = link_to "Delete", registrant_lodging_path(@registrant.bib_number, lodging_form.lodging_type), data: { confirm: t("are_you_sure"), method: :delete }
+          = link_to "Delete", registrant_lodging_package_path(@registrant.bib_number, lodging_package), data: { confirm: t("are_you_sure"), method: :delete }
 

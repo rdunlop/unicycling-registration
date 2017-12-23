@@ -24,7 +24,7 @@ describe LodgingForm do
         it "creates registrant_expense_items" do
           expect do
             form.save
-          end.to change(RegistrantExpenseItem, :count).by(3)
+          end.to change(RegistrantExpenseItem, :count).by(1)
         end
       end
 
@@ -176,27 +176,28 @@ describe LodgingForm do
     #   end
     # end
 
-    # describe "#selected_for" do
-    #   context "with no selected elements" do
-    #     it "returns a blank array" do
-    #       expect(described_class.selected_for(competitor)).to eq([])
-    #     end
-    #   end
+    describe "#selected_for" do
+      context "with no selected elements" do
+        it "returns a blank array" do
+          expect(described_class.selected_for(competitor)).to eq([])
+        end
+      end
 
-    #   context "with a single selected element" do
-    #     let!(:lodging_day1) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
-    #     let(:expense_item) { lodging_day1.expense_item }
-    #     let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, expense_item: expense_item)}
+      context "with a single selected element" do
+        let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
+        let(:package) { FactoryGirl.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
+        let!(:package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
+        let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, line_item: package)}
 
-    #     it "returns a single element array" do
-    #       competitor.reload
-    #       forms = described_class.selected_for(competitor)
+        it "returns a single element array" do
+          competitor.reload
+          packages = described_class.selected_for(competitor)
 
-    #       expect(forms.count).to eq(1)
-    #       expect(forms.first.lodging_room_type_id).to eq(lodging_room_type.id)
-    #       expect(forms.first.first_day).to eq("2017/12/28")
-    #       expect(forms.first.last_day).to eq("2017/12/28")
-    #     end
-    #   end
+          expect(packages.count).to eq(1)
+          expect(packages.first.lodging_room_type_id).to eq(lodging_room_type.id)
+          expect(packages.first).to eq(package)
+        end
+      end
+    end
   end
 end
