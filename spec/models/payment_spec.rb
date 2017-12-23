@@ -138,22 +138,12 @@ describe Payment do
       expect(Payment.total_received).to eq(15.33.to_money)
     end
 
-    it "returns the set of paid expense_items" do
-      pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
-      payment.reload
-      expect(Payment.paid_expense_items).to eq([pd.line_item])
-    end
-
     describe "with a refund" do
       before(:each) do
         pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
         @ref = FactoryGirl.create(:refund)
         @rd = FactoryGirl.create(:refund_detail, refund: @ref, payment_detail: pd)
         payment.reload
-      end
-
-      it "doesn't list the item in the paid_expense_items" do
-        expect(Payment.paid_expense_items).to eq([])
       end
 
       describe "#total_non_refunded_amount" do

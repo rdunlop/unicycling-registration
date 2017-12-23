@@ -9,6 +9,7 @@
       = render :partial => "/shared/error_messages", :object => @registrant_expense_item
       = ff.hidden_field :registrant_id
       = ff.hidden_field :line_item_id
+      = ff.hidden_field :line_item_type
       - if show_as_free
         = ff.hidden_field :free, {:value => 1}
       - if @registrant_expense_item.has_details?

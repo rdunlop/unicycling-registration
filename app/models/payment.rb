@@ -131,15 +131,6 @@ class Payment < ApplicationRecord
     all
   end
 
-  # DEAD CODE?
-  def self.paid_expense_items
-    all = []
-    Registrant.includes(:payment_details).each do |reg| # XXX more includes?
-      all += reg.paid_expense_items
-    end
-    all
-  end
-
   def self.build_from_details(options)
     payment = Payment.new(
       completed: true,

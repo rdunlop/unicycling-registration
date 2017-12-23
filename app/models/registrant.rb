@@ -402,15 +402,15 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def paid_or_pending_details
-    payment_details.completed_or_offline.not_refunded.clone
+    payment_details.completed_or_offline.not_refunded.clone.preload(line_item: [:translations, expense_group: :translations])
   end
 
   def paid_details
-    payment_details.completed.not_refunded.clone
+    payment_details.completed.not_refunded.clone.preload(line_item: [:translations, expense_group: :translations])
   end
 
   def pending_details
-    payment_details.offline_pending.not_refunded.clone
+    payment_details.offline_pending.not_refunded.clone.preload(line_item: [:translations, expense_group: :translations])
   end
 
   def amount_paid
