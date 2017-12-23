@@ -31,8 +31,7 @@ class RegistrantExpenseItem < ApplicationRecord
   has_paper_trail meta: { registrant_id: :registrant_id }
 
   validates :line_item, :registrant, presence: true
-  validate :only_one_free_per_expense_group, on: :create
-  validate :no_more_than_max_per_registrant, on: :create
+  validate :can_add_another_of_this_line_item?, on: :create
   validate :custom_cost_present
 
   monetize :custom_cost_cents, allow_nil: true
@@ -48,7 +47,11 @@ class RegistrantExpenseItem < ApplicationRecord
   end
 
   def self.cache_set_field
-    :line_item_id # XXX????
+    :line_item_type_and_id
+  end
+
+  def line_item_type_and_id
+    [line_item_type, line_item_id].join("/")
   end
 
   def to_s
@@ -76,26 +79,12 @@ class RegistrantExpenseItem < ApplicationRecord
 
   private
 
-  def only_one_free_per_expense_group
-    return true if line_item_id.nil? || registrant.nil? || (free == false)
-
-    if line_item_type == "ExpenseItem" # should be extract out
-      free_item_checker = ExpenseItemFreeChecker.new(registrant, line_item)
-      if free_item_checker.free_item_already_exists?
-        errors.add(:base, free_item_checker.error_message)
-      end
-    end
-  end
-
-  def no_more_than_max_per_registrant
+  def can_add_another_of_this_line_item?
     return true if line_item_id.nil? || registrant.nil?
-    if line_item_type == "ExpenseItem" # should be extracted out
-      max = line_item.maximum_per_registrant.to_i
-      return true if max.zero?
 
-      if registrant.all_expense_items.count(line_item) == max
-        errors.add(:base, "Each Registrant is only permitted #{max} of #{line_item}")
-      end
+    returned_errors = line_item.can_create_registrant_expense_item?(self)
+    returned_errors.each do |error|
+      errors.add(:base, error)
     end
   end
 

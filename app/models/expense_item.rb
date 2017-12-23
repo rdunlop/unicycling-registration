@@ -183,6 +183,27 @@ class ExpenseItem < ApplicationRecord
     num_unpaid(include_incomplete_registrants: true) + num_paid
   end
 
+  # return an array of errors which should prevent creating the passed registrant_expense_item
+  def can_create_registrant_expense_item?(registrant_expense_item)
+    errors = []
+
+    max = maximum_per_registrant.to_i
+    if max.positive?
+      if registrant_expense_item.registrant.all_expense_items.count(self) == max
+        errors << "Each Registrant is only permitted #{max} of #{self}"
+      end
+    end
+
+    if registrant_expense_item.free?
+      free_item_checker = ExpenseItemFreeChecker.new(registrant_expense_item.registrant, self)
+      if free_item_checker.free_item_already_exists?
+        errors << free_item_checker.error_message
+      end
+    end
+
+    errors
+  end
+
   def can_i_add?(num_to_add)
     return true if maximum_available.nil?
     return true unless has_limits?

@@ -23,12 +23,16 @@
 require 'spec_helper'
 
 describe RegistrantExpenseItem do
+  let(:rei) { FactoryGirl.create(:registrant_expense_item) }
+
   before(:each) do
-    @rei = FactoryGirl.create(:registrant_expense_item)
+    @rei = rei
     @ei = @rei.line_item
     @ei.cost = 20
     @ei.save
   end
+
+  let(:registrant) { rei.registrant }
   it "can be created by factory" do
     expect(@rei.valid?).to eq(true)
   end
@@ -98,6 +102,36 @@ describe RegistrantExpenseItem do
     @item = FactoryGirl.create(:expense_item)
     @rei = FactoryGirl.create(:registrant_expense_item, line_item: @item)
     expect(@rei.line_item).to eq(@item)
+  end
+
+  context "with an expense_item which is limited to 1 free per group" do
+    before do
+      registrant.reload
+      expense_group = @ei.expense_group
+      FactoryGirl.create(:expense_group_free_option, expense_group: expense_group, free_option: "One Free of Each In Group")
+    end
+
+    it "does allow a 2nd item of the same type (because the existing one is not free)" do
+      new_rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: true)
+      expect(new_rei).to be_valid
+    end
+
+    context "with an existing free item" do
+      before do
+        @rei.free = true
+        @rei.save!
+      end
+
+      it "does not permit a 2nd free item" do
+        new_rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: true)
+        expect(new_rei).not_to be_valid
+      end
+
+      it "does permit a 2nd item (which is not free" do
+        new_rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: false)
+        expect(new_rei).to be_valid
+      end
+    end
   end
 
   describe "with an expense_item with a limited number available" do
