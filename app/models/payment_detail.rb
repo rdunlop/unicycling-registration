@@ -53,7 +53,11 @@ class PaymentDetail < ApplicationRecord
   scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil }) }
 
   def self.cache_set_field
-    :line_item_id # ????
+    :line_item_type_and_id
+  end
+
+  def line_item_type_and_id
+    [line_item_type, line_item_id].join("/")
   end
 
   def base_cost
