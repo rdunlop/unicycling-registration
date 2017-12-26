@@ -108,7 +108,7 @@ group :test do
   gem 'capybara'
   gem 'codeclimate_circle_ci_coverage'
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '4.7.0' # https://github.com/thoughtbot/factory_girl/pull/982
+  gem 'factory_girl_rails', '4.9.0' # https://github.com/thoughtbot/factory_girl/pull/982
   gem 'poltergeist'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata

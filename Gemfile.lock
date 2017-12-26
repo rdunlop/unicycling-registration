@@ -252,10 +252,10 @@ GEM
     eye-patch (0.4.2)
       chronic_duration
       eye (>= 0.6.2)
-    factory_girl (4.7.0)
+    factory_girl (4.9.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.7.0)
-      factory_girl (~> 4.7.0)
+    factory_girl_rails (4.9.0)
+      factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
@@ -637,7 +637,7 @@ DEPENDENCIES
   devise
   devise-i18n
   eye-patch
-  factory_girl_rails (= 4.7.0)
+  factory_girl_rails (= 4.9.0)
   faker
   fancybox2-rails!
   foreman
