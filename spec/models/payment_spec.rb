@@ -146,9 +146,9 @@ describe Payment do
         payment.reload
       end
 
-      describe "#total_non_refunded_amount" do
+      describe "#total_refunded_amount" do
         it "counts the payments" do
-          expect(Payment.total_non_refunded_amount).to eq(0.to_money)
+          expect(Payment.total_refunded_amount).to eq(0.to_money)
         end
       end
     end
@@ -164,7 +164,7 @@ describe Payment do
     end
 
     it "registrant owes for this item" do
-      expect(@reg.owing_expense_items).to eq([@rei.line_item])
+      expect(@reg.owing_line_items).to eq([@rei.line_item])
     end
     describe "when the user has a free t-shirt and a paid t-shirt" do
       before(:each) do
@@ -210,10 +210,10 @@ describe Payment do
       end
 
       it "registrant no longer owes" do
-        expect(@reg.reload.owing_expense_items).to eq([])
+        expect(@reg.reload.owing_line_items).to eq([])
       end
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.line_item])
+        expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
     end
 
@@ -229,11 +229,11 @@ describe Payment do
       end
 
       it "registrant still owes" do
-        expect(@reg.owing_expense_items).to eq([@rei.line_item])
+        expect(@reg.owing_line_items).to eq([@rei.line_item])
       end
 
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.line_item])
+        expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
 
       it "should email the admin" do
@@ -255,10 +255,10 @@ describe Payment do
       end
 
       it "registrant no longer owes" do
-        expect(@reg.reload.owing_expense_items).to eq([])
+        expect(@reg.reload.owing_line_items).to eq([])
       end
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.line_item])
+        expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
     end
 
@@ -268,10 +268,10 @@ describe Payment do
         @pay.save
       end
       it "registrant no longer owes" do
-        expect(@reg.owing_expense_items).to eq([])
+        expect(@reg.owing_line_items).to eq([])
       end
       it "registrant has paid item" do
-        expect(@reg.paid_expense_items).to eq([@pd.line_item])
+        expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
 
       describe "when the payment is saved after being paid" do
@@ -281,7 +281,7 @@ describe Payment do
           @reg.reload
         end
         it "doesn't remove more items from the registrant_expenses" do
-          expect(@reg.owing_expense_items).to eq([@rei2.line_item])
+          expect(@reg.owing_line_items).to eq([@rei2.line_item])
         end
       end
     end

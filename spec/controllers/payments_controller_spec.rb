@@ -376,7 +376,7 @@ describe PaymentsController do
       item = payment_detail.line_item
       get :summary
 
-      assert_select "a", item.to_s
+      assert_select "a", item.expense_group.to_s
     end
   end
 end

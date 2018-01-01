@@ -189,7 +189,7 @@ class ExpenseItem < ApplicationRecord
 
     max = maximum_per_registrant.to_i
     if max.positive?
-      if registrant_expense_item.registrant.all_expense_items.count(self) == max
+      if registrant_expense_item.registrant.all_line_items.count(self) == max
         errors << "Each Registrant is only permitted #{max} of #{self}"
       end
     end
@@ -199,6 +199,10 @@ class ExpenseItem < ApplicationRecord
       if free_item_checker.free_item_already_exists?
         errors << free_item_checker.error_message
       end
+    end
+
+    unless can_i_add?(1)
+      errors << "There are not that many #{self} available"
     end
 
     errors

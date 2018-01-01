@@ -28,8 +28,8 @@ describe RequiredExpenseItemCreator do
       it "retrieves the non-comp registration_item" do
         expect(@noncomp.registrant_expense_items.first.line_item).to eq(@noncomp_exp)
       end
-      it "lists the item as an owing_expense_item" do
-        expect(@noncomp.owing_expense_items).to eq([@noncomp_exp])
+      it "lists the item as an owing_line_item" do
+        expect(@noncomp.owing_line_items).to eq([@noncomp_exp])
       end
     end
 

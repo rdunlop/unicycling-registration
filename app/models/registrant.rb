@@ -34,7 +34,7 @@
 #  index_registrants_on_user_id          (user_id)
 #
 
-class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
+class Registrant < ApplicationRecord
   include Eligibility
   include Representable
   include CachedModel
@@ -154,7 +154,6 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates_associated :registrant_best_times, if: :past_step_2?
 
   # Expense items/LineItems
-  validate :not_exceeding_line_item_limits
   validates_associated :registrant_expense_items
   validate :has_necessary_free_items, if: :validated?
 
@@ -253,7 +252,7 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # determine if this registrant has an unpaid (or paid) version of this expense item
   def has_expense_item?(expense_item)
-    all_expense_items.include?(expense_item)
+    all_line_items.include?(expense_item)
   end
 
   # ##########################################################
@@ -347,14 +346,14 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return true if spectator?
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
       registration_cost_items = RegistrationCost.all_registration_expense_items
-      paid_or_pending_expense_items.any? { |item| registration_cost_items.include?(item) }
+      paid_or_pending_line_items.any? { |item| registration_cost_items.include?(item) }
     end
   end
 
-  # return a list of _ALL_ of the expense_items for this registrant
+  # return a list of _ALL_ of the line_items for this registrant
   #  PAID FOR or NOT
-  def all_expense_items
-    owing_expense_items + paid_expense_items + pending_expense_items
+  def all_line_items
+    owing_line_items + paid_line_items + pending_line_items
   end
 
   def amount_pending
@@ -373,32 +372,27 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     amount_owing + amount_paid + amount_pending
   end
 
-  # returns a list of expense_items that this registrant hasn't paid for
+  # returns a list of line_items that this registrant hasn't paid for
   # INCLUDING the registration cost
-  def owing_expense_items
+  def owing_line_items
     registrant_expense_items.map{|eid| eid.line_item}
-  end
-
-  # pass back the details too, so that we don't mis-associate them when building the payment
-  def owing_expense_items_with_details
-    registrant_expense_items.map{|rei| [rei.line_item, rei.details]}
   end
 
   def owing_registrant_expense_items
     registrant_expense_items
   end
 
-  # returns a list of paid-for expense_items
-  def paid_expense_items
+  # returns a list of paid-for line_items
+  def paid_line_items
     paid_details.map{|pd| pd.line_item }
   end
 
-  def pending_expense_items
+  def pending_line_items
     pending_details.map{|pd| pd.line_item }
   end
 
-  def paid_or_pending_expense_items
-    paid_expense_items + pending_expense_items
+  def paid_or_pending_line_items
+    paid_line_items + pending_line_items
   end
 
   def paid_or_pending_details
@@ -604,21 +598,11 @@ class Registrant < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def not_exceeding_line_item_limits
-    line_items = registrant_expense_items.select(&:new_record?).map(&:line_item).reject(&:nil?)
-    line_items.uniq.each do |ei|
-      num_ei = line_items.count(ei)
-      unless ei.can_i_add?(num_ei)
-        errors.add(:base, "There are not that many #{ei} available")
-      end
-    end
-  end
-
   def has_necessary_free_items
     free_groups_required = registrant_type_model.required_free_expense_groups(age)
 
     free_groups_required.each do |expense_group|
-      if all_expense_items.none? { |expense_item| expense_item.expense_group == expense_group}
+      if all_line_items.none? { |line_item| line_item.try(:expense_group) == expense_group}
         errors.add(:base, "You must choose a free #{expense_group}")
       end
     end

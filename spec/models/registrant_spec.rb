@@ -177,8 +177,8 @@ describe Registrant do
       expect(@reg.valid?).to eq(false)
     end
 
-    it "has no paid_expense_items" do
-      expect(@reg.paid_expense_items).to eq([])
+    it "has no paid_line_items" do
+      expect(@reg.paid_line_items).to eq([])
     end
 
     it "has either Male or Female gender" do
@@ -275,23 +275,8 @@ describe Registrant do
       expect(@reg.expenses_total).to eq(@item.cost)
     end
     it "lists the item as an owing_expense_item" do
-      expect(@reg.owing_expense_items).to eq([@item])
+      expect(@reg.owing_line_items).to eq([@item])
       expect(@reg.owing_registrant_expense_items.first).to eq(@rei)
-    end
-    it "lists no details for its items" do
-      expect(@reg.owing_expense_items_with_details).to eq([[@item, nil]])
-    end
-
-    describe "With an expense_item having text details" do
-      before(:each) do
-        @rei.details = "These are some details"
-        @rei.save!
-        @reg.reload
-      end
-
-      it "should transfer the text along" do
-        expect(@reg.owing_expense_items_with_details).to eq([[@item, "These are some details"]])
-      end
     end
 
     describe "having paid for the item once, but still having it as a registrant_expense_item" do
@@ -308,13 +293,13 @@ describe Registrant do
         @reg.reload
       end
       it "lists one remaining item as owing" do
-        expect(@reg.owing_expense_items).to eq([@item])
+        expect(@reg.owing_line_items).to eq([@item])
       end
       it "lists the item as paid for" do
-        expect(@reg.paid_expense_items).to eq([@item])
+        expect(@reg.paid_line_items).to eq([@item])
       end
-      it "should list the item twice in the all_expense_items" do
-        expect(@reg.all_expense_items).to eq([@item, @item])
+      it "should list the item twice in the all_line_items" do
+        expect(@reg.all_line_items).to eq([@item, @item])
       end
     end
   end
@@ -422,11 +407,11 @@ describe Registrant do
       it "should owe 0" do
         expect(@comp.amount_owing).to eq(0.to_money)
       end
-      it "lists the paid_expense_items" do
-        expect(@comp.paid_expense_items).to eq([@payment_detail.line_item])
+      it "lists the paid_line_items" do
+        expect(@comp.paid_line_items).to eq([@payment_detail.line_item])
       end
       it "lists no items as an owing_expense_item" do
-        expect(@comp.owing_expense_items).to eq([])
+        expect(@comp.owing_line_items).to eq([])
       end
       it "knows that the registration_fee has been paid" do
         expect(@comp.reg_paid?).to eq(true)
@@ -472,11 +457,11 @@ describe Registrant do
       it "should owe 100" do
         expect(@comp.amount_owing).to eq(100.to_money)
       end
-      it "lists the paid_expense_items" do
-        expect(@comp.paid_expense_items).to eq([])
+      it "lists the paid_line_items" do
+        expect(@comp.paid_line_items).to eq([])
       end
       it "lists no items as an owing_expense_item" do
-        expect(@comp.owing_expense_items).to eq([@comp_exp])
+        expect(@comp.owing_line_items).to eq([@comp_exp])
       end
       it "knows that the registration_fee has NOT been paid" do
         expect(@comp.reg_paid?).to eq(false)
