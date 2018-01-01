@@ -152,7 +152,7 @@ describe PaymentsController do
 
         assert_select "form", action: payment.paypal_post_url, method: "post" do
           assert_select "input[type=hidden][name=amount_1][value='" + payment_detail.amount.to_s + "']"
-          assert_select "input[type=hidden][name=item_name_1][value='" + payment_detail.expense_item.to_s + "']"
+          assert_select "input[type=hidden][name=item_name_1][value='" + payment_detail.line_item.to_s + "']"
           assert_select "input[type=hidden][name=quantity_1][value='1']"
         end
       end
@@ -206,7 +206,7 @@ describe PaymentsController do
       it "only assigns registrants that owe money" do
         @other_reg = FactoryGirl.create(:competitor, user: @user)
         @payment = FactoryGirl.create(:payment)
-        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_items.first)
+        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -218,7 +218,7 @@ describe PaymentsController do
         before(:each) do
           @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
           @payment = FactoryGirl.create(:payment)
-          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, expense_item: @reg_period.expense_items.first)
+          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
           @payment.reload
           @payment.completed = true
           @payment.save
@@ -226,7 +226,7 @@ describe PaymentsController do
 
         it "handles registrants who have paid, but owe more" do
           get :new
-          assert_select "input[type='hidden'][value=?][name='payment[payment_details_attributes][0][expense_item_id]']", @rei.expense_item_id.to_s
+          assert_select "input[type='hidden'][value=?][name='payment[payment_details_attributes][0][line_item_id]']", @rei.line_item_id.to_s
         end
 
         it "copies the details" do
@@ -267,7 +267,8 @@ describe PaymentsController do
             payment_details_attributes: [
               {
                 registrant_id: @reg.id,
-                expense_item_id: @ei.id,
+                line_item_id: @ei.id,
+                line_item_type: "ExpenseItem",
                 details: "Additional Details",
                 free: true,
                 amount: 100
@@ -286,14 +287,16 @@ describe PaymentsController do
             payment_details_attributes: [
               {
                 registrant_id: @reg.id,
-                expense_item_id: @ei.id,
+                line_item_id: @ei.id,
+                line_item_type: "ExpenseItem",
                 details: "Additional Details",
                 free: true,
                 amount: 100
               },
               {
                 registrant_id: @reg.id,
-                expense_item_id: @ei2.id,
+                line_item_id: @ei2.id,
+                line_item_type: "ExpenseItem",
                 details: "Additional Details",
                 free: true,
                 amount: 100,
@@ -370,10 +373,10 @@ describe PaymentsController do
     let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
 
     it "assigns the known expense groups as expense_groups" do
-      item = payment_detail.expense_item
+      item = payment_detail.line_item
       get :summary
 
-      assert_select "a", item.to_s
+      assert_select "a", item.expense_group.to_s
     end
   end
 end

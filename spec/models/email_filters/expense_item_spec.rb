@@ -6,9 +6,9 @@ describe EmailFilters::ExpenseItem do
       @reg = FactoryGirl.create(:competitor)
       @ei = FactoryGirl.create(:expense_item)
       paid_payment = FactoryGirl.create(:payment, :completed)
-      FactoryGirl.create(:payment_detail, payment: paid_payment, registrant: @reg, expense_item: @ei)
+      FactoryGirl.create(:payment_detail, payment: paid_payment, registrant: @reg, line_item: @ei)
       @reg_not_paid_item = FactoryGirl.create(:competitor)
-      FactoryGirl.create(:payment_detail, registrant: @reg_not_paid_item, expense_item: @ei)
+      FactoryGirl.create(:payment_detail, registrant: @reg_not_paid_item, line_item: @ei)
     end
 
     it "can create a list via the expense item id" do

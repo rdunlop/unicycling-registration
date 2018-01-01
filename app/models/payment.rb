@@ -84,14 +84,14 @@ class Payment < ApplicationRecord
     payment_details.each do |pd|
       res = nil
       results.each do |r|
-        if r.expense_item_id == pd.expense_item_id && r.amount == pd.amount
+        if r.expense_item_id == pd.line_item_id && r.amount == pd.amount
           res = r
           break
         end
       end
 
       if res.nil?
-        results << PaymentDetailSummary.new(expense_item_id: pd.expense_item_id, count: 1, amount: pd.amount)
+        results << PaymentDetailSummary.new(expense_item_id: pd.line_item_id, count: 1, amount: pd.amount)
       else
         res.count += 1
       end
@@ -107,7 +107,7 @@ class Payment < ApplicationRecord
     Money.new(payment_details.reduce(0.to_money) { |memo, pd| memo + pd.cost })
   end
 
-  def self.total_non_refunded_amount
+  def self.total_refunded_amount
     total = 0.to_money
     PaymentDetail.refunded.includes(:payment).each do |payment_detail|
       total += payment_detail.cost
@@ -131,15 +131,6 @@ class Payment < ApplicationRecord
     all
   end
 
-  # DEAD CODE?
-  def self.paid_expense_items
-    all = []
-    Registrant.includes(payment_details: [:expense_item]).each do |reg|
-      all += reg.paid_expense_items
-    end
-    all
-  end
-
   def self.build_from_details(options)
     payment = Payment.new(
       completed: true,
@@ -148,7 +139,7 @@ class Payment < ApplicationRecord
     )
     payment.payment_details.build(
       registrant: options[:registrant],
-      expense_item: options[:item],
+      line_item: options[:item],
       details: options[:details],
       amount: options[:amount],
       free: false
@@ -184,10 +175,10 @@ class Payment < ApplicationRecord
     return true unless just_completed_or_offline_payment?
 
     payment_details.each do |pd|
-      rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: pd.details)
+      rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, line_item: pd.line_item, free: pd.free, details: pd.details)
       unless pd.details.nil?
         if rei.nil? && pd.details.empty?
-          rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, details: nil)
+          rei = RegistrantExpenseItem.find_by(registrant_id: pd.registrant.id, line_item: pd.line_item, free: pd.free, details: nil)
         end
       end
 
@@ -195,7 +186,7 @@ class Payment < ApplicationRecord
         # this is used when PayPal eventually approves a payment, but the registration
         # period has moved forward, and we have changed the associated registration_item?
         all_reg_items = RegistrationCost.all_registration_expense_items
-        if all_reg_items.include?(pd.expense_item)
+        if all_reg_items.include?(pd.line_item)
           # the pd is a reg_item, see if there is another reg_item in the registrant's list
           rei = pd.registrant.registration_item
         end

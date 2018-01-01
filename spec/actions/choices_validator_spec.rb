@@ -186,14 +186,4 @@ describe ChoicesValidator do
       end
     end
   end
-  describe "when saving a registrant with multiple (invalid) registrant_choice" do
-    before(:each) do
-      @ei = FactoryGirl.create(:expense_item, maximum_available: 1)
-    end
-    it "cannot save with 2 registrante_expense_items when only 1 should be possible" do
-      @ei1 = registrant.registrant_expense_items.build(expense_item_id: @ei.id)
-      @ei2 = registrant.registrant_expense_items.build(expense_item_id: @ei.id)
-      expect(registrant.valid?).to eq(false)
-    end
-  end
 end

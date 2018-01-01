@@ -29,7 +29,7 @@ class RegistrantEventChoicesForm
   end
 
   def paid_for?
-    event.has_cost? && registrant.paid_or_pending_expense_items.include?(event.expense_item)
+    event.has_cost? && registrant.paid_or_pending_line_items.include?(event.expense_item)
   end
 
   def event_categories

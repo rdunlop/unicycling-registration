@@ -150,7 +150,7 @@ describe ConventionSetup::ExpenseItemsController do
 
     context "with an associated payment_detail" do
       before do
-        FactoryGirl.create(:payment_detail, expense_item: expense_item)
+        FactoryGirl.create(:payment_detail, line_item: expense_item)
       end
 
       it "does not destroy the expense_item" do

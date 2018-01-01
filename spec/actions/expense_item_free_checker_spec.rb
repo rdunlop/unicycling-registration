@@ -32,7 +32,7 @@ describe ExpenseItemFreeChecker do
 
     describe "when it has a non-free item of the same expense_group (not free though)" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: registrant, expense_item: expense_item)
+        FactoryGirl.create(:registrant_expense_item, registrant: registrant, line_item: expense_item)
         registrant.reload
       end
 
@@ -43,12 +43,12 @@ describe ExpenseItemFreeChecker do
 
     describe "when it has a free expense_item" do
       before do
-        FactoryGirl.create(:registrant_expense_item, registrant: registrant, expense_item: expense_item, free: true)
+        FactoryGirl.create(:registrant_expense_item, registrant: registrant, line_item: expense_item, free: true)
         registrant.reload
       end
 
       it "doesn't allow registrant to have 2 free of this group" do
-        @rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, expense_item: expense_item, free: true)
+        @rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: expense_item, free: true)
         expect(subject.free_item_already_exists?).to be_truthy
       end
     end
@@ -58,7 +58,7 @@ describe ExpenseItemFreeChecker do
 
       before(:each) do
         @pay = FactoryGirl.create(:payment)
-        @pei = FactoryGirl.create(:payment_detail, registrant: registrant, payment: @pay, expense_item: expense_item, free: true)
+        @pei = FactoryGirl.create(:payment_detail, registrant: registrant, payment: @pay, line_item: expense_item, free: true)
         @pay.reload
         @pay.completed = true
         @pay.save!
@@ -84,7 +84,7 @@ describe ExpenseItemFreeChecker do
 
     describe "when it has a non-free item of the same expense_group (not free though)" do
       before(:each) do
-        FactoryGirl.create(:registrant_expense_item, registrant: registrant, expense_item: expense_item)
+        FactoryGirl.create(:registrant_expense_item, registrant: registrant, line_item: expense_item)
         registrant.reload
       end
 
@@ -95,18 +95,18 @@ describe ExpenseItemFreeChecker do
 
     describe "when it has a free expense_item" do
       before do
-        FactoryGirl.create(:registrant_expense_item, registrant: registrant, expense_item: expense_item, free: true)
+        FactoryGirl.create(:registrant_expense_item, registrant: registrant, line_item: expense_item, free: true)
         registrant.reload
       end
 
       it "doesn't allow registrant to have 2 free of this expense_item" do
-        @rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, expense_item: expense_item, free: true)
+        @rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: expense_item, free: true)
         expect(subject.free_item_already_exists?).to be_truthy
       end
 
       it "allows different free expense_items in the same group" do
         expense_item2 = FactoryGirl.create(:expense_item, expense_group: expense_group)
-        @rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, expense_item: expense_item2, free: true)
+        @rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: expense_item2, free: true)
         expect(@rei).to be_valid
       end
     end

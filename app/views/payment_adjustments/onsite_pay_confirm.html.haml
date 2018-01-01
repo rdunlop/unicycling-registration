@@ -31,8 +31,9 @@
             = paid_detail.object.registrant
             = paid_detail.hidden_field :registrant_id
           %td
-            = paid_detail.object.expense_item
-            = paid_detail.hidden_field :expense_item_id
+            = paid_detail.object.line_item
+            = paid_detail.hidden_field :line_item_id
+            = paid_detail.hidden_field :line_item_type
           %td
             = paid_detail.object.amount
             = paid_detail.hidden_field :amount
@@ -60,15 +61,16 @@
             = unpaid_detail.object.registrant
             = unpaid_detail.hidden_field :registrant_id
           %td
-            = unpaid_detail.object.expense_item
-            = unpaid_detail.hidden_field :expense_item_id
+            = unpaid_detail.object.line_item
+            = unpaid_detail.hidden_field :line_item_id
+            = unpaid_detail.hidden_field :line_item_type
           %td= unpaid_detail.object.amount
           %td
             = unpaid_detail.object.details
             = unpaid_detail.hidden_field :details
           %td= unpaid_detail.check_box :free
-  %a#show_hide_admin_payments_other_new{:href => "#"} select other item
-  %table#admin_payments_other_new.sortable
+  %a.js--showOtherPaymentOptions{:href => "#"} select other item
+  %table.sortable.js--otherPaymentOptions.is--hidden
     %thead
       %tr
         %th Registrant
@@ -79,7 +81,9 @@
       = pf.fields_for :new_details do |new_detail|
         %tr
           %td= new_detail.select :registrant_id, @registrants.map {|reg| [reg, reg.id] }, :include_blank => true
-          %td= new_detail.select :expense_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true
+          %td
+            = new_detail.select :line_item_id, ExpenseItem.all.map {|ei| [ei.to_s + " - " + ei.cost.to_s, ei.id] }, :include_blank => true
+            = new_detail.hidden_field :line_item_type, value: "ExpenseItem"
           %td= new_detail.text_field :details
           %td= new_detail.check_box :free
   = pf.button :submit, "Create and Save Payment", :class => "payment_link"

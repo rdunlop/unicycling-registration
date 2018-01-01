@@ -31,9 +31,9 @@ class ExpenseItem < ApplicationRecord
   monetize :total_cost_cents
 
   # use Exception so that RegistrationCost is rolled back if it attempts to be destroyed
-  has_many :payment_details, dependent: :restrict_with_exception
+  has_many :payment_details, as: :line_item, dependent: :restrict_with_exception
 
-  has_many :registrant_expense_items, inverse_of: :expense_item, dependent: :restrict_with_exception
+  has_many :registrant_expense_items, as: :line_item, inverse_of: :line_item, dependent: :restrict_with_exception
   has_many :coupon_code_expense_items, dependent: :destroy
 
   translates :name, :details_label, fallbacks_for_empty_translations: true
@@ -181,6 +181,31 @@ class ExpenseItem < ApplicationRecord
   # Includes
   def num_selected_items
     num_unpaid(include_incomplete_registrants: true) + num_paid
+  end
+
+  # return an array of errors which should prevent creating the passed registrant_expense_item
+  def can_create_registrant_expense_item?(registrant_expense_item)
+    errors = []
+
+    max = maximum_per_registrant.to_i
+    if max.positive?
+      if registrant_expense_item.registrant.all_line_items.count(self) == max
+        errors << "Each Registrant is only permitted #{max} of #{self}"
+      end
+    end
+
+    if registrant_expense_item.free?
+      free_item_checker = ExpenseItemFreeChecker.new(registrant_expense_item.registrant, self)
+      if free_item_checker.free_item_already_exists?
+        errors << free_item_checker.error_message
+      end
+    end
+
+    unless can_i_add?(1)
+      errors << "There are not that many #{self} available"
+    end
+
+    errors
   end
 
   def can_i_add?(num_to_add)

@@ -37,7 +37,7 @@ describe RefundDetail do
     it "re-creates the registration_expense_item successfully" do
       @reg = FactoryGirl.create(:competitor)
       expect(@reg.registrant_expense_items.count).to eq(1)
-      @pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @rp.expense_items.first)
+      @pd = FactoryGirl.create(:payment_detail, registrant: @reg, line_item: @rp.expense_items.first)
       payment = @pd.payment
       payment.reload
       payment.completed = true
@@ -58,7 +58,7 @@ describe RefundDetail do
 
       it "Doesn't re-add any items if the refund is a non-system-managed item (not the competition item)" do
         @reg = FactoryGirl.create(:competitor)
-        @pd = FactoryGirl.create(:payment_detail, registrant: @reg, expense_item: @rp_prev.expense_items.first)
+        @pd = FactoryGirl.create(:payment_detail, registrant: @reg, line_item: @rp_prev.expense_items.first)
         @pd2 = FactoryGirl.create(:payment_detail, registrant: @reg)
         payment = @pd.payment
         payment.reload
