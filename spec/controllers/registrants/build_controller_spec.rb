@@ -54,7 +54,7 @@ describe Registrants::BuildController do
 
     context "viewing the lodging page" do
       let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
-      let(:lodging_day) { FactoryGirl.create(:lodging_day) }
+      let!(:lodging_day) { FactoryGirl.create(:lodging_day) }
 
       it "displays the add-lodging form" do
         get :show, params: { registrant_id: registrant.to_param, id: "lodging" }
