@@ -144,7 +144,7 @@ Rails.application.routes.draw do
     post "/payments/update_reg_fee", controller: "admin/reg_fees", action: :update_reg_fee, as: "update_reg_fee"
 
     namespace :payment_summary do
-      resources :expense_groups, only: %i[index show]
+      resources :expense_groups, only: %i[show]
       resources :expense_items, only: [] do
         member do
           get :details
