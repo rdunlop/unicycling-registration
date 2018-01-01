@@ -27,11 +27,15 @@ class LodgingForm
 
       success &&= package.save
 
-      success &&= registrant.registrant_expense_items.create(
+      new_rei = registrant.registrant_expense_items.build(
         line_item: package,
         system_managed: true
       )
+
+      success &&= new_rei.save
+
       unless success
+        # Add error messages from new_rei?
         errors.add(:base, "Unable to save items. Are you trying to buy it a 2nd time?")
         raise ActiveRecord::Rollback
       end

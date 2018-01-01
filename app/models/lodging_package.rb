@@ -25,8 +25,17 @@ class LodgingPackage < ApplicationRecord
   validates :total_cost, presence: true
   monetize :total_cost_cents
 
-  def can_create_registrant_expense_item?(_registrant_expense_item)
-    []
+  def can_create_registrant_expense_item?(registrant_expense_item)
+    errors = []
+
+    existing_packages = registrant_expense_item.registrant.all_expense_items.select{ |line_item| line_item.is_a?(LodgingPackage) }
+    lodging_package_days.each do |lodging_package_day|
+      if existing_packages.flat_map(&:lodging_package_days).map(&:date_offered).include?(lodging_package_day.date_offered)
+        errors << "Unable to add the same day (#{lodging_package_day.date_offered}) twice"
+      end
+    end
+
+    errors
   end
 
   def has_custom_cost?
@@ -35,7 +44,7 @@ class LodgingPackage < ApplicationRecord
 
   def has_details?; end
 
-  # alias_attribute :cost, :total_cost
+  alias_attribute :cost, :total_cost
 
   def tax
     0
