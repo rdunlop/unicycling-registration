@@ -128,12 +128,6 @@ Rails.application.routes.draw do
       post :update_row_order, on: :collection
     end
 
-    resources :expense_items, only: [] do
-      member do
-        get :details
-      end
-    end
-
     resources :refunds, only: [:show]
 
     resources :pages, only: [:show], param: :slug
@@ -148,6 +142,15 @@ Rails.application.routes.draw do
 
     get  "/payments/set_reg_fees", controller: "admin/reg_fees", action: :index, as: "set_reg_fees"
     post "/payments/update_reg_fee", controller: "admin/reg_fees", action: :update_reg_fee, as: "update_reg_fee"
+
+    namespace :payment_summary do
+      resources :expense_groups, only: %i[index show]
+      resources :expense_items, only: [] do
+        member do
+          get :details
+        end
+      end
+    end
 
     resources :payments, except: %i[index edit update destroy] do
       collection do

@@ -107,7 +107,7 @@ class Payment < ApplicationRecord
     Money.new(payment_details.reduce(0.to_money) { |memo, pd| memo + pd.cost })
   end
 
-  def self.total_non_refunded_amount
+  def self.total_refunded_amount
     total = 0.to_money
     PaymentDetail.refunded.includes(:payment).each do |payment_detail|
       total += payment_detail.cost
