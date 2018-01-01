@@ -17,6 +17,14 @@ class LodgingPackagePresenter
     output_entry(date)
   end
 
+  def location
+    "#{lodging_package.lodging_room_type} - #{lodging_package.lodging_room_option}"
+  end
+
+  def to_s
+    "#{location} - #{first_day}-#{last_day}"
+  end
+
   private
 
   def output_range(start_date, end_date)

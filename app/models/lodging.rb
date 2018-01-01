@@ -15,6 +15,7 @@ class Lodging < ApplicationRecord
   validates :name, uniqueness: true
 
   has_many :lodging_room_types, inverse_of: :lodging, dependent: :restrict_with_error
+  has_many :lodging_room_options, through: :lodging_room_types
   has_many :lodging_days, through: :lodging_types
 
   accepts_nested_attributes_for :lodging_room_types, allow_destroy: true

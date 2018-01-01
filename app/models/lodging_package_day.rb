@@ -21,5 +21,5 @@ class LodgingPackageDay < ApplicationRecord
   belongs_to :lodging_package, inverse_of: :lodging_package_days
   belongs_to :lodging_day
 
-  delegate :date_offered, to: :lodging_day
+  delegate :date_offered, :to_s, to: :lodging_day
 end

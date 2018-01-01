@@ -150,6 +150,7 @@ Rails.application.routes.draw do
           get :details
         end
       end
+      resources :lodgings, only: %i[show]
     end
 
     resources :payments, except: %i[index edit update destroy] do

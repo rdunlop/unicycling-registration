@@ -23,6 +23,8 @@ class LodgingRoomType < ApplicationRecord
 
   belongs_to :lodging, inverse_of: :lodging_room_types
   has_many :lodging_room_options, dependent: :destroy
+  has_many :lodging_packages, inverse_of: :lodging_room_type
+
   accepts_nested_attributes_for :lodging_room_options, allow_destroy: true
 
   acts_as_restful_list scope: :lodging
@@ -31,5 +33,22 @@ class LodgingRoomType < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def num_selected_items(lodging_day)
+    lodging_room_options.map do |lodging_room_option|
+      lodging_room_option.num_selected_items(lodging_day)
+    end.sum
+  end
+
+  def maximum_reached?(lodging_day)
+    return false unless has_limits?
+
+    num_selected_items(lodging_day) >= maximum_available
+  end
+
+  def has_limits?
+    return true if maximum_available&.positive?
+    false
   end
 end

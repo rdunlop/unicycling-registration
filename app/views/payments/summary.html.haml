@@ -43,6 +43,13 @@
       - @expense_groups.each do |expense_group|
         %tr
           %td= link_to expense_group, payment_summary_expense_group_path(expense_group)
+    %thead
+      %tr
+        %th= Lodging.model_name.human
+    %tbody
+      - @lodgings.each do |lodging|
+        %tr
+          %td= link_to lodging, payment_summary_lodging_path(lodging)
 %hr
   %table
     - cache [Payment, Refund] do

@@ -1,12 +1,11 @@
 - if LodgingRoomType.any?
-  %fieldset.small-12.medium-6.large-4.columns
-    %legend Available Lodging
+  %h1 Available Lodging options
 
-
-    - Lodging.all.each do |lodging|
-      %h4= lodging
+  - Lodging.ordered.all.each do |lodging|
+    %fieldset.small-12.medium-6.large-4.columns
+      %legend= lodging
       %p= lodging.description
-      - lodging.lodging_room_types.each do |lodging_room_type|
+      - lodging.lodging_room_types.ordered.each do |lodging_room_type|
         %h5= lodging_room_type.name
         %p= lodging_room_type.description
         %table
@@ -16,7 +15,7 @@
               %th Days Available
               %th Price Per Day
           %tbody
-            - lodging_room_type.lodging_room_options.each do |lodging_room_option|
+            - lodging_room_type.lodging_room_options.ordered.each do |lodging_room_option|
               - pres = LodgingRoomOptionPresenter.new(lodging_room_option)
               %tr
                 %td= lodging_room_option.name
@@ -29,7 +28,7 @@
     = simple_form_for(LodgingForm.new, url: registrant_lodgings_path(@registrant)) do |f|
       .row
         .small-12.medium-4.columns
-          = f.input :lodging_room_option_id, collection: LodgingRoomOption.all
+          = f.input :lodging_room_option_id, collection: Lodging.ordered.all, as: :grouped_select, group_method: :lodging_room_options
         .small-12.medium-4.columns
           = f.input :first_day, input_html: { class: "datepicker" }
         .small-12.medium-4.columns

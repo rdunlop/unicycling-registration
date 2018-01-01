@@ -63,6 +63,7 @@ class PaymentsController < ApplicationController
     add_payment_summary_breadcrumb
     authorize Payment.new
     @expense_groups = ExpenseGroup.includes(:translations)
+    @lodgings = Lodging.ordered.all
   end
 
   # GET /payments/1

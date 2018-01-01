@@ -7,7 +7,7 @@ class LodgingPackagesController < ApplicationController
 
     lodging_package = LodgingPackage.find(params[:id])
     package = @registrant.registrant_expense_items.find_by(line_item: lodging_package)
-    if package&.destroy
+    if package&.destroy && lodging_package.destroy
       flash[:notice] = "Lodging Removed"
     else
       flash[:alert] = "Error removing lodging"

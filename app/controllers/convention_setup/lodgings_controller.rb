@@ -34,6 +34,10 @@ class ConventionSetup::LodgingsController < ConventionSetup::BaseConventionSetup
     end
   end
 
+  def show
+    add_breadcrumb @lodging.to_s, convention_setup_lodging_path(@lodging)
+  end
+
   # PUT /convention_setup/lodgings/1
   def update
     respond_to do |format|

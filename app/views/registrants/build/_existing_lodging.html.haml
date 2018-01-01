@@ -17,7 +17,7 @@
     - @selected_lodging.each do |lodging_package|
       - presenter = LodgingPackagePresenter.new(lodging_package)
       %tr
-        %td= lodging_package.lodging_room_type
+        %td= presenter.location
         %td= presenter.first_day
         %td= presenter.last_day
         %td

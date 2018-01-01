@@ -1,0 +1,42 @@
+%table.sortable
+  %legend Packages Selected/Sold
+  %thead
+    %tr
+      %th Lodging Room Type
+      %th Room Option
+      %th Registrant
+      %th Status
+      %th Date of last activity
+  %tbody
+    - @lodging.lodging_room_types.includes(lodging_packages: [:lodging_room_option, :lodging_package_days]).each do |lodging_room_type|
+      - lodging_room_type.lodging_packages.each do |package|
+        %tr
+          %td= LodgingPackagePresenter.new(package).to_s
+          %td= package.lodging_room_option
+          %td= link_to package.registrant, registrant_path(package.registrant.bib_number)
+          %td= package.status
+          %td= package.date_of_last_activity
+
+- @lodging.lodging_room_types.includes(lodging_packages: [:lodging_room_option, :lodging_package_days]).each do |lodging_room_type|
+  %table.sortable
+    %legend #{lodging_room_type} selections
+    %thead
+      %tr
+        %th Date
+        %th Room Option
+        %th Num Paid
+        %th Total Amount Paid
+        %th Num Pending
+        %th Num Unpaid
+    %tbody
+      - lodging_room_type.lodging_room_options.each do |option|
+        - option.lodging_days.each do |lodging_day|
+          %tr
+            %td= lodging_day
+            %td= option
+            %td= option.num_paid(lodging_day)
+            %td= print_formatted_currency(option.total_amount_paid(lodging_day))
+            %td= option.num_pending(lodging_day)
+            %td= option.num_unpaid(lodging_day)
+  %hr
+

@@ -2,6 +2,11 @@
   = render partial: "/shared/error_messages", object: @lodging_room_type
   = f.input :name
   = f.input :description
+  = f.input :visible
+  = label_tag :limit_quantities_available
+  = check_box_tag :limit_quantities_available, nil, f.object.has_limits?, class: 'js--inputEnable', data: { targets: 'js--inputConditional' }
+  = f.input :maximum_available, input_html: { class: 'js--inputConditional' }
+
   %table
     %thead
       %tr

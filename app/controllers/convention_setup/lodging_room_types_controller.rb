@@ -34,11 +34,12 @@ class ConventionSetup::LodgingRoomTypesController < ConventionSetup::BaseConvent
 
   def set_breadcrumbs
     add_breadcrumb "Setup Lodging", convention_setup_lodgings_path
+    add_breadcrumb @lodging_room_type.lodging.to_s, convention_setup_lodging_path(@lodging_room_type.lodging) if @lodging_room_type&.lodging
     add_breadcrumb "#{@lodging} Room Types", convention_setup_lodging_path(@lodging_room_type.lodging) if @lodging_room_type&.lodging
   end
 
   def lodging_room_type_params
-    params.require(:lodging_room_type).permit(:name, :description,
+    params.require(:lodging_room_type).permit(:name, :description, :maximum_available, :visible,
                                               lodging_room_options_attributes: %i[id _destroy name price])
   end
 end

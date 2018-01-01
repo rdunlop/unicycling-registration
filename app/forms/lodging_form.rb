@@ -5,7 +5,6 @@ class LodgingForm
   attr_accessor :first_day, :last_day
 
   validates :lodging_room_option, :registrant, :first_day, :last_day, presence: true
-  validate :days_are_available
   validate :all_desired_days_exist
 
   # create all of the associated registrant_expense_items for the given selection
@@ -25,18 +24,21 @@ class LodgingForm
         )
       end
 
-      success &&= package.save
+      unless package.save
+        errors.add(:base, "Unable to save items. #{package.errors.full_messages.join(', ')}")
+        raise ActiveRecord::Rollback
+      end
 
-      new_rei = registrant.registrant_expense_items.build(
+      # we don't go through the association so that un-saved
+      # REI are not still referenced by the registrant on form re-display
+      new_rei = RegistrantExpenseItem.new(
+        registrant: registrant,
         line_item: package,
         system_managed: true
       )
 
-      success &&= new_rei.save
-
-      unless success
-        # Add error messages from new_rei?
-        errors.add(:base, "Unable to save items. Are you trying to buy it a 2nd time?")
+      unless new_rei.save
+        errors.add(:base, "Unable to save items. #{new_rei.errors.full_messages.join(', ')}")
         raise ActiveRecord::Rollback
       end
     end
@@ -66,15 +68,6 @@ class LodgingForm
   end
 
   private
-
-  def days_are_available
-    return false # XXX
-    days_to_book.each do |day|
-      if day.expense_item.maximum_reached?
-        errors.add(:base, "#{day} Unable to be booked")
-      end
-    end
-  end
 
   def all_desired_days_exist
     return if first_day.blank? || last_day.blank?
