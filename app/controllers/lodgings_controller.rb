@@ -37,6 +37,6 @@ class LodgingsController < ApplicationController
   end
 
   def lodging_params
-    params.require(:lodging_form).permit(:lodging_room_option_id, :first_day, :last_day)
+    params.require(:lodging_form).permit(:lodging_room_option_id, :check_in_day, :check_out_day)
   end
 end

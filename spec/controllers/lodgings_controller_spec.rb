@@ -24,8 +24,8 @@ describe LodgingsController do
     let(:params) do
       {
         lodging_room_option_id: lodging_day.lodging_room_option_id,
-        first_day: lodging_day.date_offered.strftime("%Y/%m/%d"),
-        last_day: lodging_day.date_offered.strftime("%Y/%m/%d")
+        check_in_day: lodging_day.date_offered.strftime("%Y/%m/%d"),
+        check_out_day: (lodging_day.date_offered + 1.day).strftime("%Y/%m/%d")
       }
     end
 

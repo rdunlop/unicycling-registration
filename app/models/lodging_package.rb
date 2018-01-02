@@ -60,8 +60,10 @@ class LodgingPackage < ApplicationRecord
     0
   end
 
-  def to_s
-    LodgingPackagePresenter.new(self).to_s
+  delegate :to_s, :location, :check_in_day, :check_out_day, to: :presenter
+
+  def presenter
+    LodgingPackagePresenter.new(self)
   end
 
   def status

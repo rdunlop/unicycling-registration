@@ -17,8 +17,8 @@ describe LodgingForm do
           {
             registrant_id: competitor.id,
             lodging_room_option_id: lodging_room_option.id,
-            first_day: lodging_day1.date_offered.strftime("%Y/%m/%d"),
-            last_day: lodging_day3.date_offered.strftime("%Y/%m/%d")
+            check_in_day: lodging_day1.date_offered.strftime("%Y/%m/%d"),
+            check_out_day: (lodging_day3.date_offered + 1.day).strftime("%Y/%m/%d")
           }
         end
         it "creates registrant_expense_items" do
@@ -33,8 +33,8 @@ describe LodgingForm do
           {
             registrant_id: competitor.id,
             lodging_room_option_id: lodging_room_option.id,
-            first_day: lodging_day1.date_offered.strftime("%Y/%m/%d"),
-            last_day: lodging_day1.date_offered.strftime("%Y/%m/%d")
+            check_in_day: lodging_day1.date_offered.strftime("%Y/%m/%d"),
+            check_out_day: (lodging_day1.date_offered + 1.day).strftime("%Y/%m/%d")
           }
         end
         it "creates only a single registrant_expense_item" do
@@ -50,8 +50,8 @@ describe LodgingForm do
           {
             registrant_id: competitor.id,
             lodging_room_option_id: lodging_room_option.id,
-            first_day: target_date,
-            last_day: lodging_day1.date_offered.strftime("%Y/%m/%d")
+            check_in_day: target_date,
+            check_out_day: (lodging_day1.date_offered + 1.day).strftime("%Y/%m/%d")
           }
         end
 
@@ -68,8 +68,8 @@ describe LodgingForm do
           {
             registrant_id: competitor.id,
             lodging_room_option_id: lodging_room_option.id,
-            first_day: target_date,
-            last_day: target_date_end
+            check_in_day: target_date,
+            check_out_day: target_date_end
           }
         end
 
@@ -92,8 +92,8 @@ describe LodgingForm do
         {
           registrant_id: competitor.id,
           lodging_room_option_id: lodging_room_option.id,
-          first_day: lodging_day.date_offered.strftime("%Y/%m/%d"),
-          last_day: lodging_day.date_offered.strftime("%Y/%m/%d")
+          check_in_day: lodging_day.date_offered.strftime("%Y/%m/%d"),
+          check_out_day: (lodging_day.date_offered + 1.day).strftime("%Y/%m/%d")
         }
       end
 
@@ -106,27 +106,27 @@ describe LodgingForm do
             [
               "Lodging room option can't be blank",
               "2017/12/14 Unable to be booked. Out of range?",
-              "2017/12/14 Unable to be booked. Out of range?"
+              "2017/12/15 Unable to be booked. Out of range?"
             ]
           )
         end
       end
 
       context "without a start date" do
-        let(:params) { base_params.merge(first_day: "") }
+        let(:params) { base_params.merge(check_in_day: "") }
 
         it "returns an error message" do
           expect(form.save).to be_falsy
-          expect(form.errors.full_messages).to eq(["First day can't be blank"])
+          expect(form.errors.full_messages).to eq(["Check in day can't be blank"])
         end
       end
 
       context "without a end date" do
-        let(:params) { base_params.merge(last_day: "") }
+        let(:params) { base_params.merge(check_out_day: "") }
 
         it "returns an error message" do
           expect(form.save).to be_falsy
-          expect(form.errors.full_messages).to eq(["Last day can't be blank"])
+          expect(form.errors.full_messages).to eq(["Check out day can't be blank"])
         end
       end
     end
@@ -141,8 +141,8 @@ describe LodgingForm do
     #       {
     #         registrant_id: competitor.id,
     #         lodging_room_option_id: lodging_room_option.id,
-    #         first_day: lodging_day.date_offered.strftime("%Y/%m/%d"),
-    #         last_day: lodging_day.date_offered.strftime("%Y/%m/%d")
+    #         check_in_day: lodging_day.date_offered.strftime("%Y/%m/%d"),
+    #         check_out_day: lodging_day.date_offered.strftime("%Y/%m/%d")
     #       }
     #     end
     #     context "when that day is fully bought" do

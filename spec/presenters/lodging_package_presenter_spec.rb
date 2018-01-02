@@ -5,10 +5,10 @@ describe LodgingPackagePresenter do
   let(:lodging_room_option) { lodging_package.lodging_room_option }
   let(:presenter) { described_class.new(lodging_package) }
 
-  describe "#first_day" do
+  describe "#check_in_day" do
     context "with no lodging_days" do
       it "says none" do
-        expect(presenter.first_day).to eq("none")
+        expect(presenter.check_in_day).to eq("none")
       end
     end
 
@@ -17,7 +17,7 @@ describe LodgingPackagePresenter do
       let!(:lodging_package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day) }
 
       it "says that one day" do
-        expect(presenter.first_day).to eq("Jan 01, 2017")
+        expect(presenter.check_in_day).to eq("Jan 01, 2017")
       end
     end
 
@@ -28,8 +28,8 @@ describe LodgingPackagePresenter do
       let!(:lodging_package_day2) { FactoryGirl.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day2) }
 
       it "says those days" do
-        expect(presenter.first_day).to eq("Jan 01, 2017")
-        expect(presenter.last_day).to eq("Jan 02, 2017")
+        expect(presenter.check_in_day).to eq("Jan 01, 2017")
+        expect(presenter.check_out_day).to eq("Jan 03, 2017")
       end
     end
   end

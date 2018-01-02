@@ -2,9 +2,9 @@ class LodgingForm
   include ActiveModel::Model
 
   attr_accessor :lodging_room_option_id, :registrant_id
-  attr_accessor :first_day, :last_day
+  attr_accessor :check_in_day, :check_out_day
 
-  validates :lodging_room_option, :registrant, :first_day, :last_day, presence: true
+  validates :lodging_room_option, :registrant, :check_in_day, :check_out_day, presence: true
   validate :all_desired_days_exist
 
   # create all of the associated registrant_expense_items for the given selection
@@ -70,12 +70,12 @@ class LodgingForm
   private
 
   def all_desired_days_exist
-    return if first_day.blank? || last_day.blank?
-    if days_to_book.first&.date_offered != Date.parse(first_day)
-      errors.add(:base, "#{first_day} Unable to be booked. Out of range?")
+    return if check_in_day.blank? || check_out_day.blank?
+    if days_to_book.first&.date_offered != Date.parse(check_in_day)
+      errors.add(:base, "#{check_in_day} Unable to be booked. Out of range?")
     end
-    if days_to_book.last&.date_offered != Date.parse(last_day)
-      errors.add(:base, "#{last_day} Unable to be booked. Out of range?")
+    if days_to_book.last&.date_offered != (Date.parse(check_out_day) - 1.day)
+      errors.add(:base, "#{check_out_day} Unable to be booked. Out of range?")
     end
   end
 
@@ -88,9 +88,9 @@ class LodgingForm
     return LodgingDay.none if lodging_room_option.nil?
 
     lodging_room_option.lodging_days.where(
-      LodgingDay.arel_table[:date_offered].gteq(first_day)
+      LodgingDay.arel_table[:date_offered].gteq(check_in_day)
     ).where(
-      LodgingDay.arel_table[:date_offered].lteq(last_day)
+      LodgingDay.arel_table[:date_offered].lt(check_out_day)
     )
   end
 end

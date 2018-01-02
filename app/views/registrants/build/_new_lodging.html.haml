@@ -30,8 +30,8 @@
         .small-12.medium-4.columns
           = f.input :lodging_room_option_id, collection: Lodging.ordered.all, as: :grouped_select, group_method: :lodging_room_options
         .small-12.medium-4.columns
-          = f.input :first_day, input_html: { class: "datepicker" }
+          = f.input :check_in_day, input_html: { class: "datepicker" }
         .small-12.medium-4.columns
-          = f.input :last_day, input_html: { class: "datepicker" }
+          = f.input :check_out_day, input_html: { class: "datepicker" }
       .row
         = f.submit "Add Lodging", class: "button"

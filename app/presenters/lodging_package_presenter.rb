@@ -7,13 +7,13 @@ class LodgingPackagePresenter
     @lodging_package = lodging_package
   end
 
-  def first_day
+  def check_in_day
     date = lodging_package.lodging_package_days.map(&:date_offered).sort.first
     output_entry(date)
   end
 
-  def last_day
-    date = lodging_package.lodging_package_days.map(&:date_offered).sort.last
+  def check_out_day
+    date = lodging_package.lodging_package_days.map(&:date_offered).sort.last + 1.day
     output_entry(date)
   end
 
@@ -22,7 +22,7 @@ class LodgingPackagePresenter
   end
 
   def to_s
-    "#{location} - #{first_day}-#{last_day}"
+    "#{location} - #{check_in_day}-#{check_out_day}"
   end
 
   private
