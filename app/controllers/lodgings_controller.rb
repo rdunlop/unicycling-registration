@@ -13,23 +13,6 @@ class LodgingsController < ApplicationController
     redirect_to registrant_build_path(@registrant, "lodging")
   end
 
-  # /:registrant_id/lodgings/:lodging_package_id
-  # where id: lodging_type to be deleted
-  def destroy
-    authorize @registrant, :lodging?
-
-    form = LodgingForm.new(
-      lodging_room_option_id: params[:id],
-      registrant_id: @registrant.id
-    )
-    if form.destroy
-      flash[:notice] = "Lodging Removed"
-    else
-      flash[:alert] = "Error removing lodging #{form.errors.full_messages.join(', ')}"
-    end
-    redirect_to registrant_build_path(@registrant, "lodging")
-  end
-
   private
 
   def load_registrant

@@ -9,7 +9,7 @@
   - @lodging_room_option.lodging_days.each do |lodging_day|
     %tr
       %td= lodging_day.date_offered
-      %td= link_to t("manage"), edit_convention_setup_lodging_room_option_path(@lodging_room_option)
+      %td= link_to "Manage", edit_convention_setup_lodging_room_option_path(@lodging_room_option)
 %br
 
-= link_to "New Lodging Day (via lodging_room_options#edit)", edit_convention_setup_lodging_room_option_path(@lodging_room_option)
+= link_to "New Lodging Day (via lodging_room_options#edit)", edit_convention_setup_lodging_room_option_path(@lodging_room_option), class: "button"

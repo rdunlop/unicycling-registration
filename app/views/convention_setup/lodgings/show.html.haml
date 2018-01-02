@@ -18,4 +18,4 @@
       %td= link_to t("delete"), convention_setup_lodging_room_type_path(lodging_room_type), method: :delete, data: { confirm: t("are_you_sure") }
 %br
 
-= link_to "New Lodging Room Type (via lodging#edit)", edit_convention_setup_lodging_path(@lodging)
+= link_to "New Lodging Room Type (via lodging#edit)", edit_convention_setup_lodging_path(@lodging), class: "button"

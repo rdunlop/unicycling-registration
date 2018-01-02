@@ -15,11 +15,10 @@
         %td Paid
 
     - @selected_lodging.each do |lodging_package|
-      - presenter = LodgingPackagePresenter.new(lodging_package)
       %tr
-        %td= presenter.location
-        %td= presenter.check_in_day
-        %td= presenter.check_out_day
+        %td= lodging_package.location
+        %td= lodging_package.check_in_day
+        %td= lodging_package.check_out_day
         %td
           = link_to "Delete", registrant_lodging_package_path(@registrant.bib_number, lodging_package), data: { confirm: t("are_you_sure"), method: :delete }
 

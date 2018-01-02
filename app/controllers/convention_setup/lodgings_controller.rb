@@ -27,9 +27,8 @@ class ConventionSetup::LodgingsController < ConventionSetup::BaseConventionSetup
       if @lodging.save
         format.html { redirect_to convention_setup_lodgings_path, notice: 'Lodging was successfully created.' }
       else
-        @lodgings = Lodging.all
         flash.now[:alert] = "Unable to create lodging. #{@lodging.errors.full_messages.join(', ')}"
-        format.html { render action: "index" }
+        format.html { render action: "new" }
       end
     end
   end

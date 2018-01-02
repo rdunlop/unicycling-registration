@@ -13,7 +13,7 @@ class LodgingRoomOptionPresenter
     first_date = nil
     current_date = nil
     output = []
-    lodging_room_option.lodging_days.each do |day|
+    lodging_room_option.lodging_days.ordered.each do |day|
       if first_date.nil?
         # beginning of a range
         first_date = current_date = day.date_offered

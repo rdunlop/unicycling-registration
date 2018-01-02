@@ -11,6 +11,9 @@
       = f.simple_fields_for :lodging_days do |member_f|
         = render "lodging_day_fields", f: member_f
 
-  = link_to_add_association 'add new room option', f, :lodging_days, { data: { association_insertion_node: "#lodging_days", association_insertion_method: "append" } }
+  = link_to_add_association 'add new room option', f, :lodging_days, { data: { association_insertion_node: "#lodging_days", association_insertion_method: "append" }, class: "button secondary" }
 
-  = f.button :submit
+  %hr
+    .row
+      .small-12.columns.text-center
+        = f.button :submit

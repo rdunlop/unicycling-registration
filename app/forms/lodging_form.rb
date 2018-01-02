@@ -26,6 +26,7 @@ class LodgingForm
 
       unless package.save
         errors.add(:base, "Unable to save items. #{package.errors.full_messages.join(', ')}")
+        success = false
         raise ActiveRecord::Rollback
       end
 
@@ -39,6 +40,7 @@ class LodgingForm
 
       unless new_rei.save
         errors.add(:base, "Unable to save items. #{new_rei.errors.full_messages.join(', ')}")
+        success = false
         raise ActiveRecord::Rollback
       end
     end
