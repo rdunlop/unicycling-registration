@@ -18,5 +18,7 @@ class LodgingDay < ApplicationRecord
 
   belongs_to :lodging_room_option, inverse_of: :lodging_days
 
+  scope :ordered, -> { order(:date_offered) }
+
   delegate :to_s, to: :date_offered
 end
