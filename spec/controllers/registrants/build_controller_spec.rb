@@ -53,6 +53,7 @@ describe Registrants::BuildController do
     end
 
     context "viewing the lodging page" do
+      let(:user) { FactoryGirl.create(:super_admin_user) }
       let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
       let!(:lodging_day) { FactoryGirl.create(:lodging_day) }
 
