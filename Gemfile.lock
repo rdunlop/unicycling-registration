@@ -440,7 +440,7 @@ GEM
       rake
     raindrops (0.19.0)
     rake (12.3.0)
-    recaptcha (4.6.2)
+    recaptcha (4.6.3)
       json
     redis (4.0.1)
     redis-actionpack (5.0.2)
