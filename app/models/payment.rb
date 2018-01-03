@@ -109,7 +109,7 @@ class Payment < ApplicationRecord
 
   def self.total_refunded_amount
     total = 0.to_money
-    PaymentDetail.refunded.includes(:payment).each do |payment_detail|
+    PaymentDetail.refunded.includes(:payment, refund_detail: :refund).each do |payment_detail|
       total += payment_detail.cost
     end
     total
@@ -117,7 +117,7 @@ class Payment < ApplicationRecord
 
   def self.total_received
     total = 0.to_money
-    Payment.includes(payment_details: [:refund_detail]).completed.each do |payment|
+    Payment.includes(payment_details: [refund_detail: :refund]).completed.each do |payment|
       total += payment.total_amount
     end
     total

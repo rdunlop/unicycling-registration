@@ -1,0 +1,7 @@
+= render partial: "/shared/error_messages", object: @registrant
+
+= render partial: "new_lodging"
+= render partial: "existing_lodging", locals: { registrant: @registrant }
+
+= form_for(@registrant, url: wizard_path, method: :put) do |f|
+  = render partial: "/registrants/form_actions", locals: {f: f}

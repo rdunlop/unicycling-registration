@@ -1,4 +1,4 @@
-class RegistrantType
+module RegistrantType
   class Noncompetitor
     INITIAL = 2001
     MAXIMUM = 9999

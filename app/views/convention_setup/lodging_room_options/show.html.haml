@@ -1,0 +1,15 @@
+%h1 #{@lodging_room_option} - Days Available
+
+%p What options for the #{@lodging_room_option} Room
+
+%table
+  %tr
+    %th= LodgingDay.human_attribute_name(:date_offered)
+    %th
+  - @lodging_room_option.lodging_days.each do |lodging_day|
+    %tr
+      %td= lodging_day.date_offered
+      %td= link_to "Manage", edit_convention_setup_lodging_room_option_path(@lodging_room_option)
+%br
+
+= link_to "New Lodging Day (via lodging_room_options#edit)", edit_convention_setup_lodging_room_option_path(@lodging_room_option), class: "button"
