@@ -4,29 +4,31 @@
 
   - Lodging.ordered.all.each do |lodging|
     .row
-      .small-12.text-center
+      .small-12.left_aligned
         %h2= lodging
         %p= lodging.description
 
         %h3 Room Types:
-        %table
-          %thead
-            %tr
-              %th Room Option
-              %th Description
-              %th Price Per Day
-          %tbody
-            - lodging.lodging_room_types.ordered.each do |lodging_room_type|
+        - lodging.lodging_room_types.ordered.each do |lodging_room_type|
+          %br
+          %li
+            %b
+              = lodging_room_type.name
+              \-
+              = lodging_room_type.description
+          %table.full_width
+            %thead
+              %tr
+                %th Room Option
+                %th Price Per Day
+                %th Dates Available
+            %tbody
               - lodging_room_type.lodging_room_options.ordered.each do |lodging_room_option|
                 - pres = LodgingRoomOptionPresenter.new(lodging_room_option)
                 %tr
-                  %td
-                    = lodging_room_option.to_label
-                  %td
-                    = lodging_room_type.description
-                    %br
-                    Available: #{pres.days_available}
+                  %td= lodging_room_option.name
                   %td= print_formatted_currency(lodging_room_option.price)
+                  %td= pres.days_available
     %hr
 
   %fieldset.small-12.large-6.columns
