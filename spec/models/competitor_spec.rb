@@ -184,7 +184,7 @@ describe Competitor do
 
   describe "when event configuration defines the start date of convention" do
     before do
-      EventConfiguration.singleton.update(start_date: Date.new(2013, 1, 1))
+      EventConfiguration.singleton.update(start_date: Date.current)
     end
 
     it "should have updated age when a members age is updated" do
@@ -255,7 +255,7 @@ describe Competitor do
 
   describe "when it has multiple members" do
     before do
-      EventConfiguration.singleton.update(start_date: Date.new(2010, 1, 1))
+      EventConfiguration.singleton.update(start_date: Date.current)
       member = @comp.reload.members.first
       @reg1 = member.registrant
 
@@ -280,7 +280,7 @@ describe Competitor do
 
     it "should display the maximum ages for all members (when they are different)" do
       travel 2.seconds do
-        @reg3 = FactoryGirl.create(:registrant, birthday: Date.new(1980, 2, 10))
+        @reg3 = FactoryGirl.create(:registrant, birthday: 20.years.ago)
         @comp2 = FactoryGirl.create(:event_competitor)
         FactoryGirl.create(:member, competitor: @comp2, registrant: @reg3)
         @comp2.reload

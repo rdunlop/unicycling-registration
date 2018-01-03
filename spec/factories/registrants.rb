@@ -41,7 +41,7 @@ FactoryGirl.define do
     sequence(:first_name) {|n| "FirstMyString #{n}" }
     middle_initial "MMyString"
     last_name "LastMyString"
-    birthday Date.new(1990, 11, 10)
+    birthday { 18.years.ago }
     gender "Male"
     user # FactoryGirl
     registrant_type 'competitor'

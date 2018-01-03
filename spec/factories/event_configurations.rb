@@ -59,7 +59,7 @@ FactoryGirl.define do
     location "Somewhere"
     dates_description "X through Y"
     event_url "http://www.naucc.com"
-    start_date Date.new(2013, 1, 1)
+    start_date { Date.current }
     # logo ""
     currency_code "USD"
     contact_email "robinc@dunlopweb.com"
@@ -68,7 +68,7 @@ FactoryGirl.define do
     custom_waiver_text "Online Waiver."
     usa false
     iuf false
-    event_sign_up_closed_date Date.new(2013, 5, 10)
+    event_sign_up_closed_date { Date.current }
     comp_noncomp_url nil
     test_mode true
     style_name "base_green_blue"
