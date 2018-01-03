@@ -85,6 +85,6 @@ class LodgingRoomOption < ApplicationRecord
   end
 
   def lodging_packages_for_day(lodging_day)
-    lodging_packages.joins(lodging_package_days: :lodging_day).merge(LodgingDay.where(id: lodging_day.id))
+    lodging_packages.joins(lodging_package_days: :lodging_day).merge(LodgingDay.where(date_offered: lodging_day.date_offered))
   end
 end

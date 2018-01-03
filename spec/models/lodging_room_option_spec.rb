@@ -104,5 +104,15 @@ describe LodgingRoomOption do
         expect(lodging_room_option.num_unpaid(lodging_day, include_incomplete_registrants: true)).to eq(1)
       end
     end
+
+    context "With another room option for the same room type" do
+      let!(:lodging_room_option2) { FactoryGirl.create(:lodging_room_option, lodging_room_type: lodging_room_type) }
+      let(:lodging_day2) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option2, date_offered: lodging_day.date_offered) }
+
+      it "sums up the selected days properly" do
+        expect(lodging_room_type.num_selected_items(lodging_day)).to eq(1)
+        expect(lodging_room_type.num_selected_items(lodging_day2)).to eq(1)
+      end
+    end
   end
 end
