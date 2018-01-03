@@ -47,14 +47,14 @@ class ExpenseItemFreeChecker
   def chosen_free_item?
     registrant_expense_items.each do |rei|
       next unless rei.free
-      if yield(rei.expense_item)
+      if yield(rei.line_item)
         return true
       end
     end
 
     paid_details.each do |pei|
       next unless pei.free
-      if yield(pei.expense_item)
+      if yield(pei.line_item)
         return true
       end
     end

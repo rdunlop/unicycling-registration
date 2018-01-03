@@ -3,19 +3,19 @@
 #
 # Example Use:
 #
-# class PaymentDetail
+# class Result
 #   include CachedSetModel
 #   belongs_to :expense_item
 #
 #   def self.cache_set_field
-#     :expense_item_id
+#     :competition_id
 #   end
 # end
 #
 # .....
 #
-# cache [PaymentDetail.cache_key_for_set(12) ] do
-#   # this will only burst whenever a payment_detail with expense_item_id == 12 is added/removed
+# cache [Result.cache_key_for_set(12) ] do
+#   # this will only burst whenever a result with competition_id == 12 is added/removed
 # end
 #
 

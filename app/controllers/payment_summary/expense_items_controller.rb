@@ -21,29 +21,27 @@
 #  index_expense_items_expense_group_id                          (expense_group_id)
 #  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id) UNIQUE
 #
+module PaymentSummary
+  class ExpenseItemsController < ApplicationController
+    before_action :authenticate_user!
+    before_action :set_breadcrumbs
 
-require 'spec_helper'
-
-describe ExpenseItemsController do
-  before do
-    user = FactoryGirl.create(:super_admin_user)
-    sign_in user
-  end
-  let(:expense_item) { FactoryGirl.create(:expense_item) }
-
-  describe "GET details" do
-    it "displays the details" do
-      get :details, params: { id: expense_item.to_param }
-      assert_select "h1", "Listing Payment Details for #{expense_item}"
+    # GET /expense_items/1/details
+    def details
+      @expense_item = ExpenseItem.find(params[:id])
+      authorize current_user, :manage_all_payments?
+      @paid_details = @expense_item.paid_items
+      @unpaid_details = @expense_item.unpaid_items(include_incomplete_registrants: true)
+      @pending_details = @expense_item.pending_items
+      @free_with_registration = @expense_item.free_items
+      @refunded_details = @expense_item.refunded_items
     end
 
-    context "with a coupon-code applied" do
-      let!(:expense_item_coupon_code) { FactoryGirl.create(:coupon_code_expense_item, expense_item: expense_item) }
+    private
 
-      it "displays the details" do
-        get :details, params: { id: expense_item.to_param }
-        assert_select "td", expense_item_coupon_code.coupon_code.to_s
-      end
+    def set_breadcrumbs
+      add_payment_summary_breadcrumb
+      add_breadcrumb "#{@expense_item} Items"
     end
   end
 end

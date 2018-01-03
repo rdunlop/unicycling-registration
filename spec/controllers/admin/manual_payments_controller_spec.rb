@@ -49,7 +49,7 @@ describe Admin::ManualPaymentsController do
       p = Payment.last
       expect(p.completed).to be_falsey
       pd = PaymentDetail.last
-      expect(pd.expense_item).to eq(rei.expense_item)
+      expect(pd.line_item).to eq(rei.line_item)
     end
 
     context "with invalid params" do

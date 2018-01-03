@@ -1,0 +1,27 @@
+%h2 Expense Items for #{@expense_group}
+
+%table.sortable
+  %thead
+    %tr
+      %th= ExpenseItem.model_name.human
+      %th Num paid (no discount)
+      %th Num paid (with discount or free)
+      %th Total Amount Paid
+      %th Num Pending
+      %th Num unpaid
+  %tbody
+    - @expense_items.each do |item|
+      %tr
+        %td= link_to item, details_payment_summary_expense_item_path(item)
+        - cache [PaymentDetail.cache_key_for_set("#{item.class.name}/#{item.id}"), RegistrantExpenseItem.cache_key_for_set("#{item.class.name}/#{item.id}") ] do
+          %td
+            = item.num_paid_without_coupon
+          %td
+            = item.num_paid_with_coupon + item.num_free
+          %td
+            = print_formatted_currency(item.total_amount_paid)
+          %td
+            = item.num_pending
+          %td
+            - unpaid_count = item.num_unpaid
+            = unpaid_count

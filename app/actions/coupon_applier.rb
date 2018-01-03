@@ -29,7 +29,7 @@ class CouponApplier
   private
 
   def apply_coupon(payment_detail)
-    return unless coupon_code_applies_to_expense_item?(payment_detail.expense_item)
+    return unless coupon_code_applies_to_expense_item?(payment_detail.line_item)
     return unless coupon_code_applies_to_registrant_age?(payment_detail.registrant.age)
 
     if coupon_limit_reached?

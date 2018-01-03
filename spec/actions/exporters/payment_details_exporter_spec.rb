@@ -6,7 +6,7 @@ describe Exporters::PaymentDetailsExporter do
 
   context "with a paid payment_detail" do
     let(:payment) { FactoryGirl.create(:payment, :completed) }
-    let!(:pd) { FactoryGirl.create(:payment_detail, expense_item: expense_item, payment: payment)}
+    let!(:pd) { FactoryGirl.create(:payment_detail, line_item: expense_item, payment: payment)}
 
     it "returns some data" do
       data = exporter.rows
@@ -15,7 +15,7 @@ describe Exporters::PaymentDetailsExporter do
   end
 
   context "with a free item" do
-    let!(:rei) { FactoryGirl.create(:registrant_expense_item, expense_item: expense_item, registrant: registrant, free: true) }
+    let!(:rei) { FactoryGirl.create(:registrant_expense_item, line_item: expense_item, registrant: registrant, free: true) }
 
     context "with a paid registration" do
       let!(:registrant) { FactoryGirl.create(:spectator) } # spectators are reg_paid

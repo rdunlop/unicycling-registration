@@ -18,10 +18,10 @@ class PaymentPresenter
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
       next if rei.free
-      @new_expense_items << PaymentDetailPresenter.new(registrant_id: rei.registrant.id, expense_item_id: rei.expense_item.id, free: rei.free, amount: rei.total_cost, details: rei.details)
+      @new_expense_items << PaymentDetailPresenter.new(registrant_id: rei.registrant.id, line_item: rei.line_item, free: rei.free, amount: rei.total_cost, details: rei.details)
     end
     registrant.paid_details.each do |pd|
-      @existing_payment_details << PaymentDetailPresenter.new(registrant_id: pd.registrant.id, expense_item_id: pd.expense_item.id, free: pd.free, amount: pd.amount, details: pd.details)
+      @existing_payment_details << PaymentDetailPresenter.new(registrant_id: pd.registrant.id, line_item: pd.line_item, free: pd.free, amount: pd.amount, details: pd.details)
     end
   end
 
@@ -42,7 +42,8 @@ class PaymentPresenter
     include ActiveModel::Validations
 
     attribute :registrant_id, Integer
-    attribute :expense_item_id, Integer
+    attribute :line_item_id, Integer
+    attribute :line_item_type, String
     attribute :details, String
 
     attribute :amount, Decimal
@@ -60,15 +61,21 @@ class PaymentPresenter
       Registrant.find(registrant_id)
     end
 
-    def expense_item
-      ExpenseItem.find(expense_item_id)
+    def line_item=(new_item)
+      self.line_item_id = new_item.id
+      self.line_item_type = new_item.class.name
+    end
+
+    def line_item
+      return nil if line_item_type.blank? || line_item_id.blank?
+      line_item_type.constantize.find(line_item_id)
     end
 
     def cost
       if free
         0
       else
-        expense_item.total_cost
+        line_item.total_cost
       end
     end
 
@@ -141,7 +148,7 @@ class PaymentPresenter
       detail.free = new_detail.free
       detail.amount = new_detail.cost
       detail.registrant_id = new_detail.registrant_id
-      detail.expense_item_id = new_detail.expense_item_id
+      detail.line_item = new_detail.line_item
       detail.details = new_detail.details
     end
   end

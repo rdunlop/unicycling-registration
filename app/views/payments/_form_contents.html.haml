@@ -20,8 +20,9 @@
           = pf.hidden_field :registrant_id
           = pf.object.registrant
         %td
-          = pf.hidden_field :expense_item_id
-          = pf.object.expense_item
+          = pf.hidden_field :line_item_id
+          = pf.hidden_field :line_item_type
+          = pf.object.line_item
         %td
           = pf.hidden_field :details
           - unless pf.object.details.blank?

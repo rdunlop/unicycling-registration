@@ -12,7 +12,7 @@
     - @p.paid_details.each do |paid_detail|
       %tr
         %td= paid_detail.registrant
-        %td= paid_detail.expense_item
+        %td= paid_detail.line_item
         %td= paid_detail.amount
         %td= paid_detail.details
 
@@ -37,7 +37,7 @@
       - @p.unpaid_details.each do |unpaid_detail|
         %tr
           %td= unpaid_detail.registrant
-          %td= unpaid_detail.expense_item
+          %td= unpaid_detail.line_item
           %td= unpaid_detail.amount
           %td= unpaid_detail.details
   = form_tag(onsite_pay_confirm_payment_adjustments_path, :method => :post) do

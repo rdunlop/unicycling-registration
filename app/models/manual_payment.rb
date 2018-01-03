@@ -55,7 +55,7 @@ class ManualPayment
       detail.free = new_detail.free
       detail.amount = new_detail.total_cost
       detail.registrant_id = new_detail.registrant_id
-      detail.expense_item_id = new_detail.expense_item_id
+      detail.line_item = new_detail.line_item
       detail.details = new_detail.details
     end
   end

@@ -62,7 +62,7 @@ class PaymentsController < ApplicationController
   def summary
     add_payment_summary_breadcrumb
     authorize Payment.new
-    @expense_items = ExpenseItem.includes(:translations, expense_group: [:translations]).ordered
+    @expense_groups = ExpenseGroup.includes(:translations)
   end
 
   # GET /payments/1
@@ -174,7 +174,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(payment_details_attributes: %i[amount registrant_id expense_item_id details free _destroy])
+    params.require(:payment).permit(payment_details_attributes: %i[amount registrant_id line_item_id line_item_type details free _destroy])
   end
 
   def set_payments_breadcrumb

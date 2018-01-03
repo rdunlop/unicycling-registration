@@ -197,7 +197,7 @@ describe ConventionSetup::RegistrationCostsController do
 
     context "with a non-deletable expense_item (due to payment_detail)" do
       let(:expense_item) { FactoryGirl.create(:expense_item) }
-      let!(:payment_detail) { FactoryGirl.create(:payment_detail, expense_item: expense_item) }
+      let!(:payment_detail) { FactoryGirl.create(:payment_detail, line_item: expense_item) }
       let(:registration_cost) { FactoryGirl.create(:registration_cost, expense_item: expense_item) }
 
       it "cannot delete the registration_cost" do

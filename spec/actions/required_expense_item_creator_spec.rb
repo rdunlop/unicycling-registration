@@ -26,10 +26,10 @@ describe RequiredExpenseItemCreator do
         expect(@noncomp.amount_owing).to eq(50.to_money)
       end
       it "retrieves the non-comp registration_item" do
-        expect(@noncomp.registrant_expense_items.first.expense_item).to eq(@noncomp_exp)
+        expect(@noncomp.registrant_expense_items.first.line_item).to eq(@noncomp_exp)
       end
-      it "lists the item as an owing_expense_item" do
-        expect(@noncomp.owing_expense_items).to eq([@noncomp_exp])
+      it "lists the item as an owing_line_item" do
+        expect(@noncomp.owing_line_items).to eq([@noncomp_exp])
       end
     end
 
@@ -38,10 +38,10 @@ describe RequiredExpenseItemCreator do
         @comp = FactoryGirl.create(:competitor)
       end
       it "retrieves the comp registration_item" do
-        expect(@comp.registrant_expense_items.first.expense_item).to eq(@comp_exp)
+        expect(@comp.registrant_expense_items.first.line_item).to eq(@comp_exp)
       end
       it "lists the item as an owing_expense_item" do
-        expect(@comp.owing_registrant_expense_items.first.expense_item).to eq(@comp_exp)
+        expect(@comp.owing_registrant_expense_items.first.line_item).to eq(@comp_exp)
       end
     end
 
@@ -61,7 +61,7 @@ describe RequiredExpenseItemCreator do
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do
-      expect(@reg2.owing_registrant_expense_items.last.expense_item).to eq(@ei)
+      expect(@reg2.owing_registrant_expense_items.last.line_item).to eq(@ei)
       expect(@reg2.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
   end

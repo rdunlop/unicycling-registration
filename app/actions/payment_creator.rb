@@ -12,7 +12,7 @@ class PaymentCreator
       payment.payment_details.build(
         registrant: registrant,
         amount: reg_item.total_cost,
-        expense_item: reg_item.expense_item,
+        line_item: reg_item.line_item,
         details: reg_item.details,
         free: reg_item.free
       )

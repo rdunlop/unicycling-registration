@@ -32,42 +32,25 @@
 
 %hr
 
-- cache [Payment, RegistrantExpenseItem] do
-  %h2 Revenues by Group
+- cache [Payment, RegistrantExpenseItem, :top_summary] do
+  %h2 By Group
 
   %table.sortable
     %thead
       %tr
         %th= ExpenseGroup.model_name.human
-        %th= ExpenseItem.model_name.human
-        %th Num paid (no discount)
-        %th Num paid (with discount or free)
-        %th Total Amount Paid
-        %th Num Pending
-        %th Num unpaid
     %tbody
-      - @expense_items.each do |item|
+      - @expense_groups.each do |expense_group|
         %tr
-          %td= item.expense_group
-          %td= link_to item, details_expense_item_path(item)
-          - cache [PaymentDetail.cache_key_for_set(item.id), RegistrantExpenseItem.cache_key_for_set(item.id) ] do
-            %td
-              = item.num_paid_without_coupon
-            %td
-              = item.num_paid_with_coupon + item.num_free
-            %td
-              = print_formatted_currency(item.total_amount_paid)
-            %td
-              = item.num_pending
-            %td
-              - unpaid_count = item.num_unpaid
-              = unpaid_count
+          %td= link_to expense_group, payment_summary_expense_group_path(expense_group)
+%hr
+  %table
     - cache [Payment, Refund] do
       %tfoot
         %tr
           %th{colspan: 3}
-          %th Non-Refunded Amount
-          %th= print_formatted_currency(Payment.total_non_refunded_amount)
+          %th Refunded Amount
+          %th= print_formatted_currency(Payment.total_refunded_amount)
           %th{ colspan: 2}
         %tr
           %th{colspan: 3}

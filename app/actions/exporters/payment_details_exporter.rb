@@ -42,7 +42,7 @@ class Exporters::PaymentDetailsExporter
   def add_element(element, free_with_reg)
     reg = element.registrant
     [
-      element.expense_item.to_s,
+      element.line_item.to_s,
       element.details,
       reg.bib_number,
       reg.first_name,

@@ -92,7 +92,7 @@ shared_context 'optional expense_item' do |options = {}|
   options.reverse_merge! cost: 15, has_details: false, details: nil
   before :each do
     @ei = FactoryGirl.create(:expense_item, name: "USA Individual Membership", has_details: options[:has_details], cost: options[:cost])
-    competitor.registrant_expense_items.create expense_item: @ei, system_managed: false, details: options[:details]
+    competitor.registrant_expense_items.create line_item: @ei, system_managed: false, details: options[:details]
     competitor.reload
   end
 end

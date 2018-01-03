@@ -14,3 +14,7 @@ select_all = (check_on) ->
     if (el.prop('checked') != check_on)
       el.trigger("click");
   return false
+
+$(document).on "click", ".js--showOtherPaymentOptions", ->
+  $('.js--otherPaymentOptions').toggle("is--hidden");
+  return false;

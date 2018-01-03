@@ -120,7 +120,7 @@ class ExportRegistrantsController < ApplicationController
       ]
 
       reg.paid_details.each do |pd|
-        row << pd.expense_item.to_s
+        row << pd.line_item.to_s
         row << pd.details
       end
       data << row
@@ -132,7 +132,7 @@ class ExportRegistrantsController < ApplicationController
   private
 
   def paid_items_summary(registrant)
-    registrant.paid_expense_items.map(&:to_s).join("\n")
+    registrant.paid_line_items.map(&:to_s).join("\n")
   end
 
   def event_summary(registrant)
