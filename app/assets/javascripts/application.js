@@ -52,6 +52,7 @@
 //= require jquery.are-you-sure
 //= require jquery.placeholder
 //= require lane_assignment
+//= require lodging_adder
 //= require payments
 //= require registrants
 //= require reorder_rows
