@@ -21,8 +21,8 @@
 
 FactoryGirl.define do
   factory :registration_cost do
-    start_date Date.new(2012, 11, 3)
-    end_date Date.new(2022, 11, 27)
+    start_date { 1.year.ago }
+    end_date { 5.years.from_now }
 
     transient do
       build_entries true
