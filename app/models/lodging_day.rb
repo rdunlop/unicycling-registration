@@ -15,6 +15,7 @@
 
 class LodgingDay < ApplicationRecord
   validates :date_offered, uniqueness: { scope: [:lodging_room_option_id] }
+  validates :date_offered, presence: true
 
   belongs_to :lodging_room_option, inverse_of: :lodging_days
 

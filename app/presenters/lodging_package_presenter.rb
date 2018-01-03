@@ -18,7 +18,11 @@ class LodgingPackagePresenter
   end
 
   def location
-    "#{lodging_package.lodging_room_type} - #{lodging_package.lodging_room_option}"
+    [
+      lodging_package.lodging_room_type.lodging,
+      lodging_package.lodging_room_type,
+      lodging_package.lodging_room_option
+    ].join(" - ")
   end
 
   def to_s

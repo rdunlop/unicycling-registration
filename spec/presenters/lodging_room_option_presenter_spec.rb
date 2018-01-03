@@ -15,7 +15,7 @@ describe LodgingRoomOptionPresenter do
       let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 1, 1)) }
 
       it "says that one day" do
-        expect(presenter.days_available).to eq("Jan 01, 2017")
+        expect(presenter.days_available).to eq("Jan 01, 2017 - Jan 02, 2017")
       end
     end
 
@@ -24,7 +24,7 @@ describe LodgingRoomOptionPresenter do
       let!(:lodging_day2) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 1, 2)) }
 
       it "says those days" do
-        expect(presenter.days_available).to eq("Jan 01, 2017 - Jan 02, 2017")
+        expect(presenter.days_available).to eq("Jan 01, 2017 - Jan 03, 2017")
       end
     end
 
@@ -35,7 +35,7 @@ describe LodgingRoomOptionPresenter do
       let!(:lodging_day4) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 1, 6)) }
 
       it "says those ranges of days" do
-        expect(presenter.days_available).to eq("Jan 01, 2017 - Jan 02, 2017, Jan 05, 2017 - Jan 06, 2017")
+        expect(presenter.days_available).to eq("Jan 01, 2017 - Jan 03, 2017, Jan 05, 2017 - Jan 07, 2017")
       end
     end
   end

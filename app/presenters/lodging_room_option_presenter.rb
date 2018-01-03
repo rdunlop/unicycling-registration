@@ -22,11 +22,11 @@ class LodgingRoomOptionPresenter
         current_date = day.date_offered
       else
         # non-consecutive days
-        output << output_range(first_date, current_date)
+        output << output_range(first_date, current_date + 1.day)
         first_date = current_date = day.date_offered
       end
     end
-    output << output_range(first_date, current_date)
+    output << output_range(first_date, current_date + 1.day)
     output.join(", ")
   end
 
@@ -34,7 +34,7 @@ class LodgingRoomOptionPresenter
 
   def output_range(start_date, end_date)
     if start_date == end_date
-      output_entry(start_date)
+      output_range(start_date, start_date + 1.day)
     else
       "#{output_entry(start_date)} - #{output_entry(end_date)}"
     end
