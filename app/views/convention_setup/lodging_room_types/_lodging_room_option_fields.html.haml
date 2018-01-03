@@ -1,0 +1,4 @@
+%tr.nested-fields
+  %td= f.input :name
+  %td= f.input :price
+  %td= link_to_remove_association t("delete"), f, { data: { confirm: t("are_you_sure") } }

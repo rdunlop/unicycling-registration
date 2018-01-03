@@ -1,0 +1,43 @@
+- if LodgingRoomType.any?
+  %h1 Available Lodging options
+  %hr
+
+  - Lodging.ordered.all.each do |lodging|
+    .row
+      .small-12.text-center
+        %h2= lodging
+        %p= lodging.description
+
+        %h3 Room Types:
+        %table
+          %thead
+            %tr
+              %th Room Option
+              %th Description
+              %th Price Per Day
+          %tbody
+            - lodging.lodging_room_types.ordered.each do |lodging_room_type|
+              - lodging_room_type.lodging_room_options.ordered.each do |lodging_room_option|
+                - pres = LodgingRoomOptionPresenter.new(lodging_room_option)
+                %tr
+                  %td
+                    = lodging_room_option.to_label
+                  %td
+                    = lodging_room_type.description
+                    %br
+                    Available: #{pres.days_available}
+                  %td= print_formatted_currency(lodging_room_option.price)
+    %hr
+
+  %fieldset.small-12.large-6.columns
+    %legend Add Lodging
+    = simple_form_for(LodgingForm.new, url: registrant_lodgings_path(@registrant)) do |f|
+      .row
+        .small-12.medium-4.columns
+          = f.input :lodging_room_option_id, collection: Lodging.ordered.all, as: :grouped_select, group_method: :lodging_room_options
+        .small-12.medium-4.columns
+          = f.input :check_in_day, input_html: { class: "datepicker" }
+        .small-12.medium-4.columns
+          = f.input :check_out_day, input_html: { class: "datepicker" }
+      .row
+        = f.submit "Add Lodging", class: "button"

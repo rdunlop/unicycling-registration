@@ -339,6 +339,12 @@ class EventConfiguration < ApplicationRecord
     organization_membership_type == "usa"
   end
 
+  def has_lodging?
+    return @has_lodging if defined?(@has_lodging)
+
+    @has_lodging = LodgingDay.any?
+  end
+
   def has_expenses?
     return @has_expenses if defined?(@has_expenses)
 

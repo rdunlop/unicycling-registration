@@ -150,6 +150,7 @@ Rails.application.routes.draw do
           get :details
         end
       end
+      resources :lodgings, only: %i[show]
     end
 
     resources :payments, except: %i[index edit update destroy] do
@@ -302,6 +303,15 @@ Rails.application.routes.draw do
           post :update_row_order, on: :collection
         end
       end
+
+      resources :lodgings do
+        resources :lodging_room_types, shallow: true, except: %i[index new create destroy] do
+          resources :lodging_room_options, shallow: true, except: %i[index new create destroy] do
+            resources :lodging_days, shallow: true, except: %i[index new create destroy]
+          end
+        end
+      end
+
       resources :event_choices, except: %i[index create new show]
       resources :event_categories, except: %i[index create new show]
 
@@ -420,6 +430,8 @@ Rails.application.routes.draw do
         post :copy_to_noncompetitor
       end
       resources :registrant_expense_items, only: %i[create destroy]
+      resources :lodgings, only: %i[create]
+      resources :lodging_packages, only: %(destroy)
       resources :standard_skill_routines, only: [:create]
       member do
         get :payments, to: "payments#registrant_payments"

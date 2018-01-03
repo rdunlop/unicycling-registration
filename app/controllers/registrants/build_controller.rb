@@ -9,7 +9,7 @@ class Registrants::BuildController < ApplicationController
   before_action :load_categories, only: %i[show update add_events]
   layout "wizard"
 
-  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details expenses].freeze
+  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses].freeze
 
   rescue_from Wicked::Wizard::InvalidStepError, with: :step_not_found
 
@@ -40,6 +40,9 @@ class Registrants::BuildController < ApplicationController
     when :add_events
       skip_step unless @registrant.competitor?
     when :add_volunteers # rubocop:disable Lint/EmptyWhen
+    when :lodging
+      @selected_lodging = LodgingForm.selected_for(@registrant)
+      @paid_lodging = LodgingForm.paid_for(@registrant)
     end
 
     render_wizard
@@ -58,7 +61,7 @@ class Registrants::BuildController < ApplicationController
     end
     @registrant.status = 'active' if step == steps.last
 
-    @registrant.update_attributes(registrant_params) unless wizard_value(step) == :expenses
+    @registrant.update_attributes(registrant_params) unless (wizard_value(step) == :lodging) || (wizard_value(step) == :expenses)
     render_wizard @registrant
   end
 

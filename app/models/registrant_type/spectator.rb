@@ -1,4 +1,4 @@
-class RegistrantType
+module RegistrantType
   class Spectator
     INITIAL = 2001
     MAXIMUM = 9999

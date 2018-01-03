@@ -1,0 +1,23 @@
+%h1 Lodgings
+
+%p Using this system, you can sell a limited number of lodging rooms/options.
+
+%p This is different than the "Items for Sale" system because it allows a user to specify the days that they want to book the lodging, and creates a single LodgingPackage for them to pay for. It also manages the limited number of lodging rooms available at each Lodging location.
+
+%table
+  %tr
+    %th= Lodging.human_attribute_name(:name)
+    %th= Lodging.human_attribute_name(:description)
+    %th
+    %th
+  - @lodgings.each do |lodging|
+    %tr
+      %td= link_to lodging.name, convention_setup_lodging_path(lodging)
+      %td= lodging.name
+      %td= lodging.description
+      %td= lodging.lodging_room_types.map(&:to_s).join(", ")
+      %td= link_to t("edit"), edit_convention_setup_lodging_path(lodging)
+      %td= link_to t("delete"), convention_setup_lodging_path(lodging), method: :delete, data: { confirm: t("are_you_sure") }
+%br
+
+= link_to "New Lodging", new_convention_setup_lodging_path, class: "button"

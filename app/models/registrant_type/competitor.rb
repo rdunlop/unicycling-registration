@@ -1,4 +1,4 @@
-class RegistrantType
+module RegistrantType
   class Competitor
     INITIAL = 1
     MAXIMUM = 1999

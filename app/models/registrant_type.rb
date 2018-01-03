@@ -1,4 +1,4 @@
-class RegistrantType
+module RegistrantType
   TYPES = ['competitor', 'noncompetitor', 'spectator'].freeze
 
   def self.for(registrant_type)
