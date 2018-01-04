@@ -17,7 +17,7 @@ class EmailFilters::UnpaidRegAccounts
   end
 
   def filtered_user_emails
-    users = User.this_tenant.unpaid_reg_fees
+    users = User.this_tenant.unpaid_reg_fees(include_pending: false)
     users.map(&:email).compact.uniq
   end
 
