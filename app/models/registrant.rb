@@ -342,11 +342,15 @@ class Registrant < ApplicationRecord
   ###### Expenses ##########
 
   # Indicates that this registrant has paid their registration_fee
-  def reg_paid?
+  def reg_paid?(include_pending: true)
     return true if spectator?
-    Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid") do
+    Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid/include_pending/#{include_pending}") do
       registration_cost_items = RegistrationCost.all_registration_expense_items
-      paid_or_pending_line_items.any? { |item| registration_cost_items.include?(item) }
+      if include_pending
+        paid_or_pending_line_items
+      else
+        paid_line_items
+      end.any? { |item| registration_cost_items.include?(item) }
     end
   end
 

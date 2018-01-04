@@ -442,6 +442,20 @@ describe Registrant do
       end
     end
 
+    describe "with a complete (offline) payment" do
+      let(:comp) { FactoryGirl.create(:competitor) }
+      let(:payment) { FactoryGirl.create(:payment, offline_pending: true, offline_pending_date: Date.current) }
+      let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, registrant: comp, amount: 100, line_item: @comp_exp) }
+
+      it "knows that the registration_fee has been paid" do
+        expect(comp.reg_paid?).to eq(true)
+      end
+
+      it "knows that the registration_fee has been paid offline" do
+        expect(comp.reg_paid?(include_pending: false)).to eq(false)
+      end
+    end
+
     describe "with an incomplete payment" do
       before(:each) do
         @comp = FactoryGirl.create(:competitor)
