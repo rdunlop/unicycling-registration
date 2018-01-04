@@ -74,8 +74,10 @@ class User < ApplicationRecord
   end
 
   # get all users who have registrants with unpaid fees
-  def self.unpaid_reg_fees
-    registrants = Registrant.active.includes(:user).reject(&:reg_paid?)
+  # If include_pending is true, pending payments are considered paid
+  # otherwise, only fully-paid payments are considered paid
+  def self.unpaid_reg_fees(include_pending: true)
+    registrants = Registrant.active.includes(:user).reject{|reg| reg.reg_paid?(include_pending: include_pending) }
     registrants.map(&:user).flatten.uniq
   end
 
