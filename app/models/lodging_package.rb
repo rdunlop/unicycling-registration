@@ -31,7 +31,7 @@ class LodgingPackage < ApplicationRecord
     errors = []
 
     # Check to see if the registrant has already booked a Lodging for the same day as they are trying to book
-    existing_packages = registrant_expense_item.registrant.all_line_items.select{ |line_item| line_item.is_a?(LodgingPackage) }
+    existing_packages = registrant_expense_item.registrant.all_line_items.select { |line_item| line_item.is_a?(LodgingPackage) }
     lodging_package_days.each do |lodging_package_day|
       if existing_packages.flat_map(&:lodging_package_days).map(&:date_offered).include?(lodging_package_day.date_offered)
         errors << "Unable to add the same day (#{lodging_package_day.date_offered}) twice"

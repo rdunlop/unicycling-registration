@@ -26,10 +26,10 @@ class StandardSkillScoreEntry < ApplicationRecord
   validates :standard_skill_routine_entry_id, presence: true
 
   validates :difficulty_devaluation_percent, presence: true, inclusion: { in: [0, 50, 100] }
-  validates :wave, presence: true, numericality: {greater_than_or_equal_to: 0}
-  validates :line, presence: true, numericality: {greater_than_or_equal_to: 0}
-  validates :cross, presence: true, numericality: {greater_than_or_equal_to: 0}
-  validates :circle, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :wave, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :line, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :cross, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :circle, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def difficulty_devaluation_score
     return 0 unless valid?

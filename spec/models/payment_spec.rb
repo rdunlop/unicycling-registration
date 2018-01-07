@@ -111,7 +111,7 @@ describe Payment do
 
   it "saves associated details when the payment is saved" do
     pay = FactoryGirl.build(:payment)
-    pd = pay.payment_details.build()
+    pd = pay.payment_details.build
     pd.registrant = FactoryGirl.create(:registrant)
     pd.amount = 100
     pd.line_item = FactoryGirl.create(:expense_item)

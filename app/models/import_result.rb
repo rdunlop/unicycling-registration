@@ -37,7 +37,7 @@ class ImportResult < ApplicationRecord
   validates :competition_id, presence: true
   validates :user_id, :bib_number, presence: true
   validate :results_for_competition
-  validates :minutes, :seconds, :thousands, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+  validates :minutes, :seconds, :thousands, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   validates :status, inclusion: { in: TimeResult.status_values, allow_nil: true }
   before_validation :set_details_if_blank

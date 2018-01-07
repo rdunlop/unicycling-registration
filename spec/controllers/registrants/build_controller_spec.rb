@@ -161,7 +161,7 @@ describe Registrants::BuildController do
 
       it "can create a competitor based on a previous convention record" do
         expect do
-          post :create_from_previous, params: { registrant: { registrant_type: "competitor" }, registrant_id: "new", previous_registrant: previous_reg_reference}
+          post :create_from_previous, params: { registrant: { registrant_type: "competitor" }, registrant_id: "new", previous_registrant: previous_reg_reference }
         end.to change(Registrant, :count).by(1)
         expect(Registrant.last.contact_detail).not_to be_nil
       end
@@ -211,14 +211,14 @@ describe Registrants::BuildController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         expect do
-          post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
+          post :create, params: { registrant_id: "new", registrant: { registrant_type: 'competitor' } }
         end.not_to change(Registrant, :count)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
-        post :create, params: { registrant_id: "new", registrant: {registrant_type: 'competitor'} }
+        post :create, params: { registrant_id: "new", registrant: { registrant_type: 'competitor' } }
         expect(response).to redirect_to(new_registrant_path(registrant_type: 'competitor', copy_from_previous: false))
       end
     end
@@ -232,11 +232,11 @@ describe Registrants::BuildController do
                                              registrant_event_sign_ups_attributes: [
                                                { signed_up: "1",
                                                  event_category_id: @ev.event_categories.first.id,
-                                                 event_id: @ev.id}
+                                                 event_id: @ev.id }
                                              ],
                                              registrant_choices_attributes: [
                                                { event_choice_id: @ec.id,
-                                                 value: "1"}
+                                                 value: "1" }
                                              ])
       end
 
@@ -268,13 +268,13 @@ describe Registrants::BuildController do
                                              registrant_event_sign_ups_attributes: [
                                                { event_category_id: @ecat.id,
                                                  event_id: @ecat.event.id,
-                                                 signed_up: "1"}
+                                                 signed_up: "1" }
                                              ])
         @new_attributes = valid_attributes.merge(registrant_type: 'competitor',
                                                  registrant_event_sign_ups_attributes: [
                                                    { event_category_id: @ecat.id,
                                                      event_id: @ecat.event.id,
-                                                     signed_up: "0"}
+                                                     signed_up: "0" }
                                                  ])
       end
 
@@ -367,7 +367,7 @@ describe Registrants::BuildController do
     describe "with invalid params" do
       let(:registrant) { FactoryGirl.create(:competitor, user: user) }
       let(:do_action) do
-        put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: {registrant_type: 'competitor'} }
+        put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: { registrant_type: 'competitor' } }
       end
       it "assigns the registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted

@@ -22,9 +22,9 @@
 
 class AgeGroupEntry < ApplicationRecord
   validates :age_group_type, :short_description, :start_age, :end_age, presence: true
-  validates :start_age, :end_age, numericality: {greater_than_or_equal_to: 0}
-  validates :short_description, uniqueness: {scope: :age_group_type_id}
-  validates :gender, inclusion: {in: %w[Male Female Mixed], message: "%{value} must be either 'Male', 'Female' or 'Mixed'"}
+  validates :start_age, :end_age, numericality: { greater_than_or_equal_to: 0 }
+  validates :short_description, uniqueness: { scope: :age_group_type_id }
+  validates :gender, inclusion: { in: %w[Male Female Mixed], message: "%{value} must be either 'Male', 'Female' or 'Mixed'" }
 
   belongs_to :age_group_type, touch: true, inverse_of: :age_group_entries
   belongs_to :wheel_size
@@ -40,7 +40,7 @@ class AgeGroupEntry < ApplicationRecord
         element[:age] <= end_age
     end
 
-    matching_entries.sum {|element| element[:count] }
+    matching_entries.sum { |element| element[:count] }
   end
 
   def smallest_neighbour(registrant_data)

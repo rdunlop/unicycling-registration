@@ -67,14 +67,14 @@ describe ConventionSetup::CategoriesController do
         category = Category.create! valid_attributes
         allow_any_instance_of(Category).to receive(:save).and_return(false)
         expect do
-          post :create, params: { category: {name: "Hi"} }
+          post :create, params: { category: { name: "Hi" } }
         end.not_to change { category.reload.name }
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        post :create, params: { category: {name: "Hi"} }
+        post :create, params: { category: { name: "Hi" } }
 
         assert_select "h1", "Event Categories"
       end
@@ -103,7 +103,7 @@ describe ConventionSetup::CategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: category.to_param, category: {name: 'fake'} }
+          put :update, params: { id: category.to_param, category: { name: 'fake' } }
         end.not_to change { category.reload.name }
       end
 
@@ -111,7 +111,7 @@ describe ConventionSetup::CategoriesController do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-        put :update, params: { id: category.to_param, category: {name: "Hi"} }
+        put :update, params: { id: category.to_param, category: { name: "Hi" } }
 
         assert_select "h1", "Editing Event Category"
       end

@@ -75,14 +75,14 @@ describe ConventionSetup::EventCategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         expect do
-          post :create, params: { event_id: @event.id, event_category: {name: "cat name"} }
+          post :create, params: { event_id: @event.id, event_category: { name: "cat name" } }
         end.not_to change(EventCategory, :count)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
-        post :create, params: { event_id: @event.id, event_category: {name: "cat name"} }
+        post :create, params: { event_id: @event.id, event_category: { name: "cat name" } }
         assert_select "h3", "New event category"
       end
     end
@@ -110,7 +110,7 @@ describe ConventionSetup::EventCategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: event_category.to_param, event_category: {name: "cat name"} }
+          put :update, params: { id: event_category.to_param, event_category: { name: "cat name" } }
         end.not_to change { event_category.reload.name }
       end
 
@@ -118,7 +118,7 @@ describe ConventionSetup::EventCategoriesController do
         event_category = @event.event_categories.first
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventCategory).to receive(:save).and_return(false)
-        put :update, params: { id: event_category.to_param, event_category: {name: "cat name"} }
+        put :update, params: { id: event_category.to_param, event_category: { name: "cat name" } }
         assert_select "h1", "Editing Event Category"
       end
     end

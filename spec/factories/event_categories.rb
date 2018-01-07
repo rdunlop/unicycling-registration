@@ -22,6 +22,6 @@
 FactoryGirl.define do
   factory :event_category do
     event # FactoryGirl
-    sequence(:name) {|n| "EventCategory #{n}"}
+    sequence(:name) { |n| "EventCategory #{n}" }
   end
 end

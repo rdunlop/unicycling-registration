@@ -54,7 +54,7 @@ class JudgeType < ApplicationRecord
   end
 
   def score_attributes
-    score_numbers.map{|score_number| "val_#{score_number}".to_sym }
+    score_numbers.map { |score_number| "val_#{score_number}".to_sym }
   end
 
   def description_for(score_number)

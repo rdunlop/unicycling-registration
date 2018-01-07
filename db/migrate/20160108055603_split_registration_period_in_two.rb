@@ -46,7 +46,7 @@ class SplitRegistrationPeriodInTwo < ActiveRecord::Migration
         expense_item_id: rp.competitor_expense_item_id
       )
       rp.translations.each do |translation|
-        rc.set_translations(translation.locale => { name: translation.name})
+        rc.set_translations(translation.locale => { name: translation.name })
       end
 
       # NonCompetitor
@@ -61,7 +61,7 @@ class SplitRegistrationPeriodInTwo < ActiveRecord::Migration
         expense_item_id: rp.noncompetitor_expense_item_id
       )
       rp.translations.each do |translation|
-        rc.set_translations(translation.locale => { name: translation.name})
+        rc.set_translations(translation.locale => { name: translation.name })
       end
     end
   end

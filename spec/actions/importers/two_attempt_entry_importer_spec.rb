@@ -11,12 +11,10 @@ describe Importers::TwoAttemptEntryImporter do
              valid_file?: true,
              process_row: {
                bib_number: 101,
-
                minutes_1: 1,
                seconds_1: 34,
                thousands_1: 390,
                status_1: "active",
-
                minutes_2: 2,
                seconds_2: 24,
                thousands_2: 290,

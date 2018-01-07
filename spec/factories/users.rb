@@ -32,28 +32,28 @@
 
 FactoryGirl.define do
   factory :user do
-    sequence(:email) {|n| "me#{n}@dunlopweb.com" }
+    sequence(:email) { |n| "me#{n}@dunlopweb.com" }
     password "something"
     password_confirmation "something"
 
     factory :super_admin_user do
-      after(:create) {|user| user.add_role :super_admin }
+      after(:create) { |user| user.add_role :super_admin }
     end
 
     factory :convention_admin_user do
-      after(:create) {|user| user.add_role :convention_admin }
+      after(:create) { |user| user.add_role :convention_admin }
     end
 
     factory :competition_admin_user do
-      after(:create) {|user| user.add_role :competition_admin }
+      after(:create) { |user| user.add_role :competition_admin }
     end
 
     factory :award_admin_user do
-      after(:create) {|user| user.add_role :awards_admin }
+      after(:create) { |user| user.add_role :awards_admin }
     end
 
     factory :data_entry_volunteer_user do
-      after(:create) {|user| user.add_role :data_entry_volunteer }
+      after(:create) { |user| user.add_role :data_entry_volunteer }
     end
 
     factory :payment_admin do
@@ -61,16 +61,16 @@ FactoryGirl.define do
     end
 
     factory :director do
-      after(:create) {|user| user.add_role :data_entry_volunteer }
-      after(:create) {|user| user.add_role :director, EventCategory }
+      after(:create) { |user| user.add_role :data_entry_volunteer }
+      after(:create) { |user| user.add_role :director, EventCategory }
     end
 
     factory :music_dj do
-      after(:create) {|user| user.add_role :music_dj }
+      after(:create) { |user| user.add_role :music_dj }
     end
 
     factory :event_planner do
-      after(:create) {|user| user.add_role :event_planner }
+      after(:create) { |user| user.add_role :event_planner }
     end
 
     after(:create) { |user| user.confirm if Rails.application.secrets.mail_skip_confirmation.nil? }

@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   default_scope { order(:email) }
 
-  has_paper_trail meta: {user_id: :id }
+  has_paper_trail meta: { user_id: :id }
 
   has_many :registrants, -> { includes %i[registrant_expense_items payment_details] }
 
@@ -77,7 +77,7 @@ class User < ApplicationRecord
   # If include_pending is true, pending payments are considered paid
   # otherwise, only fully-paid payments are considered paid
   def self.unpaid_reg_fees(include_pending: true)
-    registrants = Registrant.active.includes(:user).reject{|reg| reg.reg_paid?(include_pending: include_pending) }
+    registrants = Registrant.active.includes(:user).reject { |reg| reg.reg_paid?(include_pending: include_pending) }
     registrants.map(&:user).flatten.uniq
   end
 
@@ -140,11 +140,7 @@ class User < ApplicationRecord
   end
 
   def to_s_with_safe_email
-    if name.present?
-      name
-    else
-      email.first(8) + "..."
-    end
+    name.presence || email.first(8) + "..."
   end
 
   def to_s_with_email
@@ -172,7 +168,7 @@ class User < ApplicationRecord
   end
 
   def total_owing
-    accessible_registrants.inject(0.to_money){|memo, reg| memo + reg.amount_owing }
+    accessible_registrants.inject(0.to_money) { |memo, reg| memo + reg.amount_owing }
   end
 
   # Internal: Prevent confirmation from being required for staging

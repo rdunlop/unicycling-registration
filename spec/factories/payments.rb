@@ -30,7 +30,7 @@ FactoryGirl.define do
     cancelled false
     transaction_id "MyString"
     completed_date nil
-    sequence(:invoice_id) {|n| "INVOICE #{n}" }
+    sequence(:invoice_id) { |n| "INVOICE #{n}" }
 
     trait :completed do
       completed true

@@ -32,7 +32,7 @@ Apartment.configure do |config|
   # config.append_environment = true
 
   # supply list of database names for migrations to run on
-  config.tenant_names = ->{ Tenant.pluck :subdomain }
+  config.tenant_names = -> { Tenant.pluck :subdomain }
 end
 
 ##

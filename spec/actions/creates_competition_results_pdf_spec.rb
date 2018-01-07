@@ -12,7 +12,7 @@ describe CreatesCompetitionResultsPdf do
     end
 
     context "with a freestyle competition" do
-      let(:competition) { FactoryGirl.create(:competition, :freestyle_2017)}
+      let(:competition) { FactoryGirl.create(:competition, :freestyle_2017) }
       it "creates 2 new results" do
         expect do
           subject.publish!

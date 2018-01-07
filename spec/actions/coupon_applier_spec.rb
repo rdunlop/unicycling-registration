@@ -9,7 +9,7 @@ describe CouponApplier do
   let(:expense_item) { FactoryGirl.create(:expense_item) }
   let(:max_coupon_uses) { 0 }
   let(:coupon_code) { FactoryGirl.create(:coupon_code, max_num_uses: max_coupon_uses) }
-  let!(:coupon_code_detail) { FactoryGirl.create(:coupon_code_expense_item, coupon_code: coupon_code, expense_item: expense_item)}
+  let!(:coupon_code_detail) { FactoryGirl.create(:coupon_code_expense_item, coupon_code: coupon_code, expense_item: expense_item) }
   let(:coupon_code_string) { coupon_code.code }
   let(:payment) { FactoryGirl.create(:payment, :completed) }
   let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, line_item: expense_item) }
@@ -87,7 +87,7 @@ describe CouponApplier do
 
     describe "when it has already reached its limit" do
       before { do_action }
-      let(:new_payment) { FactoryGirl.create(:payment)}
+      let(:new_payment) { FactoryGirl.create(:payment) }
       let!(:new_payment_detail) { FactoryGirl.create(:payment_detail, payment: new_payment, line_item: expense_item) }
 
       it "doesn't allow being applied again" do

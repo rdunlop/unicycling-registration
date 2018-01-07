@@ -27,7 +27,7 @@ describe HeatLaneJudgeNotesController do
   end
   let(:competition) { FactoryGirl.create(:competition) }
   let(:heat_lane_judge_note) { FactoryGirl.create(:heat_lane_judge_note, competition: competition, heat: 2, lane: 1) }
-  let!(:heat_lane_result) { FactoryGirl.create(:heat_lane_result, competition: competition, heat: 2, lane: 1)}
+  let!(:heat_lane_result) { FactoryGirl.create(:heat_lane_result, competition: competition, heat: 2, lane: 1) }
   let!(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
   let!(:lane_assignment) { FactoryGirl.create(:lane_assignment, competition: competition, heat: 2, lane: 1, competitor: competitor) }
 

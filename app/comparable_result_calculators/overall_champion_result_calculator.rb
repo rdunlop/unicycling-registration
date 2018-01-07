@@ -50,12 +50,12 @@ class OverallChampionResultCalculator
   end
 
   def competitor_score(competitor)
-    calc_res = results(competitor.gender).find{ |res| res[:bib_number] == competitor.lowest_member_bib_number }
+    calc_res = results(competitor.gender).find { |res| res[:bib_number] == competitor.lowest_member_bib_number }
     calc_res.try(:[], :total_points) || 0
   end
 
   def competitor_display_score(competitor)
-    calc_res = results(competitor.gender).find{ |res| res[:bib_number] == competitor.lowest_member_bib_number }
+    calc_res = results(competitor.gender).find { |res| res[:bib_number] == competitor.lowest_member_bib_number }
     calc_res.try(:[], :display_points) || 0
   end
 
@@ -248,7 +248,7 @@ class OverallChampionResultCalculator
     result = {}
 
     firsts_counts.uniq.sort.reverse_each do |num_firsts|
-      competitors_with_this_number_of_firsts = competitor_firsts_counts.select{ |el| competitor_firsts_counts[el] == num_firsts }.keys
+      competitors_with_this_number_of_firsts = competitor_firsts_counts.select { |el| competitor_firsts_counts[el] == num_firsts }.keys
       current_score = score - adjustment
       result[current_score] = competitors_with_this_number_of_firsts
       adjustment += 0.1
@@ -259,7 +259,7 @@ class OverallChampionResultCalculator
   def adjust_ties_by_tie_breaker(_scores); end
 
   def num_firsts(gender, bib_number)
-    registrants(gender)[bib_number].count{ |comp| get_place(comp) == 1}
+    registrants(gender)[bib_number].count { |comp| get_place(comp) == 1 }
   end
 
   def tie_breaker_competition
@@ -269,7 +269,7 @@ class OverallChampionResultCalculator
   def place_of_tie_breaker(gender, bib_number)
     @place_of_tie_breaker ||= {}
     # if someone didn't place in  the tie breaker, give them a high place so that they are sorted out properly
-    @place_of_tie_breaker[bib_number] ||= get_place(registrants(gender)[bib_number].find{ |comp| comp.competition == tie_breaker_competition }) || 999
+    @place_of_tie_breaker[bib_number] ||= get_place(registrants(gender)[bib_number].find { |comp| comp.competition == tie_breaker_competition }) || 999
   end
 
   # inputs:
@@ -294,7 +294,7 @@ class OverallChampionResultCalculator
     if bib_numbers.length > 1
       results = []
       calc_score = score
-      places_in_tie_breaker = bib_numbers.map{ |bib_number| place_of_tie_breaker(gender, bib_number) }
+      places_in_tie_breaker = bib_numbers.map { |bib_number| place_of_tie_breaker(gender, bib_number) }
       places_in_tie_breaker.uniq.sort.each do |place|
         # each time through this loop is a different (increasing) place in the tie breaker
         bib_numbers.each do |bib_number|
@@ -311,7 +311,7 @@ class OverallChampionResultCalculator
   end
 
   def store_registrants(gender)
-    competitors = combined_competition.combined_competition_entries.map{ |entry| entry.competitors(gender) }.flatten
+    competitors = combined_competition.combined_competition_entries.map { |entry| entry.competitors(gender) }.flatten
 
     registrant_bib_numbers = {}
 

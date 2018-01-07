@@ -65,7 +65,7 @@ describe Compete::CombinedCompetitionsController do
         combined_competition = CombinedCompetition.create! valid_attributes
         expect do
           put :update, params: { id: combined_competition.to_param, combined_competition: valid_attributes.merge(name: "Hello") }
-        end.to change{ combined_competition.reload.name }
+        end.to change { combined_competition.reload.name }
       end
 
       it "redirects to the combined_competition" do

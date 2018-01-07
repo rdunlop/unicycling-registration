@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe SongPolicy do
-  let(:my_user) { FactoryGirl.create(:user)}
+  let(:my_user) { FactoryGirl.create(:user) }
   let(:my_song) { FactoryGirl.create(:song, user: my_user) }
 
   subject { described_class }

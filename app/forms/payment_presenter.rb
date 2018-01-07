@@ -120,8 +120,8 @@ class PaymentPresenter
   end
 
   def registrants
-    regs = paid_details.map {|nd| nd.registrant}
-    unregs = unpaid_details.map {|ud| ud.registrant}
+    regs = paid_details.map { |nd| nd.registrant }
+    unregs = unpaid_details.map { |ud| ud.registrant }
     (regs + unregs).uniq
   end
 

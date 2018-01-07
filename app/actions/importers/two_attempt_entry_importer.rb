@@ -32,12 +32,10 @@ class Importers::TwoAttemptEntryImporter < Importers::CompetitionDataImporter
       seconds_1: hash[:seconds_1],
       thousands_1: hash[:thousands_1],
       status_1: hash[:status_1],
-
       minutes_2: hash[:minutes_2],
       seconds_2: hash[:seconds_2],
       thousands_2: hash[:thousands_2],
       status_2: hash[:status_2],
-
       is_start_time: is_start_time,
       competition: competition,
       user: user

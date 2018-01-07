@@ -27,7 +27,7 @@ class EventCategory < ApplicationRecord
   accepts_nested_attributes_for :translations
 
   validates :event, presence: true
-  validates :name, presence: true, uniqueness: {scope: [:event_id]}
+  validates :name, presence: true, uniqueness: { scope: [:event_id] }
 
   acts_as_restful_list scope: :event
 
@@ -40,7 +40,7 @@ class EventCategory < ApplicationRecord
   end
 
   def competitions_being_fed(registrant)
-    competition_sources.select{|cs| cs.registrant_passes_filters(registrant) }.map(&:target_competition)
+    competition_sources.select { |cs| cs.registrant_passes_filters(registrant) }.map(&:target_competition)
   end
 
   def signed_up_registrants

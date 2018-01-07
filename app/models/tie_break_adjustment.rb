@@ -23,7 +23,7 @@ class TieBreakAdjustment < ApplicationRecord
   belongs_to :judge
 
   validates :judge_id, presence: true
-  validates :tie_break_place, presence: true, numericality: {greater_than_or_equal_to: 0, less_than: 1000}
+  validates :tie_break_place, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 1000 }
 
   # validate uniqueness of this competitor having a tie break adjustment
   validates :competitor_id, uniqueness: true

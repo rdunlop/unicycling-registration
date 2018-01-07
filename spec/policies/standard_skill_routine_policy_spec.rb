@@ -1,15 +1,15 @@
 require "spec_helper"
 
 describe StandardSkillRoutinePolicy do
-  let(:my_user) { FactoryGirl.create(:user)}
+  let(:my_user) { FactoryGirl.create(:user) }
   let(:my_registrant) { FactoryGirl.create(:registrant, user: my_user) }
   let(:other_registrant) { FactoryGirl.create(:registrant) }
-  let(:my_routine) { FactoryGirl.create(:standard_skill_routine, registrant: my_registrant)}
-  let(:other_routine) { FactoryGirl.create(:standard_skill_routine, registrant: other_registant)}
+  let(:my_routine) { FactoryGirl.create(:standard_skill_routine, registrant: my_registrant) }
+  let(:other_routine) { FactoryGirl.create(:standard_skill_routine, registrant: other_registant) }
   let(:event_planner) { FactoryGirl.create(:event_planner) }
   let(:std_director) { FactoryGirl.create(:user) }
   let(:other_director) { FactoryGirl.create(:user) }
-  let(:standard_skill_event) { FactoryGirl.create(:event, :standard_skill)}
+  let(:standard_skill_event) { FactoryGirl.create(:event, :standard_skill) }
   before do
     std_director.add_role :director, standard_skill_event
     other_director.add_role :director, FactoryGirl.create(:event)

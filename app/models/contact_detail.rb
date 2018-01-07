@@ -69,11 +69,7 @@ class ContactDetail < ApplicationRecord
   end
 
   def country_code
-    if country_representing.blank?
-      country_residence
-    else
-      country_representing
-    end
+    country_representing.presence || country_residence
   end
 
   def country

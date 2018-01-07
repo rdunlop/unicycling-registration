@@ -21,7 +21,7 @@ class CombinedCompetition < ApplicationRecord
   CALCULATION_MODES = ['default', 'percentage', 'average_speed'].freeze
   validates :calculation_mode, inclusion: { in: CALCULATION_MODES }
 
-  has_many :combined_competition_entries, -> {order("combined_competition_entries.id") }, dependent: :destroy
+  has_many :combined_competition_entries, -> { order("combined_competition_entries.id") }, dependent: :destroy
   has_one :competition
 
   def to_s

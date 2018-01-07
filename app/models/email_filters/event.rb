@@ -10,7 +10,7 @@ class EmailFilters::Event
       filter: "event",
       description: "Users who have SIGNED UP for an Event",
       possible_arguments: ::Event.all,
-      custom_show_argument: proc{|element| ["#{element.category} - #{element}", element.id] }
+      custom_show_argument: proc { |element| ["#{element.category} - #{element}", element.id] }
     )
   end
 

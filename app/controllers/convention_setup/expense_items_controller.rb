@@ -1,7 +1,7 @@
 class ConventionSetup::ExpenseItemsController < ConventionSetup::BaseConventionSetupController
   include SortableObject
 
-  before_action :load_expense_group, except: :update_row_order
+  before_action :load_expense_group, except: :update_row_order # rubocop:disable Rails/LexicallyScopedActionFilter
   before_action :load_expense_item, except: %i[index create]
   before_action :authorize_setup
 

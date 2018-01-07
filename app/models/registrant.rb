@@ -56,7 +56,7 @@ class Registrant < ApplicationRecord
     has_many :registrant_choices, inverse_of: :registrant
     has_many :registrant_event_sign_ups, inverse_of: :registrant
     has_many :registrant_expense_items, autosave: true
-    has_many :payment_details, -> {includes :payment}
+    has_many :payment_details, -> { includes :payment }
     has_many :additional_registrant_accesses
     has_many :registrant_group_members
     has_many :songs
@@ -130,7 +130,7 @@ class Registrant < ApplicationRecord
   # necessary for comp/non-comp only (not spectators):
   with_options if: :comp_noncomp_past_step_1? do
     validates :birthday, :gender, presence: true
-    validates :gender, inclusion: {in: %w[Male Female], message: "%{value} must be either 'Male' or 'Female'"}
+    validates :gender, inclusion: { in: %w[Male Female], message: "%{value} must be either 'Male' or 'Female'" }
     validate  :gender_present
     before_validation :set_age
     validates :age, presence: true
@@ -159,7 +159,7 @@ class Registrant < ApplicationRecord
 
   scope :active_or_incomplete, -> { not_deleted.order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
-  scope :started, -> { where.not(status: "blank").active_or_incomplete}
+  scope :started, -> { where.not(status: "blank").active_or_incomplete }
   scope :not_deleted, -> { where(deleted: false) }
 
   def validated?
@@ -204,12 +204,12 @@ class Registrant < ApplicationRecord
 
   # TODO: This should be extracted into a form helper?
   def self.select_box_options
-    active.competitor.map{ |reg| [reg.with_id_to_s, reg.id] }
+    active.competitor.map { |reg| [reg.with_id_to_s, reg.id] }
   end
 
   # TODO: This should be extracted into a form helper?
   def self.all_select_box_options
-    started.map{ |reg| [reg.with_id_to_s, reg.id] }
+    started.map { |reg| [reg.with_id_to_s, reg.id] }
   end
 
   # ##########################################################
@@ -228,7 +228,7 @@ class Registrant < ApplicationRecord
     unless reg_item.nil? || !has_expense_item?(reg_item)
       # registrant_expense_items.system_managed.find_by(expense_item_id: reg_item.id).destroy
       # use `.to_a` here so that we can use `mark_for_destruction` and it will be destroy on save
-      item_to_remove = registrant_expense_items.to_a.find { |rei| rei.system_managed? && rei.line_item == reg_item}
+      item_to_remove = registrant_expense_items.to_a.find { |rei| rei.system_managed? && rei.line_item == reg_item }
       item_to_remove.mark_for_destruction
     end
   end
@@ -260,7 +260,7 @@ class Registrant < ApplicationRecord
   # ##########################################################
 
   def matching_competition_in_event(event)
-    competitors.active.find{ |competitor| competitor.event == event }.try(:competition)
+    competitors.active.find { |competitor| competitor.event == event }.try(:competition)
   end
 
   def create_associated_required_expense_items
@@ -273,7 +273,7 @@ class Registrant < ApplicationRecord
   end
 
   def wheel_size_id_for_event(event)
-    competition_wheel_sizes.find{ |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
+    competition_wheel_sizes.find { |cws| cws.event_id == event.id }.try(:wheel_size_id) || wheel_size_id
   end
 
   # Public: Is this registrant young enough that they may need
@@ -303,7 +303,7 @@ class Registrant < ApplicationRecord
   # if this user is signed up for an event category which is now "warning" flagged
   def event_warnings
     warned_sign_ups = signed_up_events.joins(:event_category).includes(:event, :event_category).merge(EventCategory.with_warnings)
-    warned_sign_ups.map{|rei| "#{rei.event} - #{rei.event_category.name} Category" }
+    warned_sign_ups.map { |rei| "#{rei.event} - #{rei.event_category.name} Category" }
   end
 
   def has_standard_skill?
@@ -379,7 +379,7 @@ class Registrant < ApplicationRecord
   # returns a list of line_items that this registrant hasn't paid for
   # INCLUDING the registration cost
   def owing_line_items
-    registrant_expense_items.map{|eid| eid.line_item}
+    registrant_expense_items.map { |eid| eid.line_item }
   end
 
   def owing_registrant_expense_items
@@ -388,11 +388,11 @@ class Registrant < ApplicationRecord
 
   # returns a list of paid-for line_items
   def paid_line_items
-    paid_details.map{|pd| pd.line_item }
+    paid_details.map { |pd| pd.line_item }
   end
 
   def pending_line_items
-    pending_details.map{|pd| pd.line_item }
+    pending_details.map { |pd| pd.line_item }
   end
 
   def paid_or_pending_line_items
@@ -413,7 +413,7 @@ class Registrant < ApplicationRecord
 
   def amount_paid
     Rails.cache.fetch("/registrants/#{id}-#{updated_at}/amount_paid_money") do
-      paid_details.inject(0.to_money){|total, item| total + item.cost}
+      paid_details.inject(0.to_money) { |total, item| total + item.cost }
     end
   end
 
@@ -502,7 +502,7 @@ class Registrant < ApplicationRecord
 
   ############# Events Selection ########
   def has_event_in_category?(category)
-    category.events.any?{|event| has_event?(event) }
+    category.events.any? { |event| has_event?(event) }
   end
 
   # does this registrant have this event checked off?
@@ -606,7 +606,7 @@ class Registrant < ApplicationRecord
     free_groups_required = registrant_type_model.required_free_expense_groups(age)
 
     free_groups_required.each do |expense_group|
-      if all_line_items.none? { |line_item| line_item.try(:expense_group) == expense_group}
+      if all_line_items.none? { |line_item| line_item.try(:expense_group) == expense_group }
         errors.add(:base, "You must choose a free #{expense_group}")
       end
     end

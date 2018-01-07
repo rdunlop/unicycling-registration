@@ -35,7 +35,7 @@ class StreetResultCalculator
   end
 
   def total_points_for_judge_type(competitor, judge_type, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
-    scores = competitor.scores.select{ |score| score.judge_type == judge_type }
+    scores = competitor.scores.select { |score| score.judge_type == judge_type }
 
     scores.map(&:placing_points).compact.reduce(:+) || 0
   end

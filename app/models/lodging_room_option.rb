@@ -81,7 +81,7 @@ class LodgingRoomOption < ApplicationRecord
            else
              registrant_expense_items.includes(:registrant).joins(:registrant).merge(Registrant.active)
            end
-    reis.free.reject{ |rei| rei.registrant.reg_paid? } + reis.where(free: false)
+    reis.free.reject { |rei| rei.registrant.reg_paid? } + reis.where(free: false)
   end
 
   def lodging_packages_for_day(lodging_day)

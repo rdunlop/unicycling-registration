@@ -62,14 +62,14 @@ describe ConventionSetup::ExpenseGroupsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
         expect do
-          post :create, params: { expense_group: {info_url: "hi"} }
+          post :create, params: { expense_group: { info_url: "hi" } }
         end.not_to change(ExpenseGroup, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
-        post :create, params: { expense_group: {info_url: "hi"} }
+        post :create, params: { expense_group: { info_url: "hi" } }
         assert_select "h1", "Items For Sale"
       end
     end
@@ -97,7 +97,7 @@ describe ConventionSetup::ExpenseGroupsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: expense_group.to_param, expense_group: {info_url: "fake"} }
+          put :update, params: { id: expense_group.to_param, expense_group: { info_url: "fake" } }
         end.not_to change { expense_group.reload.info_url }
       end
 
@@ -105,7 +105,7 @@ describe ConventionSetup::ExpenseGroupsController do
         expense_group = ExpenseGroup.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseGroup).to receive(:save).and_return(false)
-        put :update, params: { id: expense_group.to_param, expense_group: {info_url: "hi"} }
+        put :update, params: { id: expense_group.to_param, expense_group: { info_url: "hi" } }
         assert_select "h1", "#{expense_group} - Expense Group Details"
       end
     end

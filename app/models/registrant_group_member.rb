@@ -23,7 +23,7 @@ class RegistrantGroupMember < ApplicationRecord
   belongs_to :additional_details, polymorphic: true
 
   validates :registrant, presence: true
-  validates :registrant_id, uniqueness: {scope: [:registrant_group_id]}
+  validates :registrant_id, uniqueness: { scope: [:registrant_group_id] }
   validates :registrant_group, presence: true
 
   delegate :to_s, to: :registrant

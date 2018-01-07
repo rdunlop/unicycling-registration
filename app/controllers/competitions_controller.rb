@@ -248,7 +248,7 @@ class CompetitionsController < ApplicationController
     authorize @competitor, :create?
     respond_to do |format|
       @competitor.save
-      format.js { }
+      format.js {}
     end
   end
 

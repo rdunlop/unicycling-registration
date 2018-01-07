@@ -19,7 +19,7 @@ class RegistrantGroupLeader < ApplicationRecord
   belongs_to :registrant_group, inverse_of: :registrant_group_leaders
   belongs_to :user
 
-  validates :registrant_group_id, uniqueness: {scope: [:user_id]}
+  validates :registrant_group_id, uniqueness: { scope: [:user_id] }
   validates :registrant_group, presence: true
   validates :user, presence: true
 

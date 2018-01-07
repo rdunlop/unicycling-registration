@@ -43,14 +43,14 @@ class PaymentDetail < ApplicationRecord
   scope :completed, -> { joins(:payment).merge(Payment.completed) }
   scope :offline_pending, -> { joins(:payment).merge(Payment.offline_pending) }
   scope :completed_or_offline, -> { joins(:payment).merge(Payment.completed_or_offline) }
-  scope :not_refunded, -> { includes(:refund_detail).where(refund_details: { payment_detail_id: nil}) }
+  scope :not_refunded, -> { includes(:refund_detail).where(refund_details: { payment_detail_id: nil }) }
 
   scope :paid, -> { completed.where(free: false) }
 
   scope :free, -> { completed.where(free: true) }
   scope :refunded, -> { completed.where(refunded: true) }
 
-  scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: {payment_detail_id: nil }) }
+  scope :with_coupon, -> { includes(:payment_detail_coupon_code).where.not(payment_detail_coupon_codes: { payment_detail_id: nil }) }
 
   def self.cache_set_field
     :line_item_type_and_id

@@ -6,7 +6,7 @@ class Registrants::BuildController < ApplicationController
   before_action :set_steps, except: [:drop_event]
   before_action :setup_wizard, except: [:drop_event]
 
-  before_action :load_categories, only: %i[show update add_events]
+  before_action :load_categories, only: %i[show update add_events] # rubocop:disable Rails/LexicallyScopedActionFilter
   layout "wizard"
 
   ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses].freeze
@@ -117,7 +117,7 @@ class Registrants::BuildController < ApplicationController
     event = Event.find(params[:event_id])
     @registrant.transaction do
       sign_up = @registrant.registrant_event_sign_ups.find_by(event: event)
-      choices = @registrant.registrant_choices.includes(event_choice: :event).select{ |ec| ec.event_choice.event == event}
+      choices = @registrant.registrant_choices.includes(event_choice: :event).select { |ec| ec.event_choice.event == event }
       choices.map(&:destroy)
       sign_up.update_attribute(:signed_up, false)
     end

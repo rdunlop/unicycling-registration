@@ -35,7 +35,7 @@ class TimeResult < ApplicationRecord
   include HoursFacade
 
   validates :heat_lane_result_id, uniqueness: { message: "Only 1 Import Per Heat/Lane." }, allow_nil: true
-  validates :minutes, :seconds, :thousands, numericality: {greater_than_or_equal_to: 0}
+  validates :minutes, :seconds, :thousands, numericality: { greater_than_or_equal_to: 0 }
 
   def self.cache_set_field
     :competitor_id

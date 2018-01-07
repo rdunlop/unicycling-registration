@@ -65,17 +65,17 @@ class CompetitionSource < ApplicationRecord
     end
 
     if competition.present?
-      registrants = signed_up_competitors.map{|comp| comp.registrants }.flatten
+      registrants = signed_up_competitors.map { |comp| comp.registrants }.flatten
     end
 
-    registrants.select{|reg| registrant_passes_filters(reg) }
+    registrants.select { |reg| registrant_passes_filters(reg) }
   end
 
   def signed_up_competitors
     if competition.present?
       competitors = competition.competitors
-      competitors = competitors.select {|comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil? # rubocop:disable Style/NumericPredicate
-      competitors = competitors.select {|comp| registrant_passes_filters(comp) }
+      competitors = competitors.select { |comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil? # rubocop:disable Style/NumericPredicate
+      competitors = competitors.select { |comp| registrant_passes_filters(comp) }
       competitors
     else
       []

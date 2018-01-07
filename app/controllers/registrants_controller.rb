@@ -168,7 +168,7 @@ class RegistrantsController < ApplicationController
   end
 
   def subregion_options
-    render partial: 'subregion_select', locals: {from_object: false}
+    render partial: 'subregion_select', locals: { from_object: false }
   end
 
   def copy_to_competitor

@@ -26,11 +26,11 @@ class CompetitorsController < ApplicationController
   include SortableObject
 
   before_action :authenticate_user!
-  before_action :load_competition, except: %i[edit update destroy withdraw update_row_order]
-  before_action :load_competitor, only:    %i[edit update destroy withdraw update_row_order]
+  before_action :load_competition, except: %i[edit update destroy withdraw update_row_order] # rubocop:disable Rails/LexicallyScopedActionFilter
+  before_action :load_competitor, only:    %i[edit update destroy withdraw update_row_order] # rubocop:disable Rails/LexicallyScopedActionFilter
 
   before_action :set_parent_breadcrumbs, only: %i[index new edit]
-  before_action :authorize_sort, only: :update_row_order
+  before_action :authorize_sort, only: :update_row_order # rubocop:disable Rails/LexicallyScopedActionFilter
 
   # GET /competitions/:competition_id/1/competitors/new
   def new

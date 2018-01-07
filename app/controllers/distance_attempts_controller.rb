@@ -18,7 +18,7 @@
 
 class DistanceAttemptsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_and_authorize_judge, only: %i[index create new competitor_details]
+  before_action :load_and_authorize_judge, only: %i[index create competitor_details]
   before_action :load_distance_attempt, only: [:destroy]
 
   before_action :load_competition, only: %i[index create]
@@ -60,7 +60,7 @@ class DistanceAttemptsController < ApplicationController
           flash[:notice] = 'Distance Attempt was successfully created.'
           redirect_back(fallback_location: judge_distance_attempts_path(@judge))
         end
-        format.js { }
+        format.js {}
       else
         format.html do
           @distance_attempts = @judge.distance_attempts

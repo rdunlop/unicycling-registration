@@ -42,8 +42,8 @@
 FactoryGirl.define do
   factory :competition do
     event # FactoryGirl
-    sequence(:name) {|n| "Competition #{n}"}
-    sequence(:award_title_name) {|n| "Competition #{n}"}
+    sequence(:name) { |n| "Competition #{n}" }
+    sequence(:award_title_name) { |n| "Competition #{n}" }
     locked_at nil
     scoring_class "Freestyle"
 

@@ -98,7 +98,7 @@ class ManualRefund
 
     items.each do |pd|
       if pd.refund
-        detail = refund.refund_details.build()
+        detail = refund.refund_details.build
         detail.payment_detail_id = pd.paid_detail_id
       end
     end

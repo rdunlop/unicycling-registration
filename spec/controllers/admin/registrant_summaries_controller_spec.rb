@@ -23,7 +23,7 @@ describe Admin::RegistrantSummariesController do
       end
 
       it "renders in id order with offset" do
-        post :create, params: { order: "id", offset: "20", max: "5"}, format: :pdf
+        post :create, params: { order: "id", offset: "20", max: "5" }, format: :pdf
         expect(response).to redirect_to(reports_path)
       end
     end

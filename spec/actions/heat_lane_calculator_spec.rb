@@ -68,11 +68,9 @@ describe HeatLaneCalculator do
                              { heat: 1, lane: 3 },
                              { heat: 1, lane: 2 },
                              { heat: 1, lane: 1 },
-
                              { heat: 2, lane: 3 },
                              { heat: 2, lane: 2 },
                              { heat: 2, lane: 1 },
-
                              { heat: 3, lane: 3 },
                              { heat: 3, lane: 2 },
                              { heat: 3, lane: 1 }

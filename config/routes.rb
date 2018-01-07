@@ -674,7 +674,7 @@ Rails.application.routes.draw do
           get :list
         end
       end
-      resources :heat_lane_results, shallow: true, only: %i[edit update create destroy]
+      resources :heat_lane_results, shallow: true, only: %i[destroy]
       resources :heat_lane_judge_notes, only: [] do
         member do
           put :merge

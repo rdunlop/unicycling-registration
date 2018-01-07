@@ -89,14 +89,14 @@ describe ConventionSetup::EventChoicesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
         expect do
-          post :create, params: { event_id: @event.id, event_choice: {optional: false} }
+          post :create, params: { event_id: @event.id, event_choice: { optional: false } }
         end.not_to change(EventChoice, :count)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(EventChoice).to receive(:valid?).and_return(false)
-        post :create, params: { event_id: @event.id, event_choice: {optional: false} }
+        post :create, params: { event_id: @event.id, event_choice: { optional: false } }
 
         assert_select "h3", "New Event Choice"
       end
@@ -167,7 +167,7 @@ describe ConventionSetup::EventChoicesController do
       end
 
       it "re-renders the 'edit' template" do
-        put :update, params: { id: event_choice.to_param, event_choice: {cell_type: "fake", optional: false} }
+        put :update, params: { id: event_choice.to_param, event_choice: { cell_type: "fake", optional: false } }
         assert_select "h1", "Editing Event Choice"
       end
     end

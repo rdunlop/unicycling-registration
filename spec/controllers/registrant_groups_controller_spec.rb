@@ -81,7 +81,7 @@ describe RegistrantGroupsController do
     end
 
     describe "with invalid params" do
-      let!(:existing_reg_group) { FactoryGirl.create(:registrant_group)}
+      let!(:existing_reg_group) { FactoryGirl.create(:registrant_group) }
       it "does not update the registrant_group" do
         registrant_group = FactoryGirl.create(:registrant_group, registrant_group_type: existing_reg_group.registrant_group_type)
         # Trigger the behavior that occurs when invalid params are submitted

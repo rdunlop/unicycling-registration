@@ -64,7 +64,7 @@ class StreetScoresController < ApplicationController
   def set_competitor_rank_score(score_object, rank)
     Score.transaction do
       current_rank = 1
-      scores_without_current_score = @street_scores.reject{ |s| s == score_object }
+      scores_without_current_score = @street_scores.reject { |s| s == score_object }
 
       # When moving a score up vs down, it changes the elements which we
       # want to move below us

@@ -253,11 +253,7 @@ class AwardLabelsController < ApplicationController
   end
 
   def set_string_if_present(value, default)
-    if value.present?
-      value
-    else
-      default
-    end
+    value.presence || default
   end
 
   def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place)
@@ -347,7 +343,7 @@ module Prawn
       linecount = (split_lines = record.split("\n")).length
 
       # 15 is estimated max character length per line.
-      split_lines.each {|line| linecount += line.length / 13 } # Total hack to make square labels work.
+      split_lines.each { |line| linecount += line.length / 13 } # Total hack to make square labels work.
 
       # -10 accounts for the overflow margins
       rowheight = @document.grid.row_height - 10

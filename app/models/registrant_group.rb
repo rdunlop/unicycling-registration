@@ -23,7 +23,7 @@ class RegistrantGroup < ApplicationRecord
   validates :name, uniqueness: { scope: :registrant_group_type_id }, allow_blank: true
 
   def sorted_registrants
-    registrants.sort{|a, b| a.contact_detail.address <=> b.contact_detail.address }
+    registrants.sort { |a, b| a.contact_detail.address <=> b.contact_detail.address }
   end
 
   def registrant_group_member_registrant_ids

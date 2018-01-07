@@ -28,7 +28,7 @@ describe FeedbacksController do
 
   describe "POST #create" do
     it "returns http success" do
-      post :create, params: { feedback: { message: "Hello WorlD", entered_email: "robin@dunlopweb.com"} }
+      post :create, params: { feedback: { message: "Hello WorlD", entered_email: "robin@dunlopweb.com" } }
       expect(response).to redirect_to(new_feedback_path)
     end
 

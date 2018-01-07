@@ -54,7 +54,7 @@ describe CompetitionSetup::CompetitionsController do
       it "can create a Female gender_filter competition" do
         @comp = FactoryGirl.create(:competition)
         expect do
-          post :create, params: { event_id: @event.id, competition: valid_attributes.merge(competition_sources_attributes: [{competition_id: @comp.id, gender_filter: "Female"}]) }
+          post :create, params: { event_id: @event.id, competition: valid_attributes.merge(competition_sources_attributes: [{ competition_id: @comp.id, gender_filter: "Female" }]) }
         end.to change(Competition, :count).by(1)
         expect(CompetitionSource.last.gender_filter).to eq("Female")
       end
@@ -69,7 +69,7 @@ describe CompetitionSetup::CompetitionsController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
-        post :create, params: { event_id: @event.id, competition: {name: "comp"} }
+        post :create, params: { event_id: @event.id, competition: { name: "comp" } }
 
         assert_select "h1", "New #{@event} Competition"
       end
@@ -98,7 +98,7 @@ describe CompetitionSetup::CompetitionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         expect do
-          put :update, params: { id: competition.to_param, competition: {name: "fake"} }
+          put :update, params: { id: competition.to_param, competition: { name: "fake" } }
         end.not_to change { competition.reload.name }
       end
 
@@ -106,7 +106,7 @@ describe CompetitionSetup::CompetitionsController do
         competition = FactoryGirl.create(:competition, event: @event)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
-        put :update, params: { id: competition.to_param, competition: {name: "comp"} }
+        put :update, params: { id: competition.to_param, competition: { name: "comp" } }
 
         assert_select "h1", "Editing #{@event} comp" # comp from update args
       end
