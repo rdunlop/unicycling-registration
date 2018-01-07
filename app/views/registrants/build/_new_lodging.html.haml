@@ -36,7 +36,7 @@
     = simple_form_for(LodgingForm.new, url: registrant_lodgings_path(@registrant)) do |f|
       .row
         .small-12.medium-4.columns
-          = f.input :lodging_room_option_id, collection: Lodging.ordered.all, as: :grouped_select, group_method: :lodging_room_options
+          = f.input :lodging_room_option_id, collection: Lodging.ordered.all, as: :grouped_select, group_method: :ordered_lodging_room_options
         .small-12.medium-4.columns
           = f.input :check_in_day, input_html: { class: "datepicker" }
         .small-12.medium-4.columns

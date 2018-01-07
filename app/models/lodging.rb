@@ -18,6 +18,10 @@ class Lodging < ApplicationRecord
   has_many :lodging_room_options, through: :lodging_room_types
   has_many :lodging_days, through: :lodging_types
 
+  def ordered_lodging_room_options
+    lodging_room_options.merge(LodgingRoomType.ordered).merge(LodgingRoomOption.ordered)
+  end
+
   accepts_nested_attributes_for :lodging_room_types, allow_destroy: true
   validates_uniqueness :lodging_room_types, attribute_name: :name
 

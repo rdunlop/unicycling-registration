@@ -28,6 +28,40 @@ describe LodgingForm do
         end
       end
 
+      context "when there is a minimum 2 days duration specified on the lodging room type" do
+        let(:lodging_room_type) { FactoryGirl.create(:lodging_room_type, minimum_duration_days: 2) }
+
+        context "when selecting only a single day" do
+          let(:params) do
+            {
+              registrant_id: competitor.id,
+              lodging_room_option_id: lodging_room_option.id,
+              check_in_day: lodging_day1.date_offered.strftime("%Y/%m/%d"),
+              check_out_day: (lodging_day1.date_offered + 1.day).strftime("%Y/%m/%d")
+            }
+          end
+
+          it "is not valid" do
+            expect(form).not_to be_valid
+          end
+        end
+
+        context "when selecting 2 days" do
+          let(:params) do
+            {
+              registrant_id: competitor.id,
+              lodging_room_option_id: lodging_room_option.id,
+              check_in_day: lodging_day1.date_offered.strftime("%Y/%m/%d"),
+              check_out_day: (lodging_day1.date_offered + 2.days).strftime("%Y/%m/%d")
+            }
+          end
+
+          it "is valid" do
+            expect(form).to be_valid
+          end
+        end
+      end
+
       describe "when selecting a single day" do
         let(:params) do
           {
