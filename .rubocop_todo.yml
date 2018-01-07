@@ -166,15 +166,6 @@ Style/IfInsideElse:
 Style/IfUnlessModifier:
   Enabled: false
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/MethodCallWithoutArgsParentheses:
-  Exclude:
-    - 'app/controllers/standard_skill_routines_controller.rb'
-    - 'app/models/manual_refund.rb'
-    - 'config/initializers/tenant_console.rb'
-    - 'spec/models/payment_spec.rb'
-
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: snake_case, camelCase
