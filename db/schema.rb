@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221025728) do
+ActiveRecord::Schema.define(version: 20180107041303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -654,6 +654,7 @@ ActiveRecord::Schema.define(version: 20171221025728) do
     t.integer "maximum_available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "minimum_duration_days", default: 0, null: false
     t.index ["lodging_id"], name: "index_lodging_room_types_on_lodging_id"
   end
 
