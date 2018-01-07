@@ -52,10 +52,10 @@
 
 require 'spec_helper'
 
-# so that I can test print_item_cost_currency
-include ApplicationHelper
-
 describe EventConfiguration do
+  # so that I can test print_item_cost_currency
+  include ApplicationHelper
+
   before(:each) do
     @ev = EventConfiguration.singleton
     @ev.assign_attributes(FactoryGirl.attributes_for(:event_configuration, standard_skill_closed_date: Date.new(2013, 5, 5)))

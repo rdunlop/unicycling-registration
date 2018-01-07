@@ -280,6 +280,12 @@ Style/StringLiterals:
 Style/SymbolProc:
   Enabled: false
 
+Rails/InverseOf:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: ExactNameMatch, AllowPredicates, AllowDSLWriters, IgnoreClassMethods, Whitelist.
