@@ -3,7 +3,7 @@ jobs:
   build:
     parallelism: 4
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.3
         environment:
           RAILS_ENV: test
           PGHOST: localhost
