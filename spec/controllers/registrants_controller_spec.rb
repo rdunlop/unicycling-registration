@@ -218,4 +218,16 @@ describe RegistrantsController do
       end
     end
   end
+
+  describe "PUT refresh_usa_status" do
+    before do
+      sign_in @user
+    end
+    let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
+
+    it "renders blank page" do
+      put :refresh_usa_status, params: { id: registrant.to_param }
+      expect(response).to be_success
+    end
+  end
 end
