@@ -11,3 +11,4 @@ if defined?(Rails::Console)
   end
   switch_tenant
 end
+# rubocop:enable Rails/Output

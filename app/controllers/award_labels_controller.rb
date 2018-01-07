@@ -253,11 +253,7 @@ class AwardLabelsController < ApplicationController
   end
 
   def set_string_if_present(value, default)
-    if value.present?
-      value
-    else
-      default
-    end
+    value.presence || default
   end
 
   def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place)

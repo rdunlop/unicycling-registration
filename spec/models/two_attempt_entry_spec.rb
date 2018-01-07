@@ -11,12 +11,10 @@ describe TwoAttemptEntry do
         user: user,
         bib_number: competitor1.bib_number,
         competition: competition,
-
         minutes_1: 1,
         seconds_1: 2,
         thousands_1: 3,
         status_1: "active",
-
         minutes_2: 4,
         seconds_2: 5,
         thousands_2: 6,
@@ -39,12 +37,10 @@ describe TwoAttemptEntry do
         user: user,
         bib_number: competitor1.bib_number,
         competition: competition,
-
         minutes_1: nil,
         seconds_1: nil,
         thousands_1: nil,
         status_1: "",
-
         minutes_2: nil,
         seconds_2: nil,
         thousands_2: nil,

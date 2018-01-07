@@ -101,7 +101,6 @@ gem 'capistrano3-unicorn', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
-  gem 'rubocop', '0.51', require: false
 end
 
 group :test do
@@ -119,6 +118,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'rubocop', require: false
   gem 'teaspoon-jasmine'
 end
 

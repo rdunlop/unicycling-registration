@@ -19,7 +19,7 @@
 
 class HeatLaneResultsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_heat_lane_result, except: [:create]
+  before_action :load_heat_lane_result
 
   before_action :authorize_competition_data
 

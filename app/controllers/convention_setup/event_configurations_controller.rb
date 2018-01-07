@@ -46,7 +46,7 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   before_action :authenticate_user!
   before_action :load_event_configuration
   before_action :authorize_cache, only: %i[cache clear_cache clear_counter_cache]
-  before_action :authorize_advanced_settings, only: [:advanced_settings]
+  before_action :authorize_advanced_settings, only: [:advanced_settings] # rubocop:disable Rails/LexicallyScopedActionFilter
 
   EVENT_CONFIG_PAGES = %i[registrant_types rules_waiver name_logo organization_membership important_dates registration_questions volunteers payment_settings advanced_settings go_live].freeze
 

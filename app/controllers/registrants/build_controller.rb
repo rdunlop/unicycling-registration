@@ -6,7 +6,7 @@ class Registrants::BuildController < ApplicationController
   before_action :set_steps, except: [:drop_event]
   before_action :setup_wizard, except: [:drop_event]
 
-  before_action :load_categories, only: %i[show update add_events]
+  before_action :load_categories, only: %i[show update add_events] # rubocop:disable Rails/LexicallyScopedActionFilter
   layout "wizard"
 
   ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses].freeze

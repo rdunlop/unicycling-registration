@@ -140,11 +140,7 @@ class User < ApplicationRecord
   end
 
   def to_s_with_safe_email
-    if name.present?
-      name
-    else
-      email.first(8) + "..."
-    end
+    name.presence || email.first(8) + "..."
   end
 
   def to_s_with_email

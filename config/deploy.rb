@@ -41,6 +41,7 @@ namespace :translation do
     end
   end
 end
+# rubocop:enable Rails/Output
 
 set :whenever_command,      ->{ %i[bundle exec whenever] }
 set :whenever_environment,  ->{ fetch :rails_env }

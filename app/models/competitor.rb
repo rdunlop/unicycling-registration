@@ -273,7 +273,7 @@ class Competitor < ApplicationRecord
   end
 
   def team_name
-    custom_name if custom_name.present?
+    custom_name.presence
   end
 
   def name

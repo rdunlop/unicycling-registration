@@ -18,7 +18,7 @@
 
 class DistanceAttemptsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_and_authorize_judge, only: %i[index create new competitor_details]
+  before_action :load_and_authorize_judge, only: %i[index create competitor_details]
   before_action :load_distance_attempt, only: [:destroy]
 
   before_action :load_competition, only: %i[index create]
