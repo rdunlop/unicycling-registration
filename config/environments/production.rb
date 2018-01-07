@@ -99,5 +99,5 @@ Rails.application.configure do
 
   # Support select2 IE8 (https://github.com/argerim/select2-rails#ie8-invalid-character)
   require 'uglifier'
-  config.assets.js_compressor = Uglifier.new(output: {ascii_only: true, quote_keys: true})
+  config.assets.js_compressor = Uglifier.new(output: { ascii_only: true, quote_keys: true })
 end

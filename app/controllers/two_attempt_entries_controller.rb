@@ -59,11 +59,11 @@ class TwoAttemptEntriesController < ApplicationController
       if @two_attempt_entry.update_attributes(two_attempt_entry_params)
         format.html { redirect_to user_competition_two_attempt_entries_path(@two_attempt_entry.user, @two_attempt_entry.competition, is_start_times: @two_attempt_entry.is_start_time), notice: 'Entry was successfully updated.' }
         format.json { head :no_content }
-        format.js { }
+        format.js {}
       else
         format.html { render action: "edit" }
         format.json { render json: @two_attempt_entry.errors, status: :unprocessable_entity }
-        format.js { }
+        format.js {}
       end
     end
   end
@@ -85,12 +85,12 @@ class TwoAttemptEntriesController < ApplicationController
     respond_to do |format|
       if @two_attempt_entry.save
         # format.html { redirect_to user_competition_two_attempt_entries_path(@user, @competition), notice: 'Import result was successfully created.' }
-        format.js { }
+        format.js {}
       else
         # index
         # @two_attempt_entries = TwoAttemptEntry.entries_for(@user, @competition, @is_start_time)
         # format.html { render action: "index" }
-        format.js { }
+        format.js {}
       end
     end
   end

@@ -27,11 +27,11 @@ class Score < ApplicationRecord
   SCORES_RANGE = (1..5).freeze
 
   def self.score_fields
-    SCORES_RANGE.map{|i| "val_#{i}".to_sym }
+    SCORES_RANGE.map{ |i| "val_#{i}".to_sym }
   end
 
   score_fields.each do |sym|
-    validates sym, presence: true, numericality: {greater_than_or_equal_to: 0}
+    validates sym, presence: true, numericality: { greater_than_or_equal_to: 0 }
   end
   before_validation :set_zero_for_non_applicable_scores
 

@@ -28,7 +28,7 @@ class Devise::CustomRegistrationsController < Devise::RegistrationsController
     user = User.find_for_authentication(email: params[:user][:email])
     if user.present?
       flash[:alert] = t(".flash_error")
-      redirect_to new_user_session_path(user: { email: params[:user][:email]})
+      redirect_to new_user_session_path(user: { email: params[:user][:email] })
     end
   end
 

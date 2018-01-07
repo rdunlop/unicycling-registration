@@ -17,7 +17,7 @@ class Category < ApplicationRecord
   acts_as_restful_list
   default_scope { order(:position) }
 
-  has_many :events, -> {order("events.position") }, dependent: :destroy, inverse_of: :category
+  has_many :events, -> { order("events.position") }, dependent: :destroy, inverse_of: :category
 
   validates :name, presence: true
 

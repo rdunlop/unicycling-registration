@@ -127,14 +127,14 @@ describe ConventionSetup::RegistrationCostsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
         expect do
-          post :create, params: { registration_cost: {onsite: true} }
+          post :create, params: { registration_cost: { onsite: true } }
         end.not_to change(RegistrationCost, :count)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
-        post :create, params: { registration_cost: {onsite: true} }
+        post :create, params: { registration_cost: { onsite: true } }
         assert_select "h1", "New Registration Cost Entry"
       end
     end
@@ -144,7 +144,7 @@ describe ConventionSetup::RegistrationCostsController do
     describe "with valid params" do
       it "updates the registration_cost" do
         expect do
-          put :update, params: { id: registration_cost.to_param, registration_cost: {name: "New Namee"} }
+          put :update, params: { id: registration_cost.to_param, registration_cost: { name: "New Namee" } }
         end.to change { registration_cost.reload.name }
       end
 
@@ -169,14 +169,14 @@ describe ConventionSetup::RegistrationCostsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: registration_cost.to_param, registration_cost: {name: 'fake'} }
+          put :update, params: { id: registration_cost.to_param, registration_cost: { name: 'fake' } }
         end.not_to change { registration_cost.reload.name }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RegistrationCost).to receive(:save).and_return(false)
-        put :update, params: { id: registration_cost.to_param, registration_cost: {onsite: true} }
+        put :update, params: { id: registration_cost.to_param, registration_cost: { onsite: true } }
         assert_select "h1", "Editing #{registration_cost} Registration Cost"
       end
     end

@@ -59,14 +59,14 @@ describe JudgesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
         expect do
-          post :create, params: { judge: {user_id: 1}, competition_id: @ec.id }
+          post :create, params: { judge: { user_id: 1 }, competition_id: @ec.id }
         end.not_to change(Judge, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Judge).to receive(:valid?).and_return(false)
-        post :create, params: { judge: {user_id: 1}, competition_id: @ec.id }
+        post :create, params: { judge: { user_id: 1 }, competition_id: @ec.id }
 
         assert_select "h1", "Manage #{@ec} Judges"
       end
@@ -80,7 +80,7 @@ describe JudgesController do
 
       expect(@ec.judges.count).to eq(0)
 
-      post :copy_judges, params: { competition_id: @ec.id, copy_judges: {competition_id: @new_competition.id} }
+      post :copy_judges, params: { competition_id: @ec.id, copy_judges: { competition_id: @new_competition.id } }
 
       expect(@ec.judges.count).to eq(1)
     end
@@ -90,7 +90,7 @@ describe JudgesController do
       judge_type = FactoryGirl.create(:judge_type, event_class: "High/Long")
       judge = FactoryGirl.create(:judge, judge_type: judge_type, competition: competition)
 
-      post :copy_judges, params: {competition_id: @ec.id, copy_judges: { competition_id: judge.competition.id} }
+      post :copy_judges, params: { competition_id: @ec.id, copy_judges: { competition_id: judge.competition.id } }
       expect(@ec.judges.count).to eq(0)
       expect(flash[:alert]).to eq("Judge type Not valid for competition")
     end
@@ -104,7 +104,7 @@ describe JudgesController do
 
       expect(@ec.judges.count).to eq(0)
 
-      post :copy_judges, params: { competition_id: @ec.id, copy_judges: {competition_id: @new_competition } }
+      post :copy_judges, params: { competition_id: @ec.id, copy_judges: { competition_id: @new_competition } }
       expect(response).to redirect_to(root_path)
     end
   end

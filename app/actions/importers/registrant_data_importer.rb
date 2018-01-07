@@ -119,7 +119,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
       @events = Event.all.includes(event_categories: [:translations], event_choices: [:translations])
     end
 
-    @events.find{|ev| ev.name == name }
+    @events.find{ |ev| ev.name == name }
   end
 
   # {
@@ -135,7 +135,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
     event = event_by_name(event_hash[:name])
     resu = registrant.registrant_event_sign_ups.find_or_initialize_by(event: event)
     resu.signed_up = event_hash[:signed_up]
-    resu.event_category = event.event_categories.find{|event_category| event_category.name == event_hash[:category] }
+    resu.event_category = event.event_categories.find{ |event_category| event_category.name == event_hash[:category] }
     resu.save!
   end
 

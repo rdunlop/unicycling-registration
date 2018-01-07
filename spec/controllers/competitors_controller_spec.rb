@@ -86,8 +86,8 @@ describe CompetitorsController do
         @reg3 = FactoryGirl.create(:competitor) # registrant
         expect do
           post :create, params: { competitor: valid_attributes.merge(
-            members_attributes:               { "0" => {registrant_id: @reg2.id},
-                                                "1" => {registrant_id: @reg3.id}}
+            members_attributes:               { "0" => { registrant_id: @reg2.id },
+                                                "1" => { registrant_id: @reg3.id } }
           ), competition_id: @ec.id }
         end.to change(Member, :count).by(2)
       end
@@ -103,9 +103,9 @@ describe CompetitorsController do
         expect do
           post :create, params: { competitor: valid_attributes.merge(
             members_attributes:
-              { "0" => {registrant_id: reg1.id},
-                "1" => {registrant_id: reg2.id},
-                "2" => {registrant_id: reg3.id}}, custom_name: 'Robin Rocks!'
+              { "0" => { registrant_id: reg1.id },
+                "1" => { registrant_id: reg2.id },
+                "2" => { registrant_id: reg3.id } }, custom_name: 'Robin Rocks!'
           ), competition_id: @ec.id }
         end.to change(Competitor, :count).by(1)
       end
@@ -164,7 +164,7 @@ describe CompetitorsController do
       it "re-renders the 'competitors#new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
-        post :create, params: { competitor: {custom_name: "name"}, competition_id: @ec.id }
+        post :create, params: { competitor: { custom_name: "name" }, competition_id: @ec.id }
         assert_select "h4", "Add New Competitor"
       end
     end
@@ -192,7 +192,7 @@ describe CompetitorsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
         expect do
-          put :update, params: { id: competitor.to_param, competitor: {custom_name: "name"} }
+          put :update, params: { id: competitor.to_param, competitor: { custom_name: "name" } }
         end.not_to change{ competitor.reload.custom_name }
       end
 
@@ -200,7 +200,7 @@ describe CompetitorsController do
         competitor = FactoryGirl.create(:event_competitor, competition: @ec)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
-        put :update, params: { id: competitor.to_param, competitor: {custom_name: "name"} }
+        put :update, params: { id: competitor.to_param, competitor: { custom_name: "name" } }
         assert_select "h1", "Editing competitor"
       end
     end

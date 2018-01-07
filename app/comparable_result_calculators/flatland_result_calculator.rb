@@ -67,10 +67,10 @@ class FlatlandResultCalculator
 
     # choose a 'score' object which is going to be removed
     #  because it's the 'max' and 'min' object(s)
-    max = scores.find {|s| s.total == totals.max }.val_4
-    min = scores.find {|s| s.total == totals.min }.val_4
+    max = scores.find { |s| s.total == totals.max }.val_4
+    min = scores.find { |s| s.total == totals.min }.val_4
 
-    last_trick_scores = scores.map {|s| s.val_4.to_i}
+    last_trick_scores = scores.map { |s| s.val_4.to_i }
     total = last_trick_scores.reduce(:+) || 0
 
     total - max - min

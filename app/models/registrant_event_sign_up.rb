@@ -24,10 +24,10 @@ class RegistrantEventSignUp < ApplicationRecord
   # The following should be re-enabled? first double-check to see which conventions have violating data.
   # also ensure that flow still works with this. (do we have any events which do not have event_categories?)
   # validates :event_category, :presence => true, :if  => "signed_up"
-  validates :signed_up, inclusion: {in: [true, false] } # because it's a boolean
+  validates :signed_up, inclusion: { in: [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up
   validate :category_in_age_range
-  validates :event_id, presence: true, uniqueness: {scope: [:registrant_id]}
+  validates :event_id, presence: true, uniqueness: { scope: [:registrant_id] }
 
   has_paper_trail meta: { registrant_id: :registrant_id }
 
@@ -40,7 +40,7 @@ class RegistrantEventSignUp < ApplicationRecord
   after_save :create_reg_item
 
   def self.signed_up
-    includes(:registrant).where(registrants: {deleted: false}).where(signed_up: true)
+    includes(:registrant).where(registrants: { deleted: false }).where(signed_up: true)
   end
 
   def event_category_name
@@ -106,7 +106,7 @@ class RegistrantEventSignUp < ApplicationRecord
   def drop_from_event_category(event_category_id)
     ec = EventCategory.find(event_category_id)
     ec.competitions_being_fed(registrant).each do |competition|
-      member = registrant.members.find{|mem| mem.competitor.competition == competition}
+      member = registrant.members.find{ |mem| mem.competitor.competition == competition }
       if member
         member.update_attributes(dropped_from_registration: true)
         competitor = member.competitor

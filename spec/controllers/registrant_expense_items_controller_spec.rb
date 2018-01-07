@@ -37,7 +37,7 @@ describe RegistrantExpenseItemsController do
     { free: false,
       details: nil,
       line_item_id: @exp.id,
-      line_item_type: @exp.class.name}
+      line_item_type: @exp.class.name }
   end
 
   describe "POST create" do

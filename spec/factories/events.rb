@@ -27,7 +27,7 @@
 FactoryGirl.define do
   factory :event do
     category # FactoryGirl
-    sequence(:name) {|n| "Teh event number #{n}" }
+    sequence(:name) { |n| "Teh event number #{n}" }
     visible true
 
     trait :marathon_best_time_format do

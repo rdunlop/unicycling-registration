@@ -30,7 +30,7 @@ describe OverallChampionResultCalculator do
 
   it "lists the first place details" do
     result_1 = combined_competition_result
-    expect(result_1).to eq([{bib_number: 10, results: {"TT" => { entry_place: 1, entry_points: 50 } }, total_points: 50, display_points: 50 }])
+    expect(result_1).to eq([{ bib_number: 10, results: { "TT" => { entry_place: 1, entry_points: 50 } }, total_points: 50, display_points: 50 }])
   end
 
   describe "with a tie-breaker" do
@@ -146,7 +146,7 @@ describe OverallChampionResultCalculator do
   it "adjusts points by number of firsts" do
     score = 10
     bib_numbers = [3, 2]
-    firsts_counts = { 3 => 1, 2 => 0}
+    firsts_counts = { 3 => 1, 2 => 0 }
 
     expected_hash = { 10 => [3], 9.9 => [2] }
     expect(result.adjust_ties_by_firsts(score, bib_numbers, firsts_counts)).to eq(expected_hash)

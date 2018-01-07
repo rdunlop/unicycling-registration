@@ -23,7 +23,7 @@ describe StandardSkillRoutineEntriesController do
 
     @valid_attributes = { standard_skill_routine_id: @routine.id,
                           standard_skill_entry_id: new_skill.id,
-                          position: @initial_entry.position + 1}
+                          position: @initial_entry.position + 1 }
   end
 
   describe "POST create" do
@@ -79,14 +79,14 @@ describe StandardSkillRoutineEntriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillRoutine).to receive(:save).and_return(false)
         expect do
-          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
+          post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: { position: 1 } }
         end.not_to change(StandardSkillRoutineEntry, :count)
       end
 
       it "re-renders the 'show' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(StandardSkillRoutine).to receive(:save).and_return(false)
-        post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: {position: 1} }
+        post :create, params: { standard_skill_routine_id: @routine.id, standard_skill_routine_entry: { position: 1 } }
         assert_select "h1", "#{@registrant} - Standard Skill Routine"
       end
     end

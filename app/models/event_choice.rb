@@ -34,8 +34,8 @@ class EventChoice < ApplicationRecord
     ["boolean", "text"] # , "multiple", "best_time"]
   end
 
-  validates :cell_type, inclusion: {in: cell_types }
-  validates :optional, inclusion: {in: [true, false] } # because it's a boolean
+  validates :cell_type, inclusion: { in: cell_types }
+  validates :optional, inclusion: { in: [true, false] } # because it's a boolean
   acts_as_restful_list scope: :event
 
   def choicename
@@ -47,7 +47,7 @@ class EventChoice < ApplicationRecord
   end
 
   def unique_values
-    registrant_choices.map{|rc| rc.value}.uniq
+    registrant_choices.map{ |rc| rc.value }.uniq
   end
 
   def to_s

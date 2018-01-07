@@ -16,7 +16,7 @@ class Exporters::EventsExporter
   end
 
   def event_titles
-    event_choices.map{|ec| ec.to_s}
+    event_choices.map{ |ec| ec.to_s }
   end
 
   def event_categories
@@ -24,7 +24,7 @@ class Exporters::EventsExporter
   end
 
   def event_categories_titles
-    event_categories.map{|ec| ec.to_s}
+    event_categories.map{ |ec| ec.to_s }
   end
 
   def rows

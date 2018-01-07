@@ -1,4 +1,4 @@
-set :eye_env, -> { {rails_env: fetch(:rails_env)} }
+set :eye_env, -> { { rails_env: fetch(:rails_env) } }
 set :application, 'unicycling-registration'
 set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
 set :stages, %w[prod]

@@ -6,7 +6,7 @@ describe Exporters::PaymentDetailsExporter do
 
   context "with a paid payment_detail" do
     let(:payment) { FactoryGirl.create(:payment, :completed) }
-    let!(:pd) { FactoryGirl.create(:payment_detail, line_item: expense_item, payment: payment)}
+    let!(:pd) { FactoryGirl.create(:payment_detail, line_item: expense_item, payment: payment) }
 
     it "returns some data" do
       data = exporter.rows

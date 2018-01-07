@@ -229,7 +229,7 @@ class ExpenseItem < ApplicationRecord
   end
 
   def free_items_with_reg_paid
-    registrant_expense_items.includes(:registrant).joins(:registrant).where(registrants: {deleted: false}).free.select{ |rei| rei.registrant.reg_paid? }
+    registrant_expense_items.includes(:registrant).joins(:registrant).where(registrants: { deleted: false }).free.select{ |rei| rei.registrant.reg_paid? }
   end
 
   private

@@ -39,7 +39,7 @@ class ResultDisplayer::TimeResult
   end
 
   def headings
-    form_inputs.map{|field_name, _| TimeResult.human_attribute_name(field_name) }
+    form_inputs.map{ |field_name, _| TimeResult.human_attribute_name(field_name) }
   end
 
   # get the value of each field from the passed time_result/import_result object
@@ -50,30 +50,30 @@ class ResultDisplayer::TimeResult
   end
 
   def form_label_symbols
-    form_inputs.map{|field_name, _| field_name }
+    form_inputs.map{ |field_name, _| field_name }
   end
 
   def form_inputs
     results = []
     if @competition.data_entry_format.hours?
-      results << [:facade_hours, {min: 0}]
-      results << [:facade_minutes, {min: 0}]
+      results << [:facade_hours, { min: 0 }]
+      results << [:facade_minutes, { min: 0 }]
     else
-      results << [:minutes, {min: 0}]
+      results << [:minutes, { min: 0 }]
     end
-    results << [:seconds, {min: 0}]
+    results << [:seconds, { min: 0 }]
     if @competition.data_entry_format.hundreds?
-      results << [:facade_hundreds, {min: 0}]
+      results << [:facade_hundreds, { min: 0 }]
     end
     if @competition.data_entry_format.thousands?
-      results << [:thousands, {min: 0}]
+      results << [:thousands, { min: 0 }]
     end
 
     if @competition.has_penalty?
       results << [:number_of_penalties, {}]
     end
     if @competition.has_num_laps?
-      results << [:number_of_laps, {min: 1}]
+      results << [:number_of_laps, { min: 1 }]
     end
 
     results

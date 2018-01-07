@@ -27,10 +27,10 @@ class Event < ApplicationRecord
   resourcify
 
   with_options dependent: :destroy, inverse_of: :event do
-    has_many :event_choices, -> {order "event_choices.position"}
-    has_many :event_categories, -> { order "event_categories.position"}
+    has_many :event_choices, -> { order "event_choices.position" }
+    has_many :event_categories, -> { order "event_categories.position" }
     has_many :registrant_event_sign_ups
-    has_many :competitions, -> {order "competitions.name"}
+    has_many :competitions, -> { order "competitions.name" }
   end
 
   has_many :competitors, through: :competitions
@@ -102,7 +102,7 @@ class Event < ApplicationRecord
   end
 
   def competitor_registrants
-    competitors.map {|comp| comp.members.map{|mem| mem.registrant}}
+    competitors.map { |comp| comp.members.map{ |mem| mem.registrant } }
   end
 
   def num_choices

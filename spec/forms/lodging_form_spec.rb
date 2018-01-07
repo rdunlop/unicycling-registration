@@ -221,7 +221,7 @@ describe LodgingForm do
         let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
         let(:package) { FactoryGirl.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
         let!(:package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
-        let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, line_item: package)}
+        let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, line_item: package) }
 
         it "returns a single element array" do
           competitor.reload

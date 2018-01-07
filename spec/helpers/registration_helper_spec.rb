@@ -77,7 +77,7 @@ describe RegistrationHelper do
     context "with a deleted registrant in a previous convention" do
       before do
         @old_registrant = create_registrant_in_previous_convention(
-          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith", deleted: true}
+          subdomain: "other", user_attributes: { first_name: "Bob", last_name: "Smith", deleted: true }
         )
       end
 

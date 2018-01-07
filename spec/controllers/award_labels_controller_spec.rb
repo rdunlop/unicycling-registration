@@ -35,7 +35,7 @@ describe AwardLabelsController do
   # update the return value of this method accordingly.
   def valid_attributes
     { "registrant_id" => @registrant.id,
-      "place" => 1}
+      "place" => 1 }
   end
 
   describe "GET index" do

@@ -60,7 +60,7 @@ class DistanceAttemptsController < ApplicationController
           flash[:notice] = 'Distance Attempt was successfully created.'
           redirect_back(fallback_location: judge_distance_attempts_path(@judge))
         end
-        format.js { }
+        format.js {}
       else
         format.html do
           @distance_attempts = @judge.distance_attempts

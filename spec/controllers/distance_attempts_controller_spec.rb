@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe DistanceAttemptsController do
   let(:competition) { FactoryGirl.create(:distance_competition) }
-  let(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long")}
+  let(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long") }
   let(:comp) { FactoryGirl.create(:event_competitor, competition: competition) }
   before do
     @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
@@ -59,7 +59,7 @@ describe DistanceAttemptsController do
     end
     describe "with invalid params" do
       it "renders the 'new' form" do
-        post :create, params: { distance_attempt: {fault: false}, judge_id: @judge.id }
+        post :create, params: { distance_attempt: { fault: false }, judge_id: @judge.id }
         assert_select "h1", "#{competition} - Distance Attempt"
       end
     end

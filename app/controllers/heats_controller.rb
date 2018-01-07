@@ -52,7 +52,7 @@ class HeatsController < ApplicationController
     @lane_assignments = LaneAssignment.where(id: params[:age_group_entry]).order(:heat, :lane)
 
     # holds the list of all heats/lanes
-    previous_heat_lanes = @lane_assignments.map{|la| [la.heat, la.lane] }
+    previous_heat_lanes = @lane_assignments.map{ |la| [la.heat, la.lane] }
 
     # enable a mode which assigns new lane numbers (but not heats)
     if params[:move_lane]

@@ -38,7 +38,7 @@
 
 FactoryGirl.define do
   factory :registrant do
-    sequence(:first_name) {|n| "FirstMyString #{n}" }
+    sequence(:first_name) { |n| "FirstMyString #{n}" }
     middle_initial "MMyString"
     last_name "LastMyString"
     birthday { 18.years.ago }

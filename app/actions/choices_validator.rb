@@ -13,8 +13,8 @@ class ChoicesValidator
     # loop
     sign_up_events = @registrant.registrant_event_sign_ups
                                 .includes(event: [:translations])
-                                .map{|resu| resu.event}
-    choice_events = registrant_choices.includes(event_choice: [:event]).map{|rc| rc.event_choice}.map{|ec| ec.event}
+                                .map{ |resu| resu.event }
+    choice_events = registrant_choices.includes(event_choice: [:event]).map{ |rc| rc.event_choice }.map{ |ec| ec.event }
 
     events_to_validate = sign_up_events + choice_events
 
@@ -39,7 +39,7 @@ class ChoicesValidator
   end
 
   def reg_sign_up_record_for(event)
-    @registrant.registrant_event_sign_ups.find{|resu| resu.event_id == event.id}
+    @registrant.registrant_event_sign_ups.find{ |resu| resu.event_id == event.id }
   end
 
   def signed_up_for(event)
@@ -122,7 +122,7 @@ class ChoicesValidator
   end
 
   def get_choice_for_event_choice(event_choice)
-    registrant_choices.find{|rc| rc.event_choice_id == event_choice.id}
+    registrant_choices.find{ |rc| rc.event_choice_id == event_choice.id }
   end
 
   def event_choice_chosen?(event_choice)

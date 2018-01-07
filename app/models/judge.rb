@@ -26,18 +26,18 @@ class Judge < ApplicationRecord
   before_destroy :check_for_scores # must occur before the dependent->destroy
 
   with_options dependent: :destroy do
-    has_many :scores, -> {order("competitors.position").includes(:competitor) }
-    has_many :boundary_scores, -> {order("competitors.position").includes(:competitor) }
+    has_many :scores, -> { order("competitors.position").includes(:competitor) }
+    has_many :boundary_scores, -> { order("competitors.position").includes(:competitor) }
     has_many :standard_skill_scores, -> { includes(standard_skill_score_entries: [:standard_skill_routine_entry]) }
-    has_many :distance_attempts, -> {order "id DESC"}
+    has_many :distance_attempts, -> { order "id DESC" }
     has_many :tie_break_adjustments
     has_many :standard_skill_scores
   end
 
-  has_many :competitors, -> {order "position"}, through: :competition
+  has_many :competitors, -> { order "position" }, through: :competition
 
   validates :competition_id, presence: true
-  validates :judge_type_id, presence: true, uniqueness: {scope: %i[competition_id user_id] }
+  validates :judge_type_id, presence: true, uniqueness: { scope: %i[competition_id user_id] }
   validates :user_id, presence: true
   validates :status, inclusion: { in: ["active", "removed"] }
   validate :judge_type_is_valid_for_competition

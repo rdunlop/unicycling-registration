@@ -28,7 +28,7 @@ describe Admin::EventSongsController do
 
   describe "GET show" do
     let(:event) { FactoryGirl.create(:event) }
-    let!(:song) { FactoryGirl.create(:song, event: event, description: "Description")}
+    let!(:song) { FactoryGirl.create(:song, event: event, description: "Description") }
 
     it "loads the page" do
       get :show, params: { id: event.to_param }

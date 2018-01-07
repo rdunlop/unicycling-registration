@@ -7,8 +7,8 @@ class AddTranslationsToExpenseGroupExpenseItems < ActiveRecord::Migration
   end
 
   def up
-    ExpenseGroup.create_translation_table!({group_name: :string}, {migrate_data: true})
-    ExpenseItem.create_translation_table!({name: :string, description: :string, details_label: :string}, {migrate_data: true})
+    ExpenseGroup.create_translation_table!({ group_name: :string }, { migrate_data: true })
+    ExpenseItem.create_translation_table!({ name: :string, description: :string, details_label: :string }, { migrate_data: true })
   end
 
   def down

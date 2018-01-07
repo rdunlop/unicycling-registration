@@ -4,7 +4,7 @@ class TranslateRegistrationPeriodName < ActiveRecord::Migration
   end
 
   def up
-    RegistrationPeriod.create_translation_table!({name: :string}, {migrate_data: true})
+    RegistrationPeriod.create_translation_table!({ name: :string }, { migrate_data: true })
   end
 
   def down
