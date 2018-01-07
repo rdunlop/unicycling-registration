@@ -101,7 +101,7 @@ class JudgesController < ApplicationController
     @all_data_entry_volunteers = User.this_tenant.data_entry_volunteer
 
     @judges = @competition.judges
-    @competitions_with_judges = Competition.event_order.select{ |comp| comp.uses_judges } - [@competition]
+    @competitions_with_judges = Competition.event_order.select { |comp| comp.uses_judges } - [@competition]
     @judge ||= @competition.judges.build
   end
 

@@ -24,7 +24,7 @@ class OrderedResultCalculator
   end
 
   def update_age_group_entry_results(entry)
-    age_group_competitors = competitors.select{ |c| c.age_group_entry == entry }
+    age_group_competitors = competitors.select { |c| c.age_group_entry == entry }
     update_age_group_entry_results_with(age_group_competitors)
   end
 

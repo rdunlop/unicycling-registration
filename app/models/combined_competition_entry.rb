@@ -43,7 +43,7 @@ class CombinedCompetitionEntry < ApplicationRecord
 
   def competitors(gender)
     @competitors ||= {}
-    @competitors[gender] ||= competition.results.overall.includes(competitor: %i[age_group_result overall_result competition]).where("place > 0").map(&:competitor).select{ |comp| comp.gender == gender }
+    @competitors[gender] ||= competition.results.overall.includes(competitor: %i[age_group_result overall_result competition]).where("place > 0").map(&:competitor).select { |comp| comp.gender == gender }
   end
 
   def male_competitors
@@ -69,7 +69,7 @@ class CombinedCompetitionEntry < ApplicationRecord
 
   def determine_best_time_in_thousands(gender)
     first_place_results = competition.results.includes(:competitor).overall.where(place: 1)
-    gender_comp = first_place_results.map(&:competitor).find{ |comp| comp.gender == gender }
+    gender_comp = first_place_results.map(&:competitor).find { |comp| comp.gender == gender }
     gender_comp.try(:comparable_score)
   end
 

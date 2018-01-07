@@ -47,7 +47,7 @@ class EventChoice < ApplicationRecord
   end
 
   def unique_values
-    registrant_choices.map{ |rc| rc.value }.uniq
+    registrant_choices.map { |rc| rc.value }.uniq
   end
 
   def to_s

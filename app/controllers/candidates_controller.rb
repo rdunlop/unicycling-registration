@@ -19,9 +19,9 @@ class CandidatesController < ApplicationController
     if params[:sort]
       case params[:sort]
       when "result"
-        @competitors = @competitors.sort_by{ |a| a.result }
+        @competitors = @competitors.sort_by { |a| a.result }
       when "gender"
-        @competitors = @competitors.sort_by{ |a| [a.gender, a.overall_place] }
+        @competitors = @competitors.sort_by { |a| [a.gender, a.overall_place] }
       end
     end
 

@@ -176,7 +176,7 @@ describe CompetitorsController do
         competitor = FactoryGirl.create(:event_competitor, competition: @ec)
         expect do
           put :update, params: { id: competitor.to_param, competitor: valid_attributes.merge(status: "withdrawn") }
-        end.to change{ competitor.reload.status }
+        end.to change { competitor.reload.status }
       end
 
       it "redirects to the competition" do
@@ -193,7 +193,7 @@ describe CompetitorsController do
         allow_any_instance_of(Competitor).to receive(:valid?).and_return(false)
         expect do
           put :update, params: { id: competitor.to_param, competitor: { custom_name: "name" } }
-        end.not_to change{ competitor.reload.custom_name }
+        end.not_to change { competitor.reload.custom_name }
       end
 
       it "re-renders the 'events#edit' template" do

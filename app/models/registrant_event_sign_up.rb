@@ -106,7 +106,7 @@ class RegistrantEventSignUp < ApplicationRecord
   def drop_from_event_category(event_category_id)
     ec = EventCategory.find(event_category_id)
     ec.competitions_being_fed(registrant).each do |competition|
-      member = registrant.members.find{ |mem| mem.competitor.competition == competition }
+      member = registrant.members.find { |mem| mem.competitor.competition == competition }
       if member
         member.update_attributes(dropped_from_registration: true)
         competitor = member.competitor

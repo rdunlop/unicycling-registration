@@ -39,7 +39,7 @@ class ResultDisplayer::TimeResult
   end
 
   def headings
-    form_inputs.map{ |field_name, _| TimeResult.human_attribute_name(field_name) }
+    form_inputs.map { |field_name, _| TimeResult.human_attribute_name(field_name) }
   end
 
   # get the value of each field from the passed time_result/import_result object
@@ -50,7 +50,7 @@ class ResultDisplayer::TimeResult
   end
 
   def form_label_symbols
-    form_inputs.map{ |field_name, _| field_name }
+    form_inputs.map { |field_name, _| field_name }
   end
 
   def form_inputs

@@ -16,7 +16,7 @@ describe HeatAssignmentCreator do
 
   describe "with no age groups" do
     it "doesn't create any lane assignments" do
-      expect{ perform }.not_to change(LaneAssignment, :count)
+      expect { perform }.not_to change(LaneAssignment, :count)
     end
   end
 
@@ -27,7 +27,7 @@ describe HeatAssignmentCreator do
     end
 
     it "assigns the competitors by their returned order" do
-      expect{ perform }.to change(LaneAssignment, :count).by(3)
+      expect { perform }.to change(LaneAssignment, :count).by(3)
       competitor1_lane_assignment = LaneAssignment.find_by(competitor: competitor1)
       expect(competitor1_lane_assignment.heat).to eq(1)
       expect(competitor1_lane_assignment.lane).to eq(2)

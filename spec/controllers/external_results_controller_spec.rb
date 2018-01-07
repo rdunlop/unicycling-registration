@@ -96,7 +96,7 @@ describe ExternalResultsController do
         external_result = FactoryGirl.create(:external_result)
         expect do
           put :update, params: { id: external_result.to_param, external_result: valid_attributes }
-        end.to change{ external_result.reload.updated_at }
+        end.to change { external_result.reload.updated_at }
       end
 
       it "redirects to the external_result index" do

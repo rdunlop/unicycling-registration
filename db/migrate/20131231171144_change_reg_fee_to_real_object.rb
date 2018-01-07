@@ -24,7 +24,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     end
 
     def paid_expense_items
-      paid_details.map{ |pd| pd.expense_item }
+      paid_details.map { |pd| pd.expense_item }
     end
 
     def paid_details
@@ -53,7 +53,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration
     end
 
     def self.all_registration_expense_items
-      RegistrationPeriod.all.collect{ |rp| rp.competitor_expense_item } + RegistrationPeriod.all.collect{ |rp| rp.noncompetitor_expense_item }
+      RegistrationPeriod.all.collect { |rp| rp.competitor_expense_item } + RegistrationPeriod.all.collect { |rp| rp.noncompetitor_expense_item }
     end
 
     def self.relevant_period(date)

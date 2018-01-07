@@ -245,13 +245,6 @@ Style/SingleLineBlockParams:
     - 'app/models/score.rb'
     - 'app/models/user.rb'
 
-# Offense count: 87
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: space, no_space
-Layout/SpaceBeforeBlockBraces:
-  Enabled: false
-
 # Offense count: 6597
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.

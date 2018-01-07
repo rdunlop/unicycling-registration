@@ -27,7 +27,7 @@ class Score < ApplicationRecord
   SCORES_RANGE = (1..5).freeze
 
   def self.score_fields
-    SCORES_RANGE.map{ |i| "val_#{i}".to_sym }
+    SCORES_RANGE.map { |i| "val_#{i}".to_sym }
   end
 
   score_fields.each do |sym|

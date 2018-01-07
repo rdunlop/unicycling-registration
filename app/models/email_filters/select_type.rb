@@ -11,7 +11,7 @@ class EmailFilters::SelectType
   end
 
   def allowed_arguments(user)
-    possible_arguments.select{ |el| Pundit.policy(user, el).contact_registrants? }
+    possible_arguments.select { |el| Pundit.policy(user, el).contact_registrants? }
   end
 
   def usable_by?(user)

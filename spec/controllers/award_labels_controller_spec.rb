@@ -137,7 +137,7 @@ describe AwardLabelsController do
       it "updates the requested award_label" do
         expect do
           put :update, params: { id: award_label.to_param, award_label: valid_attributes.merge("place" => 2) }
-        end.to change{ award_label.reload.place }
+        end.to change { award_label.reload.place }
       end
 
       it "redirects to the award_label" do
@@ -152,7 +152,7 @@ describe AwardLabelsController do
         allow_any_instance_of(AwardLabel).to receive(:save).and_return(false)
         expect do
           put :update, params: { id: award_label.to_param, award_label: { "bib_number" => "invalid value" } }
-        end.not_to change{ award_label.reload.bib_number }
+        end.not_to change { award_label.reload.bib_number }
       end
 
       it "re-renders the 'edit' template" do

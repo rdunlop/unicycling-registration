@@ -64,10 +64,10 @@ class ExpenseItemFreeChecker
 
   # return true/false to show whether an expense_group has been chosen by this registrant
   def chosen_free_item_from_expense_group?(expense_group)
-    chosen_free_item?{ |expense_item| expense_item.expense_group == expense_group }
+    chosen_free_item? { |expense_item| expense_item.expense_group == expense_group }
   end
 
   def chosen_free_item_of_expense_item?(target_expense_item)
-    chosen_free_item?{ |expense_item| expense_item == target_expense_item }
+    chosen_free_item? { |expense_item| expense_item == target_expense_item }
   end
 end

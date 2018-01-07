@@ -102,7 +102,7 @@ class Event < ApplicationRecord
   end
 
   def competitor_registrants
-    competitors.map { |comp| comp.members.map{ |mem| mem.registrant } }
+    competitors.map { |comp| comp.members.map { |mem| mem.registrant } }
   end
 
   def num_choices

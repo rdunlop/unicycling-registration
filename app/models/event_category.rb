@@ -40,7 +40,7 @@ class EventCategory < ApplicationRecord
   end
 
   def competitions_being_fed(registrant)
-    competition_sources.select{ |cs| cs.registrant_passes_filters(registrant) }.map(&:target_competition)
+    competition_sources.select { |cs| cs.registrant_passes_filters(registrant) }.map(&:target_competition)
   end
 
   def signed_up_registrants

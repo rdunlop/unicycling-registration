@@ -11,7 +11,7 @@ class CompetitorOrderer
   end
 
   def sort
-    @sorted ||= competitors.sort{ |a, b| compare_competitors(a, b) }
+    @sorted ||= competitors.sort { |a, b| compare_competitors(a, b) }
   end
 
   private

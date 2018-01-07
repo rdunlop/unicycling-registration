@@ -65,10 +65,10 @@ class CompetitionSource < ApplicationRecord
     end
 
     if competition.present?
-      registrants = signed_up_competitors.map{ |comp| comp.registrants }.flatten
+      registrants = signed_up_competitors.map { |comp| comp.registrants }.flatten
     end
 
-    registrants.select{ |reg| registrant_passes_filters(reg) }
+    registrants.select { |reg| registrant_passes_filters(reg) }
   end
 
   def signed_up_competitors

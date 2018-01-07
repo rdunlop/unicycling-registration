@@ -117,7 +117,7 @@ class Registrants::BuildController < ApplicationController
     event = Event.find(params[:event_id])
     @registrant.transaction do
       sign_up = @registrant.registrant_event_sign_ups.find_by(event: event)
-      choices = @registrant.registrant_choices.includes(event_choice: :event).select{ |ec| ec.event_choice.event == event }
+      choices = @registrant.registrant_choices.includes(event_choice: :event).select { |ec| ec.event_choice.event == event }
       choices.map(&:destroy)
       sign_up.update_attribute(:signed_up, false)
     end

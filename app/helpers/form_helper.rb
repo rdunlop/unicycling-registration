@@ -11,7 +11,7 @@ module FormHelper
   end
 
   def registrant_bib_number_select_box(form, competition, options = {})
-    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, { include_blank: true }, { autofocus: true, class: "chosen-select #{options[:class]}" }
+    form.select :bib_number, eligible_registrants(competition).map { |reg| [reg.with_id_to_s, reg.bib_number] }, { include_blank: true }, { autofocus: true, class: "chosen-select #{options[:class]}" }
   end
 
   def eligible_registrants(competition)

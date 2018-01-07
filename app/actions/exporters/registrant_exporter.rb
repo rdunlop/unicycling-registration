@@ -55,11 +55,11 @@ class Exporters::RegistrantExporter
     result = []
 
     events.map do |event|
-      resu = registrant.registrant_event_sign_ups.find{ |resup| resup.event_id == event.id }
+      resu = registrant.registrant_event_sign_ups.find { |resup| resup.event_id == event.id }
       if resu&.signed_up?
         result << "Y"
 
-        rbt = registrant.registrant_best_times.find{ |rbtime| rbtime.event_id == event.id }
+        rbt = registrant.registrant_best_times.find { |rbtime| rbtime.event_id == event.id }
         if rbt
           result << rbt.formatted_value
         else
@@ -68,7 +68,7 @@ class Exporters::RegistrantExporter
 
         result << resu.event_category.name
         event.event_choices.each do |event_choice|
-          rc = registrant.registrant_choices.find{ |rchoice| rchoice.event_choice_id == event_choice.id }
+          rc = registrant.registrant_choices.find { |rchoice| rchoice.event_choice_id == event_choice.id }
           if rc
             result << rc.value
           else

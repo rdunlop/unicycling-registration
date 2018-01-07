@@ -124,8 +124,8 @@ class Competition < ApplicationRecord
   validate :awarded_only_when_published
   validate :award_label_title_checks
   validate :no_competition_sources_when_overall_calculation
-  validates :combined_competition, presence: true, if: proc{ |f| f.scoring_class == "Overall Champion" }
-  validates :combined_competition, absence: true, unless: proc{ |f| f.scoring_class == "Overall Champion" }
+  validates :combined_competition, presence: true, if: proc { |f| f.scoring_class == "Overall Champion" }
+  validates :combined_competition, absence: true, unless: proc { |f| f.scoring_class == "Overall Champion" }
 
   TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "hours_minutes_seconds"].freeze
   validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }, allow_nil: true
@@ -250,7 +250,7 @@ class Competition < ApplicationRecord
 
   def num_results
     Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_results") do
-      competitors.to_a.count{ |comp| comp.has_result? }
+      competitors.to_a.count { |comp| comp.has_result? }
     end
   end
 
@@ -307,7 +307,7 @@ class Competition < ApplicationRecord
   end
 
   def sorted_competitors
-    competitors.active.sort{ |a, b| a.bib_number.to_i <=> b.bib_number.to_i }
+    competitors.active.sort { |a, b| a.bib_number.to_i <=> b.bib_number.to_i }
   end
 
   def other_eligible_registrants
@@ -352,7 +352,7 @@ class Competition < ApplicationRecord
   # returns all of the results together, ignoring age-group data
   def results_list
     res = competitors.active.to_a
-    res.sort!{ |a, b| a.sorting_overall_place <=> b.sorting_overall_place }
+    res.sort! { |a, b| a.sorting_overall_place <=> b.sorting_overall_place }
   end
 
   def competitors_with_results
@@ -360,12 +360,12 @@ class Competition < ApplicationRecord
   end
 
   def expert_results_list(gender)
-    competitors_with_results.select{ |comp| comp.gender == gender }.sort_by(&:sorting_overall_place)
+    competitors_with_results.select { |comp| comp.gender == gender }.sort_by(&:sorting_overall_place)
   end
 
   def results_list_for(ag_entry)
     results = competitors.active.where(age_group_entry: ag_entry).select(&:has_result?)
-    results.sort!{ |a, b| a.sorting_place <=> b.sorting_place }
+    results.sort! { |a, b| a.sorting_place <=> b.sorting_place }
   end
 
   def get_judge(user)
@@ -472,7 +472,7 @@ class Competition < ApplicationRecord
   def best_distance_attempts
     best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt).compact
 
-    best_attempts_for_each_competitor.sort{ |a, b| b.distance <=> a.distance }
+    best_attempts_for_each_competitor.sort { |a, b| b.distance <=> a.distance }
   end
 
   private

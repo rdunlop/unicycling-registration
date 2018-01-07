@@ -120,9 +120,9 @@ describe OverallChampionResultCalculator do
     it "lists the 3 places" do
       result_1 = combined_competition_result
       expect(result_1.length).to eq(3)
-      res_10 = result_1.detect{ |res| res[:bib_number] == 10 }
-      res_20 = result_1.detect{ |res| res[:bib_number] == 20 }
-      res_30 = result_1.detect{ |res| res[:bib_number] == 30 }
+      res_10 = result_1.detect { |res| res[:bib_number] == 10 }
+      res_20 = result_1.detect { |res| res[:bib_number] == 20 }
+      res_30 = result_1.detect { |res| res[:bib_number] == 30 }
 
       expect(res_10[:display_points]).to eq(75.0)
       expect(res_10[:total_points]).to eq(75.0)

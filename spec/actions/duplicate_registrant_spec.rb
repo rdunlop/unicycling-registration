@@ -7,7 +7,7 @@ describe DuplicateRegistrant do
     let(:registrant) { FactoryGirl.create(:competitor) }
 
     it "creates a new noncompetitor" do
-      expect{ action.to_noncompetitor }.to change(Registrant.noncompetitor, :count)
+      expect { action.to_noncompetitor }.to change(Registrant.noncompetitor, :count)
     end
   end
 
@@ -15,7 +15,7 @@ describe DuplicateRegistrant do
     let(:registrant) { FactoryGirl.create(:noncompetitor) }
 
     it "creates a new noncompetitor" do
-      expect{ action.to_competitor }.to change(Registrant.competitor, :count)
+      expect { action.to_competitor }.to change(Registrant.competitor, :count)
     end
   end
 
@@ -24,7 +24,7 @@ describe DuplicateRegistrant do
       let(:registrant) { FactoryGirl.create(:noncompetitor, contact_detail: nil) }
 
       it "creates a new noncompetitor" do
-        expect{ action.to_competitor }.to change(Registrant.competitor, :count)
+        expect { action.to_competitor }.to change(Registrant.competitor, :count)
       end
     end
   end

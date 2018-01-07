@@ -83,7 +83,7 @@ class EventConfiguration < ApplicationRecord
   ].freeze
 
   validates :currency_code, inclusion: { in: currency_codes }, allow_nil: true
-  validates :style_name, inclusion: { in: style_names.map{ |y| y[1] } }
+  validates :style_name, inclusion: { in: style_names.map { |y| y[1] } }
   validates :waiver, inclusion: { in: ["none", "online", "print"] }
   validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
   validates :representation_type, inclusion: { in: RepresentationType::TYPES }
@@ -318,7 +318,7 @@ class EventConfiguration < ApplicationRecord
 
   # convert from passed in array ["", "en", "fr"] to "en,fr"
   def enabled_locales=(values)
-    languages = values.reject{ |x| x.blank? }
+    languages = values.reject { |x| x.blank? }
     # add default, since it's the configured fallback it must exist
     languages = (languages << I18n.default_locale.to_s).uniq
     self[:enabled_locales] = languages.join(",")

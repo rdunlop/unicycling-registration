@@ -32,6 +32,6 @@ class RequiredExpenseItemCreator
     egs = @registrant.registrant_type_model.required_expense_groups
 
     egs.select { |expense_group| expense_group.expense_items.count == 1 }
-       .map{ |expense_group| expense_group.expense_items.first }
+       .map { |expense_group| expense_group.expense_items.first }
   end
 end

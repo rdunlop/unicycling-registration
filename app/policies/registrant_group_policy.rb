@@ -22,6 +22,6 @@ class RegistrantGroupPolicy < ApplicationPolicy
   end
 
   def group_leader?(group)
-    group.registrant_group_leaders.any?{ |grl| grl.user == user }
+    group.registrant_group_leaders.any? { |grl| grl.user == user }
   end
 end

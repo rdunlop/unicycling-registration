@@ -20,7 +20,7 @@ class StandardDeviation
   end
 
   def sum
-    array.inject(0){ |accum, i| accum + i }
+    array.inject(0) { |accum, i| accum + i }
   end
 
   def mean
@@ -30,7 +30,7 @@ class StandardDeviation
 
   def sample_variance
     m = mean
-    calc_sum = array.inject(0){ |accum, i| accum + (i - m)**2 }
+    calc_sum = array.inject(0) { |accum, i| accum + (i - m)**2 }
     calc_sum / (array.length - 1).to_f
   end
 end
