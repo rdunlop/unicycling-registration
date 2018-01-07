@@ -37,6 +37,7 @@ Metrics/ClassLength:
   Max: 400
   Exclude:
     - 'app/models/competition.rb'
+    - 'app/models/registrant.rb'
 
 # Offense count: 31
 Metrics/CyclomaticComplexity:
@@ -217,6 +218,8 @@ Naming/PredicateName:
     - 'app/models/user.rb'
     - 'app/distance_attempt_managers/distance_attempt_manager.rb'
     - 'app/lib/upload.rb'
+    - 'app/models/lodging_package.rb'
+    - 'app/models/lodging_room_type.rb'
 
 # Offense count: 9
 # Configuration parameters: EnforcedStyle, SupportedStyles.
