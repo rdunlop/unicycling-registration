@@ -37,15 +37,16 @@ end
 #
 # Table name: lodging_room_types
 #
-#  id                :integer          not null, primary key
-#  lodging_id        :integer          not null
-#  position          :integer
-#  name              :string           not null
-#  description       :text
-#  visible           :boolean          default(TRUE), not null
-#  maximum_available :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id                    :integer          not null, primary key
+#  lodging_id            :integer          not null
+#  position              :integer
+#  name                  :string           not null
+#  description           :text
+#  visible               :boolean          default(TRUE), not null
+#  maximum_available     :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  minimum_duration_days :integer          default(0), not null
 #
 # Indexes
 #

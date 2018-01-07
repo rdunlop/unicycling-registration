@@ -3,6 +3,7 @@
   = f.input :name
   = f.input :description
   = f.input :visible
+  = f.input :minimum_duration_days
   = label_tag :limit_quantities_available
   = check_box_tag :limit_quantities_available, nil, f.object.has_limits?, class: 'js--inputEnable', data: { targets: 'js--inputConditional' }
   = f.input :maximum_available, input_html: { class: 'js--inputConditional' }
