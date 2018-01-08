@@ -10,7 +10,7 @@ class AddPageModel < ActiveRecord::Migration
     end
     add_index :pages, :slug, unique: true
     Page.reset_column_information
-    Page.create_translation_table!({title: :string, body: :text}, {migrate_data: false})
+    Page.create_translation_table!({ title: :string, body: :text }, { migrate_data: false })
   end
 
   def down

@@ -28,6 +28,29 @@ describe LodgingForm do
         end
       end
 
+      context "when the days were created in a non-ascending order" do
+        let(:target_date) { Date.current }
+        let!(:lodging_day1) { FactoryGirl.create(:lodging_day, date_offered: target_date + 2.days, lodging_room_option: lodging_room_option) }
+        let!(:lodging_day2) { FactoryGirl.create(:lodging_day, date_offered: target_date + 1.day, lodging_room_option: lodging_room_option) }
+        let!(:lodging_day3) { FactoryGirl.create(:lodging_day, date_offered: target_date, lodging_room_option: lodging_room_option) }
+
+        describe "when selecting the whole range" do
+          let(:params) do
+            {
+              registrant_id: competitor.id,
+              lodging_room_option_id: lodging_room_option.id,
+              check_in_day: target_date.strftime("%Y/%m/%d"),
+              check_out_day: (target_date + 3.days).strftime("%Y/%m/%d")
+            }
+          end
+          it "creates registrant_expense_items" do
+            expect do
+              form.save
+            end.to change(RegistrantExpenseItem, :count).by(1)
+          end
+        end
+      end
+
       context "when there is a minimum 2 days duration specified on the lodging room type" do
         let(:lodging_room_type) { FactoryGirl.create(:lodging_room_type, minimum_duration_days: 2) }
 
@@ -221,7 +244,7 @@ describe LodgingForm do
         let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
         let(:package) { FactoryGirl.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
         let!(:package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
-        let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, line_item: package)}
+        let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, line_item: package) }
 
         it "returns a single element array" do
           competitor.reload

@@ -6,7 +6,7 @@ module Judgeable
     belongs_to :judge, touch: true
 
     validates :judge_id, presence: true
-    validates :judge_id, uniqueness: {scope: [:competitor_id]}, on: :create
+    validates :judge_id, uniqueness: { scope: [:competitor_id] }, on: :create
 
     delegate :user, to: :judge
   end

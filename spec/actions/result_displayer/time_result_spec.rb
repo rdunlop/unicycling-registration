@@ -42,9 +42,9 @@ RSpec.describe ResultDisplayer::TimeResult do
 
     it "form_inputs" do
       expect(subject.form_inputs).to eq([
-                                          [:minutes, {min: 0}],
-                                          [:seconds, {min: 0}],
-                                          [:thousands, {min: 0}]
+                                          [:minutes, { min: 0 }],
+                                          [:seconds, { min: 0 }],
+                                          [:thousands, { min: 0 }]
                                         ])
     end
   end
@@ -75,10 +75,10 @@ RSpec.describe ResultDisplayer::TimeResult do
 
     it "form_inputs" do
       expect(subject.form_inputs).to eq([
-                                          [:minutes, {min: 0}],
-                                          [:seconds, {min: 0}],
-                                          [:thousands, {min: 0}],
-                                          [:number_of_laps, {min: 1}]
+                                          [:minutes, { min: 0 }],
+                                          [:seconds, { min: 0 }],
+                                          [:thousands, { min: 0 }],
+                                          [:number_of_laps, { min: 1 }]
                                         ])
     end
   end

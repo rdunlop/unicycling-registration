@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_footer
-    {left: '[date] [time]', center: @config.short_name, right: 'Page [page] of [topage]'}
+    { left: '[date] [time]', center: @config.short_name, right: 'Page [page] of [topage]' }
   end
 
   def render_common_pdf(view_name, orientation = "Portrait", attachment = false, simple_pdf: false)
@@ -93,7 +93,7 @@ class ApplicationController < ActionController::Base
     render pdf: view_name,
            page_size: "Letter",
            print_media_type: true,
-           margin: {top: 15, bottom: 10, left: 7, right: 7},
+           margin: { top: 15, bottom: 10, left: 7, right: 7 },
            show_as_html: params[:debug].present?,
            footer: default_footer,
            formats: %i[pdf html],
@@ -108,11 +108,11 @@ class ApplicationController < ActionController::Base
     render pdf: view_name,
            page_size: "Letter",
            print_media_type: true,
-           margin: {top: 60, left: 2, right: 2},
+           margin: { top: 60, left: 2, right: 2 },
            show_as_html: params[:debug].present?,
            footer: default_footer,
            formats: [:html],
-           header: { html: {template: template, locals: locals}},
+           header: { html: { template: template, locals: locals } },
            orientation: "Portrait",
            disposition: "inline",
            layout: "pdf.html"

@@ -50,7 +50,7 @@ class RegistrationCost < ApplicationRecord
   end
 
   def self.all_registration_expense_items
-    includes(registration_cost_entries: :expense_item).all.flat_map{ |rp| rp.expense_items }
+    includes(registration_cost_entries: :expense_item).all.flat_map { |rp| rp.expense_items }
   end
 
   def self.relevant_period(registrant_type, date)
@@ -73,7 +73,7 @@ class RegistrationCost < ApplicationRecord
 
   # determine the appropriate expense_item based on the registrant
   def expense_item_for(registrant)
-    registration_cost_entries.find{ |rce| rce.valid_for?(registrant.age) }.try(:expense_item)
+    registration_cost_entries.find { |rce| rce.valid_for?(registrant.age) }.try(:expense_item)
   end
 
   # ##################### Instance Level ###########

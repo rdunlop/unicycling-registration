@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe RegistrantPolicy do
-  let(:my_user) { FactoryGirl.create(:user)}
+  let(:my_user) { FactoryGirl.create(:user) }
   let(:my_registrant) { FactoryGirl.create(:registrant, user: my_user) }
   let(:other_registrant) { FactoryGirl.create(:registrant) }
 

@@ -315,7 +315,7 @@ describe PaymentsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
         expect do
-          post :create, params: { payment: {other: true} }
+          post :create, params: { payment: { other: true } }
         end.not_to change(Payment, :count)
       end
 
@@ -328,7 +328,7 @@ describe PaymentsController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Payment).to receive(:save).and_return(false)
-        post :create, params: { payment: {other: true} }
+        post :create, params: { payment: { other: true } }
         assert_select "h1", "New payment"
       end
     end

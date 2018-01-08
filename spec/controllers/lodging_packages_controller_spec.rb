@@ -33,13 +33,13 @@ describe LodgingPackagesController do
 
       it "removes the registrant expense item" do
         expect do
-          delete :destroy, params: { registrant_id: competitor.bib_number, id: lodging_package.id}
+          delete :destroy, params: { registrant_id: competitor.bib_number, id: lodging_package.id }
         end.to change(RegistrantExpenseItem, :count).by(-1)
       end
 
       it "removes the lodging_package too" do
         expect do
-          delete :destroy, params: { registrant_id: competitor.bib_number, id: lodging_package.id}
+          delete :destroy, params: { registrant_id: competitor.bib_number, id: lodging_package.id }
         end.to change(LodgingPackage, :count).by(-1)
       end
     end

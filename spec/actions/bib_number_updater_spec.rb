@@ -31,7 +31,7 @@ RSpec.describe BibNumberUpdater do
         it "touches the competitor" do
           expect do
             described_class.free_bib_number(competitor1.bib_number)
-          end.to change{ event_competitor.reload.updated_at }
+          end.to change { event_competitor.reload.updated_at }
         end
       end
     end

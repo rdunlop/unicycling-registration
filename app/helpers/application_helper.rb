@@ -49,7 +49,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
       end
     end
     Event.all.each do |ev|
-      if registrant.registrant_event_sign_ups.select { |resu| resu.event_id == ev.id}.empty?
+      if registrant.registrant_event_sign_ups.select { |resu| resu.event_id == ev.id }.empty?
         registrant.registrant_event_sign_ups.build(event: ev)
       end
       if ev.best_time? && registrant.registrant_best_times.select { |bt| bt.event_id == ev.id }.empty?
@@ -61,7 +61,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
 
   def numeric?(val)
     !Float(val).nil?
-  rescue # rubocop:disable Lint/RescueWithoutErrorClass
+  rescue StandardError
     false
   end
 

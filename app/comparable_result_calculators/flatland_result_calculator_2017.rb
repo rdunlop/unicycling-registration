@@ -47,7 +47,7 @@ class FlatlandResultCalculator_2017 # rubocop:disable Naming/ClassAndModuleCamel
   def total_last_trick_points(competitor)
     scores = competitor.scores
 
-    last_trick_scores = scores.map {|s| s.val_5.to_i}
+    last_trick_scores = scores.map { |s| s.val_5.to_i }
     last_trick_scores.reduce(:+) || 0
   end
 end

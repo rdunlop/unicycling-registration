@@ -1,5 +1,5 @@
 class ConventionSetup::LodgingRoomTypesController < ConventionSetup::BaseConventionSetupController
-  before_action :load_lodging_room_type, except: %i[new]
+  before_action :load_lodging_room_type
   before_action :authorize_setup
 
   before_action :set_breadcrumbs

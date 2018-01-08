@@ -106,14 +106,14 @@ describe TimeResultsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         expect do
-          post :create, params: { competition_id: @competition.id, time_result: {status: "DQ"} }
+          post :create, params: { competition_id: @competition.id, time_result: { status: "DQ" } }
         end.not_to change(TimeResult, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        post :create, params: { competition_id: @competition.id, time_result: {status: "DQ"} }
+        post :create, params: { competition_id: @competition.id, time_result: { status: "DQ" } }
         assert_select "h1", "Listing Time Results for #{@competition}"
       end
     end
@@ -135,7 +135,7 @@ describe TimeResultsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: time_result.to_param, time_result: {status: "DQ"} }
+          put :update, params: { id: time_result.to_param, time_result: { status: "DQ" } }
         end.not_to change { time_result.reload.status }
       end
 
@@ -143,7 +143,7 @@ describe TimeResultsController do
         time_result = FactoryGirl.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
-        put :update, params: { id: time_result.to_param, time_result: {status: "DQ"} }
+        put :update, params: { id: time_result.to_param, time_result: { status: "DQ" } }
         assert_select "h1", "Editing Time Result"
       end
     end

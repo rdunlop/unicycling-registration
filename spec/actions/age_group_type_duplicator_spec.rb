@@ -9,10 +9,10 @@ RSpec.describe AgeGroupTypeDuplicator do
   end
 
   it 'can duplicate an age group' do
-    expect{ do_action }.to change(AgeGroupType, :count).by 1
+    expect { do_action }.to change(AgeGroupType, :count).by 1
   end
 
   it 'can duplicate an age group with entries' do
-    expect{ do_action }.to change(AgeGroupEntry, :count).by 1
+    expect { do_action }.to change(AgeGroupEntry, :count).by 1
   end
 end

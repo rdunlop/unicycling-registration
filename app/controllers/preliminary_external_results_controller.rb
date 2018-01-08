@@ -72,7 +72,7 @@ class PreliminaryExternalResultsController < ApplicationController
 
   # POST .../approve
   def approve
-    @external_results.map{ |er| er.update_attributes(preliminary: false) }
+    @external_results.map { |er| er.update_attributes(preliminary: false) }
     flash[:notice] = "Results Approved"
     redirect_back(fallback_location: competition_preliminary_external_results_path(@competition))
   end

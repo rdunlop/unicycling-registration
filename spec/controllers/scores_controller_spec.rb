@@ -58,7 +58,7 @@ describe ScoresController do
       val_2: 2.2,
       val_3: 3.3,
       val_4: 4.4,
-      notes: "hi"}
+      notes: "hi" }
   end
 
   describe "GET index" do
@@ -164,7 +164,7 @@ describe ScoresController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Score).to receive(:save).and_return(false)
-        post :create, params: { score: {val_1: 1}, judge_id: @judge.id, competitor_id: @comp.id }
+        post :create, params: { score: { val_1: 1 }, judge_id: @judge.id, competitor_id: @comp.id }
         assert_select "h3", "Judge: #{@judge}"
       end
     end

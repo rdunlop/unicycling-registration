@@ -35,7 +35,7 @@ describe Judge do
   context "With a high/long competition" do
     let(:competition) { FactoryGirl.create(:distance_competition) }
     let(:judge) { FactoryGirl.build(:judge, competition: competition) }
-    let!(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long", name: "High/Long Judge Type")}
+    let!(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long", name: "High/Long Judge Type") }
 
     describe "when the judge type is valid for this competition" do
       it "can save the judge" do

@@ -79,14 +79,14 @@ describe ConventionSetup::ExpenseItemsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
         expect do
-          post :create, params: { expense_item: {position: 1}, expense_group_id: expense_group.id }
+          post :create, params: { expense_item: { position: 1 }, expense_group_id: expense_group.id }
         end.not_to change(ExpenseItem, :count)
       end
 
       it "re-renders the 'index' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
-        post :create, params: { expense_item: {position: 1}, expense_group_id: expense_group.id }
+        post :create, params: { expense_item: { position: 1 }, expense_group_id: expense_group.id }
         assert_select "h1", "Listing #{expense_group} expense items"
       end
     end
@@ -111,14 +111,14 @@ describe ConventionSetup::ExpenseItemsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
         expect do
-          put :update, params: { id: expense_item.to_param, expense_item: {position: 1, cost: 20}, expense_group_id: expense_group.id }
+          put :update, params: { id: expense_item.to_param, expense_item: { position: 1, cost: 20 }, expense_group_id: expense_group.id }
         end.not_to change { expense_item.reload.cost }
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExpenseItem).to receive(:save).and_return(false)
-        put :update, params: { id: expense_item.to_param, expense_item: {position: 1}, expense_group_id: expense_group.id }
+        put :update, params: { id: expense_item.to_param, expense_item: { position: 1 }, expense_group_id: expense_group.id }
         assert_select "h1", "Editing Expense Item"
       end
     end

@@ -17,6 +17,6 @@
 
 FactoryGirl.define do
   factory :age_group_type do
-    sequence(:name) {|n| "AgeGroup #{n}"}
+    sequence(:name) { |n| "AgeGroup #{n}" }
   end
 end

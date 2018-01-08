@@ -82,7 +82,7 @@ class Competitor < ApplicationRecord
 
   # statuses for use on the sign-ins page
   def self.sign_in_statuses
-    statuses.reject{ |stat| stat == "withdrawn"}
+    statuses.reject { |stat| stat == "withdrawn" }
   end
 
   # not all competitor types require a position
@@ -269,11 +269,11 @@ class Competitor < ApplicationRecord
   delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where(registrants: {bib_number: bib_number}).count.positive?
+    members.includes(:registrant).where(registrants: { bib_number: bib_number }).count.positive?
   end
 
   def team_name
-    custom_name if custom_name.present?
+    custom_name.presence
   end
 
   def name
@@ -347,11 +347,11 @@ class Competitor < ApplicationRecord
   def majority_country(input_countries)
     different_countries = input_countries.uniq.compact
     count_of_countries = {}
-    different_countries.map{|c| count_of_countries[c] = input_countries.count(c) }
+    different_countries.map { |c| count_of_countries[c] = input_countries.count(c) }
 
-    max_matches = different_countries.map{|c| count_of_countries[c] }.max
+    max_matches = different_countries.map { |c| count_of_countries[c] }.max
 
-    countries_at_max_matches = count_of_countries.select{|_key, value| value == max_matches }.keys
+    countries_at_max_matches = count_of_countries.select { |_key, value| value == max_matches }.keys
 
     countries_at_max_matches.sort.join(", ") unless countries_at_max_matches.empty?
   end

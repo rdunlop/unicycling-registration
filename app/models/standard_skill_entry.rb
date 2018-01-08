@@ -27,7 +27,7 @@ class StandardSkillEntry < ApplicationRecord
   belongs_to :additional_description, class_name: "StandardSkillEntryAdditionalDescription"
 
   validates :number, :points, :description, presence: true
-  validates :letter, presence: true, uniqueness: {scope: :number } # not allowed to have the same number/letter pair twice
+  validates :letter, presence: true, uniqueness: { scope: :number } # not allowed to have the same number/letter pair twice
 
   default_scope { order('number, letter') }
 

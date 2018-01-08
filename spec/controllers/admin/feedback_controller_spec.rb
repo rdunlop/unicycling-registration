@@ -37,7 +37,7 @@ describe Admin::FeedbackController do
       it "can resolve the feedback" do
         expect do
           put :resolve, params: { id: feedback.id, feedback: { resolution: "This is done" } }
-        end.to change{ feedback.reload.status }.to("resolved")
+        end.to change { feedback.reload.status }.to("resolved")
       end
     end
 

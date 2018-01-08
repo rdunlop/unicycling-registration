@@ -41,7 +41,7 @@ describe Admin::RegistrantsController do
 
       context "with a bib_number" do
         context "with a matching bib_number" do
-          let(:bib_number) { registrant.bib_number}
+          let(:bib_number) { registrant.bib_number }
 
           it "sends to the build path" do
             expect(response).to redirect_to(registrant_build_path(registrant, :add_name))

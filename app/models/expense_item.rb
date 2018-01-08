@@ -124,7 +124,7 @@ class ExpenseItem < ApplicationRecord
            else
              registrant_expense_items.includes(:registrant).joins(:registrant).merge(Registrant.active)
            end
-    reis.free.reject{ |rei| rei.registrant.reg_paid? } + reis.where(free: false)
+    reis.free.reject { |rei| rei.registrant.reg_paid? } + reis.where(free: false)
   end
 
   def num_unpaid(include_incomplete_registrants: false)
@@ -229,7 +229,7 @@ class ExpenseItem < ApplicationRecord
   end
 
   def free_items_with_reg_paid
-    registrant_expense_items.includes(:registrant).joins(:registrant).where(registrants: {deleted: false}).free.select{ |rei| rei.registrant.reg_paid? }
+    registrant_expense_items.includes(:registrant).joins(:registrant).where(registrants: { deleted: false }).free.select { |rei| rei.registrant.reg_paid? }
   end
 
   private

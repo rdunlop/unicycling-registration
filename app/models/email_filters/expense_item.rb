@@ -10,7 +10,7 @@ class EmailFilters::ExpenseItem
       filter: "expense_item",
       description: "Users who have PAID for a particular Expense Item",
       possible_arguments: ::ExpenseItem.all,
-      custom_show_argument: proc{|element| [element.to_s, element.id] }
+      custom_show_argument: proc { |element| [element.to_s, element.id] }
     )
   end
 

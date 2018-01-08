@@ -9,7 +9,7 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration
   end
 
   class Registrant < ActiveRecord::Base
-    has_many :payment_details, -> {includes :payment}
+    has_many :payment_details, -> { includes :payment }
   end
 
   class ExpenseItem < ActiveRecord::Base
@@ -30,7 +30,7 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration
       ei = eg.expense_items.first
       Registrant.all.each do |reg|
         next unless (reg.competitor && eg.competitor_required) || (!reg.competitor && eg.noncompetitor_required)
-        next if reg.payment_details.where(payments: {completed: true}).map { |pd| pd.expense_item_id}.include?(ei.id)
+        next if reg.payment_details.where(payments: { completed: true }).map { |pd| pd.expense_item_id }.include?(ei.id)
         re = RegistrantExpenseItem.new
         re.registrant_id = reg.id
         re.expense_item_id = ei.id

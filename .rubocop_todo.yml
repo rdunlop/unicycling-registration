@@ -37,6 +37,7 @@ Metrics/ClassLength:
   Max: 400
   Exclude:
     - 'app/models/competition.rb'
+    - 'app/models/registrant.rb'
 
 # Offense count: 31
 Metrics/CyclomaticComplexity:
@@ -166,15 +167,6 @@ Style/IfInsideElse:
 Style/IfUnlessModifier:
   Enabled: false
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/MethodCallWithoutArgsParentheses:
-  Exclude:
-    - 'app/controllers/standard_skill_routines_controller.rb'
-    - 'app/models/manual_refund.rb'
-    - 'config/initializers/tenant_console.rb'
-    - 'spec/models/payment_spec.rb'
-
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: snake_case, camelCase
@@ -226,6 +218,8 @@ Naming/PredicateName:
     - 'app/models/user.rb'
     - 'app/distance_attempt_managers/distance_attempt_manager.rb'
     - 'app/lib/upload.rb'
+    - 'app/models/lodging_package.rb'
+    - 'app/models/lodging_room_type.rb'
 
 # Offense count: 9
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -254,27 +248,6 @@ Style/SingleLineBlockParams:
     - 'app/models/score.rb'
     - 'app/models/user.rb'
 
-# Offense count: 87
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: space, no_space
-Layout/SpaceBeforeBlockBraces:
-  Enabled: false
-
-# Offense count: 171
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-# SupportedStyles: space, no_space
-Layout/SpaceInsideBlockBraces:
-  Enabled: false
-
-# Offense count: 343
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
-# SupportedStyles: space, no_space
-Layout/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
 # Offense count: 6597
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
@@ -287,6 +260,12 @@ Style/StringLiterals:
 # Configuration parameters: IgnoredMethods.
 # IgnoredMethods: respond_to
 Style/SymbolProc:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Style/FormatStringToken:
   Enabled: false
 
 # Offense count: 4

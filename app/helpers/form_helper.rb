@@ -2,7 +2,7 @@
 module FormHelper
   def setup_registrant_group(registrant_group)
     registrant_group ||= RegistrantGroup.new
-    (Registrant.active.all - registrant_group.registrant_group_members.map {|rgm| rgm.registrant }).each do |registrant|
+    (Registrant.active.all - registrant_group.registrant_group_members.map { |rgm| rgm.registrant }).each do |registrant|
       registrant_group.registrant_group_members.build(registrant_id: registrant.id)
     end
     # registrant_group.registrant_group_members.sort_by! {|x| x.registrant.bib_number }
@@ -11,7 +11,7 @@ module FormHelper
   end
 
   def registrant_bib_number_select_box(form, competition, options = {})
-    form.select :bib_number, eligible_registrants(competition).map{ |reg| [reg.with_id_to_s, reg.bib_number] }, {include_blank: true}, {autofocus: true, class: "chosen-select #{options[:class]}"}
+    form.select :bib_number, eligible_registrants(competition).map { |reg| [reg.with_id_to_s, reg.bib_number] }, { include_blank: true }, { autofocus: true, class: "chosen-select #{options[:class]}" }
   end
 
   def eligible_registrants(competition)
@@ -36,7 +36,7 @@ module FormHelper
     options[:autofocus] = true
     options[:class] = "chosen-select #{options[:class]}"
     disabled_ids = options[:disabled_ids]
-    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, {include_blank: true, disabled: disabled_ids}, options
+    form.select :competitor_id, competition.competitors.active.ordered.map { |comp| ["##{comp.bib_number}-#{comp}", comp.id] }, { include_blank: true, disabled: disabled_ids }, options
   end
 
   # The form element which is used to create a new competitor, if one shows up last minute for a competition
@@ -50,7 +50,7 @@ module FormHelper
   end
 
   def all_registrant_competitors(form)
-    form.select :registrant_id, Registrant.select_box_options, {include_blank: true}, {class: 'chosen-select'}
+    form.select :registrant_id, Registrant.select_box_options, { include_blank: true }, { class: 'chosen-select' }
   end
 
   def no_form_all_registrants(selected: nil, additional_classes: nil)

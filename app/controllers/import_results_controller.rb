@@ -78,12 +78,12 @@ class ImportResultsController < ApplicationController
     respond_to do |format|
       if @import_result.save
         format.html { redirect_to data_entry_user_competition_import_results_path(@user, @competition, is_start_times: @import_result.is_start_time), notice: 'Result was successfully created.' }
-        format.js { }
+        format.js {}
       else
         load_import_results
         filter_import_results_by_start_times
         format.html { render action: "data_entry" }
-        format.js { }
+        format.js {}
       end
     end
   end
@@ -95,11 +95,11 @@ class ImportResultsController < ApplicationController
       if @import_result.update_attributes(import_result_params)
         format.html { redirect_to data_entry_user_competition_import_results_path(@import_result.user, @import_result.competition, is_start_times: @import_result.is_start_time), notice: 'Import result was successfully updated.' }
         format.json { head :no_content }
-        format.js { }
+        format.js {}
       else
         format.html { render action: "edit" }
         format.json { render json: @import_result.errors, status: :unprocessable_entity }
-        format.js { }
+        format.js {}
       end
     end
   end

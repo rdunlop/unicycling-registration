@@ -159,16 +159,16 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  # PUT /registrants/:id/refresh
+  # PUT /registrants/:id/refresh_usa_status
   def refresh_usa_status
     if @config.organization_membership_usa?
       UpdateUsaMembershipStatusWorker.perform_async(@registrant.id)
     end
-    render text: "", status: 200
+    render plain: "", status: 200
   end
 
   def subregion_options
-    render partial: 'subregion_select', locals: {from_object: false}
+    render partial: 'subregion_select', locals: { from_object: false }
   end
 
   def copy_to_competitor

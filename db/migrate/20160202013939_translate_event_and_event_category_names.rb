@@ -8,8 +8,8 @@ class TranslateEventAndEventCategoryNames < ActiveRecord::Migration
   end
 
   def up
-    Event.create_translation_table!({name: :string}, {migrate_data: true})
-    EventCategory.create_translation_table!({name: :string}, {migrate_data: true})
+    Event.create_translation_table!({ name: :string }, { migrate_data: true })
+    EventCategory.create_translation_table!({ name: :string }, { migrate_data: true })
   end
 
   def down

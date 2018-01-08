@@ -20,7 +20,7 @@
 
 FactoryGirl.define do
   factory :page do
-    sequence(:slug) {|n| "page-#{n}"}
+    sequence(:slug) { |n| "page-#{n}" }
     title "Page Title"
     body "Page Body"
     sequence(:position) { |n| n }

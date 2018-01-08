@@ -68,7 +68,7 @@ class ArtisticResultCalculator
     if judge_type.nil?
       scores = competitor.scores
     else
-      scores = competitor.scores.select {|s| judge_type == s.judge_type }
+      scores = competitor.scores.select { |s| judge_type == s.judge_type }
     end
     scores.map(&:placing_points).compact
   end

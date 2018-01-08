@@ -10,10 +10,10 @@ RSpec.describe AgeGroupEntryCombiner do
   end
 
   it 'can rename the age group entry' do
-    expect{ do_action }.to change{ age_group_entry.reload.short_description }
+    expect { do_action }.to change { age_group_entry.reload.short_description }
   end
 
   it 'can remove the age group entry' do
-    expect{ do_action }.to change(AgeGroupEntry, :count).by(-1)
+    expect { do_action }.to change(AgeGroupEntry, :count).by(-1)
   end
 end

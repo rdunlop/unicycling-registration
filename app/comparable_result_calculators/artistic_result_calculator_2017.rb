@@ -68,7 +68,7 @@ class ArtisticResultCalculator_2017 # rubocop:disable Naming/ClassAndModuleCamel
   def total_points_for_judge_type(competitor, judge_type, with_ineligible: false)
     scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
 
-    active_scores = scores.map{ |score| score.placing_points(with_ineligible: with_ineligible) }.compact
+    active_scores = scores.map { |score| score.placing_points(with_ineligible: with_ineligible) }.compact
 
     return 0 if active_scores.none?
 

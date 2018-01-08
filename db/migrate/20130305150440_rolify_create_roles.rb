@@ -7,7 +7,7 @@ class RolifyCreateRoles < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table(:users_roles, id: false) do |t|
+    create_table(:users_roles, id: false) do |t| # rubocop:disable Rails/CreateTableWithTimestamps
       t.references :user
       t.references :role
     end

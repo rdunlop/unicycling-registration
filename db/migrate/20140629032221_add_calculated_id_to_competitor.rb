@@ -15,7 +15,7 @@ class AddCalculatedIdToCompetitor < ActiveRecord::Migration
     add_column :competitors, :lowest_member_bib_number, :integer
     Competitor.reset_column_information
     Competitor.all.each do |competitor|
-      lowest_bib_number = competitor.members.map{ |member| member.registrant.bib_number }.min
+      lowest_bib_number = competitor.members.map { |member| member.registrant.bib_number }.min
       competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number)
     end
   end

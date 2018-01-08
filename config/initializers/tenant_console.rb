@@ -9,5 +9,6 @@ if defined?(Rails::Console)
     Apartment::Tenant.switch!(gets.strip)
     puts "Tenant Switched to #{Apartment::Tenant.current}"
   end
-  switch_tenant()
+  switch_tenant
 end
+# rubocop:enable Rails/Output

@@ -4,6 +4,7 @@ AllCops:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
     - "db/schema.rb" # Auto-generated
+    - "vendor/**/*" # CI uses this directory for gems
 Rails:
   Enabled: true
 

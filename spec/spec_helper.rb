@@ -19,7 +19,7 @@ require "shoulda/matchers"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec", "support", "**", "*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 
 # This is required by CI because sometimes it runs the model specs before
 # other rails specs (which would have initialized/created the following directories)
@@ -66,7 +66,7 @@ RSpec.configure do |config|
     # Truncating doesn't drop schemas, ensure we're clean here, app *may not* exist
     begin
       Apartment::Tenant.drop('testing')
-    rescue # rubocop:disable Lint/RescueWithoutErrorClass
+    rescue StandardError
       nil
     end
     # Create the default tenant for our tests

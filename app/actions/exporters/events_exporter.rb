@@ -12,19 +12,19 @@ class Exporters::EventsExporter
   end
 
   def event_choices
-    @event_choices ||= Event.includes(event_choices: %i[event translations]).flat_map{ |ev| ev.event_choices }
+    @event_choices ||= Event.includes(event_choices: %i[event translations]).flat_map { |ev| ev.event_choices }
   end
 
   def event_titles
-    event_choices.map{|ec| ec.to_s}
+    event_choices.map { |ec| ec.to_s }
   end
 
   def event_categories
-    @event_categories ||= Event.includes(event_categories: %i[event translations]).flat_map{ |ev| ev.event_categories }
+    @event_categories ||= Event.includes(event_categories: %i[event translations]).flat_map { |ev| ev.event_categories }
   end
 
   def event_categories_titles
-    event_categories.map{|ec| ec.to_s}
+    event_categories.map { |ec| ec.to_s }
   end
 
   def rows

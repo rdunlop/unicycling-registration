@@ -21,7 +21,7 @@ class ExpenseGroup < ApplicationRecord
   validates :group_name, presence: true
   validates :visible, :competitor_required, :noncompetitor_required, inclusion: { in: [true, false] } # because it's a boolean
 
-  has_many :expense_items, -> {order "expense_items.position"}, inverse_of: :expense_group
+  has_many :expense_items, -> { order "expense_items.position" }, inverse_of: :expense_group
   has_many :expense_group_free_options, inverse_of: :expense_group
 
   translates :group_name, fallbacks_for_empty_translations: true

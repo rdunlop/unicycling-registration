@@ -25,7 +25,7 @@ describe StandardSkillScoreEntry do
   let(:competitor) { FactoryGirl.create(:event_competitor, competition: judge.competition) }
   let(:sss) { FactoryGirl.create(:standard_skill_score) }
   let(:skill_points) { 5.1 }
-  let(:standard_skill_entry) { FactoryGirl.create(:standard_skill_entry, points: skill_points)}
+  let(:standard_skill_entry) { FactoryGirl.create(:standard_skill_entry, points: skill_points) }
   let(:ssre) { FactoryGirl.create(:standard_skill_routine_entry, standard_skill_entry: standard_skill_entry) }
   let(:devaluation_percent) { 50 }
   let(:ssse) { FactoryGirl.create(:standard_skill_score_entry, standard_skill_routine_entry: ssre, standard_skill_score: sss, difficulty_devaluation_percent: devaluation_percent) }

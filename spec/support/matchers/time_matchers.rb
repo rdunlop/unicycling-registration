@@ -2,7 +2,7 @@
 # Postgres. Linux provides nanosecond precision, so sometimes #eq will work locally,
 # but fail on CI. Use this instead.
 RSpec::Matchers.define :match_microseconds do |_expected|
-  include TimeMatcherHelpers # rubocop:disable Style/MixinUsage
+  include TimeMatcherHelpers
 
   def round_to(time)
     time.change(usec: time.nsec / 1000)
@@ -28,7 +28,7 @@ end
 module TimeMatcherHelpers
   def self.included(base)
     def format_time(time) # rubocop:disable Lint/NestedMethodDefinition
-      time.strftime("%Y-%m-%d %H:%M:%S.#{'%09d' % round_to(time).nsec} %z") # rubocop:disable Style/FormatString
+      time.strftime("%Y-%m-%d %H:%M:%S.#{'%09d' % round_to(time).nsec} %z") # rubocop:disable Style/FormatString Style/FormatStringToken
     end
 
     base.match do |actual|
