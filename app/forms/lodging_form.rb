@@ -101,6 +101,6 @@ class LodgingForm
       LodgingDay.arel_table[:date_offered].gteq(check_in_day)
     ).where(
       LodgingDay.arel_table[:date_offered].lt(check_out_day)
-    )
+    ).order(LodgingDay.arel_table[:date_offered])
   end
 end
