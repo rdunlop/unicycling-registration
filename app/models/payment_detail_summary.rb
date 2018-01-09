@@ -9,7 +9,8 @@ class PaymentDetailSummary
 
   attribute :count, Integer
 
-  attribute :expense_item_id, Integer
+  attribute :line_item_id, Integer
+  attribute :line_item_type, String
   attribute :payment_id, Integer
   attribute :amount, Decimal
 
@@ -21,15 +22,16 @@ class PaymentDetailSummary
     self.payment_id = payment.id
   end
 
-  def expense_item
-    ExpenseItem.find(expense_item_id)
+  def line_item
+    line_item_type.constantize.find(line_item_id)
   end
 
-  def expense_item=(item)
-    self.expense_item_id = item.id
+  def line_item=(item)
+    self.line_item_id = item.id
+    self.line_item_type = item.class.name
   end
 
-  delegate :to_s, to: :expense_item
+  delegate :to_s, to: :line_item
 
   def persisted?
     false
@@ -38,7 +40,8 @@ class PaymentDetailSummary
   def ==(other)
     other.count == count &&
       other.payment_id == payment_id &&
-      other.expense_item_id == expense_item_id &&
+      other.line_item_id == line_item_id &&
+      other.line_item_type == line_item_type &&
       other.amount == amount
   end
 end
