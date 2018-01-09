@@ -84,14 +84,14 @@ class Payment < ApplicationRecord
     payment_details.each do |pd|
       res = nil
       results.each do |r|
-        if r.expense_item_id == pd.line_item_id && r.amount == pd.amount
+        if r.line_item_id == pd.line_item_id && r.line_item_type == pd.line_item_type && r.amount == pd.amount
           res = r
           break
         end
       end
 
       if res.nil?
-        results << PaymentDetailSummary.new(expense_item_id: pd.line_item_id, count: 1, amount: pd.amount)
+        results << PaymentDetailSummary.new(line_item_id: pd.line_item_id, line_item_type: pd.line_item_type, count: 1, amount: pd.amount)
       else
         res.count += 1
       end
