@@ -6,6 +6,6 @@ describe PaymentDetailSummary do
   end
 
   it "has the to_s of the associated expense_item" do
-    expect(@pds.to_s).to eq(@pds.expense_item.to_s)
+    expect(@pds.to_s).to eq(@pds.line_item.to_s)
   end
 end
