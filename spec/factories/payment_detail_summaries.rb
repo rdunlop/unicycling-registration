@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :payment_detail_summary do
     skip_create
 
-    expense_item # FactoryGirl
+    association(:line_item, factory: :expense_item) # FactoryGirl
     payment # FactoryGirl
     count 1
     amount 10.0
