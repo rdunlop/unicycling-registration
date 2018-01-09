@@ -52,8 +52,6 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def lodging?
-    # Temporarily only allow privileged users to see the lodging pages
-    return false unless user.has_any_role?
     update? && config.has_lodging?
   end
 
