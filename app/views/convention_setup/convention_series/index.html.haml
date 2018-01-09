@@ -1,0 +1,18 @@
+%h1 Convention Series
+
+%table
+  %thead
+    %tr
+      %th Series
+  %tbody
+    - @series.each do |series|
+      %tr
+        %td= link_to series, convention_series_path(series)
+
+%hr
+
+%h1 New Series
+
+= simple_form_for(@new_series) do |f|
+  = f.input :name
+  = f.submit
