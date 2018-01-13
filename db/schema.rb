@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107041303) do
+ActiveRecord::Schema.define(version: 20180107193822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,23 @@ ActiveRecord::Schema.define(version: 20180107041303) do
     t.string "organization_membership_system_status"
     t.index ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true
     t.index ["registrant_id"], name: "index_contact_details_registrant_id"
+  end
+
+  create_table "convention_series", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_convention_series_on_name", unique: true
+  end
+
+  create_table "convention_series_members", force: :cascade do |t|
+    t.integer "convention_series_id", null: false
+    t.integer "tenant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["convention_series_id"], name: "index_convention_series_members_on_convention_series_id"
+    t.index ["tenant_id", "convention_series_id"], name: "convention_series_member_ids_unique", unique: true
+    t.index ["tenant_id"], name: "index_convention_series_members_on_tenant_id"
   end
 
   create_table "coupon_code_expense_items", id: :serial, force: :cascade do |t|

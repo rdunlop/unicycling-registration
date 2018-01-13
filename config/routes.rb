@@ -220,6 +220,12 @@ Rails.application.routes.draw do
           post :activate
         end
       end
+      resources :convention_series, only: %i[index create show destroy] do
+        member do
+          post :add
+          delete :remove
+        end
+      end
       # /convention_setup/migrate
       # /convention_setup/migrate/from/:tenant
       # /convention_setup/migrate/from/:tenant/events
