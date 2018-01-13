@@ -8,8 +8,8 @@ class BibNumberUpdater
 
   # Check to see whether a given bib number is valid for the given registrant
   def self.valid_new_bib_number(registrant, new_bib_number)
-    max_possible_bib_number = registrant.registrant_type_model.class::MAXIMUM
-    min_possible_bib_number = registrant.registrant_type_model.class::INITIAL
+    min_possible_bib_number = BibNumberFinder::FreeNumber.new(registrant.registrant_type).range.first
+    max_possible_bib_number = BibNumberFinder::FreeNumber.new(registrant.registrant_type).range.max
 
     min_possible_bib_number <= new_bib_number.to_i && new_bib_number.to_i <= max_possible_bib_number
   end

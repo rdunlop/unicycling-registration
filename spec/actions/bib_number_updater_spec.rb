@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe BibNumberUpdater do
+  INITIAL_NONCOMPETITOR_NUMBER = BibNumberFinder::FreeNumber.new("noncompetitor").range.first
   let!(:competitor1) { FactoryGirl.create(:competitor) }
   let!(:competitor2) { FactoryGirl.create(:competitor) }
   let!(:competitor3) { FactoryGirl.create(:competitor) }
@@ -21,7 +22,7 @@ RSpec.describe BibNumberUpdater do
 
       it "sets the bib number to a competitor-bib-number" do
         described_class.free_bib_number(competitor1.bib_number)
-        expect(competitor1.reload.bib_number).to be <= RegistrantType::Noncompetitor::INITIAL
+        expect(competitor1.reload.bib_number).to be < INITIAL_NONCOMPETITOR_NUMBER
       end
 
       context "with related event-competitors" do
@@ -39,7 +40,7 @@ RSpec.describe BibNumberUpdater do
     context "with a non-competitor" do
       it "sets the non-competitor to a new non-competitor id" do
         described_class.free_bib_number(noncompetitor1.bib_number)
-        expect(noncompetitor1.reload.bib_number).to be > RegistrantType::Noncompetitor::INITIAL
+        expect(noncompetitor1.reload.bib_number).to be > INITIAL_NONCOMPETITOR_NUMBER
       end
     end
   end
@@ -73,7 +74,7 @@ RSpec.describe BibNumberUpdater do
     end
 
     it "allows a noncompetitor in noncompetitor range" do
-      expect(described_class.valid_new_bib_number(noncompetitor1, RegistrantType::Noncompetitor::INITIAL + 1)).to be_truthy
+      expect(described_class.valid_new_bib_number(noncompetitor1, INITIAL_NONCOMPETITOR_NUMBER + 1)).to be_truthy
     end
   end
 end

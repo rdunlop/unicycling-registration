@@ -28,8 +28,6 @@ module BibNumberFinder
       end
     end
 
-    private
-
     def range
       case competitor_type
       when "competitor"
@@ -38,6 +36,8 @@ module BibNumberFinder
         (INITIAL_NON_COMPETITOR..MAXIMUM_NON_COMPETITOR)
       end
     end
+
+    private
 
     def no_registrant?(subdomain, number)
       Apartment::Tenant.switch(subdomain) do
