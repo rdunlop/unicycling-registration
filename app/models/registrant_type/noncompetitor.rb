@@ -1,8 +1,5 @@
 module RegistrantType
   class Noncompetitor
-    INITIAL = 2001
-    MAXIMUM = 9999
-
     def free_options(expense_group, registrant)
       expense_group.expense_group_free_options.for("noncompetitor", registrant.age).first.try(:free_option)
     end
@@ -17,9 +14,7 @@ module RegistrantType
     end
 
     def next_available_bib_number
-      (INITIAL..MAXIMUM).each do |number|
-        return number if Registrant.where(bib_number: number).none?
-      end
+      BibNumberFinder::FreeNumber.new("noncompetitor").next_available_bib_number
     end
   end
 end

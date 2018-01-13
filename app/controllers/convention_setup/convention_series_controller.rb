@@ -1,9 +1,10 @@
 class ConventionSetup::ConventionSeriesController < ConventionSetup::BaseConventionSetupController
-  before_action :authorize_setup
   before_action :load_series, only: %i[show destroy add remove]
+  before_action :authorize_series, only: %i[show destroy add remove]
 
   # Show all series
   def index
+    authorize ConventionSeries.new, :index?
     @series = ConventionSeries.all
     @new_series = ConventionSeries.new
   end
@@ -14,6 +15,7 @@ class ConventionSetup::ConventionSeriesController < ConventionSetup::BaseConvent
   # create a new series
   def create
     @new_series = ConventionSeries.new(convention_series_params)
+    authorize @new_series
     if @new_series.save
       flash[:notice] = "Series created successfully"
       redirect_to convention_series_path(@new_series)
@@ -59,8 +61,8 @@ class ConventionSetup::ConventionSeriesController < ConventionSetup::BaseConvent
 
   private
 
-  def authorize_setup
-    authorize @config, :setup_convention?
+  def authorize_series
+    authorize @series
   end
 
   def load_series

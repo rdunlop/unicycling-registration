@@ -25,6 +25,10 @@ class ConventionSeries < ApplicationRecord
     convention_series_members.find_by(tenant: find_tenant(tenant_name)).destroy
   end
 
+  def subdomains
+    convention_series_members.includes(:tenant).pluck(Tenant.arel_table[:subdomain])
+  end
+
   private
 
   def find_tenant(tenant_name)
