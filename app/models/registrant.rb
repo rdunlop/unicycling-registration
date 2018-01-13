@@ -517,7 +517,8 @@ class Registrant < ApplicationRecord
   #
   def set_bib_number
     if bib_number.nil?
-      self.bib_number = registrant_type_model.next_available_bib_number
+      matching_number = BibNumberFinder::RegistrantMatch.new(self, user).matching_registrant
+      self.bib_number = matching_number || registrant_type_model.next_available_bib_number
     end
   end
 

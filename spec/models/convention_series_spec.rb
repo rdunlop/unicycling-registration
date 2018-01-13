@@ -28,4 +28,31 @@ describe ConventionSeries do
       end.to change(ConventionSeriesMember, :count).by(-1)
     end
   end
+
+  describe "#registrant_data" do
+    before do
+      Apartment::Tenant.create("new_tenant")
+    end
+    let!(:member) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: tenant) }
+    let!(:member2) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: Tenant.find_by(subdomain: Apartment::Tenant.current)) }
+
+    context "with a few registrants" do
+      let!(:reg1) { FactoryGirl.create(:competitor, first_name: "Bob", last_name: "Smith", bib_number: 1) }
+      let!(:reg2) { FactoryGirl.create(:competitor, first_name: "James", last_name: "Gordon", bib_number: 2) }
+
+      it "shows registrants across all subdomains" do
+        result = series.registrant_data
+        expect(result).to match(
+          ids: [1, 2],
+          subdomains: {
+            "new_tenant" => {},
+            Apartment::Tenant.current => {
+              1 => "Bob Smith",
+              2 => "James Gordon"
+            }
+          }
+        )
+      end
+    end
+  end
 end
