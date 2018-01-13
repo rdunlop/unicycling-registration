@@ -1,0 +1,23 @@
+%h1 Convention Series - #{@series}
+
+%ul
+  %li= link_to "Add self to series", add_convention_series_path(@series), method: :post
+  %li= link_to "Remove self from series", remove_convention_series_path(@series), method: :delete
+
+%hr
+
+%h2 Members
+
+- reg_data = @series.registrant_data
+%table
+  %thead
+    %tr
+      %th ID
+      - @series.subdomains.each do |subdomain|
+        %th= subdomain
+  %tbody
+    - reg_data[:ids].each do |id|
+      %tr
+        %td= id
+        - @series.subdomains.each do |subdomain|
+          %td= reg_data[:subdomains][subdomain][id]

@@ -148,6 +148,7 @@ describe Registrants::BuildController do
 
     context "when creating with copy-from-previous convention" do
       before do
+        FactoryGirl.create(:tenant, subdomain: "other")
         Apartment::Tenant.create("other")
         Apartment::Tenant.switch "other" do
           @other_reg = FactoryGirl.create(:competitor, user: user)

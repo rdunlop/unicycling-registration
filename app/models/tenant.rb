@@ -21,6 +21,7 @@ class Tenant < ApplicationRecord
   before_validation :trim_subdomain
 
   has_many :tenant_aliases, dependent: :destroy, inverse_of: :tenant
+  has_one :convention_series_member, dependent: :destroy, inverse_of: :tenant
 
   accepts_nested_attributes_for :tenant_aliases, allow_destroy: true
 

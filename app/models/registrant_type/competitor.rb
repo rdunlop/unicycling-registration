@@ -1,9 +1,5 @@
 module RegistrantType
   class Competitor
-    INITIAL = 1
-    MAXIMUM = 1999
-
-    # Finds the free-option setting, if one is found for this registrant
     def free_options(expense_group, registrant)
       expense_group.expense_group_free_options.for("competitor", registrant.age).first.try(:free_option)
     end
@@ -18,9 +14,7 @@ module RegistrantType
     end
 
     def next_available_bib_number
-      (INITIAL..MAXIMUM).each do |number|
-        return number if Registrant.where(bib_number: number).none?
-      end
+      BibNumberFinder::FreeNumber.new("competitor").next_available_bib_number
     end
   end
 end
