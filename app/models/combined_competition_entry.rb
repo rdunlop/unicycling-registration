@@ -21,6 +21,11 @@
 #  competition_id          :integer
 #  base_points             :integer
 #  distance                :integer
+#  points_11               :integer
+#  points_12               :integer
+#  points_13               :integer
+#  points_14               :integer
+#  points_15               :integer
 #
 
 class CombinedCompetitionEntry < ApplicationRecord
@@ -29,8 +34,6 @@ class CombinedCompetitionEntry < ApplicationRecord
 
   validates :combined_competition_id, :abbreviation, presence: true
   validates :competition_id, presence: true
-  validates :points_1, :points_2, :points_3, :points_4, :points_5, presence: true, if: :requires_points?
-  validates :points_6, :points_7, :points_8, :points_9, :points_10, presence: true, if: :requires_points?
 
   validates :base_points, presence: true, if: :is_percentage_based?
   validates :distance, presence: true, if: :is_average_speed_based?
@@ -55,8 +58,8 @@ class CombinedCompetitionEntry < ApplicationRecord
   end
 
   def bonus_for_place(place)
-    if place > 0 && place <= 10 # rubocop:disable Style/NumericPredicate
-      send("points_#{place}")
+    if combined_competition.range_of_places.include?(place)
+      send("points_#{place}").to_i
     else
       0
     end
