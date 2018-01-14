@@ -11,12 +11,12 @@
   %h3= t(".noncompetitor_auto_assign")
   = f.input :noncompetitor_required
 
-  %h3= t(".free_elements")
-  %p Specify whether items from this Expense Group should be provided for free to registrants.
-  #expense_group_free_options
-    = f.simple_fields_for :expense_group_free_options do |member_f|
-      = render "expense_group_free_option_fields", f: member_f
-  = link_to_add_association 'add new free-element', f, :expense_group_free_options, data: { association_insertion_node: "#expense_group_free_options", association_insertion_method: "append" }
+  %h3= t(".group_options")
+  %p Specify whether items from this Expense Group should be provided for free to registrants, or required to be selected.
+  #expense_group_options
+    = f.simple_fields_for :expense_group_options do |member_f|
+      = render "expense_group_option_fields", f: member_f
+  = link_to_add_association 'add new expense-group option-element', f, :expense_group_options, data: { association_insertion_node: "#expense_group_options", association_insertion_method: "append" }
   %br
   %br
   = f.button :submit

@@ -9,8 +9,11 @@ describe ExpenseItemFreeChecker do
 
   describe "with an expense_group which REQUIRES one free item per group" do
     let(:expense_group) { FactoryGirl.create(:expense_group) }
+    let!(:expense_group_required_option) do
+      FactoryGirl.create(:expense_group_option, expense_group: expense_group, registrant_type: "competitor", option: "One In Group REQUIRED")
+    end
     let!(:expense_group_free_option) do
-      FactoryGirl.create(:expense_group_free_option, expense_group: expense_group, registrant_type: "competitor", free_option: "One Free In Group REQUIRED")
+      FactoryGirl.create(:expense_group_option, expense_group: expense_group, registrant_type: "competitor", option: "One Free In Group")
     end
     let(:expense_item) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
 
@@ -22,7 +25,7 @@ describe ExpenseItemFreeChecker do
   describe "with an expense_group which allows one free item per group" do
     let(:expense_group) { FactoryGirl.create(:expense_group) }
     let!(:expense_group_free_option) do
-      FactoryGirl.create(:expense_group_free_option, expense_group: expense_group, registrant_type: "competitor", free_option: "One Free In Group")
+      FactoryGirl.create(:expense_group_option, expense_group: expense_group, registrant_type: "competitor", option: "One Free In Group")
     end
     let(:expense_item) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
 
@@ -74,7 +77,7 @@ describe ExpenseItemFreeChecker do
   describe "with an expense_group which allows one free item per item in group" do
     let(:expense_group) { FactoryGirl.create(:expense_group) }
     let!(:expense_group_free_option) do
-      FactoryGirl.create(:expense_group_free_option, expense_group: expense_group, registrant_type: "competitor", free_option: "One Free of Each In Group")
+      FactoryGirl.create(:expense_group_option, expense_group: expense_group, registrant_type: "competitor", option: "One Free of Each In Group")
     end
     let(:expense_item) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
 

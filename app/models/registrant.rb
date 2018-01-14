@@ -155,7 +155,7 @@ class Registrant < ApplicationRecord
 
   # Expense items/LineItems
   validates_associated :registrant_expense_items
-  validate :has_necessary_free_items, if: :validated?
+  validate :has_necessary_items?, if: :validated?
 
   scope :active_or_incomplete, -> { not_deleted.order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
@@ -603,12 +603,12 @@ class Registrant < ApplicationRecord
     end
   end
 
-  def has_necessary_free_items
-    free_groups_required = registrant_type_model.required_free_expense_groups(age)
+  def has_necessary_items?
+    expense_groups_required = registrant_type_model.required_item_from_expense_groups(age)
 
-    free_groups_required.each do |expense_group|
+    expense_groups_required.each do |expense_group|
       if all_line_items.none? { |line_item| line_item.try(:expense_group) == expense_group }
-        errors.add(:base, "You must choose a free #{expense_group}")
+        errors.add(:base, "You must choose an item from #{expense_group}")
       end
     end
   end
