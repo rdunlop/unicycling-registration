@@ -25,7 +25,7 @@
           - @combined_competition_entries.each do |cc|
             %td= cc.distance
       - if @combined_competition.requires_per_place_points?
-        - for place in 1..10
+        - for place in @combined_competition.range_of_places
           %tr
             %th= place
             - @combined_competition_entries.each do |cc|

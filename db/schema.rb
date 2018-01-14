@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107193822) do
+ActiveRecord::Schema.define(version: 20180114215931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,11 @@ ActiveRecord::Schema.define(version: 20180107193822) do
     t.integer "competition_id"
     t.integer "base_points"
     t.integer "distance"
+    t.integer "points_11"
+    t.integer "points_12"
+    t.integer "points_13"
+    t.integer "points_14"
+    t.integer "points_15"
   end
 
   create_table "combined_competitions", id: :serial, force: :cascade do |t|

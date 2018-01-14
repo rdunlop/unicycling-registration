@@ -24,6 +24,10 @@ class CombinedCompetition < ApplicationRecord
   has_many :combined_competition_entries, -> { order("combined_competition_entries.id") }, dependent: :destroy
   has_one :competition
 
+  def range_of_places
+    (1..15)
+  end
+
   def to_s
     name
   end
