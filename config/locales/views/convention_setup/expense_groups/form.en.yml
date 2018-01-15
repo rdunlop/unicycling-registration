@@ -4,4 +4,4 @@ en:
       form:
         competitor_auto_assign: Automatically Assign to Competitor?
         noncompetitor_auto_assign: Automatically Assign to Non-Competitor?
-        free_elements: Free Elements
+        group_options: Expense Group Options

@@ -108,7 +108,7 @@ describe RegistrantExpenseItem do
     before do
       registrant.reload
       expense_group = @ei.expense_group
-      FactoryGirl.create(:expense_group_free_option, expense_group: expense_group, free_option: "One Free of Each In Group")
+      FactoryGirl.create(:expense_group_option, expense_group: expense_group, option: "One Free of Each In Group")
     end
 
     it "does allow a 2nd item of the same type (because the existing one is not free)" do

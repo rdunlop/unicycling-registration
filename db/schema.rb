@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114215931) do
+ActiveRecord::Schema.define(version: 20180114221314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -446,16 +446,15 @@ ActiveRecord::Schema.define(version: 20180114215931) do
     t.index ["category_id"], name: "index_events_category_id"
   end
 
-  create_table "expense_group_free_options", id: :serial, force: :cascade do |t|
+  create_table "expense_group_options", id: :serial, force: :cascade do |t|
     t.integer "expense_group_id", null: false
     t.string "registrant_type", null: false
-    t.string "free_option", null: false
+    t.string "option", null: false
     t.integer "min_age"
     t.integer "max_age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["expense_group_id", "registrant_type"], name: "free_options_group_reg_type", unique: true
-    t.index ["expense_group_id"], name: "index_expense_group_free_options_on_expense_group_id"
+    t.index ["expense_group_id"], name: "index_expense_group_options_on_expense_group_id"
   end
 
   create_table "expense_group_translations", id: :serial, force: :cascade do |t|
