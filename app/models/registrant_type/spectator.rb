@@ -1,7 +1,7 @@
 module RegistrantType
   class Spectator
     def options(_expense_group, _registrant)
-      nil
+      []
     end
 
     # Returns a collection of ExpenseGroups which are required to have items selected

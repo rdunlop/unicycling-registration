@@ -1,7 +1,7 @@
 module RegistrantType
   class Noncompetitor
     def options(expense_group, registrant)
-      expense_group.expense_group_options.for("noncompetitor", registrant.age).first.try(:option)
+      expense_group.expense_group_options.for("noncompetitor", registrant.age).map(&:option)
     end
 
     # Returns a collection of ExpenseGroups which are required to have items selected
