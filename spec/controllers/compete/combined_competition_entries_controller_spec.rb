@@ -61,6 +61,7 @@ describe Compete::CombinedCompetitionEntriesController do
         expect do
           post :create, params: { combined_competition_entry: valid_attributes, combined_competition_id: combined_competition.id }
         end.to change(CombinedCompetitionEntry, :count).by(1)
+        expect(CombinedCompetitionEntry.last.points_10).to eq(50)
       end
 
       it "redirects to the created combined_competition" do
