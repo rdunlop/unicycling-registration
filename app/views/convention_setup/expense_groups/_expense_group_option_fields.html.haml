@@ -1,6 +1,6 @@
 .row.item.nested-fields
   .small-6.columns
-    = f.input :free_option, collection: ExpenseGroupFreeOption.free_options, include_blank: false
+    = f.input :option, collection: ExpenseGroupOption.options, include_blank: false
   .small-2.columns
     = f.input :registrant_type, collection: ["competitor", "noncompetitor"], include_blank: false
   .small-2.columns

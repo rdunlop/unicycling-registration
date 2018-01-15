@@ -27,7 +27,7 @@
         = f.number_field :distance, {min: 0}
   - if @combined_competition.requires_per_place_points?
     %hr
-    - for place in 1..10
+    - for place in @combined_competition.range_of_places
       .row
         .small-6.columns
           - if @combined_competition.percentage_based_calculations?

@@ -21,6 +21,11 @@
 #  competition_id          :integer
 #  base_points             :integer
 #  distance                :integer
+#  points_11               :integer
+#  points_12               :integer
+#  points_13               :integer
+#  points_14               :integer
+#  points_15               :integer
 #
 
 require 'spec_helper'

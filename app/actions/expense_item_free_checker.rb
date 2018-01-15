@@ -8,32 +8,36 @@ class ExpenseItemFreeChecker
   end
 
   def expense_item_is_free?
-    free_options = registrant_type_model.free_options(expense_item.expense_group, registrant)
+    options = registrant_type_model.options(expense_item.expense_group, registrant)
 
-    case free_options
-    when "One Free In Group", "One Free In Group REQUIRED"
-      return !chosen_free_item_from_expense_group?(expense_item.expense_group)
-    when "One Free of Each In Group"
-      return !chosen_free_item_of_expense_item?(expense_item)
-    else
-      return false
+    options.each do |option|
+      case option
+      when "One Free In Group"
+        return !chosen_free_item_from_expense_group?(expense_item.expense_group)
+      when "One Free of Each In Group"
+        return !chosen_free_item_of_expense_item?(expense_item)
+      end
     end
+
+    false
   end
 
   # Return true on failure, and set :error_message
   def free_item_already_exists?
-    free_options = registrant_type_model.free_options(expense_item.expense_group, registrant)
+    options = registrant_type_model.options(expense_item.expense_group, registrant)
 
-    case free_options
-    when "One Free In Group", "One Free In Group REQUIRED"
-      if chosen_free_item_from_expense_group?(expense_item.expense_group)
-        @error_message = "Only 1 free item is permitted in this expense_group"
-        return true
-      end
-    when "One Free of Each In Group"
-      if chosen_free_item_of_expense_item?(expense_item)
-        @error_message = "Only 1 free item of this item is permitted"
-        return true
+    options.each do |option|
+      case option
+      when "One Free In Group"
+        if chosen_free_item_from_expense_group?(expense_item.expense_group)
+          @error_message = "Only 1 free item is permitted in this expense_group"
+          return true
+        end
+      when "One Free of Each In Group"
+        if chosen_free_item_of_expense_item?(expense_item)
+          @error_message = "Only 1 free item of this item is permitted"
+          return true
+        end
       end
     end
 

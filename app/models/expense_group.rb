@@ -22,11 +22,11 @@ class ExpenseGroup < ApplicationRecord
   validates :visible, :competitor_required, :noncompetitor_required, inclusion: { in: [true, false] } # because it's a boolean
 
   has_many :expense_items, -> { order "expense_items.position" }, inverse_of: :expense_group
-  has_many :expense_group_free_options, inverse_of: :expense_group
+  has_many :expense_group_options, inverse_of: :expense_group
 
   translates :group_name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
-  accepts_nested_attributes_for :expense_group_free_options, allow_destroy: true
+  accepts_nested_attributes_for :expense_group_options, allow_destroy: true
 
   default_scope { order(:position) }
   scope :visible, -> { where(visible: true).not_a_required_item_group }

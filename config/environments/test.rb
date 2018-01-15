@@ -56,3 +56,4 @@ Rails.application.secrets.secret_key_base = "somesecretstringisreallylongenought
 Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
 Rails.application.secrets.server_admin_email = "robin+admin@dunlopweb.com"
 Rails.application.secrets.ssl_enabled = false
+Rails.application.secrets.instance_creation_code = "this_is_the_code"
