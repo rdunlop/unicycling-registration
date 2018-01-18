@@ -19,6 +19,8 @@ en:
         submit: Save Record
         alias_verified: Alias Verified
         delete_current_primary_domain: Delete current Primary Domain
+        delete_alias: Remove Alias
         set_as_primary_domain: Set Alias as Primary Domain
         must_save_warning: |
           Before you can activate the alias, you must "Save Record" it.
+        alias_is_primary_domain: This Alias is now the primary domain.

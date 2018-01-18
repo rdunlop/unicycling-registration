@@ -30,11 +30,16 @@
         = check_box_tag :verified, nil, @tenant_alias.verified?, disabled: true
       - unless @tenant_alias.verified?
         = link_to "Verify this alias is internet-routable", confirm_url_tenant_alias_path(@tenant_alias), method: :put, class: "focus_button"
-  %li
-    - if @tenant_alias.persisted?
+        %br
+      = link_to t(".delete_alias"), tenant_alias_path(@tenant_alias), method: :delete, class: "nonfocus_button"
+  - if @tenant_alias.persisted?
+    %li
       - if @tenant_alias.primary_domain?
-        = link_to t(".delete_current_primary_domain"), tenant_alias_path(@tenant_alias), method: :delete, class: "nonfocus_button"
+        = t(".alias_is_primary_domain")
       - else
-        = link_to t(".set_as_primary_domain"), activate_tenant_alias_path(@tenant_alias), method: :post, class: "focus_button"
-    - else
-      %p= t(".must_save_warning")
+        - if @tenant_alias.verified?
+          = link_to t(".set_as_primary_domain"), activate_tenant_alias_path(@tenant_alias), method: :post, class: "focus_button"
+        - else
+          = t(".set_as_primary_domain")
+  - else
+    %p= t(".must_save_warning")
