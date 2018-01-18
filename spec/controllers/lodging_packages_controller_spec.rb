@@ -43,5 +43,18 @@ describe LodgingPackagesController do
         end.to change(LodgingPackage, :count).by(-1)
       end
     end
+
+    context "When there is a pending payment for this lodging package" do
+      let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, line_item: lodging_package, registrant: competitor) }
+      let!(:payment) { FactoryGirl.create(:payment) }
+      let!(:payment_detail) { FactoryGirl.create(:payment_detail, registrant: competitor, line_item: lodging_package) }
+
+      it "removes the REI, but not the LP" do
+        expect do
+          delete :destroy, params: { registrant_id: competitor.bib_number, id: lodging_package.id }
+        end.to change(RegistrantExpenseItem, :count).by(-1)
+        expect(LodgingPackage.count).to eq(1)
+      end
+    end
   end
 end
