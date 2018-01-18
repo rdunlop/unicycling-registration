@@ -486,8 +486,8 @@ describe Registrant do
   describe "with an expense_group which REQUIRES one free item per group" do
     before(:each) do
       @eg = FactoryGirl.create(:expense_group)
-      FactoryGirl.create(:expense_group_option, expense_group: @eg, registrant_type: "competitor", option: "One Free In Group")
-      FactoryGirl.create(:expense_group_option, expense_group: @eg, registrant_type: "competitor", option: "One In Group REQUIRED")
+      FactoryGirl.create(:expense_group_option, expense_group: @eg, registrant_type: "competitor", option: ExpenseGroupOption::ONE_FREE_IN_GROUP)
+      FactoryGirl.create(:expense_group_option, expense_group: @eg, registrant_type: "competitor", option: ExpenseGroupOption::ONE_IN_GROUP_REQUIRED)
       @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
     end
 
