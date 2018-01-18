@@ -12,9 +12,9 @@ class ExpenseItemFreeChecker
 
     options.each do |option|
       case option
-      when "One Free In Group"
+      when ExpenseGroupOption::ONE_FREE_IN_GROUP
         return !chosen_free_item_from_expense_group?(expense_item.expense_group)
-      when "One Free of Each In Group"
+      when ExpenseGroupOption::ONE_FREE_OF_EACH_IN_GROUP
         return !chosen_free_item_of_expense_item?(expense_item)
       end
     end
@@ -28,12 +28,12 @@ class ExpenseItemFreeChecker
 
     options.each do |option|
       case option
-      when "One Free In Group"
+      when ExpenseGroupOption::ONE_FREE_IN_GROUP
         if chosen_free_item_from_expense_group?(expense_item.expense_group)
           @error_message = "Only 1 free item is permitted in this expense_group"
           return true
         end
-      when "One Free of Each In Group"
+      when ExpenseGroupOption::ONE_FREE_OF_EACH_IN_GROUP
         if chosen_free_item_of_expense_item?(expense_item)
           @error_message = "Only 1 free item of this item is permitted"
           return true

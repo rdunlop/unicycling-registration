@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :expense_group_option do
     expense_group # FactoryGirl
     registrant_type "competitor"
-    option "One In Group REQUIRED"
+    option ExpenseGroupOption::ONE_IN_GROUP_REQUIRED
   end
 end
 

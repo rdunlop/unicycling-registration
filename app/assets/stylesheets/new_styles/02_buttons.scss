@@ -72,7 +72,7 @@
 
 .nonfocus_button {
   @include button($background: white, $background-hover: white);
-  padding: map-get($button-sizes, small); //(220px);
+  margin: 10px;
   color: $nonfocus;
   border: 1px solid $nonfocus;
 
