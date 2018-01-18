@@ -1,14 +1,17 @@
 # == Schema Information
 #
-# Table name: public.tenant_aliases
+# Table name: public.tenants
 #
-#  id             :integer          not null, primary key
-#  tenant_id      :integer          not null
-#  website_alias  :string(255)      not null
-#  primary_domain :boolean          default(FALSE), not null
-#  created_at     :datetime
-#  updated_at     :datetime
-#  verified       :boolean          default(FALSE), not null
+#  id                 :integer          not null, primary key
+#  subdomain          :string(255)
+#  description        :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  admin_upgrade_code :string(255)
+#
+# Indexes
+#
+#  index_tenants_on_subdomain  (subdomain)
 #
 
 require 'spec_helper'
