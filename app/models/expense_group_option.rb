@@ -20,8 +20,12 @@ class ExpenseGroupOption < ApplicationRecord
   belongs_to :expense_group, inverse_of: :expense_group_options
   validates :registrant_type, presence: true, inclusion: { in: ["competitor", "noncompetitor"] }
 
+  ONE_FREE_IN_GROUP = "One Free In Group".freeze
+  ONE_IN_GROUP_REQUIRED = "One In Group REQUIRED".freeze
+  ONE_FREE_OF_EACH_IN_GROUP = "One Free of Each In Group".freeze
+
   def self.options
-    ["One Free In Group", "One In Group REQUIRED", "One Free of Each In Group"]
+    [ONE_FREE_IN_GROUP, ONE_IN_GROUP_REQUIRED, ONE_FREE_OF_EACH_IN_GROUP]
   end
 
   validates :option, inclusion: { in: options }
