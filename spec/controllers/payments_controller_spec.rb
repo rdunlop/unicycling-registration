@@ -156,6 +156,17 @@ describe PaymentsController do
           assert_select "input[type=hidden][name=quantity_1][value='1']"
         end
       end
+
+      context "when the payment item costs > $1000" do
+        let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount_cents: 1234_56) }
+
+        it "displays the cost without comma" do
+          get :show, params: { id: payment.to_param }
+          assert_select "form", action: payment.paypal_post_url, method: "post" do
+            assert_select "input[type=hidden][name=amount_1][value='1234.56']"
+          end
+        end
+      end
     end
   end
 
