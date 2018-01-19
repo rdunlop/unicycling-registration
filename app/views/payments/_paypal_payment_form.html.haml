@@ -12,7 +12,7 @@
   - payment.unique_payment_details.each do |pd|
     - next if pd.amount == 0.to_money
     -# This must be in the format of "12.34" (no commas)
-    = hidden_field_tag "amount_#{index + 1}", pd.amount.format(separator: ".", symbol: nil)
+    = hidden_field_tag "amount_#{index + 1}", pd.amount.format(separator: ".", symbol: nil, thousands_separator: nil)
     = hidden_field_tag "item_name_#{index + 1}", pd.to_s
     = hidden_field_tag "quantity_#{index + 1}", pd.count.to_s
     - index += 1
