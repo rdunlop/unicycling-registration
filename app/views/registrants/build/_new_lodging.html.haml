@@ -15,6 +15,10 @@
             %b
               = lodging_room_type.name
               \-
+              - remaining = LodgingRoomTypePresenter.new(lodging_room_type).min_days_remaining
+              - if remaining != ""
+                = "(#{remaining} Remain Available)"
+                \-
               = lodging_room_type.description
           %table.full_width
             %thead
