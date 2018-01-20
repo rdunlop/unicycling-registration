@@ -55,7 +55,7 @@ class LodgingForm
   end
 
   def self.paid_for(registrant)
-    registrant.payment_details.where(line_item_type: "LodgingPackage").map(&:line_item)
+    registrant.payment_details.paid.where(line_item_type: "LodgingPackage").map(&:line_item)
   end
 
   def lodging_room_type

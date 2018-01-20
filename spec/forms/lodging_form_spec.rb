@@ -256,5 +256,38 @@ describe LodgingForm do
         end
       end
     end
+
+    describe "#paid_for" do
+      context "with no paid elements" do
+        it "returns a blank array" do
+          expect(described_class.paid_for(competitor)).to eq([])
+        end
+      end
+
+      context "with a payment detail" do
+        let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
+        let(:package) { FactoryGirl.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
+        let!(:package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
+        let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, registrant: competitor, line_item: package) }
+
+        context "with a single unpaid element" do
+          let(:payment) { FactoryGirl.create(:payment) }
+          it { expect(described_class.paid_for(competitor)).to eq([]) }
+        end
+
+        context "with a single paid element" do
+          let(:payment) { FactoryGirl.create(:payment, :completed) }
+
+          it "returns a single element array" do
+            competitor.reload
+            packages = described_class.paid_for(competitor)
+
+            expect(packages.count).to eq(1)
+            expect(packages.first.lodging_room_type_id).to eq(lodging_room_type.id)
+            expect(packages.first).to eq(package)
+          end
+        end
+      end
+    end
   end
 end
