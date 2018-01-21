@@ -37,9 +37,9 @@ class RegistrantsController < ApplicationController
 
   before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
-  before_action :load_registrant_by_bib_number, only: %i[show results refresh_usa_status copy_to_competitor copy_to_noncompetitor destroy waiver]
-  before_action :authorize_registrant, only: %i[show destroy refresh_usa_status waiver]
-  before_action :authorize_logged_in, only: %i[all empty_waiver subregion_options]
+  before_action :load_registrant_by_bib_number, only: %i[show results refresh_usa_status copy_to_competitor copy_to_noncompetitor destroy]
+  before_action :authorize_registrant, only: %i[show destroy refresh_usa_status]
+  before_action :authorize_logged_in, only: %i[all subregion_options]
   before_action :skip_authorization, only: [:results]
 
   before_action :set_registrants_breadcrumb
@@ -51,7 +51,7 @@ class RegistrantsController < ApplicationController
     @my_registrants = @user.registrants.active_or_incomplete
     @shared_registrants = @user.accessible_registrants - @my_registrants
     @total_owing = @user.total_owing
-    @has_print_waiver = @config.has_print_waiver
+    @has_print_waiver = @config.print_waiver?
     @registrant = Registrant.new(user: @user)
 
     respond_to do |format|
@@ -86,44 +86,6 @@ class RegistrantsController < ApplicationController
       format.html # all.html.erb
       format.pdf { render_common_pdf "all", 'Landscape' }
     end
-  end
-
-  # GET /registrants/empty_waiver
-  def empty_waiver
-    @event_name = @config.long_name
-    @event_start_date = @config.start_date.try(:strftime, "%b %-d, %Y")
-
-    respond_to do |format|
-      format.html { render action: "waiver", layout: "pdf.html" }
-      format.pdf { render pdf: "waiver", formats: [:html], layout: "pdf.html" }
-    end
-  end
-
-  # GET /registrants/1/waiver
-  def waiver
-    @today_date = Date.today.in_time_zone.strftime("%B %-d, %Y")
-
-    @name = @registrant.to_s
-    @age = @registrant.age
-
-    contact_detail = @registrant.contact_detail
-
-    @club = contact_detail.club
-    @address = contact_detail.address
-    @city = contact_detail.city
-    @state = contact_detail.state
-    @zip = contact_detail.zip
-    @country = contact_detail.country_residence
-    @phone = contact_detail.phone
-    @mobile = contact_detail.mobile
-    @email = contact_detail.email
-    # if no e-mail specified, use the user email?
-    @user_email = current_user.email
-    @emergency_name = contact_detail.emergency_name
-    @emergency_primary_phone = contact_detail.emergency_primary_phone
-    @emergency_other_phone = contact_detail.emergency_other_phone
-
-    empty_waiver # load and display waiver
   end
 
   # GET /registrants/1

@@ -276,3 +276,15 @@
     background-color: $payment_active;
   }
 }
+
+.print_waiver_link {
+  @include button($background: $payment, $background-hover: $payment_hover); //(150px);
+  color:white;
+  &:visited {
+    color: white;
+  }
+
+  &:active {
+    background-color: $payment_active;
+  }
+}

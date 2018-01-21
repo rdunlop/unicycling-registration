@@ -127,26 +127,6 @@ describe RegistrantsController do
     end
   end
 
-  describe "GET waiver" do
-    let(:registrant) { FactoryGirl.create(:registrant, :competitor, :minor, user: @user, birthday: Date.new(2000, 1, 2)) }
-    let!(:event_configuration) { FactoryGirl.create(:event_configuration, start_date: Date.new(2013, 7, 21)) }
-
-    it "shows the requested registrant" do
-      get :waiver, params: { id: registrant.to_param }
-      expect(response).to be_success
-      assert_select "[contains(?)]", registrant.to_s
-    end
-
-    it "sets the event-related variables" do
-      allow(Date).to receive(:today).and_return(Date.new(2012, 1, 22))
-      get :waiver, params: { id: registrant.to_param }
-
-      assert_select "[contains(?)]", "January 22, 2012" # Today's date
-      assert_select "[contains(?)]", "Consent and release of parent or guardian, if above entrant is under 18 years of age" # consent
-      assert_select "[contains(?)]", "on Jul 21, 2013." # consent date
-    end
-  end
-
   describe "GET show" do
     it "shows the requested registrant" do
       registrant = FactoryGirl.create(:competitor, user: @user)
