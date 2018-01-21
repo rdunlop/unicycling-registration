@@ -15,10 +15,15 @@
     .help_bubble{ title: t(".online_waiver_description") }
     .help_bubble{ title: t(".print_waiver_description") }
 
+    - if f.object.waiver_file_name.present?
+      = link_to "Current Waiver", f.object.waiver_file_name_url, target: "_blank"
+    = f.input :waiver_file_name
     = f.input :custom_waiver_text, placeholder: EventConfiguration.default_waiver_text
 
     %h3= t(".rules")
 
+    - if f.object.rules_file_name.present?
+      = link_to "Current Rules", f.object.rules_file_name_url, target: "_blank"
     = f.input :rules_file_name
     = f.input :accept_rules
 

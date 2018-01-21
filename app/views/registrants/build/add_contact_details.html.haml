@@ -1,5 +1,5 @@
 - @registrant.build_contact_detail if @registrant.contact_detail.nil?
-- @has_online_waiver = @config.has_online_waiver
+- @has_online_waiver = @config.online_waiver?
 - @has_rules = @config.accept_rules?
 - @other_registrant = (current_user.registrants.active - [@registrant]).last
 - if session[:copy_from_previous_warnings] && session[:copy_from_previous_warnings].include?(@registrant.id)

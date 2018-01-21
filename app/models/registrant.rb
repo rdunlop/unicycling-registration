@@ -554,7 +554,7 @@ class Registrant < ApplicationRecord
   end
 
   def needs_waiver?
-    EventConfiguration.singleton.has_online_waiver && status_is_active?("contact_details")
+    EventConfiguration.singleton.online_waiver? && status_is_active?("contact_details")
   end
 
   def needs_rules_accepted?
