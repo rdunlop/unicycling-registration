@@ -424,13 +424,11 @@ Rails.application.routes.draw do
       # normal user
       collection do
         get :all
-        get :empty_waiver
         get :subregion_options
       end
 
       member do
         get :results
-        get :waiver
         put :refresh_usa_status
         post :copy_to_competitor
         post :copy_to_noncompetitor

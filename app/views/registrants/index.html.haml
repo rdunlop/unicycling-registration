@@ -9,13 +9,12 @@
   = render "reg_closed_banner"
 
 = render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants}
-= render partial: "waiver_blank"
+= render :partial => "waiver"
 - if @config.online_payment?
   %hr
   %p
     = t(".be_sure_to_submit_payment")
   %p= t(".note_date_of_payment_html")
-  = render :partial => "waiver"
   %p
     = t(".registration_time")
     %br

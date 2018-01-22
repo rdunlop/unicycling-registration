@@ -48,6 +48,7 @@
 #  add_event_end_date                            :datetime
 #  max_registrants                               :integer          default(0), not null
 #  representation_type                           :string           default("country"), not null
+#  waiver_file_name                              :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -82,6 +83,11 @@ FactoryGirl.define do
     trait :with_usa do
       usa true
       organization_membership_type "usa"
+    end
+
+    trait :with_waiver_pdf do
+      waiver_file_name { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
+      waiver "print"
     end
   end
 end

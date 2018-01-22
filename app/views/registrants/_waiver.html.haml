@@ -1,9 +1,9 @@
 - cache_i18n [@config, @registrant] do
-  - if @config.has_print_waiver
-    .data_block.non_printable
+  - if @config.print_waiver?
+    %hr.non_printable
+    .non_printable
       %p
         %b= t(".headline")
         %br
         = t(".parent_guardian_blurb")
-      - if @registrant && @registrant.persisted?
-        = link_to t(".print_legal_waiver"), waiver_registrant_path(@registrant, format: 'pdf'), { class: "print_waiver_link", target: "_blank" }
+      = link_to t(".print_legal_waiver"), @config.waiver_file_name_url, { class: "print_waiver_link", target: "_blank" }

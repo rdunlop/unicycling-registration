@@ -29,6 +29,7 @@ en:
         max_registrants: Maximum Total Number of Registrants
         comp_noncomp_page_id: "Competitor vs Non-Competitor description Page"
         rules_file_name: Rules File PDF
+        waiver_file_name: Printable Waiver File PDF
         accept_rules: Must Accept Rules
         music_submission_end_date: Last day to accept Music Uploads
         event_sign_up_closed_date: Last day to sign up for Events

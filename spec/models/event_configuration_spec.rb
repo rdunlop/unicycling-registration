@@ -48,6 +48,7 @@
 #  add_event_end_date                            :datetime
 #  max_registrants                               :integer          default(0), not null
 #  representation_type                           :string           default("country"), not null
+#  waiver_file_name                              :string
 #
 
 require 'spec_helper'
