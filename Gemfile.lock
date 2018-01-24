@@ -289,7 +289,7 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     http_accept_language (2.1.1)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     i18n_data (0.7.0)
     ice_nine (0.11.2)
@@ -568,7 +568,7 @@ GEM
     timeliness (0.3.8)
     timers (4.1.2)
       hitimes
-    tinymce-rails (4.6.7)
+    tinymce-rails (4.7.5)
       railties (>= 3.1.1)
     ttfunk (1.4.0)
     tzinfo (1.2.4)
@@ -686,7 +686,7 @@ DEPENDENCIES
   spreadsheet
   teaspoon-jasmine
   therubyracer
-  tinymce-rails (< 4.7)
+  tinymce-rails (< 4.8)
   tolk!
   uglifier (>= 1.0.3)
   unicorn

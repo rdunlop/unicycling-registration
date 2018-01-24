@@ -36,7 +36,7 @@ gem 'money-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
 gem 'simple_form'
-gem 'tinymce-rails', '< 4.7' # Issue with async loading of JS for TinyMCE
+gem 'tinymce-rails', '< 4.8' # Issue with async loading of JS for TinyMCE
 
 # system utils
 gem 'acme-client'
