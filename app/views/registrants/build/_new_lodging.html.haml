@@ -15,10 +15,14 @@
             %b
               = lodging_room_type.name
               \-
-              - remaining = LodgingRoomTypePresenter.new(lodging_room_type).min_days_remaining
-              - if remaining != ""
-                = "(#{remaining} Remain Available)"
-                \-
+              - cache_i18n [LodgingPackage.cache_key_for_set(lodging_room_type.id), Payment] do
+                - remaining = LodgingRoomTypePresenter.new(lodging_room_type).min_days_remaining
+                - if remaining != ""
+                  - if remaining == 0
+                    = "Sold Out"
+                  - else
+                    = "(#{remaining} Remain Available)"
+                  \-
               = lodging_room_type.description
           %table.full_width
             %thead

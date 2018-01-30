@@ -16,6 +16,8 @@
 #
 
 class LodgingPackage < ApplicationRecord
+  include CachedSetModel
+
   belongs_to :lodging_room_type
   belongs_to :lodging_room_option
   has_many :lodging_package_days, dependent: :destroy
@@ -25,6 +27,10 @@ class LodgingPackage < ApplicationRecord
   validates :lodging_room_type, :lodging_room_option, presence: true
   validates :total_cost, presence: true
   monetize :total_cost_cents
+
+  def self.cache_set_field
+    :lodging_room_type_id
+  end
 
   # Check to see that a new entry can be created
   def can_create_registrant_expense_item?(registrant_expense_item)
