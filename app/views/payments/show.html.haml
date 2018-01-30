@@ -17,10 +17,6 @@
     - if @payment.total_amount > 0.to_money
       - if @config.online_payment?
         = render "paypal_payment_form", payment: @payment, config: @config
-      - if @config.offline_payment?
-        = form_tag pay_offline_payment_path(@payment) do
-          = submit_tag t(".pay_offline"), data: { confirm: t(".confirm_pay_offline", payment_number: @payment.id) }, class: "payment_link"
-
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag t(".complete_payment"), class: "payment_link"

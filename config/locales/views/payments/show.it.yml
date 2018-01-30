@@ -6,5 +6,4 @@ it:
       offline_payment_instructions: Istruzioni per il pagamento offline
       payment_reference: 'Riferimento del pagamento #%{payment_id}'
       payment_summary: Riassunto pagamenti
-      pay_offline: Accetta di pagare offline
       please_proceed_with_payment: Prego proceda con il suo pagamento

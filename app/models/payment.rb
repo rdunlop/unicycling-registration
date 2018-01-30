@@ -71,13 +71,6 @@ class Payment < ApplicationRecord
     save
   end
 
-  # Mark this payment as "will be paid offline"
-  def offline_pay
-    self.offline_pending_date = Time.current
-    self.offline_pending = true
-    save
-  end
-
   # return a set of payment_details which are unique With-respect-to {amount, expense_item }
   def unique_payment_details
     results = []
