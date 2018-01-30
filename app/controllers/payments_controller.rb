@@ -119,25 +119,6 @@ class PaymentsController < ApplicationController
     redirect_to user_registrants_path(@payment.user)
   end
 
-  # User has agreed that they will make an offline payment
-  # As a result, we commit these expenses to a payment
-  def pay_offline
-    @payment = Payment.find(params[:id])
-    authorize @payment
-    if @payment.total_amount == 0.to_money
-      @payment.complete(note: "Zero Cost")
-      return
-    end
-
-    if @payment.offline_pay
-      flash[:notice] = "Payment Marked as an Offline Payment"
-      redirect_to user_registrants_path(@payment.user)
-    else
-      flash[:alert] = "Error marking payment ready for offline payment #{@payment.errors.full_messages}"
-      redirect_to payment_path(@payment)
-    end
-  end
-
   def fake_complete
     @payment = Payment.find(params[:id])
     authorize @payment
