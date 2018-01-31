@@ -18,8 +18,12 @@
           %td= package.date_of_last_activity
 
 - @lodging.lodging_room_types.includes(lodging_packages: [:lodging_room_option, :lodging_package_days]).each do |lodging_room_type|
+  - num_free = LodgingRoomTypePresenter.new(lodging_room_type).min_days_remaining
   %table.sortable
-    %legend #{lodging_room_type} selections
+    %legend
+      #{lodging_room_type} selections
+      - if num_free != ""
+        = "(#{num_free} Remain Available)"
     %thead
       %tr
         %th Date
