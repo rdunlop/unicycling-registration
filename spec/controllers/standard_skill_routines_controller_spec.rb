@@ -17,15 +17,15 @@ require 'spec_helper'
 describe StandardSkillRoutinesController do
   before do
     EventConfiguration.singleton.update(standard_skill: true, standard_skill_closed_date: 1.week.from_now)
-    @user = FactoryGirl.create(:user)
-    @registrant = FactoryGirl.create(:competitor, user: @user)
+    @user = FactoryBot.create(:user)
+    @registrant = FactoryBot.create(:competitor, user: @user)
     sign_in @user
   end
 
   describe "GET show" do
     it "shows the requested routine" do
-      routine = FactoryGirl.create(:standard_skill_routine, registrant: @registrant)
-      FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: routine, standard_skill_entry: FactoryGirl.create(:standard_skill_entry, number: 1, letter: "a", description: "One"))
+      routine = FactoryBot.create(:standard_skill_routine, registrant: @registrant)
+      FactoryBot.create(:standard_skill_routine_entry, standard_skill_routine: routine, standard_skill_entry: FactoryBot.create(:standard_skill_entry, number: 1, letter: "a", description: "One"))
       get :show, params: { id: routine.to_param }
 
       assert_match(/One/, response.body)
@@ -52,7 +52,7 @@ describe StandardSkillRoutinesController do
     end
 
     describe "when a routine already exists" do
-      let!(:standard_skill_routine) { FactoryGirl.create(:standard_skill_routine, registrant: @registrant) }
+      let!(:standard_skill_routine) { FactoryBot.create(:standard_skill_routine, registrant: @registrant) }
 
       it "redirects to that routine without creating a new one" do
         expect do
@@ -63,7 +63,7 @@ describe StandardSkillRoutinesController do
     end
 
     it "Cannot create a routine for another user" do
-      post :create, params: { registrant_id: FactoryGirl.create(:registrant).to_param }
+      post :create, params: { registrant_id: FactoryBot.create(:registrant).to_param }
       expect(response).to redirect_to(root_path)
     end
 

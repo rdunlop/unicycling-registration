@@ -24,10 +24,10 @@
 require 'spec_helper'
 
 describe VolunteersController do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before(:each) do
-    @ev = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:timed_competition, event: @ev)
+    @ev = FactoryBot.create(:event)
+    @ec = FactoryBot.create(:timed_competition, event: @ev)
 
     @ec.save!
     user.add_role :director, @ev
@@ -49,7 +49,7 @@ describe VolunteersController do
   end
 
   describe "POST create" do
-    let!(:other_user) { FactoryGirl.create(:user) }
+    let!(:other_user) { FactoryBot.create(:user) }
     before { request.env["HTTP_REFERER"] = competition_path(@ec) }
     describe "with valid params" do
       it "creates a new Volunteer" do
@@ -77,7 +77,7 @@ describe VolunteersController do
   end
 
   describe "DELETE destroy" do
-    let(:other_user) { FactoryGirl.create(:user) }
+    let(:other_user) { FactoryBot.create(:user) }
     before do
       other_user.add_role(:race_official, @ec)
     end

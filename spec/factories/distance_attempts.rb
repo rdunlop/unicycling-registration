@@ -16,12 +16,12 @@
 #  index_distance_attempts_judge_id       (judge_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :distance_attempt do
     association :competitor, factory: %i[event_competitor with_high_jump_competition]
-    judge # use FactoryGirl to create
+    judge # use FactoryBot to create
     distance 220
     fault false
   end

@@ -20,9 +20,9 @@
 #  index_award_labels_on_user_id  (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :award_label do
     bib_number 1
     line_1 "Bob Smith"
@@ -32,6 +32,6 @@ FactoryGirl.define do
     line_5 "MyString"
     place 1
     user # Factory Girl
-    registrant # FactoryGirl
+    registrant # FactoryBot
   end
 end

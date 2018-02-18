@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe UserPolicy do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   subject { described_class }
 
@@ -11,11 +11,11 @@ describe UserPolicy do
     end
 
     it "disallows access to another registrant" do
-      expect(subject).to_not permit(FactoryGirl.create(:user), user)
+      expect(subject).to_not permit(FactoryBot.create(:user), user)
     end
 
     it "grants access to super_admin" do
-      expect(subject).to permit(FactoryGirl.create(:super_admin_user), user)
+      expect(subject).to permit(FactoryBot.create(:super_admin_user), user)
     end
   end
 

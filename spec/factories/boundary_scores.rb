@@ -20,12 +20,12 @@
 #  index_boundary_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :boundary_score do
     association :competitor, factory: :event_competitor
-    judge # FactoryGirl
+    judge # FactoryBot
     number_of_people 3
     major_dismount 0
     minor_dismount 0

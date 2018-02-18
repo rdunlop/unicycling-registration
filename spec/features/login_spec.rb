@@ -5,7 +5,7 @@ describe 'Logging in to the system' do
   include_context 'can login'
 
   context 'as a normal user' do
-    let(:user) { FactoryGirl.create :user }
+    let(:user) { FactoryBot.create :user }
 
     context 'that has logged in' do
       before :each do

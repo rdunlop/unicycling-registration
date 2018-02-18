@@ -31,10 +31,10 @@ require 'spec_helper'
 
 describe TimeResult do
   before(:each) do
-    @competitor = FactoryGirl.create(:event_competitor)
-    @tr = FactoryGirl.create(:time_result, competitor: @competitor)
+    @competitor = FactoryBot.create(:event_competitor)
+    @tr = FactoryBot.create(:time_result, competitor: @competitor)
   end
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@tr.valid?).to eq(true)
   end
 

@@ -19,17 +19,17 @@ require 'spec_helper'
 
 describe RegistrantGroupLeadersController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
 
-  let(:registrant_group) { FactoryGirl.create(:registrant_group) }
+  let(:registrant_group) { FactoryBot.create(:registrant_group) }
 
   describe "POST create" do
     describe "with valid params" do
       let(:params) do
         {
-          user_id: FactoryGirl.create(:user).id
+          user_id: FactoryBot.create(:user).id
         }
       end
 
@@ -42,8 +42,8 @@ describe RegistrantGroupLeadersController do
   end
 
   describe "DELETE destroy" do
-    let!(:other_registrant_group_leader) { FactoryGirl.create(:registrant_group_leader, registrant_group: registrant_group) }
-    let!(:registrant_group_leader) { FactoryGirl.create(:registrant_group_leader, registrant_group: registrant_group) }
+    let!(:other_registrant_group_leader) { FactoryBot.create(:registrant_group_leader, registrant_group: registrant_group) }
+    let!(:registrant_group_leader) { FactoryBot.create(:registrant_group_leader, registrant_group: registrant_group) }
     it "destroys the requested registrant_group_leader" do
       expect do
         delete :destroy, params: { id: registrant_group_leader.to_param }

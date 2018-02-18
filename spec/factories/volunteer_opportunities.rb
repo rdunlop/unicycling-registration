@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :volunteer_opportunity do
     sequence(:description) { |n| "Artistic Judge #{n}" }
     inform_emails "test@dunlopweb.com"

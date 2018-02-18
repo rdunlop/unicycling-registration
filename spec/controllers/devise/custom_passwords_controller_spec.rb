@@ -11,7 +11,7 @@ describe Devise::CustomPasswordsController do
   }
 
   describe "when updating the password" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let!(:user_convention) { user.user_conventions.first }
 
     before do

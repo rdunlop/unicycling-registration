@@ -21,13 +21,13 @@
 #  index_payment_details_registrant_id                       (registrant_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment_detail do
-    payment # FactoryGirl
-    registrant # FactoryGirl
+    payment # FactoryBot
+    registrant # FactoryBot
     amount "9.99"
-    association(:line_item, factory: :expense_item) # FactoryGirl
+    association(:line_item, factory: :expense_item) # FactoryBot
   end
 end

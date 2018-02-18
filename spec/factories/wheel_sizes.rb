@@ -9,9 +9,9 @@
 #  updated_at  :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :wheel_size do
     position 1
     description "MyString"

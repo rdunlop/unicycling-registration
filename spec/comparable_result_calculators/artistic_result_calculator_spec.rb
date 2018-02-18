@@ -2,13 +2,13 @@ require 'spec_helper'
 
 RSpec.describe ArtisticResultCalculator do
   before(:each) do
-    @competition = FactoryGirl.create(:competition)
-    @judge1 = FactoryGirl.create(:judge, competition: @competition)
+    @competition = FactoryBot.create(:competition)
+    @judge1 = FactoryBot.create(:judge, competition: @competition)
     @jt = @judge1.judge_type
     @calc = described_class.new
-    @comp1 = FactoryGirl.create(:event_competitor, competition: @competition)
-    @comp2 = FactoryGirl.create(:event_competitor, competition: @competition)
-    @comp3 = FactoryGirl.create(:event_competitor, competition: @competition)
+    @comp1 = FactoryBot.create(:event_competitor, competition: @competition)
+    @comp2 = FactoryBot.create(:event_competitor, competition: @competition)
+    @comp3 = FactoryBot.create(:event_competitor, competition: @competition)
   end
   describe "when calculating the placement points of an event" do
     before(:each) do
@@ -38,8 +38,8 @@ RSpec.describe ArtisticResultCalculator do
 
     describe "with technical scores too" do
       before(:each) do
-        @tech_jt = FactoryGirl.create(:judge_type, name: "Technical", event_class: @competition.event_class)
-        @judge = FactoryGirl.create(:judge, competition: @competition, judge_type: @tech_jt)
+        @tech_jt = FactoryBot.create(:judge_type, name: "Technical", event_class: @competition.event_class)
+        @judge = FactoryBot.create(:judge, competition: @competition, judge_type: @tech_jt)
 
         @jt2 = @judge.judge_type
 

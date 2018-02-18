@@ -37,11 +37,11 @@
 #  index_competitions_on_combined_competition_id  (combined_competition_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition do
-    event # FactoryGirl
+    event # FactoryBot
     sequence(:name) { |n| "Competition #{n}" }
     sequence(:award_title_name) { |n| "Competition #{n}" }
     locked_at nil

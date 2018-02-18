@@ -14,8 +14,8 @@ require 'spec_helper'
 
 describe StandardSkillRoutineEntry do
   it "should be able to reference the associated skill entry" do
-    skill = FactoryGirl.create(:standard_skill_entry)
-    routine = FactoryGirl.create(:standard_skill_routine)
+    skill = FactoryBot.create(:standard_skill_entry)
+    routine = FactoryBot.create(:standard_skill_routine)
     skr = StandardSkillRoutineEntry.new
     skr.standard_skill_entry = skill
     skr.standard_skill_routine = routine

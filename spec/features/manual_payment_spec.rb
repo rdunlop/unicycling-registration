@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Creating manual payments' do
-  let(:user) { FactoryGirl.create(:payment_admin) }
+  let(:user) { FactoryBot.create(:payment_admin) }
   include_context 'user is logged in'
   include_context 'basic event configuration'
 

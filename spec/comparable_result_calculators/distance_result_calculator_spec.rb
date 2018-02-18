@@ -3,8 +3,8 @@ require 'spec_helper'
 describe DistanceResultCalculator do
   let(:calc) { described_class.new }
 
-  let(:competition) { FactoryGirl.create(:distance_competition) }
-  let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+  let(:competition) { FactoryBot.create(:distance_competition) }
+  let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
 
   describe "#competitor_has_result?" do
     it "doesn't have results by default" do
@@ -12,7 +12,7 @@ describe DistanceResultCalculator do
     end
 
     it "does have results with distance_attempts" do
-      FactoryGirl.create(:distance_attempt, competitor: competitor)
+      FactoryBot.create(:distance_attempt, competitor: competitor)
       expect(calc.competitor_has_result?(competitor.reload)).to be_truthy
     end
   end
@@ -23,7 +23,7 @@ describe DistanceResultCalculator do
     end
 
     describe "When the only results are DQ" do
-      let!(:distance_attempt) { FactoryGirl.create(:distance_attempt, competitor: competitor, fault: true) }
+      let!(:distance_attempt) { FactoryBot.create(:distance_attempt, competitor: competitor, fault: true) }
 
       it "returns nil" do
         expect(calc.competitor_result(competitor.reload)).to be_nil
@@ -31,7 +31,7 @@ describe DistanceResultCalculator do
     end
 
     describe "when there are results" do
-      let!(:distance_attempt) { FactoryGirl.create(:distance_attempt, competitor: competitor, fault: false, distance: 14) }
+      let!(:distance_attempt) { FactoryBot.create(:distance_attempt, competitor: competitor, fault: false, distance: 14) }
 
       it "returns the distance" do
         expect(calc.competitor_result(competitor.reload)).to eq("14 cm")
@@ -45,7 +45,7 @@ describe DistanceResultCalculator do
     end
 
     describe "with a result" do
-      let!(:distance_attempt) { FactoryGirl.create(:distance_attempt, competitor: competitor, fault: false, distance: 14) }
+      let!(:distance_attempt) { FactoryBot.create(:distance_attempt, competitor: competitor, fault: false, distance: 14) }
 
       it { expect(calc.competitor_comparable_result(competitor)).to eq(14) }
     end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Logging in to the system' do
-  let(:user) { FactoryGirl.create :user }
+  let(:user) { FactoryBot.create :user }
   include_context 'basic event configuration'
   include_context 'user is logged in'
 
@@ -74,7 +74,7 @@ describe 'Logging in to the system' do
 
   describe "when a noncompetitor registrant exists" do
     before :each do
-      registrant = FactoryGirl.create(:noncompetitor, user: user)
+      registrant = FactoryBot.create(:noncompetitor, user: user)
       visit registrant_path(registrant)
     end
 

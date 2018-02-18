@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe StreetScoresController do
   before do
-    @admin = FactoryGirl.create(:super_admin_user)
-    @user = FactoryGirl.create(:data_entry_volunteer_user)
-    @other_user = FactoryGirl.create(:data_entry_volunteer_user)
+    @admin = FactoryBot.create(:super_admin_user)
+    @user = FactoryBot.create(:data_entry_volunteer_user)
+    @other_user = FactoryBot.create(:data_entry_volunteer_user)
     sign_in @admin
 
-    @judge_type = FactoryGirl.create(:judge_type, :street_judge)
-    @judge = FactoryGirl.create(:judge, user_id: @user.id, judge_type: @judge_type)
-    @other_judge = FactoryGirl.create(:judge, user_id: @other_user.id, judge_type: @judge_type)
+    @judge_type = FactoryBot.create(:judge_type, :street_judge)
+    @judge = FactoryBot.create(:judge, user_id: @user.id, judge_type: @judge_type)
+    @other_judge = FactoryBot.create(:judge, user_id: @other_user.id, judge_type: @judge_type)
 
-    @comp = FactoryGirl.create(:event_competitor, competition: @judge.competition)
-    @comp2 = FactoryGirl.create(:event_competitor, competition: @judge.competition)
+    @comp = FactoryBot.create(:event_competitor, competition: @judge.competition)
+    @comp2 = FactoryBot.create(:event_competitor, competition: @judge.competition)
     @judge.competition.competitors << @comp2
     @judge.competition.competitors << @comp
     @judge.save!
@@ -32,8 +32,8 @@ describe StreetScoresController do
     end
     describe "when returning a list of scores" do
       before do
-        @user_score2 = FactoryGirl.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
-        @user_score1 = FactoryGirl.create(:score, val_1: 5, judge: @judge, competitor: @comp)
+        @user_score2 = FactoryBot.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
+        @user_score1 = FactoryBot.create(:score, val_1: 5, judge: @judge, competitor: @comp)
       end
 
       it "should return them in ascending order of val_1 points" do
@@ -68,8 +68,8 @@ describe StreetScoresController do
   end
   describe "DELETE destroy" do
     before do
-      @user_score1 = FactoryGirl.create(:score, val_1: 5, judge: @judge, competitor: @comp)
-      @user_score2 = FactoryGirl.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
+      @user_score1 = FactoryBot.create(:score, val_1: 5, judge: @judge, competitor: @comp)
+      @user_score2 = FactoryBot.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
     end
     it "should allow access to destroy" do
       expect do
@@ -83,11 +83,11 @@ describe StreetScoresController do
 
     before do
       # create score with existing current_user
-      @user_score = FactoryGirl.create(:score, judge: @judge, competitor: @comp)
+      @user_score = FactoryBot.create(:score, judge: @judge, competitor: @comp)
 
       # Change logged-in user
       sign_out @user
-      @auth_user = FactoryGirl.create(:user)
+      @auth_user = FactoryBot.create(:user)
       sign_in @auth_user
     end
     it "should deny access to index" do

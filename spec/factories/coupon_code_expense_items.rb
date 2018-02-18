@@ -14,9 +14,9 @@
 #  index_coupon_code_expense_items_on_expense_item_id  (expense_item_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :coupon_code_expense_item do
     coupon_code # Factory Girl
     expense_item # Factory Girl

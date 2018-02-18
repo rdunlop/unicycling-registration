@@ -7,7 +7,7 @@ describe PaymentPresenter do
   end
 
   it "requires that the note be set" do
-    @pay.user = FactoryGirl.create(:payment_admin)
+    @pay.user = FactoryBot.create(:payment_admin)
     expect(@pay.valid?).to eq(false)
     @pay.note = "Hello"
     expect(@pay.valid?).to eq(true)
@@ -19,9 +19,9 @@ describe PaymentPresenter do
 
   describe "when a registrant has paid for something" do
     before(:each) do
-      @reg = FactoryGirl.create(:competitor)
-      @payment = FactoryGirl.create(:payment, completed: true)
-      @pd = FactoryGirl.create(:payment_detail, payment: @payment, registrant: @reg, details: "Some details")
+      @reg = FactoryBot.create(:competitor)
+      @payment = FactoryBot.create(:payment, completed: true)
+      @pd = FactoryBot.create(:payment_detail, payment: @payment, registrant: @reg, details: "Some details")
     end
 
     it "has paid_items for the registrant" do
@@ -49,8 +49,8 @@ describe PaymentPresenter do
 
   describe "when a registrant has selected something, but not paid for" do
     before(:each) do
-      @reg = FactoryGirl.create(:competitor)
-      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Some other details")
+      @reg = FactoryBot.create(:competitor)
+      @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, details: "Some other details")
       @reg.reload
     end
     it "has unpaid_details" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Printing::RaceRecordingController do
   before do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
 

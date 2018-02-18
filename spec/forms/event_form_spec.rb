@@ -25,9 +25,9 @@
 require 'spec_helper'
 
 describe EventForm do
-  let(:category) { FactoryGirl.create(:category) }
+  let(:category) { FactoryBot.create(:category) }
   let(:event) { Event.new(category: category) }
-  let(:attributes) { FactoryGirl.attributes_for(:event) }
+  let(:attributes) { FactoryBot.attributes_for(:event) }
 
   describe "with normal event elements" do
     it "creates an event" do

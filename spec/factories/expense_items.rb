@@ -22,14 +22,14 @@
 #  index_expense_items_on_cost_element_type_and_cost_element_id  (cost_element_type,cost_element_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :expense_item do
     sequence(:name) { |n| "T-Shirt Size ##{n}" }
     cost "9.99"
     position 1
-    expense_group # FactoryGirl
+    expense_group # FactoryBot
     has_details false
     has_custom_cost false
     details_label nil

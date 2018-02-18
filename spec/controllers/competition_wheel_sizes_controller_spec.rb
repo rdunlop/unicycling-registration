@@ -18,9 +18,9 @@
 require 'spec_helper'
 
 describe CompetitionWheelSizesController do
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:user) { FactoryGirl.create(:super_admin_user) }
-  let(:registrant) { FactoryGirl.create(:competitor) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:user) { FactoryBot.create(:super_admin_user) }
+  let(:registrant) { FactoryBot.create(:competitor) }
   before { sign_in user }
 
   describe "GET index" do
@@ -33,7 +33,7 @@ describe CompetitionWheelSizesController do
   describe "POST create" do
     let(:valid_attributes) do
       {
-        event_id: FactoryGirl.create(:event).id,
+        event_id: FactoryBot.create(:event).id,
         wheel_size_id: WheelSize.first.id
       }
     end
@@ -45,7 +45,7 @@ describe CompetitionWheelSizesController do
   end
 
   describe "DELETE destroy" do
-    let!(:wheel_size) { FactoryGirl.create(:competition_wheel_size, registrant: registrant) }
+    let!(:wheel_size) { FactoryBot.create(:competition_wheel_size, registrant: registrant) }
     it "removes the result" do
       expect do
         delete :destroy, params: { id: wheel_size.id, registrant_id: registrant.bib_number }

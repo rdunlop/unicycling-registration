@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::TranslationsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:convention_admin_user)
+    @admin_user = FactoryBot.create(:convention_admin_user)
     sign_in @admin_user
   end
 

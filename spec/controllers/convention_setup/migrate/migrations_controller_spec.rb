@@ -2,18 +2,18 @@ require 'spec_helper'
 
 describe ConventionSetup::Migrate::MigrationsController do
   before do
-    FactoryGirl.create(:tenant, subdomain: "other")
+    FactoryBot.create(:tenant, subdomain: "other")
     Apartment::Tenant.create "other"
     Apartment::Tenant.switch "other" do
-      event = FactoryGirl.create(:event)
-      FactoryGirl.create(:event_category, event: event)
-      FactoryGirl.create(:event_choice, event: event)
+      event = FactoryBot.create(:event)
+      FactoryBot.create(:event_category, event: event)
+      FactoryBot.create(:event_choice, event: event)
     end
   end
 
   describe "as an admin user" do
     before do
-      user = FactoryGirl.create(:super_admin_user)
+      user = FactoryBot.create(:super_admin_user)
       sign_in user
     end
 

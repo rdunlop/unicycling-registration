@@ -23,7 +23,7 @@
 require 'spec_helper'
 
 describe RegistrantExpenseItem do
-  let(:rei) { FactoryGirl.create(:registrant_expense_item) }
+  let(:rei) { FactoryBot.create(:registrant_expense_item) }
 
   before(:each) do
     @rei = rei
@@ -94,13 +94,13 @@ describe RegistrantExpenseItem do
     end
   end
   it "must associate with the registrant" do
-    @reg = FactoryGirl.create(:registrant)
-    @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg)
+    @reg = FactoryBot.create(:registrant)
+    @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg)
     expect(@rei.registrant).to eq(@reg)
   end
   it "must associate with the expense_item" do
-    @item = FactoryGirl.create(:expense_item)
-    @rei = FactoryGirl.create(:registrant_expense_item, line_item: @item)
+    @item = FactoryBot.create(:expense_item)
+    @rei = FactoryBot.create(:registrant_expense_item, line_item: @item)
     expect(@rei.line_item).to eq(@item)
   end
 
@@ -108,11 +108,11 @@ describe RegistrantExpenseItem do
     before do
       registrant.reload
       expense_group = @ei.expense_group
-      FactoryGirl.create(:expense_group_option, expense_group: expense_group, option: ExpenseGroupOption::ONE_FREE_OF_EACH_IN_GROUP)
+      FactoryBot.create(:expense_group_option, expense_group: expense_group, option: ExpenseGroupOption::ONE_FREE_OF_EACH_IN_GROUP)
     end
 
     it "does allow a 2nd item of the same type (because the existing one is not free)" do
-      new_rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: true)
+      new_rei = FactoryBot.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: true)
       expect(new_rei).to be_valid
     end
 
@@ -123,12 +123,12 @@ describe RegistrantExpenseItem do
       end
 
       it "does not permit a 2nd free item" do
-        new_rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: true)
+        new_rei = FactoryBot.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: true)
         expect(new_rei).not_to be_valid
       end
 
       it "does permit a 2nd item (which is not free" do
-        new_rei = FactoryGirl.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: false)
+        new_rei = FactoryBot.build(:registrant_expense_item, registrant: registrant, line_item: @rei.line_item, free: false)
         expect(new_rei).to be_valid
       end
     end
@@ -136,27 +136,27 @@ describe RegistrantExpenseItem do
 
   describe "with an expense_item with a limited number available" do
     before(:each) do
-      @ei = FactoryGirl.create(:expense_item, maximum_available: 2)
+      @ei = FactoryBot.create(:expense_item, maximum_available: 2)
     end
 
     it "allows creating a registrant expense_item" do
-      @rei = FactoryGirl.build(:registrant_expense_item, line_item: @ei)
+      @rei = FactoryBot.build(:registrant_expense_item, line_item: @ei)
       expect(@rei.valid?).to eq(true)
     end
 
     it "allows creating the maximum amount" do
-      @rei = FactoryGirl.build(:registrant_expense_item, line_item: @ei)
+      @rei = FactoryBot.build(:registrant_expense_item, line_item: @ei)
       expect(@rei.valid?).to eq(true)
       @rei.save!
 
-      @rei2 = FactoryGirl.build(:registrant_expense_item, line_item: @ei)
+      @rei2 = FactoryBot.build(:registrant_expense_item, line_item: @ei)
       expect(@rei2.valid?).to eq(true)
       @rei2.save!
     end
 
     it "doesn't allow creating more than the maximum" do
-      @rei = FactoryGirl.create(:registrant_expense_item, line_item: @ei)
-      @rei2 = FactoryGirl.create(:registrant_expense_item, line_item: @ei)
+      @rei = FactoryBot.create(:registrant_expense_item, line_item: @ei)
+      @rei2 = FactoryBot.create(:registrant_expense_item, line_item: @ei)
       @ei.reload
 
       reg = @rei2.registrant
@@ -168,29 +168,29 @@ describe RegistrantExpenseItem do
 
   describe "with an expense_item with a limited number available PER REGISTRANT" do
     before(:each) do
-      @ei = FactoryGirl.create(:expense_item, maximum_per_registrant: 1)
-      @reg = FactoryGirl.create(:registrant)
+      @ei = FactoryBot.create(:expense_item, maximum_per_registrant: 1)
+      @reg = FactoryBot.create(:registrant)
     end
 
     it "allows creating a registrant expense_item" do
-      @rei = FactoryGirl.build(:registrant_expense_item, line_item: @ei)
+      @rei = FactoryBot.build(:registrant_expense_item, line_item: @ei)
       expect(@rei.valid?).to eq(true)
     end
 
     it "doesn't allow creating more than the max amount" do
-      @rei = FactoryGirl.build(:registrant_expense_item, registrant: @reg, line_item: @ei)
+      @rei = FactoryBot.build(:registrant_expense_item, registrant: @reg, line_item: @ei)
       expect(@rei.valid?).to eq(true)
       @rei.save!
       @reg.reload
 
-      @rei2 = FactoryGirl.build(:registrant_expense_item, registrant: @reg, line_item: @ei)
+      @rei2 = FactoryBot.build(:registrant_expense_item, registrant: @reg, line_item: @ei)
       expect(@rei2.valid?).to eq(false)
     end
 
     it "allows creating max PER registrant" do
-      @reg2 = FactoryGirl.create(:registrant)
-      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @ei)
-      @rei2 = FactoryGirl.build(:registrant_expense_item, registrant: @reg2, line_item: @ei)
+      @reg2 = FactoryBot.create(:registrant)
+      @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @ei)
+      @rei2 = FactoryBot.build(:registrant_expense_item, registrant: @reg2, line_item: @ei)
 
       expect(@rei2.valid?).to eq(true)
     end
@@ -202,8 +202,8 @@ describe RegistrantExpenseItem do
       end
 
       it "can create 2 expense_items for the registrant" do
-        @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @ei)
-        @rei2 = FactoryGirl.build(:registrant_expense_item, registrant: @reg, line_item: @ei)
+        @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @ei)
+        @rei2 = FactoryBot.build(:registrant_expense_item, registrant: @reg, line_item: @ei)
         expect(@rei2.valid?).to eq(true)
       end
     end

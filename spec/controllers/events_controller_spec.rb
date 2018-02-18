@@ -26,10 +26,10 @@ require 'spec_helper'
 
 describe EventsController do
   before do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
-  let(:event) { FactoryGirl.create(:event) }
+  let(:event) { FactoryBot.create(:event) }
 
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
@@ -42,7 +42,7 @@ describe EventsController do
 
   describe "as a normal user" do
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -61,9 +61,9 @@ describe EventsController do
     end
     describe "With competitors and non-competitors" do
       before(:each) do
-        @comp1 = FactoryGirl.create(:competitor)
-        @comp2 = FactoryGirl.create(:competitor)
-        @non_comp1 = FactoryGirl.create(:noncompetitor)
+        @comp1 = FactoryBot.create(:competitor)
+        @comp2 = FactoryBot.create(:competitor)
+        @non_comp1 = FactoryBot.create(:noncompetitor)
       end
       it "sets the number of registrants as @num_registrants" do
         get :summary
@@ -88,7 +88,7 @@ describe EventsController do
   end
 
   describe "GET specific_volunteers" do
-    let(:volunteer_opportunity) { FactoryGirl.create(:volunteer_opportunity) }
+    let(:volunteer_opportunity) { FactoryBot.create(:volunteer_opportunity) }
 
     it "returns a list" do
       get :specific_volunteers, params: { volunteer_opportunity_id: volunteer_opportunity.id }

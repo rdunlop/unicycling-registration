@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Exporters::EventsExporter do
   before do
-    @ev = FactoryGirl.create(:event)
+    @ev = FactoryBot.create(:event)
   end
 
   let(:base_headers) { ["Id", "First Name", "Last Name", "Birthday", "Age", "Gender", "Club"] }
@@ -14,7 +14,7 @@ describe Exporters::EventsExporter do
   end
 
   describe "with a registrant" do
-    let!(:reg) { FactoryGirl.create(:competitor) }
+    let!(:reg) { FactoryBot.create(:competitor) }
     it "sets the rows" do
       data = exporter.rows
       expect(data[0]).to eq([reg.bib_number, reg.first_name, reg.last_name, reg.birthday, reg.age, reg.gender, reg.club, nil])
@@ -23,7 +23,7 @@ describe Exporters::EventsExporter do
     describe "with a registration choice for the event" do
       before(:each) do
         @ecat = @ev.event_categories.first
-        @rc = FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event_category: @ecat, event: @ev, signed_up: true)
+        @rc = FactoryBot.create(:registrant_event_sign_up, registrant: reg, event_category: @ecat, event: @ev, signed_up: true)
       end
 
       it "has a value in the event-signed-up target column" do

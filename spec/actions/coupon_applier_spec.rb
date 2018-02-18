@@ -3,16 +3,16 @@ require 'spec_helper'
 describe CouponApplier do
   before do
     # so that registrants have ages:
-    FactoryGirl.create(:event_configuration, start_date: Date.current)
+    FactoryBot.create(:event_configuration, start_date: Date.current)
   end
 
-  let(:expense_item) { FactoryGirl.create(:expense_item) }
+  let(:expense_item) { FactoryBot.create(:expense_item) }
   let(:max_coupon_uses) { 0 }
-  let(:coupon_code) { FactoryGirl.create(:coupon_code, max_num_uses: max_coupon_uses) }
-  let!(:coupon_code_detail) { FactoryGirl.create(:coupon_code_expense_item, coupon_code: coupon_code, expense_item: expense_item) }
+  let(:coupon_code) { FactoryBot.create(:coupon_code, max_num_uses: max_coupon_uses) }
+  let!(:coupon_code_detail) { FactoryBot.create(:coupon_code_expense_item, coupon_code: coupon_code, expense_item: expense_item) }
   let(:coupon_code_string) { coupon_code.code }
-  let(:payment) { FactoryGirl.create(:payment, :completed) }
-  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, line_item: expense_item) }
+  let(:payment) { FactoryBot.create(:payment, :completed) }
+  let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, line_item: expense_item) }
   let(:subject) { described_class.new(payment.reload, coupon_code_string) }
   let(:do_action) { subject.perform }
 
@@ -48,16 +48,16 @@ describe CouponApplier do
   end
 
   describe "when a maximum registrant age is specified" do
-    let(:coupon_code) { FactoryGirl.create(:coupon_code, maximum_registrant_age: 20) }
+    let(:coupon_code) { FactoryBot.create(:coupon_code, maximum_registrant_age: 20) }
     let!(:payment_detail) do
-      FactoryGirl.create(:payment_detail,
-                         payment: payment,
-                         registrant: registrant,
-                         line_item: expense_item)
+      FactoryBot.create(:payment_detail,
+                        payment: payment,
+                        registrant: registrant,
+                        line_item: expense_item)
     end
 
     context "on a 21 year old" do
-      let(:registrant) { FactoryGirl.create(:competitor, birthday: 21.years.ago) }
+      let(:registrant) { FactoryBot.create(:competitor, birthday: 21.years.ago) }
 
       it "doesn't allow the coupon to be used" do
         do_action
@@ -67,7 +67,7 @@ describe CouponApplier do
     end
 
     context "on a 20 year old" do
-      let(:registrant) { FactoryGirl.create(:competitor, birthday: 20.years.ago) }
+      let(:registrant) { FactoryBot.create(:competitor, birthday: 20.years.ago) }
 
       it "does allow the coupon to be used on a 20 year old" do
         do_action
@@ -87,8 +87,8 @@ describe CouponApplier do
 
     describe "when it has already reached its limit" do
       before { do_action }
-      let(:new_payment) { FactoryGirl.create(:payment) }
-      let!(:new_payment_detail) { FactoryGirl.create(:payment_detail, payment: new_payment, line_item: expense_item) }
+      let(:new_payment) { FactoryBot.create(:payment) }
+      let!(:new_payment_detail) { FactoryBot.create(:payment_detail, payment: new_payment, line_item: expense_item) }
 
       it "doesn't allow being applied again" do
         act = described_class.new(new_payment.reload, coupon_code_string)

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Importers::WaveUpdater do
-  let(:competition) { FactoryGirl.create(:timed_competition) }
+  let(:competition) { FactoryBot.create(:timed_competition) }
 
   describe "update waves" do
-    let!(:competitor1) { FactoryGirl.create(:event_competitor, competition: competition, bib_number: 101) }
+    let!(:competitor1) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 101) }
 
     let(:processor) do
       double(

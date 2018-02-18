@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe ConventionSetup::ConventionSeriesController do
   before(:each) do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
 
   describe "GET index" do
-    let!(:series) { FactoryGirl.create(:convention_series) }
+    let!(:series) { FactoryBot.create(:convention_series) }
 
     it "displays all" do
       get :index
@@ -16,7 +16,7 @@ describe ConventionSetup::ConventionSeriesController do
   end
 
   describe "POST create" do
-    let(:params) { FactoryGirl.attributes_for(:convention_series) }
+    let(:params) { FactoryBot.attributes_for(:convention_series) }
 
     it "creates a new series" do
       expect do
@@ -26,7 +26,7 @@ describe ConventionSetup::ConventionSeriesController do
   end
 
   describe "DELETE destroy" do
-    let!(:series) { FactoryGirl.create(:convention_series) }
+    let!(:series) { FactoryBot.create(:convention_series) }
     it "deletes a new series" do
       expect do
         delete :destroy, params: { id: series.id }
@@ -35,7 +35,7 @@ describe ConventionSetup::ConventionSeriesController do
   end
 
   describe "GET show" do
-    let(:series) { FactoryGirl.create(:convention_series) }
+    let(:series) { FactoryBot.create(:convention_series) }
 
     it "displays the series" do
       get :show, params: { id: series.id }
@@ -44,7 +44,7 @@ describe ConventionSetup::ConventionSeriesController do
   end
 
   context "with a series" do
-    let(:series) { FactoryGirl.create(:convention_series) }
+    let(:series) { FactoryBot.create(:convention_series) }
 
     describe "POST add" do
       it "adds tenant to series" do
@@ -55,7 +55,7 @@ describe ConventionSetup::ConventionSeriesController do
     end
 
     describe "DELETE remove" do
-      let!(:member) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: Tenant.first) }
+      let!(:member) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: Tenant.first) }
 
       it "removes tenant from series" do
         expect do

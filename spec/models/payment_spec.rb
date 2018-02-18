@@ -26,10 +26,10 @@ require 'cgi'
 
 describe Payment do
   before do
-    @pay = FactoryGirl.create(:payment)
+    @pay = FactoryBot.create(:payment)
   end
 
-  it "can be created by FactoryGirl" do
+  it "can be created by FactoryBot" do
     expect(@pay.valid?).to eq(true)
   end
 
@@ -50,7 +50,7 @@ describe Payment do
 
   describe "with payment details" do
     before do
-      @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: 57.49)
+      @pd = FactoryBot.create(:payment_detail, payment: @pay, amount: 57.49)
       @pay.reload
     end
 
@@ -58,7 +58,7 @@ describe Payment do
       expect(@pay.payment_details).to eq([@pd])
     end
     it "can calcalate the payment total-amount" do
-      @pd2 = FactoryGirl.create(:payment_detail, payment: @pay, amount: 23.0)
+      @pd2 = FactoryBot.create(:payment_detail, payment: @pay, amount: 23.0)
       expect(@pay.total_amount == 80.49.to_money).to eq(true)
     end
 
@@ -68,8 +68,8 @@ describe Payment do
 
     describe "with mulitple payment_details of the same expense_item" do
       before(:each) do
-        @pd2 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
-        @pd3 = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
+        @pd2 = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
+        @pd3 = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
       end
 
       it "only lists the element once" do
@@ -79,7 +79,7 @@ describe Payment do
 
       describe "with payment_details of different expense_items" do
         before(:each) do
-          @pdb = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details)
+          @pdb = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details)
         end
 
         it "lists the entries separately" do
@@ -89,7 +89,7 @@ describe Payment do
 
       describe "with different amounts" do
         before(:each) do
-          @pdc = FactoryGirl.create(:payment_detail, payment: @pd.payment, amount: 99.98, details: @pd.details, line_item: @pd.line_item)
+          @pdc = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: 99.98, details: @pd.details, line_item: @pd.line_item)
         end
 
         it "does not group them together" do
@@ -102,7 +102,7 @@ describe Payment do
   end
 
   describe "With an environment config with test mode disabled" do
-    let!(:event_configuration) { FactoryGirl.create :event_configuration, paypal_mode: "enabled" }
+    let!(:event_configuration) { FactoryBot.create :event_configuration, paypal_mode: "enabled" }
 
     it "has a REAL paypal_post_url" do
       expect(@pay.paypal_post_url).to eq("https://www.paypal.com/cgi-bin/webscr")
@@ -110,19 +110,19 @@ describe Payment do
   end
 
   it "saves associated details when the payment is saved" do
-    pay = FactoryGirl.build(:payment)
+    pay = FactoryBot.build(:payment)
     pd = pay.payment_details.build
-    pd.registrant = FactoryGirl.create(:registrant)
+    pd.registrant = FactoryBot.create(:registrant)
     pd.amount = 100
-    pd.line_item = FactoryGirl.create(:expense_item)
+    pd.line_item = FactoryBot.create(:expense_item)
     expect(PaymentDetail.all.count).to eq(0)
     pay.save
     expect(PaymentDetail.all.count).to eq(1)
   end
 
   it "destroys related payment_details upon destroy" do
-    pay = FactoryGirl.create(:payment)
-    FactoryGirl.create(:payment_detail, payment: pay)
+    pay = FactoryBot.create(:payment)
+    FactoryBot.create(:payment_detail, payment: pay)
     pay.reload
     expect(PaymentDetail.all.count).to eq(1)
     pay.destroy
@@ -130,19 +130,19 @@ describe Payment do
   end
 
   describe "with a completed payment" do
-    let(:payment) { FactoryGirl.create(:payment, completed: true) }
+    let(:payment) { FactoryBot.create(:payment, completed: true) }
 
     it "can determine the total received" do
-      FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
+      FactoryBot.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
       expect(Payment.total_received).to eq(15.33.to_money)
     end
 
     describe "with a refund" do
       before(:each) do
-        pd = FactoryGirl.create(:payment_detail, payment: payment, amount: 15.33)
-        @ref = FactoryGirl.create(:refund)
-        @rd = FactoryGirl.create(:refund_detail, refund: @ref, payment_detail: pd)
+        pd = FactoryBot.create(:payment_detail, payment: payment, amount: 15.33)
+        @ref = FactoryBot.create(:refund)
+        @rd = FactoryBot.create(:refund_detail, refund: @ref, payment_detail: pd)
         payment.reload
       end
 
@@ -156,10 +156,10 @@ describe Payment do
 
   describe "a payment for a tshirt" do
     before(:each) do
-      @pd = FactoryGirl.create(:payment_detail, payment: @pay)
+      @pd = FactoryBot.create(:payment_detail, payment: @pay)
       @pay.reload
       @reg = @pd.registrant
-      @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: @pd.free, details: @pd.details)
+      @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: @pd.free, details: @pd.details)
       @reg.reload
     end
 
@@ -168,7 +168,7 @@ describe Payment do
     end
     describe "when the user has a free t-shirt and a paid t-shirt" do
       before(:each) do
-        @rei_free = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: true)
+        @rei_free = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: true)
         @reg.reload
       end
 
@@ -187,7 +187,7 @@ describe Payment do
     end
     describe "when the registrant has two t-shirts, who only differ by details" do
       before(:each) do
-        @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, details: "for My Kid")
+        @rei2 = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, details: "for My Kid")
         @reg.reload
       end
 
@@ -276,7 +276,7 @@ describe Payment do
 
       describe "when the payment is saved after being paid" do
         before(:each) do
-          @rei2 = FactoryGirl.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item)
+          @rei2 = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item)
           @pay.save
           @reg.reload
         end
@@ -288,11 +288,11 @@ describe Payment do
   end
   describe "when paying for registration item" do
     before(:each) do
-      @reg_cost = FactoryGirl.create(:registration_cost, :competitor)
-      @pay = FactoryGirl.create(:payment)
-      @pd = FactoryGirl.create(:payment_detail, payment: @pay, amount: @reg_cost.expense_items.first.cost)
+      @reg_cost = FactoryBot.create(:registration_cost, :competitor)
+      @pay = FactoryBot.create(:payment)
+      @pd = FactoryBot.create(:payment_detail, payment: @pay, amount: @reg_cost.expense_items.first.cost)
 
-      @reg_with_reg_item = FactoryGirl.create(:competitor)
+      @reg_with_reg_item = FactoryBot.create(:competitor)
       @pd.registrant = @reg_with_reg_item
       @pd.line_item = @reg_cost.expense_items.first
       @pd.save

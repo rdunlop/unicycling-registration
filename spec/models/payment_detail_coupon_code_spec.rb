@@ -17,11 +17,11 @@
 require 'spec_helper'
 
 describe PaymentDetailCouponCode do
-  let(:coupon_code) { FactoryGirl.create(:coupon_code, inform_emails: "interest@dunlopweb.com,other@dunlopweb.com") }
-  let(:pdcc) { FactoryGirl.create(:payment_detail_coupon_code) }
+  let(:coupon_code) { FactoryBot.create(:coupon_code, inform_emails: "interest@dunlopweb.com,other@dunlopweb.com") }
+  let(:pdcc) { FactoryBot.create(:payment_detail_coupon_code) }
 
   describe "when the coupon has no inform_emails" do
-    let(:coupon_code) { FactoryGirl.create(:coupon_code, inform_emails: "") }
+    let(:coupon_code) { FactoryBot.create(:coupon_code, inform_emails: "") }
 
     it "does not inform" do
       expect(pdcc.inform?).to be_falsy

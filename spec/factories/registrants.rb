@@ -34,19 +34,19 @@
 #  index_registrants_on_user_id          (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant do
     sequence(:first_name) { |n| "FirstMyString #{n}" }
     middle_initial "MMyString"
     last_name "LastMyString"
     birthday { 18.years.ago }
     gender "Male"
-    user # FactoryGirl
+    user # FactoryBot
     registrant_type 'competitor'
     ineligible false
-    contact_detail # FactoryGirl
+    contact_detail # FactoryBot
 
     # New Way
     trait :competitor do
@@ -80,8 +80,8 @@ FactoryGirl.define do
 
     before(:create) do
       if WheelSize.count == 0
-        @ws20 = FactoryGirl.create(:wheel_size_20)
-        @ws24 = FactoryGirl.create(:wheel_size_24)
+        @ws20 = FactoryBot.create(:wheel_size_20)
+        @ws24 = FactoryBot.create(:wheel_size_24)
       end
     end
     after :stub do |reg|

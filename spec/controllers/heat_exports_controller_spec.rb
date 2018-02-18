@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe HeatExportsController do
-  let(:competition) { FactoryGirl.create(:timed_competition) }
+  let(:competition) { FactoryBot.create(:timed_competition) }
 
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 

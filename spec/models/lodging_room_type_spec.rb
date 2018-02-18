@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe LodgingRoomType do
-  let(:lodging_room_option) { FactoryGirl.create(:lodging_room_option) }
+  let(:lodging_room_option) { FactoryBot.create(:lodging_room_option) }
   let(:lodging_room_type) { lodging_room_option.lodging_room_type }
-  let(:lodging_package) { FactoryGirl.create(:lodging_package, lodging_room_type: lodging_room_type, lodging_room_option: lodging_room_option) }
-  let!(:lodging_package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day) }
-  let(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option) }
-  let(:rei) { FactoryGirl.build(:registrant_expense_item, line_item: lodging_package) }
+  let(:lodging_package) { FactoryBot.create(:lodging_package, lodging_room_type: lodging_room_type, lodging_room_option: lodging_room_option) }
+  let!(:lodging_package_day) { FactoryBot.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day) }
+  let(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
+  let(:rei) { FactoryBot.build(:registrant_expense_item, line_item: lodging_package) }
 
   it "lodging_room_type has not reached the maximum" do
     expect(lodging_room_type.maximum_reached?(lodging_day)).to be_falsey
@@ -22,7 +22,7 @@ describe LodgingRoomType do
 
   describe "when an associated payment has been created" do
     before(:each) do
-      @payment = FactoryGirl.create(:payment_detail, line_item: lodging_package)
+      @payment = FactoryBot.create(:payment_detail, line_item: lodging_package)
       lodging_room_type.reload
     end
 

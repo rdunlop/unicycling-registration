@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Compete::CombinedCompetitionsController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    sign_in FactoryBot.create(:super_admin_user)
   end
 
   let(:valid_attributes) { { name: "MyString", calculation_mode: 'default' } }

@@ -2,13 +2,13 @@ require "spec_helper"
 
 describe Notifications do
   before(:each) do
-    @ec = FactoryGirl.create(:event_configuration, long_name: "NAUCC 2140", contact_email: "guy@convention.com")
+    @ec = FactoryBot.create(:event_configuration, long_name: "NAUCC 2140", contact_email: "guy@convention.com")
   end
 
   describe "request_registrant_access" do
     let(:mail) do
-      Notifications.request_registrant_access(FactoryGirl.create(:registrant, first_name: "Billy", last_name: "Johnson"),
-                                              FactoryGirl.create(:user, email: "james@dean.com"))
+      Notifications.request_registrant_access(FactoryBot.create(:registrant, first_name: "Billy", last_name: "Johnson"),
+                                              FactoryBot.create(:user, email: "james@dean.com"))
     end
     it "identifies the person making the request" do
       expect(mail.body).to match(/james@dean.com has requested permission to view the registration record of Billy Johnson/)
@@ -17,8 +17,8 @@ describe Notifications do
 
   describe "registrant_access_accepted" do
     let(:mail) do
-      Notifications.registrant_access_accepted(FactoryGirl.create(:registrant, first_name: "Billy", last_name: "Johnson"),
-                                               FactoryGirl.create(:user, email: "james@dean.com"))
+      Notifications.registrant_access_accepted(FactoryBot.create(:registrant, first_name: "Billy", last_name: "Johnson"),
+                                               FactoryBot.create(:user, email: "james@dean.com"))
     end
     it "identifies the accetance of the request" do
       expect(mail.body).to match(/Your request for access to the registration of Billy Johnson has been accepted/)
@@ -36,7 +36,7 @@ describe Notifications do
   end
 
   describe "send_feedback" do
-    let(:feedback) { FactoryGirl.create(:feedback, message: "This is some feedback", entered_email: "test@complaint.com") }
+    let(:feedback) { FactoryBot.create(:feedback, message: "This is some feedback", entered_email: "test@complaint.com") }
     let(:mail) do
       Notifications.send_feedback(feedback.id)
     end
@@ -54,7 +54,7 @@ describe Notifications do
     end
 
     describe "with a signed in user without specifying an e-mail" do
-      let(:feedback) { FactoryGirl.create(:feedback, message: "other feedback", user: nil, entered_email: "test@email.com") }
+      let(:feedback) { FactoryBot.create(:feedback, message: "other feedback", user: nil, entered_email: "test@email.com") }
 
       it "sets the reply to address" do
         expect(mail.reply_to).to match(["test@email.com"])

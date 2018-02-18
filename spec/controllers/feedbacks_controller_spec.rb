@@ -17,7 +17,7 @@
 require 'spec_helper'
 
 describe FeedbacksController do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe "GET #new" do
     it "renders" do
@@ -47,7 +47,7 @@ describe FeedbacksController do
     describe "when the user is signed in, and has registrants" do
       before(:each) do
         sign_in user
-        @registrant = FactoryGirl.create(:competitor, user: user)
+        @registrant = FactoryBot.create(:competitor, user: user)
       end
 
       it "shows the feedback new page when feedback error" do

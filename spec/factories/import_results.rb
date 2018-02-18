@@ -29,12 +29,12 @@
 #  index_imported_results_user_id   (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :import_result do
-    user # FactoryGirl
-    competition # FactoryGirl
+    user # FactoryBot
+    competition # FactoryBot
     raw_data "MyString"
     bib_number 1
     minutes 1

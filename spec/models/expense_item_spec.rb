@@ -26,14 +26,14 @@ require 'spec_helper'
 
 describe ExpenseItem do
   before(:each) do
-    @item = FactoryGirl.create(:expense_item)
+    @item = FactoryBot.create(:expense_item)
   end
 
   it "can have the same position but in different expense_groups" do
-    eg1 = FactoryGirl.create(:expense_group)
-    eg2 = FactoryGirl.create(:expense_group)
-    ei1 = FactoryGirl.create(:expense_item, expense_group: eg1)
-    ei2 = FactoryGirl.create(:expense_item, expense_group: eg2)
+    eg1 = FactoryBot.create(:expense_group)
+    eg2 = FactoryBot.create(:expense_group)
+    ei1 = FactoryBot.create(:expense_item, expense_group: eg1)
+    ei2 = FactoryBot.create(:expense_item, expense_group: eg2)
     expect(ei1.position).to eq(ei2.position)
     expect(ei2.valid?).to eq(true)
   end
@@ -141,7 +141,7 @@ describe ExpenseItem do
 
   describe "when an associated payment has been created" do
     before(:each) do
-      @payment = FactoryGirl.create(:payment_detail, line_item: @item)
+      @payment = FactoryBot.create(:payment_detail, line_item: @item)
       @item.reload
     end
 
@@ -170,29 +170,29 @@ describe ExpenseItem do
 
   describe "with an expense_group set for 'noncompetitor_required'" do
     before(:each) do
-      @rg = FactoryGirl.create(:expense_group, noncompetitor_required: true)
+      @rg = FactoryBot.create(:expense_group, noncompetitor_required: true)
     end
 
     it "can have a first item" do
-      @re = FactoryGirl.build(:expense_item, expense_group: @rg)
+      @re = FactoryBot.build(:expense_item, expense_group: @rg)
       expect(@re.valid?).to eq(true)
     end
 
     it "cannot have a second item" do
-      @re = FactoryGirl.create(:expense_item, expense_group: @rg)
+      @re = FactoryBot.create(:expense_item, expense_group: @rg)
       @rg.reload
-      @re2 = FactoryGirl.build(:expense_item, expense_group: @rg)
+      @re2 = FactoryBot.build(:expense_item, expense_group: @rg)
       expect(@re2.valid?).to eq(false)
     end
   end
 
   describe "with an expense_group set for registration_items" do
     before(:each) do
-      @rg = FactoryGirl.create(:expense_group, :registration)
+      @rg = FactoryBot.create(:expense_group, :registration)
     end
 
     it "isn't user_manageable" do
-      @re = FactoryGirl.create(:expense_item, expense_group: @rg)
+      @re = FactoryBot.create(:expense_item, expense_group: @rg)
       expect(ExpenseItem.user_manageable).to eq([@item])
       expect(ExpenseItem.all).to match_array([@re, @item])
     end
@@ -200,35 +200,35 @@ describe ExpenseItem do
 
   describe "with an expense_group set for 'competitor_required'" do
     before(:each) do
-      @rg = FactoryGirl.create(:expense_group, competitor_required: true)
+      @rg = FactoryBot.create(:expense_group, competitor_required: true)
     end
 
     it "can have a first item" do
-      @re = FactoryGirl.build(:expense_item, expense_group: @rg)
+      @re = FactoryBot.build(:expense_item, expense_group: @rg)
       expect(@re.valid?).to eq(true)
     end
 
     it "cannot have a second item" do
-      @re = FactoryGirl.create(:expense_item, expense_group: @rg)
+      @re = FactoryBot.create(:expense_item, expense_group: @rg)
       @rg.reload
-      @re2 = FactoryGirl.build(:expense_item, expense_group: @rg)
+      @re2 = FactoryBot.build(:expense_item, expense_group: @rg)
       expect(@re2.valid?).to eq(false)
     end
     describe "with a pre-existing registrant" do
       before(:each) do
-        @reg = FactoryGirl.create(:competitor)
+        @reg = FactoryBot.create(:competitor)
       end
 
       it "creates a registrant_expense_item" do
         expect(@reg.registrant_expense_items.count).to eq(0)
-        @re = FactoryGirl.create(:expense_item, expense_group: @rg)
+        @re = FactoryBot.create(:expense_item, expense_group: @rg)
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
         expect(@reg.registrant_expense_items.first.line_item).to eq(@re)
       end
       it "does not create extra entries if the expense_item is updated" do
         expect(@reg.registrant_expense_items.count).to eq(0)
-        @re = FactoryGirl.create(:expense_item, expense_group: @rg)
+        @re = FactoryBot.create(:expense_item, expense_group: @rg)
         @re.save
         @reg.reload
         expect(@reg.registrant_expense_items.count).to eq(1)
@@ -239,7 +239,7 @@ describe ExpenseItem do
 
   describe "with associated registrant_expense_items" do
     before(:each) do
-      @rei = FactoryGirl.create(:registrant_expense_item, line_item: @item)
+      @rei = FactoryBot.create(:registrant_expense_item, line_item: @item)
     end
 
     it "should count the entry as a selected_item" do
@@ -277,8 +277,8 @@ describe ExpenseItem do
   end
 
   describe "when associated with an event" do
-    let(:event) { FactoryGirl.create(:event, name: "The Event") }
-    let(:expense_item) { FactoryGirl.create(:expense_item, cost_element: event) }
+    let(:event) { FactoryBot.create(:event, name: "The Event") }
+    let(:expense_item) { FactoryBot.create(:expense_item, cost_element: event) }
 
     it "describes the name of the expense_item based on the name of the event" do
       expect(expense_item.to_s).to eq("The Event")
@@ -287,13 +287,13 @@ describe ExpenseItem do
 
   describe "when a registration has a registration_cost" do
     before(:each) do
-      @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor, expense_item: @item)
-      @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor)
+      @comp_reg_cost = FactoryBot.create(:registration_cost, :competitor, expense_item: @item)
+      @noncomp_reg_cost = FactoryBot.create(:registration_cost, :noncompetitor)
       @nc_item = @noncomp_reg_cost.expense_items.first
     end
     describe "with a single competitor" do
       before(:each) do
-        @reg = FactoryGirl.create(:competitor)
+        @reg = FactoryBot.create(:competitor)
       end
       it "should list the item as un_paid" do
         expect(@item.num_unpaid).to eq(1)
@@ -302,7 +302,7 @@ describe ExpenseItem do
     end
     describe "with a single non_competitor" do
       before(:each) do
-        @nc_reg = FactoryGirl.create(:noncompetitor)
+        @nc_reg = FactoryBot.create(:noncompetitor)
       end
 
       it "counts the nc item only" do

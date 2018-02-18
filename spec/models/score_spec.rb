@@ -24,8 +24,8 @@
 require 'spec_helper'
 
 describe Score do
-  let(:judge) { FactoryGirl.build_stubbed(:judge) }
-  let(:subject) { FactoryGirl.build_stubbed(:score, val_1: 10, val_2: 1.2, judge: judge) }
+  let(:judge) { FactoryBot.build_stubbed(:judge) }
+  let(:subject) { FactoryBot.build_stubbed(:score, val_1: 10, val_2: 1.2, judge: judge) }
 
   describe "when the score is invalid" do
     before(:each) do
@@ -43,8 +43,8 @@ describe Score do
 
   describe "#raw_scores" do
     context "when judge_type specifies 2 valid scores" do
-      let(:judge_type) { FactoryGirl.build_stubbed(:judge_type, val_1_max: 10, val_2_max: 10, val_3_max: 0, val_4_max: 0) }
-      let(:judge) { FactoryGirl.build_stubbed(:judge, judge_type: judge_type) }
+      let(:judge_type) { FactoryBot.build_stubbed(:judge_type, val_1_max: 10, val_2_max: 10, val_3_max: 0, val_4_max: 0) }
+      let(:judge) { FactoryBot.build_stubbed(:judge, judge_type: judge_type) }
 
       it "returns only 2 scores" do
         expect(subject.raw_scores).to eq([10.0, 1.2])
@@ -72,13 +72,13 @@ end
 
 describe Score do
   before do
-    @judge = FactoryGirl.create(:judge)
+    @judge = FactoryBot.create(:judge)
   end
 
   it "should not be able to have the same score/judge created twice" do
-    score = FactoryGirl.create(:score)
+    score = FactoryBot.create(:score)
 
-    score2 = FactoryGirl.build(:score, judge: score.judge, competitor: score.competitor)
+    score2 = FactoryBot.build(:score, judge: score.judge, competitor: score.competitor)
 
     expect(score2.valid?).to eq(false)
   end
@@ -91,7 +91,7 @@ describe Score do
     score.val_4 = 4.0
     expect(score.valid?).to eq(false)
     expect(score.total).to be_nil
-    score.competitor = FactoryGirl.build_stubbed(:event_competitor)
+    score.competitor = FactoryBot.build_stubbed(:event_competitor)
     expect(score.valid?).to eq(false)
     score.judge = @judge
     expect(score.valid?).to eq(true)
@@ -111,8 +111,8 @@ describe Score do
   end
   describe "when the score is based on a judge with judge_type" do
     before(:each) do
-      @jt = FactoryGirl.create(:judge_type, val_1_max: 5, val_2_max: 6, val_3_max: 7, val_4_max: 20)
-      @judge = FactoryGirl.create(:judge, judge_type: @jt)
+      @jt = FactoryBot.create(:judge_type, val_1_max: 5, val_2_max: 6, val_3_max: 7, val_4_max: 20)
+      @judge = FactoryBot.create(:judge, judge_type: @jt)
       @score = Score.new
       @score.val_1 = 1.0
       @score.val_2 = 2.0

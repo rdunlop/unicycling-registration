@@ -5,8 +5,8 @@ describe MultiLapResultCalculator do
     described_class.new.competitor_comparable_result(sub)
   end
 
-  let(:competition) { FactoryGirl.create(:timed_competition) }
-  let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+  let(:competition) { FactoryBot.create(:timed_competition) }
+  let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
 
   let(:fast_competitor) { double(:competitor, best_time_in_thousands: 2.minutes, num_laps: 5, has_result?: true) }
   let(:faster_competitor) { double(:competitor, best_time_in_thousands: 1.minute, num_laps: 5, has_result?: true) }
@@ -30,7 +30,7 @@ describe MultiLapResultCalculator do
     end
 
     it "does have results with finish_times" do
-      FactoryGirl.create(:time_result, competitor: competitor)
+      FactoryBot.create(:time_result, competitor: competitor)
       expect(described_class.new.competitor_has_result?(competitor.reload)).to be_truthy
     end
   end
@@ -41,7 +41,7 @@ describe MultiLapResultCalculator do
     end
 
     describe "When the only results are DQ" do
-      let!(:time_result) { FactoryGirl.create(:time_result, competitor: competitor, status: "DQ") }
+      let!(:time_result) { FactoryBot.create(:time_result, competitor: competitor, status: "DQ") }
 
       it "returns nil" do
         expect(described_class.new.competitor_result(competitor.reload)).to be_nil
@@ -49,7 +49,7 @@ describe MultiLapResultCalculator do
     end
 
     describe "when there are results" do
-      let!(:time_result) { FactoryGirl.create(:time_result, competitor: competitor, minutes: 1, number_of_laps: 1) }
+      let!(:time_result) { FactoryBot.create(:time_result, competitor: competitor, minutes: 1, number_of_laps: 1) }
 
       it "returns the time" do
         expect(described_class.new.competitor_result(competitor.reload)).to eq("1:00 (1 laps)")

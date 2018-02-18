@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ExportPaymentsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 
@@ -15,8 +15,8 @@ describe ExportPaymentsController do
 
   describe "PUT payments" do
     before do
-      payment = FactoryGirl.create(:payment, :completed)
-      FactoryGirl.create(:payment_detail, payment: payment)
+      payment = FactoryBot.create(:payment, :completed)
+      FactoryBot.create(:payment_detail, payment: payment)
     end
 
     it "can download the file" do
@@ -27,8 +27,8 @@ describe ExportPaymentsController do
 
   describe "PUT payment_details" do
     before do
-      payment = FactoryGirl.create(:payment, :completed)
-      FactoryGirl.create(:payment_detail, payment: payment)
+      payment = FactoryBot.create(:payment, :completed)
+      FactoryBot.create(:payment_detail, payment: payment)
     end
 
     it "can download the file" do

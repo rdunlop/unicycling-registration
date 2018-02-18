@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ConventionSetup::ConventionSetupController do
   before(:each) do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
 

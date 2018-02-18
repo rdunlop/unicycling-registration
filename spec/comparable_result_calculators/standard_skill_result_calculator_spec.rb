@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe StandardSkillResultCalculator do
-  let(:competition) { FactoryGirl.create(:competition, :standard_skill) }
-  let(:judge_type) { FactoryGirl.create(:judge_type, event_class: "Standard Skill") }
+  let(:competition) { FactoryBot.create(:competition, :standard_skill) }
+  let(:judge_type) { FactoryBot.create(:judge_type, event_class: "Standard Skill") }
   let(:scores) do
     [
       double(:standard_skill_score, total_execution_devaluation: 10, total_difficulty_devaluation: 4),
       double(:standard_skill_score, total_execution_devaluation: 14, total_difficulty_devaluation: 6)
     ]
   end
-  let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+  let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
 
   # routine score 90
   # judge 1 devaluation of 14

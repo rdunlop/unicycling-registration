@@ -20,36 +20,36 @@ require 'spec_helper'
 
 describe Result do
   before(:each) do
-    @result = FactoryGirl.create(:result)
+    @result = FactoryBot.create(:result)
   end
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@result).to be_valid
   end
 
   it "only allows a single result per result-type/competitor pair" do
-    result2 = FactoryGirl.build(:result, competitor: @result.competitor, result_type: @result.result_type)
+    result2 = FactoryBot.build(:result, competitor: @result.competitor, result_type: @result.result_type)
     expect(result2).to be_invalid
   end
 
   it "allows multiple results for the same competitor, with different result_types" do
     expect(@result.result_type).to eq("AgeGroup")
-    result2_overall = FactoryGirl.build(:result, competitor: @result.competitor, result_type: "Overall")
+    result2_overall = FactoryBot.build(:result, competitor: @result.competitor, result_type: "Overall")
     expect(result2_overall).to be_valid
   end
 end
 
 describe Result do
   before(:each) do
-    @al = FactoryGirl.build_stubbed(:result, place: 2)
+    @al = FactoryBot.build_stubbed(:result, place: 2)
   end
   describe "with a solo competitor" do
     before(:each) do
-      @comp = FactoryGirl.build_stubbed(:event_competitor)
+      @comp = FactoryBot.build_stubbed(:event_competitor)
       allow(@comp).to receive_message_chain(:members, :count).and_return(1)
       allow(@comp).to receive_message_chain(:members, :size).and_return(1)
       allow(@comp).to receive_message_chain(:members, :empty?).and_return(false)
       allow(@comp).to receive(:result).and_return("Some Result")
-      @reg = FactoryGirl.build_stubbed(:competitor)
+      @reg = FactoryBot.build_stubbed(:competitor)
       allow(@comp).to receive(:registrants).and_return([@reg])
       allow(@al).to receive(:competitor).and_return(@comp)
     end
@@ -59,7 +59,7 @@ describe Result do
     end
 
     it "displays both names if in a pair" do
-      @reg2 = FactoryGirl.build_stubbed(:competitor, first_name: "Bob", last_name: "Smith")
+      @reg2 = FactoryBot.build_stubbed(:competitor, first_name: "Bob", last_name: "Smith")
       allow(@comp).to receive_message_chain(:active_members, :size).and_return(2)
       allow(@comp).to receive(:registrants).and_return([@reg, @reg2])
       expect(@al.competitor_name(@reg)).to eq("#{@reg.first_name} #{@reg.last_name} & #{@reg2.first_name} #{@reg2.last_name}")
@@ -93,7 +93,7 @@ describe Result do
     describe "when the competitor has expert results" do
       before(:each) do
         @comp.competition.scoring_class = "Shortest Time"
-        @comp.competition.age_group_type = FactoryGirl.create(:age_group_type)
+        @comp.competition.age_group_type = FactoryBot.create(:age_group_type)
       end
 
       it "uses the age group and the gender as line 4" do

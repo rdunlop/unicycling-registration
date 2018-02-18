@@ -14,11 +14,11 @@
 #  index_standard_skill_scores_on_judge_id_and_competitor_id  (judge_id,competitor_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :standard_skill_score do
     association :competitor, factory: :event_competitor
-    judge # FactoryGirl
+    judge # FactoryBot
   end
 end

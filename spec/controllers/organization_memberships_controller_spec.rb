@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe OrganizationMembershipsController do
-  let(:user) { FactoryGirl.create(:super_admin_user) }
+  let(:user) { FactoryBot.create(:super_admin_user) }
   before(:each) do
-    @config = FactoryGirl.create(:event_configuration, :with_usa)
+    @config = FactoryBot.create(:event_configuration, :with_usa)
     sign_in user
 
-    FactoryGirl.create_list(:competitor, 5)
+    FactoryBot.create_list(:competitor, 5)
   end
 
-  let(:registrant) { FactoryGirl.create(:registrant) }
+  let(:registrant) { FactoryBot.create(:registrant) }
   let(:contact_detail) { registrant.contact_detail }
 
   describe "#index" do

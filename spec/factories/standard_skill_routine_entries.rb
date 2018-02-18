@@ -10,11 +10,11 @@
 #  updated_at                :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :standard_skill_routine_entry do
-    standard_skill_routine # FactoryGirl
+    standard_skill_routine # FactoryBot
     standard_skill_entry
     position 1
   end

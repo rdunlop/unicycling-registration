@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Importers::ImportResultImporter do
-  let(:admin_user) { FactoryGirl.create(:super_admin_user) }
-  let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
+  let(:admin_user) { FactoryBot.create(:super_admin_user) }
+  let(:competition) { FactoryBot.create(:timed_competition, uses_lane_assignments: true) }
   let(:importer) { described_class.new(competition, admin_user) }
 
   describe "when importing data" do
@@ -19,7 +19,7 @@ describe Importers::ImportResultImporter do
              })
     end
     it "creates a competitor" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
+      @reg = FactoryBot.create(:registrant, bib_number: 101)
 
       expect do
         importer.process(false, processor)
@@ -43,7 +43,7 @@ describe Importers::ImportResultImporter do
     let(:processor) { double(valid_file?: false, errors: ["File not found"]) }
 
     it "returns an error message" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
+      @reg = FactoryBot.create(:registrant, bib_number: 101)
 
       result = nil
       expect do

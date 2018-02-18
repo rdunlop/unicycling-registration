@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Admin::FeedbackController do
-  let(:user) { FactoryGirl.create(:payment_admin) }
-  let!(:feedback) { FactoryGirl.create(:feedback) }
-  let!(:resolved_feedback) { FactoryGirl.create(:feedback, :resolved) }
+  let(:user) { FactoryBot.create(:payment_admin) }
+  let!(:feedback) { FactoryBot.create(:feedback) }
+  let!(:resolved_feedback) { FactoryBot.create(:feedback, :resolved) }
 
   before(:each) do
     sign_in user
@@ -50,7 +50,7 @@ describe Admin::FeedbackController do
   end
 
   context "as a super-admin" do
-    let(:user) { FactoryGirl.create(:super_admin_user) }
+    let(:user) { FactoryBot.create(:super_admin_user) }
     describe "#new" do
       it "displays" do
         get :new

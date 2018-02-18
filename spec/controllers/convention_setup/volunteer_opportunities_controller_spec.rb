@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe ConventionSetup::VolunteerOpportunitiesController do
   before do
-    user = FactoryGirl.create(:convention_admin_user)
+    user = FactoryBot.create(:convention_admin_user)
     sign_in user
   end
 
   def valid_attributes
-    FactoryGirl.attributes_for(:volunteer_opportunity)
+    FactoryBot.attributes_for(:volunteer_opportunity)
   end
 
   describe "as a normal user" do
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -24,7 +24,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
 
   describe "GET index" do
     it "shows all volunteer opportunities" do
-      volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
+      volunteer_opportunity = FactoryBot.create(:volunteer_opportunity)
       get :index
       expect(response).to be_success
       assert_select "h1", "Volunteer Opportunities"
@@ -62,7 +62,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
 
   describe "PUT update" do
     it "updates the volunteer opportunity" do
-      volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
+      volunteer_opportunity = FactoryBot.create(:volunteer_opportunity)
 
       expect do
         put :update, params: { volunteer_opportunity: { description: "New description" }, id: volunteer_opportunity.id }
@@ -73,7 +73,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
 
     describe "with invalid params" do
       it "re-renders the 'edit' template" do
-        volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
+        volunteer_opportunity = FactoryBot.create(:volunteer_opportunity)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(VolunteerOpportunity).to receive(:save).and_return(false)
         put :update, params: { volunteer_opportunity: { description: "New description" }, id: volunteer_opportunity.id }
@@ -84,8 +84,8 @@ describe ConventionSetup::VolunteerOpportunitiesController do
   end
 
   describe "PUT update_row_order" do
-    let!(:volunteer_opportunity_1) { FactoryGirl.create(:volunteer_opportunity) }
-    let!(:volunteer_opportunity_2) { FactoryGirl.create(:volunteer_opportunity) }
+    let!(:volunteer_opportunity_1) { FactoryBot.create(:volunteer_opportunity) }
+    let!(:volunteer_opportunity_2) { FactoryBot.create(:volunteer_opportunity) }
 
     it "updates the order" do
       put :update_row_order, params: { id: volunteer_opportunity_1.to_param, row_order_position: 1 }
@@ -96,7 +96,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
 
   describe "DELETE destroy" do
     it "removes volunteer opportunity" do
-      volunteer_opportunity = FactoryGirl.create(:volunteer_opportunity)
+      volunteer_opportunity = FactoryBot.create(:volunteer_opportunity)
       expect do
         delete :destroy, params: { id: volunteer_opportunity.id }
       end.to change(VolunteerOpportunity, :count).by(-1)

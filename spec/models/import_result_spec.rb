@@ -32,9 +32,9 @@
 require 'spec_helper'
 
 describe ImportResult do
-  let(:competition) { FactoryGirl.build_stubbed(:timed_competition) }
+  let(:competition) { FactoryBot.build_stubbed(:timed_competition) }
   before(:each) do
-    @ir = FactoryGirl.build_stubbed(:import_result, competition: competition)
+    @ir = FactoryBot.build_stubbed(:import_result, competition: competition)
   end
   it "has a valid factory" do
     expect(@ir.valid?).to eq(true)
@@ -61,18 +61,18 @@ end
 describe "when importing the result" do
   describe "with a competition and competitor in multiple competitions" do
     before :each do
-      @event = FactoryGirl.create(:event)
-      @competition1 = FactoryGirl.create(:timed_competition, event: @event)
-      @competition2 = FactoryGirl.create(:timed_competition, event: @event)
-      @competitor1 = FactoryGirl.create(:event_competitor, competition: @competition1)
-      @competitor2 = FactoryGirl.create(:event_competitor, competition: @competition2)
-      @comp = FactoryGirl.create(:competitor, bib_number: 100)
+      @event = FactoryBot.create(:event)
+      @competition1 = FactoryBot.create(:timed_competition, event: @event)
+      @competition2 = FactoryBot.create(:timed_competition, event: @event)
+      @competitor1 = FactoryBot.create(:event_competitor, competition: @competition1)
+      @competitor2 = FactoryBot.create(:event_competitor, competition: @competition2)
+      @comp = FactoryBot.create(:competitor, bib_number: 100)
       @competitor1.members.create(registrant: @comp)
       @competitor2.members.create(registrant: @comp)
     end
 
     it "assigns the import_result to the correct competition" do
-      ir = FactoryGirl.create(:import_result, bib_number: 100, competition: @competition2)
+      ir = FactoryBot.create(:import_result, bib_number: 100, competition: @competition2)
       ir.import!
       expect(TimeResult.last.competition).to eq(@competition2)
     end

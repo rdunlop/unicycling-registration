@@ -8,8 +8,8 @@ describe MassEmail do
       end
     end
 
-    let!(:user) { FactoryGirl.create(:user) }
-    let(:email) { FactoryGirl.create(:mass_email, sent_by: user, email_addresses: addresses) }
+    let!(:user) { FactoryBot.create(:user) }
+    let(:email) { FactoryBot.create(:mass_email, sent_by: user, email_addresses: addresses) }
 
     it "sends multiple notifications" do
       ActionMailer::Base.deliveries.clear

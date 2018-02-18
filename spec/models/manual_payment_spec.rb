@@ -6,9 +6,9 @@ describe ManualPayment do
   end
 
   describe "when a registrant has been added" do
-    let(:registrant) { FactoryGirl.create(:competitor) }
-    let(:expense_item) { FactoryGirl.create :expense_item, cost: 10.00, tax: 2.00 }
-    let!(:registrant_expense_item) { FactoryGirl.create :registrant_expense_item, line_item: expense_item, registrant: registrant }
+    let(:registrant) { FactoryBot.create(:competitor) }
+    let(:expense_item) { FactoryBot.create :expense_item, cost: 10.00, tax: 2.00 }
+    let!(:registrant_expense_item) { FactoryBot.create :registrant_expense_item, line_item: expense_item, registrant: registrant }
 
     before :each do
       @pay.add_registrant(registrant.reload)

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe ExportRegistrantsController do
-  let!(:registrant) { FactoryGirl.create(:registrant) }
+  let!(:registrant) { FactoryBot.create(:registrant) }
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 

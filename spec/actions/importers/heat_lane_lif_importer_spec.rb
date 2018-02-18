@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Importers::HeatLaneLifImporter do
-  let(:admin_user) { FactoryGirl.create(:super_admin_user) }
-  let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
+  let(:admin_user) { FactoryBot.create(:super_admin_user) }
+  let(:competition) { FactoryBot.create(:timed_competition, uses_lane_assignments: true) }
   let(:importer) { described_class.new(competition, admin_user) }
 
   let(:processor) do

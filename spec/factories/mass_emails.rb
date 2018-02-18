@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :mass_email do
     association :sent_by, factory: :user
     subject "Hello"

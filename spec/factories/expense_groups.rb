@@ -15,9 +15,9 @@
 #  system_managed         :boolean          default(FALSE), not null
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :expense_group do
     group_name "MyString"
     visible true

@@ -17,11 +17,11 @@
 #  index_event_categories_on_event_id_and_name  (event_id,name) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event_category do
-    event # FactoryGirl
+    event # FactoryBot
     sequence(:name) { |n| "EventCategory #{n}" }
   end
 end

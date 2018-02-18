@@ -3,10 +3,10 @@ require 'spec_helper'
 describe FlatlandResultCalculator do
   describe "when calculating the placement points of an event" do
     before(:each) do
-      @competition = FactoryGirl.create(:flatland_competition)
-      @comp1 = FactoryGirl.create(:event_competitor, competition: @competition)
-      @jt = FactoryGirl.create(:judge_type, event_class: "Flatland")
-      @judge = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
+      @competition = FactoryBot.create(:flatland_competition)
+      @comp1 = FactoryBot.create(:event_competitor, competition: @competition)
+      @jt = FactoryBot.create(:judge_type, event_class: "Flatland")
+      @judge = FactoryBot.create(:judge, competition: @competition, judge_type: @jt)
       @calc = described_class.new
       allow(@comp1).to receive(:has_result?).and_return(true)
     end
@@ -24,7 +24,7 @@ describe FlatlandResultCalculator do
 
       describe "with a 3rd judge's scores" do
         before(:each) do
-          @judge3 = FactoryGirl.create(:judge, competition: @competition, judge_type: @jt)
+          @judge3 = FactoryBot.create(:judge, competition: @competition, judge_type: @jt)
           @score1_3 = double(:score, total: 10, val_4: 5)
 
           allow(@comp1).to receive(:scores).and_return([@score1_1, @score1_2, @score1_3])

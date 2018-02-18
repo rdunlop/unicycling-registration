@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe AwardLabel do
   before(:each) do
-    @al = FactoryGirl.build_stubbed(:award_label)
+    @al = FactoryBot.build_stubbed(:award_label)
   end
 
   it "has a valid factory" do

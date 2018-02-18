@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe LodgingForm do
-  let(:competitor) { FactoryGirl.create(:competitor) }
-  let(:lodging_room_type) { FactoryGirl.create(:lodging_room_type) }
-  let(:lodging_room_option) { FactoryGirl.create(:lodging_room_option, lodging_room_type: lodging_room_type) }
+  let(:competitor) { FactoryBot.create(:competitor) }
+  let(:lodging_room_type) { FactoryBot.create(:lodging_room_type) }
+  let(:lodging_room_option) { FactoryBot.create(:lodging_room_option, lodging_room_type: lodging_room_type) }
   let(:form) { described_class.new(params) }
 
   context "#save" do
     context "with a lodging type with multiple days" do
-      let!(:lodging_day1) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option) }
-      let!(:lodging_day2) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option) }
-      let!(:lodging_day3) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option) }
+      let!(:lodging_day1) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
+      let!(:lodging_day2) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
+      let!(:lodging_day3) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
 
       describe "when selecting the whole range" do
         let(:params) do
@@ -30,9 +30,9 @@ describe LodgingForm do
 
       context "when the days were created in a non-ascending order" do
         let(:target_date) { Date.current }
-        let!(:lodging_day1) { FactoryGirl.create(:lodging_day, date_offered: target_date + 2.days, lodging_room_option: lodging_room_option) }
-        let!(:lodging_day2) { FactoryGirl.create(:lodging_day, date_offered: target_date + 1.day, lodging_room_option: lodging_room_option) }
-        let!(:lodging_day3) { FactoryGirl.create(:lodging_day, date_offered: target_date, lodging_room_option: lodging_room_option) }
+        let!(:lodging_day1) { FactoryBot.create(:lodging_day, date_offered: target_date + 2.days, lodging_room_option: lodging_room_option) }
+        let!(:lodging_day2) { FactoryBot.create(:lodging_day, date_offered: target_date + 1.day, lodging_room_option: lodging_room_option) }
+        let!(:lodging_day3) { FactoryBot.create(:lodging_day, date_offered: target_date, lodging_room_option: lodging_room_option) }
 
         describe "when selecting the whole range" do
           let(:params) do
@@ -52,7 +52,7 @@ describe LodgingForm do
       end
 
       context "when there is a minimum 2 days duration specified on the lodging room type" do
-        let(:lodging_room_type) { FactoryGirl.create(:lodging_room_type, minimum_duration_days: 2) }
+        let(:lodging_room_type) { FactoryBot.create(:lodging_room_type, minimum_duration_days: 2) }
 
         context "when selecting only a single day" do
           let(:params) do
@@ -143,7 +143,7 @@ describe LodgingForm do
     end
 
     context "when the form is not fully filled out" do
-      let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 14)) }
+      let!(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 14)) }
 
       let(:base_params) do
         {
@@ -192,7 +192,7 @@ describe LodgingForm do
     #     before do
     #       lodging_room_type.update!(maximum_available: 1)
     #     end
-    #     let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 17)) }
+    #     let!(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 17)) }
 
     #     let(:params) do
     #       {
@@ -203,9 +203,9 @@ describe LodgingForm do
     #       }
     #     end
     #     context "when that day is fully bought" do
-    #       let(:existing_package) { FactoryGirl.create(:lodging_package) }
-    #       let!(:existing_package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day)}
-    #       let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, line_item: lodging_package) }
+    #       let(:existing_package) { FactoryBot.create(:lodging_package) }
+    #       let!(:existing_package_day) { FactoryBot.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day)}
+    #       let!(:registrant_expense_item) { FactoryBot.create(:registrant_expense_item, line_item: lodging_package) }
 
     #       it "returns falsey" do
     #         expect(form.save).to be_falsy
@@ -241,10 +241,10 @@ describe LodgingForm do
       end
 
       context "with a single selected element" do
-        let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
-        let(:package) { FactoryGirl.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
-        let!(:package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
-        let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, registrant: competitor, line_item: package) }
+        let!(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
+        let(:package) { FactoryBot.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
+        let!(:package_day) { FactoryBot.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
+        let!(:registrant_expense_item) { FactoryBot.create(:registrant_expense_item, registrant: competitor, line_item: package) }
 
         it "returns a single element array" do
           competitor.reload
@@ -265,18 +265,18 @@ describe LodgingForm do
       end
 
       context "with a payment detail" do
-        let!(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
-        let(:package) { FactoryGirl.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
-        let!(:package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
-        let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, registrant: competitor, line_item: package) }
+        let!(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option, date_offered: Date.new(2017, 12, 28)) }
+        let(:package) { FactoryBot.create(:lodging_package, lodging_room_option: lodging_room_option, lodging_room_type: lodging_room_option.lodging_room_type) }
+        let!(:package_day) { FactoryBot.create(:lodging_package_day, lodging_package: package, lodging_day: lodging_day) }
+        let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, registrant: competitor, line_item: package) }
 
         context "with a single unpaid element" do
-          let(:payment) { FactoryGirl.create(:payment) }
+          let(:payment) { FactoryBot.create(:payment) }
           it { expect(described_class.paid_for(competitor)).to eq([]) }
         end
 
         context "with a single paid element" do
-          let(:payment) { FactoryGirl.create(:payment, :completed) }
+          let(:payment) { FactoryBot.create(:payment, :completed) }
 
           it "returns a single element array" do
             competitor.reload

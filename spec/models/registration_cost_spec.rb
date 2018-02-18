@@ -20,9 +20,9 @@
 require 'spec_helper'
 
 describe RegistrationCost do
-  let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7)) }
+  let(:registration_cost) { FactoryBot.build(:registration_cost, :competitor, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7)) }
 
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(registration_cost.valid?).to eq(true)
   end
 
@@ -62,7 +62,7 @@ describe RegistrationCost do
     describe "when the expense_item has a payment" do
       before do
         registration_cost.save!
-        FactoryGirl.create :payment_detail, line_item: registration_cost.expense_items.first
+        FactoryBot.create :payment_detail, line_item: registration_cost.expense_items.first
       end
 
       it "can't remove the RegistrationCost on deletion" do
@@ -72,10 +72,10 @@ describe RegistrationCost do
   end
 
   describe "with existing periods" do
-    let!(:comp_registration_cost1) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
-    let!(:noncomp_registration_cost1) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
-    let!(:comp_registration_cost2) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 0o2, 3), end_date: Date.new(2012, 4, 4)) }
-    let!(:noncomp_registration_cost2) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 2, 3), end_date: Date.new(2012, 4, 4)) }
+    let!(:comp_registration_cost1) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
+    let!(:noncomp_registration_cost1) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 1, 1), end_date: Date.new(2012, 2, 2)) }
+    let!(:comp_registration_cost2) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2012, 0o2, 3), end_date: Date.new(2012, 4, 4)) }
+    let!(:noncomp_registration_cost2) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 2, 3), end_date: Date.new(2012, 4, 4)) }
 
     it "can retrieve only the competitor periods" do
       expect(RegistrationCost.for_type("competitor")).to match_array([comp_registration_cost1, comp_registration_cost2])
@@ -118,7 +118,7 @@ describe RegistrationCost do
       expect(RegistrationCost.for_type("competitor").last_online_period).to eq(comp_registration_cost2)
     end
     describe "with more registration periods" do
-      let!(:comp_registration_cost0) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2010, 2, 3), end_date: Date.new(2010, 4, 4)) }
+      let!(:comp_registration_cost0) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2010, 2, 3), end_date: Date.new(2010, 4, 4)) }
 
       it "returns the periods in ascending date order" do
         registration_cost.save!

@@ -6,7 +6,7 @@ end
 
 describe "CostItem" do
   let(:model) { Event.new }
-  let(:expense_item) { FactoryGirl.create(:expense_item) }
+  let(:expense_item) { FactoryBot.create(:expense_item) }
 
   it "Can be associated with an expense item" do
     expect(model.expense_item).to eq(nil)

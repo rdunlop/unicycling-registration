@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe JumpLimit::DoubleFault do
   context "when there is a single fault" do
-    let(:distance_attempts) { [FactoryGirl.create(:distance_attempt, fault: true)] }
+    let(:distance_attempts) { [FactoryBot.create(:distance_attempt, fault: true)] }
 
     it "can attempt" do
       expect(subject.no_more_jumps?(distance_attempts)).to be_falsy
@@ -12,8 +12,8 @@ RSpec.describe JumpLimit::DoubleFault do
   context "when there are 2 faults at the same distance" do
     let(:distance_attempts) do
       [
-        FactoryGirl.create(:distance_attempt, fault: true, distance: 12),
-        FactoryGirl.create(:distance_attempt, fault: true, distance: 12)
+        FactoryBot.create(:distance_attempt, fault: true, distance: 12),
+        FactoryBot.create(:distance_attempt, fault: true, distance: 12)
       ]
     end
 
@@ -25,8 +25,8 @@ RSpec.describe JumpLimit::DoubleFault do
   context "when there are 2 faults at different distances" do
     let(:distance_attempts) do
       [
-        FactoryGirl.create(:distance_attempt, fault: true, distance: 11),
-        FactoryGirl.create(:distance_attempt, fault: true, distance: 12)
+        FactoryBot.create(:distance_attempt, fault: true, distance: 11),
+        FactoryBot.create(:distance_attempt, fault: true, distance: 12)
       ]
     end
 

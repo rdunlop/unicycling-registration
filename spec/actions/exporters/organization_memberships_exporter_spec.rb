@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Exporters::OrganizationMembershipsExporter do
   before do
-    FactoryGirl.create_list(:competitor, 5)
+    FactoryBot.create_list(:competitor, 5)
   end
 
   it "outputs some rows" do

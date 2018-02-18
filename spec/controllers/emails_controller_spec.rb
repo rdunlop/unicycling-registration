@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmailsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 
@@ -29,7 +29,7 @@ describe EmailsController do
 
   describe "GET sent" do
     it "can view the page" do
-      mass_email = FactoryGirl.create(:mass_email)
+      mass_email = FactoryBot.create(:mass_email)
       get :sent, params: { id: mass_email.id }
       expect(response).to be_success
     end
@@ -44,7 +44,7 @@ describe EmailsController do
 
   describe "POST send_email" do
     it "can send an e-mail" do
-      FactoryGirl.create(:user)
+      FactoryBot.create(:user)
       ActionMailer::Base.deliveries.clear
       post :create, params: { email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }
       num_deliveries = ActionMailer::Base.deliveries.size
@@ -56,7 +56,7 @@ describe EmailsController do
 
     it "breaks apart large requests into multiple smaller requests" do
       50.times do |_n|
-        FactoryGirl.create(:user)
+        FactoryBot.create(:user)
       end
       ActionMailer::Base.deliveries.clear
       post :create, params: { email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }

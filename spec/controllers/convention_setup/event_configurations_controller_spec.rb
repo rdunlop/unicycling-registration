@@ -46,7 +46,7 @@ require 'spec_helper'
 
 describe ConventionSetup::EventConfigurationsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 
@@ -79,7 +79,7 @@ describe ConventionSetup::EventConfigurationsController do
     let(:event_configuration) { EventConfiguration.singleton }
 
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
       event_configuration.update(valid_attributes)
     end

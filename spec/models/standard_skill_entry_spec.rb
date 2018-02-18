@@ -33,20 +33,20 @@ describe StandardSkillEntry do
   end
 
   it "displays a full description" do
-    std = FactoryGirl.build(:standard_skill_entry)
+    std = FactoryBot.build(:standard_skill_entry)
     expect(std.fullDescription).to eq(std.number.to_s + std.letter + " - riding - 8")
   end
   it "should be a non_riding_skill if >= 100" do
-    std = FactoryGirl.build(:standard_skill_entry)
+    std = FactoryBot.build(:standard_skill_entry)
     expect(std.non_riding_skill).to eq(false)
 
-    std = FactoryGirl.build(:standard_skill_entry, number: 100)
+    std = FactoryBot.build(:standard_skill_entry, number: 100)
     expect(std.non_riding_skill).to eq(true)
   end
 
   describe "with associated routine entries" do
     before(:each) do
-      @entry = FactoryGirl.create(:standard_skill_routine_entry)
+      @entry = FactoryBot.create(:standard_skill_routine_entry)
     end
     it "has associated entry" do
       skill = @entry.standard_skill_entry

@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :lodging_room_option do
-    lodging_room_type # FactoryGirl
+    lodging_room_type # FactoryBot
     sequence(:name) { |n| "Small Room #{n}" }
     sequence(:price) { |n| 1000 + n }
     sequence(:position) { |n| n }

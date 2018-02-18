@@ -17,7 +17,7 @@
 require 'spec_helper'
 
 describe TenantsController do
-  let(:user) { FactoryGirl.create(:super_admin_user) }
+  let(:user) { FactoryBot.create(:super_admin_user) }
 
   before(:each) do
     sign_in user

@@ -41,14 +41,14 @@ require 'spec_helper'
 
 describe ContactDetail do
   before(:each) do
-    FactoryGirl.create(:event_configuration, :with_usa)
-    @reg = FactoryGirl.build_stubbed(:registrant)
-    @cd = FactoryGirl.build_stubbed(:contact_detail, registrant: @reg)
+    FactoryBot.create(:event_configuration, :with_usa)
+    @reg = FactoryBot.build_stubbed(:registrant)
+    @cd = FactoryBot.build_stubbed(:contact_detail, registrant: @reg)
     allow(@reg).to receive(:age).and_return(20)
   end
   subject(:contact_detail) { @cd }
 
-  it "has a valid from FactoryGirl" do
+  it "has a valid from FactoryBot" do
     expect(@cd.valid?).to eq(true)
   end
 
@@ -85,7 +85,7 @@ describe ContactDetail do
   end
 
   context "with a db-backed contact_detail" do
-    let(:contact_detail) { FactoryGirl.create(:contact_detail) }
+    let(:contact_detail) { FactoryBot.create(:contact_detail) }
 
     context "when organization_membership_config mode is enabled" do
       before do

@@ -18,12 +18,12 @@
 #  index_judges_user_id                                          (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :judge do
     competition
-    judge_type # Use FactoryGirl to create
-    user       # Use FactoryGirl to create
+    judge_type # Use FactoryBot to create
+    user       # Use FactoryBot to create
   end
 end

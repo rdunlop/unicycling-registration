@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Compete::CombinedCompetitionEntriesController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    sign_in FactoryBot.create(:super_admin_user)
   end
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:combined_competition) { FactoryGirl.create(:combined_competition) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:combined_competition) { FactoryBot.create(:combined_competition) }
 
   let(:valid_attributes) do
     {
@@ -27,7 +27,7 @@ describe Compete::CombinedCompetitionEntriesController do
 
   describe "GET index" do
     it "shows all combined_competition_entries" do
-      combined_competition_entry = FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition)
+      combined_competition_entry = FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition)
       get :index, params: { combined_competition_id: combined_competition.id }
 
       assert_select "th", combined_competition_entry.to_s
@@ -48,7 +48,7 @@ describe Compete::CombinedCompetitionEntriesController do
 
   describe "GET edit" do
     it "shows the requested combined_competition_entry" do
-      combined_competition_entry = FactoryGirl.create(:combined_competition_entry)
+      combined_competition_entry = FactoryBot.create(:combined_competition_entry)
       get :edit, params: { id: combined_competition_entry.to_param, combined_competition_id: combined_competition.id }
 
       assert_select "h1", "Editing calculation source"
@@ -83,14 +83,14 @@ describe Compete::CombinedCompetitionEntriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the combined_competition_entry" do
-        combined_competition_entry = FactoryGirl.create(:combined_competition_entry)
+        combined_competition_entry = FactoryBot.create(:combined_competition_entry)
         expect do
           put :update, params: { id: combined_competition_entry.to_param, combined_competition_entry: valid_attributes.merge(abbreviation: "T22"), combined_competition_id: combined_competition.id }
         end.to change { combined_competition_entry.reload.abbreviation }
       end
 
       it "redirects to the combined_competition_entry" do
-        combined_competition_entry = FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition)
+        combined_competition_entry = FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition)
         put :update, params: { id: combined_competition_entry.to_param, combined_competition_entry: valid_attributes, combined_competition_id: combined_competition.id }
         expect(response).to redirect_to(combined_competition_combined_competition_entries_path(combined_competition))
       end
@@ -98,7 +98,7 @@ describe Compete::CombinedCompetitionEntriesController do
 
     describe "with invalid params" do
       it "re-renders the 'edit' template" do
-        combined_competition_entry = FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition)
+        combined_competition_entry = FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(CombinedCompetitionEntry).to receive(:save).and_return(false)
         put :update, params: { id: combined_competition_entry.to_param, combined_competition_entry: { "combined_competition_id" => "invalid value" }, combined_competition_id: combined_competition.id }
@@ -109,14 +109,14 @@ describe Compete::CombinedCompetitionEntriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested combined_competition_entry" do
-      combined_competition_entry = FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition)
+      combined_competition_entry = FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition)
       expect do
         delete :destroy, params: { id: combined_competition_entry.to_param, combined_competition_id: combined_competition.id }
       end.to change(CombinedCompetitionEntry, :count).by(-1)
     end
 
     it "redirects to the combined_competition_entries list" do
-      combined_competition_entry = FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition)
+      combined_competition_entry = FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition)
       delete :destroy, params: { id: combined_competition_entry.to_param, combined_competition_id: combined_competition.id }
       expect(response).to redirect_to(combined_competition)
     end

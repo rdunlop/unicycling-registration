@@ -20,10 +20,10 @@ require 'spec_helper'
 
 describe Page do
   before(:each) do
-    @page = FactoryGirl.create(:page)
+    @page = FactoryBot.create(:page)
   end
 
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@page).to be_valid
   end
 
@@ -57,7 +57,7 @@ describe Page do
 
   context "page with a child" do
     before do
-      @child = FactoryGirl.create(:page, parent_page: @page)
+      @child = FactoryBot.create(:page, parent_page: @page)
     end
 
     it "marks the page as a parent" do

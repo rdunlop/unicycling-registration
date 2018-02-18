@@ -21,9 +21,9 @@
 require 'spec_helper'
 
 describe RegistrantEventSignUp do
-  let(:re) { FactoryGirl.create(:registrant_event_sign_up) }
+  let(:re) { FactoryBot.create(:registrant_event_sign_up) }
 
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(re.valid?).to eq(true)
   end
 
@@ -33,12 +33,12 @@ describe RegistrantEventSignUp do
   end
 
   describe "when I sign up for an event which has an expense_item" do
-    let(:expense_item) { FactoryGirl.create(:expense_item) }
-    let!(:event) { FactoryGirl.create(:event, expense_item: expense_item) }
-    let!(:reg) { FactoryGirl.create(:competitor) }
+    let(:expense_item) { FactoryBot.create(:expense_item) }
+    let!(:event) { FactoryBot.create(:event, expense_item: expense_item) }
+    let!(:reg) { FactoryBot.create(:competitor) }
 
     def sign_up
-      @registrant_event_sign_up = FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: event.event_categories.first)
+      @registrant_event_sign_up = FactoryBot.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: event.event_categories.first)
     end
     it "creates a registrant_expense_item" do
       expect { sign_up }.to change(RegistrantExpenseItem, :count).by(1)
@@ -58,8 +58,8 @@ describe RegistrantEventSignUp do
 
   describe "when an auto-competitor event exists" do
     before :each do
-      @competition = FactoryGirl.create(:competition)
-      @competition_source = FactoryGirl.create(:competition_source, target_competition: @competition, event_category: re.event_category)
+      @competition = FactoryBot.create(:competition)
+      @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: re.event_category)
     end
 
     it "doesn't add the competition on change of state if the competition isn't auto-creation" do
@@ -75,9 +75,9 @@ describe RegistrantEventSignUp do
 
   describe "when a competitor already exists and I un-sign up" do
     before :each do
-      @competition = FactoryGirl.create(:competition, num_members_per_competitor: "One")
-      @competition_source = FactoryGirl.create(:competition_source, target_competition: @competition, event_category: re.event_category)
-      @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+      @competition = FactoryBot.create(:competition, num_members_per_competitor: "One")
+      @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: re.event_category)
+      @competitor = FactoryBot.create(:event_competitor, competition: @competition)
       @member = @competitor.members.first
       @member.update_attributes(registrant: re.registrant)
       re.reload
@@ -98,7 +98,7 @@ describe RegistrantEventSignUp do
     describe "When the event has multiple categories" do
       before :each do
         @event = re.event_category.event
-        @cat2 = FactoryGirl.create(:event_category, event: @event)
+        @cat2 = FactoryBot.create(:event_category, event: @event)
       end
 
       it "marks the member as dropped when I change the category I signed up for" do
@@ -111,14 +111,14 @@ describe RegistrantEventSignUp do
 end
 
 describe "when a competition exists before a sign-up" do
-  let(:event_category) { FactoryGirl.create(:event).event_categories.first }
+  let(:event_category) { FactoryBot.create(:event).event_categories.first }
   before :each do
-    @competition = FactoryGirl.create(:competition, automatic_competitor_creation: true, num_members_per_competitor: "One")
-    @competition_source = FactoryGirl.create(:competition_source, target_competition: @competition, event_category: event_category)
+    @competition = FactoryBot.create(:competition, automatic_competitor_creation: true, num_members_per_competitor: "One")
+    @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: event_category)
   end
 
   it "adds the competition on change of state" do
-    @re = FactoryGirl.create(:registrant_event_sign_up, event: event_category.event, signed_up: false)
+    @re = FactoryBot.create(:registrant_event_sign_up, event: event_category.event, signed_up: false)
     expect do
       expect(@re.save).to be_truthy
     end.to change(Competitor, :count).by(0)
@@ -137,7 +137,7 @@ describe "when a competition exists before a sign-up" do
     end
 
     it "doesn't add the competitor on change of state" do
-      @re = FactoryGirl.create(:registrant_event_sign_up, event: event_category.event, signed_up: false)
+      @re = FactoryBot.create(:registrant_event_sign_up, event: event_category.event, signed_up: false)
       expect(@re.registrant.gender).to eq("Male")
 
       @re.signed_up = true

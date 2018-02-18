@@ -41,12 +41,12 @@ require 'spec_helper'
 
 describe CompetitionsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
-    @event = FactoryGirl.create(:event)
+    @event = FactoryBot.create(:event)
     @event_category = @event.event_categories.first
   end
-  let(:competition) { FactoryGirl.create(:competition, event: @event) }
+  let(:competition) { FactoryBot.create(:competition, event: @event) }
 
   describe "#show" do
     it "renders successfully" do
@@ -81,9 +81,9 @@ describe CompetitionsController do
   end
 
   describe "#set_age_group_places" do
-    let(:competition) { FactoryGirl.create(:timed_competition) }
+    let(:competition) { FactoryBot.create(:timed_competition) }
     let(:age_group_type) { competition.age_group_type }
-    let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+    let!(:age_group_entry) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
 
     context "with valid params" do
       it "renders" do
@@ -116,7 +116,7 @@ describe CompetitionsController do
 
   describe "POST lock" do
     it "locks the competition" do
-      competition = FactoryGirl.create(:competition, event: @event)
+      competition = FactoryBot.create(:competition, event: @event)
       post :lock, params: { id: competition.to_param }
       competition.reload
       expect(competition.locked?).to eq(true)
@@ -124,7 +124,7 @@ describe CompetitionsController do
   end
   describe "DELETE lock" do
     it "unlocks the competition" do
-      competition = FactoryGirl.create(:competition, :locked, event: @event)
+      competition = FactoryBot.create(:competition, :locked, event: @event)
       delete :unlock, params: { id: competition.to_param }
       competition.reload
       expect(competition.locked?).to eq(false)
@@ -132,9 +132,9 @@ describe CompetitionsController do
   end
 
   describe "POST publish_age_group_entry" do
-    let(:competition) { FactoryGirl.create(:timed_competition, :locked) }
+    let(:competition) { FactoryBot.create(:timed_competition, :locked) }
     let(:age_group_type) { competition.age_group_type }
-    let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+    let!(:age_group_entry) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
 
     context "with valid params" do
       it "publishes the age group entry" do
@@ -153,7 +153,7 @@ describe CompetitionsController do
 
   describe "POST publish" do
     it "publishes the competition results" do
-      competition = FactoryGirl.create(:competition, :locked, event: @event)
+      competition = FactoryBot.create(:competition, :locked, event: @event)
       post :publish, params: { id: competition.to_param }
       competition.reload
       expect(competition.published?).to eq(true)
@@ -161,7 +161,7 @@ describe CompetitionsController do
   end
   describe "DELETE publish" do
     it "un-publishes the competition" do
-      competition = FactoryGirl.create(:competition, :locked, :published, event: @event)
+      competition = FactoryBot.create(:competition, :locked, :published, event: @event)
       delete :unpublish, params: { id: competition.to_param }
       competition.reload
       expect(competition.published?).to eq(false)
@@ -169,8 +169,8 @@ describe CompetitionsController do
   end
 
   describe "POST create_last_minute_competitor" do
-    let(:new_registrant) { FactoryGirl.create(:competitor) }
-    let!(:config) { FactoryGirl.create(:event_configuration, :with_usa) }
+    let(:new_registrant) { FactoryBot.create(:competitor) }
+    let!(:config) { FactoryBot.create(:event_configuration, :with_usa) }
     it "creates a competitor for the competition" do
       expect do
         post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }
@@ -179,7 +179,7 @@ describe CompetitionsController do
 
     context "with a withdrawn competitor for this registrant" do
       before do
-        @withdrawn_competitor = FactoryGirl.create(:event_competitor, competition: competition, status: "withdrawn")
+        @withdrawn_competitor = FactoryBot.create(:event_competitor, competition: competition, status: "withdrawn")
         @withdrawn_competitor.members.first.update_attribute(:registrant_id, new_registrant.id)
       end
 
@@ -192,8 +192,8 @@ describe CompetitionsController do
   end
 
   context "with a competitor and judge" do
-    let!(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
-    let!(:judge) { FactoryGirl.create(:judge, competition: competition) }
+    let!(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
+    let!(:judge) { FactoryBot.create(:judge, competition: competition) }
 
     it "can refresh" do
       put :refresh_competitors, params: { id: competition.id }

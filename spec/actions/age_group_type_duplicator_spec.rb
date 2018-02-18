@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe AgeGroupTypeDuplicator do
-  let(:age_group_type) { FactoryGirl.create(:age_group_type) }
-  let!(:age_group_entry) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+  let(:age_group_type) { FactoryBot.create(:age_group_type) }
+  let!(:age_group_entry) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
 
   def do_action
     described_class.new(age_group_type.reload).duplicate

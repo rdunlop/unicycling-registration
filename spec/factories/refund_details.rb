@@ -14,11 +14,11 @@
 #  index_refund_details_on_refund_id          (refund_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :refund_detail do
-    refund # FactoryGirl
-    payment_detail # FactoryGirl
+    refund # FactoryBot
+    payment_detail # FactoryBot
   end
 end

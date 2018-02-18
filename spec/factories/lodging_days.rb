@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :lodging_day do
     lodging_room_option # FactoryBot
     sequence(:date_offered) { |n| (10 + n).days.from_now }

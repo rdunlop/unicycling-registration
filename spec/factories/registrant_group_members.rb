@@ -17,11 +17,11 @@
 #  reg_group_reg_group                                    (registrant_id,registrant_group_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_group_member do
-    registrant_group # FactoryGirl
-    registrant # FactoryGirl
+    registrant_group # FactoryBot
+    registrant # FactoryBot
   end
 end

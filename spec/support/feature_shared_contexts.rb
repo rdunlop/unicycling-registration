@@ -25,39 +25,39 @@ shared_context 'user is logged in' do
 end
 
 shared_context "unpaid registration" do
-  let(:competitor) { FactoryGirl.create(:competitor, user: user) }
+  let(:competitor) { FactoryBot.create(:competitor, user: user) }
 end
 
 shared_context 'basic event configuration' do |options = {}|
   options.reverse_merge! test_mode: false
   before :each do
-    FactoryGirl.create(:wheel_size_16)
-    FactoryGirl.create(:wheel_size_20)
-    FactoryGirl.create(:wheel_size_24)
+    FactoryBot.create(:wheel_size_16)
+    FactoryBot.create(:wheel_size_20)
+    FactoryBot.create(:wheel_size_24)
     EventConfiguration.singleton.update_attributes(
-      FactoryGirl.attributes_for(:event_configuration,
-                                 start_date: Date.today + 6.months,
-                                 iuf: true,
-                                 usa: false,
-                                 test_mode: options[:test_mode],
-                                 music_submission_end_date: Date.today + 2.months,
-                                 event_sign_up_closed_date: Date.today + 2.months)
+      FactoryBot.attributes_for(:event_configuration,
+                                start_date: Date.today + 6.months,
+                                iuf: true,
+                                usa: false,
+                                test_mode: options[:test_mode],
+                                music_submission_end_date: Date.today + 2.months,
+                                event_sign_up_closed_date: Date.today + 2.months)
     )
-    exp_comp = FactoryGirl.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
-    exp_noncomp = FactoryGirl.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
-    FactoryGirl.create(:registration_cost, :current, :competitor,
-                       start_date: Date.today - 1.month, end_date: Date.today + 1.month, expense_item: exp_comp)
-    FactoryGirl.create(:registration_cost, :current, :noncompetitor,
-                       start_date: Date.today - 1.month, end_date: Date.today + 1.month, expense_item: exp_noncomp)
-    FactoryGirl.create(:event, name: "100m")
+    exp_comp = FactoryBot.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
+    exp_noncomp = FactoryBot.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
+    FactoryBot.create(:registration_cost, :current, :competitor,
+                      start_date: Date.today - 1.month, end_date: Date.today + 1.month, expense_item: exp_comp)
+    FactoryBot.create(:registration_cost, :current, :noncompetitor,
+                      start_date: Date.today - 1.month, end_date: Date.today + 1.month, expense_item: exp_noncomp)
+    FactoryBot.create(:event, name: "100m")
   end
 end
 
 shared_context "freestyle_event" do |options = {}|
   before :each do
-    event = FactoryGirl.create(:event, name: options[:name])
-    competition = FactoryGirl.create(:competition, event: event, name: options[:name])
-    FactoryGirl.create(:event_competitor, competition: competition)
+    event = FactoryBot.create(:event, name: options[:name])
+    competition = FactoryBot.create(:competition, event: event, name: options[:name])
+    FactoryBot.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"
     reg.last_name = "Robin"
@@ -67,9 +67,9 @@ end
 
 shared_context "points_event" do |options = {}|
   before :each do
-    event = FactoryGirl.create(:event, name: options[:name])
-    competition = FactoryGirl.create(:ranked_competition, event: event, name: options[:name], end_data_type: "One Data Per Line")
-    FactoryGirl.create(:event_competitor, competition: competition)
+    event = FactoryBot.create(:event, name: options[:name])
+    competition = FactoryBot.create(:ranked_competition, event: event, name: options[:name], end_data_type: "One Data Per Line")
+    FactoryBot.create(:event_competitor, competition: competition)
     reg = Registrant.first
     reg.first_name = "Robin"
     reg.last_name = "Robin"
@@ -81,7 +81,7 @@ shared_context "judge_is_assigned_to_competition" do |options = {}|
   before :each do
     competition = Competition.first
     judge_user = User.find_by(name: options[:user_name])
-    judge = FactoryGirl.create(:judge, competition: competition, user: judge_user)
+    judge = FactoryBot.create(:judge, competition: competition, user: judge_user)
     jt = judge.judge_type
     jt.name = "Presentation"
     jt.save
@@ -91,7 +91,7 @@ end
 shared_context 'optional expense_item' do |options = {}|
   options.reverse_merge! cost: 15, has_details: false, details: nil
   before :each do
-    @ei = FactoryGirl.create(:expense_item, name: "USA Individual Membership", has_details: options[:has_details], cost: options[:cost])
+    @ei = FactoryBot.create(:expense_item, name: "USA Individual Membership", has_details: options[:has_details], cost: options[:cost])
     competitor.registrant_expense_items.create line_item: @ei, system_managed: false, details: options[:details]
     competitor.reload
   end
@@ -99,7 +99,7 @@ end
 
 shared_context 'paid expense item' do
   before :each do
-    pd = FactoryGirl.create(:payment_detail, registrant: competitor)
+    pd = FactoryBot.create(:payment_detail, registrant: competitor)
     payment = pd.payment
     payment.completed = true
     payment.save

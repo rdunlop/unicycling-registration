@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe CompetitionSetup::CompetitionsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
-    @event = FactoryGirl.create(:event)
+    @event = FactoryBot.create(:event)
     @event_category = @event.event_categories.first
   end
 
@@ -28,7 +28,7 @@ describe CompetitionSetup::CompetitionsController do
 
     describe "with a copy_from argument" do
       it "sets the arguments from an existing competition" do
-        first_competition = FactoryGirl.create(:competition)
+        first_competition = FactoryBot.create(:competition)
         get :new, params: { event_id: @event.id, copy_from: first_competition.id }
         assert_select "input[type='text'][value=?]", first_competition.name
       end
@@ -37,7 +37,7 @@ describe CompetitionSetup::CompetitionsController do
 
   describe "GET edit" do
     it "shows the requested competition form" do
-      competition = FactoryGirl.create(:competition, event: @event)
+      competition = FactoryBot.create(:competition, event: @event)
       get :edit, params: { id: competition.to_param }
 
       assert_select "h1", "Editing #{@event} #{competition}"
@@ -52,7 +52,7 @@ describe CompetitionSetup::CompetitionsController do
         end.to change(Competition, :count).by(1)
       end
       it "can create a Female gender_filter competition" do
-        @comp = FactoryGirl.create(:competition)
+        @comp = FactoryBot.create(:competition)
         expect do
           post :create, params: { event_id: @event.id, competition: valid_attributes.merge(competition_sources_attributes: [{ competition_id: @comp.id, gender_filter: "Female" }]) }
         end.to change(Competition, :count).by(1)
@@ -79,14 +79,14 @@ describe CompetitionSetup::CompetitionsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested competition" do
-        competition = FactoryGirl.create(:competition)
+        competition = FactoryBot.create(:competition)
         expect do
           put :update, params: { id: competition.to_param, competition: valid_attributes.merge(name: "test Name") }
         end.to change { competition.reload.name }
       end
 
       it "redirects to the competition" do
-        competition = FactoryGirl.create(:competition)
+        competition = FactoryBot.create(:competition)
         put :update, params: { id: competition.to_param, competition: valid_attributes }
         expect(response).to redirect_to(competition)
       end
@@ -94,7 +94,7 @@ describe CompetitionSetup::CompetitionsController do
 
     describe "with invalid params" do
       it "assigns the competition as @competition" do
-        competition = FactoryGirl.create(:competition)
+        competition = FactoryBot.create(:competition)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         expect do
@@ -103,7 +103,7 @@ describe CompetitionSetup::CompetitionsController do
       end
 
       it "re-renders the 'edit' template" do
-        competition = FactoryGirl.create(:competition, event: @event)
+        competition = FactoryBot.create(:competition, event: @event)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Competition).to receive(:valid?).and_return(false)
         put :update, params: { id: competition.to_param, competition: { name: "comp" } }
@@ -115,14 +115,14 @@ describe CompetitionSetup::CompetitionsController do
 
   describe "DELETE destroy" do
     it "destroys the requested competition" do
-      competition = FactoryGirl.create(:competition, event: @event)
+      competition = FactoryBot.create(:competition, event: @event)
       expect do
         delete :destroy, params: { id: competition.to_param }
       end.to change(Competition, :count).by(-1)
     end
 
     it "redirects to the competition_setup_path" do
-      competition = FactoryGirl.create(:competition, event: @event)
+      competition = FactoryBot.create(:competition, event: @event)
       delete :destroy, params: { id: competition.to_param }
       expect(response).to redirect_to(competition_setup_path)
     end

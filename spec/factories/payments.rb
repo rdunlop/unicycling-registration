@@ -21,11 +21,11 @@
 #  index_payments_user_id  (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment do
-    user # FactoryGirl
+    user # FactoryBot
     completed false
     cancelled false
     transaction_id "MyString"

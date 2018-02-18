@@ -19,13 +19,13 @@
 require 'spec_helper'
 
 describe DistanceAttemptsController do
-  let(:competition) { FactoryGirl.create(:distance_competition) }
-  let(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long") }
-  let(:comp) { FactoryGirl.create(:event_competitor, competition: competition) }
+  let(:competition) { FactoryBot.create(:distance_competition) }
+  let(:judge_type) { FactoryBot.create(:judge_type, event_class: "High/Long") }
+  let(:comp) { FactoryBot.create(:event_competitor, competition: competition) }
   before do
-    @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
+    @data_entry_volunteer_user = FactoryBot.create(:data_entry_volunteer_user)
     sign_in @data_entry_volunteer_user
-    @judge = FactoryGirl.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
+    @judge = FactoryBot.create(:judge, competition: competition, user: @data_entry_volunteer_user, judge_type: judge_type)
   end
 
   describe "GET index" do
@@ -67,14 +67,14 @@ describe DistanceAttemptsController do
 
   describe "GET list" do
     it "should return the distance attempts" do
-      da = FactoryGirl.create(:distance_attempt, judge: @judge, competitor: comp)
+      da = FactoryBot.create(:distance_attempt, judge: @judge, competitor: comp)
       get :list, params: { competition_id: competition.id }
 
       assert_select "td", da.competitor.to_s
     end
     it "should not be accessible to non-data_entry_volunteers" do
       sign_out @data_entry_volunteer_user
-      @normal_user = FactoryGirl.create(:user)
+      @normal_user = FactoryBot.create(:user)
       sign_in @normal_user
 
       get :list, params: { competition_id: competition.id }
@@ -87,7 +87,7 @@ describe DistanceAttemptsController do
     before do
       request.env["HTTP_REFERER"] = root_path
     end
-    let!(:distance_attempt) { FactoryGirl.create(:distance_attempt, competitor: comp, judge: @judge) }
+    let!(:distance_attempt) { FactoryBot.create(:distance_attempt, competitor: comp, judge: @judge) }
 
     it "destroys the requested distance_attempt" do
       expect do

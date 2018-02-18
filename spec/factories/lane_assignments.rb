@@ -16,11 +16,11 @@
 #  index_lane_assignments_on_competition_id_and_heat_and_lane  (competition_id,heat,lane) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :lane_assignment do
-    competition # FactoryGirl
+    competition # FactoryBot
     association :competitor, factory: :event_competitor
     heat 1
     lane 1

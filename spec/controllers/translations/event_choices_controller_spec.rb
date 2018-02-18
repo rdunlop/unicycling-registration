@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Translations::EventChoicesController do
-  let!(:event_choice) { FactoryGirl.create(:event_choice) }
-  let(:user) { FactoryGirl.create(:convention_admin_user) }
+  let!(:event_choice) { FactoryBot.create(:event_choice) }
+  let(:user) { FactoryBot.create(:convention_admin_user) }
 
   before { sign_in user }
   after { I18n.locale = :en }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WelcomeController do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   describe "GET 'help'" do
     context "When not logged in" do
       it "returns http success" do
@@ -40,7 +40,7 @@ describe WelcomeController do
 
   describe "GET index" do
     describe "when there is a 'Home' page" do
-      let!(:home_page) { FactoryGirl.create(:page, :home) }
+      let!(:home_page) { FactoryBot.create(:page, :home) }
 
       it "redirects to homepage" do
         get :index
@@ -68,7 +68,7 @@ describe WelcomeController do
 
   describe "GET usa_membership" do
     describe "with USA enabled" do
-      let!(:event_configuration) { FactoryGirl.create(:event_configuration, :with_usa) }
+      let!(:event_configuration) { FactoryBot.create(:event_configuration, :with_usa) }
 
       it "returns http success" do
         get :usa_membership

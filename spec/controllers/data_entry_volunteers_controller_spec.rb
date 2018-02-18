@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe DataEntryVolunteersController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
-    @super_admin = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:user)
+    @super_admin = FactoryBot.create(:super_admin_user)
     sign_in @super_admin
-    @ev = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:competition, event: @ev)
-    @data_entry_volunteer_user = FactoryGirl.create(:data_entry_volunteer_user)
+    @ev = FactoryBot.create(:event)
+    @ec = FactoryBot.create(:competition, event: @ev)
+    @data_entry_volunteer_user = FactoryBot.create(:data_entry_volunteer_user)
   end
 
   # This should return the minimal set of attributes required to create a valid
