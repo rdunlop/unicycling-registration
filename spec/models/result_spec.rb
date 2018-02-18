@@ -70,7 +70,6 @@ describe Result do
       competition.scoring_class = "Freestyle"
       competition.name = "Hello"
       competition.award_title_name = "Individual"
-      competition.save!
 
       expect(@al.competition_name).to eq("Individual")
     end
@@ -80,7 +79,6 @@ describe Result do
       competition.name = "Club Freestyle Int"
       competition.award_title_name = "Club Freestyle"
       competition.award_subtitle_name = "Intermediate Club"
-      competition.save!
 
       expect(@al.category_name).to eq("Intermediate Club")
     end
