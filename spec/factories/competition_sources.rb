@@ -20,9 +20,9 @@
 #  index_competition_sources_target_competition_id  (target_competition_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition_source do
     target_competition factory: :competition
     competition nil
@@ -31,7 +31,7 @@ FactoryGirl.define do
     gender_filter "Both"
     before(:create) do |competition_source|
       if competition_source.event_category.nil?
-        ev = FactoryGirl.create(:event)
+        ev = FactoryBot.create(:event)
         competition_source.event_category = ev.event_categories.first
       end
     end

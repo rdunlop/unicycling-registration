@@ -32,7 +32,7 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = FactoryGirl.create(:user, password: "base_password", password_confirmation: "base_password")
+    @user = FactoryBot.create(:user, password: "base_password", password_confirmation: "base_password")
   end
 
   it "can be created by factory girl" do
@@ -50,33 +50,33 @@ describe User do
   end
   describe "with an expense_item" do
     before(:each) do
-      @rp = FactoryGirl.create(:registration_cost, :competitor)
-      @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor)
+      @rp = FactoryBot.create(:registration_cost, :competitor)
+      @noncomp_reg_cost = FactoryBot.create(:registration_cost, :noncompetitor)
       ei = @noncomp_reg_cost.expense_items.first
       ei.update!(cost: 50)
     end
 
     it "calculates the cost of a competitor" do
-      @comp = FactoryGirl.create(:competitor, user: @user)
+      @comp = FactoryBot.create(:competitor, user: @user)
       expect(@user.total_owing).to eq(100.to_money)
     end
     it "calculates the cost of a noncompetitor" do
-      @comp = FactoryGirl.create(:noncompetitor, user: @user)
+      @comp = FactoryBot.create(:noncompetitor, user: @user)
       expect(@user.total_owing).to eq(50.to_money)
     end
   end
   describe "with related registrants" do
     before(:each) do
-      @reg1 = FactoryGirl.create(:competitor, user: @user)
-      @reg2 = FactoryGirl.create(:noncompetitor, user: @user)
-      @reg3 = FactoryGirl.create(:competitor, user: @user)
+      @reg1 = FactoryBot.create(:competitor, user: @user)
+      @reg2 = FactoryBot.create(:noncompetitor, user: @user)
+      @reg3 = FactoryBot.create(:competitor, user: @user)
 
       @reg1.first_name = "holly"
       @reg1.save
     end
     describe "only users with registrants" do
       before(:each) do
-        @other_user = FactoryGirl.create(:user)
+        @other_user = FactoryBot.create(:user)
       end
 
       it "lists only users who have registrants" do
@@ -89,7 +89,7 @@ describe User do
     end
     describe "with a user who is not confirmed" do
       before(:each) do
-        u = FactoryGirl.create(:user)
+        u = FactoryBot.create(:user)
         u.confirmed_at = nil
         u.save!
       end
@@ -106,9 +106,9 @@ describe User do
 
   describe "with 3 users" do
     before(:each) do
-      @b = FactoryGirl.create(:user, email: "b@b.com")
-      @a = FactoryGirl.create(:payment_admin, email: "a@a.com")
-      @c = FactoryGirl.create(:super_admin_user, email: "c@c.com")
+      @b = FactoryBot.create(:user, email: "b@b.com")
+      @a = FactoryBot.create(:payment_admin, email: "a@a.com")
+      @c = FactoryBot.create(:super_admin_user, email: "c@c.com")
     end
 
     it "lists them in alphabetical order" do
@@ -120,10 +120,10 @@ describe User do
     let(:encrypted_password) { Devise::Encryptor.digest(User, "legacy_password") }
     let(:subdomain) { Apartment::Tenant.current }
     let!(:user_convention) do
-      FactoryGirl.create(:user_convention,
-                         user: @user,
-                         legacy_encrypted_password: encrypted_password,
-                         subdomain: subdomain)
+      FactoryBot.create(:user_convention,
+                        user: @user,
+                        legacy_encrypted_password: encrypted_password,
+                        subdomain: subdomain)
     end
 
     it "is NOT valid with legacy password" do
@@ -147,7 +147,7 @@ describe User do
     end
 
     context "when the user_convention has no legacy password" do
-      let!(:user_convention) { FactoryGirl.create(:user_convention, user: @user, legacy_encrypted_password: nil) }
+      let!(:user_convention) { FactoryBot.create(:user_convention, user: @user, legacy_encrypted_password: nil) }
 
       it "does not allow blank password" do
         expect(@user.valid_password?(nil)).to be_falsey

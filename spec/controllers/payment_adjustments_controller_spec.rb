@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe PaymentAdjustmentsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
-  let!(:payment) { FactoryGirl.create(:payment, completed: true, transaction_id: "My Transaction ID") }
-  let!(:other_payment) { FactoryGirl.create(:payment, transaction_id: "Other Transaction ID") }
-  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
+  let!(:payment) { FactoryBot.create(:payment, completed: true, transaction_id: "My Transaction ID") }
+  let!(:other_payment) { FactoryBot.create(:payment, transaction_id: "Other Transaction ID") }
+  let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
 
   describe "GET list" do
     it "lists all payments" do
@@ -27,7 +27,7 @@ describe PaymentAdjustmentsController do
   end
 
   describe "POST adjust_payment_choose" do
-    let(:registrant) { FactoryGirl.create(:registrant) }
+    let(:registrant) { FactoryBot.create(:registrant) }
 
     context "without choosing a registrant" do
       it "redirects to :new" do
@@ -48,8 +48,8 @@ describe PaymentAdjustmentsController do
 
   describe "POST exchange_create" do
     let(:registrant) { payment_detail.registrant.reload }
-    let(:new_expense_item) { FactoryGirl.create(:expense_item) }
-    let(:other_expense_item) { FactoryGirl.create(:expense_item) }
+    let(:new_expense_item) { FactoryBot.create(:expense_item) }
+    let(:other_expense_item) { FactoryBot.create(:expense_item) }
 
     it "can create an exchange of elements" do
       expect do

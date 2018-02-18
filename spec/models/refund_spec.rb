@@ -19,7 +19,7 @@ require 'spec_helper'
 
 describe Refund do
   before(:each) do
-    @refund = FactoryGirl.create(:refund)
+    @refund = FactoryBot.create(:refund)
   end
 
   it "should have 100% refund" do

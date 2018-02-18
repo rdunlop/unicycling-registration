@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe ConventionSetup::EventsController do
   before do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
-    @category = FactoryGirl.create(:category)
+    @category = FactoryBot.create(:category)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -18,7 +18,7 @@ describe ConventionSetup::EventsController do
 
   describe "as a normal user" do
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -30,8 +30,8 @@ describe ConventionSetup::EventsController do
 
   describe "GET index" do
     it "shows all events" do
-      event = FactoryGirl.create(:event, category: @category)
-      FactoryGirl.create(:event)
+      event = FactoryBot.create(:event, category: @category)
+      FactoryBot.create(:event)
       get :index, params: { category_id: @category.id }
 
       assert_select "td", event.name
@@ -45,7 +45,7 @@ describe ConventionSetup::EventsController do
 
   describe "GET edit" do
     it "shows the requested event" do
-      event = FactoryGirl.create(:event, category: @category)
+      event = FactoryBot.create(:event, category: @category)
       get :edit, params: { id: event.to_param }
       assert_select "form", action: convention_setup_event_path(event), method: "post" do
         assert_select "select#event_category_id", name: "event[category_id]"
@@ -108,14 +108,14 @@ describe ConventionSetup::EventsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         expect do
           put :update, params: { id: event.to_param, event: valid_attributes.merge(name: "Naaa") }
         end.to change { event.reload.name }
       end
 
       it "redirects to the event" do
-        event = FactoryGirl.create(:event, category: @category)
+        event = FactoryBot.create(:event, category: @category)
         put :update, params: { id: event.to_param, event: valid_attributes }
         expect(response).to redirect_to(convention_setup_category_events_path(@category))
       end
@@ -123,7 +123,7 @@ describe ConventionSetup::EventsController do
 
     describe "with invalid params" do
       it "does not update the event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
         expect do
@@ -132,7 +132,7 @@ describe ConventionSetup::EventsController do
       end
 
       it "re-renders the 'edit' template" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Event).to receive(:save).and_return(false)
         put :update, params: { id: event.to_param, event: { name: "event" } }
@@ -142,7 +142,7 @@ describe ConventionSetup::EventsController do
     end
     describe "with nested event_choices" do
       before(:each) do
-        @event = FactoryGirl.create(:event)
+        @event = FactoryBot.create(:event)
       end
       it "accepts nested attributes" do
         expect do
@@ -194,7 +194,7 @@ describe ConventionSetup::EventsController do
 
     describe "with nested event_categories" do
       before(:each) do
-        @event = FactoryGirl.create(:event)
+        @event = FactoryBot.create(:event)
       end
       it "can update event_categories" do
         ecat = @event.event_categories.last
@@ -217,9 +217,9 @@ describe ConventionSetup::EventsController do
   end
 
   describe "PUT update_row_order" do
-    let(:category) { FactoryGirl.create(:category) }
-    let!(:event_1) { FactoryGirl.create(:event, category: category) }
-    let!(:event_2) { FactoryGirl.create(:event, category: category) }
+    let(:category) { FactoryBot.create(:category) }
+    let!(:event_1) { FactoryBot.create(:event, category: category) }
+    let!(:event_2) { FactoryBot.create(:event, category: category) }
 
     it "updates the order" do
       put :update_row_order, params: { category_id: category.to_param, id: event_1.to_param, row_order_position: 1 }
@@ -230,14 +230,14 @@ describe ConventionSetup::EventsController do
 
   describe "DELETE destroy" do
     it "destroys the requested event" do
-      event = FactoryGirl.create(:event)
+      event = FactoryBot.create(:event)
       expect do
         delete :destroy, params: { id: event.to_param }
       end.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do
-      event = FactoryGirl.create(:event, category: @category)
+      event = FactoryBot.create(:event, category: @category)
       delete :destroy, params: { id: event.to_param }
       expect(response).to redirect_to(convention_setup_category_events_path(@category))
     end

@@ -26,13 +26,13 @@
 #  index_competitors_on_competition_id_and_age_group_entry_id  (competition_id,age_group_entry_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
 require 'rspec/mocks/standalone'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event_competitor, class: Competitor do
-    competition # FactoryGirl
+    competition # FactoryBot
 
     transient do
       bib_number nil
@@ -43,7 +43,7 @@ FactoryGirl.define do
     end
 
     after(:create) do |comp, evaluator|
-      member = FactoryGirl.create(:member, competitor: comp)
+      member = FactoryBot.create(:member, competitor: comp)
       reg = member.registrant
       reg.update(bib_number: evaluator.bib_number) if evaluator.bib_number.present?
       reg.reload.touch_members # propagate bib_number to competitor
@@ -51,7 +51,7 @@ FactoryGirl.define do
     end
 
     after(:stub) do |competitor|
-      allow(competitor).to receive(:members).and_return([FactoryGirl.build_stubbed(:member, competitor: competitor)])
+      allow(competitor).to receive(:members).and_return([FactoryBot.build_stubbed(:member, competitor: competitor)])
     end
   end
 

@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 describe Admin::CompetitionSongsController do
-  let(:user) { FactoryGirl.create(:super_admin_user) }
+  let(:user) { FactoryBot.create(:super_admin_user) }
   before(:each) do
-    FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
+    FactoryBot.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
     sign_in user
   end
-  let(:competition) { FactoryGirl.create(:competition) }
+  let(:competition) { FactoryBot.create(:competition) }
 
   describe "as a normal user" do
     before do
       sign_out user
-      sign_in FactoryGirl.create(:user)
+      sign_in FactoryBot.create(:user)
     end
 
     it "doesn't have permission" do
@@ -28,9 +28,9 @@ describe Admin::CompetitionSongsController do
   end
 
   describe "POST create" do
-    let(:event) { FactoryGirl.create(:event) }
-    let(:competitor) { FactoryGirl.create(:event_competitor) }
-    let(:song) { FactoryGirl.create(:song) }
+    let(:event) { FactoryBot.create(:event) }
+    let(:competitor) { FactoryBot.create(:event_competitor) }
+    let(:song) { FactoryBot.create(:song) }
 
     it "assigns the competitor to the song" do
       post :create, params: { competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id }
@@ -38,7 +38,7 @@ describe Admin::CompetitionSongsController do
     end
 
     context "when the competitor already has a song associated" do
-      let!(:old_song) { FactoryGirl.create(:song, competitor: competitor) }
+      let!(:old_song) { FactoryBot.create(:song, competitor: competitor) }
 
       it "un-assigns, and assigns to a new song" do
         post :create, params: { competition_id: competition.to_param, song_id: song.id, competitor_id: competitor.id }
@@ -49,7 +49,7 @@ describe Admin::CompetitionSongsController do
   end
 
   describe "GET download_zip" do
-    let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+    let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
     # NOTE: on songs
 
     it "loads all songs" do

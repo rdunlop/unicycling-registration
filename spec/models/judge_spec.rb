@@ -22,9 +22,9 @@ require 'spec_helper'
 
 describe Judge do
   describe "when the judge has scores" do
-    let(:judge) { FactoryGirl.create(:judge) }
-    let(:competitor) { FactoryGirl.create(:event_competitor, competition: judge.competition) }
-    let!(:score) { FactoryGirl.create(:score, competitor: competitor, judge: judge) }
+    let(:judge) { FactoryBot.create(:judge) }
+    let(:competitor) { FactoryBot.create(:event_competitor, competition: judge.competition) }
+    let!(:score) { FactoryBot.create(:score, competitor: competitor, judge: judge) }
 
     it "cannot destroy the judge" do
       judge.destroy
@@ -33,9 +33,9 @@ describe Judge do
   end
 
   context "With a high/long competition" do
-    let(:competition) { FactoryGirl.create(:distance_competition) }
-    let(:judge) { FactoryGirl.build(:judge, competition: competition) }
-    let!(:judge_type) { FactoryGirl.create(:judge_type, event_class: "High/Long", name: "High/Long Judge Type") }
+    let(:competition) { FactoryBot.create(:distance_competition) }
+    let(:judge) { FactoryBot.build(:judge, competition: competition) }
+    let!(:judge_type) { FactoryBot.create(:judge_type, event_class: "High/Long", name: "High/Long Judge Type") }
 
     describe "when the judge type is valid for this competition" do
       it "can save the judge" do

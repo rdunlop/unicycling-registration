@@ -16,11 +16,11 @@
 #  index_results_on_competitor_id_and_result_type  (competitor_id,result_type) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :result do
-    association :competitor, factory: :event_competitor # FactoryGirl
+    association :competitor, factory: :event_competitor # FactoryBot
     place 1
     result_type "AgeGroup"
 

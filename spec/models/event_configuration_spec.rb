@@ -59,7 +59,7 @@ describe EventConfiguration do
 
   before(:each) do
     @ev = EventConfiguration.singleton
-    @ev.assign_attributes(FactoryGirl.attributes_for(:event_configuration, standard_skill_closed_date: Date.new(2013, 5, 5)))
+    @ev.assign_attributes(FactoryBot.attributes_for(:event_configuration, standard_skill_closed_date: Date.new(2013, 5, 5)))
   end
 
   it "is valid from factoryGirl" do
@@ -145,12 +145,12 @@ describe EventConfiguration do
 
   it "cannot have both url and page" do
     @ev.comp_noncomp_url = "http://www.google.com"
-    @ev.comp_noncomp_page_id = FactoryGirl.create(:page).id
+    @ev.comp_noncomp_page_id = FactoryBot.create(:page).id
     expect(@ev).to be_invalid
   end
 
   it "Can have a info page" do
-    @ev.comp_noncomp_page_id = FactoryGirl.create(:page).id
+    @ev.comp_noncomp_page_id = FactoryBot.create(:page).id
     expect(@ev).to be_valid
   end
 
@@ -238,14 +238,14 @@ describe EventConfiguration do
     end
 
     it "should be closed if the number of registrants is >= the max_limit" do
-      FactoryGirl.create(:competitor)
+      FactoryBot.create(:competitor)
 
       travel_to(Date.new(2013, 5, 1)) do
         expect(ev.registration_closed?).to be_falsy
         ev.max_registrants = 1
         expect(ev.new_registration_closed?).to be_truthy
 
-        FactoryGirl.create(:competitor)
+        FactoryBot.create(:competitor)
         expect(ev.new_registration_closed?).to be_truthy
       end
     end
@@ -274,8 +274,8 @@ describe EventConfiguration do
 
   describe "with a registration cost" do
     before(:each) do
-      FactoryGirl.create(:event_configuration)
-      @rp = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7))
+      FactoryBot.create(:event_configuration)
+      @rp = FactoryBot.create(:registration_cost, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7))
     end
     it "should be open on the last day of registration" do
       travel_to(Date.new(2012, 11, 7)) do
@@ -314,7 +314,7 @@ describe EventConfiguration do
 
   describe "when doing partial_model validations" do
     it "allows short_name nil when not validated" do
-      @ec = FactoryGirl.build :event_configuration
+      @ec = FactoryBot.build :event_configuration
       @ec.validations_applied = 0
       @ec.short_name = nil
       expect(@ec).to be_valid

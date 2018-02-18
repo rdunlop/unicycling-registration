@@ -2,13 +2,13 @@ require 'spec_helper'
 
 RSpec.describe BibNumberUpdater do
   INITIAL_NONCOMPETITOR_NUMBER = BibNumberFinder::FreeNumber.new("noncompetitor").range.first
-  let!(:competitor1) { FactoryGirl.create(:competitor) }
-  let!(:competitor2) { FactoryGirl.create(:competitor) }
-  let!(:competitor3) { FactoryGirl.create(:competitor) }
+  let!(:competitor1) { FactoryBot.create(:competitor) }
+  let!(:competitor2) { FactoryBot.create(:competitor) }
+  let!(:competitor3) { FactoryBot.create(:competitor) }
 
-  let!(:noncompetitor1) { FactoryGirl.create(:noncompetitor) }
-  let!(:noncompetitor2) { FactoryGirl.create(:noncompetitor) }
-  let!(:noncompetitor3) { FactoryGirl.create(:noncompetitor) }
+  let!(:noncompetitor1) { FactoryBot.create(:noncompetitor) }
+  let!(:noncompetitor2) { FactoryBot.create(:noncompetitor) }
+  let!(:noncompetitor3) { FactoryBot.create(:noncompetitor) }
 
   describe "#free_bib_number" do
     context "with a competitor" do
@@ -26,8 +26,8 @@ RSpec.describe BibNumberUpdater do
       end
 
       context "with related event-competitors" do
-        let!(:event_competitor) { FactoryGirl.create(:event_competitor) }
-        let!(:member) { FactoryGirl.create(:member, competitor: event_competitor, registrant: competitor1) }
+        let!(:event_competitor) { FactoryBot.create(:event_competitor) }
+        let!(:member) { FactoryBot.create(:member, competitor: event_competitor, registrant: competitor1) }
 
         it "touches the competitor" do
           expect do

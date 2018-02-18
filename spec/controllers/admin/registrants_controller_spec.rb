@@ -2,21 +2,21 @@ require 'spec_helper'
 
 describe Admin::RegistrantsController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     sign_in @user
   end
 
   describe "with a super admin user" do
     before(:each) do
       sign_out @user
-      @admin_user = FactoryGirl.create(:super_admin_user)
+      @admin_user = FactoryBot.create(:super_admin_user)
       sign_in @admin_user
     end
 
     describe "GET manage_all" do
       it "displays all registrants" do
-        registrant = FactoryGirl.create(:competitor)
-        other_reg = FactoryGirl.create(:registrant)
+        registrant = FactoryBot.create(:competitor)
+        other_reg = FactoryBot.create(:registrant)
         get :manage_all
         assert_select "td", registrant.first_name
         assert_select "td", other_reg.first_name
@@ -34,7 +34,7 @@ describe Admin::RegistrantsController do
       let(:summary) { "0" }
       let(:bib_number) { nil }
       let(:registrant_id) { nil }
-      let(:registrant) { FactoryGirl.create(:registrant) }
+      let(:registrant) { FactoryBot.create(:registrant) }
 
       before { request.env["HTTP_REFERER"] = root_path }
       before { post :choose_one, params: { bib_number: bib_number, registrant_id: registrant_id, summary: summary } }
@@ -74,28 +74,28 @@ describe Admin::RegistrantsController do
 
     describe "POST undelete" do
       before(:each) do
-        FactoryGirl.create(:registration_cost)
+        FactoryBot.create(:registration_cost)
       end
       it "un-deletes a deleted registration" do
-        registrant = FactoryGirl.create(:competitor, deleted: true)
+        registrant = FactoryBot.create(:competitor, deleted: true)
         post :undelete, params: { id: registrant.to_param }
         registrant.reload
         expect(registrant.deleted).to eq(false)
       end
 
       it "redirects to the root" do
-        registrant = FactoryGirl.create(:competitor, deleted: true)
+        registrant = FactoryBot.create(:competitor, deleted: true)
         post :undelete, params: { id: registrant.to_param }
         expect(response).to redirect_to(manage_all_registrants_path)
       end
 
       describe "as a normal user" do
         before(:each) do
-          @user = FactoryGirl.create(:user)
+          @user = FactoryBot.create(:user)
           sign_in @user
         end
         it "Cannot undelete a user" do
-          registrant = FactoryGirl.create(:competitor, deleted: true)
+          registrant = FactoryBot.create(:competitor, deleted: true)
           post :undelete, params: { id: registrant.to_param }
           registrant.reload
           expect(registrant.deleted).to eq(true)

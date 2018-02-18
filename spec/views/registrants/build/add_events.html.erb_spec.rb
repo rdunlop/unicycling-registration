@@ -3,26 +3,26 @@ require 'spec_helper'
 describe "registrants/build/add_events" do
   let(:wizard_path) { "/" }
   before(:each) do
-    FactoryGirl.create(:registration_cost, :competitor,
-                       start_date: Date.new(2012, 1, 10),
-                       end_date: Date.new(2012, 2, 11))
-    FactoryGirl.create(:wheel_size_24, id: 3)
-    allow(controller).to receive(:current_user) { FactoryGirl.create(:user) }
+    FactoryBot.create(:registration_cost, :competitor,
+                      start_date: Date.new(2012, 1, 10),
+                      end_date: Date.new(2012, 2, 11))
+    FactoryBot.create(:wheel_size_24, id: 3)
+    allow(controller).to receive(:current_user) { FactoryBot.create(:user) }
     allow(view).to receive(:wizard_path).and_return(wizard_path)
   end
 
   describe "the events lists" do
     before(:each) do
-      @registrant = FactoryGirl.build(:competitor)
-      FactoryGirl.create(:registration_cost,
-                         start_date: Date.new(2012, 1, 10),
-                         end_date: Date.new(2012, 2, 11))
-      @ev1 = FactoryGirl.create(:event)
+      @registrant = FactoryBot.build(:competitor)
+      FactoryBot.create(:registration_cost,
+                        start_date: Date.new(2012, 1, 10),
+                        end_date: Date.new(2012, 2, 11))
+      @ev1 = FactoryBot.create(:event)
       @categories = [@ev1.category]
     end
     describe "for a boolean choice" do
       before(:each) do
-        @ec1 = FactoryGirl.create(:event_choice, event: @ev1)
+        @ec1 = FactoryBot.create(:event_choice, event: @ev1)
         rc = @registrant.registrant_choices.build
         rc.event_choice_id = @ec1.id
       end
@@ -41,7 +41,7 @@ describe "registrants/build/add_events" do
       end
       describe "With existing selections" do
         before(:each) do
-          @rc = FactoryGirl.create(:registrant_choice, value: "1", event_choice: @ec1)
+          @rc = FactoryBot.create(:registrant_choice, value: "1", event_choice: @ec1)
           @registrant = @rc.registrant
           @registrant.reload
           @attending = @rc
@@ -88,7 +88,7 @@ describe "registrants/build/add_events" do
 
     describe "for a text choice" do
       before(:each) do
-        @ec1 = FactoryGirl.create(:event_choice, event: @ev1, cell_type: "text", position: 2)
+        @ec1 = FactoryBot.create(:event_choice, event: @ev1, cell_type: "text", position: 2)
       end
       describe "without a choice selected" do
         before(:each) do
@@ -126,7 +126,7 @@ describe "registrants/build/add_events" do
 
     # describe "for multiple choice" do
     #   before(:each) do
-    #     @ec1 = FactoryGirl.create(:event_choice, event: @ev1, cell_type: "multiple", multiple_values: "one, two, three", position: 2)
+    #     @ec1 = FactoryBot.create(:event_choice, event: @ev1, cell_type: "multiple", multiple_values: "one, two, three", position: 2)
     #   end
 
     #   it "presents me with a select box" do

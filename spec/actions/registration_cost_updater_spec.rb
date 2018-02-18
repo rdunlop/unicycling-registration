@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe "when testing the update function for registration costs", caching: true do
   before(:each) do
-    @reg = FactoryGirl.create(:competitor) # will have rp1
-    @nc_reg = FactoryGirl.create(:noncompetitor) # will have rp1
+    @reg = FactoryBot.create(:competitor) # will have rp1
+    @nc_reg = FactoryBot.create(:noncompetitor) # will have rp1
     ActionMailer::Base.deliveries.clear
     # create a rp which encompasses "today"
-    @comp_registration_cost1 = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
-    @noncomp_registration_cost1 = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
+    @comp_registration_cost1 = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
+    @noncomp_registration_cost1 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
   end
 
   it "automatically has the current_period set" do
@@ -47,7 +47,7 @@ describe "when testing the update function for registration costs", caching: tru
     end
 
     it "doesn't update this registrants' items when moving to the next period" do
-      FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
+      FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
       travel_to Date.new(2020, 12, 1) do
         RegistrationCostUpdater.new("competitor").update_current_period
       end
@@ -56,8 +56,8 @@ describe "when testing the update function for registration costs", caching: tru
     end
   end
   describe "when updating to the next period" do
-    let!(:comp_registration_cost2) { FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
-    let!(:noncomp_registration_cost2) { FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
+    let!(:comp_registration_cost2) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
+    let!(:noncomp_registration_cost2) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
 
     before(:each) do
       ActionMailer::Base.deliveries.clear
@@ -123,8 +123,8 @@ describe "when testing the update function for registration costs", caching: tru
 
     describe "when updating to a now-existent period" do
       before(:each) do
-        @comp_registration_cost2 = FactoryGirl.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-        @noncomp_registration_cost2 = FactoryGirl.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
+        @comp_registration_cost2 = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
+        @noncomp_registration_cost2 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
         travel_to Date.new(2020, 12, 1) do
           ActionMailer::Base.deliveries.clear
           @ret = RegistrationCostUpdater.new("competitor").update_current_period

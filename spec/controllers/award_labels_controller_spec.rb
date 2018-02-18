@@ -24,11 +24,11 @@ require 'spec_helper'
 
 describe AwardLabelsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:award_admin_user)
+    @admin_user = FactoryBot.create(:award_admin_user)
     sign_in @admin_user
-    @registrant = FactoryGirl.create(:competitor)
+    @registrant = FactoryBot.create(:competitor)
   end
-  let(:award_label) { FactoryGirl.create(:award_label, user: @admin_user) }
+  let(:award_label) { FactoryBot.create(:award_label, user: @admin_user) }
 
   # This should return the minimal set of attributes required to create a valid
   # AwardLabel. As you add validations to AwardLabel, be sure to
@@ -48,15 +48,15 @@ describe AwardLabelsController do
     end
 
     it "shows all award_labels" do
-      aw_label = FactoryGirl.create(:award_label,
-                                    bib_number: 123,
-                                    line_1: "Robin Dunlop & Connie Cotter",
-                                    line_2: "Pairs Freestyle",
-                                    line_3: "TCUC",
-                                    line_4: "Adults",
-                                    line_5: "Winner",
-                                    place: 2,
-                                    user: @admin_user)
+      aw_label = FactoryBot.create(:award_label,
+                                   bib_number: 123,
+                                   line_1: "Robin Dunlop & Connie Cotter",
+                                   line_2: "Pairs Freestyle",
+                                   line_3: "TCUC",
+                                   line_4: "Adults",
+                                   line_5: "Winner",
+                                   place: 2,
+                                   user: @admin_user)
       get :index, params: { user_id: @admin_user }
       assert_select "td", aw_label.line_1
 
@@ -166,7 +166,7 @@ describe AwardLabelsController do
 
   describe "DELETE destroy" do
     it "destroys the requested award_label" do
-      aw_label = FactoryGirl.create(:award_label, user: @admin_user)
+      aw_label = FactoryBot.create(:award_label, user: @admin_user)
       expect do
         delete :destroy, params: { id: aw_label.to_param }
       end.to change(AwardLabel, :count).by(-1)
@@ -179,11 +179,11 @@ describe AwardLabelsController do
   end
 
   describe "with competition and competitors" do
-    let!(:competition) { FactoryGirl.create(:competition) }
-    let!(:competitors) { FactoryGirl.create_list(:event_competitor, 5, competition: competition) }
+    let!(:competition) { FactoryBot.create(:competition) }
+    let!(:competitors) { FactoryBot.create_list(:event_competitor, 5, competition: competition) }
     before do
       competitors.each do |competitor|
-        FactoryGirl.create(:result, :overall, competitor: competitor)
+        FactoryBot.create(:result, :overall, competitor: competitor)
       end
     end
 
@@ -212,7 +212,7 @@ describe AwardLabelsController do
     end
 
     describe "DELETE destroy_all" do
-      let!(:award) { FactoryGirl.create(:award_label, user: @admin_user) }
+      let!(:award) { FactoryBot.create(:award_label, user: @admin_user) }
 
       it "removes award" do
         expect do

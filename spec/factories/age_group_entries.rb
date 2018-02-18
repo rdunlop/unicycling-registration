@@ -20,11 +20,11 @@
 #  index_age_group_entries_wheel_size_id      (wheel_size_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :age_group_entry do
-    age_group_type # FactoryGirl
+    age_group_type # FactoryBot
     sequence(:short_description) { |n| "MyString #{n}" }
     start_age 1
     end_age 100

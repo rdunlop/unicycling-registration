@@ -23,10 +23,10 @@
 #  index_two_attempt_entries_ids  (competition_id,is_start_time,id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :two_attempt_entry do
-    user # FactoryGirl
-    competition # FactoryGirl
+    user # FactoryBot
+    competition # FactoryBot
     bib_number 1
     minutes_1 1
     minutes_2 1

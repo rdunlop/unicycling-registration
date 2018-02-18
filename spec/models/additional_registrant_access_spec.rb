@@ -22,7 +22,7 @@ require 'spec_helper'
 
 describe AdditionalRegistrantAccess do
   before(:each) do
-    @ara = FactoryGirl.create(:additional_registrant_access)
+    @ara = FactoryBot.create(:additional_registrant_access)
   end
   it "can be created from factorygirl" do
     expect(@ara.valid?).to eq(true)
@@ -48,7 +48,7 @@ describe AdditionalRegistrantAccess do
   end
 
   it "Cannot have a duplicate request" do
-    ara2 = FactoryGirl.build(:additional_registrant_access, user: @ara.user, registrant: @ara.registrant)
+    ara2 = FactoryBot.build(:additional_registrant_access, user: @ara.user, registrant: @ara.registrant)
     expect(ara2.valid?).to eq(false)
   end
 

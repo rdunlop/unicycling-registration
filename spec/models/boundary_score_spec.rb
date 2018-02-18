@@ -26,8 +26,8 @@ describe BoundaryScore do
   it "should require that the fields be filled out" do
     bs = BoundaryScore.new
     expect(bs.valid?).to eq(false)
-    bs.judge = FactoryGirl.build_stubbed(:judge)
-    bs.competitor = FactoryGirl.build_stubbed(:event_competitor)
+    bs.judge = FactoryBot.build_stubbed(:judge)
+    bs.competitor = FactoryBot.build_stubbed(:event_competitor)
 
     bs.number_of_people = 4
     bs.major_dismount = 1
@@ -39,7 +39,7 @@ describe BoundaryScore do
 
   describe "for a group of 1 people" do
     before(:each) do
-      @bs = FactoryGirl.build_stubbed(:boundary_score)
+      @bs = FactoryBot.build_stubbed(:boundary_score)
       @bs.number_of_people = 1
     end
 
@@ -72,7 +72,7 @@ describe BoundaryScore do
   end
   describe "for a group of 2 people" do
     before(:each) do
-      @bs = FactoryGirl.build_stubbed(:boundary_score)
+      @bs = FactoryBot.build_stubbed(:boundary_score)
       @bs.number_of_people = 2
     end
 
@@ -105,7 +105,7 @@ describe BoundaryScore do
   end
   describe "for a group of 3 people" do
     before(:each) do
-      @bs = FactoryGirl.build_stubbed(:boundary_score)
+      @bs = FactoryBot.build_stubbed(:boundary_score)
       @bs.number_of_people = 3
     end
 
@@ -138,7 +138,7 @@ describe BoundaryScore do
   end
   describe "for a group of 4" do
     before(:each) do
-      @bs = FactoryGirl.build_stubbed(:boundary_score)
+      @bs = FactoryBot.build_stubbed(:boundary_score)
       @bs.number_of_people = 4
     end
 
@@ -172,7 +172,7 @@ describe BoundaryScore do
 
   describe "for a group of 8 people" do
     before(:each) do
-      @bs = FactoryGirl.build_stubbed(:boundary_score)
+      @bs = FactoryBot.build_stubbed(:boundary_score)
       @bs.number_of_people = 8
     end
 
@@ -205,7 +205,7 @@ describe BoundaryScore do
   end
   describe "for a group of 20 people" do
     before(:each) do
-      @bs = FactoryGirl.build_stubbed(:boundary_score)
+      @bs = FactoryBot.build_stubbed(:boundary_score)
       @bs.number_of_people = 20
     end
 

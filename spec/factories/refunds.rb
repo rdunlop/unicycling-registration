@@ -15,11 +15,11 @@
 #  index_refunds_on_user_id  (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :refund do
-    user # FactoryGirl
+    user # FactoryBot
     refund_date "2013-10-11 09:35:39"
     note "MyString"
   end

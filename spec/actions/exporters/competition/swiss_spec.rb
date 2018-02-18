@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Exporters::Competition::Swiss do
   let(:exporter) { described_class.new(competition.reload, heat) }
-  let(:competition) { FactoryGirl.create(:timed_competition) }
+  let(:competition) { FactoryBot.create(:timed_competition) }
   let(:heat) { nil }
-  let!(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+  let!(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
   before do
     @reg = competitor.registrants.first
   end
@@ -16,7 +16,7 @@ describe Exporters::Competition::Swiss do
 
   describe "with a lane_assignment" do
     let!(:la) do
-      FactoryGirl.create(:lane_assignment, competition: competition, competitor: competitor, heat: 1, lane: 3)
+      FactoryBot.create(:lane_assignment, competition: competition, competitor: competitor, heat: 1, lane: 3)
     end
 
     context "with the same heat" do

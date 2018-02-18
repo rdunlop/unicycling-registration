@@ -17,11 +17,11 @@
 #  updated_at     :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :heat_lane_result do
-    competition # FactoryGirl
+    competition # FactoryBot
     minutes 1
     seconds 1
     thousands 1

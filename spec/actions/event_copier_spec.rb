@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EventCopier do
   before do
-    FactoryGirl.create(:tenant, subdomain: "other")
+    FactoryBot.create(:tenant, subdomain: "other")
     Apartment::Tenant.create "other"
   end
   let(:copier) { described_class.new("other") }
@@ -10,8 +10,8 @@ describe EventCopier do
   context "with an event with a single category and choice" do
     before do
       Apartment::Tenant.switch "other" do
-        event = FactoryGirl.create(:event)
-        FactoryGirl.create(:event_choice, event: event)
+        event = FactoryBot.create(:event)
+        FactoryBot.create(:event_choice, event: event)
       end
     end
 
@@ -38,9 +38,9 @@ describe EventCopier do
   context "with an event with a customized set of event_categories" do
     before do
       Apartment::Tenant.switch "other" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         event.event_categories.first.update(name: "First Category")
-        FactoryGirl.create(:event_category, event: event, name: "Second Category")
+        FactoryBot.create(:event_category, event: event, name: "Second Category")
       end
     end
 
@@ -53,8 +53,8 @@ describe EventCopier do
   context "when copying 2 events" do
     before do
       Apartment::Tenant.switch "other" do
-        @event1 = FactoryGirl.create(:event)
-        @event2 = FactoryGirl.create(:event)
+        @event1 = FactoryBot.create(:event)
+        @event2 = FactoryBot.create(:event)
       end
     end
 
@@ -69,7 +69,7 @@ describe EventCopier do
   xcontext "with an event with a translated event name" do
     before do
       Apartment::Tenant.switch "other" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         event.translations.create(name: "Francais", locale: "fr")
       end
     end

@@ -28,9 +28,9 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "me#{n}@dunlopweb.com" }
     password "something"

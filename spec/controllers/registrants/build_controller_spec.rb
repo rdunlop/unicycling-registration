@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Registrants::BuildController do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before(:each) do
     sign_in user
 
@@ -44,7 +44,7 @@ describe Registrants::BuildController do
 
   describe "GET show" do
     context "viewing the add_contact_details page" do
-      let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
+      let(:registrant) { FactoryBot.create(:competitor, status: "contact_details", user: user) }
 
       it "displays the contact detail form" do
         get :show, params: { registrant_id: registrant.to_param, id: "add_contact_details" }
@@ -53,9 +53,9 @@ describe Registrants::BuildController do
     end
 
     context "viewing the lodging page" do
-      let(:user) { FactoryGirl.create(:super_admin_user) }
-      let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
-      let!(:lodging_day) { FactoryGirl.create(:lodging_day) }
+      let(:user) { FactoryBot.create(:super_admin_user) }
+      let(:registrant) { FactoryBot.create(:competitor, status: "contact_details", user: user) }
+      let!(:lodging_day) { FactoryBot.create(:lodging_day) }
 
       it "displays the add-lodging form" do
         get :show, params: { registrant_id: registrant.to_param, id: "lodging" }
@@ -66,13 +66,13 @@ describe Registrants::BuildController do
     end
 
     context "viewing the expenses page" do
-      let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
-      let!(:group) { FactoryGirl.create(:expense_group) }
-      let!(:item1) { FactoryGirl.create(:expense_item, expense_group: group) }
-      let!(:item2) { FactoryGirl.create(:expense_item, expense_group: group) }
+      let(:registrant) { FactoryBot.create(:competitor, status: "contact_details", user: user) }
+      let!(:group) { FactoryBot.create(:expense_group) }
+      let!(:item1) { FactoryBot.create(:expense_item, expense_group: group) }
+      let!(:item2) { FactoryBot.create(:expense_item, expense_group: group) }
 
-      let!(:group2) { FactoryGirl.create(:expense_group, position: 2, visible: false) }
-      let!(:item3) { FactoryGirl.create(:expense_item, expense_group: group2) }
+      let!(:group2) { FactoryBot.create(:expense_group, position: 2, visible: false) }
+      let!(:item3) { FactoryBot.create(:expense_item, expense_group: group2) }
 
       it "displays the add-expenses form" do
         get :show, params: { registrant_id: registrant.to_param, id: "expenses" }
@@ -84,7 +84,7 @@ describe Registrants::BuildController do
       end
 
       it "should render the details field, if enabled" do
-        @item = FactoryGirl.create(:registrant_expense_item, registrant: registrant)
+        @item = FactoryBot.create(:registrant_expense_item, registrant: registrant)
         ei = @item.line_item
         ei.has_details = true
         ei.details_label = "What is your family?"
@@ -98,20 +98,20 @@ describe Registrants::BuildController do
     end
 
     context "viewing the add_name page" do
-      let(:registrant) { FactoryGirl.create(:competitor, status: "contact_details", user: user) }
+      let(:registrant) { FactoryBot.create(:competitor, status: "contact_details", user: user) }
 
       before do
-        @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
-        @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
-        FactoryGirl.create(:registration_cost, :competitor,
-                           start_date: Date.new(2012, 1, 10),
-                           end_date: Date.new(2012, 2, 11),
-                           expense_item: @comp_exp)
-        FactoryGirl.create(:registration_cost, :noncompetitor,
-                           start_date: Date.new(2012, 1, 10),
-                           end_date: Date.new(2012, 2, 11),
-                           expense_item: @noncomp_exp)
-        FactoryGirl.create(:wheel_size_24, id: 3)
+        @comp_exp = FactoryBot.create(:expense_item, cost: 100)
+        @noncomp_exp = FactoryBot.create(:expense_item, cost: 50)
+        FactoryBot.create(:registration_cost, :competitor,
+                          start_date: Date.new(2012, 1, 10),
+                          end_date: Date.new(2012, 2, 11),
+                          expense_item: @comp_exp)
+        FactoryBot.create(:registration_cost, :noncompetitor,
+                          start_date: Date.new(2012, 1, 10),
+                          end_date: Date.new(2012, 2, 11),
+                          expense_item: @noncomp_exp)
+        FactoryBot.create(:wheel_size_24, id: 3)
       end
 
       it "renders dates in nice formats" do
@@ -129,7 +129,7 @@ describe Registrants::BuildController do
       end
 
       describe "as non-competitor" do
-        let(:registrant) { FactoryGirl.create(:noncompetitor, status: "contact_details", user: user) }
+        let(:registrant) { FactoryBot.create(:noncompetitor, status: "contact_details", user: user) }
 
         it "displays the registration_period for non-competitors" do
           get :show, params: { registrant_id: registrant.to_param, id: "add_name" }
@@ -142,16 +142,16 @@ describe Registrants::BuildController do
 
   describe "POST create" do
     before(:each) do
-      @ws20 = FactoryGirl.create(:wheel_size_20)
-      @ws24 = FactoryGirl.create(:wheel_size_24)
+      @ws20 = FactoryBot.create(:wheel_size_20)
+      @ws24 = FactoryBot.create(:wheel_size_24)
     end
 
     context "when creating with copy-from-previous convention" do
       before do
-        FactoryGirl.create(:tenant, subdomain: "other")
+        FactoryBot.create(:tenant, subdomain: "other")
         Apartment::Tenant.create("other")
         Apartment::Tenant.switch "other" do
-          @other_reg = FactoryGirl.create(:competitor, user: user)
+          @other_reg = FactoryBot.create(:competitor, user: user)
         end
       end
       after do
@@ -226,9 +226,9 @@ describe Registrants::BuildController do
 
     describe "When creating nested registrant choices" do
       before(:each) do
-        @reg = FactoryGirl.create(:registrant, user: user)
-        @ev = FactoryGirl.create(:event)
-        @ec = FactoryGirl.create(:event_choice, event: @ev)
+        @reg = FactoryBot.create(:registrant, user: user)
+        @ev = FactoryBot.create(:event)
+        @ec = FactoryBot.create(:event_choice, event: @ev)
         @attributes = valid_attributes.merge(registrant_type: 'competitor',
                                              registrant_event_sign_ups_attributes: [
                                                { signed_up: "1",
@@ -263,8 +263,8 @@ describe Registrants::BuildController do
 
     xdescribe "when creating registrant_event_sign_ups" do
       before(:each) do
-        @reg = FactoryGirl.create(:registrant, user: user)
-        @ecat = FactoryGirl.create(:event).event_categories.first
+        @reg = FactoryBot.create(:registrant, user: user)
+        @ecat = FactoryBot.create(:event).event_categories.first
         @attributes = valid_attributes.merge(registrant_type: 'competitor',
                                              registrant_event_sign_ups_attributes: [
                                                { event_category_id: @ecat.id,
@@ -308,7 +308,7 @@ describe Registrants::BuildController do
     end
 
     context "when registrant is copied from a previous convention" do
-      let(:registrant) { FactoryGirl.create(:competitor, user: user, status: "base_details") }
+      let(:registrant) { FactoryBot.create(:competitor, user: user, status: "base_details") }
 
       before do
         # Copied from previous convention don't have these fields
@@ -326,7 +326,7 @@ describe Registrants::BuildController do
       end
 
       context "When we are using USA organization_membership_usa" do
-        let(:event_configuration) { FactoryGirl.create(:event_configuration, :with_usa) }
+        let(:event_configuration) { FactoryBot.create(:event_configuration, :with_usa) }
 
         context "when starting on the new_name page" do
           it "redirects to the next page" do
@@ -341,32 +341,32 @@ describe Registrants::BuildController do
   xdescribe "PUT update" do
     describe "with valid params" do
       it "assigns the requested registrant as @registrant" do
-        registrant = FactoryGirl.create(:competitor, user: user)
+        registrant = FactoryBot.create(:competitor, user: user)
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
         expect(assigns(:registrant)).to eq(registrant)
       end
 
       it "cannot change the competitor to a non-competitor" do
-        registrant = FactoryGirl.create(:competitor, user: user)
+        registrant = FactoryBot.create(:competitor, user: user)
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes.merge(registrant_type: 'noncompetitor') }
         expect(assigns(:registrant)).to eq(registrant)
         expect(assigns(:registrant).competitor?).to eq(true)
       end
 
       it "redirects competitors to the items" do
-        registrant = FactoryGirl.create(:competitor, user: user)
+        registrant = FactoryBot.create(:competitor, user: user)
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
         expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
       it "redirects noncompetitors to the items" do
-        registrant = FactoryGirl.create(:noncompetitor, user: user)
+        registrant = FactoryBot.create(:noncompetitor, user: user)
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
         expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
     end
 
     describe "with invalid params" do
-      let(:registrant) { FactoryGirl.create(:competitor, user: user) }
+      let(:registrant) { FactoryBot.create(:competitor, user: user) }
       let(:do_action) do
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: { registrant_type: 'competitor' } }
       end
@@ -377,7 +377,7 @@ describe Registrants::BuildController do
         expect(assigns(:registrant)).to eq(registrant)
       end
       it "loads the categories" do
-        category1 = FactoryGirl.create(:category)
+        category1 = FactoryBot.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)
         do_action
         expect(assigns(:categories)).to eq([category1])
@@ -393,11 +393,11 @@ describe Registrants::BuildController do
   end
 
   describe "DELETE drop_event" do
-    let(:event) { FactoryGirl.create(:event) }
-    let(:registrant) { FactoryGirl.create(:competitor, user: user) }
-    let(:event_choice) { FactoryGirl.create(:event_choice, event: event) }
+    let(:event) { FactoryBot.create(:event) }
+    let(:registrant) { FactoryBot.create(:competitor, user: user) }
+    let(:event_choice) { FactoryBot.create(:event_choice, event: event) }
     let(:event_category) { event.event_categories.first }
-    let!(:resu) { FactoryGirl.create(:registrant_event_sign_up, event: event, event_category: event_category, registrant: registrant) }
+    let!(:resu) { FactoryBot.create(:registrant_event_sign_up, event: event, event_category: event_category, registrant: registrant) }
 
     it "sign out for event" do
       delete :drop_event, params: { registrant_id: registrant.bib_number, event_id: event.id }

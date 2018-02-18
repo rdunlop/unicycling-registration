@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Entering Points data' do
-  let!(:user) { FactoryGirl.create(:data_entry_volunteer_user, name: "Judge User") }
+  let!(:user) { FactoryBot.create(:data_entry_volunteer_user, name: "Judge User") }
   include_context 'unpaid registration'
   include_context 'basic event configuration'
   include_context 'points_event', name: 'Basketball'

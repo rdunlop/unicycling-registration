@@ -1,23 +1,23 @@
 require "spec_helper"
 
 describe RegistrantPolicy do
-  let(:my_user) { FactoryGirl.create(:user) }
-  let(:my_registrant) { FactoryGirl.create(:registrant, user: my_user) }
-  let(:other_registrant) { FactoryGirl.create(:registrant) }
+  let(:my_user) { FactoryBot.create(:user) }
+  let(:my_registrant) { FactoryBot.create(:registrant, user: my_user) }
+  let(:other_registrant) { FactoryBot.create(:registrant) }
 
-  let(:ara_readonly) { FactoryGirl.create(:additional_registrant_access, user: my_user, accepted_readonly: true) }
+  let(:ara_readonly) { FactoryBot.create(:additional_registrant_access, user: my_user, accepted_readonly: true) }
   let(:readonly_registrant) { ara_readonly.registrant }
 
-  let(:ara_full_access) { FactoryGirl.create(:additional_registrant_access, user: my_user, accepted_readwrite: true) }
+  let(:ara_full_access) { FactoryBot.create(:additional_registrant_access, user: my_user, accepted_readwrite: true) }
   let(:full_access_registrant) { ara_full_access.registrant }
 
-  let(:unconfirmed_ara) { FactoryGirl.create(:additional_registrant_access, user: my_user) }
+  let(:unconfirmed_ara) { FactoryBot.create(:additional_registrant_access, user: my_user) }
   let(:unconfirmed_shared_registrant) { unconfirmed_ara.registrant }
 
   subject { described_class }
 
   permissions :payments? do
-    let(:payment_admin) { FactoryGirl.create(:payment_admin) }
+    let(:payment_admin) { FactoryBot.create(:payment_admin) }
 
     it { expect(subject).to permit(payment_admin, my_registrant) }
     it { expect(subject).to permit(my_user, my_registrant) }
@@ -50,7 +50,7 @@ describe RegistrantPolicy do
         end
 
         describe "as a super_admin" do
-          let(:user) { FactoryGirl.create(:super_admin_user) }
+          let(:user) { FactoryBot.create(:super_admin_user) }
 
           it { expect(subject).to permit(user_context, my_registrant) }
         end
@@ -72,7 +72,7 @@ describe RegistrantPolicy do
       end
 
       describe "as a super_admin" do
-        let(:user) { FactoryGirl.create(:super_admin_user) }
+        let(:user) { FactoryBot.create(:super_admin_user) }
 
         it { expect(subject).to permit(user_context, my_registrant) }
       end
@@ -85,7 +85,7 @@ describe RegistrantPolicy do
     end
 
     it "disallows access to another registrant" do
-      expect(subject).to_not permit(FactoryGirl.create(:user), my_registrant)
+      expect(subject).to_not permit(FactoryBot.create(:user), my_registrant)
     end
 
     it "allows access to another registrant if I have a additional access permit" do
@@ -102,7 +102,7 @@ describe RegistrantPolicy do
     end
 
     it "grants access to super_admin" do
-      expect(subject).to permit(FactoryGirl.create(:super_admin_user), my_registrant)
+      expect(subject).to permit(FactoryBot.create(:super_admin_user), my_registrant)
     end
   end
 
@@ -112,7 +112,7 @@ describe RegistrantPolicy do
     end
 
     it "disallows access to another registrant" do
-      expect(subject).to_not permit(FactoryGirl.create(:user), my_registrant)
+      expect(subject).to_not permit(FactoryBot.create(:user), my_registrant)
     end
 
     it "doesn't allow access if readonly" do
@@ -124,7 +124,7 @@ describe RegistrantPolicy do
     end
 
     it "grants access to super_admin" do
-      expect(subject).to permit(FactoryGirl.create(:super_admin_user), my_registrant)
+      expect(subject).to permit(FactoryBot.create(:super_admin_user), my_registrant)
     end
   end
 
@@ -138,24 +138,24 @@ describe RegistrantPolicy do
 
     permissions :add_volunteers? do
       describe "when event_configuration has volunteers set by default" do
-        it { expect(subject).to permit(user_context, FactoryGirl.create(:competitor, user: user)) }
+        it { expect(subject).to permit(user_context, FactoryBot.create(:competitor, user: user)) }
       end
 
       describe "when event_configuration has volunteers disabled" do
         let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "none") }
 
-        it { expect(subject).not_to permit(user_context, FactoryGirl.create(:competitor, user: user)) }
+        it { expect(subject).not_to permit(user_context, FactoryBot.create(:competitor, user: user)) }
       end
     end
 
     permissions :add_events? do
       describe "while registration is open" do
         describe "for a non-competitor" do
-          it { expect(subject).not_to permit(user_context, FactoryGirl.create(:noncompetitor)) }
+          it { expect(subject).not_to permit(user_context, FactoryBot.create(:noncompetitor)) }
         end
 
         describe "for a competitor" do
-          it { expect(subject).not_to permit(user_context, FactoryGirl.create(:noncompetitor)) }
+          it { expect(subject).not_to permit(user_context, FactoryBot.create(:noncompetitor)) }
         end
       end
 
@@ -174,7 +174,7 @@ describe RegistrantPolicy do
         end
 
         describe "as a super_admin" do
-          let(:user) { FactoryGirl.create(:super_admin_user) }
+          let(:user) { FactoryBot.create(:super_admin_user) }
 
           it { expect(subject).to permit(user_context, my_registrant) }
         end
@@ -195,7 +195,7 @@ describe RegistrantPolicy do
         end
 
         describe "as a super_admin" do
-          let(:user) { FactoryGirl.create(:super_admin_user) }
+          let(:user) { FactoryBot.create(:super_admin_user) }
 
           it { expect(subject).to permit(user_context, my_registrant) }
         end
@@ -209,11 +209,11 @@ describe RegistrantPolicy do
       end
 
       describe "for an adult" do
-        it { expect(subject).not_to permit(user_context, FactoryGirl.create(:registrant, :competitor, :minor, user: my_user, birthday: 11.years.ago)) }
+        it { expect(subject).not_to permit(user_context, FactoryBot.create(:registrant, :competitor, :minor, user: my_user, birthday: 11.years.ago)) }
       end
 
       describe "for a child" do
-        it { expect(subject).to permit(user_context, FactoryGirl.create(:registrant, :competitor, :minor, user: my_user, birthday: 8.years.ago)) }
+        it { expect(subject).to permit(user_context, FactoryBot.create(:registrant, :competitor, :minor, user: my_user, birthday: 8.years.ago)) }
       end
     end
   end

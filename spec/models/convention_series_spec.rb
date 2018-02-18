@@ -8,8 +8,8 @@ describe ConventionSeries do
     expect(series.valid?).to eq(true)
   end
 
-  let(:series) { FactoryGirl.create(:convention_series) }
-  let!(:tenant) { FactoryGirl.create(:tenant, subdomain: "new_tenant") }
+  let(:series) { FactoryBot.create(:convention_series) }
+  let!(:tenant) { FactoryBot.create(:tenant, subdomain: "new_tenant") }
 
   describe "#add" do
     it "can create a new member" do
@@ -20,7 +20,7 @@ describe ConventionSeries do
   end
 
   describe "remove" do
-    let!(:member) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: tenant) }
+    let!(:member) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: tenant) }
 
     it "can remove a member" do
       expect do
@@ -33,12 +33,12 @@ describe ConventionSeries do
     before do
       Apartment::Tenant.create("new_tenant")
     end
-    let!(:member) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: tenant) }
-    let!(:member2) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: Tenant.find_by(subdomain: Apartment::Tenant.current)) }
+    let!(:member) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: tenant) }
+    let!(:member2) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: Tenant.find_by(subdomain: Apartment::Tenant.current)) }
 
     context "with a few registrants" do
-      let!(:reg1) { FactoryGirl.create(:competitor, first_name: "Bob", last_name: "Smith", bib_number: 1) }
-      let!(:reg2) { FactoryGirl.create(:competitor, first_name: "James", last_name: "Gordon", bib_number: 2) }
+      let!(:reg1) { FactoryBot.create(:competitor, first_name: "Bob", last_name: "Smith", bib_number: 1) }
+      let!(:reg2) { FactoryBot.create(:competitor, first_name: "James", last_name: "Gordon", bib_number: 2) }
 
       it "shows registrants across all subdomains" do
         result = series.registrant_data

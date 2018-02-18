@@ -20,9 +20,9 @@
 #  index_standard_skill_entries_on_letter_and_number  (letter,number) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :standard_skill_entry do
     sequence(:number)
     sequence(:letter) do |n|

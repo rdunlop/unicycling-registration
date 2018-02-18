@@ -55,7 +55,7 @@ describe UpdateUsaMembershipStatusWorker do
   end
 
   describe "#store_result" do
-    let(:contact_detail) { FactoryGirl.create(:contact_detail) }
+    let(:contact_detail) { FactoryBot.create(:contact_detail) }
 
     before do
       subject.process_response(contact_detail, JSON.parse(response_hash.to_json))

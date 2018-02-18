@@ -19,12 +19,12 @@
 require 'spec_helper'
 
 describe RegistrantBestTime do
-  let(:event) { FactoryGirl.create :event, :marathon_best_time_format }
+  let(:event) { FactoryBot.create :event, :marathon_best_time_format }
   before do
-    @rb = FactoryGirl.create(:registrant_best_time, event: event)
+    @rb = FactoryBot.create(:registrant_best_time, event: event)
   end
 
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@rb).to be_valid
   end
 

@@ -18,22 +18,22 @@ require 'spec_helper'
 
 describe StandardSkillScoresController do
   before do
-    @admin = FactoryGirl.create(:super_admin_user)
-    @user = FactoryGirl.create(:data_entry_volunteer_user)
-    @other_user = FactoryGirl.create(:data_entry_volunteer_user)
+    @admin = FactoryBot.create(:super_admin_user)
+    @user = FactoryBot.create(:data_entry_volunteer_user)
+    @other_user = FactoryBot.create(:data_entry_volunteer_user)
     sign_in @admin
 
-    @judge = FactoryGirl.create(:judge, user_id: @user.id)
+    @judge = FactoryBot.create(:judge, user_id: @user.id)
 
-    @comp = FactoryGirl.create(:event_competitor, competition: @judge.competition)
-    @comp2 = FactoryGirl.create(:event_competitor, competition: @judge.competition)
+    @comp = FactoryBot.create(:event_competitor, competition: @judge.competition)
+    @comp2 = FactoryBot.create(:event_competitor, competition: @judge.competition)
     @judge.competition.competitors << @comp2
     @judge.competition.competitors << @comp
     @judge.save!
   end
-  let!(:routine) { FactoryGirl.create(:standard_skill_routine, registrant: @comp.registrants.first) }
-  let!(:skill_1) { FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: routine) }
-  let!(:skill_2) { FactoryGirl.create(:standard_skill_routine_entry, standard_skill_routine: routine) }
+  let!(:routine) { FactoryBot.create(:standard_skill_routine, registrant: @comp.registrants.first) }
+  let!(:skill_1) { FactoryBot.create(:standard_skill_routine_entry, standard_skill_routine: routine) }
+  let!(:skill_2) { FactoryBot.create(:standard_skill_routine_entry, standard_skill_routine: routine) }
 
   # This should return the minimal set of attributes required to create a valid
   # Score. As you add validations to Score, be sure to
@@ -41,8 +41,8 @@ describe StandardSkillScoresController do
   def valid_attributes
     {
       standard_skill_score_entries_attributes: [
-        FactoryGirl.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_1.id),
-        FactoryGirl.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_2.id)
+        FactoryBot.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_1.id),
+        FactoryBot.attributes_for(:standard_skill_score_entry, standard_skill_routine_entry_id: skill_2.id)
       ]
     }
   end

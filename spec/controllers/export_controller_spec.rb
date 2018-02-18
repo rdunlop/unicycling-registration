@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ExportController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 
@@ -25,7 +25,7 @@ describe ExportController do
 
     describe "with some events defined" do
       before(:each) do
-        @ev = FactoryGirl.create(:event)
+        @ev = FactoryBot.create(:event)
       end
 
       it "lists the event titles" do
@@ -36,7 +36,7 @@ describe ExportController do
   end
 
   describe "GET results" do
-    let!(:result) { FactoryGirl.create(:result, :overall) }
+    let!(:result) { FactoryBot.create(:result, :overall) }
 
     it "returns much data" do
       get :results, format: 'xls'
@@ -45,7 +45,7 @@ describe ExportController do
   end
 
   describe "GET download_payment_details" do
-    let(:expense_item) { FactoryGirl.create(:expense_item) }
+    let(:expense_item) { FactoryBot.create(:expense_item) }
     it "returns much data" do
       get :download_payment_details, format: 'xls', params: { data: { expense_item_id: expense_item.id } }
       assert_equal "application/vnd.ms-excel", @response.content_type

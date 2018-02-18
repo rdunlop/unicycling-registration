@@ -17,9 +17,9 @@
 #  index_registration_costs_on_registrant_type_and_current_period  (registrant_type,current_period)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registration_cost do
     start_date { 1.year.ago }
     end_date { 5.years.from_now }

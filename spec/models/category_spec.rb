@@ -21,19 +21,19 @@ describe Category do
   end
 
   it "has events" do
-    cat = FactoryGirl.create(:category)
-    ev = FactoryGirl.create(:event, category: cat)
+    cat = FactoryBot.create(:category)
+    ev = FactoryBot.create(:event, category: cat)
     expect(cat.events).to eq([ev])
   end
 
   it "displays its name as to_s" do
-    cat = FactoryGirl.create(:category)
+    cat = FactoryBot.create(:category)
     expect(cat.to_s).to eq(cat.name)
   end
   describe "with multiple categories" do
     before(:each) do
-      @category2 = FactoryGirl.create(:category)
-      @category1 = FactoryGirl.create(:category)
+      @category2 = FactoryBot.create(:category)
+      @category1 = FactoryBot.create(:category)
       @category1.update_attribute(:position, 1)
     end
 
@@ -43,28 +43,28 @@ describe Category do
   end
 
   it "events should be sorted by position" do
-    cat = FactoryGirl.create(:category)
-    event1 = FactoryGirl.create(:event, category: cat)
-    event3 = FactoryGirl.create(:event, category: cat)
-    event2 = FactoryGirl.create(:event, category: cat)
+    cat = FactoryBot.create(:category)
+    event1 = FactoryBot.create(:event, category: cat)
+    event3 = FactoryBot.create(:event, category: cat)
+    event2 = FactoryBot.create(:event, category: cat)
     event3.update_attribute(:position, 3)
 
     expect(cat.events).to eq([event1, event2, event3])
   end
 
   it "destroy related events upon destroy" do
-    cat = FactoryGirl.create(:category)
-    FactoryGirl.create(:event, category: cat)
+    cat = FactoryBot.create(:category)
+    FactoryBot.create(:event, category: cat)
     expect(Event.all.count).to eq(1)
     cat.destroy
     expect(Event.all.count).to eq(0)
   end
 
   describe "info_url/info_page" do
-    let(:cat) { FactoryGirl.create(:category) }
+    let(:cat) { FactoryBot.create(:category) }
 
     before do
-      cat.update_attribute(:info_page, FactoryGirl.create(:page))
+      cat.update_attribute(:info_page, FactoryBot.create(:page))
       cat.update_attribute(:info_url, nil)
     end
 

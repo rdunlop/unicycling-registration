@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe HeatReviewController do
   before(:each) do
-    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
-    director = FactoryGirl.create(:user)
+    @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
+    director = FactoryBot.create(:user)
     director.add_role(:director, @competition.event)
     sign_in director
-    @reg = FactoryGirl.create(:registrant)
-    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    @reg = FactoryBot.create(:registrant)
+    @competitor = FactoryBot.create(:event_competitor, competition: @competition)
     @competitor.members.first.update_attribute(:registrant_id, @reg.id)
-    @lane_assignment = FactoryGirl.create(:lane_assignment, competition: @competition, competitor: @competitor)
+    @lane_assignment = FactoryBot.create(:lane_assignment, competition: @competition, competitor: @competitor)
   end
 
   describe "GET index" do
@@ -68,7 +68,7 @@ describe HeatReviewController do
   end
 
   describe "DELETE #destroy" do
-    let!(:result) { FactoryGirl.create(:heat_lane_result, competition: @competition) }
+    let!(:result) { FactoryBot.create(:heat_lane_result, competition: @competition) }
 
     it "removes all heat lane rsults" do
       expect do

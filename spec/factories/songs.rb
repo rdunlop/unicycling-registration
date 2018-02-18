@@ -19,9 +19,9 @@
 #  index_songs_registrant_id                              (registrant_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :song do
     description "MyString"
     song_file_name { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'example.mp3'), 'audio/mp3') }

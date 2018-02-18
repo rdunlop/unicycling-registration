@@ -2,24 +2,24 @@ require 'spec_helper'
 
 describe RequiredExpenseItemCreator do
   before(:each) do
-    @reg = FactoryGirl.create(:competitor)
+    @reg = FactoryBot.create(:competitor)
   end
 
   describe "with a registration_cost" do
     before(:each) do
-      @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
-      @noncomp_exp = FactoryGirl.create(:expense_item, cost: 50)
-      @comp_reg_cost = FactoryGirl.create(:registration_cost, :competitor,
-                                          start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1),
-                                          expense_item: @comp_exp)
-      @noncomp_reg_cost = FactoryGirl.create(:registration_cost, :noncompetitor,
-                                             start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1),
-                                             expense_item: @noncomp_exp)
+      @comp_exp = FactoryBot.create(:expense_item, cost: 100)
+      @noncomp_exp = FactoryBot.create(:expense_item, cost: 50)
+      @comp_reg_cost = FactoryBot.create(:registration_cost, :competitor,
+                                         start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1),
+                                         expense_item: @comp_exp)
+      @noncomp_reg_cost = FactoryBot.create(:registration_cost, :noncompetitor,
+                                            start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1),
+                                            expense_item: @noncomp_exp)
     end
 
     describe "as a non-Competitor" do
       before(:each) do
-        @noncomp = FactoryGirl.build_stubbed(:noncompetitor)
+        @noncomp = FactoryBot.build_stubbed(:noncompetitor)
         @noncomp.create_associated_required_expense_items
       end
       it "should owe different cost" do
@@ -35,7 +35,7 @@ describe RequiredExpenseItemCreator do
 
     describe "as a Competitor" do
       before(:each) do
-        @comp = FactoryGirl.create(:competitor)
+        @comp = FactoryBot.create(:competitor)
       end
       it "retrieves the comp registration_item" do
         expect(@comp.registrant_expense_items.first.line_item).to eq(@comp_exp)
@@ -46,7 +46,7 @@ describe RequiredExpenseItemCreator do
     end
 
     describe "as a spectator" do
-      let(:spectator) { FactoryGirl.create(:spectator) }
+      let(:spectator) { FactoryBot.create(:spectator) }
 
       specify { expect(spectator.registrant_expense_items.count).to eq(0) }
       specify { expect(spectator.owing_registrant_expense_items.count).to eq(0) }
@@ -55,9 +55,9 @@ describe RequiredExpenseItemCreator do
 
   describe "with an expense_group marked as 'required' created BEFORE the registrant" do
     before(:each) do
-      @eg = FactoryGirl.create(:expense_group, competitor_required: true)
-      @ei = FactoryGirl.create(:expense_item, expense_group: @eg)
-      @reg2 = FactoryGirl.create(:competitor)
+      @eg = FactoryBot.create(:expense_group, competitor_required: true)
+      @ei = FactoryBot.create(:expense_item, expense_group: @eg)
+      @reg2 = FactoryBot.create(:competitor)
     end
 
     it "should include this expense_item in the list of owing_registrant_expense_items" do

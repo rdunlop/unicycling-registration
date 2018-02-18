@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe CompetitionHeatTsvZipCreator do
-  let(:competition) { FactoryGirl.create(:competition) }
+  let(:competition) { FactoryBot.create(:competition) }
   before do
     # Heat 1
     create_competitor(competition, "123", 1, 1)

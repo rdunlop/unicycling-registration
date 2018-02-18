@@ -24,10 +24,10 @@ require 'spec_helper'
 
 describe CompetitionSource do
   before(:each) do
-    @competition = FactoryGirl.create(:competition)
-    @cs = FactoryGirl.create(:competition_source, target_competition: @competition)
+    @competition = FactoryBot.create(:competition)
+    @cs = FactoryBot.create(:competition_source, target_competition: @competition)
   end
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@cs.valid?).to eq(true)
   end
 
@@ -51,7 +51,7 @@ describe CompetitionSource do
     @cs.max_place = 1
     expect(@cs.valid?).to eq(false)
 
-    @cs.competition = FactoryGirl.create(:competition)
+    @cs.competition = FactoryBot.create(:competition)
     expect(@cs.valid?).to eq(true)
   end
 
@@ -61,20 +61,20 @@ describe CompetitionSource do
 
   describe "with a competition_source targetting another competition" do
     before(:each) do
-      @competition2 = FactoryGirl.create(:competition)
-      @source_competition = FactoryGirl.create(:ranked_competition)
-      @cs2 = FactoryGirl.create(:competition_source, competition: @source_competition, target_competition: @competition2, max_place: 2)
+      @competition2 = FactoryBot.create(:competition)
+      @source_competition = FactoryBot.create(:ranked_competition)
+      @cs2 = FactoryBot.create(:competition_source, competition: @source_competition, target_competition: @competition2, max_place: 2)
     end
 
     it "chooses competitors from the source_competition with a good enough overall_place", caching: true do
-      @competitor = FactoryGirl.create(:event_competitor, competition: @source_competition)
-      FactoryGirl.create(:result, place: 1, result_type: "Overall", competitor: @competitor)
+      @competitor = FactoryBot.create(:event_competitor, competition: @source_competition)
+      FactoryBot.create(:result, place: 1, result_type: "Overall", competitor: @competitor)
 
       expect(@cs2.reload.signed_up_registrants.count).to eq(1)
     end
     it "doesn't choose a competitor with an overall_place worse than the required" do
-      @competitor = FactoryGirl.create(:event_competitor, competition: @source_competition)
-      FactoryGirl.create(:result, place: 3, result_type: "Overall", competitor: @competitor)
+      @competitor = FactoryBot.create(:event_competitor, competition: @source_competition)
+      FactoryBot.create(:result, place: 3, result_type: "Overall", competitor: @competitor)
 
       expect(@cs2.signed_up_registrants.count).to eq(0)
     end
@@ -82,7 +82,7 @@ describe CompetitionSource do
 
   describe "when a competition_source is filtered by age" do
     it "chooses competitors with the age filter" do
-      reg = FactoryGirl.create(:competitor)
+      reg = FactoryBot.create(:competitor)
       ec = @cs.event_category
       allow(ec).to receive(:signed_up_registrants).and_return([reg])
       allow(reg).to receive(:age).and_return(11)

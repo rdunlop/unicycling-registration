@@ -4,8 +4,8 @@ RSpec.describe ResultDisplayer::TimeResult do
   let(:subject) { described_class.new(competition) }
 
   context "points competition" do
-    let(:competition) { FactoryGirl.build(:high_points_competition) }
-    let(:result) { FactoryGirl.build(:import_result, points: 3.45) }
+    let(:competition) { FactoryBot.build(:high_points_competition) }
+    let(:result) { FactoryBot.build(:import_result, points: 3.45) }
 
     it "summary_headings" do
       expect(subject.summary_headings).to eq(["Points"])
@@ -17,8 +17,8 @@ RSpec.describe ResultDisplayer::TimeResult do
   end
 
   context "times competition" do
-    let(:competition) { FactoryGirl.build(:timed_competition) }
-    let(:result) { FactoryGirl.build(:import_result, minutes: 1, seconds: 2, thousands: 345) }
+    let(:competition) { FactoryBot.build(:timed_competition) }
+    let(:result) { FactoryBot.build(:import_result, minutes: 1, seconds: 2, thousands: 345) }
 
     it "summary_headings" do
       expect(subject.summary_headings).to eq(["Time"])
@@ -50,8 +50,8 @@ RSpec.describe ResultDisplayer::TimeResult do
   end
 
   context "times with laps competition" do
-    let(:competition) { FactoryGirl.build(:timed_laps_competition) }
-    let(:result) { FactoryGirl.build(:import_result, minutes: 1, seconds: 2, thousands: 345, number_of_laps: 3) }
+    let(:competition) { FactoryBot.build(:timed_laps_competition) }
+    let(:result) { FactoryBot.build(:import_result, minutes: 1, seconds: 2, thousands: 345, number_of_laps: 3) }
 
     it "summary_headings" do
       expect(subject.summary_headings).to eq(["Time", "# Laps"])

@@ -11,13 +11,13 @@ describe OrderedResultCalculator do
 
   before(:each) do
     # Note: Registrants are born in 1990, thus are 22 years old
-    FactoryGirl.create(:event_configuration)
-    @age_group_entry = FactoryGirl.create(:age_group_entry) # 0-100 age group
-    @competition = FactoryGirl.create(:ranked_competition, age_group_type: @age_group_entry.age_group_type)
-    @tr1 = FactoryGirl.create(:external_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition), points: 1)
-    @tr2 = FactoryGirl.create(:external_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition), points: 2)
-    @tr3 = FactoryGirl.create(:external_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition), points: 3)
-    @tr4 = FactoryGirl.create(:external_result, competitor: FactoryGirl.create(:event_competitor, competition: @competition), points: 4)
+    FactoryBot.create(:event_configuration)
+    @age_group_entry = FactoryBot.create(:age_group_entry) # 0-100 age group
+    @competition = FactoryBot.create(:ranked_competition, age_group_type: @age_group_entry.age_group_type)
+    @tr1 = FactoryBot.create(:external_result, competitor: FactoryBot.create(:event_competitor, competition: @competition), points: 1)
+    @tr2 = FactoryBot.create(:external_result, competitor: FactoryBot.create(:event_competitor, competition: @competition), points: 2)
+    @tr3 = FactoryBot.create(:external_result, competitor: FactoryBot.create(:event_competitor, competition: @competition), points: 3)
+    @tr4 = FactoryBot.create(:external_result, competitor: FactoryBot.create(:event_competitor, competition: @competition), points: 4)
   end
   describe "without an age group" do
     before :each do
@@ -50,7 +50,7 @@ describe OrderedResultCalculator do
     end
 
     it "ignores competitors without scores" do
-      @comp5 = FactoryGirl.create(:event_competitor, competition: @competition)
+      @comp5 = FactoryBot.create(:event_competitor, competition: @competition)
       recalc
       expect(@tr1.reload.competitor.place).to eq(1)
       expect(@tr2.reload.competitor.place).to eq(2)

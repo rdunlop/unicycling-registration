@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe ConventionSetup::ExpenseItemsController do
   before(:each) do
-    @admin = FactoryGirl.create(:super_admin_user)
+    @admin = FactoryBot.create(:super_admin_user)
     sign_in @admin
   end
 
-  let(:expense_group) { FactoryGirl.create(:expense_group) }
-  let(:expense_item) { FactoryGirl.create :expense_item, expense_group: expense_group }
+  let(:expense_group) { FactoryBot.create(:expense_group) }
+  let(:expense_item) { FactoryBot.create :expense_item, expense_group: expense_group }
 
   # This should return the minimal set of attributes required to create a valid
   # ExpenseItem. As you add validations to ExpenseItem, be sure to
@@ -125,8 +125,8 @@ describe ConventionSetup::ExpenseItemsController do
   end
 
   describe "PUT update_row_order" do
-    let!(:expense_item_1) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
-    let!(:expense_item_2) { FactoryGirl.create(:expense_item, expense_group: expense_group) }
+    let!(:expense_item_1) { FactoryBot.create(:expense_item, expense_group: expense_group) }
+    let!(:expense_item_2) { FactoryBot.create(:expense_item, expense_group: expense_group) }
 
     it "updates the order" do
       put :update_row_order, params: { id: expense_item_1.to_param, row_order_position: 1 }
@@ -150,7 +150,7 @@ describe ConventionSetup::ExpenseItemsController do
 
     context "with an associated payment_detail" do
       before do
-        FactoryGirl.create(:payment_detail, line_item: expense_item)
+        FactoryBot.create(:payment_detail, line_item: expense_item)
       end
 
       it "does not destroy the expense_item" do

@@ -16,11 +16,11 @@
 #  index_wave_times_on_competition_id_and_wave  (competition_id,wave) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :wave_time do
-    competition # FactoryGirl
+    competition # FactoryBot
     wave 1
     minutes 2
     seconds 3

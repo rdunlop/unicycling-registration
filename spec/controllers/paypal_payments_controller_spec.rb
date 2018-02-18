@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe PaypalPaymentsController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @config = EventConfiguration.singleton
-    @config.update(FactoryGirl.attributes_for(:event_configuration))
+    @config.update(FactoryBot.attributes_for(:event_configuration))
     sign_in @user
   end
 
@@ -28,8 +28,8 @@ describe PaypalPaymentsController do
 
     describe "with a valid IPN for a valid payment" do
       before(:each) do
-        @payment = FactoryGirl.create(:payment, transaction_id: nil, completed_date: nil)
-        @payment_detail = FactoryGirl.create(:payment_detail, payment: @payment, amount: 20.00)
+        @payment = FactoryBot.create(:payment, transaction_id: nil, completed_date: nil)
+        @payment_detail = FactoryBot.create(:payment_detail, payment: @payment, amount: 20.00)
         @payment.reload
       end
 

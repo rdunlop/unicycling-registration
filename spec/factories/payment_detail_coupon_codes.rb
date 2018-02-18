@@ -14,11 +14,11 @@
 #  index_payment_detail_coupon_codes_on_payment_detail_id  (payment_detail_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :payment_detail_coupon_code do
-    payment_detail # FactoryGirl
-    coupon_code # FactoryGirl
+    payment_detail # FactoryBot
+    coupon_code # FactoryBot
   end
 end

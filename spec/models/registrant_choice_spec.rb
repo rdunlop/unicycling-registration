@@ -20,9 +20,9 @@ require 'spec_helper'
 
 describe RegistrantChoice do
   before(:each) do
-    @rc = FactoryGirl.create(:registrant_choice)
+    @rc = FactoryBot.create(:registrant_choice)
   end
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@rc.valid?).to eq(true)
   end
   it "requires an event_choice" do
@@ -40,7 +40,7 @@ describe RegistrantChoice do
   end
 
   it "cannot have 2 choices for the same event_choice" do
-    @rc = FactoryGirl.build(:registrant_choice, event_choice: @rc.event_choice, registrant: @rc.registrant)
+    @rc = FactoryBot.build(:registrant_choice, event_choice: @rc.event_choice, registrant: @rc.registrant)
     expect(@rc.valid?).to eq(false)
   end
 

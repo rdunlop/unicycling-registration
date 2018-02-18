@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::PermissionsController do
   before(:each) do
-    @super_user = FactoryGirl.create(:super_admin_user)
+    @super_user = FactoryBot.create(:super_admin_user)
     sign_in @super_user
   end
 
@@ -16,7 +16,7 @@ describe Admin::PermissionsController do
   describe "PUT set_role" do
     describe "with a normal user" do
       before(:each) do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryBot.create(:user)
       end
       it "can change a user to an admin" do
         put :set_role, params: { user_id: @user.to_param, role_name: :convention_admin }
@@ -25,7 +25,7 @@ describe Admin::PermissionsController do
         expect(@user.has_role?(:convention_admin)).to eq(true)
       end
       it "can change an admin back to a user" do
-        admin = FactoryGirl.create(:convention_admin_user)
+        admin = FactoryBot.create(:convention_admin_user)
         put :set_role, params: { user_id: admin.to_param, role_name: :convention_admin }
         expect(response).to redirect_to(permissions_path)
         admin.reload
@@ -33,7 +33,7 @@ describe Admin::PermissionsController do
       end
 
       it "is not possible as a normal admin user" do
-        user = FactoryGirl.create(:user)
+        user = FactoryBot.create(:user)
         sign_out @super_user
         sign_in user
 
@@ -46,7 +46,7 @@ describe Admin::PermissionsController do
   end
 
   describe "PUT set_password" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let(:new_password) { "New Password" }
 
     before do

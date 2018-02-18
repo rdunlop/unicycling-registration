@@ -3,9 +3,9 @@ require 'spec_helper'
 describe CompetitionSetup::EventConfigurationsController do
   let(:max_place) { 6 }
   before(:each) do
-    @admin_user = FactoryGirl.create(:competition_admin_user)
+    @admin_user = FactoryBot.create(:competition_admin_user)
     sign_in @admin_user
-    @event = FactoryGirl.create(:event)
+    @event = FactoryBot.create(:event)
     EventConfiguration.singleton.update(max_award_place: max_place)
   end
 

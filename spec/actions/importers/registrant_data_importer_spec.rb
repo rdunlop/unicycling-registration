@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Importers::RegistrantDataImporter do
-  let(:admin_user) { FactoryGirl.create(:super_admin_user) }
+  let(:admin_user) { FactoryBot.create(:super_admin_user) }
   let(:importer) { described_class.new(admin_user) }
 
   describe "#find_existing_registrant" do
@@ -18,7 +18,7 @@ describe Importers::RegistrantDataImporter do
     end
 
     context "when one already exists" do
-      let!(:registrant) { FactoryGirl.create(:registrant, first_name: "Bob", last_name: "Smith", birthday: Date.new(2007, 0o1, 20)) }
+      let!(:registrant) { FactoryBot.create(:registrant, first_name: "Bob", last_name: "Smith", birthday: Date.new(2007, 0o1, 20)) }
 
       it "returns the existing registrant" do
         expect(importer.find_existing_registrant(reg_hash)).to eq(registrant)
@@ -46,7 +46,7 @@ describe Importers::RegistrantDataImporter do
   end
 
   describe "#set_event_sign_up" do
-    let!(:registrant) { FactoryGirl.create(:competitor) }
+    let!(:registrant) { FactoryBot.create(:competitor) }
     let(:event_hash) do
       {
         name: "100m",
@@ -60,7 +60,7 @@ describe Importers::RegistrantDataImporter do
     end
 
     context "with a single event" do
-      let!(:event) { FactoryGirl.create(:event, name: "100m") }
+      let!(:event) { FactoryBot.create(:event, name: "100m") }
 
       it "creates a registrant_event_sign_up" do
         expect do
@@ -73,7 +73,7 @@ describe Importers::RegistrantDataImporter do
       end
 
       context "when resu already exists" do
-        let!(:registrant_event_sign_up) { FactoryGirl.create(:registrant_event_sign_up, registrant: registrant, event: event, signed_up: false) }
+        let!(:registrant_event_sign_up) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event, signed_up: false) }
 
         it "does not create a new sign up" do
           expect do
@@ -88,7 +88,7 @@ describe Importers::RegistrantDataImporter do
       end
 
       context "with event choices" do
-        let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, label: "Team Name") }
+        let!(:event_choice) { FactoryBot.create(:event_choice, event: event, label: "Team Name") }
 
         it "creates the registrant choice" do
           expect do
@@ -98,7 +98,7 @@ describe Importers::RegistrantDataImporter do
         end
 
         context "when there is already a registrant choice" do
-          let!(:registrant_choice) { FactoryGirl.create(:registrant_choice, value: "Other Team", registrant: registrant, event_choice: event_choice) }
+          let!(:registrant_choice) { FactoryBot.create(:registrant_choice, value: "Other Team", registrant: registrant, event_choice: event_choice) }
 
           it "updates the registrant choice" do
             expect do
@@ -111,7 +111,7 @@ describe Importers::RegistrantDataImporter do
       end
     end
     describe "with best time" do
-      let!(:event) { FactoryGirl.create(:event, name: "100m", best_time_format: "h:mm") }
+      let!(:event) { FactoryBot.create(:event, name: "100m", best_time_format: "h:mm") }
 
       it "creates a best time" do
         expect do
@@ -127,12 +127,12 @@ describe Importers::RegistrantDataImporter do
 
   describe "when importing a single row" do
     before do
-      FactoryGirl.create(:wheel_size_20)
-      FactoryGirl.create(:wheel_size_24)
+      FactoryBot.create(:wheel_size_20)
+      FactoryBot.create(:wheel_size_24)
     end
 
-    let!(:event) { FactoryGirl.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
-    let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, label: "Team Name") }
+    let!(:event) { FactoryBot.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
+    let!(:event_choice) { FactoryBot.create(:event_choice, event: event, label: "Team Name") }
 
     let(:reg_hash) do
       {

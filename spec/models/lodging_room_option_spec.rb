@@ -18,12 +18,12 @@
 require 'spec_helper'
 
 describe LodgingRoomOption do
-  let(:lodging_room_option) { FactoryGirl.create(:lodging_room_option) }
+  let(:lodging_room_option) { FactoryBot.create(:lodging_room_option) }
   let(:lodging_room_type) { lodging_room_option.lodging_room_type }
-  let(:lodging_package) { FactoryGirl.create(:lodging_package, lodging_room_type: lodging_room_type, lodging_room_option: lodging_room_option) }
-  let!(:lodging_package_day) { FactoryGirl.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day) }
-  let(:lodging_day) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option) }
-  let(:rei) { FactoryGirl.build(:registrant_expense_item, line_item: lodging_package) }
+  let(:lodging_package) { FactoryBot.create(:lodging_package, lodging_room_type: lodging_room_type, lodging_room_option: lodging_room_option) }
+  let!(:lodging_package_day) { FactoryBot.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day) }
+  let(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
+  let(:rei) { FactoryBot.build(:registrant_expense_item, line_item: lodging_package) }
 
   it "can create from factory" do
     expect(lodging_room_option.valid?).to eq(true)
@@ -31,7 +31,7 @@ describe LodgingRoomOption do
 
   describe "when an associated payment has been created" do
     before(:each) do
-      @payment = FactoryGirl.create(:payment_detail, line_item: lodging_package)
+      @payment = FactoryBot.create(:payment_detail, line_item: lodging_package)
       lodging_room_option.reload
     end
 
@@ -99,8 +99,8 @@ describe LodgingRoomOption do
     end
 
     context "With another room option for the same room type" do
-      let!(:lodging_room_option2) { FactoryGirl.create(:lodging_room_option, lodging_room_type: lodging_room_type) }
-      let(:lodging_day2) { FactoryGirl.create(:lodging_day, lodging_room_option: lodging_room_option2, date_offered: lodging_day.date_offered) }
+      let!(:lodging_room_option2) { FactoryBot.create(:lodging_room_option, lodging_room_type: lodging_room_type) }
+      let(:lodging_day2) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option2, date_offered: lodging_day.date_offered) }
 
       it "sums up the selected days properly" do
         expect(lodging_room_type.num_selected_items(lodging_day)).to eq(1)

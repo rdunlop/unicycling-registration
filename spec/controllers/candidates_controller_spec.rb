@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe CandidatesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:reg) { FactoryGirl.create(:competitor) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:reg) { FactoryBot.create(:competitor) }
 
   describe "GET index" do
     let(:params) do

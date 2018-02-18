@@ -19,11 +19,11 @@ require 'spec_helper'
 
 describe RefundsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
 
-  let(:refund) { FactoryGirl.create(:refund) }
+  let(:refund) { FactoryBot.create(:refund) }
 
   describe "GET show" do
     it "renders" do

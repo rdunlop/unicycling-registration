@@ -16,8 +16,8 @@
 require 'spec_helper'
 
 describe CompetitionResultsController do
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:user) { FactoryGirl.create(:super_admin_user) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:user) { FactoryBot.create(:super_admin_user) }
   before { sign_in user }
 
   describe "GET index" do
@@ -39,7 +39,7 @@ describe CompetitionResultsController do
   end
 
   describe "DELETE destroy" do
-    let!(:result) { FactoryGirl.create(:competition_result, competition: competition) }
+    let!(:result) { FactoryBot.create(:competition_result, competition: competition) }
     it "removes the result" do
       expect do
         delete :destroy, params: { id: result.id, competition_id: competition.id }

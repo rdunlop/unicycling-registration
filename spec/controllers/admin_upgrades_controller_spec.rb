@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe AdminUpgradesController do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before(:each) do
     sign_in user
   end

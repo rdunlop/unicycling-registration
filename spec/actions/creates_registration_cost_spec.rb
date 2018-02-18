@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CreatesRegistrationCost do
   let(:comp_expense_item) { ExpenseItem.new cost: 100, tax: 0 }
   let(:rce) { RegistrationCostEntry.new(expense_item: comp_expense_item) }
-  let(:reg_period) { FactoryGirl.build :registration_cost, :without_entries, registration_cost_entries: [rce] }
+  let(:reg_period) { FactoryBot.build :registration_cost, :without_entries, registration_cost_entries: [rce] }
 
   def perform
     described_class.new(reg_period).perform
@@ -22,7 +22,7 @@ describe CreatesRegistrationCost do
 
   describe "when an expense_group exists" do
     before do
-      FactoryGirl.create :expense_group, :registration
+      FactoryBot.create :expense_group, :registration
     end
 
     it "doesn't create another expense_group" do

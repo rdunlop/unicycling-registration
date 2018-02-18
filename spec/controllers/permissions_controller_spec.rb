@@ -14,7 +14,7 @@ describe PermissionsController do
     end
 
     describe "can use an access code" do
-      let!(:registrant) { FactoryGirl.create(:registrant) }
+      let!(:registrant) { FactoryBot.create(:registrant) }
       let(:access_code) { registrant.access_code }
 
       it "can use the access code" do

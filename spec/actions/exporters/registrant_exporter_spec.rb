@@ -18,8 +18,8 @@ describe Exporters::RegistrantExporter do
     end
 
     context "with an event" do
-      let!(:event) { FactoryGirl.create(:event, best_time_format: "none", name: "100m") }
-      let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, label: "Team") }
+      let!(:event) { FactoryBot.create(:event, best_time_format: "none", name: "100m") }
+      let!(:event_choice) { FactoryBot.create(:event_choice, event: event, label: "Team") }
 
       let(:expected_headers) do
         [
@@ -35,7 +35,7 @@ describe Exporters::RegistrantExporter do
       end
 
       context "with 2 categories" do
-        let!(:second_category) { FactoryGirl.create(:event_category, event: event, name: "Junior") }
+        let!(:second_category) { FactoryBot.create(:event_category, event: event, name: "Junior") }
 
         it "has the 2 categories as header" do
           expect(headers).to include("EV: 100m - Category (All/Junior)")
@@ -45,7 +45,7 @@ describe Exporters::RegistrantExporter do
   end
 
   describe "#rows" do
-    let!(:registrant) { FactoryGirl.create(:competitor, birthday: Date.new(1998, 4, 20), gender: "Male") }
+    let!(:registrant) { FactoryBot.create(:competitor, birthday: Date.new(1998, 4, 20), gender: "Male") }
 
     let(:rows) { described_class.new.rows }
 
@@ -64,7 +64,7 @@ describe Exporters::RegistrantExporter do
     end
 
     context "when the registrant is a spectator (no birthday)" do
-      let!(:registrant) { FactoryGirl.create(:spectator, birthday: nil, gender: nil) }
+      let!(:registrant) { FactoryBot.create(:spectator, birthday: nil, gender: nil) }
 
       let(:expected_row) do
         [
@@ -82,10 +82,10 @@ describe Exporters::RegistrantExporter do
     end
 
     context "with an event with choices" do
-      let!(:event) { FactoryGirl.create(:event, best_time_format: "none", name: "100m") }
-      let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, label: "Team") }
+      let!(:event) { FactoryBot.create(:event, best_time_format: "none", name: "100m") }
+      let!(:event_choice) { FactoryBot.create(:event_choice, event: event, label: "Team") }
 
-      let!(:resu) { FactoryGirl.create(:registrant_event_sign_up, registrant: registrant, signed_up: true, event_category: event.event_categories.first) }
+      let!(:resu) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, signed_up: true, event_category: event.event_categories.first) }
 
       context "when registrant does not have the choice" do
         let(:expected_row) do
@@ -102,7 +102,7 @@ describe Exporters::RegistrantExporter do
       end
 
       context "When registrant has the choice" do
-        let!(:rc) { FactoryGirl.create(:registrant_choice, registrant: registrant, event_choice: event_choice, value: "My Team") }
+        let!(:rc) { FactoryBot.create(:registrant_choice, registrant: registrant, event_choice: event_choice, value: "My Team") }
 
         let(:expected_row) do
           [

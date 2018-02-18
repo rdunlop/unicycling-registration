@@ -15,11 +15,11 @@
 #  index_competition_wheel_sizes_registrant_id_event_id         (registrant_id,event_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition_wheel_size do
-    registrant # FactoryGirl
+    registrant # FactoryBot
 
-    event # FactoryGirl
+    event # FactoryBot
     wheel_size { WheelSize.first }
   end
 end

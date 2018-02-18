@@ -27,11 +27,11 @@ require 'spec_helper'
 
 describe TwoAttemptEntriesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
+    @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
   end
-  let(:two_attempt_entry) { FactoryGirl.create(:two_attempt_entry, user: @admin_user, competition: @competition) }
+  let(:two_attempt_entry) { FactoryBot.create(:two_attempt_entry, user: @admin_user, competition: @competition) }
 
   def valid_attributes
     {
@@ -103,10 +103,10 @@ describe TwoAttemptEntriesController do
 
   describe "POST approve" do
     it "redirects to the competitions' results page" do
-      competition = FactoryGirl.create(:timed_competition)
-      reg = FactoryGirl.create(:competitor)
-      @config = FactoryGirl.create(:event_configuration, :with_usa)
-      import = FactoryGirl.create(:two_attempt_entry, competition: competition, bib_number: reg.bib_number)
+      competition = FactoryBot.create(:timed_competition)
+      reg = FactoryBot.create(:competitor)
+      @config = FactoryBot.create(:event_configuration, :with_usa)
+      import = FactoryBot.create(:two_attempt_entry, competition: competition, bib_number: reg.bib_number)
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       post :approve, params: { user_id: import.user, competition_id: competition.id }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
@@ -114,9 +114,9 @@ describe TwoAttemptEntriesController do
   end
 
   describe "POST import" do
-    let(:competition) { FactoryGirl.create(:timed_competition) }
-    let(:reg) { FactoryGirl.create(:competitor) }
-    let(:import) { FactoryGirl.create(:two_attempt_entry, competition: competition, bib_number: reg.bib_number) }
+    let(:competition) { FactoryBot.create(:timed_competition) }
+    let(:reg) { FactoryBot.create(:competitor) }
+    let(:import) { FactoryBot.create(:two_attempt_entry, competition: competition, bib_number: reg.bib_number) }
 
     describe "with valid params" do
       let(:test_file_name) { fixture_path + "/swiss_heat.tsv" }
@@ -195,7 +195,7 @@ describe TwoAttemptEntriesController do
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(@admin_user, @competition)
     end
     it "destroys the requested two_attempt_entry" do
-      im_result = FactoryGirl.create(:two_attempt_entry, user: @admin_user, competition: @competition)
+      im_result = FactoryBot.create(:two_attempt_entry, user: @admin_user, competition: @competition)
       expect do
         delete :destroy, params: { id: im_result.to_param }
       end.to change(TwoAttemptEntry, :count).by(-1)

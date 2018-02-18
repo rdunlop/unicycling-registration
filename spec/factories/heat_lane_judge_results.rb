@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :heat_lane_judge_note do
     competition
     heat 1

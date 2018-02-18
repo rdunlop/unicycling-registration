@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe RegistrationHelper do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   def create_registrant_in_previous_convention(subdomain:, user_attributes:)
-    FactoryGirl.create(:tenant, subdomain: subdomain)
-    FactoryGirl.create(:user_convention, user: user, subdomain: subdomain)
+    FactoryBot.create(:tenant, subdomain: subdomain)
+    FactoryBot.create(:user_convention, user: user, subdomain: subdomain)
     Apartment::Tenant.create(subdomain)
     reg = nil
     Apartment::Tenant.switch(subdomain) do
-      reg = FactoryGirl.create(:competitor, user: user, **user_attributes)
+      reg = FactoryBot.create(:competitor, user: user, **user_attributes)
     end
 
     reg
@@ -24,7 +24,7 @@ describe RegistrationHelper do
     it_should_behave_like "return an empty array"
 
     context "with a registrant" do
-      let!(:registrant) { FactoryGirl.create(:competitor, user: user) }
+      let!(:registrant) { FactoryBot.create(:competitor, user: user) }
 
       it_should_behave_like "return an empty array"
     end

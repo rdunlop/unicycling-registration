@@ -22,10 +22,10 @@ require 'spec_helper'
 
 describe ExternalResultsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:competition)
-    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    @competition = FactoryBot.create(:competition)
+    @competitor = FactoryBot.create(:event_competitor, competition: @competition)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -40,7 +40,7 @@ describe ExternalResultsController do
 
   describe "GET index" do
     it "shows all external_results" do
-      FactoryGirl.create(:external_result, competitor: @competitor)
+      FactoryBot.create(:external_result, competitor: @competitor)
       get :index, params: { competition_id: @competition.id }
       assert_select "h1", "New Entered Points Result"
 
@@ -54,7 +54,7 @@ describe ExternalResultsController do
 
   describe "GET edit" do
     it "shows requested external_result form" do
-      external_result = FactoryGirl.create(:external_result)
+      external_result = FactoryBot.create(:external_result)
       get :edit, params: { id: external_result.to_param }
       assert_select "h1", "Editing points result"
 
@@ -93,14 +93,14 @@ describe ExternalResultsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested external_result" do
-        external_result = FactoryGirl.create(:external_result)
+        external_result = FactoryBot.create(:external_result)
         expect do
           put :update, params: { id: external_result.to_param, external_result: valid_attributes }
         end.to change { external_result.reload.updated_at }
       end
 
       it "redirects to the external_result index" do
-        external_result = FactoryGirl.create(:external_result)
+        external_result = FactoryBot.create(:external_result)
         put :update, params: { id: external_result.to_param, external_result: valid_attributes }
         expect(response).to redirect_to(competition_external_results_path(@competition))
       end
@@ -108,7 +108,7 @@ describe ExternalResultsController do
 
     describe "with invalid params" do
       it "re-renders the 'edit' template" do
-        external_result = FactoryGirl.create(:external_result)
+        external_result = FactoryBot.create(:external_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
         put :update, params: { id: external_result.to_param, external_result: { "competitor_id" => "invalid value" } }
@@ -119,14 +119,14 @@ describe ExternalResultsController do
 
   describe "DELETE destroy" do
     it "destroys the requested external_result" do
-      external_result = FactoryGirl.create(:external_result)
+      external_result = FactoryBot.create(:external_result)
       expect do
         delete :destroy, params: { id: external_result.to_param }
       end.to change(ExternalResult, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
-      external_result = FactoryGirl.create(:external_result, competitor: @competitor)
+      external_result = FactoryBot.create(:external_result, competitor: @competitor)
       delete :destroy, params: { id: external_result.to_param }
       expect(response).to redirect_to(competition_external_results_path(@competition))
     end

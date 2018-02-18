@@ -18,7 +18,7 @@
 require 'spec_helper'
 
 describe ExpenseGroup do
-  let(:group) { FactoryGirl.create(:expense_group) }
+  let(:group) { FactoryBot.create(:expense_group) }
 
   it "can be created by the factory" do
     expect(group).to be_valid
@@ -38,13 +38,13 @@ describe ExpenseGroup do
   end
 
   it "cannot have both the info_page_id and info_url set" do
-    group.info_page = FactoryGirl.create(:page)
+    group.info_page = FactoryBot.create(:page)
     group.info_url = "http://www.google.com"
     expect(group).to be_invalid
   end
 
   it "can have the info_page_id set" do
-    group.info_page = FactoryGirl.create(:page)
+    group.info_page = FactoryBot.create(:page)
     expect(group).to be_valid
   end
 
@@ -53,7 +53,7 @@ describe ExpenseGroup do
   end
 
   it "should only list the visible groups" do
-    @group2 = FactoryGirl.create(:expense_group, visible: true)
+    @group2 = FactoryBot.create(:expense_group, visible: true)
     group # reference to build it
     ExpenseGroup.visible == [group]
   end
@@ -75,8 +75,8 @@ describe ExpenseGroup do
 
   describe "with expense_items" do
     before(:each) do
-      @item2 = FactoryGirl.create(:expense_item, expense_group: group)
-      @item1 = FactoryGirl.create(:expense_item, expense_group: group)
+      @item2 = FactoryBot.create(:expense_item, expense_group: group)
+      @item1 = FactoryBot.create(:expense_item, expense_group: group)
       @item2.update_attribute(:position, 2)
     end
     it "orders the items by position" do
@@ -89,9 +89,9 @@ describe ExpenseGroup do
       group.position = 1
       group.visible = false
       group.save
-      @group3 = FactoryGirl.create(:expense_group)
-      @group2 = FactoryGirl.create(:expense_group)
-      @group4 = FactoryGirl.create(:expense_group)
+      @group3 = FactoryBot.create(:expense_group)
+      @group2 = FactoryBot.create(:expense_group)
+      @group4 = FactoryBot.create(:expense_group)
       @group3.update_attribute(:position, 3)
     end
 

@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Compete::IneligibleRegistrantsController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    sign_in FactoryBot.create(:super_admin_user)
   end
 
   describe "GET index" do
-    let!(:registrant) { FactoryGirl.create(:registrant, ineligible: true) }
+    let!(:registrant) { FactoryBot.create(:registrant, ineligible: true) }
 
     it "displays all ineligible registrants" do
       get :index
@@ -15,7 +15,7 @@ describe Compete::IneligibleRegistrantsController do
   end
 
   describe "POST create" do
-    let!(:registrant) { FactoryGirl.create(:registrant) }
+    let!(:registrant) { FactoryBot.create(:registrant) }
 
     it "marks registrant as ineligible" do
       post :create, params: { registrant_id: registrant.id }
@@ -24,7 +24,7 @@ describe Compete::IneligibleRegistrantsController do
   end
 
   describe "DELETE destroy" do
-    let!(:registrant) { FactoryGirl.create(:registrant, ineligible: true) }
+    let!(:registrant) { FactoryBot.create(:registrant, ineligible: true) }
 
     it "marks registrant as eligible" do
       delete :destroy, params: { id: registrant.id }

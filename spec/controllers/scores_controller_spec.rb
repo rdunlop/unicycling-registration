@@ -25,23 +25,23 @@ require 'spec_helper'
 
 describe ScoresController do
   before do
-    @user = FactoryGirl.create(:data_entry_volunteer_user)
-    @other_user = FactoryGirl.create(:data_entry_volunteer_user)
+    @user = FactoryBot.create(:data_entry_volunteer_user)
+    @other_user = FactoryBot.create(:data_entry_volunteer_user)
 
-    @judge = FactoryGirl.create(:judge, user_id: @user.id)
-    @jt = FactoryGirl.create(:judge_type)
-    @judge_with_pres = FactoryGirl.create(:judge, judge_type: @jt, user_id: @other_user.id)
-    @other_judge = FactoryGirl.create(:judge, user_id: @other_user.id)
+    @judge = FactoryBot.create(:judge, user_id: @user.id)
+    @jt = FactoryBot.create(:judge_type)
+    @judge_with_pres = FactoryBot.create(:judge, judge_type: @jt, user_id: @other_user.id)
+    @other_judge = FactoryBot.create(:judge, user_id: @other_user.id)
 
-    @comp = FactoryGirl.create(:event_competitor, competition: @judge.competition)
-    @comp2 = FactoryGirl.create(:event_competitor, competition: @judge.competition)
+    @comp = FactoryBot.create(:event_competitor, competition: @judge.competition)
+    @comp2 = FactoryBot.create(:event_competitor, competition: @judge.competition)
     @judge.competition.competitors << @comp2
     @judge.competition.competitors << @comp
     @judge.save!
 
     @signed_in_scores = [
-      FactoryGirl.create(:score, judge: @judge, competitor: @comp, val_1: 3.22),
-      FactoryGirl.create(:score, judge: @judge, competitor: @comp2, val_1: 2.33)
+      FactoryBot.create(:score, judge: @judge, competitor: @comp, val_1: 3.22),
+      FactoryBot.create(:score, judge: @judge, competitor: @comp2, val_1: 2.33)
     ]
 
     # director
@@ -178,7 +178,7 @@ describe ScoresController do
 
         # Change logged-in user
         sign_out @user
-        @auth_user = FactoryGirl.create(:user)
+        @auth_user = FactoryBot.create(:user)
         sign_in @auth_user
       end
 

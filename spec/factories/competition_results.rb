@@ -13,9 +13,9 @@
 #  name           :string(255)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition_result do
-    competition # FactoryGirl
+    competition # FactoryBot
 
     results_file { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
     system_managed false

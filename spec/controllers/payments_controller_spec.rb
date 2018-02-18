@@ -25,9 +25,9 @@ require 'spec_helper'
 
 describe PaymentsController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @config = EventConfiguration.singleton
-    @config.update(FactoryGirl.attributes_for(:event_configuration, event_sign_up_closed_date: Date.tomorrow))
+    @config.update(FactoryBot.attributes_for(:event_configuration, event_sign_up_closed_date: Date.tomorrow))
     sign_in @user
   end
 
@@ -45,19 +45,19 @@ describe PaymentsController do
 
   describe "POST fake_complete" do
     it "sets the payment as completed" do
-      payment = FactoryGirl.create(:payment, user: @user, transaction_id: nil)
+      payment = FactoryBot.create(:payment, user: @user, transaction_id: nil)
       post :fake_complete, params: { id: payment.to_param }
       payment.reload
       expect(payment.completed).to eq(true)
     end
     it "redirects to registrants page" do
-      payment = FactoryGirl.create(:payment, user: @user)
+      payment = FactoryBot.create(:payment, user: @user)
       post :fake_complete, params: { id: payment.to_param }
       expect(response).to redirect_to root_path
     end
     it "cannot change if config test_mode is disabled" do
       @config.update_attribute(:test_mode, false)
-      payment = FactoryGirl.create(:payment, user: @user)
+      payment = FactoryBot.create(:payment, user: @user)
       post :fake_complete, params: { id: payment.to_param }
       payment.reload
       expect(payment.completed).to eq(false)
@@ -66,9 +66,9 @@ describe PaymentsController do
 
   describe "GET index" do
     before(:each) do
-      @super_admin = FactoryGirl.create(:super_admin_user)
+      @super_admin = FactoryBot.create(:super_admin_user)
       sign_in @super_admin
-      @payment = FactoryGirl.create(:payment, user: @user, completed: true)
+      @payment = FactoryBot.create(:payment, user: @user, completed: true)
     end
 
     describe "as normal user" do
@@ -88,7 +88,7 @@ describe PaymentsController do
       end
 
       it "doesn't list my payments which are not completed" do
-        my_incomplete_payment = FactoryGirl.create(:payment, completed: false, user: @user, note: "MY NOTE")
+        my_incomplete_payment = FactoryBot.create(:payment, completed: false, user: @user, note: "MY NOTE")
 
         get :index, params: { user_id: @user.id }
 
@@ -99,9 +99,9 @@ describe PaymentsController do
 
   describe "GET index (registrants)" do
     before(:each) do
-      @super_admin = FactoryGirl.create(:super_admin_user)
+      @super_admin = FactoryBot.create(:super_admin_user)
       sign_in @super_admin
-      @reg = FactoryGirl.create(:competitor, user: @super_admin)
+      @reg = FactoryBot.create(:competitor, user: @super_admin)
     end
 
     it "can get the registrants payments" do
@@ -123,8 +123,8 @@ describe PaymentsController do
   end
 
   describe "GET show" do
-    let!(:payment) { FactoryGirl.create(:payment, user: @user) }
-    let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment) }
+    let!(:payment) { FactoryBot.create(:payment, user: @user) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment) }
 
     it "shows the payment form" do
       get :show, params: { id: payment.to_param }
@@ -145,7 +145,7 @@ describe PaymentsController do
     end
 
     context "with a payment_detail" do
-      let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment) }
+      let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment) }
 
       it "renders the sub-entries for associated payment_details" do
         get :show, params: { id: payment.to_param }
@@ -158,7 +158,7 @@ describe PaymentsController do
       end
 
       context "when the payment item costs > $1000" do
-        let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount_cents: 1234_56) }
+        let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount_cents: 1234_56) }
 
         it "displays the cost without comma" do
           get :show, params: { id: payment.to_param }
@@ -172,15 +172,15 @@ describe PaymentsController do
 
   describe "Complete a $0 payment" do
     it "sets the payment completed" do
-      payment = FactoryGirl.create(:payment, user: @user)
+      payment = FactoryBot.create(:payment, user: @user)
       post :complete, params: { id: payment.to_param }
       expect(payment.reload.completed).to be_truthy
     end
 
     it "doesn't allow completing a $1 payment" do
       request.env["HTTP_REFERER"] = root_path
-      payment = FactoryGirl.create(:payment, user: @user)
-      FactoryGirl.create(:payment_detail, payment: payment, amount: 1.00)
+      payment = FactoryBot.create(:payment, user: @user)
+      FactoryBot.create(:payment_detail, payment: payment, amount: 1.00)
       post :complete, params: { id: payment.to_param }
       expect(payment.reload.completed).to be_falsy
     end
@@ -194,8 +194,8 @@ describe PaymentsController do
 
     describe "for a user with a registrant owing money" do
       before(:each) do
-        @reg_period = FactoryGirl.create(:registration_cost, :competitor)
-        @reg = FactoryGirl.create(:competitor, user: @user)
+        @reg_period = FactoryBot.create(:registration_cost, :competitor)
+        @reg = FactoryBot.create(:competitor, user: @user)
       end
 
       it "assigns a new payment_detail for the registrant" do
@@ -215,9 +215,9 @@ describe PaymentsController do
       end
 
       it "only assigns registrants that owe money" do
-        @other_reg = FactoryGirl.create(:competitor, user: @user)
-        @payment = FactoryGirl.create(:payment)
-        @pd = FactoryGirl.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
+        @other_reg = FactoryBot.create(:competitor, user: @user)
+        @payment = FactoryBot.create(:payment)
+        @pd = FactoryBot.create(:payment_detail, registrant: @other_reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
         @payment.reload
         @payment.completed = true
         @payment.save
@@ -227,9 +227,9 @@ describe PaymentsController do
 
       describe "has paid, but owes for more items" do
         before(:each) do
-          @rei = FactoryGirl.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
-          @payment = FactoryGirl.create(:payment)
-          @pd = FactoryGirl.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
+          @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
+          @payment = FactoryBot.create(:payment)
+          @pd = FactoryBot.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
           @payment.reload
           @payment.completed = true
           @payment.save
@@ -272,8 +272,8 @@ describe PaymentsController do
 
       describe "with nested attributes for payment_details" do
         it "creates the payment_detail" do
-          @ei = FactoryGirl.create(:expense_item)
-          @reg = FactoryGirl.create(:competitor)
+          @ei = FactoryBot.create(:expense_item)
+          @reg = FactoryBot.create(:competitor)
           post :create, params: { payment: {
             payment_details_attributes: [
               {
@@ -291,9 +291,9 @@ describe PaymentsController do
         end
 
         it "doesn't create an entry when it is set to _destroy" do
-          @ei = FactoryGirl.create(:expense_item)
-          @ei2 = FactoryGirl.create(:expense_item)
-          @reg = FactoryGirl.create(:competitor)
+          @ei = FactoryBot.create(:expense_item)
+          @ei2 = FactoryBot.create(:expense_item)
+          @reg = FactoryBot.create(:competitor)
           post :create, params: { payment: {
             payment_details_attributes: [
               {
@@ -364,7 +364,7 @@ describe PaymentsController do
   end
 
   describe "POST apply_coupon" do
-    let(:payment) { FactoryGirl.create(:payment) }
+    let(:payment) { FactoryBot.create(:payment) }
 
     context "without a valid coupon" do
       it "renders" do
@@ -380,8 +380,8 @@ describe PaymentsController do
     before(:each) do
       @user.add_role :payment_admin
     end
-    let!(:payment) { FactoryGirl.create(:payment, completed: true) }
-    let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
+    let!(:payment) { FactoryBot.create(:payment, completed: true) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
 
     it "assigns the known expense groups as expense_groups" do
       item = payment_detail.line_item

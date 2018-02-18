@@ -1,13 +1,13 @@
 require "spec_helper"
 
 describe StandardSkillScorePolicy do
-  let(:competitor) { FactoryGirl.create(:event_competitor) }
-  let(:skill_score) { FactoryGirl.create(:standard_skill_score, competitor: competitor) }
+  let(:competitor) { FactoryBot.create(:event_competitor) }
+  let(:skill_score) { FactoryBot.create(:standard_skill_score, competitor: competitor) }
 
   subject { described_class }
 
   permissions :new?, :edit?, :create?, :update?, :destroy? do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     context "as a director" do
       before do

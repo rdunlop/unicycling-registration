@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe ConventionSetup::RegistrationCostsController do
   before(:each) do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
-    @comp_exp = FactoryGirl.create(:expense_item, cost: 100)
+    @comp_exp = FactoryBot.create(:expense_item, cost: 100)
   end
 
-  let(:registration_cost) { FactoryGirl.create(:registration_cost) }
+  let(:registration_cost) { FactoryBot.create(:registration_cost) }
 
   # This should return the minimal set of attributes required to create a valid
   # RegistrationCost. As you add validations to RegistrationCost, be sure to
@@ -33,7 +33,7 @@ describe ConventionSetup::RegistrationCostsController do
 
   describe "as a normal user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -196,9 +196,9 @@ describe ConventionSetup::RegistrationCostsController do
     end
 
     context "with a non-deletable expense_item (due to payment_detail)" do
-      let(:expense_item) { FactoryGirl.create(:expense_item) }
-      let!(:payment_detail) { FactoryGirl.create(:payment_detail, line_item: expense_item) }
-      let(:registration_cost) { FactoryGirl.create(:registration_cost, expense_item: expense_item) }
+      let(:expense_item) { FactoryBot.create(:expense_item) }
+      let!(:payment_detail) { FactoryBot.create(:payment_detail, line_item: expense_item) }
+      let(:registration_cost) { FactoryBot.create(:registration_cost, expense_item: expense_item) }
 
       it "cannot delete the registration_cost" do
         expect { delete :destroy, params: { id: registration_cost.to_param } }.to raise_error(ActiveRecord::DeleteRestrictionError)

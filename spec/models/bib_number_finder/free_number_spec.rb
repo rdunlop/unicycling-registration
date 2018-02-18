@@ -30,8 +30,8 @@ describe BibNumberFinder::FreeNumber do
       end
 
       context "when there is already a number 1" do
-        let!(:reg) { FactoryGirl.create(:competitor) }
-        let!(:reg2) { FactoryGirl.create(:noncompetitor) }
+        let!(:reg) { FactoryBot.create(:competitor) }
+        let!(:reg2) { FactoryBot.create(:noncompetitor) }
 
         context "as a competitor" do
           let(:registrant_type) { "competitor" }
@@ -53,18 +53,18 @@ describe BibNumberFinder::FreeNumber do
 
     context "when part of a convention_series" do
       let(:tenant) { Tenant.first }
-      let!(:series) { FactoryGirl.create(:convention_series) }
-      let!(:series_member) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: tenant) }
+      let!(:series) { FactoryBot.create(:convention_series) }
+      let!(:series_member) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: tenant) }
 
       context "when another convention has a registrant" do
-        let!(:other_tenant) { FactoryGirl.create(:tenant, subdomain: "other") }
+        let!(:other_tenant) { FactoryBot.create(:tenant, subdomain: "other") }
         before do
           Apartment::Tenant.create "other"
           Apartment::Tenant.switch "other" do
-            FactoryGirl.create(:competitor)
+            FactoryBot.create(:competitor)
           end
         end
-        let!(:series_member2) { FactoryGirl.create(:convention_series_member, convention_series: series, tenant: other_tenant) }
+        let!(:series_member2) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: other_tenant) }
 
         context "as a competitor" do
           let(:registrant_type) { "competitor" }

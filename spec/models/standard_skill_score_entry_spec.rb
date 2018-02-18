@@ -21,21 +21,21 @@
 require 'spec_helper'
 
 describe StandardSkillScoreEntry do
-  let(:judge) { FactoryGirl.create(:judge) }
-  let(:competitor) { FactoryGirl.create(:event_competitor, competition: judge.competition) }
-  let(:sss) { FactoryGirl.create(:standard_skill_score) }
+  let(:judge) { FactoryBot.create(:judge) }
+  let(:competitor) { FactoryBot.create(:event_competitor, competition: judge.competition) }
+  let(:sss) { FactoryBot.create(:standard_skill_score) }
   let(:skill_points) { 5.1 }
-  let(:standard_skill_entry) { FactoryGirl.create(:standard_skill_entry, points: skill_points) }
-  let(:ssre) { FactoryGirl.create(:standard_skill_routine_entry, standard_skill_entry: standard_skill_entry) }
+  let(:standard_skill_entry) { FactoryBot.create(:standard_skill_entry, points: skill_points) }
+  let(:ssre) { FactoryBot.create(:standard_skill_routine_entry, standard_skill_entry: standard_skill_entry) }
   let(:devaluation_percent) { 50 }
-  let(:ssse) { FactoryGirl.create(:standard_skill_score_entry, standard_skill_routine_entry: ssre, standard_skill_score: sss, difficulty_devaluation_percent: devaluation_percent) }
+  let(:ssse) { FactoryBot.create(:standard_skill_score_entry, standard_skill_routine_entry: ssre, standard_skill_score: sss, difficulty_devaluation_percent: devaluation_percent) }
 
   it "should be able to have 2 different skills scored by the same judge" do
-    score_entry = FactoryGirl.create(:standard_skill_score_entry)
+    score_entry = FactoryBot.create(:standard_skill_score_entry)
 
-    score_entry_2 = FactoryGirl.build(:standard_skill_score_entry,
-                                      standard_skill_score: score_entry.standard_skill_score,
-                                      standard_skill_routine_entry: FactoryGirl.create(:standard_skill_routine_entry))
+    score_entry_2 = FactoryBot.build(:standard_skill_score_entry,
+                                     standard_skill_score: score_entry.standard_skill_score,
+                                     standard_skill_routine_entry: FactoryBot.create(:standard_skill_routine_entry))
     expect(score_entry_2).to be_valid
   end
 

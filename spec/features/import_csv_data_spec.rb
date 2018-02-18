@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe 'With an Externally Ranked Competition' do
-  # let!(:user) { FactoryGirl.create(:payment_admin) }
-  let(:user) { FactoryGirl.create(:super_admin_user) }
+  # let!(:user) { FactoryBot.create(:payment_admin) }
+  let(:user) { FactoryBot.create(:super_admin_user) }
   include_context 'user is logged in'
   include_context 'basic event configuration'
 
   before :each do
-    @competition = FactoryGirl.create(:ranked_competition)
+    @competition = FactoryBot.create(:ranked_competition)
   end
 
   it "can import csv data" do

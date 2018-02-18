@@ -16,12 +16,12 @@
 #  index_registrant_choices_registrant_id                         (registrant_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_choice do
-    registrant # FactoryGirl
-    event_choice # FactoryGirl
+    registrant # FactoryBot
+    event_choice # FactoryBot
     value "0"
   end
 end

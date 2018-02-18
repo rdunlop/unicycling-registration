@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe SampleData::RegistrantsController do
   before(:each) do
-    @reg = FactoryGirl.create(:registrant) # so that WheelSizes are created
-    @user = FactoryGirl.create(:super_admin_user)
+    @reg = FactoryBot.create(:registrant) # so that WheelSizes are created
+    @user = FactoryBot.create(:super_admin_user)
     EventConfiguration.singleton.update(test_mode: true)
     sign_in @user
   end
@@ -23,7 +23,7 @@ describe SampleData::RegistrantsController do
     end
 
     context "when the sign_up_for_events is checked" do
-      let!(:event) { FactoryGirl.create(:event) }
+      let!(:event) { FactoryBot.create(:event) }
 
       it "signs the registrant up for all events" do
         expect do

@@ -17,15 +17,15 @@ require 'spec_helper'
 describe Admin::StandardSkillRoutinesController do
   describe "as super_admin" do
     before do
-      FactoryGirl.create(:event_configuration, standard_skill: true, standard_skill_closed_date: 1.week.from_now)
-      @super_admin_user = FactoryGirl.create(:super_admin_user)
+      FactoryBot.create(:event_configuration, standard_skill: true, standard_skill_closed_date: 1.week.from_now)
+      @super_admin_user = FactoryBot.create(:super_admin_user)
       sign_in @super_admin_user
     end
 
     describe "GET download_file" do
       before do
-        @initial_entry = FactoryGirl.create(:standard_skill_routine_entry)
-        @next_entry = FactoryGirl.create(:standard_skill_routine_entry)
+        @initial_entry = FactoryBot.create(:standard_skill_routine_entry)
+        @next_entry = FactoryBot.create(:standard_skill_routine_entry)
       end
 
       it "downloads the standard_skill_routine_entries for everyone" do
@@ -50,7 +50,7 @@ describe Admin::StandardSkillRoutinesController do
       end
 
       it "should fail for non-admin user" do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryBot.create(:user)
         sign_in @user
 
         get :download_file

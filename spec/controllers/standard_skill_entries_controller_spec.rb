@@ -24,13 +24,13 @@ require 'spec_helper'
 
 describe StandardSkillEntriesController do
   before do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     sign_in @user
   end
 
   describe "GET 'index'" do
     it "returns http success" do
-      FactoryGirl.create(:standard_skill_entry, description: "first skill")
+      FactoryBot.create(:standard_skill_entry, description: "first skill")
       get :index
       expect(response).to be_success
 

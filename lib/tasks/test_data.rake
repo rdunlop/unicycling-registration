@@ -2,12 +2,12 @@ desc "This task creates a whole set of fake event/registrations/competitions/sig
 
 def create_category(name)
   cat = Category.find_by(name: name)
-  FactoryGirl.create(:category, name: name) if cat.nil?
+  FactoryBot.create(:category, name: name) if cat.nil?
 end
 
 def create_event(category, name, event_categories = [])
   event = Event.find_by(name: name)
-  event ||= FactoryGirl.create(:event, category: category, name: name)
+  event ||= FactoryBot.create(:event, category: category, name: name)
   event_categories.each_with_index do |ecat, index|
     if index.zero?
       # replace the 'All' event_category
@@ -18,17 +18,17 @@ def create_event(category, name, event_categories = [])
       end
     end
     ecat_el = event.event_categories.find_by(name: ecat)
-    FactoryGirl.create(:event_category, event: event, name: ecat, position: index + 2) if ecat_el.nil?
+    FactoryBot.create(:event_category, event: event, name: ecat, position: index + 2) if ecat_el.nil?
   end
   event
 end
 
 def create_registrant(first_name, last_name, email_name)
   user = User.find_by(email: "#{email_name}@dunlopweb.com")
-  user ||= FactoryGirl.create(:user, email: "#{email_name}@dunlopweb.com")
+  user ||= FactoryBot.create(:user, email: "#{email_name}@dunlopweb.com")
   reg = Registrant.find_by(first_name: first_name, last_name: last_name)
   birthday = Date.today - rand(19..99).years
-  FactoryGirl.create(:competitor, first_name: first_name, last_name: last_name, user: user, birthday: birthday) if reg.nil?
+  FactoryBot.create(:competitor, first_name: first_name, last_name: last_name, user: user, birthday: birthday) if reg.nil?
 end
 
 def sign_up_for_event(reg, event, event_category = nil)
@@ -38,7 +38,7 @@ def sign_up_for_event(reg, event, event_category = nil)
   ecat_name = event_category || "All"
   ecat = event.event_categories.find_by(name: ecat_name)
   resu = RegistrantEventSignUp.find_by(registrant: reg, event: event, event_category: ecat)
-  FactoryGirl.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: ecat, signed_up: true) if resu.nil?
+  FactoryBot.create(:registrant_event_sign_up, registrant: reg, event: event, event_category: ecat, signed_up: true) if resu.nil?
 end
 
 def sign_up_for_random_event(reg, event, event_categories)
@@ -47,17 +47,17 @@ end
 
 def create_competition(event, competition_name, event_cat_names, source_competition = nil)
   comp = Competition.find_by(name: competition_name)
-  FactoryGirl.create(:competition, event: event, name: competition_name, scoring_class: "Shortest Time", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer") if comp.nil?
+  FactoryBot.create(:competition, event: event, name: competition_name, scoring_class: "Shortest Time", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer") if comp.nil?
 
   event_cat_names.each do |ecat_name|
     ecat = event.event_categories.find_by(name: ecat_name)
     competition_source = CompetitionSource.find_by(target_competition: comp, event_category: ecat)
-    FactoryGirl.create(:competition_source, target_competition: comp, event_category: ecat) if competition_source.nil?
+    FactoryBot.create(:competition_source, target_competition: comp, event_category: ecat) if competition_source.nil?
   end
 
   [source_competition].each do |source|
     competition_source = CompetitionSource.find_by(target_competition: comp, competition: source)
-    FactoryGirl.create(:competition_source, target_competition: comp, competition: source) if competition_source.nil?
+    FactoryBot.create(:competition_source, target_competition: comp, competition: source) if competition_source.nil?
   end
 end
 

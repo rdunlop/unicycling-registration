@@ -15,9 +15,9 @@
 #  index_combined_competitions_on_name  (name) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :combined_competition do
     sequence(:name) { |n| "MyString #{n}" }
     tie_break_by_firsts true

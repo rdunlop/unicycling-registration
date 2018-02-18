@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe PaymentPolicy do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:my_payment) { FactoryGirl.build(:payment, user: user) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:my_payment) { FactoryBot.build(:payment, user: user) }
   let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
   let(:reg_closed?) { false }
   let(:authorized_laptop?) { false }
@@ -10,7 +10,7 @@ describe PaymentPolicy do
   subject { described_class }
 
   permissions :create? do
-    let(:config) { FactoryGirl.create(:event_configuration) }
+    let(:config) { FactoryBot.create(:event_configuration) }
 
     describe "while registration is open" do
       it "allows creation" do
@@ -32,7 +32,7 @@ describe PaymentPolicy do
       end
 
       describe "as a super_admin" do
-        let(:user) { FactoryGirl.create(:super_admin_user) }
+        let(:user) { FactoryBot.create(:super_admin_user) }
 
         it { expect(subject).to permit(user_context, my_payment) }
       end
@@ -41,7 +41,7 @@ describe PaymentPolicy do
 
   permissions :fake_complete? do
     let(:test_mode) { false }
-    let(:config) { FactoryGirl.create(:event_configuration, test_mode: test_mode) }
+    let(:config) { FactoryBot.create(:event_configuration, test_mode: test_mode) }
 
     describe "while registration is open" do
       it "doesn't allow fake_complete" do
@@ -58,7 +58,7 @@ describe PaymentPolicy do
   end
 
   permissions :offline_payment? do
-    let(:config) { FactoryGirl.create(:event_configuration, offline_payment: offline_payment) }
+    let(:config) { FactoryBot.create(:event_configuration, offline_payment: offline_payment) }
 
     describe "with offline payment enabled" do
       let(:offline_payment) { true }

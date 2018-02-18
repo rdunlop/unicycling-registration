@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Translations::EventConfigurationsController do
-  let!(:event_configuration) { FactoryGirl.create(:event_configuration) }
-  let(:user) { FactoryGirl.create(:convention_admin_user) }
+  let!(:event_configuration) { FactoryBot.create(:event_configuration) }
+  let(:user) { FactoryBot.create(:convention_admin_user) }
 
   before { sign_in user }
   after { I18n.locale = :en }

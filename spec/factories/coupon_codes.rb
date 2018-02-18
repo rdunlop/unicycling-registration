@@ -18,9 +18,9 @@
 #  index_coupon_codes_on_code  (code) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :coupon_code do
     sequence(:name) { |n| "the Coupon #{n}" }
     sequence(:code) { |n| "code #{n}" }

@@ -28,11 +28,11 @@
 #  points_15               :integer
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :combined_competition_entry do
-    combined_competition # FactoryGirl
+    combined_competition # FactoryBot
     abbreviation "MyString"
     tie_breaker false
     points_1 50
@@ -45,6 +45,6 @@ FactoryGirl.define do
     points_8 6
     points_9 3
     points_10 1
-    competition # FactoryGirl
+    competition # FactoryBot
   end
 end

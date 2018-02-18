@@ -18,9 +18,9 @@
 #  index_external_results_on_competitor_id  (competitor_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :external_result do
     association :competitor, factory: :event_competitor
     association :entered_by, factory: :user

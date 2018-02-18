@@ -1,19 +1,19 @@
 require "spec_helper"
 
 describe RegistrantGroupPolicy do
-  let(:super_admin) { FactoryGirl.create(:super_admin_user) }
+  let(:super_admin) { FactoryBot.create(:super_admin_user) }
 
-  let(:event_director) { FactoryGirl.create(:user) }
-  let(:other_event_director) { FactoryGirl.create(:user) }
-  let(:event) { FactoryGirl.create(:event) }
+  let(:event_director) { FactoryBot.create(:user) }
+  let(:other_event_director) { FactoryBot.create(:user) }
+  let(:event) { FactoryBot.create(:event) }
 
   before do
     event_director.add_role(:director, event)
-    other_event_director.add_role(:director, FactoryGirl.create(:event))
+    other_event_director.add_role(:director, FactoryBot.create(:event))
   end
-  let(:registrant_group_type) { FactoryGirl.create(:registrant_group_type, source_element: event) }
-  let(:registrant_group) { FactoryGirl.create(:registrant_group, registrant_group_type: registrant_group_type) }
-  let(:group_leader) { FactoryGirl.create(:registrant_group_leader, registrant_group: registrant_group) }
+  let(:registrant_group_type) { FactoryBot.create(:registrant_group_type, source_element: event) }
+  let(:registrant_group) { FactoryBot.create(:registrant_group, registrant_group_type: registrant_group_type) }
+  let(:group_leader) { FactoryBot.create(:registrant_group_leader, registrant_group: registrant_group) }
 
   subject { described_class }
 

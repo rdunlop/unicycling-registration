@@ -18,8 +18,8 @@ describe Importers::Parsers::RegistrantImport do
     end
 
     context "with 1 event" do
-      let!(:event) { FactoryGirl.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
-      let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, cell_type: "text", label: "Team Name") }
+      let!(:event) { FactoryBot.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
+      let!(:event_choice) { FactoryBot.create(:event_choice, event: event, cell_type: "text", label: "Team Name") }
       let(:event_headers) { ["EV: 100m - Signed Up (Y/N)", "EV: 100m - Category (All)", "EV: 100m - Best Time ((m)m:ss.xx)", "EV: 100m - Choice: Team Name"] }
       let(:event_row) { ["Y", "All", "20.03", "100m Team"] }
 
@@ -47,8 +47,8 @@ describe Importers::Parsers::RegistrantImport do
   end
 
   describe "#extract_file" do
-    let!(:event) { FactoryGirl.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
-    let!(:event_choice) { FactoryGirl.create(:event_choice, event: event, cell_type: "text", label: "Team Name") }
+    let!(:event) { FactoryBot.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
+    let!(:event_choice) { FactoryBot.create(:event_choice, event: event, cell_type: "text", label: "Team Name") }
 
     let(:test_file) { fixture_path + '/registrants.csv' }
     let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }

@@ -2,23 +2,23 @@ require 'spec_helper'
 
 describe OverallChampionResultCalculator do
   def build_competitor(options = {})
-    competition = (options[:competition]) || FactoryGirl.create(:competition, :published)
-    reg = Registrant.find_by(bib_number: options[:bib_number]) || FactoryGirl.create(:registrant, bib_number: options[:bib_number], gender: "Male")
-    comp = FactoryGirl.create(:event_competitor, competition: competition)
-    FactoryGirl.create(:result, competitor: comp, place: options[:place], result_type: "Overall")
+    competition = (options[:competition]) || FactoryBot.create(:competition, :published)
+    reg = Registrant.find_by(bib_number: options[:bib_number]) || FactoryBot.create(:registrant, bib_number: options[:bib_number], gender: "Male")
+    comp = FactoryBot.create(:event_competitor, competition: competition)
+    FactoryBot.create(:result, competitor: comp, place: options[:place], result_type: "Overall")
     mem = comp.members.first
     mem.registrant = reg
     travel 2.seconds do
       mem.save!
-      FactoryGirl.create(:time_result, competitor: comp, minutes: 1)
+      FactoryBot.create(:time_result, competitor: comp, minutes: 1)
     end
     comp
   end
 
-  let(:race_100m) { FactoryGirl.create(:timed_competition, :published) }
-  let(:combined_competition) { FactoryGirl.create(:combined_competition) }
+  let(:race_100m) { FactoryBot.create(:timed_competition, :published) }
+  let(:combined_competition) { FactoryBot.create(:combined_competition) }
   let(:combined_competition_result) { described_class.new(combined_competition).results("Male") }
-  let(:combined_competition_entry) { FactoryGirl.create(:combined_competition_entry, combined_competition: combined_competition, abbreviation: "TT", competition: race_100m) }
+  let(:combined_competition_entry) { FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition, abbreviation: "TT", competition: race_100m) }
 
   before(:each) do
     build_competitor(place: 1, bib_number: 10, competition: combined_competition_entry.competition)
@@ -60,9 +60,9 @@ describe OverallChampionResultCalculator do
 
   describe "when there is a tie" do
     before(:each) do
-      competition1 = FactoryGirl.create(:competition, :published)
-      competition2 = FactoryGirl.create(:competition, :published)
-      competition3 = FactoryGirl.create(:competition, :published)
+      competition1 = FactoryBot.create(:competition, :published)
+      competition2 = FactoryBot.create(:competition, :published)
+      competition3 = FactoryBot.create(:competition, :published)
       # competitor1m    =
       build_competitor(place: 2, bib_number: 10, competition: competition1)
 
@@ -90,15 +90,15 @@ describe OverallChampionResultCalculator do
       # competitor3crit =
       build_competitor(place: 5, bib_number: 30, competition: competition3)
 
-      m_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "M", tie_breaker: true, competition: competition1, combined_competition: combined_competition)
+      m_combined_competition_entry = FactoryBot.create(:combined_competition_entry, abbreviation: "M", tie_breaker: true, competition: competition1, combined_competition: combined_competition)
       # allow(competitor1m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor2m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
       # allow(competitor3m).to receive_message_chain(:competition, :combined_competition_entries).and_return([m_combined_competition_entry])
-      tt_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "TT", tie_breaker: false, competition: competition2, combined_competition: combined_competition)
+      tt_combined_competition_entry = FactoryBot.create(:combined_competition_entry, abbreviation: "TT", tie_breaker: false, competition: competition2, combined_competition: combined_competition)
       # allow(competitor1tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
       # allow(competitor2tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
       # allow(competitor3tt).to receive_message_chain(:competition, :combined_competition_entries).and_return([tt_combined_competition_entry])
-      crit_combined_competition_entry = FactoryGirl.create(:combined_competition_entry, abbreviation: "Crit", tie_breaker: false, competition: competition3, combined_competition: combined_competition)
+      crit_combined_competition_entry = FactoryBot.create(:combined_competition_entry, abbreviation: "Crit", tie_breaker: false, competition: competition3, combined_competition: combined_competition)
       # allow(competitor1crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
       # allow(competitor2crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
       # allow(competitor3crit).to receive_message_chain(:competition, :combined_competition_entries).and_return([crit_combined_competition_entry])
@@ -140,7 +140,7 @@ describe OverallChampionResultCalculator do
 end
 
 describe OverallChampionResultCalculator do
-  let(:combined_competition) { FactoryGirl.build_stubbed :combined_competition, :percentage_based_calculations }
+  let(:combined_competition) { FactoryBot.build_stubbed :combined_competition, :percentage_based_calculations }
   let(:result) { described_class.new(combined_competition) }
 
   it "adjusts points by number of firsts" do

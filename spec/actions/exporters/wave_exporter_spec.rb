@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Exporters::WaveExporter do
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition, wave: 10) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:competitor) { FactoryBot.create(:event_competitor, competition: competition, wave: 10) }
 
   let(:exporter) { described_class.new([competitor]) }
 
