@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::RegFeesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:payment_admin)
+    @admin_user = FactoryBot.create(:payment_admin)
     sign_in @admin_user
   end
 
@@ -15,9 +15,9 @@ describe Admin::RegFeesController do
 
   describe "POST change the reg fee" do
     before(:each) do
-      @rp1 = FactoryGirl.create(:registration_cost, start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 1, 1))
-      @rp2 = FactoryGirl.create(:registration_cost, start_date: Date.new(2012, 1, 2), end_date: Date.new(2020, 2, 2))
-      @reg = FactoryGirl.create(:competitor)
+      @rp1 = FactoryBot.create(:registration_cost, start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 1, 1))
+      @rp2 = FactoryBot.create(:registration_cost, start_date: Date.new(2012, 1, 2), end_date: Date.new(2020, 2, 2))
+      @reg = FactoryBot.create(:competitor)
     end
 
     it "initially has a reg fee from rp2" do
@@ -44,8 +44,8 @@ describe Admin::RegFeesController do
     end
 
     it "cannot be updated if the registrant is already paid" do
-      payment = FactoryGirl.create(:payment)
-      FactoryGirl.create(:payment_detail, registrant: @reg, line_item: @reg.registrant_expense_items.first.line_item, payment: payment)
+      payment = FactoryBot.create(:payment)
+      FactoryBot.create(:payment_detail, registrant: @reg, line_item: @reg.registrant_expense_items.first.line_item, payment: payment)
       payment.completed = true
       payment.save
       @reg.reload

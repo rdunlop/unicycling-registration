@@ -25,7 +25,7 @@ describe ImportsTable do
   end
 
   describe "with a lookup function" do
-    let!(:user) { FactoryGirl.create :user }
+    let!(:user) { FactoryBot.create :user }
     let(:hash) do
       {
         lookup_user_id_by_email: user.email,

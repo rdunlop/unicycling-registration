@@ -15,7 +15,7 @@ require 'spec_helper'
 
 describe RegistrantGroupType do
   before(:each) do
-    @rgt = FactoryGirl.create(:registrant_group_type)
+    @rgt = FactoryBot.create(:registrant_group_type)
   end
 
   it "has a valid factory" do
@@ -32,9 +32,9 @@ describe RegistrantGroupType do
   end
 
   it "has multiple registrant_groups" do
-    FactoryGirl.create(:registrant_group, registrant_group_type: @rgt)
-    FactoryGirl.create(:registrant_group, registrant_group_type: @rgt)
-    FactoryGirl.create(:registrant_group, registrant_group_type: @rgt)
+    FactoryBot.create(:registrant_group, registrant_group_type: @rgt)
+    FactoryBot.create(:registrant_group, registrant_group_type: @rgt)
+    FactoryBot.create(:registrant_group, registrant_group_type: @rgt)
     expect(@rgt.registrant_groups.count).to eq(3)
   end
 end

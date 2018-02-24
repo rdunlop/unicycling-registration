@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe ConventionSetup::CouponCodesController do
   before do
-    user = FactoryGirl.create(:convention_admin_user)
+    user = FactoryBot.create(:convention_admin_user)
     sign_in user
   end
 
   describe "as a normal user" do
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -20,7 +20,7 @@ describe ConventionSetup::CouponCodesController do
 
   describe "GET index" do
     it "shows all coupon_codes" do
-      coupon_code = FactoryGirl.create(:coupon_code)
+      coupon_code = FactoryBot.create(:coupon_code)
       get :index
       expect(response).to be_success
 
@@ -30,7 +30,7 @@ describe ConventionSetup::CouponCodesController do
 
   describe "GET edit" do
     it "shows the coupon_code form" do
-      coupon_code = FactoryGirl.create(:coupon_code)
+      coupon_code = FactoryBot.create(:coupon_code)
       get :edit, params: { id: coupon_code.id }
       expect(response).to be_success
 
@@ -42,7 +42,7 @@ describe ConventionSetup::CouponCodesController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:valid_attributes) { FactoryGirl.attributes_for(:coupon_code) }
+      let(:valid_attributes) { FactoryBot.attributes_for(:coupon_code) }
 
       it "creates a new CouponCode" do
         expect do
@@ -53,8 +53,8 @@ describe ConventionSetup::CouponCodesController do
   end
 
   describe "PUT update" do
-    let!(:coupon_code) { FactoryGirl.create(:coupon_code) }
-    let(:new_valid_attributes) { FactoryGirl.attributes_for(:coupon_code) }
+    let!(:coupon_code) { FactoryBot.create(:coupon_code) }
+    let(:new_valid_attributes) { FactoryBot.attributes_for(:coupon_code) }
 
     it "updates the coupon code" do
       put :update, params: { id: coupon_code.to_param, coupon_code: new_valid_attributes }
@@ -63,7 +63,7 @@ describe ConventionSetup::CouponCodesController do
   end
 
   describe "DELETE destroy" do
-    let!(:coupon_code) { FactoryGirl.create(:coupon_code) }
+    let!(:coupon_code) { FactoryBot.create(:coupon_code) }
 
     it "deletes the object" do
       expect do

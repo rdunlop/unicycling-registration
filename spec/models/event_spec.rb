@@ -26,9 +26,9 @@ require 'spec_helper'
 
 describe Event do
   before(:each) do
-    @ev = FactoryGirl.create(:event)
+    @ev = FactoryBot.create(:event)
   end
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@ev.valid?).to eq(true)
   end
 
@@ -71,20 +71,20 @@ describe Event do
   end
 
   it "has many event_choices" do
-    @ec = FactoryGirl.create(:event_choice, event: @ev)
+    @ec = FactoryBot.create(:event_choice, event: @ev)
     @ev.event_choices = [@ec]
   end
 
   it "sorts event choices by position" do
-    @ec4 = FactoryGirl.create(:event_choice, event: @ev)
-    @ec2 = FactoryGirl.create(:event_choice, event: @ev)
-    @ec3 = FactoryGirl.create(:event_choice, event: @ev)
+    @ec4 = FactoryBot.create(:event_choice, event: @ev)
+    @ec2 = FactoryBot.create(:event_choice, event: @ev)
+    @ec3 = FactoryBot.create(:event_choice, event: @ev)
     @ec4.update_attribute(:position, 4)
 
     expect(@ev.event_choices).to eq([@ec2, @ec3, @ec4])
   end
   it "destroys associated event_choices upon destroy" do
-    FactoryGirl.create(:event_choice, event: @ev)
+    FactoryBot.create(:event_choice, event: @ev)
     expect do
       @ev.destroy
     end.to change(EventChoice, :count).by(-1)
@@ -105,12 +105,12 @@ describe Event do
 
   it "has many event_categories" do
     @ecat1 = @ev.event_categories.first
-    @ecat2 = FactoryGirl.create(:event_category, event: @ev, name: "Other")
+    @ecat2 = FactoryBot.create(:event_category, event: @ev, name: "Other")
     expect(@ev.event_categories).to eq([@ecat1, @ecat2])
   end
 
   context "with a best time" do
-    let(:event) { FactoryGirl.create(:event, :marathon_best_time_format) }
+    let(:event) { FactoryBot.create(:event, :marathon_best_time_format) }
 
     it "counts more choices" do
       expect(event.num_choices).to eq(2)
@@ -119,8 +119,8 @@ describe Event do
 
   describe "when a user has chosen an event" do
     before(:each) do
-      @ev = FactoryGirl.create(:event)
-      @ec = FactoryGirl.create(:registrant_event_sign_up, event: @ev, event_category: @ev.event_categories.first, signed_up: true)
+      @ev = FactoryBot.create(:event)
+      @ec = FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ev.event_categories.first, signed_up: true)
     end
 
     it "will know that it is selected" do
@@ -133,14 +133,14 @@ describe Event do
       expect(@ev.num_signed_up_registrants).to eq(0)
     end
     it "will not count if no one has selected the choice" do
-      event = FactoryGirl.create(:event)
+      event = FactoryBot.create(:event)
       expect(event.num_signed_up_registrants).to eq(0)
     end
 
     describe "when we try to create associated expense items" do
       it "creates the registrant_expense_item" do
         expect do
-          FactoryGirl.create(:expense_item, cost_element: @ev)
+          FactoryBot.create(:expense_item, cost_element: @ev)
         end.to change(RegistrantExpenseItem, :count).by(1)
 
         expect(@ec.registrant.reload.registrant_expense_items.count).to eq(1)
@@ -149,7 +149,7 @@ describe Event do
   end
   describe "when there is a director" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       @user.add_role(:director, @ev)
     end
 

@@ -15,9 +15,9 @@
 #  registrant_group_leaders_uniq                          (registrant_group_id,user_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_group_leader do
     association :user, factory: :user
     association :registrant_group, factory: :registrant_group

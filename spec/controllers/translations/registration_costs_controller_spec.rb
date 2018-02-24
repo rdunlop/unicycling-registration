@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Translations::RegistrationCostsController do
-  let!(:registration_cost) { FactoryGirl.create(:registration_cost) }
-  let(:user) { FactoryGirl.create(:convention_admin_user) }
+  let!(:registration_cost) { FactoryBot.create(:registration_cost) }
+  let(:user) { FactoryBot.create(:convention_admin_user) }
 
   before { sign_in user }
   after { I18n.locale = :en }

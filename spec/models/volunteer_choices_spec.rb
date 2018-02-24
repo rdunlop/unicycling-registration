@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe VolunteerChoice do
   describe "creating a volunteer choice" do
-    let(:volunteer_opportunity) { FactoryGirl.create(:volunteer_opportunity) }
-    let!(:registrant) { FactoryGirl.create(:registrant) }
+    let(:volunteer_opportunity) { FactoryBot.create(:volunteer_opportunity) }
+    let!(:registrant) { FactoryBot.create(:registrant) }
 
     let(:subject) { VolunteerChoice.new(volunteer_opportunity: volunteer_opportunity, registrant: registrant) }
 

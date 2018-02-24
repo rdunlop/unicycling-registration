@@ -26,10 +26,10 @@ require 'spec_helper'
 
 describe PaymentSummary::ExpenseItemsController do
   before do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
-  let(:expense_item) { FactoryGirl.create(:expense_item) }
+  let(:expense_item) { FactoryBot.create(:expense_item) }
 
   describe "GET details" do
     it "displays the details" do
@@ -38,7 +38,7 @@ describe PaymentSummary::ExpenseItemsController do
     end
 
     context "with a coupon-code applied" do
-      let!(:expense_item_coupon_code) { FactoryGirl.create(:coupon_code_expense_item, expense_item: expense_item) }
+      let!(:expense_item_coupon_code) { FactoryBot.create(:coupon_code_expense_item, expense_item: expense_item) }
 
       it "displays the details" do
         get :details, params: { id: expense_item.to_param }

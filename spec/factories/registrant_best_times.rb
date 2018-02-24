@@ -16,9 +16,9 @@
 #  index_registrant_best_times_on_registrant_id               (registrant_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_best_time do
     registrant
     event

@@ -19,17 +19,17 @@ require 'spec_helper'
 
 describe LodgingPackagesController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
-  let(:competitor) { FactoryGirl.create(:competitor) }
-  let!(:lodging_day) { FactoryGirl.create(:lodging_day) }
+  let(:competitor) { FactoryBot.create(:competitor) }
+  let!(:lodging_day) { FactoryBot.create(:lodging_day) }
 
   describe "DELETE #destroy" do
-    let(:lodging_package) { FactoryGirl.create(:lodging_package) }
+    let(:lodging_package) { FactoryBot.create(:lodging_package) }
 
     context "with a lodging expense item" do
-      let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, line_item: lodging_package, registrant: competitor) }
+      let!(:registrant_expense_item) { FactoryBot.create(:registrant_expense_item, line_item: lodging_package, registrant: competitor) }
 
       it "removes the registrant expense item" do
         expect do
@@ -45,9 +45,9 @@ describe LodgingPackagesController do
     end
 
     context "When there is a pending payment for this lodging package" do
-      let!(:registrant_expense_item) { FactoryGirl.create(:registrant_expense_item, line_item: lodging_package, registrant: competitor) }
-      let!(:payment) { FactoryGirl.create(:payment) }
-      let!(:payment_detail) { FactoryGirl.create(:payment_detail, registrant: competitor, line_item: lodging_package) }
+      let!(:registrant_expense_item) { FactoryBot.create(:registrant_expense_item, line_item: lodging_package, registrant: competitor) }
+      let!(:payment) { FactoryBot.create(:payment) }
+      let!(:payment_detail) { FactoryBot.create(:payment_detail, registrant: competitor, line_item: lodging_package) }
 
       it "removes the REI, but not the LP" do
         expect do

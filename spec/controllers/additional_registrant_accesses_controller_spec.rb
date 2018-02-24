@@ -22,8 +22,8 @@ require 'spec_helper'
 
 describe AdditionalRegistrantAccessesController do
   before(:each) do
-    @reg = FactoryGirl.create(:registrant)
-    @user = FactoryGirl.create(:user)
+    @reg = FactoryBot.create(:registrant)
+    @user = FactoryBot.create(:user)
     sign_in @user
   end
 
@@ -36,7 +36,7 @@ describe AdditionalRegistrantAccessesController do
 
   describe "GET index" do
     it "show all additional_registrant_accesses" do
-      FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
+      FactoryBot.create(:additional_registrant_access, user: @user, registrant: @reg)
       get :index, params: { user_id: @user.id }
       assert_select "tr>td", text: @reg.to_s, count: 1
     end
@@ -44,13 +44,13 @@ describe AdditionalRegistrantAccessesController do
 
   describe "GET invitations" do
     it "show all invitations for me" do
-      my_reg = FactoryGirl.create(:registrant, user: @user)
-      ada = FactoryGirl.create(:additional_registrant_access, registrant: my_reg)
+      my_reg = FactoryBot.create(:registrant, user: @user)
+      ada = FactoryBot.create(:additional_registrant_access, registrant: my_reg)
       get :invitations, params: { user_id: @user.id }
       assert_select "td", ada.user.to_s
     end
     it "doesn't show other people's invitations" do
-      FactoryGirl.create(:additional_registrant_access)
+      FactoryBot.create(:additional_registrant_access)
       get :invitations, params: { user_id: @user.id }
       assert_select "td", count: 0, text: "Decline"
     end
@@ -114,7 +114,7 @@ describe AdditionalRegistrantAccessesController do
   describe "PUT accepted_readonly" do
     describe "with a request" do
       before(:each) do
-        @additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
+        @additional_registrant_access = FactoryBot.create(:additional_registrant_access, user: @user, registrant: @reg)
       end
 
       it "cannot accept its own invitation" do
@@ -152,7 +152,7 @@ describe AdditionalRegistrantAccessesController do
 
   describe "DELETE decline" do
     it "dosen't allow the creator to decline the invitation" do
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
+      additional_registrant_access = FactoryBot.create(:additional_registrant_access, user: @user, registrant: @reg)
 
       delete :decline, params: { id: additional_registrant_access.to_param }
       expect(additional_registrant_access.reload.declined).to eq(false)
@@ -160,7 +160,7 @@ describe AdditionalRegistrantAccessesController do
     it "decline the requested additional_registrant_access" do
       sign_out @user
       sign_in @reg.user
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
+      additional_registrant_access = FactoryBot.create(:additional_registrant_access, user: @user, registrant: @reg)
 
       expect(additional_registrant_access.declined).to eq(false)
       delete :decline, params: { id: additional_registrant_access.to_param }
@@ -170,7 +170,7 @@ describe AdditionalRegistrantAccessesController do
     it "redirects to the additional_registrant_accesses list" do
       sign_out @user
       sign_in @reg.user
-      additional_registrant_access = FactoryGirl.create(:additional_registrant_access, user: @user, registrant: @reg)
+      additional_registrant_access = FactoryBot.create(:additional_registrant_access, user: @user, registrant: @reg)
       delete :decline, params: { id: additional_registrant_access.to_param }
       expect(response).to redirect_to(invitations_user_additional_registrant_accesses_path(@reg.user))
     end

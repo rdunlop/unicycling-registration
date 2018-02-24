@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe ConventionSetup::LodgingsController do
   before do
-    user = FactoryGirl.create(:convention_admin_user)
+    user = FactoryBot.create(:convention_admin_user)
     sign_in user
   end
 
   describe "as a normal user" do
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -20,7 +20,7 @@ describe ConventionSetup::LodgingsController do
 
   describe "GET index" do
     it "shows all lodgings" do
-      lodging = FactoryGirl.create(:lodging)
+      lodging = FactoryBot.create(:lodging)
       get :index
       expect(response).to be_success
 
@@ -37,7 +37,7 @@ describe ConventionSetup::LodgingsController do
 
   describe "GET edit" do
     it "shows the lodging form" do
-      lodging = FactoryGirl.create(:lodging)
+      lodging = FactoryBot.create(:lodging)
       get :edit, params: { id: lodging.id }
       expect(response).to be_success
 
@@ -49,7 +49,7 @@ describe ConventionSetup::LodgingsController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:valid_attributes) { FactoryGirl.attributes_for(:lodging) }
+      let(:valid_attributes) { FactoryBot.attributes_for(:lodging) }
 
       it "creates a new Lodging" do
         expect do
@@ -60,8 +60,8 @@ describe ConventionSetup::LodgingsController do
   end
 
   describe "GET show" do
-    let(:lodging) { FactoryGirl.create(:lodging) }
-    let!(:lodging_room_type) { FactoryGirl.create(:lodging_room_type, lodging: lodging) }
+    let(:lodging) { FactoryBot.create(:lodging) }
+    let!(:lodging_room_type) { FactoryBot.create(:lodging_room_type, lodging: lodging) }
 
     it "shows the lodging" do
       get :show, params: { id: lodging.id }
@@ -70,8 +70,8 @@ describe ConventionSetup::LodgingsController do
   end
 
   describe "PUT update" do
-    let!(:lodging) { FactoryGirl.create(:lodging) }
-    let(:new_valid_attributes) { FactoryGirl.attributes_for(:lodging) }
+    let!(:lodging) { FactoryBot.create(:lodging) }
+    let(:new_valid_attributes) { FactoryBot.attributes_for(:lodging) }
 
     it "updates the coupon code" do
       put :update, params: { id: lodging.to_param, lodging: new_valid_attributes }
@@ -80,7 +80,7 @@ describe ConventionSetup::LodgingsController do
   end
 
   describe "DELETE destroy" do
-    let!(:lodging) { FactoryGirl.create(:lodging) }
+    let!(:lodging) { FactoryBot.create(:lodging) }
 
     it "deletes the object" do
       expect do

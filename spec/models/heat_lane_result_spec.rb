@@ -20,14 +20,14 @@
 require 'spec_helper'
 
 describe HeatLaneResult do
-  let(:hlr) { FactoryGirl.build_stubbed(:heat_lane_result) }
+  let(:hlr) { FactoryBot.build_stubbed(:heat_lane_result) }
 
   it "has a valid factory" do
     expect(hlr.valid?).to eq(true)
   end
 
   describe "when disqualified" do
-    let(:hlr) { FactoryGirl.build_stubbed(:heat_lane_result, :disqualified) }
+    let(:hlr) { FactoryBot.build_stubbed(:heat_lane_result, :disqualified) }
 
     it "doesn't require time" do
       hlr.minutes = nil

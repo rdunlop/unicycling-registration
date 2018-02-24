@@ -43,7 +43,7 @@ describe Devise::CustomRegistrationsController do
 
   describe "when updating the password" do
     let(:initial_password) { "start password" }
-    let(:user) { FactoryGirl.create(:user, confirmed_at: 1.day.ago, email: valid_attributes[:email], password: initial_password, password_confirmation: initial_password) }
+    let(:user) { FactoryBot.create(:user, confirmed_at: 1.day.ago, email: valid_attributes[:email], password: initial_password, password_confirmation: initial_password) }
     let!(:user_convention) { user.user_conventions.first }
 
     before do

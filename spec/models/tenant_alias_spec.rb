@@ -19,25 +19,25 @@
 require 'spec_helper'
 
 describe TenantAlias do
-  let(:tenant) { FactoryGirl.create(:tenant, subdomain: "robin") }
+  let(:tenant) { FactoryBot.create(:tenant, subdomain: "robin") }
 
   before do
-    FactoryGirl.create(:tenant_alias, website_alias: "reg.robinsite.com", tenant: tenant, primary_domain: true)
+    FactoryBot.create(:tenant_alias, website_alias: "reg.robinsite.com", tenant: tenant, primary_domain: true)
   end
 
   it "cannot have multiple primary_domains" do
-    alias2 = FactoryGirl.build(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant, primary_domain: true)
+    alias2 = FactoryBot.build(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant, primary_domain: true)
 
     expect(alias2).to be_invalid
   end
 
   it "can have multiple non-primary domains" do
-    alias2 = FactoryGirl.build(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant, primary_domain: false)
+    alias2 = FactoryBot.build(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant, primary_domain: false)
 
     expect(alias2).to be_valid
     alias2.save!
 
-    alias3 = FactoryGirl.build(:tenant_alias, website_alias: "reg.unicon.com", tenant: tenant, primary_domain: false)
+    alias3 = FactoryBot.build(:tenant_alias, website_alias: "reg.unicon.com", tenant: tenant, primary_domain: false)
 
     expect(alias3).to be_valid
     alias3.save!

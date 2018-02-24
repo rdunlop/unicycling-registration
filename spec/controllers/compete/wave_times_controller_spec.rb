@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Compete::WaveTimesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:wave_time) { FactoryGirl.create(:wave_time, competition: competition) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:wave_time) { FactoryBot.create(:wave_time, competition: competition) }
 
   describe "GET index" do
     it "renders" do
@@ -16,7 +16,7 @@ describe Compete::WaveTimesController do
   end
 
   describe "POST create" do
-    let(:attributes) { FactoryGirl.attributes_for(:wave_time) }
+    let(:attributes) { FactoryBot.attributes_for(:wave_time) }
 
     it "creates a new wave time" do
       expect do

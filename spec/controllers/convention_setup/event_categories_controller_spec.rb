@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ConventionSetup::EventCategoriesController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
-    @event = FactoryGirl.create(:event)
+    sign_in FactoryBot.create(:super_admin_user)
+    @event = FactoryBot.create(:event)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -17,7 +17,7 @@ describe ConventionSetup::EventCategoriesController do
 
   describe "as a normal user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -125,9 +125,9 @@ describe ConventionSetup::EventCategoriesController do
   end
 
   describe "PUT update_row_order" do
-    let(:event) { FactoryGirl.create(:event) }
+    let(:event) { FactoryBot.create(:event) }
     let!(:event_category_1) { event.event_categories.first }
-    let!(:event_category_2) { FactoryGirl.create(:event_category, event: event) }
+    let!(:event_category_2) { FactoryBot.create(:event_category, event: event) }
 
     it "updates the order" do
       put :update_row_order, params: { event_id: event.to_param, id: event_category_1.to_param, row_order_position: 1 }
@@ -138,14 +138,14 @@ describe ConventionSetup::EventCategoriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested event_category" do
-      event_category = FactoryGirl.create(:event_category, event: @event)
+      event_category = FactoryBot.create(:event_category, event: @event)
       expect do
         delete :destroy, params: { id: event_category.to_param }
       end.to change(EventCategory, :count).by(-1)
     end
 
     it "redirects to the event_categories list" do
-      event_category = FactoryGirl.create(:event_category, event: @event)
+      event_category = FactoryBot.create(:event_category, event: @event)
       event = event_category.event
       delete :destroy, params: { id: event_category.to_param }
       expect(response).to redirect_to(convention_setup_event_event_categories_path(event))

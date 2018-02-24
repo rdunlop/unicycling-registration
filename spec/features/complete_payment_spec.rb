@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Completing normal payments' do
-  # let!(:user) { FactoryGirl.create(:payment_admin) }
-  let(:user) { FactoryGirl.create(:user) }
+  # let!(:user) { FactoryBot.create(:payment_admin) }
+  let(:user) { FactoryBot.create(:user) }
   include_context 'user is logged in'
   include_context 'unpaid registration'
   include_context 'basic event configuration', test_mode: true

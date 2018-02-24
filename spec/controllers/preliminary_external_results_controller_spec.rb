@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe PreliminaryExternalResultsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:competition)
-    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    @competition = FactoryBot.create(:competition)
+    @competitor = FactoryBot.create(:event_competitor, competition: @competition)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -22,7 +22,7 @@ describe PreliminaryExternalResultsController do
 
   describe "GET index" do
     it "shows all external_results" do
-      external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor, details: "My details")
+      external_result = FactoryBot.create(:external_result, :preliminary, competitor: @competitor, details: "My details")
       get :index, params: { competition_id: @competition.id }
 
       assert_select "h1", "Data Recording Form - Entry Form (External Results)"
@@ -32,7 +32,7 @@ describe PreliminaryExternalResultsController do
 
   describe "POST approve" do
     it "redirects" do
-      # external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor, details: "My details")
+      # external_result = FactoryBot.create(:external_result, :preliminary, competitor: @competitor, details: "My details")
       post :approve, params: { competition_id: @competition.id }
       expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
     end
@@ -40,7 +40,7 @@ describe PreliminaryExternalResultsController do
 
   describe "GET edit" do
     it "assigns the requested external_result as @external_result" do
-      external_result = FactoryGirl.create(:external_result, :preliminary)
+      external_result = FactoryBot.create(:external_result, :preliminary)
       get :edit, params: { id: external_result.to_param }
       assert_select "h1", "Editing points result"
     end
@@ -81,14 +81,14 @@ describe PreliminaryExternalResultsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the external_result" do
-        external_result = FactoryGirl.create(:external_result, :preliminary)
+        external_result = FactoryBot.create(:external_result, :preliminary)
         expect do
           put :update, params: { id: external_result.to_param, external_result: valid_attributes }
         end.to change { external_result.reload.details }
       end
 
       it "redirects to the external_result index" do
-        external_result = FactoryGirl.create(:external_result, :preliminary)
+        external_result = FactoryBot.create(:external_result, :preliminary)
         put :update, params: { id: external_result.to_param, external_result: valid_attributes }
         expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
       end
@@ -96,7 +96,7 @@ describe PreliminaryExternalResultsController do
 
     describe "with invalid params" do
       it "does not update the external_result" do
-        external_result = FactoryGirl.create(:external_result, :preliminary)
+        external_result = FactoryBot.create(:external_result, :preliminary)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
         expect do
@@ -105,7 +105,7 @@ describe PreliminaryExternalResultsController do
       end
 
       it "re-renders the 'edit' template" do
-        external_result = FactoryGirl.create(:external_result, :preliminary)
+        external_result = FactoryBot.create(:external_result, :preliminary)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(ExternalResult).to receive(:save).and_return(false)
         put :update, params: { id: external_result.to_param, external_result: { "competitor_id" => "invalid value" } }
@@ -116,14 +116,14 @@ describe PreliminaryExternalResultsController do
 
   describe "DELETE destroy" do
     it "destroys the requested external_result" do
-      external_result = FactoryGirl.create(:external_result, :preliminary)
+      external_result = FactoryBot.create(:external_result, :preliminary)
       expect do
         delete :destroy, params: { id: external_result.to_param }
       end.to change(ExternalResult, :count).by(-1)
     end
 
     it "redirects to the external_results list" do
-      external_result = FactoryGirl.create(:external_result, :preliminary, competitor: @competitor)
+      external_result = FactoryBot.create(:external_result, :preliminary, competitor: @competitor)
       delete :destroy, params: { id: external_result.to_param }
       expect(response).to redirect_to(competition_preliminary_external_results_path(@competition))
     end
@@ -133,14 +133,14 @@ describe PreliminaryExternalResultsController do
     let(:test_file_name) { fixture_path + '/external_results.csv' }
     let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
     before do
-      registrant1 = FactoryGirl.create(:competitor, bib_number: 101)
-      registrant2 = FactoryGirl.create(:competitor, bib_number: 102)
-      registrant3 = FactoryGirl.create(:competitor, bib_number: 103)
-      registrant4 = FactoryGirl.create(:competitor, bib_number: 104)
-      comp1 = FactoryGirl.create(:event_competitor, competition: @competition)
-      comp2 = FactoryGirl.create(:event_competitor, competition: @competition)
-      comp3 = FactoryGirl.create(:event_competitor, competition: @competition)
-      comp4 = FactoryGirl.create(:event_competitor, competition: @competition)
+      registrant1 = FactoryBot.create(:competitor, bib_number: 101)
+      registrant2 = FactoryBot.create(:competitor, bib_number: 102)
+      registrant3 = FactoryBot.create(:competitor, bib_number: 103)
+      registrant4 = FactoryBot.create(:competitor, bib_number: 104)
+      comp1 = FactoryBot.create(:event_competitor, competition: @competition)
+      comp2 = FactoryBot.create(:event_competitor, competition: @competition)
+      comp3 = FactoryBot.create(:event_competitor, competition: @competition)
+      comp4 = FactoryBot.create(:event_competitor, competition: @competition)
       comp1.members.first.update_attribute(:registrant, registrant1)
       comp2.members.first.update_attribute(:registrant, registrant2)
       comp3.members.first.update_attribute(:registrant, registrant3)

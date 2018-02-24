@@ -46,7 +46,7 @@ describe JudgeType do
   end
 
   it "destroys the judge when it is destroyed" do
-    judge = FactoryGirl.create(:judge)
+    judge = FactoryBot.create(:judge)
     jt = judge.judge_type
 
     expect(Judge.count).to eq(1)
@@ -75,7 +75,7 @@ describe JudgeType do
     expect(jt.valid?).to eq(true)
   end
   it "require event_class" do
-    jt = FactoryGirl.build(:judge_type)
+    jt = FactoryBot.build(:judge_type)
     ec = jt.event_class
     jt.event_class = nil
     expect(jt.valid?).to eq(false)
@@ -83,7 +83,7 @@ describe JudgeType do
     expect(jt.valid?).to eq(true)
   end
   it "allows boundary_calculation_enabled" do
-    jt = FactoryGirl.build(:judge_type)
+    jt = FactoryBot.build(:judge_type)
     jt.boundary_calculation_enabled = true
     expect(jt.valid?).to eq(false) # XXX Boundary Scores are disabled
   end

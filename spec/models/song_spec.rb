@@ -22,7 +22,7 @@
 require 'spec_helper'
 
 describe Song do
-  let(:song) { FactoryGirl.build_stubbed(:song) }
+  let(:song) { FactoryBot.build_stubbed(:song) }
   it "must be valid by default" do
     expect(song.valid?).to eq(true)
   end
@@ -32,7 +32,7 @@ describe Song do
   end
 
   it "must have a description" do
-    song.event = FactoryGirl.build_stubbed(:event)
+    song.event = FactoryBot.build_stubbed(:event)
     song.description = nil
     expect(song.valid?).to eq(false)
   end
@@ -43,22 +43,22 @@ describe Song do
   end
 
   describe "with a song created" do
-    let(:registrant) { FactoryGirl.create(:registrant) }
-    let!(:song1) { FactoryGirl.create(:song, registrant: registrant) }
+    let(:registrant) { FactoryBot.create(:registrant) }
+    let!(:song1) { FactoryBot.create(:song, registrant: registrant) }
 
     it "cannot create a second song for the same event for the same registrant" do
-      song2 = FactoryGirl.build(:song, registrant: registrant, event: song1.event, user: song1.user)
+      song2 = FactoryBot.build(:song, registrant: registrant, event: song1.event, user: song1.user)
       expect(song2).to be_invalid
     end
 
     it "can create a second song for the same event, different registrant" do
-      song1a = FactoryGirl.build(:song, event: song1.event, user: song1.user)
+      song1a = FactoryBot.build(:song, event: song1.event, user: song1.user)
       expect(song1a).to be_valid
     end
   end
 
   describe "validations" do
-    subject(:song) { FactoryGirl.build(:song) }
+    subject(:song) { FactoryBot.build(:song) }
     it { is_expected.to validate_presence_of(:registrant_id) }
     it { is_expected.to validate_presence_of(:user_id) }
     it { is_expected.to validate_presence_of(:event_id) }

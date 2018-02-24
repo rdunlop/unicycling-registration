@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ConventionSetup::EventChoicesController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
-    @event = FactoryGirl.create(:event)
+    sign_in FactoryBot.create(:super_admin_user)
+    @event = FactoryBot.create(:event)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -33,7 +33,7 @@ describe ConventionSetup::EventChoicesController do
 
   describe "as a normal user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -63,7 +63,7 @@ describe ConventionSetup::EventChoicesController do
 
   describe "GET edit" do
     it "shows the requested event_choice form" do
-      event_choice = FactoryGirl.create(:event_choice)
+      event_choice = FactoryBot.create(:event_choice)
       get :edit, params: { id: event_choice.to_param }
 
       assert_select "h1", "Editing Event Choice"
@@ -174,9 +174,9 @@ describe ConventionSetup::EventChoicesController do
   end
 
   describe "PUT update_row_order" do
-    let(:event) { FactoryGirl.create(:event) }
-    let!(:event_choice_1) { FactoryGirl.create(:event_choice, event: event) }
-    let!(:event_choice_2) { FactoryGirl.create(:event_choice, event: event) }
+    let(:event) { FactoryBot.create(:event) }
+    let!(:event_choice_1) { FactoryBot.create(:event_choice, event: event) }
+    let!(:event_choice_2) { FactoryBot.create(:event_choice, event: event) }
 
     it "updates the order" do
       put :update_row_order, params: { event_id: event.to_param, id: event_choice_1.to_param, row_order_position: 1 }
@@ -187,14 +187,14 @@ describe ConventionSetup::EventChoicesController do
 
   describe "DELETE destroy" do
     it "destroys the requested event_choice" do
-      event_choice = FactoryGirl.create(:event_choice)
+      event_choice = FactoryBot.create(:event_choice)
       expect do
         delete :destroy, params: { id: event_choice.to_param }
       end.to change(EventChoice, :count).by(-1)
     end
 
     it "redirects to the event_choices list" do
-      event_choice = FactoryGirl.create(:event_choice)
+      event_choice = FactoryBot.create(:event_choice)
       event = event_choice.event
       delete :destroy, params: { id: event_choice.to_param }
       expect(response).to redirect_to(convention_setup_event_event_choices_path(event))

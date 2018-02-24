@@ -14,11 +14,11 @@ require 'spec_helper'
 
 describe LodgingsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
-  let(:competitor) { FactoryGirl.create(:competitor) }
-  let!(:lodging_day) { FactoryGirl.create(:lodging_day) }
+  let(:competitor) { FactoryBot.create(:competitor) }
+  let!(:lodging_day) { FactoryBot.create(:lodging_day) }
 
   describe "POST #create" do
     let(:params) do

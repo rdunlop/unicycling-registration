@@ -18,9 +18,9 @@
 #  index_event_choices_on_event_id_and_position  (event_id,position)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event_choice do
     event # FactoryGIrl
     cell_type "boolean"

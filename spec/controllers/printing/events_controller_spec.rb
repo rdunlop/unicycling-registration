@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Printing::EventsController do
   before do
-    FactoryGirl.create(:event_configuration)
-    user = FactoryGirl.create(:user)
+    FactoryBot.create(:event_configuration)
+    user = FactoryBot.create(:user)
     user.add_role :director, event
     sign_in user
   end
-  let(:event) { FactoryGirl.create(:event) }
+  let(:event) { FactoryBot.create(:event) }
 
   describe "GET results" do
     it "renders" do

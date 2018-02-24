@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe ConventionSeriesMember do
-  let(:tenant) { FactoryGirl.create(:tenant) }
-  let(:series) { FactoryGirl.create(:convention_series) }
+  let(:tenant) { FactoryBot.create(:tenant) }
+  let(:series) { FactoryBot.create(:convention_series) }
 
   it "must have a series and tenant" do
     member = described_class.new

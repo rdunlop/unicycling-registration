@@ -37,9 +37,9 @@
 require 'spec_helper'
 
 describe RegistrantsController do
-  let!(:event_configuration) { FactoryGirl.create(:event_configuration, event_sign_up_closed_date: Date.tomorrow) }
+  let!(:event_configuration) { FactoryBot.create(:event_configuration, event_sign_up_closed_date: Date.tomorrow) }
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     sign_in @user
   end
 
@@ -76,10 +76,10 @@ describe RegistrantsController do
 
   describe "GET index" do
     context "with a registrant" do
-      let!(:registrant) { FactoryGirl.create(:competitor, user: @user, first_name: "Robin", last_name: "Dunlop") }
+      let!(:registrant) { FactoryBot.create(:competitor, user: @user, first_name: "Robin", last_name: "Dunlop") }
 
       it "shows all registrants" do
-        FactoryGirl.create(:registrant) # other user's registrant
+        FactoryBot.create(:registrant) # other user's registrant
         get :index, params: { user_id: @user.id }
 
         assert_select "legend", text: "Registrations", count: 1
@@ -105,8 +105,8 @@ describe RegistrantsController do
     describe "as the sender of a registration request" do
       describe "when I have been granted additional_access" do
         before(:each) do
-          @other_reg = FactoryGirl.create(:competitor)
-          FactoryGirl.create(:additional_registrant_access, user: @user, accepted_readonly: true, registrant: @other_reg)
+          @other_reg = FactoryBot.create(:competitor)
+          FactoryBot.create(:additional_registrant_access, user: @user, accepted_readonly: true, registrant: @other_reg)
         end
         it "shows the registrant" do
           get :index, params: { user_id: @user.id }
@@ -119,8 +119,8 @@ describe RegistrantsController do
 
   describe "get all" do
     it "shows all registrants" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
-      other_reg = FactoryGirl.create(:registrant)
+      registrant = FactoryBot.create(:competitor, user: @user)
+      other_reg = FactoryBot.create(:registrant)
       get :all
       assert_select "td", registrant.to_s
       assert_select "td", other_reg.to_s
@@ -129,23 +129,23 @@ describe RegistrantsController do
 
   describe "GET show" do
     it "shows the requested registrant" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
+      registrant = FactoryBot.create(:competitor, user: @user)
       get :show, params: { id: registrant.to_param }
       assert_select "h1[contains(?)]", "#{registrant.last_name}, #{registrant.first_name}"
     end
 
     it "cannot read another user's registrant" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
-      sign_in FactoryGirl.create(:user)
+      registrant = FactoryBot.create(:competitor, user: @user)
+      sign_in FactoryBot.create(:user)
       get :show, params: { id: registrant.to_param }
       expect(response).to redirect_to(root_path)
     end
     describe "as an event planner" do
       before(:each) do
-        sign_in FactoryGirl.create(:event_planner)
+        sign_in FactoryBot.create(:event_planner)
       end
       it "Can read other users registrant" do
-        registrant = FactoryGirl.create(:competitor, user: @user)
+        registrant = FactoryBot.create(:competitor, user: @user)
         get :show, params: { id: registrant.to_param }
 
         assert_select "h1[contains(?)]", "#{registrant.last_name}, #{registrant.first_name}"
@@ -153,10 +153,10 @@ describe RegistrantsController do
     end
 
     context "as a usa-enabled membership system" do
-      let!(:event_configuration) { FactoryGirl.create(:event_configuration, :with_usa) }
+      let!(:event_configuration) { FactoryBot.create(:event_configuration, :with_usa) }
 
       it "can show the page" do
-        registrant = FactoryGirl.create(:competitor, user: @user)
+        registrant = FactoryBot.create(:competitor, user: @user)
         get :show, params: { id: registrant.to_param }
         assert_select "h1[contains(?)]", "#{registrant.last_name}, #{registrant.first_name}"
       end
@@ -168,21 +168,21 @@ describe RegistrantsController do
       sign_in @user
     end
     it "destroys the requested registrant" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
+      registrant = FactoryBot.create(:competitor, user: @user)
       expect do
         delete :destroy, params: { id: registrant.to_param }
       end.to change(Registrant.active, :count).by(-1)
     end
 
     it "sets the registrant as 'deleted'" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
+      registrant = FactoryBot.create(:competitor, user: @user)
       delete :destroy, params: { id: registrant.to_param }
       registrant.reload
       expect(registrant.deleted).to eq(true)
     end
 
     it "redirects to the registrants list" do
-      registrant = FactoryGirl.create(:competitor, user: @user)
+      registrant = FactoryBot.create(:competitor, user: @user)
       delete :destroy, params: { id: registrant.to_param }
       expect(response).to redirect_to(root_path)
     end
@@ -192,7 +192,7 @@ describe RegistrantsController do
         sign_in @user
       end
       it "cannot destroy another user's registrant" do
-        registrant = FactoryGirl.create(:competitor)
+        registrant = FactoryBot.create(:competitor)
         delete :destroy, params: { id: registrant.to_param }
         expect(response).to redirect_to(root_path)
       end
@@ -203,7 +203,7 @@ describe RegistrantsController do
     before do
       sign_in @user
     end
-    let(:registrant) { FactoryGirl.create(:competitor, user: @user) }
+    let(:registrant) { FactoryBot.create(:competitor, user: @user) }
 
     it "renders blank page" do
       put :refresh_usa_status, params: { id: registrant.to_param }

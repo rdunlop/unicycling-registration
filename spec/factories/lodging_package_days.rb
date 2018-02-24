@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :lodging_package_day do
     lodging_package
     lodging_day

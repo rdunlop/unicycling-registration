@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe SampleDataPolicy do
   let(:test_mode) { false }
-  let(:config) { FactoryGirl.create(:event_configuration, test_mode: test_mode) }
+  let(:config) { FactoryBot.create(:event_configuration, test_mode: test_mode) }
   let(:reg_closed?) { false }
   let(:authorized_laptop?) { false }
   let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
@@ -10,7 +10,7 @@ describe SampleDataPolicy do
   subject { described_class }
 
   context "a normal user" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     permissions :create? do
       it { expect(subject).not_to permit(user_context) }
@@ -18,7 +18,7 @@ describe SampleDataPolicy do
   end
 
   context "a super user" do
-    let(:user) { FactoryGirl.create(:super_admin_user) }
+    let(:user) { FactoryBot.create(:super_admin_user) }
 
     context "when test mode is disabled" do
       permissions :create? do

@@ -18,12 +18,12 @@
 #  standard_skill_entries_unique  (standard_skill_score_id,standard_skill_routine_entry_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :standard_skill_score_entry do
     association :standard_skill_score
-    standard_skill_routine_entry # FactoryGirl
+    standard_skill_routine_entry # FactoryBot
     difficulty_devaluation_percent 0
     wave 0
     line 0

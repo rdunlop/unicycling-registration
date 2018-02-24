@@ -20,12 +20,12 @@ require 'spec_helper'
 
 describe LaneAssignmentsController do
   before(:each) do
-    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
-    race_official = FactoryGirl.create(:user)
+    @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
+    race_official = FactoryBot.create(:user)
     race_official.add_role(:race_official, @competition)
     sign_in race_official
-    @reg = FactoryGirl.create(:registrant)
-    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    @reg = FactoryBot.create(:registrant)
+    @competitor = FactoryBot.create(:event_competitor, competition: @competition)
     @competitor.members.first.update_attribute(:registrant_id, @reg.id)
   end
 
@@ -38,11 +38,11 @@ describe LaneAssignmentsController do
       competitor_id: @competitor.id }
   end
 
-  let(:lane_assignment) { FactoryGirl.create(:lane_assignment, competition: @competition) }
+  let(:lane_assignment) { FactoryBot.create(:lane_assignment, competition: @competition) }
 
   describe "GET index" do
     it "shows all lane_assignments" do
-      FactoryGirl.create(:lane_assignment, competition: @competition, heat: 3, lane: 4)
+      FactoryBot.create(:lane_assignment, competition: @competition, heat: 3, lane: 4)
       get :index, params: { competition_id: @competition.id }
 
       assert_select "tr>td.heat", text: 3.to_s, count: 1
@@ -157,14 +157,14 @@ describe LaneAssignmentsController do
 
   describe "DELETE destroy" do
     it "destroys the requested lane_assignment" do
-      lane_assignment = FactoryGirl.create(:lane_assignment, competition: @competition)
+      lane_assignment = FactoryBot.create(:lane_assignment, competition: @competition)
       expect do
         delete :destroy, params: { id: lane_assignment.to_param }
       end.to change(LaneAssignment, :count).by(-1)
     end
 
     it "redirects to the lane_assignments list" do
-      lane_assignment = FactoryGirl.create(:lane_assignment, competition: @competition)
+      lane_assignment = FactoryBot.create(:lane_assignment, competition: @competition)
       delete :destroy, params: { id: lane_assignment.to_param }
       expect(response).to redirect_to(competition_lane_assignments_path(@competition))
     end

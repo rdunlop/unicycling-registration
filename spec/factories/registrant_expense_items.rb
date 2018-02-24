@@ -20,12 +20,12 @@
 #  registrant_expense_items_line_item            (line_item_id,line_item_type)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_expense_item do
-    registrant # FactoryGirl
-    association(:line_item, factory: :expense_item) # FactoryGirl
+    registrant # FactoryBot
+    association(:line_item, factory: :expense_item) # FactoryBot
     system_managed false
   end
 end

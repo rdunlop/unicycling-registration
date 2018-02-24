@@ -23,22 +23,22 @@ require 'spec_helper'
 
 describe SongsController do
   before(:each) do
-    FactoryGirl.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
-    @user = FactoryGirl.create(:user)
-    @reg = FactoryGirl.create(:competitor, user: @user)
+    FactoryBot.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
+    @user = FactoryBot.create(:user)
+    @reg = FactoryBot.create(:competitor, user: @user)
     sign_in @user
   end
 
   # This should return the minimal set of attributes required to create a valid
   # Song. As you add validations to Song, be sure to
   # adjust the attributes here as well.
-  let(:event) { FactoryGirl.create(:event) }
+  let(:event) { FactoryBot.create(:event) }
   let(:song_file) { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'example.mp3'), 'audio/mp3') }
   let(:valid_attributes) { { description: "MyString", event_id: event.id, song_file_name: song_file } }
 
   describe "GET index" do
     it "hsows all songs for reg" do
-      FactoryGirl.create(:song, registrant: @reg, description: "Description")
+      FactoryBot.create(:song, registrant: @reg, description: "Description")
       get :index, params: { registrant_id: @reg.to_param }
 
       assert_select "tr>td", text: "Description".to_s, count: 1
@@ -88,14 +88,14 @@ describe SongsController do
 
   describe "DELETE destroy" do
     it "destroys the requested song" do
-      song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
+      song = FactoryBot.create(:song, registrant: @reg, user: @reg.user)
       expect do
         delete :destroy, params: { id: song.to_param }
       end.to change(Song, :count).by(-1)
     end
 
     it "redirects to the songs list" do
-      song = FactoryGirl.create(:song, registrant: @reg, user: @reg.user)
+      song = FactoryBot.create(:song, registrant: @reg, user: @reg.user)
       delete :destroy, params: { id: song.to_param }
       expect(response).to redirect_to(registrant_songs_path(@reg))
     end

@@ -18,12 +18,12 @@
 #  index_additional_registrant_accesses_user_id        (user_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :additional_registrant_access do
-    user # FactoryGirl
-    registrant # FactoryGirl
+    user # FactoryBot
+    registrant # FactoryBot
     declined false
     accepted_readonly false
   end

@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.1.5'
 
 # Authentication
 gem 'devise'
@@ -107,7 +107,7 @@ group :test do
   gem 'capybara'
   gem 'codeclimate_circle_ci_coverage'
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '4.7.0' # https://github.com/thoughtbot/factory_girl/pull/982
+  gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata

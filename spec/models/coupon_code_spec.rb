@@ -21,12 +21,12 @@
 require 'spec_helper'
 
 describe CouponCode do
-  let(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment) }
-  let(:coup) { FactoryGirl.create(:payment_detail_coupon_code, payment_detail: payment_detail) }
+  let(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment) }
+  let(:coup) { FactoryBot.create(:payment_detail_coupon_code, payment_detail: payment_detail) }
   let(:coupon_code) { coup.coupon_code }
 
   describe "with an unpaid applied coupon code" do
-    let(:payment) { FactoryGirl.create(:payment) }
+    let(:payment) { FactoryBot.create(:payment) }
 
     it "doesn't count the coupon" do
       expect(coupon_code.num_uses).to eq(0)
@@ -34,7 +34,7 @@ describe CouponCode do
   end
 
   describe "with a completed payment" do
-    let(:payment) { FactoryGirl.create(:payment, :completed) }
+    let(:payment) { FactoryBot.create(:payment, :completed) }
 
     it "counts the coupon" do
       expect(coupon_code.num_uses).to eq(1)
@@ -42,9 +42,9 @@ describe CouponCode do
   end
 
   describe "it doesn't allow multiple codes with different cases" do
-    let!(:code1) { FactoryGirl.create(:coupon_code, code: "HELLO") }
+    let!(:code1) { FactoryBot.create(:coupon_code, code: "HELLO") }
     it "doesn't allow downcase version" do
-      code2 = FactoryGirl.build(:coupon_code, code: "hello")
+      code2 = FactoryBot.build(:coupon_code, code: "hello")
       expect(code2).to be_invalid
       expect(code2.errors).to include(:code)
     end

@@ -19,18 +19,18 @@
 require 'spec_helper'
 
 describe Member do
-  let(:member) { FactoryGirl.build(:member) }
+  let(:member) { FactoryBot.build(:member) }
 
   it "must have a competitor and registrant" do
     member = Member.new
 
     expect(member.valid?).to eq(false)
 
-    member.competitor = FactoryGirl.create(:event_competitor)
+    member.competitor = FactoryBot.create(:event_competitor)
 
     expect(member.valid?).to eq(false)
 
-    member.registrant = FactoryGirl.create(:registrant)
+    member.registrant = FactoryBot.create(:registrant)
 
     expect(member.valid?).to eq(true)
   end

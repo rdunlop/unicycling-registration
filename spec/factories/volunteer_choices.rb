@@ -1,8 +1,8 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :volunteer_choice do
-    volunteer_opportunity # FactoryGirl
+    volunteer_opportunity # FactoryBot
     registrant # Factory
   end
 end

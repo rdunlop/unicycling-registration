@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :expense_group_option do
-    expense_group # FactoryGirl
+    expense_group # FactoryBot
     registrant_type "competitor"
     option ExpenseGroupOption::ONE_IN_GROUP_REQUIRED
   end

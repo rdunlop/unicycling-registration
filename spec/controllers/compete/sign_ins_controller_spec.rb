@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Compete::SignInsController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    sign_in FactoryBot.create(:super_admin_user)
   end
 
-  let(:competition) { FactoryGirl.create(:timed_competition, start_data_type: "Mass Start") }
+  let(:competition) { FactoryBot.create(:timed_competition, start_data_type: "Mass Start") }
 
   let(:valid_attributes) { { "name" => "MyString" } }
 
@@ -30,7 +30,7 @@ describe Compete::SignInsController do
 
   describe "PUT update" do
     before { request.env["HTTP_REFERER"] = competition_path(competition) }
-    let!(:competitor1) { FactoryGirl.create(:event_competitor, competition: competition, bib_number: 101) }
+    let!(:competitor1) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 101) }
 
     it "updates the sign_ins" do
       params = {

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CompetitionSetup::AgeGroupTypesController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
+    sign_in FactoryBot.create(:super_admin_user)
   end
 
   def valid_attributes
@@ -13,7 +13,7 @@ describe CompetitionSetup::AgeGroupTypesController do
 
   describe "GET 'index'" do
     it "returns http success" do
-      agt = FactoryGirl.create(:age_group_type)
+      agt = FactoryBot.create(:age_group_type)
       get :index
       expect(response).to be_success
 
@@ -25,8 +25,8 @@ describe CompetitionSetup::AgeGroupTypesController do
 
   describe "GET show" do
     it "shows all age_group_entries" do
-      age_group_type = FactoryGirl.create(:age_group_type)
-      age = FactoryGirl.create(:age_group_entry, age_group_type: age_group_type, short_description: "hi there")
+      age_group_type = FactoryBot.create(:age_group_type)
+      age = FactoryBot.create(:age_group_entry, age_group_type: age_group_type, short_description: "hi there")
       get :show, params: { id: age_group_type.id }
 
       assert_select "td", age.short_description
@@ -44,7 +44,7 @@ describe CompetitionSetup::AgeGroupTypesController do
 
   describe "DELETE 'destroy'" do
     it "returns http success" do
-      agt = FactoryGirl.create(:age_group_type)
+      agt = FactoryBot.create(:age_group_type)
       expect do
         delete :destroy, params: { id: agt.id }
       end.to change(AgeGroupType, :count).by(-1)
@@ -54,7 +54,7 @@ describe CompetitionSetup::AgeGroupTypesController do
 
   describe "PUT 'update'" do
     it "returns http success" do
-      agt = FactoryGirl.create(:age_group_type)
+      agt = FactoryBot.create(:age_group_type)
       put :update, params: { id: agt.id, age_group_type: valid_attributes }
       expect(response).to redirect_to(age_group_types_path)
     end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CompetitionPresenter do
-  let(:competition) { FactoryGirl.create(:competition) }
+  let(:competition) { FactoryBot.create(:competition) }
   let(:presenter) { described_class.new(competition) }
 
   describe "#status" do
@@ -12,7 +12,7 @@ describe CompetitionPresenter do
       end
     end
     describe "with competitors" do
-      before { FactoryGirl.create(:event_competitor, competition: competition) }
+      before { FactoryBot.create(:event_competitor, competition: competition) }
 
       it "has status and status_code" do
         expect(presenter.status_code).to eq("no_results")

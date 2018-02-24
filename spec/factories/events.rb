@@ -22,11 +22,11 @@
 #  index_events_on_accepts_wheel_size_override  (accepts_wheel_size_override)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :event do
-    category # FactoryGirl
+    category # FactoryBot
     sequence(:name) { |n| "Teh event number #{n}" }
     visible true
 

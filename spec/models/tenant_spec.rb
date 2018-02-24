@@ -17,11 +17,11 @@
 require 'spec_helper'
 
 describe Tenant do
-  let!(:tenant) { FactoryGirl.create(:tenant, subdomain: "robin") }
+  let!(:tenant) { FactoryBot.create(:tenant, subdomain: "robin") }
 
   context "with tenant aliases" do
-    let!(:alias1) { FactoryGirl.create(:tenant_alias, website_alias: "reg.robinsite.com", tenant: tenant) }
-    let!(:alias2) { FactoryGirl.create(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant) }
+    let!(:alias1) { FactoryBot.create(:tenant_alias, website_alias: "reg.robinsite.com", tenant: tenant) }
+    let!(:alias2) { FactoryBot.create(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant) }
 
     it "matches the alias" do
       expect(described_class.find_tenant_by_hostname("reg.robinsite.com")).to eq(tenant)
@@ -32,7 +32,7 @@ describe Tenant do
     end
 
     context "with a primary_domain alias" do
-      let!(:alias3) { FactoryGirl.create(:tenant_alias, website_alias: "my.website.com", tenant: tenant, primary_domain: true) }
+      let!(:alias3) { FactoryBot.create(:tenant_alias, website_alias: "my.website.com", tenant: tenant, primary_domain: true) }
 
       it "uses the default_host_domain and subdomain for default mailer" do
         expect(tenant.base_url).to eq("https://my.website.com")
@@ -46,19 +46,19 @@ describe Tenant do
 
   context "ensure valid subdomain" do
     it "trims trailing spaces" do
-      tenant = FactoryGirl.build(:tenant, subdomain: "testing ")
+      tenant = FactoryBot.build(:tenant, subdomain: "testing ")
       tenant.save
       expect(tenant.subdomain).to eq("testing")
     end
 
     it "trims leading spaces" do
-      tenant = FactoryGirl.build(:tenant, subdomain: " testing")
+      tenant = FactoryBot.build(:tenant, subdomain: " testing")
       tenant.save
       expect(tenant.subdomain).to eq("testing")
     end
 
     it "doesn't allow subdomain with spaces" do
-      tenant = FactoryGirl.build(:tenant, subdomain: "not allowed")
+      tenant = FactoryBot.build(:tenant, subdomain: "not allowed")
       expect(tenant).not_to be_valid
     end
   end

@@ -20,8 +20,8 @@ require 'spec_helper'
 
 describe DistanceAttempt do
   before(:each) do
-    @comp = FactoryGirl.create(:competitor)
-    @judge = FactoryGirl.create(:judge)
+    @comp = FactoryBot.create(:competitor)
+    @judge = FactoryBot.create(:judge)
   end
   describe "with a new distance attempt" do
     before(:each) do

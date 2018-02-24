@@ -31,9 +31,9 @@ require 'spec_helper'
 
 describe TimeResultsController do
   before(:each) do
-    sign_in FactoryGirl.create(:super_admin_user)
-    @competition = FactoryGirl.create(:competition)
-    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    sign_in FactoryBot.create(:super_admin_user)
+    @competition = FactoryBot.create(:competition)
+    @competitor = FactoryBot.create(:event_competitor, competition: @competition)
     @competition = @competitor.competition
   end
 
@@ -52,7 +52,7 @@ describe TimeResultsController do
 
   describe "as a normal user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -64,7 +64,7 @@ describe TimeResultsController do
 
   describe "GET index" do
     it "shows all time_results" do
-      time_result = FactoryGirl.create(:time_result, competitor: @competitor)
+      time_result = FactoryBot.create(:time_result, competitor: @competitor)
       get :index, params: { competition_id: @competition.id }
 
       assert_select "h1", "Listing Time Results for #{@competition}"
@@ -80,7 +80,7 @@ describe TimeResultsController do
 
   describe "GET edit" do
     it "shows the requested time_result form" do
-      time_result = FactoryGirl.create(:time_result)
+      time_result = FactoryBot.create(:time_result)
       get :edit, params: { id: time_result.id }
 
       assert_select "h1", "Editing Time Result"
@@ -122,8 +122,8 @@ describe TimeResultsController do
   describe "PUT update" do
     describe "with valid params" do
       it "redirects to the event time results" do
-        other_competitor = FactoryGirl.create(:event_competitor, competition: @competition)
-        time_result = FactoryGirl.create(:time_result, competitor: other_competitor)
+        other_competitor = FactoryBot.create(:event_competitor, competition: @competition)
+        time_result = FactoryBot.create(:time_result, competitor: other_competitor)
         put :update, params: { id: time_result.to_param, time_result: valid_attributes }
         expect(response).to redirect_to(competition_time_results_path(@competition))
       end
@@ -131,7 +131,7 @@ describe TimeResultsController do
 
     describe "with invalid params" do
       it "does not update the time_result" do
-        time_result = FactoryGirl.create(:time_result)
+        time_result = FactoryBot.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         expect do
@@ -140,7 +140,7 @@ describe TimeResultsController do
       end
 
       it "re-renders the 'edit' template" do
-        time_result = FactoryGirl.create(:time_result)
+        time_result = FactoryBot.create(:time_result)
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TimeResult).to receive(:save).and_return(false)
         put :update, params: { id: time_result.to_param, time_result: { status: "DQ" } }
@@ -151,14 +151,14 @@ describe TimeResultsController do
 
   describe "DELETE destroy" do
     it "destroys the requested time_result" do
-      time_result = FactoryGirl.create(:time_result)
+      time_result = FactoryBot.create(:time_result)
       expect do
         delete :destroy, params: { id: time_result.to_param }
       end.to change(TimeResult, :count).by(-1)
     end
 
     it "redirects to the event's time_results list" do
-      time_result = FactoryGirl.create(:time_result)
+      time_result = FactoryBot.create(:time_result)
       competition = time_result.competition
       delete :destroy, params: { id: time_result.to_param }
       expect(response).to redirect_to(competition_time_results_path(competition))

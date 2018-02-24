@@ -33,11 +33,11 @@ require 'spec_helper'
 
 describe ImportResultsController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
-    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
+    @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
   end
-  let(:import_result) { FactoryGirl.create(:import_result, user: @admin_user, competition: @competition) }
+  let(:import_result) { FactoryBot.create(:import_result, user: @admin_user, competition: @competition) }
 
   # This should return the minimal set of attributes required to create a valid
   # ImportResult. As you add validations to ImportResult, be sure to
@@ -141,7 +141,7 @@ describe ImportResultsController do
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(@admin_user, @competition)
     end
     it "destroys the requested import_result" do
-      im_result = FactoryGirl.create(:import_result, user: @admin_user, competition: @competition)
+      im_result = FactoryBot.create(:import_result, user: @admin_user, competition: @competition)
       expect do
         delete :destroy, params: { id: im_result.to_param }
       end.to change(ImportResult, :count).by(-1)
@@ -155,10 +155,10 @@ describe ImportResultsController do
 
   describe "POST approve" do
     it "redirects to the competitions' results page" do
-      competition = FactoryGirl.create(:timed_competition)
-      reg = FactoryGirl.create(:competitor)
-      @config = FactoryGirl.create(:event_configuration, :with_usa)
-      import = FactoryGirl.create(:import_result, competition: competition, bib_number: reg.bib_number)
+      competition = FactoryBot.create(:timed_competition)
+      reg = FactoryBot.create(:competitor)
+      @config = FactoryBot.create(:event_configuration, :with_usa)
+      import = FactoryBot.create(:import_result, competition: competition, bib_number: reg.bib_number)
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       post :approve, params: { user_id: import.user, competition_id: competition.id }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
@@ -167,8 +167,8 @@ describe ImportResultsController do
 
   describe "DELETE destroy_all" do
     it "redirects to the import competition page" do
-      competition = FactoryGirl.create(:timed_competition)
-      import = FactoryGirl.create(:import_result, competition: competition)
+      competition = FactoryBot.create(:timed_competition)
+      import = FactoryBot.create(:import_result, competition: competition)
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       delete :destroy_all, params: { user_id: import.user, competition_id: competition.id }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))

@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe AgeGroupEntry do
   before(:each) do
-    @age_group_entry = FactoryGirl.build_stubbed(:age_group_entry)
+    @age_group_entry = FactoryBot.build_stubbed(:age_group_entry)
   end
 
   it { is_expected.to validate_uniqueness_of(:short_description).scoped_to(:age_group_type_id) }
@@ -44,12 +44,12 @@ describe AgeGroupEntry do
   end
 
   it "can have the same short_description, as long as it has a different age_group_type" do
-    age2 = FactoryGirl.build(:age_group_entry, short_description: @age_group_entry.short_description)
+    age2 = FactoryBot.build(:age_group_entry, short_description: @age_group_entry.short_description)
     expect(age2.valid?).to eq(true)
   end
 
   it "has a wheel_size" do
-    @age_group_entry.wheel_size = FactoryGirl.build_stubbed(:wheel_size)
+    @age_group_entry.wheel_size = FactoryBot.build_stubbed(:wheel_size)
   end
 
   it "requires gender be valid" do
@@ -70,9 +70,9 @@ describe AgeGroupEntry do
   end
 
   describe "#smallest_neighbour" do
-    let!(:age_group_type) { FactoryGirl.create(:age_group_type) }
-    let!(:age_group_entry_1) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
-    let!(:age_group_entry_2) { FactoryGirl.create(:age_group_entry, age_group_type: age_group_type) }
+    let!(:age_group_type) { FactoryBot.create(:age_group_type) }
+    let!(:age_group_entry_1) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
+    let!(:age_group_entry_2) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
     let(:registrant_data) do
       {
         gender: 'male',

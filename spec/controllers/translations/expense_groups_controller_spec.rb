@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Translations::ExpenseGroupsController do
-  let!(:expense_group) { FactoryGirl.create(:expense_group) }
-  let(:user) { FactoryGirl.create(:convention_admin_user) }
+  let!(:expense_group) { FactoryBot.create(:expense_group) }
+  let(:user) { FactoryBot.create(:convention_admin_user) }
 
   before { sign_in user }
   after { I18n.locale = :en }

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe SampleData::CompetitionsController do
   before(:each) do
-    FactoryGirl.create(:event)
-    @user = FactoryGirl.create(:super_admin_user)
+    FactoryBot.create(:event)
+    @user = FactoryBot.create(:super_admin_user)
     EventConfiguration.singleton.update(test_mode: true)
     sign_in @user
   end

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :registration_cost_entry do
     association :expense_item, cost: 100
     association :registration_cost

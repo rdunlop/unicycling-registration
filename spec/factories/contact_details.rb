@@ -37,9 +37,9 @@
 #  index_contact_details_registrant_id     (registrant_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :contact_detail do
     address "1234 fake street"
     city "madison"

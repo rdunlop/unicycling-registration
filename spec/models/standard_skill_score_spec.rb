@@ -17,20 +17,20 @@
 require 'spec_helper'
 
 describe StandardSkillScore do
-  let(:score) { FactoryGirl.create(:standard_skill_score) }
+  let(:score) { FactoryBot.create(:standard_skill_score) }
   let(:difficulty_percent) { 50 }
-  let(:standard_skill_entry) { FactoryGirl.create(:standard_skill_entry, points: 5.2) }
-  let(:standard_skill_routine_entry) { FactoryGirl.create(:standard_skill_routine_entry, standard_skill_entry: standard_skill_entry) }
+  let(:standard_skill_entry) { FactoryBot.create(:standard_skill_entry, points: 5.2) }
+  let(:standard_skill_routine_entry) { FactoryBot.create(:standard_skill_routine_entry, standard_skill_entry: standard_skill_entry) }
   let!(:standard_skill_score_entry) do
-    FactoryGirl.create(:standard_skill_score_entry,
-                       standard_skill_score: score,
-                       standard_skill_routine_entry: standard_skill_routine_entry,
-                       difficulty_devaluation_percent: difficulty_percent)
+    FactoryBot.create(:standard_skill_score_entry,
+                      standard_skill_score: score,
+                      standard_skill_routine_entry: standard_skill_routine_entry,
+                      difficulty_devaluation_percent: difficulty_percent)
   end
 
   it "should not be able to have the same score/judge created twice" do
-    score2 = FactoryGirl.build(:standard_skill_score, judge: score.judge,
-                                                      competitor: score.competitor)
+    score2 = FactoryBot.build(:standard_skill_score, judge: score.judge,
+                                                     competitor: score.competitor)
 
     expect(score2).to be_invalid
   end
@@ -60,20 +60,20 @@ describe StandardSkillScore do
 
   describe "with multiple score_entries" do
     let!(:standard_skill_score_entry_2) do
-      FactoryGirl.create(:standard_skill_score_entry,
-                         standard_skill_score: score,
-                         wave: 1,
-                         line: 2,
-                         cross: 3,
-                         circle: 4)
+      FactoryBot.create(:standard_skill_score_entry,
+                        standard_skill_score: score,
+                        wave: 1,
+                        line: 2,
+                        cross: 3,
+                        circle: 4)
     end
     let!(:standard_skill_score_entry_3) do
-      FactoryGirl.create(:standard_skill_score_entry,
-                         standard_skill_score: score,
-                         wave: 1,
-                         line: 2,
-                         cross: 3,
-                         circle: 4)
+      FactoryBot.create(:standard_skill_score_entry,
+                        standard_skill_score: score,
+                        wave: 1,
+                        line: 2,
+                        cross: 3,
+                        circle: 4)
     end
 
     describe "#wave_count" do

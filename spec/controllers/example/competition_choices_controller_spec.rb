@@ -56,8 +56,8 @@ describe Example::CompetitionChoicesController do
 
   context "as admin" do
     before do
-      @ev = FactoryGirl.create(:event)
-      sign_in FactoryGirl.create(:competition_admin_user)
+      @ev = FactoryBot.create(:event)
+      sign_in FactoryBot.create(:competition_admin_user)
     end
 
     actions.each do |action|

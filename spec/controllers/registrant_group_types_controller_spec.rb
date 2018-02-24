@@ -15,13 +15,13 @@ require 'spec_helper'
 
 describe RegistrantGroupTypesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
 
   describe "GET index" do
     it "shows all registrant_group_types" do
-      registrant_group_type = FactoryGirl.create(:registrant_group_type)
+      registrant_group_type = FactoryBot.create(:registrant_group_type)
       get :index
       assert_select "li", text: registrant_group_type.source_element.to_s, count: 1
     end

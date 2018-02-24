@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Importers::SwissResultImporter do
-  let(:admin_user) { FactoryGirl.create(:super_admin_user) }
-  let(:competition) { FactoryGirl.create(:timed_competition, uses_lane_assignments: true) }
+  let(:admin_user) { FactoryBot.create(:super_admin_user) }
+  let(:competition) { FactoryBot.create(:timed_competition, uses_lane_assignments: true) }
   let(:importer) { described_class.new(competition, admin_user) }
 
   context "with an import file with 1 DQ row" do
@@ -23,7 +23,7 @@ describe Importers::SwissResultImporter do
 
     describe "when the imported data is a DQ" do
       context "when the competitor is withdrawn" do
-        let(:competitor) { FactoryGirl.create(:event_competitor, status: "withdrawn", competition: competition) }
+        let(:competitor) { FactoryBot.create(:event_competitor, status: "withdrawn", competition: competition) }
         before do
           reg = competitor.members.first.registrant
           reg.update(bib_number: 101)
@@ -53,7 +53,7 @@ describe Importers::SwissResultImporter do
       end
 
       context "when the competitor exists" do
-        let(:competitor) { FactoryGirl.create(:event_competitor, competition: competition) }
+        let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
         before do
           reg = competitor.members.first.registrant
           reg.update(bib_number: 101)
@@ -88,7 +88,7 @@ describe Importers::SwissResultImporter do
 
     context "when importing heats" do
       it "creates heat result and time result" do
-        @competitor = FactoryGirl.create(:event_competitor, competition: competition)
+        @competitor = FactoryBot.create(:event_competitor, competition: competition)
         @reg = @competitor.members.first.registrant
         @reg.update(bib_number: 101)
 
@@ -112,7 +112,7 @@ describe Importers::SwissResultImporter do
 
     context "When importing without heats" do
       it "does not create Heat Lane result" do
-        @competitor = FactoryGirl.create(:event_competitor, competition: competition)
+        @competitor = FactoryBot.create(:event_competitor, competition: competition)
         @reg = @competitor.members.first.registrant
         @reg.update(bib_number: 101)
         competition.reload
@@ -128,7 +128,7 @@ describe Importers::SwissResultImporter do
     let(:processor) { double(valid_file?: false, errors: ["File not found"]) }
 
     it "returns an error message" do
-      @reg = FactoryGirl.create(:registrant, bib_number: 101)
+      @reg = FactoryBot.create(:registrant, bib_number: 101)
 
       expect do
         expect(importer.process(false, processor)).to be_falsey

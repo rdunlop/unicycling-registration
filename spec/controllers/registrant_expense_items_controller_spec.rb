@@ -24,9 +24,9 @@ require 'spec_helper'
 
 describe RegistrantExpenseItemsController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
-    @reg = FactoryGirl.create(:registrant, user: @user)
-    @exp = FactoryGirl.create(:expense_item)
+    @user = FactoryBot.create(:user)
+    @reg = FactoryBot.create(:registrant, user: @user)
+    @exp = FactoryBot.create(:expense_item)
     sign_in @user
   end
 
@@ -77,14 +77,14 @@ describe RegistrantExpenseItemsController do
     before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
 
     it "destroys the requested registrant_expense_item" do
-      registrant_expense_item = FactoryGirl.create(:registrant_expense_item, registrant: @reg)
+      registrant_expense_item = FactoryBot.create(:registrant_expense_item, registrant: @reg)
       expect do
         delete :destroy, params: { id: registrant_expense_item.to_param, registrant_id: @reg.to_param }
       end.to change(RegistrantExpenseItem, :count).by(-1)
     end
 
     it "redirects to the registrant_items list" do
-      registrant_expense_item = FactoryGirl.create(:registrant_expense_item, registrant: @reg)
+      registrant_expense_item = FactoryBot.create(:registrant_expense_item, registrant: @reg)
       reg = registrant_expense_item.registrant
       delete :destroy, params: { id: registrant_expense_item.to_param, registrant_id: @reg.to_param }
       expect(response).to redirect_to(registrant_build_path(reg.id, :expenses))

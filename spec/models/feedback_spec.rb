@@ -19,7 +19,7 @@ describe Feedback do
 
   it "is not valid with an invalid email" do
     feedback.message = "hi"
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     feedback.user = user
     expect(feedback).to be_valid
     feedback.entered_email = "this is what is wrong"
@@ -31,12 +31,12 @@ describe Feedback do
   end
 
   it "can overwrite the username" do
-    feedback.user = FactoryGirl.create(:user)
+    feedback.user = FactoryBot.create(:user)
     expect(feedback.username).to eq(feedback.user.email)
   end
 
   it "doensn't need to specify e-mail when signed in" do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     feedback.user = user
     feedback.message = "This is a great site"
     expect(feedback).to be_valid
@@ -47,13 +47,13 @@ describe Feedback do
   end
 
   it "can overwrite registrants" do
-    registrant = FactoryGirl.create(:registrant)
+    registrant = FactoryBot.create(:registrant)
     feedback.user = registrant.user
     expect(feedback.user_first_registrant_name).to eq(registrant.name)
   end
 
   it "can be updated by a user object" do
-    reg = FactoryGirl.create(:competitor, first_name: "Bob", last_name: "Smith")
+    reg = FactoryBot.create(:competitor, first_name: "Bob", last_name: "Smith")
     feedback.user = reg.user
     expect(feedback.username).to eq(reg.user.email)
     expect(feedback.user_first_registrant_name).to eq("Bob Smith")
@@ -66,13 +66,13 @@ describe Feedback do
 
   it "returns the username if the email is not set for replyto" do
     feedback.entered_email = ""
-    user = FactoryGirl.create(:user, email: "bob@dunlopweb.com")
+    user = FactoryBot.create(:user, email: "bob@dunlopweb.com")
     feedback.user = user
     expect(feedback.reply_to_email).to eq("bob@dunlopweb.com")
   end
 
   context "with a saved feedback" do
-    let(:feedback) { FactoryGirl.create(:feedback) }
+    let(:feedback) { FactoryBot.create(:feedback) }
 
     context "with the resolution set" do
       before { feedback.resolution = "something" }
@@ -82,7 +82,7 @@ describe Feedback do
       end
 
       context "having set the resolved_by user" do
-        before { feedback.resolved_by = FactoryGirl.create(:user) }
+        before { feedback.resolved_by = FactoryBot.create(:user) }
 
         it "can resolve" do
           expect(feedback.resolve).to be_truthy
@@ -91,7 +91,7 @@ describe Feedback do
     end
 
     it "cannot resolve without the resolution" do
-      feedback.resolved_by = FactoryGirl.create(:user)
+      feedback.resolved_by = FactoryBot.create(:user)
       expect(feedback.resolve).to be_falsey
     end
   end

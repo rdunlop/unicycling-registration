@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :convention_series_member do
-    convention_series # FactoryGirl
-    tenant # FactoryGirl
+    convention_series # FactoryBot
+    tenant # FactoryBot
   end
 end

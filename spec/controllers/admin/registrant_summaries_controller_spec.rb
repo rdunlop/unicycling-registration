@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Admin::RegistrantSummariesController do
   before(:each) do
-    @admin_user = FactoryGirl.create(:super_admin_user)
+    @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
 
   context "with some registrants" do
     before do
-      FactoryGirl.create_list(:registrant, 3)
+      FactoryBot.create_list(:registrant, 3)
     end
 
     describe "GET show_all" do

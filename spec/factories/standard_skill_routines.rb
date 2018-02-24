@@ -12,10 +12,10 @@
 #  index_standard_skill_routines_on_registrant_id  (registrant_id) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :standard_skill_routine do
-    registrant # FactoryGirl
+    registrant # FactoryBot
   end
 end

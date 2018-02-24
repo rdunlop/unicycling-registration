@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ConventionSetup::CategoriesController do
   before(:each) do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
 
@@ -17,7 +17,7 @@ describe ConventionSetup::CategoriesController do
 
   describe "as a normal user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       sign_in @user
     end
 
@@ -119,8 +119,8 @@ describe ConventionSetup::CategoriesController do
   end
 
   describe "PUT update_row_order" do
-    let!(:category_1) { FactoryGirl.create(:category) }
-    let!(:category_2) { FactoryGirl.create(:category) }
+    let!(:category_1) { FactoryBot.create(:category) }
+    let!(:category_2) { FactoryBot.create(:category) }
 
     it "updates the order" do
       put :update_row_order, params: { id: category_1.to_param, row_order_position: 1 }

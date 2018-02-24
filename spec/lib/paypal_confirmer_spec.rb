@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PaypalConfirmer do
-  let!(:config) { FactoryGirl.create(:event_configuration) }
+  let!(:config) { FactoryBot.create(:event_configuration) }
 
   it "completed message is marked as complete" do
     params = {

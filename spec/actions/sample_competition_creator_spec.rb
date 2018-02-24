@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SampleCompetitionCreator do
   before do
     # need at least 1 event to create the competitions against
-    FactoryGirl.create(:event)
+    FactoryBot.create(:event)
   end
 
   Competition.scoring_classes.each do |scoring_class|

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ConventionSetup::ExpenseGroupsController do
   before(:each) do
-    @admin = FactoryGirl.create(:super_admin_user)
+    @admin = FactoryBot.create(:super_admin_user)
     sign_in @admin
   end
 
@@ -112,8 +112,8 @@ describe ConventionSetup::ExpenseGroupsController do
   end
 
   describe "PUT update_row_order" do
-    let!(:expense_group_1) { FactoryGirl.create(:expense_group) }
-    let!(:expense_group_2) { FactoryGirl.create(:expense_group) }
+    let!(:expense_group_1) { FactoryBot.create(:expense_group) }
+    let!(:expense_group_2) { FactoryBot.create(:expense_group) }
 
     it "updates the order" do
       put :update_row_order, params: { id: expense_group_1.to_param, row_order_position: 1 }

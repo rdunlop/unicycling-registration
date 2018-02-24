@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe PaymentMailer do
   before(:each) do
-    @ec = FactoryGirl.create(:event_configuration, long_name: "NAUCC 2140")
+    @ec = FactoryBot.create(:event_configuration, long_name: "NAUCC 2140")
   end
   describe "ipn_received" do
     let(:mail) { PaymentMailer.ipn_received("something") }
@@ -20,13 +20,13 @@ describe PaymentMailer do
   end
 
   describe "coupon_used" do
-    let(:payment) { FactoryGirl.create(:payment, completed: true) }
-    let!(:payment_detail) { FactoryGirl.create(:payment_detail, amount: 10, payment: payment) }
-    let!(:coupon_code) { FactoryGirl.create(:coupon_code, inform_emails: "a@b.c") }
+    let(:payment) { FactoryBot.create(:payment, completed: true) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, amount: 10, payment: payment) }
+    let!(:coupon_code) { FactoryBot.create(:coupon_code, inform_emails: "a@b.c") }
     let!(:payment_detail_coupon_code) do
-      FactoryGirl.create(:payment_detail_coupon_code,
-                         payment_detail: payment_detail,
-                         coupon_code: coupon_code)
+      FactoryBot.create(:payment_detail_coupon_code,
+                        payment_detail: payment_detail,
+                        coupon_code: coupon_code)
     end
 
     it "sends to inform_emails" do
@@ -36,8 +36,8 @@ describe PaymentMailer do
   end
 
   describe "payment_completed" do
-    let(:payment) { FactoryGirl.create(:payment, completed: true) }
-    let!(:payment_detail) { FactoryGirl.create(:payment_detail, amount: 10, payment: payment) }
+    let(:payment) { FactoryBot.create(:payment, completed: true) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, amount: 10, payment: payment) }
     before(:each) do
       payment.reload
       Rails.application.secrets.payment_notice_email = "robin+p@dunlopweb.com"

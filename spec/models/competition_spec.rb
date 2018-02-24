@@ -41,10 +41,10 @@ require 'spec_helper'
 
 describe Competition do
   before(:each) do
-    @ev = FactoryGirl.create(:event)
-    @ec = FactoryGirl.create(:competition, event: @ev)
+    @ev = FactoryBot.create(:event)
+    @ec = FactoryBot.create(:competition, event: @ev)
   end
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(@ec.valid?).to eq(true)
   end
 
@@ -88,14 +88,14 @@ describe Competition do
     end
     it "can be High/Long" do
       @ec.scoring_class = "High/Long"
-      @ec.age_group_type = FactoryGirl.build_stubbed(:age_group_type)
+      @ec.age_group_type = FactoryBot.build_stubbed(:age_group_type)
       expect(@ec.valid?).to eq(true)
     end
 
     it "can be overall Champion" do
       @ec.scoring_class = "Overall Champion"
       expect(@ec).to be_invalid
-      @ec.combined_competition = FactoryGirl.create(:combined_competition)
+      @ec.combined_competition = FactoryBot.create(:combined_competition)
       expect(@ec).to be_valid
     end
   end
@@ -107,7 +107,7 @@ describe Competition do
 
   describe "with a user" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
     end
     it "says there are no judges" do
       expect(@ec.has_judge(@user)).to eq(false)
@@ -116,7 +116,7 @@ describe Competition do
 
     describe "as a judge" do
       before(:each) do
-        @judge = FactoryGirl.create(:judge, competition: @ec, user: @user)
+        @judge = FactoryBot.create(:judge, competition: @ec, user: @user)
       end
 
       it "has judge" do
@@ -140,9 +140,9 @@ describe Competition do
   end
 
   it "can create a competitor from registrants" do
-    regs = [FactoryGirl.create(:competitor),
-            FactoryGirl.create(:competitor),
-            FactoryGirl.create(:competitor)]
+    regs = [FactoryBot.create(:competitor),
+            FactoryBot.create(:competitor),
+            FactoryBot.create(:competitor)]
     @ec.create_competitor_from_registrants(regs, "Robin's Team")
     comp = Competitor.last
     expect(comp.members.count).to eq(3)

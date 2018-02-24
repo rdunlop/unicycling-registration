@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Admin::ManualPaymentsController do
   before(:each) do
-    @user = FactoryGirl.create(:payment_admin)
+    @user = FactoryBot.create(:payment_admin)
     sign_in @user
   end
-  let!(:payment) { FactoryGirl.create(:payment, completed: true) }
-  let!(:payment_detail) { FactoryGirl.create(:payment_detail, payment: payment, amount: 5.22) }
-  let(:registrant) { FactoryGirl.create(:registrant) }
+  let!(:payment) { FactoryBot.create(:payment, completed: true) }
+  let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
+  let(:registrant) { FactoryBot.create(:registrant) }
 
   describe "GET new" do
     it "renders" do
@@ -33,7 +33,7 @@ describe Admin::ManualPaymentsController do
   end
 
   describe "POST payment create" do
-    let(:rei) { FactoryGirl.create(:registrant_expense_item) }
+    let(:rei) { FactoryBot.create(:registrant_expense_item) }
 
     it "can create a payment with refund elements" do
       expect do

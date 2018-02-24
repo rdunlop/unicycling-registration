@@ -25,7 +25,7 @@ require 'spec_helper'
 
 describe PaymentDetail do
   before(:each) do
-    @pd = FactoryGirl.create(:payment_detail, amount: 90)
+    @pd = FactoryBot.create(:payment_detail, amount: 90)
   end
 
   it "can be cerated by factory" do
@@ -58,7 +58,7 @@ describe PaymentDetail do
   it "has additional description if it is refunded" do
     expect(@pd.refunded?).to eq(false)
     expect(@pd.to_s).to eq(@pd.line_item.to_s)
-    @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
+    @ref = FactoryBot.create(:refund_detail, payment_detail: @pd)
     @pd.reload
     expect(@pd.refunded?).to eq(true)
     expect(@pd.to_s).to eq("#{@pd.line_item} (Refunded)")
@@ -66,7 +66,7 @@ describe PaymentDetail do
 
   it "indicates that it is a refund if it has an associated refund_detail" do
     expect(@pd.refunded?).to eq(false)
-    @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
+    @ref = FactoryBot.create(:refund_detail, payment_detail: @pd)
     @pd.reload
     expect(@pd.refunded?).to eq(true)
     expect(@ref.percentage).to eq(100)
@@ -75,7 +75,7 @@ describe PaymentDetail do
 
   it "it marks the cost as partial if the refund is not 100%" do
     expect(@pd.refunded?).to eq(false)
-    @refund_detail = FactoryGirl.create(:refund_detail, payment_detail: @pd)
+    @refund_detail = FactoryBot.create(:refund_detail, payment_detail: @pd)
     @refund = @refund_detail.refund
     @refund.percentage = 50
     @refund.save!
@@ -105,17 +105,17 @@ describe PaymentDetail do
     end
 
     it "doesn't list refunded payments" do
-      @ref = FactoryGirl.create(:refund_detail, payment_detail: @pd)
+      @ref = FactoryBot.create(:refund_detail, payment_detail: @pd)
       expect(PaymentDetail.not_refunded).to eq([])
       expect(PaymentDetail.refunded).to eq([@pd])
     end
   end
 
   describe "with a coupon code" do
-    let(:coupon_code) { FactoryGirl.create(:coupon_code, price: 1.00) }
+    let(:coupon_code) { FactoryBot.create(:coupon_code, price: 1.00) }
 
     it "discounts the payment_detail" do
-      FactoryGirl.create(:payment_detail_coupon_code, payment_detail: @pd, coupon_code: coupon_code)
+      FactoryBot.create(:payment_detail_coupon_code, payment_detail: @pd, coupon_code: coupon_code)
       @pd.recalculate!
       expect(@pd.amount).to eq(1.to_money)
     end

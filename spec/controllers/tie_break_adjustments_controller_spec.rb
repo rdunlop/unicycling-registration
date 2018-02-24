@@ -21,19 +21,19 @@ require 'spec_helper'
 
 describe TieBreakAdjustmentsController do
   before(:each) do
-    @user = FactoryGirl.create(:data_entry_volunteer_user)
+    @user = FactoryBot.create(:data_entry_volunteer_user)
 
-    @judge = FactoryGirl.create(:judge, user_id: @user.id)
-    @jt = FactoryGirl.create(:judge_type)
+    @judge = FactoryBot.create(:judge, user_id: @user.id)
+    @jt = FactoryBot.create(:judge_type)
 
-    @competitor = FactoryGirl.create(:event_competitor, competition: @judge.competition)
+    @competitor = FactoryBot.create(:event_competitor, competition: @judge.competition)
 
     sign_in @user
   end
 
   describe "GET index" do
     it "shows all tie_break_adjustments" do
-      tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, competitor: @competitor, judge: @judge)
+      tie_break_adjustment = FactoryBot.create(:tie_break_adjustment, competitor: @competitor, judge: @judge)
       get :index, params: { judge_id: @judge.id }
 
       assert_select "h1", "#{@judge.competition} - Tie Break Adjustments"
@@ -72,14 +72,14 @@ describe TieBreakAdjustmentsController do
 
   describe "DELETE destroy" do
     it "destroys the requested tie_break_adjustment" do
-      tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, judge: @judge)
+      tie_break_adjustment = FactoryBot.create(:tie_break_adjustment, judge: @judge)
       expect do
         delete :destroy, params: { id: tie_break_adjustment.to_param }
       end.to change(TieBreakAdjustment, :count).by(-1)
     end
 
     it "redirects to the event's tie_break_adjustment list" do
-      tie_break_adjustment = FactoryGirl.create(:tie_break_adjustment, judge: @judge)
+      tie_break_adjustment = FactoryBot.create(:tie_break_adjustment, judge: @judge)
       delete :destroy, params: { id: tie_break_adjustment.to_param }
       expect(response).to redirect_to(judge_tie_break_adjustments_path(@judge))
     end

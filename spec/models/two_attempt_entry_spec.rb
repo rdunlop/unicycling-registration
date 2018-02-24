@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe TwoAttemptEntry do
-  let(:competition) { FactoryGirl.create(:competition) }
-  let(:competitor1) { FactoryGirl.create(:event_competitor, competition: competition) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:competition) { FactoryBot.create(:competition) }
+  let(:competitor1) { FactoryBot.create(:event_competitor, competition: competition) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe "creating time_results from TwoAttemptEntry" do
     let(:two_attempt_entry) do

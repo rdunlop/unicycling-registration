@@ -13,9 +13,9 @@
 #  index_registrant_groups_on_registrant_group_type_id  (registrant_group_type_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_group do
     sequence(:name) { |n| "MyString #{n}" }
     association :registrant_group_type, factory: :registrant_group_type

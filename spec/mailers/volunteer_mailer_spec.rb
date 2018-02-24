@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe VolunteerMailer do
-  let(:volunteer_opportunity) { FactoryGirl.create(:volunteer_opportunity, inform_emails: inform_emails) }
-  let(:volunteer_choice) { FactoryGirl.create(:volunteer_choice, volunteer_opportunity: volunteer_opportunity) }
+  let(:volunteer_opportunity) { FactoryBot.create(:volunteer_opportunity, inform_emails: inform_emails) }
+  let(:volunteer_choice) { FactoryBot.create(:volunteer_choice, volunteer_opportunity: volunteer_opportunity) }
 
   context "with multiple inform_emails" do
     let(:inform_emails) { "test@test.com, test2@test.com" }

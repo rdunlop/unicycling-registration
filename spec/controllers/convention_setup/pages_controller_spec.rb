@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe ConventionSetup::PagesController do
   before(:each) do
-    user = FactoryGirl.create(:super_admin_user)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
-  let(:page) { FactoryGirl.create(:page) }
+  let(:page) { FactoryBot.create(:page) }
 
   describe "GET index" do
     it "shows all pages" do
@@ -28,12 +28,12 @@ describe ConventionSetup::PagesController do
     describe "with valid params" do
       it "creates a new Page" do
         expect do
-          post :create, params: { page: FactoryGirl.attributes_for(:page) }
+          post :create, params: { page: FactoryBot.attributes_for(:page) }
         end.to change(Page, :count).by(1)
       end
 
       it "redirects to the created page" do
-        post :create, params: { page: FactoryGirl.attributes_for(:page) }
+        post :create, params: { page: FactoryBot.attributes_for(:page) }
         expect(response).to redirect_to(convention_setup_page_path(Page.last))
       end
     end
@@ -69,13 +69,13 @@ describe ConventionSetup::PagesController do
     describe "with valid params" do
       it "updates the page" do
         expect do
-          put :update, params: { id: page.to_param, page: FactoryGirl.attributes_for(:page) }
+          put :update, params: { id: page.to_param, page: FactoryBot.attributes_for(:page) }
         end.to change { page.reload.slug }
       end
 
       it "redirects to the page" do
-        # params = FactoryGirl.attributes_for(:page).merge(expense_item_attributes: { id: page.expense_item.id })
-        put :update, params: { id: page.to_param, page: FactoryGirl.attributes_for(:page) }
+        # params = FactoryBot.attributes_for(:page).merge(expense_item_attributes: { id: page.expense_item.id })
+        put :update, params: { id: page.to_param, page: FactoryBot.attributes_for(:page) }
         expect(response).to redirect_to(convention_setup_page_path(page))
       end
     end

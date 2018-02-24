@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe RegistrationCostEntry do
-  let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor) }
-  let(:registration_cost_entry) { FactoryGirl.build(:registration_cost_entry, registration_cost: registration_cost) }
+  let(:registration_cost) { FactoryBot.build(:registration_cost, :competitor) }
+  let(:registration_cost_entry) { FactoryBot.build(:registration_cost_entry, registration_cost: registration_cost) }
 
-  it "is valid from FactoryGirl" do
+  it "is valid from FactoryBot" do
     expect(registration_cost_entry.valid?).to eq(true)
   end
 
@@ -14,7 +14,7 @@ describe RegistrationCostEntry do
   end
 
   context "as a competitor type" do
-    let(:registration_cost) { FactoryGirl.build(:registration_cost, :competitor) }
+    let(:registration_cost) { FactoryBot.build(:registration_cost, :competitor) }
 
     it "can have ages" do
       registration_cost_entry.min_age = 10
@@ -23,7 +23,7 @@ describe RegistrationCostEntry do
   end
 
   context "as a noncompetitor type" do
-    let(:registration_cost) { FactoryGirl.build(:registration_cost, :noncompetitor) }
+    let(:registration_cost) { FactoryBot.build(:registration_cost, :noncompetitor) }
 
     it "Cannot have ages" do
       registration_cost_entry.min_age = 10
@@ -42,7 +42,7 @@ describe RegistrationCostEntry do
     describe "when the expense_item has a payment" do
       before do
         registration_cost_entry.save!
-        FactoryGirl.create :payment_detail, line_item: registration_cost_entry.expense_item
+        FactoryBot.create :payment_detail, line_item: registration_cost_entry.expense_item
       end
 
       it "can't remove the RegistrationCost on deletion" do
@@ -54,7 +54,7 @@ describe RegistrationCostEntry do
   describe "#valid_for" do
     let(:min_age) { nil }
     let(:max_age) { nil }
-    let(:registration_cost_entry) { FactoryGirl.build(:registration_cost_entry, min_age: min_age, max_age: max_age) }
+    let(:registration_cost_entry) { FactoryBot.build(:registration_cost_entry, min_age: min_age, max_age: max_age) }
 
     def do_action(age)
       registration_cost_entry.valid_for?(age)

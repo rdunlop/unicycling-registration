@@ -20,12 +20,12 @@ require 'spec_helper'
 
 describe HeatsController do
   before(:each) do
-    @competition = FactoryGirl.create(:timed_competition, uses_lane_assignments: true)
-    director = FactoryGirl.create(:user)
+    @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
+    director = FactoryBot.create(:user)
     director.add_role(:director, @competition.event)
     sign_in director
-    @reg = FactoryGirl.create(:registrant)
-    @competitor = FactoryGirl.create(:event_competitor, competition: @competition)
+    @reg = FactoryBot.create(:registrant)
+    @competitor = FactoryBot.create(:event_competitor, competition: @competition)
     @competitor.members.first.update_attribute(:registrant_id, @reg.id)
   end
 
@@ -89,7 +89,7 @@ describe HeatsController do
   end
 
   describe "#destroy_all" do
-    before { FactoryGirl.create(:lane_assignment, competitor: @competitor, competition: @competition) }
+    before { FactoryBot.create(:lane_assignment, competitor: @competitor, competition: @competition) }
     it "removes all lane assignments" do
       expect do
         delete :destroy_all, params: { competition_id: @competition.id }

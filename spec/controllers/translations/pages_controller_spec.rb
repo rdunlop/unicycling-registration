@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Translations::PagesController do
-  let!(:page) { FactoryGirl.create(:page) }
-  let(:user) { FactoryGirl.create(:convention_admin_user) }
+  let!(:page) { FactoryBot.create(:page) }
+  let(:user) { FactoryBot.create(:convention_admin_user) }
 
   before { sign_in user }
   after { I18n.locale = :en }

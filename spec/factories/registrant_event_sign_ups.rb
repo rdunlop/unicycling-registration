@@ -18,11 +18,11 @@
 #  index_registrant_event_sign_ups_registrant_id                  (registrant_id)
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :registrant_event_sign_up do
-    registrant # FactoryGirl
+    registrant # FactoryBot
     event nil
     event_category nil
     signed_up true
@@ -30,7 +30,7 @@ FactoryGirl.define do
     before(:create) do |resu|
       if resu.event.nil? && resu.signed_up?
         if resu.event_category.nil?
-          ev = FactoryGirl.create(:event)
+          ev = FactoryBot.create(:event)
           resu.event_category = ev.event_categories.first
         end
         resu.event = resu.event_category.event

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :tenant do
     subdomain "test"
     description "MyString"

@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Printing::CompetitionsController do
   before do
-    FactoryGirl.create(:event_configuration)
-    user = FactoryGirl.create(:super_admin_user)
+    FactoryBot.create(:event_configuration)
+    user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
-  let(:competition) { FactoryGirl.create(:competition) }
+  let(:competition) { FactoryBot.create(:competition) }
 
   describe "GET announcer" do
     it "renders" do
@@ -51,7 +51,7 @@ describe Printing::CompetitionsController do
   end
 
   describe "GET freestyle_summary" do
-    let(:competition) { FactoryGirl.create(:competition, :freestyle_2017) }
+    let(:competition) { FactoryBot.create(:competition, :freestyle_2017) }
     it "renders" do
       get :freestyle_summary, params: { id: competition.id }
       expect(response).to be_success

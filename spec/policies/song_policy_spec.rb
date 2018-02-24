@@ -1,14 +1,14 @@
 require "spec_helper"
 
 describe SongPolicy do
-  let(:my_user) { FactoryGirl.create(:user) }
-  let(:my_song) { FactoryGirl.create(:song, user: my_user) }
+  let(:my_user) { FactoryBot.create(:user) }
+  let(:my_song) { FactoryBot.create(:song, user: my_user) }
 
   subject { described_class }
 
   permissions :update? do
     let(:music_end_date) { 2.weeks.from_now }
-    let(:config) { FactoryGirl.create(:event_configuration, music_submission_end_date: music_end_date) }
+    let(:config) { FactoryBot.create(:event_configuration, music_submission_end_date: music_end_date) }
     let(:user) { my_user }
     let(:reg_closed?) { false }
     let(:authorized_laptop?) { false }
@@ -19,7 +19,7 @@ describe SongPolicy do
     end
 
     it "cannot update another person's song" do
-      other_song = FactoryGirl.create(:song)
+      other_song = FactoryBot.create(:song)
       expect(subject).not_to permit(user_context, other_song)
     end
 
@@ -31,7 +31,7 @@ describe SongPolicy do
       end
 
       describe "as a super admin" do
-        let(:user) { FactoryGirl.create(:super_admin_user) }
+        let(:user) { FactoryBot.create(:super_admin_user) }
 
         it "can update music" do
           expect(subject).to permit(user_context, my_song)

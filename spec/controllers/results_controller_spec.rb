@@ -20,11 +20,11 @@ require 'spec_helper'
 
 describe ResultsController do
   before(:each) do
-    @user = FactoryGirl.create(:super_admin_user)
+    @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
-  let(:registrant) { FactoryGirl.create(:competitor) }
-  let(:competition) { FactoryGirl.create(:competition) }
+  let(:registrant) { FactoryBot.create(:competitor) }
+  let(:competition) { FactoryBot.create(:competition) }
 
   describe "GET index" do
     it "renders" do
@@ -41,7 +41,7 @@ describe ResultsController do
   end
 
   describe "GET scores" do
-    let(:competition) { FactoryGirl.create(:competition, :combined) }
+    let(:competition) { FactoryBot.create(:competition, :combined) }
     it "renders" do
       get :scores, params: { id: competition.id }
       expect(response).to be_success

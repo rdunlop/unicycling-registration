@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe CategoryHelper do
-  let(:category) { FactoryGirl.create :category }
+  let(:category) { FactoryBot.create :category }
 
   context "with an info_url" do
-    let(:category) { FactoryGirl.create :category, info_url: "http://www.google.com" }
+    let(:category) { FactoryBot.create :category, info_url: "http://www.google.com" }
 
     it "returns the url as the additional_information_url" do
       expect(helper.additional_information_url(category)).to eq("http://www.google.com")
@@ -12,8 +12,8 @@ describe CategoryHelper do
   end
 
   context "with an info_page specified" do
-    let(:page) { FactoryGirl.create :page }
-    let(:category) { FactoryGirl.create :category, info_page: page }
+    let(:page) { FactoryBot.create :page }
+    let(:category) { FactoryBot.create :category, info_page: page }
 
     it "returns the info_page url when the info_url is blank" do
       category.update_attribute(:info_url, "")
