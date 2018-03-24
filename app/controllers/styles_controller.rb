@@ -1,5 +1,5 @@
 class StylesController < ApplicationController
-  before_action :skip_authorization
+  before_action :authenticate_user!
 
   def index; end
 end
