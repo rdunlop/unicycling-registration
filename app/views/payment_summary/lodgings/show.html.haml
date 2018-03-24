@@ -8,14 +8,22 @@
       %th Status
       %th Date of last activity
   %tbody
-    - @lodging.lodging_room_types.includes(lodging_packages: [:lodging_room_option, :lodging_package_days]).each do |lodging_room_type|
-      - lodging_room_type.lodging_packages.each do |package|
-        %tr
-          %td= LodgingPackagePresenter.new(package).to_s
-          %td= package.lodging_room_option
-          %td= link_to package.registrant, registrant_path(package.registrant.bib_number)
-          %td= package.status
-          %td= package.date_of_last_activity
+    // Sold
+    - @paid_packages.each do |package|
+      %tr
+        %td= LodgingPackagePresenter.new(package).to_s
+        %td= package.lodging_room_option
+        %td= link_to package.registrant, registrant_path(package.registrant.bib_number)
+        %td= package.status
+        %td= package.date_of_last_activity
+    // Selected
+    - @selected_packages.each do |package|
+      %tr
+        %td= LodgingPackagePresenter.new(package).to_s
+        %td= package.lodging_room_option
+        %td= link_to package.registrant, registrant_path(package.registrant.bib_number)
+        %td= package.status
+        %td= package.date_of_last_activity
 
 - @lodging.lodging_room_types.includes(lodging_packages: [:lodging_room_option, :lodging_package_days]).each do |lodging_room_type|
   - num_free = LodgingRoomTypePresenter.new(lodging_room_type).min_days_remaining
