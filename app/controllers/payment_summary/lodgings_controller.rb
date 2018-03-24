@@ -4,6 +4,15 @@ module PaymentSummary
 
     def show
       @lodging = Lodging.find(params[:id])
+      @paid_packages = LodgingPackage
+                       .joins(:lodging_room_type, :payment_details)
+                       .includes(:lodging_room_option, :lodging_package_days)
+                       .merge(PaymentDetail.paid)
+                       .merge(LodgingRoomType.where(lodging: @lodging))
+      @selected_packages = LodgingPackage
+                           .joins(:lodging_room_type, :registrant_expense_items)
+                           .includes(:lodging_room_option, :lodging_package_days)
+                           .merge(LodgingRoomType.where(lodging: @lodging))
       set_breadcrumbs
     end
 
