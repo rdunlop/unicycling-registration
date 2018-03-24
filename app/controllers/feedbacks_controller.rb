@@ -30,9 +30,7 @@ class FeedbacksController < ApplicationController
 
     if captcha_valid? && @feedback.save
       Notifications.send_feedback(@feedback.id).deliver_later
-      respond_to do |format|
-        format.html { redirect_to new_feedback_path, notice: 'Feedback sent successfully.' }
-      end
+      redirect_to new_feedback_path, notice: 'Feedback sent successfully.'
     else
       render :new
     end

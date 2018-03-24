@@ -21,10 +21,6 @@ class ResultsController < ApplicationController
 
   def index
     add_breadcrumb "Results"
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   # GET /results/registrant?registrant_id=123

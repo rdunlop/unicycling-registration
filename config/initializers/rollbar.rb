@@ -33,6 +33,7 @@ Rollbar.configure do |config|
                                         "ActiveRecord::RecordNotFound" => "ignore",
                                         "AbstractController::ActionNotFound" => "ignore",
                                         "ActionController::RoutingError" => "ignore",
+                                        "ActionController::UnknownFormat" => "ignore",
                                         "ActionDispatch::ParamsParser::ParseError" => "ignore")
 
   # "ActionController::UnknownFormat" => "ignore",
