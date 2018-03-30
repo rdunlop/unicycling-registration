@@ -138,7 +138,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.11)
-    bindata (2.4.1)
+    bindata (2.4.3)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     bullet (5.7.5)
