@@ -328,7 +328,7 @@ GEM
     kaminari-core (1.1.1)
     kgio (2.11.1)
     kostya-sigar (2.0.0)
-    libv8 (3.16.14.17)
+    libv8 (3.16.14.19)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
