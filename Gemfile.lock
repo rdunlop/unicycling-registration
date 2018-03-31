@@ -506,7 +506,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-ole (1.2.12.1)
     ruby-progressbar (1.9.0)
-    ruby_parser (3.10.1)
+    ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
