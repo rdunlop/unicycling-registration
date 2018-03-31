@@ -350,7 +350,7 @@ GEM
       monetize (~> 1.7.0)
       money (~> 6.10.0)
       railties (>= 3.0)
-    multi_json (1.12.2)
+    multi_json (1.13.1)
     multipart-post (2.0.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
