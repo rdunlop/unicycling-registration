@@ -223,7 +223,7 @@ GEM
     country_select (2.4.0)
       countries (~> 1.1.0)
       sort_alphabetical (~> 1.0)
-    crass (1.0.3)
+    crass (1.0.4)
     css_splitter (0.4.6)
       sprockets (>= 2.0.0)
     currencies (0.4.2)
