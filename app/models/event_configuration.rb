@@ -312,7 +312,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def lodging_sales_closed?
-    is_date_in_the_past?(effective_lodging_end_date)
+    is_date_in_the_past?(effective_lodging_closed_date)
   end
 
   def self.configuration_exists?
