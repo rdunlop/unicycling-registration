@@ -1,6 +1,11 @@
 class EventForm < SimpleDelegator
   attr_accessor :cost
 
+  # Without that, Simple Form will consider the user model as the object.
+  def to_model
+    self
+  end
+
   def valid?
     super
   end
