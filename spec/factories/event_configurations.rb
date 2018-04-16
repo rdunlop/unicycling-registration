@@ -49,6 +49,7 @@
 #  max_registrants                               :integer          default(0), not null
 #  representation_type                           :string           default("country"), not null
 #  waiver_file_name                              :string
+#  lodging_end_date                              :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot
