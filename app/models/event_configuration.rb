@@ -49,6 +49,7 @@
 #  max_registrants                               :integer          default(0), not null
 #  representation_type                           :string           default("country"), not null
 #  waiver_file_name                              :string
+#  lodging_end_date                              :datetime
 #
 
 class EventConfiguration < ApplicationRecord
@@ -269,6 +270,10 @@ class EventConfiguration < ApplicationRecord
     event_sign_up_closed_date || registration_closed_date
   end
 
+  def effective_lodging_closed_date
+    lodging_end_date || registration_closed_date
+  end
+
   # Public: What is the base date we should use when calculating competitor
   # Ages.
   # Default to the start date of the competition, but can be changed, if
@@ -304,6 +309,10 @@ class EventConfiguration < ApplicationRecord
 
   def event_sign_up_closed?
     is_date_in_the_past?(effective_event_sign_up_closed_date)
+  end
+
+  def lodging_sales_closed?
+    is_date_in_the_past?(effective_lodging_end_date)
   end
 
   def self.configuration_exists?

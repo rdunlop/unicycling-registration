@@ -52,7 +52,8 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def lodging?
-    update? && config.has_lodging?
+    return true if event_planner? || super_admin?
+    update? && config.has_lodging? && !config.lodging_sales_closed?
   end
 
   def expenses?
