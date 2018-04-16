@@ -8,7 +8,6 @@ RSpec.describe "/rails_admin", type: :request do
 
     it "can browse" do
       get "/rails_admin"
-      binding.pry
       expect(response).to be_successful
     end
   end
