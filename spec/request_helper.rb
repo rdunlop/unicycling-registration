@@ -1,3 +1,3 @@
 def login(user)
-  post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
+  post user_session_path, params: { user: { email: user.email, password: user.password } }
 end
