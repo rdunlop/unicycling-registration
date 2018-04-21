@@ -38,6 +38,8 @@ class EventCopier
     new_event = source_event.dup
     new_event.name = source_event.name
     new_event.category = Category.find_by(name: source_event.category.name)
+    new_event.event_categories_count = 0
+    new_event.event_choices_count = 0
 
     # Set the event_categories before saving the event, to prevent creating the default 'All' EventCategory
     source_event.event_categories.each do |ec|
