@@ -30,6 +30,10 @@ describe EventCopier do
       expect(EventCategory.count).to eq(1)
     end
 
+    it "sets the cached event_categories count properly" do
+      expect(Event.first.event_categories.size).to eq(Event.first.event_categories.count)
+    end
+
     it "copies the event_choice" do
       expect(EventChoice.count).to eq(1)
     end
