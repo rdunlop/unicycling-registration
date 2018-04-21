@@ -3,7 +3,6 @@ class RegistrationCostUpdater
   def self.update_registration_periods
     Apartment.tenant_names.each do |tenant|
       Apartment::Tenant.switch(tenant) do
-        RequestStore.clear! # Prevent EventConfiguration.singleton to be shared across tenants
         new("competitor").update_current_period
         new("noncompetitor").update_current_period
       end

@@ -27,7 +27,6 @@ class RegistrantCopier
   def previous_registrant_attributes
     attributes = {}
     Apartment::Tenant.switch(subdomain) do
-      RequestStore.clear! # Prevent EventConfiguration.singleton to be shared across tenants
       previous_reg = Registrant.find(previous_id)
       attributes = {
         first_name: previous_reg.first_name,
@@ -42,7 +41,6 @@ class RegistrantCopier
   def previous_contact_detail_attributes
     contact_attributes = {}
     Apartment::Tenant.switch(subdomain) do
-      RequestStore.clear! # Prevent EventConfiguration.singleton to be shared across tenants
       previous_reg = Registrant.find(previous_id)
       if previous_reg.contact_detail.present?
         contact_detail = previous_reg.contact_detail
