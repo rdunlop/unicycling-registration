@@ -227,6 +227,12 @@ class EventConfiguration < ApplicationRecord
     # Use the request-level EventConfiguration, if it is defined, otherwise, fall-back
     # to fetching from the DB
     return @config if defined?(@config)
+
+    if RequestStore.store[:ec_tenant] != Apartment::Tenant.current
+      # Prevent EventConfiguration.singleton to be shared across tenants
+      RequestStore.clear!
+      RequestStore.store[:ec_tenant] = Apartment::Tenant.current
+    end
     RequestStore.store[:ec_singleton] ||= EventConfiguration.includes(:translations).first || EventConfiguration.new
   end
 
