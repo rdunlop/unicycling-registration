@@ -92,6 +92,7 @@ class EventCopier
   def source_events
     return @events if @events
     Apartment::Tenant.switch subdomain do
+      RequestStore.clear! # Prevent EventConfiguration.singleton to be shared across tenants
       @events = Event.all.includes(:translations, event_categories: :translations, category: :translations, event_choices: :translations).load
     end
 
@@ -101,6 +102,7 @@ class EventCopier
   def source_categories
     @categories = nil
     Apartment::Tenant.switch subdomain do
+      RequestStore.clear! # Prevent EventConfiguration.singleton to be shared across tenants
       @categories = Category.all.includes(:translations).load
     end
 

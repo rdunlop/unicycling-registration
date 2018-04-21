@@ -32,6 +32,7 @@ class AgeGroupType < ApplicationRecord
   def self.update_all
     Apartment.tenant_names.each do |tenant|
       Apartment::Tenant.switch(tenant) do
+        RequestStore.clear! # Prevent EventConfiguration.singleton to be shared across tenants
         AgeGroupType.all.find_each do |age_group_type|
           age_group_type.touch
         end
