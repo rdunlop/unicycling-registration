@@ -22,7 +22,7 @@ class PaypalPaymentsController < ApplicationController
       PaymentMailer.configuration_error(
         paypal.configured_paypal_email,
         paypal.receiver_email
-      )
+      ).deliver_later
       return
     end
 
