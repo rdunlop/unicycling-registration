@@ -32,8 +32,16 @@ class PaypalConfirmer
     @params["payment_status"] == "Completed"
   end
 
+  def receiver_email
+    @params["receiver_email"].try(:downcase)
+  end
+
+  def configured_paypal_email
+    EventConfiguration.singleton.paypal_account.downcase
+  end
+
   def correct_paypal_account?
-    @params["receiver_email"].try(:downcase) == EventConfiguration.singleton.paypal_account.downcase
+    receiver_email == configured_paypal_email
   end
 
   def transaction_id
