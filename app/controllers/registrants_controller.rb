@@ -126,7 +126,7 @@ class RegistrantsController < ApplicationController
     if @config.organization_membership_usa?
       UpdateUsaMembershipStatusWorker.perform_async(@registrant.id)
     end
-    render plain: "", status: 200
+    render plain: "", status: :ok
   end
 
   def subregion_options

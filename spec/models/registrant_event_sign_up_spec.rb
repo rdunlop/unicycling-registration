@@ -79,7 +79,7 @@ describe RegistrantEventSignUp do
       @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: re.event_category)
       @competitor = FactoryBot.create(:event_competitor, competition: @competition)
       @member = @competitor.members.first
-      @member.update_attributes(registrant: re.registrant)
+      @member.update(registrant: re.registrant)
       re.reload
     end
 

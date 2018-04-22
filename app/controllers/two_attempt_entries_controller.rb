@@ -56,7 +56,7 @@ class TwoAttemptEntriesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @two_attempt_entry.update_attributes(two_attempt_entry_params)
+      if @two_attempt_entry.update(two_attempt_entry_params)
         format.html { redirect_to user_competition_two_attempt_entries_path(@two_attempt_entry.user, @two_attempt_entry.competition, is_start_times: @two_attempt_entry.is_start_time), notice: 'Entry was successfully updated.' }
         format.json { head :no_content }
         format.js {}

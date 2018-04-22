@@ -10,7 +10,7 @@ class Translations::EventCategoriesController < Admin::TranslationsController
 
   # PUT /translations/event_categories/1
   def update
-    if @event_category.update_attributes(event_category_params)
+    if @event_category.update(event_category_params)
       flash[:notice] = 'Event Category was successfully updated.'
       redirect_to action: :index
     else

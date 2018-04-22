@@ -10,7 +10,7 @@ class Translations::PagesController < Admin::TranslationsController
 
   # PUT /translations/pages/1
   def update
-    if @page.update_attributes(page_params)
+    if @page.update(page_params)
       flash[:notice] = 'Page was successfully updated.'
       redirect_to action: :index
     else

@@ -6,18 +6,18 @@ class ErrorsController < ApplicationController
 
   def not_found
     if @tenant.try(:persisted?)
-      render status: 404
+      render status: :not_found
     else
-      render status: 404, layout: false
+      render status: :not_found, layout: false
     end
   end
 
   def not_permitted
-    render status: 422, layout: false
+    render status: :unprocessable_entity, layout: false
   end
 
   def internal_server_error
-    render status: 500, layout: false
+    render status: :internal_server_error, layout: false
   end
 
   private

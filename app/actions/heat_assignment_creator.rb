@@ -48,7 +48,7 @@ class HeatAssignmentCreator
   # return +1 if a > b. (i.e. invert the order)
   #
   # Sorts `nil` first, then larger numbers, followed by smaller numbers
-  def compare(a, b)
+  def compare(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
     if a.nil? || b.nil?
       if a.nil? && b.nil?
         return 0

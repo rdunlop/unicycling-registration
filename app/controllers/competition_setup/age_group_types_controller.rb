@@ -52,7 +52,7 @@ class CompetitionSetup::AgeGroupTypesController < CompetitionSetup::BaseCompetit
   def edit; end
 
   def update
-    if @age_group_type.update_attributes(age_group_type_params)
+    if @age_group_type.update(age_group_type_params)
       flash[:notice] = 'Age Group Type was successfully updated.'
     end
     respond_with(@age_group_type, location: age_group_types_path)

@@ -35,7 +35,7 @@ class Compete::WaveTimesController < ApplicationController
   def edit; end
 
   def update
-    if @wave_time.update_attributes(wave_time_params)
+    if @wave_time.update(wave_time_params)
       flash[:notice] = "Wave Time Updated"
       redirect_to competition_wave_times_path(@competition)
     else

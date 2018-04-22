@@ -2,7 +2,7 @@ class ChangeStreetScoringTypes < ActiveRecord::Migration
   def up
     jt = JudgeType.find_by(name: "Street Judge Type")
     if jt&.val_1_description == "?"
-      jt.update_attributes(
+      jt.update(
         name: "Street Judge Zone 1",
         val_1_description: "Score",
         val_2_description: "n/a",

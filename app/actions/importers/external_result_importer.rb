@@ -20,7 +20,7 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
     end
   rescue ActiveRecord::RecordInvalid => invalid
     @errors << invalid.message
-    return false
+    false
   end
 
   # from CSV to import_result
@@ -35,6 +35,6 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
     )
   rescue ActiveRecord::RecordNotFound
     @errors << "Unable to find registrant (#{row_hash})"
-    return false
+    false
   end
 end

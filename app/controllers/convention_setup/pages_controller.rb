@@ -34,7 +34,7 @@ class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupCon
 
   # PUT /event_choices/1
   def update
-    if @page.update_attributes(page_params)
+    if @page.update(page_params)
       flash[:notice] = 'Page was successfully updated.'
     end
     respond_with(@page, location: [:convention_setup, @page], action: "edit")

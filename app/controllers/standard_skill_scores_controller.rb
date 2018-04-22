@@ -62,7 +62,7 @@ class StandardSkillScoresController < ApplicationController
   # this is used to update standard_skill_score_entries
   # PUT /judges/29/competitors/4/standard_skill_score/1
   def update
-    if @standard_skill_score.update_attributes(standard_skill_score_params)
+    if @standard_skill_score.update(standard_skill_score_params)
       redirect_to judge_standard_skill_scores_path(@judge), notice: 'Standard Skill Scores successfully updated.'
     else
       render :edit

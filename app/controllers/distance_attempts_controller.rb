@@ -106,7 +106,7 @@ class DistanceAttemptsController < ApplicationController
   def load_new_distance_attempt
     @height = params[:height]
     # display the form which allows entering the distance, competitor, fault.
-    @distance_attempt ||= DistanceAttempt.new(distance: @height)
+    @distance_attempt ||= DistanceAttempt.new(distance: @height) # rubocop:disable Naming/MemoizedInstanceVariableName
   end
 
   def distance_attempt_params

@@ -61,7 +61,7 @@ class Registrants::BuildController < ApplicationController
     end
     @registrant.status = 'active' if step == steps.last
 
-    @registrant.update_attributes(registrant_params) unless (wizard_value(step) == :lodging) || (wizard_value(step) == :expenses)
+    @registrant.update(registrant_params) unless (wizard_value(step) == :lodging) || (wizard_value(step) == :expenses)
     render_wizard @registrant
   end
 

@@ -34,7 +34,7 @@ shared_context 'basic event configuration' do |options = {}|
     FactoryBot.create(:wheel_size_16)
     FactoryBot.create(:wheel_size_20)
     FactoryBot.create(:wheel_size_24)
-    EventConfiguration.singleton.update_attributes(
+    EventConfiguration.singleton.update(
       FactoryBot.attributes_for(:event_configuration,
                                 start_date: Date.today + 6.months,
                                 iuf: true,
