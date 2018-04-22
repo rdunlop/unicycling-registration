@@ -10,7 +10,7 @@ class BestTimesController < ApplicationController
   def update
     @registrant_best_time = RegistrantBestTime.find_or_initialize_by(event: @event, registrant_id: params[:id])
 
-    @registrant_best_time.update_attributes(registrant_best_time_params)
+    @registrant_best_time.update(registrant_best_time_params)
     @registrant_best_time.save
     @registrant = @registrant_best_time.registrant
     # Format JS

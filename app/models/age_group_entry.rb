@@ -73,7 +73,7 @@ class AgeGroupEntry < ApplicationRecord
   end
 
   def wheel_size_name
-    wheel_size.to_s unless wheel_size.nil?
+    wheel_size&.to_s
   end
 
   def to_s

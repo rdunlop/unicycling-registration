@@ -10,7 +10,7 @@ class Translations::EventChoicesController < Admin::TranslationsController
 
   # PUT /translations/event_choices/1
   def update
-    if @event_choice.update_attributes(event_choice_params)
+    if @event_choice.update(event_choice_params)
       flash[:notice] = 'EventChoice was successfully updated.'
       redirect_to action: :index
     else

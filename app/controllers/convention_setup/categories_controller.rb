@@ -33,7 +33,7 @@ class ConventionSetup::CategoriesController < ConventionSetup::BaseConventionSet
   # PUT /categories/1.json
   def update
     respond_to do |format|
-      if @category.update_attributes(category_params)
+      if @category.update(category_params)
         format.html { redirect_to convention_setup_categories_path, notice: 'Category was successfully updated.' }
       else
         format.html { render action: "edit" }

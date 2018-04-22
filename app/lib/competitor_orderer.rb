@@ -11,7 +11,7 @@ class CompetitorOrderer
   end
 
   def sort
-    @sorted ||= competitors.sort { |a, b| compare_competitors(a, b) }
+    @sort ||= competitors.sort { |a, b| compare_competitors(a, b) }
   end
 
   private
@@ -27,7 +27,7 @@ class CompetitorOrderer
   # return 1 if first score is worse than the second score
   # return 0 if they are the same
   # return -1 if the first score is better than the second score
-  def compare_competitors(a, b)
+  def compare_competitors(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
     if either_score_is_invalid(a, b)
       return incorrect_scores_last(competitor_score(a), competitor_score(b))
     end
@@ -51,7 +51,7 @@ class CompetitorOrderer
     end
   end
 
-  def either_score_is_invalid(a, b)
+  def either_score_is_invalid(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
     return true if score_is_invalid(competitor_score(a))
     return true if score_is_invalid(competitor_score(b))
     false
@@ -67,7 +67,7 @@ class CompetitorOrderer
   # return 1 if first score is invalid, but the second is valid
   # return 0 if they are the same
   # return -1 if the first score is valid, and the second is invalid
-  def incorrect_scores_last(a, b)
+  def incorrect_scores_last(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
     invalid_a = score_is_invalid(a)
     invalid_b = score_is_invalid(b)
     if invalid_a && invalid_b

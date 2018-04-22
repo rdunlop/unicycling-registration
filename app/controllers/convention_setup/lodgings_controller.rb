@@ -40,7 +40,7 @@ class ConventionSetup::LodgingsController < ConventionSetup::BaseConventionSetup
   # PUT /convention_setup/lodgings/1
   def update
     respond_to do |format|
-      if @lodging.update_attributes(lodging_params)
+      if @lodging.update(lodging_params)
         format.html { redirect_to convention_setup_lodgings_path, notice: 'Lodging was successfully updated.' }
       else
         format.html { render action: "edit" }

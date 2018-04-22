@@ -10,7 +10,7 @@ class Translations::ExpenseGroupsController < Admin::TranslationsController
 
   # PUT /translations/expense_groups/1
   def update
-    if @expense_group.update_attributes(expense_group_params)
+    if @expense_group.update(expense_group_params)
       flash[:notice] = 'ExpenseGroup was successfully updated.'
       redirect_to action: :index
     else

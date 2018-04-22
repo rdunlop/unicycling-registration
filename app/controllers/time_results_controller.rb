@@ -77,7 +77,7 @@ class TimeResultsController < ApplicationController
   # PUT time_results/1.json
   def update
     respond_to do |format|
-      if @time_result.update_attributes(time_result_params)
+      if @time_result.update(time_result_params)
         format.html { redirect_to(competition_time_results_path(@competition), notice: 'Time result was successfully updated.') }
         format.json { head :ok }
       else

@@ -51,7 +51,7 @@ describe RegistrantBestTime do
   context "with a h:mm event" do
     before do
       ev = @rb.event
-      ev.update_attributes(best_time_format: "h:mm")
+      ev.update(best_time_format: "h:mm")
     end
 
     it "stores the converted time in the value" do

@@ -108,7 +108,7 @@ class RegistrantEventSignUp < ApplicationRecord
     ec.competitions_being_fed(registrant).each do |competition|
       member = registrant.members.find { |mem| mem.competitor.competition == competition }
       if member
-        member.update_attributes(dropped_from_registration: true)
+        member.update(dropped_from_registration: true)
         competitor = member.competitor
         if competitor.active? && competition.num_members_per_competitor == "One"
           WithdrawCompetitor.perform(competitor)

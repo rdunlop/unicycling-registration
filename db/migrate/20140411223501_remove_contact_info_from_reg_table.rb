@@ -62,7 +62,7 @@ class RemoveContactInfoFromRegTable < ActiveRecord::Migration
 
     ContactDetail.all.each do |cd|
       reg = cd.registrant
-      reg.update_attributes(
+      reg.update(
         address: cd.address,
         city: cd.city,
         state: cd.state,

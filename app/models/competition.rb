@@ -442,7 +442,7 @@ class Competition < ApplicationRecord
   end
 
   def judge_score_calculator
-    @judge_scoring_calculator ||= ScoringClass.for(event_class, self)[:judge_score_calculator]
+    @judge_score_calculator ||= ScoringClass.for(event_class, self)[:judge_score_calculator]
   end
 
   def high_long_event?

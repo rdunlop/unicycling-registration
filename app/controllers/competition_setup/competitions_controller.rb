@@ -39,7 +39,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   # PUT /competitions/1
   # PUT /competitions/1.json
   def update
-    if @competition.update_attributes(competition_params)
+    if @competition.update(competition_params)
       flash[:notice] = 'Competition was successfully updated.'
       redirect_to @competition
     else
@@ -83,7 +83,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
   end
 
   def load_event_from_competition
-    @event ||= @competition.event
+    @event ||= @competition.event # rubocop:disable Naming/MemoizedInstanceVariableName
   end
 
   def load_event

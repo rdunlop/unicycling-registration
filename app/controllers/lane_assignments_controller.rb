@@ -101,7 +101,7 @@ class LaneAssignmentsController < ApplicationController
   # PUT /lane_assignments/1.json
   def update
     respond_to do |format|
-      if @lane_assignment.update_attributes(lane_assignment_params)
+      if @lane_assignment.update(lane_assignment_params)
         format.html { redirect_to competition_lane_assignments_path(@lane_assignment.competition), notice: 'Lane assignment was successfully updated.' }
         format.js { render js: "window.location.replace('#{competition_lane_assignments_path(@lane_assignment.competition)}');" }
       else
