@@ -33,7 +33,7 @@ class ConventionSetup::CouponCodesController < ConventionSetup::BaseConventionSe
   # PUT /convention_setup/coupon_codes/1
   def update
     respond_to do |format|
-      if @coupon_code.update_attributes(coupon_code_params)
+      if @coupon_code.update(coupon_code_params)
         format.html { redirect_to coupon_codes_path, notice: 'Coupon Code was successfully updated.' }
       else
         format.html { render action: "edit" }

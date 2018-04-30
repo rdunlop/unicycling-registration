@@ -8,12 +8,12 @@ class LodgingPackagePresenter
   end
 
   def check_in_day
-    date = lodging_package.lodging_package_days.map(&:date_offered).sort.first
+    date = lodging_package.lodging_package_days.map(&:date_offered).min
     output_entry(date)
   end
 
   def check_out_day
-    date = lodging_package.lodging_package_days.map(&:date_offered).sort.last + 1.day
+    date = lodging_package.lodging_package_days.map(&:date_offered).max + 1.day
     output_entry(date)
   end
 

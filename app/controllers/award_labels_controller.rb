@@ -58,7 +58,7 @@ class AwardLabelsController < ApplicationController
   # PUT /award_labels/1.json
   def update
     respond_to do |format|
-      if @award_label.update_attributes(award_label_params)
+      if @award_label.update(award_label_params)
         format.html { redirect_to user_award_labels_path(@award_label.user), notice: 'Award label was successfully updated.' }
         format.json { head :no_content }
       else

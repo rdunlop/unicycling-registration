@@ -43,7 +43,7 @@ class ConventionSetup::ExpenseItemsController < ConventionSetup::BaseConventionS
   # PUT /expense_items/1.json
   def update
     respond_to do |format|
-      if @expense_item.update_attributes(expense_item_params)
+      if @expense_item.update(expense_item_params)
         format.html { redirect_to expense_group_expense_items_path(@expense_group), notice: 'Expense item was successfully updated.' }
       else
         format.html { render action: "edit" }

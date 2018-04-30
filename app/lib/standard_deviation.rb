@@ -1,8 +1,8 @@
 class StandardDeviation
   attr_reader :array
 
-  def initialize(a)
-    @array = a
+  def initialize(incoming_array)
+    @array = incoming_array
   end
 
   def standard_deviation

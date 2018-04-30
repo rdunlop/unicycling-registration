@@ -12,7 +12,7 @@ listen 8080
 preload_app true
 
 # paths
-app_path = File.expand_path("../../..", __FILE__)
+app_path = File.expand_path('../..', __dir__)
 working_directory app_path
 pid "tmp/pids/unicorn.pid"
 

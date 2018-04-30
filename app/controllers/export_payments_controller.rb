@@ -35,7 +35,7 @@ class ExportPaymentsController < ApplicationController
     headers = ["Payment ID", "Expense Item ID", "Item Description", "Amount Paid", "Registrant ID"]
     data = []
     # Marco, we don't include the Free T-Shirts
-    PaymentDetail.paid.includes(:registrant).each do |payment_detail|
+    PaymentDetail.paid.where(refunded: false).includes(:registrant).each do |payment_detail|
       data << [
         payment_detail.payment_id,
         payment_detail.line_item.id,

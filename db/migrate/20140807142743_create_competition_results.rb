@@ -45,7 +45,7 @@ class CreateCompetitionResults < ActiveRecord::Migration
 
     CompetitionResult.all.each do |competition_result|
       competition = Competition.find(competition_result.competition_id)
-      competition.update_attributes(
+      competition.update(
         published_results_file: competition_result.results_file,
         published_date: competition_result.published_date
       )

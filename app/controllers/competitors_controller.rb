@@ -122,7 +122,7 @@ class CompetitorsController < ApplicationController
   def update
     authorize @competitor
 
-    if @competitor.update_attributes(competitor_params)
+    if @competitor.update(competitor_params)
       flash[:notice] = 'Competition registrant was successfully updated.'
       redirect_to competition_competitors_path(@competitor.competition)
     else

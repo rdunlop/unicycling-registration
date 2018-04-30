@@ -102,7 +102,7 @@ class JudgesController < ApplicationController
 
     @judges = @competition.judges
     @competitions_with_judges = Competition.event_order.select { |comp| comp.uses_judges } - [@competition]
-    @judge ||= @competition.judges.build
+    @judge ||= @competition.judges.build # rubocop:disable Naming/MemoizedInstanceVariableName
   end
 
   private

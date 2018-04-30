@@ -97,10 +97,13 @@ describe PaypalPaymentsController do
         end
       end
       it "doesn't set the payment if the wrong paypal account is specified" do
+        ActionMailer::Base.deliveries.clear
         post :notification, params: { receiver_email: "bob@bob.com", payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
         @payment.reload
         expect(@payment.completed).to eq(false)
+        num_deliveries = ActionMailer::Base.deliveries.size
+        expect(num_deliveries).to eq(1) # one for error notification
       end
       it "should send an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear

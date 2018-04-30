@@ -7,7 +7,7 @@ module PaymentSummary
       @paid_packages = LodgingPackage
                        .joins(:lodging_room_type, :payment_details)
                        .includes(:lodging_room_option, :lodging_package_days)
-                       .merge(PaymentDetail.paid)
+                       .merge(PaymentDetail.paid.where(refunded: false))
                        .merge(LodgingRoomType.where(lodging: @lodging))
       @selected_packages = LodgingPackage
                            .joins(:lodging_room_type, :registrant_expense_items)

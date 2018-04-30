@@ -14,7 +14,7 @@ class ConventionSetup::LodgingRoomOptionsController < ConventionSetup::BaseConve
   # PUT /convention_setup/lodging_room_option/1
   def update
     respond_to do |format|
-      if @lodging_room_option.update_attributes(lodging_room_option_params)
+      if @lodging_room_option.update(lodging_room_option_params)
         format.html { redirect_to convention_setup_lodging_room_option_path(@lodging_room_option), notice: 'Lodging Room Option was successfully updated.' }
       else
         format.html { render action: "edit" }

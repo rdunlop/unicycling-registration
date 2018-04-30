@@ -6,6 +6,16 @@ class PaymentMailer < TenantAwareMailer
     mail to: Rails.application.secrets.error_emails
   end
 
+  def configuration_error(configured_email, received_email)
+    @configured_email = configured_email
+    @received_email = received_email
+
+    mail(
+      to: [EventConfiguration.singleton.contact_email, Rails.application.secrets.error_emails],
+      subject: "Paypal Mis-configuration"
+    )
+  end
+
   def payment_completed(payment)
     @payment_number = payment.id
     @total_amount = payment.total_amount

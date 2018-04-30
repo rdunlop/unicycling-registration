@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '~> 5.1.5'
+gem 'rails', '= 5.1.5'
 
 # Authentication
 gem 'devise'
@@ -36,7 +36,7 @@ gem 'money-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
 gem 'simple_form'
-gem 'tinymce-rails', '< 4.7' # Issue with async loading of JS for TinyMCE
+gem 'tinymce-rails'
 
 # system utils
 gem 'acme-client'

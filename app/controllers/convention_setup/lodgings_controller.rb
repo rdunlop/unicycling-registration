@@ -40,7 +40,7 @@ class ConventionSetup::LodgingsController < ConventionSetup::BaseConventionSetup
   # PUT /convention_setup/lodgings/1
   def update
     respond_to do |format|
-      if @lodging.update_attributes(lodging_params)
+      if @lodging.update(lodging_params)
         format.html { redirect_to convention_setup_lodgings_path, notice: 'Lodging was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -73,7 +73,7 @@ class ConventionSetup::LodgingsController < ConventionSetup::BaseConventionSetup
   end
 
   def lodging_params
-    params.require(:lodging).permit(:name, :description,
+    params.require(:lodging).permit(:name, :description, :visible,
                                     lodging_room_types_attributes: %i[id _destroy name description visible maximum_available])
   end
 end

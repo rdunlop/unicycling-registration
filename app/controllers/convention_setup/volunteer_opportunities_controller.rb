@@ -25,7 +25,7 @@ class ConventionSetup::VolunteerOpportunitiesController < ConventionSetup::BaseC
   end
 
   def update
-    if @volunteer_opportunity.update_attributes(volunteer_opportunity_params)
+    if @volunteer_opportunity.update(volunteer_opportunity_params)
       redirect_to convention_setup_volunteer_opportunities_path, notice: 'Volunteer Opportunity was successfully updated.'
     else
       render :edit

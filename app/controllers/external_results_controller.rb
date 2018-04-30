@@ -69,7 +69,7 @@ class ExternalResultsController < ApplicationController
   # PUT /external_results/1.json
   def update
     respond_to do |format|
-      if @external_result.update_attributes(external_result_params)
+      if @external_result.update(external_result_params)
         format.html { redirect_to competition_external_results_path(@external_result.competition), notice: 'External result was successfully updated.' }
         format.json { head :no_content }
       else

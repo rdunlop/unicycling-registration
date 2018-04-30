@@ -37,7 +37,7 @@ class ConventionSetup::EventChoicesController < ConventionSetup::BaseConventionS
   # PUT /event_choices/1
   # PUT /event_choices/1.json
   def update
-    if @event_choice.update_attributes(event_choice_params)
+    if @event_choice.update(event_choice_params)
       flash[:notice] = 'Event choice was successfully updated.'
       redirect_to [:convention_setup, @event_choice.event, :event_choices]
     else

@@ -57,7 +57,7 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
 
   # PUT /registrant_group_types/1
   def update
-    if @registrant_group_type.update_attributes(registrant_group_type_params)
+    if @registrant_group_type.update(registrant_group_type_params)
       redirect_to [:convention_setup, @registrant_group_type], notice: 'Registrant group type was successfully updated.'
     else
       render :show

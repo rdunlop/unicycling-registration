@@ -21,7 +21,7 @@ class Compete::TierAssignmentsController < ApplicationController
   def update
     authorize @competition, :assign_tiers?
 
-    if @competition.update_attributes(update_competitors_params)
+    if @competition.update(update_competitors_params)
       flash[:notice] = "updated competitor tiers/descriptions"
     else
       flash[:alert] = "Unable to update tier assignments"

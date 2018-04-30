@@ -44,7 +44,7 @@ class HeatLaneJudgeNote < ApplicationRecord
     heat_lane_result = competition.heat_lane_results.find_by(heat: heat, lane: lane)
     time_result = heat_lane_result.try(:time_result)
     if time_result
-      time_result.update_attributes(status: "DQ", comments: comments, comments_by: entered_by)
+      time_result.update(status: "DQ", comments: comments, comments_by: entered_by)
       true
     else
       competitor = heat_lane_result.matching_competitor

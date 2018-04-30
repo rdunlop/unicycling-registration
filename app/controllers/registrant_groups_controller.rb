@@ -74,7 +74,7 @@ class RegistrantGroupsController < ApplicationController
 
   # PUT /registrant_groups/1
   def update
-    if @registrant_group.update_attributes(registrant_group_params)
+    if @registrant_group.update(registrant_group_params)
       redirect_to @registrant_group, notice: 'Registrant group was successfully updated.'
     else
       render :edit

@@ -20,7 +20,7 @@ class Importers::TwoAttemptEntryImporter < Importers::CompetitionDataImporter
     end
   rescue ActiveRecord::RecordInvalid => invalid
     @errors << invalid.message
-    return false
+    false
   end
 
   # Public: Create an ImportResult object.

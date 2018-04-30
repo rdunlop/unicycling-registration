@@ -10,7 +10,7 @@ class Translations::RegistrationCostsController < Admin::TranslationsController
 
   # PUT /translations/registration_costs/1
   def update
-    if @registration_cost.update_attributes(registration_cost_params)
+    if @registration_cost.update(registration_cost_params)
       flash[:notice] = 'Registration Costs was successfully updated.'
       redirect_to action: :index
     else

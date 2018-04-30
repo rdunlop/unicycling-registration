@@ -1615,7 +1615,7 @@ if StandardSkillEntry.find_by(number: 1, letter: 'a').friendly_description.blank
 
     standard_skill_entry = StandardSkillEntry.find_by(number: skill_data[:number], letter: skill_data[:letter])
 
-    standard_skill_entry.update_attributes(
+    standard_skill_entry.update(
       friendly_description: skill_data[:friendly_description],
       additional_description_id: additional_description_id,
       skill_speed: skill_speed_description,

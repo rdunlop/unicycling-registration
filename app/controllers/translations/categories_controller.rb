@@ -10,7 +10,7 @@ class Translations::CategoriesController < Admin::TranslationsController
 
   # PUT /translations//categories/1
   def update
-    if @category.update_attributes(category_params)
+    if @category.update(category_params)
       flash[:notice] = 'Category was successfully updated.'
       redirect_to action: :index
     else
