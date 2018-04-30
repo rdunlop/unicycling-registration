@@ -67,7 +67,9 @@ class LodgingForm
   def lodging_room_option
     return nil if lodging_room_option_id.blank?
 
-    LodgingRoomOption.find(lodging_room_option_id)
+    LodgingRoomOption.joins(lodging_room_type: :lodging)
+                     .merge(Lodging.active)
+                     .find(lodging_room_option_id)
   end
 
   private

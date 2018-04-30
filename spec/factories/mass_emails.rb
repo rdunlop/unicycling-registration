@@ -24,5 +24,5 @@ end
 #
 # Indexes
 #
-#  index_mass_emails_on_email_addresses  (email_addresses)
+#  index_mass_emails_on_email_addresses  (email_addresses) USING gin
 #
