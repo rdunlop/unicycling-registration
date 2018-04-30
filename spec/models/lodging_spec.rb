@@ -18,10 +18,15 @@ end
 #
 # Table name: lodgings
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
+#  id          :bigint(8)        not null, primary key
 #  position    :integer
+#  name        :string           not null
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  visible     :boolean          default(TRUE), not null
+#
+# Indexes
+#
+#  index_lodgings_on_visible  (visible)
 #

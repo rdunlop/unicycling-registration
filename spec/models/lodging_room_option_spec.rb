@@ -2,7 +2,7 @@
 #
 # Table name: lodging_room_options
 #
-#  id                   :integer          not null, primary key
+#  id                   :bigint(8)        not null, primary key
 #  lodging_room_type_id :integer          not null
 #  position             :integer
 #  name                 :string           not null

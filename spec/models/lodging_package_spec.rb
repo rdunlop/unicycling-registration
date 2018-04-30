@@ -33,7 +33,7 @@ end
 #
 # Table name: lodging_packages
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint(8)        not null, primary key
 #  lodging_room_type_id   :integer          not null
 #  lodging_room_option_id :integer          not null
 #  total_cost_cents       :integer          not null

@@ -73,7 +73,7 @@ class ConventionSetup::LodgingsController < ConventionSetup::BaseConventionSetup
   end
 
   def lodging_params
-    params.require(:lodging).permit(:name, :description,
+    params.require(:lodging).permit(:name, :description, :visible,
                                     lodging_room_types_attributes: %i[id _destroy name description visible maximum_available])
   end
 end
