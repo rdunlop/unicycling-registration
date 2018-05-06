@@ -3,4 +3,6 @@ it:
   convention_setup:
     volunteer_opportunities:
       specific_question_results:
+        confirmation: È sicuro? Questo eliminerà tutti gli iscritti selezionati per
+          questa opzione di volontariato
         new_volunteer_role: Nuovo ruolo di volontario

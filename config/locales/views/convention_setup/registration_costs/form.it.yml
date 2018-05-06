@@ -9,3 +9,11 @@ it:
           aumenterà automaticamente fino a 36 ore dalla scadenza della data d'iscrizione.
           Questo permette agli ultimi che desiderano iscriversi una dilazione supplementare.
           (e anche a molti iscritti ritardatari)
+        registration_costs_increase_description_html: "Normalmente le iscrizioni online
+          chiudono un po' prima che il raduno inizi, le iscrizioni in loco possono
+          essere effettuate unicamente utilizzando il computer principale del raduno
+          nella hall.\r\n<br>\r\nQuesto permette il coordinamento della stampa di
+          pacchi gara, la preparazione delle liste dei partecipanti e altri preparativi
+          dell'ultimo momento\r\n<br>\r\nImpostare i costi di registrazione \"in loco\"
+          provoca l'esposizione del banner 'Chiusura delle registrazioni online' nel
+          riquadro dei costi"

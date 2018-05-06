@@ -3,5 +3,7 @@ it:
   data_entry_volunteers:
     index:
       assign_access: Assegna accesso supplementare
+      description_1: Assegnando a un utente "Accesso supplementare", il suo account
+        utente diventa selezionabili nella lista dei giudici e Data-Entry volontari.
       header: Accesso supplementare
       users_with_access: Utenti con accesso supplementare
