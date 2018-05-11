@@ -3,4 +3,6 @@ it:
   convention_setup:
     volunteer_opportunities:
       index:
+        description: Quando registrato, a un utente può essere chiesto di svolgere
+          un ruolo qualsiasi di volontariato.
         header: Opportunità di volontariato

@@ -4,3 +4,13 @@ it:
     registration_costs:
       index:
         header: Costi di registrazione
+        new_registration_cost: Nuovo costo d'iscrizione
+        range_description: Ogni costo di iscrizione definisce il periodo di tempo
+          nel quale un utente può registrarsi all'evento e al relativo costo.
+        timezone_logic_description: "Considerando che gli utenti possono vivere in
+          zone con fusi orari diversi, per essere corretti nei confronti di tutti,
+          il sistema permette i pagamento del prezzo iniziale fino a un giorno completo
+          dopo la fine del periodo di registrazione. \r\n(a dipendenza del luogo di
+          provenienza del server)"
+        timezone_logic_example: Se il primo periodo di registrazione termina il 20
+          di aprile, gli iscritti possono pagare il prezzo iniziale fino al 22 aprile.

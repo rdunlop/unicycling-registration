@@ -111,7 +111,7 @@ Extracting the new translations out of the system, and back into the source-code
 
     this will copy the remote `config/locales` onto your local machine's `config/locales`
 
-4. Examine the changes, to ensure that you aren't accidentally removing changes which you want.
+4. Examine the changes, to ensure that you aren't accidentally removing changes which you don't want.
 
 5. Commit the changes.
 
@@ -119,7 +119,7 @@ Extracting the new translations out of the system, and back into the source-code
 Other Commands available (useful for testing:
 ---------------------------------------------
 
-* Clear the current loaded Tolk Content (** This is a very destructive step. Be warned! **)
+* Clear the current loaded Tolk Content (**This is a very destructive step. Be warned!**)
 
     `rake clear_translations`
 
