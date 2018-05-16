@@ -1,4 +1,4 @@
-class AddExternalIdToRegistrant < ActiveRecord::Migration
+class AddExternalIdToRegistrant < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
 

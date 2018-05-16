@@ -1,4 +1,4 @@
-class ChangeCompetitionDataRecording < ActiveRecord::Migration
+class ChangeCompetitionDataRecording < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
   end
 

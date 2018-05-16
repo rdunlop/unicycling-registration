@@ -1,4 +1,4 @@
-class ReplaceComplexAwardModelWithSimpleOne < ActiveRecord::Migration
+class ReplaceComplexAwardModelWithSimpleOne < ActiveRecord::Migration[4.2]
   def up
     change_table :award_labels do |t|
       t.remove :first_name

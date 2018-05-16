@@ -1,4 +1,4 @@
-class PopulateRegistrantEventSignUp < ActiveRecord::Migration
+class PopulateRegistrantEventSignUp < ActiveRecord::Migration[4.2]
   # for updating the registrant data
   class EventCategory < ActiveRecord::Base
   end

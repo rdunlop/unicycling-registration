@@ -1,4 +1,4 @@
-class CreateRegistrationPeriods < ActiveRecord::Migration
+class CreateRegistrationPeriods < ActiveRecord::Migration[4.2]
   def change
     create_table :registration_periods do |t|
       t.date :start_date

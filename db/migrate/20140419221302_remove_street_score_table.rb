@@ -1,4 +1,4 @@
-class RemoveStreetScoreTable < ActiveRecord::Migration
+class RemoveStreetScoreTable < ActiveRecord::Migration[4.2]
   class StreetScore < ActiveRecord::Base
   end
 

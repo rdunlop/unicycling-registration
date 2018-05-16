@@ -1,4 +1,4 @@
-class AddJudge < ActiveRecord::Migration
+class AddJudge < ActiveRecord::Migration[4.2]
   def change
     create_table :judges do |t|
       t.integer  :event_category_id

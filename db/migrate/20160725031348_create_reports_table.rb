@@ -1,4 +1,4 @@
-class CreateReportsTable < ActiveRecord::Migration
+class CreateReportsTable < ActiveRecord::Migration[4.2]
   def change
     create_table :reports do |t|
       t.string :report_type, null: false

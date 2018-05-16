@@ -1,4 +1,4 @@
-class UpdateFieldsInRegistrant < ActiveRecord::Migration
+class UpdateFieldsInRegistrant < ActiveRecord::Migration[4.2]
   def up
     remove_column :registrants, :address_line_1
     remove_column :registrants, :address_line_2

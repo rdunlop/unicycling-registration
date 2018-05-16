@@ -1,4 +1,4 @@
-class RemoveClubFromUser < ActiveRecord::Migration
+class RemoveClubFromUser < ActiveRecord::Migration[4.2]
   def up
     remove_column :users, :club_admin
     remove_column :users, :club

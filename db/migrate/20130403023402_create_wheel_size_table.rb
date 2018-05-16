@@ -1,4 +1,4 @@
-class CreateWheelSizeTable < ActiveRecord::Migration
+class CreateWheelSizeTable < ActiveRecord::Migration[4.2]
   def change
     create_table :wheel_sizes do |t|
       t.integer :position

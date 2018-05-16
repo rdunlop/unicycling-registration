@@ -1,4 +1,4 @@
-class FixMembershipConfigValue < ActiveRecord::Migration
+class FixMembershipConfigValue < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE event_configurations SET organization_membership_type = 'usa' WHERE organization_membership_type = 'USA'"
   end

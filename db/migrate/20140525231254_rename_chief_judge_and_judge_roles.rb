@@ -1,4 +1,4 @@
-class RenameChiefJudgeAndJudgeRoles < ActiveRecord::Migration
+class RenameChiefJudgeAndJudgeRoles < ActiveRecord::Migration[4.2]
   class Role < ActiveRecord::Base
   end
   def up

@@ -1,4 +1,4 @@
-class UpdateFlatlandJudgeType < ActiveRecord::Migration
+class UpdateFlatlandJudgeType < ActiveRecord::Migration[4.2]
   class JudgeType < ActiveRecord::Base
   end
 

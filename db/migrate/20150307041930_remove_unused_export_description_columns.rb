@@ -1,4 +1,4 @@
-class RemoveUnusedExportDescriptionColumns < ActiveRecord::Migration
+class RemoveUnusedExportDescriptionColumns < ActiveRecord::Migration[4.2]
   def change
     remove_column :event_choices, :export_name, :string
     remove_column :events, :export_name, :string

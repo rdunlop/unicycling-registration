@@ -1,4 +1,4 @@
-class CreateTieBreakAdjustment < ActiveRecord::Migration
+class CreateTieBreakAdjustment < ActiveRecord::Migration[4.2]
   def change
     create_table :tie_break_adjustments do |t|
       t.integer :tie_break_place

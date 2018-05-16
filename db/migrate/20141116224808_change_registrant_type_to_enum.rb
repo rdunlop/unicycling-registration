@@ -1,4 +1,4 @@
-class ChangeRegistrantTypeToEnum < ActiveRecord::Migration
+class ChangeRegistrantTypeToEnum < ActiveRecord::Migration[4.2]
   def up
     add_column :registrants, :registrant_type, :string, default: 'competitor'
     execute "UPDATE registrants SET registrant_type = 'noncompetitor' where competitor = false"

@@ -1,4 +1,4 @@
-class ChangeColumnsToSupportArbitraryUniOrganizationMembership < ActiveRecord::Migration
+class ChangeColumnsToSupportArbitraryUniOrganizationMembership < ActiveRecord::Migration[4.2]
   def up
     rename_column :event_configurations, :usa_membership_config, :organization_membership_config
     add_column :event_configurations, :organization_membership_type, :string

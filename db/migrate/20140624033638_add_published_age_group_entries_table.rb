@@ -1,4 +1,4 @@
-class AddPublishedAgeGroupEntriesTable < ActiveRecord::Migration
+class AddPublishedAgeGroupEntriesTable < ActiveRecord::Migration[4.2]
   def change
     create_table :published_age_group_entries do |t|
       t.references :competition

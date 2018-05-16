@@ -1,4 +1,4 @@
-class ConvertToSingleWaiverSetting < ActiveRecord::Migration
+class ConvertToSingleWaiverSetting < ActiveRecord::Migration[4.2]
   def up
     add_column :event_configurations, :waiver, :string, default: "none"
 

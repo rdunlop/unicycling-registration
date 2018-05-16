@@ -1,4 +1,4 @@
-class CreateRequiredExpenseItems < ActiveRecord::Migration
+class CreateRequiredExpenseItems < ActiveRecord::Migration[4.2]
   class RegistrantExpenseItem < ActiveRecord::Base
   end
 

@@ -1,4 +1,4 @@
-class CreateExternalResults < ActiveRecord::Migration
+class CreateExternalResults < ActiveRecord::Migration[4.2]
   def change
     create_table :external_results do |t|
       t.integer :competitor_id

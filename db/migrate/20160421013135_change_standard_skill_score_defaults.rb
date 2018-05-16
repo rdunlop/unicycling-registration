@@ -1,4 +1,4 @@
-class ChangeStandardSkillScoreDefaults < ActiveRecord::Migration
+class ChangeStandardSkillScoreDefaults < ActiveRecord::Migration[4.2]
   def up
     change_column_default :standard_skill_score_entries, :difficulty_devaluation_percent, 0
     change_column_default :standard_skill_score_entries, :wave, 0

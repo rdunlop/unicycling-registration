@@ -1,4 +1,4 @@
-class SplitRegistrationPeriodInTwo < ActiveRecord::Migration
+class SplitRegistrationPeriodInTwo < ActiveRecord::Migration[4.2]
   class RegistrationPeriod < ActiveRecord::Base
     translates :name
   end

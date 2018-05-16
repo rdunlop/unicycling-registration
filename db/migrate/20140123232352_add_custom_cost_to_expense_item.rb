@@ -1,4 +1,4 @@
-class AddCustomCostToExpenseItem < ActiveRecord::Migration
+class AddCustomCostToExpenseItem < ActiveRecord::Migration[4.2]
   def change
     add_column :expense_items, :has_custom_cost, :boolean, default: false
     add_column :registrant_expense_items, :custom_cost, :decimal

@@ -1,4 +1,4 @@
-class AddUsaConfirmFields < ActiveRecord::Migration
+class AddUsaConfirmFields < ActiveRecord::Migration[4.2]
   def change
     add_column :contact_details, :usa_confirmed_paid, :boolean, default: false
     add_column :contact_details, :usa_family_membership_holder_id, :integer

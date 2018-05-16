@@ -1,4 +1,4 @@
-class AddStandardSkillDataEntry < ActiveRecord::Migration
+class AddStandardSkillDataEntry < ActiveRecord::Migration[4.2]
   def change
     create_table :standard_skill_entries do |t|
       t.integer  :number

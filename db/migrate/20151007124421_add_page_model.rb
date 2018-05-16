@@ -1,4 +1,4 @@
-class AddPageModel < ActiveRecord::Migration
+class AddPageModel < ActiveRecord::Migration[4.2]
   class Page < ActiveRecord::Base
     translates :title, :body
   end

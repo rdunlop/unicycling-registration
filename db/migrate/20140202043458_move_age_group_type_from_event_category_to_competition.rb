@@ -1,4 +1,4 @@
-class MoveAgeGroupTypeFromEventCategoryToCompetition < ActiveRecord::Migration
+class MoveAgeGroupTypeFromEventCategoryToCompetition < ActiveRecord::Migration[4.2]
   class EventCategory < ActiveRecord::Base
     belongs_to :age_group_type
     belongs_to :competition

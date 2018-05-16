@@ -1,4 +1,4 @@
-class ChangeStreetScoringTypes < ActiveRecord::Migration
+class ChangeStreetScoringTypes < ActiveRecord::Migration[4.2]
   def up
     jt = JudgeType.find_by(name: "Street Judge Type")
     if jt&.val_1_description == "?"

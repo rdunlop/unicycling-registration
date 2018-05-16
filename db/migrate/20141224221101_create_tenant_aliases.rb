@@ -1,4 +1,4 @@
-class CreateTenantAliases < ActiveRecord::Migration
+class CreateTenantAliases < ActiveRecord::Migration[4.2]
   def change
     create_table :tenant_aliases do |t|
       t.integer :tenant_id, null: false

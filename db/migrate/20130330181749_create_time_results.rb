@@ -1,4 +1,4 @@
-class CreateTimeResults < ActiveRecord::Migration
+class CreateTimeResults < ActiveRecord::Migration[4.2]
   def change
     create_table :time_results do |t|
       t.references :event_category

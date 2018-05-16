@@ -1,4 +1,4 @@
-class CreateCombinedCompetitionEntries < ActiveRecord::Migration
+class CreateCombinedCompetitionEntries < ActiveRecord::Migration[4.2]
   def change
     create_table :combined_competition_entries do |t|
       t.integer :combined_competition_id

@@ -1,4 +1,4 @@
-class SetAllRegistrantsToNotBeDeleted < ActiveRecord::Migration
+class SetAllRegistrantsToNotBeDeleted < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
 

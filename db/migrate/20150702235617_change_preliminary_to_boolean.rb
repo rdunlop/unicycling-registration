@@ -1,4 +1,4 @@
-class ChangePreliminaryToBoolean < ActiveRecord::Migration
+class ChangePreliminaryToBoolean < ActiveRecord::Migration[4.2]
   def up
     add_column :time_results, :preliminary, :boolean
 

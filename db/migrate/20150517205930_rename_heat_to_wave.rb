@@ -1,4 +1,4 @@
-class RenameHeatToWave < ActiveRecord::Migration
+class RenameHeatToWave < ActiveRecord::Migration[4.2]
   def change
     rename_column :competitors, :heat, :wave
     rename_column :heat_times, :heat, :wave

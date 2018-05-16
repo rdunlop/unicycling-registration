@@ -1,4 +1,4 @@
-class MoveEventCategoryAssociationIntoCompetition < ActiveRecord::Migration
+class MoveEventCategoryAssociationIntoCompetition < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
     has_one :event_category
   end

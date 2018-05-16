@@ -1,4 +1,4 @@
-class ChangeDistanceToFaster < ActiveRecord::Migration
+class ChangeDistanceToFaster < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
   end
 

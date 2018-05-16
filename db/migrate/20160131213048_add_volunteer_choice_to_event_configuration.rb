@@ -1,4 +1,4 @@
-class AddVolunteerChoiceToEventConfiguration < ActiveRecord::Migration
+class AddVolunteerChoiceToEventConfiguration < ActiveRecord::Migration[4.2]
   class VolunteerOpportunity < ActiveRecord::Base
   end
 
