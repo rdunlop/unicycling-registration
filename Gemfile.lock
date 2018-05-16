@@ -571,7 +571,7 @@ GEM
     timeliness (0.3.8)
     timers (4.1.2)
       hitimes
-    tinymce-rails (4.7.11)
+    tinymce-rails (4.7.13)
       railties (>= 3.1.1)
     ttfunk (1.5.1)
     tzinfo (1.2.5)
