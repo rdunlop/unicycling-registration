@@ -1,4 +1,4 @@
-class MakeEnteredAtRequired < ActiveRecord::Migration
+class MakeEnteredAtRequired < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE time_results SET entered_at = created_at WHERE entered_at IS NULL"
     execute "UPDATE external_results SET entered_at = created_at WHERE entered_at IS NULL"

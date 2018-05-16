@@ -1,4 +1,4 @@
-class AddPartialValidationToEventConfiguration < ActiveRecord::Migration
+class AddPartialValidationToEventConfiguration < ActiveRecord::Migration[4.2]
   def up
     add_column :event_configurations, :validations_applied, :integer
 

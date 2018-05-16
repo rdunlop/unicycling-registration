@@ -1,4 +1,4 @@
-class ChangeRankedScoringClassName < ActiveRecord::Migration
+class ChangeRankedScoringClassName < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
   end
 

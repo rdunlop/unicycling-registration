@@ -1,4 +1,4 @@
-class ChangeStylesFromYearSpecific < ActiveRecord::Migration
+class ChangeStylesFromYearSpecific < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE event_configurations SET style_name='base_blue_pink' WHERE style_name='unicon_17'"
     execute "UPDATE event_configurations SET style_name='base_green_blue' WHERE style_name='naucc_2013'"

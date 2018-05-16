@@ -1,4 +1,4 @@
-class AddEventIdToRegistrantEventSignUp < ActiveRecord::Migration
+class AddEventIdToRegistrantEventSignUp < ActiveRecord::Migration[4.2]
   class RegistrantEventSignUp < ActiveRecord::Base
   end
   class EventCategory < ActiveRecord::Base

@@ -1,4 +1,4 @@
-class RemoveBaseTranslationColmuns < ActiveRecord::Migration
+class RemoveBaseTranslationColmuns < ActiveRecord::Migration[4.2]
   def change
     remove_column :categories, :name, :string
 

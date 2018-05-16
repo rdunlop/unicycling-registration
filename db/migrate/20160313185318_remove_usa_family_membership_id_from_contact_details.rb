@@ -1,4 +1,4 @@
-class RemoveUsaFamilyMembershipIdFromContactDetails < ActiveRecord::Migration
+class RemoveUsaFamilyMembershipIdFromContactDetails < ActiveRecord::Migration[4.2]
   def up
     remove_column :contact_details, :usa_family_membership_holder_id
   end

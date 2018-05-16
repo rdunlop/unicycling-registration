@@ -1,4 +1,4 @@
-class SpecifyDateOfLockingCompetition < ActiveRecord::Migration
+class SpecifyDateOfLockingCompetition < ActiveRecord::Migration[4.2]
   def up
     add_column :competitions, :locked_at, :datetime
     add_column :competitions, :published_at, :datetime

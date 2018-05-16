@@ -1,4 +1,4 @@
-class SetPrimaryChoiceLabelToEventName < ActiveRecord::Migration
+class SetPrimaryChoiceLabelToEventName < ActiveRecord::Migration[4.2]
   class EventChoice < ActiveRecord::Base
   end
   class Event < ActiveRecord::Base

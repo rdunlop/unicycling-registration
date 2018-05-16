@@ -1,4 +1,4 @@
-class CreateRefundModel < ActiveRecord::Migration
+class CreateRefundModel < ActiveRecord::Migration[4.2]
   def up
     create_table :refunds do |t|
       t.integer :user_id

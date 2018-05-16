@@ -1,4 +1,4 @@
-class InitiallyRegistrationIsClosed < ActiveRecord::Migration
+class InitiallyRegistrationIsClosed < ActiveRecord::Migration[4.2]
   def up
     add_column :event_configurations, :under_construction, :boolean
     # Set existing EventConfigurations to have under_construction false

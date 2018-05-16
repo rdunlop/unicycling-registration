@@ -1,4 +1,4 @@
-class AddAwardLabelAttributesToCompetition < ActiveRecord::Migration
+class AddAwardLabelAttributesToCompetition < ActiveRecord::Migration[4.2]
   class Event < ActiveRecord::Base
   end
 

@@ -1,4 +1,4 @@
-class CreateRegistrantChoices < ActiveRecord::Migration
+class CreateRegistrantChoices < ActiveRecord::Migration[4.2]
   def change
     create_table :registrant_choices do |t|
       t.integer :registrant_id

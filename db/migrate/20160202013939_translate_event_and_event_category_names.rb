@@ -1,4 +1,4 @@
-class TranslateEventAndEventCategoryNames < ActiveRecord::Migration
+class TranslateEventAndEventCategoryNames < ActiveRecord::Migration[4.2]
   class Event < ActiveRecord::Base
     translates :name
   end

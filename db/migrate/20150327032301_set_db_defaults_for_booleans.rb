@@ -1,4 +1,4 @@
-class SetDbDefaultsForBooleans < ActiveRecord::Migration
+class SetDbDefaultsForBooleans < ActiveRecord::Migration[4.2]
   def up
     change_column_default :additional_registrant_accesses, :declined, false
     change_column_default :additional_registrant_accesses, :accepted_readonly, false

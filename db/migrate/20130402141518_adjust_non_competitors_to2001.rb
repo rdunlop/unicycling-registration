@@ -1,4 +1,4 @@
-class AdjustNonCompetitorsTo2001 < ActiveRecord::Migration
+class AdjustNonCompetitorsTo2001 < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
 

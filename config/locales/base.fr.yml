@@ -10,6 +10,7 @@ fr:
   competitor: Compétiteur
   date:
     formats:
+      lodging_date_format: "%b %d, %Y"
       registration_date_format: "%d %b, %Y"
     order:
     - :day
@@ -39,6 +40,7 @@ fr:
     add_name: Nom
     add_volunteers: Bénévole
     expenses: Frais
+    lodging: Logement
     music: Musique
     set_wheel_sizes: Taille de la roue
   'yes': Oui

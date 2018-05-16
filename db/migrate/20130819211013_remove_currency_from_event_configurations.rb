@@ -1,4 +1,4 @@
-class RemoveCurrencyFromEventConfigurations < ActiveRecord::Migration
+class RemoveCurrencyFromEventConfigurations < ActiveRecord::Migration[4.2]
   def up
     remove_column :event_configurations, :currency
   end

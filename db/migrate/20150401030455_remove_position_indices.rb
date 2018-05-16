@@ -1,4 +1,4 @@
-class RemovePositionIndices < ActiveRecord::Migration
+class RemovePositionIndices < ActiveRecord::Migration[4.2]
   def up
     remove_index :event_categories, name: 'index_event_categories_on_event_id_and_position'
     remove_index :event_choices, %i[event_id position]

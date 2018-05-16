@@ -1,4 +1,4 @@
-class AddPaypalToEventConfigurations < ActiveRecord::Migration
+class AddPaypalToEventConfigurations < ActiveRecord::Migration[4.2]
   class EventConfiguration < ActiveRecord::Base
   end
 

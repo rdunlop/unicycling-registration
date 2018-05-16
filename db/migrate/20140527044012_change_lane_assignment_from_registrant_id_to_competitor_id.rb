@@ -1,4 +1,4 @@
-class ChangeLaneAssignmentFromRegistrantIdToCompetitorId < ActiveRecord::Migration
+class ChangeLaneAssignmentFromRegistrantIdToCompetitorId < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
     has_many :lane_assignments, dependent: :destroy
     has_many :competitors

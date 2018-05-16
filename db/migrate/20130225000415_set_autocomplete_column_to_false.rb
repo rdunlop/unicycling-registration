@@ -1,4 +1,4 @@
-class SetAutocompleteColumnToFalse < ActiveRecord::Migration
+class SetAutocompleteColumnToFalse < ActiveRecord::Migration[4.2]
   class EventChoice < ActiveRecord::Base
   end
 

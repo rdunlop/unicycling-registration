@@ -1,4 +1,4 @@
-class CreateAwardLabels < ActiveRecord::Migration
+class CreateAwardLabels < ActiveRecord::Migration[4.2]
   def change
     create_table :award_labels do |t|
       t.integer :bib_number

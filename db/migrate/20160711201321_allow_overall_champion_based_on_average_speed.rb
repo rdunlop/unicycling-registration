@@ -1,4 +1,4 @@
-class AllowOverallChampionBasedOnAverageSpeed < ActiveRecord::Migration
+class AllowOverallChampionBasedOnAverageSpeed < ActiveRecord::Migration[4.2]
   def up
     add_column :combined_competitions, :calculation_mode, :string
     execute "UPDATE combined_competitions SET calculation_mode = 'default'"

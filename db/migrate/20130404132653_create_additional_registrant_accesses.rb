@@ -1,4 +1,4 @@
-class CreateAdditionalRegistrantAccesses < ActiveRecord::Migration
+class CreateAdditionalRegistrantAccesses < ActiveRecord::Migration[4.2]
   def change
     create_table :additional_registrant_accesses do |t|
       t.integer :user_id

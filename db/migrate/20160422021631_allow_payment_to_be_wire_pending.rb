@@ -1,4 +1,4 @@
-class AllowPaymentToBeWirePending < ActiveRecord::Migration
+class AllowPaymentToBeWirePending < ActiveRecord::Migration[4.2]
   def up
     add_column :payments, :offline_pending, :boolean, default: false, null: false
     add_column :payments, :offline_pending_date, :datetime

@@ -46,6 +46,7 @@ fr:
         start_date: Premier jour de compétition
         style_name: Style de page web
         under_construction: En construction
+        waiver_file_name: Décharge PDF à imprimer
     models:
       event_configurations:
         one: Configuration d'événement

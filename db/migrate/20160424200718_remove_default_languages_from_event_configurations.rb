@@ -1,4 +1,4 @@
-class RemoveDefaultLanguagesFromEventConfigurations < ActiveRecord::Migration
+class RemoveDefaultLanguagesFromEventConfigurations < ActiveRecord::Migration[4.2]
   def up
     change_column_default :event_configurations, :enabled_locales, nil
   end

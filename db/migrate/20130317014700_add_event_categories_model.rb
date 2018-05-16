@@ -1,4 +1,4 @@
-class AddEventCategoriesModel < ActiveRecord::Migration
+class AddEventCategoriesModel < ActiveRecord::Migration[4.2]
   class EventChoice < ActiveRecord::Base
   end
   class EventCategory < ActiveRecord::Base

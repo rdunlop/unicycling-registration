@@ -1,4 +1,4 @@
-class CreateImportedDataTable < ActiveRecord::Migration
+class CreateImportedDataTable < ActiveRecord::Migration[4.2]
   def change
     create_table :import_results do |t|
       t.integer :user_id

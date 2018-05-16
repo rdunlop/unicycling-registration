@@ -1,4 +1,4 @@
-class AddTranslationsToExpenseGroupExpenseItems < ActiveRecord::Migration
+class AddTranslationsToExpenseGroupExpenseItems < ActiveRecord::Migration[4.2]
   class ExpenseGroup < ActiveRecord::Base
     translates :group_name
   end

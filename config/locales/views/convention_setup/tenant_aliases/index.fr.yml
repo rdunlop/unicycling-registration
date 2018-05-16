@@ -4,6 +4,7 @@ fr:
     tenant_aliases:
       index:
         accessible_url_html: Cette convention sera <u>toujours</u> accessible à %{link}
+        alias_is_primary_domain: Cet Alias est maintenant le principal domaine.
         alias_verified: Alias vérifié
         base_dns_cname_html: MEttez en place un enregistrement DNS CNAME de "&lt;votreurl.votresite.com&gt;."
           à
@@ -12,6 +13,7 @@ fr:
           DNS CNAME pour créer un alias.
         current_url_html: Le système d'inscription est actuellement configuré pour
           être en ligne à %{link}
+        delete_alias: Supprimer l'Alias
         delete_current_primary_domain: Supprimer le domaine primaire actuel
         header: Configuration du domaine
         must_save_warning: Avant de pouvoir activer l'alias, vous devez "Sauvegarder

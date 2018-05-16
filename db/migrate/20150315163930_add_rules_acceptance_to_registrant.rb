@@ -1,4 +1,4 @@
-class AddRulesAcceptanceToRegistrant < ActiveRecord::Migration
+class AddRulesAcceptanceToRegistrant < ActiveRecord::Migration[4.2]
   def change
     add_column :registrants, :rules_accepted, :boolean, default: false, null: false
     add_column :event_configurations, :rules_file_name, :string, default: nil

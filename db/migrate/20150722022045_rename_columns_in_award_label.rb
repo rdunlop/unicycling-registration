@@ -1,4 +1,4 @@
-class RenameColumnsInAwardLabel < ActiveRecord::Migration
+class RenameColumnsInAwardLabel < ActiveRecord::Migration[4.2]
   def change
     rename_column :award_labels, :competitor_name, :line_1
     rename_column :award_labels, :competition_name, :line_2

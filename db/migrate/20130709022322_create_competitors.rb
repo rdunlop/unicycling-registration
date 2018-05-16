@@ -1,4 +1,4 @@
-class CreateCompetitors < ActiveRecord::Migration
+class CreateCompetitors < ActiveRecord::Migration[4.2]
   def change
     create_table :competitors do |t|
       t.integer  :event_category_id

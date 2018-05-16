@@ -1,4 +1,4 @@
-class AddMissingEventChoiceIndex < ActiveRecord::Migration
+class AddMissingEventChoiceIndex < ActiveRecord::Migration[4.2]
   def change
     add_index :coupon_code_expense_items, [:coupon_code_id]
     add_index :coupon_code_expense_items, [:expense_item_id]

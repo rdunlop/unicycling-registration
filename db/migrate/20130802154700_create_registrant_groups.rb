@@ -1,4 +1,4 @@
-class CreateRegistrantGroups < ActiveRecord::Migration
+class CreateRegistrantGroups < ActiveRecord::Migration[4.2]
   def change
     create_table :registrant_groups do |t|
       t.string :name

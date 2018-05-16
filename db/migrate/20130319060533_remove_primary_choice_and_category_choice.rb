@@ -1,4 +1,4 @@
-class RemovePrimaryChoiceAndCategoryChoice < ActiveRecord::Migration
+class RemovePrimaryChoiceAndCategoryChoice < ActiveRecord::Migration[4.2]
   class EventChoice < ActiveRecord::Base
   end
   class RegistrantChoice < ActiveRecord::Base

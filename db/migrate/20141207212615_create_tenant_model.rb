@@ -1,4 +1,4 @@
-class CreateTenantModel < ActiveRecord::Migration
+class CreateTenantModel < ActiveRecord::Migration[4.2]
   def change
     create_table :tenants do |t|
       t.string :subdomain

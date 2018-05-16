@@ -1,4 +1,4 @@
-class CreateHeatLaneResultsTable < ActiveRecord::Migration
+class CreateHeatLaneResultsTable < ActiveRecord::Migration[4.2]
   def change
     create_table :heat_lane_results do |t|
       t.integer :competition_id, null: false

@@ -1,4 +1,4 @@
-class AddOfflinePaymentDetails < ActiveRecord::Migration
+class AddOfflinePaymentDetails < ActiveRecord::Migration[4.2]
   def up
     add_column :event_configurations, :paypal_mode, :string, default: "disabled"
     execute "UPDATE event_configurations SET paypal_mode = 'test' WHERE paypal_test = true"

@@ -1,4 +1,4 @@
-class CreateMusicModel < ActiveRecord::Migration
+class CreateMusicModel < ActiveRecord::Migration[4.2]
   def change
     remove_column :registrant_choices, :music, :string
     create_table :songs do |t|

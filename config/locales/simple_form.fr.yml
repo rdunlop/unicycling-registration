@@ -92,6 +92,9 @@ fr:
           ajouter des événements à une inscription. (bien qu'il puisse en supprimer)
         event_url: Le logo dans la barre de menu renverra vers cet URL.
         iuf: Activer ceci permet des questions sur l'adhésion à l'IUF.
+        lodging_end_date: Après cette date, SEULS les administrateurs peuvent ajouter/supprimer
+          des logements d'une inscription (bien que les logements existants puissent
+          toujours être achetés)
         logo_file: Les logos doivent faire 93px x 38px
         max_award_place: Ceci configure la place maximum pour laquelle il faut imprimer
           les récompenses. (s'applique à la fois aux catégories d'âge et aux experts)

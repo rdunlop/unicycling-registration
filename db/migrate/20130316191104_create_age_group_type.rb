@@ -1,4 +1,4 @@
-class CreateAgeGroupType < ActiveRecord::Migration
+class CreateAgeGroupType < ActiveRecord::Migration[4.2]
   def change
     create_table :age_group_types do |t|
       t.string :name

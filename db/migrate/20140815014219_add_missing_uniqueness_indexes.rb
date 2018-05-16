@@ -1,4 +1,4 @@
-class AddMissingUniquenessIndexes < ActiveRecord::Migration
+class AddMissingUniquenessIndexes < ActiveRecord::Migration[4.2]
   def up
     add_index :additional_registrant_accesses, %i[registrant_id user_id], unique: true, name: "ada_reg_user"
 

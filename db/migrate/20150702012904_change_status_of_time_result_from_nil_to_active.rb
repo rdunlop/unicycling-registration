@@ -1,4 +1,4 @@
-class ChangeStatusOfTimeResultFromNilToActive < ActiveRecord::Migration
+class ChangeStatusOfTimeResultFromNilToActive < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE time_results SET status = 'active' WHERE status IS NULL"
     change_column_null :time_results, :status, false

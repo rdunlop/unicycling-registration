@@ -1,4 +1,4 @@
-class CreatePageImages < ActiveRecord::Migration
+class CreatePageImages < ActiveRecord::Migration[4.2]
   def change
     create_table :page_images do |t|
       t.integer :page_id, null: false

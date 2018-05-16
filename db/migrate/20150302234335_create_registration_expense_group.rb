@@ -1,4 +1,4 @@
-class CreateRegistrationExpenseGroup < ActiveRecord::Migration
+class CreateRegistrationExpenseGroup < ActiveRecord::Migration[4.2]
   class RegistrationPeriod < ActiveRecord::Base
   end
 

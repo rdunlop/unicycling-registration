@@ -1,4 +1,4 @@
-class AddAwardedBooleanToCompetition < ActiveRecord::Migration
+class AddAwardedBooleanToCompetition < ActiveRecord::Migration[4.2]
   def change
     add_column :competitions, :awarded, :boolean, default: false
   end

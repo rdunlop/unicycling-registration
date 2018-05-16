@@ -1,4 +1,4 @@
-class AddRefundedBooleanToPaymentDetails < ActiveRecord::Migration
+class AddRefundedBooleanToPaymentDetails < ActiveRecord::Migration[4.2]
   class PaymentDetail < ActiveRecord::Base
     has_one :refund_detail
   end

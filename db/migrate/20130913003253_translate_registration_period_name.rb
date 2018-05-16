@@ -1,4 +1,4 @@
-class TranslateRegistrationPeriodName < ActiveRecord::Migration
+class TranslateRegistrationPeriodName < ActiveRecord::Migration[4.2]
   class RegistrationPeriod < ActiveRecord::Base
     translates :name
   end

@@ -1,4 +1,4 @@
-class AddAccessCodeToRegistrant < ActiveRecord::Migration
+class AddAccessCodeToRegistrant < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
 

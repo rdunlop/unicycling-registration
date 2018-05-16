@@ -1,0 +1,10 @@
+---
+fr:
+  activerecord:
+    attributes:
+      lodging_room_type:
+        minimum_duration_days: Nombre de jours minimum pour une réservation
+    models:
+      lodging_room_type:
+        one: Type de chambre
+        other: Type de chambres
