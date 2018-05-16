@@ -1,4 +1,4 @@
-class ChangeDecimalsToCents < ActiveRecord::Migration
+class ChangeDecimalsToCents < ActiveRecord::Migration[4.2]
   def up
     add_column :coupon_codes, :price_cents, :integer
     execute "UPDATE coupon_codes SET price_cents = (price * 100)"

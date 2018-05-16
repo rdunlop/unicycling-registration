@@ -1,4 +1,4 @@
-class AddUsaMembershipConfigToEventConfigurations < ActiveRecord::Migration
+class AddUsaMembershipConfigToEventConfigurations < ActiveRecord::Migration[4.2]
   def up
     add_column :event_configurations, :usa_membership_config, :boolean, default: false
     execute "UPDATE event_configurations SET usa_membership_config = true WHERE usa = true"

@@ -1,4 +1,4 @@
-class AddCalculatedIdToCompetitor < ActiveRecord::Migration
+class AddCalculatedIdToCompetitor < ActiveRecord::Migration[4.2]
   class Competitor < ActiveRecord::Base
     has_many :members
   end

@@ -1,4 +1,4 @@
-class CreateHeatTimesTable < ActiveRecord::Migration
+class CreateHeatTimesTable < ActiveRecord::Migration[4.2]
   def change
     create_table :heat_times do |t|
       t.references :competition

@@ -1,4 +1,4 @@
-class AddDefaultToTwoResultStatus < ActiveRecord::Migration
+class AddDefaultToTwoResultStatus < ActiveRecord::Migration[4.2]
   def up
     execute "UPDATE two_attempt_entries SET status_1 = 'active' WHERE status_1 IS NULL"
     execute "UPDATE two_attempt_entries SET status_2 = 'active' WHERE status_2 IS NULL"

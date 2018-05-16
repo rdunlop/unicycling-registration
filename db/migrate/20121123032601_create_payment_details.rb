@@ -1,4 +1,4 @@
-class CreatePaymentDetails < ActiveRecord::Migration
+class CreatePaymentDetails < ActiveRecord::Migration[4.2]
   def change
     create_table :payment_details do |t|
       t.integer :payment_id

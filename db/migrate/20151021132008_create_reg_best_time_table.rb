@@ -1,4 +1,4 @@
-class CreateRegBestTimeTable < ActiveRecord::Migration
+class CreateRegBestTimeTable < ActiveRecord::Migration[4.2]
   def change
     add_column :events, :best_time_format, :string, null: false, default: "none"
     create_table :registrant_best_times do |t|

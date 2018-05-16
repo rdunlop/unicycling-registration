@@ -1,4 +1,4 @@
-class AddScores < ActiveRecord::Migration
+class AddScores < ActiveRecord::Migration[4.2]
   def change
     create_table :boundary_scores do |t|
       t.integer  :competitor_id

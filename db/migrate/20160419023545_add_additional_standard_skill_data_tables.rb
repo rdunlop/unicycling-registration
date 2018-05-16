@@ -1,4 +1,4 @@
-class AddAdditionalStandardSkillDataTables < ActiveRecord::Migration
+class AddAdditionalStandardSkillDataTables < ActiveRecord::Migration[4.2]
   def up
     create_table :standard_skill_entry_transitions do |t|
       t.string :description

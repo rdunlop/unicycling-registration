@@ -1,4 +1,4 @@
-class AddForeignKeyIndexes < ActiveRecord::Migration
+class AddForeignKeyIndexes < ActiveRecord::Migration[4.2]
   def change
     add_index "additional_registrant_accesses", ["user_id"], name: "index_additional_registrant_accesses_user_id"
     add_index "additional_registrant_accesses", ["registrant_id"], name: "index_additional_registrant_accesses_registrant_id"

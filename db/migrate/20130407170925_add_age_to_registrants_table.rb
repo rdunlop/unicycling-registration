@@ -1,4 +1,4 @@
-class AddAgeToRegistrantsTable < ActiveRecord::Migration
+class AddAgeToRegistrantsTable < ActiveRecord::Migration[4.2]
   class EventConfiguration < ActiveRecord::Base
   end
 

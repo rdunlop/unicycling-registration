@@ -1,4 +1,4 @@
-class ChangeAllMultiplesToCategories < ActiveRecord::Migration
+class ChangeAllMultiplesToCategories < ActiveRecord::Migration[4.2]
   class EventChoice < ActiveRecord::Base
   end
 

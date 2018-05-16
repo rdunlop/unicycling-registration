@@ -1,4 +1,4 @@
-class RemoveRefundFromPaymentDetail < ActiveRecord::Migration
+class RemoveRefundFromPaymentDetail < ActiveRecord::Migration[4.2]
   def up
     remove_column :payment_details, :refund
   end

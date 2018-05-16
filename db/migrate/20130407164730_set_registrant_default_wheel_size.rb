@@ -1,4 +1,4 @@
-class SetRegistrantDefaultWheelSize < ActiveRecord::Migration
+class SetRegistrantDefaultWheelSize < ActiveRecord::Migration[4.2]
   class EventConfiguration < ActiveRecord::Base
   end
   class WheelSize < ActiveRecord::Base

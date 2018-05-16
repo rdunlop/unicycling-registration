@@ -1,4 +1,4 @@
-class CreateMassEmailModel < ActiveRecord::Migration
+class CreateMassEmailModel < ActiveRecord::Migration[4.2]
   def change
     create_table :mass_emails do |t|
       t.integer :sent_by_id, null: false

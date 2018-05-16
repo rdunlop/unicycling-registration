@@ -1,4 +1,4 @@
-class ChangeNameOfDistanceToHighLong < ActiveRecord::Migration
+class ChangeNameOfDistanceToHighLong < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
   end
 

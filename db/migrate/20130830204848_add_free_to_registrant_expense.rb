@@ -1,4 +1,4 @@
-class AddFreeToRegistrantExpense < ActiveRecord::Migration
+class AddFreeToRegistrantExpense < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
   class RegistrantExpenseItem < ActiveRecord::Base

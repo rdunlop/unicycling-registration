@@ -1,4 +1,4 @@
-class MoveEventClassFromEventToCompetition < ActiveRecord::Migration
+class MoveEventClassFromEventToCompetition < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
     belongs_to :event
   end

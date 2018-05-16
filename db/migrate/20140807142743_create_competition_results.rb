@@ -1,4 +1,4 @@
-class CreateCompetitionResults < ActiveRecord::Migration
+class CreateCompetitionResults < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
   end
 

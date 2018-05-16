@@ -1,4 +1,4 @@
-class CreateLaneAssignments < ActiveRecord::Migration
+class CreateLaneAssignments < ActiveRecord::Migration[4.2]
   def change
     create_table :lane_assignments do |t|
       t.integer :competition_id

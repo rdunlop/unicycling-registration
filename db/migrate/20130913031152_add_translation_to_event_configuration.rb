@@ -1,4 +1,4 @@
-class AddTranslationToEventConfiguration < ActiveRecord::Migration
+class AddTranslationToEventConfiguration < ActiveRecord::Migration[4.2]
   class EventConfiguration < ActiveRecord::Base
     translates :short_name, :long_name, :location, :dates_description
   end

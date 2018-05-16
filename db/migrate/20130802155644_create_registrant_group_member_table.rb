@@ -1,4 +1,4 @@
-class CreateRegistrantGroupMemberTable < ActiveRecord::Migration
+class CreateRegistrantGroupMemberTable < ActiveRecord::Migration[4.2]
   def change
     create_table :registrant_group_members do |t|
       t.integer :registrant_id

@@ -1,4 +1,4 @@
-class CreateContactInfoTable < ActiveRecord::Migration
+class CreateContactInfoTable < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
   class ContactDetail < ActiveRecord::Base

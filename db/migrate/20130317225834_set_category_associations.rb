@@ -1,4 +1,4 @@
-class SetCategoryAssociations < ActiveRecord::Migration
+class SetCategoryAssociations < ActiveRecord::Migration[4.2]
   class RegistrantChoice < ActiveRecord::Base
     belongs_to :event_category
   end

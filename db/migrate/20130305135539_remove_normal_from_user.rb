@@ -1,4 +1,4 @@
-class RemoveNormalFromUser < ActiveRecord::Migration
+class RemoveNormalFromUser < ActiveRecord::Migration[4.2]
   def up
     remove_column :users, :normal
   end

@@ -1,4 +1,4 @@
-class UpgradeJudgingTypesToNewRules < ActiveRecord::Migration
+class UpgradeJudgingTypesToNewRules < ActiveRecord::Migration[4.2]
   def up
     jt = JudgeType.find_by(name: "Presentation")
     if jt&.val_1_description == "Mistakes"

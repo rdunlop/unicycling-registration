@@ -1,4 +1,4 @@
-class AddCommentsAttemptsAndStatusToTimeResults < ActiveRecord::Migration
+class AddCommentsAttemptsAndStatusToTimeResults < ActiveRecord::Migration[4.2]
   class TimeResult < ActiveRecord::Base
   end
 

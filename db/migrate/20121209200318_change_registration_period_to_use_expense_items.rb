@@ -1,4 +1,4 @@
-class ChangeRegistrationPeriodToUseExpenseItems < ActiveRecord::Migration
+class ChangeRegistrationPeriodToUseExpenseItems < ActiveRecord::Migration[4.2]
   def up
     add_column :registration_periods, :competitor_expense_item_id, :integer
     add_column :registration_periods, :noncompetitor_expense_item_id, :integer

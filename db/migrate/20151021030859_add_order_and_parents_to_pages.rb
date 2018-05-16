@@ -1,4 +1,4 @@
-class AddOrderAndParentsToPages < ActiveRecord::Migration
+class AddOrderAndParentsToPages < ActiveRecord::Migration[4.2]
   def change
     add_column :pages, :position, :integer
     add_column :pages, :parent_page_id, :integer

@@ -1,4 +1,4 @@
-class AddWheelSizeOverrideTable < ActiveRecord::Migration
+class AddWheelSizeOverrideTable < ActiveRecord::Migration[4.2]
   def change
     create_table :competition_wheel_sizes do |t|
       t.references :registrant

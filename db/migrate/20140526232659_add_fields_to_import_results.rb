@@ -1,4 +1,4 @@
-class AddFieldsToImportResults < ActiveRecord::Migration
+class AddFieldsToImportResults < ActiveRecord::Migration[4.2]
   class ImportResult < ActiveRecord::Base
   end
 

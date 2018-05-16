@@ -1,4 +1,4 @@
-class RemoveOrganizationMembershipConfigFromEventConfiguration < ActiveRecord::Migration
+class RemoveOrganizationMembershipConfigFromEventConfiguration < ActiveRecord::Migration[4.2]
   def up
     remove_column :event_configurations, :organization_membership_config
   end

@@ -1,4 +1,4 @@
-class RemoveContactInfoFromRegTable < ActiveRecord::Migration
+class RemoveContactInfoFromRegTable < ActiveRecord::Migration[4.2]
   class Registrant < ActiveRecord::Base
   end
   class ContactDetail < ActiveRecord::Base

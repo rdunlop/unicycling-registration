@@ -1,4 +1,4 @@
-class CreateTwoAttemptEntryTable < ActiveRecord::Migration
+class CreateTwoAttemptEntryTable < ActiveRecord::Migration[4.2]
   def change
     create_table :two_attempt_entries do |t|
       t.references :user

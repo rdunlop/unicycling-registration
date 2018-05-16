@@ -1,4 +1,4 @@
-class AddIndexToTables < ActiveRecord::Migration
+class AddIndexToTables < ActiveRecord::Migration[4.2]
   def change
     add_index "event_categories", ["event_id", "position"], name: "index_event_categories_event_id"
     add_index "event_choices", ["event_id", "position"], name: "index_event_choices_event_id"

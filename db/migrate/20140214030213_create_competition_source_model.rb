@@ -1,4 +1,4 @@
-class CreateCompetitionSourceModel < ActiveRecord::Migration
+class CreateCompetitionSourceModel < ActiveRecord::Migration[4.2]
   class Competition < ActiveRecord::Base
     has_many :competition_sources
   end

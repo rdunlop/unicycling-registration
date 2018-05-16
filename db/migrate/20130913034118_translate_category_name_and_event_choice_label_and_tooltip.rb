@@ -1,4 +1,4 @@
-class TranslateCategoryNameAndEventChoiceLabelAndTooltip < ActiveRecord::Migration
+class TranslateCategoryNameAndEventChoiceLabelAndTooltip < ActiveRecord::Migration[4.2]
   class Category < ActiveRecord::Base
     translates :name
   end

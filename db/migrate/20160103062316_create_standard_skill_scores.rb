@@ -1,4 +1,4 @@
-class CreateStandardSkillScores < ActiveRecord::Migration
+class CreateStandardSkillScores < ActiveRecord::Migration[4.2]
   def up
     create_table :standard_skill_scores do |t|
       t.integer  :competitor_id, null: false

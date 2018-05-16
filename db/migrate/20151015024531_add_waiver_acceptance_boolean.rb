@@ -1,4 +1,4 @@
-class AddWaiverAcceptanceBoolean < ActiveRecord::Migration
+class AddWaiverAcceptanceBoolean < ActiveRecord::Migration[4.2]
   def up
     add_column :registrants, :online_waiver_acceptance, :boolean, null: false, default: false
     execute "UPDATE registrants SET online_waiver_acceptance = TRUE WHERE online_waiver_signature IS NOT NULL"

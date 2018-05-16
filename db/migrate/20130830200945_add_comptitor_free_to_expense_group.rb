@@ -1,4 +1,4 @@
-class AddComptitorFreeToExpenseGroup < ActiveRecord::Migration
+class AddComptitorFreeToExpenseGroup < ActiveRecord::Migration[4.2]
   class EventConfiguration < ActiveRecord::Base
   end
   class ExpenseGroup < ActiveRecord::Base

@@ -1,4 +1,4 @@
-class AddNameToEvent < ActiveRecord::Migration
+class AddNameToEvent < ActiveRecord::Migration[4.2]
   class EventChoice < ActiveRecord::Base
     belongs_to :event
   end

@@ -1,4 +1,4 @@
-class CreateEventChoices < ActiveRecord::Migration
+class CreateEventChoices < ActiveRecord::Migration[4.2]
   def change
     create_table :event_choices do |t|
       t.integer :event_id

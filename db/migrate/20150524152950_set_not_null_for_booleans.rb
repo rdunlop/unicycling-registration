@@ -1,4 +1,4 @@
-class SetNotNullForBooleans < ActiveRecord::Migration
+class SetNotNullForBooleans < ActiveRecord::Migration[4.2]
   def up
     change_column_null :tenant_aliases, :verified, false, false
 

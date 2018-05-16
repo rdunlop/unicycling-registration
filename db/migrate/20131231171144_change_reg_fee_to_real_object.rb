@@ -1,4 +1,4 @@
-class ChangeRegFeeToRealObject < ActiveRecord::Migration
+class ChangeRegFeeToRealObject < ActiveRecord::Migration[4.2]
   class PaymentDetail < ActiveRecord::Base
     belongs_to :payment, inverse_of: :payment_details
     belongs_to :expense_item
