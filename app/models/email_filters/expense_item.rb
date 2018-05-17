@@ -19,12 +19,16 @@ class EmailFilters::ExpenseItem
   end
 
   def filtered_user_emails
-    users = expense_item.paid_items.map(&:registrant).map(&:user).uniq
+    users = registrants.map(&:user).uniq
     users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    []
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    expense_item.paid_items.includes(registrant: %i[contact_detail user]).map(&:registrant)
   end
 
   # object whose policy must respond to `:contact_registrants?`

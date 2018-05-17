@@ -113,7 +113,7 @@ class EmailsController < ApplicationController
   def check_auth(auth_object)
     auth_object = current_user if auth_object.nil?
 
-    if auth_object.is_a?(Array)
+    if auth_object.respond_to?(:each)
       auth_object.each { |auth| check_auth(auth) }
     else
       authorize auth_object, :contact_registrants?

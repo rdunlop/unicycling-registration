@@ -17,6 +17,12 @@ describe MassEmail do
         email.send_emails
       end.to change(ActionMailer::Base.deliveries, :count).by(2)
     end
+
+    it "sends to the originator" do
+      ActionMailer::Base.deliveries.clear
+      email.send_emails
+      expect(ActionMailer::Base.deliveries.first.bcc).to include(user.email)
+    end
   end
 end
 

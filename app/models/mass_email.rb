@@ -23,9 +23,15 @@ class MassEmail < ApplicationRecord
   validates :sent_by, presence: true
 
   def send_emails
-    email_addresses.each_slice(30).with_index do |addresses, index|
+    addresses.each_slice(30).with_index do |addresses, index|
       # wait a second for each email to prevent hitting SES Rate limit
       Notifications.send_mass_email(subject, body, addresses).deliver_later(wait: index.seconds)
     end
+  end
+
+  private
+
+  def addresses
+    [sent_by.email] + email_addresses
   end
 end
