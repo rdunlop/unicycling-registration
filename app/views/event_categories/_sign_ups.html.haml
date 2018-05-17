@@ -1,3 +1,4 @@
+- display_email = (sign_ups.any? && policy(sign_ups.first.event).contact_registrants?)
 %table.sortable
   %thead
     %tr
@@ -6,6 +7,8 @@
       %th Last Name
       %th Age
       %th Gender
+      - if display_email
+        %th Email
       %th Event Category
       %th= RepresentationType.description
       %th Details
@@ -17,6 +20,8 @@
         %td= resu.registrant.last_name
         %td= resu.registrant.age
         %td= resu.registrant.gender
+        - if display_email
+          %td= resu.registrant.email
         %td= resu.event_category.name
         %td= resu.registrant.representation
         %td= resu.registrant.describe_event_hash(event)[:additional]
