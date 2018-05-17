@@ -32,6 +32,6 @@ class MassEmail < ApplicationRecord
   private
 
   def addresses
-    [sent_by.email] + email_addresses
+    ([sent_by.email] + email_addresses).uniq
   end
 end

@@ -67,7 +67,7 @@ describe EmailsController do
       expect(first_message.bcc.count).to eq(30)
 
       second_message = ActionMailer::Base.deliveries.second
-      expect(second_message.bcc.count).to eq(21)
+      expect(second_message.bcc.count).to eq(21) # 20 remaining from 50, plus 1 super_admin (self)
     end
   end
 end
