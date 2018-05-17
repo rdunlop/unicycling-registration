@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MassEmail do
   describe "when sending e-mails" do
     let(:addresses) do
-      Array.new(50).map do |i|
+      Array.new(50) do |i|
         "example#{i}@example.com"
       end
     end
