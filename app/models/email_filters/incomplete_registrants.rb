@@ -17,12 +17,16 @@ class EmailFilters::IncompleteRegistrants
   end
 
   def filtered_user_emails
-    users = User.where(id: Registrant.not_deleted.where.not(status: "active").pluck(:user_id))
+    users = User.where(id: registrants.pluck(:user_id))
     users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    []
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    Registrant.not_deleted.where.not(status: "active").includes(:contact_detail, :user)
   end
 
   # object whose policy must respond to `:contact_registrants?`

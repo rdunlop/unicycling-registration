@@ -18,12 +18,16 @@ class EmailFilters::Category
   end
 
   def filtered_user_emails
-    users = category.events.map(&:competitor_registrants).flatten.map(&:user)
+    users = registrants.map(&:user)
     users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    category.events.map(&:competitor_registrants).flatten.map(&:contact_detail).compact.map(&:email).compact.uniq
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    category.events.map(&:competitor_registrants).flatten
   end
 
   # object whose policy must respond to `:contact_registrants?`

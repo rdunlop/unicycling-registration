@@ -17,12 +17,16 @@ class EmailFilters::NonConfirmedOrganizationMembers
   end
 
   def filtered_user_emails
-    users = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.all.reject(&:organization_membership_confirmed?).map(&:user).compact.uniq
+    users = registrants.map(&:user).compact.uniq
     users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    []
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.includes(:contact_detail, :user).reject(&:organization_membership_confirmed?)
   end
 
   # object whose policy must respond to `:contact_registrants?`

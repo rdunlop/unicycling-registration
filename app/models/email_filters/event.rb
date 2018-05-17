@@ -19,12 +19,16 @@ class EmailFilters::Event
   end
 
   def filtered_user_emails
-    users = event.registrant_event_sign_ups.signed_up.map(&:registrant).map(&:user).uniq
+    users = registrants.map(&:user).uniq
     users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    []
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    event.registrant_event_sign_ups.signed_up.includes(registrant: %i[contact_detail user]).map(&:registrant)
   end
 
   # object whose policy must respond to `:contact_registrants?`
