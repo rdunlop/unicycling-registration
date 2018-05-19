@@ -1,0 +1,31 @@
+%h1 Email all directors
+
+= render :partial => "/shared/error_messages", :object => @email_form
+
+%h2 Send an e-mail
+
+.row.left_aligned
+  = simple_form_for @email_form, url: director_emails_path do |f|
+    %p
+      %b Note:
+      This form will send to all (#{directors_count}) of the directors
+    %br
+    %b From:
+    = EventConfiguration.singleton.contact_email
+    %br
+    %b Reply-to:
+    = EventConfiguration.singleton.contact_email
+    %br
+    %b BCC:
+    You +
+    All of the director email addresses
+    %br
+    = f.label :subject
+    = f.text_field :subject
+    %br
+    = f.label :body
+    = f.text_area :body, {:cols => 100, :rows => 6 }
+    %br
+    = f.button :submit, "Send Email", class: "focus_button"
+  %hr
+  = link_to "Start over", emails_path, class: "back_link"

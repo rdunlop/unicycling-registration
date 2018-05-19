@@ -18,14 +18,18 @@ class EmailFilters::SignedUpCategory
   end
 
   def filtered_user_emails
-    users = signed_up_category.events.map do |event|
-      event.registrant_event_sign_ups.signed_up.map(&:registrant).map(&:user).uniq
-    end.flatten.uniq
+    users = registrants.map(&:user)
     users.map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    []
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    signed_up_category.events.map do |event|
+      event.registrant_event_sign_ups.signed_up.includes(registrant: %i[contact_detail user]).map(&:registrant)
+    end.flatten
   end
 
   # object whose policy must respond to `:contact_registrants?`

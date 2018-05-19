@@ -1,10 +1,8 @@
 %h1 Email multiple people
 
-Scroll down to see the e-mail form
+At the bottom of this page, you can use the system to send e-mails, if you wish.
 
 %h3= @filter.detailed_description
-
-Note: It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
 
 %h4 E-mail
 = render :partial => "/shared/error_messages", :object => @email_form
@@ -30,22 +28,40 @@ Note: It may take many seconds to send the e-mail to everyone (if it's a large n
           %br
 
 %hr
-= simple_form_for @email_form, url: emails_path do |f|
-  <b>Note</b> This form will send to all the e-mails in BOTH of the columns above.
-  %br
-  = hidden_field_tag :filter, @filter.class.config.filter
-  - if @filter.arguments.is_a?(Array)
-    - @filter.arguments.each do |arg|
-      = hidden_field_tag "arguments[]", arg
-  - else
-    = hidden_field_tag "arguments", @filter.arguments
+%h2 Send an e-mail
 
-  = f.label :subject
-  = f.text_field :subject
-  %br
-  = f.label :body
-  = f.text_area :body, {:cols => 100, :rows => 6 }
-  %br
-  = f.button :submit, "Send Email", class: "focus_button"
-%hr
-= link_to "Start over", emails_path, class: "back_link"
+.row.left_aligned
+  = simple_form_for @email_form, url: emails_path do |f|
+    %p
+      %b Note:
+      This form will send to all the e-mails in BOTH of the columns above.
+    %p
+      %b Note:
+      It may take many seconds to send the e-mail to everyone (if it's a large number of e-mail addresses)
+    %br
+    = hidden_field_tag :filter, @filter.class.config.filter
+    - if @filter.arguments.is_a?(Array)
+      - @filter.arguments.each do |arg|
+        = hidden_field_tag "arguments[]", arg
+    - else
+      = hidden_field_tag "arguments", @filter.arguments
+
+    %b From:
+    = EventConfiguration.singleton.contact_email
+    %br
+    %b Reply-to:
+    = EventConfiguration.singleton.contact_email
+    %br
+    %b BCC:
+    You +
+    All of the email addresses listed above
+    %br
+    = f.label :subject
+    = f.text_field :subject
+    %br
+    = f.label :body
+    = f.text_area :body, {:cols => 100, :rows => 6 }
+    %br
+    = f.button :submit, "Send Email", class: "focus_button"
+  %hr
+  = link_to "Start over", emails_path, class: "back_link"

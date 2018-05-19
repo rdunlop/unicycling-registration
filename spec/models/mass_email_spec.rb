@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MassEmail do
   describe "when sending e-mails" do
     let(:addresses) do
-      Array.new(50).map do |i|
+      Array.new(50) do |i|
         "example#{i}@example.com"
       end
     end
@@ -16,6 +16,12 @@ describe MassEmail do
       expect do
         email.send_emails
       end.to change(ActionMailer::Base.deliveries, :count).by(2)
+    end
+
+    it "sends to the originator" do
+      ActionMailer::Base.deliveries.clear
+      email.send_emails
+      expect(ActionMailer::Base.deliveries.first.bcc).to include(user.email)
     end
   end
 end

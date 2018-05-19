@@ -355,6 +355,7 @@ Rails.application.routes.draw do
     # backwards-compatible URL
     get '/registrants/:id/items', to: redirect('/registrants/%{id}/registrant_expense_items')
 
+    resources :director_emails, only: %i[new create]
     resources :emails, only: %i[index create] do
       collection do
         get :list

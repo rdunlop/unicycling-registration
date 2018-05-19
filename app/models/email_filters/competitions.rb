@@ -19,11 +19,15 @@ class EmailFilters::Competitions
   end
 
   def filtered_user_emails
-    competitions.map(&:registrants).flatten.map(&:user).map(&:email).compact.uniq
+    registrants.map(&:user).map(&:email).compact.uniq
   end
 
   def filtered_registrant_emails
-    competitions.map(&:registrants).flatten.map(&:contact_detail).compact.map(&:email).compact.uniq
+    registrants.map(&:email).compact.uniq
+  end
+
+  def registrants
+    competitions.flat_map(&:registrants)
   end
 
   # object whose policy must respond to `:contact_registrants?`
@@ -32,7 +36,7 @@ class EmailFilters::Competitions
   end
 
   def valid?
-    competitions.any?
+    competitions&.any?
   end
 
   private
@@ -40,12 +44,7 @@ class EmailFilters::Competitions
   def competitions
     return @competitions if @competitions
 
-    @competitions = []
-    if arguments.present?
-      arguments.each do |cid|
-        @competitions << Competition.find(cid) if cid.present?
-      end
-    end
+    @competitions = Competition.where(id: arguments) if arguments.present?
 
     @competitions
   end
