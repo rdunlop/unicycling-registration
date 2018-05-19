@@ -8,7 +8,7 @@
   = simple_form_for @email_form, url: director_emails_path do |f|
     %p
       %b Note:
-      This form will send to all of the directors
+      This form will send to all (#{directors_count}) of the directors
     %br
     %b From:
     = EventConfiguration.singleton.contact_email

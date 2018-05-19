@@ -24,5 +24,17 @@ describe DirectorEmailsController do
       message = ActionMailer::Base.deliveries.first
       expect(message.bcc.count).to eq(1)
     end
+
+    context "when there are directors" do
+      let!(:director1) { FactoryBot.create(:director) }
+      let!(:director2) { FactoryBot.create(:director) }
+
+      it "sends to those directors" do
+        ActionMailer::Base.deliveries.clear
+        post :create, params: { email: { subject: "Hello werld", body: "This is the body" } }
+        message = ActionMailer::Base.deliveries.first
+        expect(message.bcc.count).to eq(3)
+      end
+    end
   end
 end

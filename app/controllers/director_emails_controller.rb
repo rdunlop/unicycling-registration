@@ -28,6 +28,11 @@ class DirectorEmailsController < ApplicationController
     end
   end
 
+  helper_method :directors_count
+  def directors_count
+    director_email_addresses.count
+  end
+
   private
 
   def authorize_some_contact
@@ -35,6 +40,6 @@ class DirectorEmailsController < ApplicationController
   end
 
   def director_email_addresses
-    User.with_role(:director).map(&:email).compact
+    User.with_role(:director, :any).map(&:email).compact.uniq
   end
 end
