@@ -31,6 +31,8 @@ class Notifications < TenantAwareMailer
 
     @new_period_description = new_period_name || "Unspecified"
 
+    @convention_name = EventConfiguration.singleton.long_name
+
     mail to: Rails.application.secrets.error_emails, subject: "Updated Registration Period"
   end
 
