@@ -60,6 +60,7 @@ class Admin::FeedbackController < ApplicationController
     params.require(:feedback).permit(
       :user_id,
       :entered_email,
+      :subject,
       :message,
       :status,
       :resolved_at,

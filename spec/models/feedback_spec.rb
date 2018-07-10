@@ -6,11 +6,13 @@ describe Feedback do
   it "is not valid without feedback" do
     feedback.entered_email = "robin@dunlopweb.com"
     expect(feedback).not_to be_valid
+    feedback.subject = "Help me please"
     feedback.message = "hi"
     expect(feedback).to be_valid
   end
 
   it "is not valid without mail" do
+    feedback.subject = "Help me please"
     feedback.message = "hi"
     expect(feedback).not_to be_valid
     feedback.entered_email = "robin@dunlopweb.com"
@@ -20,6 +22,7 @@ describe Feedback do
   it "is not valid with an invalid email" do
     feedback.message = "hi"
     user = FactoryBot.create(:user)
+    feedback.subject = "Help me please"
     feedback.user = user
     expect(feedback).to be_valid
     feedback.entered_email = "this is what is wrong"
@@ -38,6 +41,7 @@ describe Feedback do
   it "doensn't need to specify e-mail when signed in" do
     user = FactoryBot.create(:user)
     feedback.user = user
+    feedback.subject = "Help me please"
     feedback.message = "This is a great site"
     expect(feedback).to be_valid
   end
@@ -49,14 +53,14 @@ describe Feedback do
   it "can overwrite registrants" do
     registrant = FactoryBot.create(:registrant)
     feedback.user = registrant.user
-    expect(feedback.user_first_registrant_name).to eq(registrant.name)
+    expect(feedback.user_first_registrant_name).to eq("##{registrant.bib_number}: #{registrant.name}")
   end
 
   it "can be updated by a user object" do
     reg = FactoryBot.create(:competitor, first_name: "Bob", last_name: "Smith")
     feedback.user = reg.user
     expect(feedback.username).to eq(reg.user.email)
-    expect(feedback.user_first_registrant_name).to eq("Bob Smith")
+    expect(feedback.user_first_registrant_name).to eq("##{reg.bib_number}: Bob Smith")
   end
 
   it "returns the email if set for replyto" do

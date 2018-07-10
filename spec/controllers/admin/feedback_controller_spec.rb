@@ -61,7 +61,7 @@ describe Admin::FeedbackController do
     describe "#create" do
       it "creates new feedback" do
         expect do
-          post :create, params: { feedback: { entered_email: "test@example.com", message: "help me obi-wan" } }
+          post :create, params: { feedback: { subject: "This is feedbacK", entered_email: "test@example.com", message: "help me obi-wan" } }
         end.to change(Feedback, :count).by(1)
       end
     end
