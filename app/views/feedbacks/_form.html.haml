@@ -1,4 +1,5 @@
 %h4= t(".header")
+%br
 = render :partial => "/shared/error_messages", :object => @feedback
 = simple_form_for @feedback, url: feedback_path do |f|
   .row
@@ -7,10 +8,14 @@
     .small-10.columns
       = f.text_field :entered_email, placeholder: t(".optional")
   .row
-    .small-12.columns
-      = f.text_area :subject, {:cols => 100 }
+    .small-2.columns
+      = f.label :subject
+    .small-10.columns
+      = f.text_field :subject, {:cols => 100 }
   .row
-    .small-12.columns
+    .small-2.columns
+      = f.label :message
+    .small-10.columns
       = f.text_area :message, {:cols => 100, :rows => 6 }
   - if recaptcha_required?
     .row
