@@ -11,6 +11,7 @@ es:
   date:
     formats:
       registration_date_format: "%b %d, %Y"
+      lodging_date_format: "%b %d, %Y"
     order:
     - :month
     - :day
