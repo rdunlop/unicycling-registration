@@ -12,6 +12,7 @@
 #  resolution     :text
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  subject        :text
 #
 
 class Feedback < ApplicationRecord
@@ -21,6 +22,8 @@ class Feedback < ApplicationRecord
   validates :status, inclusion: { in: %w[new resolved] }
 
   validates :message, presence: true
+  validates :subject, presence: true
+  validates :subject, length: { maximum: 100 }
   validates :entered_email, presence: true, unless: :signed_in?
   validates :resolved_at, :resolved_by_id, :resolution, presence: true, if: :resolved?
   validates :entered_email, email_format: true, allow_blank: true
@@ -39,7 +42,7 @@ class Feedback < ApplicationRecord
 
   def user_first_registrant_name
     return "unknown" unless user
-    return user.registrants.first.name if user.registrants.count.positive?
+    return "##{user.registrants.active.first.bib_number}: #{user.registrants.active.first.name}" if user.registrants.active.count.positive?
     "unknown"
   end
 

@@ -3,7 +3,7 @@ class Notifications < TenantAwareMailer
     @feedback = Feedback.find(feedback_id)
     mail to: EventConfiguration.singleton.contact_email.presence,
          reply_to: @feedback.reply_to_email,
-         cc: Rails.application.secrets.error_emails, subject: 'Feedback'
+         cc: Rails.application.secrets.error_emails, subject: "Feedback: #{@feedback.subject}"
   end
 
   def request_registrant_access(target_registrant, requesting_user)
