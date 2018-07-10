@@ -12,6 +12,7 @@
 #  resolution     :text
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  subject        :text
 #
 
 require 'spec_helper'
@@ -28,18 +29,23 @@ describe FeedbacksController do
 
   describe "POST #create" do
     it "returns http success" do
-      post :create, params: { feedback: { message: "Hello WorlD", entered_email: "robin@dunlopweb.com" } }
+      post :create, params: { feedback: { subject: "I want to help", message: "Hello WorlD", entered_email: "robin@dunlopweb.com" } }
       expect(response).to redirect_to(new_feedback_path)
     end
 
+    it "returns an error when no subject" do
+      post :create, params: { feedback: { subject: "", message: nil } }
+      assert_select "h1", "Contact Us"
+    end
+
     it "returns an error when no message" do
-      post :create, params: { feedback: { message: nil } }
+      post :create, params: { feedback: { subject: "I want to help", message: nil } }
       assert_select "h1", "Contact Us"
     end
 
     it "sends a message" do
       ActionMailer::Base.deliveries.clear
-      post :create, params: { feedback: { message: "Hello werld", entered_email: "robin@dunlopweb.com" } }
+      post :create, params: { feedback: { subject: "I want to help", message: "Hello werld", entered_email: "robin@dunlopweb.com" } }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
     end
@@ -51,13 +57,13 @@ describe FeedbacksController do
       end
 
       it "shows the feedback new page when feedback error" do
-        post :create, params: { feedback: { message: nil } }
+        post :create, params: { feedback: { subject: "I want to help", message: nil } }
         assert_select "h1", "Contact Us"
       end
 
       it "sends a message" do
         ActionMailer::Base.deliveries.clear
-        post :create, params: { feedback: { message: "Hello werld" } }
+        post :create, params: { feedback: { subject: "I want to help", message: "Hello werld" } }
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1)
       end

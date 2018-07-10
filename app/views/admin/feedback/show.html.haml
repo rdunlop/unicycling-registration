@@ -20,6 +20,9 @@
         %th User's First Registrant
         %td= @feedback.user_first_registrant_name
       %tr
+        %th Subject
+        %td= simple_format(@feedback.subject)
+      %tr
         %th Message
         %td= simple_format(@feedback.message)
 

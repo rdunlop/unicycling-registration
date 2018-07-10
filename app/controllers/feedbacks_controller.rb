@@ -50,6 +50,6 @@ class FeedbacksController < ApplicationController
   helper_method :recaptcha_required?
 
   def feedback_params
-    params.require(:feedback).permit(:entered_email, :message)
+    params.require(:feedback).permit(:entered_email, :subject, :message)
   end
 end

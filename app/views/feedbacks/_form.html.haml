@@ -8,6 +8,9 @@
       = f.text_field :entered_email, placeholder: t(".optional")
   .row
     .small-12.columns
+      = f.text_area :subject, {:cols => 100 }
+  .row
+    .small-12.columns
       = f.text_area :message, {:cols => 100, :rows => 6 }
   - if recaptcha_required?
     .row
