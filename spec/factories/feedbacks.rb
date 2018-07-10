@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :feedback do
+    subject "can I volunteer?"
     message "Please help me with registration"
     user
     status "new"
@@ -28,4 +29,5 @@ end
 #  resolution     :text
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  subject        :text
 #

@@ -1,6 +1,10 @@
 ---
 en:
   activerecord:
+    attributes:
+      feedback:
+        subject: Subject
+        message: Message
     models:
       feedback:
         one: Feedback
