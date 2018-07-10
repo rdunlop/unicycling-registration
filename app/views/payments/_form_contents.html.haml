@@ -32,7 +32,7 @@
           = pf.hidden_field :free
         %td= print_item_cost_currency(pf.object.tax)
         %td
-          = pf.hidden_field :amount
+          = pf.hidden_field :amount, value: number_to_currency(pf.object.amount, format: "%n")
           = print_item_cost_currency(pf.object.amount)
         %td.choose_payments
           = pf.check_box :_destroy, {checked: true, :class => "delete_payment_item js--costItem", data: { cents: pf.object.amount.to_f * 100 } }, '0', '1'
