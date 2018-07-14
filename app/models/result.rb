@@ -122,7 +122,7 @@ class Result < ApplicationRecord
   def to_s
     return "DQ" if status == "DQ"
     if place.zero? || place.nil?
-      "Unknown"
+      "-"
     else
       place
     end
