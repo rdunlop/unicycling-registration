@@ -1,0 +1,27 @@
+%h1 Event Confirmation Email
+
+%p From this page, you can send an e-mail to all current competitors which asks them to confirm their events
+
+%p You can use the options to choose a subset of user accounts to send e-mail to.
+
+- if @emails.any?
+  Previously created emails
+  %table
+    %thead
+      %tr
+        %td Sent At
+    %tbody
+      - @emails.each do |email|
+        %tr
+          %td
+            - if email.sent?
+              = email.sent_at
+            - else
+              Unsent
+          %td
+            - unless email.sent?
+              = link_to "Edit", edit_event_confirmation_email_path(email)
+
+%hr
+
+= link_to "New", new_event_confirmation_email_path, class: "button"

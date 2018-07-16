@@ -1,3 +1,5 @@
+- if policy(current_user).send_event_confirmation_email?
+  %li= link_to "Send Event Confirmation Email", event_confirmation_emails_path
 - if policy(current_user).under_development?
   %li= link_to 'Registrant Groups',convention_setup_registrant_group_types_path
 - if policy(:export).index?

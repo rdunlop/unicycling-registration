@@ -1,0 +1,15 @@
+%table
+  %tr
+    %th Reply To Address
+    %td= @email.reply_to_address
+  %tr
+    %th Subject
+    %td= @email.subject_result(@registrant)
+  %tr
+    %th Body
+    %td= simple_format(@email.body_result(@registrant))
+
+= link_to "Edit", edit_event_confirmation_email_path(@email)
+%br
+%hr
+= link_to "Send Now!", send_emails_event_confirmation_email_path(@email), method: :post
