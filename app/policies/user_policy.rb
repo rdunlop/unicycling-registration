@@ -70,6 +70,11 @@ class UserPolicy < ApplicationPolicy
     director? || event_planner? || super_admin?
   end
 
+  # Can send email to all competitors about confirming their events
+  def send_event_confirmation_email?
+    convention_admin? || super_admin?
+  end
+
   # the old way of doing manual payments
   def manage_old_payment_adjustments?
     super_admin?

@@ -368,6 +368,13 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :event_confirmation_emails, except: [:destroy] do
+      member do
+        get :preview
+        post :send_emails
+      end
+    end
+
     namespace :admin do
       resources :feedback, only: %i[index show new create] do
         member do

@@ -25,6 +25,12 @@ class Notifications < TenantAwareMailer
     mail bcc: addresses, subject: subject, reply_to: EventConfiguration.singleton.contact_email
   end
 
+  def event_confirmation_email(to_addresses, reply_to, subject, body)
+    @body = body
+
+    mail to: to_addresses, subject: subject, reply_to: reply_to
+  end
+
   ######### ADMIN
   def updated_current_reg_period(old_period_name, new_period_name)
     @old_period_description = old_period_name || "Unspecified"

@@ -1,0 +1,15 @@
+%b The allowed templates are: #{RegistrantTemplateParser.template_names.join(", ")}
+
+%p You can use them by putting the text within {{ }}, e.g. "Hello {{FirstName}}, how are you?"
+
+.row.left_aligned
+  = simple_form_for(@email) do |f|
+    = f.input :reply_to_address
+    %br
+    = f.input :subject
+    %br
+    = f.input :body
+
+    = f.button :submit, "Create/Update", class: "focus_button"
+  %hr
+  = link_to "Start over", event_confirmation_emails_path, class: "back_link"
