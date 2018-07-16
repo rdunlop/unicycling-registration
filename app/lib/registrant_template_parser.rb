@@ -28,7 +28,7 @@ class RegistrantTemplateParser
   end
 
   def result
-    output = template
+    output = template.dup
     ALLOWED_TEMPLATES.each do |template, template_output|
       output.gsub!("{{#{template}}}", template_output.call(registrant))
     end
