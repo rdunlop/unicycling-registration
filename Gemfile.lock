@@ -109,7 +109,7 @@ GEM
       rails (>= 4.1.0, <= 5.2)
     arel (8.0.0)
     ast (2.4.0)
-    autoprefixer-rails (8.6.4)
+    autoprefixer-rails (9.0.0)
       execjs
     aws-partitions (1.82.0)
     aws-sdk-core (3.20.2)
