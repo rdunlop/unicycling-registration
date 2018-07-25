@@ -16,55 +16,56 @@
       .small-12.medium-6.columns.text-left
         = submit_tag "View Results", class: "button"
 
-%table
-  %thead
-    %tr
-      // %th Competition End
-      %th Competition
-      %th
-      //%th Status
-      %th Competitor List
-      %th Start List
-      %th Results
-      %th Date Published
-  %tbody
-    - Competition.includes(:published_age_group_entries).order(:scheduled_completion_at).all.each do |competition|
-      - cache_i18n [competition] do
-        %tr
-          // %td= competition.end_time_to_s
-          %td= competition.award_title_name
-          %td= competition.award_subtitle_name
-          // competition_presenter = CompetitionPresenter.new(competition)
-          //%td{ class: competition_presenter.status_code}= competition_presenter.status
-          %td
-            - if competition.num_competitors > 0
-              = link_to "Competitor List", announcer_printing_competition_path(competition)
-          %td
-            - if competition.start_list?
-              - if competition.start_list_present?
-                = link_to "Start List", start_list_printing_competition_path(competition)
-              - else
-                Not yet available
-          %td
-            - if competition.published?
-              - competition.competition_results.active.each do |result|
-                = link_to result.to_s, result.results_file_url
-                %br
-            - else
-              - if competition.combined_competition
-                = link_to "Preliminary Calculated Results", scores_result_path(competition)
-                %br
-
-              - if competition.high_long_event?
-                = link_to "Preliminary Results", distances_result_path(competition)
-                %br
-
-              - if competition.has_age_group_entry_results?
-                - competition.published_age_group_entries.each do |entry|
-                  = link_to entry, competition_published_age_group_entry_path(competition, entry), title: "published at #{entry.published_formatted}"
+.row
+  %table.sortable
+    %thead
+      %tr
+        // %th Competition End
+        %th Competition
+        %th
+        //%th Status
+        %th Competitor List
+        %th Start List
+        %th Results
+        %th Date Published
+    %tbody
+      - Competition.includes(:published_age_group_entries).order(:scheduled_completion_at).all.each do |competition|
+        - cache_i18n [competition] do
+          %tr
+            // %td= competition.end_time_to_s
+            %td= competition.award_title_name
+            %td= competition.award_subtitle_name
+            // competition_presenter = CompetitionPresenter.new(competition)
+            //%td{ class: competition_presenter.status_code}= competition_presenter.status
+            %td
+              - if competition.num_competitors > 0
+                = link_to "Competitor List", announcer_printing_competition_path(competition)
+            %td
+              - if competition.start_list?
+                - if competition.start_list_present?
+                  = link_to "Start List", start_list_printing_competition_path(competition)
+                - else
+                  Not yet available
+            %td
+              - if competition.published?
+                - competition.competition_results.active.each do |result|
+                  = link_to result.to_s, result.results_file_url
                   %br
-          %td
-            - if competition.published?
-              - competition.competition_results.active.each do |result|
-                = result.published_date_to_s
-                %br
+              - else
+                - if competition.combined_competition
+                  = link_to "Preliminary Calculated Results", scores_result_path(competition)
+                  %br
+
+                - if competition.high_long_event?
+                  = link_to "Preliminary Results", distances_result_path(competition)
+                  %br
+
+                - if competition.has_age_group_entry_results?
+                  - competition.published_age_group_entries.each do |entry|
+                    = link_to entry, competition_published_age_group_entry_path(competition, entry), title: "published at #{entry.published_formatted}"
+                    %br
+            %td
+              - if competition.published?
+                - competition.competition_results.active.each do |result|
+                  = result.published_date_to_s
+                  %br
