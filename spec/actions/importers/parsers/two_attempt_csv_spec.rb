@@ -57,8 +57,23 @@ describe Importers::Parsers::TwoAttemptCsv do
   end
 
   context "when doing a hours_seconds_import" do
-    it "works" do
-      raise
+    let(:competition) { FactoryBot.create(:timed_competition, time_entry_columns: "minutes_seconds_hundreds") }
+
+    it "returns facade results", :aggregate_failures do
+      # 102,2,30,239,DQ,11,0,0,
+      input_data = importer.process_row(["102", "DQ", "2", "30", "23", nil, "11", "0", "0"])
+
+      expect(input_data[:bib_number]).to eq("102")
+
+      expect(input_data[:first_attempt][:minutes]).to eq("2")
+      expect(input_data[:first_attempt][:seconds]).to eq("30")
+      expect(input_data[:first_attempt][:facade_hundreds]).to eq("23")
+      expect(input_data[:first_attempt][:status]).to eq("DQ")
+
+      expect(input_data[:second_attempt][:minutes]).to eq("11")
+      expect(input_data[:second_attempt][:seconds]).to eq("0")
+      expect(input_data[:second_attempt][:facade_hundreds]).to eq("0")
+      expect(input_data[:second_attempt][:status]).to eq("active")
     end
   end
 end
