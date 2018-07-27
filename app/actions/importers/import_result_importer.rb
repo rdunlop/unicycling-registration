@@ -25,16 +25,12 @@ class Importers::ImportResultImporter < Importers::CompetitionDataImporter
   # Throws an exception if not valid
   def build_and_save_imported_result(hash, raw, user, competition, is_start_time)
     ImportResult.create!(
-      bib_number: hash[:bib_number],
-      minutes: hash[:minutes],
-      seconds: hash[:seconds],
-      thousands: hash[:thousands],
-      number_of_laps: hash[:number_of_laps],
-      status: hash[:status],
-      raw_data: convert_array_to_string(raw),
-      user: user,
-      competition: competition,
-      is_start_time: is_start_time
+      hash.merge(
+        raw_data: convert_array_to_string(raw),
+        user: user,
+        competition: competition,
+        is_start_time: is_start_time
+      )
     )
   end
 
