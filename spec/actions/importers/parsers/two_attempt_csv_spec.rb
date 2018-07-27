@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Importers::Parsers::TwoAttemptCsv do
-  let(:importer) { described_class.new(test_file) }
+  let(:competition) { FactoryBot.create(:timed_competition) }
+  let(:results_displayer) { competition.results_displayer }
+  let(:importer) { described_class.new(test_file, results_displayer) }
 
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
@@ -10,8 +12,8 @@ describe Importers::Parsers::TwoAttemptCsv do
   it "Can read from file" do
     expect(importer.extract_file).to eq(
       [
-        ["101", "1", "30", "0", nil, "10", "45", "0", nil],
-        ["102", "2", "30", "239", "DQ", "11", "0", "0", nil]
+        ["101", nil, "1", "30", "0", nil, "10", "45", "0"],
+        ["102", "DQ", "2", "30", "239", nil, "11", "0", "0"]
       ]
     )
   end
@@ -21,36 +23,42 @@ describe Importers::Parsers::TwoAttemptCsv do
   end
 
   it "returns first row result", :aggregate_failures do
-    input_data = importer.process_row(["101", "1", "30", "0", nil, "10", "45", "0"])
+    input_data = importer.process_row(["101", nil, "1", "30", "0", nil, "10", "45", "0"])
 
     # 101,1,30,0,,10,45,0,
     expect(input_data[:bib_number]).to eq("101")
 
-    expect(input_data[:minutes_1]).to eq("1")
-    expect(input_data[:seconds_1]).to eq("30")
-    expect(input_data[:thousands_1]).to eq("0")
-    expect(input_data[:status_1]).to eq("active")
+    expect(input_data[:first_attempt][:minutes]).to eq("1")
+    expect(input_data[:first_attempt][:seconds]).to eq("30")
+    expect(input_data[:first_attempt][:thousands]).to eq("0")
+    expect(input_data[:first_attempt][:status]).to eq("active")
 
-    expect(input_data[:minutes_2]).to eq("10")
-    expect(input_data[:seconds_2]).to eq("45")
-    expect(input_data[:thousands_2]).to eq("0")
-    expect(input_data[:status_2]).to eq("active")
+    expect(input_data[:second_attempt][:minutes]).to eq("10")
+    expect(input_data[:second_attempt][:seconds]).to eq("45")
+    expect(input_data[:second_attempt][:thousands]).to eq("0")
+    expect(input_data[:second_attempt][:status]).to eq("active")
   end
 
   it "returns second row result", :aggregate_failures do
     # 102,2,30,239,DQ,11,0,0,
-    input_data = importer.process_row(["102", "2", "30", "239", "DQ", "11", "0", "0"])
+    input_data = importer.process_row(["102", "DQ", "2", "30", "239", nil, "11", "0", "0"])
 
     expect(input_data[:bib_number]).to eq("102")
 
-    expect(input_data[:minutes_1]).to eq("2")
-    expect(input_data[:seconds_1]).to eq("30")
-    expect(input_data[:thousands_1]).to eq("239")
-    expect(input_data[:status_1]).to eq("DQ")
+    expect(input_data[:first_attempt][:minutes]).to eq("2")
+    expect(input_data[:first_attempt][:seconds]).to eq("30")
+    expect(input_data[:first_attempt][:thousands]).to eq("239")
+    expect(input_data[:first_attempt][:status]).to eq("DQ")
 
-    expect(input_data[:minutes_2]).to eq("11")
-    expect(input_data[:seconds_2]).to eq("0")
-    expect(input_data[:thousands_2]).to eq("0")
-    expect(input_data[:status_2]).to eq("active")
+    expect(input_data[:second_attempt][:minutes]).to eq("11")
+    expect(input_data[:second_attempt][:seconds]).to eq("0")
+    expect(input_data[:second_attempt][:thousands]).to eq("0")
+    expect(input_data[:second_attempt][:status]).to eq("active")
+  end
+
+  context "when doing a hours_seconds_import" do
+    it "works" do
+      raise
+    end
   end
 end
