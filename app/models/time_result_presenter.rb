@@ -11,15 +11,15 @@ class TimeResultPresenter
   end
 
   def initialize(minutes, seconds, thousands, display_hours: nil, display_thousands: nil)
-    @minutes = minutes
-    @seconds = seconds
-    @thousands = thousands
+    @minutes = minutes.to_i
+    @seconds = seconds.to_i
+    @thousands = thousands.to_i
     @display_hours = display_hours
     @display_thousands = display_thousands
   end
 
   def full_time
-    return unless minutes && seconds && thousands
+    return unless minutes.positive? || seconds.positive? || thousands.positive?
     "#{hours_minutes_string}:#{seconds_string}#{thousands_string}"
   end
 
