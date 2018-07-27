@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Csv do
-  let(:importer) { described_class.new(test_file) }
+  let(:competition) { FactoryBot.create(:timed_competition) }
+  let(:results_displayer) { competition.results_displayer }
+  let(:importer) { described_class.new(test_file, results_displayer) }
 
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
@@ -9,7 +11,7 @@ describe Importers::Parsers::Csv do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101.txt' }
 
     it "reads the line" do
-      expect(importer.extract_file).to eq([["101", "1", "2", "300", "0"]])
+      expect(importer.extract_file).to eq([["101", "0", "1", "2", "300"]])
     end
 
     it "has valid headers" do
@@ -17,7 +19,7 @@ describe Importers::Parsers::Csv do
     end
 
     it "returns competitor data" do
-      input_data = importer.process_row(["101", "1", "2", "300", "0"])
+      input_data = importer.process_row(["101", "0", "1", "2", "300"])
 
       expect(input_data[:bib_number]).to eq("101")
       expect(input_data[:minutes]).to eq("1")
@@ -27,12 +29,28 @@ describe Importers::Parsers::Csv do
       expect(input_data[:status]).to eq("active")
     end
 
-    it "reads num_laps, if configured" do
-      importer = described_class.new(test_file, read_num_laps: true)
+    context "when using a lap-competition" do
+      let(:competition) { FactoryBot.create(:timed_laps_competition) }
 
-      input_data = importer.process_row(["101", "1", "2", "300", "0", "4"])
+      it "reads num_laps" do
+        importer = described_class.new(test_file, results_displayer)
 
-      expect(input_data[:number_of_laps]).to eq("4")
+        input_data = importer.process_row(["101", "0", "1", "2", "300", "4"])
+
+        expect(input_data[:number_of_laps]).to eq("4")
+      end
+    end
+
+    context "when reading from non-thousands import" do
+      let(:competition) { FactoryBot.create(:timed_competition, time_entry_columns: "minutes_seconds_hundreds") }
+
+      it "reads facade_hundreds" do
+        importer = described_class.new(test_file, results_displayer)
+
+        input_data = importer.process_row(["101", "0", "1", "2", "30"])
+
+        expect(input_data[:facade_hundreds]).to eq("30")
+      end
     end
   end
 
@@ -40,11 +58,11 @@ describe Importers::Parsers::Csv do
     let(:test_file) { fixture_path + '/sample_time_results_bib_101_dq.txt' }
 
     it "reads the line" do
-      expect(importer.extract_file).to eq([["101", "0", "0", "0", "DQ"]])
+      expect(importer.extract_file).to eq([["101", "DQ", "0", "0", "0"]])
     end
 
     it "returns dq data" do
-      input_data = importer.process_row(["101", "0", "0", "0", "DQ"])
+      input_data = importer.process_row(["101", "DQ", "0", "0", "0"])
       expect(input_data[:status]).to eq("DQ")
     end
   end

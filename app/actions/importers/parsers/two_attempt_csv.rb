@@ -1,6 +1,18 @@
 class Importers::Parsers::TwoAttemptCsv < Importers::Parsers::Base
+  attr_reader :results_displayer
+
+  def initialize(file, results_displayer)
+    super(file)
+    @results_displayer = results_displayer
+  end
+
   def extract_file
     Importers::CsvExtractor.new(file).extract_csv
+  end
+
+  def num_columns
+    # Bib Number + ((Status + fields) * 2)
+    1 + ((1 + results_displayer.form_label_symbols.count) * 2)
   end
 
   def validate_contents
@@ -10,21 +22,35 @@ class Importers::Parsers::TwoAttemptCsv < Importers::Parsers::Base
   end
 
   def process_row(raw)
-    # 101,1,30,0,,10,45,0,
-    # 102,2,30,239,DQ,11,0,0,
-    status_1 = Importers::StatusTranslation::DqOrDnfOnly.translate(raw[4])
-    status_2 = Importers::StatusTranslation::DqOrDnfOnly.translate(raw[8])
-    {
-      bib_number: raw[0],
-      minutes_1: raw[1],
-      seconds_1: raw[2],
-      thousands_1: raw[3],
-      status_1: status_1,
+    # 101,,1,30,0,,10,45,0
+    # 102,DQ,2,30,239,,11,0,0
 
-      minutes_2: raw[5],
-      seconds_2: raw[6],
-      thousands_2: raw[7],
-      status_2: status_2
+    result = {
+      bib_number: raw[0],
+      first_attempt: {},
+      second_attempt: {}
     }
+    column = 1
+
+    status_1 = Importers::StatusTranslation::DqOrDnfOnly.translate(raw[column])
+    column += 1
+    result[:first_attempt][:status] = status_1
+
+    column = 2
+    results_displayer.form_label_symbols.each do |symbol|
+      result[:first_attempt][symbol] = raw[column]
+      column += 1
+    end
+
+    status_2 = Importers::StatusTranslation::DqOrDnfOnly.translate(raw[column])
+    column += 1
+    result[:second_attempt][:status] = status_2
+
+    results_displayer.form_label_symbols.each do |symbol|
+      result[:second_attempt][symbol] = raw[column]
+      column += 1
+    end
+
+    result
   end
 end

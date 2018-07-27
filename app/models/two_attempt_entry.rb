@@ -47,14 +47,14 @@ class TwoAttemptEntry < ApplicationRecord
     end
 
     def time_is_present?
-      minutes && seconds && thousands
+      minutes.to_i.positive? || seconds.to_i.positive? || thousands.to_i.positive?
     end
 
     def build_result
       TimeResult.new(
-        minutes: minutes,
-        seconds: seconds,
-        thousands: thousands,
+        minutes: minutes.to_i,
+        seconds: seconds.to_i,
+        thousands: thousands.to_i,
         status: convert_status
       )
     end

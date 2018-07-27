@@ -3,11 +3,11 @@
     %td= import_result_counter
     %td= import_result.bib_number
     = render partial: "matching_registrant_cell", locals: { import_result: import_result }
+    %td= import_result.disqualified? ? "Yes" : ""
 
     - displayer = import_result.competition.results_displayer
     - displayer.result_data(import_result).each do |entry|
       %td= entry
 
-    %td= import_result.disqualified? ? "Yes" : ""
     %td= link_to t("edit"), edit_import_result_path(import_result)
     %td= link_to t("delete"), import_result, method: :delete, data: { confirm: t("are_you_sure") }
