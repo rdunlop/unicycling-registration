@@ -171,8 +171,8 @@ class TwoAttemptEntriesController < ApplicationController
 
   def two_attempt_entry_params
     params.require(:two_attempt_entry).permit(:bib_number, :is_start_time,
-                                              first_attempt: [*HoursFacade::PERMITTED_PARAMS, :status],
-                                              second_attempt: [*HoursFacade::PERMITTED_PARAMS, :status])
+                                              first_attempt: [*HoursFacade::PERMITTED_PARAMS, :number_of_penalties, :status],
+                                              second_attempt: [*HoursFacade::PERMITTED_PARAMS, :number_of_penalties, :status])
   end
 
   def load_competition
