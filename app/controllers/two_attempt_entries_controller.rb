@@ -110,7 +110,7 @@ class TwoAttemptEntriesController < ApplicationController
       parser = if params[:advanced]
                  Importers::Parsers::TwoAttemptSlalom.new(uploaded_file.original_file.file)
                else
-                 Importers::Parsers::TwoAttemptCsv.new(uploaded_file.original_file.file)
+                 Importers::Parsers::TwoAttemptCsv.new(uploaded_file.original_file.file, @competition.results_displayer)
                end
 
       if importer.process(@is_start_time, parser)

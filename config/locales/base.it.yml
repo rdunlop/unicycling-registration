@@ -10,6 +10,7 @@ it:
   competitor: Partecipante
   date:
     formats:
+      lodging_date_format: "%b %d, %Y"
       registration_date_format: "%b %d, %Y"
     order:
     - :month

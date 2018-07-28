@@ -161,7 +161,7 @@ class ImportResultsController < ApplicationController
       flash[:alert] = "File Not found"
     else
       importer = Importers::ImportResultImporter.new(@competition, @user)
-      parser = Importers::Parsers::Csv.new(uploaded_file.original_file.file, read_num_laps: @competition.has_num_laps?)
+      parser = Importers::Parsers::Csv.new(uploaded_file.original_file.file, @competition.results_displayer)
 
       if importer.process(@is_start_time, parser)
         flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"

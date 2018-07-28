@@ -25,7 +25,7 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
 
   # from CSV to import_result
   def build_and_save_imported_result(row_hash, user, competition)
-    ExternalResult.preliminary.create(
+    result = ExternalResult.preliminary.create(
       competitor: CompetitorFinder.new(competition).find_by(bib_number: row_hash[:bib_number]),
       points: row_hash[:points],
       details: row_hash[:details],
@@ -33,6 +33,14 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
       entered_at: Time.current,
       entered_by: user
     )
+    if result.persisted?
+      true
+    else
+      result.errors.full_messages.each do |message|
+        @errors << message
+      end
+      false
+    end
   rescue ActiveRecord::RecordNotFound
     @errors << "Unable to find registrant (#{row_hash})"
     false
