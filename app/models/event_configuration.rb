@@ -378,7 +378,7 @@ class EventConfiguration < ApplicationRecord
 
   def is_date_in_the_past?(date)
     return false if date.nil?
-    date < Date.today
+    date < Date.current
   end
 
   def benefits_list(text)

@@ -30,7 +30,7 @@ class Admin::BagLabelsController < ApplicationController
       pdf.text name, align: :center, inline_format: true
     end
 
-    send_data labels, filename: "bag-labels-#{Date.today}.pdf", type: "application/pdf"
+    send_data labels, filename: "bag-labels-#{Date.current}.pdf", type: "application/pdf"
   end
 
   private

@@ -185,13 +185,13 @@ describe EventConfiguration do
 
   describe "#effective_age_calculation_base_date" do
     it "has an effective_age_calculation_base_date" do
-      date = Date.today
+      date = Date.current
       @ev.age_calculation_base_date = date
       expect(@ev.effective_age_calculation_base_date).to eq(date)
     end
 
     it "uses the start_date if age_calculation_base_date is nil" do
-      date = Date.today
+      date = Date.current
       @ev.start_date = date
       @ev.age_calculation_base_date = nil
       expect(@ev.effective_age_calculation_base_date).to eq(date)

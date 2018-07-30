@@ -10,7 +10,7 @@ class ExportController < ApplicationController
     exporter = Exporters::RegistrantExporter.new
     headers = exporter.headers
     data = exporter.rows
-    output_csv(headers, data, "download_registrants_#{Date.today}.csv")
+    output_csv(headers, data, "download_registrants_#{Date.current}.csv")
   end
 
   def download_competitors_for_timers
@@ -23,7 +23,7 @@ class ExportController < ApplicationController
     exporter = Exporters::EventsExporter.new
     headers = exporter.headers
     data = exporter.rows
-    output_spreadsheet(headers, data, "download_events_#{Date.today}")
+    output_spreadsheet(headers, data, "download_events_#{Date.current}")
   end
 
   def download_payment_details

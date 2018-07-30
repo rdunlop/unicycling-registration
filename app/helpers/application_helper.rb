@@ -125,7 +125,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def modification_access_key(date = Date.today)
+  def modification_access_key(date = Date.current)
     hash = Digest::SHA256.hexdigest(date.to_s + Rails.application.secrets.secret_key_base + Apartment::Tenant.current)
     hash.to_i(16) % 1000000
   end

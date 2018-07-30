@@ -20,7 +20,7 @@ describe "when testing the update function for registration costs", caching: tru
   end
 
   it "(when looking 3 days in the future) says that an update has not yet been done" do
-    expect(RegistrationCostUpdater.update_checked_recently?(Date.today + 3.days)).to eq(false)
+    expect(RegistrationCostUpdater.update_checked_recently?(Date.current + 3.days)).to eq(false)
   end
 
   it "initially, the registrant has an expense_item from the current period" do
