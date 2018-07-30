@@ -50,6 +50,7 @@
 #  representation_type                           :string           default("country"), not null
 #  waiver_file_name                              :string
 #  lodging_end_date                              :datetime
+#  time_zone                                     :string           default("Central Time (US & Canada)")
 #
 
 require 'spec_helper'

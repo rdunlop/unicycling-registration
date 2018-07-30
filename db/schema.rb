@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180728050718) do
+ActiveRecord::Schema.define(version: 20180730153921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -418,6 +418,7 @@ ActiveRecord::Schema.define(version: 20180728050718) do
     t.string "representation_type", default: "country", null: false
     t.string "waiver_file_name"
     t.datetime "lodging_end_date"
+    t.string "time_zone", default: "Central Time (US & Canada)"
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|

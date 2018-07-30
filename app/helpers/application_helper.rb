@@ -18,6 +18,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
 
   def load_config_object_and_i18n
     @config = EventConfiguration.singleton
+    Time.zone = @config&.time_zone || "Central Time (US & Canada)"
     set_fallbacks
   end
 
