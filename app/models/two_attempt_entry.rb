@@ -2,21 +2,23 @@
 #
 # Table name: two_attempt_entries
 #
-#  id             :integer          not null, primary key
-#  user_id        :integer
-#  competition_id :integer
-#  bib_number     :integer
-#  minutes_1      :integer
-#  minutes_2      :integer
-#  seconds_1      :integer
-#  status_1       :string(255)      default("active")
-#  seconds_2      :integer
-#  thousands_1    :integer
-#  thousands_2    :integer
-#  status_2       :string(255)      default("active")
-#  is_start_time  :boolean          default(FALSE), not null
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id                    :integer          not null, primary key
+#  user_id               :integer
+#  competition_id        :integer
+#  bib_number            :integer
+#  minutes_1             :integer
+#  minutes_2             :integer
+#  seconds_1             :integer
+#  status_1              :string(255)      default("active")
+#  seconds_2             :integer
+#  thousands_1           :integer
+#  thousands_2           :integer
+#  status_2              :string(255)      default("active")
+#  is_start_time         :boolean          default(FALSE), not null
+#  created_at            :datetime
+#  updated_at            :datetime
+#  number_of_penalties_1 :integer
+#  number_of_penalties_2 :integer
 #
 # Indexes
 #
@@ -28,8 +30,8 @@ class TwoAttemptEntry < ApplicationRecord
 
   validates :competition_id, presence: true
   validates :user_id, :bib_number, presence: true
-  validates :minutes_1, :seconds_1, :thousands_1, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :minutes_2, :seconds_2, :thousands_2, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :minutes_1, :seconds_1, :thousands_1, :number_of_penalties_1, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :minutes_2, :seconds_2, :thousands_2, :number_of_penalties_2, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   nilify_blanks only: %i[status_1 status_2], before: :validation
   validates :status_1, inclusion: { in: TimeResult.status_values, allow_nil: true }
@@ -37,7 +39,7 @@ class TwoAttemptEntry < ApplicationRecord
   validates :is_start_time, inclusion: { in: [true, false] }
 
   class TwoAttemptEntryElement
-    attr_accessor :minutes, :seconds, :thousands, :status
+    attr_accessor :minutes, :seconds, :thousands, :number_of_penalties, :status
     include HoursFacade
     include ActiveModel::Model
     validate :results_for_competition
@@ -55,6 +57,7 @@ class TwoAttemptEntry < ApplicationRecord
         minutes: minutes.to_i,
         seconds: seconds.to_i,
         thousands: thousands.to_i,
+        number_of_penalties: number_of_penalties.to_i,
         status: convert_status
       )
     end
@@ -114,7 +117,7 @@ class TwoAttemptEntry < ApplicationRecord
   end
 
   def first_attempt
-    TwoAttemptEntryElement.new(minutes: minutes_1, seconds: seconds_1, thousands: thousands_1, status: status_1)
+    TwoAttemptEntryElement.new(minutes: minutes_1, seconds: seconds_1, thousands: thousands_1, number_of_penalties: number_of_penalties_1, status: status_1)
   end
 
   def first_attempt=(attempt_params)
@@ -122,11 +125,12 @@ class TwoAttemptEntry < ApplicationRecord
     self.minutes_1 = attempt.minutes
     self.seconds_1 = attempt.seconds
     self.thousands_1 = attempt.thousands
+    self.number_of_penalties_1 = attempt.number_of_penalties
     self.status_1 = attempt.status
   end
 
   def second_attempt
-    TwoAttemptEntryElement.new(minutes: minutes_2, seconds: seconds_2, thousands: thousands_2, status: status_2)
+    TwoAttemptEntryElement.new(minutes: minutes_2, seconds: seconds_2, thousands: thousands_2, number_of_penalties: number_of_penalties_2, status: status_2)
   end
 
   def second_attempt=(attempt_params)
@@ -134,14 +138,25 @@ class TwoAttemptEntry < ApplicationRecord
     self.minutes_2 = attempt.minutes
     self.seconds_2 = attempt.seconds
     self.thousands_2 = attempt.thousands
+    self.number_of_penalties_2 = attempt.number_of_penalties
     self.status_2 = attempt.status
   end
 
   def full_time_1
-    TimeResultPresenter.new(minutes_1, seconds_1, thousands_1).full_time
+    result = TimeResultPresenter.new(minutes_1, seconds_1, thousands_1).full_time
+    if number_of_penalties_1.to_i.positive?
+      result += " (#{number_of_penalties_1} penalties)"
+    end
+
+    result
   end
 
   def full_time_2
-    TimeResultPresenter.new(minutes_2, seconds_2, thousands_2).full_time
+    result = TimeResultPresenter.new(minutes_2, seconds_2, thousands_2).full_time
+    if number_of_penalties_2.to_i.positive?
+      result += " (#{number_of_penalties_2} penalties)"
+    end
+
+    result
   end
 end
