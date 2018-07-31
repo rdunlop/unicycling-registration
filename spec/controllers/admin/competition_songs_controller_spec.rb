@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Admin::CompetitionSongsController do
   let(:user) { FactoryBot.create(:super_admin_user) }
   before(:each) do
-    FactoryBot.create(:event_configuration, music_submission_end_date: Date.today + 4.days)
+    FactoryBot.create(:event_configuration, music_submission_end_date: Date.current + 4.days)
     sign_in user
   end
   let(:competition) { FactoryBot.create(:competition) }

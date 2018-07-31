@@ -204,7 +204,7 @@ describe RegistrantPolicy do
 
     permissions :set_wheel_sizes? do
       let(:config) do
-        EventConfiguration.singleton.update(start_date: Date.today)
+        EventConfiguration.singleton.update(start_date: Date.current)
         EventConfiguration.singleton
       end
 

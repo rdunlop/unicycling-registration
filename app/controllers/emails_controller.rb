@@ -31,7 +31,7 @@ class EmailsController < ApplicationController
       ]
     end
 
-    filename = "#{@config.short_name}_Registrant_Emails_#{Date.today}"
+    filename = "#{@config.short_name}_Registrant_Emails_#{Date.current}"
 
     output_spreadsheet(headers, data, filename)
   end

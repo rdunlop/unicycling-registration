@@ -24,7 +24,7 @@ class RequiredExpenseItemCreator
   private
 
   def registration_item(registrant)
-    RegistrationCost.relevant_period(registrant.registrant_type, Date.today).try(:expense_item_for, registrant)
+    RegistrationCost.relevant_period(registrant.registrant_type, Date.current).try(:expense_item_for, registrant)
   end
 
   # any items which have a required element, but only 1 element in the group (no choices allowed by the registrant)

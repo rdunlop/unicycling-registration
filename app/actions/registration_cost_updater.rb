@@ -16,7 +16,7 @@ class RegistrationCostUpdater
   end
 
   # Removes all unpaid reg-items for the old period, and creating ones for the new period
-  def update_current_period(date = Date.today)
+  def update_current_period(date = Date.current)
     now_period = RegistrationCost.relevant_period(registrant_type, date)
 
     old_period = RegistrationCost.for_type(registrant_type).current_period
@@ -54,7 +54,7 @@ class RegistrationCostUpdater
     true
   end
 
-  def self.update_checked_recently?(date = Date.today)
+  def self.update_checked_recently?(date = Date.current)
     update_type_recently?("competitor", date) || update_type_recently?("noncompetitor", date)
   end
 

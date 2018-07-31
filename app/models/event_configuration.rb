@@ -50,6 +50,7 @@
 #  representation_type                           :string           default("country"), not null
 #  waiver_file_name                              :string
 #  lodging_end_date                              :datetime
+#  time_zone                                     :string           default("Central Time (US & Canada)")
 #
 
 class EventConfiguration < ApplicationRecord
@@ -68,6 +69,7 @@ class EventConfiguration < ApplicationRecord
   validates :event_url, format: URI.regexp(%w[http https]), unless: -> { event_url.nil? }
   validates :comp_noncomp_url, format: URI.regexp(%w[http https]), unless: -> { comp_noncomp_url.blank? }
   validates :enabled_locales, presence: true
+  validates :time_zone, presence: true, inclusion: { in: ActiveSupport::TimeZone.send(:zones_map).keys }
   validate :only_one_info_type
 
   def self.style_names
@@ -376,7 +378,7 @@ class EventConfiguration < ApplicationRecord
 
   def is_date_in_the_past?(date)
     return false if date.nil?
-    date < Date.today
+    date < Date.current
   end
 
   def benefits_list(text)

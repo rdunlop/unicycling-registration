@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RegistrantPresenter do
   let(:registrant) { FactoryBot.create(:competitor) }
   let(:presenter) { described_class.new(registrant) }
-  let!(:config) { FactoryBot.create(:event_configuration, start_date: Date.today) }
+  let!(:config) { FactoryBot.create(:event_configuration, start_date: Date.current) }
 
   describe "#unpaid_warnings" do
     let(:warnings) { presenter.unpaid_warnings(config) }
