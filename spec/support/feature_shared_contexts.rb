@@ -36,19 +36,19 @@ shared_context 'basic event configuration' do |options = {}|
     FactoryBot.create(:wheel_size_24)
     EventConfiguration.singleton.update(
       FactoryBot.attributes_for(:event_configuration,
-                                start_date: Date.today + 6.months,
+                                start_date: Date.current + 6.months,
                                 iuf: true,
                                 usa: false,
                                 test_mode: options[:test_mode],
-                                music_submission_end_date: Date.today + 2.months,
-                                event_sign_up_closed_date: Date.today + 2.months)
+                                music_submission_end_date: Date.current + 2.months,
+                                event_sign_up_closed_date: Date.current + 2.months)
     )
     exp_comp = FactoryBot.create(:expense_item, name: "Early Registration - Competitor", cost: 20.00)
     exp_noncomp = FactoryBot.create(:expense_item, name: "Early Registration - NonCompetitor", cost: 11.00)
     FactoryBot.create(:registration_cost, :current, :competitor,
-                      start_date: Date.today - 1.month, end_date: Date.today + 1.month, expense_item: exp_comp)
+                      start_date: Date.current - 1.month, end_date: Date.current + 1.month, expense_item: exp_comp)
     FactoryBot.create(:registration_cost, :current, :noncompetitor,
-                      start_date: Date.today - 1.month, end_date: Date.today + 1.month, expense_item: exp_noncomp)
+                      start_date: Date.current - 1.month, end_date: Date.current + 1.month, expense_item: exp_noncomp)
     FactoryBot.create(:event, name: "100m")
   end
 end

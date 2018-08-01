@@ -19,7 +19,7 @@ class Compete::WaveAssignmentsController < ApplicationController
         exporter = Exporters::WaveExporter.new(@competitors)
         headers = exporter.headers
         data = exporter.rows
-        output_csv(headers, data, "#{@competition.slug}-waves-draft-#{Date.today}.csv")
+        output_csv(headers, data, "#{@competition.slug}-waves-draft-#{Date.current}.csv")
       end
       format.html {} # normal
     end

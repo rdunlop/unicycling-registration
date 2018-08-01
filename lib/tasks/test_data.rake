@@ -27,7 +27,7 @@ def create_registrant(first_name, last_name, email_name)
   user = User.find_by(email: "#{email_name}@dunlopweb.com")
   user ||= FactoryBot.create(:user, email: "#{email_name}@dunlopweb.com")
   reg = Registrant.find_by(first_name: first_name, last_name: last_name)
-  birthday = Date.today - rand(19..99).years
+  birthday = Date.current - rand(19..99).years
   FactoryBot.create(:competitor, first_name: first_name, last_name: last_name, user: user, birthday: birthday) if reg.nil?
 end
 

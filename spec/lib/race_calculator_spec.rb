@@ -16,7 +16,7 @@ describe OrderedResultCalculator do
 
   describe "when calculating the placing of timed races" do
     before(:each) do
-      @event_configuration = FactoryBot.create(:event_configuration, start_date: Date.today)
+      @event_configuration = FactoryBot.create(:event_configuration, start_date: Date.current)
       @event = FactoryBot.create(:event)
       @age_group_entry = FactoryBot.create(:age_group_entry) # 0-100 age group
       @competition = FactoryBot.create(:timed_competition, age_group_type: @age_group_entry.age_group_type, event: @event)
@@ -59,7 +59,7 @@ describe OrderedResultCalculator do
 
         @reg = @tr1.competitor.registrants.first
         travel 2.seconds do
-          @reg.birthday = Date.today - 1.year
+          @reg.birthday = Date.current - 1.year
           @reg.contact_detail.responsible_adult_name = "Bob Smith"
           @reg.contact_detail.responsible_adult_phone = "911"
           @reg.save!
@@ -69,7 +69,7 @@ describe OrderedResultCalculator do
         # to burst the cache on Competitor#age
         travel 2.seconds do
           @reg = @tr2.competitor.registrants.first
-          @reg.birthday = Date.today - 60.years
+          @reg.birthday = Date.current - 60.years
           @reg.save!
         end
         expect(@reg.age).to eq(60)

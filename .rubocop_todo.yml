@@ -63,12 +63,6 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 19
 
-# Offense count: 38
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: strict, flexible
-Rails/Date:
-  Enabled: false
-
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb

@@ -83,11 +83,11 @@ class RegistrationCost < ApplicationRecord
     end_date + 1.day
   end
 
-  def current_period?(date = Date.today)
+  def current_period?(date = Date.current)
     (start_date <= date && date <= last_day)
   end
 
-  def past_period?(date = Date.today)
+  def past_period?(date = Date.current)
     (last_day < date)
   end
 
@@ -102,7 +102,7 @@ class RegistrationCost < ApplicationRecord
   private
 
   def clear_cache
-    Rails.cache.delete("/registration_cost/by_date/#{registrant_type}/#{Date.today}")
+    Rails.cache.delete("/registration_cost/by_date/#{registrant_type}/#{Date.current}")
     RegistrationCostUpdater.new(registrant_type).update_current_period
   end
 end

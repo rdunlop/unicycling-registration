@@ -48,7 +48,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration[4.2]
       end_date + 1.day
     end
 
-    def current_period?(date = Date.today)
+    def current_period?(date = Date.current)
       (start_date <= date && date <= last_day)
     end
 
@@ -90,7 +90,7 @@ class ChangeRegFeeToRealObject < ActiveRecord::Migration[4.2]
     RegistrationPeriod.reset_column_information
 
     # determine the current competitor expense item, and non-competitor expense item
-    rp = RegistrationPeriod.relevant_period(Date.today)
+    rp = RegistrationPeriod.relevant_period(Date.current)
     unless rp.nil?
       Registrant.all.each do |reg|
         if reg.competitor

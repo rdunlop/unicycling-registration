@@ -30,7 +30,7 @@ class ExportRegistrantsController < ApplicationController
       ]
     end
 
-    filename = "#{@config.short_name} Registrants #{Date.today}"
+    filename = "#{@config.short_name} Registrants #{Date.current}"
 
     output_spreadsheet(headers, data, filename)
   end
@@ -75,7 +75,7 @@ class ExportRegistrantsController < ApplicationController
       ]
     end
 
-    filename = "#{@config.short_name} Registration Summaries #{Date.today}"
+    filename = "#{@config.short_name} Registration Summaries #{Date.current}"
 
     output_spreadsheet(headers, data, filename)
   end

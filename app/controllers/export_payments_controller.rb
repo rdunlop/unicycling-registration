@@ -25,7 +25,7 @@ class ExportPaymentsController < ApplicationController
       ]
     end
 
-    filename = "#{@config.short_name} Payments #{Date.today}"
+    filename = "#{@config.short_name} Payments #{Date.current}"
 
     output_spreadsheet(headers, data, filename)
   end
@@ -55,7 +55,7 @@ class ExportPaymentsController < ApplicationController
       ]
     end
 
-    filename = "#{@config.short_name} PaymentDetails #{Date.today}"
+    filename = "#{@config.short_name} PaymentDetails #{Date.current}"
 
     output_spreadsheet(headers, data, filename)
   end
