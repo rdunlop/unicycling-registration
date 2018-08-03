@@ -69,7 +69,7 @@ class Printing::CompetitionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf { render_common_pdf(name, "Portrait", attachment) }
+      format.pdf { render_common_pdf(name, "Portrait", attachment, header: @competition.results_header) }
     end
   end
 

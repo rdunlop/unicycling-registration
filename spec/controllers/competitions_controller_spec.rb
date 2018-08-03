@@ -29,6 +29,7 @@
 #  import_results_into_other_competition :boolean          default(FALSE), not null
 #  base_age_group_type_id                :integer
 #  score_ineligible_competitors          :boolean          default(FALSE), not null
+#  results_header                        :string
 #
 # Indexes
 #
