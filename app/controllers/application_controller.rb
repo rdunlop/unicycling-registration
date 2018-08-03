@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
     { left: '[date] [time]', center: @config.short_name, right: 'Page [page] of [topage]' }
   end
 
-  def render_common_pdf(view_name, orientation = "Portrait", attachment = false, simple_pdf: false)
+  def render_common_pdf(view_name, orientation = "Portrait", attachment = false, simple_pdf: false, header: nil)
     if attachment
       disposition = "attachment"
     else
@@ -95,6 +95,7 @@ class ApplicationController < ActionController::Base
            print_media_type: true,
            margin: { top: 15, bottom: 10, left: 7, right: 7 },
            show_as_html: params[:debug].present?,
+           header: { center: header, line: header.present? },
            footer: default_footer,
            formats: %i[pdf html],
            orientation: orientation,
