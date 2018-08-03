@@ -67,6 +67,7 @@ class Printing::CompetitionsController < ApplicationController
     name = "#{@config.short_name.tr(' ', '_')}_#{@competition.name.tr(' ', '_')}_results"
     attachment = true unless params[:attachment].nil?
 
+    # this should become common with CreatesCompetitionResultsPdf/PdfCreator
     respond_to do |format|
       format.html
       format.pdf { render_common_pdf(name, "Portrait", attachment, header: @competition.results_header) }
