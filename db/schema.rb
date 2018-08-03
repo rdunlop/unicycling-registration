@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180730153921) do
+ActiveRecord::Schema.define(version: 20180803213043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "age_group_entries", id: :serial, force: :cascade do |t|
     t.integer "age_group_type_id"
-    t.string "short_description", limit: 255
+    t.string "short_description"
     t.integer "start_age"
     t.integer "end_age"
-    t.string "gender", limit: 255
+    t.string "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "wheel_size_id"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "age_group_types", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "description", limit: 255
+    t.string "name"
+    t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_age_group_types_on_name", unique: true
@@ -53,16 +53,16 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "award_labels", id: :serial, force: :cascade do |t|
     t.integer "bib_number"
-    t.string "line_2", limit: 255
-    t.string "line_3", limit: 255
-    t.string "line_5", limit: 255
+    t.string "line_2"
+    t.string "line_3"
+    t.string "line_5"
     t.integer "place"
     t.integer "user_id"
     t.integer "registrant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "line_1", limit: 255
-    t.string "line_4", limit: 255
+    t.string "line_1"
+    t.string "line_4"
     t.index ["user_id"], name: "index_award_labels_on_user_id"
   end
 
@@ -85,23 +85,23 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "info_url", limit: 255
+    t.string "info_url"
     t.integer "info_page_id"
   end
 
-  create_table "category_translations", id: :serial, force: :cascade do |t|
+  create_table "category_translations", force: :cascade do |t|
     t.integer "category_id", null: false
-    t.string "locale", limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "name", limit: 255
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
   end
 
   create_table "combined_competition_entries", id: :serial, force: :cascade do |t|
     t.integer "combined_competition_id"
-    t.string "abbreviation", limit: 255
+    t.string "abbreviation"
     t.boolean "tie_breaker", default: false, null: false
     t.integer "points_1"
     t.integer "points_2"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "combined_competitions", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "use_age_group_places", default: false, null: false
@@ -137,20 +137,20 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "competition_results", id: :serial, force: :cascade do |t|
     t.integer "competition_id"
-    t.string "results_file", limit: 255
+    t.string "results_file"
     t.boolean "system_managed", default: false, null: false
     t.boolean "published", default: false, null: false
     t.datetime "published_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "name", limit: 255
+    t.string "name"
   end
 
   create_table "competition_sources", id: :serial, force: :cascade do |t|
     t.integer "target_competition_id"
     t.integer "event_category_id"
     t.integer "competition_id"
-    t.string "gender_filter", limit: 255, default: "Both", null: false
+    t.string "gender_filter", default: "Both", null: false
     t.integer "max_place"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -173,20 +173,20 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "competitions", id: :serial, force: :cascade do |t|
     t.integer "event_id"
-    t.string "name", limit: 255
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "age_group_type_id"
     t.boolean "has_experts", default: false, null: false
-    t.string "scoring_class", limit: 255
-    t.string "start_data_type", limit: 255
-    t.string "end_data_type", limit: 255
+    t.string "scoring_class"
+    t.string "start_data_type"
+    t.string "end_data_type"
     t.boolean "uses_lane_assignments", default: false, null: false
     t.datetime "scheduled_completion_at"
     t.boolean "awarded", default: false, null: false
-    t.string "award_title_name", limit: 255
-    t.string "award_subtitle_name", limit: 255
-    t.string "num_members_per_competitor", limit: 255
+    t.string "award_title_name"
+    t.string "award_subtitle_name"
+    t.string "num_members_per_competitor"
     t.boolean "automatic_competitor_creation", default: false, null: false
     t.integer "combined_competition_id"
     t.boolean "order_finalized", default: false, null: false
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.boolean "import_results_into_other_competition", default: false, null: false
     t.integer "base_age_group_type_id"
     t.boolean "score_ineligible_competitors", default: false, null: false
+    t.string "results_header"
     t.index ["base_age_group_type_id"], name: "index_competitions_on_base_age_group_type_id"
     t.index ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true
     t.index ["event_id"], name: "index_competitions_event_id"
@@ -206,14 +207,14 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   create_table "competitors", id: :serial, force: :cascade do |t|
     t.integer "competition_id"
     t.integer "position"
-    t.string "custom_name", limit: 255
+    t.string "custom_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "status", default: 0
     t.integer "lowest_member_bib_number"
     t.boolean "geared", default: false, null: false
     t.integer "riding_wheel_size"
-    t.string "notes", limit: 255
+    t.string "notes"
     t.integer "wave"
     t.integer "riding_crank_size"
     t.datetime "withdrawn_at"
@@ -226,30 +227,30 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "contact_details", id: :serial, force: :cascade do |t|
     t.integer "registrant_id"
-    t.string "address", limit: 255
-    t.string "city", limit: 255
-    t.string "state_code", limit: 255
-    t.string "zip", limit: 255
-    t.string "country_residence", limit: 255
-    t.string "country_representing", limit: 255
-    t.string "phone", limit: 255
-    t.string "mobile", limit: 255
-    t.string "email", limit: 255
-    t.string "club", limit: 255
-    t.string "club_contact", limit: 255
-    t.string "organization_member_number", limit: 255
-    t.string "emergency_name", limit: 255
-    t.string "emergency_relationship", limit: 255
+    t.string "address"
+    t.string "city"
+    t.string "state_code"
+    t.string "zip"
+    t.string "country_residence"
+    t.string "country_representing"
+    t.string "phone"
+    t.string "mobile"
+    t.string "email"
+    t.string "club"
+    t.string "club_contact"
+    t.string "organization_member_number"
+    t.string "emergency_name"
+    t.string "emergency_relationship"
     t.boolean "emergency_attending", default: false, null: false
-    t.string "emergency_primary_phone", limit: 255
-    t.string "emergency_other_phone", limit: 255
-    t.string "responsible_adult_name", limit: 255
-    t.string "responsible_adult_phone", limit: 255
+    t.string "emergency_primary_phone"
+    t.string "emergency_other_phone"
+    t.string "responsible_adult_name"
+    t.string "responsible_adult_phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "organization_membership_manually_confirmed", default: false, null: false
-    t.string "birthplace", limit: 255
-    t.string "italian_fiscal_code", limit: 255
+    t.string "birthplace"
+    t.string "italian_fiscal_code"
     t.boolean "organization_membership_system_confirmed", default: false, null: false
     t.string "organization_membership_system_status"
     t.index ["registrant_id"], name: "index_contact_details_on_registrant_id", unique: true
@@ -283,9 +284,9 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "coupon_codes", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "code", limit: 255
-    t.string "description", limit: 255
+    t.string "name"
+    t.string "code"
+    t.string "description"
     t.integer "max_num_uses", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -309,7 +310,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   create_table "event_categories", id: :serial, force: :cascade do |t|
     t.integer "event_id"
     t.integer "position"
-    t.string "name", limit: 255
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "age_range_start", default: 0
@@ -319,7 +320,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.index ["event_id", "position"], name: "index_event_categories_event_id"
   end
 
-  create_table "event_category_translations", id: :serial, force: :cascade do |t|
+  create_table "event_category_translations", force: :cascade do |t|
     t.integer "event_category_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -329,21 +330,21 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.index ["locale"], name: "index_event_category_translations_on_locale"
   end
 
-  create_table "event_choice_translations", id: :serial, force: :cascade do |t|
+  create_table "event_choice_translations", force: :cascade do |t|
     t.integer "event_choice_id", null: false
-    t.string "locale", limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "label", limit: 255
-    t.string "tooltip", limit: 255
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "label"
+    t.string "tooltip"
     t.index ["event_choice_id"], name: "index_event_choice_translations_on_event_choice_id"
     t.index ["locale"], name: "index_event_choice_translations_on_locale"
   end
 
   create_table "event_choices", id: :serial, force: :cascade do |t|
     t.integer "event_id"
-    t.string "cell_type", limit: 255
-    t.string "multiple_values", limit: 255
+    t.string "cell_type"
+    t.string "multiple_values"
     t.integer "position"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -353,15 +354,15 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.index ["event_id", "position"], name: "index_event_choices_on_event_id_and_position"
   end
 
-  create_table "event_configuration_translations", id: :serial, force: :cascade do |t|
+  create_table "event_configuration_translations", force: :cascade do |t|
     t.integer "event_configuration_id", null: false
-    t.string "locale", limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "short_name", limit: 255
-    t.string "long_name", limit: 255
-    t.string "location", limit: 255
-    t.string "dates_description", limit: 255
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "short_name"
+    t.string "long_name"
+    t.string "location"
+    t.string "dates_description"
     t.text "competitor_benefits"
     t.text "noncompetitor_benefits"
     t.text "spectator_benefits"
@@ -371,36 +372,36 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "event_configurations", id: :serial, force: :cascade do |t|
-    t.string "event_url", limit: 255
+    t.string "event_url"
     t.date "start_date"
-    t.string "contact_email", limit: 255
+    t.string "contact_email"
     t.date "artistic_closed_date"
     t.date "standard_skill_closed_date"
     t.date "event_sign_up_closed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "test_mode", default: false, null: false
-    t.string "comp_noncomp_url", limit: 255
+    t.string "comp_noncomp_url"
     t.boolean "standard_skill", default: false, null: false
     t.boolean "usa", default: false, null: false
     t.boolean "iuf", default: false, null: false
-    t.string "currency_code", limit: 255
-    t.string "rulebook_url", limit: 255
-    t.string "style_name", limit: 255
+    t.string "currency_code"
+    t.string "rulebook_url"
+    t.string "style_name"
     t.text "custom_waiver_text"
     t.date "music_submission_end_date"
     t.boolean "artistic_score_elimination_mode_naucc", default: false, null: false
-    t.string "logo_file", limit: 255
+    t.string "logo_file"
     t.integer "max_award_place", default: 5
     t.boolean "display_confirmed_events", default: false, null: false
     t.boolean "spectators", default: false, null: false
-    t.string "paypal_account", limit: 255
-    t.string "waiver", limit: 255, default: "none"
+    t.string "paypal_account"
+    t.string "waiver", default: "none"
     t.integer "validations_applied"
     t.boolean "italian_requirements", default: false, null: false
-    t.string "rules_file_name", limit: 255
+    t.string "rules_file_name"
     t.boolean "accept_rules", default: false, null: false
-    t.string "paypal_mode", limit: 255, default: "disabled"
+    t.string "paypal_mode", default: "disabled"
     t.boolean "offline_payment", default: false, null: false
     t.string "enabled_locales", null: false
     t.integer "comp_noncomp_page_id"
@@ -431,7 +432,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "event_translations", id: :serial, force: :cascade do |t|
+  create_table "event_translations", force: :cascade do |t|
     t.integer "event_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -446,7 +447,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "name", limit: 255
+    t.string "name"
     t.boolean "visible", default: true, null: false
     t.boolean "accepts_music_uploads", default: false, null: false
     t.boolean "artistic", default: false, null: false
@@ -470,12 +471,12 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.index ["expense_group_id"], name: "index_expense_group_options_on_expense_group_id"
   end
 
-  create_table "expense_group_translations", id: :serial, force: :cascade do |t|
+  create_table "expense_group_translations", force: :cascade do |t|
     t.integer "expense_group_id", null: false
-    t.string "locale", limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "group_name", limit: 255
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "group_name"
     t.index ["expense_group_id"], name: "index_expense_group_translations_on_expense_group_id"
     t.index ["locale"], name: "index_expense_group_translations_on_locale"
   end
@@ -485,7 +486,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "info_url", limit: 255
+    t.string "info_url"
     t.boolean "competitor_required", default: false, null: false
     t.boolean "noncompetitor_required", default: false, null: false
     t.boolean "registration_items", default: false, null: false
@@ -493,13 +494,13 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.boolean "system_managed", default: false, null: false
   end
 
-  create_table "expense_item_translations", id: :serial, force: :cascade do |t|
+  create_table "expense_item_translations", force: :cascade do |t|
     t.integer "expense_item_id", null: false
-    t.string "locale", limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "name", limit: 255
-    t.string "details_label", limit: 255
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "details_label"
     t.index ["expense_item_id"], name: "index_expense_item_translations_on_expense_item_id"
     t.index ["locale"], name: "index_expense_item_translations_on_locale"
   end
@@ -515,15 +516,15 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "maximum_per_registrant", default: 0
     t.integer "cost_cents"
     t.integer "tax_cents", default: 0, null: false
-    t.integer "cost_element_id"
     t.string "cost_element_type"
+    t.integer "cost_element_id"
     t.index ["cost_element_type", "cost_element_id"], name: "index_expense_items_on_cost_element_type_and_cost_element_id", unique: true
     t.index ["expense_group_id"], name: "index_expense_items_expense_group_id"
   end
 
   create_table "external_results", id: :serial, force: :cascade do |t|
     t.integer "competitor_id"
-    t.string "details", limit: 255
+    t.string "details"
     t.decimal "points", precision: 6, scale: 3, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -577,7 +578,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "import_results", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.string "raw_data", limit: 255
+    t.string "raw_data"
     t.integer "bib_number"
     t.integer "minutes"
     t.integer "seconds"
@@ -586,12 +587,12 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.datetime "updated_at"
     t.integer "competition_id"
     t.decimal "points", precision: 6, scale: 3
-    t.string "details", limit: 255
+    t.string "details"
     t.boolean "is_start_time", default: false, null: false
     t.integer "number_of_laps"
-    t.string "status", limit: 255
+    t.string "status"
     t.text "comments"
-    t.string "comments_by", limit: 255
+    t.string "comments_by"
     t.integer "heat"
     t.integer "lane"
     t.integer "number_of_penalties"
@@ -600,18 +601,18 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "judge_types", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "val_1_description", limit: 255
-    t.string "val_2_description", limit: 255
-    t.string "val_3_description", limit: 255
-    t.string "val_4_description", limit: 255
+    t.string "name"
+    t.string "val_1_description"
+    t.string "val_2_description"
+    t.string "val_3_description"
+    t.string "val_4_description"
     t.integer "val_1_max"
     t.integer "val_2_max"
     t.integer "val_3_max"
     t.integer "val_4_max"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "event_class", limit: 255
+    t.string "event_class"
     t.boolean "boundary_calculation_enabled", default: false, null: false
     t.string "val_5_description"
     t.integer "val_5_max"
@@ -734,7 +735,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "page_translations", id: :serial, force: :cascade do |t|
+  create_table "page_translations", force: :cascade do |t|
     t.integer "page_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -771,7 +772,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "line_item_id"
-    t.string "details", limit: 255
+    t.string "details"
     t.boolean "free", default: false, null: false
     t.boolean "refunded", default: false, null: false
     t.integer "amount_cents"
@@ -785,13 +786,13 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "user_id"
     t.boolean "completed", default: false, null: false
     t.boolean "cancelled", default: false, null: false
-    t.string "transaction_id", limit: 255
+    t.string "transaction_id"
     t.datetime "completed_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "payment_date", limit: 255
-    t.string "note", limit: 255
-    t.string "invoice_id", limit: 255
+    t.string "payment_date"
+    t.string "note"
+    t.string "invoice_id"
     t.boolean "offline_pending", default: false, null: false
     t.datetime "offline_pending_date"
     t.index ["user_id"], name: "index_payments_user_id"
@@ -808,9 +809,9 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "rails_admin_histories", id: :serial, force: :cascade do |t|
     t.text "message"
-    t.string "username", limit: 255
+    t.string "username"
     t.integer "item"
-    t.string "table", limit: 255
+    t.string "table"
     t.integer "month", limit: 2
     t.bigint "year"
     t.datetime "created_at"
@@ -830,7 +831,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   create_table "refunds", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.datetime "refund_date"
-    t.string "note", limit: 255
+    t.string "note"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "percentage", default: 100
@@ -851,7 +852,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   create_table "registrant_choices", id: :serial, force: :cascade do |t|
     t.integer "registrant_id"
     t.integer "event_choice_id"
-    t.string "value", limit: 255
+    t.string "value"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["event_choice_id"], name: "index_registrant_choices_event_choice_id"
@@ -877,7 +878,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "line_item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "details", limit: 255
+    t.string "details"
     t.boolean "free", default: false, null: false
     t.boolean "system_managed", default: false, null: false
     t.boolean "locked", default: false, null: false
@@ -904,9 +905,9 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.datetime "updated_at"
     t.string "additional_details_type"
     t.integer "additional_details_id"
-    t.index ["registrant_group_id"], name: "index_registrant_group_members_on_registrant_group_id"
+    t.index ["registrant_group_id"], name: "index_registrant_group_mumbers_registrant_group_id"
     t.index ["registrant_id", "registrant_group_id"], name: "reg_group_reg_group", unique: true
-    t.index ["registrant_id"], name: "index_registrant_group_members_on_registrant_id"
+    t.index ["registrant_id"], name: "index_registrant_group_mumbers_registrant_id"
   end
 
   create_table "registrant_group_types", id: :serial, force: :cascade do |t|
@@ -927,11 +928,11 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "registrants", id: :serial, force: :cascade do |t|
-    t.string "first_name", limit: 255
-    t.string "middle_initial", limit: 255
-    t.string "last_name", limit: 255
+    t.string "first_name"
+    t.string "middle_initial"
+    t.string "last_name"
     t.date "birthday"
-    t.string "gender", limit: 255
+    t.string "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "user_id"
@@ -941,14 +942,13 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "age"
     t.boolean "ineligible", default: false, null: false
     t.boolean "volunteer", default: false, null: false
-    t.string "online_waiver_signature", limit: 255
-    t.string "access_code", limit: 255
-    t.string "sorted_last_name", limit: 255
-    t.string "status", limit: 255, default: "active", null: false
-    t.string "registrant_type", limit: 255, default: "competitor"
+    t.string "online_waiver_signature"
+    t.string "access_code"
+    t.string "sorted_last_name"
+    t.string "status", default: "active", null: false
+    t.string "registrant_type", default: "competitor"
     t.boolean "rules_accepted", default: false, null: false
     t.boolean "online_waiver_acceptance", default: false, null: false
-    t.boolean "paid", default: false, null: false
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true
     t.index ["deleted"], name: "index_registrants_deleted"
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type"
@@ -987,12 +987,12 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.index ["registrant_type", "current_period"], name: "index_registration_costs_on_registrant_type_and_current_period"
   end
 
-  create_table "registration_period_translations", id: :serial, force: :cascade do |t|
+  create_table "registration_period_translations", force: :cascade do |t|
     t.integer "registration_period_id", null: false
-    t.string "locale", limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "name", limit: 255
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["locale"], name: "index_registration_period_translations_on_locale"
     t.index ["registration_period_id"], name: "index_43f042772e959a61bb6b1fedb770048039229050"
   end
@@ -1007,19 +1007,19 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "results", id: :serial, force: :cascade do |t|
     t.integer "competitor_id"
-    t.string "result_type", limit: 255
+    t.string "result_type"
     t.integer "result_subtype"
     t.integer "place"
-    t.string "status", limit: 255
+    t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["competitor_id", "result_type"], name: "index_results_on_competitor_id_and_result_type", unique: true
   end
 
   create_table "roles", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string "name"
+    t.string "resource_type"
     t.integer "resource_id"
-    t.string "resource_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -1044,8 +1044,8 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "songs", id: :serial, force: :cascade do |t|
     t.integer "registrant_id"
-    t.string "description", limit: 255
-    t.string "song_file_name", limit: 255
+    t.string "description"
+    t.string "song_file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "event_id"
@@ -1058,9 +1058,9 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "standard_skill_entries", id: :serial, force: :cascade do |t|
     t.integer "number"
-    t.string "letter", limit: 255
+    t.string "letter"
     t.decimal "points", precision: 6, scale: 2
-    t.string "description", limit: 255
+    t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "friendly_description"
@@ -1122,7 +1122,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
 
   create_table "tenant_aliases", id: :serial, force: :cascade do |t|
     t.integer "tenant_id", null: false
-    t.string "website_alias", limit: 255, null: false
+    t.string "website_alias", null: false
     t.boolean "primary_domain", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1132,11 +1132,11 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "tenants", id: :serial, force: :cascade do |t|
-    t.string "subdomain", limit: 255
-    t.string "description", limit: 255
+    t.string "subdomain"
+    t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "admin_upgrade_code", limit: 255
+    t.string "admin_upgrade_code"
     t.index ["subdomain"], name: "index_tenants_on_subdomain"
   end
 
@@ -1161,9 +1161,9 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.datetime "updated_at"
     t.boolean "is_start_time", default: false, null: false
     t.integer "number_of_laps"
-    t.string "status", limit: 255, null: false
+    t.string "status", null: false
     t.text "comments"
-    t.string "comments_by", limit: 255
+    t.string "comments_by"
     t.integer "number_of_penalties"
     t.datetime "entered_at", null: false
     t.integer "entered_by_id", null: false
@@ -1205,11 +1205,11 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "minutes_1"
     t.integer "minutes_2"
     t.integer "seconds_1"
-    t.string "status_1", limit: 255, default: "active"
+    t.string "status_1", default: "active"
     t.integer "seconds_2"
     t.integer "thousands_1"
     t.integer "thousands_2"
-    t.string "status_2", limit: 255, default: "active"
+    t.string "status_2", default: "active"
     t.boolean "is_start_time", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -1240,22 +1240,22 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 255, default: "", null: false
-    t.string "reset_password_token", limit: 255
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip", limit: 255
-    t.string "last_sign_in_ip", limit: 255
-    t.string "confirmation_token", limit: 255
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "name", limit: 255
+    t.string "name"
     t.boolean "guest", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -1269,10 +1269,10 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "versions", id: :serial, force: :cascade do |t|
-    t.string "item_type", limit: 255, null: false
+    t.string "item_type", null: false
     t.integer "item_id", null: false
-    t.string "event", limit: 255, null: false
-    t.string "whodunnit", limit: 255
+    t.string "event", null: false
+    t.string "whodunnit"
     t.text "object"
     t.datetime "created_at"
     t.text "object_changes"
@@ -1292,7 +1292,7 @@ ActiveRecord::Schema.define(version: 20180730153921) do
   end
 
   create_table "volunteer_opportunities", id: :serial, force: :cascade do |t|
-    t.string "description", limit: 255, null: false
+    t.string "description", null: false
     t.integer "position"
     t.text "inform_emails"
     t.datetime "created_at"
@@ -1308,13 +1308,13 @@ ActiveRecord::Schema.define(version: 20180730153921) do
     t.integer "seconds"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "scheduled_time", limit: 255
+    t.string "scheduled_time"
     t.index ["competition_id", "wave"], name: "index_wave_times_on_competition_id_and_wave", unique: true
   end
 
   create_table "wheel_sizes", id: :serial, force: :cascade do |t|
     t.integer "position"
-    t.string "description", limit: 255
+    t.string "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
