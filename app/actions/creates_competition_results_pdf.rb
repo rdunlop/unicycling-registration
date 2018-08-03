@@ -17,6 +17,8 @@ class CreatesCompetitionResultsPdf
   end
 
   def freestyle_summary_raw_pdf
+    header = competition.results_header
+
     renderer = PdfRenderer.new('printing/competitions/freestyle_summary',
                                layout: 'pdf',
                                locals: { :@competition => @competition },
