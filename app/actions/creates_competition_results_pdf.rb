@@ -5,13 +5,22 @@ class CreatesCompetitionResultsPdf
     @competition = competition
   end
 
+  # this should become common with CompetitionsController#results
   def results_raw_pdf
-    renderer = PdfRenderer.new('printing/competitions/results', layout: 'pdf', locals: { :@competition => @competition })
+    header = competition.results_header
+
+    renderer = PdfRenderer.new('printing/competitions/results',
+                               layout: 'pdf',
+                               locals: { :@competition => @competition },
+                               pdf_options: { header: { center: header, line: header.present? } })
     renderer.raw_pdf
   end
 
   def freestyle_summary_raw_pdf
-    renderer = PdfRenderer.new('printing/competitions/freestyle_summary', layout: 'pdf', locals: { :@competition => @competition })
+    renderer = PdfRenderer.new('printing/competitions/freestyle_summary',
+                               layout: 'pdf',
+                               locals: { :@competition => @competition },
+                               pdf_options: { header: { center: header, line: header.present? } })
     renderer.raw_pdf
   end
 

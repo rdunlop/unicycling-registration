@@ -10,6 +10,6 @@ class PdfRenderer
     @controller = ApplicationController.new
     @controller.request = ActionDispatch::Request.new({})
     html_string = @controller.render_to_string(view_target, arguments)
-    WickedPdf.new.pdf_from_string(html_string)
+    WickedPdf.new.pdf_from_string(html_string, arguments[:pdf_options])
   end
 end
