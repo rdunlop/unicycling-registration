@@ -66,7 +66,6 @@ class Competitor < ApplicationRecord
   validate :must_have_3_members_for_custom_name
   validates :tier_number, presence: true
   validates :tier_number, numericality: { greater_than_or_equal_to: 1, less_than: 10 }
-  validates :results_header, length: { maximum: 60 }
 
   enum status: %i[active not_qualified dns withdrawn dnf]
   after_save :touch_members

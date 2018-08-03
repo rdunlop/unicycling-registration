@@ -41,7 +41,7 @@ class PublishedAgeGroupEntriesController < ApplicationController
 
     respond_to do |format|
       format.html { render :show }
-      format.pdf { render_common_pdf("preview") }
+      format.pdf { render_common_pdf("preview", header: @competition.results_header) }
     end
   end
 

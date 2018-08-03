@@ -127,6 +127,7 @@ class Competition < ApplicationRecord
   validate :no_competition_sources_when_overall_calculation
   validates :combined_competition, presence: true, if: proc { |f| f.scoring_class == "Overall Champion" }
   validates :combined_competition, absence: true, unless: proc { |f| f.scoring_class == "Overall Champion" }
+  validates :results_header, length: { maximum: 60 }
 
   TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "hours_minutes_seconds"].freeze
   validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }, allow_nil: true
