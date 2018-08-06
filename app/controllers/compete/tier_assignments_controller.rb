@@ -1,4 +1,6 @@
 class Compete::TierAssignmentsController < ApplicationController
+  include CsvOutputter
+  include WaveBestTimeEagerLoader
   layout "competition_management"
 
   before_action :authenticate_user!
@@ -33,10 +35,10 @@ class Compete::TierAssignmentsController < ApplicationController
 
     if updater.process(parser)
       flash[:notice] = "#{updater.num_rows_processed} Tiers Configured"
-      redirect_to competition_tiers_path(@competition)
+      redirect_to competition_tier_assignments_path(@competition)
     else
       flash[:alert] = "Error processing file #{updater.errors}"
-      redirect_back(fallback_location: competition_tiers_path(@competition))
+      redirect_back(fallback_location: competition_tier_assignments_path(@competition))
     end
   end
 
