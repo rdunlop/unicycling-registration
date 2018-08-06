@@ -4,6 +4,26 @@
   On this page, you can specify the tier # and description for each competitor.
 
 %p
+  Instead of importing the tier assignments, you can also use the "Enter Sign-Ins" page to enter/update
+  The Tier Number/Description of each competitor.
+
+%h2 Step 1 Download Tier Assignment Spreadsheet (CSV)
+
+%p
+  You will need a spreadsheet with the Registrant ID, and tier number, tier description (with a header row).
+  To make it easier for you, we provide a
+  = link_to "Draft Assignments CSV", competition_tier_assignments_path(@competition, format: :csv), class: "button tiny"
+  file.
+  %br
+  %b Note
+  Each row must contain a valid Registrant ID, Tier, and Tier description.
+
+- if policy(@competition).assign_tiers?
+  = form_tag competition_tier_assignments_path(@competition), method: :put, multipart: true do
+    = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
+    = submit_tag "Upload Tier assignments", class: "button"
+
+%p
   Specifying a Tier # will cause them to be ranked AFTER anyone with a lower # tier.
   %br
   e.g. tier 1 competitors are ranked above all tier 2 competitors, who are ranked above tier 3 competitors.
