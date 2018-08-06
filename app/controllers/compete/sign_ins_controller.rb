@@ -54,7 +54,7 @@ class Compete::SignInsController < ApplicationController
   end
 
   def update_competitors_params
-    params.require(:competition).permit(competitors_attributes: %i[id status wave geared riding_wheel_size riding_crank_size notes])
+    params.require(:competition).permit(competitors_attributes: %i[id status wave tier_number tier_description geared riding_wheel_size riding_crank_size notes])
   end
 
   def set_parent_breadcrumbs

@@ -13,6 +13,9 @@
         %th Order
       - if @competition.start_list_present?
         %th Wave
+      - if @competition.uses_tiers?
+        %th Tier
+        %th Tier Description
       %th ID
       %th Name
       %th Age
@@ -28,6 +31,9 @@
           %td= comp.position
         - if @competition.start_list_present?
           %th= comp.wave
+        - if @compettion.uses_tiers?
+          %th= comp.tier_number
+          %th= comp.tier_description
         %td.bib_number= comp.bib_number
         %td.name= name_with_team(comp)
         %td.age= comp.age
