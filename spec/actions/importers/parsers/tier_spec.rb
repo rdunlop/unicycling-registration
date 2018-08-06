@@ -21,7 +21,7 @@ describe Importers::Parsers::Tier do
   end
 
   it "converts contents to hash" do
-    expect(described_class.new.process_row(["101", "1", "1 laps"])).to eq(bib_number: "101", tier_number: "1", tier_description: "1 lap")
+    expect(described_class.new.process_row(["101", "1", "1 lap"])).to eq(bib_number: "101", tier_number: "1", tier_description: "1 lap")
   end
 
   context "with an invalid file type" do
