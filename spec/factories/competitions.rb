@@ -66,6 +66,11 @@ FactoryBot.define do
       age_group_type # factory Girl
     end
 
+    factory :tier_competition do
+      scoring_class "Shortest Time with Tiers"
+      age_group_type # factory Girl
+    end
+
     factory :slow_competition do
       scoring_class "Longest Time"
       age_group_type # factory Girl
