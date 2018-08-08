@@ -5,6 +5,7 @@ class Exporters::RegistrantExporter
       "Id",
       "First Name",
       "Last Name",
+      "Country",
       "Birthday (dd/mm/yyyy)",
       "Sex (m/f)"
     ] + event_headers
@@ -33,7 +34,7 @@ class Exporters::RegistrantExporter
 
   def country(country_string)
     return "" if country_string.blank?
-    ISO3166::Country[country_string]
+    ISO3166::Country[country_string].to_s
   end
 
   def events

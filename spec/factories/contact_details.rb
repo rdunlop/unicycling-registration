@@ -45,6 +45,7 @@ FactoryBot.define do
     city "madison"
     state_code "IL"
     country_residence "US"
+    country_representing "US"
     zip "12345"
     phone "PhoMyString"
     mobile "IMobMyString"
