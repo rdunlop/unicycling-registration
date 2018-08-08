@@ -11,7 +11,7 @@ class Exporters::RegistrantExporter
   end
 
   def rows
-    Registrant.all.includes(:registrant_best_times, :registrant_choices, registrant_event_sign_ups: [event_category: [:translations]]).map do |registrant|
+    Registrant.all.includes(:contact_detail, :registrant_best_times, :registrant_choices, registrant_event_sign_ups: [event_category: [:translations]]).map do |registrant|
       birthday = registrant.birthday&.strftime("%d/%m/%Y") || ""
       gender = if registrant.gender.present?
                  registrant.gender == "Male" ? "m" : "f"
@@ -22,6 +22,7 @@ class Exporters::RegistrantExporter
         registrant.bib_number.to_s,
         registrant.first_name,
         registrant.last_name,
+        country(registrant.contact_detail&.country_representing),
         birthday,
         gender
       ] + event_rows(registrant)
@@ -29,6 +30,11 @@ class Exporters::RegistrantExporter
   end
 
   private
+
+  def country(country_string)
+    return "" if country_string.blank?
+    ISO3166::Country[country_string]
+  end
 
   def events
     @events ||= Event.all.order(:id).includes(:translations, event_choices: [:translations], event_categories: [:translations])
