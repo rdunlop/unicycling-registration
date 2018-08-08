@@ -70,7 +70,7 @@ class HeatLaneResult < ApplicationRecord
   end
 
   def full_time
-    TimeResultPresenter.new(minutes, seconds, thousands).full_time
+    TimeResultPresenter.new(minutes, seconds, thousands, data_entry_format: competition.data_entry_format).full_time
   end
 
   private

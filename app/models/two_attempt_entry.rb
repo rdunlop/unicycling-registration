@@ -143,7 +143,7 @@ class TwoAttemptEntry < ApplicationRecord
   end
 
   def full_time_1
-    result = TimeResultPresenter.new(minutes_1, seconds_1, thousands_1).full_time
+    result = TimeResultPresenter.new(minutes_1, seconds_1, thousands_1, data_entry_format: competition.data_entry_format).full_time
     if number_of_penalties_1.to_i.positive?
       result += " (#{number_of_penalties_1} penalties)"
     end
@@ -152,7 +152,7 @@ class TwoAttemptEntry < ApplicationRecord
   end
 
   def full_time_2
-    result = TimeResultPresenter.new(minutes_2, seconds_2, thousands_2).full_time
+    result = TimeResultPresenter.new(minutes_2, seconds_2, thousands_2, data_entry_format: competition.data_entry_format).full_time
     if number_of_penalties_2.to_i.positive?
       result += " (#{number_of_penalties_2} penalties)"
     end

@@ -27,84 +27,60 @@ describe TimeResultPresenter do
       expect(result.full_time).to eq("19:16.701")
     end
 
-    context "with 0 thousands" do
-      let(:thousands) { 0 }
+    context "when set to default precision" do
+      context "with 0 thousands" do
+        let(:thousands) { 0 }
 
-      it "shouldn't print the thousands if they are 0" do
-        expect(result.full_time).to eq("19:16")
+        it "should print the thousands even if they are 0" do
+          expect(result.full_time).to eq("19:16.000")
+        end
+      end
+
+      context "with 100 thousands" do
+        let(:thousands) { 100 }
+
+        it "should always print tens, if the result is tens" do
+          expect(result.full_time).to eq("19:16.100")
+        end
+      end
+
+      context "with multi-hours of data" do
+        let(:minutes) { 200 }
+        let(:thousands) { 0 }
+
+        it "should print the hours, for multi-hour events" do
+          expect(result.full_time).to eq("3:20:16.000")
+        end
       end
     end
 
-    context "with 100 thousands" do
-      let(:thousands) { 100 }
+    context "when set to hundreds precision" do
+      let(:entry_format) { OpenStruct.new(hours?: false, thousands?: false, hundreds?: true) }
+      let(:result) { described_class.new(minutes, seconds, thousands, data_entry_format: entry_format) }
 
-      it "should only print tens, if the result is tens" do
-        expect(result.full_time).to eq("19:16.1")
+      context "with 0 thousands" do
+        let(:thousands) { 0 }
+
+        it "should print the hundreds even if they are 0" do
+          expect(result.full_time).to eq("19:16.00")
+        end
       end
-    end
 
-    context "with multi-hours of data" do
-      let(:minutes) { 200 }
-      let(:thousands) { 0 }
+      context "with 100 thousands" do
+        let(:thousands) { 100 }
 
-      it "shouldn't print the thousands if they are 0, even for multi-hour events" do
-        expect(result.full_time).to eq("3:20:16")
+        it "should always print tens, if the result is tens" do
+          expect(result.full_time).to eq("19:16.10")
+        end
       end
-    end
 
-    context "with numbers starting with 0" do
-      let(:minutes) { 9 }
-      let(:seconds) { 6 }
-      let(:thousands) { 5 }
+      context "with multi-hours of data" do
+        let(:minutes) { 200 }
+        let(:thousands) { 0 }
 
-      it "can print the full time when the numbers start with 0" do
-        expect(result.full_time).to eq("9:06.005")
-      end
-    end
-
-    context "with more than 60 minutes" do
-      let(:minutes) { 61 }
-      let(:seconds) { 10 }
-      let(:thousands) { 123 }
-
-      it "can print the full time when the minutes are more than an hour" do
-        expect(result.full_time).to eq("1:01:10.123")
-      end
-    end
-  end
-
-  context "with a specified format" do
-    let(:minutes) { 19 }
-    let(:seconds) { 16 }
-    let(:thousands) { 701 }
-    let(:result) { described_class.new(minutes, seconds, thousands, display_hours: true, display_thousands: true) }
-
-    it "can print the full time when all values exist" do
-      expect(result.full_time).to eq("0:19:16.701")
-    end
-
-    context "with 0 thousands" do
-      let(:thousands) { 0 }
-
-      it "shouldn't print the thousands if they are 0" do
-        expect(result.full_time).to eq("0:19:16.000")
-      end
-    end
-
-    context "with 100 thousands" do
-      let(:thousands) { 100 }
-
-      it "should only print tens, if the result is tens" do
-        expect(result.full_time).to eq("0:19:16.100")
-      end
-    end
-
-    context "with multi-hours of data" do
-      let(:minutes) { 200 }
-      let(:thousands) { 0 }
-
-      it "shouldn't print the thousands if they are 0, even for multi-hour events" do
-        expect(result.full_time).to eq("3:20:16.000")
+        it "should print the hours, for multi-hour events" do
+          expect(result.full_time).to eq("3:20:16.00")
+        end
       end
     end
 
@@ -114,7 +90,7 @@ describe TimeResultPresenter do
       let(:thousands) { 5 }
 
       it "can print the full time when the numbers start with 0" do
-        expect(result.full_time).to eq("0:09:06.005")
+        expect(result.full_time).to eq("09:06.005")
       end
     end
 

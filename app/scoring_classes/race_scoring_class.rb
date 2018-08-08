@@ -39,7 +39,7 @@ class RaceScoringClass < BaseScoringClass
 
     if competitor.time_results.any?
       time_result = competitor.time_results.order(:id).last
-      ["DQ", time_result.status_description].compact.join(" ")
+      ["DQ", time_result.status_description].compact.join(" ") # this doesn't work if the start times are imported AFTER the end times
     else
       "DQ"
     end
