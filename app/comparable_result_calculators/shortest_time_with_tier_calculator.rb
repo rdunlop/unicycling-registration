@@ -43,7 +43,7 @@ class ShortestTimeWithTierCalculator
 
   def tier_description(competitor)
     if competitor.tier_description.present?
-      "(#{competitor.tier_description})"
+      " (#{competitor.tier_description})"
     else
       ""
     end
