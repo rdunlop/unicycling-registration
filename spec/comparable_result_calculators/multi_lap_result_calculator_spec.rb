@@ -52,7 +52,7 @@ describe MultiLapResultCalculator do
       let!(:time_result) { FactoryBot.create(:time_result, competitor: competitor, minutes: 1, number_of_laps: 1) }
 
       it "returns the time" do
-        expect(described_class.new.competitor_result(competitor.reload)).to eq("1:00 (1 laps)")
+        expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 laps)")
       end
     end
   end
