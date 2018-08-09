@@ -21,7 +21,7 @@ class Importers::CsvExtractor
     end
 
     begin
-      return attempt_parse(upload_file, "UTF-8")
+      return attempt_parse(upload_file, "bom|UTF-8")
     rescue ParseError
       # If it fails to parse the file as UTF-8, try again
       begin
