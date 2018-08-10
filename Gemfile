@@ -16,7 +16,8 @@ gem 'rolify'
 gem 'prawn-labels'
 gem 'spreadsheet'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', '0.12.3.1'
+# newer versions of wkhtmltopdf seem to have shrunken fonts on Mac OS X
 
 # Front-end
 gem "autoprefixer-rails"
