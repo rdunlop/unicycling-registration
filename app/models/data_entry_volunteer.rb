@@ -32,6 +32,11 @@ class DataEntryVolunteer
     true
   end
 
+  def destroy
+    return false unless user
+    user.remove_role(:data_entry_volunteer)
+  end
+
   delegate :errors, to: :user
 
   def new_record?
