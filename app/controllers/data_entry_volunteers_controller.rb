@@ -18,13 +18,25 @@ class DataEntryVolunteersController < ApplicationController
     @events = Event.all
   end
 
-  # POST /competitions/#/judges
-  # POST /competitions/#/judges.json
+  # POST /competitions/#/data_entry_volunteers
+  # POST /competitions/#/data_entry_volunteers.json
   def create
     @data_entry_volunteer = DataEntryVolunteer.new(params[:data_entry_volunteer])
     if @data_entry_volunteer.save
       flash[:notice] = 'Additional UDA Access was successfully created.'
     else
+      index
+    end
+    respond_with(@data_entry_volunteer, location: competition_data_entry_volunteers_path(@competition), action: "index")
+  end
+
+  # DELETE /competitions/#/data_entry_volunteers/:user_id
+  def destroy
+    @data_entry_volunteer = DataEntryVolunteer.new(user_id: params[:user_id])
+    if @data_entry_volunteer.destroy
+      flash[:notice] = 'Additional UDA Access was successfully removed.'
+    else
+      flash[:alert] = "Unable to remove data entry volunteer"
       index
     end
     respond_with(@data_entry_volunteer, location: competition_data_entry_volunteers_path(@competition), action: "index")

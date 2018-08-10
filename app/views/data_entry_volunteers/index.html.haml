@@ -30,9 +30,11 @@
   %thead
     %th= User.human_attribute_name(:name)
     %th= User.human_attribute_name(:email)
+    %th
   %tbody
     - @all_data_entry_volunteers.each do |user|
       %tr
         %th
           = user
         %td= user.email
+        %td= link_to "Delete", competition_data_entry_volunteer_path(@competition, user.id), method: :delete, data: { confirm: t("are_you_sure") }
