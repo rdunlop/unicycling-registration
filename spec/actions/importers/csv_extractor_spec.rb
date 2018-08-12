@@ -11,6 +11,17 @@ describe Importers::CsvExtractor do
     expect(data.count).to eq(1)
   end
 
+  it "can extract CSV for a file with BOM encoding" do
+    sample_file = fixture_path + '/with_bom.csv'
+    sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
+
+    subject = described_class.new(sample_input)
+    data = subject.extract_csv
+
+    expect(data.count).to eq(138)
+    expect(data[0][0]).to eq("819")
+  end
+
   it "can extract csv for lif race results" do
     sample_file = fixture_path + '/800m14.lif'
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
