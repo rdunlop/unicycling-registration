@@ -1,15 +1,19 @@
 - reg = import_result.matching_registrant
-%td= reg
-- matching_competitor = import_result.matching_competitor
-- if matching_competitor.try(:competition) == import_result.competition
-  %td.competitor_exists Yes
+- if reg.nil?
+  %td
+  %td.competitor_not_exists Invalid Bib Number
 - else
-  - import_into_matching_competitions = import_result.competition.import_results_into_other_competition?
-  - if import_into_matching_competitions
-    - other_competition = reg.matching_competition_in_event(import_result.competition.event)
-    - if other_competition
-      %td.competitor_other_comp_exists No (but #{other_competition} does, so I'll import it there)
+  %td= reg
+  - matching_competitor = import_result.matching_competitor
+  - if matching_competitor.try(:competition) == import_result.competition
+    %td.competitor_exists Yes
+  - else
+    - import_into_matching_competitions = import_result.competition.import_results_into_other_competition?
+    - if import_into_matching_competitions
+      - other_competition = reg.matching_competition_in_event(import_result.competition.event)
+      - if other_competition
+        %td.competitor_other_comp_exists No (but #{other_competition} does, so I'll import it there)
+      - else
+        %td.competitor_not_exists No
     - else
       %td.competitor_not_exists No
-  - else
-    %td.competitor_not_exists No
