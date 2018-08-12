@@ -43,7 +43,7 @@ describe ContactDetail do
   before(:each) do
     FactoryBot.create(:event_configuration, :with_usa)
     @reg = FactoryBot.build_stubbed(:registrant)
-    @cd = FactoryBot.build_stubbed(:contact_detail, registrant: @reg)
+    @cd = FactoryBot.build_stubbed(:contact_detail, registrant: @reg, country_representing: nil)
     allow(@reg).to receive(:age).and_return(20)
   end
   subject(:contact_detail) { @cd }
