@@ -1,21 +1,25 @@
 class TimeResultPresenter
   attr_accessor :minutes, :seconds, :thousands
-  attr_reader :display_hours, :display_thousands
+  attr_reader :display_hours, :display_thousands, :display_hundreds
 
-  def self.from_thousands(time_in_thousands)
+  def self.from_thousands(time_in_thousands, data_entry_format: nil)
     thousands = time_in_thousands % 1000
     seconds_remaining = (time_in_thousands - thousands) / 1000
     seconds = seconds_remaining % 60
     minutes = (seconds_remaining - seconds) / 60
-    new(minutes, seconds, thousands)
+    new(minutes, seconds, thousands, data_entry_format: data_entry_format)
   end
 
-  def initialize(minutes, seconds, thousands, display_hours: nil, display_thousands: nil)
+  def initialize(minutes, seconds, thousands, data_entry_format: nil)
     @minutes = minutes.to_i
     @seconds = seconds.to_i
     @thousands = thousands.to_i
-    @display_hours = display_hours
-    @display_thousands = display_thousands
+    if data_entry_format.nil?
+      data_entry_format = OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+    end
+    @display_hours = data_entry_format.hours?
+    @display_hundreds = data_entry_format.hundreds?
+    @display_thousands = data_entry_format.thousands?
   end
 
   def full_time
@@ -25,23 +29,15 @@ class TimeResultPresenter
 
   private
 
-  # convert thousands into a string forma: ".XXX"
-  # if the number of thousands happens to be a multiple
-  # of 100, we assume that we only have 0.1 second precision,
-  # and thus we only print ".X"
+  # convert thousands into a string format: ".XXX" or ".XX" or ""
+  # we display the precision based on the competition configuration
   def thousands_string
-    if thousands.zero?
-      if display_thousands
-        return ".000"
-      else
-        return ""
-      end
-    end
-
-    if (thousands % 100).zero? && !display_thousands
-      ".#{(thousands / 100)}"
+    if display_thousands
+      ".#{pad(thousands, 3)}"
+    elsif display_hundreds
+      ".#{pad((thousands / 10.0).round, 2)}"
     else
-      ".#{thousands.to_s.rjust(3, '0')}"
+      ""
     end
   end
 
@@ -49,13 +45,17 @@ class TimeResultPresenter
     hours = minutes / 60
     if hours.positive? || display_hours
       remaining_minutes = minutes % 60
-      "#{hours}:#{remaining_minutes.to_s.rjust(2, '0')}"
+      "#{hours}:#{pad(remaining_minutes, 2)}"
     else
-      minutes.to_s
+      pad(minutes, 2)
     end
   end
 
   def seconds_string
-    seconds.to_s.rjust(2, "0")
+    pad(seconds, 2)
+  end
+
+  def pad(number, decimals)
+    number.to_s.rjust(decimals, "0")
   end
 end
