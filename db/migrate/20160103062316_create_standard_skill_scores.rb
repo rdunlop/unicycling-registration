@@ -30,7 +30,7 @@ class CreateStandardSkillScores < ActiveRecord::Migration[4.2]
     drop_table :standard_skill_scores
     drop_table :standard_skill_score_entries
 
-    create_table "standard_difficulty_scores", force: :cascade do |t| # rubocop:disable Rails/CreateTableWithTimestamps
+    create_table "standard_difficulty_scores", force: :cascade do |t|
       t.integer  "competitor_id"
       t.integer  "standard_skill_routine_entry_id"
       t.integer  "judge_id"
@@ -41,7 +41,7 @@ class CreateStandardSkillScores < ActiveRecord::Migration[4.2]
 
     add_index "standard_difficulty_scores", ["judge_id", "standard_skill_routine_entry_id", "competitor_id"], name: "standard_diff_judge_routine_comp", unique: true, using: :btree
 
-    create_table "standard_execution_scores", force: :cascade do |t| # rubocop:disable Rails/CreateTableWithTimestamps
+    create_table "standard_execution_scores", force: :cascade do |t|
       t.integer  "competitor_id"
       t.integer  "standard_skill_routine_entry_id"
       t.integer  "judge_id"

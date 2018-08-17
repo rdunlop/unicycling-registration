@@ -23,6 +23,12 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
   end
 
+  # so that devise routes are properly including the locale
+  # https://github.com/plataformatec/devise/wiki/How-To:--Redirect-with-locale-after-authentication-failure
+  def self.default_url_options(options = {})
+    options.merge(locale: I18n.locale)
+  end
+
   private
 
   def ssl_required?
@@ -55,12 +61,6 @@ class ApplicationController < ActionController::Base
   # NOTE: This logic is duplicated in tolk.rb initializer
   def translation_domain?
     @tenant.try(:subdomain) == Rails.application.secrets.translations_subdomain
-  end
-
-  # so that devise routes are properly including the locale
-  # https://github.com/plataformatec/devise/wiki/How-To:--Redirect-with-locale-after-authentication-failure
-  public def self.default_url_options(options = {})
-    options.merge(locale: I18n.locale)
   end
 
   # so that all routes have the locale specified
