@@ -5,6 +5,7 @@ describe Exporters::Competition::FinishLynx do
   let(:competition) { FactoryBot.create(:timed_competition) }
   let(:heat) { 1 }
   let!(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
+
   before do
     @reg = competitor.registrants.first
   end
@@ -22,6 +23,7 @@ describe Exporters::Competition::FinishLynx do
 
     context "with the same heat" do
       let(:heat) { 1 }
+
       it "sets the rows" do
         data = exporter.rows
         expect(data.count).to eq(1)

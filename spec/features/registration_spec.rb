@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Logging in to the system' do
   let(:user) { FactoryBot.create :user }
+
   include_context 'basic event configuration'
   include_context 'user is logged in'
 
@@ -17,7 +18,7 @@ describe 'Logging in to the system' do
 
       context 'filling in the neccesary information' do
         include_context 'basic registrant data'
-        before :each do
+        before do
           within "#tabs-new-registrant" do
             click_button 'Save & Continue'
           end
@@ -37,7 +38,7 @@ describe 'Logging in to the system' do
 
     context 'filling in the necessary information' do
       include_context 'basic registrant data'
-      before :each do
+      before do
         within "#tabs-new-registrant" do
           click_button 'Save & Continue'
         end
@@ -54,13 +55,13 @@ describe 'Logging in to the system' do
       end
 
       describe "when filling in volunteer, and address info" do
-        before :each do
+        before do
           click_button "Save & Continue" # on volunteer page
         end
 
         context "blah" do
           include_context "basic address data"
-          before :each do
+          before do
             click_button "Save & Continue"
           end
 
@@ -73,14 +74,14 @@ describe 'Logging in to the system' do
   end
 
   describe "when a noncompetitor registrant exists" do
-    before :each do
+    before do
       registrant = FactoryBot.create(:noncompetitor, user: user)
       visit registrant_path(registrant)
     end
 
     it "displays the summary page" do
       expect(page).to have_content 'Registration Summary'
-      expect(page).to_not have_content 'Events'
+      expect(page).not_to have_content 'Events'
     end
   end
 end

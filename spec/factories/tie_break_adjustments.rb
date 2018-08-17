@@ -23,6 +23,6 @@ FactoryBot.define do
   factory :tie_break_adjustment do
     association :competitor, factory: :event_competitor
     judge # use FactoryBot to create
-    tie_break_place 1
+    tie_break_place { 1 }
   end
 end

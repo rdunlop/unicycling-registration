@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe CompetitionPolicy do
-  let(:competition) { FactoryBot.create(:competition) }
-
   subject { described_class }
+
+  let(:competition) { FactoryBot.create(:competition) }
 
   permissions :manage_lane_assignments? do
     it "denies access to normal user" do
@@ -32,9 +32,11 @@ describe CompetitionPolicy do
 
     describe "as a director" do
       let(:user) { FactoryBot.create(:user) }
+
       before do
         user.add_role(:director, competition.event)
       end
+
       it "is accessible" do
         expect(subject).to permit(user, competition)
       end
@@ -50,6 +52,7 @@ describe CompetitionPolicy do
       @director = FactoryBot.create(:user)
       @director.add_role :director, competition.event
     end
+
     let(:normal_user) { FactoryBot.create(:user) }
 
     it { expect(subject).not_to permit(normal_user, competition) }

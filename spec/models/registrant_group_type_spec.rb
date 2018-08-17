@@ -14,7 +14,7 @@
 require 'spec_helper'
 
 describe RegistrantGroupType do
-  before(:each) do
+  before do
     @rgt = FactoryBot.create(:registrant_group_type)
   end
 

@@ -15,11 +15,11 @@
 require 'spec_helper'
 
 describe StandardSkillRoutine do
-  before(:each) do
+  before do
     @routine = FactoryBot.create(:standard_skill_routine)
   end
 
-  it "should be able to save an entry" do
+  it "is able to save an entry" do
     skill = FactoryBot.create(:standard_skill_entry)
     @routine.standard_skill_routine_entries.build(
       position: 1,
@@ -27,7 +27,7 @@ describe StandardSkillRoutine do
     )
     expect(@routine.valid?).to eq(true)
   end
-  it "should not be able to save more than 18 entries per user" do
+  it "is not able to save more than 18 entries per user" do
     18.times do |_i|
       skill = FactoryBot.create(:standard_skill_entry)
       @routine.standard_skill_routine_entries.create(position: 1, standard_skill_entry_id: skill.id)
@@ -41,7 +41,7 @@ describe StandardSkillRoutine do
   end
 
   describe "with a routine containing 12 skills > 100" do
-    before(:each) do
+    before do
       12.times do |i|
         skill = FactoryBot.create(:standard_skill_entry, number: (100 + i))
         @routine.standard_skill_routine_entries.create(
@@ -50,14 +50,15 @@ describe StandardSkillRoutine do
         )
       end
     end
-    it "should not allow a 13th entry with skill > 100" do
+
+    it "does not allow a 13th entry with skill > 100" do
       skill = FactoryBot.create(:standard_skill_entry, number: 101)
       ssre = @routine.standard_skill_routine_entries.build(position: 1, standard_skill_entry_id: skill.id)
       expect(@routine.valid?).to eq(false)
       expect(ssre.valid?).to eq(false)
     end
 
-    it "should allow a 13th entry with skill < 100" do
+    it "allows a 13th entry with skill < 100" do
       skill = FactoryBot.create(:standard_skill_entry, number: 10)
       ssre = @routine.standard_skill_routine_entries.build(position: 1, standard_skill_entry_id: skill.id)
       expect(@routine.valid?).to eq(true)
@@ -65,7 +66,7 @@ describe StandardSkillRoutine do
     end
   end
 
-  it "should not be able to have 2 skills with the same number" do
+  it "is not able to have 2 skills with the same number" do
     skill = FactoryBot.create(:standard_skill_entry)
     @routine.standard_skill_routine_entries.create(
       position: 1,
@@ -83,7 +84,7 @@ describe StandardSkillRoutine do
     expect(@routine.valid?).to eq(false)
   end
 
-  it "should not be able to have 2 skills with the same number, but different letters" do
+  it "is not able to have 2 skills with the same number, but different letters" do
     skill1 = FactoryBot.create(:standard_skill_entry, number: 1, letter: 'a')
     skill2 = FactoryBot.create(:standard_skill_entry, number: 1, letter: 'b')
     @routine.standard_skill_routine_entries.create!(
@@ -103,7 +104,7 @@ describe StandardSkillRoutine do
 
     expect(ssre.errors.count).to eq(1)
   end
-  it "should be able to total up some scores" do
+  it "is able to total up some scores" do
     skill1 = FactoryBot.create(:standard_skill_entry, points: 1.1)
     skill2 = FactoryBot.create(:standard_skill_entry, points: 2.2)
     @routine.standard_skill_routine_entries.create(

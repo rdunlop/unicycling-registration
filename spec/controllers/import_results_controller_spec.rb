@@ -32,11 +32,12 @@
 require 'spec_helper'
 
 describe ImportResultsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
     @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
   end
+
   let(:import_result) { FactoryBot.create(:import_result, user: @admin_user, competition: @competition) }
 
   # This should return the minimal set of attributes required to create a valid
@@ -137,9 +138,10 @@ describe ImportResultsController do
   end
 
   describe "DELETE destroy" do
-    before :each do
+    before do
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(@admin_user, @competition)
     end
+
     it "destroys the requested import_result" do
       im_result = FactoryBot.create(:import_result, user: @admin_user, competition: @competition)
       expect do

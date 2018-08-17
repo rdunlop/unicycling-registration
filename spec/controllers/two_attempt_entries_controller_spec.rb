@@ -28,11 +28,12 @@
 require 'spec_helper'
 
 describe TwoAttemptEntriesController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
     @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
   end
+
   let(:two_attempt_entry) { FactoryBot.create(:two_attempt_entry, user: @admin_user, competition: @competition) }
 
   def valid_attributes
@@ -193,9 +194,10 @@ describe TwoAttemptEntriesController do
   end
 
   describe "DELETE destroy" do
-    before :each do
+    before do
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(@admin_user, @competition)
     end
+
     it "destroys the requested two_attempt_entry" do
       im_result = FactoryBot.create(:two_attempt_entry, user: @admin_user, competition: @competition)
       expect do

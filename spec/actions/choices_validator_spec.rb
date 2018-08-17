@@ -32,10 +32,11 @@ describe ChoicesValidator do
     end
 
     describe "and a text field" do
-      before(:each) do
+      before do
         @ec2 = FactoryBot.create(:event_choice, event: event, label: "Team", cell_type: "text")
         @rc2 = FactoryBot.create(:registrant_choice, registrant: registrant, event_choice: @ec2, value: "My Team")
       end
+
       it "can describe the event" do
         expect(registrant.describe_event(event)).to eq("#{event.name} - #{@ec2.label}: #{@rc2.value}")
       end
@@ -57,7 +58,7 @@ describe ChoicesValidator do
   end
 
   describe "with a single event_choices for an event" do
-    before(:each) do
+    before do
       @ev = FactoryBot.create(:event)
       @ec1 = @ev.event_categories.first
     end
@@ -70,15 +71,16 @@ describe ChoicesValidator do
       expect(registrant.valid?).to eq(true)
     end
     describe "with a second (boolean) event_choice for an event" do
-      before(:each) do
+      before do
         @ec2 = FactoryBot.create(:event_choice, event: @ev)
       end
-      it "should be valid if we only check off the primary_choice" do
+
+      it "is valid if we only check off the primary_choice" do
         FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(true)
       end
-      it "should be valid if we check off both event_choices" do
+      it "is valid if we check off both event_choices" do
         registrant.reload
         expect(registrant.valid?).to eq(true)
         FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
@@ -86,19 +88,19 @@ describe ChoicesValidator do
         registrant.reload
         expect(registrant.valid?).to eq(true)
       end
-      it "should be invalid if we only check off the second_choice" do
+      it "is invalid if we only check off the second_choice" do
         FactoryBot.create(:registrant_choice, event_choice: @ec2, value: "1", registrant: registrant)
         FactoryBot.create(:registrant_event_sign_up, event: @ev, signed_up: false, registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(false)
       end
-      it "should describe the event" do
+      it "describes the event" do
         FactoryBot.create(:registrant_choice, event_choice: @ec2, value: "1", registrant: registrant)
         expect(registrant.describe_event(@ev)).to eq("#{@ev.name} - #{@ec2.label}: yes")
       end
 
       describe "with a text_field optional_if_event_choice to the boolean" do
-        before(:each) do
+        before do
           FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
           @ec3 = FactoryBot.create(:event_choice, event: @ev, cell_type: "text", optional_if_event_choice: @ec2)
           registrant.reload
@@ -118,8 +120,9 @@ describe ChoicesValidator do
           expect(registrant.valid?).to eq(false)
         end
       end
+
       describe "with a text_field required_if_event_choice" do
-        before(:each) do
+        before do
           FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
           @ec3 = FactoryBot.create(:event_choice, event: @ev, cell_type: "text", required_if_event_choice: @ec2)
           registrant.reload
@@ -144,40 +147,43 @@ describe ChoicesValidator do
         end
       end
     end
+
     describe "with a second event_choice (text-style) for an event" do
-      before(:each) do
+      before do
         @ec2 = FactoryBot.create(:event_choice, event: @ev, cell_type: "text")
       end
-      it "should be invalid if we only check off the primary_choice" do
+
+      it "is invalid if we only check off the primary_choice" do
         FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(false)
       end
-      it "should be valid if we fill in both event_choices" do
+      it "is valid if we fill in both event_choices" do
         FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
         FactoryBot.create(:registrant_choice, event_choice: @ec2, value: "hello there", registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(true)
       end
-      it "should be valid if we don't choose the event, and we don't fill in the event_choice" do
+      it "is valid if we don't choose the event, and we don't fill in the event_choice" do
         FactoryBot.create(:registrant_event_sign_up, event: @ev, signed_up: false, registrant: registrant)
         FactoryBot.create(:registrant_choice, event_choice: @ec2, value: "", registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(true)
       end
-      it "should be invalid if we fill in only the second_choice" do
+      it "is invalid if we fill in only the second_choice" do
         FactoryBot.create(:registrant_choice, event_choice: @ec2, value: "goodbye", registrant: registrant)
         FactoryBot.create(:registrant_event_sign_up, event: @ev, signed_up: false, registrant: registrant)
         registrant.reload
         expect(registrant.valid?).to eq(false)
       end
       describe "if the second choices is optional" do
-        before(:each) do
+        before do
           @ec2.optional = true
           @ec2.save!
           registrant.reload
         end
-        it "should allow empty registarnt_choice" do
+
+        it "allows empty registarnt_choice" do
           FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec1, signed_up: true, registrant: registrant)
           FactoryBot.create(:registrant_choice, event_choice: @ec2, value: "", registrant: registrant)
           registrant.reload

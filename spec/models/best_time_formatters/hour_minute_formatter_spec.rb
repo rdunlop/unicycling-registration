@@ -30,18 +30,18 @@ describe BestTimeFormatter::HourMinuteFormatter do
   end
 
   it "marks empty as invalid" do
-    expect(described_class.valid?("")).to be_falsey
+    expect(described_class).not_to be_valid("")
   end
 
   it "marks real string as valid" do
-    expect(described_class.valid?("1:00")).to be_truthy
+    expect(described_class).to be_valid("1:00")
   end
 
   it "doesnt't allow minutes over 59" do
-    expect(described_class.valid?("0:60")).to be_falsey
+    expect(described_class).not_to be_valid("0:60")
   end
 
   it "doesn't allow negative hours" do
-    expect(described_class.valid?("-1:0")).to be_falsey
+    expect(described_class).not_to be_valid("-1:0")
   end
 end

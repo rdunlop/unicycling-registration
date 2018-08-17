@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Compete::WaveTimesController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
+
   let(:competition) { FactoryBot.create(:competition) }
   let(:wave_time) { FactoryBot.create(:wave_time, competition: competition) }
 

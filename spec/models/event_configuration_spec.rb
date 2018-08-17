@@ -59,8 +59,8 @@ describe EventConfiguration do
   # so that I can test print_item_cost_currency
   include ApplicationHelper
 
-  before(:each) do
-    @ev = EventConfiguration.singleton
+  before do
+    @ev = described_class.singleton
     @ev.assign_attributes(FactoryBot.attributes_for(:event_configuration, standard_skill_closed_date: Date.new(2013, 5, 5)))
   end
 
@@ -85,12 +85,12 @@ describe EventConfiguration do
     expect(@ev).to be_invalid
   end
 
-  it { expect(@ev).to validate_inclusion_of(:organization_membership_type).in_array(EventConfiguration.organization_membership_types) }
-  it { should allow_value(nil).for(:organization_membership_type) }
-  it { should allow_value("").for(:organization_membership_type) }
+  it { expect(@ev).to validate_inclusion_of(:organization_membership_type).in_array(described_class.organization_membership_types) }
+  it { is_expected.to allow_value(nil).for(:organization_membership_type) }
+  it { is_expected.to allow_value("").for(:organization_membership_type) }
 
   context "when in EUR format" do
-    before :each do
+    before do
       @ev.update_attribute(:currency_code, "EUR")
     end
 
@@ -104,7 +104,7 @@ describe EventConfiguration do
   end
 
   it "has a list of style_names" do
-    expect(EventConfiguration.style_names.count).to be > 0
+    expect(described_class.style_names.count).to be > 0
   end
 
   it "style_name must be a valid_style_name" do
@@ -112,12 +112,12 @@ describe EventConfiguration do
     @ev.apply_validation(:base_settings)
     expect(@ev.valid?).to eq(false)
 
-    @ev.style_name = EventConfiguration.style_names.first[1]
+    @ev.style_name = described_class.style_names.first[1]
     expect(@ev.valid?).to eq(true)
   end
 
   it "has a style_name even without having any entries" do
-    expect(EventConfiguration.new.style_name).to eq("base_green_blue")
+    expect(described_class.new.style_name).to eq("base_green_blue")
   end
 
   it "has a long name" do
@@ -199,119 +199,121 @@ describe EventConfiguration do
   end
 
   it "defaults test_mode to false" do
-    ev = EventConfiguration.new
+    ev = described_class.new
     expect(ev.test_mode).to eq(false)
   end
 
-  it "should be open if no periods are defined" do
+  it "is open if no periods are defined" do
     @ev.update_attribute(:event_sign_up_closed_date, nil)
     @ev.save
-    expect(EventConfiguration.closed?).to eq(false)
+    expect(described_class.closed?).to eq(false)
   end
 
-  it "should be closed if the event_closed_date is defined, and in the past" do
-    ev = EventConfiguration.new(under_construction: false)
+  it "is closed if the event_closed_date is defined, and in the past" do
+    ev = described_class.new(under_construction: false)
     ev.event_sign_up_closed_date = Date.new(2013, 5, 1)
     travel_to(Date.new(2013, 5, 4)) do
-      expect(ev.registration_closed?).to be_truthy
+      expect(ev).to be_registration_closed
     end
 
     travel_to(Date.new(2013, 5, 1)) do
-      expect(ev.registration_closed?).to be_falsy
+      expect(ev).not_to be_registration_closed
     end
   end
 
-  it "should be closed if it is under construction" do
+  it "is closed if it is under construction" do
     @ev.under_construction = true
-    expect(@ev.registration_closed?).to be_truthy
+    expect(@ev).to be_registration_closed
   end
 
   describe "#new_registration_closed" do
-    let(:ev) { EventConfiguration.new(under_construction: false) }
+    let(:ev) { described_class.new(under_construction: false) }
+
     before do
       ev.event_sign_up_closed_date = Date.new(2013, 5, 1)
     end
 
-    it "should be closed if registration_closed?" do
+    it "is closed if registration_closed?" do
       travel_to(Date.new(2013, 5, 4)) do
-        expect(ev.registration_closed?).to be_truthy
-        expect(ev.new_registration_closed?).to be_truthy
+        expect(ev).to be_registration_closed
+        expect(ev).to be_new_registration_closed
       end
     end
 
-    it "should be closed if the number of registrants is >= the max_limit" do
+    it "is closed if the number of registrants is >= the max_limit" do
       FactoryBot.create(:competitor)
 
       travel_to(Date.new(2013, 5, 1)) do
-        expect(ev.registration_closed?).to be_falsy
+        expect(ev).not_to be_registration_closed
         ev.max_registrants = 1
-        expect(ev.new_registration_closed?).to be_truthy
+        expect(ev).to be_new_registration_closed
 
         FactoryBot.create(:competitor)
-        expect(ev.new_registration_closed?).to be_truthy
+        expect(ev).to be_new_registration_closed
       end
     end
   end
 
-  it "should NOT have standard_skill_closed by default " do
+  it "does not have standard_skill_closed by default " do
     travel_to(Date.new(2013, 1, 1)) do
-      expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
+      expect(described_class.singleton.standard_skill_closed?).to eq(false)
     end
   end
 
   describe "with the standard_skill_closed_date defined" do
-    it "should be closed on the 6th" do
+    it "is closed on the 6th" do
       @ev.save!
       travel_to(Date.new(2013, 5, 4)) do
-        expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
+        expect(described_class.singleton.standard_skill_closed?).to eq(false)
       end
       travel_to(Date.new(2013, 5, 5)) do
-        expect(EventConfiguration.singleton.standard_skill_closed?).to eq(false)
+        expect(described_class.singleton.standard_skill_closed?).to eq(false)
       end
       travel_to(Date.new(2013, 5, 6)) do
-        expect(EventConfiguration.singleton.standard_skill_closed?).to eq(true)
+        expect(described_class.singleton.standard_skill_closed?).to eq(true)
       end
     end
   end
 
   describe "with a registration cost" do
-    before(:each) do
+    before do
       FactoryBot.create(:event_configuration)
       @rp = FactoryBot.create(:registration_cost, start_date: Date.new(2012, 11, 3), end_date: Date.new(2012, 11, 7))
     end
-    it "should be open on the last day of registration" do
+
+    it "is open on the last day of registration" do
       travel_to(Date.new(2012, 11, 7)) do
-        expect(EventConfiguration.closed?).to eq(false)
+        expect(described_class.closed?).to eq(false)
       end
     end
-    it "should be open as long as the registration_period is current" do
+    it "is open as long as the registration_period is current" do
       d = Date.new(2012, 11, 7)
       travel_to(d) do
         expect(@rp.current_period?(d)).to eq(true)
-        expect(EventConfiguration.closed?).to eq(false)
+        expect(described_class.closed?).to eq(false)
       end
 
       e = Date.new(2012, 11, 8)
       travel_to(e) do
         expect(@rp.current_period?(e)).to eq(true)
-        expect(EventConfiguration.closed?).to eq(false)
+        expect(described_class.closed?).to eq(false)
       end
 
       f = Date.new(2012, 11, 9)
       travel_to(f) do
         expect(@rp.current_period?(f)).to eq(false)
-        expect(EventConfiguration.closed?).to eq(true)
+        expect(described_class.closed?).to eq(true)
       end
     end
   end
 
   it "returns the live paypal url when paypal mode is enabled" do
     @ev.update_attribute(:paypal_mode, "enabled")
-    expect(EventConfiguration.paypal_base_url).to eq("https://www.paypal.com")
+    expect(described_class.paypal_base_url).to eq("https://www.paypal.com")
   end
   it "returns the test paypal url when paypal mode is TEST" do
     @ev.update_attribute(:paypal_mode, "test")
-    expect(EventConfiguration.paypal_base_url).to eq("https://www.sandbox.paypal.com")
+    expect(described_class.paypal_base_url).to eq("https://www.sandbox.paypal.com")
   end
 
   describe "when doing partial_model validations" do

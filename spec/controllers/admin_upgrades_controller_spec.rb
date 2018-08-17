@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe AdminUpgradesController do
   let(:user) { FactoryBot.create(:user) }
-  before(:each) do
+
+  before do
     sign_in user
   end
 
@@ -24,7 +25,7 @@ describe AdminUpgradesController do
     context "with correct code" do
       it "upgrades user" do
         post :create, params: { access_code: "TEST_UPGRADE_CODE" }
-        expect(user.reload.has_role?(:convention_admin)).to be_truthy
+        expect(user.reload).to have_role(:convention_admin)
       end
     end
   end

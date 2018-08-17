@@ -21,6 +21,7 @@ describe LodgingForm do
             check_out_day: (lodging_day3.date_offered + 1.day).strftime("%Y/%m/%d")
           }
         end
+
         it "creates registrant_expense_items" do
           expect do
             form.save
@@ -43,6 +44,7 @@ describe LodgingForm do
               check_out_day: (target_date + 3.days).strftime("%Y/%m/%d")
             }
           end
+
           it "creates registrant_expense_items" do
             expect do
               form.save
@@ -94,6 +96,7 @@ describe LodgingForm do
             check_out_day: (lodging_day1.date_offered + 1.day).strftime("%Y/%m/%d")
           }
         end
+
         it "creates only a single registrant_expense_item" do
           expect do
             form.save
@@ -272,6 +275,7 @@ describe LodgingForm do
 
         context "with a single unpaid element" do
           let(:payment) { FactoryBot.create(:payment) }
+
           it { expect(described_class.paid_for(competitor)).to eq([]) }
         end
 

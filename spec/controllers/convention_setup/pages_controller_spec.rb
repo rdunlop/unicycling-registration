@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe ConventionSetup::PagesController do
-  before(:each) do
+  before do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
+
   let(:page) { FactoryBot.create(:page) }
 
   describe "GET index" do

@@ -24,6 +24,7 @@ describe BibNumberFinder::RegistrantMatch do
         FactoryBot.create(:competitor, user: user, first_name: "Bob", last_name: "Smith", birthday: birthday, bib_number: 123)
       end
     end
+
     let!(:series_member2) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: other_tenant) }
 
     it "returns the bib number of the matching tenant" do

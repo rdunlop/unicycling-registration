@@ -508,6 +508,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    rubocop-rspec (1.28.0)
+      rubocop (>= 0.58.0)
     ruby-ole (1.2.12.1)
     ruby-progressbar (1.10.0)
     ruby_parser (3.11.0)
@@ -679,6 +681,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop
+  rubocop-rspec
   rubyzip
   sass-rails
   select2-rails

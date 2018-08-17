@@ -27,6 +27,7 @@ describe Importers::WaveUpdater do
 
     context "When searching for a bib_number which is not found" do
       before { competitor1.destroy }
+
       it "returns an error" do
         importer = described_class.new(competition, nil)
         expect(importer.process(processor)).to be_falsey

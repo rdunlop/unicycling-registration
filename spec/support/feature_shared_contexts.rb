@@ -10,7 +10,7 @@ end
 
 shared_context 'user is logged in' do
   include_context 'can login'
-  before :each do
+  before do
     login_as user
     visit '/'
     # The above "visit" call may fail with "wrong number of arguments (given 1, expected 0)"
@@ -30,7 +30,7 @@ end
 
 shared_context 'basic event configuration' do |options = {}|
   options.reverse_merge! test_mode: false
-  before :each do
+  before do
     FactoryBot.create(:wheel_size_16)
     FactoryBot.create(:wheel_size_20)
     FactoryBot.create(:wheel_size_24)
@@ -54,7 +54,7 @@ shared_context 'basic event configuration' do |options = {}|
 end
 
 shared_context "freestyle_event" do |options = {}|
-  before :each do
+  before do
     event = FactoryBot.create(:event, name: options[:name])
     competition = FactoryBot.create(:competition, event: event, name: options[:name])
     FactoryBot.create(:event_competitor, competition: competition)
@@ -66,7 +66,7 @@ shared_context "freestyle_event" do |options = {}|
 end
 
 shared_context "points_event" do |options = {}|
-  before :each do
+  before do
     event = FactoryBot.create(:event, name: options[:name])
     competition = FactoryBot.create(:ranked_competition, event: event, name: options[:name], end_data_type: "One Data Per Line")
     FactoryBot.create(:event_competitor, competition: competition)
@@ -78,7 +78,7 @@ shared_context "points_event" do |options = {}|
 end
 
 shared_context "judge_is_assigned_to_competition" do |options = {}|
-  before :each do
+  before do
     competition = Competition.first
     judge_user = User.find_by(name: options[:user_name])
     judge = FactoryBot.create(:judge, competition: competition, user: judge_user)
@@ -90,7 +90,7 @@ end
 
 shared_context 'optional expense_item' do |options = {}|
   options.reverse_merge! cost: 15, has_details: false, details: nil
-  before :each do
+  before do
     @ei = FactoryBot.create(:expense_item, name: "USA Individual Membership", has_details: options[:has_details], cost: options[:cost])
     competitor.registrant_expense_items.create line_item: @ei, system_managed: false, details: options[:details]
     competitor.reload
@@ -98,7 +98,7 @@ shared_context 'optional expense_item' do |options = {}|
 end
 
 shared_context 'paid expense item' do
-  before :each do
+  before do
     pd = FactoryBot.create(:payment_detail, registrant: competitor)
     payment = pd.payment
     payment.completed = true
@@ -113,7 +113,7 @@ shared_context 'optional expense_item with details' do |options = {}|
 end
 
 shared_context 'basic registrant data' do
-  before :each do
+  before do
     fill_in 'registrant_first_name', with: 'Robin'
     fill_in 'registrant_last_name',  with: 'Dunlop'
     select 'May',   from: 'registrant_birthday_2i'
@@ -124,7 +124,7 @@ shared_context 'basic registrant data' do
   end
 end
 shared_context "basic address data" do
-  before :each do
+  before do
     fill_in 'Email', with: 'email@example.com'
     fill_in 'Address', with: "123 Fake street"
     fill_in "City", with: "Springfield"

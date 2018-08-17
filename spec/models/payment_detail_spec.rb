@@ -24,7 +24,7 @@
 require 'spec_helper'
 
 describe PaymentDetail do
-  before(:each) do
+  before do
     @pd = FactoryBot.create(:payment_detail, amount: 90)
   end
 
@@ -73,7 +73,7 @@ describe PaymentDetail do
     expect(@pd.cost).to eq(0.to_money)
   end
 
-  it "it marks the cost as partial if the refund is not 100%" do
+  it "marks the cost as partial if the refund is not 100%" do
     expect(@pd.refunded?).to eq(false)
     @refund_detail = FactoryBot.create(:refund_detail, payment_detail: @pd)
     @refund = @refund_detail.refund
@@ -85,29 +85,30 @@ describe PaymentDetail do
   end
 
   it "is not refunded by default" do
-    pay = PaymentDetail.new
+    pay = described_class.new
     expect(pay.refunded?).to eq(false)
   end
 
   it "is not scoped as completed if not completed" do
     expect(@pd.payment.completed).to eq(false)
-    expect(PaymentDetail.completed).to eq([])
+    expect(described_class.completed).to eq([])
   end
 
   describe "when a payment is completed" do
-    before(:each) do
+    before do
       pay = @pd.payment
       pay.completed = true
       pay.save!
     end
+
     it "is scoped as completed when payment is completed" do
-      expect(PaymentDetail.completed).to eq([@pd])
+      expect(described_class.completed).to eq([@pd])
     end
 
     it "doesn't list refunded payments" do
       @ref = FactoryBot.create(:refund_detail, payment_detail: @pd)
-      expect(PaymentDetail.not_refunded).to eq([])
-      expect(PaymentDetail.refunded).to eq([@pd])
+      expect(described_class.not_refunded).to eq([])
+      expect(described_class.refunded).to eq([@pd])
     end
   end
 

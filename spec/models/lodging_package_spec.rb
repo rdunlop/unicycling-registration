@@ -11,6 +11,7 @@ describe LodgingPackage do
   context "when limited number days are available" do
     let(:maximum_available) { 1 }
     let(:rei) { FactoryBot.build(:registrant_expense_item, line_item: lodging_package) }
+
     context "and none are booked" do
       it "allows creating the rei" do
         expect(lodging_package.can_create_registrant_expense_item?(rei)).to eq([])

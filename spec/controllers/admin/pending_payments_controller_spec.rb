@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Admin::PendingPaymentsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:payment_admin)
     sign_in @user
   end
+
   let!(:payment) { FactoryBot.create(:payment, transaction_id: nil, note: "a note") }
   let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
 

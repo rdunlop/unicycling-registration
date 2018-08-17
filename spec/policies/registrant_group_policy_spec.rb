@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe RegistrantGroupPolicy do
+  subject { described_class }
+
   let(:super_admin) { FactoryBot.create(:super_admin_user) }
 
   let(:event_director) { FactoryBot.create(:user) }
@@ -11,11 +13,10 @@ describe RegistrantGroupPolicy do
     event_director.add_role(:director, event)
     other_event_director.add_role(:director, FactoryBot.create(:event))
   end
+
   let(:registrant_group_type) { FactoryBot.create(:registrant_group_type, source_element: event) }
   let(:registrant_group) { FactoryBot.create(:registrant_group, registrant_group_type: registrant_group_type) }
   let(:group_leader) { FactoryBot.create(:registrant_group_leader, registrant_group: registrant_group) }
-
-  subject { described_class }
 
   permissions :new?, :create?, :index? do
     it "super_admin can access" do

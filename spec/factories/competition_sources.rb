@@ -25,10 +25,10 @@
 FactoryBot.define do
   factory :competition_source do
     target_competition factory: :competition
-    competition nil
-    event_category nil
-    max_place nil
-    gender_filter "Both"
+    competition { nil }
+    event_category { nil }
+    max_place { nil }
+    gender_filter { "Both" }
     before(:create) do |competition_source|
       if competition_source.event_category.nil?
         ev = FactoryBot.create(:event)

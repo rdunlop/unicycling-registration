@@ -12,6 +12,7 @@ RSpec.describe CompetitionHeatTsvZipCreator do
     create_competitor(competition, "222", 2, 2)
     create_competitor(competition, "233", 2, 3)
   end
+
   let(:subject) { described_class.new(payment.reload, coupon_code_string) }
   let(:do_action) { subject.perform }
 

@@ -21,11 +21,11 @@
 FactoryBot.define do
   factory :result do
     association :competitor, factory: :event_competitor # FactoryBot
-    place 1
-    result_type "AgeGroup"
+    place { 1 }
+    result_type { "AgeGroup" }
 
     trait :overall do
-      result_type "Overall"
+      result_type { "Overall" }
     end
   end
 end

@@ -22,7 +22,7 @@ describe Member do
   let(:member) { FactoryBot.build(:member) }
 
   it "must have a competitor and registrant" do
-    member = Member.new
+    member = described_class.new
 
     expect(member.valid?).to eq(false)
 

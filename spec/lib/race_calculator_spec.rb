@@ -15,7 +15,7 @@ describe OrderedResultCalculator do
   end
 
   describe "when calculating the placing of timed races" do
-    before(:each) do
+    before do
       @event_configuration = FactoryBot.create(:event_configuration, start_date: Date.current)
       @event = FactoryBot.create(:event)
       @age_group_entry = FactoryBot.create(:age_group_entry) # 0-100 age group
@@ -27,23 +27,23 @@ describe OrderedResultCalculator do
       @tr3 = FactoryBot.create(:time_result, competitor: FactoryBot.create(:event_competitor, competition: @competition))
       @tr4 = FactoryBot.create(:time_result, competitor: FactoryBot.create(:event_competitor, competition: @competition))
 
-      @calc = OrderedResultCalculator.new(@competition)
+      @calc = described_class.new(@competition)
     end
 
     describe "with a DQ and a non-DQ for the same competitor" do
-      before :each do
+      before do
         @tr1.update(status: "DQ", minutes: 0, seconds: 0, thousands: 0)
         @tr1b = FactoryBot.create(:time_result, competitor: @tr1.competitor, minutes: 2, seconds: 3, thousands: 300)
       end
 
-      it "should not consider the DQ to be the best time" do
-        expect(@tr1.competitor.disqualified?).to be_falsy
+      it "does not consider the DQ to be the best time" do
+        expect(@tr1.competitor).not_to be_disqualified
         expect(@tr1.competitor.best_time_in_thousands).to eq(@tr1b.result)
       end
     end
 
     describe "with 2 age_groups" do
-      before(:each) do
+      before do
         @age_group_type = @age_group_entry.age_group_type
         @age_group_entry2 = FactoryBot.create(:age_group_entry, age_group_type: @age_group_type, start_age: 50, end_age: 100, short_description: "50-100")
         @age_group_entry.start_age = 0
@@ -114,7 +114,7 @@ describe OrderedResultCalculator do
     end
 
     describe "when tr1 is slower than tr2" do
-      before(:each) do
+      before do
         @tr1.thousands = 0
         @tr1.seconds = 30
         @tr1.minutes = 3
@@ -126,6 +126,7 @@ describe OrderedResultCalculator do
         @tr2.minutes = 2
         @tr2.save!
       end
+
       it "places fast times first" do
         recalc
 
@@ -133,7 +134,7 @@ describe OrderedResultCalculator do
         expect(@tr2.competitor.place).to eq(1)
       end
       describe "when the first competitor is ineligible" do
-        before(:each) do
+        before do
           @reg = @tr2.competitor.registrants.first
           @reg.ineligible = true
           @reg.save!
@@ -150,12 +151,13 @@ describe OrderedResultCalculator do
     end
 
     describe "if 2 times are identical" do
-      before(:each) do
+      before do
         @tr1.minutes = 1
         @tr1.save!
         @tr2.minutes = 1
         @tr2.save!
       end
+
       it "ties for first" do
         recalc
 
@@ -173,7 +175,7 @@ describe OrderedResultCalculator do
       end
 
       describe "if 3-way tie" do
-        before(:each) do
+        before do
           @tr3.minutes = 1
           @tr3.save!
 
@@ -192,6 +194,7 @@ describe OrderedResultCalculator do
       end
     end
   end
+
   describe "when calculating multiple scores (bug)" do
     it "has increasing thousands" do
       @all_together = FactoryBot.create(:age_group_type)
@@ -206,7 +209,7 @@ describe OrderedResultCalculator do
         tr6 = FactoryBot.create(:time_result, minutes: 1, seconds: 32, thousands: 508, competitor: FactoryBot.create(:event_competitor, competition: @competition))
         tr7 = FactoryBot.create(:time_result, minutes: 1, seconds: 32, thousands: 815, competitor: FactoryBot.create(:event_competitor, competition: @competition))
 
-        rc = OrderedResultCalculator.new(@competition)
+        rc = described_class.new(@competition)
         recalc(rc)
 
         expect(tr1.reload.competitor.place).to eq(1)

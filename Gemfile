@@ -120,6 +120,7 @@ end
 
 group :development, :test do
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   gem 'teaspoon-jasmine'
 end
 

@@ -16,12 +16,13 @@ describe "CostItem" do
 
   describe "#has_cost?" do
     describe "when it does NOT have an associated expense_item" do
-      it { expect(model.has_cost?).to be_falsey }
+      it { expect(model).not_to have_cost }
     end
 
     describe "when it has an associated expense_item" do
       before { model.expense_item = expense_item }
-      it { expect(model.has_cost?).to be_truthy }
+
+      it { expect(model).to have_cost }
     end
   end
 end

@@ -28,7 +28,7 @@ require 'spec_helper'
 
 describe JudgeType do
   it "stores the 4 descriptions, as well as a name" do
-    jt = JudgeType.new
+    jt = described_class.new
     jt.val_1_description = "Mistakes"
     jt.val_2_description = "Cherography & Style"
     jt.val_3_description = "Originality of Performance & Showmanship"
@@ -56,7 +56,7 @@ describe JudgeType do
     expect(Judge.count).to eq(0)
   end
   it "requires limits to be specified" do
-    jt = JudgeType.new
+    jt = described_class.new
     jt.val_1_description = "Mistakes"
     jt.val_2_description = "Cherography & Style"
     jt.val_3_description = "Originality of Performance & Showmanship"

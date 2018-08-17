@@ -16,6 +16,7 @@ describe RegistrationCostPresenter do
         rce = registration_cost.registration_cost_entries.first
         rce.update(min_age: 10, max_age: 50)
       end
+
       let!(:rce2) { FactoryBot.create(:registration_cost_entry, min_age: 51, max_age: 99, registration_cost: registration_cost) }
 
       it "shows the ages" do

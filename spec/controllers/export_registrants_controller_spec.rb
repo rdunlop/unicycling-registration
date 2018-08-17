@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe ExportRegistrantsController do
   let!(:registrant) { FactoryBot.create(:registrant) }
-  before(:each) do
+
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end

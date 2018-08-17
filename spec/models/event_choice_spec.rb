@@ -21,10 +21,11 @@
 require 'spec_helper'
 
 describe EventChoice do
-  before(:each) do
+  before do
     @event = FactoryBot.create(:event)
     @ec = FactoryBot.create(:event_choice, event: @event)
   end
+
   it "is valid from FactoryBot" do
     expect(@ec.valid?).to eq(true)
   end
@@ -56,12 +57,12 @@ describe EventChoice do
   end
 
   it "defaults optional_if_event_choice to nil" do
-    ec = EventChoice.new
+    ec = described_class.new
     expect(ec.optional_if_event_choice).to be_nil
   end
 
   it "defaults required_if_event_choice to nil" do
-    ec = EventChoice.new
+    ec = described_class.new
     expect(ec.required_if_event_choice).to be_nil
   end
 
@@ -114,9 +115,10 @@ describe EventChoice do
   end
 
   describe "with associated registrant_choice" do
-    before(:each) do
+    before do
       @rc = FactoryBot.create(:registrant_choice, event_choice: @ec)
     end
+
     it "deletes the RC when deleted" do
       expect(RegistrantChoice.all.count).to eq(1)
       @ec.destroy

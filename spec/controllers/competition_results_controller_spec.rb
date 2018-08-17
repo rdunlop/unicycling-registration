@@ -18,6 +18,7 @@ require 'spec_helper'
 describe CompetitionResultsController do
   let(:competition) { FactoryBot.create(:competition) }
   let(:user) { FactoryBot.create(:super_admin_user) }
+
   before { sign_in user }
 
   describe "GET index" do
@@ -40,6 +41,7 @@ describe CompetitionResultsController do
 
   describe "DELETE destroy" do
     let!(:result) { FactoryBot.create(:competition_result, competition: competition) }
+
     it "removes the result" do
       expect do
         delete :destroy, params: { id: result.id, competition_id: competition.id }

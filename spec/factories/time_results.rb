@@ -34,11 +34,11 @@ FactoryBot.define do
     association :competitor, factory: :event_competitor
     association :entered_by, factory: :user
     entered_at { Time.current }
-    status "active"
-    preliminary false
-    is_start_time false
-    minutes 0
-    seconds 0
-    thousands 0
+    status { "active" }
+    preliminary { false }
+    is_start_time { false }
+    minutes { 0 }
+    seconds { 0 }
+    thousands { 0 }
   end
 end

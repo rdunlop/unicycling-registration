@@ -43,6 +43,7 @@ describe CouponCode do
 
   describe "it doesn't allow multiple codes with different cases" do
     let!(:code1) { FactoryBot.create(:coupon_code, code: "HELLO") }
+
     it "doesn't allow downcase version" do
       code2 = FactoryBot.build(:coupon_code, code: "hello")
       expect(code2).to be_invalid

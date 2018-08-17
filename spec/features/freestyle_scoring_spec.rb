@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Judging an event' do
   let!(:user) { FactoryBot.create(:data_entry_volunteer_user, name: "Judge User") }
+
   include_context 'basic event configuration'
   include_context 'freestyle_event', name: "Individual"
   include_context "judge_is_assigned_to_competition", user_name: "Judge User", competition_name: "Individual"
@@ -13,7 +14,7 @@ describe 'Judging an event' do
     end
 
     describe "in event judging" do
-      before :each do
+      before do
         visit '/en/welcome/data_entry_menu'
         click_link "Individual - Presentation"
       end

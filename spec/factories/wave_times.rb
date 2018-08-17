@@ -21,8 +21,8 @@
 FactoryBot.define do
   factory :wave_time do
     competition # FactoryBot
-    wave 1
-    minutes 2
-    seconds 3
+    wave { 1 }
+    minutes { 2 }
+    seconds { 3 }
   end
 end

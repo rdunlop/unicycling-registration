@@ -57,39 +57,39 @@
 
 FactoryBot.define do
   factory :event_configuration do
-    short_name "My conv"
-    long_name "Some really nice convention"
-    location "Somewhere"
-    dates_description "X through Y"
-    event_url "http://www.naucc.com"
+    short_name { "My conv" }
+    long_name { "Some really nice convention" }
+    location { "Somewhere" }
+    dates_description { "X through Y" }
+    event_url { "http://www.naucc.com" }
     start_date { Date.current }
     # logo ""
-    currency_code "USD"
-    contact_email "robinc@dunlopweb.com"
-    artistic_closed_date "2013-1-10"
-    waiver "print"
-    custom_waiver_text "Online Waiver."
-    usa false
-    iuf false
+    currency_code { "USD" }
+    contact_email { "robinc@dunlopweb.com" }
+    artistic_closed_date { "2013-1-10" }
+    waiver { "print" }
+    custom_waiver_text { "Online Waiver." }
+    usa { false }
+    iuf { false }
     event_sign_up_closed_date { Date.current }
-    comp_noncomp_url nil
-    test_mode true
-    style_name "base_green_blue"
-    max_award_place 5
-    spectators false
-    paypal_account "ROBIN+merchant@dunlopweb.com"
-    paypal_mode "enabled"
-    offline_payment false
-    under_construction false
+    comp_noncomp_url { nil }
+    test_mode { true }
+    style_name { "base_green_blue" }
+    max_award_place { 5 }
+    spectators { false }
+    paypal_account { "ROBIN+merchant@dunlopweb.com" }
+    paypal_mode { "enabled" }
+    offline_payment { false }
+    under_construction { false }
 
     trait :with_usa do
-      usa true
-      organization_membership_type "usa"
+      usa { true }
+      organization_membership_type { "usa" }
     end
 
     trait :with_waiver_pdf do
       waiver_file_name { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
-      waiver "print"
+      waiver { "print" }
     end
   end
 end

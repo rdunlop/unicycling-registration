@@ -25,7 +25,7 @@
 require 'spec_helper'
 
 describe ExpenseItem do
-  before(:each) do
+  before do
     @item = FactoryBot.create(:expense_item)
   end
 
@@ -58,7 +58,7 @@ describe ExpenseItem do
   end
 
   describe "With a tax percentage of 5%" do
-    before(:each) do
+    before do
       @item.cost = 100
       @item.tax = 5
     end
@@ -95,13 +95,13 @@ describe ExpenseItem do
     @item.has_details = nil
     expect(@item.valid?).to eq(false)
   end
-  it "should have a default of no details" do
-    item = ExpenseItem.new
+  it "has a default of no details" do
+    item = described_class.new
     expect(item.has_details).to eq(false)
   end
 
-  it "should default to a tax of 0" do
-    item = ExpenseItem.new
+  it "defaults to a tax of 0" do
+    item = described_class.new
     expect(item.tax).to eq(0.to_money)
   end
 
@@ -115,40 +115,40 @@ describe ExpenseItem do
     expect(@item.valid?).to eq(false)
   end
 
-  it "should have a decent description" do
+  it "has a decent description" do
     expect(@item.to_s).to eq(@item.expense_group.to_s + " - " + @item.name)
   end
 
   it "has not reached the maximum" do
-    expect(@item.maximum_reached?).to be_falsey
+    expect(@item).not_to be_maximum_reached
   end
 
   it "Can add more entries" do
-    expect(@item.can_i_add?(1)).to be_truthy
+    expect(@item).to be_can_i_add(1)
   end
 
   context "When there is a 0-limit set for the maximum available" do
     before { @item.maximum_available = 0 }
 
     it "has not reached the maximum" do
-      expect(@item.maximum_reached?).to be_falsey
+      expect(@item).not_to be_maximum_reached
     end
 
     it "Can add more entries" do
-      expect(@item.can_i_add?(1)).to be_truthy
+      expect(@item).to be_can_i_add(1)
     end
   end
 
   describe "when an associated payment has been created" do
-    before(:each) do
+    before do
       @payment = FactoryBot.create(:payment_detail, line_item: @item)
       @item.reload
     end
 
-    it "should not be able to destroy this item" do
-      expect(ExpenseItem.all.count).to eq(1)
+    it "is not able to destroy this item" do
+      expect(described_class.all.count).to eq(1)
       expect { @item.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
-      expect(ExpenseItem.all.count).to eq(1)
+      expect(described_class.all.count).to eq(1)
     end
 
     it "does not count this entry as a selected_item when the payment is incomplete" do
@@ -169,7 +169,7 @@ describe ExpenseItem do
   end
 
   describe "with an expense_group set for 'noncompetitor_required'" do
-    before(:each) do
+    before do
       @rg = FactoryBot.create(:expense_group, noncompetitor_required: true)
     end
 
@@ -187,19 +187,19 @@ describe ExpenseItem do
   end
 
   describe "with an expense_group set for registration_items" do
-    before(:each) do
+    before do
       @rg = FactoryBot.create(:expense_group, :registration)
     end
 
     it "isn't user_manageable" do
       @re = FactoryBot.create(:expense_item, expense_group: @rg)
-      expect(ExpenseItem.user_manageable).to eq([@item])
-      expect(ExpenseItem.all).to match_array([@re, @item])
+      expect(described_class.user_manageable).to eq([@item])
+      expect(described_class.all).to match_array([@re, @item])
     end
   end
 
   describe "with an expense_group set for 'competitor_required'" do
-    before(:each) do
+    before do
       @rg = FactoryBot.create(:expense_group, competitor_required: true)
     end
 
@@ -215,7 +215,7 @@ describe ExpenseItem do
       expect(@re2.valid?).to eq(false)
     end
     describe "with a pre-existing registrant" do
-      before(:each) do
+      before do
         @reg = FactoryBot.create(:competitor)
       end
 
@@ -238,39 +238,39 @@ describe ExpenseItem do
   end
 
   describe "with associated registrant_expense_items" do
-    before(:each) do
+    before do
       @rei = FactoryBot.create(:registrant_expense_item, line_item: @item)
     end
 
-    it "should count the entry as a selected_item" do
+    it "counts the entry as a selected_item" do
       expect(@item.num_selected_items).to eq(1)
       expect(@item.num_unpaid).to eq(1)
     end
 
     describe "when the registrant is deleted" do
-      before(:each) do
+      before do
         reg = @rei.registrant
         reg.deleted = true
         reg.save!
       end
 
-      it "should not count the expense_item as num_unpaid" do
+      it "does not count the expense_item as num_unpaid" do
         expect(@item.num_unpaid).to eq(0)
       end
     end
 
     describe "when the registrant is not completed filling out their registration form" do
-      before(:each) do
+      before do
         reg = @rei.registrant
         reg.status = "events"
         reg.save!
       end
 
-      it "should not count the expense_item as num_unpaid" do
+      it "does not count the expense_item as num_unpaid" do
         expect(@item.num_unpaid).to eq(0)
       end
 
-      it "should count the expense_item as num_unpaid when option is selected" do
+      it "counts the expense_item as num_unpaid when option is selected" do
         expect(@item.num_unpaid(include_incomplete_registrants: true)).to eq(1)
       end
     end
@@ -286,22 +286,25 @@ describe ExpenseItem do
   end
 
   describe "when a registration has a registration_cost" do
-    before(:each) do
+    before do
       @comp_reg_cost = FactoryBot.create(:registration_cost, :competitor, expense_item: @item)
       @noncomp_reg_cost = FactoryBot.create(:registration_cost, :noncompetitor)
       @nc_item = @noncomp_reg_cost.expense_items.first
     end
+
     describe "with a single competitor" do
-      before(:each) do
+      before do
         @reg = FactoryBot.create(:competitor)
       end
-      it "should list the item as un_paid" do
+
+      it "lists the item as un_paid" do
         expect(@item.num_unpaid).to eq(1)
         expect(@nc_item.num_unpaid).to eq(0)
       end
     end
+
     describe "with a single non_competitor" do
-      before(:each) do
+      before do
         @nc_reg = FactoryBot.create(:noncompetitor)
       end
 

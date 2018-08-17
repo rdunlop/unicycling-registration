@@ -21,7 +21,7 @@
 require 'spec_helper'
 
 describe JudgesController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     @super_admin = FactoryBot.create(:super_admin_user)
     sign_in @super_admin
@@ -95,7 +95,7 @@ describe JudgesController do
       expect(flash[:alert]).to eq("Judge type Not valid for competition")
     end
 
-    it "should fail when not an admin" do
+    it "fails when not an admin" do
       sign_out @super_admin
       sign_in @user
 

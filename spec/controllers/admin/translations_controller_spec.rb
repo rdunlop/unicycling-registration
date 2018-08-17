@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Admin::TranslationsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:convention_admin_user)
     sign_in @admin_user
   end

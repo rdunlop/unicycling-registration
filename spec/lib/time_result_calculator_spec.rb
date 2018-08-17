@@ -32,6 +32,7 @@ describe TimeResultCalculator do
   describe "with multiple finish and start times" do
     let(:start_times) { [2000, 1000, 3000] }
     let(:finish_times) { [2900, 1800, 4000] }
+
     it "determines the actual best time" do
       expect(calculator.best_time_in_thousands).to eq(800)
     end

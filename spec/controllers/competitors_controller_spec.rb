@@ -29,7 +29,7 @@
 require 'spec_helper'
 
 describe CompetitorsController do
-  before(:each) do
+  before do
     @ev = FactoryBot.create(:event)
     @ec = FactoryBot.create(:competition, event: @ev)
     @ec.save!
@@ -112,17 +112,18 @@ describe CompetitorsController do
     end
 
     describe "add_all adds all registrants" do
-      before(:each) do
+      before do
         FactoryBot.create(:registrant, bib_number: 1)
         FactoryBot.create(:registrant, bib_number: 2)
         FactoryBot.create(:noncompetitor, bib_number: 3)
       end
-      it "should create a competitor for every registrant" do
+
+      it "creates a competitor for every registrant" do
         expect do
           post :add_all, params: { competition_id: @ec.id }
         end.to change(Competitor, :count).by(2)
       end
-      it "should not create any new competitors if we run it twice" do
+      it "does not create any new competitors if we run it twice" do
         post :add_all, params: { competition_id: @ec.id }
 
         expect do
@@ -131,7 +132,7 @@ describe CompetitorsController do
       end
 
       describe "when adding multiple non-contiguous external_id registrants" do
-        it "should add them with continuous position numbers" do
+        it "adds them with continuous position numbers" do
           FactoryBot.create(:registrant, bib_number: 9)
           FactoryBot.create(:registrant, bib_number: 8)
           FactoryBot.create(:registrant, bib_number: 7)
@@ -147,13 +148,15 @@ describe CompetitorsController do
         end
       end
     end
+
     describe "with the 'destroy_all' field" do
-      before(:each) do
+      before do
         FactoryBot.create(:event_competitor, competition: @ec)
         FactoryBot.create(:event_competitor, competition: @ec)
         FactoryBot.create(:event_competitor, competition: @ec)
       end
-      it "should remove all competitors in this event" do
+
+      it "removes all competitors in this event" do
         expect do
           delete :destroy_all, params: { competition_id: @ec.to_param }
         end.to change(Competitor, :count).by(-3)

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe WelcomeController do
   let(:user) { FactoryBot.create(:user) }
+
   describe "GET 'help'" do
     context "When not logged in" do
       it "returns http success" do

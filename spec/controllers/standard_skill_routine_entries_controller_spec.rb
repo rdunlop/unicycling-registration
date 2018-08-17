@@ -13,7 +13,7 @@
 require 'spec_helper'
 
 describe StandardSkillRoutineEntriesController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     sign_in @user
     @registrant = FactoryBot.create(:registrant, user: @user)
@@ -40,7 +40,7 @@ describe StandardSkillRoutineEntriesController do
       end
 
       describe "when 4 entries already exist" do
-        before(:each) do
+        before do
           5.times do |i|
             # creates 1b,2b,3b,4b
             skill = FactoryBot.create(:standard_skill_entry)
@@ -50,6 +50,7 @@ describe StandardSkillRoutineEntriesController do
                               position: i + 1)
           end
         end
+
         it "inserts a new element at the top of the list, by the 'position'" do
           # creates 5b
           skill = FactoryBot.create(:standard_skill_entry)
@@ -92,7 +93,7 @@ describe StandardSkillRoutineEntriesController do
     end
 
     describe "when standard_skill is closed" do
-      before(:each) do
+      before do
         EventConfiguration.singleton.update(standard_skill_closed_date: Date.yesterday)
       end
 

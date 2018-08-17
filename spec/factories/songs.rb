@@ -23,7 +23,7 @@
 
 FactoryBot.define do
   factory :song do
-    description "MyString"
+    description { "MyString" }
     song_file_name { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'example.mp3'), 'audio/mp3') }
     event
     registrant

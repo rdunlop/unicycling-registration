@@ -57,7 +57,7 @@ describe RegistrantEventSignUp do
   end
 
   describe "when an auto-competitor event exists" do
-    before :each do
+    before do
       @competition = FactoryBot.create(:competition)
       @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: re.event_category)
     end
@@ -74,7 +74,7 @@ describe RegistrantEventSignUp do
   end
 
   describe "when a competitor already exists and I un-sign up" do
-    before :each do
+    before do
       @competition = FactoryBot.create(:competition, num_members_per_competitor: "One")
       @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: re.event_category)
       @competitor = FactoryBot.create(:event_competitor, competition: @competition)
@@ -96,7 +96,7 @@ describe RegistrantEventSignUp do
     end
 
     describe "When the event has multiple categories" do
-      before :each do
+      before do
         @event = re.event_category.event
         @cat2 = FactoryBot.create(:event_category, event: @event)
       end
@@ -112,7 +112,8 @@ end
 
 describe "when a competition exists before a sign-up" do
   let(:event_category) { FactoryBot.create(:event).event_categories.first }
-  before :each do
+
+  before do
     @competition = FactoryBot.create(:competition, automatic_competitor_creation: true, num_members_per_competitor: "One")
     @competition_source = FactoryBot.create(:competition_source, target_competition: @competition, event_category: event_category)
   end
@@ -132,7 +133,7 @@ describe "when a competition exists before a sign-up" do
   end
 
   describe "but the gender filter is in effect" do
-    before :each do
+    before do
       @competition_source.update_attribute(:gender_filter, "Female")
     end
 

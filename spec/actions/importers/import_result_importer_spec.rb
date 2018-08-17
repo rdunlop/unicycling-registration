@@ -18,6 +18,7 @@ describe Importers::ImportResultImporter do
                status: "active"
              })
     end
+
     it "creates a competitor" do
       @reg = FactoryBot.create(:registrant, bib_number: 101)
 

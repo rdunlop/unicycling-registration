@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Compete::SignInsController do
-  before(:each) do
+  before do
     sign_in FactoryBot.create(:super_admin_user)
   end
 
@@ -30,6 +30,7 @@ describe Compete::SignInsController do
 
   describe "PUT update" do
     before { request.env["HTTP_REFERER"] = competition_path(competition) }
+
     let!(:competitor1) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 101) }
 
     it "updates the sign_ins" do

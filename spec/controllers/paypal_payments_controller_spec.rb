@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PaypalPaymentsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     @config = EventConfiguration.singleton
     @config.update(FactoryBot.attributes_for(:event_configuration))
@@ -21,13 +21,14 @@ describe PaypalPaymentsController do
   end
 
   describe "without a user signed in" do
-    before(:each) do
+    before do
       sign_out @user
     end
+
     let(:paypal_account) { @config.paypal_account.downcase }
 
     describe "with a valid IPN for a valid payment" do
-      before(:each) do
+      before do
         @payment = FactoryBot.create(:payment, transaction_id: nil, completed_date: nil)
         @payment_detail = FactoryBot.create(:payment_detail, payment: @payment, amount: 20.00)
         @payment.reload
@@ -78,6 +79,7 @@ describe PaypalPaymentsController do
           expect(@payment.payment_date).to eq("Some Paypal payment date")
         end
       end
+
       describe "with an incorrect payment_id" do
         let(:attributes) do
           {
@@ -88,6 +90,7 @@ describe PaypalPaymentsController do
             mc_gross: @payment.total_amount
           }
         end
+
         it "sends an IPN message" do
           ActionMailer::Base.deliveries.clear
           post :notification, params: attributes
@@ -96,6 +99,7 @@ describe PaypalPaymentsController do
           expect(num_deliveries).to eq(1) # one for error
         end
       end
+
       it "doesn't set the payment if the wrong paypal account is specified" do
         ActionMailer::Base.deliveries.clear
         post :notification, params: { receiver_email: "bob@bob.com", payment_status: "Completed", invoice: @payment.invoice_id }
@@ -105,14 +109,14 @@ describe PaypalPaymentsController do
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1) # one for error notification
       end
-      it "should send an e-mail to notify of payment receipt" do
+      it "sends an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
         post :notification, params: { mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1) # one for success
       end
-      it "should send an e-mail to notify of payment error when mc_gross is empty" do
+      it "sends an e-mail to notify of payment error when mc_gross is empty" do
         ActionMailer::Base.deliveries.clear
         post :notification, params: { mc_gross: "", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success
@@ -120,7 +124,7 @@ describe PaypalPaymentsController do
         expect(num_deliveries).to eq(2) # one for success, one for the error
       end
 
-      it "should send an IPN notification message if the total amount doesn't match the payment total" do
+      it "sends an IPN notification message if the total amount doesn't match the payment total" do
         ActionMailer::Base.deliveries.clear
         post :notification, params: { mc_gross: @payment.total_amount - 1.to_money, receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
         expect(response).to be_success

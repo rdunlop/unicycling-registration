@@ -29,6 +29,7 @@ RSpec.describe DistanceError::GreaterThanOrEqual do
 
       context "when the current attempt is better than the previous" do
         let(:current_attempt) { previous_distance + 1 }
+
         it "returns no error" do
           expect(message).to be_nil
         end

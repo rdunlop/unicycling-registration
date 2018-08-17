@@ -1,11 +1,12 @@
 require "spec_helper"
 
 describe PaymentMailer do
-  before(:each) do
+  before do
     @ec = FactoryBot.create(:event_configuration, long_name: "NAUCC 2140")
   end
+
   describe "ipn_received" do
-    let(:mail) { PaymentMailer.ipn_received("something") }
+    let(:mail) { described_class.ipn_received("something") }
 
     it "renders the headers" do
       Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
@@ -38,10 +39,11 @@ describe PaymentMailer do
   describe "payment_completed" do
     let(:payment) { FactoryBot.create(:payment, completed: true) }
     let!(:payment_detail) { FactoryBot.create(:payment_detail, amount: 10, payment: payment) }
-    before(:each) do
+
+    before do
       payment.reload
       Rails.application.secrets.payment_notice_email = "robin+p@dunlopweb.com"
-      @mail = PaymentMailer.payment_completed(payment)
+      @mail = described_class.payment_completed(payment)
     end
 
     it "renders the headers" do

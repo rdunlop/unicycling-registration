@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PaymentDetailSummary do
-  before(:each) do
+  before do
     @pds = FactoryBot.create(:payment_detail_summary)
   end
 

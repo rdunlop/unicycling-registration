@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Admin::ManualPaymentsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:payment_admin)
     sign_in @user
   end
+
   let!(:payment) { FactoryBot.create(:payment, completed: true) }
   let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
   let(:registrant) { FactoryBot.create(:registrant) }

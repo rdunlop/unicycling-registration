@@ -7,6 +7,8 @@ describe GenericPlacingPointsCalculator do
     described_class.new(points_per_rank: pts_for_rank).points(place, ties)
   end
 
+  let(:calc) { described_class.new }
+
   it "can convert places into points" do
     expect(pts(1, 0)).to eq(1.0)
     expect(pts(2, 0)).to eq(2.0)
@@ -34,8 +36,6 @@ describe GenericPlacingPointsCalculator do
       expect(pts(15, 1)).to eq(0)
     end
   end
-
-  let(:calc) { described_class.new }
 
   describe "when there are multiple competitors with points" do
     let(:all_points) { [10, 5, 1] }
@@ -70,13 +70,13 @@ describe GenericPlacingPointsCalculator do
   describe "where there is a tie, the points are split" do
     let(:all_points) { [10, 4, 4, 3] }
 
-    it "should place according to scores, even with ties" do
+    it "places according to scores, even with ties" do
       expect(calc.judged_place(all_points, 10)).to eq(1)
       expect(calc.judged_place(all_points, 4)).to eq(2)
       expect(calc.judged_place(all_points, 3)).to eq(4)
     end
 
-    it "should split the placing_points" do
+    it "splits the placing_points" do
       expect(calc.judged_points(all_points, 10)).to eq(1)
       expect(calc.judged_points(all_points, 4)).to eq(2.5)
     end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe OrganizationMembershipsController do
   let(:user) { FactoryBot.create(:super_admin_user) }
-  before(:each) do
+  before do
     @config = FactoryBot.create(:event_configuration, :with_usa)
     sign_in user
 

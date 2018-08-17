@@ -24,6 +24,7 @@ describe Importers::SwissResultImporter do
     describe "when the imported data is a DQ" do
       context "when the competitor is withdrawn" do
         let(:competitor) { FactoryBot.create(:event_competitor, status: "withdrawn", competition: competition) }
+
         before do
           reg = competitor.members.first.registrant
           reg.update(bib_number: 101)
@@ -54,6 +55,7 @@ describe Importers::SwissResultImporter do
 
       context "when the competitor exists" do
         let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
+
         before do
           reg = competitor.members.first.registrant
           reg.update(bib_number: 101)

@@ -22,6 +22,7 @@ describe HeatAssignmentCreator do
 
   describe "with a single age group" do
     let!(:age_group_entry) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
+
     before do
       competition.reload # to load the age_group_entries
     end
@@ -47,6 +48,7 @@ describe HeatAssignmentCreator do
         FactoryBot.create(:registrant_best_time, registrant: competitor2.registrants.first, value: 200)
         FactoryBot.create(:registrant_best_time, registrant: competitor3.registrants.first, value: 100)
       end
+
       it "assigns in descending order of best times" do
         perform
         competitor1_lane_assignment = LaneAssignment.find_by(competitor: competitor1)
@@ -68,6 +70,7 @@ describe HeatAssignmentCreator do
         FactoryBot.create(:registrant_best_time, registrant: competitor1.registrants.first, value: 300, event: event)
         FactoryBot.create(:registrant_best_time, registrant: competitor2.registrants.first, value: 200, event: event)
       end
+
       it "assigns those without best times first" do
         perform
 

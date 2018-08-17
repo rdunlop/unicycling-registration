@@ -51,7 +51,7 @@ RSpec.configure do |config|
     # config.filter_run_excluding :pdf_generation => true
   end
 
-  config.before(:each) do
+  config.before do
     # We do this instead of setting cache_store = :null_store
     # because sometimes we DO want caching enabled (see below)
     Rails.cache.clear
@@ -74,11 +74,11 @@ RSpec.configure do |config|
     Apartment::Tenant.create(tenant.subdomain)
   end
 
-  config.before(:each) do
+  config.before do
     Apartment::Tenant.switch! 'testing'
   end
 
-  config.after(:each) do
+  config.after do
     Apartment::Tenant.reset
   end
 
@@ -90,7 +90,7 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
-  config.before(:each) do
+  config.before do
     RequestStore.clear!
   end
 
@@ -128,17 +128,17 @@ RSpec.configure do |config|
   # called. Since we primarily are using this for email, this ensures
   # the emails go immediately to ActionMailer::Base.deliveries
   require 'sidekiq/testing'
-  config.before(:each) do
+  config.before do
     Sidekiq::Worker.clear_all
   end
 
   # In order to cause .deliver_later to actually .deliver_now
-  config.before(:each) do
+  config.before do
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
     ActiveJob::Base.queue_adapter.perform_enqueued_at_jobs = true
   end
 
-  config.around(:each) do |example|
+  config.around do |example|
     if example.metadata[:sidekiq] == :fake
       Sidekiq::Testing.fake!(&example)
     else

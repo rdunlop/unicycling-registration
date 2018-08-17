@@ -26,6 +26,6 @@ FactoryBot.define do
   factory :registrant_expense_item do
     registrant # FactoryBot
     association(:line_item, factory: :expense_item) # FactoryBot
-    system_managed false
+    system_managed { false }
   end
 end

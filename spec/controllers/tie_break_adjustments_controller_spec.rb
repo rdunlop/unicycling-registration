@@ -20,7 +20,7 @@
 require 'spec_helper'
 
 describe TieBreakAdjustmentsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:data_entry_volunteer_user)
 
     @judge = FactoryBot.create(:judge, user_id: @user.id)

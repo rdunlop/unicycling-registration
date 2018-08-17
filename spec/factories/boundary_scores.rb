@@ -26,10 +26,10 @@ FactoryBot.define do
   factory :boundary_score do
     association :competitor, factory: :event_competitor
     judge # FactoryBot
-    number_of_people 3
-    major_dismount 0
-    minor_dismount 0
-    major_boundary 0
-    minor_boundary 0
+    number_of_people { 3 }
+    major_dismount { 0 }
+    minor_dismount { 0 }
+    major_boundary { 0 }
+    minor_boundary { 0 }
   end
 end

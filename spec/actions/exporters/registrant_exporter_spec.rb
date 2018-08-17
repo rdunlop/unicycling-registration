@@ -99,6 +99,7 @@ describe Exporters::RegistrantExporter do
             ""
           ]
         end
+
         it "includes the event sign up details" do
           expect(rows.first).to include(*expected_row)
         end
@@ -115,6 +116,7 @@ describe Exporters::RegistrantExporter do
             "My Team"
           ]
         end
+
         it "includes the event sign up details" do
           expect(rows.first).to include(*expected_row)
         end

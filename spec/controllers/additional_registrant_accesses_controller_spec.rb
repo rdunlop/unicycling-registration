@@ -21,7 +21,7 @@
 require 'spec_helper'
 
 describe AdditionalRegistrantAccessesController do
-  before(:each) do
+  before do
     @reg = FactoryBot.create(:registrant)
     @user = FactoryBot.create(:user)
     sign_in @user
@@ -113,14 +113,14 @@ describe AdditionalRegistrantAccessesController do
 
   describe "PUT accepted_readonly" do
     describe "with a request" do
-      before(:each) do
+      before do
         @additional_registrant_access = FactoryBot.create(:additional_registrant_access, user: @user, registrant: @reg)
       end
 
       it "cannot accept its own invitation" do
         expect do
           put :accept_readonly, params: { id: @additional_registrant_access.to_param }
-        end.to_not change(@additional_registrant_access, :accepted_readonly)
+        end.not_to change(@additional_registrant_access, :accepted_readonly)
       end
       it "redirects to the root if unauthorized" do
         put :accept_readonly, params: { id: @additional_registrant_access.to_param }
@@ -128,7 +128,7 @@ describe AdditionalRegistrantAccessesController do
       end
 
       describe "when signed in as the target of the invitation" do
-        before(:each) do
+        before do
           sign_out @user
           sign_in @reg.user
         end
@@ -136,7 +136,7 @@ describe AdditionalRegistrantAccessesController do
         it "allows the registrant's user to accept the invitation" do
           expect do
             put :accept_readonly, params: { id: @additional_registrant_access.to_param }
-          end.to_not change(@additional_registrant_access, :accepted_readonly)
+          end.not_to change(@additional_registrant_access, :accepted_readonly)
         end
         it "creates an e-mail to the requesting user" do
           ActionMailer::Base.deliveries.clear

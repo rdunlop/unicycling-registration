@@ -30,10 +30,11 @@
 require 'spec_helper'
 
 describe TimeResult do
-  before(:each) do
+  before do
     @competitor = FactoryBot.create(:event_competitor)
     @tr = FactoryBot.create(:time_result, competitor: @competitor)
   end
+
   it "is valid from FactoryBot" do
     expect(@tr.valid?).to eq(true)
   end
@@ -59,7 +60,8 @@ describe TimeResult do
   end
 
   describe "With a new TimeResult" do
-    subject { TimeResult.new }
+    subject { described_class.new }
+
     it "defaults to not DQ" do
       expect(subject.disqualified?).to eq(false)
     end
@@ -80,7 +82,7 @@ describe TimeResult do
   end
 
   describe "when it has a time" do
-    before(:each) do
+    before do
       @tr.minutes = 19
       @tr.seconds = 16
       @tr.thousands = 701

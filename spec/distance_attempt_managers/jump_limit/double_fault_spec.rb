@@ -5,7 +5,7 @@ RSpec.describe JumpLimit::DoubleFault do
     let(:distance_attempts) { [FactoryBot.create(:distance_attempt, fault: true)] }
 
     it "can attempt" do
-      expect(subject.no_more_jumps?(distance_attempts)).to be_falsy
+      expect(subject).not_to be_no_more_jumps(distance_attempts)
     end
   end
 
@@ -18,7 +18,7 @@ RSpec.describe JumpLimit::DoubleFault do
     end
 
     it "can attempt" do
-      expect(subject.no_more_jumps?(distance_attempts)).to be_truthy
+      expect(subject).to be_no_more_jumps(distance_attempts)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe JumpLimit::DoubleFault do
     end
 
     it "can attempt" do
-      expect(subject.no_more_jumps?(distance_attempts)).to be_falsy
+      expect(subject).not_to be_no_more_jumps(distance_attempts)
     end
   end
 end

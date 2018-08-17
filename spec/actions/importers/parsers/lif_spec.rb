@@ -4,6 +4,8 @@ describe Importers::Parsers::Lif do
   let(:test_file) { fixture_path + '/800m14.lif' }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
+  let(:up) { described_class.new }
+
   it "can process lif files" do
     input_data = described_class.new(sample_input).extract_file
     expect(input_data.count).to eq(8)
@@ -15,8 +17,6 @@ describe Importers::Parsers::Lif do
     importer = described_class.new(sample_input)
     expect(importer).to be_valid_file
   end
-
-  let(:up) { described_class.new }
 
   it "can convert a lif hash to data" do
     arr = [7, nil, 4, nil, nil, nil, "DQ", nil, nil, nil, nil, nil, nil, nil, nil]

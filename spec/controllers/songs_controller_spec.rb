@@ -22,7 +22,7 @@
 require 'spec_helper'
 
 describe SongsController do
-  before(:each) do
+  before do
     FactoryBot.create(:event_configuration, music_submission_end_date: Date.current + 4.days)
     @user = FactoryBot.create(:user)
     @reg = FactoryBot.create(:competitor, user: @user)

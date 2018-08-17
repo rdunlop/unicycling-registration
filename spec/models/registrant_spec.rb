@@ -37,7 +37,7 @@
 require 'spec_helper'
 
 describe Registrant do
-  before(:each) do
+  before do
     @reg = FactoryBot.build(:registrant)
     @ws20 = FactoryBot.build_stubbed(:wheel_size_20)
     @ws24 = FactoryBot.build_stubbed(:wheel_size_24)
@@ -46,11 +46,11 @@ describe Registrant do
   end
 
   describe "with a 10 year old registrant" do
-    before(:each) do
+    before do
       allow(@reg).to receive(:age).and_return(10)
     end
 
-    it "should have a 20\" wheel" do
+    it "has a 20\" wheel" do
       @reg.default_wheel_size = nil
       @reg.send(:set_default_wheel_size)
       expect(@reg.default_wheel_size).to eq(@ws20)
@@ -59,6 +59,7 @@ describe Registrant do
 
   describe "when EventConfiguration does not require default wheel size" do
     let(:registrant) { FactoryBot.build(:registrant, :competitor, :minor, status: "base_details", contact_detail: nil) }
+
     before { EventConfiguration.singleton.update(registrants_should_specify_default_wheel_size: false) }
 
     it "does not set a default wheel size" do
@@ -77,31 +78,33 @@ describe Registrant do
   end
 
   describe "with an event configuration starting date" do
-    before(:each) do
+    before do
       EventConfiguration.singleton.update(start_date: Date.new(2012, 5, 20))
     end
 
     describe "and a registrant born on the starting day in 1982" do
-      before(:each) do
+      before do
         @reg.birthday = Date.new(1982, 5, 20)
         @reg.valid? # set age
       end
-      it "should have an age of 30" do
+
+      it "has an age of 30" do
         expect(@reg.age).to eq(30)
       end
 
-      it "should have a wheel_size of 24\"" do
+      it "has a wheel_size of 24\"" do
         @reg.send(:set_default_wheel_size)
         expect(@reg.default_wheel_size).to eq(@ws24)
       end
     end
 
     describe "and a registrant born the day after the starting date in 1982" do
-      before(:each) do
+      before do
         @reg.birthday = Date.new(1982, 5, 21)
         @reg.valid? # set_age
       end
-      it "should have an age of 29" do
+
+      it "has an age of 29" do
         expect(@reg.age).to eq(29)
       end
 
@@ -114,10 +117,11 @@ describe Registrant do
   end
 
   context "checking required attributes" do
-    before :each do
+    before do
       @reg.bib_number = nil # clear out the auto-set bib_number
       @reg.valid? # cause bib_number to be set
     end
+
     it "has a valid reg from FactoryBot" do
       expect(@reg.valid?).to eq(true)
     end
@@ -136,13 +140,13 @@ describe Registrant do
       @reg.registrant_type = nil
     end
 
-    it "should be eligible by default" do
-      r = Registrant.new
+    it "is eligible by default" do
+      r = described_class.new
       expect(r.ineligible?).to eq(false)
     end
 
-    it "should not be a volunteer by default" do
-      r = Registrant.new
+    it "is not a volunteer by default" do
+      r = described_class.new
       expect(r.volunteer).to eq(false)
     end
 
@@ -193,7 +197,7 @@ describe Registrant do
     end
 
     it "defaults the deleted flag to false" do
-      reg = Registrant.new
+      reg = described_class.new
       expect(reg.deleted).to eq(false)
     end
 
@@ -230,7 +234,7 @@ describe Registrant do
 end
 
 describe Registrant do
-  before(:each) do
+  before do
     @reg = FactoryBot.create(:competitor)
   end
 
@@ -239,14 +243,15 @@ describe Registrant do
   end
 
   it "has an access_code" do
-    expect(@reg.access_code).to_not be_empty
+    expect(@reg.access_code).not_to be_empty
   end
 
   describe "with a deleted competitor" do
-    before(:each) do
+    before do
       @reg.deleted = true
       @reg.save!
     end
+
     it "can build a competitor" do
       @reg2 = FactoryBot.create(:competitor)
       expect(@reg2.external_id).to eq(2)
@@ -259,7 +264,7 @@ describe Registrant do
   end
 
   describe "with an expense_item" do
-    before(:each) do
+    before do
       @item = FactoryBot.create(:expense_item)
       @rei = FactoryBot.build(:registrant_expense_item, registrant: @reg, line_item: @item)
       @reg.registrant_expense_items << @rei
@@ -280,7 +285,7 @@ describe Registrant do
     end
 
     describe "having paid for the item once, but still having it as a registrant_expense_item" do
-      before(:each) do
+      before do
         @payment = FactoryBot.create(:payment)
         @payment_detail = FactoryBot.create(:payment_detail, payment: @payment, registrant: @reg, amount: @item.cost, line_item: @item)
         @payment.reload
@@ -292,23 +297,25 @@ describe Registrant do
         rei.save
         @reg.reload
       end
+
       it "lists one remaining item as owing" do
         expect(@reg.owing_line_items).to eq([@item])
       end
       it "lists the item as paid for" do
         expect(@reg.paid_line_items).to eq([@item])
       end
-      it "should list the item twice in the all_line_items" do
+      it "lists the item twice in the all_line_items" do
         expect(@reg.all_line_items).to eq([@item, @item])
       end
     end
   end
 
   describe "with a registrant_choice" do
-    before(:each) do
+    before do
       @rc = FactoryBot.create(:registrant_choice, registrant: @reg)
       @reg.reload
     end
+
     it "can access its registrant choices" do
       expect(@reg.registrant_choices).to eq([@rc])
     end
@@ -339,16 +346,17 @@ describe Registrant do
   end
 
   describe "with a standard_skill registrant_choice" do
-    before(:each) do
+    before do
       event = FactoryBot.create(:event, name: "Standard Skill", standard_skill: true)
       event_category = event.event_categories.first
       @rc = FactoryBot.create(:registrant_event_sign_up, event: event, event_category: event_category, registrant: @reg, signed_up: true)
       @reg.reload
     end
-    it "should list as having standard skill" do
+
+    it "lists as having standard skill" do
       expect(@reg.has_standard_skill?).to eq(true)
     end
-    it "should not list if not selected" do
+    it "does not list if not selected" do
       @rc.signed_up = false
       @rc.save!
       expect(@reg.has_standard_skill?).to eq(false)
@@ -356,7 +364,7 @@ describe Registrant do
   end
 
   describe "with a registration_cost" do
-    before(:each) do
+    before do
       @comp_exp = FactoryBot.create(:expense_item, cost: 100)
       @noncomp_exp = FactoryBot.create(:expense_item, cost: 50)
       @comp_reg_cost = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2010, 1, 1), end_date: Date.new(2022, 1, 1), expense_item: @comp_exp)
@@ -364,7 +372,7 @@ describe Registrant do
     end
 
     describe "with an older (PAID_FOR) registration_cost" do
-      before(:each) do
+      before do
         @oldcomp_exp = FactoryBot.create(:expense_item, cost: 90)
         @oldnoncomp_exp = FactoryBot.create(:expense_item, cost: 40)
         @comp_reg_cost = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2009, 1, 1), end_date: Date.new(2010, 1, 1),
@@ -379,17 +387,18 @@ describe Registrant do
         @payment.save
         @comp.reload
       end
-      it "should return nil as the registration_item" do
+
+      it "returns nil as the registration_item" do
         expect(@comp.registrant_expense_items.count).to eq(0)
       end
-      it "should not allow deleting the registrant" do
+      it "does not allow deleting the registrant" do
         @comp.deleted = true
         expect(@comp.valid?).to eq(false)
       end
     end
 
     describe "with a completed payment" do
-      before(:each) do
+      before do
         @comp = FactoryBot.create(:competitor)
         @payment = FactoryBot.create(:payment)
         @payment_detail = FactoryBot.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, line_item: @comp_exp)
@@ -398,13 +407,14 @@ describe Registrant do
         @payment.save
         @comp.reload
       end
-      it "should have associated payment_details" do
+
+      it "has associated payment_details" do
         expect(@comp.payment_details).to eq([@payment_detail])
       end
-      it "should have an amount_paid" do
+      it "has an amount_paid" do
         expect(@comp.amount_paid).to eq(100.to_money)
       end
-      it "should owe 0" do
+      it "owes 0" do
         expect(@comp.amount_owing).to eq(0.to_money)
       end
       it "lists the paid_line_items" do
@@ -422,7 +432,7 @@ describe Registrant do
       end
 
       describe "with a refund of everything it has completed" do
-        before(:each) do
+        before do
           @ref_det = FactoryBot.create(:refund_detail, payment_detail: @payment_detail)
         end
 
@@ -457,18 +467,19 @@ describe Registrant do
     end
 
     describe "with an incomplete payment" do
-      before(:each) do
+      before do
         @comp = FactoryBot.create(:competitor)
         @payment = FactoryBot.create(:payment)
         @payment_detail = FactoryBot.create(:payment_detail, payment: @payment, registrant: @comp, amount: 100, line_item: @comp_exp)
       end
-      it "should have associated payment_details" do
+
+      it "has associated payment_details" do
         expect(@comp.payment_details).to eq([@payment_detail])
       end
-      it "should not have an amount_paid" do
+      it "does not have an amount_paid" do
         expect(@comp.amount_paid).to eq(0.to_money)
       end
-      it "should owe 100" do
+      it "owes 100" do
         expect(@comp.amount_owing).to eq(100.to_money)
       end
       it "lists the paid_line_items" do
@@ -484,7 +495,7 @@ describe Registrant do
   end
 
   describe "with an expense_group which REQUIRES one free item per group" do
-    before(:each) do
+    before do
       @eg = FactoryBot.create(:expense_group)
       FactoryBot.create(:expense_group_option, expense_group: @eg, registrant_type: "competitor", option: ExpenseGroupOption::ONE_FREE_IN_GROUP)
       FactoryBot.create(:expense_group_option, expense_group: @eg, registrant_type: "competitor", option: ExpenseGroupOption::ONE_IN_GROUP_REQUIRED)
@@ -496,7 +507,7 @@ describe Registrant do
     end
 
     context "when it has the (free) expense item" do
-      before(:each) do
+      before do
         FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @ei, free: true)
         @reg.reload
       end
@@ -508,13 +519,13 @@ describe Registrant do
   end
 
   describe "with an expense_group marked as 'required' created AFTER the non-competitor registrant" do
-    before(:each) do
+    before do
       @nc_reg = FactoryBot.create(:noncompetitor)
       @eg = FactoryBot.create(:expense_group, noncompetitor_required: true)
       @ei = FactoryBot.create(:expense_item, expense_group: @eg)
     end
 
-    it "should include this expense_item in the list of owing_registrant_expense_items" do
+    it "includes this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
       expect(@reg.owing_registrant_expense_items.count).to eq(0)
       @nc_reg.reload
@@ -524,12 +535,12 @@ describe Registrant do
   end
 
   describe "with an expense_group marked as 'required' created AFTER the registrant" do
-    before(:each) do
+    before do
       @eg = FactoryBot.create(:expense_group, competitor_required: true)
       @ei = FactoryBot.create(:expense_item, expense_group: @eg)
     end
 
-    it "should include this expense_item in the list of owing_registrant_expense_items" do
+    it "includes this expense_item in the list of owing_registrant_expense_items" do
       @reg.reload
       expect(@reg.owing_registrant_expense_items.last.line_item).to eq(@ei)
       expect(@reg.owing_registrant_expense_items.last.system_managed).to eq(true)
@@ -537,19 +548,19 @@ describe Registrant do
   end
 
   describe "with an expense_group marked as 'required' created BEFORE the registrant" do
-    before(:each) do
+    before do
       @eg = FactoryBot.create(:expense_group, competitor_required: true)
       @ei = FactoryBot.create(:expense_item, expense_group: @eg)
       @reg2 = FactoryBot.create(:competitor)
     end
 
-    it "should include this expense_item in the list of owing_registrant_expense_items" do
+    it "includes this expense_item in the list of owing_registrant_expense_items" do
       expect(@reg2.owing_registrant_expense_items.last.line_item).to eq(@ei)
       expect(@reg2.owing_registrant_expense_items.last.system_managed).to eq(true)
     end
 
     describe "when it has paid for the expense_item" do
-      before(:each) do
+      before do
         @payment = FactoryBot.create(:payment)
         @payment_detail = FactoryBot.create(:payment_detail, payment: @payment, registrant: @reg2, amount: @ei.cost, line_item: @ei)
         @payment.reload

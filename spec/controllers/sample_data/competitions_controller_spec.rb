@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SampleData::CompetitionsController do
-  before(:each) do
+  before do
     FactoryBot.create(:event)
     @user = FactoryBot.create(:super_admin_user)
     EventConfiguration.singleton.update(test_mode: true)

@@ -1,15 +1,16 @@
 require "spec_helper"
 
 describe Notifications do
-  before(:each) do
+  before do
     @ec = FactoryBot.create(:event_configuration, long_name: "NAUCC 2140", contact_email: "guy@convention.com")
   end
 
   describe "request_registrant_access" do
     let(:mail) do
-      Notifications.request_registrant_access(FactoryBot.create(:registrant, first_name: "Billy", last_name: "Johnson"),
-                                              FactoryBot.create(:user, email: "james@dean.com"))
+      described_class.request_registrant_access(FactoryBot.create(:registrant, first_name: "Billy", last_name: "Johnson"),
+                                                FactoryBot.create(:user, email: "james@dean.com"))
     end
+
     it "identifies the person making the request" do
       expect(mail.body).to match(/james@dean.com has requested permission to view the registration record of Billy Johnson/)
     end
@@ -17,9 +18,10 @@ describe Notifications do
 
   describe "registrant_access_accepted" do
     let(:mail) do
-      Notifications.registrant_access_accepted(FactoryBot.create(:registrant, first_name: "Billy", last_name: "Johnson"),
-                                               FactoryBot.create(:user, email: "james@dean.com"))
+      described_class.registrant_access_accepted(FactoryBot.create(:registrant, first_name: "Billy", last_name: "Johnson"),
+                                                 FactoryBot.create(:user, email: "james@dean.com"))
     end
+
     it "identifies the accetance of the request" do
       expect(mail.body).to match(/Your request for access to the registration of Billy Johnson has been accepted/)
     end
@@ -27,7 +29,7 @@ describe Notifications do
 
   describe "send_mass_email" do
     let(:mail) do
-      Notifications.send_mass_email("subejct", "Body", ["a@b.com"])
+      described_class.send_mass_email("subejct", "Body", ["a@b.com"])
     end
 
     it "sets the reply-to address" do
@@ -38,7 +40,7 @@ describe Notifications do
   describe "send_feedback" do
     let(:feedback) { FactoryBot.create(:feedback, message: "This is some feedback", entered_email: "test@complaint.com") }
     let(:mail) do
-      Notifications.send_feedback(feedback.id)
+      described_class.send_feedback(feedback.id)
     end
 
     it "sets the reply-to address" do

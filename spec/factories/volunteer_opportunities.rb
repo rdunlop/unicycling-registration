@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :volunteer_opportunity do
     sequence(:description) { |n| "Artistic Judge #{n}" }
-    inform_emails "test@dunlopweb.com"
+    inform_emails { "test@dunlopweb.com" }
   end
 end
 

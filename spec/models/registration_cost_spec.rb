@@ -42,13 +42,13 @@ describe RegistrationCost do
   end
 
   it "is not onsite by default" do
-    rp = RegistrationCost.new
+    rp = described_class.new
     expect(rp.onsite).to eq(false)
   end
 
   it "can determine the last online registration period" do
     registration_cost.save!
-    expect(RegistrationCost.last_online_period).to eq(registration_cost)
+    expect(described_class.last_online_period).to eq(registration_cost)
   end
 
   describe "with associated expense_items" do
@@ -78,51 +78,51 @@ describe RegistrationCost do
     let!(:noncomp_registration_cost2) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 2, 3), end_date: Date.new(2012, 4, 4)) }
 
     it "can retrieve only the competitor periods" do
-      expect(RegistrationCost.for_type("competitor")).to match_array([comp_registration_cost1, comp_registration_cost2])
+      expect(described_class.for_type("competitor")).to match_array([comp_registration_cost1, comp_registration_cost2])
     end
 
     it "can retrieve only the noncompetitor periods" do
-      expect(RegistrationCost.for_type("noncompetitor")).to match_array([noncomp_registration_cost1, noncomp_registration_cost2])
+      expect(described_class.for_type("noncompetitor")).to match_array([noncomp_registration_cost1, noncomp_registration_cost2])
     end
 
     it "can retrieve the expense items for only a set of the registration_costs" do
-      expect(RegistrationCost.for_type("competitor").all_registration_expense_items).to match_array([
-                                                                                                      comp_registration_cost1.expense_items.first,
-                                                                                                      comp_registration_cost2.expense_items.first
-                                                                                                    ])
-      expect(RegistrationCost.for_type("noncompetitor").all_registration_expense_items).to match_array([
-                                                                                                         noncomp_registration_cost1.expense_items.first,
-                                                                                                         noncomp_registration_cost2.expense_items.first
-                                                                                                       ])
+      expect(described_class.for_type("competitor").all_registration_expense_items).to match_array([
+                                                                                                     comp_registration_cost1.expense_items.first,
+                                                                                                     comp_registration_cost2.expense_items.first
+                                                                                                   ])
+      expect(described_class.for_type("noncompetitor").all_registration_expense_items).to match_array([
+                                                                                                        noncomp_registration_cost1.expense_items.first,
+                                                                                                        noncomp_registration_cost2.expense_items.first
+                                                                                                      ])
     end
 
     it "can retrieve period" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 1, 15))).to eq(comp_registration_cost1)
+      expect(described_class.relevant_period("competitor", Date.new(2012, 1, 15))).to eq(comp_registration_cost1)
     end
 
     it "gets nil for missing section" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2010, 1, 1))).to be_nil
+      expect(described_class.relevant_period("competitor", Date.new(2010, 1, 1))).to be_nil
     end
 
     it "returns the first registration period INCLUDING the day AFTER the period ends" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 2, 3))).to eq(comp_registration_cost1)
+      expect(described_class.relevant_period("competitor", Date.new(2012, 2, 3))).to eq(comp_registration_cost1)
     end
 
     it "returns the second registration period +2 days after the first period ends" do
-      expect(RegistrationCost.relevant_period("competitor", Date.new(2012, 2, 4))).to eq(comp_registration_cost2)
+      expect(described_class.relevant_period("competitor", Date.new(2012, 2, 4))).to eq(comp_registration_cost2)
     end
 
     it "disregards onsite registration periods for last_online_period" do
       registration_cost.onsite = true
       registration_cost.save!
-      expect(RegistrationCost.for_type("competitor").last_online_period).to eq(comp_registration_cost2)
+      expect(described_class.for_type("competitor").last_online_period).to eq(comp_registration_cost2)
     end
     describe "with more registration periods" do
       let!(:comp_registration_cost0) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2010, 2, 3), end_date: Date.new(2010, 4, 4)) }
 
       it "returns the periods in ascending date order" do
         registration_cost.save!
-        expect(RegistrationCost.for_type("competitor").all).to eq([comp_registration_cost0, comp_registration_cost1, comp_registration_cost2, registration_cost])
+        expect(described_class.for_type("competitor").all).to eq([comp_registration_cost0, comp_registration_cost1, comp_registration_cost2, registration_cost])
       end
     end
 

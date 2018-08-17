@@ -28,7 +28,7 @@ describe Score do
   let(:subject) { FactoryBot.build_stubbed(:score, val_1: 10, val_2: 1.2, judge: judge) }
 
   describe "when the score is invalid" do
-    before(:each) do
+    before do
       allow(subject).to receive(:invalid?).and_return(true)
     end
 
@@ -59,7 +59,7 @@ describe Score do
       expect(subject.valid?).to eq(false)
     end
 
-    it "should total the values to create the Total" do
+    it "totals the values to create the Total" do
       subject.val_1 = 1.0
       subject.val_2 = 2.0
       subject.val_3 = 3.0
@@ -75,7 +75,7 @@ describe Score do
     @judge = FactoryBot.create(:judge)
   end
 
-  it "should not be able to have the same score/judge created twice" do
+  it "is not able to have the same score/judge created twice" do
     score = FactoryBot.create(:score)
 
     score2 = FactoryBot.build(:score, judge: score.judge, competitor: score.competitor)
@@ -83,8 +83,8 @@ describe Score do
     expect(score2.valid?).to eq(false)
   end
 
-  it "should store the judge" do
-    score = Score.new
+  it "stores the judge" do
+    score = described_class.new
     score.val_1 = 1.0
     score.val_2 = 2.0
     score.val_3 = 3.0
@@ -97,8 +97,8 @@ describe Score do
     expect(score.valid?).to eq(true)
     expect(score.total).to eq(10)
   end
-  it "should validate the bounds of the Values" do
-    score = Score.new
+  it "validates the bounds of the Values" do
+    score = described_class.new
     score.val_1 = 1.0
     score.val_2 = 2.0
     score.val_3 = 3.0
@@ -110,10 +110,10 @@ describe Score do
     expect(score.valid?).to eq(false)
   end
   describe "when the score is based on a judge with judge_type" do
-    before(:each) do
+    before do
       @jt = FactoryBot.create(:judge_type, val_1_max: 5, val_2_max: 6, val_3_max: 7, val_4_max: 20)
       @judge = FactoryBot.create(:judge, judge_type: @jt)
-      @score = Score.new
+      @score = described_class.new
       @score.val_1 = 1.0
       @score.val_2 = 2.0
       @score.val_3 = 3.0
@@ -121,7 +121,8 @@ describe Score do
       @score.competitor_id = 4
       @score.judge = @judge
     end
-    it "Should validate the bounds of the values when the judge_type specifies different max" do
+
+    it "validates the bounds of the values when the judge_type specifies different max" do
       score = @score
 
       expect(score.valid?).to eq(true)
@@ -130,7 +131,7 @@ describe Score do
       score.val_1 = 5.0
       expect(score.valid?).to eq(true)
     end
-    it "should check each column separately for max" do
+    it "checks each column separately for max" do
       score = @score
       expect(score.valid?).to eq(true)
 

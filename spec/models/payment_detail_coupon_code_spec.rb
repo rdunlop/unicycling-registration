@@ -24,7 +24,7 @@ describe PaymentDetailCouponCode do
     let(:coupon_code) { FactoryBot.create(:coupon_code, inform_emails: "") }
 
     it "does not inform" do
-      expect(pdcc.inform?).to be_falsy
+      expect(pdcc).not_to be_inform
     end
   end
 end

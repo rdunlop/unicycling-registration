@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe ConventionSeriesPolicy do
-  let(:series) { FactoryBot.create(:convention_series) }
-
   subject { described_class }
+
+  let(:series) { FactoryBot.create(:convention_series) }
 
   permissions :index? do
     it "allows super_admin" do

@@ -5,6 +5,7 @@ describe EventCopier do
     FactoryBot.create(:tenant, subdomain: "other")
     Apartment::Tenant.create "other"
   end
+
   let(:copier) { described_class.new("other") }
 
   context "with an event with a single category and choice" do
@@ -77,7 +78,9 @@ describe EventCopier do
         event.translations.create(name: "Francais", locale: "fr")
       end
     end
+
     before { I18n.locale = "fr" }
+
     after { I18n.locale = "en" }
 
     it "can copy the event name translations" do

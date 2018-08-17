@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe ConventionSeries do
+  let!(:tenant) { FactoryBot.create(:tenant, subdomain: "new_tenant") }
+  let(:series) { FactoryBot.create(:convention_series) }
+
   it "must have a name" do
     series = described_class.new
     expect(series.valid?).to eq(false)
     series.name = "Muni Championship"
     expect(series.valid?).to eq(true)
   end
-
-  let(:series) { FactoryBot.create(:convention_series) }
-  let!(:tenant) { FactoryBot.create(:tenant, subdomain: "new_tenant") }
 
   describe "#add" do
     it "can create a new member" do
@@ -33,6 +33,7 @@ describe ConventionSeries do
     before do
       Apartment::Tenant.create("new_tenant")
     end
+
     let!(:member) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: tenant) }
     let!(:member2) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: Tenant.find_by(subdomain: Apartment::Tenant.current)) }
 

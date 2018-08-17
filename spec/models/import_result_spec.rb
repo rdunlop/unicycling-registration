@@ -33,9 +33,11 @@ require 'spec_helper'
 
 describe ImportResult do
   let(:competition) { FactoryBot.build_stubbed(:timed_competition) }
-  before(:each) do
+
+  before do
     @ir = FactoryBot.build_stubbed(:import_result, competition: competition)
   end
+
   it "has a valid factory" do
     expect(@ir.valid?).to eq(true)
   end
@@ -60,7 +62,7 @@ end
 
 describe "when importing the result" do
   describe "with a competition and competitor in multiple competitions" do
-    before :each do
+    before do
       @event = FactoryBot.create(:event)
       @competition1 = FactoryBot.create(:timed_competition, event: @event)
       @competition2 = FactoryBot.create(:timed_competition, event: @event)

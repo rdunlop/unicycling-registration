@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe EventConfigurationPolicy do
-  let(:event_configuration) { FactoryBot.build_stubbed(:event_configuration) }
-
   subject { described_class }
+
+  let(:event_configuration) { FactoryBot.build_stubbed(:event_configuration) }
 
   permissions :setup_competition? do
     it "denies access to normal user" do
