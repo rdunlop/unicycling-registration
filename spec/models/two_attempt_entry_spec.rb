@@ -7,7 +7,7 @@ describe TwoAttemptEntry do
 
   describe "creating time_results from TwoAttemptEntry" do
     let(:two_attempt_entry) do
-      TwoAttemptEntry.new(
+      described_class.new(
         user: user,
         bib_number: competitor1.bib_number,
         competition: competition,
@@ -21,6 +21,7 @@ describe TwoAttemptEntry do
         status_2: "DQ"
       )
     end
+
     it "can save to the database" do
       expect(two_attempt_entry.save).to eq(true)
     end
@@ -33,7 +34,7 @@ describe TwoAttemptEntry do
 
   describe "creating time_results from two attempt entry with no data" do
     let(:two_attempt_entry) do
-      TwoAttemptEntry.new(
+      described_class.new(
         user: user,
         bib_number: competitor1.bib_number,
         competition: competition,

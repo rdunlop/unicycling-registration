@@ -20,9 +20,10 @@ require 'spec_helper'
 
 describe LaneAssignment do
   describe "with an existing lane assignment" do
-    before(:each) do
+    before do
       @la = FactoryBot.create(:lane_assignment)
     end
+
     it "has a valid factory" do
       expect(@la.valid?).to eq(true)
     end
@@ -50,7 +51,7 @@ describe LaneAssignment do
 
   describe "When updating an existing lane assignment" do
     describe "when at NAUCC" do
-      before :each do
+      before do
         FactoryBot.create(:event_configuration, :with_usa)
       end
 
@@ -64,9 +65,10 @@ describe LaneAssignment do
 
   describe "when creating a lane assignment from a registrant" do
     describe "when at NAUCC" do
-      before :each do
+      before do
         FactoryBot.create(:event_configuration, :with_usa)
       end
+
       it "will create the competitor if it doesn't exist" do
         reg = FactoryBot.create(:registrant)
         competition = FactoryBot.create(:competition)

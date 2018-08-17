@@ -3,10 +3,11 @@ require 'spec_helper'
 describe 'With an Externally Ranked Competition' do
   # let!(:user) { FactoryBot.create(:payment_admin) }
   let(:user) { FactoryBot.create(:super_admin_user) }
+
   include_context 'user is logged in'
   include_context 'basic event configuration'
 
-  before :each do
+  before do
     @competition = FactoryBot.create(:ranked_competition)
   end
 

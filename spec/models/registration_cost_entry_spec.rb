@@ -68,6 +68,7 @@ describe RegistrationCostEntry do
 
     context "when entry has a max age" do
       let(:max_age) { 10 }
+
       it "is valid below" do
         expect(do_action(5)).to be_truthy
       end
@@ -79,6 +80,7 @@ describe RegistrationCostEntry do
 
     context "when entry has a min age" do
       let(:min_age) { 10 }
+
       it "is valid above" do
         expect(do_action(15)).to be_truthy
       end
@@ -91,6 +93,7 @@ describe RegistrationCostEntry do
     context "when entry has a min and max age" do
       let(:min_age) { 10 }
       let(:max_age) { 40 }
+
       it "is valid between" do
         expect(do_action(15)).to be_truthy
       end

@@ -40,6 +40,7 @@ describe CombinedCompetitionEntry do
   end
 
   let(:combined_competition_entry) { FactoryBot.build_stubbed(:combined_competition_entry) }
+
   it "is initially valid" do
     expect(combined_competition_entry).to be_valid
   end

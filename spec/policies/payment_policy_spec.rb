@@ -1,13 +1,13 @@
 require "spec_helper"
 
 describe PaymentPolicy do
+  subject { described_class }
+
   let(:user) { FactoryBot.create(:user) }
   let(:my_payment) { FactoryBot.build(:payment, user: user) }
   let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
   let(:reg_closed?) { false }
   let(:authorized_laptop?) { false }
-
-  subject { described_class }
 
   permissions :create? do
     let(:config) { FactoryBot.create(:event_configuration) }
@@ -51,6 +51,7 @@ describe PaymentPolicy do
 
     describe "when test mode is enabled" do
       let(:test_mode) { true }
+
       it "allows fake-complete" do
         expect(subject).to permit(user_context, my_payment)
       end
@@ -62,11 +63,13 @@ describe PaymentPolicy do
 
     describe "with offline payment enabled" do
       let(:offline_payment) { true }
+
       it { is_expected.to permit(user_context, Payment) }
     end
 
     describe "without offline payment enabled" do
       let(:offline_payment) { false }
+
       it { is_expected.not_to permit(user_context, Payment) }
     end
   end

@@ -23,7 +23,7 @@
 require 'spec_helper'
 
 describe AwardLabel do
-  before(:each) do
+  before do
     @al = FactoryBot.build_stubbed(:award_label)
   end
 

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe RegistrationHelper do
   let(:user) { FactoryBot.create(:user) }
+
   def create_registrant_in_previous_convention(subdomain:, user_attributes:)
     FactoryBot.create(:tenant, subdomain: subdomain)
     FactoryBot.create(:user_convention, user: user, subdomain: subdomain)
@@ -21,12 +22,12 @@ describe RegistrationHelper do
   end
 
   describe "previous_registrants_for" do
-    it_should_behave_like "return an empty array"
+    it_behaves_like "return an empty array"
 
     context "with a registrant" do
       let!(:registrant) { FactoryBot.create(:competitor, user: user) }
 
-      it_should_behave_like "return an empty array"
+      it_behaves_like "return an empty array"
     end
 
     context "with a registrant from a previous convention" do
@@ -71,7 +72,7 @@ describe RegistrationHelper do
         )
       end
 
-      it_should_behave_like "return an empty array"
+      it_behaves_like "return an empty array"
     end
 
     context "with a deleted registrant in a previous convention" do
@@ -81,7 +82,7 @@ describe RegistrationHelper do
         )
       end
 
-      it_should_behave_like "return an empty array"
+      it_behaves_like "return an empty array"
     end
   end
 end

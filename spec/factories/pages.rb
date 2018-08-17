@@ -21,12 +21,12 @@
 FactoryBot.define do
   factory :page do
     sequence(:slug) { |n| "page-#{n}" }
-    title "Page Title"
-    body "Page Body"
+    title { "Page Title" }
+    body { "Page Body" }
     sequence(:position) { |n| n }
 
     trait :home do
-      slug "home"
+      slug { "home" }
     end
   end
 end

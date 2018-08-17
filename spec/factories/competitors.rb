@@ -35,7 +35,7 @@ FactoryBot.define do
     competition # FactoryBot
 
     transient do
-      bib_number nil
+      bib_number { nil }
     end
 
     trait :with_high_jump_competition do

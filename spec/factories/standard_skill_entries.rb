@@ -32,7 +32,7 @@ FactoryBot.define do
       end
       x
     end
-    points "1.3"
-    description "riding - 8"
+    points { "1.3" }
+    description { "riding - 8" }
   end
 end

@@ -19,9 +19,10 @@
 require 'spec_helper'
 
 describe RegistrantChoice do
-  before(:each) do
+  before do
     @rc = FactoryBot.create(:registrant_choice)
   end
+
   it "is valid from FactoryBot" do
     expect(@rc.valid?).to eq(true)
   end
@@ -45,10 +46,11 @@ describe RegistrantChoice do
   end
 
   describe "when a boolean has a value 1" do
-    before(:each) do
+    before do
       @rc.value = "1"
       @rc.save
     end
+
     it "has_value" do
       expect(@rc.has_value?).to eq(true)
     end
@@ -73,11 +75,12 @@ describe RegistrantChoice do
   # end
 
   describe "when a text input has a value" do
-    before(:each) do
+    before do
       @ec = @rc.event_choice
       @ec.cell_type = "text"
       @ec.save!
     end
+
     it "has_value with anything" do
       @rc.value = "hi"
       expect(@rc.has_value?).to eq(true)

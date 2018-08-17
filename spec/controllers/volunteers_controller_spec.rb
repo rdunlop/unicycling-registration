@@ -25,7 +25,8 @@ require 'spec_helper'
 
 describe VolunteersController do
   let(:user) { FactoryBot.create(:user) }
-  before(:each) do
+
+  before do
     @ev = FactoryBot.create(:event)
     @ec = FactoryBot.create(:timed_competition, event: @ev)
 
@@ -50,7 +51,9 @@ describe VolunteersController do
 
   describe "POST create" do
     let!(:other_user) { FactoryBot.create(:user) }
+
     before { request.env["HTTP_REFERER"] = competition_path(@ec) }
+
     describe "with valid params" do
       it "creates a new Volunteer" do
         expect do
@@ -78,6 +81,7 @@ describe VolunteersController do
 
   describe "DELETE destroy" do
     let(:other_user) { FactoryBot.create(:user) }
+
     before do
       other_user.add_role(:race_official, @ec)
     end

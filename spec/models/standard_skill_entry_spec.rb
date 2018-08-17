@@ -24,7 +24,7 @@ require 'spec_helper'
 
 describe StandardSkillEntry do
   it "can save the necessary fields" do
-    std = StandardSkillEntry.new
+    std = described_class.new
     std.number = 2
     std.letter = "a"
     std.points = 1.3
@@ -36,7 +36,7 @@ describe StandardSkillEntry do
     std = FactoryBot.build(:standard_skill_entry)
     expect(std.fullDescription).to eq(std.number.to_s + std.letter + " - riding - 8")
   end
-  it "should be a non_riding_skill if >= 100" do
+  it "is a non_riding_skill if >= 100" do
     std = FactoryBot.build(:standard_skill_entry)
     expect(std.non_riding_skill).to eq(false)
 
@@ -45,9 +45,10 @@ describe StandardSkillEntry do
   end
 
   describe "with associated routine entries" do
-    before(:each) do
+    before do
       @entry = FactoryBot.create(:standard_skill_routine_entry)
     end
+
     it "has associated entry" do
       skill = @entry.standard_skill_entry
       expect(skill.standard_skill_routine_entries).to eq([@entry])

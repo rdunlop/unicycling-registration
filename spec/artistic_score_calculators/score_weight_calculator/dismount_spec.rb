@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe ScoreWeightCalculator::Dismount do
   let(:subject) { described_class.new(group_size) }
+
   context "for a large group" do
     let(:group_size) { 10 }
 

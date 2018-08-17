@@ -16,7 +16,7 @@
 require 'spec_helper'
 
 describe RegistrantGroupsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
@@ -82,6 +82,7 @@ describe RegistrantGroupsController do
 
     describe "with invalid params" do
       let!(:existing_reg_group) { FactoryBot.create(:registrant_group) }
+
       it "does not update the registrant_group" do
         registrant_group = FactoryBot.create(:registrant_group, registrant_group_type: existing_reg_group.registrant_group_type)
         # Trigger the behavior that occurs when invalid params are submitted

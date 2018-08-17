@@ -38,7 +38,8 @@ require 'spec_helper'
 
 describe RegistrantsController do
   let!(:event_configuration) { FactoryBot.create(:event_configuration, event_sign_up_closed_date: Date.tomorrow) }
-  before(:each) do
+
+  before do
     @user = FactoryBot.create(:user)
     sign_in @user
   end
@@ -89,13 +90,13 @@ describe RegistrantsController do
     end
 
     context "without any registrants" do
-      it "should not render the registrants list" do
+      it "does not render the registrants list" do
         get :index, params: { user_id: @user.id }
 
         assert_select "legend", text: "Registrations", count: 0
       end
 
-      it "should not render the amount owing block" do
+      it "does not render the amount owing block" do
         get :index, params: { user_id: @user.id }
 
         assert_select "div", text: /Pay Now/, count: 0
@@ -104,10 +105,11 @@ describe RegistrantsController do
 
     describe "as the sender of a registration request" do
       describe "when I have been granted additional_access" do
-        before(:each) do
+        before do
           @other_reg = FactoryBot.create(:competitor)
           FactoryBot.create(:additional_registrant_access, user: @user, accepted_readonly: true, registrant: @other_reg)
         end
+
         it "shows the registrant" do
           get :index, params: { user_id: @user.id }
 
@@ -141,9 +143,10 @@ describe RegistrantsController do
       expect(response).to redirect_to(root_path)
     end
     describe "as an event planner" do
-      before(:each) do
+      before do
         sign_in FactoryBot.create(:event_planner)
       end
+
       it "Can read other users registrant" do
         registrant = FactoryBot.create(:competitor, user: @user)
         get :show, params: { id: registrant.to_param }
@@ -164,9 +167,10 @@ describe RegistrantsController do
   end
 
   describe "DELETE destroy" do
-    before(:each) do
+    before do
       sign_in @user
     end
+
     it "destroys the requested registrant" do
       registrant = FactoryBot.create(:competitor, user: @user)
       expect do
@@ -188,9 +192,10 @@ describe RegistrantsController do
     end
 
     describe "as normal user" do
-      before(:each) do
+      before do
         sign_in @user
       end
+
       it "cannot destroy another user's registrant" do
         registrant = FactoryBot.create(:competitor)
         delete :destroy, params: { id: registrant.to_param }
@@ -203,6 +208,7 @@ describe RegistrantsController do
     before do
       sign_in @user
     end
+
     let(:registrant) { FactoryBot.create(:competitor, user: @user) }
 
     it "renders blank page" do

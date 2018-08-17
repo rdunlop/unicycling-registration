@@ -22,6 +22,7 @@ describe DistanceAttemptsController do
   let(:competition) { FactoryBot.create(:distance_competition) }
   let(:judge_type) { FactoryBot.create(:judge_type, event_class: "High/Long") }
   let(:comp) { FactoryBot.create(:event_competitor, competition: competition) }
+
   before do
     @data_entry_volunteer_user = FactoryBot.create(:data_entry_volunteer_user)
     sign_in @data_entry_volunteer_user
@@ -29,7 +30,7 @@ describe DistanceAttemptsController do
   end
 
   describe "GET index" do
-    it "should return a list of all distance_attempts" do
+    it "returns a list of all distance_attempts" do
       get :index, params: { judge_id: @judge.id }
 
       assert_select "form", action: judge_distance_attempts_path(@judge), method: "get" do
@@ -57,6 +58,7 @@ describe DistanceAttemptsController do
         expect(response).to redirect_to(judge_distance_attempts_path(@judge))
       end
     end
+
     describe "with invalid params" do
       it "renders the 'new' form" do
         post :create, params: { distance_attempt: { fault: false }, judge_id: @judge.id }
@@ -66,13 +68,13 @@ describe DistanceAttemptsController do
   end
 
   describe "GET list" do
-    it "should return the distance attempts" do
+    it "returns the distance attempts" do
       da = FactoryBot.create(:distance_attempt, judge: @judge, competitor: comp)
       get :list, params: { competition_id: competition.id }
 
       assert_select "td", da.competitor.to_s
     end
-    it "should not be accessible to non-data_entry_volunteers" do
+    it "is not accessible to non-data_entry_volunteers" do
       sign_out @data_entry_volunteer_user
       @normal_user = FactoryBot.create(:user)
       sign_in @normal_user
@@ -87,6 +89,7 @@ describe DistanceAttemptsController do
     before do
       request.env["HTTP_REFERER"] = root_path
     end
+
     let!(:distance_attempt) { FactoryBot.create(:distance_attempt, competitor: comp, judge: @judge) }
 
     it "destroys the requested distance_attempt" do

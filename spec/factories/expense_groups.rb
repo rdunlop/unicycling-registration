@@ -19,15 +19,15 @@
 
 FactoryBot.define do
   factory :expense_group do
-    group_name "MyString"
-    visible true
-    position 1
-    competitor_required false
-    noncompetitor_required false
+    group_name { "MyString" }
+    visible { true }
+    position { 1 }
+    competitor_required { false }
+    noncompetitor_required { false }
 
     trait :registration do
-      system_managed true
-      registration_items true
+      system_managed { true }
+      registration_items { true }
     end
   end
 end

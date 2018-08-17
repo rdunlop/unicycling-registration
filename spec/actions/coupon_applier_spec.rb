@@ -24,6 +24,7 @@ describe CouponApplier do
 
   describe "when the code is typed in uppercase" do
     let(:coupon_code_string) { coupon_code.code.upcase }
+
     it "finds matching coupon even still" do
       do_action
       expect(payment.payment_details.first.payment_detail_coupon_code).to be_present
@@ -32,6 +33,7 @@ describe CouponApplier do
 
   describe "when coupon code invalid" do
     let(:coupon_code_string) { "fake" }
+
     it "returns an error" do
       do_action
       expect(subject.error).to eq("Coupon Code not found")
@@ -87,6 +89,7 @@ describe CouponApplier do
 
     describe "when it has already reached its limit" do
       before { do_action }
+
       let(:new_payment) { FactoryBot.create(:payment) }
       let!(:new_payment_detail) { FactoryBot.create(:payment_detail, payment: new_payment, line_item: expense_item) }
 

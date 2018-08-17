@@ -23,6 +23,7 @@ require 'spec_helper'
 
 describe Song do
   let(:song) { FactoryBot.build_stubbed(:song) }
+
   it "must be valid by default" do
     expect(song.valid?).to eq(true)
   end
@@ -59,6 +60,7 @@ describe Song do
 
   describe "validations" do
     subject(:song) { FactoryBot.build(:song) }
+
     it { is_expected.to validate_presence_of(:registrant_id) }
     it { is_expected.to validate_presence_of(:user_id) }
     it { is_expected.to validate_presence_of(:event_id) }

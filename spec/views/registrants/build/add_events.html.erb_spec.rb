@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe "registrants/build/add_events" do
   let(:wizard_path) { "/" }
-  before(:each) do
+
+  before do
     FactoryBot.create(:registration_cost, :competitor,
                       start_date: Date.new(2012, 1, 10),
                       end_date: Date.new(2012, 2, 11))
@@ -12,7 +13,7 @@ describe "registrants/build/add_events" do
   end
 
   describe "the events lists" do
-    before(:each) do
+    before do
       @registrant = FactoryBot.build(:competitor)
       FactoryBot.create(:registration_cost,
                         start_date: Date.new(2012, 1, 10),
@@ -20,13 +21,15 @@ describe "registrants/build/add_events" do
       @ev1 = FactoryBot.create(:event)
       @categories = [@ev1.category]
     end
+
     describe "for a boolean choice" do
-      before(:each) do
+      before do
         @ec1 = FactoryBot.create(:event_choice, event: @ev1)
         rc = @registrant.registrant_choices.build
         rc.event_choice_id = @ec1.id
       end
-      it "should have the checkbox" do
+
+      it "has the checkbox" do
         render
 
         # Run the generator again with the --webrat flag if you want to use webrat matchers
@@ -40,7 +43,7 @@ describe "registrants/build/add_events" do
         end
       end
       describe "With existing selections" do
-        before(:each) do
+        before do
           @rc = FactoryBot.create(:registrant_choice, value: "1", event_choice: @ec1)
           @registrant = @rc.registrant
           @registrant.reload
@@ -87,15 +90,17 @@ describe "registrants/build/add_events" do
     end
 
     describe "for a text choice" do
-      before(:each) do
+      before do
         @ec1 = FactoryBot.create(:event_choice, event: @ev1, cell_type: "text", position: 2)
       end
+
       describe "without a choice selected" do
-        before(:each) do
+        before do
           rc = @registrant.registrant_choices.build
           rc.event_choice_id = @ec1.id
         end
-        it "should have the text input" do
+
+        it "has the text input" do
           render
 
           assert_select "form", action: wizard_path, method: "post" do
@@ -108,12 +113,14 @@ describe "registrants/build/add_events" do
           end
         end
       end
+
       describe "for already present choice" do
-        before(:each) do
+        before do
           rc = @registrant.registrant_choices.build
           rc.event_choice_id = @ec1.id
           rc.value = "Hello"
         end
+
         it "displays the text if already present in user's choice" do
           render
 

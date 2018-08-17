@@ -31,6 +31,7 @@ describe StandardSkillScoresController do
     @judge.competition.competitors << @comp
     @judge.save!
   end
+
   let!(:routine) { FactoryBot.create(:standard_skill_routine, registrant: @comp.registrants.first) }
   let!(:skill_1) { FactoryBot.create(:standard_skill_routine_entry, standard_skill_routine: routine) }
   let!(:skill_2) { FactoryBot.create(:standard_skill_routine_entry, standard_skill_routine: routine) }

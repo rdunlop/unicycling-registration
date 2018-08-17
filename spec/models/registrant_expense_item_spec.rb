@@ -25,7 +25,7 @@ require 'spec_helper'
 describe RegistrantExpenseItem do
   let(:rei) { FactoryBot.create(:registrant_expense_item) }
 
-  before(:each) do
+  before do
     @rei = rei
     @ei = @rei.line_item
     @ei.cost = 20
@@ -33,6 +33,7 @@ describe RegistrantExpenseItem do
   end
 
   let(:registrant) { rei.registrant }
+
   it "can be created by factory" do
     expect(@rei.valid?).to eq(true)
   end
@@ -46,41 +47,42 @@ describe RegistrantExpenseItem do
   end
 
   describe "when the expense_item is custom_cost=true" do
-    before(:each) do
+    before do
       @ei = @rei.line_item
       @ei.has_custom_cost = true
       @ei.save
     end
-    it "should require a custom_cost" do
+
+    it "requires a custom_cost" do
       @rei.custom_cost = nil
       expect(@rei.valid?).to eq(false)
     end
-    it "should be acceptable if the custom_cost is set" do
+    it "is acceptable if the custom_cost is set" do
       @rei.custom_cost = 1
       expect(@rei.valid?).to eq(true)
     end
 
-    it "should not allow a negative custom_cost" do
+    it "does not allow a negative custom_cost" do
       @rei.custom_cost = -10
       expect(@rei.valid?).to eq(false)
     end
   end
 
   describe "when the expense item has fractional tax" do
-    before :each do
+    before do
       @ei = @rei.line_item
       @ei.cost = 17
       @ei.tax = 0.94
       @ei.save
     end
 
-    it "should round" do
+    it "rounds" do
       expect(@rei.total_cost).to eq(17.94.to_money)
     end
   end
 
   describe "when the item is free" do
-    before(:each) do
+    before do
       @rei.free = true
       @rei.save
     end
@@ -93,6 +95,7 @@ describe RegistrantExpenseItem do
       expect(@rei.tax).to eq(0)
     end
   end
+
   it "must associate with the registrant" do
     @reg = FactoryBot.create(:registrant)
     @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg)
@@ -135,7 +138,7 @@ describe RegistrantExpenseItem do
   end
 
   describe "with an expense_item with a limited number available" do
-    before(:each) do
+    before do
       @ei = FactoryBot.create(:expense_item, maximum_available: 2)
     end
 
@@ -167,7 +170,7 @@ describe RegistrantExpenseItem do
   end
 
   describe "with an expense_item with a limited number available PER REGISTRANT" do
-    before(:each) do
+    before do
       @ei = FactoryBot.create(:expense_item, maximum_per_registrant: 1)
       @reg = FactoryBot.create(:registrant)
     end
@@ -196,7 +199,7 @@ describe RegistrantExpenseItem do
     end
 
     describe "when the limit is 2 per registrant" do
-      before(:each) do
+      before do
         @ei.maximum_per_registrant = 2
         @ei.save
       end

@@ -19,7 +19,7 @@
 require 'spec_helper'
 
 describe LaneAssignmentsController do
-  before(:each) do
+  before do
     @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
     race_official = FactoryBot.create(:user)
     race_official.add_role(:race_official, @competition)
@@ -72,6 +72,7 @@ describe LaneAssignmentsController do
         status: "DQ"
       }
     end
+
     it "marks the competitor as dq" do
       expect do
         post :dq_competitor, params: { competition_id: @competition.id, heat_lane_judge_note: params }

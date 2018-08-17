@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe CandidatesController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
+
   let(:competition) { FactoryBot.create(:competition) }
   let(:reg) { FactoryBot.create(:competitor) }
 
@@ -14,6 +15,7 @@ describe CandidatesController do
         competition_id: competition.id
       }
     end
+
     it "renders" do
       get :index, params: params
       expect(response).to be_success
@@ -33,6 +35,7 @@ describe CandidatesController do
         }
       }
     end
+
     it "creates a competitor" do
       post :create_from_candidates, params: params
       expect(Competitor.count).to eq(1)

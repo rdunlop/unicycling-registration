@@ -131,6 +131,7 @@ describe ScoresController do
       sign_out @user
       sign_in @other_user
     end
+
     describe "with valid params" do
       it "creates a new Score" do
         expect do
@@ -145,7 +146,8 @@ describe ScoresController do
       @comp.competition.locked_at = Time.current
       @comp.competition.save!
     end
-    it "should not be allowed to create scores" do
+
+    it "is not allowed to create scores" do
       expect do
         post :create, params: { score: valid_attributes, judge_id: @other_judge.id, competitor_id: @comp.id }
       end.to change(Score, :count).by(0)
@@ -182,11 +184,11 @@ describe ScoresController do
         sign_in @auth_user
       end
 
-      it "should deny access to edit" do
+      it "denies access to edit" do
         get :new, params: { judge_id: @judge, competitor_id: @comp.id }
         expect(response).to redirect_to(root_path)
       end
-      it "should deny access to update" do
+      it "denies access to update" do
         post :create, params: { judge_id: @judge, competitor_id: @comp.id }
         expect(response).to redirect_to(root_path)
       end

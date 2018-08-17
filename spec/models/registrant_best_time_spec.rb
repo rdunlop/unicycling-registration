@@ -20,6 +20,7 @@ require 'spec_helper'
 
 describe RegistrantBestTime do
   let(:event) { FactoryBot.create :event, :marathon_best_time_format }
+
   before do
     @rb = FactoryBot.create(:registrant_best_time, event: event)
   end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Devise::CustomPasswordsController do
-  before :each do
+  before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
@@ -25,7 +25,7 @@ describe Devise::CustomPasswordsController do
 
     it "can sign in with new password" do
       put :update, params: { user: valid_attributes.merge(reset_password_token: @token) }
-      expect(user.reload.valid_password?("password")).to be_truthy
+      expect(user.reload).to be_valid_password("password")
     end
 
     it "does NOT clear all legacy_passwords" do

@@ -49,7 +49,7 @@ describe Admin::StandardSkillRoutinesController do
         expect(row2[3]).to eq(@next_entry.standard_skill_entry.letter.to_s)
       end
 
-      it "should fail for non-admin user" do
+      it "fails for non-admin user" do
         @user = FactoryBot.create(:user)
         sign_in @user
 

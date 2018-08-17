@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DataEntryVolunteersController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     @super_admin = FactoryBot.create(:super_admin_user)
     sign_in @super_admin
@@ -32,7 +32,7 @@ describe DataEntryVolunteersController do
       end
     end
 
-    it "should fail when not an admin" do
+    it "fails when not an admin" do
       sign_out @super_admin
       sign_in @user
 
@@ -45,7 +45,7 @@ describe DataEntryVolunteersController do
     it "doesn't create the volunteer" do
       expect do
         post :create, params: { data_entry_volunteer: { user_id: @user.id, name: "" }, competition_id: @ec.id }
-      end.to_not change(@user.roles, :count)
+      end.not_to change(@user.roles, :count)
     end
   end
 end

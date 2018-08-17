@@ -27,7 +27,7 @@ FactoryBot.define do
   factory :payment_detail do
     payment # FactoryBot
     registrant # FactoryBot
-    amount "9.99"
+    amount { "9.99" }
     association(:line_item, factory: :expense_item) # FactoryBot
   end
 end

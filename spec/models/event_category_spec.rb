@@ -20,10 +20,11 @@
 require 'spec_helper'
 
 describe EventCategory do
-  before(:each) do
+  before do
     @ev = FactoryBot.create(:event)
     @ec = @ev.event_categories.first
   end
+
   it "is valid from FactoryBot" do
     expect(@ec.valid?).to eq(true)
   end
@@ -51,7 +52,7 @@ describe EventCategory do
   end
 
   describe "with some registrant_choices" do
-    before(:each) do
+    before do
       @rc = FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec)
     end
 
@@ -76,7 +77,7 @@ describe EventCategory do
   end
 
   describe "with a signed up, but deleted registrant" do
-    before :each do
+    before do
       reg = FactoryBot.create(:registrant)
       FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ec, signed_up: true, registrant: reg)
       reg.deleted = true

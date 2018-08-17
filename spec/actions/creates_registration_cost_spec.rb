@@ -36,6 +36,7 @@ describe CreatesRegistrationCost do
 
   describe "when registration_cost is saved and is being updated" do
     before { perform }
+
     it "updates the name of the expense_item" do
       existing_rce = reg_period.registration_cost_entries.first
       existing_rce.min_age = 10

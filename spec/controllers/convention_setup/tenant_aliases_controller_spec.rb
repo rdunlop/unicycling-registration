@@ -16,7 +16,7 @@ require 'spec_helper'
 describe ConventionSetup::TenantAliasesController do
   let(:user) { FactoryBot.create(:super_admin_user) }
 
-  before(:each) do
+  before do
     sign_in user
   end
 
@@ -30,7 +30,7 @@ describe ConventionSetup::TenantAliasesController do
   end
 
   describe "index" do
-    before :each do
+    before do
       get :index
     end
 
@@ -40,7 +40,7 @@ describe ConventionSetup::TenantAliasesController do
   end
 
   describe "as a normal user" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
       sign_in @user
     end

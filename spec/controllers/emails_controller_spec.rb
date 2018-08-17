@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe EmailsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
@@ -55,9 +55,7 @@ describe EmailsController do
     end
 
     it "breaks apart large requests into multiple smaller requests" do
-      50.times do |_n|
-        FactoryBot.create(:user)
-      end
+      FactoryBot.create_list(:user, 50)
       ActionMailer::Base.deliveries.clear
       post :create, params: { email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }
       num_deliveries = ActionMailer::Base.deliveries.size

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PreliminaryExternalResultsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
     @competition = FactoryBot.create(:competition)
@@ -132,6 +132,7 @@ describe PreliminaryExternalResultsController do
   describe "import_csv" do
     let(:test_file_name) { fixture_path + '/external_results.csv' }
     let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
+
     before do
       registrant1 = FactoryBot.create(:competitor, bib_number: 101)
       registrant2 = FactoryBot.create(:competitor, bib_number: 102)

@@ -27,11 +27,11 @@ FactoryBot.define do
   factory :score do
     association :competitor, factory: :event_competitor
     judge
-    val_1 1.1
-    val_2 1.2
-    val_3 1.3
-    val_4 1.4
-    val_5 0
-    notes 'this is a factory score'
+    val_1 { 1.1 }
+    val_2 { 1.2 }
+    val_3 { 1.3 }
+    val_4 { 1.4 }
+    val_5 { 0 }
+    notes { 'this is a factory score' }
   end
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe FlatlandResultCalculator do
   describe "when calculating the placement points of an event" do
-    before(:each) do
+    before do
       @competition = FactoryBot.create(:flatland_competition)
       @comp1 = FactoryBot.create(:event_competitor, competition: @competition)
       @jt = FactoryBot.create(:judge_type, event_class: "Flatland")
@@ -23,7 +23,7 @@ describe FlatlandResultCalculator do
       end
 
       describe "with a 3rd judge's scores" do
-        before(:each) do
+        before do
           @judge3 = FactoryBot.create(:judge, competition: @competition, judge_type: @jt)
           @score1_3 = double(:score, total: 10, val_4: 5)
 
@@ -35,7 +35,7 @@ describe FlatlandResultCalculator do
         end
 
         describe "when checking a tie" do
-          it "should drop the high-low of the 'Total' and returns the val_4" do
+          it "drops the high-low of the 'Total' and returns the val_4" do
             expect(@calc.competitor_tie_break_comparable_result(@comp1)).to eq(5)
           end
         end

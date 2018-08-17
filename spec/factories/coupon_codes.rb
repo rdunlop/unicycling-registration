@@ -25,7 +25,7 @@ FactoryBot.define do
     sequence(:name) { |n| "the Coupon #{n}" }
     sequence(:code) { |n| "code #{n}" }
     sequence(:description) { |n| "description #{n}" }
-    max_num_uses 0
-    price 10.00
+    max_num_uses { 0 }
+    price { 10.00 }
   end
 end

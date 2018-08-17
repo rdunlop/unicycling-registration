@@ -19,7 +19,7 @@
 require 'spec_helper'
 
 describe HeatsController do
-  before(:each) do
+  before do
     @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
     director = FactoryBot.create(:user)
     director.add_role(:director, @competition.event)
@@ -34,6 +34,7 @@ describe HeatsController do
       allow_any_instance_of(Competitor).to receive(:best_time).and_return("2:20")
       get :index, params: { competition_id: @competition.id }
     end
+
     it "shows all competitors" do
       assert_select "td", @competitor.age.to_s
     end
@@ -90,6 +91,7 @@ describe HeatsController do
 
   describe "#destroy_all" do
     before { FactoryBot.create(:lane_assignment, competitor: @competitor, competition: @competition) }
+
     it "removes all lane assignments" do
       expect do
         delete :destroy_all, params: { competition_id: @competition.id }

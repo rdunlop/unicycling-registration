@@ -8,12 +8,12 @@ describe DistanceResultCalculator do
 
   describe "#competitor_has_result?" do
     it "doesn't have results by default" do
-      expect(calc.competitor_has_result?(competitor)).to be_falsey
+      expect(calc).not_to be_competitor_has_result(competitor)
     end
 
     it "does have results with distance_attempts" do
       FactoryBot.create(:distance_attempt, competitor: competitor)
-      expect(calc.competitor_has_result?(competitor.reload)).to be_truthy
+      expect(calc).to be_competitor_has_result(competitor.reload)
     end
   end
 
@@ -52,16 +52,16 @@ describe DistanceResultCalculator do
   end
 
   describe "with a tie_breaker result" do
-    before :each do
+    before do
       allow(competitor).to receive(:tie_break_adjustment).and_return(double(tie_break_place: 1))
     end
 
-    it "should have a non-0 tie breaker adjustment value" do
+    it "has a non-0 tie breaker adjustment value" do
       expect(calc.competitor_tie_break_comparable_result(competitor)).to eq(0.9)
     end
   end
 
-  it "should have a 0 tie_breaker_adjustment" do
+  it "has a 0 tie_breaker_adjustment" do
     expect(calc.competitor_tie_break_comparable_result(competitor)).to eq(0)
   end
 end

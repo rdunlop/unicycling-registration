@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SampleData::RegistrantsController do
-  before(:each) do
+  before do
     @reg = FactoryBot.create(:registrant) # so that WheelSizes are created
     @user = FactoryBot.create(:super_admin_user)
     EventConfiguration.singleton.update(test_mode: true)

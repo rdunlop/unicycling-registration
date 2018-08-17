@@ -34,23 +34,23 @@ describe BestTimeFormatter::MinuteSecondFormatter do
   end
 
   it "allows full case with double-digit minutes" do
-    expect(described_class.valid?("10:23.45")).to be_truthy
+    expect(described_class).to be_valid("10:23.45")
   end
 
   it "allows hour/minute only" do
-    expect(described_class.valid?("1:30")).to be_truthy
+    expect(described_class).to be_valid("1:30")
   end
 
   it "requires that minutes be specified" do
-    expect(described_class.valid?("30")).to be_falsey
+    expect(described_class).not_to be_valid("30")
   end
 
   it "requires hours be specified" do
-    expect(described_class.valid?("30.12")).to be_falsey
+    expect(described_class).not_to be_valid("30.12")
   end
 
   it "doesn't allow seconds/hundreds only" do
-    expect(described_class.valid?("0.10")).to be_falsey
+    expect(described_class).not_to be_valid("0.10")
   end
 
   it "converts 6000 to 1 minute" do
@@ -66,32 +66,32 @@ describe BestTimeFormatter::MinuteSecondFormatter do
   end
 
   it "allows 00:15.50" do
-    expect(described_class.valid?("00:15.50")).to be_truthy
+    expect(described_class).to be_valid("00:15.50")
     expect(described_class.to_string(described_class.from_string("00:15.50"))).to eq("0:15.50")
-    expect(described_class.valid?("0:15.50")).to be_truthy
+    expect(described_class).to be_valid("0:15.50")
   end
 
   it "marks empty as invalid" do
-    expect(described_class.valid?("")).to be_falsey
+    expect(described_class).not_to be_valid("")
   end
 
   it "marks real string as valid" do
-    expect(described_class.valid?("1:00.00")).to be_truthy
+    expect(described_class).to be_valid("1:00.00")
   end
 
   it "doesnt't allow seconds over 59" do
-    expect(described_class.valid?("0:60")).to be_falsey
+    expect(described_class).not_to be_valid("0:60")
   end
 
   it "doesn't allow negative minutes" do
-    expect(described_class.valid?("-1:0")).to be_falsey
+    expect(described_class).not_to be_valid("-1:0")
   end
 
   it "allows minutes greater than 60" do
-    expect(described_class.valid?("65:30")).to be_truthy
+    expect(described_class).to be_valid("65:30")
   end
 
   it "Doesn't allow strings" do
-    expect(described_class.valid?("none")).to be_falsey
+    expect(described_class).not_to be_valid("none")
   end
 end

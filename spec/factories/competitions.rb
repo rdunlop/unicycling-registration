@@ -45,72 +45,72 @@ FactoryBot.define do
     event # FactoryBot
     sequence(:name) { |n| "Competition #{n}" }
     sequence(:award_title_name) { |n| "Competition #{n}" }
-    locked_at nil
-    scoring_class "Freestyle"
+    locked_at { nil }
+    scoring_class { "Freestyle" }
 
     factory :distance_competition do
-      scoring_class "High/Long"
+      scoring_class { "High/Long" }
       age_group_type # factory Girl
     end
 
     factory :street_competition do
-      scoring_class "Street"
+      scoring_class { "Street" }
     end
 
     factory :flatland_competition do
-      scoring_class "Flatland"
+      scoring_class { "Flatland" }
     end
 
     factory :timed_competition do
-      scoring_class "Shortest Time"
+      scoring_class { "Shortest Time" }
       age_group_type # factory Girl
     end
 
     factory :tier_competition do
-      scoring_class "Shortest Time with Tiers"
+      scoring_class { "Shortest Time with Tiers" }
       age_group_type # factory Girl
     end
 
     factory :slow_competition do
-      scoring_class "Longest Time"
+      scoring_class { "Longest Time" }
       age_group_type # factory Girl
     end
 
     factory :timed_laps_competition do
-      scoring_class "Timed Multi-Lap"
+      scoring_class { "Timed Multi-Lap" }
       age_group_type # factory Girl
     end
 
     factory :ranked_competition do
-      scoring_class "Points Low to High"
+      scoring_class { "Points Low to High" }
       age_group_type # factory Girl
     end
 
     factory :high_points_competition do
-      scoring_class "Points High to Low"
+      scoring_class { "Points High to Low" }
       age_group_type # factory Girl
     end
 
     trait :standard_skill do
-      scoring_class "Standard Skill"
+      scoring_class { "Standard Skill" }
     end
 
     trait :combined do
-      scoring_class "Overall Champion"
+      scoring_class { "Overall Champion" }
       combined_competition # Factory Girl
     end
 
     trait :freestyle_2017 do
-      scoring_class "Artistic Freestyle IUF 2017"
+      scoring_class { "Artistic Freestyle IUF 2017" }
     end
 
     trait :locked do
-      locked_at Time.current
+      locked_at { Time.current }
     end
 
     trait :published do
       locked
-      published_at Time.current
+      published_at { Time.current }
     end
   end
 end

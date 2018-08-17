@@ -19,10 +19,11 @@
 require 'spec_helper'
 
 describe ResultsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
+
   let(:registrant) { FactoryBot.create(:competitor) }
   let(:competition) { FactoryBot.create(:competition) }
 
@@ -42,6 +43,7 @@ describe ResultsController do
 
   describe "GET scores" do
     let(:competition) { FactoryBot.create(:competition, :combined) }
+
     it "renders" do
       get :scores, params: { id: competition.id }
       expect(response).to be_success

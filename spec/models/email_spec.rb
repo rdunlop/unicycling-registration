@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe Email do
-  before(:each) do
+  before do
     @email = FactoryBot.build(:email)
   end
+
   it "is initially valid" do
     expect(@email.valid?).to eq(true)
   end

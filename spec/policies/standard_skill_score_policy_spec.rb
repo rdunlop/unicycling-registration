@@ -1,10 +1,10 @@
 require "spec_helper"
 
 describe StandardSkillScorePolicy do
+  subject { described_class }
+
   let(:competitor) { FactoryBot.create(:event_competitor) }
   let(:skill_score) { FactoryBot.create(:standard_skill_score, competitor: competitor) }
-
-  subject { described_class }
 
   permissions :new?, :edit?, :create?, :update?, :destroy? do
     let(:user) { FactoryBot.create(:user) }

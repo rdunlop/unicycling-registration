@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe ManualPayment do
-  before(:each) do
-    @pay = ManualPayment.new
+  before do
+    @pay = described_class.new
   end
 
   describe "when a registrant has been added" do
@@ -10,7 +10,7 @@ describe ManualPayment do
     let(:expense_item) { FactoryBot.create :expense_item, cost: 10.00, tax: 2.00 }
     let!(:registrant_expense_item) { FactoryBot.create :registrant_expense_item, line_item: expense_item, registrant: registrant }
 
-    before :each do
+    before do
       @pay.add_registrant(registrant.reload)
       @pay.unpaid_details.first.pay_for = true
     end

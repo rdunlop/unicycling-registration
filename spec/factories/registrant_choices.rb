@@ -22,6 +22,6 @@ FactoryBot.define do
   factory :registrant_choice do
     registrant # FactoryBot
     event_choice # FactoryBot
-    value "0"
+    value { "0" }
   end
 end

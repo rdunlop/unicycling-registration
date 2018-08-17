@@ -24,14 +24,14 @@ FactoryBot.define do
   factory :external_result do
     association :competitor, factory: :event_competitor
     association :entered_by, factory: :user
-    entered_at Time.current
-    details "MyString"
-    points 1
-    status "active"
-    preliminary false
+    entered_at { Time.current }
+    details { "MyString" }
+    points { 1 }
+    status { "active" }
+    preliminary { false }
 
     trait :preliminary do
-      preliminary true
+      preliminary { true }
     end
   end
 end

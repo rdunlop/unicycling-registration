@@ -30,7 +30,7 @@ describe StandardSkillScoreEntry do
   let(:devaluation_percent) { 50 }
   let(:ssse) { FactoryBot.create(:standard_skill_score_entry, standard_skill_routine_entry: ssre, standard_skill_score: sss, difficulty_devaluation_percent: devaluation_percent) }
 
-  it "should be able to have 2 different skills scored by the same judge" do
+  it "is able to have 2 different skills scored by the same judge" do
     score_entry = FactoryBot.create(:standard_skill_score_entry)
 
     score_entry_2 = FactoryBot.build(:standard_skill_score_entry,
@@ -42,6 +42,7 @@ describe StandardSkillScoreEntry do
   describe "#difficulty_devaluation_score" do
     describe "with 0 devaluation" do
       let(:devaluation_percent) { 0 }
+
       it "returns the full point value when no devaluation" do
         expect(ssse.difficulty_devaluation_score).to eq(0)
       end
@@ -49,6 +50,7 @@ describe StandardSkillScoreEntry do
 
     describe "with 50 devaluation" do
       let(:devaluation_percent) { 50 }
+
       it "returns 1/2 point value when no devaluation" do
         expect(ssse.difficulty_devaluation_score).to eq(skill_points / 2.0)
       end
@@ -56,6 +58,7 @@ describe StandardSkillScoreEntry do
 
     describe "with 100 devaluation" do
       let(:devaluation_percent) { 100 }
+
       it "returns 0 point value when no devaluation" do
         expect(ssse.difficulty_devaluation_score).to eq(skill_points)
       end

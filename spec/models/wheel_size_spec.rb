@@ -13,9 +13,10 @@ require 'spec_helper'
 
 describe WheelSize do
   context "with 1 wheel size" do
-    before(:each) do
+    before do
       @ws = FactoryBot.create(:wheel_size)
     end
+
     it "is valid" do
       expect(@ws.valid?).to eq(true)
     end
@@ -33,7 +34,7 @@ describe WheelSize do
     it "returns the wheel sizes in position order" do
       @ws3 = FactoryBot.create(:wheel_size, position: 3)
       @ws2 = FactoryBot.create(:wheel_size, position: 2)
-      expect(WheelSize.all).to eq([@ws3, @ws2, @ws])
+      expect(described_class.all).to eq([@ws3, @ws2, @ws])
     end
 
     it "returns the description as the to_s" do
@@ -48,7 +49,7 @@ describe WheelSize do
     let!(:ws_24_inch) { FactoryBot.create(:wheel_size_24) }
 
     it "doesn't list 16 inch wheel size" do
-      expect(WheelSize.available_sizes.count).to eq(2)
+      expect(described_class.available_sizes.count).to eq(2)
     end
   end
 end

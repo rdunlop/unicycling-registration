@@ -28,7 +28,7 @@ describe StandardSkillScore do
                       difficulty_devaluation_percent: difficulty_percent)
   end
 
-  it "should not be able to have the same score/judge created twice" do
+  it "is not able to have the same score/judge created twice" do
     score2 = FactoryBot.build(:standard_skill_score, judge: score.judge,
                                                      competitor: score.competitor)
 
@@ -38,6 +38,7 @@ describe StandardSkillScore do
   describe "#total_difficulty_devaluation" do
     describe "with 0 devaluations" do
       let(:difficulty_percent) { 0 }
+
       it "returns 0 total devaluation" do
         expect(score.total_difficulty_devaluation).to eq(0)
       end
@@ -45,6 +46,7 @@ describe StandardSkillScore do
 
     describe "with 50% devaluation" do
       let(:difficulty_percent) { 50 }
+
       it "returns the total devaluation" do
         expect(score.total_difficulty_devaluation).to eq(2.6)
       end
@@ -52,6 +54,7 @@ describe StandardSkillScore do
 
     describe "with 100% devaluation" do
       let(:difficulty_percent) { 100 }
+
       it "returns the total devaluation" do
         expect(score.total_difficulty_devaluation).to eq(5.2)
       end

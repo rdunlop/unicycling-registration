@@ -51,7 +51,7 @@ describe FeedbacksController do
     end
 
     describe "when the user is signed in, and has registrants" do
-      before(:each) do
+      before do
         sign_in user
         @registrant = FactoryBot.create(:competitor, user: user)
       end

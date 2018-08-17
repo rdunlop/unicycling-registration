@@ -2,20 +2,20 @@ require 'spec_helper'
 
 describe PlaceCalculator do
   describe "when calculating the placing of a few entries" do
-    before(:each) do
-      @calc = PlaceCalculator.new
+    before do
+      @calc = described_class.new
     end
 
-    it "should return DQ as place 0" do
+    it "returns DQ as place 0" do
       expect(@calc.place_next(1, dq: true)).to eq("DQ")
     end
 
-    it "should place ascending times as ascending places" do
+    it "places ascending times as ascending places" do
       expect(@calc.place_next(1)).to eq(1)
       expect(@calc.place_next(10)).to eq(2)
       expect(@calc.place_next(100)).to eq(3)
     end
-    it "should place multiple times as ties" do
+    it "places multiple times as ties" do
       expect(@calc.place_next(1)).to eq(1)
       expect(@calc.place_next(1)).to eq(1)
       expect(@calc.place_next(10)).to eq(3)

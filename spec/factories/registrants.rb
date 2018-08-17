@@ -39,24 +39,24 @@
 FactoryBot.define do
   factory :registrant do
     sequence(:first_name) { |n| "FirstMyString #{n}" }
-    middle_initial "MMyString"
-    last_name "LastMyString"
+    middle_initial { "MMyString" }
+    last_name { "LastMyString" }
     birthday { 18.years.ago }
-    gender "Male"
+    gender { "Male" }
     user # FactoryBot
-    registrant_type 'competitor'
-    ineligible false
+    registrant_type { 'competitor' }
+    ineligible { false }
     contact_detail # FactoryBot
 
     # New Way
     trait :competitor do
-      registrant_type 'competitor'
+      registrant_type { 'competitor' }
     end
     trait :noncompetitor do
-      registrant_type 'noncompetitor'
+      registrant_type { 'noncompetitor' }
     end
     trait :spectator do
-      registrant_type 'spectator'
+      registrant_type { 'spectator' }
     end
 
     trait :minor do
@@ -68,13 +68,13 @@ FactoryBot.define do
 
     # old way
     factory :competitor do
-      registrant_type 'competitor'
+      registrant_type { 'competitor' }
     end
     factory :noncompetitor do
-      registrant_type 'noncompetitor'
+      registrant_type { 'noncompetitor' }
     end
     factory :spectator do
-      registrant_type 'spectator'
+      registrant_type { 'spectator' }
     end
     # end Old-way
 
@@ -84,6 +84,7 @@ FactoryBot.define do
         @ws24 = FactoryBot.create(:wheel_size_24)
       end
     end
+
     after :stub do |reg|
       reg.bib_number ||= 1234
       ws = WheelSize.find_by(description: "24\" Wheel")

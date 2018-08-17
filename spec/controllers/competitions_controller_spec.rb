@@ -41,12 +41,13 @@
 require 'spec_helper'
 
 describe CompetitionsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
     @event = FactoryBot.create(:event)
     @event_category = @event.event_categories.first
   end
+
   let(:competition) { FactoryBot.create(:competition, event: @event) }
 
   describe "#show" do
@@ -123,6 +124,7 @@ describe CompetitionsController do
       expect(competition.locked?).to eq(true)
     end
   end
+
   describe "DELETE lock" do
     it "unlocks the competition" do
       competition = FactoryBot.create(:competition, :locked, event: @event)
@@ -160,6 +162,7 @@ describe CompetitionsController do
       expect(competition.published?).to eq(true)
     end
   end
+
   describe "DELETE publish" do
     it "un-publishes the competition" do
       competition = FactoryBot.create(:competition, :locked, :published, event: @event)
@@ -172,6 +175,7 @@ describe CompetitionsController do
   describe "POST create_last_minute_competitor" do
     let(:new_registrant) { FactoryBot.create(:competitor) }
     let!(:config) { FactoryBot.create(:event_configuration, :with_usa) }
+
     it "creates a competitor for the competition" do
       expect do
         post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }

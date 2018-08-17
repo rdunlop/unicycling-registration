@@ -26,7 +26,7 @@ describe ExpenseGroup do
 
   it "must have a name" do
     group.group_name = nil
-    expect(group).to_not be_valid
+    expect(group).not_to be_valid
   end
 
   it "must have a visible setting of true or false" do
@@ -48,18 +48,18 @@ describe ExpenseGroup do
     expect(group).to be_valid
   end
 
-  it "should have a nice to_s" do
+  it "has a nice to_s" do
     expect(group.to_s).to eq(group.group_name)
   end
 
-  it "should only list the visible groups" do
+  it "onlies list the visible groups" do
     @group2 = FactoryBot.create(:expense_group, visible: true)
     group # reference to build it
-    ExpenseGroup.visible == [group]
+    described_class.visible == [group]
   end
 
   it "defaults to not required" do
-    group = ExpenseGroup.new
+    group = described_class.new
     expect(group.competitor_required).to eq(false)
     expect(group.noncompetitor_required).to eq(false)
   end
@@ -74,18 +74,19 @@ describe ExpenseGroup do
   end
 
   describe "with expense_items" do
-    before(:each) do
+    before do
       @item2 = FactoryBot.create(:expense_item, expense_group: group)
       @item1 = FactoryBot.create(:expense_item, expense_group: group)
       @item2.update_attribute(:position, 2)
     end
+
     it "orders the items by position" do
       expect(group.expense_items).to eq([@item1, @item2])
     end
   end
 
   describe "with multiple expense groups" do
-    before(:each) do
+    before do
       group.position = 1
       group.visible = false
       group.save
@@ -96,11 +97,11 @@ describe ExpenseGroup do
     end
 
     it "lists them in order" do
-      expect(ExpenseGroup.all).to eq([group, @group2, @group3, @group4])
+      expect(described_class.all).to eq([group, @group2, @group3, @group4])
     end
 
     it "lists the 'visible' ones in order" do
-      expect(ExpenseGroup.visible).to eq([@group2, @group3, @group4])
+      expect(described_class.visible).to eq([@group2, @group3, @group4])
     end
   end
 end

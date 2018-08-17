@@ -26,12 +26,12 @@ describe MultiLapResultCalculator do
 
   describe "#competitor_has_result?" do
     it "doesn't have results by default" do
-      expect(described_class.new.competitor_has_result?(competitor)).to be_falsey
+      expect(described_class.new).not_to be_competitor_has_result(competitor)
     end
 
     it "does have results with finish_times" do
       FactoryBot.create(:time_result, competitor: competitor)
-      expect(described_class.new.competitor_has_result?(competitor.reload)).to be_truthy
+      expect(described_class.new).to be_competitor_has_result(competitor.reload)
     end
   end
 

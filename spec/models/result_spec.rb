@@ -19,9 +19,10 @@
 require 'spec_helper'
 
 describe Result do
-  before(:each) do
+  before do
     @result = FactoryBot.create(:result)
   end
+
   it "is valid from FactoryBot" do
     expect(@result).to be_valid
   end
@@ -39,11 +40,12 @@ describe Result do
 end
 
 describe Result do
-  before(:each) do
+  before do
     @al = FactoryBot.build_stubbed(:result, place: 2)
   end
+
   describe "with a solo competitor" do
-    before(:each) do
+    before do
       @comp = FactoryBot.build_stubbed(:event_competitor)
       allow(@comp).to receive_message_chain(:members, :count).and_return(1)
       allow(@comp).to receive_message_chain(:members, :size).and_return(1)
@@ -89,7 +91,7 @@ describe Result do
     end
 
     describe "when the competitor has expert results" do
-      before(:each) do
+      before do
         @comp.competition.scoring_class = "Shortest Time"
         @comp.competition.age_group_type = FactoryBot.create(:age_group_type)
       end

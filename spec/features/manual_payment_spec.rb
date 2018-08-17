@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Creating manual payments' do
   let(:user) { FactoryBot.create(:payment_admin) }
+
   include_context 'user is logged in'
   include_context 'basic event configuration'
 
@@ -20,7 +21,7 @@ describe 'Creating manual payments' do
       fill_in "payment_note", with: "Volunteer"
       click_button "Mark as Paid (admin function)"
       expect(competitor.reload.amount_owing).to eq(0.to_money)
-      expect(competitor.amount_paid).to_not eq(0.to_money)
+      expect(competitor.amount_paid).not_to eq(0.to_money)
     end
   end
 end

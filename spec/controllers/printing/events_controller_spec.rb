@@ -7,6 +7,7 @@ describe Printing::EventsController do
     user.add_role :director, event
     sign_in user
   end
+
   let(:event) { FactoryBot.create(:event) }
 
   describe "GET results" do

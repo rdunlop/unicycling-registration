@@ -41,24 +41,24 @@
 
 FactoryBot.define do
   factory :contact_detail do
-    address "1234 fake street"
-    city "madison"
-    state_code "IL"
-    country_residence "US"
-    country_representing "US"
-    zip "12345"
-    phone "PhoMyString"
-    mobile "IMobMyString"
+    address { "1234 fake street" }
+    city { "madison" }
+    state_code { "IL" }
+    country_residence { "US" }
+    country_representing { "US" }
+    zip { "12345" }
+    phone { "PhoMyString" }
+    mobile { "IMobMyString" }
     sequence(:email) { |n| "EmailMyString+#{n}@example.com" }
-    club "TCUC"
-    club_contact "Connie Cotter"
-    organization_member_number "00001"
-    emergency_name "Jane Doe"
-    emergency_relationship "SO"
-    emergency_attending false
-    emergency_primary_phone "306-555-1212"
-    emergency_other_phone nil
-    responsible_adult_name nil
-    responsible_adult_phone nil
+    club { "TCUC" }
+    club_contact { "Connie Cotter" }
+    organization_member_number { "00001" }
+    emergency_name { "Jane Doe" }
+    emergency_relationship { "SO" }
+    emergency_attending { false }
+    emergency_primary_phone { "306-555-1212" }
+    emergency_other_phone { nil }
+    responsible_adult_name { nil }
+    responsible_adult_phone { nil }
   end
 end

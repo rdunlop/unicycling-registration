@@ -18,11 +18,11 @@
 require 'spec_helper'
 
 describe Refund do
-  before(:each) do
+  before do
     @refund = FactoryBot.create(:refund)
   end
 
-  it "should have 100% refund" do
+  it "has 100% refund" do
     expect(@refund.percentage).to eq(100)
   end
 

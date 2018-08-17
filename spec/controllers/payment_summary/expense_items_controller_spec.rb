@@ -29,6 +29,7 @@ describe PaymentSummary::ExpenseItemsController do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
+
   let(:expense_item) { FactoryBot.create(:expense_item) }
 
   describe "GET details" do

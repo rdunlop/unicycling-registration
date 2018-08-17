@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe HeatReviewController do
-  before(:each) do
+  before do
     @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
     director = FactoryBot.create(:user)
     director.add_role(:director, @competition.event)

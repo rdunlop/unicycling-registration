@@ -5,7 +5,7 @@ describe Admin::FeedbackController do
   let!(:feedback) { FactoryBot.create(:feedback) }
   let!(:resolved_feedback) { FactoryBot.create(:feedback, :resolved) }
 
-  before(:each) do
+  before do
     sign_in user
   end
 
@@ -51,6 +51,7 @@ describe Admin::FeedbackController do
 
   context "as a super-admin" do
     let(:user) { FactoryBot.create(:super_admin_user) }
+
     describe "#new" do
       it "displays" do
         get :new

@@ -14,7 +14,7 @@
 require 'spec_helper'
 
 describe RegistrantGroupTypesController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end

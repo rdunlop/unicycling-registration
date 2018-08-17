@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ConventionSetup::EventCategoriesController do
-  before(:each) do
+  before do
     sign_in FactoryBot.create(:super_admin_user)
     @event = FactoryBot.create(:event)
   end
@@ -16,7 +16,7 @@ describe ConventionSetup::EventCategoriesController do
   end
 
   describe "as a normal user" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
       sign_in @user
     end

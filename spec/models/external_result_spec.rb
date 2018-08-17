@@ -21,9 +21,10 @@
 require 'spec_helper'
 
 describe ExternalResult do
-  before(:each) do
+  before do
     @er = FactoryBot.create(:external_result)
   end
+
   it "has a valid factory" do
     expect(@er.valid?).to eq(true)
   end

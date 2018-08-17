@@ -91,6 +91,7 @@ describe Competitor do
         Rails.cache.clear
         allow(@comp).to receive(:lower_is_better).and_return(true)
       end
+
       it "has the correct best_time_in_thousands" do
         expect(@comp.best_time_in_thousands).to eq(45000)
       end
@@ -101,6 +102,7 @@ describe Competitor do
         Rails.cache.clear
         allow(@comp).to receive(:lower_is_better).and_return(false)
       end
+
       it "has the correct best_time_in_thousands" do
         expect(@comp.best_time_in_thousands).to eq(90000)
       end
@@ -126,6 +128,7 @@ describe Competitor do
     before do
       allow(@comp).to receive(:members).and_return([registrant])
     end
+
     let(:subject) { @comp }
 
     include_context 'can display correct state, country, club', state: "Illinois", country: "United States", club: "My Club"
@@ -139,29 +142,29 @@ describe Competitor do
     @comp = FactoryBot.create(:event_competitor, competition: competition)
   end
 
-  it "should join a registrant and a event" do
+  it "joins a registrant and a event" do
     reg = FactoryBot.create(:registrant)
 
     competition = FactoryBot.create(:competition)
 
-    comp = Competitor.new
+    comp = described_class.new
     comp.registrants << reg
     comp.competition = competition
     comp.position = 1
     expect(comp.save).to eq(true)
   end
-  it "should modify the other competitor's position" do
+  it "modifies the other competitor's position" do
     competition = FactoryBot.create(:competition)
     reg1 = FactoryBot.create(:registrant)
     reg2 = FactoryBot.create(:registrant)
 
-    comp = Competitor.new
+    comp = described_class.new
     comp.registrants << reg1
     comp.competition = competition
     comp.position = 1
     expect(comp.save).to eq(true)
 
-    comp = Competitor.new
+    comp = described_class.new
     comp.registrants << reg2
     comp.competition = competition
     comp.position = 1
@@ -172,13 +175,13 @@ describe Competitor do
     expect(comps[0].position).to eq(1)
     expect(comps[1].position).to eq(2)
   end
-  it "should have name/id from the registrant" do
+  it "has name/id from the registrant" do
     reg = @comp.registrants.first
 
     expect(@comp.name).to eq(reg.name)
     expect(@comp.bib_number).to eq(reg.external_id.to_s)
   end
-  it "should be elgiible" do
+  it "is elgiible" do
     expect(@comp.ineligible?).to eq(false)
   end
 
@@ -187,7 +190,7 @@ describe Competitor do
       EventConfiguration.singleton.update(start_date: Date.current)
     end
 
-    it "should have updated age when a members age is updated" do
+    it "has updated age when a members age is updated" do
       registrant = @comp.members.first.registrant
       expect(@comp.age).to eq(registrant.age)
 
@@ -203,14 +206,14 @@ describe Competitor do
     end
   end
 
-  it "should not set the external name if it is a blank-string" do
+  it "does not set the external name if it is a blank-string" do
     @comp.custom_name = ""
     reg = @comp.registrants.first
 
     expect(@comp.bib_number).to eq(reg.external_id.to_s)
     expect(@comp.name).to eq(reg.name)
   end
-  it "should allow setting the custom_name to nil" do
+  it "allows setting the custom_name to nil" do
     @comp.custom_name = nil
     expect(@comp.valid?).to eq(true)
   end
@@ -231,26 +234,26 @@ describe Competitor do
     expect(c2.valid?).to eq(true)
     expect(c2.save).to eq(true)
 
-    comp_again = Competitor.find(@comp.id)
+    comp_again = described_class.find(@comp.id)
     expect(comp_again.position).not_to eq(c2.position)
   end
   describe "when checking the export_id field" do
-    it "should return the registrant when only one" do
+    it "returns the registrant when only one" do
       expect(@comp.export_id).to eq(@comp.registrants.first.external_id)
     end
-    it "should return the first registrant when two registrants" do
+    it "returns the first registrant when two registrants" do
       @comp.registrants << FactoryBot.create(:registrant)
       @comp.save!
       expect(@comp.registrants.map(&:external_id)).to include(@comp.export_id)
     end
   end
 
-  it "should delete the competitor if the last member is deleted" do
+  it "deletes the competitor if the last member is deleted" do
     member = @comp.reload.members.first
 
     expect do
       member.destroy
-    end.to change(Competitor, :count).by(-1)
+    end.to change(described_class, :count).by(-1)
   end
 
   describe "when it has multiple members" do
@@ -266,19 +269,20 @@ describe Competitor do
         @reg2 = member2.registrant
       end
     end
-    it "should display the external id's for all members" do
+
+    it "displays the external id's for all members" do
       expect(@comp.bib_number).to eq(@reg1.external_id.to_s + ", " + @reg2.external_id.to_s)
     end
-    it "should display the ages for all members (when they are the same)" do
+    it "displays the ages for all members (when they are the same)" do
       expect(@comp.age).to eq(@reg1.age)
     end
 
-    it "should store the mimimum bib_number" do
+    it "stores the mimimum bib_number" do
       lowest = [@reg1.bib_number, @reg2.bib_number].min
       expect(@comp.lowest_member_bib_number).to be(lowest)
     end
 
-    it "should display the maximum ages for all members (when they are different)" do
+    it "displays the maximum ages for all members (when they are different)" do
       travel 2.seconds do
         @reg3 = FactoryBot.create(:registrant, birthday: 20.years.ago)
         @comp2 = FactoryBot.create(:event_competitor)
@@ -288,7 +292,7 @@ describe Competitor do
 
       expect(@comp2.age).to eq(@reg3.age)
     end
-    it "should display '(mixed)', if there are multiple members (even if they are the same gender)" do
+    it "displays '(mixed)', if there are multiple members (even if they are the same gender)" do
       # this is so that the overall placing calculation works properly with mixed-gender groups
       expect(@comp.gender).to eq("(mixed)")
     end
@@ -300,11 +304,11 @@ describe Competitor do
       expect(@comp.majority_country(["USA", "Canada", "Canada"])).to eq("Canada")
       expect(@comp.majority_country([nil, nil])).to eq(nil)
     end
-    it "should display the source country" do
+    it "displays the source country" do
       expect(@comp.country).to eq(@reg1.country)
     end
 
-    it "should display (mixed) if both genders exist" do
+    it "displays (mixed) if both genders exist" do
       travel 2.seconds do
         @reg3 = FactoryBot.create(:registrant, gender: "Female")
         FactoryBot.create(:member, competitor: @comp, registrant: @reg3)
@@ -314,14 +318,14 @@ describe Competitor do
       expect(@comp.gender).to eq("(mixed)")
     end
 
-    it "should respond to member_has_bib_number?" do
+    it "responds to member_has_bib_number?" do
       expect(@comp.member_has_bib_number?(@reg1.bib_number)).to eq(true)
       expect(@comp.member_has_bib_number?(@reg2.bib_number)).to eq(true)
       expect(@comp.member_has_bib_number?(-1)).to eq(false)
     end
 
     context "when a member is deleted" do
-      it "should no longer show the deleted competitor's name", :caching do
+      it "noes longer show the deleted competitor's name", :caching do
         member1 = @comp.members.first
         member2 = @comp.members.second
         expect(@comp.registrants_names).to include(member1.to_s)
@@ -355,53 +359,59 @@ describe Competitor do
       @reg.reload
     end
 
-    it "should be able to access the reg via event" do
+    it "is able to access the reg via event" do
       expect(@competition.registrants).to eq([@reg])
     end
-    it "should be able to access the event via reg" do
+    it "is able to access the event via reg" do
       expect(@reg.competitions).to eq([@competition])
     end
-    it "should be able to access the competitors via competition" do
+    it "is able to access the competitors via competition" do
       expect(@competition.competitors).to eq([@cr])
     end
-    it "should be able to access the competitors via registrant" do
+    it "is able to access the competitors via registrant" do
       expect(@reg.competitors).to eq([@cr])
     end
-    it "should be able to access the scores via competitor" do
+    it "is able to access the scores via competitor" do
       expect(@cr.scores).to eq([@score])
     end
   end
+
   describe "with a standard skill score" do
     before do
       @st_score = FactoryBot.create(:standard_skill_score)
     end
 
-    it "should be able to get the scores from the competitor" do
+    it "is able to get the scores from the competitor" do
       expect(@st_score.competitor.standard_skill_scores).to eq([@st_score])
     end
   end
+
   describe "with a score" do
     before do
       @score = FactoryBot.create(:score)
     end
-    it "should delete the score when the associated competitor is deleted" do
+
+    it "deletes the score when the associated competitor is deleted" do
       @comp = @score.competitor
       expect(Score.count).to eq(1)
       @comp.destroy
       expect(Score.count).to eq(0)
     end
   end
+
   describe "with a boundary_score" do
     before do
       @score = FactoryBot.create(:boundary_score)
     end
-    it "should delete the boundary_score when the associated competitor is deleted" do
+
+    it "deletes the boundary_score when the associated competitor is deleted" do
       @comp = @score.competitor
       expect(BoundaryScore.count).to eq(1)
       @comp.destroy
       expect(BoundaryScore.count).to eq(0)
     end
   end
+
   describe "with a distance attempt" do
     let(:competition) { FactoryBot.create(:distance_competition) }
 
@@ -410,13 +420,14 @@ describe Competitor do
         @da = DistanceAttempt.new
       end
     end
-    it "should be accessible from the competitor" do
+
+    it "is accessible from the competitor" do
       da = FactoryBot.create(:distance_attempt, competitor: @comp)
 
       expect(@comp.distance_attempts).to eq([da])
     end
 
-    it "should delete related distance_attempts if the competitor is deleted" do
+    it "deletes related distance_attempts if the competitor is deleted" do
       comp = FactoryBot.create(:event_competitor, competition: competition)
       FactoryBot.create(:distance_attempt, competitor: comp)
 
@@ -427,7 +438,7 @@ describe Competitor do
       expect(DistanceAttempt.count).to eq(0)
     end
 
-    it "should indicate no_more_jumps if two attempts at the same distance are found" do
+    it "indicates no_more_jumps if two attempts at the same distance are found" do
       expect(@comp.no_more_jumps?).to eq(false)
       FactoryBot.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.no_more_jumps?).to eq(false)
@@ -439,7 +450,7 @@ describe Competitor do
       expect(@comp.reload.no_more_jumps?).to eq(true)
     end
 
-    it "should NOT indicate no_more_jumps if two consecutive attempts at different distances are found" do
+    it "does not indicate no_more_jumps if two consecutive attempts at different distances are found" do
       expect(@comp.no_more_jumps?).to eq(false)
       da1 = FactoryBot.create(:distance_attempt, competitor: @comp, fault: true)
       expect(@comp.reload.no_more_jumps?).to eq(false)
@@ -450,7 +461,7 @@ describe Competitor do
       expect(@comp.reload.no_more_jumps?).to eq(false)
     end
 
-    it "should return the max attempted distance" do
+    it "returns the max attempted distance" do
       expect(@comp.max_attempted_distance).to eq(0)
       expect(@comp.max_successful_distance).to be_nil
       da1 = FactoryBot.create(:distance_attempt, competitor: @comp, fault: true)
@@ -458,21 +469,21 @@ describe Competitor do
       expect(@comp.reload.max_successful_distance).to be_nil
     end
 
-    it "should return the attempts is descending distance order" do
+    it "returns the attempts is descending distance order" do
       da1 = FactoryBot.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
       da2 = FactoryBot.create(:distance_attempt, distance: 2, competitor: @comp, fault: false)
       da3 = FactoryBot.create(:distance_attempt, distance: 3, competitor: @comp, fault: false)
 
       expect(@comp.reload.distance_attempts).to eq([da3, da2, da1])
     end
-    it "should return the attempts in descending attempt order (if the same distance)" do
+    it "returns the attempts in descending attempt order (if the same distance)" do
       da1 = FactoryBot.create(:distance_attempt, distance: 1, competitor: @comp, fault: true)
       da2 = FactoryBot.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
 
       expect(@comp.reload.distance_attempts).to eq([da2, da1])
     end
 
-    it "should describe the status clearly" do
+    it "describes the status clearly" do
       expect(@comp.distance_attempt_status).to eq("Not Attempted")
     end
 
@@ -492,16 +503,16 @@ describe Competitor do
         travel_back
       end
 
-      it "should not be allowed to attempt a smaller distance" do
+      it "is not allowed to attempt a smaller distance" do
         da = FactoryBot.build(:distance_attempt, competitor: @comp, distance: 5)
 
         expect(da.valid?).to eq(false)
       end
-      it "should return the max successful distance" do
+      it "returns the max successful distance" do
         expect(@comp.max_successful_distance).to eq(10)
       end
 
-      it "should not allow another attempt when in double-fault" do
+      it "does not allow another attempt when in double-fault" do
         FactoryBot.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         da = FactoryBot.build(:distance_attempt, competitor: @comp, distance: 25, fault: false)
 
@@ -510,19 +521,20 @@ describe Competitor do
       end
 
       describe "when there are 2 faults" do
-        before(:each) do
+        before do
           @da2 = FactoryBot.create(:distance_attempt, competitor: @comp, distance: 15, fault: true)
         end
-        it "should allow the 2nd attempt to also be a fault" do
+
+        it "allows the 2nd attempt to also be a fault" do
           expect(@comp.reload.no_more_jumps?).to eq(true)
           expect(@da2.valid?).to eq(true)
         end
-        it "should describe the status" do
+        it "describes the status" do
           expect(@comp.reload.distance_attempt_status).to eq("Finished. Final Score 10cm")
         end
       end
 
-      it "should allow multiple faults, interspersed within the attempts" do
+      it "allows multiple faults, interspersed within the attempts" do
         FactoryBot.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
         # Created 2 seconds in the future:
         FactoryBot.create(:distance_attempt, competitor: @comp, distance: 25, fault: true, created_at: 2.seconds.from_now)
@@ -532,15 +544,16 @@ describe Competitor do
         expect(da.valid?).to eq(true)
       end
 
-      it "should describe its status clearly" do
+      it "describes its status clearly" do
         expect(@comp.reload.distance_attempt_status).to eq("Fault. Next Distance 15cm+")
       end
 
       describe "the last attempt was a success" do
-        before(:each) do
+        before do
           FactoryBot.create(:distance_attempt, competitor: @comp, distance: 20, fault: false)
         end
-        it "should have a nice status" do
+
+        it "has a nice status" do
           expect(@comp.reload.distance_attempt_status).to eq("Success. Next Distance 21cm +")
         end
       end
@@ -561,7 +574,7 @@ describe Competitor do
 
   describe "when it has multiple time results" do
     describe "when there are DQs and live results" do
-      before :each do
+      before do
         @comp.competition.scoring_class = "Shortest Time"
         @end1 = FactoryBot.create(:time_result, competitor: @comp, minutes: 2, seconds: 30)
         @end2 = FactoryBot.create(:time_result, competitor: @comp, minutes: 0, seconds: 45, status: "DQ")
@@ -580,8 +593,8 @@ describe Competitor do
       @reg.save!
     end
 
-    it "should be ineligible itself" do
-      expect(@comp.ineligible?).to be_truthy
+    it "is ineligible itself" do
+      expect(@comp).to be_ineligible
     end
   end
 end

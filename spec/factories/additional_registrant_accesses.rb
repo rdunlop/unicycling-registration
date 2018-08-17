@@ -24,7 +24,7 @@ FactoryBot.define do
   factory :additional_registrant_access do
     user # FactoryBot
     registrant # FactoryBot
-    declined false
-    accepted_readonly false
+    declined { false }
+    accepted_readonly { false }
   end
 end

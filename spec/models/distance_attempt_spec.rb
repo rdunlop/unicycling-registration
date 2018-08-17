@@ -19,15 +19,17 @@
 require 'spec_helper'
 
 describe DistanceAttempt do
-  before(:each) do
+  before do
     @comp = FactoryBot.create(:competitor)
     @judge = FactoryBot.create(:judge)
   end
+
   describe "with a new distance attempt" do
-    before(:each) do
-      @da = DistanceAttempt.new
+    before do
+      @da = described_class.new
     end
-    it "should have an associated competitor" do
+
+    it "has an associated competitor" do
       @da.distance = 1.0
       @da.judge_id = @judge.id
       expect(@da.valid?).to eq(false)
@@ -35,7 +37,7 @@ describe DistanceAttempt do
       @da.competitor_id = @comp.id
       expect(@da.valid?).to eq(true)
     end
-    it "should have a distance" do
+    it "has a distance" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       expect(@da.valid?).to eq(false)
@@ -43,7 +45,7 @@ describe DistanceAttempt do
       @da.distance = 1.0
       expect(@da.valid?).to eq(true)
     end
-    it "should have a positive distance" do
+    it "has a positive distance" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       expect(@da.valid?).to eq(false)
@@ -51,13 +53,13 @@ describe DistanceAttempt do
       @da.distance = -1.0
       expect(@da.valid?).to eq(false)
     end
-    it "should have a distance less than 1000" do
+    it "has a distance less than 1000" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       @da.distance = 1000
       expect(@da.valid?).to eq(false)
     end
-    it "should have a judge" do
+    it "has a judge" do
       @da.competitor_id = @comp.id
       @da.distance = 100
       expect(@da.valid?).to eq(false)

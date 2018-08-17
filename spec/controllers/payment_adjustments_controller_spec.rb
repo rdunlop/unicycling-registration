@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe PaymentAdjustmentsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
+
   let!(:payment) { FactoryBot.create(:payment, completed: true, transaction_id: "My Transaction ID") }
   let!(:other_payment) { FactoryBot.create(:payment, transaction_id: "Other Transaction ID") }
   let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
@@ -74,7 +75,7 @@ describe PaymentAdjustmentsController do
                                          registrant_id: registrant.id,
                                          old_item_id: other_expense_item.id,
                                          new_item_id: new_expense_item.id }
-      end.to_not change(Refund, :count)
+      end.not_to change(Refund, :count)
     end
   end
 end

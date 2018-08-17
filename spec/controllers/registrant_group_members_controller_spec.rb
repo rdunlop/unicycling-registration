@@ -20,7 +20,7 @@
 require 'spec_helper'
 
 describe RegistrantGroupMembersController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
   end
@@ -45,6 +45,7 @@ describe RegistrantGroupMembersController do
 
   describe "DELETE destroy" do
     let!(:registrant_group_member) { FactoryBot.create(:registrant_group_member, registrant_group: registrant_group) }
+
     it "destroys the requested registrant_group_member" do
       expect do
         delete :destroy, params: { id: registrant_group_member.to_param }

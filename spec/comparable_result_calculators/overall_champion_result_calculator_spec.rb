@@ -20,7 +20,7 @@ describe OverallChampionResultCalculator do
   let(:combined_competition_result) { described_class.new(combined_competition).results("Male") }
   let(:combined_competition_entry) { FactoryBot.create(:combined_competition_entry, combined_competition: combined_competition, abbreviation: "TT", competition: race_100m) }
 
-  before(:each) do
+  before do
     build_competitor(place: 1, bib_number: 10, competition: combined_competition_entry.competition)
   end
 
@@ -59,7 +59,7 @@ describe OverallChampionResultCalculator do
   end
 
   describe "when there is a tie" do
-    before(:each) do
+    before do
       competition1 = FactoryBot.create(:competition, :published)
       competition2 = FactoryBot.create(:competition, :published)
       competition3 = FactoryBot.create(:competition, :published)

@@ -140,10 +140,12 @@ describe ConventionSetup::EventsController do
         assert_select "h1", "Editing event"
       end
     end
+
     describe "with nested event_choices" do
-      before(:each) do
+      before do
         @event = FactoryBot.create(:event)
       end
+
       it "accepts nested attributes" do
         expect do
           put :update, params: { id: @event.to_param, event: {
@@ -193,9 +195,10 @@ describe ConventionSetup::EventsController do
     end
 
     describe "with nested event_categories" do
-      before(:each) do
+      before do
         @event = FactoryBot.create(:event)
       end
+
       it "can update event_categories" do
         ecat = @event.event_categories.last
 

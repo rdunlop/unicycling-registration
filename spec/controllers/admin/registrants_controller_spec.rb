@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Admin::RegistrantsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     sign_in @user
   end
 
   describe "with a super admin user" do
-    before(:each) do
+    before do
       sign_out @user
       @admin_user = FactoryBot.create(:super_admin_user)
       sign_in @admin_user
@@ -37,6 +37,7 @@ describe Admin::RegistrantsController do
       let(:registrant) { FactoryBot.create(:registrant) }
 
       before { request.env["HTTP_REFERER"] = root_path }
+
       before { post :choose_one, params: { bib_number: bib_number, registrant_id: registrant_id, summary: summary } }
 
       context "with a bib_number" do
@@ -73,9 +74,10 @@ describe Admin::RegistrantsController do
     end
 
     describe "POST undelete" do
-      before(:each) do
+      before do
         FactoryBot.create(:registration_cost)
       end
+
       it "un-deletes a deleted registration" do
         registrant = FactoryBot.create(:competitor, deleted: true)
         post :undelete, params: { id: registrant.to_param }
@@ -90,10 +92,11 @@ describe Admin::RegistrantsController do
       end
 
       describe "as a normal user" do
-        before(:each) do
+        before do
           @user = FactoryBot.create(:user)
           sign_in @user
         end
+
         it "Cannot undelete a user" do
           registrant = FactoryBot.create(:competitor, deleted: true)
           post :undelete, params: { id: registrant.to_param }

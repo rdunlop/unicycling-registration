@@ -5,6 +5,7 @@ describe PaymentSummary::ExpenseGroupsController do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
+
   let(:expense_group) { FactoryBot.create(:expense_group) }
 
   describe "GET show" do

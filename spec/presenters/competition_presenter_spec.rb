@@ -11,6 +11,7 @@ describe CompetitionPresenter do
         expect(presenter.status).to eq("No Competitors Defined")
       end
     end
+
     describe "with competitors" do
       before { FactoryBot.create(:event_competitor, competition: competition) }
 

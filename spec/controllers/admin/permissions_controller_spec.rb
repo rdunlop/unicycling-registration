@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Admin::PermissionsController do
-  before(:each) do
+  before do
     @super_user = FactoryBot.create(:super_admin_user)
     sign_in @super_user
   end
@@ -15,9 +15,10 @@ describe Admin::PermissionsController do
 
   describe "PUT set_role" do
     describe "with a normal user" do
-      before(:each) do
+      before do
         @user = FactoryBot.create(:user)
       end
+
       it "can change a user to an admin" do
         put :set_role, params: { user_id: @user.to_param, role_name: :convention_admin }
         expect(response).to redirect_to(permissions_path)
@@ -56,7 +57,7 @@ describe Admin::PermissionsController do
 
     it "changes the users password" do
       put :set_password, params: { user_id: user.id, password: new_password }
-      expect(user.reload.valid_password?(new_password)).to be_truthy
+      expect(user.reload).to be_valid_password(new_password)
       expect(ActionMailer::Base.deliveries.count).to eq(0)
     end
   end

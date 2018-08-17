@@ -16,7 +16,7 @@
 require 'spec_helper'
 
 describe RegistrantGroup do
-  before(:each) do
+  before do
     @rg = FactoryBot.create(:registrant_group)
   end
 
@@ -31,6 +31,7 @@ describe RegistrantGroup do
 
   context "with an existing registrant_group" do
     let!(:reg_group) { FactoryBot.create(:registrant_group, name: "My Name") }
+
     it "does not allow the same name again" do
       new_reg_group = FactoryBot.build(:registrant_group, registrant_group_type: reg_group.registrant_group_type, name: "My Name")
       expect(new_reg_group).to be_invalid
