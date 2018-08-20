@@ -422,13 +422,13 @@ GEM
     rails-i18n (5.1.1)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
-    rails_admin (1.2.0)
+    rails_admin (1.4.1)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
       font-awesome-rails (>= 3.0, < 5)
       haml (>= 4.0, < 6)
       jquery-rails (>= 3.0, < 5)
-      jquery-ui-rails (~> 5.0)
+      jquery-ui-rails (>= 5.0, < 7)
       kaminari (>= 0.14, < 2.0)
       nested_form (~> 0.3)
       rack-pjax (>= 0.7)
@@ -668,7 +668,7 @@ DEPENDENCIES
   pundit
   rails (= 5.1.5)
   rails-i18n
-  rails_admin (= 1.2.0)
+  rails_admin (= 1.4.1)
   rake
   recaptcha
   redis-namespace
