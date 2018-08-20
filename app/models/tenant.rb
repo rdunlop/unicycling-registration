@@ -19,6 +19,7 @@ class Tenant < ApplicationRecord
   validates :subdomain, uniqueness: true
   validate :subdomain_has_no_spaces
   before_validation :trim_subdomain
+  before_validation :lowercase_subdomain
 
   has_many :tenant_aliases, dependent: :destroy, inverse_of: :tenant
   has_one :convention_series_member, dependent: :destroy, inverse_of: :tenant
@@ -50,6 +51,10 @@ class Tenant < ApplicationRecord
 
   def trim_subdomain
     self.subdomain = subdomain.strip
+  end
+
+  def lowercase_subdomain
+    self.subdomain = subdomain.downcase
   end
 
   def subdomain_has_no_spaces
