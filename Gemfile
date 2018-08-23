@@ -140,10 +140,6 @@ end
 gem 'coffee-rails'
 gem 'sass-rails'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# Necessary so that the uglifier can process/compress the assets
-gem 'therubyracer'
-
 gem 'uglifier', '>= 1.0.3'
 
 # To use ActiveModel has_secure_password
