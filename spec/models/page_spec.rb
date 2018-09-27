@@ -19,7 +19,7 @@
 require 'spec_helper'
 
 describe Page do
-  before(:each) do
+  before do
     @page = FactoryBot.create(:page)
   end
 
@@ -48,11 +48,11 @@ describe Page do
   end
 
   it "is a parent" do
-    expect(Page.parent_or_single).to eq([@page])
+    expect(described_class.parent_or_single).to eq([@page])
   end
 
   it "is an ordinary slug" do
-    expect(Page.ordinary).to eq([@page])
+    expect(described_class.ordinary).to eq([@page])
   end
 
   context "page with a child" do
@@ -61,7 +61,7 @@ describe Page do
     end
 
     it "marks the page as a parent" do
-      expect(@page.parent?).to be_truthy
+      expect(@page).to be_parent
     end
   end
 end

@@ -24,13 +24,13 @@
 
 FactoryBot.define do
   factory :award_label do
-    bib_number 1
-    line_1 "Bob Smith"
-    line_2 "MyString"
+    bib_number { 1 }
+    line_1 { "Bob Smith" }
+    line_2 { "MyString" }
     # line_3 "Team Awesome"
-    line_4 "All"
-    line_5 "MyString"
-    place 1
+    line_4 { "All" }
+    line_5 { "MyString" }
+    place { 1 }
     user # Factory Girl
     registrant # FactoryBot
   end

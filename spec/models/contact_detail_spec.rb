@@ -40,13 +40,14 @@
 require 'spec_helper'
 
 describe ContactDetail do
-  before(:each) do
+  subject(:contact_detail) { @cd }
+
+  before do
     FactoryBot.create(:event_configuration, :with_usa)
     @reg = FactoryBot.build_stubbed(:registrant)
-    @cd = FactoryBot.build_stubbed(:contact_detail, registrant: @reg)
+    @cd = FactoryBot.build_stubbed(:contact_detail, registrant: @reg, country_representing: nil)
     allow(@reg).to receive(:age).and_return(20)
   end
-  subject(:contact_detail) { @cd }
 
   it "has a valid from FactoryBot" do
     expect(@cd.valid?).to eq(true)
@@ -97,10 +98,12 @@ describe ContactDetail do
         contact_detail.save
       end
     end
+
     context "when organization_membership_config mode is not enabled" do
       before do
         EventConfiguration.singleton.update_attribute(:organization_membership_type, nil)
       end
+
       it "does not call the update worker" do
         expect(contact_detail).not_to receive(:update_usa_membership_status)
         contact_detail.save
@@ -134,11 +137,11 @@ describe ContactDetail do
       EventConfiguration.singleton.update_attribute(:request_address, false)
     end
 
-    it { is_expected.to_not validate_presence_of(:address) }
-    it { is_expected.to_not validate_presence_of(:city) }
-    it { is_expected.to_not validate_presence_of(:state_code) }
-    it { is_expected.to_not validate_presence_of(:zip) }
-    it { is_expected.to_not validate_presence_of(:country_residence) }
+    it { is_expected.not_to validate_presence_of(:address) }
+    it { is_expected.not_to validate_presence_of(:city) }
+    it { is_expected.not_to validate_presence_of(:state_code) }
+    it { is_expected.not_to validate_presence_of(:zip) }
+    it { is_expected.not_to validate_presence_of(:country_residence) }
   end
 
   context "when address fields are required" do

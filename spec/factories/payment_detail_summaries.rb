@@ -6,7 +6,7 @@ FactoryBot.define do
 
     association(:line_item, factory: :expense_item) # FactoryBot
     payment # FactoryBot
-    count 1
-    amount 10.0
+    count { 1 }
+    amount { 10.0 }
   end
 end

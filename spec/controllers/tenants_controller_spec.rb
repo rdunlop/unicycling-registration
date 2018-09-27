@@ -19,12 +19,12 @@ require 'spec_helper'
 describe TenantsController do
   let(:user) { FactoryBot.create(:super_admin_user) }
 
-  before(:each) do
+  before do
     sign_in user
   end
 
   describe "index" do
-    before :each do
+    before do
       get :index
     end
 
@@ -42,6 +42,7 @@ describe TenantsController do
 
   describe "#create" do
     let(:code) { "this_is_the_code" }
+
     it "creates a new tenant" do
       expect do
         post :create, params: { code: code, tenant: { subdomain: "new_tenant", description: "My Tenant", admin_upgrade_code: "Hi" } }

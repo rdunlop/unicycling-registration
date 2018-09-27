@@ -101,7 +101,7 @@ class TimeResult < ApplicationRecord
   def full_time
     return "" if disqualified?
 
-    TimeResultPresenter.from_thousands(full_time_in_thousands).full_time
+    TimeResultPresenter.from_thousands(full_time_in_thousands, data_entry_format: competition.data_entry_format).full_time
   end
 
   def result

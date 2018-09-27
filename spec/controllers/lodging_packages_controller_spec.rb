@@ -18,10 +18,11 @@
 require 'spec_helper'
 
 describe LodgingPackagesController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
+
   let(:competitor) { FactoryBot.create(:competitor) }
   let!(:lodging_day) { FactoryBot.create(:lodging_day) }
 

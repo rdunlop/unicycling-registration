@@ -6,6 +6,7 @@ describe Lodging do
   context "destroying" do
     describe "with an lodging_type" do
       let!(:lodging_room_type) { FactoryBot.create(:lodging_room_type, lodging: lodging) }
+
       it "does not allow destruction" do
         expect(lodging.reload.lodging_room_types.length).to eq(1)
         expect(lodging.destroy).to be_falsey

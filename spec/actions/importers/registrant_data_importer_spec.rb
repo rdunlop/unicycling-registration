@@ -110,6 +110,7 @@ describe Importers::RegistrantDataImporter do
         end
       end
     end
+
     describe "with best time" do
       let!(:event) { FactoryBot.create(:event, name: "100m", best_time_format: "h:mm") }
 

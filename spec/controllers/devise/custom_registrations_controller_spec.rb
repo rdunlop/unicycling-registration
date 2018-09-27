@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Devise::CustomRegistrationsController do
-  before :each do
+  before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
@@ -12,7 +12,7 @@ describe Devise::CustomRegistrationsController do
   }
 
   describe "confirmation e-mail" do
-    after(:each) do
+    after do
       Rails.application.secrets.mail_skip_confirmation = nil
     end
 
@@ -53,7 +53,7 @@ describe Devise::CustomRegistrationsController do
     it "can sign in with new password" do
       sign_in user
       put :update, params: { user: valid_attributes.merge(current_password: initial_password) }
-      expect(user.reload.valid_password?("password")).to be_truthy
+      expect(user.reload).to be_valid_password("password")
     end
 
     it "does NOT clear all legacy_passwords" do

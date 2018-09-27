@@ -59,11 +59,13 @@ describe EventForm do
 
     describe "when it no longer has a cost" do
       before { @form.cost = "" }
+
       it { expect { @form.save }.to change(ExpenseItem, :count).by(-1) }
     end
 
     describe "when it has the same cost" do
       before { @form.cost = "100.50" }
+
       it "doesn't change the expense_item" do
         original_expense_item = @form.expense_item
         @form.save
@@ -73,6 +75,7 @@ describe EventForm do
 
     describe "when it has a different cost" do
       before { @form.cost = "200" }
+
       it "does change the expense_item" do
         original_expense_item = @form.expense_item
         @form.save

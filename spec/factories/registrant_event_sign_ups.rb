@@ -23,9 +23,9 @@
 FactoryBot.define do
   factory :registrant_event_sign_up do
     registrant # FactoryBot
-    event nil
-    event_category nil
-    signed_up true
+    event { nil }
+    event_category { nil }
+    signed_up { true }
 
     before(:create) do |resu|
       if resu.event.nil? && resu.signed_up?

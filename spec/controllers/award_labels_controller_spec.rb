@@ -23,11 +23,12 @@
 require 'spec_helper'
 
 describe AwardLabelsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:award_admin_user)
     sign_in @admin_user
     @registrant = FactoryBot.create(:competitor)
   end
+
   let(:award_label) { FactoryBot.create(:award_label, user: @admin_user) }
 
   # This should return the minimal set of attributes required to create a valid
@@ -41,6 +42,7 @@ describe AwardLabelsController do
   describe "GET index" do
     describe "When not signed in" do
       before { sign_out @admin_user }
+
       it "redirects to root path" do
         get :index, params: { user_id: @admin_user }
         expect(response).to redirect_to(new_user_session_path)
@@ -181,6 +183,7 @@ describe AwardLabelsController do
   describe "with competition and competitors" do
     let!(:competition) { FactoryBot.create(:competition) }
     let!(:competitors) { FactoryBot.create_list(:event_competitor, 5, competition: competition) }
+
     before do
       competitors.each do |competitor|
         FactoryBot.create(:result, :overall, competitor: competitor)

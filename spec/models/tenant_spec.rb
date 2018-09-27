@@ -61,6 +61,12 @@ describe Tenant do
       tenant = FactoryBot.build(:tenant, subdomain: "not allowed")
       expect(tenant).not_to be_valid
     end
+
+    it "lowercases the subdomain if it has uppercase characters" do
+      tenant = FactoryBot.build(:tenant, subdomain: "A-THING")
+      expect(tenant).to be_valid
+      expect(tenant.subdomain).to eq("a-thing")
+    end
   end
 
   context "without tenant aliases" do

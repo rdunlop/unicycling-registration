@@ -24,7 +24,7 @@
 require 'spec_helper'
 
 describe PaymentsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     @config = EventConfiguration.singleton
     @config.update(FactoryBot.attributes_for(:event_configuration, event_sign_up_closed_date: Date.tomorrow))
@@ -65,14 +65,14 @@ describe PaymentsController do
   end
 
   describe "GET index" do
-    before(:each) do
+    before do
       @super_admin = FactoryBot.create(:super_admin_user)
       sign_in @super_admin
       @payment = FactoryBot.create(:payment, user: @user, completed: true)
     end
 
     describe "as normal user" do
-      before(:each) do
+      before do
         sign_in @user
       end
 
@@ -98,7 +98,7 @@ describe PaymentsController do
   end
 
   describe "GET index (registrants)" do
-    before(:each) do
+    before do
       @super_admin = FactoryBot.create(:super_admin_user)
       sign_in @super_admin
       @reg = FactoryBot.create(:competitor, user: @super_admin)
@@ -110,7 +110,7 @@ describe PaymentsController do
     end
 
     describe "as a normal user" do
-      before(:each) do
+      before do
         sign_out @super_admin
         sign_in @user
       end
@@ -193,7 +193,7 @@ describe PaymentsController do
     end
 
     describe "for a user with a registrant owing money" do
-      before(:each) do
+      before do
         @reg_period = FactoryBot.create(:registration_cost, :competitor)
         @reg = FactoryBot.create(:competitor, user: @user)
       end
@@ -226,7 +226,7 @@ describe PaymentsController do
       end
 
       describe "has paid, but owes for more items" do
-        before(:each) do
+        before do
           @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, details: "Additional Details")
           @payment = FactoryBot.create(:payment)
           @pd = FactoryBot.create(:payment_detail, registrant: @reg, payment: @payment, amount: 100, line_item: @reg_period.expense_items.first)
@@ -377,9 +377,10 @@ describe PaymentsController do
   end
 
   describe "GET summary" do
-    before(:each) do
+    before do
       @user.add_role :payment_admin
     end
+
     let!(:payment) { FactoryBot.create(:payment, completed: true) }
     let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
 

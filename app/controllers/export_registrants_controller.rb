@@ -94,6 +94,7 @@ class ExportRegistrantsController < ApplicationController
       "State",
       "Zip",
       "Country",
+      "Country Representing",
       "Phone",
       "Email",
       "Club",
@@ -113,6 +114,7 @@ class ExportRegistrantsController < ApplicationController
         reg.contact_detail.state,
         reg.contact_detail.zip,
         reg.contact_detail.country_residence,
+        country(reg.contact_detail.country_representing),
         reg.contact_detail.phone,
         reg.contact_detail.email,
         reg.club,
@@ -130,6 +132,11 @@ class ExportRegistrantsController < ApplicationController
   end
 
   private
+
+  def country(country_string)
+    return "" if country_string.blank?
+    ISO3166::Country[country_string]
+  end
 
   def paid_items_summary(registrant)
     registrant.paid_line_items.map(&:to_s).join("\n")

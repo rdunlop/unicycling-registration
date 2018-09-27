@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "when testing the update function for registration costs", caching: true do
-  before(:each) do
+  before do
     @reg = FactoryBot.create(:competitor) # will have rp1
     @nc_reg = FactoryBot.create(:noncompetitor) # will have rp1
     ActionMailer::Base.deliveries.clear
@@ -40,7 +40,7 @@ describe "when testing the update function for registration costs", caching: tru
   end
 
   describe "when a registrant has a LOCKED registration_item" do
-    before(:each) do
+    before do
       @original_item = rei = @reg.registration_item
       rei.locked = true
       rei.save
@@ -55,11 +55,12 @@ describe "when testing the update function for registration costs", caching: tru
       expect(@reg.registration_item).to eq(@original_item)
     end
   end
+
   describe "when updating to the next period" do
     let!(:comp_registration_cost2) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
     let!(:noncomp_registration_cost2) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
 
-    before(:each) do
+    before do
       ActionMailer::Base.deliveries.clear
       travel_to Date.new(2020, 12, 1) do
         @ret = RegistrationCostUpdater.new("competitor").update_current_period
@@ -67,7 +68,7 @@ describe "when testing the update function for registration costs", caching: tru
       end
     end
 
-    it "it indicates that the new period has been recently updated" do
+    it "indicates that the new period has been recently updated" do
       expect(RegistrationCostUpdater.update_checked_recently?(Date.new(2020, 12, 2))).to eq(true)
     end
 
@@ -91,7 +92,7 @@ describe "when testing the update function for registration costs", caching: tru
   end
 
   describe "when updating to a non-existent period" do
-    before(:each) do
+    before do
       ActionMailer::Base.deliveries.clear
       travel_to Date.new(2020, 12, 1) do
         @ret = RegistrationCostUpdater.new("competitor").update_current_period
@@ -122,7 +123,7 @@ describe "when testing the update function for registration costs", caching: tru
     end
 
     describe "when updating to a now-existent period" do
-      before(:each) do
+      before do
         @comp_registration_cost2 = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
         @noncomp_registration_cost2 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
         travel_to Date.new(2020, 12, 1) do

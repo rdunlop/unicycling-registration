@@ -6,6 +6,7 @@ describe Freestyle_2015_JudgePointsCalculator do
   describe "ties" do
     # with a 2nd place, but tied
     let(:scores) { [10, 5, 5] }
+
     it "calculates the placing points for this tie score" do
       expect(subject.judged_points(scores, 5)).to eq(25.0)
     end
@@ -28,6 +29,7 @@ describe Freestyle_2015_JudgePointsCalculator do
 
     describe "the lowest scoring competitor" do
       let(:score) { 0 }
+
       it "calculates the proper placement of each score" do
         expect(judged_place).to eq(4)
       end
@@ -39,6 +41,7 @@ describe Freestyle_2015_JudgePointsCalculator do
 
     describe "the highest scoring competitor" do
       let(:score) { 10 }
+
       it do
         expect(judged_place).to eq(1)
       end
@@ -50,6 +53,7 @@ describe Freestyle_2015_JudgePointsCalculator do
 
     describe "the tie in the middle" do
       let(:score) { 5 }
+
       it do
         expect(judged_place).to eq(2)
       end

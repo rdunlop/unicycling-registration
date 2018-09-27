@@ -23,7 +23,7 @@
 require 'spec_helper'
 
 describe RegistrantExpenseItemsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:user)
     @reg = FactoryBot.create(:registrant, user: @user)
     @exp = FactoryBot.create(:expense_item)
@@ -42,6 +42,7 @@ describe RegistrantExpenseItemsController do
 
   describe "POST create" do
     before { request.env["HTTP_REFERER"] = registrant_build_path(Registrant.last.id, :expenses) }
+
     describe "with valid params" do
       it "creates a new RegistrantExpenseItem" do
         expect do

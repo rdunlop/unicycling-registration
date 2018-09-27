@@ -25,9 +25,10 @@
 require 'spec_helper'
 
 describe Event do
-  before(:each) do
+  before do
     @ev = FactoryBot.create(:event)
   end
+
   it "is valid from FactoryBot" do
     expect(@ev.valid?).to eq(true)
   end
@@ -42,7 +43,7 @@ describe Event do
     expect(@ev.valid?).to eq(false)
   end
 
-  it "should have name as to_s" do
+  it "has name as to_s" do
     expect(@ev.to_s).to eq(@ev.name)
   end
 
@@ -118,7 +119,7 @@ describe Event do
   end
 
   describe "when a user has chosen an event" do
-    before(:each) do
+    before do
       @ev = FactoryBot.create(:event)
       @ec = FactoryBot.create(:registrant_event_sign_up, event: @ev, event_category: @ev.event_categories.first, signed_up: true)
     end
@@ -147,8 +148,9 @@ describe Event do
       end
     end
   end
+
   describe "when there is a director" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
       @user.add_role(:director, @ev)
     end

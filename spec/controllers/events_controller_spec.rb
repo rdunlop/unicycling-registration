@@ -29,6 +29,7 @@ describe EventsController do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
+
   let(:event) { FactoryBot.create(:event) }
 
   # This should return the minimal set of attributes required to create a valid
@@ -60,11 +61,12 @@ describe EventsController do
       assert_select "td", event.event_categories.first.to_s
     end
     describe "With competitors and non-competitors" do
-      before(:each) do
+      before do
         @comp1 = FactoryBot.create(:competitor)
         @comp2 = FactoryBot.create(:competitor)
         @non_comp1 = FactoryBot.create(:noncompetitor)
       end
+
       it "sets the number of registrants as @num_registrants" do
         get :summary
         assert_select "b.num_registrants", "3"

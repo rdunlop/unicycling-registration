@@ -26,12 +26,12 @@ FactoryBot.define do
   factory :age_group_entry do
     age_group_type # FactoryBot
     sequence(:short_description) { |n| "MyString #{n}" }
-    start_age 1
-    end_age 100
-    gender "Male"
+    start_age { 1 }
+    end_age { 100 }
+    gender { "Male" }
 
     trait :female do
-      gender "Female"
+      gender { "Female" }
     end
   end
 end

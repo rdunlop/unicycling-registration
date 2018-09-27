@@ -16,6 +16,6 @@ FactoryBot.define do
   factory :standard_skill_routine_entry do
     standard_skill_routine # FactoryBot
     standard_skill_entry
-    position 1
+    position { 1 }
   end
 end

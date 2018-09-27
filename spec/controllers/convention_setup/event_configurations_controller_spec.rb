@@ -45,7 +45,7 @@
 require 'spec_helper'
 
 describe ConventionSetup::EventConfigurationsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end
@@ -90,9 +90,10 @@ describe ConventionSetup::EventConfigurationsController do
     end
 
     describe "POST 'test_mode_role'" do
-      before :each do
+      before do
         request.env["HTTP_REFERER"] = root_url
       end
+
       it "redirects to root" do
         post :test_mode_role, params: { role: "normal_user" }
         expect(response).to redirect_to(root_path)

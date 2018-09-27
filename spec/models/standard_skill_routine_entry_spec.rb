@@ -13,16 +13,16 @@
 require 'spec_helper'
 
 describe StandardSkillRoutineEntry do
-  it "should be able to reference the associated skill entry" do
+  it "is able to reference the associated skill entry" do
     skill = FactoryBot.create(:standard_skill_entry)
     routine = FactoryBot.create(:standard_skill_routine)
-    skr = StandardSkillRoutineEntry.new
+    skr = described_class.new
     skr.standard_skill_entry = skill
     skr.standard_skill_routine = routine
     skr.position = 2
     skr.save!
 
-    skr = StandardSkillRoutineEntry.last
+    skr = described_class.last
     expect(skr.standard_skill_entry.description).to eq("riding - 8")
   end
 end

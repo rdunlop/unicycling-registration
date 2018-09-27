@@ -20,7 +20,7 @@ class RegistrationCostEntry < ApplicationRecord
   validates :expense_item, presence: true
 
   belongs_to :registration_cost, inverse_of: :registration_cost_entries, touch: true
-  validates :min_age, :max_age, absence: true, if: proc { |el| el.registration_cost.registrant_type != "competitor" }
+  validates :min_age, :max_age, absence: true, if: proc { |el| el.registration_cost.registrant_type == "spectator" }
 
   belongs_to :expense_item, dependent: :destroy
   accepts_nested_attributes_for :expense_item

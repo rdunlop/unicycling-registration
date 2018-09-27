@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ConventionSetup::RegistrationCostsController do
-  before(:each) do
+  before do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
     @comp_exp = FactoryBot.create(:expense_item, cost: 100)
@@ -32,7 +32,7 @@ describe ConventionSetup::RegistrationCostsController do
   end
 
   describe "as a normal user" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
       sign_in @user
     end

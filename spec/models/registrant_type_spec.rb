@@ -9,9 +9,10 @@ describe RegistrantType do
     end
 
     describe "with a second competitor" do
-      before(:each) do
+      before do
         FactoryBot.create(:competitor)
       end
+
       it "assigns the second competitor bib_number 2" do
         expect(subject.next_available_bib_number).to eq(2)
       end
@@ -26,9 +27,10 @@ describe RegistrantType do
     end
 
     describe "with a second noncompetitor" do
-      before(:each) do
+      before do
         FactoryBot.create(:noncompetitor)
       end
+
       it "assigns the second noncompetitor bib_number 2002" do
         expect(subject.next_available_bib_number).to eq(2002)
       end

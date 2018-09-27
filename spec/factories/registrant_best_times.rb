@@ -22,7 +22,7 @@ FactoryBot.define do
   factory :registrant_best_time do
     registrant
     event
-    value 60000
-    source_location "Nationals 2012"
+    value { 60000 }
+    source_location { "Nationals 2012" }
   end
 end

@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :registrant_group_type do
-    notes "These be my notes"
+    notes { "These be my notes" }
     association :source_element, factory: :event
   end
 end

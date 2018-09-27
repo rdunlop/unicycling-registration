@@ -25,7 +25,7 @@ RSpec.describe ResultDisplayer::TimeResult do
     end
 
     it "summary_result_data" do
-      expect(subject.summary_result_data(result)).to eq(["1:02.345"])
+      expect(subject.summary_result_data(result)).to eq(["01:02.345"])
     end
 
     it "headings" do
@@ -58,7 +58,7 @@ RSpec.describe ResultDisplayer::TimeResult do
     end
 
     it "summary_result_data" do
-      expect(subject.summary_result_data(result)).to eq(["1:02.345", 3])
+      expect(subject.summary_result_data(result)).to eq(["01:02.345", 3])
     end
 
     it "headings" do

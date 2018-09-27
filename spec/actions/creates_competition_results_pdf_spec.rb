@@ -13,6 +13,7 @@ describe CreatesCompetitionResultsPdf do
 
     context "with a freestyle competition" do
       let(:competition) { FactoryBot.create(:competition, :freestyle_2017) }
+
       it "creates 2 new results" do
         expect do
           subject.publish!

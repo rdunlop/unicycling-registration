@@ -41,10 +41,11 @@
 require 'spec_helper'
 
 describe Competition do
-  before(:each) do
+  before do
     @ev = FactoryBot.create(:event)
     @ec = FactoryBot.create(:competition, event: @ev)
   end
+
   it "is valid from FactoryBot" do
     expect(@ec.valid?).to eq(true)
   end
@@ -102,21 +103,22 @@ describe Competition do
   end
 
   it "is not_expert by default" do
-    comp = Competition.new
+    comp = described_class.new
     expect(comp.has_experts).to eq(false)
   end
 
   describe "with a user" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
     end
+
     it "says there are no judges" do
       expect(@ec.has_judge(@user)).to eq(false)
       expect(@ec.get_judge(@user)).to be_nil
     end
 
     describe "as a judge" do
-      before(:each) do
+      before do
         @judge = FactoryBot.create(:judge, competition: @ec, user: @user)
       end
 

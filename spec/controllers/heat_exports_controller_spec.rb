@@ -3,7 +3,7 @@ require 'spec_helper'
 describe HeatExportsController do
   let(:competition) { FactoryBot.create(:timed_competition) }
 
-  before(:each) do
+  before do
     @user = FactoryBot.create(:super_admin_user)
     sign_in @user
   end

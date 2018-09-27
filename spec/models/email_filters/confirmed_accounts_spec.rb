@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmailFilters::ConfirmedAccounts do
   describe "with one confirmed account, and one with unpaid registrant" do
-    before(:each) do
+    before do
       @reg_period = FactoryBot.create(:registration_cost)
       @reg = FactoryBot.create(:competitor)
       @user = FactoryBot.create(:user)

@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe Compete::CombinedCompetitionEntriesController do
-  before(:each) do
+  before do
     sign_in FactoryBot.create(:super_admin_user)
   end
+
   let(:competition) { FactoryBot.create(:competition) }
   let(:combined_competition) { FactoryBot.create(:combined_competition) }
 

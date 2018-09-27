@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ConventionSetup::ConventionSeriesController do
-  before(:each) do
+  before do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
@@ -27,6 +27,7 @@ describe ConventionSetup::ConventionSeriesController do
 
   describe "DELETE destroy" do
     let!(:series) { FactoryBot.create(:convention_series) }
+
     it "deletes a new series" do
       expect do
         delete :destroy, params: { id: series.id }

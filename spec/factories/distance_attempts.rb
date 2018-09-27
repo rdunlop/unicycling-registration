@@ -22,7 +22,7 @@ FactoryBot.define do
   factory :distance_attempt do
     association :competitor, factory: %i[event_competitor with_high_jump_competition]
     judge # use FactoryBot to create
-    distance 220
-    fault false
+    distance { 220 }
+    fault { false }
   end
 end

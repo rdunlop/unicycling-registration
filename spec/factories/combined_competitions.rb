@@ -20,11 +20,11 @@
 FactoryBot.define do
   factory :combined_competition do
     sequence(:name) { |n| "MyString #{n}" }
-    tie_break_by_firsts true
-    calculation_mode 'default'
+    tie_break_by_firsts { true }
+    calculation_mode { 'default' }
 
     trait :percentage_based_calculations do
-      calculation_mode 'percentage'
+      calculation_mode { 'percentage' }
     end
   end
 end

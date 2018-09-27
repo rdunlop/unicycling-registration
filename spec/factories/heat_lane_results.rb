@@ -22,18 +22,18 @@
 FactoryBot.define do
   factory :heat_lane_result do
     competition # FactoryBot
-    minutes 1
-    seconds 1
-    thousands 1
+    minutes { 1 }
+    seconds { 1 }
+    thousands { 1 }
     sequence(:heat) { |n| n }
     sequence(:lane) { |n| n }
-    status "active"
-    raw_data "MyString"
+    status { "active" }
+    raw_data { "MyString" }
     entered_at { Time.current }
     association :entered_by, factory: :user
 
     trait :disqualified do
-      status "DQ"
+      status { "DQ" }
     end
   end
 end

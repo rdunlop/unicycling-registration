@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CompetitionSetup::DirectorsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:competition_admin_user)
     sign_in @admin_user
     @event = FactoryBot.create(:event)

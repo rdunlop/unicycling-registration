@@ -34,12 +34,12 @@ describe Payment do
   end
 
   it "defaults completed to false" do
-    p = Payment.new
+    p = described_class.new
     expect(p.completed).to eq(false)
   end
 
   it "defaults cancelled to false" do
-    p = Payment.new
+    p = described_class.new
     expect(p.cancelled).to eq(false)
   end
 
@@ -67,7 +67,7 @@ describe Payment do
     end
 
     describe "with mulitple payment_details of the same expense_item" do
-      before(:each) do
+      before do
         @pd2 = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
         @pd3 = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details, line_item: @pd.line_item)
       end
@@ -78,7 +78,7 @@ describe Payment do
       end
 
       describe "with payment_details of different expense_items" do
-        before(:each) do
+        before do
           @pdb = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: @pd.amount, details: @pd.details)
         end
 
@@ -88,7 +88,7 @@ describe Payment do
       end
 
       describe "with different amounts" do
-        before(:each) do
+        before do
           @pdc = FactoryBot.create(:payment_detail, payment: @pd.payment, amount: 99.98, details: @pd.details, line_item: @pd.line_item)
         end
 
@@ -135,11 +135,11 @@ describe Payment do
     it "can determine the total received" do
       FactoryBot.create(:payment_detail, payment: payment, amount: 15.33)
       payment.reload
-      expect(Payment.total_received).to eq(15.33.to_money)
+      expect(described_class.total_received).to eq(15.33.to_money)
     end
 
     describe "with a refund" do
-      before(:each) do
+      before do
         pd = FactoryBot.create(:payment_detail, payment: payment, amount: 15.33)
         @ref = FactoryBot.create(:refund)
         @rd = FactoryBot.create(:refund_detail, refund: @ref, payment_detail: pd)
@@ -148,14 +148,14 @@ describe Payment do
 
       describe "#total_refunded_amount" do
         it "counts the payments" do
-          expect(Payment.total_refunded_amount).to eq(0.to_money)
+          expect(described_class.total_refunded_amount).to eq(0.to_money)
         end
       end
     end
   end
 
   describe "a payment for a tshirt" do
-    before(:each) do
+    before do
       @pd = FactoryBot.create(:payment_detail, payment: @pay)
       @pay.reload
       @reg = @pd.registrant
@@ -167,7 +167,7 @@ describe Payment do
       expect(@reg.owing_line_items).to eq([@rei.line_item])
     end
     describe "when the user has a free t-shirt and a paid t-shirt" do
-      before(:each) do
+      before do
         @rei_free = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: true)
         @reg.reload
       end
@@ -185,8 +185,9 @@ describe Payment do
         expect(@reg.reload.owing_registrant_expense_items).to eq([@rei])
       end
     end
+
     describe "when the registrant has two t-shirts, who only differ by details" do
-      before(:each) do
+      before do
         @rei2 = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, details: "for My Kid")
         @reg.reload
       end
@@ -200,7 +201,7 @@ describe Payment do
     end
 
     describe "when the payment has empty details, and the registrant_expense_item has empty details" do
-      before(:each) do
+      before do
         @rei.details = ""
         @rei.save
         @pd.details = ""
@@ -218,7 +219,7 @@ describe Payment do
     end
 
     describe "when the payment has different details that the reg expense item details" do
-      before(:each) do
+      before do
         ActionMailer::Base.deliveries.clear
         @rei.details = "original"
         @rei.save
@@ -236,7 +237,7 @@ describe Payment do
         expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
 
-      it "should email the admin" do
+      it "emails the admin" do
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1)
         mail = ActionMailer::Base.deliveries.first
@@ -245,7 +246,7 @@ describe Payment do
     end
 
     describe "when the payment has empty details, vs nil details" do
-      before(:each) do
+      before do
         @rei.details = nil
         @rei.save
         @pd.details = ""
@@ -263,10 +264,11 @@ describe Payment do
     end
 
     describe "when the payment is paid" do
-      before(:each) do
+      before do
         @pay.completed = true
         @pay.save
       end
+
       it "registrant no longer owes" do
         expect(@reg.owing_line_items).to eq([])
       end
@@ -275,19 +277,21 @@ describe Payment do
       end
 
       describe "when the payment is saved after being paid" do
-        before(:each) do
+        before do
           @rei2 = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item)
           @pay.save
           @reg.reload
         end
+
         it "doesn't remove more items from the registrant_expenses" do
           expect(@reg.owing_line_items).to eq([@rei2.line_item])
         end
       end
     end
   end
+
   describe "when paying for registration item" do
-    before(:each) do
+    before do
       @reg_cost = FactoryBot.create(:registration_cost, :competitor)
       @pay = FactoryBot.create(:payment)
       @pd = FactoryBot.create(:payment_detail, payment: @pay, amount: @reg_cost.expense_items.first.cost)

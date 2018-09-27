@@ -6,6 +6,7 @@ describe Printing::CompetitionsController do
     user = FactoryBot.create(:super_admin_user)
     sign_in user
   end
+
   let(:competition) { FactoryBot.create(:competition) }
 
   describe "GET announcer" do
@@ -52,6 +53,7 @@ describe Printing::CompetitionsController do
 
   describe "GET freestyle_summary" do
     let(:competition) { FactoryBot.create(:competition, :freestyle_2017) }
+
     it "renders" do
       get :freestyle_summary, params: { id: competition.id }
       expect(response).to be_success

@@ -34,7 +34,7 @@ describe ExpenseItemFreeChecker do
     end
 
     describe "when it has a non-free item of the same expense_group (not free though)" do
-      before(:each) do
+      before do
         FactoryBot.create(:registrant_expense_item, registrant: registrant, line_item: expense_item)
         registrant.reload
       end
@@ -52,14 +52,14 @@ describe ExpenseItemFreeChecker do
 
       it "doesn't allow registrant to have 2 free of this group" do
         @rei = FactoryBot.build(:registrant_expense_item, registrant: registrant, line_item: expense_item, free: true)
-        expect(subject.free_item_already_exists?).to be_truthy
+        expect(subject).to be_free_item_already_exists
       end
     end
 
     describe "when it has a paid expense_item" do
       let(:expense_item) { FactoryBot.create(:expense_item, expense_group: expense_group) }
 
-      before(:each) do
+      before do
         @pay = FactoryBot.create(:payment)
         @pei = FactoryBot.create(:payment_detail, registrant: registrant, payment: @pay, line_item: expense_item, free: true)
         @pay.reload
@@ -69,7 +69,7 @@ describe ExpenseItemFreeChecker do
       end
 
       it "shows that it has the given expense_group" do
-        expect(subject.free_item_already_exists?).to be_truthy
+        expect(subject).to be_free_item_already_exists
       end
     end
   end
@@ -86,7 +86,7 @@ describe ExpenseItemFreeChecker do
     end
 
     describe "when it has a non-free item of the same expense_group (not free though)" do
-      before(:each) do
+      before do
         FactoryBot.create(:registrant_expense_item, registrant: registrant, line_item: expense_item)
         registrant.reload
       end
@@ -104,7 +104,7 @@ describe ExpenseItemFreeChecker do
 
       it "doesn't allow registrant to have 2 free of this expense_item" do
         @rei = FactoryBot.build(:registrant_expense_item, registrant: registrant, line_item: expense_item, free: true)
-        expect(subject.free_item_already_exists?).to be_truthy
+        expect(subject).to be_free_item_already_exists
       end
 
       it "allows different free expense_items in the same group" do

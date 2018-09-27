@@ -26,12 +26,12 @@ describe MultiLapResultCalculator do
 
   describe "#competitor_has_result?" do
     it "doesn't have results by default" do
-      expect(described_class.new.competitor_has_result?(competitor)).to be_falsey
+      expect(described_class.new).not_to be_competitor_has_result(competitor)
     end
 
     it "does have results with finish_times" do
       FactoryBot.create(:time_result, competitor: competitor)
-      expect(described_class.new.competitor_has_result?(competitor.reload)).to be_truthy
+      expect(described_class.new).to be_competitor_has_result(competitor.reload)
     end
   end
 
@@ -52,7 +52,7 @@ describe MultiLapResultCalculator do
       let!(:time_result) { FactoryBot.create(:time_result, competitor: competitor, minutes: 1, number_of_laps: 1) }
 
       it "returns the time" do
-        expect(described_class.new.competitor_result(competitor.reload)).to eq("1:00 (1 laps)")
+        expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 laps)")
       end
     end
   end

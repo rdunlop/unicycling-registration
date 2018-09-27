@@ -2,16 +2,17 @@ require 'spec_helper'
 
 describe 'Creating a Competition from an Event' do
   let!(:user) { FactoryBot.create(:super_admin_user) }
+
   include_context 'basic event configuration'
   include_context 'freestyle_event', name: "Individual"
   include_context 'user is logged in'
 
-  before :each do
+  before do
     visit competition_setup_path
   end
 
   describe "when on the new competition page" do
-    before :each do
+    before do
       within("tbody tr:first") do
         click_link "Create New Competition"
       end

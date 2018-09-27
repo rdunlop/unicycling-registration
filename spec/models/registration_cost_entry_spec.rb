@@ -25,6 +25,15 @@ describe RegistrationCostEntry do
   context "as a noncompetitor type" do
     let(:registration_cost) { FactoryBot.build(:registration_cost, :noncompetitor) }
 
+    it "Can have ages" do
+      registration_cost_entry.min_age = 10
+      expect(registration_cost_entry).to be_valid
+    end
+  end
+
+  context "as a spectator type" do
+    let(:registration_cost) { FactoryBot.build(:registration_cost, :spectator) }
+
     it "Cannot have ages" do
       registration_cost_entry.min_age = 10
       expect(registration_cost_entry).not_to be_valid
@@ -68,6 +77,7 @@ describe RegistrationCostEntry do
 
     context "when entry has a max age" do
       let(:max_age) { 10 }
+
       it "is valid below" do
         expect(do_action(5)).to be_truthy
       end
@@ -79,6 +89,7 @@ describe RegistrationCostEntry do
 
     context "when entry has a min age" do
       let(:min_age) { 10 }
+
       it "is valid above" do
         expect(do_action(15)).to be_truthy
       end
@@ -91,6 +102,7 @@ describe RegistrationCostEntry do
     context "when entry has a min and max age" do
       let(:min_age) { 10 }
       let(:max_age) { 40 }
+
       it "is valid between" do
         expect(do_action(15)).to be_truthy
       end

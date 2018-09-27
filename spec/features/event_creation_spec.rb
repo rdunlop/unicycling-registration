@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe 'Creating an Event' do
   let!(:user) { FactoryBot.create(:super_admin_user) }
+
   include_context 'basic event configuration'
   include_context 'user is logged in'
 
-  before :each do
+  before do
     visit convention_setup_path
   end
 

@@ -22,7 +22,7 @@ FactoryBot.define do
   factory :lane_assignment do
     competition # FactoryBot
     association :competitor, factory: :event_competitor
-    heat 1
-    lane 1
+    heat { 1 }
+    lane { 1 }
   end
 end

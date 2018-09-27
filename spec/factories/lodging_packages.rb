@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :lodging_package do
     lodging_room_type
     lodging_room_option
-    total_cost 120.30
+    total_cost { 120.30 }
   end
 end
 

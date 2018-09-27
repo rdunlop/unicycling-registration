@@ -13,22 +13,22 @@
 
 FactoryBot.define do
   factory :wheel_size do
-    position 1
-    description "MyString"
+    position { 1 }
+    description { "MyString" }
 
     factory :wheel_size_24 do
-      position 3
-      description "24\" Wheel"
+      position { 3 }
+      description { "24\" Wheel" }
     end
 
     factory :wheel_size_20 do
-      position 2
-      description "20\" Wheel"
+      position { 2 }
+      description { "20\" Wheel" }
     end
 
     factory :wheel_size_16 do
-      position 1
-      description "16\" Wheel"
+      position { 1 }
+      description { "16\" Wheel" }
     end
   end
 end

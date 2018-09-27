@@ -76,6 +76,7 @@ end
 describe "CachedSetModel", caching: true do
   let(:model) { CachedSetModelTest.new(expense_item_id: key) }
   let(:key) { 10 }
+
   before { Rails.cache.clear }
 
   it "has a cached_key_for_set at the class level" do
@@ -84,7 +85,8 @@ describe "CachedSetModel", caching: true do
 
   describe "touch" do
     let(:do_action) { model.touch }
-    it_should_behave_like "does update the global key"
+
+    it_behaves_like "does update the global key"
   end
 
   describe "when nothing is changed" do
@@ -93,7 +95,8 @@ describe "CachedSetModel", caching: true do
     before { allow(model).to receive(:changes).and_return(changes) }
 
     let(:do_action) { model.save }
-    it_should_behave_like "does not update the global key"
+
+    it_behaves_like "does not update the global key"
   end
 
   describe "when a field has changed" do
@@ -101,6 +104,7 @@ describe "CachedSetModel", caching: true do
     before { allow(model).to receive(:changes).and_return(changes) }
 
     let(:do_action) { model.save }
-    it_should_behave_like "does update the global key"
+
+    it_behaves_like "does update the global key"
   end
 end

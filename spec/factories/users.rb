@@ -33,8 +33,8 @@
 FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "me#{n}@dunlopweb.com" }
-    password "something"
-    password_confirmation "something"
+    password { "something" }
+    password_confirmation { "something" }
 
     factory :super_admin_user do
       after(:create) { |user| user.add_role :super_admin }
@@ -62,6 +62,7 @@ FactoryBot.define do
 
     factory :director do
       after(:create) { |user| user.add_role :data_entry_volunteer }
+
       after(:create) { |user| user.add_role :director, EventCategory }
     end
 
@@ -74,6 +75,7 @@ FactoryBot.define do
     end
 
     after(:create) { |user| user.confirm if Rails.application.secrets.mail_skip_confirmation.nil? }
+
     after(:create) { |user| user.user_conventions.create(subdomain: Tenant.first.subdomain) }
   end
 end

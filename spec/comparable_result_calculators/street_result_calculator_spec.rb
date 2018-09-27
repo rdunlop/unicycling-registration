@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StreetResultCalculator do
   describe "when calculating the placement points of an event" do
-    before(:each) do
+    before do
       @calc = described_class.new
       @comp1 = double(:competitor, has_result?: true)
       @comp2 = double(:competitor, has_result?: true)
@@ -10,7 +10,7 @@ describe StreetResultCalculator do
     end
 
     describe "and there are 2 judges" do
-      before(:each) do
+      before do
         @score1_1 = double(:score, placing_points: 1)
         @score2_1 = double(:score, placing_points: 2)
         @score3_1 = double(:score, placing_points: 3)
@@ -31,7 +31,7 @@ describe StreetResultCalculator do
       end
 
       describe "with a 3rd judge's scores" do
-        before(:each) do
+        before do
           @score1_3 = double(:score, placing_points: 1)
           @score2_3 = double(:score, placing_points: 2)
           @score3_3 = double(:score, placing_points: 3)

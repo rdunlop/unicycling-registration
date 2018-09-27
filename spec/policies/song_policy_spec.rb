@@ -1,10 +1,10 @@
 require "spec_helper"
 
 describe SongPolicy do
+  subject { described_class }
+
   let(:my_user) { FactoryBot.create(:user) }
   let(:my_song) { FactoryBot.create(:song, user: my_user) }
-
-  subject { described_class }
 
   permissions :update? do
     let(:music_end_date) { 2.weeks.from_now }

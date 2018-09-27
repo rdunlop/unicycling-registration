@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe Admin::ManualRefundsController do
-  before(:each) do
+  before do
     @user = FactoryBot.create(:payment_admin)
     sign_in @user
   end
+
   let!(:payment) { FactoryBot.create(:payment, completed: true) }
   let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount: 5.22) }
 
@@ -34,7 +35,7 @@ describe Admin::ManualRefundsController do
   end
 
   describe "POST refund create" do
-    before(:each) do
+    before do
       @pd = FactoryBot.create(:payment_detail)
     end
 

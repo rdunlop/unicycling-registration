@@ -26,14 +26,14 @@ describe PermissionsController do
       it "doesn't succeed if the access code is invalid" do
         expect do
           post :use_code, params: { registrant_id: registrant.id, code: "invalid_code" }
-        end.to_not change(User, :count)
+        end.not_to change(User, :count)
       end
 
       it "doesn't create another guest if one already exists" do
         post :use_code, params: { registrant_id: registrant.id, code: access_code }
         expect do
           post :use_code, params: { registrant_id: registrant.id, code: access_code }
-        end.to_not change(User, :count)
+        end.not_to change(User, :count)
       end
     end
   end

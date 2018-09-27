@@ -1,16 +1,17 @@
 FactoryBot.define do
   factory :feedback do
-    subject "can I volunteer?"
-    message "Please help me with registration"
+    subject { "can I volunteer?" }
+
+    message { "Please help me with registration" }
     user
-    status "new"
-    entered_email nil
+    status { "new" }
+    entered_email { nil }
 
     trait :resolved do
-      status "resolved"
+      status { "resolved" }
       association :resolved_by, factory: :user
       resolved_at { Time.current }
-      resolution "Sent him an e-mail"
+      resolution { "Sent him an e-mail" }
     end
   end
 end

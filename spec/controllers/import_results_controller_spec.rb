@@ -32,11 +32,12 @@
 require 'spec_helper'
 
 describe ImportResultsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
     @competition = FactoryBot.create(:timed_competition, uses_lane_assignments: true)
   end
+
   let(:import_result) { FactoryBot.create(:import_result, user: @admin_user, competition: @competition) }
 
   # This should return the minimal set of attributes required to create a valid
@@ -137,9 +138,10 @@ describe ImportResultsController do
   end
 
   describe "DELETE destroy" do
-    before :each do
+    before do
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(@admin_user, @competition)
     end
+
     it "destroys the requested import_result" do
       im_result = FactoryBot.create(:import_result, user: @admin_user, competition: @competition)
       expect do
@@ -172,6 +174,21 @@ describe ImportResultsController do
       request.env["HTTP_REFERER"] = data_entry_user_competition_import_results_path(import.user, competition)
       delete :destroy_all, params: { user_id: import.user, competition_id: competition.id }
       expect(response).to redirect_to(data_entry_user_competition_import_results_path(import.user, competition))
+    end
+  end
+
+  describe "GET display_chip" do
+    context "when the data includes registrants which exist" do
+    end
+
+    context "when the data includes a registrant ID which we don't have" do
+      let(:competition) { FactoryBot.create(:timed_competition, import_results_into_other_competition: true) }
+      let!(:import_result) { FactoryBot.create(:import_result, bib_number: "123", competition: competition) }
+
+      it "displays the page" do
+        get :display_chip, params: { competition_id: competition.id, user_id: import_result.user }
+        expect(response).to be_successful
+      end
     end
   end
 end

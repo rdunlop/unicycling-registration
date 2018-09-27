@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe UpdateUsaMembershipStatusWorker do
+  subject(:worker) { described_class.new }
+
   let(:membership_number) { 123 }
   let(:last_name) { "Smith" }
   let(:server) { "example.com" }
   let(:endpoint) { "/wp-content/themes/twentytwelve-child-unimember/naucc.php" }
   let(:apikey) { "abc" }
 
-  subject(:worker) { described_class.new }
   before do
     allow(subject).to receive(:server).and_return(server)
     allow(subject).to receive(:endpoint).and_return(endpoint)
@@ -41,11 +42,13 @@ describe UpdateUsaMembershipStatusWorker do
     describe "special cases" do
       describe "multiple words" do
         let(:last_name) { "van der Velden" }
+
         it { expect(url).to include("lastname=van+der+Velden") }
       end
 
       describe "apostrophes" do
         let(:last_name) { "O'Brien" }
+
         it { expect(url).to include("lastname=O%27Brien") }
       end
     end
@@ -70,7 +73,7 @@ describe UpdateUsaMembershipStatusWorker do
       end
 
       it "stores a success and message" do
-        expect(contact_detail.organization_membership_system_confirmed?).to be_truthy
+        expect(contact_detail).to be_organization_membership_system_confirmed
         expect(contact_detail.organization_membership_system_status).to eq("You are a member")
       end
     end
@@ -84,7 +87,7 @@ describe UpdateUsaMembershipStatusWorker do
       end
 
       it "stores failure and a message" do
-        expect(contact_detail.organization_membership_system_confirmed?).to be_falsy
+        expect(contact_detail).not_to be_organization_membership_system_confirmed
         expect(contact_detail.organization_membership_system_status).to eq("Your Membership has expired")
       end
     end

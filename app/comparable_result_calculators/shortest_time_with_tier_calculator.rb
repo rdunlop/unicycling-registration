@@ -7,7 +7,7 @@ class ShortestTimeWithTierCalculator
   # returns the result for this competitor
   def competitor_result(competitor)
     if competitor.has_result? && !competitor.disqualified?
-      TimeResultPresenter.from_thousands(competitor.best_time_in_thousands).full_time + tier_description(competitor)
+      TimeResultPresenter.from_thousands(competitor.best_time_in_thousands, data_entry_format: competitor.competition.data_entry_format).full_time + tier_description(competitor)
     end
   end
 
@@ -43,7 +43,7 @@ class ShortestTimeWithTierCalculator
 
   def tier_description(competitor)
     if competitor.tier_description.present?
-      "(#{competitor.tier_description})"
+      " (#{competitor.tier_description})"
     else
       ""
     end

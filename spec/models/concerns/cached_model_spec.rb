@@ -67,6 +67,7 @@ end
 
 describe "CachedModel", caching: true do
   let(:model) { CachedModelTest.new }
+
   before { Rails.cache.clear }
 
   it "has a cached_key at the class level" do
@@ -75,7 +76,8 @@ describe "CachedModel", caching: true do
 
   describe "touch" do
     let(:do_action) { model.touch }
-    it_should_behave_like "does update the global key"
+
+    it_behaves_like "does update the global key"
   end
 
   describe "when nothing is changed" do
@@ -84,7 +86,8 @@ describe "CachedModel", caching: true do
     before { allow(model).to receive(:changes).and_return(changes) }
 
     let(:do_action) { model.save }
-    it_should_behave_like "does not update the global key"
+
+    it_behaves_like "does not update the global key"
   end
 
   describe "when a field has changed" do
@@ -92,15 +95,18 @@ describe "CachedModel", caching: true do
     before { allow(model).to receive(:changes).and_return(changes) }
 
     let(:do_action) { model.save }
-    it_should_behave_like "does update the global key"
+
+    it_behaves_like "does update the global key"
   end
 
   describe "when an ignored field has changed" do
     let(:changes) { { attribute: "changed" } }
     before { allow(model).to receive(:changes).and_return(changes) }
+
     before { allow(model).to receive(:ignored_for_collection_invalidation_fields).and_return([:attribute]) }
 
     let(:do_action) { model.save }
-    it_should_behave_like "does not update the global key"
+
+    it_behaves_like "does not update the global key"
   end
 end

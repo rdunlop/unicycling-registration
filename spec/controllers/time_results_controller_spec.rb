@@ -30,7 +30,7 @@
 require 'spec_helper'
 
 describe TimeResultsController do
-  before(:each) do
+  before do
     sign_in FactoryBot.create(:super_admin_user)
     @competition = FactoryBot.create(:competition)
     @competitor = FactoryBot.create(:event_competitor, competition: @competition)
@@ -51,7 +51,7 @@ describe TimeResultsController do
   end
 
   describe "as a normal user" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
       sign_in @user
     end

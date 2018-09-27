@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe CompetitionSetup::EventConfigurationsController do
   let(:max_place) { 6 }
-  before(:each) do
+
+  before do
     @admin_user = FactoryBot.create(:competition_admin_user)
     sign_in @admin_user
     @event = FactoryBot.create(:event)

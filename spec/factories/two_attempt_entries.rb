@@ -29,14 +29,14 @@ FactoryBot.define do
   factory :two_attempt_entry do
     user # FactoryBot
     competition # FactoryBot
-    bib_number 1
-    minutes_1 1
-    minutes_2 1
-    seconds_1 2
-    seconds_2 2
-    thousands_1 3
-    thousands_2 3
-    status_1 "active"
-    status_2 "active"
+    bib_number { 1 }
+    minutes_1 { 1 }
+    minutes_2 { 1 }
+    seconds_1 { 2 }
+    seconds_2 { 2 }
+    thousands_1 { 3 }
+    thousands_2 { 3 }
+    status_1 { "active" }
+    status_2 { "active" }
   end
 end

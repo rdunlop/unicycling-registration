@@ -68,7 +68,7 @@ describe StandardSkillRoutinesController do
     end
 
     describe "when standard skill is closed" do
-      before(:each) do
+      before do
         EventConfiguration.singleton.update_attribute(:standard_skill_closed_date, Date.yesterday)
       end
 

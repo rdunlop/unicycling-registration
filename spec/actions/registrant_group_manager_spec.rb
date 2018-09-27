@@ -46,6 +46,7 @@ describe RegistrantGroupManager do
 
   describe "remove_leader" do
     let!(:leader) { FactoryBot.create(:registrant_group_leader, registrant_group: registrant_group) }
+
     it "cannot remove the last leader" do
       expect(manager.remove_leader(leader)).to be_falsy
     end

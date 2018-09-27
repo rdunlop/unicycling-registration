@@ -644,7 +644,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :data_entry_volunteers, only: %i[index create]
+      resources :data_entry_volunteers, only: %i[index create destroy], param: :user_id
       resources :volunteers, only: %i[index destroy] do
         collection do
           post ":volunteer_type", action: :create, as: :create

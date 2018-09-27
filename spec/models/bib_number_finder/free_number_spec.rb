@@ -64,11 +64,13 @@ describe BibNumberFinder::FreeNumber do
             FactoryBot.create(:competitor)
           end
         end
+
         let!(:series_member2) { FactoryBot.create(:convention_series_member, convention_series: series, tenant: other_tenant) }
 
         context "as a competitor" do
           let(:registrant_type) { "competitor" }
-          it "should choose a number which is unused in all conventions" do
+
+          it "chooses a number which is unused in all conventions" do
             expect(subject.next_available_bib_number).to eq(2)
           end
         end

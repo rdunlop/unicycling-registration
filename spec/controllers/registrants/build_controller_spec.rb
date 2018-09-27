@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Registrants::BuildController do
   let(:user) { FactoryBot.create(:user) }
-  before(:each) do
+
+  before do
     sign_in user
 
     allow_any_instance_of(EventConfiguration).to receive(:registration_closed?).and_return(false)
@@ -83,7 +84,7 @@ describe Registrants::BuildController do
         end
       end
 
-      it "should render the details field, if enabled" do
+      it "renders the details field, if enabled" do
         @item = FactoryBot.create(:registrant_expense_item, registrant: registrant)
         ei = @item.line_item
         ei.has_details = true
@@ -141,7 +142,7 @@ describe Registrants::BuildController do
   end
 
   describe "POST create" do
-    before(:each) do
+    before do
       @ws20 = FactoryBot.create(:wheel_size_20)
       @ws24 = FactoryBot.create(:wheel_size_24)
     end
@@ -154,6 +155,7 @@ describe Registrants::BuildController do
           @other_reg = FactoryBot.create(:competitor, user: user)
         end
       end
+
       after do
         Apartment::Tenant.drop("other")
       end
@@ -169,9 +171,10 @@ describe Registrants::BuildController do
     end
 
     describe "with valid params" do
-      before(:each) do
+      before do
         @comp_attributes = valid_attributes.merge(registrant_type: 'competitor')
       end
+
       let(:params) do
         {
           registrant_type: "competitor",
@@ -183,6 +186,7 @@ describe Registrants::BuildController do
           gender: "Male"
         }
       end
+
       it "creates a new Registrant" do
         expect do
           post :create, params: { registrant_id: "new", registrant: params }
@@ -225,7 +229,7 @@ describe Registrants::BuildController do
     end
 
     describe "When creating nested registrant choices" do
-      before(:each) do
+      before do
         @reg = FactoryBot.create(:registrant, user: user)
         @ev = FactoryBot.create(:event)
         @ec = FactoryBot.create(:event_choice, event: @ev)
@@ -262,7 +266,7 @@ describe Registrants::BuildController do
     end
 
     xdescribe "when creating registrant_event_sign_ups" do
-      before(:each) do
+      before do
         @reg = FactoryBot.create(:registrant, user: user)
         @ecat = FactoryBot.create(:event).event_categories.first
         @attributes = valid_attributes.merge(registrant_type: 'competitor',
@@ -370,6 +374,7 @@ describe Registrants::BuildController do
       let(:do_action) do
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: { registrant_type: 'competitor' } }
       end
+
       it "assigns the registrant as @registrant" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)

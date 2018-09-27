@@ -23,7 +23,7 @@
 require 'spec_helper'
 
 describe AgeGroupEntry do
-  before(:each) do
+  before do
     @age_group_entry = FactoryBot.build_stubbed(:age_group_entry)
   end
 

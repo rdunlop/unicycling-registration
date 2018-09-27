@@ -8,6 +8,7 @@ describe Exporters::RegistrantExporter do
         "Id",
         "First Name",
         "Last Name",
+        "Country",
         "Birthday (dd/mm/yyyy)",
         "Sex (m/f)"
       ]
@@ -54,6 +55,7 @@ describe Exporters::RegistrantExporter do
         registrant.bib_number.to_s,
         registrant.first_name,
         registrant.last_name,
+        "United States",
         "20/04/1998",
         "m"
       ]
@@ -71,6 +73,7 @@ describe Exporters::RegistrantExporter do
           registrant.bib_number.to_s,
           registrant.first_name,
           registrant.last_name,
+          "United States",
           "",
           ""
         ]
@@ -96,6 +99,7 @@ describe Exporters::RegistrantExporter do
             ""
           ]
         end
+
         it "includes the event sign up details" do
           expect(rows.first).to include(*expected_row)
         end
@@ -112,6 +116,7 @@ describe Exporters::RegistrantExporter do
             "My Team"
           ]
         end
+
         it "includes the event sign up details" do
           expect(rows.first).to include(*expected_row)
         end

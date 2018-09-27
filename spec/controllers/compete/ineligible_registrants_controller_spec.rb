@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Compete::IneligibleRegistrantsController do
-  before(:each) do
+  before do
     sign_in FactoryBot.create(:super_admin_user)
   end
 

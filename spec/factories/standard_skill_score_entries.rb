@@ -24,10 +24,10 @@ FactoryBot.define do
   factory :standard_skill_score_entry do
     association :standard_skill_score
     standard_skill_routine_entry # FactoryBot
-    difficulty_devaluation_percent 0
-    wave 0
-    line 0
-    cross 0
-    circle 0
+    difficulty_devaluation_percent { 0 }
+    wave { 0 }
+    line { 0 }
+    cross { 0 }
+    circle { 0 }
   end
 end

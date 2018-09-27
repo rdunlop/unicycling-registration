@@ -16,7 +16,8 @@ gem 'rolify'
 gem 'prawn-labels'
 gem 'spreadsheet'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', '0.12.3.1'
+# newer versions of wkhtmltopdf seem to have shrunken fonts on Mac OS X
 
 # Front-end
 gem "autoprefixer-rails"
@@ -48,7 +49,7 @@ gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'rails_admin', '1.2.0'
+gem 'rails_admin'
 gem 'rake'
 gem 'redis-namespace'
 gem 'redis-rails'
@@ -119,6 +120,7 @@ end
 
 group :development, :test do
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   gem 'teaspoon-jasmine'
 end
 

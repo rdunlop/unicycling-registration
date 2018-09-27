@@ -23,9 +23,9 @@
 FactoryBot.define do
   factory :event_choice do
     event # FactoryGIrl
-    cell_type "boolean"
-    multiple_values nil
+    cell_type { "boolean" }
+    multiple_values { nil }
     sequence(:label) { |n| "Event_choice #{n} chosen" }
-    optional false
+    optional { false }
   end
 end

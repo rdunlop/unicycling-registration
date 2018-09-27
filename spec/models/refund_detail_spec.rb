@@ -17,7 +17,7 @@
 require 'spec_helper'
 
 describe RefundDetail do
-  before(:each) do
+  before do
     @rd = FactoryBot.create(:refund_detail)
   end
 
@@ -31,9 +31,10 @@ describe RefundDetail do
   end
 
   describe "when there is an active registration_cost", caching: true do
-    before(:each) do
+    before do
       @rp = FactoryBot.create(:registration_cost, :competitor)
     end
+
     it "re-creates the registration_expense_item successfully" do
       @reg = FactoryBot.create(:competitor)
       expect(@reg.registrant_expense_items.count).to eq(1)
@@ -52,7 +53,7 @@ describe RefundDetail do
     end
 
     describe "when there is a previous active registration_cost", caching: true do
-      before(:each) do
+      before do
         @rp_prev = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2010, 1, 1), end_date: Date.new(2011, 1, 1))
       end
 

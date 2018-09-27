@@ -36,7 +36,7 @@ describe StreetScoresController do
         @user_score1 = FactoryBot.create(:score, val_1: 5, judge: @judge, competitor: @comp)
       end
 
-      it "should return them in ascending order of val_1 points" do
+      it "returns them in ascending order of val_1 points" do
         get :index, params: { judge_id: @judge.id }
 
         within "#current_ranks" do
@@ -66,12 +66,14 @@ describe StreetScoresController do
       end
     end
   end
+
   describe "DELETE destroy" do
     before do
       @user_score1 = FactoryBot.create(:score, val_1: 5, judge: @judge, competitor: @comp)
       @user_score2 = FactoryBot.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
     end
-    it "should allow access to destroy" do
+
+    it "allows access to destroy" do
       expect do
         delete :destroy, params: { id: @user_score1.to_param, judge_id: @judge.id }
       end.to change(Score, :count).by(-1)
@@ -90,11 +92,12 @@ describe StreetScoresController do
       @auth_user = FactoryBot.create(:user)
       sign_in @auth_user
     end
-    it "should deny access to index" do
+
+    it "denies access to index" do
       get :index, params: { judge_id: @judge }
       expect(response).to redirect_to(root_path)
     end
-    it "should deny access to destroy" do
+    it "denies access to destroy" do
       delete :destroy, params: { id: @user_score.to_param, judge_id: @judge }
       expect(response).to redirect_to(root_path)
     end

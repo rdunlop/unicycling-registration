@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe ArtisticResultCalculator do
-  before(:each) do
+  before do
     @competition = FactoryBot.create(:competition)
     @judge1 = FactoryBot.create(:judge, competition: @competition)
     @jt = @judge1.judge_type
@@ -10,34 +10,35 @@ RSpec.describe ArtisticResultCalculator do
     @comp2 = FactoryBot.create(:event_competitor, competition: @competition)
     @comp3 = FactoryBot.create(:event_competitor, competition: @competition)
   end
+
   describe "when calculating the placement points of an event" do
-    before(:each) do
+    before do
       @score1 = double(placing_points: 1, judge_type: @jt)
       @score2 = double(placing_points: 2, judge_type: @jt)
       @score3 = double(placing_points: 3, judge_type: @jt)
     end
 
-    it "should have 0 points for no scores" do
+    it "has 0 points for no scores" do
       expect(@calc.total_points(@comp1)).to eq(0.0)
     end
 
-    it "should have total_points of 0 (with 1 judge)" do
+    it "has total_points of 0 (with 1 judge)" do
       allow(@comp1).to receive(:scores).and_return([@score1])
       expect(@calc.total_points(@comp1)).to eq(0.0)
     end
 
-    it "should have a total_points of 0 (with 2 judge scores)" do
+    it "has a total_points of 0 (with 2 judge scores)" do
       allow(@comp1).to receive(:scores).and_return([@score1, @score2])
       expect(@calc.total_points(@comp1)).to eq(0.0)
     end
 
-    it "should have the middle score (with 3 judges scores)" do
+    it "has the middle score (with 3 judges scores)" do
       allow(@comp1).to receive(:scores).and_return([@score1, @score2, @score3])
       expect(@calc.total_points(@comp1)).to eq(2)
     end
 
     describe "with technical scores too" do
-      before(:each) do
+      before do
         @tech_jt = FactoryBot.create(:judge_type, name: "Technical", event_class: @competition.event_class)
         @judge = FactoryBot.create(:judge, competition: @competition, judge_type: @tech_jt)
 
@@ -65,7 +66,7 @@ RSpec.describe ArtisticResultCalculator do
       end
 
       describe "when using NAUCC-style rules" do
-        before(:each) do
+        before do
           @calc = described_class.new(false)
         end
 

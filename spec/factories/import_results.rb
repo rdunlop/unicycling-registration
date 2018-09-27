@@ -35,11 +35,11 @@ FactoryBot.define do
   factory :import_result do
     user # FactoryBot
     competition # FactoryBot
-    raw_data "MyString"
-    bib_number 1
-    minutes 1
-    seconds 1
-    thousands 1
-    status nil
+    raw_data { "MyString" }
+    bib_number { 1 }
+    minutes { 1 }
+    seconds { 1 }
+    thousands { 1 }
+    status { nil }
   end
 end

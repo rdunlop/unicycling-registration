@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe RegistrantPolicy do
+  subject { described_class }
+
   let(:my_user) { FactoryBot.create(:user) }
   let(:my_registrant) { FactoryBot.create(:registrant, user: my_user) }
   let(:other_registrant) { FactoryBot.create(:registrant) }
@@ -13,8 +15,6 @@ describe RegistrantPolicy do
 
   let(:unconfirmed_ara) { FactoryBot.create(:additional_registrant_access, user: my_user) }
   let(:unconfirmed_shared_registrant) { unconfirmed_ara.registrant }
-
-  subject { described_class }
 
   permissions :payments? do
     let(:payment_admin) { FactoryBot.create(:payment_admin) }
@@ -85,7 +85,7 @@ describe RegistrantPolicy do
     end
 
     it "disallows access to another registrant" do
-      expect(subject).to_not permit(FactoryBot.create(:user), my_registrant)
+      expect(subject).not_to permit(FactoryBot.create(:user), my_registrant)
     end
 
     it "allows access to another registrant if I have a additional access permit" do
@@ -94,7 +94,7 @@ describe RegistrantPolicy do
     end
 
     it "disallows access to another registrant by me" do
-      expect(subject).to_not permit(my_user, other_registrant)
+      expect(subject).not_to permit(my_user, other_registrant)
     end
 
     it "doesn't allow access if not confirmed" do
@@ -112,7 +112,7 @@ describe RegistrantPolicy do
     end
 
     it "disallows access to another registrant" do
-      expect(subject).to_not permit(FactoryBot.create(:user), my_registrant)
+      expect(subject).not_to permit(FactoryBot.create(:user), my_registrant)
     end
 
     it "doesn't allow access if readonly" do

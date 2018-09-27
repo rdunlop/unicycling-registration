@@ -28,14 +28,14 @@ FactoryBot.define do
   factory :event do
     category # FactoryBot
     sequence(:name) { |n| "Teh event number #{n}" }
-    visible true
+    visible { true }
 
     trait :marathon_best_time_format do
-      best_time_format "h:mm"
+      best_time_format { "h:mm" }
     end
 
     trait :standard_skill do
-      standard_skill true
+      standard_skill { true }
     end
   end
 end

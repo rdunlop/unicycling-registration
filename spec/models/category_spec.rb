@@ -14,7 +14,7 @@ require 'spec_helper'
 
 describe Category do
   it "must have a name" do
-    cat = Category.new
+    cat = described_class.new
     expect(cat.valid?).to eq(false)
     cat.name = "Track"
     expect(cat.valid?).to eq(true)
@@ -31,14 +31,14 @@ describe Category do
     expect(cat.to_s).to eq(cat.name)
   end
   describe "with multiple categories" do
-    before(:each) do
+    before do
       @category2 = FactoryBot.create(:category)
       @category1 = FactoryBot.create(:category)
       @category1.update_attribute(:position, 1)
     end
 
     it "lists them in position order" do
-      expect(Category.all).to eq([@category1, @category2])
+      expect(described_class.all).to eq([@category1, @category2])
     end
   end
 

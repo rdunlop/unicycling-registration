@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe StandardSkillRoutinePolicy do
+  subject { described_class }
+
   let(:my_user) { FactoryBot.create(:user) }
   let(:my_registrant) { FactoryBot.create(:registrant, user: my_user) }
   let(:other_registrant) { FactoryBot.create(:registrant) }
@@ -10,12 +12,11 @@ describe StandardSkillRoutinePolicy do
   let(:std_director) { FactoryBot.create(:user) }
   let(:other_director) { FactoryBot.create(:user) }
   let(:standard_skill_event) { FactoryBot.create(:event, :standard_skill) }
+
   before do
     std_director.add_role :director, standard_skill_event
     other_director.add_role :director, FactoryBot.create(:event)
   end
-
-  subject { described_class }
 
   permissions :show? do
     it { expect(subject).to permit(my_user, my_routine) }

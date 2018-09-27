@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ConventionSetup::EventChoicesController do
-  before(:each) do
+  before do
     sign_in FactoryBot.create(:super_admin_user)
     @event = FactoryBot.create(:event)
   end
@@ -32,7 +32,7 @@ describe ConventionSetup::EventChoicesController do
   end
 
   describe "as a normal user" do
-    before(:each) do
+    before do
       @user = FactoryBot.create(:user)
       sign_in @user
     end
@@ -103,7 +103,7 @@ describe ConventionSetup::EventChoicesController do
     end
 
     describe "with translations specified for label/tooltip" do
-      before(:each) do
+      before do
         @ec_params = {
           "cell_type" => "boolean",
           "multiple_values" => "",

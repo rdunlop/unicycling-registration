@@ -20,7 +20,7 @@
 FactoryBot.define do
   factory :refund do
     user # FactoryBot
-    refund_date "2013-10-11 09:35:39"
-    note "MyString"
+    refund_date { "2013-10-11 09:35:39" }
+    note { "MyString" }
   end
 end

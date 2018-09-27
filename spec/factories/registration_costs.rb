@@ -25,13 +25,13 @@ FactoryBot.define do
     end_date { 5.years.from_now }
 
     transient do
-      build_entries true
+      build_entries { true }
       # if specified,we will build the first entry with this expense_item
-      expense_item nil
+      expense_item { nil }
     end
 
     trait :without_entries do
-      build_entries false
+      build_entries { false }
     end
 
     after(:build) do |registration_cost, evaluator|
@@ -43,24 +43,25 @@ FactoryBot.define do
                                                        end
       end
     end
+
     sequence(:name) { |n| "Early Registration #{n}" }
-    onsite false
-    registrant_type "competitor"
+    onsite { false }
+    registrant_type { "competitor" }
 
     trait :current do
-      current_period true
+      current_period { true }
     end
 
     trait :competitor do
-      registrant_type "competitor"
+      registrant_type { "competitor" }
     end
 
     trait :noncompetitor do
-      registrant_type "noncompetitor"
+      registrant_type { "noncompetitor" }
     end
 
     trait :spectator do
-      registrant_type "spectator"
+      registrant_type { "spectator" }
     end
   end
 end

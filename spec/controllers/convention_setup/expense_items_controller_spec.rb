@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ConventionSetup::ExpenseItemsController do
-  before(:each) do
+  before do
     @admin = FactoryBot.create(:super_admin_user)
     sign_in @admin
   end

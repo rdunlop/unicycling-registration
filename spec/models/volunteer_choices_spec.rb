@@ -5,7 +5,7 @@ describe VolunteerChoice do
     let(:volunteer_opportunity) { FactoryBot.create(:volunteer_opportunity) }
     let!(:registrant) { FactoryBot.create(:registrant) }
 
-    let(:subject) { VolunteerChoice.new(volunteer_opportunity: volunteer_opportunity, registrant: registrant) }
+    let(:subject) { described_class.new(volunteer_opportunity: volunteer_opportunity, registrant: registrant) }
 
     before { ActionMailer::Base.deliveries.clear }
 
@@ -23,7 +23,7 @@ describe VolunteerChoice do
     specify do
       expect do
         subject.save
-      end.to change(VolunteerChoice, :count).by(1)
+      end.to change(described_class, :count).by(1)
     end
   end
 end

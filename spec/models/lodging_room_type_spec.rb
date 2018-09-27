@@ -9,19 +9,19 @@ describe LodgingRoomType do
   let(:rei) { FactoryBot.build(:registrant_expense_item, line_item: lodging_package) }
 
   it "lodging_room_type has not reached the maximum" do
-    expect(lodging_room_type.maximum_reached?(lodging_day)).to be_falsey
+    expect(lodging_room_type).not_to be_maximum_reached(lodging_day)
   end
 
   context "When there is a 0-limit set for the maximum available" do
     before { lodging_room_type.maximum_available = 0 }
 
     it "has not reached the maximum" do
-      expect(lodging_room_type.maximum_reached?(lodging_day)).to be_falsey
+      expect(lodging_room_type).not_to be_maximum_reached(lodging_day)
     end
   end
 
   describe "when an associated payment has been created" do
-    before(:each) do
+    before do
       @payment = FactoryBot.create(:payment_detail, line_item: lodging_package)
       lodging_room_type.reload
     end

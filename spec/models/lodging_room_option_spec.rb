@@ -30,17 +30,17 @@ describe LodgingRoomOption do
   end
 
   describe "when an associated payment has been created" do
-    before(:each) do
+    before do
       @payment = FactoryBot.create(:payment_detail, line_item: lodging_package)
       lodging_room_option.reload
     end
 
-    it "should not be able to destroy this item" do
+    it "is not able to destroy this item" do
       expect(LodgingPackage.all.count).to eq(1)
-      expect(LodgingRoomOption.all.count).to eq(1)
+      expect(described_class.all.count).to eq(1)
       expect { lodging_room_option.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
       expect(LodgingPackage.all.count).to eq(1)
-      expect(LodgingRoomOption.all.count).to eq(1)
+      expect(described_class.all.count).to eq(1)
     end
 
     it "does not count this entry as a selected_item when the payment is incomplete" do
@@ -61,39 +61,39 @@ describe LodgingRoomOption do
   end
 
   describe "with associated registrant_expense_items" do
-    before(:each) do
+    before do
       rei.save! # create the REI
     end
 
-    it "should count the entry as a selected_item" do
+    it "counts the entry as a selected_item" do
       expect(lodging_room_option.num_selected_items(lodging_day)).to eq(1)
       expect(lodging_room_option.num_unpaid(lodging_day)).to eq(1)
     end
 
     describe "when the registrant is deleted" do
-      before(:each) do
+      before do
         reg = rei.registrant
         reg.deleted = true
         reg.save!
       end
 
-      it "should not count the expense_item as num_unpaid" do
+      it "does not count the expense_item as num_unpaid" do
         expect(lodging_room_option.num_unpaid(lodging_day)).to eq(0)
       end
     end
 
     describe "when the registrant is not completed filling out their registration form" do
-      before(:each) do
+      before do
         reg = rei.registrant
         reg.status = "events"
         reg.save!
       end
 
-      it "should not count the expense_item as num_unpaid" do
+      it "does not count the expense_item as num_unpaid" do
         expect(lodging_room_option.num_unpaid(lodging_day)).to eq(0)
       end
 
-      it "should count the expense_item as num_unpaid when option is selected" do
+      it "counts the expense_item as num_unpaid when option is selected" do
         expect(lodging_room_option.num_unpaid(lodging_day, include_incomplete_registrants: true)).to eq(1)
       end
     end

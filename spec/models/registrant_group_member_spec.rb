@@ -20,7 +20,7 @@
 require 'spec_helper'
 
 describe RegistrantGroupMember do
-  before(:each) do
+  before do
     @rgm = FactoryBot.create(:registrant_group_member)
     @rg = @rgm.registrant_group
   end

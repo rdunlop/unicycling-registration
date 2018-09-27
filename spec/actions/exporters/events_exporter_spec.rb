@@ -15,13 +15,14 @@ describe Exporters::EventsExporter do
 
   describe "with a registrant" do
     let!(:reg) { FactoryBot.create(:competitor) }
+
     it "sets the rows" do
       data = exporter.rows
       expect(data[0]).to eq([reg.bib_number, reg.first_name, reg.last_name, reg.birthday, reg.age, reg.gender, reg.club, nil])
     end
 
     describe "with a registration choice for the event" do
-      before(:each) do
+      before do
         @ecat = @ev.event_categories.first
         @rc = FactoryBot.create(:registrant_event_sign_up, registrant: reg, event_category: @ecat, event: @ev, signed_up: true)
       end

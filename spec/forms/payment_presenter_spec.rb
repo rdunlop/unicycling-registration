@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'cgi'
 
 describe PaymentPresenter do
-  before(:each) do
-    @pay = PaymentPresenter.new
+  before do
+    @pay = described_class.new
   end
 
   it "requires that the note be set" do
@@ -18,7 +18,7 @@ describe PaymentPresenter do
   end
 
   describe "when a registrant has paid for something" do
-    before(:each) do
+    before do
       @reg = FactoryBot.create(:competitor)
       @payment = FactoryBot.create(:payment, completed: true)
       @pd = FactoryBot.create(:payment_detail, payment: @payment, registrant: @reg, details: "Some details")
@@ -48,11 +48,12 @@ describe PaymentPresenter do
   end
 
   describe "when a registrant has selected something, but not paid for" do
-    before(:each) do
+    before do
       @reg = FactoryBot.create(:competitor)
       @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg, details: "Some other details")
       @reg.reload
     end
+
     it "has unpaid_details" do
       expect(@reg.owing_registrant_expense_items.size).to eq(1)
     end

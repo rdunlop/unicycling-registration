@@ -21,10 +21,11 @@
 require 'spec_helper'
 
 describe HeatLaneJudgeNotesController do
-  before(:each) do
+  before do
     @super_admin_user = FactoryBot.create(:super_admin_user)
     sign_in @super_admin_user
   end
+
   let(:competition) { FactoryBot.create(:competition) }
   let(:heat_lane_judge_note) { FactoryBot.create(:heat_lane_judge_note, competition: competition, heat: 2, lane: 1) }
   let!(:heat_lane_result) { FactoryBot.create(:heat_lane_result, competition: competition, heat: 2, lane: 1) }

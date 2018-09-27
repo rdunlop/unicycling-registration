@@ -8,7 +8,7 @@ describe 'Logging in to the system' do
     let(:user) { FactoryBot.create :user }
 
     context 'that has logged in' do
-      before :each do
+      before do
         visit new_user_session_path
         fill_in_login_form
       end

@@ -23,10 +23,11 @@
 require 'spec_helper'
 
 describe CompetitionSource do
-  before(:each) do
+  before do
     @competition = FactoryBot.create(:competition)
     @cs = FactoryBot.create(:competition_source, target_competition: @competition)
   end
+
   it "is valid from FactoryBot" do
     expect(@cs.valid?).to eq(true)
   end
@@ -60,7 +61,7 @@ describe CompetitionSource do
   end
 
   describe "with a competition_source targetting another competition" do
-    before(:each) do
+    before do
       @competition2 = FactoryBot.create(:competition)
       @source_competition = FactoryBot.create(:ranked_competition)
       @cs2 = FactoryBot.create(:competition_source, competition: @source_competition, target_competition: @competition2, max_place: 2)

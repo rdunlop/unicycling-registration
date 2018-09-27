@@ -29,38 +29,38 @@
 FactoryBot.define do
   factory :judge_type do
     sequence(:name) { |n| "Presentation #{n}" }
-    event_class "Freestyle"
+    event_class { "Freestyle" }
 
-    val_1_description "Mistakes"
-    val_2_description "Intepretation"
-    val_3_description "Mastery"
-    val_4_description "Magic"
-    val_5_description "N/A"
-    val_1_max 10
-    val_2_max 10
-    val_3_max 10
-    val_4_max 10
-    val_5_max 0
-    boundary_calculation_enabled false
+    val_1_description { "Mistakes" }
+    val_2_description { "Intepretation" }
+    val_3_description { "Mastery" }
+    val_4_description { "Magic" }
+    val_5_description { "N/A" }
+    val_1_max { 10 }
+    val_2_max { 10 }
+    val_3_max { 10 }
+    val_4_max { 10 }
+    val_5_max { 0 }
+    boundary_calculation_enabled { false }
 
     trait :street_judge do
-      val_2_max 0
-      val_3_max 0
-      val_4_max 0
-      val_5_max 0
+      val_2_max { 0 }
+      val_3_max { 0 }
+      val_4_max { 0 }
+      val_5_max { 0 }
     end
 
     trait :artistic_tech_judge do
-      val_1_description "Presence/Execution"
-      val_2_description "Composition/Choreography"
-      val_3_description "Interpretation of the Music/Timing"
-      val_4_description "N/A"
-      val_5_description "N/A"
-      val_1_max 10
-      val_2_max 10
-      val_3_max 10
-      val_4_max 0
-      val_5_max 0
+      val_1_description { "Presence/Execution" }
+      val_2_description { "Composition/Choreography" }
+      val_3_description { "Interpretation of the Music/Timing" }
+      val_4_description { "N/A" }
+      val_5_description { "N/A" }
+      val_1_max { 10 }
+      val_2_max { 10 }
+      val_3_max { 10 }
+      val_4_max { 0 }
+      val_5_max { 0 }
     end
   end
 end

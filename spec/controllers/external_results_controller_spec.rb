@@ -21,7 +21,7 @@
 require 'spec_helper'
 
 describe ExternalResultsController do
-  before(:each) do
+  before do
     @admin_user = FactoryBot.create(:super_admin_user)
     sign_in @admin_user
     @competition = FactoryBot.create(:competition)
