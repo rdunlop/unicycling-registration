@@ -12,6 +12,12 @@ RailsAdmin.config do |config|
   # RailsAdmin may need a way to know who the current user is]
   config.current_user_method { current_user } # auto-generated
 
+  # This is necessary in order to avoid issues when in development
+  # The way that RailsAdmin patches in the "include Pundit" is not
+  # working well with  the auto-reloading, and so, we specify
+  # a controller which explicitly already does "include Pundit"
+  config.parent_controller = "ApplicationController"
+
   config.authorize_with :pundit
   # If you want to track changes on your models:
   # config.audit_with :history, 'User'
