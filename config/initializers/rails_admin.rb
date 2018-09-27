@@ -119,3 +119,19 @@ module RailsAdmin
     end
   end
 end
+
+# Fix issue where it tries to load paper_trail_options for a model which has none
+# this reverts https://github.com/sferik/rails_admin/pull/3059/files
+module RailsAdmin
+  module Extensions
+    module PaperTrail
+      class AuditingAdapter
+        def version_class_for(model)
+          model_name = model.name
+          klass = model_name.constantize.try(:version_class_name).try(:constantize)
+          klass || @version_class
+        end
+      end
+    end
+  end
+end
