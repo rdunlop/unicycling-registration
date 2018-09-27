@@ -34,6 +34,7 @@ class Competitor < ApplicationRecord
   with_options dependent: :destroy do
     has_many :members, inverse_of: :competitor
     has_many :lane_assignments
+
     has_many :scores
     has_many :boundary_scores
     has_many :standard_skill_scores
