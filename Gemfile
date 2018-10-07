@@ -59,6 +59,7 @@ gem 'rollbar'
 gem 'rubyzip'
 gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
 gem 'unicorn', require: false
+gem 'webpacker'
 gem 'whenever'
 
 # determined we are over IE8 CSS limits using
