@@ -9,6 +9,7 @@
 
 import "jquery"
 import "jquery-ujs"
+import "datatables"
 import "./components/attending"
 import "./components/block_displayer"
 import "./components/block_enabler_by_radio"

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "datatables": "^1.10.18",
     "jquery": "^3.3.1",
     "jquery-ujs": "^1.2.2"
   },
