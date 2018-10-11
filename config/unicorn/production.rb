@@ -2,7 +2,7 @@
 # see https://ariejan.net/2011/09/14/lighting-fast-zero-downtime-deployments-with-git-capistrano-nginx-and-unicorn/
 
 # workers
-worker_processes 1
+worker_processes 2
 
 # listen
 listen "/tmp/unicorn-unicycling-registration.socket", backlog: 64
