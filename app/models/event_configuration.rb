@@ -225,6 +225,10 @@ class EventConfiguration < ApplicationRecord
     usa?
   end
 
+  def volunteer?
+    volunteer_option != "none"
+  end
+
   def self.singleton
     # Use the request-level EventConfiguration, if it is defined, otherwise, fall-back
     # to fetching from the DB
