@@ -133,7 +133,7 @@ describe RegistrantPolicy do
     let(:authorized_laptop?) { false }
     let(:user) { my_user }
     let(:event_sign_up_closed?) { false }
-    let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "generic", wheel_size_configuration_max_age: 10) }
+    let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "generic", volunteer?: true, wheel_size_configuration_max_age: 10) }
     let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
 
     permissions :add_volunteers? do
@@ -142,7 +142,7 @@ describe RegistrantPolicy do
       end
 
       describe "when event_configuration has volunteers disabled" do
-        let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "none") }
+        let(:config) { double(event_sign_up_closed?: event_sign_up_closed?, volunteer_option: "none", volunteer?: false) }
 
         it { expect(subject).not_to permit(user_context, FactoryBot.create(:competitor, user: user)) }
       end
