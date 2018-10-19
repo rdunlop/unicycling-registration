@@ -201,7 +201,7 @@ GEM
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     cliver (0.3.2)
-    cocoon (1.2.11)
+    cocoon (1.2.12)
     codeclimate-test-reporter (1.0.8)
       simplecov (<= 0.13)
     codeclimate_circle_ci_coverage (0.2.2)
