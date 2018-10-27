@@ -1,42 +1,86 @@
 version: 2
-jobs:
-  build:
-    parallelism: 4
+references:
+  default_job_config: &default_job_config
+    # The working directory is important, so that we
+    # install/cache everything relative to that location
+    working_directory: ~/tmp
     docker:
-      - image: circleci/ruby:2.4.3
+      - image: circleci/ruby:2.4.3-node
         environment:
           RAILS_ENV: test
           PGHOST: localhost
-          PGUSER: robindunlop
+          PGUSER: ubuntu
+          # Bundle paths are necessary so that the gems are installed within the workspace
+          # otherwise, they are installed in /usr/local
+          BUNDLE_PATH: ~/tmp/vendor/bundle
+          BUNDLE_APP_CONFIG: ~/tmp/vendor/bundle
       - image: circleci/postgres:9.4.12-alpine
         environment:
           POSTGRES_USER: robindunlop
           POSTGRES_PASSWORD: password
+jobs:
+  build:
+    <<: *default_job_config
     steps:
       - checkout
 
       # Gems
+      # Restore the bundle of gems
       - restore_cache:
-          key: unicycling-registration
-      - run: bundle install --path vendor/bundle
+          key: badges-gemfile-cache-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --without=development --jobs=4 --retry=3
+
       - save_cache:
-          key: unicycling-registration
+          key: badges-gemfile-cache-{{ checksum "Gemfile.lock" }}
+          # NOTE: if this path directory is changed, the 'key' must be changed.
+          # because caches are write-once, and always restore to the same path
+          # they were in when they were stored.
           paths:
-            - vendor/bundle
+            - ~/tmp/vendor/bundle
 
       - run: cp config/secrets.yml.template config/secrets.yml
       - run: cp config/database.yml.template config/database.yml
 
-      # Setup DB
+      # Store the application code, configuration, and gems in a workspace
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  rubocop:
+    <<: *default_job_config
+    steps:
+      - attach_workspace:
+          at: ~/tmp
+      - run: bundle exec rubocop --config .rubocop.yml
+
+  bundle_audit:
+    <<: *default_job_config
+    steps:
+      - attach_workspace:
+          at: ~/tmp
+      - run: bundle exec bundle-audit check --ignore CVE-2018-1000544
+
+  rspec:
+    parallelism: 4
+    <<: *default_job_config
+    steps:
+      - attach_workspace:
+          at: ~/tmp
+
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 2m
+
+      # Setup DB in this job, because it cannot be shared through the attach_workspace
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
-      - run: bundle exec rubocop --config .rubocop.yml
-
       # Run rspec in parallel
-      - type: shell
-        command: |
-          bundle exec rspec --profile 10 \
+      - run:
+          shell: /bin/bash -eo pipefail -O globstar
+          name: rspec
+          command: |
+            bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
                             --out test_results/rspec.xml \
                             --format progress \
@@ -46,25 +90,71 @@ jobs:
       - store_test_results:
           path: test_results
 
-      # Save the test results to allow downloading them for CodeClimate Reporting
-      - store_artifacts:
-          path: coverage/.resultset.json
-          prefix: coverage
+  check_db_schema:
+    <<: *default_job_config
+    steps:
+      - attach_workspace:
+          at: ~/tmp
 
-      - deploy:
-          name: Merge and copy coverage data
-          command: bundle exec report_coverage
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 2m
 
-      - deploy:
-          name: Deploy develop branch to staging
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              bundle exec cap stage deploy
-            fi
+      # # check to ensure that we can migrate from scratch
+      - run: bundle exec rake db:drop db:create db:migrate RAILS_ENV=test
+      # # check that the schema.rb is the same result
+      - run: git diff --exit-code db/schema.rb
 
-      - deploy:
-          name: Deploy master branch to production
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              bundle exec cap prod deploy
-            fi
+  release_stage:
+    <<: *default_job_config
+    steps:
+      - attach_workspace:
+          at: ~/tmp
+
+      - run: bundle exec cap stage deploy
+
+  release_prod:
+    <<: *default_job_config
+    steps:
+      - attach_workspace:
+          at: ~/tmp
+
+      - run: bundle exec cap prod deploy
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - rspec:
+          requires:
+            - build
+      - rubocop:
+          requires:
+            - build
+      - bundle_audit:
+          requires:
+            - build
+      - check_db_schema:
+          requires:
+            - build
+      - release_stage:
+          requires:
+            - rspec
+            - rubocop
+            - bundle_audit
+            - check_db_schema
+          filters:
+            branches:
+              only:
+                - develop
+      - release_prod:
+          requires:
+            - rspec
+            - rubocop
+            - bundle_audit
+            - check_db_schema
+          filters:
+            branches:
+              only:
+                - master
