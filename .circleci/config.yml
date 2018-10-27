@@ -58,7 +58,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/tmp
-      - run: bundle exec bundle-audit
+      - run: bundle exec bundle-audit check --ignore CVE-2018-1000544
 
   rspec:
     parallelism: 4
