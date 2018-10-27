@@ -135,9 +135,6 @@ workflows:
       - bundle_audit:
           requires:
             - build
-      - haml_lint:
-          requires:
-            - build
       - check_db_schema:
           requires:
             - build
@@ -146,7 +143,6 @@ workflows:
             - rspec
             - rubocop
             - bundle_audit
-            - haml_lint
             - check_db_schema
           filters:
             branches:
@@ -157,7 +153,6 @@ workflows:
             - rspec
             - rubocop
             - bundle_audit
-            - haml_lint
             - check_db_schema
           filters:
             branches:
