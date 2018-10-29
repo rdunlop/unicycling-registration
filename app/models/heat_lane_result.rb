@@ -77,6 +77,7 @@ class HeatLaneResult < ApplicationRecord
 
   def set_time_if_disqualified
     return unless disqualified?
+
     self.minutes ||= 0
     self.seconds ||= 0
     self.thousands ||= 0

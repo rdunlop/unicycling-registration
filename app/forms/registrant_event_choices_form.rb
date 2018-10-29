@@ -56,6 +56,7 @@ class RegistrantEventChoicesForm
       found_rc = nil
       registrant.registrant_choices.each do |rc|
         next unless rc.event_choice_id == choice.id
+
         found_rc = rc
         results << [choice, found_rc]
         break

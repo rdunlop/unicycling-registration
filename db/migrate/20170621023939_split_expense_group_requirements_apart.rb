@@ -30,6 +30,7 @@ class SplitExpenseGroupRequirementsApart < ActiveRecord::Migration[5.0]
 
       option = expense_group.noncompetitor_free_options
       next unless option.present? && option != "None Free"
+
       ExpenseGroupFreeOption.create!(
         expense_group_id: expense_group.id,
         registrant_type: "noncompetitor",

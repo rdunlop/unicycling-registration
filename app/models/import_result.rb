@@ -71,6 +71,7 @@ class ImportResult < ApplicationRecord
           # another competition with a competitor in the same event exists, use a competitor there
           competitor = matching_registrant.competitors.find_by(competition: matching_competition)
           raise "error finding matching competitor" if competitor.nil?
+
           target_competition = matching_competition
         end
       end

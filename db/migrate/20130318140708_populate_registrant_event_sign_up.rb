@@ -24,6 +24,7 @@ class PopulateRegistrantEventSignUp < ActiveRecord::Migration[4.2]
       # find all registrants who have chosen this
       RegistrantChoice.where(event_choice_id: ec.id).each do |rc|
         next if rc.value == "0"
+
         # determine the event_category for this user
         category_ec = EventChoice.find_by(cell_type: "category", event_id: ec.event_id)
         category_id = nil

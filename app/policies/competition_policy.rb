@@ -90,6 +90,7 @@ class CompetitionPolicy < ApplicationPolicy
 
   def freestyle_summary?
     return false unless record.freestyle_summary?
+
     results?
   end
 

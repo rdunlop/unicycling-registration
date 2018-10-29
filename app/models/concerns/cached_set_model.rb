@@ -36,6 +36,7 @@ module CachedSetModel
 
   def update_last_modified_set_collection_cache
     return unless recent_changes.keys.any?
+
     do_touch_set
   end
 

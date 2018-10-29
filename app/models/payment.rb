@@ -102,7 +102,7 @@ class Payment < ApplicationRecord
 
   def self.total_refunded_amount
     total = 0.to_money
-    PaymentDetail.refunded.includes(:payment, refund_detail: :refund).each do |payment_detail|
+    PaymentDetail.refunded.includes(:payment, refund_detail: :refund).find_each do |payment_detail|
       total += payment_detail.cost
     end
     total

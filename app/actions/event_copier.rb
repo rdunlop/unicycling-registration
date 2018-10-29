@@ -91,6 +91,7 @@ class EventCopier
 
   def source_events
     return @events if @events
+
     Apartment::Tenant.switch subdomain do
       @events = Event.all.includes(:translations, event_categories: :translations, category: :translations, event_choices: :translations).load
     end

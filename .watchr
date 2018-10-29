@@ -14,13 +14,13 @@ watch("^spec/.*/*_spec.rb") do |match|
 end
 
 watch("^app/(.*).rb") do |match|
-  run_spec %{spec/#{match[1]}_spec.rb}
+  run_spec %(spec/#{match[1]}_spec.rb)
 end
 
 watch("^app/(.*).erb") do |match|
-  run_spec %{spec/#{match[1]}.erb_spec.rb}
+  run_spec %(spec/#{match[1]}.erb_spec.rb)
 end
 
 watch("^lib/(.*).rb") do |match|
-  run_spec %{spec/lib/#{match[1]}_spec.rb}
+  run_spec %(spec/lib/#{match[1]}_spec.rb)
 end

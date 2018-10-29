@@ -236,6 +236,7 @@ class Registrant < ApplicationRecord
   # for use when overriding the default system-managed reg_item
   def set_registration_item_expense(expense_item, lock = true)
     return true if reg_paid?
+
     curr_rei = registration_item
 
     if curr_rei.nil?
@@ -344,6 +345,7 @@ class Registrant < ApplicationRecord
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?(include_pending: true)
     return true if spectator?
+
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid/include_pending/#{include_pending}") do
       registration_cost_items = RegistrationCost.all_registration_expense_items
       if include_pending
@@ -439,6 +441,7 @@ class Registrant < ApplicationRecord
 
   def organization_membership_confirmed?
     return false unless validated?
+
     contact_detail.try(:organization_membership_confirmed?)
   end
 
@@ -476,7 +479,7 @@ class Registrant < ApplicationRecord
   # }
   def assigned_event_categories
     results = {}
-    signed_up_events.includes(event: [event_choices: [:translations], category: [:translations]]).each do |registrant_sign_up|
+    signed_up_events.includes(event: [event_choices: [:translations], category: [:translations]]).find_each do |registrant_sign_up|
       category_hash = results[registrant_sign_up.event.category.to_s] ||= {}
       event_hash = category_hash[registrant_sign_up.event.to_s] ||= {}
       event_hash[:competition_name] = registrant_sign_up.event.to_s
@@ -486,7 +489,7 @@ class Registrant < ApplicationRecord
       event_hash[:status] = nil
     end
 
-    competitors.includes(competition: [event: [category: [:translations]]]).each do |competitor|
+    competitors.includes(competition: [event: [category: [:translations]]]).find_each do |competitor|
       category_hash = results[competitor.event.category.to_s] ||= {}
       event_hash = category_hash[competitor.event.to_s] ||= {}
       event_hash[:competition_name] = competitor.competition.award_title

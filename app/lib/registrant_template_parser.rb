@@ -44,11 +44,13 @@ class RegistrantTemplateParser
     output = ""
     Category.includes(:events, :translations).each do |cat|
       next unless registrant.has_event_in_category?(cat)
+
       output += "#{cat}\n"
       output += "===================\n"
 
       cat.events.each do |event|
         next unless registrant.has_event?(event)
+
         details = registrant.describe_event_hash(event)
         output += (details[:description]).to_s
         output += " - #{details[:category]}" if details[:category].present?

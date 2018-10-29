@@ -85,6 +85,7 @@ class RegistrantEventSignUp < ApplicationRecord
       event_category.competitions_being_fed(registrant).each do |competition|
         next unless competition.automatic_competitor_creation?
         next if registrant.competitions.include?(competition)
+
         competition.create_competitors_from_registrants([registrant], nil)
       end
     end

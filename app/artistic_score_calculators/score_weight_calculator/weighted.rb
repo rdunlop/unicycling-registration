@@ -10,6 +10,7 @@ class ScoreWeightCalculator::Weighted
     sum = 0
     raw_scores.each_with_index do |score, index|
       next if score_weights[index].nil?
+
       sum += score * score_weights[index]
     end
     sum / 100.0

@@ -10,6 +10,7 @@ class PercentageBasedCalculation
 
   def self.calc_perc_points(best_time:, time:, base_points:, bonus_percentage:)
     return 0 if time.zero?
+
     points = (best_time * 1.0 / time) * base_points
     points + (points * bonus_percentage / 100.0)
   end

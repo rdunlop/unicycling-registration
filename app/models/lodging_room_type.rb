@@ -50,6 +50,7 @@ class LodgingRoomType < ApplicationRecord
 
   def has_limits?
     return true if maximum_available&.positive?
+
     false
   end
 end

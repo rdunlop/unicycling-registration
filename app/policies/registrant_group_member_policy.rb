@@ -7,6 +7,7 @@ class RegistrantGroupMemberPolicy < ApplicationPolicy
   def destroy?
     # allow member to remove self
     return true if user.registrants.include?(record.registrant)
+
     create?
   end
 

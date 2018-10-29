@@ -11,6 +11,7 @@ class LodgingForm
   # create all of the associated registrant_expense_items for the given selection
   def save
     return false unless valid?
+
     success = true
 
     Lodging.transaction do
@@ -76,6 +77,7 @@ class LodgingForm
 
   def all_desired_days_exist
     return if check_in_day.blank? || check_out_day.blank?
+
     if days_to_book.first&.date_offered != Date.parse(check_in_day)
       errors.add(:base, "#{check_in_day} Unable to be booked. Out of range?")
     end
@@ -86,6 +88,7 @@ class LodgingForm
 
   def meets_minimum_duration
     return if lodging_room_type.nil? || lodging_room_type.minimum_duration_days.to_i <= 1
+
     if days_to_book.count < lodging_room_type.minimum_duration_days
       errors.add(:base, "Must book at least #{lodging_room_type.minimum_duration_days} days for this lodging type")
     end

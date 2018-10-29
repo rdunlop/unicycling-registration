@@ -74,6 +74,7 @@ class ContactDetail < ApplicationRecord
 
   def country
     return "N/A" if country_code.nil?
+
     country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
@@ -97,6 +98,7 @@ class ContactDetail < ApplicationRecord
 
   def update_usa_membership_status
     return unless organization_member_number_changed?
+
     # If we perform the search immediately, sometimes the ContactDetail hasn't been committed yet, so we wait 3 seconds.
     UpdateUsaMembershipStatusWorker.perform_in(3.seconds, registrant_id)
   end

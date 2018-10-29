@@ -21,6 +21,7 @@ class Importers::Parsers::TwoAttemptSlalom < Importers::Parsers::Base
     status_2 = translate_status_column(time_two)
 
     return nil if status_1.nil? && status_2.nil?
+
     minutes_1, seconds_1, thousands_1 = nil
     minutes_2, seconds_2, thousands_2 = nil
 

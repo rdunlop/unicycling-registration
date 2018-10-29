@@ -7,6 +7,7 @@ AllCops:
     - "bin/**/*" # Auto-generated
     - "db/schema.rb" # Auto-generated
     - "vendor/**/*" # CI uses this directory for gems
+    - "node_modules/**/*"
 Rails:
   Enabled: true
 

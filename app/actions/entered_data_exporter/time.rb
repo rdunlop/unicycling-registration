@@ -12,6 +12,7 @@ class EnteredDataExporter::Time
   def data
     competition.competitors.map do |comp|
       next unless comp.has_result?
+
       tr = comp.time_results.first
       heat = tr.heat_lane_result
 

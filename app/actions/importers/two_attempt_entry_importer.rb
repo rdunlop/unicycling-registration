@@ -13,6 +13,7 @@ class Importers::TwoAttemptEntryImporter < Importers::CompetitionDataImporter
       raw_data.each do |raw|
         row_hash = processor.process_row(raw)
         next if row_hash.nil? # different than ImportResultImporter
+
         if build_and_save_imported_result(row_hash, @user, @competition, is_start_time)
           self.num_rows_processed += 1
         end

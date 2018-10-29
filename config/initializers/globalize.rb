@@ -3,6 +3,7 @@ module ActionView
     class FormBuilder
       def globalize_fields_for(locale, *args, &proc)
         raise ArgumentError, "Missing block" unless block_given?
+
         @index = @index ? @index + 1 : 1
         object_name = "#{@object_name}[translations_attributes][#{@index}]"
         object = @object.translations.find_by locale: locale.to_s
