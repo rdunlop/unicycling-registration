@@ -72,6 +72,7 @@ class TwoAttemptEntry < ApplicationRecord
 
     def results_for_competition
       return if disqualified?
+
       unless time_is_present?
         errors.add(:base, "Must enter time or dq")
       end

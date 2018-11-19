@@ -15,6 +15,7 @@ class ApplicationRecord < ActiveRecord::Base
       value.map do |obj|
         # be sure to not count the destroyed objects
         next if obj.marked_for_destruction?
+
         cur_attr_value = obj.try(attr_name)
         if duplicates.member?(cur_attr_value)
           # mark the record as in error so validation will detect a failure

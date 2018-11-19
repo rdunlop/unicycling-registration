@@ -9,6 +9,7 @@ class DistanceResultCalculator
     if competitor.has_result?
       max_distance = competitor.max_successful_distance
       return if max_distance.nil? || max_distance.zero?
+
       "#{max_distance} cm"
     end
   end

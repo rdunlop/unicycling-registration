@@ -40,6 +40,7 @@ class Example::CompetitionChoicesController < ApplicationController
   def download_file
     filename = validate_file(params[:filename])
     return if filename.blank?
+
     send_file(
       Rails.root.join("public", "sample_data", filename),
       filename: filename

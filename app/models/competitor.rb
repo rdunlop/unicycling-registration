@@ -209,16 +209,19 @@ class Competitor < ApplicationRecord
 
   def place
     return 0 if disqualified?
+
     age_group_result.try(:place)
   end
 
   def overall_place
     return 0 if disqualified?
+
     overall_result.try(:place)
   end
 
   def sorting_place
     return 999 if disqualified? || place.nil?
+
     place
   end
 
@@ -235,6 +238,7 @@ class Competitor < ApplicationRecord
   def sorting_overall_place
     return 999 if disqualified? || overall_place.nil?
     return 100 + overall_place if !competition.score_ineligible_competitors? && ineligible?
+
     overall_place
   end
 

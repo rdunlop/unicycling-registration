@@ -25,6 +25,7 @@ class EventConfirmationEmail < ApplicationRecord
 
   def send!(user)
     return false if sent?
+
     self.sent_by = user
     self.sent_at = Time.current
     saved = save

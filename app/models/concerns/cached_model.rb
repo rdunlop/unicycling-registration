@@ -15,6 +15,7 @@ module CachedModel
 
   def update_last_modified_collection_cache
     return unless (recent_changes.keys - ignored_for_collection_invalidation_fields).any?
+
     do_touch
   end
 

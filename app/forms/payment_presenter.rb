@@ -18,6 +18,7 @@ class PaymentPresenter
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
       next if rei.free
+
       @new_expense_items << PaymentDetailPresenter.new(registrant_id: rei.registrant.id, line_item: rei.line_item, free: rei.free, amount: rei.total_cost, details: rei.details)
     end
     registrant.paid_details.each do |pd|
@@ -68,6 +69,7 @@ class PaymentPresenter
 
     def line_item
       return nil if line_item_type.blank? || line_item_id.blank?
+
       line_item_type.constantize.find(line_item_id)
     end
 
@@ -174,6 +176,7 @@ class PaymentPresenter
     payment = build_payment
     valid?
     return false unless payment.valid?
+
     self.saved_payment = payment
     payment.save
   end

@@ -176,6 +176,7 @@ class EventConfiguration < ApplicationRecord
 
   def can_only_drop_or_modify_events?
     return false if add_event_end_date.blank?
+
     is_date_in_the_past?(add_event_end_date)
   end
 
@@ -199,6 +200,7 @@ class EventConfiguration < ApplicationRecord
 
   def waiver_text
     return custom_waiver_text if custom_waiver_text.present?
+
     self.class.default_waiver_text
   end
 
@@ -296,6 +298,7 @@ class EventConfiguration < ApplicationRecord
 
   def registration_closed?
     return true if under_construction?
+
     # allow 1 day of grace to registration_closed_date
     is_date_in_the_past?(registration_closed_date)
   end
@@ -382,6 +385,7 @@ class EventConfiguration < ApplicationRecord
 
   def is_date_in_the_past?(date)
     return false if date.nil?
+
     date < Date.current
   end
 

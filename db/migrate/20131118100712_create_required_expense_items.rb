@@ -27,10 +27,12 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration[4.2]
     # Create a registrant_expense_item for any registrant who hasn't paid for the required item(s)
     ExpenseGroup.all.each do |eg|
       next unless eg.expense_items.count == 1
+
       ei = eg.expense_items.first
       Registrant.all.each do |reg|
         next unless (reg.competitor && eg.competitor_required) || (!reg.competitor && eg.noncompetitor_required)
         next if reg.payment_details.where(payments: { completed: true }).map { |pd| pd.expense_item_id }.include?(ei.id)
+
         re = RegistrantExpenseItem.new
         re.registrant_id = reg.id
         re.expense_item_id = ei.id
@@ -44,6 +46,7 @@ class CreateRequiredExpenseItems < ActiveRecord::Migration[4.2]
   def down
     RegistrantExpenseItem.all.each do |rei|
       next unless rei.system_managed
+
       rei.delete
     end
     remove_column :registrant_expense_items, :system_managed

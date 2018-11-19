@@ -12,6 +12,7 @@ module HoursFacade
   # NOT YET fully tested to be working.
   def facade_minutes
     return nil if minutes.blank?
+
     minutes % 60
   end
 
@@ -21,6 +22,7 @@ module HoursFacade
 
   def facade_hours
     return nil if minutes.blank?
+
     minutes / 60
   end
 
@@ -34,6 +36,7 @@ module HoursFacade
 
   def facade_hundreds
     return nil if thousands.blank?
+
     thousands / 10
   end
 

@@ -45,6 +45,7 @@ class CompetitorOrderer
       if score_is_invalid(a.comparable_tie_break_score) || score_is_invalid(b.comparable_tie_break_score)
         return incorrect_scores_last(a.comparable_tie_break_score, b.comparable_tie_break_score)
       end
+
       first_competitor.comparable_tie_break_score <=> second_competitor.comparable_tie_break_score
     else
       res
@@ -54,6 +55,7 @@ class CompetitorOrderer
   def either_score_is_invalid(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
     return true if score_is_invalid(competitor_score(a))
     return true if score_is_invalid(competitor_score(b))
+
     false
   end
 

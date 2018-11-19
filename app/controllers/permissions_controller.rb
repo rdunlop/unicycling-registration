@@ -35,6 +35,7 @@ class PermissionsController < ApplicationController
     reg = Registrant.find(registrant_id)
     user = reg.additional_registrant_accesses.map(&:user).find(&:guest?)
     return user if user
+
     user ||= User.this_tenant.create(name: "guest", guest: true, confirmed_at: Time.current, email: "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com")
     user.save!(validate: false)
     user_convention = user.user_conventions.build(subdomain: Apartment::Tenant.current)
@@ -46,6 +47,7 @@ class PermissionsController < ApplicationController
 
   def code_is_valid(registrant_id, code)
     return false if registrant_id.empty? || code.empty?
+
     r = Registrant.find(registrant_id)
     r.access_code == code
   end

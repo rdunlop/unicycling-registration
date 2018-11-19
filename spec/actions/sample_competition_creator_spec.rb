@@ -8,6 +8,7 @@ describe SampleCompetitionCreator do
 
   Competition.scoring_classes.each do |scoring_class|
     next if scoring_class == "Overall Champion"
+
     it "can create #{scoring_class} competition type" do
       expect do
         result = described_class.new(scoring_class).create

@@ -15,6 +15,7 @@ class SetCategoryAssociations < ActiveRecord::Migration[4.2]
     EventChoice.where(cell_type: "category").each do |ec|
       ec.registrant_choices.each do |reg_choice|
         next if reg_choice.value == ""
+
         reg_choice.event_category = EventCategory.find_by(name: reg_choice.value, event_id: ec.event_id)
         reg_choice.save!
       end

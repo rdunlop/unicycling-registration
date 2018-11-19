@@ -24,6 +24,7 @@ class TimeResultPresenter
 
   def full_time
     return unless minutes.positive? || seconds.positive? || thousands.positive?
+
     "#{hours_minutes_string}:#{seconds_string}#{thousands_string}"
   end
 

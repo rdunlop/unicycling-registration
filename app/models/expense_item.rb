@@ -225,6 +225,7 @@ class ExpenseItem < ApplicationRecord
   def has_limits?
     return true if maximum_available&.positive?
     return true if maximum_per_registrant&.positive?
+
     false
   end
 

@@ -73,6 +73,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
 
   def print_item_cost_currency(cost)
     return "Free" if cost == 0.to_money
+
     print_formatted_currency(cost)
   end
 

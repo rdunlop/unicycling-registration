@@ -33,6 +33,7 @@ class StandardSkillScoreEntry < ApplicationRecord
 
   def difficulty_devaluation_score
     return 0 unless valid?
+
     standard_skill_routine_entry.points * (difficulty_devaluation_percent / 100.0)
   end
 end

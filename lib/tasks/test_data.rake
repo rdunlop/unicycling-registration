@@ -35,6 +35,7 @@ def sign_up_for_event(reg, event, event_category = nil)
   if reg.registrant_event_sign_ups.find_by(event: event)
     return
   end
+
   ecat_name = event_category || "All"
   ecat = event.event_categories.find_by(name: ecat_name)
   resu = RegistrantEventSignUp.find_by(registrant: reg, event: event, event_category: ecat)

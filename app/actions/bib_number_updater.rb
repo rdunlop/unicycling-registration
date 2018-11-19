@@ -2,6 +2,7 @@ class BibNumberUpdater
   # set a user to the new bib number
   def self.update_bib_number(registrant, new_bib_number)
     return false unless valid_new_bib_number(registrant, new_bib_number)
+
     free_bib_number(new_bib_number)
     registrant.update(bib_number: new_bib_number)
   end
@@ -18,6 +19,7 @@ class BibNumberUpdater
   def self.free_bib_number(bib_number)
     reg = Registrant.find_by(bib_number: bib_number)
     return if reg.nil?
+
     new_bib_number = reg.registrant_type_model.next_available_bib_number
     reg.update(bib_number: new_bib_number)
   end

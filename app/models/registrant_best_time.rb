@@ -40,6 +40,7 @@ class RegistrantBestTime < ApplicationRecord
 
   def to_s
     return if formatter.nil?
+
     "Best Time: #{formatted_value} @ #{source_location}"
   end
 

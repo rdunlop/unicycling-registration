@@ -64,6 +64,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
 
   def competition_params
     return {} if params[:competition].blank?
+
     params.require(:competition).permit(:name, :uses_lane_assignments, :start_data_type, :end_data_type, :base_age_group_type_id,
                                         :age_group_type_id, :scoring_class, :has_experts, :award_title_name,
                                         :award_subtitle_name, :scheduled_completion_at, :num_members_per_competitor,

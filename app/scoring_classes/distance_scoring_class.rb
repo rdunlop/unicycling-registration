@@ -24,6 +24,7 @@ class DistanceScoringClass < BaseScoringClass
 
   def competitor_dq?(competitor)
     return false unless competitor.has_attempt?
+
     !competitor.has_successful_attempt?
   end
 

@@ -16,6 +16,7 @@ class StandardDeviation
   def num_standards_from_the_mean(value)
     return 0.0 if value.nil?
     return 0.0 if standard_deviation.zero?
+
     ((value - mean) / standard_deviation).abs
   end
 
@@ -25,6 +26,7 @@ class StandardDeviation
 
   def mean
     return 0.0 if array.length.zero?
+
     sum / array.length.to_f
   end
 

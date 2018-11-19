@@ -54,6 +54,7 @@ class HeatAssignmentCreator
         return 0
       end
       return -1 if a.nil?
+
       return 1
     end
     b.try(:value) <=> a.try(:value)
