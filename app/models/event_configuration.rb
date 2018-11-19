@@ -71,6 +71,7 @@ class EventConfiguration < ApplicationRecord
   validates :enabled_locales, presence: true
   validates :time_zone, presence: true, inclusion: { in: ActiveSupport::TimeZone.send(:zones_map).keys }
   validate :only_one_info_type
+  validate :stripe_or_paypal_only
 
   def self.style_names
     [["Blue and Pink", "base_blue_pink"], ["Green and Blue", "base_green_blue"], ["Blue Purple Green", "base_blue_purple"], ["Purple Blue Green", "base_purple_blue"]]
@@ -381,6 +382,10 @@ class EventConfiguration < ApplicationRecord
     @has_expenses = ExpenseItem.any_in_use?
   end
 
+  def payment_account?
+    paypal_account? || stripe_secret_key?
+  end
+
   private
 
   def is_date_in_the_past?(date)
@@ -400,6 +405,12 @@ class EventConfiguration < ApplicationRecord
   def only_one_info_type
     if comp_noncomp_url.present? && comp_noncomp_page.present?
       errors.add(:comp_noncomp_page_id, "Unable to specify both Comp-NonComp URL and Comp-NonComp Page")
+    end
+  end
+
+  def stripe_or_paypal_only
+    if paypal_account.present? && stripe_secret_key.present?
+      errors.add(:paypal_account, "Cannot specify BOTH stripe AND paypal")
     end
   end
 end

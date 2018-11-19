@@ -158,6 +158,7 @@ Rails.application.routes.draw do
         get :summary
         post :notification, controller: "paypal_payments"
         get :success, controller: "paypal_payments"
+        post :stripe, controller: "stripe_payments"
         get :offline
       end
 
