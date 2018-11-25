@@ -21,9 +21,22 @@ class StripePaymentsController < ApplicationController
     # Get the payment token ID submitted by the form:
     token = params[:stripeToken]
 
-    # Should add metadata, and update the amount, etc etc.
+    if payment.completed
+      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: " + paypal.order_number).deliver_later
+    else
+      charge = create_charge(token)
+      if charge.captured
+        payment.complete(transaction_id: charge.id, payment_date: Time.current)
+        PaymentMailer.payment_completed(payment).deliver_later
+      else
+        PaymentMailer.ipn_received("Unable to capture charge for #{payment.id}")
+      end
+    end
+  end
+
+  def create_charge(token)
     Stripe::Charge.create(
-      amount: payment.total.cents,
+      amount: payment.total_amount.cents,
       currency: @config.currency_code,
       description: @payment.long_description,
       source: token,
