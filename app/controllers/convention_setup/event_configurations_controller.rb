@@ -176,8 +176,16 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   end
 
   def payment_settings_params
-    params.require(:event_configuration).permit(:paypal_account, :paypal_mode, :offline_payment, :offline_payment_description,
-                                                :currency, :currency_code)
+    params.require(:event_configuration).permit(
+      :paypal_account,
+      :paypal_mode,
+      :stripe_public_key,
+      :stripe_secret_key,
+      :offline_payment,
+      :offline_payment_description,
+      :currency,
+      :currency_code
+    )
   end
 
   def important_dates_params

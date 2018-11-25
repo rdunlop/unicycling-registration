@@ -27,12 +27,12 @@
 #  display_confirmed_events                      :boolean          default(FALSE), not null
 #  spectators                                    :boolean          default(FALSE), not null
 #  paypal_account                                :string(255)
-#  waiver                                        :string(255)      default("none")
+#  waiver                                        :string           default("none")
 #  validations_applied                           :integer
 #  italian_requirements                          :boolean          default(FALSE), not null
-#  rules_file_name                               :string(255)
+#  rules_file_name                               :string
 #  accept_rules                                  :boolean          default(FALSE), not null
-#  paypal_mode                                   :string(255)      default("disabled")
+#  paypal_mode                                   :string           default("disabled")
 #  offline_payment                               :boolean          default(FALSE), not null
 #  enabled_locales                               :string           not null
 #  comp_noncomp_page_id                          :integer
@@ -51,6 +51,8 @@
 #  waiver_file_name                              :string
 #  lodging_end_date                              :datetime
 #  time_zone                                     :string           default("Central Time (US & Canada)")
+#  stripe_public_key                             :string
+#  stripe_secret_key                             :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot

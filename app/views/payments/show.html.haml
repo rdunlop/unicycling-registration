@@ -16,7 +16,10 @@
     = t(".please_proceed_with_payment")
     - if @payment.total_amount > 0.to_money
       - if @config.online_payment?
-        = render "paypal_payment_form", payment: @payment, config: @config
+        - if @config.paypal_account?
+          = render "paypal_payment_form", payment: @payment, config: @config
+        - elsif @config.stripe_secret_key?
+          = render "stripe_payment_form", payment: @payment, config: @config
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag t(".complete_payment"), class: "payment_link"

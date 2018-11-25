@@ -92,6 +92,22 @@ class Payment < ApplicationRecord
     results
   end
 
+  # describe the payment, in succint form
+  # by only describing the members
+  def description
+    payment_details.map(&:registrant).compact.uniq.map do |reg|
+      reg.with_id_to_s
+    end.join(", ")
+  end
+
+  def long_description
+    payment_details.map do |pd|
+      next if pd.amount == 0.to_money
+
+      "##{pd.registrant.bib_number} #{pd} (#{pd.amount.format(separator: '.', symbol: nil, thousands_separator: nil)})"
+    end.compact.join(", ")
+  end
+
   def paypal_post_url
     EventConfiguration.paypal_base_url + "/cgi-bin/webscr"
   end
