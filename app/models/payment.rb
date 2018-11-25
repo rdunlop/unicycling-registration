@@ -101,10 +101,10 @@ class Payment < ApplicationRecord
   end
 
   def long_description
-    unique_payment_details.map do |pd|
+    payment_details.map do |pd|
       next if pd.amount == 0.to_money
 
-      "#{pd.count} #{pd.to_s.pluralize(pd.count)} (#{pd.amount.format(separator: '.', symbol: nil, thousands_separator: nil)})"
+      "##{pd.registrant.bib_number} #{pd} (#{pd.amount.format(separator: '.', symbol: nil, thousands_separator: nil)})"
     end.compact.join(", ")
   end
 

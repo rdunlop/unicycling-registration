@@ -5,7 +5,6 @@ class StripePaymentsController < ApplicationController
   # Stripe post-back endpoint
   def stripe
     process_notification
-    head :ok
   end
 
   private
@@ -28,10 +27,13 @@ class StripePaymentsController < ApplicationController
       if charge.captured
         payment.complete(transaction_id: charge.id, payment_date: Time.current)
         PaymentMailer.payment_completed(payment).deliver_later
+        redirect_to success_payments_path
+        return
       else
         PaymentMailer.ipn_received("Unable to capture charge for #{payment.id}")
       end
     end
+    redirect_to payment_path(payment), alert: "Error processing payment"
   end
 
   def create_charge(token)
