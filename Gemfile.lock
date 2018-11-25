@@ -358,6 +358,8 @@ GEM
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nested_form (0.3.2)
+    net-http-persistent (3.0.0)
+      connection_pool (~> 2.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (5.0.1)
@@ -562,6 +564,9 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     state_machines (0.5.0)
+    stripe (4.0.3)
+      faraday (~> 0.13)
+      net-http-persistent (~> 3.0)
     teaspoon (1.1.5)
       railties (>= 3.2.5, < 6)
     teaspoon-jasmine (2.3.4)
@@ -693,6 +698,7 @@ DEPENDENCIES
   sidekiq (< 6)
   simple_form
   spreadsheet
+  stripe
   teaspoon-jasmine
   therubyracer
   tinymce-rails

@@ -158,7 +158,6 @@ Rails.application.routes.draw do
         get :summary
         post :notification, controller: "paypal_payments"
         get :success, controller: "paypal_payments"
-        post :stripe, controller: "stripe_payments"
         get :offline
       end
 
@@ -168,6 +167,7 @@ Rails.application.routes.draw do
         post :admin_complete
         post :pay_offline
         post :apply_coupon
+        post :stripe, controller: "stripe_payments"
       end
     end
     resources :pending_payments, only: [], controller: "admin/pending_payments" do

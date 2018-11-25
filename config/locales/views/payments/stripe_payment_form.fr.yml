@@ -1,0 +1,4 @@
+fr:
+  payments:
+    stripe_payment_form:
+      pay_with_stripe: Payer avec Carte

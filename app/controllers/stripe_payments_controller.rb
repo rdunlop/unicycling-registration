@@ -10,6 +10,10 @@ class StripePaymentsController < ApplicationController
 
   private
 
+  def payment
+    @payment ||= Payment.find(params[:id])
+  end
+
   def process_notification
     Stripe.api_key = @config.stripe_secret_key
 
@@ -18,11 +22,19 @@ class StripePaymentsController < ApplicationController
     token = params[:stripeToken]
 
     # Should add metadata, and update the amount, etc etc.
-    charge = Stripe::Charge.create(
-      amount: 999,
-      currency: 'usd',
-      description: 'Example charge',
-      source: token
+    Stripe::Charge.create(
+      amount: payment.total.cents,
+      currency: @config.currency_code,
+      description: @payment.long_description,
+      source: token,
+      metadata: metadata
     )
+  end
+
+  def metadata
+    {
+      payment_id: payment.id,
+      details: payment.long_description
+    }
   end
 end
