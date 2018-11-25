@@ -4,7 +4,7 @@
 #
 #  id                      :integer          not null, primary key
 #  combined_competition_id :integer
-#  abbreviation            :string(255)
+#  abbreviation            :string
 #  tie_breaker             :boolean          default(FALSE), not null
 #  points_1                :integer
 #  points_2                :integer

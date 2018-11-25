@@ -4,8 +4,8 @@
 #
 #  id             :integer          not null, primary key
 #  registrant_id  :integer
-#  description    :string(255)
-#  song_file_name :string(255)
+#  description    :string
+#  song_file_name :string
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer

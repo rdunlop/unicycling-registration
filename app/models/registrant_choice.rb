@@ -5,7 +5,7 @@
 #  id              :integer          not null, primary key
 #  registrant_id   :integer
 #  event_choice_id :integer
-#  value           :string(255)
+#  value           :string
 #  created_at      :datetime
 #  updated_at      :datetime
 #

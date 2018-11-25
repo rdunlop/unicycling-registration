@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  user_id     :integer
 #  refund_date :datetime
-#  note        :string(255)
+#  note        :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #  percentage  :integer          default(100)

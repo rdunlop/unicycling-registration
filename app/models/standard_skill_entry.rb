@@ -4,9 +4,9 @@
 #
 #  id                        :integer          not null, primary key
 #  number                    :integer
-#  letter                    :string(255)
+#  letter                    :string
 #  points                    :decimal(6, 2)
-#  description               :string(255)
+#  description               :string
 #  created_at                :datetime
 #  updated_at                :datetime
 #  friendly_description      :text

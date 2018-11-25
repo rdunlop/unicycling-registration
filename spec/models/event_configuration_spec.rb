@@ -3,30 +3,30 @@
 # Table name: event_configurations
 #
 #  id                                            :integer          not null, primary key
-#  event_url                                     :string(255)
+#  event_url                                     :string
 #  start_date                                    :date
-#  contact_email                                 :string(255)
+#  contact_email                                 :string
 #  artistic_closed_date                          :date
 #  standard_skill_closed_date                    :date
 #  event_sign_up_closed_date                     :date
 #  created_at                                    :datetime
 #  updated_at                                    :datetime
 #  test_mode                                     :boolean          default(FALSE), not null
-#  comp_noncomp_url                              :string(255)
+#  comp_noncomp_url                              :string
 #  standard_skill                                :boolean          default(FALSE), not null
 #  usa                                           :boolean          default(FALSE), not null
 #  iuf                                           :boolean          default(FALSE), not null
-#  currency_code                                 :string(255)
-#  rulebook_url                                  :string(255)
-#  style_name                                    :string(255)
+#  currency_code                                 :string
+#  rulebook_url                                  :string
+#  style_name                                    :string
 #  custom_waiver_text                            :text
 #  music_submission_end_date                     :date
 #  artistic_score_elimination_mode_naucc         :boolean          default(FALSE), not null
-#  logo_file                                     :string(255)
+#  logo_file                                     :string
 #  max_award_place                               :integer          default(5)
 #  display_confirmed_events                      :boolean          default(FALSE), not null
 #  spectators                                    :boolean          default(FALSE), not null
-#  paypal_account                                :string(255)
+#  paypal_account                                :string
 #  waiver                                        :string           default("none")
 #  validations_applied                           :integer
 #  italian_requirements                          :boolean          default(FALSE), not null

@@ -3,11 +3,11 @@
 # Table name: registrants
 #
 #  id                       :integer          not null, primary key
-#  first_name               :string(255)
-#  middle_initial           :string(255)
-#  last_name                :string(255)
+#  first_name               :string
+#  middle_initial           :string
+#  last_name                :string
 #  birthday                 :date
-#  gender                   :string(255)
+#  gender                   :string
 #  created_at               :datetime
 #  updated_at               :datetime
 #  user_id                  :integer
@@ -17,14 +17,13 @@
 #  age                      :integer
 #  ineligible               :boolean          default(FALSE), not null
 #  volunteer                :boolean          default(FALSE), not null
-#  online_waiver_signature  :string(255)
-#  access_code              :string(255)
-#  sorted_last_name         :string(255)
-#  status                   :string(255)      default("active"), not null
-#  registrant_type          :string(255)      default("competitor")
+#  online_waiver_signature  :string
+#  access_code              :string
+#  sorted_last_name         :string
+#  status                   :string           default("active"), not null
+#  registrant_type          :string           default("competitor")
 #  rules_accepted           :boolean          default(FALSE), not null
 #  online_waiver_acceptance :boolean          default(FALSE), not null
-#  paid                     :boolean          default(FALSE), not null
 #
 # Indexes
 #
