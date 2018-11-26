@@ -9,7 +9,7 @@
 #  seconds        :integer
 #  created_at     :datetime
 #  updated_at     :datetime
-#  scheduled_time :string(255)
+#  scheduled_time :string
 #
 # Indexes
 #

@@ -7,7 +7,7 @@
 #  line_item_id      :integer
 #  created_at        :datetime
 #  updated_at        :datetime
-#  details           :string(255)
+#  details           :string
 #  free              :boolean          default(FALSE), not null
 #  system_managed    :boolean          default(FALSE), not null
 #  locked            :boolean          default(FALSE), not null

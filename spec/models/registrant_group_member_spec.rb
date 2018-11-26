@@ -12,9 +12,9 @@
 #
 # Indexes
 #
-#  index_registrant_group_members_on_registrant_group_id  (registrant_group_id)
-#  index_registrant_group_members_on_registrant_id        (registrant_id)
-#  reg_group_reg_group                                    (registrant_id,registrant_group_id) UNIQUE
+#  index_registrant_group_mumbers_registrant_group_id  (registrant_group_id)
+#  index_registrant_group_mumbers_registrant_id        (registrant_id)
+#  reg_group_reg_group                                 (registrant_id,registrant_group_id) UNIQUE
 #
 
 require 'spec_helper'

@@ -3,7 +3,7 @@
 # Table name: combined_competitions
 #
 #  id                   :integer          not null, primary key
-#  name                 :string(255)
+#  name                 :string
 #  created_at           :datetime
 #  updated_at           :datetime
 #  use_age_group_places :boolean          default(FALSE), not null

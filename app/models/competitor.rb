@@ -5,14 +5,14 @@
 #  id                       :integer          not null, primary key
 #  competition_id           :integer
 #  position                 :integer
-#  custom_name              :string(255)
+#  custom_name              :string
 #  created_at               :datetime
 #  updated_at               :datetime
 #  status                   :integer          default("active")
 #  lowest_member_bib_number :integer
 #  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
-#  notes                    :string(255)
+#  notes                    :string
 #  wave                     :integer
 #  riding_crank_size        :integer
 #  withdrawn_at             :datetime

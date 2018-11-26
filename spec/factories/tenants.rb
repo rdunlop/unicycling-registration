@@ -11,11 +11,11 @@ end
 # Table name: public.tenants
 #
 #  id                 :integer          not null, primary key
-#  subdomain          :string(255)
-#  description        :string(255)
+#  subdomain          :string
+#  description        :string
 #  created_at         :datetime
 #  updated_at         :datetime
-#  admin_upgrade_code :string(255)
+#  admin_upgrade_code :string
 #
 # Indexes
 #

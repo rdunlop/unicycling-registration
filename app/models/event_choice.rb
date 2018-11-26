@@ -4,8 +4,8 @@
 #
 #  id                          :integer          not null, primary key
 #  event_id                    :integer
-#  cell_type                   :string(255)
-#  multiple_values             :string(255)
+#  cell_type                   :string
+#  multiple_values             :string
 #  position                    :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime

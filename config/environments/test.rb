@@ -18,6 +18,8 @@ Rails.application.configure do
 
   config.active_record.maintain_test_schema = true
 
+  config.active_record.dump_schema_after_migration = true
+
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {

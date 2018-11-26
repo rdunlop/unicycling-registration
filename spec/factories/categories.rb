@@ -6,7 +6,7 @@
 #  position     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  info_url     :string(255)
+#  info_url     :string
 #  info_page_id :integer
 #
 

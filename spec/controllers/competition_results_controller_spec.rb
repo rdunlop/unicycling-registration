@@ -4,13 +4,13 @@
 #
 #  id             :integer          not null, primary key
 #  competition_id :integer
-#  results_file   :string(255)
+#  results_file   :string
 #  system_managed :boolean          default(FALSE), not null
 #  published      :boolean          default(FALSE), not null
 #  published_date :datetime
 #  created_at     :datetime
 #  updated_at     :datetime
-#  name           :string(255)
+#  name           :string
 #
 
 require 'spec_helper'

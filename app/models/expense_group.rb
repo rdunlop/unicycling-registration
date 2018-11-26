@@ -7,7 +7,7 @@
 #  position               :integer
 #  created_at             :datetime
 #  updated_at             :datetime
-#  info_url               :string(255)
+#  info_url               :string
 #  competitor_required    :boolean          default(FALSE), not null
 #  noncompetitor_required :boolean          default(FALSE), not null
 #  registration_items     :boolean          default(FALSE), not null
