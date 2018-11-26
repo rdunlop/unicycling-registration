@@ -32,7 +32,7 @@
 #  italian_requirements                          :boolean          default(FALSE), not null
 #  rules_file_name                               :string
 #  accept_rules                                  :boolean          default(FALSE), not null
-#  paypal_mode                                   :string           default("disabled")
+#  payment_mode                                  :string           default("disabled")
 #  offline_payment                               :boolean          default(FALSE), not null
 #  enabled_locales                               :string           not null
 #  comp_noncomp_page_id                          :integer
@@ -310,11 +310,11 @@ describe EventConfiguration do
   end
 
   it "returns the live paypal url when paypal mode is enabled" do
-    @ev.update_attribute(:paypal_mode, "enabled")
+    @ev.update_attribute(:payment_mode, "enabled")
     expect(described_class.paypal_base_url).to eq("https://www.paypal.com")
   end
   it "returns the test paypal url when paypal mode is TEST" do
-    @ev.update_attribute(:paypal_mode, "test")
+    @ev.update_attribute(:payment_mode, "test")
     expect(described_class.paypal_base_url).to eq("https://www.sandbox.paypal.com")
   end
 

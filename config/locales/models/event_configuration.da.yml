@@ -25,4 +25,3 @@ da:
         offline_payment: Tillad offline betaling
         offline_payment_description: Detaljer for offline betaling
         paypal_account: Paypal Merchant Account Email
-        paypal_mode: Paypal Mode
