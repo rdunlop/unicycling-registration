@@ -3,7 +3,16 @@ de:
   admin:
     translations:
       common_translations:
+        access_not_enabled: Der Zugriff zum Übersetzungs System ist für dich nicht
+          aktiviert.
+        common_example_1: Navigationsleisten Beschriftung
         common_example_2: Automatisierter Email Text
+        common_example_3: Feld Namen (z.B. Vorname, Telefon Nummer)
         common_translations: Verbreitete Übersetzungen
+        common_translations_detail: "Da die geläufigen Übersetzungen für alle Veranstaltungen
+          anwendbar sind, sind sie\r\nwahrscheinlich bereits vollständig in deine
+          gewünschte Sprache übersetzt.\r\nJegliche Änderungen dieser Texte werden
+          sofort auf ALLE Veranstaltungssysteme\r\nangewendet."
         examples_of_common_translations: Beispiele typischer Übersetzungen
+        follow_the_directions: folge den Anweisungen
         want_to_help: Wenn du helfen möchtest diesen Text zu übersetzen, bitte

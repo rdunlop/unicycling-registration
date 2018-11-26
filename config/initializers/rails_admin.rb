@@ -104,6 +104,7 @@ module RailsAdmin
           if action && !policy(record).send(*action_for_pundit(action)) # Added splat
             raise ::Pundit::NotAuthorizedError.new("not allowed to #{action} this #{record}")
           end
+
           @controller.instance_variable_set(:@_pundit_policy_authorized, true)
         end
 

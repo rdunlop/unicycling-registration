@@ -6,6 +6,7 @@ class BestTimeFormatter::HourMinuteFormatter
   def self.valid?(string)
     numbers = string.split(":")
     return false unless numbers.count == 2
+
     to_string(from_string(string)) == string
   end
 

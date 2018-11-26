@@ -10,8 +10,8 @@ de:
   competitor: Teilnehmer
   date:
     formats:
-      registration_date_format: "%d %b, %Y"
       lodging_date_format: "%b %d, %Y"
+      registration_date_format: "%d %b, %Y"
     order:
     - :month
     - :day
@@ -32,12 +32,15 @@ de:
   prices_increase_soon: Der Preis steigt in weniger als einem Tag
   show: Anzeigen
   spectator: Zuschauer
+  validations:
+    duplicate: Muss einmalig sein
   wizard:
     add_contact_details: Kontakt Details
     add_events: Wettbewerbe
     add_name: Name
     add_volunteers: Freiwillige Helfer
     expenses: Ausgaben
+    lodging: Unterkunft
     music: Musik
     set_wheel_sizes: Radgrößen
   'yes': Ja

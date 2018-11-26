@@ -11,6 +11,10 @@ de:
         event_planned_example: "Um eine Liste der Teilnehmer je Disziplin zu sehen
           solltest Du\r\ndie Rolle \"Event Planer\" aktivieren"
         header: Benutzer Verwaltung
+        other_roles_not_permitted_html: "Es gibt zusätzliche Rollen wo du\r\n<u>keinen</u>\r\nZugriff
+          hast um diese zu sehen."
+        payment_admin_example: "Um die eingegangenen Zahlungen zu sehen/verwalten
+          (und um Rückzahlungen zu leisten),\r\naktiviere die \"Zahlungs Admin\" Rolle"
         role_allows_access: Jede Rolle ermöglicht dem Benutzer andere Bereiche des
           Systems zu sehen/verwenden.
         role_description:

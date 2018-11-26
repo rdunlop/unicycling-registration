@@ -3,4 +3,5 @@ de:
   registrants:
     registrant_total_owing:
       paid: Bezahlt
+      pending: offen
       unpaid: nicht Bezahlt

@@ -22,6 +22,7 @@ class DataEntryVolunteer
 
   def save
     return false unless valid?
+
     begin
       user.confirm unless user.confirmed?
       user.update!(name: name)
@@ -34,6 +35,7 @@ class DataEntryVolunteer
 
   def destroy
     return false unless user
+
     user.remove_role(:data_entry_volunteer)
   end
 

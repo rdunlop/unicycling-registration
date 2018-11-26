@@ -3,36 +3,36 @@
 # Table name: event_configurations
 #
 #  id                                            :integer          not null, primary key
-#  event_url                                     :string(255)
+#  event_url                                     :string
 #  start_date                                    :date
-#  contact_email                                 :string(255)
+#  contact_email                                 :string
 #  artistic_closed_date                          :date
 #  standard_skill_closed_date                    :date
 #  event_sign_up_closed_date                     :date
 #  created_at                                    :datetime
 #  updated_at                                    :datetime
 #  test_mode                                     :boolean          default(FALSE), not null
-#  comp_noncomp_url                              :string(255)
+#  comp_noncomp_url                              :string
 #  standard_skill                                :boolean          default(FALSE), not null
 #  usa                                           :boolean          default(FALSE), not null
 #  iuf                                           :boolean          default(FALSE), not null
-#  currency_code                                 :string(255)
-#  rulebook_url                                  :string(255)
-#  style_name                                    :string(255)
+#  currency_code                                 :string
+#  rulebook_url                                  :string
+#  style_name                                    :string
 #  custom_waiver_text                            :text
 #  music_submission_end_date                     :date
 #  artistic_score_elimination_mode_naucc         :boolean          default(FALSE), not null
-#  logo_file                                     :string(255)
+#  logo_file                                     :string
 #  max_award_place                               :integer          default(5)
 #  display_confirmed_events                      :boolean          default(FALSE), not null
 #  spectators                                    :boolean          default(FALSE), not null
-#  paypal_account                                :string(255)
-#  waiver                                        :string(255)      default("none")
+#  paypal_account                                :string
+#  waiver                                        :string           default("none")
 #  validations_applied                           :integer
 #  italian_requirements                          :boolean          default(FALSE), not null
-#  rules_file_name                               :string(255)
+#  rules_file_name                               :string
 #  accept_rules                                  :boolean          default(FALSE), not null
-#  paypal_mode                                   :string(255)      default("disabled")
+#  payment_mode                                  :string           default("disabled")
 #  offline_payment                               :boolean          default(FALSE), not null
 #  enabled_locales                               :string           not null
 #  comp_noncomp_page_id                          :integer
@@ -51,6 +51,8 @@
 #  waiver_file_name                              :string
 #  lodging_end_date                              :datetime
 #  time_zone                                     :string           default("Central Time (US & Canada)")
+#  stripe_public_key                             :string
+#  stripe_secret_key                             :string
 #
 
 class EventConfiguration < ApplicationRecord
@@ -71,6 +73,7 @@ class EventConfiguration < ApplicationRecord
   validates :enabled_locales, presence: true
   validates :time_zone, presence: true, inclusion: { in: ActiveSupport::TimeZone.send(:zones_map).keys }
   validate :only_one_info_type
+  validate :stripe_or_paypal_only
 
   def self.style_names
     [["Blue and Pink", "base_blue_pink"], ["Green and Blue", "base_green_blue"], ["Blue Purple Green", "base_blue_purple"], ["Purple Blue Green", "base_purple_blue"]]
@@ -118,11 +121,11 @@ class EventConfiguration < ApplicationRecord
     organization_membership_type.present?
   end
 
-  def self.paypal_modes
+  def self.payment_modes
     ["disabled", "test", "enabled"]
   end
 
-  validates :paypal_mode, inclusion: { in: paypal_modes }
+  validates :payment_mode, inclusion: { in: payment_modes }
 
   nilify_blanks only: %i[rulebook_url event_url], before: :validation
 
@@ -171,16 +174,17 @@ class EventConfiguration < ApplicationRecord
   end
 
   def online_payment?
-    paypal_mode == "test" || paypal_mode == "enabled"
+    payment_mode == "test" || payment_mode == "enabled"
   end
 
   def can_only_drop_or_modify_events?
     return false if add_event_end_date.blank?
+
     is_date_in_the_past?(add_event_end_date)
   end
 
   def paypal_test?
-    paypal_mode == "test"
+    payment_mode == "test"
   end
 
   def print_waiver?
@@ -199,6 +203,7 @@ class EventConfiguration < ApplicationRecord
 
   def waiver_text
     return custom_waiver_text if custom_waiver_text.present?
+
     self.class.default_waiver_text
   end
 
@@ -223,6 +228,10 @@ class EventConfiguration < ApplicationRecord
   # Display State instead of Country
   def state?
     usa?
+  end
+
+  def volunteer?
+    volunteer_option != "none"
   end
 
   def self.singleton
@@ -292,6 +301,7 @@ class EventConfiguration < ApplicationRecord
 
   def registration_closed?
     return true if under_construction?
+
     # allow 1 day of grace to registration_closed_date
     is_date_in_the_past?(registration_closed_date)
   end
@@ -374,10 +384,15 @@ class EventConfiguration < ApplicationRecord
     @has_expenses = ExpenseItem.any_in_use?
   end
 
+  def payment_account?
+    paypal_account? || stripe_secret_key?
+  end
+
   private
 
   def is_date_in_the_past?(date)
     return false if date.nil?
+
     date < Date.current
   end
 
@@ -392,6 +407,12 @@ class EventConfiguration < ApplicationRecord
   def only_one_info_type
     if comp_noncomp_url.present? && comp_noncomp_page.present?
       errors.add(:comp_noncomp_page_id, "Unable to specify both Comp-NonComp URL and Comp-NonComp Page")
+    end
+  end
+
+  def stripe_or_paypal_only
+    if paypal_account.present? && stripe_secret_key.present?
+      errors.add(:paypal_account, "Cannot specify BOTH stripe AND paypal")
     end
   end
 end

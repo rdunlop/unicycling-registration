@@ -12,7 +12,7 @@ end
 #
 #  id             :integer          not null, primary key
 #  tenant_id      :integer          not null
-#  website_alias  :string(255)      not null
+#  website_alias  :string           not null
 #  primary_domain :boolean          default(FALSE), not null
 #  created_at     :datetime
 #  updated_at     :datetime

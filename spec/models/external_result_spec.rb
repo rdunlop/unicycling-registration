@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  competitor_id :integer
-#  details       :string(255)
+#  details       :string
 #  points        :decimal(6, 3)    not null
 #  created_at    :datetime
 #  updated_at    :datetime

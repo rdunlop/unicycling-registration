@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803213043) do
+ActiveRecord::Schema.define(version: 20181126020943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -401,7 +401,7 @@ ActiveRecord::Schema.define(version: 20180803213043) do
     t.boolean "italian_requirements", default: false, null: false
     t.string "rules_file_name"
     t.boolean "accept_rules", default: false, null: false
-    t.string "paypal_mode", default: "disabled"
+    t.string "payment_mode", default: "disabled"
     t.boolean "offline_payment", default: false, null: false
     t.string "enabled_locales", null: false
     t.integer "comp_noncomp_page_id"
@@ -420,6 +420,8 @@ ActiveRecord::Schema.define(version: 20180803213043) do
     t.string "waiver_file_name"
     t.datetime "lodging_end_date"
     t.string "time_zone", default: "Central Time (US & Canada)"
+    t.string "stripe_public_key"
+    t.string "stripe_secret_key"
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|

@@ -8,6 +8,7 @@ class MultiLapResultCalculator
   def competitor_result(competitor)
     if competitor.has_result?
       return if competitor.best_time_in_thousands.zero?
+
       TimeResultPresenter.from_thousands(competitor.best_time_in_thousands, data_entry_format: competitor.competition.data_entry_format).full_time.to_s + " (" + competitor.num_laps.to_s + " laps)"
     end
   end
@@ -39,6 +40,7 @@ class MultiLapResultCalculator
   # convert 1 lap int 9900000000, 2 laps into 980000000000....thus sorting by shortest time correctly.
   def lap_time(num_laps)
     raise "Unable to process >= 100 laps" if num_laps >= 100
+
     ((100 - num_laps) * 100000000)
   end
 end

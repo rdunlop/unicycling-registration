@@ -70,6 +70,7 @@ class ChoicesValidator
 
     if event_selected && !reg_choice_chosen
       return true if event_choice.cell_type == "boolean"
+
       @registrant.errors.add(:base, "#{event_choice} must be specified")
       reg_choice&.errors&.add(:value, "")
       reg_choice&.errors&.add(:event_category_id, "")
@@ -101,6 +102,7 @@ class ChoicesValidator
 
   def valid_with_optional_selection(event_choice, reg_choice_chosen)
     return true if event_choice.optional
+
     optional_if_event_choice = event_choice.optional_if_event_choice
 
     # check to see if this is optional by way of another choice

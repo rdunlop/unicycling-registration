@@ -27,8 +27,8 @@
         ", Event:"
         = render "progress_check", status: ExpenseItem.where(cost_element_type: "Event").any?
     %tr
-      %th Payment Settings are configured (either Paypal, or Offline Payment details)
-      %td= render "progress_check", status: (@config.offline_payment? || @config.paypal_account?)
+      %th Payment Settings are configured (either Paypal, Stripe, or Offline Payment details)
+      %td= render "progress_check", status: (@config.offline_payment? || @config.payment_account?)
     %tr
       %th At least 1 event is configured
       %td= render "progress_check", status: Event.any?

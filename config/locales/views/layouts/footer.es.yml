@@ -2,6 +2,14 @@
 es:
   layouts:
     footer:
+      contact_us: Contáctanos
       developed_by: Desarrollado por Robin Dunlop
+      features: Cracterísticas
+      handle_feedback: Maneja respuestas presentadas
       help: Ayuda
+      help_translate: Ayuda a traducir
+      information_header: Información
+      language_header: Lenguaje
+      organizers_header: Organizadores
       privacy_policy: Política de Privacidad
+      upcoming_changes: Cambios por venir

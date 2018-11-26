@@ -4,16 +4,16 @@
 #
 #  id            :integer          not null, primary key
 #  bib_number    :integer
-#  line_2        :string(255)
-#  line_3        :string(255)
-#  line_5        :string(255)
+#  line_2        :string
+#  line_3        :string
+#  line_5        :string
 #  place         :integer
 #  user_id       :integer
 #  registrant_id :integer
 #  created_at    :datetime
 #  updated_at    :datetime
-#  line_1        :string(255)
-#  line_4        :string(255)
+#  line_1        :string
+#  line_4        :string
 #
 # Indexes
 #

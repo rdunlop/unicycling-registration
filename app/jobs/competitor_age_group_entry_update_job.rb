@@ -17,6 +17,7 @@ class CompetitorAgeGroupEntryUpdateJob < ApplicationJob
     end
 
     return if competitor.age_group_entry_id == new_age_group_entry_id
+
     competitor.update_attribute(:age_group_entry_id, new_age_group_entry_id)
   end
 end

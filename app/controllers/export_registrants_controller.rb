@@ -135,6 +135,7 @@ class ExportRegistrantsController < ApplicationController
 
   def country(country_string)
     return "" if country_string.blank?
+
     ISO3166::Country[country_string]
   end
 

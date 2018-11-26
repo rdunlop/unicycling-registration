@@ -3,11 +3,11 @@
 # Table name: registrants
 #
 #  id                       :integer          not null, primary key
-#  first_name               :string(255)
-#  middle_initial           :string(255)
-#  last_name                :string(255)
+#  first_name               :string
+#  middle_initial           :string
+#  last_name                :string
 #  birthday                 :date
-#  gender                   :string(255)
+#  gender                   :string
 #  created_at               :datetime
 #  updated_at               :datetime
 #  user_id                  :integer
@@ -17,14 +17,13 @@
 #  age                      :integer
 #  ineligible               :boolean          default(FALSE), not null
 #  volunteer                :boolean          default(FALSE), not null
-#  online_waiver_signature  :string(255)
-#  access_code              :string(255)
-#  sorted_last_name         :string(255)
-#  status                   :string(255)      default("active"), not null
-#  registrant_type          :string(255)      default("competitor")
+#  online_waiver_signature  :string
+#  access_code              :string
+#  sorted_last_name         :string
+#  status                   :string           default("active"), not null
+#  registrant_type          :string           default("competitor")
 #  rules_accepted           :boolean          default(FALSE), not null
 #  online_waiver_acceptance :boolean          default(FALSE), not null
-#  paid                     :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -236,6 +235,7 @@ class Registrant < ApplicationRecord
   # for use when overriding the default system-managed reg_item
   def set_registration_item_expense(expense_item, lock = true)
     return true if reg_paid?
+
     curr_rei = registration_item
 
     if curr_rei.nil?
@@ -344,6 +344,7 @@ class Registrant < ApplicationRecord
   # Indicates that this registrant has paid their registration_fee
   def reg_paid?(include_pending: true)
     return true if spectator?
+
     Rails.cache.fetch("/registrant/#{id}-#{updated_at}/reg_paid/include_pending/#{include_pending}") do
       registration_cost_items = RegistrationCost.all_registration_expense_items
       if include_pending
@@ -439,6 +440,7 @@ class Registrant < ApplicationRecord
 
   def organization_membership_confirmed?
     return false unless validated?
+
     contact_detail.try(:organization_membership_confirmed?)
   end
 
@@ -476,7 +478,7 @@ class Registrant < ApplicationRecord
   # }
   def assigned_event_categories
     results = {}
-    signed_up_events.includes(event: [event_choices: [:translations], category: [:translations]]).each do |registrant_sign_up|
+    signed_up_events.includes(event: [event_choices: [:translations], category: [:translations]]).find_each do |registrant_sign_up|
       category_hash = results[registrant_sign_up.event.category.to_s] ||= {}
       event_hash = category_hash[registrant_sign_up.event.to_s] ||= {}
       event_hash[:competition_name] = registrant_sign_up.event.to_s
@@ -486,7 +488,7 @@ class Registrant < ApplicationRecord
       event_hash[:status] = nil
     end
 
-    competitors.includes(competition: [event: [category: [:translations]]]).each do |competitor|
+    competitors.includes(competition: [event: [category: [:translations]]]).find_each do |competitor|
       category_hash = results[competitor.event.category.to_s] ||= {}
       event_hash = category_hash[competitor.event.to_s] ||= {}
       event_hash[:competition_name] = competitor.competition.award_title

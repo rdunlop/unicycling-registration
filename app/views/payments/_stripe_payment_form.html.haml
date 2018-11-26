@@ -1,0 +1,12 @@
+= form_tag stripe_payment_url(@payment.id), method: :post do
+  %script{ src: "https://checkout.stripe.com/checkout.js",
+    class: "stripe-button",
+    data: { key: @config.stripe_public_key,
+      amount: @payment.total_amount.cents,
+      name: @config.short_name,
+      email: @payment.user.email,
+      locale: I18n.locale,
+      label: t(".pay_with_stripe"),
+      description: payment.description,
+      currency: config.currency_code,
+      allow_remember_me: "false" } }

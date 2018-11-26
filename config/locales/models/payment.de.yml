@@ -3,6 +3,8 @@ de:
   activerecord:
     attributes:
       payment:
+        completed_date: Kompletter Datensatz
+        details: Details
         note: Hinweis
         offline_pending_date: Datum
         payment_id: Zahlungs ID

@@ -4,30 +4,30 @@
 #
 #  id                                         :integer          not null, primary key
 #  registrant_id                              :integer
-#  address                                    :string(255)
-#  city                                       :string(255)
-#  state_code                                 :string(255)
-#  zip                                        :string(255)
-#  country_residence                          :string(255)
-#  country_representing                       :string(255)
-#  phone                                      :string(255)
-#  mobile                                     :string(255)
-#  email                                      :string(255)
-#  club                                       :string(255)
-#  club_contact                               :string(255)
-#  organization_member_number                 :string(255)
-#  emergency_name                             :string(255)
-#  emergency_relationship                     :string(255)
+#  address                                    :string
+#  city                                       :string
+#  state_code                                 :string
+#  zip                                        :string
+#  country_residence                          :string
+#  country_representing                       :string
+#  phone                                      :string
+#  mobile                                     :string
+#  email                                      :string
+#  club                                       :string
+#  club_contact                               :string
+#  organization_member_number                 :string
+#  emergency_name                             :string
+#  emergency_relationship                     :string
 #  emergency_attending                        :boolean          default(FALSE), not null
-#  emergency_primary_phone                    :string(255)
-#  emergency_other_phone                      :string(255)
-#  responsible_adult_name                     :string(255)
-#  responsible_adult_phone                    :string(255)
+#  emergency_primary_phone                    :string
+#  emergency_other_phone                      :string
+#  responsible_adult_name                     :string
+#  responsible_adult_phone                    :string
 #  created_at                                 :datetime
 #  updated_at                                 :datetime
 #  organization_membership_manually_confirmed :boolean          default(FALSE), not null
-#  birthplace                                 :string(255)
-#  italian_fiscal_code                        :string(255)
+#  birthplace                                 :string
+#  italian_fiscal_code                        :string
 #  organization_membership_system_confirmed   :boolean          default(FALSE), not null
 #  organization_membership_system_status      :string
 #
@@ -74,6 +74,7 @@ class ContactDetail < ApplicationRecord
 
   def country
     return "N/A" if country_code.nil?
+
     country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
@@ -97,6 +98,7 @@ class ContactDetail < ApplicationRecord
 
   def update_usa_membership_status
     return unless organization_member_number_changed?
+
     # If we perform the search immediately, sometimes the ContactDetail hasn't been committed yet, so we wait 3 seconds.
     UpdateUsaMembershipStatusWorker.perform_in(3.seconds, registrant_id)
   end

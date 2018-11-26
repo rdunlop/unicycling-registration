@@ -3,11 +3,21 @@ de:
   convention_setup:
     tenant_aliases:
       index:
+        accessible_url_html: Diese Veranstaltung wird <u>immer</u> verfügbar sein
+          unter %{link}
+        alias_is_primary_domain: Dieser Alias ist nun die primäre Domain.
         alias_verified: Alias verifiziert
+        current_url_html: Das Registrierungssystem ist derzeit so konfiguriert, dass
+          es unter %{link} verfügbar ist
+        delete_alias: Alias entfernen
         delete_current_primary_domain: Enferne die derzeitige primäre Domain
         header: Domain Setup
         must_save_warning: Bevor du den ALias aktivieren kannst must du ihn als 'Datensatz
           speichern'
+        primary_domain_description: "Sobald ein Alias erstellt wurde kannst du den
+          Alias hier als \"primäre Domain\"\r\nsetzen, was zur Folge hat, dass alle
+          Links die in E-Mails versandt werden diese Internet\r\nAdresse anstelle
+          von der standardmäßigen unicycling-software.com Adresse verwenden."
         set_as_primary_domain: Setze den Alias als primäre Domain
         submit: Datensatz speichern
         url_of_new_domain: Trage die URL der neuen Domain ein

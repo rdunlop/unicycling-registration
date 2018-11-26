@@ -46,6 +46,7 @@ class ExportPaymentsController < ApplicationController
     end
     RegistrantExpenseItem.free.includes(:registrant).each do |rei|
       next unless rei.registrant.reg_paid?
+
       data << [
         "Free With Reg",
         rei.line_item.id,

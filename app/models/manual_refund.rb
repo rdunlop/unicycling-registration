@@ -83,6 +83,7 @@ class ManualRefund
 
   def save
     return false if invalid?
+
     refund = build_refund
     return false if refund.invalid?
 

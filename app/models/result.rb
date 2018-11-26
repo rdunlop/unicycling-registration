@@ -4,10 +4,10 @@
 #
 #  id             :integer          not null, primary key
 #  competitor_id  :integer
-#  result_type    :string(255)
+#  result_type    :string
 #  result_subtype :integer
 #  place          :integer
-#  status         :string(255)
+#  status         :string
 #  created_at     :datetime
 #  updated_at     :datetime
 #
@@ -121,6 +121,7 @@ class Result < ApplicationRecord
 
   def to_s
     return "DQ" if status == "DQ"
+
     if place.zero? || place.nil?
       "-"
     else

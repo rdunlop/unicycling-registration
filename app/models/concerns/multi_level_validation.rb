@@ -31,6 +31,7 @@ module MultiLevelValidation
 
   def apply_validation(step_name)
     return unless step_name_exists?(step_name)
+
     index = get_step_index(step_name)
     self.validations_applied ||= 0 # deal with nil
     self.validations_applied |= (1 << index)
@@ -40,6 +41,7 @@ module MultiLevelValidation
 
   def is_step_applied?(step_name)
     return false if validations_applied.nil?
+
     index = get_step_index(step_name)
     (validations_applied & (1 << index)) != 0
   end
@@ -47,6 +49,7 @@ module MultiLevelValidation
   def get_step_index(step_name)
     index = step_names.find_index(step_name)
     raise StandardError.new("step not defined #{step_name}") if index.nil?
+
     index
   end
 

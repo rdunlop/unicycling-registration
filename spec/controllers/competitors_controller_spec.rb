@@ -5,14 +5,14 @@
 #  id                       :integer          not null, primary key
 #  competition_id           :integer
 #  position                 :integer
-#  custom_name              :string(255)
+#  custom_name              :string
 #  created_at               :datetime
 #  updated_at               :datetime
 #  status                   :integer          default("active")
 #  lowest_member_bib_number :integer
 #  geared                   :boolean          default(FALSE), not null
 #  riding_wheel_size        :integer
-#  notes                    :string(255)
+#  notes                    :string
 #  wave                     :integer
 #  riding_crank_size        :integer
 #  withdrawn_at             :datetime
@@ -86,8 +86,8 @@ describe CompetitorsController do
         @reg3 = FactoryBot.create(:competitor) # registrant
         expect do
           post :create, params: { competitor: valid_attributes.merge(
-            members_attributes:               { "0" => { registrant_id: @reg2.id },
-                                                "1" => { registrant_id: @reg3.id } }
+            members_attributes: { "0" => { registrant_id: @reg2.id },
+                                  "1" => { registrant_id: @reg3.id } }
           ), competition_id: @ec.id }
         end.to change(Member, :count).by(2)
       end

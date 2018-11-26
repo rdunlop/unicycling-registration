@@ -1,6 +1,7 @@
 class ScorePolicy < ApplicationPolicy
   def create?
     return false if record.competitor.competition.locked?
+
     user_match? || director?(record.competition.event) || super_admin?
   end
 

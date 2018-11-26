@@ -11,7 +11,14 @@ es:
         un mensaje de confirmación. Revise todos los filtros de spam. Seleccione la
         opción "Volver a enviar la confirmación de correo electrónico" si usted no
         puede encontrar el mensaje
+      password_account_details: Una vez que hayas firmado para tu primera convención
+        de monociclismo, tu puedes usar esa misma correo/contraseña para ingresar
+        a futuras convenciones. Para más detalles ve %{link}.
       registration: Cómo puedo inscribirme?
+      registration_help: "Una vez que hayas ingresado, elije \"Crear nuevo competidor\"
+        o \"nuevo no competidor\" y llena los campos.\r\nPaga por el registro para
+        asegurar tu registro."
+      shared_password: "¿Necesitas ingresar cada año?"
       sharing_link: Solicite el acceso a los registros de su equipo a través del Formulario
         %{link}
       sharing_registration_details: Cómo compartir Detalles de Inscripción
@@ -20,6 +27,7 @@ es:
         miembros, así como ver los eventos que se han inscrito.
       subheader: Este sitio es para la registración de la Convención de Monociclismo
         %{domain}
+      this_link: Este enlace
       translation_help: He encontrado una falta / error en la traducción. Enviar los
         detalles de traducción aquí en el 'feedback', o aplicar para ser un traductor,
         y ayudar a hacer más de las traducciones para un idioma

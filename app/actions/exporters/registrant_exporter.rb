@@ -34,6 +34,7 @@ class Exporters::RegistrantExporter
 
   def country(country_string)
     return "" if country_string.blank?
+
     ISO3166::Country[country_string].to_s
   end
 

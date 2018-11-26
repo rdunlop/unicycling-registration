@@ -54,6 +54,7 @@ class PaymentAdjustmentsController < ApplicationController
         )
         refunded_pd = refund.refund_details.first.payment_detail
         raise "Unable to find matching paid expense item" unless refunded_pd
+
         payment = Payment.build_from_details(
           note: note,
           registrant: registrant,

@@ -3,9 +3,9 @@
 # Table name: roles
 #
 #  id            :integer          not null, primary key
-#  name          :string(255)
+#  name          :string
+#  resource_type :string
 #  resource_id   :integer
-#  resource_type :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
 #

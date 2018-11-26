@@ -22,6 +22,7 @@ class StandardSkillResultCalculator
 
   def competitor_tie_break_comparable_result(competitor)
     return 0 if competitor.standard_skill_scores.none?
+
     # maximum Execution score
     base_points = get_base_points(competitor)
 

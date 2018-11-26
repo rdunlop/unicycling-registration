@@ -3,18 +3,18 @@
 # Table name: judge_types
 #
 #  id                           :integer          not null, primary key
-#  name                         :string(255)
-#  val_1_description            :string(255)
-#  val_2_description            :string(255)
-#  val_3_description            :string(255)
-#  val_4_description            :string(255)
+#  name                         :string
+#  val_1_description            :string
+#  val_2_description            :string
+#  val_3_description            :string
+#  val_4_description            :string
 #  val_1_max                    :integer
 #  val_2_max                    :integer
 #  val_3_max                    :integer
 #  val_4_max                    :integer
 #  created_at                   :datetime
 #  updated_at                   :datetime
-#  event_class                  :string(255)
+#  event_class                  :string
 #  boundary_calculation_enabled :boolean          default(FALSE), not null
 #  val_5_description            :string
 #  val_5_max                    :integer

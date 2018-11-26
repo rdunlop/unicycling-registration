@@ -22,7 +22,7 @@ en:
         under_construction: Under Construction
         artistic_closed_date: Last day to accept new Artistic Registration
         currency_code: Currency Code
-        paypal_mode: Paypal Mode
+        payment_mode: Payment Mode
         competitor: Competitor
         noncompetitor: Non-Competitor
         spectator: Spectator

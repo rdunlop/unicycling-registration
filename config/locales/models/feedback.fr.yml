@@ -1,6 +1,7 @@
 ---
 fr:
   activerecord:
+    attributes: 
     models:
       feedback:
         one: Réaction

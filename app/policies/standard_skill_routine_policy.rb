@@ -47,6 +47,7 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
 
   def view_all?
     return false unless config.standard_skill?
+
     event_planner? || super_admin? || standard_skill_director?
   end
 
@@ -62,6 +63,7 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
     return false if record.judge_scores? # prevent changing the routine once judging is started
     return true if super_admin? || event_planner?
     return false if config.standard_skill_closed?
+
     user.registrants.include?(record.registrant)
   end
 

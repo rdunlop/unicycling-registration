@@ -58,7 +58,7 @@ class RegistrationCost < ApplicationRecord
     cached_rp = find_by(id: rp_id)
     return cached_rp unless cached_rp.nil?
 
-    RegistrationCost.for_type(registrant_type).includes(registration_cost_entries: :expense_item).each do |rp|
+    RegistrationCost.for_type(registrant_type).includes(registration_cost_entries: :expense_item).find_each do |rp|
       if rp.current_period?(date)
         Rails.cache.write("/registration_cost/by_date/#{registrant_type}/#{date}", rp.id, expires_in: 5.minutes)
         return rp

@@ -3,8 +3,8 @@
 # Table name: age_group_types
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :string(255)
+#  name        :string
+#  description :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -71,7 +71,7 @@ class AgeGroupType < ApplicationRecord
   private
 
   def update_competitor_age_group_entries
-    competitions.includes(:competitors).each do |competition|
+    competitions.includes(:competitors).find_each do |competition|
       competition.competitors.each do |competitor|
         competitor.update_age_group_entry
       end

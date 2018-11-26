@@ -58,6 +58,7 @@ gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sidekiq', '< 6' # as per sidekiq recommendations, always lock like this
+gem 'stripe'
 gem 'unicorn', require: false
 gem 'whenever'
 
@@ -119,6 +120,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'bundler-audit', require: false
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'teaspoon-jasmine'
@@ -137,10 +139,6 @@ end
 # in production environments by default.
 gem 'coffee-rails'
 gem 'sass-rails'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# Necessary so that the uglifier can process/compress the assets
-gem 'therubyracer'
 
 gem 'uglifier', '>= 1.0.3'
 

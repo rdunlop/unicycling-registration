@@ -2,6 +2,10 @@
 de:
   payments:
     show:
+      complete_payment: Zahlung abschließen
       offline_payment_instructions: Anweisung zur Zahlung per Überweisung
+      offline_payment_instructions_description: "Um per Überweisung zu zahlen, verwende
+        bitte die\r\n\"Zahlungs Referenz #\" und folge den Anweisungen:"
+      payment_reference: 'Zahlungs Referenz #%{payment_id}'
       payment_summary: Zusammenfassung der Zahlung
       please_proceed_with_payment: Bitte führe deine Zahlung durch

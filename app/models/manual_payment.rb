@@ -17,12 +17,14 @@ class ManualPayment
 
   def at_least_one_paid_element
     return if unpaid_details.any? { |el| el.pay_for? }
+
     errors.add(:base, "At least one element must be marked paid for")
   end
 
   def add_registrant(registrant)
     registrant.owing_registrant_expense_items.each do |rei|
       next if rei.free
+
       @new_expense_items << ManualPaymentDetail.new(registrant_expense_item_id: rei.id)
     end
   end

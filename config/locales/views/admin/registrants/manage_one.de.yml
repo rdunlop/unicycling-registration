@@ -3,6 +3,7 @@ de:
   admin:
     registrants:
       manage_one:
+        change_registrant_user: Ändere den User für einen Teilnehmerbericht
         edit_summary: Bearbeiten/Zusammenfassung
         full_registrant_list: Komplette Liste
         summary: Zusammenfassung

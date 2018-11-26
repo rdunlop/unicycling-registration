@@ -43,6 +43,7 @@ class Feedback < ApplicationRecord
   def user_first_registrant_name
     return "unknown" unless user
     return "##{user.registrants.active.first.bib_number}: #{user.registrants.active.first.name}" if user.registrants.active.count.positive?
+
     "unknown"
   end
 

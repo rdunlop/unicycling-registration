@@ -55,6 +55,7 @@ class GenericPlacingPointsCalculator
 
   def points_for(rank)
     return 0 if rank > points_per_rank.length
+
     points_per_rank[rank - 1]
   end
 end

@@ -3,5 +3,13 @@ de:
   admin:
     reg_fees:
       index:
+        automatic_increase: "Sobald dies festgelegt ist, wird die gewählte Registrierungsperiode
+          \"festgelegt\"\r\nfür den Teilnehmer und wird sich nicht automatisch mit
+          der Zeit erhöhen."
+        can_lock_again: "Nachdem die Registrierungsgebühr für einen Teilnehmer \"festgelegt\"
+          wurde kann \"festgelegt\" werden,\r\ndass der Teilnehmer eine andere Gebühr
+          zahlen soll, wenn gewünscht."
+        description: Dieses Formular erlaubt dir die Anmelde Kosten für den Teilnehmer
+          zu definieren.
         header: Anmeldegebühr ändern
         set_reg_fee: Anmeldegebühr setzen

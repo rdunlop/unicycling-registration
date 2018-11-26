@@ -4,10 +4,10 @@
 #
 #  id                :integer          not null, primary key
 #  age_group_type_id :integer
-#  short_description :string(255)
+#  short_description :string
 #  start_age         :integer
 #  end_age           :integer
-#  gender            :string(255)
+#  gender            :string
 #  created_at        :datetime
 #  updated_at        :datetime
 #  wheel_size_id     :integer

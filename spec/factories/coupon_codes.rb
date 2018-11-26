@@ -3,9 +3,9 @@
 # Table name: coupon_codes
 #
 #  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  code                   :string(255)
-#  description            :string(255)
+#  name                   :string
+#  code                   :string
+#  description            :string
 #  max_num_uses           :integer          default(0)
 #  created_at             :datetime
 #  updated_at             :datetime

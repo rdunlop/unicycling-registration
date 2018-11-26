@@ -2,4 +2,13 @@
 es:
   attending:
     event:
+      best_time: Mejor tiempo
       category: Categoría
+      drop_out_confirmation: "Si abandonas, no podrás entrar de nuevo sin aprobación
+        del administrador.\r\nContinuar?"
+      drop_out_of_event: Abandonar
+      paid_for: Pagar por
+      paid_for_tooltip: Para retirarse de este evento, por favor contacta a los organizadores
+        del evento
+      upload_music: Sube tu música?
+      upload_music_details: Sube tu música para este evento desde el resumen de página

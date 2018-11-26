@@ -22,13 +22,14 @@ de:
         location: Ort
         logo_file: Logo
         long_name: Voller Name
+        max_registrants: Maximale Anzahl an Teilnehmern
         music_submission_end_date: Letzter Tag um Musik hoch zu laden
         noncompetitor: Begleiter (Non Competitor)
         noncompetitor_benefits: Begleiter Vorteile
         offline_payment: Gib Details zur offline Zahlmethode an
         offline_payment_description: Details der offline Zahlmethode
         paypal_account: Paypal Händler Account E-Mail
-        paypal_mode: Paypal Modus
+        payment_mode: Angemeldeter Modus
         registrants_should_specify_default_wheel_size: Teilnehmer sollen ihre Standard
           Radgröße spezifizieren
         request_address: Adresse erfragen
@@ -45,6 +46,7 @@ de:
         start_date: Erster Tag der Veranstaltung
         style_name: Webseiten Stil
         under_construction: wird gerade überarbeitet
+        waiver_file_name: Druckbare Verzichtsdatei PDF
     models: 
   helpers:
     submit:

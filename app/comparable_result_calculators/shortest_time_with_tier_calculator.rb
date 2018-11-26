@@ -38,6 +38,7 @@ class ShortestTimeWithTierCalculator
   def tier_time(tier)
     raise "Tier must be >= 1" if tier < 1
     raise "Unable to process tier >= 10" if tier >= 10
+
     (tier - 1) * 11_000_000
   end
 

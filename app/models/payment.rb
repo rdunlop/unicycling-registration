@@ -6,13 +6,13 @@
 #  user_id              :integer
 #  completed            :boolean          default(FALSE), not null
 #  cancelled            :boolean          default(FALSE), not null
-#  transaction_id       :string(255)
+#  transaction_id       :string
 #  completed_date       :datetime
 #  created_at           :datetime
 #  updated_at           :datetime
-#  payment_date         :string(255)
-#  note                 :string(255)
-#  invoice_id           :string(255)
+#  payment_date         :string
+#  note                 :string
+#  invoice_id           :string
 #  offline_pending      :boolean          default(FALSE), not null
 #  offline_pending_date :datetime
 #
@@ -92,6 +92,22 @@ class Payment < ApplicationRecord
     results
   end
 
+  # describe the payment, in succint form
+  # by only describing the members
+  def description
+    payment_details.map(&:registrant).compact.uniq.map do |reg|
+      reg.with_id_to_s
+    end.join(", ")
+  end
+
+  def long_description
+    payment_details.map do |pd|
+      next if pd.amount == 0.to_money
+
+      "##{pd.registrant.bib_number} #{pd} (#{pd.amount.format(separator: '.', symbol: nil, thousands_separator: nil)})"
+    end.compact.join(", ")
+  end
+
   def paypal_post_url
     EventConfiguration.paypal_base_url + "/cgi-bin/webscr"
   end
@@ -102,7 +118,7 @@ class Payment < ApplicationRecord
 
   def self.total_refunded_amount
     total = 0.to_money
-    PaymentDetail.refunded.includes(:payment, refund_detail: :refund).each do |payment_detail|
+    PaymentDetail.refunded.includes(:payment, refund_detail: :refund).find_each do |payment_detail|
       total += payment_detail.cost
     end
     total

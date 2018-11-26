@@ -32,6 +32,7 @@ class RegistrantPolicy < ApplicationPolicy
   def add_events?
     return false unless record.competitor?
     return true if event_planner? || super_admin?
+
     (user_record? || shared_editable_record?) && (!config.event_sign_up_closed? || !registration_closed?)
     # change this to allow add_events when registration is closed, but events date is open
     # !config.event_sign_up_closed?
@@ -40,11 +41,12 @@ class RegistrantPolicy < ApplicationPolicy
 
   def set_wheel_sizes?
     return false unless config.registrants_should_specify_default_wheel_size?
+
     record.competitor? && update? && record.try(:age).to_i <= config.wheel_size_configuration_max_age
   end
 
   def add_volunteers?
-    (config.volunteer_option != "none") && update?
+    config.volunteer? && update?
   end
 
   def add_contact_details?
@@ -53,6 +55,7 @@ class RegistrantPolicy < ApplicationPolicy
 
   def lodging?
     return true if event_planner? || super_admin?
+
     update? && config.has_lodging? && !config.lodging_sales_closed?
   end
 
@@ -72,6 +75,7 @@ class RegistrantPolicy < ApplicationPolicy
   # can I update any of my registration data?
   def update?
     return true if event_planner? || super_admin?
+
     (user_record? || shared_editable_record?) && !registration_closed?
   end
 

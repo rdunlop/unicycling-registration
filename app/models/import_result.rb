@@ -4,7 +4,7 @@
 #
 #  id                  :integer          not null, primary key
 #  user_id             :integer
-#  raw_data            :string(255)
+#  raw_data            :string
 #  bib_number          :integer
 #  minutes             :integer
 #  seconds             :integer
@@ -13,12 +13,12 @@
 #  updated_at          :datetime
 #  competition_id      :integer
 #  points              :decimal(6, 3)
-#  details             :string(255)
+#  details             :string
 #  is_start_time       :boolean          default(FALSE), not null
 #  number_of_laps      :integer
-#  status              :string(255)
+#  status              :string
 #  comments            :text
-#  comments_by         :string(255)
+#  comments_by         :string
 #  heat                :integer
 #  lane                :integer
 #  number_of_penalties :integer
@@ -71,6 +71,7 @@ class ImportResult < ApplicationRecord
           # another competition with a competitor in the same event exists, use a competitor there
           competitor = matching_registrant.competitors.find_by(competition: matching_competition)
           raise "error finding matching competitor" if competitor.nil?
+
           target_competition = matching_competition
         end
       end

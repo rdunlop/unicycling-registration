@@ -5,11 +5,27 @@ es:
       default_message: 'Por favor revise los problemas siguientes:'
     hints:
       category:
+        info_page_id: Elige una "Página" que describa esta categoría. Esto servirá
+          la correcta traducción de esta página para el usuario.
         info_url: Este enlace aparece en la página de Categoría, y puede servir como
           un enlace para obtener más información sobre los eventos en esta categoría.
       competition:
+        award_subtitle_name: "Ingresa un linea adicional opcional de texto de premio.
+          NOTA: Sólo permitido SIN Grupo de edad.\r\nEj. Principiantes Hombres"
         award_title_name: "Texto que aparece en los resultados oficiales y premios\r\nPor
           ejemplo: Freestyle Individual"
+        combined_competition_id: "Esto debe solo ser habilitado en la competencia
+          general. No en los competidores que son parte de esta. \r\n(ie no para 10k,
+          solo para la \"Competencia general de carrera\""
+        has_experts: "Selecciona este si los resultados ingresados aquí deberán también
+          ser premiados ignorando los de grupos de edad.\r\nSeleccionar esta casilla
+          causará que los premios de Expertos sean creados, por separado de los resultados
+          de grupos de edad.\r\nSí esta competencia es sólo de expertos, entonces
+          esta casilla no es requerida , como serán colocadas en resultados de grupo
+          individual.\r\nDebes tener un grupo de edad específico."
+        import_results_into_other_competition: Cuando importes resultados, si el registrante
+          no ha sido asignado a esta competencia pero si a otra en el mismo evento,
+          esto hara que los resultados se importen ahí después de aprobarse.
         num_members_per_competitor: Para la mayoría de los eventos esto será "Uno"
         penalty_seconds: ¿Se puede penalizar a un competidor "X" segundos por una
           infracción (como desmontarse del monociclo)?
@@ -20,9 +36,14 @@ es:
           eventos (como Pista). Utilice esta opción\r\nsi quieres entrar la longitud
           de las bielas, y otros detalles para un evento que no tiene de forma predeterminada\r\nun
           formulario para firmar."
+        uses_lane_assignments: Habilitada la herramienta de asignación
       coupon_code:
+        expense_items: Elige los artículos de gasto que serán descontados por el código
+          de cupón.
         inform_emails: Una lista, separada por comas, de direcciones de correo electrónico
           que serán informados cuando alguien use este cupón
+        maximum_registrant_age: Puede aplicarse a los registrantes (e incluyendo)
+          su edad
         price: El precio que se cobrará al utilizar este cupón.
       event:
         accepts_music_uploads: Marque esta casilla si cada competidor puede elegir
@@ -30,12 +51,29 @@ es:
         accepts_wheel_size_override: Al establecer esta opción le presenta los niños
           de 10 años o menos con la capacidad de especificar una re-definición del
           tamaño de la rueda.
+        artistic: Ajustando este boolean automáticamente restringe cambios después
+          de el cierre de fecha artística.
+        best_time_format: Quieres que el usuario imponga un mejor tiempo para este
+          evento. (Esto puede ser de uso para determinar el inicio del orden para
+          algunas competencias)
+        cost: Específica el costo de registro de este evento (opcional)
+        standard_skill: Marca esta casilla si los competidores deben también cargar
+          sus rutinas de habilidad estandar.
       event_category:
         warning_on_registration_summary: Cualquier registrante que se inscribia en
           esta categoría tendrá una advertencia en su formulario de inscripción.
       event_choice:
         optional: Permite al usuario elegir a no introducir datos en este campo
+        optional_if_event_choice_id: Si el usuario elige "Opción de Evento", el campo
+          es opcional.(ej. "Nombre de Equipo" opcional si "Escoges" )
+        required_if_event_choice_id: Sí el usuario ha elegido esta otra "Opción de
+          Evento", este campo es requerido. (Ej. "Color de equipo" si "hacerlo por
+          diversión")
+        tooltip: Esto sera presentado cuando el usuario hover sobre la etiqueta
       event_configuration:
+        accept_rules: Fuerza a todos los registrantes a aceptar las reglas en el PDF
+        age_calculation_base_date: Las edades de los registrantes están calculadas
+          en base es su fecha (opcional)
         artistic_closed_date: Después de esta fecha, los registrantes normales no
           pueden añadir eventos marcados como "artístico". Pueden sin embargo dejarlos,
           hasta la Fecha de Cierre para la Registración de Eventos.
@@ -43,18 +81,37 @@ es:
           los beneficios de la Registración de Competidor
         comp_noncomp_url: Especifica un enlace que explica la diferencia entre los
           Tipos de Inscripción ofrecidas
+        contact_email: Este es el blanco para todas los mails de retro alimentación
+          en la página de "ayuda".
+        dates_description: Esta descripción aparece en la página de no registrado,
+          y debe describir las fechas de la convención.
         display_confirmed_events: La activación de esto muestra los eventos confirmados
           / eventos sin confirmar en la página de Resumen de Registrante.
         event_sign_up_closed_date: Después de esta fecha, SOLO los administradores
           pueden añadir eventos a las registraciones. (aunque aún pueden eliminarlos)
         event_url: Enlaces desde el logotipo de la Barra de menús a esta URL.
         iuf: Al habilitar esto permite  preguntas de membresía de la IUF.
+        lodging_end_date: Después de esta fecha, sólo los administradores pueden agregar/quitar
+          hospedaje a un registro. (Aunque existiendo hospedaje aún puede pedirse)
         logo_file: El logo debe ser de 93px x 38px
+        max_award_place: Esto deja el máximo lugar para imprimir premios. (Aplica
+          a los dos grupos, de edad y expertos)
+        max_registrants: Los usuarios serán incapaces de crear nuevos registros una
+          vez que el número de (no pagado o pagado) de registrados exista. Específica
+          0 para deshabilitar esta característica.
         music_submission_end_date: La última fecha en la que se les permitirá presentar
           la musica
         noncompetitor_benefits: Aparece en la Página de Inicio de la Registración,
           que describe los beneficios de registrarse como No-Competidor
         paypal_test: permitir pretender que recibe la confirmación del pago de PayPal
+        registrants_should_specify_default_wheel_size: Necesitamos preguntarle a los
+          registrados <= 10 años por su tamaño de rueda por default (normalmente es
+          eventos de ruta).
+        request_address: Cada registrado requiere ingresar una dirección de correo
+          físico.
+        request_emergency_contact: Cada registrado debe ingresar un contacto de emergencia.
+        request_responsible_adult: Solicita a cada menos de 18 años registrado, ingresar
+          a un adulto responsable
         spectator_benefits: Aparece en la Página de Inicio de la Registración, que
           describe los beneficios de registrarse como Espectador
         spectators: Los espectadores no pagan "Cuotas de Inscripción", y pueden comprar
@@ -62,6 +119,35 @@ es:
         start_date: La edad de los Registrantes se calcula basándose en esta fecha
         test_mode: La activación de esta permite a cualquier usuario convertirse en
           un Super Usuario, y también para "pretender completar" un pago.
+        usa: "Esto prioritiza Estados Unidos y Canada en las casillas de selección
+          de país, y causa que el estado sea requerido.\r\nEsto también permite registros
+          de último momento de competidores (por el data de entrada de personas)"
+      expense_group:
+        competitor_required: Un elemento de este grupo de gastos será asignado al
+          registrado (Solo puede estar 1 artículo en el grupo, y automáticamente será
+          agregado al registrado)
+        info_url: Este enlace aparece en la página de gastos, útil si los gastos necesitan
+          mayor explicación, o mostrar los imágenes
+        noncompetitor_required: Un elemento de este grupo de gastos será asignado
+          al registrado(ahí solo puede haber 1 artículo en el grupo, y automáticamente
+          será agregado al registrado)
+      expense_item:
+        has_custom_cost: Permite al registrado elegir cuanto pagar por el artículo
+        has_details: Pregunta detalles adicionales al usuario cuando elija el artículo
+      page:
+        parent_page: "[Opcional] Agrupa esta página bajo esta página de padres"
+        position: Ordena las páginas bajo una sóla página de padres
+        slug: El URL slug, solo usa caracteres normales (no debe contener espacios)
+      payment:
+        note: 'Describe el pago. Ejemplos: Efectivo, Cheque #123'
+      registrant_best_times:
+        source_location: Ingresa nombre y fecha
+      registrant:
+        wheel_size_id: Usado para elegir edad, grupos cuando es aplicable.(ruta, clases
+          estandares de evento)
+      registration_cost:
+        end_date: Específica la última fecha  en la que estos precios aplican.
+        start_date: Específica la fecha siguiendo el periodo previo "Fecha de Fin"
       volunteer_opportunity:
         inform_emails: cuando alguien se registra para este puesto de voluntario,
           un correo electrónico será enviado a estas direcciones de correo electrónico
@@ -74,6 +160,7 @@ es:
     options:
       event_configuration:
         waiver:
+          none: No renuncia
           online: Relevo de Responsabilidad en linea
           print: Imprimir Relevo de Responsabilida
     placeholders:

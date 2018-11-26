@@ -32,6 +32,7 @@ class AdditionalRegistrantAccess < ApplicationRecord
     return "Declined" if declined?
     return "Accepted" if accepted_readonly?
     return "Full Access" if accepted_readwrite?
+
     "New"
   end
 end

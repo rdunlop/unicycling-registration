@@ -103,6 +103,7 @@ class OverallChampionResultCalculator
 
   def get_place(competitor)
     return nil if competitor.nil?
+
     if combined_competition.use_age_group_places?
       competitor.place
     else
@@ -124,6 +125,7 @@ class OverallChampionResultCalculator
 
       matching_comp = matching_competitor(bib_number, gender, entry.competition)
       next unless matching_comp
+
       points = calc_points(entry, matching_comp)
       competitor_results[entry.abbreviation] = {
         entry_place: get_place(matching_comp),
@@ -159,6 +161,7 @@ class OverallChampionResultCalculator
     registrant_bib_numbers(gender).each do |bib_number|
       results[bib_number] = create_registrant_entry(bib_number, gender)
       next if results[bib_number][:total_points].zero?
+
       store_score(results[bib_number][:total_points], bib_number)
     end
 
