@@ -7,6 +7,7 @@ es:
       invalid_date: no es una fecha válida
       invalid_datetime: no es una fecha/hora válida
       invalid_time: no es una hora válida
+      is_at: Debe estar en  %{restriction}
       on_or_after: debe ser en o después %{restriction}
       on_or_before: debe estar en o antes %{restriction}
   validates_timeliness:

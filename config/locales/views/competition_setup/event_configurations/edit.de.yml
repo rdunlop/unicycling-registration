@@ -3,4 +3,10 @@ de:
   competition_setup:
     event_configurations:
       edit:
+        artistic_mode_description: "Dies bestimmt, ob 1 hoher, 1 niedriger Judge während
+          der Bewertung\r\n(kleine Veranstaltung), 1 hoher, 1 niedriger Judge PRO
+          JUDGE TYP während der Bewertung (große Veranstaltung) eliminiert werden
+          soll."
+        artistic_scoring_mode: Artistischer Bewertungsmodus
+        description: Diese Einstellungen wirken auf alle Events in dem Wettbewerb.
         header: Globale Wettkampf Einstellungen

@@ -3,6 +3,7 @@ es:
   registrants:
     all:
       all_registrants: Todos los solicitantes
+      club: Club
       country: País
       id: ID
       name: Nombre

@@ -8,6 +8,10 @@ de:
         event_category_hint: "Spezifiziere 'alle' wenn es nur eine Kategorie gibt\r\n(anmerkung:
           erweiterte Optionen sind unter 'Disziplin Kategorien' verfügbar)"
         header: Disziplin bearbeiten
+        standard_skill_closed_date: Die Frist zur Standard Skill Einreichung ist der
+          %{standard_skill_closed_date}
+        standard_skill_enabled: Das Standard Skill Einreichungssystem ist aktiviert?
+          %{enabled}
         wheel_size_override_only_when_default_wheel_size: "Die Radgröße für eine Disziplin
           ausser Kraft zu setzen\r\nist NUR erlaubt wenn die \"Standard Radgröße abfragen\"\r\nOption
           in den Anmelde Fragen aktiviert ist."

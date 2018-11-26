@@ -40,6 +40,8 @@ de:
           rabatiert werden.
         inform_emails: Eine Komma separierte Liste von E-Mail Adressen die informiert
           werden wenn jemand diesen Coupon verwendet
+        maximum_registrant_age: Kann auf Teilnehmer bis zu (einschließlich) diesem
+          Alter angewendet werden
         price: Der Preis der berechnet wird wenn dieser Coupon verwendet wird
       event:
         accepts_music_uploads: Aktiviere diese Box wenn jeder Teilnehmer Musik für
@@ -52,6 +54,8 @@ de:
           diese Disziplin angibt. (Dies kann helfen um die Start Reihenfolge für einige
           Wettkämpfe fest zu legen
         cost: Gib die Anmeldegebühr für diese Disziplin an (optional).
+        standard_skill: Hake diese Box an, wenn die Wettkämpfer auch ihre Standard
+          Skill Abläufe hochladen sollen.
       event_category:
         warning_on_registration_summary: Jeder Teilnehmer der sich für diese Kategorie
           anmeldet wird eine Warnung auf seinem Anmeldeformular sehen.
@@ -88,13 +92,24 @@ de:
           können)
         event_url: Links vom Menü Bar Logo zu dieser URL
         iuf: Das aktivieren dieser Funktion erlaubt IUF Mitgliedschafts Fragen.
+        lodging_end_date: Nach diesem Datum können NUR Administratoren Unterkünfte
+          zu einer Registrierung hinzufügen/entfernen. (obwohl bestehende Unterkünfte
+          immer noch gebucht werden können)
         logo_file: Das Logo sollte 93x38 Pixel haben
+        max_award_place: Hier definierst du den maximalen Platz für den Ehrungen gedruckt
+          werden. (greift für ALtersklassen und Expert)
+        max_registrants: Benutzer werden nicht in der Lage sein eine neue Anmeldung
+          zu erzeugen sobald diese Anzahl an (bezahlten oder unbezahlten) Teilnehmern
+          erreicht ist. Setze 0 um diese Funktion zu deaktivieren.
         music_submission_end_date: Der letzte Tag an dem die Zustellung von Musik
           erlaubt ist
         noncompetitor_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
           die Vorteile einer Anmeldung als Begleiter
         paypal_test: Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal
           bekomen zu haben
+        registrants_should_specify_default_wheel_size: Müssen wir Teilnehmer die <=
+          10 Jahre alt sind nach ihrer standard Reifengröße fragen (üblicherweise
+          für Bahn Rennen)
         request_address: Erfordert von jedem Teilnehmer die EIngabe einer Email Adresse
         request_emergency_contact: Erfordert von jedem Teilnehmer die EIngabe eines
           Notfall Kontakt

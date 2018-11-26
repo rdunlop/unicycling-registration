@@ -3,4 +3,5 @@ es:
   layouts:
     rulebook_footer:
       competition_rulebook: Reglamento para la competición
+      header: Reglas
       rulebook_tooltip: Haz clic aquí para el reglameto que rige la competición!

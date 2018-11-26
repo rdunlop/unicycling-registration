@@ -8,6 +8,8 @@ de:
         combined_competition_id: Gesamtsieger Berechnung
         end_data_type: Ziellinien Dateneingabe
         has_experts: Auch Expert berechnen
+        import_results_into_other_competition: Importiere die Ergebnisse in einen
+          anderen Wettkampf
         name: Wettkampfname
         num_members_per_competitor: Teamgröße
         penalty_seconds: Sekunden pro Strafe

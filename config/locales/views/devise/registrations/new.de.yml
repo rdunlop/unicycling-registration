@@ -8,3 +8,5 @@ de:
         header: Registrieren
         password_min_length: "(mindestens 6 Zeichen)"
         sign_up: Registrieren
+        subheader: Dieses Konto wird für alle Einrad Veranstaltungen in diesem System
+          verwendet.

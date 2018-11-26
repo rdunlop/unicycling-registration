@@ -10,24 +10,37 @@ es:
   competitor: Competitor
   date:
     formats:
-      registration_date_format: "%b %d, %Y"
       lodging_date_format: "%b %d, %Y"
+      registration_date_format: "%b %d, %Y"
     order:
     - :month
     - :day
     - :year
+  delete: Elimina
+  edit: Edita
+  example: Ejemplo
   language_name: Spanish
+  membership_number: Número de membresía
   'no': 'No'
   noncompetitor: No competidor
+  note: Nota
+  organization_membership_types:
+    french_federation: Federación Francesa
+    usa: Estados Unidos
+  pdf: "(pdf)"
   prices_increase_at_date: Prices Increase in %{end_date}
   prices_increase_soon: Prices Increase in less than 1 day
+  show: 'Mostrar:'
   spectator: Espectador
+  validations:
+    duplicate: Debe ser único
   wizard:
     add_contact_details: Detalles de contacto
     add_events: Eventos
     add_name: Nombre
     add_volunteers: Voluntarios
     expenses: Gastos
+    lodging: Hospedaje
     music: Música
     set_wheel_sizes: Tamaño de rueda
   'yes': Sí

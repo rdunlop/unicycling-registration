@@ -2,5 +2,10 @@
 es:
   payments:
     show:
+      complete_payment: Completar pago
+      offline_payment_instructions: Instrucciones de pago fuera de linea
+      offline_payment_instructions_description: 'Para pago fuera de línea, favor de
+        usar la "Referencia de Pago #" y seguir las instrucciones:'
+      payment_reference: 'Referencia de pago # %{payment_id}'
       payment_summary: Resumen del pago
       please_proceed_with_payment: Por favor proceda con el pago

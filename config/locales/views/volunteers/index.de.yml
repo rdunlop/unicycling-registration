@@ -2,4 +2,7 @@
 de:
   volunteers:
     index:
+      add_volunteer_description_html: "Wenn der Helfer denn du brauchst hier nicht
+        gelistet ist,\r\nmust du diesen Helfer auf der \r\n%{link} Seite hinzufügen"
       header: freiwillige Helfer
+      manage_additional_access: Verwalte zusätzlichen Zugriff

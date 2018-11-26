@@ -5,3 +5,4 @@ es:
       representation_type:
         club: Equipo
         country: País
+        state: estado

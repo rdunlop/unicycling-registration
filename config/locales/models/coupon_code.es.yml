@@ -3,5 +3,11 @@ es:
   activerecord:
     attributes:
       coupon_code:
+        code: Código
+        description: Descripción
         inform_emails: Correos electrónicos para notificar cada uso de cupones
+        maximum_registrant_age: Edad máxima para registrarse
+        max_num_uses: Numero máximo de usos
+        name: Nombre
+        price: Precio
     models: 

@@ -2,6 +2,9 @@
 de:
   competition_results:
     index:
+      description: "Lade PDFs als \"zusätzliche Ergebnisse\" hoch um zusätzliche Informationen
+        zu geben.\r\nBeispiele: Round Robin Ergebnisse, Battle Ergebnisse, oder andere
+        unterstützende Ergebnisse."
       published_immediately_warning: Diese Daten werden umgehend online publiziert.
       upload_a_file: Lade eine Ergebniss Datei als PDF hoch
       upload_these_results: Lade diese Ergebnisse hoch
