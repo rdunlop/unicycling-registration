@@ -3,4 +3,6 @@ de:
   admin:
     standard_skill_routines:
       view_pdfs:
+        difficulty_judge_pdf: Schwierigkeitsjuror pdf
         download: Lade ein PDF dieser Routine herunter
+        execution_judge_pdf: Ausführungsjuror pdf

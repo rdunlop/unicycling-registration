@@ -9,3 +9,5 @@ es:
         header: Inscribirse
         password_min_length: "(mínimo 6 caracteres)"
         sign_up: Inscribirse
+        subheader: Esta cuenta que fue usada para todas las Convenciones de Monociclismo
+          en este sistema.

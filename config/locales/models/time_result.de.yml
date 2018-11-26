@@ -3,7 +3,13 @@ de:
   activerecord:
     attributes:
       time_result:
+        facade_hours: Stunden
+        facade_hundreds: Hunderter
+        facade_minutes: Minuten
+        hours: Stunden
         minutes: Minuten
+        number_of_laps: "# Runden"
+        number_of_penalties: Strafen
         seconds: Sekunden
         thousands: Tausender
     models: 

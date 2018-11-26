@@ -3,7 +3,24 @@ de:
   admin:
     translations:
       index:
+        avaliable_in_multiple_languages: Das Registrierungs und Wettkampf System ist
+          in verschiedenen Sprachen verfügbar.
+        clear_translation_action: Übersetzungs Cache löschen
+        clear_translation_cache: Cache leeren, nachdem die Übersetzung geändert wurde
+        clear_translation_confirm: "Bist du sicher? Dies hat Auswirkungen auf die
+          Leistung, da der Cache\r\nneu erstellt wird (bitte tu dies nicht häufig)"
+        clear_translation_description: "Sobald du damit fertig bist, verschiedene
+          Dateien zu übersetzen (und alle \"Änderungen angewendet\" hast bei geläufigen
+          Übersetzungen), musst du vielleicht\r\nden Seitencache leeren, damit alle
+          möglichen Seiten aktualisiert werden."
+        common_translations_set: Übersetzungen, die allen Veranstaltungen gemeinsam
+          sind
         convention_available_in_languages_html: "Die\r\n<b>%{convention}</b>\r\nVeranstaltung
           ist verfügbar in\r\n%{languages}"
+        convention_translation_set: Übersetzungen, die spezifisch für jede Veranstaltung
+          sind
         header: Inhalt übersetzen
+        thank_you_for_volunteering_html: "Danke für deine Hilfe bei der Übersetzung
+          einiger Inhalte.\r\nWenn du Fragen oder Probleme hast, verwende bitte %{link}\r\num
+          uns davon wissen zu lassen."
         two_sets_of_translations: Es gibt zwei verschiedene Sätze von Übersetzungen

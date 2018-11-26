@@ -3,24 +3,49 @@ es:
   activerecord:
     attributes:
       event_configuration:
+        accept_rules: Se deben aceptar las reglas
+        age_calculation_base_date: Base de datos para cálculo de edad
+        artistic_closed_date: último día para aceptar nuevo registro artístico
         artistic_score_elimination_mode_naucc: Grupo pequeño
+        competitor: Competidor
         competitor_benefits: Ventajas para los participantes
+        comp_noncomp_page_id: Página de de descripción de Competidor contra no competidor
         comp_noncomp_url: Explicación Competidor / No-Competidor
+        contact_email: Contacto de correo de Convención
+        currency_code: Código de moneda
+        custom_waiver_text: texto personalizado de renuncia
         dates_description: Descripción de datos
+        enabled_locales: Idiomas habilitados
+        event_sign_up_closed_date: último día para inscribirse a eventos
         event_url: Sitio web principal
         location: Lugar
+        logo_file: Logotipo
         long_name: Nombre completo
+        max_registrants: Número total máximo de registrados
+        music_submission_end_date: Último día para aceptar carga de Música
+        noncompetitor: No competidor
         noncompetitor_benefits: Ventajas para los acompañantes
         offline_payment: Proporcione detalles sobre el pago fuera de línea
         offline_payment_description: Detalles para el pago fuera de línea
         paypal_account: Correo electrónico de Cuenta Mercantil de Paypal
+        paypal_mode: Modo Paypal
+        registrants_should_specify_default_wheel_size: Los registrantes deben específicar
+          tamaño de rueda
+        request_address: Dirección para solicitudes
+        request_emergency_contact: Contacto para solicitudes de emergencia
+        request_responsible_adult: Solicitud responsiva de un adulto
         rulebook_url: Reglamento PDF URL
+        rules_file_name: Archivo de reglas PDF
         short_name: Nombre corto
+        spectator: Espectador
         spectator_benefits: Ventajas para los espectadores
         standard_skill: Activar Sistema de Sumisión de Standard Skill
         standard_skill_closed_date: Último día para presentar rutinas de Standard
           Skill en línea
         start_date: Primer día de la competición
+        style_name: Estilo de página web
+        under_construction: En construcción
+        waiver_file_name: Archivo de Renuncia imprimible PDF
     models: 
   helpers:
     submit:

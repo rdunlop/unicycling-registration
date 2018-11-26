@@ -3,6 +3,9 @@ de:
   convention_setup:
     categories:
       index:
+        copy_from_previous:
+          header: Kopiere Events und Kategorien von einer vorherigen Veranstaltung
+          link: Wähle eine vorherige Veranstaltung und kopiere deren Events
         description: Disziplinen sind in verschiedene Disziplin Kategorien gruppiert.
           z.B. Manschafts Sport, Freestyle, Muni
         existing_categories: Bestehende Kategorien

@@ -7,6 +7,8 @@ es:
         award_title_name: Título del Premio
         combined_competition_id: Cálculo del Campeón Global
         end_data_type: Entrada de datos en línea de meta
+        has_experts: Calcular expertos también
+        import_results_into_other_competition: Importar resultados a otra competencia
         name: Nombre del concurso
         num_members_per_competitor: Tamaño del equipo
         penalty_seconds: Segundos por penalización

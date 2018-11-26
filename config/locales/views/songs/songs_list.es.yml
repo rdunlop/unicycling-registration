@@ -6,9 +6,14 @@ es:
       changes_after_deadline: Después de ese tiempo, si usted necesita cambiar su
         música, por favor comuníquese con el Director / organizadores (o use "Ayuda"
         -> "Feedback").
+      description: Para algunos competidores, la música es reproducida durante el
+        tiempo de competencia. Favor de cargar en mp3 con la música que quisieras
+        que se reproduzca. Favor de proveer música de duración apropiada (ver reglamento)
+        para tu competencia/categoría.
       download: Download
       guest: Esta canción fue subida por otro participante?
       music_deadline: La música puede ser subida hasta %{end_date}
+      reg_name: Nombre de Registro
       remove: Borrar
       requirements: Usted todavía es requerido a tener la música en un CD o un reproductor
         de MP3 en la competencia. Esto es para que si hay dificultades técnicas con

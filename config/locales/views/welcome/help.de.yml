@@ -14,6 +14,7 @@ de:
       registration_help: "Wenn du dich angemeldet hast, wähle \"Neuen Teilnehmer anlegen\"
         oder = \"Neuen Begleiter anlegen\" und fülle alle Felder aus\r\nZahle dann
         die Anmeldegebühr um deine Anmeldung zu sichern."
+      shared_password: Muss ich mich jedes Jahr registrieren?
       sharing_link: Bitte die für dein Team angemeldeten um Zugriff mit diesem %{link}
         Formular
       sharing_registration_details: Wie man Anmelde Details teilen kann
@@ -21,6 +22,7 @@ de:
         Trainer kannst du um Zugriff bitten um die Anmeldungen deiner Mitglieder zu
         bezahlen und/oder die Anmelde Daten einzusehen und/oder zu ändern.
       subheader: Diese Seite ist für die %{domain} Einrad Veranstaltungs Registrierung
+      this_link: dieser Link
       translation_help: Ich habe eine fehlende/falsche Übersetzung gefunden. Schick
         uns die Details dazu hier als Feedback or stimme zu ein Übersetzer zu werden
         um die Übersetzung einer Sprache zu kompletieren.

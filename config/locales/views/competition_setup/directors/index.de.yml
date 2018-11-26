@@ -5,5 +5,13 @@ de:
       index:
         add_director: Direktor hinzufügen
         create_director: Direktor anlegen
+        description: "Die Direktoren werden einer Event-Klase zugeordnet. Sie können\r\nStartlisten,
+          Judges und Helfer zur Dateneingabe für ihre Wettkämpfe erstellen/verwalten."
         director: Direktor
         header: Direktoren bearbeiten
+        note_1: "Ein Wettkampf muss durch den \"Wettkampf Admin\" konfiguriert werden\r\n(das
+          bist wahrscheinlich du), bevor der Direktor die Startlisten für den Wettkampf\r\nverwalten
+          kann."
+        note_2: "Die Direktoren können keine Wettkämpfe selbst erstellen, da die Wahl\r\nbestimmter
+          Einstellungen für einen Wettkampf normalerweise viel nuancierter sind\r\nals
+          den Direktoren bewusst ist."

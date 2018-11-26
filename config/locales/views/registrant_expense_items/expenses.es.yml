@@ -3,6 +3,8 @@ es:
   registrant_expense_items:
     expenses:
       cost: Costes
+      items_not_guaranteed: Estos artículos no están garantizados hasta que el pago
+        se haya recibido
       paid: Pagado
       registrants_expenses: "%{registrant}'s gastos"
       total: Total

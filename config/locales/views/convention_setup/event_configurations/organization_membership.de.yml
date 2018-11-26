@@ -4,5 +4,12 @@ de:
     event_configurations:
       organization_membership:
         display_membership_pages: Zeige die Verbands Mitglieder Seiten an
+        french_behavior_description: "Die Definition \"French Federation\" wird den
+          Nutzer nach seiner\r\n\"French Federation\" Mitgliedsnummer fragen."
         requests_membership_number: Dies fragt von jedem Teilnehmer die Mitgliedschaft
           im gewählten EInrad Verband ab.
+        should_be_members: Sollen die Teilnehmer Mitglied einer Einrad Organisation
+          sein?
+        usa_behavior_description: "Die Definition \"USA\" wird das System veranlassen
+          die Mitgliedschaft jedes Teilnehmers\r\nin der USA Datenbank zu prüfen."
+        which_organization: Welche Einrad Organisation?

@@ -3,7 +3,13 @@ es:
   activerecord:
     attributes:
       payment:
+        completed_date: Fecha completa
+        details: Detalles (nota)
+        note: Nota
+        offline_pending_date: Fecha
+        payment_id: Código de pago
         total: Total
+        transaction_id: Código de Transacción
     models:
       registrant:
         one: Solicitante de la inscripción
