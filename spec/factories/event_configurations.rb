@@ -32,7 +32,7 @@
 #  italian_requirements                          :boolean          default(FALSE), not null
 #  rules_file_name                               :string
 #  accept_rules                                  :boolean          default(FALSE), not null
-#  paypal_mode                                   :string           default("disabled")
+#  payment_mode                                  :string           default("disabled")
 #  offline_payment                               :boolean          default(FALSE), not null
 #  enabled_locales                               :string           not null
 #  comp_noncomp_page_id                          :integer
@@ -80,7 +80,7 @@ FactoryBot.define do
     max_award_place { 5 }
     spectators { false }
     paypal_account { "ROBIN+merchant@dunlopweb.com" }
-    paypal_mode { "enabled" }
+    payment_mode { "enabled" }
     offline_payment { false }
     under_construction { false }
 

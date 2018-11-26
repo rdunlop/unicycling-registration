@@ -32,7 +32,7 @@
 #  italian_requirements                          :boolean          default(FALSE), not null
 #  rules_file_name                               :string
 #  accept_rules                                  :boolean          default(FALSE), not null
-#  paypal_mode                                   :string           default("disabled")
+#  payment_mode                                  :string           default("disabled")
 #  offline_payment                               :boolean          default(FALSE), not null
 #  enabled_locales                               :string           not null
 #  comp_noncomp_page_id                          :integer
@@ -121,11 +121,11 @@ class EventConfiguration < ApplicationRecord
     organization_membership_type.present?
   end
 
-  def self.paypal_modes
+  def self.payment_modes
     ["disabled", "test", "enabled"]
   end
 
-  validates :paypal_mode, inclusion: { in: paypal_modes }
+  validates :payment_mode, inclusion: { in: payment_modes }
 
   nilify_blanks only: %i[rulebook_url event_url], before: :validation
 
@@ -174,7 +174,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def online_payment?
-    paypal_mode == "test" || paypal_mode == "enabled"
+    payment_mode == "test" || payment_mode == "enabled"
   end
 
   def can_only_drop_or_modify_events?
@@ -184,7 +184,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def paypal_test?
-    paypal_mode == "test"
+    payment_mode == "test"
   end
 
   def print_waiver?

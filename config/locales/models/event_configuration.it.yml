@@ -28,7 +28,7 @@ it:
         offline_payment: Fornire dettagli per il pagamento offline
         offline_payment_description: Dettagli per il pagamento offline
         paypal_account: Account email PayPal
-        paypal_mode: Modalità PayPal
+        payment_mode: Modalità Iscritto
         registrants_should_specify_default_wheel_size: Gli iscritti devono specificare
           la dimensione della ruota per difetto
         request_address: Indirizzo richiesto

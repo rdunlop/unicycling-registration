@@ -46,7 +46,7 @@
     = f.input :stripe_secret_key
     %hr
     = f.input :currency_code, collection: EventConfiguration.currency_codes
-    = f.input :paypal_mode, collection: EventConfiguration.paypal_modes, include_blank: false
+    = f.input :payment_mode, collection: EventConfiguration.payment_modes, include_blank: false
     = f.input :offline_payment
     = render "shared/wysiwyg"
     = f.input :offline_payment_description, as: :text, input_html: { class: "tinymce" }
