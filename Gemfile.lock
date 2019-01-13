@@ -14,15 +14,6 @@ GIT
     acts_as_restful_list (0.6)
 
 GIT
-  remote: https://github.com/rdunlop/countries.git
-  revision: 09024fbee43778159dcae393ecbe8353fb696c4f
-  branch: iuf_country_changes
-  specs:
-    countries (1.1.0)
-      currencies (~> 0.4.2)
-      i18n_data (~> 0.7.0)
-
-GIT
   remote: https://github.com/rdunlop/fancybox2-rails.git
   revision: 7e63203d9032846202e632771e817872471e9132
   branch: rails5
@@ -224,13 +215,16 @@ GEM
     concurrent-ruby (1.1.4)
     connection_pool (2.2.2)
     consistency_fail (0.3.7)
-    country_select (2.4.0)
-      countries (~> 1.1.0)
+    countries (3.0.0)
+      i18n_data (~> 0.8.0)
+      sixarm_ruby_unaccent (~> 1.1)
+      unicode_utils (~> 1.4)
+    country_select (4.0.0)
+      countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
     css_splitter (0.4.6)
       sprockets (>= 2.0.0)
-    currencies (0.4.2)
     database_cleaner (1.7.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -295,7 +289,7 @@ GEM
     http_accept_language (2.1.1)
     i18n (1.5.1)
       concurrent-ruby (~> 1.0)
-    i18n_data (0.7.0)
+    i18n_data (0.8.0)
     ice_nine (0.11.2)
     jaro_winkler (1.5.1)
     jc-validates_timeliness (3.1.1)
@@ -543,6 +537,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
     spreadsheet (1.1.8)
@@ -637,7 +632,7 @@ DEPENDENCIES
   codeclimate_circle_ci_coverage
   coffee-rails
   consistency_fail
-  countries!
+  countries
   country_select
   css_splitter
   database_cleaner
