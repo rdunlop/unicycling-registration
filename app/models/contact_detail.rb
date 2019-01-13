@@ -83,7 +83,7 @@ class ContactDetail < ApplicationRecord
   def state
     country = ISO3166::Country[country_residence]
     if country.try(:subdivisions?)
-      country.subdivisions[state_code].try(:[], "name")
+      country.subdivisions[state_code.to_sym].try(:[], "name")
     else
       state_code
     end
