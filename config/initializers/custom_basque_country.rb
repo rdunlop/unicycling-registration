@@ -8,16 +8,16 @@ ISO3166::Data.register(
     {{region}}
     {{country}}",
   name: 'Basque Country',
-  languages_official: %w(es),
+  languages_official: %w[es],
   postal_code: true,
   subdivisions: {
-    A: {
+    "A" => {
       name: 'Álava'
     },
-    B: {
-      name: 'Biscay',
+    "B" => {
+      name: 'Biscay'
     },
-    G: {
+    "G" => {
       name: 'Gipuzkoa'
     }
   }
