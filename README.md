@@ -354,6 +354,7 @@ We recommend running development within a docker environment.
 
 Benefits:
 - All daemons, processes are running at all times (easier to develop features)
+- runs with caching, which helps show some problems earlier (`touch tmp/caching-dev.txt` to enable)
 - No need to install imagemagick/etc on your machine
 
 To do this:
