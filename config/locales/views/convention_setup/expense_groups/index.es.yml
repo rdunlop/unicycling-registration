@@ -1,0 +1,9 @@
+---
+es:
+  convention_setup:
+    expense_groups:
+      index:
+        description: Si quieres vender artículos (como camisas, hospedaje, etc.) crea
+          un grupo de costo por artículo.
+        header: Artículos en venta
+        new_expense_group: Nuevo grupo de costos

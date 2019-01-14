@@ -1,0 +1,18 @@
+---
+es:
+  admin:
+    translations:
+      common_translations:
+        access_not_enabled: Accede al sistema de traducciones comunes si no está habilitado
+          para tí
+        common_example_1: Secciones de la barra de navegación
+        common_example_2: Correo de Texto automático
+        common_example_3: Nombres de Campo (ej. Primer Nombre, Número de teléfono)
+        common_translations: Traducciones comunes
+        common_translations_detail: Porque las traducciones comunes son aplicables
+          a todas las convenciones por lo regular están ya traducidas por idiomas
+          que tu deseas. Todo cambio hecho a estos textos puede aplicarse inmediatamente
+          a todos los sistemas de convención.
+        examples_of_common_translations: Ejemplos de traducciones comunes
+        follow_the_directions: Sigue las instrucciones
+        want_to_help: Si quieres ayudar a traducir este texto, porfavor

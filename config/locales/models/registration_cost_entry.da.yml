@@ -1,0 +1,8 @@
+---
+da:
+  activerecord:
+    attributes:
+      registration_cost_entry:
+        max_age: Max Alder
+        min_age: Minimun Alderq
+    models: 

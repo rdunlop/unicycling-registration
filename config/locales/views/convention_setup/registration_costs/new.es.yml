@@ -1,0 +1,6 @@
+---
+es:
+  convention_setup:
+    registration_costs:
+      new:
+        header: Nueva entrada de costo de registro

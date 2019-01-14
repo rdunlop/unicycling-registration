@@ -1,0 +1,9 @@
+---
+es:
+  admin:
+    standard_skill_routines:
+      view_pdfs:
+        difficulty_judge_pdf: Juez de dificultad pdf
+        download: Descarga un PDF de esta rutina
+        execution_judge_pdf: Juez de ejecución pdf
+        writing_judge_pdf: Juez de escritura pdf

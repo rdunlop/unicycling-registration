@@ -1,0 +1,17 @@
+---
+es:
+  convention_setup:
+    pages:
+      index:
+        description: Crear páginas de información que son accesibles para el publico
+          (disponibles sin registrarse)
+        header: Páginas de información
+        home_page: Si creas una página con el slug de "Inicio", se hará por default
+          la página de inicio de la convención.
+        new_page: Nueva Página
+        pages_location_description: Enlaces a esas páginas apareceran en barra superior
+          del menú
+        pages_structure_description: Puedes crear un árbol de páginas
+        privacy_policy_page: Si creas una página con el slug de "Políticas de Privacidad",
+          aparecerá en el pie.
+        special_pages: Páginas especiales

@@ -1,0 +1,15 @@
+---
+de:
+  data_entry_volunteers:
+    index:
+      assign_access: Weise zusätzlichen Zugriff zu
+      description_1: "Indem einem User \"Zusätzlicher Zugriff\" zugeordnet wird, wird
+        der User Account\r\nin den Judge und Helfern zur Dateneingabe Listen wählbar."
+      description_2: "Wenn ein User hier hinzugefügt wird kann er das Dateneingabe
+        Menü sehen und kann\r\nals Judge oder Helfer zur Dateneingabe zugeordnet werden."
+      description_3: "Hier kannst du auch den \"Namen\" des Users eingeben, so dass
+        du dich nicht an deren\r\nE-Mail Adresse erinnern musst."
+      header: Zusätzlicher Zugriff
+      note: Durch das Erlauben des Zugriffs werden auch unbestätigte E-Mail Adressen
+        bestätigt, so dass sie sich sofort einloggen können.
+      users_with_access: Nutzer mit erweiterten Rechten

@@ -1,0 +1,13 @@
+---
+nl:
+  activerecord:
+    attributes:
+      age_group_entry:
+        end_age: Maximum leeftijd
+        gender: Geslacht
+        start_age: Minimum leeftijd
+        wheel_size: Verwachte wielomvang
+    models:
+      age_group_entry:
+        one: Leeftijdsgroep inschrijving
+        other: Leeftijdsgroep inschrijving

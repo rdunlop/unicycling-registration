@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      member:
+        one: Medlem
+        other: Medlemmer

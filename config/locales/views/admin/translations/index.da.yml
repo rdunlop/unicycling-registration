@@ -1,0 +1,7 @@
+---
+da:
+  admin:
+    translations:
+      index:
+        convention_available_in_languages_html: "The\r\n<b>%{convention}</b>\r\nConvention
+          er tilgængelig på\r\n%{languages}"

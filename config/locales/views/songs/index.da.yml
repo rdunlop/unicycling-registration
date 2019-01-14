@@ -1,0 +1,10 @@
+---
+da:
+  songs:
+    index:
+      add_songs_for_others: Tilføj musik for andre deltagere
+      new_song: Ny musik (Step 1)
+      step_1: Step 1
+      step_2: Step 2
+      title: "%{name}'s musik"
+      upload_file: Upload musik fil

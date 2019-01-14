@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      registrant_expense_item:
+        tax: Afgifter
+    models: 

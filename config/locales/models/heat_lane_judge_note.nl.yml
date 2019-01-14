@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    models:
+      heat_lane_judge_note:
+        one: Jury notitie
+        other: Jury notities

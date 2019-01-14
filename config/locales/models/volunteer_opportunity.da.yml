@@ -1,0 +1,10 @@
+---
+da:
+  activerecord:
+    attributes:
+      volunteer_opportunity:
+        description: Frivillig Rolle
+    models:
+      volunteer_opportunity:
+        one: Frivillig valgmulighed
+        other: Frivillig valgmulighedder

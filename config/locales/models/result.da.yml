@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      result:
+        one: Resultat
+        other: Resultater

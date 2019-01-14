@@ -1,0 +1,17 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      organization_membership:
+        display_membership_pages: Desplegar Páginas de membresía de organización
+        french_behavior_description: Especificar "Federación francesa" apunta al usuario
+          su número como miembro de la Federación Francesa
+        header: Ajustes de membresía de organización
+        requests_membership_number: Esto presenta a la Membresía de la Organización
+          de Monociclismo para ser solicitada por cada registrado.
+        should_be_members: Deberían los registrados ser miembros de una Organización
+          de Monociclismo?
+        usa_behavior_description: Especificar "Estados Unidos" causa que el sistema
+          confirma cada registrado como de origen estadounidense anotándolo en la
+          base de datos como tal.
+        which_organization: "¿Cual Organización de Monociclismo?"

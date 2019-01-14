@@ -1,0 +1,13 @@
+---
+da:
+  payment_mailer:
+    manual_payment_completed:
+      body: "%{event_name} - Betaling modtaget.\r\n\r\nEn betaling er blevet modtaget.\r\n\r\nLog
+        in og væl 'Mine Betalinger' for at se alle detaljer.\r\n\r\nBetaling#%{payment_number}
+        er fuldendt."
+      subject: Betalingen er blevet modtaget
+    payment_completed:
+      body: "%{event_name} - Betaling er modtaget.\r\n\r\nEn betaling på %{amount}
+        er blevet modtaget.\r\n\r\nLog ind og vælg 'Mine Betalinger' for at se alle
+        detaljer.\r\n\r\nBetaling #%{payment_number} er fuldendt."
+      subject: Betaling er gennemført

@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      standard_skill_entry:
+        description: descripción
+        letter: carta
+        number: número de habilidad
+        points: puntos
+    models: 

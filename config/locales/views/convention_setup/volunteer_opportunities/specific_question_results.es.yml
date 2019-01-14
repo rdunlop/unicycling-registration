@@ -1,0 +1,8 @@
+---
+es:
+  convention_setup:
+    volunteer_opportunities:
+      specific_question_results:
+        confirmation: "¿Estás seguro? Esto eliminará todas las selecciones del registrante
+          par esta opción de voluntario."
+        new_volunteer_role: Nuevo rol de voluntario

@@ -1,0 +1,6 @@
+---
+de:
+  volunteers:
+    manage_volunteer_type:
+      confirm_remove_volunteer: Diesen Helfer entfernen?
+      create_role: Erzeuge neue %{role}

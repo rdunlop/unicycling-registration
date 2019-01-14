@@ -1,0 +1,8 @@
+---
+es:
+  admin:
+    manual_payments:
+      new:
+        description: 'Selecciona los registrantes para ajustar pagos para:'
+        header: Nuevo pago
+        start_process: Siguiente paso (elegir artículos)

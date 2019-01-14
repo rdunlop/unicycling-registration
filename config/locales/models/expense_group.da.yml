@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      expense_group:
+        group_name: Gruppe Navn
+    models: 

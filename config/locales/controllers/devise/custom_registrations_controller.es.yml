@@ -1,0 +1,7 @@
+---
+es:
+  devise:
+    custom_registrations:
+      create:
+        flash_error: Una cuenta que ya existe (posiblemente por una convención previa),
+          favor de ingresar debajo

@@ -3,5 +3,7 @@ da:
   activerecord:
     attributes:
       combined_competition_entry:
+        abbreviation: Oversættelse
         base_points: Base Points
         tie_breaker: Tie Breaker
+    models: 

@@ -1,0 +1,13 @@
+---
+es:
+  admin:
+    translations:
+      examples:
+        example_should_become: Debería convertirse
+        leave_some_untranslated: Algunas partes deberían dejarse sin traducir
+        performance_impact_warning: Por favor solo aplica cambios y borra cache de
+          traducción cuando termines, porque puede tener implicaciones de funcionamiento.
+        text_translation_system: Sistema de traducción de texto
+        when_done_translating: Una vez que hayas terminado la traducción deberás presionar
+          el botón "Aplicar cambios" en el "Sistema de traducción de texto" para aplicar
+          cambios al sitio.

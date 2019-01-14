@@ -1,0 +1,13 @@
+---
+nl:
+  activerecord:
+    attributes:
+      event_category:
+        age_range_end: Leeftijdsgrens einde
+        age_range_start: Leeftijdsgrens start
+        name: Naam
+        warning_on_registration_summary: waarschuwing op samenvatting registratie
+    models:
+      event_category:
+        one: Wedstrijd onderdeel
+        other: Wedstrijd onderdelen

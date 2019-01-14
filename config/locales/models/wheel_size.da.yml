@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      wheel_size:
+        one: Hjul størelse
+        other: Hjul størelser

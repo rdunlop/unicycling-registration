@@ -1,0 +1,13 @@
+---
+es:
+  convention_setup:
+    categories:
+      edit:
+        description: Los eventos han sido agrupados en diferentes categorías de evento.
+          Ej. Deportes colectivos, Freestyle, Muni
+        existing_categories: Categorías existentes
+        header: Editar categorías del evento
+        manage_events: Manejar eventos
+        manage_events_note: Una vez hayas creado una categoría, elige "manejar eventos"
+          para crear eventos dentro de la categoría.
+        new_category: Nueva categoría

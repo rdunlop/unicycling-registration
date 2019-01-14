@@ -347,6 +347,32 @@ Set your local git credentials
     $ git config --local user.name "Robin Dunlop" (Enter YOUR name instead)
     $ git config --local user.email robin@dunlopweb.com (Enter YOUR email instead)
 
+Docker Development Environment
+==============================
+
+We recommend running development within a docker environment.
+
+Benefits:
+- All daemons, processes are running at all times (easier to develop features)
+- runs with caching, which helps show some problems earlier (`touch tmp/caching-dev.txt` to enable)
+- No need to install imagemagick/etc on your machine
+
+To do this:
+1. install docker (https://docs.docker.com/docker-for-mac/install/)
+1. run `./docker-setup.sh` to set up some files
+1. install `docker `and `docker-compose`.
+1. run `docker-compose up`
+1. Create the database schema with `docker-compose exec app bundle exec rake db:create db:schema:load`
+1. Add an entry to your /etc/hosts file `sudo vi /etc/hosts`: `127.0.0.1 www.local.com`
+1. open http://www.local.com:3000/new
+1. Create a new database
+
+To seed the database (optional):
+1. Fill in your AWS credentials in `config/secrets.yml`
+1. Attach to the instance with `docker-compose exec app bash`, and run `bundle exec rake db:seed` to create seed data.
+1. Log in to /admin with credentials: admin@tablexi.com Testing1
+
+
 Setup the database
 ==================
     Copy `config/database_template.yml` to `config/database.yml`  and make

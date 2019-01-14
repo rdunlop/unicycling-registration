@@ -1,0 +1,9 @@
+---
+es:
+  layouts:
+    competition_setup:
+      advanced: Ajustes avanzados
+      competition_setup: Preparar competencia
+      manage_age_groups: Tipo de Grupo de edad
+      manage_competitions: Maneja competencias
+      manage_directors: Maneja directores

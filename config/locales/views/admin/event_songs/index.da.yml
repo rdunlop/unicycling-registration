@@ -1,0 +1,7 @@
+---
+da:
+  admin:
+    event_songs:
+      index:
+        add_new_song: Tilføj en ny sang for en deltager
+        num_songs: "# Uploaded Sange"

@@ -1,0 +1,15 @@
+---
+es:
+  volunteers:
+    manage_volunteer_type:
+      confirm_remove_volunteer: "¿Eliminar a este voluntario?"
+      create_role: Crear nuevo  %{role}
+      volunteer_role_descriptions:
+        data_entry_volunteer: Disponible para ser asignado como registro de data de
+          voluntario
+        data_recording_volunteer: Disponible para ingresas inicio/fina resultados
+          de linea (transcritos)
+        race_official: "Disponible para DQ a la linea inicial o final de la carrera.\r\nDisponible
+          para descargar listas de grupo para E-TIMERS de ruta."
+        track_data_importer: "Disponible para importar data de e-timer a tu día de
+          ruta.\r\nDisponible para ajustar resultados de tiempo"

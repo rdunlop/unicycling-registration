@@ -1,0 +1,9 @@
+---
+da:
+  registrants:
+    contact_summary:
+      emergency_contact_attending: Kontakt i nødstilfælde deltager
+      emergency_contact_name: Kontakt i nødstilfældes navn
+      emergency_contact_phone: Kontak i nødstilfældes Telfonnummer
+      emergency_contact_relationship: Forhold til Kontakt i nødstilfælde
+      responsible_adult: Ansvarlig voksen

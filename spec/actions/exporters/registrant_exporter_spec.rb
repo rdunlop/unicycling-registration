@@ -55,7 +55,7 @@ describe Exporters::RegistrantExporter do
         registrant.bib_number.to_s,
         registrant.first_name,
         registrant.last_name,
-        "United States",
+        "United States of America",
         "20/04/1998",
         "m"
       ]
@@ -73,7 +73,7 @@ describe Exporters::RegistrantExporter do
           registrant.bib_number.to_s,
           registrant.first_name,
           registrant.last_name,
-          "United States",
+          "United States of America",
           "",
           ""
         ]

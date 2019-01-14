@@ -1,0 +1,10 @@
+---
+nl:
+  activerecord:
+    attributes:
+      refund:
+        details: Details (nota)
+        refund_date: Terugbetalingsdatum
+        refund_id: TerugbetalingsID
+        user_id: Terug betaald door
+    models: 

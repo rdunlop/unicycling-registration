@@ -1,0 +1,14 @@
+---
+da:
+  registrants:
+    build:
+      contact_detail:
+        address:
+          address: Adresse
+          copy_from_other_registrant: Kopier adresse fra %{other_name}
+          country_representing_description: Hvis du representerer et andet land end
+            der hvor du bor, skal du venligst indtaste det hér
+          email_tooltip: Giv os din E-mail adresse for at opdateringer om tilmelding,
+            Program, og nye events
+          state: Stat/Område
+          state_province: Stat/Område

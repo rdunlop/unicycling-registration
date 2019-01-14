@@ -1,0 +1,13 @@
+---
+es:
+  admin:
+    manual_refunds:
+      choose:
+        choose_items: Marca los artículos para marcarlos como reembolsados
+        description: "Por favor describe el reembolso.\r\nEjemplos: \"Cancelado. No
+          atendido\". , \"Reembolsar, organizador\"."
+        details_note: Solo requerido para algunos artículos
+        header: Crea un reembolso
+        mark_this_item: Marca este artículo como reembolsado
+        paid_items: Artículos pagados
+        submit: Crea un registro de reembolso

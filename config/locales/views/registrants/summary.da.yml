@@ -1,0 +1,11 @@
+---
+da:
+  registrants:
+    summary:
+      age: Alder
+      birthday: Fødselsdag
+      default_wheel_size: Standard Track Racing hjul størelse
+      gender: Køn
+      name: Navn
+      registration_summary: Tilmeldings oversigt
+      volunteer: Frivilig

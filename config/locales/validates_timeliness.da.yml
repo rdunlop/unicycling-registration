@@ -1,0 +1,17 @@
+---
+da:
+  errors:
+    messages:
+      after: skal være efter %{restriction}
+      before: skal være før%{restriction}
+      invalid_date: er ikke en gyldig dato
+      invalid_datetime: er ikke et gyldigt tidspunkt
+      invalid_time: er ikke en gyldig tid
+      is_at: Skal være %{restriction}
+      on_or_after: Skal være endten %{restriction} eller efter
+      on_or_before: skal være endten %{restriction} eller før
+  validates_timeliness:
+    error_value_formats:
+      date: "%Å-%M_%D"
+      datetime: "%Å_%M_%D %T:%M:%S"
+      time: "%T:%M:%S"

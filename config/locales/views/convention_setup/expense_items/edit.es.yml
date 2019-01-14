@@ -1,0 +1,6 @@
+---
+es:
+  convention_setup:
+    expense_items:
+      edit:
+        header: Editar gastos de artículo

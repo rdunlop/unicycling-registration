@@ -1,0 +1,8 @@
+---
+es:
+  volunteers:
+    index:
+      add_volunteer_description_html: Sí el voluntario que tu necesitas no está listado
+        aquí, necesitaras agregarlo en la página  %{link}
+      header: Voluntarios
+      manage_additional_access: Maneja acceso adicional

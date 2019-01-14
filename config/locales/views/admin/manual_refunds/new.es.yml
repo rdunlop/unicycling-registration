@@ -1,0 +1,10 @@
+---
+es:
+  admin:
+    manual_refunds:
+      new:
+        description: Esto actualmente no regresa dinero, solo cambia de cuanta con
+          el sistema de registro.
+        header: Nuevo reembolso
+        select_registrants: 'Selecciona los registrantes para reembolsar pagos por:'
+        start_process: Siguiente paso (selecciona artículos)

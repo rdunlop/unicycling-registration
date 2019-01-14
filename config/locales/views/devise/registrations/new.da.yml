@@ -1,0 +1,12 @@
+---
+da:
+  devise:
+    registrations:
+      new:
+        confirmation_reminder: Efter registrering vil du modtage en bekræftigelses-mail
+          som du skal åbne for at bekræfte din E-mail adresse
+        header: Opret en Unicycle Rigistartion bruger
+        password_min_length: Minimum 6 tegn
+        sign_up: Register
+        subheader: Denne bruger vil bliver brugt til alle unicykel events i dette
+          system

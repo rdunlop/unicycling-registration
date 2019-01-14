@@ -1,0 +1,13 @@
+---
+nl:
+  activerecord:
+    attributes:
+      registrant:
+        bib_number: ID
+        first_name: Voornaam
+        last_name: Familienaam
+        online_waiver_acceptance: Ik bevestig dat ik de regels heb gelezen, begrepen
+          en dat ik ze accepteer
+        online_waiver_signature: Handtekening
+        wheel_size_id: Basis wielomtrek voor op de piste
+    models: 

@@ -1,0 +1,8 @@
+---
+es:
+  activerecord:
+    attributes:
+      lane_assignment:
+        heat: Calor
+        lane: Carril
+    models: 

@@ -1,0 +1,15 @@
+---
+nl:
+  activerecord:
+    attributes:
+      time_result:
+        facade_hours: Uren
+        facade_hundreds: Honderden
+        facade_minutes: Minuten
+        hours: Uren
+        minutes: Minuten
+        number_of_laps: "# rondes"
+        number_of_penalties: Straf(punten)
+        seconds: Seconden
+        thousands: Duizenden
+    models: 

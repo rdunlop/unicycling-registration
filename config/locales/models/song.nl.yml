@@ -1,0 +1,10 @@
+---
+nl:
+  activerecord:
+    attributes:
+      song:
+        description: Uitleg
+        song_file_name: File naam
+        updated_at: Laatste update
+        uploaded_by_guest: Gast?
+    models: 

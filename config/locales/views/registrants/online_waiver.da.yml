@@ -1,0 +1,12 @@
+---
+da:
+  registrants:
+    online_waiver:
+      by_having_your_parent_sign_you_agree: Ved at have dine forældre/værge til at
+        skrive under i feltet herunder acceptere de ansvarsfraskrivelsen ovenfor
+      by_signing_you_agree: Ved at skrive under i feltet herunder acceptere du ansvarsfraskrivelsen
+        herover
+      by_signing_you_agree_by_age: Ved at skrive under i feltet herunder accepere
+        du ansvarsfraskrivelsen herofer. Er du under 18 skal du have en forældre/værge
+        til at skrive under
+      header: Asvarsfraskrivelse

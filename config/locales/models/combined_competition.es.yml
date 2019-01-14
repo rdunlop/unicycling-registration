@@ -1,0 +1,9 @@
+---
+es:
+  activerecord:
+    attributes:
+      combined_competition:
+        percentage_based_calculations: Porcentaje basado en cálculos
+        tie_break_by_firsts: Muerte súbita por primeros
+        use_age_group_places: Usar lugares en grupos de edad
+    models: 

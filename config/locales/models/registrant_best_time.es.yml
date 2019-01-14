@@ -1,0 +1,8 @@
+---
+es:
+  activerecord:
+    attributes:
+      registrant_best_time:
+        formatted_value: Mejor tiempo
+        source_location: Nombre de convención
+    models: 

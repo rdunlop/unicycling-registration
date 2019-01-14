@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      payment_detail:
+        details: Detaljer
+    models: 

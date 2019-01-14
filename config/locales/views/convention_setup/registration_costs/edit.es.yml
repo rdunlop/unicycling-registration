@@ -1,0 +1,6 @@
+---
+es:
+  convention_setup:
+    registration_costs:
+      edit:
+        header: Editando  %{registration_cost}  costos de registro

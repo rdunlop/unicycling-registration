@@ -1,0 +1,19 @@
+---
+da:
+  registrants:
+    index:
+      be_sure_to_submit_payment: Sør for at gennemfører betalingen når du har oprettet
+        din tilmeldingen
+      can_change_events: Når du har gennemført tilmeldingen er det muligt at redigere
+        dine event oplysninger
+      difference_tooltip: Klik her for mere infomation!
+      link_end: Detaljer
+      note_date_of_payment_html: NOTE! - Det er <b>Datoen for din betaling der afgør
+        dit tilmeldingsgebyr</b>, IKKE tilmeldingsdatoen.
+      onsite_restricted_events: For at kunne planlægge eventet ordenligt er det ikke
+        nødvendigvis alle konkurencer og tilvalg der er tilgængelige ved On-Site tilmeldning
+      registrants_includes_shared: Deltager listen inkludere deltager der er delt
+        med dig. se
+      registration: Tilmelding
+      registration_time: Tilmeldingen tager ca. 15 minutter
+      whats_the_difference: Hvad er forskellen?

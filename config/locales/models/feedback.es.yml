@@ -1,0 +1,8 @@
+---
+es:
+  activerecord:
+    attributes:
+      feedback:
+        message: Mensaje
+        subject: Tema
+    models: 

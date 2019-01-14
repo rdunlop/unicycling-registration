@@ -1,0 +1,7 @@
+---
+es:
+  activerecord:
+    attributes:
+      standard_skill_routine_entry:
+        position: 'Posición #'
+    models: 

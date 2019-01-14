@@ -1,0 +1,8 @@
+---
+da:
+  registrant_expense_items:
+    new_expense:
+      add_free_item: Tilføj Gratis
+      add_item: Tilføj
+      one_is_free: Én er gratis med til tilmelding
+      sold_out: Udsolgt

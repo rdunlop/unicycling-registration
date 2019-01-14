@@ -1,0 +1,13 @@
+---
+es:
+  admin:
+    reg_fees:
+      index:
+        automatic_increase: Una vez especificado, el periodo de registro seleccionado
+          será bloqueado para el registrado, y no aumentará con el paso de los días.
+        can_lock_again: Después de bloquear el precio de registro para un registrado,
+          tu puedes elegir bloquear a ese registrado a otro precio si se desea.
+        description: Esta forma te permite especificar el costo de registro que sera
+          puesto para este registrado
+        header: Cambia cuota de registro
+        set_reg_fee: Ajusta cuota de registro

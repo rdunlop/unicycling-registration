@@ -1,0 +1,9 @@
+---
+da:
+  devise:
+    passwords:
+      edit:
+        action: Rediger mit password
+        password_confirmation_label: Bekræft nyt password
+        password_label: Nyt password
+        title: Ændre dit password

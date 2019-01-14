@@ -1,0 +1,12 @@
+---
+nl:
+  activerecord:
+    attributes:
+      combined_competition_entry:
+        abbreviation: Afkorting
+        base_points: Basis punten
+        tie_breaker: Duel (tie breaker)
+    models:
+      combined_competition_entry:
+        one: Gecombineerde wedstrijd inschrijving
+        other: Gecombineerde wedstrijd inschrijving

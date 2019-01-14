@@ -1,0 +1,5 @@
+---
+da:
+  payments:
+    paypal_payment_form:
+      pay_with_paypal: Betal med Paypal eller Visa/Dankort

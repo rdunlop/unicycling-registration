@@ -1,0 +1,19 @@
+---
+es:
+  admin:
+    translations:
+      convention_translations:
+        access_denied_html: Tu <b>no<b> tienes acceso a traducir el sitio
+        access_enabled: Tienes acceso para hacer traducciones
+        assign_volunteers_html: Para asignar acceso de voluntarios para traducir tu
+          información de convención usa el %{link} para asignarles el rol de "traductor"
+        convention_translations_detail: Porque las traducciones especificas de convención
+          dependen del texto que estaba escrito durante la configuración de la convención,
+          necesitaran traducirse para cada grupo de convención o por voluntarios.
+        example_1: Nombre de Artículo (ej. Camisa pequeña)
+        example_2: Nombres de eventos (ej. Flatland)
+        example_3: Elecciones de eventos (ej. Jr Expert)
+        examples_of_convention_translations: Ejemploes de Traducciones específicas
+          de convención
+        header: Traducciones específicas de convención
+        user_management: Manejo de usuario

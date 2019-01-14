@@ -1,0 +1,8 @@
+---
+es:
+  activerecord:
+    attributes:
+      distance_attempt:
+        distance: Distancia
+        fault: Falta
+    models: 

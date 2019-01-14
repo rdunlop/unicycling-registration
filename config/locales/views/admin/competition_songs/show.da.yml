@@ -1,0 +1,8 @@
+---
+da:
+  admin:
+    competition_songs:
+      show:
+        download: Download
+        download_zip: Download Zip af sange
+        header: "%{competition} Sange"

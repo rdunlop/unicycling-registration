@@ -1,0 +1,9 @@
+---
+da:
+  payments:
+    summary:
+      cost: Pris
+      payment_details: Betalings oplysninger
+      registrant: Deltager
+      tax: Afgift
+      total_cost: Total pris

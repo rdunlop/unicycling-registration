@@ -1,0 +1,10 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      name_logo:
+        header: Nombre y Logo
+        long_name_description: El nombre largo, ubicación, y fechas de descripción
+          serán usadas como cabecera principal de la página web.
+        short_name_description: El nombre corto será usado en lugares donde el espacio
+          es limitado (ej. muchos PDFs

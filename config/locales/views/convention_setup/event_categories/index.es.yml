@@ -1,0 +1,8 @@
+---
+es:
+  convention_setup:
+    event_categories:
+      index:
+        allowed_age_range: Rango de edad permitido
+        header: Listar categorías para  %{event}
+        new_event_category: Nueva categoría de evento

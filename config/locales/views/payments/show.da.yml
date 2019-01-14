@@ -1,0 +1,11 @@
+---
+da:
+  payments:
+    show:
+      complete_payment: Gennemfør betaling
+      offline_payment_instructions: Instrukser til Offline betaling
+      offline_payment_instructions_description: "For at betale offline, brug venligst\r\n\"betalings
+        Refberencen #\" og følg disse instruktioner:"
+      payment_reference: 'Betalings Refference #%{payment_id}'
+      payment_summary: Betalings oversigt
+      please_proceed_with_payment: Fortsæt venligst med din betaling

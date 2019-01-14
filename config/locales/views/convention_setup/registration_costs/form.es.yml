@@ -1,0 +1,19 @@
+---
+es:
+  convention_setup:
+    registration_costs:
+      form:
+        cost_header: costo
+        header: Editando  %{registration_cost} costo de registro
+        last_minute_note: Por que muchas personas solo pagan hasta el último momento,
+          el precio automáticamente aumenta 36 horas después de la fecha final. Esto
+          permite indultar a los registrantes de último minuto. (Y también muchos
+          registrantes de último minuto)
+        registration_costs_increase_description_html: "Tradicionalmente, los registros
+          online cierran un poco después de que comienza la convención, y el registro
+          en el sitio solo es permitido en el salón de registro en las computadoras
+          de control de la convención.\r\n<br>\r\nEsto permite coordinación pra imprimir
+          paquetes de registro, preparar listas de competidores y otros detalles de
+          último mínuto.\r\n<br>\r\nPoner un costo de registro \"EN SITIO\" causa
+          que el banner de \"Cierre de Registro Online\" se despliegue apropiadamente
+          con las tablas de costos."

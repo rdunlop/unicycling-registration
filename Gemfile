@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '= 5.1.5'
+gem 'rails', '= 5.1.6.1'
 
 # Authentication
 gem 'devise'
@@ -23,7 +23,7 @@ gem 'wkhtmltopdf-binary', '0.12.3.1'
 gem "autoprefixer-rails"
 gem 'breadcrumbs_on_rails'
 gem 'cocoon' # for nested forms
-gem 'countries', github: 'rdunlop/countries', branch: 'iuf_country_changes' # necessary to be able to specify non-ISO3166 countries
+gem 'countries'
 gem 'country_select'
 gem 'fancybox2-rails', github: 'rdunlop/fancybox2-rails', branch: "rails5" # for rails 5 support
 gem 'foundation-rails'

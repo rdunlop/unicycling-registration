@@ -1,0 +1,7 @@
+---
+es:
+  devise:
+    failure:
+      invalid: No valido  %{authentication_keys} o contraseña. Cuentas viejas pueden
+        ahora ser accesadas a través de la actual contraseña. Ve "Ayuda" para más
+        detalles

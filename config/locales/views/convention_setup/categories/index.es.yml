@@ -1,0 +1,16 @@
+---
+es:
+  convention_setup:
+    categories:
+      index:
+        copy_from_previous:
+          header: Copia eventos y categorías para una convención previa
+          link: Elige una convención previa y copia sus eventos
+        description: Los eventos están agrupados en diferentes categorías de evento,
+          Ej. Deportes colectivos, Freestyle, Muni.
+        existing_categories: Categorías existentes
+        header: Categorías de evento
+        manage_events: Maneja categorías
+        manage_events_note: Una vez que hayas creado una categoría, elige "Manejar
+          eventos" para crear eventos dentro de la categoría
+        new_category: Nueva categoría

@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    models:
+      judge_type:
+        one: Jury Type
+        other: Jury Types

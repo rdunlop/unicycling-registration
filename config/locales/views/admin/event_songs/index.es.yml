@@ -1,0 +1,18 @@
+---
+es:
+  admin:
+    event_songs:
+      index:
+        add_new_song: Agregar nueva canción para un registrante
+        all_songs_together: Todas las canciones en una página
+        by_competition: Música por competencia
+        by_competition_description: Una vez la competencia y competidores hayan sido
+          creados, usa las siguientes páginas de competencias para asignar música
+          a competidores. Desde las páginas de música de competencias puedes descargar
+          el archivo zip de toda la música para una competencia, con archivos ordenados
+          por competidores.
+        by_event: Música por evento
+        by_event_description: Ver la música que ha sido cargada por cada competidor/evento
+        description: Ver descargar, y asignar música a competidores desde estas páginas
+        header: Controla música
+        num_songs: "#Canciones cargadas"

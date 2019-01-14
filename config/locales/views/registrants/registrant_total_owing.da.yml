@@ -1,0 +1,7 @@
+---
+da:
+  registrants:
+    registrant_total_owing:
+      paid: Betalt
+      pending: Afventer
+      unpaid: Ubetalt

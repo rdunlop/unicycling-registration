@@ -1,0 +1,13 @@
+---
+es:
+  admin:
+    translations:
+      all_site_translations:
+        be_careful_warning: Porfavor se cauteloso al hacer traducciones aquí, ya que
+          pueden afectar solo tu convención sino todas
+        performance_impact_warning: Porfavor aplica cmabios y borra cache de traducción
+          cuando termines, porque puede tener implicaciones de funcionamiento
+        text_translation_system: Sistema de traducción de texto
+        when_done_translating: Una vez que hayas traducido, debes presionar el botón
+          "Aplicar Cambios" en el "Sistema de Traducción de texto" para aplicar los
+          cambios al sitio.

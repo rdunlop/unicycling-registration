@@ -1,0 +1,13 @@
+---
+nl:
+  activerecord:
+    attributes:
+      event_choice:
+        cell_type: Cel type
+        label: Label
+        optional_if_event_choice_id: Optioneel als deze eventkeuze is gekozen
+        required_if_event_choice_id: Verplicht als deze eventkeuze is gekozen
+    models:
+      event_choice:
+        one: Wedstrijd keuze
+        other: Wedstrijd keuzes

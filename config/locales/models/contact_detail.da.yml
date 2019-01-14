@@ -25,3 +25,7 @@ da:
         responsible_adult_phone: Primære telfon
         state: Stat
         zip: Postnummer
+    models:
+      contact_detail:
+        one: Kontakt detalje
+        other: Kontakt deltajer

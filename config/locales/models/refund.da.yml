@@ -1,0 +1,10 @@
+---
+da:
+  activerecord:
+    attributes:
+      refund:
+        details: Detaljer (note)
+        refund_date: Refunderings dato
+        refund_id: Refunderings ID
+        user_id: Refunderet Af
+    models: 

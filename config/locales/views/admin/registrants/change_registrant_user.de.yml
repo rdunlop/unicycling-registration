@@ -1,0 +1,7 @@
+---
+de:
+  admin:
+    registrants:
+      change_registrant_user:
+        change_associated_user: Ändere den zugewiesenen Nutzer
+        header: Ändere User des Teilnehmers

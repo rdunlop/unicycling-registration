@@ -1,0 +1,12 @@
+---
+nl:
+  activerecord:
+    attributes:
+      combined_competition:
+        percentage_based_calculations: op percentage gebaseerde berekeningen
+        tie_break_by_firsts: Duel onder de eersten
+        use_age_group_places: Gebruik van rangschikking in leeftijdsgroep
+    models:
+      combined_competition:
+        one: Gecombineerde wedstrijden
+        other: Gecombineerde wedstrijden

@@ -1,0 +1,14 @@
+---
+es:
+  convention_setup:
+    event_choices:
+      index:
+        description: Las elecciones de evento son preguntas adicionales que tu puedes
+          presentar a tus competidores para conseguir más información de ellos.
+        example_1: "¿Engranado?"
+        example_2: Nombre de equipo
+        example_3: Capitán del equipo
+        example_4: Nombre del Compañero de parejas
+        existing_choices: Opciones existentes del evento %{event}
+        header: Opciones listadas del evento para  %{event}
+        new_event_choice: Nueva opción del evento
