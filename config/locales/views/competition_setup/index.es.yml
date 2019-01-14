@@ -1,0 +1,11 @@
+---
+es:
+  competition_setup:
+    index:
+      directors: Directores
+      events_by_category: Eventos por categoría
+      header: Ajuste de competencia
+      instructions: Por favor crea director (es) para cada evento, Tu (o el director)
+        pueden crear competencia (s) para cada evento, que será dictado según el data
+        en la reunión ocurra para ese evento.
+      new_competition: Crea una nueva competencia

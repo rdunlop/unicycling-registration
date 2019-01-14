@@ -1,0 +1,11 @@
+---
+nl:
+  activerecord:
+    attributes:
+      registration_cost:
+        end_date: Einddatum
+        name: Naam
+        onsite: Terplaatse
+        registrant_type: Deelnemerstype
+        start_date: Aanvangsdatum
+    models: 

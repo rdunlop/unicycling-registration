@@ -1,0 +1,10 @@
+---
+nl:
+  activerecord:
+    attributes:
+      lodging_room_type:
+        minimum_duration_days: Minimum aantal dagen dat je moet boeken
+    models:
+      lodging_room_type:
+        one: Type overnachtings ruimte
+        other: Type overnachtings ruimtes

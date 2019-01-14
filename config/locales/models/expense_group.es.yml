@@ -1,0 +1,7 @@
+---
+es:
+  activerecord:
+    attributes:
+      expense_group:
+        group_name: Nombre del grupo
+    models: 

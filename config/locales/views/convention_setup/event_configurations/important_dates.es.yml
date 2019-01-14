@@ -1,0 +1,10 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      important_dates:
+        description: Sino especificas una fecha , el acceso terminará cuando el registro
+          cierre.
+        effective_final_date: Fecha final efectiva
+        header: Fechas importantes
+        type_of_important_date: Tipo de fecha importante

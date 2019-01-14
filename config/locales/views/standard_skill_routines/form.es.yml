@@ -1,0 +1,7 @@
+---
+es:
+  standard_skill_routines:
+    form:
+      insert_at_position: Inserta una posición
+      insert_new: Inserta una noticia
+      skill: Habilidad

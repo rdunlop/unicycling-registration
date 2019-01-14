@@ -1,0 +1,21 @@
+---
+es:
+  convention_setup:
+    convention_setup:
+      costs:
+        charge_by_event: Cargo por evento
+        charge_by_event_example: "(Ej.$5 para Freestyle Individual, $6 para grupo
+          grande.)"
+        charge_by_type: Carga un precio para competidores y no comptidores
+        charge_by_type_example: "(Ej. $50 para competidor puntual, $100 para competidor
+          retardado"
+        costs_settings: El sistema de registro puede ser configurado para cargar competidores
+          con diferentes ajustes.
+        discounts: Descuentos
+        header: Precios
+        how_much_to_charge: 'Cuanto cargarle a los registrados:'
+        how_to_charge_registrants: Como cargar registrados
+        money_through_bank_transfer: Recibe dinero vía Bank Transfer
+        money_through_paypal: Recibe dinero vía Paypal
+        other_items_for_sale: Otros artículos a la venta
+        wire_bank_transfer: Cable/Banco Transferencia

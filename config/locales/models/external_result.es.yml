@@ -1,0 +1,8 @@
+---
+es:
+  activerecord:
+    attributes:
+      external_result:
+        details: Detalles
+        points: Puntos
+    models: 

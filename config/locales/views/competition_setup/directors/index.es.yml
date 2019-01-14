@@ -1,0 +1,16 @@
+---
+es:
+  competition_setup:
+    directors:
+      index:
+        add_director: Agrega director
+        create_director: Crea Director
+        description: Directores son asignados a Event-class, Podrán crear/manejar
+          listas de inicio, jueces, y data de acceso a voluntarios para sus competencias
+        director: Director
+        header: Maneja directores
+        note_1: "Una competencia debe ser configurada por el Administrador de competencias\r\n(probablemente
+          tu) antes el director puede manejar las listas de inicio para la competencia."
+        note_2: Los directores no pueden crear las competencias por ellos mismos ya
+          que elegir los aspectos particulares para una competencia usualmente es
+          más matizado de lo que los directores saben.

@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      event_category:
+        age_range_end: Rango final de edad
+        age_range_start: Rango inicial de edad
+        name: Nombre
+        warning_on_registration_summary: Advertencia en resumen de registro
+    models: 

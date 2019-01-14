@@ -1,0 +1,10 @@
+---
+es:
+  admin:
+    manual_payments:
+      pending_payments:
+        description: "El registrante está listado en los siguientes pagos pendientes.\r\nHas
+          recibido alguno de estos pagos?"
+        header: Pagos pendientes
+        items: Artículos
+        mark_as_received: 'Marca pago # %{payment_number} como recibido'

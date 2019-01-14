@@ -1,0 +1,31 @@
+---
+nl:
+  activerecord:
+    attributes:
+      contact_detail:
+        address: Adres
+        birthplace: Geboorteplaats
+        city: Gemeente
+        club: Team of clubnaam
+        club_contact: Contactpersoon team of club
+        country: Land
+        country_representing: Welk land vertegenwoordig je
+        country_residence: In welk land woon je
+        email: Email
+        emergency_name: Naam
+        emergency_other_phone: Andere telefoon
+        emergency_primary_phone: Telefoon
+        emergency_relationship: Verwantschap
+        italian_fiscal_code: Fiscale code (nodig voor Italiaanse deelnemers)
+        mobile: Mobiel telefoonummer
+        organization_member_number: IUF lidnummer
+        organization_membership_system_status: Status van je lidmaatschap
+        phone: Telefoon
+        responsible_adult_name: Naam
+        responsible_adult_phone: Telefoon
+        state: Provincie
+        zip: Postcode
+    models:
+      contact_detail:
+        one: Contact Details
+        other: Contact Details

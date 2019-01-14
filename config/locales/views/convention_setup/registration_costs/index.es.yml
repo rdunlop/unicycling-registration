@@ -1,0 +1,16 @@
+---
+es:
+  convention_setup:
+    registration_costs:
+      index:
+        header: Costos de registro
+        new_registration_cost: Nueva entrada de costo de registro
+        range_description: Cada precio de registro definirá el rango de fechas en
+          que el usuario puede registrarse para el evento en cada precio.
+        timezone_logic_description: "Por que los usuarios pueden vivir en diferentes
+          zonas horarias, para ser justos con todos el sistema permitirá pagar el
+          monto principal hasta después del día completo de periodo de registro termine.
+          \r\n(Dependiendo de la ubicación del servidor)"
+        timezone_logic_example: Sí el primer periodo de registro es hasta el 20 de
+          Abril, los registrantes podrán pagar el costo principal hasta que el servidor
+          piense que es 22 de Abril.

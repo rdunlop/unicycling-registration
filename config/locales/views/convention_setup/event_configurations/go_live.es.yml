@@ -1,0 +1,12 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      go_live:
+        header: Va en vivo
+        set_costs_warning: Debes estar seguro de ajustar los costos de registro o
+          costos de evento antes de cualquier registro de usuario.
+        system_live: El sistema actual está funcionando
+        system_under_construction: El sistema actual está bajo construcción
+        under_construction_description: Poner "Bajo construcción" como falsa habilitará
+          a los usuarios para crear registros.

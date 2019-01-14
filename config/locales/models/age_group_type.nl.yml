@@ -1,0 +1,11 @@
+---
+nl:
+  activerecord:
+    attributes:
+      age_group_type:
+        description: Omschrijving
+        name: Naam
+    models:
+      age_group_type:
+        one: Leeftijdsgroepen
+        other: Leeftijdsgroepen

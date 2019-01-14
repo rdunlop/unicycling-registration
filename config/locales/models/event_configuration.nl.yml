@@ -1,0 +1,52 @@
+---
+nl:
+  activerecord:
+    attributes:
+      event_configuration:
+        accept_rules: Verplicht om de regels te accepteren
+        age_calculation_base_date: Startdatum voor leeftijdsbepaling
+        artistic_closed_date: Laatste dag om nieuwe artistieke registraties te accepteren
+        artistic_score_elimination_mode_naucc: Kleine groep
+        competitor: Wedstrijddeelnemer
+        competitor_benefits: Voordelen voor de wedstrijddeelnemer
+        comp_noncomp_page_id: Wedstrijddeelnemer versus begeleider uitleg pagina
+        comp_noncomp_url: Deelnemer/begeleider uitleg
+        contact_email: Organisatie e-mail contact
+        currency_code: Munt code
+        custom_waiver_text: Organisatie regels
+        dates_description: Omschrijving data
+        enabled_locales: Ingeschakelde talen
+        event_sign_up_closed_date: Laatste dag om je in te schrijven voor wedstrijden
+        event_url: Link naar de website
+        location: Locatie
+        logo_file: Logo
+        long_name: Volledige naam
+        max_registrants: Maximum aantal deelnemers
+        music_submission_end_date: Laatste dag om muziek op te sturen
+        noncompetitor: Begeleider
+        noncompetitor_benefits: Voordelen voor de begeleider
+        offline_payment: Geef details over het offline betalen
+        offline_payment_description: Details over het offline betalen
+        payment_mode: Betalingsmethode
+        paypal_account: Paypal email-account (let op= je bent een ondernemer volgens
+          Paypall)
+        registrants_should_specify_default_wheel_size: Deelnemers moeten de grote
+          van hun wiel doorgeven
+        request_address: Vraag het adres
+        request_emergency_contact: Vraag contact in geval van nood
+        request_responsible_adult: Vraag naar verantwoordelijke volwassene
+        rulebook_url: Link naar IUF-regels
+        rules_file_name: Regels file in PDF
+        short_name: Korte naam
+        spectator: Toeschouwer
+        spectator_benefits: Voordelen voor toeschouwers
+        standard_skill: Voeg Standard Skill systeem toe
+        standard_skill_closed_date: Laatste dag om Standard Skill kuur online te zetten
+        start_date: Eerste dag van de competitie
+        style_name: Stijl van de webpagina
+        under_construction: Onder constructie
+        waiver_file_name: Printbare regels PDF
+    models:
+      event_configurations:
+        one: Wedstrijd configuratie
+        other: Wedstrijd configuraties

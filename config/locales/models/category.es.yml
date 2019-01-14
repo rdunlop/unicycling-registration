@@ -1,0 +1,7 @@
+---
+es:
+  activerecord:
+    attributes:
+      category:
+        name: Nombre
+    models: 

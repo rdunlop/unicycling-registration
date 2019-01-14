@@ -1,0 +1,8 @@
+---
+es:
+  convention_setup:
+    expense_groups:
+      form:
+        competitor_auto_assign: "¿Asignar automáticamente al competidor?"
+        group_options: Opciones de costo grupal
+        noncompetitor_auto_assign: "¿Asignar automáticamente a un No competidor?"

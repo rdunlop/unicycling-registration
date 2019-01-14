@@ -1,0 +1,7 @@
+---
+es:
+  activerecord:
+    attributes:
+      tenant_alias:
+        website_alias: Alias de sitio web
+    models: 

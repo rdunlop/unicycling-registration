@@ -1,0 +1,10 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      registrant_types:
+        current_num_registrants: Actualmente hay %{num} registrados
+        header: Tipos de registrados
+        noncompetitor_description: Los no competidores no pueden inscribirse a eventos.
+        offered_types: Tipos de registros disponibles
+        subheader: Tipos de registrados

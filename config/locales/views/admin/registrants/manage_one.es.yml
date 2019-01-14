@@ -1,0 +1,9 @@
+---
+es:
+  admin:
+    registrants:
+      manage_one:
+        change_registrant_user: Cambia el usuario por un registro
+        edit_summary: edita/resumen
+        full_registrant_list: Lista completa
+        summary: Resumen

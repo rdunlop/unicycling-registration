@@ -1,0 +1,23 @@
+---
+es:
+  admin:
+    translations:
+      index:
+        avaliable_in_multiple_languages: El sistema de registro y competencia está
+          disponible en idiomas diferentes
+        clear_translation_action: Borra el cache de traducción
+        clear_translation_cache: Borra el cache después de hacer los cambios de traducción
+        clear_translation_confirm: Estás seguro? Esto tiene impacto al funcionamiento
+          ya que el cache está lleno. (Por favor no hagas esto seguido)
+        clear_translation_description: Una vez que hayas terminado de traducir varios
+          archivos (y hayas aplicado cambios, si has hecho traducciones comunes),
+          necesitarás borras el caché de la página para refrescar las páginas.
+        common_translations_set: Traducciones comunes para todas las convenciones
+        convention_available_in_languages_html: "La\r\n<b>%{convention}</b>\r\nConvención
+          está disponible en\r\n%{languages}"
+        convention_translation_set: Traducciones específicas para cada convención
+        header: Traduce Contenido
+        thank_you_for_volunteering_html: Gracias por por traducir contenido como voluntario,
+          sí tienes alguna pregunta o problemas, por favor usa  %{link} para hacérnoslo
+          saber
+        two_sets_of_translations: 'Hay dos diferentes conjuntos de traducciones:'

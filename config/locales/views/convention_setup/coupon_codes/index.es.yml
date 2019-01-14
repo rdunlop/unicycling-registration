@@ -1,0 +1,9 @@
+---
+es:
+  convention_setup:
+    coupon_codes:
+      index:
+        description: Códigos de cupón puedes ser creados para proveer un descuento
+          (o incluso gratis) para ciertos artículos.
+        header: Listar códigos de cupón
+        new_coupon_code: Código de cupón nuevo

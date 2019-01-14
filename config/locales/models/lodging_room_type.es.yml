@@ -1,0 +1,7 @@
+---
+es:
+  activerecord:
+    attributes:
+      lodging_room_type:
+        minimum_duration_days: Número mínimo de días requeridos para una reservación
+    models: 

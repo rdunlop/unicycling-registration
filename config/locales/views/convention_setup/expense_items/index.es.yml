@@ -1,0 +1,9 @@
+---
+es:
+  convention_setup:
+    expense_items:
+      index:
+        description: Crea un artículo de gasto para cada tipo de  %{expense_group}  que
+          quieras vender. Ej. Camisa pequeña...
+        header: Listando %{expense_group} artículos de gasto
+        new_expense_item: Nuevo artículo de gasto

@@ -1,0 +1,7 @@
+---
+de:
+  convention_setup:
+    event_categories:
+      form:
+        details: Wenn nur eine Event Kategorie existiert, wird dem Benutzer keine
+          Auswahl Box angeboten.

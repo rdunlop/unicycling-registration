@@ -1,0 +1,21 @@
+---
+es:
+  layouts:
+    convention_setup:
+      convention_setup: Prepara convención
+      costs: Costos
+      custom_domain: Preparar dominio
+      date_deadlines: Fechas importantes
+      go_live: En vivo
+      information_pages: Páginas de información
+      items_for_sale: Artículos en venta
+      lodging_for_sale: Alojamiento en venta
+      manage_translations: Traduce ajustes de convención
+      name_and_logo: Nombre y logotipo
+      organization_membership: Membresía de Organización
+      payment_settings: Ajustes de pago
+      registrant_types: Tipos de registrantes ofrecidos
+      registration_costs: Precios de registro
+      registration_questions: Preguntas de registro
+      rules_and_waiver: Reglas y renuncias
+      volunteer_settings: Ajustes de voluntariado

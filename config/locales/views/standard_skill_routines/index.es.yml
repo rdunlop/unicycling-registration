@@ -1,0 +1,8 @@
+---
+es:
+  standard_skill_routines:
+    index:
+      header: Mis rutinas de habilidad estandár
+      my_registrations: Mis registros
+      signed_up_for_standard_skill: "¿Te registraste para una habilidad estándar?"
+      standard_skill_routine_created: "¿Rutina de habilidad estándar creada?"

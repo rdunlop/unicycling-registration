@@ -1,0 +1,8 @@
+---
+es:
+  activerecord:
+    attributes:
+      registration_cost_entry:
+        max_age: Edad máxima
+        min_age: Edad mínima
+    models: 

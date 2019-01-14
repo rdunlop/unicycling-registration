@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      age_group_entry:
+        end_age: Edad de fin
+        gender: Género
+        start_age: Edad de inicio
+        wheel_size: Tamaño de rueda requerido
+    models: 

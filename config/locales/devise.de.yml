@@ -1,0 +1,7 @@
+---
+de:
+  devise:
+    failure:
+      invalid: Ungültiger %{authentication_keys} oder Passwort. Auf ältere Accounts
+        kann nun mit deinem aktuellen Passwort zugegriffen werden. Siehe "Hilfe" für
+        Details

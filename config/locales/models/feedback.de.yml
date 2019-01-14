@@ -1,0 +1,8 @@
+---
+de:
+  activerecord:
+    attributes:
+      feedback:
+        message: Nachricht
+        subject: Betreff
+    models: 

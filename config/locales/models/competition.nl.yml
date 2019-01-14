@@ -1,0 +1,23 @@
+---
+nl:
+  activerecord:
+    attributes:
+      competition:
+        award_subtitle_name: Medaille subtitel
+        award_title_name: Medaille titel
+        combined_competition_id: Berekening kampioen over alles heen
+        end_data_type: Input van de data na aankomst
+        has_experts: Bereken ook de experts
+        import_results_into_other_competition: Importeer de resultaten in een andere
+          competitie
+        name: Competitienaam
+        num_members_per_competitor: Grote van het team
+        penalty_seconds: Secondes per strafpunt
+        scheduled_completion_at: Geplande competietijd
+        scoring_class: Score type
+        start_data_type: Manier van ingeven van de startdata
+        uses_lane_assignments: Competitie in heats of banen
+    models:
+      competition:
+        one: Wedstrijden
+        other: Wedstrijden

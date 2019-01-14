@@ -1,0 +1,21 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      rules_waiver:
+        current_iuf_rulebook_link: El libro de reglas de la IUF actual se puede encontrar
+          en
+        description: Específica el tipo de renuncia si se la quieres proveer a los
+          regustrantes.
+        header: Renuncia y reglas
+        noncompetitor_description: Los no competidores no pueden inscribirse a eventos
+        online_waiver_description: 'En linea: El usuario es requerido para inscribir
+          una renuncia'
+        print_waiver_description: 'Imprime: Proveemos una renuncia para que el usuario
+          imprima/firme en el evento. (Disponible en  la página por adelantado para
+          que los padres de los niños la puedan firmar)'
+        rulebook: Libro de reglas
+        rules: Reglas
+        sub_description: Reglas adicionales específicas y opcionales que pueden proveer
+          a los registrantes. (ej. Ajustes específicos de convención al libro de reglas
+          de IUF)

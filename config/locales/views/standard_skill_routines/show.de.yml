@@ -1,0 +1,10 @@
+---
+de:
+  standard_skill_routines:
+    show:
+      add_new_entry: Neuen Standard-Skill Eintrag hinzufügen
+      download_my_routine: PDF von meiner Kür runterladen
+      list_of_approved_skills_here: Liste von anerkannten Tricks
+      skills_are_saved_automatically: Die Liste von Tricks wird bei Änderungen automatisch
+        gespeichert.
+      total: Total

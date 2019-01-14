@@ -1,0 +1,16 @@
+---
+es:
+  standard_skill_routines:
+    show:
+      add_new_entry: Agrega nueva entrada de habilidad estándar
+      download_my_routine: Descarga un PDF de mi rutina
+      limit_description: "Tu debes tener máximo 18 habilidades en tu programa.\r\nSí
+        tienes más de 12 habilidades en tu programa, un máximo de 12 habilidades pueden
+        ser habilidades de no montar (Número de habilidades debajo de 100)"
+      list_of_approved_skills_here: Lista de todas las habilidades aprobadas aquí
+      see_list_of_skills_html: Puedes ver un  %{link}
+      skills_are_saved_automatically: Tu lista de habilidades es automáticamente guardada
+        cada vez que haces cambios en ella.
+      standard_skill_closed: Entrada de habilidad estándar está cerrada, Nos vemos
+        pronto
+      total: Total
