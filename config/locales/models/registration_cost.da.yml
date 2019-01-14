@@ -1,0 +1,11 @@
+---
+da:
+  activerecord:
+    attributes:
+      registration_cost:
+        end_date: Slut Dato
+        name: Navn
+        onsite: On-Site
+        registrant_type: Tilmeldings-type
+        start_date: Start Dato
+    models: 

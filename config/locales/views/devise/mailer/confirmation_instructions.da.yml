@@ -1,0 +1,11 @@
+---
+da:
+  devise:
+    mailer:
+      confirmation_instructions:
+        action: Bekræft min bruger
+        confirm_your_account_instructions: 'Du kan bekræfte din bruger med følgende
+          link:'
+        copy_paste_instructions: Hvis linket ikke virker, kopier venligst linket og
+          sæt det ind i din browsers søgefelt
+        welcome_message: Velkommen %{email} Til Unicykel tilmeldingen!

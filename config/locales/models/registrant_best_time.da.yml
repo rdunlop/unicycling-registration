@@ -1,0 +1,8 @@
+---
+da:
+  activerecord:
+    attributes:
+      registrant_best_time:
+        formatted_value: Beste tid
+        source_location: Convention Navn
+    models: 

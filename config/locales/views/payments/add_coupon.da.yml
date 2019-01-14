@@ -1,0 +1,7 @@
+---
+da:
+  payments:
+    add_coupon:
+      coupon_code: Rabat Kupon kode
+      have_a_coupon: Har du en rabat kupon?
+      submit: Registrer din rabat kupon kode

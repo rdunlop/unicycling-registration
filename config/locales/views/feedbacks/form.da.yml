@@ -1,0 +1,8 @@
+---
+da:
+  feedbacks:
+    form:
+      email: Din E-mail
+      header: Feedback
+      optional: Valgfri
+      submit: Send Feedback

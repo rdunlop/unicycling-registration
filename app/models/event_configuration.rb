@@ -140,7 +140,7 @@ class EventConfiguration < ApplicationRecord
     self.currency_code ||= "USD"
     self.max_award_place ||= 5
     # Cannot use `self.enabled_locales` because that conflicts with a method name
-    self[:enabled_locales] ||= ["en", "fr", "de", "es"].join(",")
+    self[:enabled_locales] ||= ["en", "fr", "de", "es", "da"].join(",")
   end
 
   def additional_info?
@@ -358,7 +358,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def self.all_available_languages
-    %i[en fr de es it]
+    %i[en fr de es it da]
   end
 
   # Public: What is the maximum age that we should allow users to configure

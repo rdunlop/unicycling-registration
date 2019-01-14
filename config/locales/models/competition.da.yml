@@ -16,3 +16,7 @@ da:
         scoring_class: Scoring Type
         start_data_type: Start Line Data Entry
         uses_lane_assignments: Konkurer i baner/heats
+    models:
+      competition:
+        one: Konkurrence
+        other: Konkurrencer

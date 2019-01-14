@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      tenant_alias:
+        website_alias: Website Alias
+    models: 

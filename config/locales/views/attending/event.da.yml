@@ -1,0 +1,13 @@
+---
+da:
+  attending:
+    event:
+      best_time: Bedste tid
+      category: Kategori
+      drop_out_confirmation: Hvis du framelder dig, kan du ikke tilmelde dig igen
+        uden godkendelse fra en administrator. Vil du fortsætte?
+      drop_out_of_event: Frameld
+      paid_for: Betalt for
+      paid_for_tooltip: For at trække dig fra dette event, kontak venligst event organisator.
+      upload_music: Upload din musik?
+      upload_music_details: Upload din musik til dette event fra din 'Oversigt' side

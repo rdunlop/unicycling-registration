@@ -1,0 +1,11 @@
+---
+da:
+  registrants:
+    show_single_registrant:
+      done: Færdig
+      edit_events: Rediger events
+      edit_items: Rediger tilvalg
+      edit_registration: Rediger tilmelding
+      list_payments: Vis betalinger
+      printable_pdf: Printervenlig (pdf)
+      registration_summary: Tilmeldnings oversigt

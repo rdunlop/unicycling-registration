@@ -1,0 +1,16 @@
+---
+da:
+  activerecord:
+    attributes:
+      expense_item:
+        cost: Pris
+        details_label: Spørgsmål
+        has_custom_cost: Donation
+        has_details: Stil spørgsmål til deltager
+        maximum_available: Max antal til salg
+        maximum_per_registrant: Max antal på deltager
+        name: Navn
+        tax: Afgifter
+        total: Total
+        total_cost: Total (Udregnet)
+    models: 

@@ -1,0 +1,10 @@
+---
+da:
+  payments:
+    form_contents:
+      cost: Pris
+      details: Detaljer
+      select_all: Vælg alle
+      start_payment: Start betaling
+      total_cost: Total pris
+      unselect_all: afmakér alle

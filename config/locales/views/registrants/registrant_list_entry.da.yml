@@ -1,0 +1,11 @@
+---
+da:
+  registrants:
+    registrant_list_entry:
+      competitor: "(Deltager)"
+      edit: Rediger
+      incomplete: Ufuldstændig
+      legal_waiver: Lovmæssig ansvarsfraskrivelse (%{first_name})
+      noncompetitor: "(Non-competititor)"
+      see_summary: Se oversigt
+      spectator: "(Tilskuer)"

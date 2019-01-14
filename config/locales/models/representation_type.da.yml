@@ -1,0 +1,8 @@
+---
+da:
+  activerecord:
+    attributes:
+      representation_type:
+        club: Klub
+        country: Land
+        state: Stat/Område/Provins

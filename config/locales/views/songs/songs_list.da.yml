@@ -1,0 +1,18 @@
+---
+da:
+  songs:
+    songs_list:
+      add_song: Tilføj musik
+      changes_after_deadline: Hvis du har brug for at ændre din musik efter dette
+        tidspunkt, kontakt da venligst overdommeren
+      description: Til nogle konkurencer bliver der afspillet musik under deltagerens
+        konkurence tid. Upload venligst en MP3 fil med det musik du ønsker afspillet.
+        Upload venligst musik i den rette længde (se regelbog) for din konkurence/kategori
+      download: Download
+      guest: Dette musik er blevet uploadet af en anden bruger
+      music_deadline: Musik kan uploades indtil %{end_date}
+      reg_name: Tilmeldings navn
+      remove: Fjern
+      requirements: Du skal stadig medbringe en kopi af din musik på CD eller et USB-stik
+        til konkurence. dette er for at have et alternativ hvis der opstår tekniske
+        udfordinger med det uploadede musik

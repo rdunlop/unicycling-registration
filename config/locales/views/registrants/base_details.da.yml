@@ -1,0 +1,8 @@
+---
+da:
+  registrants:
+    base_details:
+      birthday: Fødselsdag
+      female: Kvinde
+      male: Mand
+      required_fields: Påkrævede fælter

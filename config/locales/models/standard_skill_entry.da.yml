@@ -1,0 +1,10 @@
+---
+da:
+  activerecord:
+    attributes:
+      standard_skill_entry:
+        description: Beskrivelse
+        letter: Brev
+        number: Trick Nummer
+        points: Point
+    models: 

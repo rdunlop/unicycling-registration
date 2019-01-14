@@ -1,0 +1,6 @@
+---
+da:
+  devise:
+    failure:
+      invalid: Forkert %{authentication_keys} or password. Du kan nu logge ind på
+        ældrere konti med dit nuværende password. klik på 'Hjælp' for flere oplysninger

@@ -1,0 +1,7 @@
+---
+da:
+  songs:
+    form:
+      max_file_size: Maksimum fil størelse %{size_mb} MB
+      note: 'BEMÆRK:'
+      upload: Upload musik

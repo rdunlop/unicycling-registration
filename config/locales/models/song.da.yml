@@ -1,0 +1,13 @@
+---
+da:
+  activerecord:
+    attributes:
+      song:
+        description: Beskrivelse
+        song_file_name: Fil Navn
+        updated_at: Sidst Opdateret
+        uploaded_by_guest: Gæst?
+    models:
+      song:
+        one: Sang
+        other: Sange

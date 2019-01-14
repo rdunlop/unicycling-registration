@@ -1,0 +1,8 @@
+---
+da:
+  registration_costs:
+    list:
+      competitor_registration_cost: Deltager gebyr
+      from: Fra
+      online_registration_closes: Online tilmelding lukker
+      to: Til

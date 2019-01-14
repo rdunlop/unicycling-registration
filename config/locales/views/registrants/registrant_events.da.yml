@@ -1,0 +1,10 @@
+---
+da:
+  registrants:
+    registrant_events:
+      age_group: Aldersgruppe
+      category: Kategori
+      confirmed_events: Bekræftede events
+      event: Event
+      events: Events
+      unconfirmed_events: Ubekræftede events

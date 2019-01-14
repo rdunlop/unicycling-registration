@@ -1,0 +1,5 @@
+---
+da:
+  coupon_code_summaries:
+    show:
+      header: "%{coupon_code} Rabat kupon"

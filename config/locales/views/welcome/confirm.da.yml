@@ -1,0 +1,7 @@
+---
+da:
+  welcome:
+    confirm:
+      check_email: Du kan finde en bekræftigelses mail i din indbakke
+      confirm_header: Bekræft din E-mail
+      verify_account: Du skal verificere din bruger før du kan logge ind

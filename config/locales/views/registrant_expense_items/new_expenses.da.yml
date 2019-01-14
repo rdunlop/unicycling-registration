@@ -1,0 +1,6 @@
+---
+da:
+  registrant_expense_items:
+    new_expenses:
+      add: Tilføj %{group_name}
+      info: Mere info

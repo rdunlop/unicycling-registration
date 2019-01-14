@@ -1,0 +1,10 @@
+---
+da:
+  registrants:
+    build:
+      contact_detail:
+        responsible_adult:
+          responsible_adult: Ansvarlig voksen
+          responsible_adult_detail: "(For deltagere under 18)"
+          responsible_adult_tooltip: Den ansvarlige voksne vil være ansvarlig for
+            deltageren under 18
