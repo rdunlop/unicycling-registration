@@ -1,0 +1,12 @@
+---
+es:
+  nav_bar:
+    admin_set_two:
+      manage_cache: Manejo de Caché
+      manage_memberships: Sociedad de Monociclismo/ Manejo de membresia de Federación
+      manage_standard_skill_entries: Entradas de Habilidad Estandar
+      on_site_registration: Registro en Sitio
+      registrant_bag_labels: Bolsa de registrantes
+      registrant_summaries: Todos los resúmenes de registrantes
+      send_email_to_registrants: Registrantes (mail)
+      translations: Traducciones

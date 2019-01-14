@@ -1,3 +1,42 @@
 ---
 da:
+  are_you_sure: Er du sikker?
+  back: Tilbage
+  breadcrumbs:
+    home: Hjem
+    my_registrants: Mine tilmeldinger
+    new_payment: Ny betaling
+  cancel: Afbryd
+  competitor: Deltager
+  date:
+    formats:
+      lodging_date_format: "%M %D %Å"
+      registration_date_format: "%m %d %å"
+    order:
+    - :month
+    - :day
+    - :year
+  delete: Slet
+  edit: Rediger
+  example: Eksempel
   language_name: Danish
+  membership_number: Medlems nummer
+  'no': Nej
+  note: Note
+  pdf: "(pdf)"
+  prices_increase_at_date: Priserne stiger om %{end_date}
+  prices_increase_soon: Priserne stiger om mindre end én dag
+  show: Vis
+  spectator: Tilskuer
+  validations:
+    duplicate: Skal være unik
+  wizard:
+    add_contact_details: Kontakt detaljer
+    add_events: Events
+    add_name: Navn
+    add_volunteers: Frivillige
+    expenses: Bekostninger
+    lodging: Overnatning
+    music: Musik
+    set_wheel_sizes: Hjulstørelser
+  'yes': Ja

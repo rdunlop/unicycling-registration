@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      competitor:
+        age: Edad
+        bib_number: Cuenta
+        gender: Género
+        name: Nombre
+    models: 

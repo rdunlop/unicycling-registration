@@ -1,0 +1,13 @@
+---
+nl:
+  activerecord:
+    attributes:
+      payment:
+        completed_date: Einddatum
+        details: Details (txn/nota)
+        note: Nota
+        offline_pending_date: Datum
+        payment_id: BetalingsID
+        total: Totaal
+        transaction_id: OverschrijvingsID
+    models: 

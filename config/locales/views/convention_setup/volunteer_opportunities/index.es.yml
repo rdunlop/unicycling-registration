@@ -1,0 +1,8 @@
+---
+es:
+  convention_setup:
+    volunteer_opportunities:
+      index:
+        description: Cuando se registre, un usuario puede ser voluntario en cualquier
+          rol
+        header: Oportunidades de Voluntario

@@ -6,6 +6,7 @@ da:
         accept_rules: Skal acceptere reglerne
         age_calculation_base_date: Dato for beregning af alder
         artistic_closed_date: Sidste dag for tilmelding til artistiske dicipliner
+        artistic_score_elimination_mode_naucc: Lille Gruppe
         competitor: Deltager
         competitor_benefits: Fordele for Deltagere
         comp_noncomp_page_id: Beskrivelse af Forskellen mellem Deltager og Ikke-Deltager
@@ -22,6 +23,29 @@ da:
         long_name: Langt navn
         max_registrants: Maks antal deltagere
         music_submission_end_date: Sidste frist for at uploade musik
+        noncompetitor: Non-Competitor
         offline_payment: Tillad offline betaling
         offline_payment_description: Detaljer for offline betaling
+        payment_mode: Payment Mode
         paypal_account: Paypal Merchant Account Email
+        registrants_should_specify_default_wheel_size: Tilmeldte skal vælge standard
+          hjul-størelse
+        request_address: Bed om adresse
+        request_responsible_adult: Bed om ansvarlig voksen
+        rulebook_url: Regelbog PDF URL
+        rules_file_name: Regl-Fil PDF
+        short_name: Kort Navn
+        spectator: Tilskuer
+        spectator_benefits: Tilskuer Fordele
+        standard_skill: Aktivér Standard Skill System
+        standard_skill_closed_date: Sidste dag til at tilføje Standard Skill routiner
+          Online
+        start_date: Første konkurence dag
+        style_name: Website layout
+        under_construction: Under opbygning
+    models: 
+  helpers:
+    submit:
+      event_configuration:
+        create: Gem & Fortsæt
+        update: Gem & Fortsæt

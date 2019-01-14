@@ -1,0 +1,8 @@
+---
+da:
+  registrants:
+    registrant_songs:
+      event: Event
+      header: Din konkurence music
+      instructions: Upload musik
+      song: Sang

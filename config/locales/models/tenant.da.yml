@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      tenant:
+        one: Lejer
+        other: Lejere

@@ -1,0 +1,11 @@
+---
+da:
+  devise:
+    shared:
+      links:
+        already_have_an_account: Har du allerede en bruger?
+        forgot_your_password: Glemt dit password?
+        log_in_here: Log in her
+        need_confirmation_instructions: Har du ikke modtaget brekræftigelses mail?
+        new_user: Er du en ny bruger?
+        sign_up_here: Register dig her

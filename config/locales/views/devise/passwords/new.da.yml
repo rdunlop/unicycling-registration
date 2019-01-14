@@ -1,0 +1,7 @@
+---
+da:
+  devise:
+    passwords:
+      new:
+        action: Send mig et link til at ændre mig nuværende password
+        title: Glemt dit password

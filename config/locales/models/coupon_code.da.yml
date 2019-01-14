@@ -10,3 +10,7 @@ da:
         max_num_uses: Maksimalt antal brug
         name: Navn
         price: Pris
+    models:
+      coupon_code:
+        one: Rabat kupon kode
+        other: Rabat kupon koder

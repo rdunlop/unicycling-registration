@@ -1,0 +1,7 @@
+---
+de:
+  layouts:
+    pages:
+      begin_registration_link: Um Registrierung für %{convention_name} zu beginnen
+      manage_my_registrations: Bearbeite meine Anmeldungen
+      sign_in: Anmelden

@@ -1,0 +1,11 @@
+---
+es:
+  competition_setup:
+    event_configurations:
+      edit:
+        artistic_mode_description: Esas decisiones así como eliminar un alto, bajo
+          juez durante la puntuación (evento pequeño), un alto, una baja eliminación
+          durante la puntuación por el juez (evento grande)
+        artistic_scoring_mode: Puntaje modo artístico
+        description: Esos ajustes afectan todos los eventos de la competencia
+        header: Ajustes globales de la competencia

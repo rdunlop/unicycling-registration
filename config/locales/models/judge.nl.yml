@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    models:
+      judge:
+        one: Jury
+        other: Jury

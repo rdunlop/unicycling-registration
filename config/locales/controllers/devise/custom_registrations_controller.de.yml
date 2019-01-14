@@ -1,0 +1,7 @@
+---
+de:
+  devise:
+    custom_registrations:
+      create:
+        flash_error: Es existiert bereits ein Konto (möglicherweise von einer anderen
+          Veranstaltung), bitte melde dich hier unterhalb an.

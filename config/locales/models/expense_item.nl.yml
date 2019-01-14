@@ -1,0 +1,16 @@
+---
+nl:
+  activerecord:
+    attributes:
+      expense_item:
+        cost: Kostprijs
+        details_label: Vraag
+        has_custom_cost: Donatie
+        has_details: Stel een vraag aan de deelnemer
+        maximum_available: Maximum totaal voor verkoop
+        maximum_per_registrant: Maximum per deelnemer
+        name: Naam
+        tax: Tax
+        total: Totaal
+        total_cost: Totaal (opgeteld)
+    models: 

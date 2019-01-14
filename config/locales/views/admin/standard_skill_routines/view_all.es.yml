@@ -1,0 +1,8 @@
+---
+es:
+  admin:
+    standard_skill_routines:
+      view_all:
+        header: Todas las rutinas de habilidades estandar
+        pdfs: PDFs
+        standard_skill_routine_created: Rutina de habilidad estandar creada?

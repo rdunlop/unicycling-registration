@@ -1,0 +1,11 @@
+---
+es:
+  admin:
+    permissions:
+      display_acl:
+        current_access_key: La clave de acceso hoy es
+        description: Esto permitirá también crear usuarios en laptop sin desencadenar
+          confirmaciones por mail.
+        header: Ajusta permisos especiales en laptop
+        instructions_html: Para autorizar una laptop, <u>en esa laptop</u> ve a %{url}
+          y escribe el código de acceso

@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      registrant_group:
+        name: Gruppe Navn
+    models: 

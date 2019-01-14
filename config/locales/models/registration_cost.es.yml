@@ -1,0 +1,11 @@
+---
+es:
+  activerecord:
+    attributes:
+      registration_cost:
+        end_date: Fecha de termino
+        name: Nombre
+        onsite: En el sitio
+        registrant_type: Tipo de registro
+        start_date: Fecha de inicio
+    models: 

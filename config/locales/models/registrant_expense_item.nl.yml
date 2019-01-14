@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    attributes:
+      registrant_expense_item:
+        tax: Tax
+    models: 

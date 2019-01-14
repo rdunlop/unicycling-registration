@@ -1,0 +1,13 @@
+---
+nl:
+  activerecord:
+    attributes:
+      competitor:
+        age: Leeftijd
+        bib_number: ID
+        gender: Geslacht
+        name: Naam
+    models:
+      competitor:
+        one: Deelnemer
+        other: Deelnemers

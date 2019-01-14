@@ -1,0 +1,15 @@
+---
+es:
+  data_entry_volunteers:
+    index:
+      assign_access: Asignar acceso adicional
+      description_1: Asignando a un usuario un "Acceso adicional", la cuenta del usuario
+        se vuelve elegible en el data de entradas de listas de juez y voluntario.
+      description_2: "Agregando un usuario aquí les permite visualizar él Menú de
+        Entrada de Data\r\ny ser asignados como jueces y entrada de voluntario."
+      description_3: Tu puedes también establecer el nombre de usuario aquí, así no
+        debes recordar sus direcciones de coreo.
+      header: Acceso adicional
+      note: Asignando acceso también confirma cuentas de correo no confirmadas para
+        que puedan inmediatamente accesar.
+      users_with_access: Los usuarios con acceso adicional

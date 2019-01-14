@@ -1,0 +1,15 @@
+---
+da:
+  activerecord:
+    attributes:
+      time_result:
+        facade_hours: Timer
+        facade_hundreds: Hundrede
+        facade_minutes: Minutter
+        hours: Timer
+        minutes: Minutter
+        number_of_laps: "# Omgange"
+        number_of_penalties: Straffe
+        seconds: Sekunder
+        thousands: Tusinder
+    models: 

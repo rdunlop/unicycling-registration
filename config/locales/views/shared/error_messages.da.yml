@@ -1,0 +1,5 @@
+---
+da:
+  shared:
+    error_messages:
+      errors_prevented_object_from_being_saved: Forhindrede dette i at blive gemt

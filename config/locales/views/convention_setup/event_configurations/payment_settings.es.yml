@@ -1,0 +1,8 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      payment_settings:
+        description: Si deseas recibir un pago vía Paypal, ingresa tu mail de cuenta
+          paypal aquí.
+        header: Ajustes de pago

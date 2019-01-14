@@ -1,0 +1,8 @@
+---
+nl:
+  activerecord:
+    attributes:
+      external_result:
+        details: Details
+        points: Punten
+    models: 

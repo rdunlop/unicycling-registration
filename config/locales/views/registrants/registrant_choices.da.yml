@@ -1,0 +1,9 @@
+---
+da:
+  registrants:
+    registrant_choices:
+      create_new_competitor: Opret ny deltager
+      create_new_noncompetitor: Opret ny Non-competitor
+      create_new_spectator: Opret ny Tilskuer
+      recommended: Anbefaet
+      registration: Tilmelding

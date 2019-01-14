@@ -1,0 +1,16 @@
+---
+es:
+  admin:
+    competition_songs:
+      show:
+        assign: Asignar
+        assign_to_competitor: Cada canción de ser asignada a un competidor para que
+          sea incluida en el archivo zip de descarga.
+        description: Esta página lista todas las canciones que han sido cargadas para
+          %{event} y los registrados listados como competidores.
+        download: Descargar
+        download_zip: Descargar Zip de canciones
+        header: Canciones de %{competition}
+        zip_description: Para hacerlo más fácil para el DJ de reproducir la música
+          para competencia, los archivos en el ZIP fueron renombrados para aparecer
+          en el orden de competidores.

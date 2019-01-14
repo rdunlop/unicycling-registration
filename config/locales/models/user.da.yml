@@ -1,0 +1,11 @@
+---
+da:
+  activerecord:
+    attributes:
+      user:
+        email: Bruger Email
+        name: Navn
+    models:
+      user:
+        one: Bruger
+        other: Brugere

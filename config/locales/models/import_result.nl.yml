@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    models:
+      import_result:
+        one: Importeer resultaat
+        other: Importeer resultaten

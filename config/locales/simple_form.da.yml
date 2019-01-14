@@ -1,0 +1,25 @@
+---
+da:
+  simple_form:
+    error_notification:
+      default_message: Gennemgå venligst problemerne herunder
+    hints:
+      registrant_best_times:
+        source_location: Indtast navn og dato
+      wave_time:
+        scheduled_time: fx. 02:00, 03:00
+    'no': Nej
+    options:
+      event_configuration:
+        waiver:
+          online: Online ansvarsfraskrivelse
+          print: Print ansvarsfraskrivelse
+    placeholders:
+      competitor_expense_item:
+        cost: fx. 12.00
+      noncompetitor_expense_item:
+        cost: fx. 12.00
+    required:
+      mark: "*"
+      text: Påkrævet
+    'yes': Ja

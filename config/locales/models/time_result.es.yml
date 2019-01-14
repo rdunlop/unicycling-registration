@@ -1,0 +1,15 @@
+---
+es:
+  activerecord:
+    attributes:
+      time_result:
+        facade_hours: Horas
+        facade_hundreds: cientos
+        facade_minutes: minutos
+        hours: Horas
+        minutes: Minutos
+        number_of_laps: "# Lapsos"
+        number_of_penalties: Penalties
+        seconds: Segundos
+        thousands: Miles
+    models: 

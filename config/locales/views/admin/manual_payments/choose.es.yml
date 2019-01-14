@@ -1,0 +1,13 @@
+---
+es:
+  admin:
+    manual_payments:
+      choose:
+        choose_items: Marca artículos para marcarlos como pagados
+        chosen_and_unpaid_items: Artículos Elegidos (pero no pagados)
+        description: Un mail será mandado a la cuenta del usuario asociado cuando
+          el pago esté completado.
+        details_note: "(sólo requerido para algunos artículos)"
+        header: Recibe pago
+        mark_this_item: Selecciona este artículo
+        submit: Crea registro de pago

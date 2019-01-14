@@ -1,0 +1,72 @@
+---
+es:
+  admin:
+    permissions:
+      index:
+        add_new_permission: Agrega nuevo permiso
+        different_users_different_roles: El sistema de registro está separado en diferentes
+          secciones para uso de mucha gente diferente
+        directors_permissions_html: Para conceder acceso de director a eventos específicos,
+          porfavor usa la página %{link}
+        event_planned_example: Para ver las listas de registrantes inscribete a cada
+          evento, habilitarás el rol "Planeador de evento"
+        header: Configuración de usuario
+        other_roles_not_permitted_html: Pueden haber roles adicionales contigo <u>no</u>
+          tiene permiso para ver.
+        payment_admin_example: Para ver/configurar los pagos recibidos (y dar reembolsos),
+          habilita el rol "Administrador de pagos"
+        role_allows_access: Cada rol habilita al usuario ver/usar diferentes partes
+          del sistema
+        role_description:
+          awards_admin: "Autorizado para ver los resultados data\r\nAutorizado para
+            publicar resultados\r\nAutorizado para marcar competencias como premiadas"
+          competition_admin: "Autorizado para crear competencias, y ajustar configuración
+            de competencias\r\nAutorizado para crear/controlar grupos de edad\r\nPuedes
+            poner registrantes como inelegibles\r\nPuedes crear director, data de
+            entrada de voluntario\r\nPuedes resetear contraseñas de usuarios\r\nPuedes
+            ver todos los registros al evento\r\nPuedes bloquear/desbloquear competencias\r\nPuedes
+            exportar resultados"
+          convention_admin: "Autorizado para configurar los ajustes de la competencia
+            con bienvenidas a ajustes de registro\r\nPuedes ajustar la vista y sensación,
+            nombre de convención, dominio URL.\r\nPuedes ajustar costos de pago.\r\nPuedes
+            ajustar detalles de PayPal\r\nPuedes poner eventos ofrecidos\r\nPuedes
+            poner las opciones de voluntarios\r\nPuedes resetear contraseñas de usuarios\r\nPuedes
+            ajustar \"Laptops autorizadas\" para uso en registro del sitio\r\nPuedes
+            crear administradores de pago, planeador de evento, y djs de musica"
+          director: "Autorizado para asignar registrados como competidores\r\nPuedes
+            crear jueces, voluntarios\r\nPuedes resetear contraseñas de usuarios"
+          event_planner: "Autorizado para ver/revisar los registros al evento\r\nAutorizado
+            para buscar y modificar todo registro\r\nAutorizado para importar/exportar
+            data de registro (incluyendo registros al evento)\r\nAutorizado para agregar/modificar
+            elecciones de evento, todo el tiempo\r\nAutorizado para ver/mandar mails
+            a todos los registrados\r\nAutorizado para manejar respuestas recibidas
+            por el sistema"
+          export_payment_lists: Autorizado para usar el Menú esportado para descargar
+            archivos de Excel de registro que hayan pagado por hospedaje
+          late_registrant: "Autorizado para acceder al sistema de registro incluso
+            después del periodo que ha cerrado.\r\nAutorizado para crear nuevos registrados,
+            cargar registrados existentes, y hacer pagos.\r\nDeberías usar esto junto
+            a la función SetRegFree, para espicificar la cuota en la que se cargaran"
+          membership_admin: "Autorizado para ver/descargar las membresias de USA\r\nAutorizado
+            para actualizar el número de membresia USA\r\nAutorizado para indicar
+            si un usuario esta inscrito con cuotas de membresía USA"
+          music_dj: Autorizado para ver/descargar cualquier múscia de la Página de
+            Manejo de Música
+          payment_admin: "Autorizado para ver los pagos que ha sido recibidos\r\nAutorizado
+            para ver el número total de artículos pagados\r\nAutorizado para poner
+            las cuotas de registro por usuario\r\nAutorizado para poner marcados como
+            recibidos\r\nAutorizado para manejar respuestas recibidas por el sistema"
+          super_admin: "Autorizado para poner roles a otras personas\r\nAutorizado
+            para destruir información de pago\r\nAutorizado para configurar los ajustes,
+            ajustes de evento"
+          translator: "Autorizado para accesar a la traducción del menú.\r\nMete nuevas
+            traducciones, y aplicalas en el sitio."
+        role_descriptions: Descripciones de rol
+        roles_listed: En esta página están listados todos los roles que tienes permiso
+          de ver. Tu puedes asignar roles a otros usuarios en orden de ganarles más
+          acceso.
+        set_password: Pon contraseña de usuario
+        users_with_permissions: 'Usuarios con permisos:'
+        you_have_roles: 'Tu actualmente tienes el rol (es) de:'
+        you_may_need_to_grant_yourself_roles: Tu podrás necesitar asignarte otros
+          roles en orden de ganar acceso a otras partes del sistema.

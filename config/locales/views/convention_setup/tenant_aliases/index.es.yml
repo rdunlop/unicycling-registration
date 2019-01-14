@@ -1,0 +1,26 @@
+---
+es:
+  convention_setup:
+    tenant_aliases:
+      index:
+        accessible_url_html: Esta convención será <u>always</u> accesible en  %{link}
+        alias_is_primary_domain: Este alias es ahora de dominio primario
+        alias_verified: Alias verificado
+        base_dns_cname_html: Establecer un registro de DNS CNAME desde "&lt;yoururl.yoursite.com&gt;."
+          para
+        create_other_dns_record: Sí quisieras que el sistema de registro aparezca
+          en diferentes direcciones de internet, debes usar el registro DNS CNAME
+          para crear un alias.
+        current_url_html: El sistema de registro está actualmente configurado en vivo
+          en  %{link}
+        delete_alias: Elimina Alias
+        delete_current_primary_domain: Elimina el actual dominio primario
+        header: Ajuste de dominio
+        must_save_warning: Antes que puedas activar el alias, debes "Guardar Registro"
+        primary_domain_description: Una vez que se haya creado el alias, puedes establecer
+          que ese alias sea el "Dominio Primario" aquí, que causará que todos los
+          enlaces envíen mails para usar esas direcciones de internet en lugar del
+          por default unicycling-software.com.
+        set_as_primary_domain: Establecer Alias como dominio primario
+        submit: Guarda registro
+        url_of_new_domain: Ingresa el URL del nuevo dominio

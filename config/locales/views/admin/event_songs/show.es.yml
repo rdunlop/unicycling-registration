@@ -1,0 +1,9 @@
+---
+es:
+  admin:
+    event_songs:
+      show:
+        description_html: Esta página lista canciones que han <b> no están </b> asignadas
+          a un competidor aun.
+        download: Descargar
+        header: Canciones %{event}

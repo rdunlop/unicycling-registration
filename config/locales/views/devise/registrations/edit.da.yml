@@ -1,0 +1,14 @@
+---
+da:
+  devise:
+    registrations:
+      edit:
+        action: Opdatér
+        blank_notice: Efterlad tom hvis du ikke vil ændre det
+        change_header: Ændre Email eller password
+        change_password: Ændre password
+        confirm_password_notice: Vi skal bruge dit nuværende password for at bekræfte
+          ændringen
+        current_permissions: Nuværende tillaedser
+        title: Min Konto
+        users_name: Brugernavn

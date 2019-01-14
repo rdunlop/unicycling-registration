@@ -1,0 +1,10 @@
+---
+da:
+  registrants:
+    all:
+      all_registrants: Alle Tilmeldte
+      club: Klub
+      country: Land
+      id: ID
+      name: Navn
+      registrant_type: Type

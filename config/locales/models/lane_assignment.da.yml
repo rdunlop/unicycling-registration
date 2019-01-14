@@ -1,0 +1,8 @@
+---
+da:
+  activerecord:
+    attributes:
+      lane_assignment:
+        heat: Heat
+        lane: Bane
+    models: 

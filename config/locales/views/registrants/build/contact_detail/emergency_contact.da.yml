@@ -1,0 +1,9 @@
+---
+da:
+  registrants:
+    build:
+      contact_detail:
+        emergency_contact:
+          attending: Deltager
+          emergency_contact: Kontakt i nødstilfælde
+          in_case_of_emergency: I nødstilfælde

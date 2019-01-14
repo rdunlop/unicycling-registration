@@ -1,0 +1,7 @@
+---
+es:
+  admin:
+    registrant_summaries:
+      index:
+        registrant_summaries_by_id: Todos los registros ordenados por usuario
+        registrant_summaries_by_last_name: Todos los registrados ordenados por apellido

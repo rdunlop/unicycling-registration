@@ -1,0 +1,15 @@
+---
+nl:
+  activerecord:
+    attributes:
+      event:
+        accepts_wheel_size_override: Mag over de grote van het wiel gaan
+        artistic: Artistiek
+        best_time_format: Format beste tijd
+        id: ID
+        standard_skill: Standard Skill
+        visible: Zichtbaar
+    models:
+      event:
+        one: Onderdeel
+        other: Onderdelen

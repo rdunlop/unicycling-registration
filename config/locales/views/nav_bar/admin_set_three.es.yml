@@ -1,0 +1,8 @@
+---
+es:
+  nav_bar:
+    admin_set_three:
+      copy_events: Copia eventos para previa convención
+      export_data: Exporta data
+      standard_skill_routines_export: Rutinas de habilidad estandar (exportar)
+      standard_skill_routines_view: Rutinas de habilidad estandar (ver)

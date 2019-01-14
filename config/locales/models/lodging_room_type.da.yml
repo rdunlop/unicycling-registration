@@ -1,0 +1,10 @@
+---
+da:
+  activerecord:
+    attributes:
+      lodging_room_type:
+        minimum_duration_days: Minimum antal dage krævet for en bookning
+    models:
+      lodging_room_type:
+        one: Overnatning
+        other: Overnatnings typer

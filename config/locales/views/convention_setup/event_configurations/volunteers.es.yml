@@ -1,0 +1,11 @@
+---
+es:
+  convention_setup:
+    event_configurations:
+      volunteers:
+        description: Cuando se registre, podemos preguntar a cada registrante si quiere
+          ser voluntario (general) o preguntarle preguntas específicas (ej. ¿Quieres
+          ser voluntario de una ruta? (Opción) o hacer preguntas de no voluntarios.
+        header: Ajustes de voluntariado
+        next_step: Después de elegir "opción", puedes poner opciones en los ajustes
+          de la página de "Oportunidades de voluntariado".

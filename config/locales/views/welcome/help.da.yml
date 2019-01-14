@@ -1,0 +1,31 @@
+---
+da:
+  welcome:
+    help:
+      frequently_asked_questions: FAQ
+      general_help: Hvis du har spørgsmål til tilmeldingen kan du stiller dem via
+        feedback knappen
+      header: Hjælp
+      i_cannot_login: Jeg kan ikke logge ind
+      login_help: Når du har logget ind, skal du finde en bekræftigelses mail i din
+        indbakke. Tjek alle spam filtre. hvis du ikke kan finde emailen skal du klikke
+        'Send bekrftigelses mail igen'
+      password_account_details: Når du har tilmeldt dig dit første unicykel event
+        kan du genbruge den samme email/password ved fremtidige events. for mere information
+        se %{link}.
+      registration: Hvordan tilmelder jeg mig
+      registration_help: Klik på "opret ny delater" eller "opret ny non-competitor"
+        når du har logget ind, husk at betale for tilmeldingen for at sikre dig at
+        du ikke mister den igen
+      shared_password: Skal jeg oprette en ny bruger hvert år?
+      sharing_link: Bed om at få adgang til dit holds tilmeldinger med %{link} skemaet
+      sharing_registration_details: Hvordan deler jeg mine tilmeldingsoplysningwer
+      sharing_registration_details_help: Som holdkaptajn eller klub træner/leder kan
+        du bede om andgang så du kan betale for aldre deltagere, og se hvilke konkurencer
+        de har tilmeldt sig.
+      subheader: denne hjemmeside er til %{domain}-Tilmelding
+      this_link: dette link
+      translation_help: Jeg har fundet en fejl/noget der mangler i oversættelsen.
+        skriv venligst her her i feedbacken hvad der er galt, eller bed om at bliver
+        oversætter på siden og hjælp til med at oversætte denne.
+      translations: Oversættelser

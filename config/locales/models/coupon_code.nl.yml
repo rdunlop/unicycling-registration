@@ -1,0 +1,16 @@
+---
+nl:
+  activerecord:
+    attributes:
+      coupon_code:
+        code: Postcode
+        description: Beschrijving
+        inform_emails: E-mails zenden als er een coupon gebruikt wordt
+        maximum_registrant_age: Maximum leeftijd deelnemers
+        max_num_uses: Maximaal aantal dat er gebruik van kan maken
+        name: Naam
+        price: Prijs
+    models:
+      coupon_code:
+        one: Coupon Code
+        other: Coupon Codes

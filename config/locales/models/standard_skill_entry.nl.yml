@@ -1,0 +1,10 @@
+---
+nl:
+  activerecord:
+    attributes:
+      standard_skill_entry:
+        description: Beschrijving
+        letter: Brief
+        number: Skill nummer
+        points: Punten
+    models: 

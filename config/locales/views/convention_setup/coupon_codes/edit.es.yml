@@ -1,0 +1,6 @@
+---
+es:
+  convention_setup:
+    coupon_codes:
+      edit:
+        header: Edita tu código de cupón

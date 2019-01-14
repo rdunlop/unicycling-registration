@@ -1,0 +1,7 @@
+---
+da:
+  layouts:
+    pages:
+      begin_registration_link: For at begynde tilmeldingen til %{convention_name}
+      manage_my_registrations: Administrer mine tilmeldinger
+      sign_in: Log in

@@ -1,0 +1,18 @@
+---
+es:
+  convention_setup:
+    events:
+      form:
+        advanced_settings: Ajustes avanzados
+        artistic_closed_date: La fecha artística cerrada es  %{artistic_closed_date}
+        event_category_hint: 'Específica "Todo" si solo hay una categoría. (nota:
+          las opciones avanzadas están disponibles bajo categorías de evento"'
+        header: Editando evento
+        standard_skill_closed_date: La fecha de sumisión de habilidad estandar cerrada
+          es  %{standard_skill_closed_date}
+        standard_skill_enabled: "¿El sistema de sumisión de habilidad estandar está
+          habilitado? %{enabled}"
+        wheel_size_override_only_when_default_wheel_size: Permitir usuarios especificar
+          el tamaño de rueda permitido para un evento sólo es permitido cuando la
+          opción de "Solicitud de tamaño de rueda" está habilitada en las preguntas
+          de registro.

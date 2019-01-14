@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      judge:
+        one: Dommer
+        other: Dommere

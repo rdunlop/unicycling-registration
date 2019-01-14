@@ -1,0 +1,10 @@
+---
+es:
+  activerecord:
+    attributes:
+      refund:
+        details: Detalles (nota)
+        refund_date: Fecha de reembolso
+        refund_id: Código de reembolso
+        user_id: Reembolsado por
+    models: 

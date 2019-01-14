@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    models:
+      competition_result:
+        one: Extra resultaten
+        other: Extra resultaten
