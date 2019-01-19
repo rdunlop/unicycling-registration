@@ -41,15 +41,26 @@ class UsaMembershipChecker
   end
 
   def filter_string
-    "'FirstName' eq '#{first_name}' and 'LastName' eq '#{last_name}' and 'Birth Date' eq '#{birth_date.strftime("%Y-%m-%d")}"
+    "'FirstName' eq '#{first_name}' " \
+    " and 'LastName' eq '#{last_name}' " \
+    " and 'Birth Date' eq '#{birthdate.strftime("%Y-%m-%d")}'"
   end
 
   def contact_is_member?(contact_hash)
     contact_hash["MembershipEnabled"] &&
     contact_hash["Status"] == "Active" &&
-    contact_hash["FieldValues"].detect{|field| field["FieldName"] == "Suspended member"}["Value"] == false
+    !suspended?(contact_hash)
   end
 
+  def suspended?(contact_hash)
+    suspended_element = contact_hash["FieldValues"].detect do |field|
+      field["FieldName"] == "Suspended member"
+    end
+
+    suspended_element["Value"]
+  end
+
+  # Unused method
   def renewing?(contact_hash)
     renewal_field = contact_hash["FieldValues"].detect{|field| field["FieldName"] == "Renewal due"}
     return false unless renewal_field
