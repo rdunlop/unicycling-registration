@@ -18,6 +18,8 @@ class UsaMembershipChecker
   end
 
   def contacts
+    return [] if Rails.env.test?
+
     conn = Faraday.new(url: "https://api.wildapricot.org") do |faraday|
       faraday.request :url_encoded
       faraday.response :logger
