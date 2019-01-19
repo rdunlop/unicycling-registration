@@ -588,7 +588,7 @@ class Registrant < ApplicationRecord
 
   # Queue a job to query the USA db for membership information
   def update_usa_membership_status
-    return unless last_name_changed? || first_name_changed? || birthday_changed?
+    return unless previous_changes.key?(:last_name) || previous_changes.key?(:first_name) || previous_changes.key?(:birthday)
 
     UpdateUsaMembershipStatusWorker.perform_async(id)
   end
