@@ -59,7 +59,7 @@ class ContactDetail < ApplicationRecord
 
   validates :email, presence: true
 
-  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
+  after_commit :update_usa_membership_status, on: [:create], if: proc { EventConfiguration.singleton.organization_membership_usa? }
 
   delegate :minor?, to: :registrant, allow_nil: true
 
@@ -97,9 +97,8 @@ class ContactDetail < ApplicationRecord
   private
 
   def update_usa_membership_status
-    return unless organization_member_number_changed?
+    return if registrant_id.blank?
 
-    # If we perform the search immediately, sometimes the ContactDetail hasn't been committed yet, so we wait 3 seconds.
-    UpdateUsaMembershipStatusWorker.perform_in(3.seconds, registrant_id)
+    UpdateUsaMembershipStatusWorker.perform_async(registrant_id)
   end
 end

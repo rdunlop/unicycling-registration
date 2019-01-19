@@ -525,7 +525,7 @@ class Competition < ApplicationRecord
   end
 
   def update_age_group_if_necessary
-    return unless age_group_type_id_changed?
+    return unless previous_changes.key?(:age_group_type_id)
 
     competitors.each do |competitor|
       competitor.update_age_group_entry

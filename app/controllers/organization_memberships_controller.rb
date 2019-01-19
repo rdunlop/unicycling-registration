@@ -53,8 +53,9 @@ class OrganizationMembershipsController < ApplicationController
   def refresh_usa_status
     if @config.organization_membership_usa?
       @registrant = Registrant.find(params[:id])
-      UpdateUsaMembershipStatusWorker.perform_async(@registrant.id)
-      head :ok
+      UpdateUsaMembershipStatusWorker.new.perform(@registrant.id) # perform in-line
+      @registrant.reload # get new state
+      render "update", format: :js
     else
       head :no_content
     end

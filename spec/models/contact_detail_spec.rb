@@ -85,32 +85,6 @@ describe ContactDetail do
     end
   end
 
-  context "with a db-backed contact_detail" do
-    let(:contact_detail) { FactoryBot.create(:contact_detail) }
-
-    context "when organization_membership_config mode is enabled" do
-      before do
-        EventConfiguration.singleton.update_attribute(:organization_membership_type, "usa")
-      end
-
-      it "calls the update worker" do
-        expect(contact_detail).to receive(:update_usa_membership_status)
-        contact_detail.save
-      end
-    end
-
-    context "when organization_membership_config mode is not enabled" do
-      before do
-        EventConfiguration.singleton.update_attribute(:organization_membership_type, nil)
-      end
-
-      it "does not call the update worker" do
-        expect(contact_detail).not_to receive(:update_usa_membership_status)
-        contact_detail.save
-      end
-    end
-  end
-
   context "without a country_residence or country_representing" do
     before { contact_detail.country_residence = nil }
 
