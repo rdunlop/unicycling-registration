@@ -131,7 +131,7 @@ class PaymentDetail < ApplicationRecord
   def registrant_must_have_valid_usa_membership
     return unless EventConfiguration.singleton.organization_membership_usa?
 
-    if registrant && (!registrant.organization_membership_confirmed?)
+    if registrant && !registrant.organization_membership_confirmed?
       errors.add(:registrant, "Registrant #{registrant} does not have a current USA membership")
       return false
     end
