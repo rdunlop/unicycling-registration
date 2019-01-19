@@ -1,7 +1,6 @@
 # checks the Unicycling Society Of America (USA)
 # WildApricot membership database
 class UsaMembershipChecker
-
   attr_reader :first_name, :last_name, :birthdate
 
   def initialize(first_name, last_name, birthdate)
@@ -43,13 +42,13 @@ class UsaMembershipChecker
   def filter_string
     "'FirstName' eq '#{first_name}' " \
     " and 'LastName' eq '#{last_name}' " \
-    " and 'Birth Date' eq '#{birthdate.strftime("%Y-%m-%d")}'"
+    " and 'Birth Date' eq '#{birthdate.strftime('%Y-%m-%d')}'"
   end
 
   def contact_is_member?(contact_hash)
     contact_hash["MembershipEnabled"] &&
-    contact_hash["Status"] == "Active" &&
-    !suspended?(contact_hash)
+      contact_hash["Status"] == "Active" &&
+      !suspended?(contact_hash)
   end
 
   def suspended?(contact_hash)
@@ -62,7 +61,7 @@ class UsaMembershipChecker
 
   # Unused method
   def renewing?(contact_hash)
-    renewal_field = contact_hash["FieldValues"].detect{|field| field["FieldName"] == "Renewal due"}
+    renewal_field = contact_hash["FieldValues"].detect { |field| field["FieldName"] == "Renewal due" }
     return false unless renewal_field
 
     Date.parse(renewal_field["Value"]) < Date.current + 5.months
