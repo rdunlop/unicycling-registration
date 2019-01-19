@@ -40,7 +40,7 @@ class Registrant < ApplicationRecord
   extend OrderAsSpecified
 
   after_save :touch_members
-  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
+  after_commit :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
@@ -588,7 +588,7 @@ class Registrant < ApplicationRecord
 
   # Queue a job to query the USA db for membership information
   def update_usa_membership_status
-    return unless last_name_changed?
+    return unless last_name_changed? || first_name_changed? || birthday_changed?
 
     UpdateUsaMembershipStatusWorker.perform_async(id)
   end

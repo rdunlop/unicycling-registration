@@ -59,8 +59,6 @@ class ContactDetail < ApplicationRecord
 
   validates :email, presence: true
 
-  after_save :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
-
   delegate :minor?, to: :registrant, allow_nil: true
 
   # Italians are required to enter VAT_Number and Birthplace
@@ -92,14 +90,5 @@ class ContactDetail < ApplicationRecord
   # is this registrant a member of the relevant unicycling federation?
   def organization_membership_confirmed?
     organization_membership_system_confirmed? || organization_membership_manually_confirmed?
-  end
-
-  private
-
-  def update_usa_membership_status
-    return unless organization_member_number_changed?
-
-    # If we perform the search immediately, sometimes the ContactDetail hasn't been committed yet, so we wait 3 seconds.
-    UpdateUsaMembershipStatusWorker.perform_in(3.seconds, registrant_id)
   end
 end
