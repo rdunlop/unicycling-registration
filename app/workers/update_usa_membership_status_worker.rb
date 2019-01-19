@@ -9,6 +9,7 @@ class UpdateUsaMembershipStatusWorker
     registrant = Registrant.find(registrant_id)
 
     contact_detail = registrant.contact_detail
+    return unless contact_detail.present? # Can't proceed without a place to store the result
 
     checker = UsaMembershipChecker.new(registrant.first_name, registrant.last_name, registrant.birthday)
 
