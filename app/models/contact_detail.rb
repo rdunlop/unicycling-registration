@@ -97,7 +97,8 @@ class ContactDetail < ApplicationRecord
   private
 
   def update_usa_membership_status
-    return unless registrant_id.present?
+    return if registrant_id.blank?
+
     UpdateUsaMembershipStatusWorker.perform_async(registrant_id)
   end
 end
