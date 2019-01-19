@@ -18,7 +18,7 @@
       %tr
         %td
           = pf.hidden_field :registrant_id
-          = pf.object.registrant
+          = link_to pf.object.registrant, registrant_path(pf.object.registrant)
         %td
           = pf.hidden_field :line_item_id
           = pf.hidden_field :line_item_type
