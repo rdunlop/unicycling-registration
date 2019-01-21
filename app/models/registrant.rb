@@ -46,6 +46,7 @@ class Registrant < ApplicationRecord
 
   with_options dependent: :destroy do
     has_one :contact_detail, autosave: true, inverse_of: :registrant
+    has_one :organization_membership, inverse_of: :registrant
     has_one :standard_skill_routine
   end
 
@@ -89,6 +90,7 @@ class Registrant < ApplicationRecord
   belongs_to :user
 
   accepts_nested_attributes_for :contact_detail
+  accepts_nested_attributes_for :organization_membership
   accepts_nested_attributes_for :registrant_choices
   accepts_nested_attributes_for :registrant_event_sign_ups
   accepts_nested_attributes_for :registrant_best_times, reject_if: :no_best_time_entered, allow_destroy: true
@@ -151,6 +153,9 @@ class Registrant < ApplicationRecord
   # contact info
   validates_associated :contact_detail, if: :validated?
   validates_associated :registrant_best_times, if: :past_step_2?
+
+  # Organization Membership
+  delegate :member_number, :system_member_number, :manual_member_number, :manually_confirmed?, :system_confirmed?, :system_status, to: :organization_membership, prefix: true, allow_nil: true
 
   # Expense items/LineItems
   validates_associated :registrant_expense_items
@@ -438,10 +443,14 @@ class Registrant < ApplicationRecord
     ExpenseItemFreeChecker.new(self, expense_item).expense_item_is_free?
   end
 
+  def create_organization_membership_record
+    organization_membership || create_organization_membership
+  end
+
   def organization_membership_confirmed?
     return false unless validated?
 
-    contact_detail.try(:organization_membership_confirmed?)
+    organization_membership.try(:organization_membership_confirmed?)
   end
 
   # Return a hash of categories, with values of a hash of event names

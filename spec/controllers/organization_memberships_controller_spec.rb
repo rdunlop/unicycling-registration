@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: organization_memberships
+#
+#  id                   :bigint(8)        not null, primary key
+#  registrant_id        :bigint(8)
+#  manual_member_number :string
+#  system_member_number :string
+#  manually_confirmed   :boolean          default(FALSE), not null
+#  system_confirmed     :boolean          default(FALSE), not null
+#  system_status        :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+# Indexes
+#
+#  index_organization_memberships_on_registrant_id  (registrant_id)
+#
+
 require 'spec_helper'
 
 describe OrganizationMembershipsController do
@@ -10,7 +29,7 @@ describe OrganizationMembershipsController do
   end
 
   let(:registrant) { FactoryBot.create(:registrant) }
-  let(:contact_detail) { registrant.contact_detail }
+  let(:organization_membership) { registrant.organization_membership }
 
   describe "#index" do
     it "can list all members" do
@@ -23,20 +42,20 @@ describe OrganizationMembershipsController do
     context "when the user is not yet confirmed" do
       it "can confirm" do
         put :toggle_confirm, params: { id: registrant.id }
-        expect(registrant.reload.contact_detail).to be_organization_membership_manually_confirmed
+        expect(registrant.reload.organization_membership).to be_manually_confirmed
       end
       it "can confirm with JS" do
         put :toggle_confirm, params: { id: registrant.id, format: :js }
-        expect(registrant.reload.contact_detail).to be_organization_membership_manually_confirmed
+        expect(registrant.reload.organization_membership).to be_manually_confirmed
       end
     end
 
     context "when the user is a confirmed member" do
-      before { contact_detail.update_attribute(:organization_membership_manually_confirmed, true) }
+      before { organization_membership.update_attribute(:manually_confirmed, true) }
 
       it "can unconfirm" do
         put :toggle_confirm, params: { id: registrant.id }
-        expect(registrant.reload.contact_detail).not_to be_organization_membership_manually_confirmed
+        expect(registrant.reload.organization_membership).not_to be_manually_confirmed
       end
     end
   end
@@ -46,7 +65,7 @@ describe OrganizationMembershipsController do
 
     it "saves the membership number" do
       put :update_number, params: { id: registrant.id, membership_number: new_member_number }, format: :js
-      expect(registrant.reload.contact_detail.organization_member_number).to eq new_member_number
+      expect(registrant.reload.organization_membership.system_member_number).to eq new_member_number
     end
   end
 

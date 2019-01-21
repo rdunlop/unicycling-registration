@@ -1,0 +1,7 @@
+---
+it:
+  activerecord:
+    attributes:
+      organization_membership:
+        member_number: Numero di membro dell'organizzazione monociclistica
+        system_status: Stato dell'associato

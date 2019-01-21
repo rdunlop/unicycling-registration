@@ -61,7 +61,6 @@ describe RegistrantsController do
         zip: "12345",
         club: "TCUC",
         club_contact: "Connie",
-        organization_member_number: "12345",
         volunteer: false,
         emergency_name: "Jane",
         emergency_relationship: "Sig. Oth.",
@@ -70,6 +69,9 @@ describe RegistrantsController do
         emergency_other_phone: "911",
         responsible_adult_name: "Andy",
         responsible_adult_phone: "312-555-5555"
+      },
+      organization_membership_attributes: {
+        member_number: "12345"
       }
     }
   end

@@ -8,13 +8,13 @@ class OrganizationMembershipsController < ApplicationController
 
   def toggle_confirm
     @registrant = Registrant.find(params[:id])
-    cd = @registrant.contact_detail
+    om = @registrant.create_organization_membership_record
 
-    if cd.organization_membership_manually_confirmed?
-      cd.update_attribute(:organization_membership_manually_confirmed, false)
+    if om.manually_confirmed?
+      om.update_attribute(:manually_confirmed, false)
       flash[:notice] = "Marked #{@registrant} as unconfirmed"
     else
-      cd.update_attribute(:organization_membership_manually_confirmed, true)
+      om.update_attribute(:manually_confirmed, true)
       flash[:notice] = "Marked #{@registrant} as confirmed"
     end
 
@@ -28,10 +28,10 @@ class OrganizationMembershipsController < ApplicationController
 
   def update_number
     @registrant = Registrant.find(params[:id])
-    cd = @registrant.contact_detail
+    om = @registrant.create_organization_membership_record
 
     if params[:membership_number]
-      cd.update_attribute(:organization_member_number, params[:membership_number])
+      om.update_attribute(:system_member_number, params[:membership_number])
       flash[:notice] = "Updated Member Number"
     else
       flash[:alert] = "Unable to update member number"
@@ -68,6 +68,6 @@ class OrganizationMembershipsController < ApplicationController
   end
 
   def load_registrants
-    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:contact_detail).active
+    @registrants = Registrant.where(registrant_type: ["competitor", "noncompetitor"]).includes(:organization_membership).active
   end
 end

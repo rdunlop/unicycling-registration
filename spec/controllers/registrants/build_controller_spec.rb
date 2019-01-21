@@ -29,7 +29,6 @@ describe Registrants::BuildController do
         zip: "12345",
         club: "TCUC",
         club_contact: "Connie",
-        organization_member_number: "12345",
         email: "fake@example.com",
         volunteer: false,
         emergency_name: "Jane",
@@ -39,6 +38,9 @@ describe Registrants::BuildController do
         emergency_other_phone: "911",
         responsible_adult_name: "Andy",
         responsible_adult_phone: "312-555-5555"
+      },
+      organization_membership_attributes: {
+        manual_member_number: "12345"
       }
     }
   end

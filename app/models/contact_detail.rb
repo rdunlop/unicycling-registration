@@ -59,8 +59,6 @@ class ContactDetail < ApplicationRecord
 
   validates :email, presence: true
 
-  after_commit :update_usa_membership_status, on: [:create], if: proc { EventConfiguration.singleton.organization_membership_usa? }
-
   delegate :minor?, to: :registrant, allow_nil: true
 
   # Italians are required to enter VAT_Number and Birthplace
@@ -87,18 +85,5 @@ class ContactDetail < ApplicationRecord
     else
       state_code
     end
-  end
-
-  # is this registrant a member of the relevant unicycling federation?
-  def organization_membership_confirmed?
-    organization_membership_system_confirmed? || organization_membership_manually_confirmed?
-  end
-
-  private
-
-  def update_usa_membership_status
-    return if registrant_id.blank?
-
-    UpdateUsaMembershipStatusWorker.perform_async(registrant_id)
   end
 end

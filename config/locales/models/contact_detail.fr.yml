@@ -18,8 +18,6 @@ fr:
         emergency_relationship: Lien
         italian_fiscal_code: Code fiscal (Requis pour les participants Italiens)
         mobile: Numéro de portable
-        organization_member_number: Numéro d'adhérent fédéral
-        organization_membership_system_status: Statut de votre adhésion
         phone: Numéro de téléphone
         responsible_adult_name: Nom
         responsible_adult_phone: Numéro de téléphone principal

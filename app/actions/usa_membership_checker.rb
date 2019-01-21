@@ -2,31 +2,67 @@
 # WildApricot membership database
 class UsaMembershipChecker
   attr_reader :first_name, :last_name, :birthdate
+  attr_reader :legacy_usa_member_number, :wildapricot_member_number
 
-  def initialize(first_name, last_name, birthdate)
+  def initialize(first_name:, last_name:, birthdate:, usa_member_number:, wildapricot_member_number:)
     @first_name = first_name
     @last_name = last_name
     @birthdate = birthdate
+    @legacy_usa_member_number = usa_member_number
+    @wildapricot_member_number = wildapricot_member_number
   end
 
   def current_member?
     return false if contacts.count.zero?
 
-    contacts.any? do |contact|
-      contact_is_member?(contact)
-    end
+    active_matched_contact.present?
   end
+
+  # When a match is found, store the WildApricot ID found as the "system_member_number"
+  def current_wildapricot_id
+    matched_contact = active_matched_contact
+
+    return nil unless matched_contact
+
+    matched_contact["Id"]
+  end
+
+  private
 
   def contacts
     return [] if Rails.env.test?
 
-    conn = Faraday.new(url: "https://api.wildapricot.org") do |faraday|
+    # If a system_member_number is specified, search ONLY by that
+    if wildapricot_member_number.present?
+      search_contacts(filter_by_wildapricot_id)
+    else
+      # If system_member_number not is specified, Search by fname/lname/bday
+      result = search_contacts(filter_by_name_bday)
+      if result.none?
+        # Then search for usa via manual_member_number (if specified)
+        result = search_contacts(filter_by_old_usa_membership_id)
+      end
+
+      result
+    end
+  end
+
+  def active_matched_contact
+    @active_matched_contact ||= contacts.detect do |contact|
+      contact_is_member?(contact)
+    end
+  end
+
+  def api_connection
+    Faraday.new(url: "https://api.wildapricot.org") do |faraday|
       faraday.request :url_encoded
       faraday.response :logger
       faraday.adapter  Faraday.default_adapter
     end
+  end
 
-    response = conn.get do |req|
+  def search_contacts(filter_string)
+    response = api_connection.get do |req|
       req.headers["authorization"] = "Bearer #{token}"
       req.url("/v2.1/accounts/#{account_id}/contacts")
       req.params["$async"] = "false"
@@ -37,14 +73,23 @@ class UsaMembershipChecker
     if response.success?
       JSON.parse(response.body)["Contacts"]
     else
-      raise "Unable to fetch from wildapricot"
+      # Unable to fetch from wildapricot
+      []
     end
   end
 
-  def filter_string
+  def filter_by_name_bday
     "'FirstName' eq '#{first_name}' " \
     " and 'LastName' eq '#{last_name}' " \
     " and 'Birth Date' eq '#{birthdate.strftime('%Y-%m-%d')}'"
+  end
+
+  def filter_by_old_usa_membership_id
+    "'Old Member ID' eq '#{legacy_usa_member_number}'"
+  end
+
+  def filter_by_wildapricot_id
+    "'ID' eq '#{wildapricot_member_number}'"
   end
 
   def contact_is_member?(contact_hash)
@@ -69,17 +114,15 @@ class UsaMembershipChecker
     Date.parse(renewal_field["Value"]) < Date.current + 5.months
   end
 
-  private
-
   def token
     return @token if @token
 
-    conn = Faraday.new(url: "https://oauth.wildapricot.org") do |faraday|
+    oauth_connection = Faraday.new(url: "https://oauth.wildapricot.org") do |faraday|
       faraday.request :url_encoded
       faraday.response :logger
       faraday.adapter  Faraday.default_adapter
     end
-    response = conn.post do |req|
+    response = oauth_connection.post do |req|
       req.url("/auth/token")
       req.headers["Content-type"] = "Application/x-www-form-urlencoded"
       req.headers["Authorization"] = basic_auth

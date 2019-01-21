@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181126020943) do
+ActiveRecord::Schema.define(version: 20190121220246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -727,6 +727,18 @@ ActiveRecord::Schema.define(version: 20181126020943) do
     t.boolean "alternate", default: false, null: false
     t.index ["competitor_id"], name: "index_members_competitor_id"
     t.index ["registrant_id"], name: "index_members_registrant_id"
+  end
+
+  create_table "organization_memberships", force: :cascade do |t|
+    t.bigint "registrant_id"
+    t.string "manual_member_number"
+    t.string "system_member_number"
+    t.boolean "manually_confirmed", default: false, null: false
+    t.boolean "system_confirmed", default: false, null: false
+    t.string "system_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registrant_id"], name: "index_organization_memberships_on_registrant_id"
   end
 
   create_table "page_images", id: :serial, force: :cascade do |t|

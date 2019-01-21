@@ -102,10 +102,10 @@ class ExportRegistrantsController < ApplicationController
     ]
 
     data = []
-    Registrant.active.includes(:user, :contact_detail).each do |reg|
+    Registrant.active.includes(:user, :organization_membership, :contact_detail).each do |reg|
       row = [
         reg.bib_number,
-        reg.contact_detail.organization_member_number,
+        reg.organization_membership_member_number,
         reg.first_name,
         reg.last_name,
         reg.birthday,
