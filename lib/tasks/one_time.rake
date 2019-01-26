@@ -8,7 +8,6 @@ namespace :one_time do
          contact_detail.organization_membership_manually_confirmed? ||
          contact_detail.organization_membership_system_confirmed?
         organization_membership = registrant.create_organization_membership_record
-        organization_membership.legacy_member_number = contact_detail.organization_member_number
         organization_membership.manual_member_number = contact_detail.organization_member_number
         organization_membership.manually_confirmed = contact_detail.manually_confirmed
 
