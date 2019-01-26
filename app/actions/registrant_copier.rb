@@ -22,6 +22,10 @@ class RegistrantCopier
     ContactDetail.new(previous_contact_detail_attributes) if previous_contact_detail_attributes.any?
   end
 
+  def organization_membership
+    OrganizationMembership.new(previous_organization_membership_attributes) if previous_organization_membership_attributes.any?
+  end
+
   private
 
   def previous_registrant_attributes
@@ -54,12 +58,25 @@ class RegistrantCopier
            mobile
            email
            club
-           club_contact
-           organization_member_number].each do |attribute|
+           club_contact].each do |attribute|
           contact_attributes[attribute] = contact_detail.send(attribute)
         end
       end
     end
     contact_attributes
+  end
+
+  def previous_organization_membership_attributes
+    organization_membership_attributes = {}
+    Apartment::Tenant.switch(subdomain) do
+      previous_reg = Registrant.find(previous_id)
+      if previous_reg.organization_membership.present?
+        organization_membership = previous_reg.organization_membership
+        %i[system_member_number manual_member_number].each do |attribute|
+          organization_membership_attributes[attribute] = organization_membership.send(attribute)
+        end
+      end
+    end
+    organization_membership_attributes
   end
 end

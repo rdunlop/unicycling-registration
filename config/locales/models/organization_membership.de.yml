@@ -1,0 +1,7 @@
+---
+de:
+  activerecord:
+    attributes:
+      organization_membership:
+        member_number: Mitgliedsnummer des Einrad Verbandes
+        system_status: Mitglieds Status

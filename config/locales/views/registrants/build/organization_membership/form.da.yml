@@ -1,0 +1,8 @@
+---
+da:
+  registrants:
+    build:
+      organization_membership:
+        form:
+          organization_membership_number_tooltip: Et %{organization_type} Medlemsskab
+            er påkrævet for at deltage i %{convention_name}

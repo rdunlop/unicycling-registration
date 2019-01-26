@@ -1,0 +1,8 @@
+---
+fr:
+  registrants:
+    build:
+      organization_membership:
+        form:
+          organization_membership_number_tooltip: Une adhésion à la %{organization_type}
+            est requise pour participer à %{convention_name}

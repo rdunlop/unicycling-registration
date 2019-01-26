@@ -26,7 +26,7 @@ class EmailFilters::NonConfirmedOrganizationMembers
   end
 
   def registrants
-    Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.includes(:contact_detail, :user).reject(&:organization_membership_confirmed?)
+    Registrant.where(registrant_type: ["competitor", "noncompetitor"]).active_or_incomplete.includes(:contact_detail, :organization_membership, :user).reject(&:organization_membership_confirmed?)
   end
 
   # object whose policy must respond to `:contact_registrants?`
