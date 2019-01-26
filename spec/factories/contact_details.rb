@@ -52,7 +52,6 @@ FactoryBot.define do
     sequence(:email) { |n| "EmailMyString+#{n}@example.com" }
     club { "TCUC" }
     club_contact { "Connie Cotter" }
-    organization_member_number { "00001" }
     emergency_name { "Jane Doe" }
     emergency_relationship { "SO" }
     emergency_attending { false }

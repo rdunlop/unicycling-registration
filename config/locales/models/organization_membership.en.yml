@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      organization_membership:
+        member_number: Unicycling Organization Membership Number
+        system_status: Membership Status
+    models:
+      organization_membership:
+        one: Organization Membership
+        other: Organization Memberships

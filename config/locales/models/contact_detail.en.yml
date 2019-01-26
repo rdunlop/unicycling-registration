@@ -22,8 +22,6 @@ en:
         phone: Phone
         responsible_adult_phone: Primary Phone
         responsible_adult_name: Name
-        organization_member_number: Unicycling Organization Membership Number
-        organization_membership_system_status: Membership Status
         zip: Zip
     models:
       contact_detail:

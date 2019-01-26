@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    attributes:
+      organization_membership:
+        member_number: Unicykel organsition medlems nummer
+        system_status: Medlems status

@@ -1,4 +1,5 @@
 - @registrant.build_contact_detail if @registrant.contact_detail.nil?
+- @registrant.create_organization_membership_record if @config.organization_membership_config?
 - @has_online_waiver = @config.online_waiver?
 - @has_rules = @config.accept_rules?
 - @other_registrant = (current_user.registrants.active - [@registrant]).last

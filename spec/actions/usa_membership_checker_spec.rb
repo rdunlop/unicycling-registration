@@ -1,14 +1,25 @@
 require 'spec_helper'
 
 describe UsaMembershipChecker do
-  subject(:subject) { described_class.new(first_name, last_name, birthday) }
+  subject(:subject) do
+    described_class.new(
+      first_name: first_name,
+      last_name: last_name,
+      birthdate: birthday,
+      manual_member_number: usa_member_number,
+      wildapricot_member_number: wildapricot_member_number
+    )
+  end
 
   let(:first_name) { "John" }
   let(:last_name) { "Smith" }
   let(:birthday) { Date.new(2000, 1, 1) }
+  let(:usa_member_number) { nil }
+  let(:wildapricot_member_number) { nil }
   let(:good_response) do
     [
       {
+        "Id" => "12345",
         "FirstName" => "John",
         "LastName" => "Smith",
         "MembershipEnabled" => true,
@@ -48,6 +59,7 @@ describe UsaMembershipChecker do
 
     it "is a current member" do
       expect(subject).to be_current_member
+      expect(subject.current_wildapricot_id).to eq("12345")
     end
   end
 
@@ -58,6 +70,7 @@ describe UsaMembershipChecker do
 
     it "is not a current member" do
       expect(subject).not_to be_current_member
+      expect(subject.current_wildapricot_id).to be_nil
     end
   end
 end

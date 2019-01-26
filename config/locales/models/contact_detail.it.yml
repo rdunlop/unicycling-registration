@@ -18,8 +18,6 @@ it:
         emergency_relationship: Relazione
         italian_fiscal_code: Numero fiscale (Obbligatorio per i partecipanti italiani)
         mobile: Cellulare
-        organization_member_number: Numero di membro dell'organizzazione monociclistica
-        organization_membership_system_status: Stato dell'associato
         phone: Telefono
         responsible_adult_name: Nome
         responsible_adult_phone: Numero di telefono principale

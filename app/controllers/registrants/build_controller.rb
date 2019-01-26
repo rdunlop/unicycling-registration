@@ -69,6 +69,7 @@ class Registrants::BuildController < ApplicationController
     copier = RegistrantCopier.new(params[:previous_registrant], params[:registrant][:registrant_type])
     @registrant = copier.registrant
     @contact_detail = copier.contact_detail
+    @organization_membership = copier.organization_membership
 
     @registrant.user = current_user
     authorize @registrant
@@ -78,6 +79,10 @@ class Registrants::BuildController < ApplicationController
       if @contact_detail
         @contact_detail.registrant = @registrant
         @contact_detail.save(validate: false) # the contact_detail may not be valid yet.
+      end
+      if @organization_membership
+        @organization_membership.registrant = @registrant
+        @organization_membership.save
       end
       session[:copy_from_previous_warnings] ||= []
       session[:copy_from_previous_warnings] << @registrant.id
@@ -168,10 +173,11 @@ class Registrants::BuildController < ApplicationController
      registrant_choices_attributes: %i[event_choice_id value id],
      registrant_event_sign_ups_attributes: %i[event_category_id signed_up event_id id],
      registrant_best_times_attributes: %i[source_location formatted_value event_id id],
+     organization_membership_attributes: %i[id manual_member_number],
      contact_detail_attributes: %i[id email
                                    birthplace italian_fiscal_code
                                    address city country_residence country_representing
-                                   mobile phone state_code zip club club_contact organization_member_number
+                                   mobile phone state_code zip club club_contact
                                    emergency_name emergency_relationship emergency_attending emergency_primary_phone emergency_other_phone
                                    responsible_adult_name responsible_adult_phone]]
   end

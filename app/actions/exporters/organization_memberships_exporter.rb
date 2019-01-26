@@ -6,7 +6,8 @@ class Exporters::OrganizationMembershipsExporter
   def headers
     [
       "Id",
-      "Organization Membership#",
+      "Manual Organization Membership#",
+      "System Organization Membership#",
       "First Name",
       "Last Name",
       "Birthday",
@@ -24,10 +25,11 @@ class Exporters::OrganizationMembershipsExporter
 
   def rows
     data = []
-    @registrants.includes(payment_details: [:payment]).each do |reg|
+    @registrants.includes(:organization_membership, payment_details: [:payment]).each do |reg|
       row = [
         reg.bib_number,
-        reg.contact_detail.organization_member_number,
+        reg.organization_membership_manual_member_number,
+        reg.organization_membership_system_member_number,
         reg.first_name,
         reg.last_name,
         reg.birthday,
@@ -39,7 +41,7 @@ class Exporters::OrganizationMembershipsExporter
         reg.contact_detail.phone,
         reg.contact_detail.email,
         reg.club,
-        reg.contact_detail.organization_membership_confirmed?
+        reg.organization_membership_confirmed?
       ]
       data << row
     end

@@ -1,0 +1,7 @@
+---
+fr:
+  activerecord:
+    attributes:
+      organization_membership:
+        member_number: Numéro d'adhérent fédéral
+        system_status: Statut de votre adhésion

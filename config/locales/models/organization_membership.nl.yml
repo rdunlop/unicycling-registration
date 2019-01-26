@@ -1,0 +1,7 @@
+---
+nl:
+  activerecord:
+    attributes:
+      organization_membership:
+        member_number: IUF lidnummer
+        system_status: Status van je lidmaatschap

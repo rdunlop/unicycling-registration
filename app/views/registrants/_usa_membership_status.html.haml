@@ -2,18 +2,20 @@
   .small-6.columns
     USA membership status
   .small-6.column.js--usa_member_status
-    = render "/registrants/usa_membership_badge", contact_detail: contact_detail
+    = render "/registrants/usa_membership_badge", organization_membership: organization_membership
     = link_to usa_membership_welcome_path, target: "_blank" do
       %span.help_bubble{ title: "More details" }
 
 .row.js--usa_member_status
-  .small-4.columns
+  .small-6.columns
     USA Details
-  .small-8.columns
-    = contact_detail.organization_membership_system_status
+  .small-6.columns
+    = organization_membership.member_number
+    %br
+    = organization_membership.system_status
 .row
   .small-12.columns
-    = link_to "Recheck USA Status", refresh_usa_status_registrant_path(contact_detail.registrant.bib_number), remote: true, method: :put, class: "js--usa_member_status_refresh"
+    = link_to "Recheck USA Status", refresh_usa_status_registrant_path(organization_membership.registrant.bib_number), remote: true, method: :put, class: "js--usa_member_status_refresh"
     .js--usa_member_refresh_notice.is--hidden
       Checking....
       %br

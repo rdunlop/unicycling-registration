@@ -5,10 +5,10 @@
     -# this shouldn't happen, as all "active" should include a contact_detail
     - next if reg.contact_detail.nil?
     %td
-      %span.member_number.js--toggle{ id: "membership_number_#{reg.bib_number}", data: { toggle_target: "#member_number_form_#{reg.bib_number}" } }= reg.contact_detail.organization_member_number.presence || "set number"
+      %span.member_number.js--toggle{ id: "membership_number_#{reg.bib_number}", data: { toggle_target: "#member_number_form_#{reg.bib_number}" } }= reg.organization_membership_member_number.presence || "set number"
       %span.is--hidden{ id: "member_number_form_#{reg.bib_number}" }
         = form_tag update_number_organization_membership_path(id: reg.id), method: :put, remote: true do
-          = text_field_tag :membership_number, reg.contact_detail.organization_member_number
+          = text_field_tag :membership_number, reg.organization_membership_system_member_number
           = submit_tag "Update Membership #", class: "button tiny"
     %td= reg.first_name
     %td= reg.last_name
@@ -22,13 +22,13 @@
       = reg.organization_membership_confirmed?
       - unless reg.organization_membership_confirmed?
         %br
-        = reg.contact_detail.try!(:organization_membership_system_status)
+        = reg.organization_membership_system_status
         - if @config.organization_membership_usa?
           = link_to "Refresh USA status", refresh_usa_status_organization_membership_path(id: reg.id), remote: true, method: :post
     %td
-      - if reg.contact_detail.organization_membership_system_confirmed?
+      - if reg.organization_membership_system_confirmed?
         = "Confirmed by System"
-      - elsif reg.contact_detail.organization_membership_manually_confirmed?
+      - elsif reg.organization_membership_manually_confirmed?
         = "Manually Confirmed"
         %br
         = link_to "Mark as unconfirmed", toggle_confirm_organization_membership_path(id: reg.id), method: :put, remote: true
