@@ -31,7 +31,7 @@ class OrganizationMembershipsController < ApplicationController
     om = @registrant.create_organization_membership_record
 
     if params[:membership_number]
-      om.update_attribute(:system_member_number, params[:membership_number])
+      om.update_attribute(:manual_member_number, params[:membership_number])
       flash[:notice] = "Updated Member Number"
     else
       flash[:alert] = "Unable to update member number"

@@ -2,13 +2,13 @@
 # WildApricot membership database
 class UsaMembershipChecker
   attr_reader :first_name, :last_name, :birthdate
-  attr_reader :legacy_usa_member_number, :wildapricot_member_number
+  attr_reader :manual_member_number, :wildapricot_member_number
 
-  def initialize(first_name:, last_name:, birthdate:, usa_member_number:, wildapricot_member_number:)
+  def initialize(first_name:, last_name:, birthdate:, manual_member_number:, wildapricot_member_number:)
     @first_name = first_name
     @last_name = last_name
     @birthdate = birthdate
-    @legacy_usa_member_number = usa_member_number
+    @manual_member_number = manual_member_number
     @wildapricot_member_number = wildapricot_member_number
   end
 
@@ -41,6 +41,10 @@ class UsaMembershipChecker
       if result.none?
         # Then search for usa via manual_member_number (if specified)
         result = search_contacts(filter_by_old_usa_membership_id)
+      end
+      if result.none?
+        # Search as if the manual_member_number is a wildapricot ID
+        result = search_contacts(filter_by_manual_id_as_wildapricot_id)
       end
 
       result
@@ -85,7 +89,13 @@ class UsaMembershipChecker
   end
 
   def filter_by_old_usa_membership_id
-    "'Old Member ID' eq '#{legacy_usa_member_number}'"
+    "'Old Member ID' eq '#{manual_member_number}'" \
+    " and 'LastName' eq '#{last_name}'"
+  end
+
+  def filter_by_manual_id_as_wildapricot_id
+    "'ID' eq '#{manual_member_number}' " \
+    " and 'LastName' eq '#{last_name}'"
   end
 
   def filter_by_wildapricot_id

@@ -6,7 +6,7 @@ describe UsaMembershipChecker do
       first_name: first_name,
       last_name: last_name,
       birthdate: birthday,
-      usa_member_number: usa_member_number,
+      manual_member_number: usa_member_number,
       wildapricot_member_number: wildapricot_member_number
     )
   end

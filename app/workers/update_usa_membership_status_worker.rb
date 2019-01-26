@@ -14,7 +14,7 @@ class UpdateUsaMembershipStatusWorker
       first_name: registrant.first_name,
       last_name: registrant.last_name,
       birthdate: registrant.birthday,
-      usa_member_number: organization_membership.manual_member_number,
+      manual_member_number: organization_membership.manual_member_number,
       wildapricot_member_number: organization_membership.system_member_number
     )
 
@@ -26,7 +26,7 @@ class UpdateUsaMembershipStatusWorker
       )
     else
       organization_membership.update(
-        system_confirmed: true,
+        system_confirmed: false,
         system_status: "Not Confirmed"
       )
     end
