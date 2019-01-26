@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  index_organization_memberships_on_registrant_id  (registrant_id)
+#  index_organization_memberships_on_registrant_id  (registrant_id) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot
