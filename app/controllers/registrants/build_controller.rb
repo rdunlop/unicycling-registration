@@ -74,6 +74,10 @@ class Registrants::BuildController < ApplicationController
     @registrant.user = current_user
     authorize @registrant
 
+    # If there's an organization_membership record, the USA checking will happen after
+    # that is created.
+    @registrant.skip_usa_membership_checking = true if @organization_membership
+
     @registrant.status = "base_details"
     if @registrant.save
       if @contact_detail

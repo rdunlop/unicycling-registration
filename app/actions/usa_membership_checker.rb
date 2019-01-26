@@ -83,9 +83,14 @@ class UsaMembershipChecker
   end
 
   def filter_by_name_bday
-    "'FirstName' eq '#{first_name}' " \
-    " and 'LastName' eq '#{last_name}' " \
-    " and 'Birth Date' eq '#{birthdate.strftime('%Y-%m-%d')}'"
+    basic_filter = "'FirstName' eq '#{first_name}' " \
+                   " and 'LastName' eq '#{last_name}' "
+    if birthdate.present?
+      # allow for spectator, which has no birthday.
+      basic_filter + " and 'Birth Date' eq '#{birthdate.strftime('%Y-%m-%d')}'"
+    else
+      basic_filter
+    end
   end
 
   def filter_by_old_usa_membership_id
