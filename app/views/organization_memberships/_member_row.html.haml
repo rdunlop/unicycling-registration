@@ -8,7 +8,7 @@
       %span.member_number.js--toggle{ id: "membership_number_#{reg.bib_number}", data: { toggle_target: "#member_number_form_#{reg.bib_number}" } }= reg.organization_membership_member_number.presence || "set number"
       %span.is--hidden{ id: "member_number_form_#{reg.bib_number}" }
         = form_tag update_number_organization_membership_path(id: reg.id), method: :put, remote: true do
-          = text_field_tag :membership_number, reg.organization_membership_system_member_number
+          = text_field_tag :membership_number, reg.organization_membership_manual_member_number
           = submit_tag "Update Membership #", class: "button tiny"
     %td= reg.first_name
     %td= reg.last_name
