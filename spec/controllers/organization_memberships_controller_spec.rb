@@ -65,7 +65,7 @@ describe OrganizationMembershipsController do
 
     it "saves the membership number" do
       put :update_number, params: { id: registrant.id, membership_number: new_member_number }, format: :js
-      expect(registrant.reload.organization_membership.system_member_number).to eq new_member_number
+      expect(registrant.reload.organization_membership.manual_member_number).to eq new_member_number
     end
   end
 

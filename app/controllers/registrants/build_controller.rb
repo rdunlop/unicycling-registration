@@ -173,7 +173,7 @@ class Registrants::BuildController < ApplicationController
      registrant_choices_attributes: %i[event_choice_id value id],
      registrant_event_sign_ups_attributes: %i[event_category_id signed_up event_id id],
      registrant_best_times_attributes: %i[source_location formatted_value event_id id],
-     organization_membership_attributes: %i[manual_member_number],
+     organization_membership_attributes: %i[id manual_member_number],
      contact_detail_attributes: %i[id email
                                    birthplace italian_fiscal_code
                                    address city country_residence country_representing
