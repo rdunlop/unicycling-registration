@@ -129,6 +129,7 @@ class PaymentDetail < ApplicationRecord
   end
 
   def registrant_must_have_valid_usa_membership
+    return if registrant && registrant.spectator?
     return unless EventConfiguration.singleton.organization_membership_usa?
 
     if registrant && !registrant.organization_membership_confirmed?
