@@ -580,7 +580,7 @@ GEM
     tilt (2.0.8)
     timeliness (0.3.8)
     timers (4.2.0)
-    tinymce-rails (4.9.3)
+    tinymce-rails (5.0.0)
       railties (>= 3.1.1)
     ttfunk (1.5.1)
     tzinfo (1.2.5)
