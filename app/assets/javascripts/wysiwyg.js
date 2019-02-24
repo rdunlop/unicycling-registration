@@ -3,7 +3,6 @@
 /* Don't have access to jquery */
 tinymce.init({
   selector: ".full_tinymce",
-  theme: "modern",
   plugins: [
     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
     "searchreplace wordcount visualblocks visualchars code fullscreen",
