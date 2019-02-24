@@ -23,7 +23,7 @@ describe LodgingRoomOption do
   let(:lodging_package) { FactoryBot.create(:lodging_package, lodging_room_type: lodging_room_type, lodging_room_option: lodging_room_option) }
   let!(:lodging_package_day) { FactoryBot.create(:lodging_package_day, lodging_package: lodging_package, lodging_day: lodging_day) }
   let(:lodging_day) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
-  let(:rei) { FactoryBot.build(:registrant_expense_item, line_item: lodging_package) }
+  let(:rei) { FactoryBot.create(:registrant_expense_item, line_item: lodging_package) }
 
   it "can create from factory" do
     expect(lodging_room_option.valid?).to eq(true)

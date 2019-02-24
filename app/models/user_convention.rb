@@ -12,7 +12,7 @@
 #
 
 class UserConvention < ApplicationRecord
-  validates :user_id, presence: true
+  validates :user, presence: true
   validates :subdomain, presence: true
 
   belongs_to :user

@@ -23,7 +23,7 @@ class HeatLaneJudgeNote < ApplicationRecord
   include FindsMatchingCompetitor
   include FindsBibNumberFromHeatLane
 
-  validates :competition_id, presence: true
+  validates :competition, presence: true
   validates :heat, :lane, :status, presence: true
 
   validates :status, inclusion: { in: TimeResult.status_values }

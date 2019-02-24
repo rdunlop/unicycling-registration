@@ -22,7 +22,7 @@ class HeatLaneResult < ApplicationRecord
   include TracksEnteredBy
   include FindsBibNumberFromHeatLane
 
-  validates :competition_id, :heat, :lane, :status, presence: true
+  validates :competition, :heat, :lane, :status, presence: true
   validates :minutes, :seconds, :thousands, presence: true
 
   validates :minutes, :seconds, :thousands, numericality: { greater_than_or_equal_to: 0 }

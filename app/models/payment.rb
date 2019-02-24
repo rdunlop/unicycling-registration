@@ -28,7 +28,7 @@ class Payment < ApplicationRecord
   scope :completed_or_offline, -> { where("completed = TRUE or offline_pending = TRUE") }
   scope :offline_pending, -> { where(offline_pending: true) }
 
-  validates :user_id, presence: true
+  validates :user, presence: true
   validate :transaction_id_or_note
   validates_associated :payment_details
 
@@ -39,7 +39,8 @@ class Payment < ApplicationRecord
   accepts_nested_attributes_for :payment_details, reject_if: proc { |attributes| attributes['registrant_id'].blank? }, allow_destroy: true
 
   before_validation :set_invoice_id
-  validates :invoice_id, presence: true, uniqueness: true
+  validates :invoice, presence: true
+  validates :invoice_id, uniqueness: true
 
   after_save :update_registrant_items
   after_save :touch_payment_details

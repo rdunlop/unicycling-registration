@@ -13,7 +13,7 @@
 #
 
 class StandardSkillRoutine < ApplicationRecord
-  validates :registrant_id, presence: true, uniqueness: true
+  validates :registrant, presence: true, uniqueness: true
 
   belongs_to :registrant
 

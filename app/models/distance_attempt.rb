@@ -26,7 +26,7 @@ class DistanceAttempt < ApplicationRecord
 
   belongs_to :judge
 
-  validates :judge_id,      presence: true
+  validates :judge,      presence: true
   validates :distance,      presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 1000 }
 
   validate :must_not_have_new_attempt_less_than_existing_attempt

@@ -27,7 +27,8 @@ class RegistrantEventSignUp < ApplicationRecord
   validates :signed_up, inclusion: { in: [true, false] } # because it's a boolean
   validate :category_chosen_when_signed_up
   validate :category_in_age_range
-  validates :event_id, presence: true, uniqueness: { scope: [:registrant_id] }
+  validates :event, presence: true
+  validates :event_id, uniqueness: { scope: [:registrant_id] }
 
   has_paper_trail meta: { registrant_id: :registrant_id }
 

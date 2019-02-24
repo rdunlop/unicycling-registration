@@ -34,8 +34,8 @@ class ImportResult < ApplicationRecord
   include FindsMatchingCompetitor
   include HoursFacade
 
-  validates :competition_id, presence: true
-  validates :user_id, :bib_number, presence: true
+  validates :competition, presence: true
+  validates :user, :bib_number, presence: true
   validate :results_for_competition
   validates :minutes, :seconds, :thousands, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 

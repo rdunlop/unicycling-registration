@@ -36,9 +36,10 @@ class Judge < ApplicationRecord
 
   has_many :competitors, -> { order "position" }, through: :competition
 
-  validates :competition_id, presence: true
-  validates :judge_type_id, presence: true, uniqueness: { scope: %i[competition_id user_id] }
-  validates :user_id, presence: true
+  validates :competition, presence: true
+  validates :judge_type, presence: true
+  validates :judge_type_id, uniqueness: { scope: %i[competition_id user_id] }
+  validates :user, presence: true
   validates :status, inclusion: { in: ["active", "removed"] }
   validate :judge_type_is_valid_for_competition
 

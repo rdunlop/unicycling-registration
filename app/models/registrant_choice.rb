@@ -17,7 +17,8 @@
 #
 
 class RegistrantChoice < ApplicationRecord
-  validates :event_choice_id, presence: true, uniqueness: { scope: [:registrant_id] }
+  validates :event_choice, presence: true
+  validates :event_choice_id, uniqueness: { scope: [:registrant_id] }
   validates :registrant, presence: true
 
   has_paper_trail meta: { registrant_id: :registrant_id }

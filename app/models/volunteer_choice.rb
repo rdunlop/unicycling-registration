@@ -19,7 +19,7 @@ class VolunteerChoice < ApplicationRecord
   belongs_to :volunteer_opportunity
   belongs_to :registrant, inverse_of: :volunteer_choices
 
-  validates :registrant_id, :volunteer_opportunity_id, presence: true
+  validates :registrant, :volunteer_opportunity, presence: true
   validates :registrant_id, uniqueness: { scope: [:volunteer_opportunity_id] }
 
   after_create :send_email_to_admins

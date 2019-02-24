@@ -47,7 +47,7 @@ class Event < ApplicationRecord
   acts_as_restful_list scope: :category
 
   validates :name, presence: true
-  validates :category_id, presence: true
+  validates :category, presence: true
 
   # include translations So that we can do Event.order(:name)
   default_scope { includes(:translations) }

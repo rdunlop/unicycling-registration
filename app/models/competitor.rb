@@ -62,7 +62,7 @@ class Competitor < ApplicationRecord
 
   accepts_nested_attributes_for :members, allow_destroy: true
 
-  validates :competition_id, presence: true
+  validates :competition, presence: true
   validates_associated :members
   validate :must_have_3_members_for_custom_name
   validates :tier_number, presence: true
