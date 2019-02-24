@@ -35,8 +35,6 @@ services:
       POSTGRES_USER: ubuntu
       POSTGRES_PASSWORD: password
       POSTGRES_DB: app_development
-    ports:
-      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     logging:

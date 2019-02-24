@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe DistanceAttempt do
   before do
-    @comp = FactoryBot.create(:competitor)
+    @comp = FactoryBot.create(:event_competitor, :with_high_jump_competition)
     @judge = FactoryBot.create(:judge)
   end
 

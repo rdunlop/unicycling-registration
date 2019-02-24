@@ -36,7 +36,7 @@ describe JudgesController do
   # EventsJudgeType. As you add validations to EventsJudgeType, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { judge_type_id: 1,
+    { judge_type_id: @judge_type.id,
       user_id: @user.id }
   end
 

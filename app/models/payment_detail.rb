@@ -25,7 +25,7 @@ class PaymentDetail < ApplicationRecord
   include CachedSetModel
   include HasDetailsDescription
 
-  validates :payment, :registrant_id, :line_item, presence: true
+  validates :payment, :registrant, :line_item, presence: true
   validate :registrant_must_be_valid
   validate :registrant_must_have_valid_usa_membership
 

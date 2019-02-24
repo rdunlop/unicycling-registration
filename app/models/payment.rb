@@ -28,7 +28,7 @@ class Payment < ApplicationRecord
   scope :completed_or_offline, -> { where("completed = TRUE or offline_pending = TRUE") }
   scope :offline_pending, -> { where(offline_pending: true) }
 
-  validates :user_id, presence: true
+  validates :user, presence: true
   validate :transaction_id_or_note
   validates_associated :payment_details
 

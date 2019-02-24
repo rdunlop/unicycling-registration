@@ -23,7 +23,7 @@ class StandardSkillScoreEntry < ApplicationRecord
   belongs_to :standard_skill_score, inverse_of: :standard_skill_score_entries, touch: true
 
   validates :standard_skill_score, presence: true
-  validates :standard_skill_routine_entry_id, presence: true
+  validates :standard_skill_routine_entry, presence: true
 
   validates :difficulty_devaluation_percent, presence: true, inclusion: { in: [0, 50, 100] }
   validates :wave, presence: true, numericality: { greater_than_or_equal_to: 0 }

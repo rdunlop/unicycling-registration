@@ -15,7 +15,7 @@
 #
 
 class RefundDetail < ApplicationRecord
-  validates :payment_detail_id, presence: true
+  validates :payment_detail, presence: true
 
   belongs_to :refund
   belongs_to :payment_detail, touch: true
