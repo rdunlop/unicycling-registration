@@ -115,6 +115,6 @@ describe StandardSkillScore do
     end
   end
 
-  it { is_expected.to validate_presence_of(:competitor_id) }
-  it { is_expected.to validate_presence_of(:judge_id) }
+  it { is_expected.to validate_presence_of(:competitor) }
+  it { is_expected.to validate_presence_of(:judge) }
 end
