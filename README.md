@@ -370,7 +370,6 @@ To do this:
 To seed the database (optional):
 1. Fill in your AWS credentials in `config/secrets.yml`
 1. Attach to the instance with `docker-compose exec app bash`, and run `bundle exec rake db:seed` to create seed data.
-1. Log in to /admin with credentials: admin@tablexi.com Testing1
 
 
 Setup the database
