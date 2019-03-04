@@ -589,7 +589,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.1)
     unicode_utils (1.4.0)
-    unicorn (5.4.1)
+    unicorn (5.5.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     uniform_notifier (1.12.1)
