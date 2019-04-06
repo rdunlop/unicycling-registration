@@ -23,6 +23,6 @@ class ExportJob < ApplicationJob
     end
     export.file = temp_file
     export.save!
-    ExportCompleteMailer.send_export(export.id, "Results")
+    ExportCompleteMailer.send_export(export.id, "Results").deliver_later
   end
 end
