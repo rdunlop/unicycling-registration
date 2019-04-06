@@ -10,7 +10,7 @@ class ExportPolicy < ApplicationPolicy
   end
 
   def show?
-    send_email?
+    create?
   end
 
   def download_registrants?

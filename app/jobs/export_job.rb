@@ -1,4 +1,13 @@
 class ExportJob < ApplicationJob
+  class FileIO < StringIO
+    def initialize(stream, filename)
+      super(stream)
+      @original_filename = filename
+    end
+
+    attr_reader :original_filename
+  end
+
   def perform(export_id)
     export = Export.find(export_id)
 
@@ -17,11 +26,7 @@ class ExportJob < ApplicationJob
     report = StringIO.new
     s.write report
 
-    temp_file = Tempfile.new("results", Rails.root.join('tmp'), encoding: "binary").tap do |f|
-      f.write(report.read)
-      f.close
-    end
-    export.file = temp_file
+    export.file = FileIO.new(report.read, "#{export.export_type}.xls")
     export.save!
     ExportCompleteMailer.send_export(export.id, "Results").deliver_later
   end
