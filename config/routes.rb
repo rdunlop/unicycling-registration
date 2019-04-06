@@ -91,6 +91,8 @@ Rails.application.routes.draw do
     end
 
     namespace :export do
+      get :download_file
+      post :send_email
       get :index
       get :download_payment_details
       get :download_all_payments, controller: "/export_registrants", action: "download_with_payment_details"

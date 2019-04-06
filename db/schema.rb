@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190126211224) do
+ActiveRecord::Schema.define(version: 20190406001805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -522,6 +522,15 @@ ActiveRecord::Schema.define(version: 20190126211224) do
     t.integer "cost_element_id"
     t.index ["cost_element_type", "cost_element_id"], name: "index_expense_items_on_cost_element_type_and_cost_element_id", unique: true
     t.index ["expense_group_id"], name: "index_expense_items_expense_group_id"
+  end
+
+  create_table "exports", force: :cascade do |t|
+    t.string "export_type", null: false
+    t.integer "exported_by_id", null: false
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exported_by_id"], name: "index_exports_on_exported_by_id"
   end
 
   create_table "external_results", id: :serial, force: :cascade do |t|

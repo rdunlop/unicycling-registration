@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  index_organization_memberships_on_registrant_id  (registrant_id) UNIQUE
+#  index_organization_memberships_on_registrant_id  (registrant_id)
 #
 
 require 'spec_helper'
