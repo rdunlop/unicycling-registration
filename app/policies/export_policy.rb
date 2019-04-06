@@ -30,6 +30,10 @@ class ExportPolicy < ApplicationPolicy
     user.has_role?(:export_payment_lists) || super_admin?
   end
 
+  def download_payment_details_by_category?
+    download_payment_details?
+  end
+
   def results?
     competition_admin? || super_admin?
   end

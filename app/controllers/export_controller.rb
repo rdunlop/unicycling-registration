@@ -35,6 +35,20 @@ class ExportController < ApplicationController
     output_spreadsheet(headers, data, ei.name)
   end
 
+  def download_payment_details_by_category
+    expense_group = ExpenseGroup.find(params[:data][:expense_group_id])
+
+    data = []
+    headers = nil
+    expense_group.expense_items.each do |ei|
+      exporter = Exporters::PaymentDetailsExporter.new(ei)
+      headers = exporter.headers
+      data += exporter.rows
+    end
+
+    output_spreadsheet(headers, data, expense_group.group_name)
+  end
+
   def results
     exporter = Exporters::ResultsExporter.new
     headers = exporter.headers
