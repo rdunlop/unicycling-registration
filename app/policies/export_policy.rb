@@ -3,13 +3,13 @@ class ExportPolicy < ApplicationPolicy
     download_payment_details? || results? || download_events?
   end
 
-  def send_email?
+  def create?
     return true if super_admin?
 
     record.user == user
   end
 
-  def download_file
+  def show?
     send_email?
   end
 
