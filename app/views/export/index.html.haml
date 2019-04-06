@@ -19,6 +19,7 @@
 
 - if policy(:export).results?
   = link_to "Download all results", export_results_path(format: :xls)
+  = link_to "(Download Via Email)", export_send_email_path, method: :post
   %br
 
 - if policy(:export).download_registrants?

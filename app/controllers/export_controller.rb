@@ -6,6 +6,10 @@ class ExportController < ApplicationController
 
   def index; end
 
+  def download_file
+    send_data export.file, filename: "#{export.type}.xls"
+  end
+
   def download_registrants
     exporter = Exporters::RegistrantExporter.new
     headers = exporter.headers
@@ -40,6 +44,15 @@ class ExportController < ApplicationController
     headers = exporter.headers
     data = exporter.rows
     output_spreadsheet(headers, data, "results")
+  end
+
+  def send_email
+    export = Export.create!(
+      exported_by: current_user,
+      export_type: "results"
+    )
+    ExportJob.perform_later(export.id)
+    redirect_back(fallback_location: export_index_path, notice: "Email processing....")
   end
 
   private
