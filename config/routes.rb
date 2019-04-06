@@ -90,7 +90,7 @@ Rails.application.routes.draw do
       resources :registration_costs, only: %i[index edit update]
     end
 
-    resources :export_reports, only: [:create, :show]
+    resources :export_reports, only: %i[create show]
 
     namespace :export do
       get :index
