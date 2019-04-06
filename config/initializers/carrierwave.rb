@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
       region: Rails.application.secrets.aws_region
     }
     config.aws_bucket = Rails.application.secrets.aws_bucket
-    config.aws_acl = 'public-read'
+    config.aws_acl = 'private'
 
     config.aws_attributes = {
       cache_control: 'max-age=315576000'
