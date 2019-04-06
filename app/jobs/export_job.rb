@@ -3,9 +3,9 @@ class ExportJob < ApplicationJob
     export = Export.find(export_id)
 
     exporter = case export.export_type
-    when "results"
-      Exporters::ResultsExporter.new
-    end
+               when "results"
+                 Exporters::ResultsExporter.new
+               end
 
     return unless exporter
 

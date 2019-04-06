@@ -5,6 +5,7 @@ class ExportPolicy < ApplicationPolicy
 
   def send_email?
     return true if super_admin?
+
     record.user == user
   end
 
