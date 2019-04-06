@@ -6,7 +6,7 @@ class ExportPolicy < ApplicationPolicy
   def create?
     return true if super_admin?
 
-    record.user == user
+    record.exported_by == user
   end
 
   def show?
@@ -28,6 +28,10 @@ class ExportPolicy < ApplicationPolicy
 
   def download_payment_details?
     user.has_role?(:export_payment_lists) || super_admin?
+  end
+
+  def download_payment_details_by_category?
+    download_payment_details?
   end
 
   def results?

@@ -12,6 +12,16 @@
         = f.button :submit, "Export Registrants who bought this item", :class => "button", data: { disable_with: false }
 
   %hr
+  = simple_form_for :data, :url => export_download_payment_details_by_category_path(:format => :xls), :method => :get do |f|
+    .row
+      .small-4.columns
+        %b Download Details on registrants who bought:
+      .small-4.columns
+        = f.select :expense_group_id, ExpenseGroup.visible.all.map { |eg| [eg, eg.id] }
+      .small-4.columns
+        = f.button :submit, "Export Registrants who bought this item (group)", :class => "button", data: { disable_with: false }
+
+  %hr
 
 - if policy(current_user).download_payments?
   = link_to "Download all Registrants and their paid payments", export_download_all_payments_path(:format => :xls)
