@@ -9,6 +9,10 @@ class ExportPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def download_file
+    send_email?
+  end
+
   def download_registrants?
     event_planner? || super_admin?
   end

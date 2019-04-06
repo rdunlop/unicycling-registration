@@ -90,9 +90,12 @@ Rails.application.routes.draw do
       resources :registration_costs, only: %i[index edit update]
     end
 
-    namespace :export do
+    resources :export_reports, only: [] do
       get :download_file
       post :send_email
+    end
+
+    namespace :export do
       get :index
       get :download_payment_details
       get :download_all_payments, controller: "/export_registrants", action: "download_with_payment_details"
