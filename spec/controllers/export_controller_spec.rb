@@ -52,4 +52,13 @@ describe ExportController do
       assert_equal "application/vnd.ms-excel", @response.content_type
     end
   end
+
+  describe "GET download_payment_details_by_category" do
+    let(:expense_item) { FactoryBot.create(:expense_item) }
+
+    it "returns much data" do
+      get :download_payment_details_by_category, format: 'xls', params: { data: { expense_group_id: expense_item.expense_group.id } }
+      assert_equal "application/vnd.ms-excel", @response.content_type
+    end
+  end
 end
