@@ -110,7 +110,7 @@ describe Payment do
   end
 
   it "saves associated details when the payment is saved" do
-    pay = FactoryBot.build(:payment)
+    pay = FactoryBot.create(:payment)
     pd = pay.payment_details.build
     pd.registrant = FactoryBot.create(:registrant)
     pd.amount = 100

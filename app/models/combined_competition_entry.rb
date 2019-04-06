@@ -32,8 +32,8 @@ class CombinedCompetitionEntry < ApplicationRecord
   belongs_to :combined_competition, touch: true
   belongs_to :competition
 
-  validates :combined_competition_id, :abbreviation, presence: true
-  validates :competition_id, presence: true
+  validates :combined_competition, :abbreviation, presence: true
+  validates :competition, presence: true
 
   validates :base_points, presence: true, if: :is_percentage_based?
   validates :distance, presence: true, if: :is_average_speed_based?

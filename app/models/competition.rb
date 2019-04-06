@@ -120,7 +120,7 @@ class Competition < ApplicationRecord
 
   validate :automatic_competitor_creation_only_with_one
 
-  validates :event_id, presence: true
+  validates :event, presence: true
   validate :published_only_when_locked
   validate :awarded_only_when_published
   validate :award_label_title_checks

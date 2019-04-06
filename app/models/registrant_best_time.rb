@@ -17,7 +17,8 @@
 #
 
 class RegistrantBestTime < ApplicationRecord
-  validates :event_id, presence: true, uniqueness: { scope: [:registrant_id] }
+  validates :event, presence: true
+  validates :event_id, uniqueness: { scope: [:registrant_id] }
   validates :registrant, :source_location, :value, presence: true
   validate :formatted_value_is_formatted
 

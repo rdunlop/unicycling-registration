@@ -21,8 +21,8 @@
 #
 
 class AwardLabel < ApplicationRecord
-  validates :registrant_id, presence: true
-  validates :user_id, presence: true
+  validates :registrant, presence: true
+  validates :user, presence: true
   validates :place, presence: true, numericality: { greater_than: 0 }
 
   belongs_to :user

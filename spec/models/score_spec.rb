@@ -71,6 +71,8 @@ describe Score do
 end
 
 describe Score do
+  let(:fake_competitor) { FactoryBot.build_stubbed(:event_competitor) }
+
   before do
     @judge = FactoryBot.create(:judge)
   end
@@ -91,7 +93,7 @@ describe Score do
     score.val_4 = 4.0
     expect(score.valid?).to eq(false)
     expect(score.total).to be_nil
-    score.competitor = FactoryBot.build_stubbed(:event_competitor)
+    score.competitor = fake_competitor
     expect(score.valid?).to eq(false)
     score.judge = @judge
     expect(score.valid?).to eq(true)
@@ -103,7 +105,7 @@ describe Score do
     score.val_2 = 2.0
     score.val_3 = 3.0
     score.val_4 = 4.0
-    score.competitor_id = 4
+    score.competitor = fake_competitor
     score.judge = @judge
     expect(score.valid?).to eq(true)
     score.val_1 = 11.0
@@ -118,7 +120,7 @@ describe Score do
       @score.val_2 = 2.0
       @score.val_3 = 3.0
       @score.val_4 = 4.0
-      @score.competitor_id = 4
+      @score.competitor = fake_competitor
       @score.judge = @judge
     end
 

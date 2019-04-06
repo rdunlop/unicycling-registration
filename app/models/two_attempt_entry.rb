@@ -28,8 +28,8 @@
 class TwoAttemptEntry < ApplicationRecord
   include FindsMatchingCompetitor
 
-  validates :competition_id, presence: true
-  validates :user_id, :bib_number, presence: true
+  validates :competition, presence: true
+  validates :user, :bib_number, presence: true
   validates :minutes_1, :seconds_1, :thousands_1, :number_of_penalties_1, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :minutes_2, :seconds_2, :thousands_2, :number_of_penalties_2, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 

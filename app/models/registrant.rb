@@ -127,7 +127,7 @@ class Registrant < ApplicationRecord
   # necessary for all registrant types
   before_validation :set_sorted_last_name
   validates :first_name, :last_name, :sorted_last_name, presence: true
-  validates :user_id, presence: true
+  validates :user, presence: true
 
   # necessary for comp/non-comp only (not spectators):
   with_options if: :comp_noncomp_past_step_1? do

@@ -3,6 +3,16 @@ class ExportPolicy < ApplicationPolicy
     download_payment_details? || results? || download_events?
   end
 
+  def create?
+    return true if super_admin?
+
+    record.user == user
+  end
+
+  def show?
+    create?
+  end
+
   def download_registrants?
     event_planner? || super_admin?
   end

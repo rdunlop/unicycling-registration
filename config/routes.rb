@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '422', to: 'errors#not_permitted'
   get '500', to: 'errors#internal_server_error'
 
-  scope "(:locale)" do
+  scope "(:locale)", defaults: { locale: "en" } do
     resources :registrant_group_types, only: [:index] do
       shallow do
         resources :registrant_groups do
@@ -89,6 +89,8 @@ Rails.application.routes.draw do
       resources :expense_items, only: %i[index edit update]
       resources :registration_costs, only: %i[index edit update]
     end
+
+    resources :export_reports, only: %i[create show]
 
     namespace :export do
       get :index

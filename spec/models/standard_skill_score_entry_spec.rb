@@ -67,7 +67,7 @@ describe StandardSkillScoreEntry do
 
   it { is_expected.to validate_inclusion_of(:difficulty_devaluation_percent).in_array([0, 50, 100]) }
   it { is_expected.to validate_presence_of(:standard_skill_score) }
-  it { is_expected.to validate_presence_of(:standard_skill_routine_entry_id) }
+  it { is_expected.to validate_presence_of(:standard_skill_routine_entry) }
   it { is_expected.to validate_presence_of(:wave) }
   it { is_expected.to validate_presence_of(:line) }
   it { is_expected.to validate_presence_of(:cross) }
