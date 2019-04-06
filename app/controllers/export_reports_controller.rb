@@ -18,6 +18,6 @@ class ExportReportsController < ApplicationController
   def show
     export = Export.find(params[:id])
     authorize export
-    send_data export.file, filename: "#{export.type}.xls"
+    redirect_to export.file.url
   end
 end
