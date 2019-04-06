@@ -6,7 +6,7 @@ class ExportPolicy < ApplicationPolicy
   def create?
     return true if super_admin?
 
-    record.user == user
+    record.exported_by == user
   end
 
   def show?
