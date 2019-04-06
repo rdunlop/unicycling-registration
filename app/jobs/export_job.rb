@@ -24,9 +24,10 @@ class ExportJob < ApplicationJob
     s = SpreadsheetCreator.new.create(headers, data)
 
     report = StringIO.new
+    report.binmode
     s.write report
 
-    export.file = FileIO.new(report.read, "#{export.export_type}.xls")
+    export.file = FileIO.new(report.string, "#{export.export_type}_#{Time.current.iso8601}.xls")
     export.save!
     ExportCompleteMailer.send_export(export.id, "Results").deliver_later
   end
