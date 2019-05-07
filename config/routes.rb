@@ -488,6 +488,8 @@ Rails.application.routes.draw do
         get :distances
       end
     end
+    resources :public_results, only: [:show]
+
     # get "results", to: "results#index"
     resource :feedback, only: %i[new create]
     resource :welcome, only: [], controller: "welcome" do

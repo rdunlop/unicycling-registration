@@ -49,7 +49,7 @@
             %td
               - if competition.published?
                 - competition.competition_results.active.each do |result|
-                  = link_to result.to_s, result.results_file_url
+                  = link_to result.to_s, public_result_path(result)
                   %br
               - else
                 - if competition.combined_competition

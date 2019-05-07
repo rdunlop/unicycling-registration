@@ -13,7 +13,7 @@
       - @competition_results.active.additional.each do |result|
         %tr
           %td
-            = link_to result.to_s, result.results_file_url
+            = link_to result.to_s, public_result_path(result)
           %td
             = link_to t("delete"), competition_competition_result_path(@competition, result), method: :delete, data: { confirm: t("are_you_sure") }
 
