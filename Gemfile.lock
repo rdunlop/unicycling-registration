@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 3fe2f93ab2d0f5d9c2b84e085f627cf469db72a1
+  revision: fb833e2eb96fc4ac3fd9cad679a0ff5ad2dedad6
   specs:
     globalize (5.2.0)
-      activemodel (>= 4.2, < 5.3)
-      activerecord (>= 4.2, < 5.3)
+      activemodel (>= 4.2, < 6.1)
+      activerecord (>= 4.2, < 6.1)
       request_store (~> 1.0)
 
 GIT
