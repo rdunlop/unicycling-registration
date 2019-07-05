@@ -12,7 +12,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def send_mass_email
-    Notifications.send_mass_email(email.serialize, addresses)
+    Notifications.send_mass_email(email.subject, email.body, addresses)
   end
 
   ######### ADMIN
@@ -48,7 +48,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def email
-    Email.new(body: "This is a mass \"e-mail\" body", subject: "I want to inform all of you")
+    Email.new(body: "<p>This is a mass <b>\"e-mail\"</b> body</p>", subject: "I want to inform all of you")
   end
 
   def addresses
