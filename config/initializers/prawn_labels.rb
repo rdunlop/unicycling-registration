@@ -15,10 +15,10 @@ Prawn::Labels.types = {
     "top_margin" => 38.23,
     "bottom_margin" => 38.23,
     "left_margin" => 32.23,
-    "right_margin" => 32.23,
+    "right_margin" => 26.23,
     "columns" => 4,
     "rows" => 6,
-    "column_gutter" => 28.152,
+    "column_gutter" => 32.152,
     "row_gutter" => 6.152
   },
   "Avery8293" => {
