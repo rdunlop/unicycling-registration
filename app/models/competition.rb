@@ -332,6 +332,12 @@ class Competition < ApplicationRecord
     ScoringClass.for(event_class, self)[:num_laps_enabled]
   end
 
+  def max_laps
+    Rails.cache.fetch("/competition/#{id}-#{updated_at}/max_laps") do
+      time_results.maximum(:number_of_laps)
+    end
+  end
+
   def uses_tiers?
     ScoringClass.for(event_class, self)[:tiers_enabled]
   end
