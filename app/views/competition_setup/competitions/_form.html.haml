@@ -45,7 +45,7 @@
 
   = f.input :num_members_per_competitor, collection: Competition.num_member_options, include_blank: true
 
-  .js--blockVisibleTarget{ data: { show: ["Longest Time"] } }
+  .js--blockVisibleTarget{ data: { show: ["Shortest Time", "Longest Time"] } }
     %b Penalties
     %p Is it possible to penalize a competitor "X" seconds for an infraction (like dismounting the unicycle)?
     = f.input :penalty_seconds
