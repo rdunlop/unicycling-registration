@@ -9,7 +9,10 @@ class MultiLapResultCalculator
     if competitor.has_result?
       return if competitor.best_time_in_thousands.zero?
 
-      TimeResultPresenter.from_thousands(competitor.best_time_in_thousands, data_entry_format: competitor.competition.data_entry_format).full_time.to_s + " (" + competitor.num_laps.to_s + " laps)"
+      result = TimeResultPresenter.from_thousands(competitor.best_time_in_thousands, data_entry_format: competitor.competition.data_entry_format).full_time.to_s
+      return result if competitor.num_laps == competitor.competition.max_laps
+
+      result + " (" + competitor.num_laps.to_s + " laps)"
     end
   end
 
