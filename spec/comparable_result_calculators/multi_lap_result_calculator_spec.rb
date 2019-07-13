@@ -65,8 +65,6 @@ describe MultiLapResultCalculator do
           expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 laps)")
         end
       end
-
-
     end
   end
 end
