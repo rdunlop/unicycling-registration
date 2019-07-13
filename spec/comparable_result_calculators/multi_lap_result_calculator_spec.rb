@@ -7,6 +7,7 @@ describe MultiLapResultCalculator do
 
   let(:competition) { FactoryBot.create(:timed_competition) }
   let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
+  let(:competitor2) { FactoryBot.create(:event_competitor, competition: competition) }
 
   let(:fast_competitor) { double(:competitor, best_time_in_thousands: 2.minutes, num_laps: 5, has_result?: true) }
   let(:faster_competitor) { double(:competitor, best_time_in_thousands: 1.minute, num_laps: 5, has_result?: true) }
@@ -51,8 +52,18 @@ describe MultiLapResultCalculator do
     describe "when there are results" do
       let!(:time_result) { FactoryBot.create(:time_result, competitor: competitor, minutes: 1, number_of_laps: 1) }
 
-      it "returns the time" do
-        expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 laps)")
+      context "when the result is equal to the highest number of laps in the competition" do
+        it "returns the time without laps" do
+          expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000")
+        end
+      end
+
+      context "when the result is less than the highest number of laps in the competition" do
+        let!(:higher_laps_time_result) { FactoryBot.create(:time_result, competitor: competitor2, minutes: 1, number_of_laps: 2) }
+
+        it "returns the time with laps" do
+          expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 laps)")
+        end
       end
     end
   end
