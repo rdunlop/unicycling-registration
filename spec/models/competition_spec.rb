@@ -30,6 +30,7 @@
 #  base_age_group_type_id                :integer
 #  score_ineligible_competitors          :boolean          default(FALSE), not null
 #  results_header                        :string
+#  hide_max_laps_count                   :boolean          default(FALSE), not null
 #
 # Indexes
 #

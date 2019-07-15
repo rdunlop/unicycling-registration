@@ -55,6 +55,8 @@ en:
         import_results_into_other_competition: |
           When importing results, if the registrant is not assigned to this competition, but assigned to
           another competition within the same event, this will import the results there, after approving.
+        hide_max_laps_count: |
+          Only show the # of laps if it is fewer than the leader.
       event_choice:
         tooltip: This will be presented when the user hovers over the label
         optional: Allows the user to choose not to enter data in this field
