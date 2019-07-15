@@ -349,7 +349,6 @@ GEM
       monetize (~> 1.9.0)
       money (~> 6.13.2)
       railties (>= 3.0)
-    multi_json (1.13.1)
     multipart-post (2.1.1)
     nested_form (0.3.2)
     net-http-persistent (3.0.1)
@@ -474,8 +473,7 @@ GEM
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
     rolify (5.2.0)
-    rollbar (2.20.2)
-      multi_json
+    rollbar (2.21.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
