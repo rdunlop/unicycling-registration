@@ -5,7 +5,8 @@ describe MultiLapResultCalculator do
     described_class.new.competitor_comparable_result(sub)
   end
 
-  let(:competition) { FactoryBot.create(:timed_competition) }
+  let(:hide_max_laps_count) { false }
+  let(:competition) { FactoryBot.create(:timed_competition, hide_max_laps_count: hide_max_laps_count) }
   let(:competitor) { FactoryBot.create(:event_competitor, competition: competition) }
   let(:competitor2) { FactoryBot.create(:event_competitor, competition: competition) }
 
@@ -53,8 +54,20 @@ describe MultiLapResultCalculator do
       let!(:time_result) { FactoryBot.create(:time_result, competitor: competitor, minutes: 1, number_of_laps: 1) }
 
       context "when the result is equal to the highest number of laps in the competition" do
-        it "returns the time without laps" do
-          expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000")
+        context "hide_max_laps_count = true" do
+          let(:hide_max_laps_count) { true }
+
+          it "returns the time without laps" do
+            expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000")
+          end
+        end
+
+        context "hide_max_laps_count = false" do
+          let(:hide_max_laps_count) { false }
+
+          it "returns the time with laps" do
+            expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 lap)")
+          end
         end
       end
 
@@ -62,7 +75,11 @@ describe MultiLapResultCalculator do
         let!(:higher_laps_time_result) { FactoryBot.create(:time_result, competitor: competitor2, minutes: 1, number_of_laps: 2) }
 
         it "returns the time with laps" do
-          expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 laps)")
+          expect(described_class.new.competitor_result(competitor.reload)).to eq("01:00.000 (1 lap)")
+        end
+
+        it "pluralizes the laps correctly" do
+          expect(described_class.new.competitor_result(competitor2.reload)).to eq("01:00.000 (2 laps)")
         end
       end
     end
