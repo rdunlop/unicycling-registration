@@ -2,8 +2,8 @@
 #
 # Table name: organization_memberships
 #
-#  id                   :bigint(8)        not null, primary key
-#  registrant_id        :bigint(8)
+#  id                   :bigint           not null, primary key
+#  registrant_id        :bigint
 #  manual_member_number :string
 #  system_member_number :string
 #  manually_confirmed   :boolean          default(FALSE), not null

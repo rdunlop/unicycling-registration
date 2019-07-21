@@ -2,7 +2,7 @@
 #
 # Table name: public.convention_series_members
 #
-#  id                   :bigint(8)        not null, primary key
+#  id                   :bigint           not null, primary key
 #  convention_series_id :integer          not null
 #  tenant_id            :integer          not null
 #  created_at           :datetime         not null
