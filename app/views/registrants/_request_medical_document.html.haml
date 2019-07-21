@@ -1,0 +1,6 @@
+%fieldset.data_block
+  %legend= t(".header")
+  = f.label :medical_document_url
+  = f.file_field :medical_document_url
+  - if f.object.medical_document.present?
+    = link_to "Medical Document", f.object.medical_document_url

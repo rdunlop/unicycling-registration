@@ -24,7 +24,7 @@
 #  registrant_type          :string           default("competitor")
 #  rules_accepted           :boolean          default(FALSE), not null
 #  online_waiver_acceptance :boolean          default(FALSE), not null
-#  medical_document_url     :string
+#  medical_document         :string
 #
 # Indexes
 #
@@ -155,6 +155,8 @@ class Registrant < ApplicationRecord
   # contact info
   validates_associated :contact_detail, if: :validated?
   validates_associated :registrant_best_times, if: :past_step_2?
+
+  mount_uploader :medical_document, PdfUploader
 
   # Organization Membership
   delegate :member_number, :system_member_number, :manual_member_number, :manually_confirmed?, :system_confirmed?, :system_status, to: :organization_membership, prefix: true, allow_nil: true

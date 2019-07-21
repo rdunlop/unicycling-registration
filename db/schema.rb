@@ -974,7 +974,7 @@ ActiveRecord::Schema.define(version: 20190721184858) do
     t.string "registrant_type", default: "competitor"
     t.boolean "rules_accepted", default: false, null: false
     t.boolean "online_waiver_acceptance", default: false, null: false
-    t.string "medical_document_url"
+    t.string "medical_document"
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true
     t.index ["deleted"], name: "index_registrants_deleted"
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type"
