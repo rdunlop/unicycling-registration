@@ -2,7 +2,7 @@
 #
 # Table name: exports
 #
-#  id             :bigint(8)        not null, primary key
+#  id             :bigint           not null, primary key
 #  export_type    :string           not null
 #  exported_by_id :integer          not null
 #  file           :string

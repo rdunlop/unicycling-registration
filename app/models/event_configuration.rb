@@ -53,6 +53,7 @@
 #  time_zone                                     :string           default("Central Time (US & Canada)")
 #  stripe_public_key                             :string
 #  stripe_secret_key                             :string
+#  require_medical_document                      :boolean          default(FALSE), not null
 #
 
 class EventConfiguration < ApplicationRecord

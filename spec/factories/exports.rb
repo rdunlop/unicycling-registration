@@ -5,3 +5,19 @@ FactoryBot.define do
     file { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'invalid_sample_wave_assignments.xlsx'), 'text/plain') }
   end
 end
+
+# == Schema Information
+#
+# Table name: exports
+#
+#  id             :bigint           not null, primary key
+#  export_type    :string           not null
+#  exported_by_id :integer          not null
+#  file           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+# Indexes
+#
+#  index_exports_on_exported_by_id  (exported_by_id)
+#

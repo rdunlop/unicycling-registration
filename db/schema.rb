@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190715184450) do
+ActiveRecord::Schema.define(version: 20190721184858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,6 +423,7 @@ ActiveRecord::Schema.define(version: 20190715184450) do
     t.string "time_zone", default: "Central Time (US & Canada)"
     t.string "stripe_public_key"
     t.string "stripe_secret_key"
+    t.boolean "require_medical_document", default: false, null: false
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|
@@ -973,6 +974,7 @@ ActiveRecord::Schema.define(version: 20190715184450) do
     t.string "registrant_type", default: "competitor"
     t.boolean "rules_accepted", default: false, null: false
     t.boolean "online_waiver_acceptance", default: false, null: false
+    t.string "medical_document_url"
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true
     t.index ["deleted"], name: "index_registrants_deleted"
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type"
