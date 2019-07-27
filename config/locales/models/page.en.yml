@@ -5,6 +5,7 @@ en:
       page:
         slug: "Slug (url)"
         title: Title
+        visible: Visible
         position: Position
         parent_page_id: Parent Page
         body: Contents

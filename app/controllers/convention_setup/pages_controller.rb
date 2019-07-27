@@ -67,7 +67,7 @@ class ConventionSetup::PagesController < ConventionSetup::BaseConventionSetupCon
   end
 
   def page_params
-    params.require(:page).permit(:slug, :title, :body, :position, :parent_page_id,
+    params.require(:page).permit(:slug, :title, :visible, :body, :position, :parent_page_id,
                                  translations_attributes: %i[id locale title body])
   end
 end
