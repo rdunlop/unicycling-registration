@@ -30,8 +30,8 @@ class UpdateUsaMembershipStatusWorker
         system_status: "Not Confirmed"
       )
     end
-  rescue JSON::ParserError => ex
-    raise "Error (#{ex}) parsing response from USA database for #{request}"
+  rescue JSON::ParserError => e
+    raise "Error (#{e}) parsing response from USA database for #{request}"
   end
 
   def event_is_usa?

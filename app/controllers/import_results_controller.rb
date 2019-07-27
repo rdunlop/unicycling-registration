@@ -192,8 +192,8 @@ class ImportResultsController < ApplicationController
         end
         @import_results.destroy_all
       end
-    rescue Exception => ex
-      errors = ex
+    rescue Exception => e
+      errors = e
     end
 
     if errors

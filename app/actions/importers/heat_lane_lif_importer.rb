@@ -30,8 +30,8 @@ class Importers::HeatLaneLifImporter < Importers::CompetitionDataImporter
           end
         end
       end
-    rescue ActiveRecord::RecordInvalid => invalid
-      @errors << invalid.message
+    rescue ActiveRecord::RecordInvalid => e
+      @errors << e.message
       return false
     end
     true

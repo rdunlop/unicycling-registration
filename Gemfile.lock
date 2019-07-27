@@ -293,7 +293,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     ice_nine (0.11.2)
-    jaro_winkler (1.5.2)
+    jaro_winkler (1.5.3)
     jc-validates_timeliness (3.1.1)
       timeliness (~> 0.3.7)
     jmespath (1.4.0)
@@ -379,7 +379,6 @@ GEM
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    powerpack (0.1.2)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -499,18 +498,20 @@ GEM
     rspec-support (3.8.0)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (0.61.1)
+    rubocop (0.73.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.5, != 2.5.1.1)
-      powerpack (~> 0.1)
+      parser (>= 2.6)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.4.0)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-rails (2.2.1)
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
     rubocop-rspec (1.33.0)
       rubocop (>= 0.60.0)
     ruby-ole (1.2.12.2)
-    ruby-progressbar (1.10.0)
+    ruby-progressbar (1.10.1)
     ruby_parser (3.13.1)
       sexp_processor (~> 4.9)
     rubyzip (1.2.3)
@@ -584,7 +585,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.4.1)
+    unicode-display_width (1.6.0)
     unicode_utils (1.4.0)
     unicorn (5.5.1)
       kgio (~> 2.6)
@@ -687,6 +688,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop
+  rubocop-rails
   rubocop-rspec
   rubyzip
   sass-rails

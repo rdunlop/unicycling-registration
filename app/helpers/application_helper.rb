@@ -17,8 +17,8 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def load_config_object_and_i18n
-    @config = EventConfiguration.singleton
-    Time.zone = @config&.time_zone || "Central Time (US & Canada)"
+    @config = EventConfiguration.singleton # rubocop:disable Rails/HelperInstanceVariable
+    Time.zone = @config&.time_zone || "Central Time (US & Canada)" # rubocop:disable Rails/HelperInstanceVariable
     set_fallbacks
   end
 
@@ -27,7 +27,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def current_config_available_locales
-    EventConfiguration.all_available_languages & @config.enabled_locales
+    EventConfiguration.all_available_languages & @config.enabled_locales # rubocop:disable Rails/HelperInstanceVariable
   end
 
   # called by load_config_object_and_i18n
