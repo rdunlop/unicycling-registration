@@ -16,10 +16,14 @@
             %li= @registrant.errors.full_message(attribute, error_message )
 
   .data_block
-    - if VolunteerOpportunity.any?
-      = render partial: "/registrants/volunteer_choices", locals: {f: f}
-    - else
+    - case @config.volunteer_option
+    - when "choice"
+      - if VolunteerOpportunity.any?
+        = render partial: "/registrants/volunteer_choices", locals: {f: f}
+    - when "generic"
       = f.input :volunteer, label: t(".i_am_interested_in_volunteering")
       = t(".i_accept_to_be_contacted")
+    - when "info_page"
+      = render "/pages/embedded_page", page: @config.volunteer_option_page
 
   = render partial: "/registrants/form_actions", locals: {f: f}

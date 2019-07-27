@@ -143,13 +143,14 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
   def registration_questions_params
     params.require(:event_configuration).permit(:request_address, :request_emergency_contact,
                                                 :request_responsible_adult,
-                                                :require_medical_document,
+                                                :require_medical_certificate,
+                                                :medical_certificate_info_page_id,
                                                 :standard_skill, :representation_type,
                                                 :registrants_should_specify_default_wheel_size)
   end
 
   def volunteers_params
-    params.require(:event_configuration).permit(:volunteer_option)
+    params.require(:event_configuration).permit(:volunteer_option, :volunteer_option_page_id)
   end
 
   def advanced_settings_params

@@ -37,7 +37,7 @@ en:
         request_address: Request Address
         request_emergency_contact: Request Emergency Contact
         request_responsible_adult: Request Responsible Adult
-        require_medical_document: Request Medical Document
+        require_medical_certificate: Request Medical Certificate
         registrants_should_specify_default_wheel_size: Registrants should specify default wheel size
         comp_noncomp_url: "Comp/Non-Comp Explanation"
         artistic_score_elimination_mode_naucc: "Small Group"

@@ -8,6 +8,7 @@
 #  updated_at     :datetime
 #  position       :integer
 #  parent_page_id :integer
+#  visible        :boolean          default(TRUE), not null
 #
 # Indexes
 #

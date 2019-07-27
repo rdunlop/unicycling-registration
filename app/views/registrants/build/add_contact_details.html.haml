@@ -3,7 +3,7 @@
 - has_online_waiver = @config.online_waiver?
 - has_rules = @config.accept_rules?
 - other_registrant = (current_user.registrants.active - [@registrant]).last
-- request_medical_document = @config.require_medical_document?
+- request_medical_certificate = @config.require_medical_certificate?
 - if session[:copy_from_previous_warnings] && session[:copy_from_previous_warnings].include?(@registrant.id)
   - flash.now[:notice] = "We copied the information from a  previous convention, please confirm these details"
   - session[:copy_from_previous_warnings].delete(@registrant.id)
@@ -22,8 +22,8 @@
     %br
     .data_block{:style => "margin-top:20px;"}
       = render :partial => "/registrants/rules_acceptance", :locals => {:f => f}
-  - if request_medical_document
+  - if request_medical_certificate
     %br
     .data_block{:style => "margin-top:20px;"}
-      = render :partial => "/registrants/request_medical_document", :locals => {:f => f}
+      = render :partial => "/registrants/request_medical_certificate", :locals => {:f => f}
   = render partial: "/registrants/form_actions", locals: {f: f}

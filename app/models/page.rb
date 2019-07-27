@@ -8,6 +8,7 @@
 #  updated_at     :datetime
 #  position       :integer
 #  parent_page_id :integer
+#  visible        :boolean          default(TRUE), not null
 #
 # Indexes
 #
@@ -32,12 +33,14 @@ class Page < ApplicationRecord
 
   SPECIAL_SLUGS = ['home', 'privacy-policy'].freeze
 
+  scope :visible, -> { where(visible: true) }
+
   def self.ordinary
-    where.not(slug: SPECIAL_SLUGS)
+    visible.where.not(slug: SPECIAL_SLUGS)
   end
 
   def self.parent_or_single
-    where(parent_page_id: nil)
+    visible.where(parent_page_id: nil)
   end
 
   def self.ordered

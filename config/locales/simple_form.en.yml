@@ -106,7 +106,7 @@ en:
         request_emergency_contact: Require each registrant to enter an emergency contact
         request_responsible_adult: Request each minor (under 18) registrant to enter a Responsible Adult
         registrants_should_specify_default_wheel_size: Do we need to ask registrants <= 10 years old for their default wheel size (usually for Track Events).
-        require_medical_document: Request a medical document be uploaded by each registrant, to show that their doctor has given them the OK to participate.
+        require_medical_certificate: Request a medical certificate be uploaded by each registrant, to show that their doctor has given them the OK to participate.
       event:
         accepts_music_uploads: Check this box if each competitor may choose music for their competition
         accepts_wheel_size_override: Setting this option presents children 10-and-younger with the ability to specify a wheel size override.
