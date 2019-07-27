@@ -69,8 +69,8 @@ class PaymentAdjustmentsController < ApplicationController
           payment.save!
         end
         flash.now[:notice] = "Exchanged #{old_item} for #{new_item}"
-      rescue Exception => ex
-        flash.now[:alert] = "Error creating exchange #{ex}"
+      rescue Exception => e
+        flash.now[:alert] = "Error creating exchange #{e}"
       end
     else
       flash.now[:alert] = "Must fill in all fields"

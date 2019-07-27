@@ -64,8 +64,8 @@ class HeatReviewController < ApplicationController
           hlr.import!
         end
       end
-    rescue Exception => ex
-      errors = ex
+    rescue Exception => e
+      errors = e
     end
 
     if errors

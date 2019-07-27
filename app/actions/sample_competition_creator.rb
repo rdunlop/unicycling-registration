@@ -31,8 +31,8 @@ class SampleCompetitionCreator
         award_title_name: name
       )
     end
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors = invalid.to_s
+  rescue ActiveRecord::RecordInvalid => e
+    @errors = e.to_s
   end
 
   # return a list of errors, if any occurred

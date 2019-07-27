@@ -142,8 +142,8 @@ class TwoAttemptEntriesController < ApplicationController
         end
         @two_attempt_entries.destroy_all
       end
-    rescue Exception => ex
-      errors = ex
+    rescue Exception => e
+      errors = e
     end
 
     if errors

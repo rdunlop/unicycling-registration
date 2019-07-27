@@ -24,8 +24,8 @@ class Importers::TierUpdater < Importers::CompetitionDataImporter
           self.num_rows_processed += 1
         end
       end
-    rescue ActiveRecord::RecordInvalid, RuntimeError => invalid
-      @errors << "Error #{invalid.message}"
+    rescue ActiveRecord::RecordInvalid, RuntimeError => e
+      @errors << "Error #{e.message}"
       return false
     end
   end
