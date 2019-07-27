@@ -89,7 +89,8 @@ class EventConfiguration < ApplicationRecord
   VOLUNTEER_OPTIONS = [
     "none",
     "generic",
-    "choice"
+    "choice",
+    "info_page"
   ].freeze
 
   validates :currency_code, inclusion: { in: currency_codes }, allow_nil: true
@@ -99,6 +100,12 @@ class EventConfiguration < ApplicationRecord
   mount_uploader :waiver_file_name, PdfUploader
 
   validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
+  validates :volunteer_option_page_id, presence: true, if: -> { volunteer_option == "info_page" }
+  validates :volunteer_option_page_id, absence: true, unless: -> { volunteer_option == "info_page" }
+  belongs_to :volunteer_option_page, class_name: "Page"
+
+  belongs_to :medical_certificate_info_page, class_name: "Page"
+
   validates :representation_type, inclusion: { in: RepresentationType::TYPES }
 
   validates :standard_skill, inclusion: { in: [true, false] }

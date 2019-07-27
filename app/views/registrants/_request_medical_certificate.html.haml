@@ -1,5 +1,7 @@
 %fieldset.data_block
   %legend= t(".header")
+  - if @config.medical_certificate_info_page.present?
+    = render "/pages/embedded_page", page: @config.medical_certificate_info_page
   = f.label :medical_certificate_url
   = f.file_field :medical_certificate_url
   - if f.object.medical_certificate.present?

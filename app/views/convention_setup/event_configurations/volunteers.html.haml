@@ -9,5 +9,6 @@
   %fieldset.form__fieldset
 
     = f.input :volunteer_option, collection: EventConfiguration::VOLUNTEER_OPTIONS, include_blank: false
+    = f.input :volunteer_option_page_id, collection: Page.all
 
     = f.button :submit
