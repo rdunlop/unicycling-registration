@@ -55,8 +55,8 @@ class SampleData::RegistrantsController < SampleData::BaseController
     end
     flash[:notice] = "#{num_registrants} Sample Registrants Created (#{resu_errors} event sign up errors)"
     redirect_to sample_data_registrants_path
-  rescue ActiveRecord::RecordInvalid => invalid
-    flash[:alert] = "Error creating record: #{invalid}"
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:alert] = "Error creating record: #{e}"
     redirect_to sample_data_registrants_path
   end
 end

@@ -15,6 +15,7 @@
     %tr
       %th= Page.human_attribute_name(:slug)
       %th= Page.human_attribute_name(:title)
+      %th= Page.human_attribute_name(:visible)
       %th
       %th
       %th
@@ -23,6 +24,7 @@
       %tr
         %td= page.slug
         %td= page.title
+        %td= page.visible?
         %td= link_to t("show"), convention_setup_page_path(page)
         %td= link_to t("edit"), edit_convention_setup_page_path(page)
         %td= link_to t("delete"), [:convention_setup, page], method: :delete, data: { confirm: t("are_you_sure") }

@@ -10,7 +10,7 @@ end
 #
 # Table name: lodgings
 #
-#  id          :bigint(8)        not null, primary key
+#  id          :bigint           not null, primary key
 #  position    :integer
 #  name        :string           not null
 #  description :text

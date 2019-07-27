@@ -6,8 +6,9 @@
     .small-4.columns= f.input :slug
     .small-2.columns= f.input :position
   .row
-    .small-4.columns.last
+    .small-4.columns
       = f.input :parent_page_id, collection: Page.ordinary.parent_or_single
+    .small-4.columns.last= f.input :visible
   .row
     .small-12.columns
       = render "shared/wysiwyg"

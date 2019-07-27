@@ -47,9 +47,9 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
           if build_and_save_imported_result(row_hash, @user)
             self.num_rows_processed += 1
           end
-        rescue ActiveRecord::RecordInvalid => invalid
-          invalid.record.errors.full_messages.each do |error_message|
-            @errors << "#{invalid.record}: #{error_message}"
+        rescue ActiveRecord::RecordInvalid => e
+          e.record.errors.full_messages.each do |error_message|
+            @errors << "#{e.record}: #{error_message}"
           end
         end
       end

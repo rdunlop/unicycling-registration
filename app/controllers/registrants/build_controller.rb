@@ -173,6 +173,7 @@ class Registrants::BuildController < ApplicationController
   def attributes
     [:first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
      :online_waiver_signature, :online_waiver_acceptance, :wheel_size_id, :rules_accepted,
+     :medical_certificate,
      volunteer_opportunity_ids: [],
      registrant_choices_attributes: %i[event_choice_id value id],
      registrant_event_sign_ups_attributes: %i[event_category_id signed_up event_id id],
@@ -187,6 +188,6 @@ class Registrants::BuildController < ApplicationController
   end
 
   def registrant_params
-    params.require(:registrant).permit(attributes)
+    params.fetch(:registrant, {}).permit(attributes)
   end
 end

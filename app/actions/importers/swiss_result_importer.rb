@@ -27,8 +27,8 @@ class Importers::SwissResultImporter < Importers::CompetitionDataImporter
           self.num_rows_processed += 1
         end
       end
-    rescue ActiveRecord::RecordInvalid => invalid
-      @errors << "#{invalid.message} -> current row: #{current_row}"
+    rescue ActiveRecord::RecordInvalid => e
+      @errors << "#{e.message} -> current row: #{current_row}"
       return false
     end
 

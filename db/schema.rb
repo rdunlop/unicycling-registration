@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190406001805) do
+ActiveRecord::Schema.define(version: 20190727154033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 20190406001805) do
     t.integer "base_age_group_type_id"
     t.boolean "score_ineligible_competitors", default: false, null: false
     t.string "results_header"
+    t.boolean "hide_max_laps_count", default: false, null: false
     t.index ["base_age_group_type_id"], name: "index_competitions_on_base_age_group_type_id"
     t.index ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true
     t.index ["event_id"], name: "index_competitions_event_id"
@@ -422,6 +423,9 @@ ActiveRecord::Schema.define(version: 20190406001805) do
     t.string "time_zone", default: "Central Time (US & Canada)"
     t.string "stripe_public_key"
     t.string "stripe_secret_key"
+    t.boolean "require_medical_certificate", default: false, null: false
+    t.integer "medical_certificate_info_page_id"
+    t.integer "volunteer_option_page_id"
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|
@@ -775,6 +779,7 @@ ActiveRecord::Schema.define(version: 20190406001805) do
     t.datetime "updated_at"
     t.integer "position"
     t.integer "parent_page_id"
+    t.boolean "visible", default: true, null: false
     t.index ["parent_page_id", "position"], name: "index_pages_on_parent_page_id_and_position"
     t.index ["position"], name: "index_pages_on_position"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
@@ -972,6 +977,7 @@ ActiveRecord::Schema.define(version: 20190406001805) do
     t.string "registrant_type", default: "competitor"
     t.boolean "rules_accepted", default: false, null: false
     t.boolean "online_waiver_acceptance", default: false, null: false
+    t.string "medical_certificate"
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true
     t.index ["deleted"], name: "index_registrants_deleted"
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type"

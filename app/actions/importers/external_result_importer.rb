@@ -18,8 +18,8 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
         end
       end
     end
-  rescue ActiveRecord::RecordInvalid => invalid
-    @errors << invalid.message
+  rescue ActiveRecord::RecordInvalid => e
+    @errors << e.message
     false
   end
 

@@ -68,9 +68,9 @@ class CompetitorsController < ApplicationController
           msg = "Created #{regs.count} Competitors"
         end
         format.html { redirect_to competition_competitors_path(@competition), notice: msg }
-      rescue Exception => ex
+      rescue Exception => e
         index
-        flash.now[:alert] = "Error adding Registrants (0 added) #{ex}"
+        flash.now[:alert] = "Error adding Registrants (0 added) #{e}"
         format.html { render "index" }
       end
     end
@@ -91,9 +91,9 @@ class CompetitorsController < ApplicationController
       begin
         msg = @competition.create_competitors_from_registrants(Registrant.competitor)
         format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
-      rescue Exception => ex
+      rescue Exception => e
         new
-        flash.now[:alert] = "Error adding Registrants. #{ex}"
+        flash.now[:alert] = "Error adding Registrants. #{e}"
         format.html { render "new" }
       end
     end

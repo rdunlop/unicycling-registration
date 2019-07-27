@@ -9,7 +9,7 @@ end
 #
 # Table name: lodging_package_days
 #
-#  id                 :bigint(8)        not null, primary key
+#  id                 :bigint           not null, primary key
 #  lodging_package_id :integer          not null
 #  lodging_day_id     :integer          not null
 #  created_at         :datetime         not null

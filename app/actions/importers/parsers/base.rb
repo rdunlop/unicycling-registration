@@ -10,8 +10,8 @@ class Importers::Parsers::Base
   # read the file contents
   def file_contents
     @file_contents ||= extract_file
-  rescue CSV::MalformedCSVError => error
-    @errors << "Unable to read file. Is it it plain-text file? (#{error.message})"
+  rescue CSV::MalformedCSVError => e
+    @errors << "Unable to read file. Is it it plain-text file? (#{e.message})"
     false
   end
 

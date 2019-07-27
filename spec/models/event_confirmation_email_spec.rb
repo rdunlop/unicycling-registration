@@ -18,7 +18,7 @@ end
 #
 # Table name: event_confirmation_emails
 #
-#  id               :bigint(8)        not null, primary key
+#  id               :bigint           not null, primary key
 #  sent_by_id       :integer
 #  reply_to_address :string
 #  subject          :string

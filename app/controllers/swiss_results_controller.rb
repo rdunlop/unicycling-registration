@@ -52,8 +52,8 @@ class SwissResultsController < ApplicationController
           time_result.save!
         end
       end
-    rescue StandardError => ex
-      errors = ex
+    rescue StandardError => e
+      errors = e
     end
 
     if errors
