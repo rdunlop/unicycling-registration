@@ -2,7 +2,7 @@
   %legend= t(".header")
   - if @config.medical_certificate_info_page.present?
     = render "/pages/embedded_page", page: @config.medical_certificate_info_page
-  = f.label :medical_certificate_url
-  = f.file_field :medical_certificate_url
+  = f.label :medical_certificate
+  = f.file_field :medical_certificate
   - if f.object.medical_certificate.present?
     = link_to "Medical Certificate", f.object.medical_certificate_url
