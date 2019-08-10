@@ -4,8 +4,8 @@ en:
     attributes:
       registrant_best_time:
         source_location: Convention Name
-        formatted_value: Best Time
+        formatted_value: Best Time or Distance
     models:
       registrant_best_time:
-        one: Registrant Best Time
-        other: Registrant Best Times
+        one: Registrant Best Time or Distance
+        other: Registrant Best Times or Distances
