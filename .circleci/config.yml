@@ -1,6 +1,8 @@
-version: 2
-references:
-  default_job_config: &default_job_config
+version: 2.1
+orbs:
+  tablexi: tablexi/standard@0.0.7
+executors:
+  my_executor:
     # The working directory is important, so that we
     # install/cache everything relative to that location
     working_directory: ~/tmp
@@ -20,7 +22,7 @@ references:
           POSTGRES_PASSWORD: password
 jobs:
   build:
-    <<: *default_job_config
+    executor: my_executor
     steps:
       - checkout
 
@@ -46,23 +48,10 @@ jobs:
           root: .
           paths:
             - .
-  rubocop:
-    <<: *default_job_config
-    steps:
-      - attach_workspace:
-          at: ~/tmp
-      - run: bundle exec rubocop --config .rubocop.yml
-
-  bundle_audit:
-    <<: *default_job_config
-    steps:
-      - attach_workspace:
-          at: ~/tmp
-      - run: bundle exec bundle-audit check --ignore CVE-2018-1000544
 
   rspec:
     parallelism: 4
-    <<: *default_job_config
+    executor: my_executor
     steps:
       - attach_workspace:
           at: ~/tmp
@@ -90,23 +79,8 @@ jobs:
       - store_test_results:
           path: test_results
 
-  check_db_schema:
-    <<: *default_job_config
-    steps:
-      - attach_workspace:
-          at: ~/tmp
-
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 2m
-
-      # # check to ensure that we can migrate from scratch
-      - run: bundle exec rake db:drop db:create db:migrate RAILS_ENV=test
-      # # check that the schema.rb is the same result
-      - run: git diff --exit-code db/schema.rb
-
   release_stage:
-    <<: *default_job_config
+    executor: my_executor
     steps:
       - attach_workspace:
           at: ~/tmp
@@ -114,7 +88,7 @@ jobs:
       - run: bundle exec cap stage deploy
 
   release_prod:
-    <<: *default_job_config
+    executor: my_executor
     steps:
       - attach_workspace:
           at: ~/tmp
@@ -129,21 +103,24 @@ workflows:
       - rspec:
           requires:
             - build
-      - rubocop:
+      - tablexi/rubocop:
+          executor: my_executor
           requires:
             - build
-      - bundle_audit:
+      - tablexi/bundle_audit:
+          executor: my_executor
           requires:
             - build
-      - check_db_schema:
+      - tablexi/check_db_schema:
+          executor: my_executor
           requires:
             - build
       - release_stage:
           requires:
             - rspec
-            - rubocop
-            - bundle_audit
-            - check_db_schema
+            - tablexi/rubocop
+            - tablexi/bundle_audit
+            - tablexi/check_db_schema
           filters:
             branches:
               only:
@@ -151,9 +128,9 @@ workflows:
       - release_prod:
           requires:
             - rspec
-            - rubocop
-            - bundle_audit
-            - check_db_schema
+            - tablexi/rubocop
+            - tablexi/bundle_audit
+            - tablexi/check_db_schema
           filters:
             branches:
               only:
