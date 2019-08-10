@@ -9,7 +9,7 @@ describe DirectorEmailsController do
   describe "GET new" do
     it "can view the page" do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

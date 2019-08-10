@@ -23,7 +23,7 @@ describe PaymentAdjustmentsController do
   describe "GET new" do
     it "Renders" do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -29,14 +29,14 @@ describe TenantsController do
     end
 
     it "loads page" do
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "new" do
     it "loads page" do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

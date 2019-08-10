@@ -56,7 +56,7 @@ describe TwoAttemptEntriesController do
   describe "GET index" do
     it "renders" do
       get :index, params: { user_id: @admin_user.id, competition_id: @competition }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -75,7 +75,7 @@ describe TwoAttemptEntriesController do
 
       it "redirects to the user's two_attempt_entrys" do
         post :create, xhr: true, params: { two_attempt_entry: valid_attributes, user_id: @admin_user.id, competition_id: @competition.id }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -93,14 +93,14 @@ describe TwoAttemptEntriesController do
   describe "GET display_csv" do
     it "renders" do
       get :display_csv, params: { user_id: @admin_user.id, competition_id: @competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET proof" do
     it "renders" do
       get :proof, params: { user_id: @admin_user.id, competition_id: @competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -11,7 +11,7 @@ describe Translations::EventConfigurationsController do
   describe "#edit" do
     it "renders" do
       get :edit, params: { id: event_configuration.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -9,7 +9,7 @@ describe Example::ConventionChoicesController do
   actions.each do |action|
     it "renders successfully" do
       get action
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

@@ -59,7 +59,7 @@ describe LaneAssignmentsController do
   describe "GET view_heat" do
     it "renders" do
       get :view_heat, params: { competition_id: @competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

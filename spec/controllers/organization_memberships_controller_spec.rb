@@ -34,7 +34,7 @@ describe OrganizationMembershipsController do
   describe "#index" do
     it "can list all members" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -80,7 +80,7 @@ describe OrganizationMembershipsController do
     it "returns success" do
       allow_any_instance_of(UsaMembershipChecker).to receive(:current_member?).and_return(true)
       post :refresh_usa_status, params: { id: registrant.id, format: :js }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

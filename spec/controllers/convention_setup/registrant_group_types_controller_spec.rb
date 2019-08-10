@@ -72,7 +72,7 @@ describe ConventionSetup::RegistrantGroupTypesController do
 
     it "succeeds" do
       get :show, params: { id: registrant_group_type.to_param }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -81,7 +81,7 @@ describe ConventionSetup::RegistrantGroupTypesController do
 
     it "succeeds" do
       get :edit, params: { id: registrant_group_type.to_param }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

@@ -9,14 +9,14 @@ describe ConventionSetup::ConventionSetupController do
   describe "GET index" do
     it "renders" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET costs" do
     it "renders" do
       get :costs
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

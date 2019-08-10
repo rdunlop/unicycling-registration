@@ -11,14 +11,14 @@ describe ExportRegistrantsController do
   describe "#download_all" do
     it "renders" do
       get :download_all
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "#download_with_payment_details" do
     it "renders" do
       get :download_with_payment_details
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

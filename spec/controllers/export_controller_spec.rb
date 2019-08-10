@@ -13,7 +13,7 @@ describe ExportController do
 
     it "can download the file" do
       get :download_competitors_for_timers
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -44,13 +44,13 @@ describe Example::CompetitionChoicesController do
     actions.each do |action|
       it "renders successfully" do
         get action
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
     it "can download a file" do
       get :download_file, params: { filename: "heat_01.lif" }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -63,13 +63,13 @@ describe Example::CompetitionChoicesController do
     actions.each do |action|
       it "renders successfully" do
         get action
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
     it "can download a file" do
       get :download_file, params: { filename: "heat_01.lif" }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

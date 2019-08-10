@@ -15,7 +15,7 @@ describe CompetitionSetup::AgeGroupTypesController do
     it "returns http success" do
       agt = FactoryBot.create(:age_group_type)
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "h1", "Age Group Types"
 

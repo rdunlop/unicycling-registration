@@ -31,7 +31,7 @@ describe Admin::RegistrantSummariesController do
     describe "GET index" do
       it "renders" do
         get :index
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

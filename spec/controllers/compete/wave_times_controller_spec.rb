@@ -12,7 +12,7 @@ describe Compete::WaveTimesController do
   describe "GET index" do
     it "renders" do
       get :index, params: { competition_id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -29,7 +29,7 @@ describe Compete::WaveTimesController do
   describe "GET edit" do
     it "renders" do
       get :edit, params: { id: wave_time.id, competition_id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

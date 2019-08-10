@@ -24,7 +24,7 @@ describe CompetitionResultsController do
   describe "GET index" do
     it "renders" do
       get :index, params: { competition_id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -51,7 +51,7 @@ describe StandardSkillScoresController do
   describe "GET index" do
     it "shows all competitors" do
       get :index, params: { judge_id: @judge.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       assert_match(/#{@comp.registrants.first.first_name}/, response.body)
       assert_match(/#{@comp2.registrants.first.first_name}/, response.body)
     end
