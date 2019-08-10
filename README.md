@@ -69,9 +69,9 @@ If we want to add a new language to the list of possible translations:
 4. Add the language to the select2_locale_* in application.js
 4. Choose the language in your Event Configuration.
 
-* app/views/layouts/application.html.haml - Ensure that the 'lang' attribute is appropriately set.
+* `app/views/layouts/application.html.haml` - Ensure that the 'lang' attribute is appropriately set.
 
-* app/views/layouts/_footer.html.haml - Ensure that the link to the language is appropriately tagged/translated.
+* `app/views/layouts/_footer.html.haml` - Ensure that the link to the language is appropriately tagged/translated.
 
 * Once the language has been somewhat translated, make it the default via EventConfiguration#init function
 
