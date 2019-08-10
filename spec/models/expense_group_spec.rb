@@ -93,7 +93,7 @@ describe ExpenseGroup do
       @group3 = FactoryBot.create(:expense_group)
       @group2 = FactoryBot.create(:expense_group)
       @group4 = FactoryBot.create(:expense_group)
-      @group3.update_attribute(:position, 3)
+      @group3.update(position: 3)
     end
 
     it "lists them in order" do

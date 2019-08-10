@@ -30,7 +30,7 @@ class Lodging < ApplicationRecord
   accepts_nested_attributes_for :lodging_room_types, allow_destroy: true
   validates_uniqueness :lodging_room_types, attribute_name: :name
 
-  acts_as_restful_list
+  acts_as_list
 
   scope :ordered, -> { order(:position) }
 

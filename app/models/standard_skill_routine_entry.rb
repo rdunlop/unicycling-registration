@@ -13,11 +13,10 @@
 class StandardSkillRoutineEntry < ApplicationRecord
   belongs_to :standard_skill_entry
   belongs_to :standard_skill_routine
-  acts_as_restful_list scope: :standard_skill_routine
+  acts_as_list scope: :standard_skill_routine
   has_many :standard_skill_score_entries, dependent: :restrict_with_exception
 
   validates :standard_skill_entry, :standard_skill_routine, presence: true
-  validates :position, presence: true, numericality: { only_integer: true }
 
   validate :no_more_than_18_skill_entries
   validate :no_more_than_12_non_riding_skills

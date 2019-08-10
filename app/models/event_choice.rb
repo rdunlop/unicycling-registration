@@ -36,7 +36,7 @@ class EventChoice < ApplicationRecord
 
   validates :cell_type, inclusion: { in: cell_types }
   validates :optional, inclusion: { in: [true, false] } # because it's a boolean
-  acts_as_restful_list scope: :event
+  acts_as_list scope: :event
 
   def choicename
     "choice#{id}"

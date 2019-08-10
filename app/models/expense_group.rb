@@ -31,7 +31,7 @@ class ExpenseGroup < ApplicationRecord
   default_scope { order(:position) }
   scope :visible, -> { where(visible: true).not_a_required_item_group }
 
-  acts_as_restful_list scope: :registration_items # must keep the position for registration_items only
+  acts_as_list scope: [:registration_items] # must keep the position for registration_items only
 
   def self.admin_visible
     user_manageable.not_a_required_item_group

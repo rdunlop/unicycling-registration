@@ -28,7 +28,7 @@ class LodgingRoomType < ApplicationRecord
 
   accepts_nested_attributes_for :lodging_room_options, allow_destroy: true
 
-  acts_as_restful_list scope: :lodging
+  acts_as_list scope: :lodging
 
   scope :ordered, -> { order(:position) }
 
