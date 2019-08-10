@@ -159,8 +159,6 @@ RSpec/FilePath:
     - 'spec/judge_points_calculators/freestyle_2015_judge_points_calculator_spec.rb'
     - 'spec/judge_points_calculators/freestyle_2017_judge_points_calculator_spec.rb'
     - 'spec/lib/race_calculator_spec.rb'
-    - 'spec/models/best_time_formatters/hour_minute_formatter_spec.rb'
-    - 'spec/models/best_time_formatters/minute_second_formatter_spec.rb'
 
 # Offense count: 2995
 # Configuration parameters: AssignmentOnly.
@@ -382,7 +380,7 @@ Style/NumericLiterals:
     - 'spec/controllers/permissions_controller_spec.rb'
     - 'spec/factories/registrant_best_times.rb'
     - 'spec/lib/place_calculator_spec.rb'
-    - 'spec/models/best_time_formatters/minute_second_formatter_spec.rb'
+    - 'spec/models/best_time_formatter/minute_second_formatter_spec.rb'
     - 'spec/models/competitor_spec.rb'
     - 'spec/models/time_result_presenter_spec.rb'
     - 'spec/models/time_result_spec.rb'

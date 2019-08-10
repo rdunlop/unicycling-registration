@@ -27,7 +27,7 @@ class RegistrantBestTime < ApplicationRecord
   belongs_to :event
   belongs_to :registrant, inverse_of: :registrant_best_times, touch: true
 
-  before_validation :convert_time_to_integer
+  before_validation :convert_value_to_integer
 
   delegate :hint, to: :formatter
 
@@ -49,16 +49,18 @@ class RegistrantBestTime < ApplicationRecord
 
   attr_accessor :entered_value
 
-  def convert_time_to_integer
+  def convert_value_to_integer
     self.value = formatter.from_string(entered_value) if entered_value && formatter.valid?(entered_value)
   end
 
   def formatter
     case event.best_time_format
-    when "h:mm"
+    when Event::BEST_TIME_FORMAT_HOUR_MINUTE
       BestTimeFormatter::HourMinuteFormatter
-    when "(m)m:ss.xx"
+    when Event::BEST_TIME_FORMAT_HOUR_MINUTE_SECOND
       BestTimeFormatter::MinuteSecondFormatter
+    when Event::BEST_TIME_FORMAT_CENTIMETER
+      BestTimeFormatter::Centimeter
     end
   end
 
