@@ -23,7 +23,7 @@ describe Admin::EventSongsController do
   describe "GET index" do
     it "views the songs list index" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -33,7 +33,7 @@ describe Admin::EventSongsController do
 
     it "loads the page" do
       get :show, params: { id: event.to_param }
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "tr>td", text: "Description".to_s, count: 1
     end
@@ -42,7 +42,7 @@ describe Admin::EventSongsController do
   describe "GET all" do
     it "loads all songs" do
       get :all
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

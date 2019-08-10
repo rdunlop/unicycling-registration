@@ -21,7 +21,6 @@ FactoryBot.define do
   factory :expense_group do
     group_name { "MyString" }
     visible { true }
-    position { 1 }
     competitor_required { false }
     noncompetitor_required { false }
 

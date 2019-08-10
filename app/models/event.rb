@@ -44,7 +44,7 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :event_categories
   accepts_nested_attributes_for :translations
 
-  acts_as_restful_list scope: :category
+  acts_as_list scope: :category
 
   validates :name, presence: true
   validates :category, presence: true

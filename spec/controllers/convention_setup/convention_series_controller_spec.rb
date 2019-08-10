@@ -11,7 +11,7 @@ describe ConventionSetup::ConventionSeriesController do
 
     it "displays all" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -40,7 +40,7 @@ describe ConventionSetup::ConventionSeriesController do
 
     it "displays the series" do
       get :show, params: { id: series.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

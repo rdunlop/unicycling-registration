@@ -3,7 +3,6 @@ FactoryBot.define do
     lodging_room_type # FactoryBot
     sequence(:name) { |n| "Small Room #{n}" }
     sequence(:price) { |n| 1000 + n }
-    sequence(:position) { |n| n }
   end
 end
 

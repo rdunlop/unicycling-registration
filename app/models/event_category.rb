@@ -29,7 +29,7 @@ class EventCategory < ApplicationRecord
   validates :event, presence: true
   validates :name, presence: true, uniqueness: { scope: [:event_id] }
 
-  acts_as_restful_list scope: :event
+  acts_as_list scope: :event
 
   def to_s
     event.to_s + " - " + name

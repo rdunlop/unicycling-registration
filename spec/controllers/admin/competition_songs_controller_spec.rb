@@ -24,7 +24,7 @@ describe Admin::CompetitionSongsController do
   describe "GET show" do
     it "views the songs list index" do
       get :show, params: { competition_id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -56,7 +56,7 @@ describe Admin::CompetitionSongsController do
     it "loads all songs" do
       get :download_zip, params: { competition_id: competition.to_param }
 
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

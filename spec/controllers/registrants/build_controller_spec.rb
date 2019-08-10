@@ -51,7 +51,7 @@ describe Registrants::BuildController do
 
       it "displays the contact detail form" do
         get :show, params: { registrant_id: registrant.to_param, id: "add_contact_details" }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

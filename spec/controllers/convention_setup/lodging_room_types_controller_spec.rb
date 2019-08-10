@@ -10,7 +10,7 @@ describe ConventionSetup::LodgingRoomTypesController do
   #   it "renders" do
   #     lodging = FactoryBot.create(:lodging)
   #     get :new, params: { lodging_id: lodging.id }
-  #     expect(response).to be_success
+  #     expect(response).to be_successful
   #   end
   # end
 
@@ -18,7 +18,7 @@ describe ConventionSetup::LodgingRoomTypesController do
     it "shows the lodging form" do
       lodging_room_type = FactoryBot.create(:lodging_room_type)
       get :edit, params: { id: lodging_room_type.id }
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "form", action: edit_convention_setup_lodging_room_type_path(lodging_room_type), method: "put" do
         assert_select "input#lodging_room_type_name", name: "lodging_room_type[name]"
@@ -32,7 +32,7 @@ describe ConventionSetup::LodgingRoomTypesController do
 
     it "shows the lodging_room_type" do
       get :show, params: { id: lodging_room_type.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

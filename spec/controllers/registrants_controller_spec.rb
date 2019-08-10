@@ -215,7 +215,7 @@ describe RegistrantsController do
 
     it "renders blank page" do
       put :refresh_usa_status, params: { id: registrant.to_param }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

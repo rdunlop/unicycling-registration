@@ -10,7 +10,7 @@ describe Compete::IneligibleRegistrantsController do
 
     it "displays all ineligible registrants" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

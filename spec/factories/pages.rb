@@ -24,7 +24,6 @@ FactoryBot.define do
     sequence(:slug) { |n| "page-#{n}" }
     title { "Page Title" }
     body { "Page Body" }
-    sequence(:position) { |n| n }
 
     trait :home do
       slug { "home" }

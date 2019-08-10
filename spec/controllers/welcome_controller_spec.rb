@@ -7,7 +7,7 @@ describe WelcomeController do
     context "When not logged in" do
       it "returns http success" do
         get :help
-        expect(response).to be_success
+        expect(response).to be_successful
 
         assert_match(/Help/, response.body)
       end
@@ -18,7 +18,7 @@ describe WelcomeController do
 
       it "returns http success" do
         get :help
-        expect(response).to be_success
+        expect(response).to be_successful
 
         assert_match(/Help/, response.body)
       end
@@ -28,14 +28,14 @@ describe WelcomeController do
   describe "GET changelog" do
     it "returns http success" do
       get :changelog
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET help_translate" do
     it "returns http success" do
       get :help_translate
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -73,13 +73,13 @@ describe WelcomeController do
 
       it "returns http success" do
         get :usa_membership
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
     it "returns http success" do
       get :usa_membership
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

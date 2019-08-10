@@ -23,7 +23,7 @@ class LodgingRoomOption < ApplicationRecord
   has_many :lodging_days, dependent: :destroy
   has_many :lodging_packages, dependent: :restrict_with_exception
 
-  acts_as_restful_list scope: :lodging_room_type
+  acts_as_list scope: :lodging_room_type
   accepts_nested_attributes_for :lodging_days, allow_destroy: true
 
   scope :ordered, -> { order(:position) }

@@ -9,7 +9,7 @@ describe ExportPaymentsController do
   describe "GET list" do
     it "renders" do
       get :list
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -21,7 +21,7 @@ describe ExportPaymentsController do
 
     it "can download the file" do
       put :payments
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -33,7 +33,7 @@ describe ExportPaymentsController do
 
     it "can download the file" do
       put :payment_details
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

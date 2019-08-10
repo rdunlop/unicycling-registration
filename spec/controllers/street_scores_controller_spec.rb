@@ -28,7 +28,7 @@ describe StreetScoresController do
   describe "GET index" do
     it "shows all scores" do
       get :index, params: { judge_id: @judge.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     describe "when returning a list of scores" do
       before do

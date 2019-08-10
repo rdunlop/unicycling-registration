@@ -18,7 +18,7 @@ describe CandidatesController do
 
     it "renders" do
       get :index, params: params
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

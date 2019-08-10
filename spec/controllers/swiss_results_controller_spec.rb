@@ -17,7 +17,7 @@ describe SwissResultsController do
     before { get :index, params: { user_id: @user.id, competition_id: @competition.id } }
 
     it "renders" do
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -12,7 +12,7 @@ describe Compete::TierAssignmentsController do
   describe "GET show" do
     it "displays the competitors" do
       get :show, params: { competition_id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "downloads the csv" do

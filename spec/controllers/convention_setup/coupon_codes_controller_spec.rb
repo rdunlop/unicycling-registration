@@ -22,7 +22,7 @@ describe ConventionSetup::CouponCodesController do
     it "shows all coupon_codes" do
       coupon_code = FactoryBot.create(:coupon_code)
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "td", coupon_code.code
     end
@@ -32,7 +32,7 @@ describe ConventionSetup::CouponCodesController do
     it "shows the coupon_code form" do
       coupon_code = FactoryBot.create(:coupon_code)
       get :edit, params: { id: coupon_code.id }
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "form", action: edit_coupon_code_path(coupon_code), method: "put" do
         assert_select "input#coupon_code_code", name: "coupon_code[code]"

@@ -4,7 +4,7 @@ describe PermissionsController do
   describe "when signed out" do
     it "can access the acl page" do
       get :acl
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "can authorize acl" do

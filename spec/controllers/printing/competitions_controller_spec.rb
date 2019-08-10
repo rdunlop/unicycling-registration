@@ -12,42 +12,42 @@ describe Printing::CompetitionsController do
   describe "GET announcer" do
     it "renders" do
       get :announcer, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET start_list" do
     it "renders" do
       get :start_list, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET heat_recording" do
     it "renders" do
       get :heat_recording, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET single_attempt_recording" do
     it "renders" do
       get :single_attempt_recording, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET two_attempt_recording" do
     it "renders" do
       get :two_attempt_recording, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET results" do
     it "renders" do
       get :results, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -56,7 +56,7 @@ describe Printing::CompetitionsController do
 
     it "renders" do
       get :freestyle_summary, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

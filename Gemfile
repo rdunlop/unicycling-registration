@@ -81,7 +81,7 @@ gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 supp
 # https://github.com/influitive/apartment-sidekiq/pull/19
 
 # Model utils
-gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
+gem 'acts_as_list'
 gem 'carrierwave'
 gem 'carrierwave-aws', '1.3.0'
 gem 'carrierwave-i18n'
