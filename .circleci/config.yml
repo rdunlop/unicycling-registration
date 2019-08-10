@@ -58,6 +58,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/tmp
+      - run: bundle-audit update
       - run: bundle exec bundle-audit check --ignore CVE-2018-1000544
 
   rspec:
