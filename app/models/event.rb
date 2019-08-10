@@ -53,10 +53,10 @@ class Event < ApplicationRecord
   default_scope { includes(:translations) }
 
   BEST_TIME_FORMATS = [
-    BEST_TIME_FORMAT_NONE = "none",
-    BEST_TIME_FORMAT_HOUR_MINUTE = "h:mm",
-    BEST_TIME_FORMAT_HOUR_MINUTE_SECOND = "(m)m:ss.xx",
-    BEST_TIME_FORMAT_CENTIMETER = "cm"
+    BEST_TIME_FORMAT_NONE = "none".freeze,
+    BEST_TIME_FORMAT_HOUR_MINUTE = "h:mm".freeze,
+    BEST_TIME_FORMAT_HOUR_MINUTE_SECOND = "(m)m:ss.xx".freeze,
+    BEST_TIME_FORMAT_CENTIMETER = "cm".freeze
   ].freeze
 
   validates :best_time_format, presence: true, inclusion: BEST_TIME_FORMATS
