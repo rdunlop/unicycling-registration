@@ -33,6 +33,8 @@ module ActionView
 end
 
 # https://github.com/rails/rails/issues/28503
-unless Rails::VERSION::STRING == "5.1.6.1"
+# It appears that this was merged AFTER 5.1.7 was released.
+# And it is also available in 5.2.1
+unless Rails::VERSION::STRING == "5.1.7"
   raise "Check on Monkeypatch"
 end
