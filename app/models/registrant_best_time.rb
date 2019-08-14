@@ -60,7 +60,7 @@ class RegistrantBestTime < ApplicationRecord
     when Event::BEST_TIME_FORMAT_HOUR_MINUTE_SECOND
       BestTimeFormatter::MinuteSecondFormatter
     when Event::BEST_TIME_FORMAT_CENTIMETER
-      BestTimeFormatter::Centimeter
+      BestTimeFormatter::CentimeterFormatter
     end
   end
 
