@@ -30,6 +30,7 @@ en:
   organization_membership_types:
     usa: USA
     french_federation: French Federation
+    iuf: IUF
   membership_number: Membership Number
   pdf: "(pdf)"
   wizard:

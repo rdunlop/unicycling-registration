@@ -7,7 +7,7 @@
       - if @config.organization_membership_usa?
         %p
           %b= OrganizationMembership.human_attribute_name(:system_status)
-          = render "/registrants/usa_membership_badge", organization_membership: organization_membership
+          = render "/registrants/organization_membership_badge", organization_membership: organization_membership
           %span.non_printable
-            = link_to usa_membership_welcome_path, target: "_blank" do
+            = link_to organization_membership_welcome_path, target: "_blank" do
               %span.help_bubble{ title: "More details" }

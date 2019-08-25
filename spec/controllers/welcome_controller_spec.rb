@@ -67,18 +67,20 @@ describe WelcomeController do
     end
   end
 
-  describe "GET usa_membership" do
-    describe "with USA enabled" do
-      let!(:event_configuration) { FactoryBot.create(:event_configuration, :with_usa) }
+  describe "GET organization_membership" do
+    EventConfiguration.organization_membership_types.each do |type|
+      describe "with #{type} enabled" do
+        let!(:event_configuration) { FactoryBot.create(:event_configuration, organization_membership_type: type) }
 
-      it "returns http success" do
-        get :usa_membership
-        expect(response).to be_successful
+        it "returns http success" do
+          get :organization_membership
+          expect(response).to be_successful
+        end
       end
     end
 
     it "returns http success" do
-      get :usa_membership
+      get :organization_membership
       expect(response).to be_successful
     end
   end

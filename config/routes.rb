@@ -499,7 +499,7 @@ Rails.application.routes.draw do
         get :help
         get :confirm
         get :data_entry_menu
-        get :usa_membership
+        get :organization_membership
         get :passwords
       end
     end

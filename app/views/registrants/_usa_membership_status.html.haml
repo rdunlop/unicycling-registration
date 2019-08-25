@@ -2,8 +2,8 @@
   .small-6.columns
     USA membership status
   .small-6.column.js--usa_member_status
-    = render "/registrants/usa_membership_badge", organization_membership: organization_membership
-    = link_to usa_membership_welcome_path, target: "_blank" do
+    = render "/registrants/organization_membership_badge", organization_membership: organization_membership
+    = link_to organization_membership_welcome_path, target: "_blank" do
       %span.help_bubble{ title: "More details" }
 
 .row.js--usa_member_status

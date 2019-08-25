@@ -10,8 +10,10 @@ class WelcomeController < ApplicationController
     @user = current_user
   end
 
-  # GET /welcome/usa_membership
-  def usa_membership; end
+  # GET /welcome/organization_membership
+  def organization_membership
+    @organization = @config.organization_membership_config
+  end
 
   # GET /welcome/changelog
   def changelog; end
