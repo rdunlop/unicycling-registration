@@ -1,5 +1,9 @@
 # checks the Unicycling Society Of America (USA)
 # WildApricot membership database
+#
+# When USA mode is enabled, we query the USA database through the wildapricot
+# API to determine if the registrant is a member as of the competition-start-date
+#
 class UsaMembershipChecker
   attr_reader :first_name, :last_name, :birthdate
   attr_reader :manual_member_number, :wildapricot_member_number
@@ -156,10 +160,10 @@ class UsaMembershipChecker
   end
 
   def account_id
-    Rails.application.secrets.usa_wildapricot_account_id
+    Rails.configuration.usa_wildapricot_account_id
   end
 
   def api_key
-    Rails.application.secrets.usa_wildapricot_apikey
+    Rails.configuration.usa_wildapricot_api_key
   end
 end

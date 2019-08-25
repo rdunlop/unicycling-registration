@@ -4,7 +4,7 @@ set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
 set :stages, %w[prod]
 
 # Default value for :linked_files is []
-set :linked_files, %w[config/eye.yml config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt]
+set :linked_files, %w[.env.local config/eye.yml config/database.yml config/secrets.yml config/newrelic.yml public/robots.txt]
 
 # Default value for linked_dirs is []
 # .well-known is for letsencrypt

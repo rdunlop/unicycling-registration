@@ -43,6 +43,7 @@ gem 'tinymce-rails'
 gem 'acme-client'
 gem 'apartment_acme_client'
 gem 'aws-sdk-rails'
+gem 'dotenv-rails'
 gem 'eye-patch', require: false
 gem 'gaffe'
 gem 'http_accept_language'
