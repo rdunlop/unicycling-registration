@@ -9,7 +9,7 @@ class Registrants::BuildController < ApplicationController
   before_action :load_categories, only: %i[show update add_events] # rubocop:disable Rails/LexicallyScopedActionFilter
   layout "wizard"
 
-  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses].freeze
+  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses set_organization_membership].freeze
 
   rescue_from Wicked::Wizard::InvalidStepError, with: :step_not_found
 
