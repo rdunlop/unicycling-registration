@@ -122,7 +122,7 @@ class EventConfiguration < ApplicationRecord
   validates :max_registrants, numericality: { greater_than_or_equal_to: 0 }
 
   def self.organization_membership_types
-    ["usa", "french_federation"]
+    ["usa", "french_federation", "iuf"]
   end
 
   validates :organization_membership_type, inclusion: { in: organization_membership_types }, allow_blank: true
@@ -377,9 +377,17 @@ class EventConfiguration < ApplicationRecord
     10
   end
 
-  # Public: Is the USA-style membership system enabled?
-  def organization_membership_usa?
-    organization_membership_type == "usa"
+  def organization_membership_config
+    case organization_membership_type
+    when "usa"
+      Organization::Usa.new
+    when "french_federation"
+      Organization::FrenchFederation.new
+    when "iuf"
+      Organization::Iuf.new
+    else
+      Organization::None.new
+    end
   end
 
   def has_lodging?

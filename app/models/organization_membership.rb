@@ -20,7 +20,7 @@
 class OrganizationMembership < ApplicationRecord
   belongs_to :registrant, inverse_of: :organization_membership, touch: true
 
-  after_commit :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
+  after_commit :update_organization_membership_status, if: proc { EventConfiguration.singleton.organization_membership_config.automated_checking? }
 
   # is this registrant a member of the relevant unicycling federation?
   def organization_membership_confirmed?
@@ -37,9 +37,9 @@ class OrganizationMembership < ApplicationRecord
 
   private
 
-  def update_usa_membership_status
+  def update_organization_membership_status
     return unless previous_changes.key?(:system_member_number) || previous_changes.key?(:manual_member_number)
 
-    UpdateUsaMembershipStatusWorker.perform_async(registrant_id)
+    UpdateOrganizationMembershipStatusWorker.perform_async(registrant_id)
   end
 end

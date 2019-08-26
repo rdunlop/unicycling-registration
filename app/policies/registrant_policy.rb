@@ -17,8 +17,8 @@ class RegistrantPolicy < ApplicationPolicy
     user_record? || user.accessible_registrants.include?(record) || event_planner? || super_admin?
   end
 
-  # Action to cause a re-query of the USA Membership database
-  def refresh_usa_status?
+  # Action to cause a re-query of the Membership database
+  def refresh_organization_status?
     show?
   end
 
@@ -63,13 +63,17 @@ class RegistrantPolicy < ApplicationPolicy
     update? && config.has_expenses?
   end
 
+  def set_organization_membership?
+    update? && config.organization_membership_config?
+  end
+
   def wicked_finish?
     true
   end
 
   # is there any action to which I am able to update?
   def update_any_data?
-    add_name? || add_events? || set_wheel_sizes? || add_volunteers? || add_contact_details? || lodging? || expenses?
+    add_name? || add_events? || set_wheel_sizes? || add_volunteers? || add_contact_details? || lodging? || expenses? || set_organization_membership?
   end
 
   # can I update any of my registration data?

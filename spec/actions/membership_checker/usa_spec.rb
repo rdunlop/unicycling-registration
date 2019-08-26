@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe UsaMembershipChecker do
+describe MembershipChecker::Usa do
   subject(:subject) do
     described_class.new(
       first_name: first_name,
       last_name: last_name,
       birthdate: birthday,
       manual_member_number: usa_member_number,
-      wildapricot_member_number: wildapricot_member_number
+      system_member_number: wildapricot_member_number
     )
   end
 
@@ -59,7 +59,7 @@ describe UsaMembershipChecker do
 
     it "is a current member" do
       expect(subject).to be_current_member
-      expect(subject.current_wildapricot_id).to eq("12345")
+      expect(subject.current_system_id).to eq("12345")
     end
   end
 
@@ -70,7 +70,7 @@ describe UsaMembershipChecker do
 
     it "is not a current member" do
       expect(subject).not_to be_current_member
-      expect(subject.current_wildapricot_id).to be_nil
+      expect(subject.current_system_id).to be_nil
     end
   end
 end

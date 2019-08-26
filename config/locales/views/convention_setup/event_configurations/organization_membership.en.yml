@@ -14,3 +14,6 @@ en:
         french_behavior_description: |
           Specifying "French Federation" will prompt the user for their
           "French Federation" membership number.
+        iuf_behavior_description: |
+          Specifying "IUF" will cause the system to require that each registrant
+          is a IUF member before they can finish their registration and pay.

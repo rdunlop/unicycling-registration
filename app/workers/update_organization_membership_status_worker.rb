@@ -1,27 +1,28 @@
-class UpdateUsaMembershipStatusWorker
+class UpdateOrganizationMembershipStatusWorker
   include Sidekiq::Worker
 
-  # Query the USA membership API, and update the registrant record with the result
+  # Query the membership API, and update the registrant record with the result
   def perform(registrant_id)
-    return unless event_is_usa?
+    organization_config = EventConfiguration.singleton.organization_membership_config
+    return unless organization_config.automated_checking?
 
-    Rails.logger.debug "USA membership check for #{registrant_id}"
+    Rails.logger.debug "#{organization_config.title} membership check for #{registrant_id}"
     registrant = Registrant.find(registrant_id)
 
     organization_membership = registrant.create_organization_membership_record
 
-    checker = UsaMembershipChecker.new(
+    checker = organization_config.automated_checking_class.new(
       first_name: registrant.first_name,
       last_name: registrant.last_name,
       birthdate: registrant.birthday,
       manual_member_number: organization_membership.manual_member_number,
-      wildapricot_member_number: organization_membership.system_member_number
+      system_member_number: organization_membership.system_member_number
     )
 
     if checker.current_member?
       organization_membership.update(
         system_confirmed: true,
-        system_member_number: checker.current_wildapricot_id,
+        system_member_number: checker.current_system_id,
         system_status: "confirmed"
       )
     else
@@ -31,10 +32,6 @@ class UpdateUsaMembershipStatusWorker
       )
     end
   rescue JSON::ParserError => e
-    raise "Error (#{e}) parsing response from USA database for #{request}"
-  end
-
-  def event_is_usa?
-    EventConfiguration.singleton.organization_membership_usa?
+    raise "Error (#{e}) parsing response from Organization database for #{request}"
   end
 end
