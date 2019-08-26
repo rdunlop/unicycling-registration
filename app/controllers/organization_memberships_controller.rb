@@ -49,11 +49,11 @@ class OrganizationMembershipsController < ApplicationController
     output_spreadsheet(exporter.headers, exporter.rows, "registrants_with_membership_details")
   end
 
-  # POST /organization_memberships/:id/refresh_usa_status
-  def refresh_usa_status
-    if @config.organization_membership_usa?
+  # POST /organization_memberships/:id/refresh_organization_status
+  def refresh_organization_status
+    if @config.organization_membership_config.automated_checking?
       @registrant = Registrant.find(params[:id])
-      UpdateUsaMembershipStatusWorker.new.perform(@registrant.id) # perform in-line
+      UpdateOrganizationMembershipStatusWorker.new.perform(@registrant.id) # perform in-line
       @registrant.reload # get new state
       render "update", format: :js
     else

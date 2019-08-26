@@ -1,9 +1,7 @@
 module Organization
-  class FrenchFederation
+  class FrenchFederation < None
     def title
       "French Federation"
     end
-
-    def information_partial; end
   end
 end

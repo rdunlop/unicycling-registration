@@ -37,8 +37,8 @@ class RegistrantsController < ApplicationController
 
   before_action :authenticate_user!, except: [:results]
   before_action :load_user, only: [:index]
-  before_action :load_registrant_by_bib_number, only: %i[show results refresh_usa_status copy_to_competitor copy_to_noncompetitor destroy]
-  before_action :authorize_registrant, only: %i[show destroy refresh_usa_status]
+  before_action :load_registrant_by_bib_number, only: %i[show results refresh_organization_status copy_to_competitor copy_to_noncompetitor destroy]
+  before_action :authorize_registrant, only: %i[show destroy refresh_organization_status]
   before_action :authorize_logged_in, only: %i[all subregion_options]
   before_action :skip_authorization, only: [:results]
 
@@ -121,10 +121,10 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  # PUT /registrants/:id/refresh_usa_status
-  def refresh_usa_status
-    if @config.organization_membership_usa?
-      UpdateUsaMembershipStatusWorker.perform_async(@registrant.id)
+  # PUT /registrants/:id/refresh_organization_status
+  def refresh_organization_status
+    if @config.organization_membership_config.automated_checking?
+      UpdateOrganizationMembershipStatusWorker.perform_async(@registrant.id)
     end
     render plain: "", status: :ok
   end

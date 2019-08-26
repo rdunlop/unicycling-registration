@@ -6,5 +6,15 @@ module Organization
     end
 
     def information_partial; end
+
+    def automated_checking?
+      automated_checking_class.present?
+    end
+
+    def automated_checking_class; end
+
+    def active_membership_required?
+      false
+    end
   end
 end

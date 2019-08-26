@@ -17,8 +17,8 @@ class RegistrantPolicy < ApplicationPolicy
     user_record? || user.accessible_registrants.include?(record) || event_planner? || super_admin?
   end
 
-  # Action to cause a re-query of the USA Membership database
-  def refresh_usa_status?
+  # Action to cause a re-query of the Membership database
+  def refresh_organization_status?
     show?
   end
 

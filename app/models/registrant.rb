@@ -41,8 +41,8 @@ class Registrant < ApplicationRecord
   extend OrderAsSpecified
 
   after_save :touch_members
-  attr_accessor :skip_usa_membership_checking
-  after_commit :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
+  attr_accessor :skip_organization_membership_checking
+  after_commit :update_organization_membership_status, if: proc { EventConfiguration.singleton.organization_membership_config.automated_checking? }
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
@@ -599,12 +599,12 @@ class Registrant < ApplicationRecord
     ChoicesValidator.new(self).validate
   end
 
-  # Queue a job to query the USA db for membership information
-  def update_usa_membership_status
-    return if skip_usa_membership_checking
+  # Queue a job to query the IUF/USA db for membership information
+  def update_organization_membership_status
+    return if skip_organization_membership_checking
     return unless previous_changes.key?(:last_name) || previous_changes.key?(:first_name) || previous_changes.key?(:birthday)
 
-    UpdateUsaMembershipStatusWorker.perform_async(id)
+    UpdateOrganizationMembershipStatusWorker.perform_async(id)
   end
 
   def set_access_code

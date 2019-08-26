@@ -76,10 +76,10 @@ describe OrganizationMembershipsController do
     end
   end
 
-  describe "#refresh_usa_status" do
+  describe "#refresh_organization_status" do
     it "returns success" do
-      allow_any_instance_of(UsaMembershipChecker).to receive(:current_member?).and_return(true)
-      post :refresh_usa_status, params: { id: registrant.id, format: :js }
+      allow_any_instance_of(MembershipChecker::Usa).to receive(:current_member?).and_return(true)
+      post :refresh_organization_status, params: { id: registrant.id, format: :js }
       expect(response).to be_successful
     end
   end

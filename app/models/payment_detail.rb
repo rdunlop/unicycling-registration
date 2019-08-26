@@ -27,7 +27,7 @@ class PaymentDetail < ApplicationRecord
 
   validates :payment, :registrant, :line_item, presence: true
   validate :registrant_must_be_valid
-  validate :registrant_must_have_valid_usa_membership
+  validate :registrant_must_have_valid_organization_membership
 
   monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
 
@@ -128,12 +128,14 @@ class PaymentDetail < ApplicationRecord
     true
   end
 
-  def registrant_must_have_valid_usa_membership
+  def registrant_must_have_valid_organization_membership
     return if registrant&.spectator?
-    return unless EventConfiguration.singleton.organization_membership_usa?
+
+    organization_config = EventConfiguration.singleton.organization_membership_config
+    return unless organization_config.active_membership_required?
 
     if registrant && !registrant.organization_membership_confirmed?
-      errors.add(:registrant, "Registrant #{registrant} does not have a current USA membership")
+      errors.add(:registrant, "Registrant #{registrant} does not have a current #{organization_config.title} membership")
       return false
     end
     true

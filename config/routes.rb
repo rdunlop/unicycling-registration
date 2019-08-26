@@ -441,7 +441,7 @@ Rails.application.routes.draw do
 
       member do
         get :results
-        put :refresh_usa_status
+        put :refresh_organization_status
         post :copy_to_competitor
         post :copy_to_noncompetitor
       end
@@ -472,7 +472,7 @@ Rails.application.routes.draw do
       member do
         put :toggle_confirm
         put :update_number
-        post :refresh_usa_status
+        post :refresh_organization_status
       end
       collection do
         get :export

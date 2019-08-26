@@ -59,7 +59,7 @@
 //= require reorder_rows
 //= require total_calculator
 //= require total_cost
-//= require usa_member_refresher
+//= require organization_member_refresher
 //= require visibility_toggler
 
 // NOTE This file does NOT include wysiwyg.js

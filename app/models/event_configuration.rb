@@ -377,11 +377,6 @@ class EventConfiguration < ApplicationRecord
     10
   end
 
-  # Public: Is the USA-style membership system enabled?
-  def organization_membership_usa?
-    organization_membership_type == "usa"
-  end
-
   def organization_membership_config
     case organization_membership_type
     when "usa"
