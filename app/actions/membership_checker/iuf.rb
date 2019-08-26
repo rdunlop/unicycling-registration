@@ -18,15 +18,47 @@ module MembershipChecker
     end
 
     def current_member?
-      false
+      return false unless status
+
+      status["member"]
     end
 
     # When a match is found, store the IUF ID found as the "system_member_number"
     def current_system_id
-      nil
+      return nil unless current_member?
+
+      status["iuf_member_id"]
+    end
+
+    def status
+      return @status if @status
+
+      response = api_connection.post do |req|
+        req.body = request_string
+      end
+
+      if response.success?
+        @status = JSON.parse(response.body)
+      end
+    end
+
+    def request_string
+      [
+        "first_name=#{first_name}",
+        "last_name=#{last_name}",
+        "birthdate=#{birthdate.iso8601}"
+      ].join("&")
     end
 
     private
+
+    def api_connection
+      Faraday.new(url: api_url) do |faraday|
+        faraday.request :url_encoded
+        faraday.response :logger
+        faraday.adapter  Faraday.default_adapter
+      end
+    end
 
     def api_url
       Rails.configuration.iuf_membership_api_url
