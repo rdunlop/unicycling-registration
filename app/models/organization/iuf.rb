@@ -11,5 +11,9 @@ module Organization
     def automated_checking_class
       MembershipChecker::Iuf
     end
+
+    def active_membership_required?
+      true
+    end
   end
 end
