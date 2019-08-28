@@ -15,8 +15,9 @@
     = organization_membership.system_status
 .row
   .small-12.columns
-    = link_to "Recheck #{organization_config.title} Status", refresh_organization_status_registrant_path(organization_membership.registrant.bib_number), remote: true, method: :put, class: "js--organization_member_status_refresh"
+    - button_class = organization_membership.organization_membership_confirmed? ? "nonfocus_button" : "focus_button"
+    = link_to "Recheck #{organization_config.title} Status", refresh_organization_status_registrant_path(organization_membership.registrant.bib_number), remote: true, method: :put, class: "js--organization_member_status_refresh #{button_class}"
     .js--organization_member_refresh_notice.is--hidden
-      Checking....
+      Checking....page will refresh in 5 seconds.
       %br
-      = link_to "Reload Page", "javascript:window.location.reload()"
+      = link_to "Reload Now", "javascript:window.location.reload()", class: "focus_button"
