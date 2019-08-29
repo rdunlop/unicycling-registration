@@ -44,6 +44,7 @@ module Workspace
 
     config.tinymce.install = :compile
 
+    config.iuf_membership_url = ENV["IUF_MEMBERSHIP_URL"]
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]
     config.usa_wildapricot_account_id = ENV["USA_WILDAPRICOT_ACCOUNT_ID"]
     config.usa_wildapricot_api_key = ENV["USA_WILDAPRICOT_API_KEY"]
