@@ -29,7 +29,7 @@ class OrganizationMembership < ApplicationRecord
 
   def member_number
     description = []
-    description << "Membership ID ##{system_member_number}" if system_member_number.present?
+    description << "##{system_member_number}" if system_member_number.present?
     description << "Legacy ID ##{manual_member_number}" if manual_member_number.present? && system_member_number != manual_member_number
 
     description.join(", ")

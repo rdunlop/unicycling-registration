@@ -16,5 +16,9 @@ module Organization
     def active_membership_required?
       false
     end
+
+    def allow_manual_member_number_entry?
+      false
+    end
   end
 end
