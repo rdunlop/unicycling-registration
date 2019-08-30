@@ -20,5 +20,7 @@ module Organization
     def allow_manual_member_number_entry?
       false
     end
+
+    def membership_site_url; end
   end
 end

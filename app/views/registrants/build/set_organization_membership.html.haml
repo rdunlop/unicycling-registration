@@ -5,7 +5,7 @@
     - if @registrant.errors.any?
       = render partial: "shared/error_messages", object: @registrant
     .row
-      .small-12.large-6.columns
+      .small-12.large-12.columns
         = render "/registrants/build/organization_membership/form", reg_f: f
 
 

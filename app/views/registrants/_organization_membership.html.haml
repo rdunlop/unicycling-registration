@@ -8,6 +8,3 @@
         %p
           %b= OrganizationMembership.human_attribute_name(:system_status)
           = render "/registrants/organization_membership_badge", organization_membership: organization_membership
-          %span.non_printable
-            = link_to organization_membership_welcome_path, target: "_blank" do
-              %span.help_bubble{ title: "More details" }
