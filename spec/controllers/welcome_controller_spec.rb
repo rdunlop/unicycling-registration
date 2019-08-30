@@ -66,22 +66,4 @@ describe WelcomeController do
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
-
-  describe "GET organization_membership" do
-    EventConfiguration.organization_membership_types.each do |type|
-      describe "with #{type} enabled" do
-        let!(:event_configuration) { FactoryBot.create(:event_configuration, organization_membership_type: type) }
-
-        it "returns http success" do
-          get :organization_membership
-          expect(response).to be_successful
-        end
-      end
-    end
-
-    it "returns http success" do
-      get :organization_membership
-      expect(response).to be_successful
-    end
-  end
 end

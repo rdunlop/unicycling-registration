@@ -1,0 +1,7 @@
+%h1 #{organization_config.title} Membership
+
+- if organization_config.information_partial
+  = render organization_config.information_partial
+- else
+  %p
+    This convention asks for your #{organization_config.title} membership details.
