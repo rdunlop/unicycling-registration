@@ -17,8 +17,12 @@
       - button_class = "nonfocus_button"
     - else
       - button_class = "focus_button"
-    = link_to "Go to the #{organization_config.title} Membership Site", organization_config.membership_site_url, target: :_blank, class: "#{button_class}"
-    = link_to "Recheck #{organization_config.title} Status", refresh_organization_status_registrant_path(organization_membership.registrant.bib_number), remote: true, method: :put, class: "js--organization_member_status_refresh #{button_class}"
+    - recheck_status_label = "Recheck #{organization_config.title} Status"
+    %p
+      = link_to "Go to the #{organization_config.title} Membership Site", organization_config.membership_site_url, target: :_blank, class: "#{button_class}"
+      Once you register for a membership, return to thise page and #{recheck_status_label}.
+
+    = link_to recheck_status_label, refresh_organization_status_registrant_path(organization_membership.registrant.bib_number), remote: true, method: :put, class: "js--organization_member_status_refresh #{button_class}"
     .js--organization_member_refresh_notice.is--hidden
       Checking....page will refresh in 5 seconds.
       %br
