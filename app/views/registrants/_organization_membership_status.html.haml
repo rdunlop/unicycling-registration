@@ -1,13 +1,13 @@
 .row
-  .small-6.columns
+  .small-6.columns.right_aligned
     %label #{organization_config.title} membership status
-  .small-6.column.js--organization_member_status
+  .small-6.column.js--organization_member_status.left_aligned
     = render "/registrants/organization_membership_badge", organization_membership: organization_membership
 
 .row.js--organization_member_status
-  .small-6.columns
+  .small-6.columns.right_aligned
     %label #{organization_config.title} Details
-  .small-6.columns
+  .small-6.columns.left_aligned
     = organization_membership.member_number
     %br
     = organization_membership.system_status
@@ -20,7 +20,8 @@
     - recheck_status_label = "Recheck #{organization_config.title} Status"
     %p
       = link_to "Go to the #{organization_config.title} Membership Site", organization_config.membership_site_url, target: :_blank, class: "#{button_class}"
-      Once you register for a membership, return to thise page and #{recheck_status_label}.
+      %br
+      Once you register for a membership, return to this page and #{recheck_status_label}.
 
     = link_to recheck_status_label, refresh_organization_status_registrant_path(organization_membership.registrant.bib_number), remote: true, method: :put, class: "js--organization_member_status_refresh #{button_class}"
     .js--organization_member_refresh_notice.is--hidden
