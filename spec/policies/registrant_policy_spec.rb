@@ -221,18 +221,21 @@ describe RegistrantPolicy do
       let!(:lodging_day) { FactoryBot.create(:lodging_day) }
       let(:config) do
         EventConfiguration.singleton.update(
-          lodging_end_date: lodging_end_date)
+          lodging_end_date: lodging_end_date
+        )
         EventConfiguration.singleton
       end
 
       context "when lodging date has passed" do
         let(:lodging_end_date) { 1.year.ago }
-        it { expect(subject).not_to permit(user_context, my_registrant)}
+
+        it { expect(subject).not_to permit(user_context, my_registrant) }
       end
 
       context "when lodging date has not passed" do
         let(:lodging_end_date) { 1.year.from_now }
-        it { expect(subject).to permit(user_context, my_registrant)}
+
+        it { expect(subject).to permit(user_context, my_registrant) }
       end
     end
 
@@ -240,18 +243,21 @@ describe RegistrantPolicy do
       let!(:item) { FactoryBot.create(:expense_item) }
       let(:config) do
         EventConfiguration.singleton.update(
-          add_expenses_end_date: expenses_end_date)
+          add_expenses_end_date: expenses_end_date
+        )
         EventConfiguration.singleton
       end
 
       context "when expenses date has passed" do
         let(:expenses_end_date) { 1.year.ago }
-        it { expect(subject).not_to permit(user_context, my_registrant)}
+
+        it { expect(subject).not_to permit(user_context, my_registrant) }
       end
 
       context "when expenses date has not passed" do
         let(:expenses_end_date) { 1.year.from_now }
-        it { expect(subject).to permit(user_context, my_registrant)}
+
+        it { expect(subject).to permit(user_context, my_registrant) }
       end
     end
   end
