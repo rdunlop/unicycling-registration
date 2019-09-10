@@ -56,6 +56,7 @@
 #  require_medical_certificate                   :boolean          default(FALSE), not null
 #  medical_certificate_info_page_id              :integer
 #  volunteer_option_page_id                      :integer
+#  add_expenses_end_date                         :datetime
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot

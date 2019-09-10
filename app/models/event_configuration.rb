@@ -56,6 +56,7 @@
 #  require_medical_certificate                   :boolean          default(FALSE), not null
 #  medical_certificate_info_page_id              :integer
 #  volunteer_option_page_id                      :integer
+#  add_expenses_end_date                         :datetime
 #
 
 class EventConfiguration < ApplicationRecord
@@ -301,6 +302,10 @@ class EventConfiguration < ApplicationRecord
     lodging_end_date || registration_closed_date
   end
 
+  def effective_add_expenses_end_date
+    add_expenses_end_date || registration_closed_date
+  end
+
   # Public: What is the base date we should use when calculating competitor
   # Ages.
   # Default to the start date of the competition, but can be changed, if
@@ -341,6 +346,10 @@ class EventConfiguration < ApplicationRecord
 
   def lodging_sales_closed?
     is_date_in_the_past?(effective_lodging_closed_date)
+  end
+
+  def add_expenses_closed?
+    is_date_in_the_past?(effective_add_expenses_end_date)
   end
 
   def self.configuration_exists?
