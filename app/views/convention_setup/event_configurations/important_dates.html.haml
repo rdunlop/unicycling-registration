@@ -37,6 +37,11 @@
       = EventConfiguration.singleton.effective_lodging_closed_date
   .row
     .small-6.columns
+      = f.input :add_expenses_end_date, as: :date_picker
+    .small-6.columns
+      = EventConfiguration.singleton.effective_add_expenses_end_date
+  .row
+    .small-6.columns
       = f.input :age_calculation_base_date, as: :date_picker
     .small-6.columns
       = EventConfiguration.singleton.effective_age_calculation_base_date

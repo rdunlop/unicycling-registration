@@ -33,7 +33,7 @@ class RegistrantPolicy < ApplicationPolicy
     return false unless record.competitor?
     return true if event_planner? || super_admin?
 
-    (user_record? || shared_editable_record?) && (!config.event_sign_up_closed? || !registration_closed?)
+    my_record? && (!config.event_sign_up_closed? || !registration_closed?)
     # change this to allow add_events when registration is closed, but events date is open
     # !config.event_sign_up_closed?
     # BUT, still allow viewing of the events page after events have closed, but registration is open?
@@ -54,17 +54,23 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def lodging?
+    return false unless config.has_lodging?
     return true if event_planner? || super_admin?
 
-    update? && config.has_lodging? && !config.lodging_sales_closed?
+    my_record? && !config.lodging_sales_closed?
   end
 
   def expenses?
-    update? && config.has_expenses?
+    return false unless config.has_expenses?
+    return true if event_planner? || super_admin?
+
+    my_record? && !config.add_expenses_closed?
   end
 
   def set_organization_membership?
-    update? && config.organization_membership_config?
+    return false unless config.organization_membership_config?
+
+    update?
   end
 
   def wicked_finish?
@@ -80,7 +86,11 @@ class RegistrantPolicy < ApplicationPolicy
   def update?
     return true if event_planner? || super_admin?
 
-    (user_record? || shared_editable_record?) && !registration_closed?
+    my_record? && !registration_closed?
+  end
+
+  def my_record?
+    (user_record? || shared_editable_record?)
   end
 
   # ###########################
@@ -89,7 +99,7 @@ class RegistrantPolicy < ApplicationPolicy
 
   # view the mailing address of a registrant
   def show_contact_details?
-    user_record? || user.editable_registrants.include?(record) || add_contact_details? || super_admin?
+    my_record? || add_contact_details? || super_admin?
   end
 
   def destroy?
