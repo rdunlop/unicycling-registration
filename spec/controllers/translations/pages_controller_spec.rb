@@ -11,14 +11,14 @@ describe Translations::PagesController do
   describe "#index" do
     it "renders" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "#edit" do
     it "renders" do
       get :edit, params: { id: page.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

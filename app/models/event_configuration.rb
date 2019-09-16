@@ -56,6 +56,7 @@
 #  require_medical_certificate                   :boolean          default(FALSE), not null
 #  medical_certificate_info_page_id              :integer
 #  volunteer_option_page_id                      :integer
+#  add_expenses_end_date                         :datetime
 #
 
 class EventConfiguration < ApplicationRecord
@@ -122,7 +123,7 @@ class EventConfiguration < ApplicationRecord
   validates :max_registrants, numericality: { greater_than_or_equal_to: 0 }
 
   def self.organization_membership_types
-    ["usa", "french_federation"]
+    ["usa", "french_federation", "iuf"]
   end
 
   validates :organization_membership_type, inclusion: { in: organization_membership_types }, allow_blank: true
@@ -301,6 +302,10 @@ class EventConfiguration < ApplicationRecord
     lodging_end_date || registration_closed_date
   end
 
+  def effective_add_expenses_end_date
+    add_expenses_end_date || registration_closed_date
+  end
+
   # Public: What is the base date we should use when calculating competitor
   # Ages.
   # Default to the start date of the competition, but can be changed, if
@@ -343,6 +348,10 @@ class EventConfiguration < ApplicationRecord
     is_date_in_the_past?(effective_lodging_closed_date)
   end
 
+  def add_expenses_closed?
+    is_date_in_the_past?(effective_add_expenses_end_date)
+  end
+
   def self.configuration_exists?
     !EventConfiguration.first.nil?
   end
@@ -377,9 +386,17 @@ class EventConfiguration < ApplicationRecord
     10
   end
 
-  # Public: Is the USA-style membership system enabled?
-  def organization_membership_usa?
-    organization_membership_type == "usa"
+  def organization_membership_config
+    case organization_membership_type
+    when "usa"
+      Organization::Usa.new
+    when "french_federation"
+      Organization::FrenchFederation.new
+    when "iuf"
+      Organization::Iuf.new
+    else
+      Organization::None.new
+    end
   end
 
   def has_lodging?

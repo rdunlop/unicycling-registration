@@ -53,7 +53,7 @@ describe ConventionSetup::EventConfigurationsController do
   ConventionSetup::EventConfigurationsController::EVENT_CONFIG_PAGES.each do |page|
     it "can render the #{page} page" do
       get page
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

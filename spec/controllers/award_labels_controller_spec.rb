@@ -227,14 +227,14 @@ describe AwardLabelsController do
     describe "GET normal_labels" do
       it "renders" do
         get :normal_labels, params: { user_id: @admin_user.to_param }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
     describe "GET announcer_sheet" do
       it "renders" do
         get :normal_labels, params: { user_id: @admin_user.to_param }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

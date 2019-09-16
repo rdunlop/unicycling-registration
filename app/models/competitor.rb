@@ -58,7 +58,7 @@ class Competitor < ApplicationRecord
   belongs_to :competition, touch: true, inverse_of: :competitors
   belongs_to :age_group_entry
 
-  acts_as_restful_list scope: :competition
+  acts_as_list scope: :competition
 
   accepts_nested_attributes_for :members, allow_destroy: true
 

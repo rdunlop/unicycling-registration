@@ -9,14 +9,14 @@ describe Printing::RaceRecordingController do
   describe "#instructions" do
     it "renders" do
       get :instructions
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "#blank" do
     it "renders" do
       get :blank
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

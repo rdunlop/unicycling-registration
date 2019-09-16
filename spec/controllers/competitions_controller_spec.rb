@@ -54,7 +54,7 @@ describe CompetitionsController do
   describe "#show" do
     it "renders successfully" do
       get :show, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -72,7 +72,7 @@ describe CompetitionsController do
   describe "#set_sort" do
     it "renders" do
       get :set_sort, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -113,7 +113,7 @@ describe CompetitionsController do
   describe "#result" do
     it "renders" do
       get :result, params: { id: competition.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

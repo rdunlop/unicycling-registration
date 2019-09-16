@@ -32,7 +32,7 @@ describe StandardSkillEntriesController do
     it "returns http success" do
       FactoryBot.create(:standard_skill_entry, description: "first skill")
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_match(/first skill/, response.body)
     end

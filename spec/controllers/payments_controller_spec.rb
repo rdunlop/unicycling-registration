@@ -78,7 +78,7 @@ describe PaymentsController do
 
       it "can read index" do
         get :index, params: { user_id: @user.id }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "receives a list of payments" do
@@ -106,7 +106,7 @@ describe PaymentsController do
 
     it "can get the registrants payments" do
       get :registrant_payments, params: { id: @reg }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     describe "as a normal user" do
@@ -351,7 +351,7 @@ describe PaymentsController do
 
       it "renders" do
         get :offline
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

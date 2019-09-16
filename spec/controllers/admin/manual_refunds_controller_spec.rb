@@ -14,7 +14,7 @@ describe Admin::ManualRefundsController do
   describe "GET new" do
     it "renders" do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -29,7 +29,7 @@ describe Admin::ManualRefundsController do
     context "with registrant_ids" do
       it "renders" do
         get :choose, params: { registrant_ids: [registrant.id] }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

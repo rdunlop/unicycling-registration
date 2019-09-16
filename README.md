@@ -268,6 +268,30 @@ Set the following settings
     NEW_RELIC_LICENSE_KEY=<key>
     NEW_RELIC_APP_NAME=<name you would like to appear in NewRelic panel>
 
+IUF Membership Integration
+--------------------------
+
+The registration system can be configured to be integrated with the [IUF Membership System](https://iuf-membership.unicycling-software.com).
+
+If this feature is enabled, it will prevent users from completing/paying for their registration
+unless they are current IUF members.
+
+To configure the system to be able to offer this, set the following setting in the `.env.local` file.
+
+    IUF_MEMBERSHIP_API_URL
+
+USA Membership Integration
+--------------------------
+
+The registration system can be configured to be integrated with the [USA Membership System](https://unicyclingsocietyofamerica.wildapricot.org/).
+
+If this feature is enabled, it will /encourage/ users to pay for USA before completing their registration.
+
+To configure the system to be able to offer this, set the following setting in the `.env.local` file.
+
+    USA_WILDAPRICOT_ACCOUNT_ID
+    USA_WILDAPRICOT_API_KEY
+
 Seed Data
 ---------
 

@@ -44,7 +44,7 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :event_categories
   accepts_nested_attributes_for :translations
 
-  acts_as_restful_list scope: :category
+  acts_as_list scope: :category
 
   validates :name, presence: true
   validates :category, presence: true
@@ -53,15 +53,16 @@ class Event < ApplicationRecord
   default_scope { includes(:translations) }
 
   BEST_TIME_FORMATS = [
-    "none",
-    "h:mm",
-    "(m)m:ss.xx"
+    BEST_TIME_FORMAT_NONE = "none".freeze,
+    BEST_TIME_FORMAT_HOUR_MINUTE = "h:mm".freeze,
+    BEST_TIME_FORMAT_HOUR_MINUTE_SECOND = "(m)m:ss.xx".freeze,
+    BEST_TIME_FORMAT_CENTIMETER = "cm".freeze
   ].freeze
 
   validates :best_time_format, presence: true, inclusion: BEST_TIME_FORMATS
 
   def best_time?
-    best_time_format != "none"
+    best_time_format != BEST_TIME_FORMAT_NONE
   end
 
   before_validation :build_event_category

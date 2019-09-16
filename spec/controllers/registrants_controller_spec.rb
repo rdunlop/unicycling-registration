@@ -206,7 +206,7 @@ describe RegistrantsController do
     end
   end
 
-  describe "PUT refresh_usa_status" do
+  describe "PUT refresh_organization_status" do
     before do
       sign_in @user
     end
@@ -214,8 +214,8 @@ describe RegistrantsController do
     let(:registrant) { FactoryBot.create(:competitor, user: @user) }
 
     it "renders blank page" do
-      put :refresh_usa_status, params: { id: registrant.to_param }
-      expect(response).to be_success
+      put :refresh_organization_status, params: { id: registrant.to_param }
+      expect(response).to be_successful
     end
   end
 end

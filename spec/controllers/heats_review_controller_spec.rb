@@ -24,7 +24,7 @@ describe HeatReviewController do
     before { get :show, params: { competition_id: @competition.id, heat: @lane_assignment.heat } }
 
     it do
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

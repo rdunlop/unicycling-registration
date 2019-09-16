@@ -45,7 +45,7 @@ class ExpenseItem < ApplicationRecord
     message: "- You cannot add a 2nd item to this Expense Group. Using the Expense Group option 'competitor/non-competitor required' means only ONE item can exist in this expense group"
   }, if: -> { (expense_group.try(:competitor_required) == true) || (expense_group.try(:noncompetitor_required) == true) }
 
-  acts_as_restful_list scope: :expense_group
+  acts_as_list scope: :expense_group
 
   before_destroy :check_for_payment_details
 

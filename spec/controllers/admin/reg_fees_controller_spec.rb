@@ -9,7 +9,7 @@ describe Admin::RegFeesController do
   describe "GET index" do
     it "can view the index" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

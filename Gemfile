@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '= 5.1.6.1'
+gem 'rails', '= 5.2.3'
 
 # Authentication
 gem 'devise'
@@ -43,6 +43,7 @@ gem 'tinymce-rails'
 gem 'acme-client'
 gem 'apartment_acme_client'
 gem 'aws-sdk-rails'
+gem 'dotenv-rails'
 gem 'eye-patch', require: false
 gem 'gaffe'
 gem 'http_accept_language'
@@ -81,9 +82,9 @@ gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 supp
 # https://github.com/influitive/apartment-sidekiq/pull/19
 
 # Model utils
-gem 'acts_as_restful_list', github: 'rdunlop/acts_as_restful_list'
+gem 'acts_as_list'
 gem 'carrierwave'
-gem 'carrierwave-aws', '1.3.0'
+gem 'carrierwave-aws', '1.4.0'
 gem 'carrierwave-i18n'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
 gem 'nilify_blanks'

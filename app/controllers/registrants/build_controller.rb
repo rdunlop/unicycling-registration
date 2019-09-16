@@ -9,7 +9,7 @@ class Registrants::BuildController < ApplicationController
   before_action :load_categories, only: %i[show update add_events] # rubocop:disable Rails/LexicallyScopedActionFilter
   layout "wizard"
 
-  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses].freeze
+  ALL_STEPS = %i[add_name add_events set_wheel_sizes add_volunteers add_contact_details lodging expenses set_organization_membership].freeze
 
   rescue_from Wicked::Wizard::InvalidStepError, with: :step_not_found
 
@@ -76,7 +76,7 @@ class Registrants::BuildController < ApplicationController
 
     # If there's an organization_membership record, the USA checking will happen after
     # that is created.
-    @registrant.skip_usa_membership_checking = true if @organization_membership
+    @registrant.skip_organization_membership_checking = true if @organization_membership
 
     @registrant.status = "base_details"
     if @registrant.save

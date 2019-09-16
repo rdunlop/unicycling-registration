@@ -19,7 +19,7 @@ class VolunteerOpportunity < ApplicationRecord
   validates :description, presence: true
   validates :description, uniqueness: true
 
-  acts_as_restful_list
+  acts_as_list
 
   default_scope { order(:position) }
   has_many :volunteer_choices, dependent: :destroy

@@ -14,7 +14,7 @@ describe Printing::EventsController do
     it "renders" do
       event
       get :results, params: { id: event.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

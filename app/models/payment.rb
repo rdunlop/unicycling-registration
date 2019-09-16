@@ -219,11 +219,11 @@ class Payment < ApplicationRecord
 
   # Has this pamyent just transitioned into offline_payment or into completed?
   def just_completed_or_offline_payment?
-    (completed? && completed_changed?) || (offline_pending? && offline_pending_changed?)
+    (completed? && saved_change_to_completed?) || (offline_pending? && saved_change_to_offline_pending?)
   end
 
   # has an offline payment now transitioned to completed?
   def offline_payment_now_completed?
-    offline_pending_was && (completed? && completed_changed?)
+    offline_pending_before_last_save && (completed? && saved_change_to_completed?)
   end
 end

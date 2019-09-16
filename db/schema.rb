@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190727154033) do
+ActiveRecord::Schema.define(version: 2019_09_10_133523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -426,6 +426,7 @@ ActiveRecord::Schema.define(version: 20190727154033) do
     t.boolean "require_medical_certificate", default: false, null: false
     t.integer "medical_certificate_info_page_id"
     t.integer "volunteer_option_page_id"
+    t.datetime "add_expenses_end_date"
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|

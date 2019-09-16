@@ -14,7 +14,7 @@ class Category < ApplicationRecord
   include CachedModel
   include PageOrUrlLink
 
-  acts_as_restful_list
+  acts_as_list
   default_scope { order(:position) }
 
   has_many :events, -> { order("events.position") }, dependent: :destroy, inverse_of: :category

@@ -1,0 +1,12 @@
+= form_for(@registrant, url: wizard_path, method: :put) do |f|
+  %fieldset.row
+    %legend= t(".set_organization_membership")
+
+    - if @registrant.errors.any?
+      = render partial: "shared/error_messages", object: @registrant
+    .row
+      .small-12.large-12.columns
+        = render "/registrants/build/organization_membership/form", reg_f: f
+
+
+    = render partial: "/registrants/form_actions", locals: {f: f}

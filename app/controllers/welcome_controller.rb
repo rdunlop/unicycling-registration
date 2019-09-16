@@ -10,9 +10,6 @@ class WelcomeController < ApplicationController
     @user = current_user
   end
 
-  # GET /welcome/usa_membership
-  def usa_membership; end
-
   # GET /welcome/changelog
   def changelog; end
 

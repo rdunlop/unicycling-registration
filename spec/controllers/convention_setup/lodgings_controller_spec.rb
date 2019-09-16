@@ -22,7 +22,7 @@ describe ConventionSetup::LodgingsController do
     it "shows all lodgings" do
       lodging = FactoryBot.create(:lodging)
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "td", lodging.name
     end
@@ -31,7 +31,7 @@ describe ConventionSetup::LodgingsController do
   describe "GET new" do
     it "renders" do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -39,7 +39,7 @@ describe ConventionSetup::LodgingsController do
     it "shows the lodging form" do
       lodging = FactoryBot.create(:lodging)
       get :edit, params: { id: lodging.id }
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "form", action: edit_convention_setup_lodging_path(lodging), method: "put" do
         assert_select "input#lodging_name", name: "lodging[name]"
@@ -65,7 +65,7 @@ describe ConventionSetup::LodgingsController do
 
     it "shows the lodging" do
       get :show, params: { id: lodging.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

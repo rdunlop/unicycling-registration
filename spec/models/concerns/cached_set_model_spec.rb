@@ -53,7 +53,7 @@ class CachedSetModelTest
   include CachedSetModel
 end
 
-shared_examples_for "does update the global key" do
+shared_examples_for "csm: does update the global key" do
   it "updates the global key" do
     original_key = CachedSetModelTest.cache_key_for_set(key)
     travel 2.seconds do
@@ -63,7 +63,7 @@ shared_examples_for "does update the global key" do
   end
 end
 
-shared_examples_for "does not update the global key" do
+shared_examples_for "csm: does not update the global key" do
   it "does not update the global key" do
     original_key = CachedSetModelTest.cache_key_for_set(key)
     travel 2.seconds do
@@ -86,7 +86,7 @@ describe "CachedSetModel", caching: true do
   describe "touch" do
     let(:do_action) { model.touch }
 
-    it_behaves_like "does update the global key"
+    it_behaves_like "csm: does update the global key"
   end
 
   describe "when nothing is changed" do
@@ -96,7 +96,7 @@ describe "CachedSetModel", caching: true do
 
     let(:do_action) { model.save }
 
-    it_behaves_like "does not update the global key"
+    it_behaves_like "csm: does not update the global key"
   end
 
   describe "when a field has changed" do
@@ -105,6 +105,6 @@ describe "CachedSetModel", caching: true do
 
     let(:do_action) { model.save }
 
-    it_behaves_like "does update the global key"
+    it_behaves_like "csm: does update the global key"
   end
 end

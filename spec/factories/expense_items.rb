@@ -28,7 +28,6 @@ FactoryBot.define do
   factory :expense_item do
     sequence(:name) { |n| "T-Shirt Size ##{n}" }
     cost { "9.99" }
-    position { 1 }
     expense_group # FactoryBot
     has_details { false }
     has_custom_cost { false }

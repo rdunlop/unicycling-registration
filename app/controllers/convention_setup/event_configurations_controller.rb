@@ -198,7 +198,8 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
       :event_sign_up_closed_date,
       :start_date,
       :age_calculation_base_date,
-      :lodging_end_date
+      :lodging_end_date,
+      :add_expenses_end_date
     )
   end
 

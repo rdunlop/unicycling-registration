@@ -95,13 +95,13 @@ class RegistrantEventSignUp < ApplicationRecord
   def mark_member_as_dropped
     # was signed up and now we are not
     # Find any members which are assigned to competitions, and mark them as "withdrawn"
-    if signed_up_was && signed_up_changed? && !signed_up
-      drop_from_event_category(event_category_id_was)
+    if signed_up_before_last_save && saved_change_to_signed_up? && !signed_up
+      drop_from_event_category(event_category_id_before_last_save)
     end
 
     # handle changing category, while still signed up.
-    if signed_up && signed_up_was && event_category_id_changed? && !event_category_id_was.nil?
-      drop_from_event_category(event_category_id_was)
+    if signed_up && signed_up_before_last_save && saved_change_to_event_category_id? && !event_category_id_before_last_save.nil?
+      drop_from_event_category(event_category_id_before_last_save)
     end
   end
 

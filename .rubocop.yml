@@ -15,6 +15,9 @@ Rails:
 
 inherit_from: .rubocop_todo.yml
 
+Rails/BulkChangeTable:
+  Enabled: false
+
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
   Enabled: true

@@ -30,6 +30,7 @@ en:
   organization_membership_types:
     usa: USA
     french_federation: French Federation
+    iuf: IUF
   membership_number: Membership Number
   pdf: "(pdf)"
   wizard:
@@ -41,6 +42,7 @@ en:
     expenses: Expenses
     music: Music
     set_wheel_sizes: Wheel Sizes
+    set_organization_membership: Organization Membership
   'yes': 'Yes'
   validations:
     duplicate: "Must be unique"

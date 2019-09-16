@@ -27,7 +27,7 @@ describe CompetitionWheelSizesController do
   describe "GET index" do
     it "renders" do
       get :index, params: { registrant_id: registrant.bib_number }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

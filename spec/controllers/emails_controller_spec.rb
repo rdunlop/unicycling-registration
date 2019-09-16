@@ -9,21 +9,21 @@ describe EmailsController do
   describe "GET index" do
     it "can view the page" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET list" do
     it "can view the page" do
       get :list, params: { filter_email: { filter: "confirmed_accounts" } }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET download" do
     it "can view the page" do
       get :download
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -31,14 +31,14 @@ describe EmailsController do
     it "can view the page" do
       mass_email = FactoryBot.create(:mass_email)
       get :sent, params: { id: mass_email.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET all_sent" do
     it "can view the page" do
       get :all_sent
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

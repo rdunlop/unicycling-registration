@@ -26,7 +26,7 @@ describe Admin::RegistrantsController do
     describe "GET manage_one" do
       it "renders" do
         get :manage_one
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

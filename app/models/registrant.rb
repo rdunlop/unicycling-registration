@@ -41,8 +41,8 @@ class Registrant < ApplicationRecord
   extend OrderAsSpecified
 
   after_save :touch_members
-  attr_accessor :skip_usa_membership_checking
-  after_commit :update_usa_membership_status, if: proc { EventConfiguration.singleton.organization_membership_usa? }
+  attr_accessor :skip_organization_membership_checking
+  after_commit :update_organization_membership_status, if: proc { EventConfiguration.singleton.organization_membership_config.automated_checking? }
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }
 
@@ -158,12 +158,13 @@ class Registrant < ApplicationRecord
 
   mount_uploader :medical_certificate, PdfUploader
 
-  # Organization Membership
-  delegate :member_number, :system_member_number, :manual_member_number, :manually_confirmed?, :system_confirmed?, :system_status, to: :organization_membership, prefix: true, allow_nil: true
-
   # Expense items/LineItems
   validates_associated :registrant_expense_items
   validate :has_necessary_items?, if: :validated?
+
+  # Organization Membership
+  delegate :member_number, :system_member_number, :manual_member_number, :manually_confirmed?, :system_confirmed?, :system_status, to: :organization_membership, prefix: true, allow_nil: true
+  validate :check_organization_membership, if: :needs_organization_membership?
 
   scope :active_or_incomplete, -> { not_deleted.order(:bib_number) }
   scope :active, -> { where(status: "active").active_or_incomplete }
@@ -452,8 +453,6 @@ class Registrant < ApplicationRecord
   end
 
   def organization_membership_confirmed?
-    return false unless validated?
-
     organization_membership.try(:organization_membership_confirmed?)
   end
 
@@ -575,6 +574,13 @@ class Registrant < ApplicationRecord
   def needs_rules_accepted?
     EventConfiguration.singleton.accept_rules? && status_is_active?("contact_details")
   end
+
+  def needs_organization_membership?
+    return false if spectator?
+    return false unless EventConfiguration.singleton.organization_membership_config.active_membership_required?
+
+    status_is_active?("active")
+  end
   # end Wizard
 
   # returns true if it should be rejected
@@ -599,12 +605,12 @@ class Registrant < ApplicationRecord
     ChoicesValidator.new(self).validate
   end
 
-  # Queue a job to query the USA db for membership information
-  def update_usa_membership_status
-    return if skip_usa_membership_checking
+  # Queue a job to query the IUF/USA db for membership information
+  def update_organization_membership_status
+    return if skip_organization_membership_checking
     return unless previous_changes.key?(:last_name) || previous_changes.key?(:first_name) || previous_changes.key?(:birthday)
 
-    UpdateUsaMembershipStatusWorker.perform_async(id)
+    UpdateOrganizationMembershipStatusWorker.perform_async(id)
   end
 
   def set_access_code
@@ -668,5 +674,12 @@ class Registrant < ApplicationRecord
         errors.add(:base, "You must choose a wheel size of 24\" if you are > #{max_config_age} years old")
       end
     end
+  end
+
+  def check_organization_membership
+    return if organization_membership.organization_membership_confirmed?
+
+    organization_config = EventConfiguration.singleton.organization_membership_config
+    errors.add(:base, "Must have a current #{organization_config.title} membership")
   end
 end

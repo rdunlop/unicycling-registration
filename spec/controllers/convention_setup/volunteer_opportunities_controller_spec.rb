@@ -26,7 +26,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
     it "shows all volunteer opportunities" do
       volunteer_opportunity = FactoryBot.create(:volunteer_opportunity)
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
       assert_select "h1", "Volunteer Opportunities"
       assert_select "td", volunteer_opportunity.description
     end
@@ -35,7 +35,7 @@ describe ConventionSetup::VolunteerOpportunitiesController do
   describe "GET new" do
     it "lists the new opportunity" do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
 
       assert_select "form#new_volunteer_opportunity", action: convention_setup_volunteer_opportunities_path, method: "post" do
         assert_select "input#volunteer_opportunity_description", name: "volunteer_opportunity[description]"

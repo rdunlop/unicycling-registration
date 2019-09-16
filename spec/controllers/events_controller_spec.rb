@@ -57,7 +57,7 @@ describe EventsController do
     it "shows all events" do
       event
       get :summary
-      expect(response).to be_success
+      expect(response).to be_successful
       assert_select "td", event.event_categories.first.to_s
     end
     describe "With competitors and non-competitors" do
@@ -85,7 +85,7 @@ describe EventsController do
   describe "GET general_volunteers" do
     it "returns all general volunteers" do
       get :general_volunteers
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -94,14 +94,14 @@ describe EventsController do
 
     it "returns a list" do
       get :specific_volunteers, params: { volunteer_opportunity_id: volunteer_opportunity.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET sign_ups" do
     it "returns all sign ups" do
       get :sign_ups, params: { id: event.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 end

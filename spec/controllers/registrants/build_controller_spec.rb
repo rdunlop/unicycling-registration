@@ -8,7 +8,7 @@ describe Registrants::BuildController do
 
     allow_any_instance_of(EventConfiguration).to receive(:registration_closed?).and_return(false)
     allow_any_instance_of(EventConfiguration).to receive(:organization_membership_config?).and_return(true)
-    allow_any_instance_of(EventConfiguration).to receive(:organization_membership_usa?).and_return(true)
+    allow_any_instance_of(EventConfiguration).to receive(:organization_membership_config).and_return(Organization::Usa.new)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -51,7 +51,7 @@ describe Registrants::BuildController do
 
       it "displays the contact detail form" do
         get :show, params: { registrant_id: registrant.to_param, id: "add_contact_details" }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
