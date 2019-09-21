@@ -28,9 +28,13 @@ class Admin::PermissionsController < ApplicationController
     new_password = params[:password]
 
     @user.password = new_password
-    @user.save!
-    @user.confirm
-    flash[:notice] = "Updated Password for #{@user}"
+
+    if @user.save
+      @user.confirm
+      flash[:notice] = "Updated Password for #{@user}"
+    else
+      flash[:alert] = "Invalid Password"
+    end
     redirect_to permissions_path
   end
 

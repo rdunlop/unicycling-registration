@@ -60,5 +60,12 @@ describe Admin::PermissionsController do
       expect(user.reload).to be_valid_password(new_password)
       expect(ActionMailer::Base.deliveries.count).to eq(0)
     end
+
+    context "when the password is blank" do
+      it "displays an error message" do
+        put :set_password, params: { user_id: user.id, password: "" }
+        expect(flash[:alert]).to match(/Invalid Password/)
+      end
+    end
   end
 end
