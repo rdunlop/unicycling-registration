@@ -68,7 +68,9 @@ class RegistrantCopier
 
   def previous_organization_membership_attributes
     organization_membership_attributes = {}
+    foreign_organization_membership_type = nil
     Apartment::Tenant.switch(subdomain) do
+      foreign_organization_membership_type = EventConfiguration.first.organization_membership_type
       previous_reg = Registrant.find(previous_id)
       if previous_reg.organization_membership.present?
         organization_membership = previous_reg.organization_membership
@@ -77,6 +79,8 @@ class RegistrantCopier
         end
       end
     end
+    return {} unless foreign_organization_membership_type == EventConfiguration.singleton.organization_membership_type
+
     organization_membership_attributes
   end
 end
