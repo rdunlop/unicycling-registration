@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe BibNumberUpdater do
-  INITIAL_NONCOMPETITOR_NUMBER = BibNumberFinder::FreeNumber.new("noncompetitor").range.first
+  before do
+    stub_const("INITIAL_NONCOMPETITOR_NUMBER", BibNumberFinder::FreeNumber.new("noncompetitor").range.first)
+  end
+
   let!(:competitor1) { FactoryBot.create(:competitor) }
   let!(:competitor2) { FactoryBot.create(:competitor) }
   let!(:competitor3) { FactoryBot.create(:competitor) }
