@@ -15,7 +15,7 @@ class SampleData::RegistrantsController < SampleData::BaseController
       registrant = Registrant.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        birthday: Faker::Date.between(5.years.ago, 55.years.ago),
+        birthday: Faker::Date.between(from: 5.years.ago, to: 55.years.ago),
         gender: ["Male", "Female"].sample,
         registrant_type: "competitor",
         ineligible: false,
