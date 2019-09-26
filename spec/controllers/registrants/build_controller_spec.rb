@@ -154,6 +154,7 @@ describe Registrants::BuildController do
         FactoryBot.create(:tenant, subdomain: "other")
         Apartment::Tenant.create("other")
         Apartment::Tenant.switch "other" do
+          FactoryBot.create(:event_configuration, organization_membership_type: "usa")
           @other_reg = FactoryBot.create(:competitor, user: user)
         end
       end
