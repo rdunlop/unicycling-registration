@@ -28,8 +28,8 @@ de:
         noncompetitor_benefits: Begleiter Vorteile
         offline_payment: Gib Details zur offline Zahlmethode an
         offline_payment_description: Details der offline Zahlmethode
-        paypal_account: Paypal Händler Account E-Mail
         payment_mode: Angemeldeter Modus
+        paypal_account: Paypal Händler Account E-Mail
         registrants_should_specify_default_wheel_size: Teilnehmer sollen ihre Standard
           Radgröße spezifizieren
         request_address: Adresse erfragen
