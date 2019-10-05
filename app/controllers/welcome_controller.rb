@@ -23,6 +23,7 @@ class WelcomeController < ApplicationController
   # depending on the configuration of the server.
   def index
     flash.keep
+
     # if this is the translation domain, put the user on the translation-instructions page
     if translation_domain?
       authenticate_user!
