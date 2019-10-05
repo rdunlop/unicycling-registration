@@ -28,8 +28,8 @@ fr:
         noncompetitor_benefits: Avantages des Non-Compétiteurs
         offline_payment: Configuration des détails sur le paiement hors ligne
         offline_payment_description: Détails pour le paiement hors ligne
-        paypal_account: Email du compte marchand PayPal
         payment_mode: Mode Payment
+        paypal_account: Email du compte marchand PayPal
         registrants_should_specify_default_wheel_size: Le compétiteur doit spécifier
           sa taille de roue par défaut
         request_address: Demander l'addresse
