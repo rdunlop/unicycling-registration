@@ -7,6 +7,11 @@ class BaseScoringClass
     @competition = competition
   end
 
+  # necessary for url_helpers to work properly
+  def url_options
+    { locale: I18n.locale }.merge(super)
+  end
+
   # describes how to label the results of this competition
   def result_description
     raise StandardError.new("No Result Description Defined")
