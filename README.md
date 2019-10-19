@@ -66,6 +66,8 @@ If we want to add a new language to the list of possible translations:
 
 3. Add the language to the `all_available_languages` in the EventConfiguration class
 
+4. Add the language to the `routes.rb` locale filter.
+
 4. Add the language to the select2_locale_* in application.js
 4. Choose the language in your Event Configuration.
 
