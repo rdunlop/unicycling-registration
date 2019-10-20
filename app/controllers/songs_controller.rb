@@ -21,7 +21,7 @@
 
 class SongsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_and_authorize_song, only: %i[destroy]
+  before_action :load_and_authorize_song, only: %i[destroy download]
 
   before_action :load_registrant_by_bib_number, only: %i[index create]
   before_action :load_songs, only: %i[index create]
@@ -82,6 +82,12 @@ class SongsController < ApplicationController
 
     @song.destroy
     redirect_to return_path, notice: 'Song was successfully deleted.'
+  end
+
+  # GET /songs/1
+  def download
+    # Do this so that we don't expose expiring-AWS urls
+    redirect_to @song.song_file_name_url
   end
 
   private

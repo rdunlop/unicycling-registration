@@ -30,5 +30,5 @@
         %td
           %audio{ controls: true, src: song.song_file_name.url }
             %a{ href: song.song_file_name.url } song.song_file_name.to_s
-          = link_to t(".download"), song.song_file_name.url, target: '_blank', download: true
+          = link_to t(".download"), download_song_path(song), download: song.human_name, target: "_blank"
         %td= link_to t(".remove"), song, method: :delete, data: { confirm: t("are_you_sure") }
