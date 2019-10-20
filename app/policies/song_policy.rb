@@ -14,6 +14,10 @@ class SongPolicy < ApplicationPolicy
     !config.music_submission_ended? || super_admin?
   end
 
+  def download?
+    user_song? || music_dj? || super_admin?
+  end
+
   private
 
   def music_management?

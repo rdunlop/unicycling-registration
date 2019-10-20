@@ -456,7 +456,11 @@ Rails.application.routes.draw do
       resources :competition_wheel_sizes, only: %i[index create destroy]
     end
 
-    resources :songs, only: [:destroy]
+    resources :songs, only: [:destroy] do
+      member do
+        get :download
+      end
+    end
 
     resources :standard_skill_routines, only: %i[show index] do
       member do
