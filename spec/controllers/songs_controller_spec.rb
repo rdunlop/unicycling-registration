@@ -100,4 +100,12 @@ describe SongsController do
       expect(response).to redirect_to(registrant_songs_path(@reg))
     end
   end
+
+  describe "GET download" do
+    it "downloads the song" do
+      song = FactoryBot.create(:song, registrant: @reg, user: @reg.user)
+      get :download, params: { id: song.to_param }
+      expect(response).to redirect_to(song.song_file_name_url)
+    end
+  end
 end

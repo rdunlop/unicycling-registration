@@ -23,4 +23,4 @@
           %td= song.human_name
           %td= song.updated_at
           %td
-            = link_to t('.download'), song.song_file_name_url, target: '_blank'
+            = link_to t('.download'), download_song_path(song), download: song.human_name, target: "_blank"
