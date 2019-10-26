@@ -34,6 +34,9 @@ class StripePaymentsController < ApplicationController
       end
     end
     redirect_to payment_path(payment), alert: "Error processing payment"
+  rescue Stripe::CardError => e
+    Rollbar.error(e)
+    redirect_to Payment_path(payment), alert: "Error processing payment #{e.error.message}"
   end
 
   def create_charge(token)
