@@ -63,4 +63,14 @@ describe Importers::CsvExtractor do
     expect(data.count).to eq(3) # 2 lines, including header
     expect(data[1].count).to eq(8)
   end
+
+  it "can handle files with extra newlines" do
+    sample_file = fixture_path + '/sample_time_results_bib_101_extra_lines.txt'
+    sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
+
+    subject = described_class.new(sample_input)
+    data = subject.extract_csv
+
+    expect(data.count).to eq(1)
+  end
 end
