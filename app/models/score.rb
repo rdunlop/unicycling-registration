@@ -62,7 +62,6 @@ class Score < ApplicationRecord
   # which will require comparing it against the scores this judge gave other competitors
   def placing_points(with_ineligible: true)
     return nil if invalid?
-    return nil if !with_ineligible && competitor.ineligible?
 
     score_totals = judge.score_totals(with_ineligible: with_ineligible)
 
