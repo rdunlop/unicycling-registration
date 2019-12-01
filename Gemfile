@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '= 5.2.3'
+gem 'rails', '5.2.4'
 
 # Authentication
 gem 'devise'

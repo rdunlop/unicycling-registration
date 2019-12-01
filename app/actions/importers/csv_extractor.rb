@@ -21,17 +21,19 @@ class Importers::CsvExtractor
     end
 
     begin
-      return attempt_parse(upload_file, "bom|UTF-8")
+      return clean_result(attempt_parse(upload_file, "bom|UTF-8"))
     rescue ParseError
       # If it fails to parse the file as UTF-8, try again
       begin
-        return attempt_parse(upload_file, "ISO-8859-1")
+        return clean_result(attempt_parse(upload_file, "ISO-8859-1"))
       rescue ParseError # rubocop:disable Lint/HandleExceptions
       end
     end
 
     raise CSV::MalformedCSVError.new("Unable to parse line")
   end
+
+  private
 
   def attempt_parse(upload_file, encoding)
     if upload_file.is_a?(Aws::S3::Object)
@@ -41,5 +43,10 @@ class Importers::CsvExtractor
     end
   rescue ArgumentError
     raise ParseError
+  end
+
+  # If there's an extra newline, ignore it
+  def clean_result(result)
+    result.each.select(&:present?)
   end
 end
