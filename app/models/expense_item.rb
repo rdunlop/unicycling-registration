@@ -247,6 +247,8 @@ class ExpenseItem < ApplicationRecord
   end
 
   def exactly_one_in_group_required?
+    return unless expense_group.present?
+
     expense_group.expense_group_options.any? do |ego|
       ego.option == ExpenseGroupOption::EXACTLY_ONE_IN_GROUP_REQUIRED
     end
