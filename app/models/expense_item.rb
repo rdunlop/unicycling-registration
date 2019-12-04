@@ -41,6 +41,7 @@ class ExpenseItem < ApplicationRecord
 
   belongs_to :cost_element, polymorphic: true, inverse_of: :expense_item
   belongs_to :expense_group, inverse_of: :expense_items
+  validate :must_be_free, if: :exactly_one_in_group_required?
   validates :expense_group_id, uniqueness: {
     message: "- You cannot add a 2nd item to this Expense Group. Using the Expense Group option 'competitor/non-competitor required' means only ONE item can exist in this expense group"
   }, if: -> { (expense_group.try(:competitor_required) == true) || (expense_group.try(:noncompetitor_required) == true) }
@@ -237,5 +238,17 @@ class ExpenseItem < ApplicationRecord
 
   def paid_free_items
     payment_details.completed.where(refunded: false).free
+  end
+
+  def must_be_free
+    return if cost_cents.to_i.zero?
+
+    errors.add(:cost, "Must be free if in using an expense group with the exactly_one option")
+  end
+
+  def exactly_one_in_group_required?
+    expense_group.expense_group_options.any? do |ego|
+      ego.option == ExpenseGroupOption::EXACTLY_ONE_IN_GROUP_REQUIRED
+    end
   end
 end

@@ -16,6 +16,8 @@ class ExpenseItemFreeChecker
         return !chosen_free_item_from_expense_group?(expense_item.expense_group)
       when ExpenseGroupOption::ONE_FREE_OF_EACH_IN_GROUP
         return !chosen_free_item_of_expense_item?(expense_item)
+      when ExpenseGroupOption::EXACTLY_ONE_IN_GROUP_REQUIRED
+        return true # All items are free in this group
       end
     end
 
@@ -36,6 +38,11 @@ class ExpenseItemFreeChecker
       when ExpenseGroupOption::ONE_FREE_OF_EACH_IN_GROUP
         if chosen_free_item_of_expense_item?(expense_item)
           @error_message = "Only 1 free item of this item is permitted"
+          return true
+        end
+      when ExpenseGroupOption::EXACTLY_ONE_IN_GROUP_REQUIRED
+        if chosen_free_item_from_expense_group?(expense_item.expense_group)
+          @error_message = "You can only choose a single option from this expense group"
           return true
         end
       end

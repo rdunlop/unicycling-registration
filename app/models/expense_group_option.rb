@@ -23,9 +23,10 @@ class ExpenseGroupOption < ApplicationRecord
   ONE_FREE_IN_GROUP = "One Free In Group".freeze
   ONE_IN_GROUP_REQUIRED = "One In Group REQUIRED".freeze
   ONE_FREE_OF_EACH_IN_GROUP = "One Free of Each In Group".freeze
+  EXACTLY_ONE_IN_GROUP_REQUIRED = "Exactly One Required In Group".freeze
 
   def self.options
-    [ONE_FREE_IN_GROUP, ONE_IN_GROUP_REQUIRED, ONE_FREE_OF_EACH_IN_GROUP]
+    [ONE_FREE_IN_GROUP, ONE_IN_GROUP_REQUIRED, ONE_FREE_OF_EACH_IN_GROUP, EXACTLY_ONE_IN_GROUP_REQUIRED]
   end
 
   validates :option, inclusion: { in: options }
