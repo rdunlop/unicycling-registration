@@ -43,7 +43,7 @@ class StripePaymentsController < ApplicationController
     Stripe::Charge.create(
       amount: payment.total_amount.cents,
       currency: @config.currency_code,
-      description: @payment.long_description,
+      description: @payment.long_description.truncate(499),
       source: token,
       metadata: metadata
     )
