@@ -52,7 +52,7 @@ class StripePaymentsController < ApplicationController
   def metadata
     {
       payment_id: payment.id,
-      details: payment.long_description
+      details: payment.long_description.truncate(499)
     }
   end
 end
