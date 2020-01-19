@@ -251,6 +251,8 @@ Rails.application.routes.draw do
 
     resources :coupon_code_summaries, only: [:show]
 
+    resource :convention_specific_rules, only: :show
+
     # This concern is exposed to the public for describing the system
     # as well as to Competition Admins for creating competitions
     concern :competition_choosable do
