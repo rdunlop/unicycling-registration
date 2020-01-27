@@ -6,7 +6,6 @@ class TenantCreationJob < ApplicationJob
     Apartment::Tenant.switch(tenant.subdomain) do
       Rails.application.load_seed
       Notifications.new_convention_created(tenant.description, tenant.subdomain).deliver_later
-      ApartmentAcmeClient::RenewalService.run! unless Rails.env.test?
     end
   end
 end
