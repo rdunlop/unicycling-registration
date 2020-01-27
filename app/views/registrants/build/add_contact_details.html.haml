@@ -22,7 +22,7 @@
     %br
     .data_block{:style => "margin-top:20px;"}
       = render :partial => "/registrants/rules_acceptance", :locals => {:f => f}
-  - if request_medical_certificate
+  - if request_medical_certificate && @registrant.competitor?
     %br
     .data_block{:style => "margin-top:20px;"}
       = render :partial => "/registrants/request_medical_certificate", :locals => {:f => f}
