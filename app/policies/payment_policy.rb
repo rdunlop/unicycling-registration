@@ -15,7 +15,7 @@ class PaymentPolicy < ApplicationPolicy
     !registration_closed? || super_admin?
   end
 
-  %i[create complete pay_offline apply_coupon].each do |meth|
+  %i[create advanced_stripe complete pay_offline apply_coupon].each do |meth|
     define_method("#{meth}?") do
       manage?
     end

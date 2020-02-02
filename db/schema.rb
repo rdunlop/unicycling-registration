@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_133523) do
+ActiveRecord::Schema.define(version: 2020_02_01_192420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -427,6 +427,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_133523) do
     t.integer "medical_certificate_info_page_id"
     t.integer "volunteer_option_page_id"
     t.datetime "add_expenses_end_date"
+    t.string "stripe_webhook_secret"
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|

@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_payments_breadcrumb
+  before_action :load_payment, only: %i[show advanced_stripe complete fake_complete admin_complete apply_coupon]
 
   # GET /users/12/payments
   # or
@@ -68,7 +69,6 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1
   def show
-    @payment = Payment.find(params[:id])
     authorize @payment
     add_breadcrumb t("new_payment", scope: "breadcrumbs")
   end
@@ -82,6 +82,47 @@ class PaymentsController < ApplicationController
     current_user.accessible_registrants.each do |reg|
       payment_creator.add_registrant(reg)
     end
+  end
+
+  # POST /payments/:id/advanced_stripe
+  # Create the StripeSession, and redirect to stripe immediately
+  def advanced_stripe
+    authorize @payment
+    unless @config.payment_type == "advanced_stripe"
+      flash[:alert] = "Error, not correct stripe configuration"
+      redirect_to root_path
+      return
+    end
+    line_items = []
+    @payment.unique_payment_details.each do |pd|
+      next if pd.amount == 0.to_money
+
+      # This must be in the format of "12.34" (no commas)
+      line_items << {
+        name: pd.to_s,
+        amount: pd.amount_cents,
+        currency: @config.currency_code,
+        quantity: pd.count.to_s
+      }
+    end
+
+    Stripe.api_key = @config.stripe_secret_key
+    stripe_session = Stripe::Checkout::Session.create(
+      client_reference_id: @payment.invoice_id,
+      customer_email: @payment.user.email,
+      locale: I18n.locale,
+      metadata: {
+        uni_invoice_id: @payment.invoice_id
+      },
+      mode: "payment",
+      success_url: success_payments_url,
+      cancel_url: user_payments_url(current_user),
+      payment_method_types: ['card'],
+      line_items: line_items,
+      submit_type: "pay"
+    )
+    @session_id = stripe_session.id
+    # renders the page, which then redirects to stripe.com for capture
   end
 
   # POST /payments
@@ -105,7 +146,6 @@ class PaymentsController < ApplicationController
   end
 
   def complete
-    @payment = Payment.find(params[:id])
     authorize @payment
     unless @payment.total_amount == 0.to_money
       flash[:alert] = "Please use Paypal to complete the payment"
@@ -120,7 +160,6 @@ class PaymentsController < ApplicationController
   end
 
   def fake_complete
-    @payment = Payment.find(params[:id])
     authorize @payment
 
     @payment.complete(note: "Fake_Complete")
@@ -129,7 +168,6 @@ class PaymentsController < ApplicationController
   end
 
   def apply_coupon
-    @payment = Payment.find(params[:id])
     authorize @payment
 
     action = CouponApplier.new(@payment, params[:coupon_code])
@@ -142,18 +180,21 @@ class PaymentsController < ApplicationController
   end
 
   def admin_complete
-    payment = Payment.find(params[:id])
-    authorize payment
+    authorize @payment
 
-    if payment.complete(note: params[:payment][:note])
-      ManualPaymentReceiver.send_emails(payment)
-      redirect_to payment_path(payment), notice: "Successfully created payment and sent e-mail"
+    if @payment.complete(note: params[:payment][:note])
+      ManualPaymentReceiver.send_emails(@payment)
+      redirect_to payment_path(@payment), notice: "Successfully created payment and sent e-mail"
     else
       redirect_to user_payments_path(current_user)
     end
   end
 
   private
+
+  def load_payment
+    @payment = Payment.find(params[:id])
+  end
 
   def payment_params
     params.require(:payment).permit(payment_details_attributes: %i[amount registrant_id line_item_id line_item_type details free _destroy])

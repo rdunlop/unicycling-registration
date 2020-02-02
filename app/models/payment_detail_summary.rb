@@ -37,6 +37,10 @@ class PaymentDetailSummary
     false
   end
 
+  def amount_cents
+    (amount.to_i * 100).round
+  end
+
   def ==(other)
     other.count == count &&
       other.payment_id == payment_id &&
