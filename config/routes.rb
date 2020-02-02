@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '422', to: 'errors#not_permitted'
   get '500', to: 'errors#internal_server_error'
 
+  post "/webhook/endpoint", to: "stripe_webhooks#create"
+
   scope "(:locale)", locale: /en|fr|de|hu|es|ja|ko|it|da|nl/ do
     resources :registrant_group_types, only: [:index] do
       shallow do
@@ -171,6 +173,7 @@ Rails.application.routes.draw do
         post :pay_offline
         post :apply_coupon
         post :stripe, controller: "stripe_payments"
+        post :advanced_stripe
       end
     end
     resources :pending_payments, only: [], controller: "admin/pending_payments" do

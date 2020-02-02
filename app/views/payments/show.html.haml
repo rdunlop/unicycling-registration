@@ -15,11 +15,13 @@
   .row
     = t(".please_proceed_with_payment")
     - if @payment.total_amount > 0.to_money
-      - if @config.online_payment?
-        - if @config.paypal_account?
-          = render "paypal_payment_form", payment: @payment, config: @config
-        - elsif @config.stripe_secret_key?
-          = render "stripe_payment_form", payment: @payment, config: @config
+      - case @config.payment_type
+      - when "paypal"
+        = render "paypal_payment_form", payment: @payment, config: @config
+      - when "stripe"
+        = render "stripe_payment_form", payment: @payment, config: @config
+      - when "advanced_stripe"
+        = render "stripe_advanced_payment_form", payment: @payment, config: @config, payment_intent: @payment_intent
     - else
       = form_tag complete_payment_path(@payment) do
         = submit_tag t(".complete_payment"), class: "payment_link"

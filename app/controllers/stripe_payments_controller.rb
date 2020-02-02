@@ -1,3 +1,4 @@
+# Handles the "old" stripe way, without webhooks
 class StripePaymentsController < ApplicationController
   before_action :skip_authorization
   skip_before_action :verify_authenticity_token
@@ -21,7 +22,7 @@ class StripePaymentsController < ApplicationController
     token = params[:stripeToken]
 
     if payment.completed
-      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: " + paypal.order_number).deliver_later
+      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: " + payment.invoice_id).deliver_later
     else
       charge = create_charge(token)
       if charge.captured

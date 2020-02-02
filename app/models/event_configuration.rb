@@ -137,6 +137,8 @@ class EventConfiguration < ApplicationRecord
   end
 
   validates :payment_mode, inclusion: { in: payment_modes }
+  after_commit :unregister_stripe_webhook_if_necessary
+  after_commit :register_stripe_webhook_if_necessary
 
   nilify_blanks only: %i[rulebook_url event_url], before: :validation
 
@@ -415,6 +417,27 @@ class EventConfiguration < ApplicationRecord
     paypal_account? || stripe_secret_key?
   end
 
+  # return a string describing the payment type, based on configuration
+  # "none"
+  # "paypal"
+  # "stripe"
+  # "advanced_stripe"
+  def payment_type
+    return "none" unless online_payment?
+
+    if paypal_account?
+      "paypal"
+    elsif stripe_secret_key?
+      if stripe_webhook_secret?
+        "advanced_stripe"
+      else
+        "stripe"
+      end
+    else
+      "none"
+    end
+  end
+
   private
 
   def is_date_in_the_past?(date)
@@ -440,6 +463,40 @@ class EventConfiguration < ApplicationRecord
   def stripe_or_paypal_only
     if paypal_account.present? && stripe_secret_key.present?
       errors.add(:paypal_account, "Cannot specify BOTH stripe AND paypal")
+    end
+  end
+
+  # Easy access to the subdomain url
+  include SubdomainHelper
+
+  # if the stripe keys have changed, and are now both present
+  # set a webhook
+  def register_stripe_webhook_if_necessary
+    return unless previous_changes_include?(:stripe_secret_key)
+
+    # secret key was changed
+
+    # we HAVE a secret_key
+    if stripe_secret_key.present?
+      domain = default_url_options[:host]
+      manager = StripeWebhook::Manager.new(stripe_secret_key, domain)
+      result = manager.register_callback
+      update(stripe_webhook_secret: result.secret)
+    end
+  end
+
+  # If the stripe keys were both present, and we had a registered webhook
+  # now unregister the webhook
+  def unregister_stripe_webhook_if_necessary
+    return unless previous_changes_include?(:stripe_secret_key)
+
+    # secret key was changed
+
+    # if we HAD a secret key
+    if previous_changes[:stripe_secret_key][0].present?
+      domain = default_url_options[:host]
+      manager = StripeWebhook::Manager.new(previous_changes[:stripe_secret_key][0], domain)
+      manager.unregister_callback
     end
   end
 end
