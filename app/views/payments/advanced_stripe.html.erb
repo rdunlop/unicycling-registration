@@ -1,0 +1,10 @@
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe("<%= @config.stripe_public_key %>");
+  stripe.redirectToCheckout({
+    sessionId: "<%= @session_id %>"
+  }).then(function (result) {
+    alert("Error with stripe checkout");
+    alert(result.error.message);
+  });
+</script>
