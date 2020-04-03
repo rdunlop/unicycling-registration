@@ -8,7 +8,7 @@ class EmailFilters::IncompleteRegistrants
   def self.config
     EmailFilters::BooleanType.new(
       filter: "incomplete_registrants",
-      description: "User Accounts with ANY Registrants who are incomplete"
+      description: "User+Registrants Accounts with ANY Registrants who are incomplete"
     )
   end
 

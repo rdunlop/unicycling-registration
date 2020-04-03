@@ -8,7 +8,7 @@ class EmailFilters::SignedUpCategory
   def self.config
     EmailFilters::SelectType.new(
       filter: "signed_up_category",
-      description: "Users who have SIGNED UP to any event in this category",
+      description: "Users+Registrants who have SIGNED UP to any event in this category",
       possible_arguments: ::Category.all
     )
   end
