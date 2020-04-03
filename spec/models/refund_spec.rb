@@ -41,4 +41,9 @@ describe Refund do
     @refund.note = ""
     expect(@refund.valid?).to eq(false)
   end
+
+  it "allows fractional percentages" do
+    @refund.percentage = 47.393
+    expect(@refund).to be_valid
+  end
 end

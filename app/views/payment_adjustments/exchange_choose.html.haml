@@ -22,7 +22,7 @@
 
 = form_tag exchange_create_payment_adjustments_path do
   = label_tag :note
-  = text_field_tag :note
+  = text_field_tag :note, maxlength: 255
   %br
   = label_tag :registrant_id
   = select_tag :registrant_id, options_from_collection_for_select(@registrants, "id", "to_s")
