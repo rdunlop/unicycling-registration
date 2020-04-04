@@ -470,7 +470,7 @@ GEM
       redis-actionpack (>= 5.0, < 6)
       redis-activesupport (>= 5.0, < 6)
       redis-store (>= 1.2, < 2)
-    redis-store (1.8.1)
+    redis-store (1.8.2)
       redis (>= 4, < 5)
     regexp_parser (1.6.0)
     remotipart (1.4.4)
