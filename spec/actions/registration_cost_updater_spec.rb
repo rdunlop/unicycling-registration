@@ -1,13 +1,15 @@
 require 'spec_helper'
 
 describe "when testing the update function for registration costs", caching: true do
+  let(:current_date) { Date.current }
+
   before do
     @reg = FactoryBot.create(:competitor) # will have rp1
     @nc_reg = FactoryBot.create(:noncompetitor) # will have rp1
     ActionMailer::Base.deliveries.clear
     # create a rp which encompasses "today"
-    @comp_registration_cost1 = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
-    @noncomp_registration_cost1 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 12, 21), end_date: Date.new(2020, 11, 7))
+    @comp_registration_cost1 = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2012, 12, 21), end_date: current_date)
+    @noncomp_registration_cost1 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2012, 12, 21), end_date: current_date)
   end
 
   it "automatically has the current_period set" do
@@ -20,7 +22,7 @@ describe "when testing the update function for registration costs", caching: tru
   end
 
   it "(when looking 3 days in the future) says that an update has not yet been done" do
-    expect(RegistrationCostUpdater.update_checked_recently?(Date.current + 3.days)).to eq(false)
+    expect(RegistrationCostUpdater.update_checked_recently?(current_date + 3.days)).to eq(false)
   end
 
   it "initially, the registrant has an expense_item from the current period" do
@@ -47,8 +49,8 @@ describe "when testing the update function for registration costs", caching: tru
     end
 
     it "doesn't update this registrants' items when moving to the next period" do
-      FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-      travel_to Date.new(2020, 12, 1) do
+      FactoryBot.create(:registration_cost, :competitor, start_date: current_date + 1.day, end_date: current_date + 1.year)
+      travel_to current_date + 1.month do
         RegistrationCostUpdater.new("competitor").update_current_period
       end
       @reg.reload
@@ -57,19 +59,19 @@ describe "when testing the update function for registration costs", caching: tru
   end
 
   describe "when updating to the next period" do
-    let!(:comp_registration_cost2) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
-    let!(:noncomp_registration_cost2) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1)) }
+    let!(:comp_registration_cost2) { FactoryBot.create(:registration_cost, :competitor, start_date: current_date + 1.day, end_date: current_date + 1.year) }
+    let!(:noncomp_registration_cost2) { FactoryBot.create(:registration_cost, :noncompetitor, start_date: current_date + 1.day, end_date: current_date + 1.year) }
 
     before do
       ActionMailer::Base.deliveries.clear
-      travel_to Date.new(2020, 12, 1) do
+      travel_to current_date + 1.month do
         @ret = RegistrationCostUpdater.new("competitor").update_current_period
         @ret = RegistrationCostUpdater.new("noncompetitor").update_current_period
       end
     end
 
     it "indicates that the new period has been recently updated" do
-      expect(RegistrationCostUpdater.update_checked_recently?(Date.new(2020, 12, 2))).to eq(true)
+      expect(RegistrationCostUpdater.update_checked_recently?(current_date + 1.month + 1.day)).to eq(true)
     end
 
     it "indicates that it updated" do
@@ -94,7 +96,7 @@ describe "when testing the update function for registration costs", caching: tru
   describe "when updating to a non-existent period" do
     before do
       ActionMailer::Base.deliveries.clear
-      travel_to Date.new(2020, 12, 1) do
+      travel_to current_date + 1.month do
         @ret = RegistrationCostUpdater.new("competitor").update_current_period
       end
     end
@@ -124,9 +126,9 @@ describe "when testing the update function for registration costs", caching: tru
 
     describe "when updating to a now-existent period" do
       before do
-        @comp_registration_cost2 = FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-        @noncomp_registration_cost2 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: Date.new(2020, 11, 8), end_date: Date.new(2021, 1, 1))
-        travel_to Date.new(2020, 12, 1) do
+        @comp_registration_cost2 = FactoryBot.create(:registration_cost, :competitor, start_date: current_date + 1.day, end_date: current_date + 1.year)
+        @noncomp_registration_cost2 = FactoryBot.create(:registration_cost, :noncompetitor, start_date: current_date + 1.day, end_date: current_date + 1.year)
+        travel_to current_date + 1.month do
           ActionMailer::Base.deliveries.clear
           @ret = RegistrationCostUpdater.new("competitor").update_current_period
           @ret = RegistrationCostUpdater.new("noncompetitor").update_current_period
