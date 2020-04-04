@@ -8,7 +8,7 @@ class EmailFilters::ExpenseItem
   def self.config
     EmailFilters::SelectType.new(
       filter: "expense_item",
-      description: "Users who have PAID for a particular Expense Item",
+      description: "Users+Registrants who have PAID for a particular Expense Item",
       possible_arguments: ::ExpenseItem.all,
       custom_show_argument: proc { |element| [element.to_s, element.id] }
     )
