@@ -84,7 +84,7 @@ gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 supp
 # Model utils
 gem 'acts_as_list'
 gem 'carrierwave'
-gem 'carrierwave-aws', '1.4.0'
+gem 'carrierwave-aws', '1.5.0'
 gem 'carrierwave-i18n'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
 gem 'nilify_blanks'
