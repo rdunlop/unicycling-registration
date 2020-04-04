@@ -8,7 +8,7 @@ class EmailFilters::Country
   def self.config
     EmailFilters::SelectType.new(
       filter: "country",
-      description: "Users who have select that they are representing the given country",
+      description: "Users+Registrants who have select that they are representing the given country",
       possible_arguments: ISO3166::Country.all,
       custom_show_argument: proc { |element| [element.to_s, element.alpha2] },
       custom_policy: proc { |user| Pundit.policy(user, User).contact_registrants? }

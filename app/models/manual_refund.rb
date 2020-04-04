@@ -46,7 +46,7 @@ class ManualRefund
   attribute :note, String
 
   attribute :user, User
-  attribute :percentage, Integer
+  attribute :percentage, Float
   validates :note, :percentage, presence: true
   validate :at_least_one_refunded_element
 

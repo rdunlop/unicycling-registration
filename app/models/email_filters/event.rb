@@ -8,7 +8,7 @@ class EmailFilters::Event
   def self.config
     EmailFilters::SelectType.new(
       filter: "event",
-      description: "Users who have SIGNED UP for an Event",
+      description: "Users+Registrants who have SIGNED UP for an Event",
       possible_arguments: ::Event.all,
       custom_show_argument: proc { |element| ["#{element.category} - #{element}", element.id] }
     )

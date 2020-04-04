@@ -23,5 +23,5 @@
             %br
         %td
           = simple_form_for(pending_payment, url: pay_pending_payment_path(pending_payment), method: :post) do |pf|
-            = pf.input :note
+            = pf.input :note, maxlength: 255
             = pf.submit t(".mark_as_received", payment_number: pending_payment.id), class: "payment_link"

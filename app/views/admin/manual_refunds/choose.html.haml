@@ -9,18 +9,19 @@
     .small-6.columns.text-right
       = pf.label :note
     .small-6.columns
-      = pf.text_field :note
+      = pf.text_field :note, maxlength: 255
   .row
     .small-6.columns.text-right
       = pf.label :percentage
     .small-6.columns
-      = pf.number_field :percentage
+      = pf.number_field :percentage, step: 0.00001
 
   %h1= t(".paid_items")
   .payment_instructions= t(".choose_items")
   %table.sortable
     %thead
       %tr
+        %th= Registrant.human_attribute_name(:bib_number)
         %th= Registrant.model_name.human
         %th= ExpenseItem.model_name.human
         %th= ExpenseItem.human_attribute_name(:cost)
@@ -31,6 +32,8 @@
     %tbody
       = pf.fields_for :items do |paid_detail|
         %tr
+          %td
+            = paid_detail.object.registrant.bib_number
           %td
             = paid_detail.object.registrant
             = paid_detail.hidden_field :paid_detail_id
@@ -43,6 +46,7 @@
 
     %tfoot
       %tr
+        %th
         %th
         %th= ExpenseItem.human_attribute_name(:total)
         %th.js--total

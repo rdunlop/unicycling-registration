@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '5.2.4'
+gem 'rails', '5.2.4.2'
 
 # Authentication
 gem 'devise'
@@ -84,7 +84,7 @@ gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 supp
 # Model utils
 gem 'acts_as_list'
 gem 'carrierwave'
-gem 'carrierwave-aws', '1.4.0'
+gem 'carrierwave-aws', '1.5.0'
 gem 'carrierwave-i18n'
 gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
 gem 'nilify_blanks'

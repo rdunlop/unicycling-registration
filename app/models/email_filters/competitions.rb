@@ -8,7 +8,7 @@ class EmailFilters::Competitions
   def self.config
     EmailFilters::SelectType.new(
       filter: "competition",
-      description: "Users who are assigned to a competition",
+      description: "Users+Registrants who are assigned to a competition",
       possible_arguments: Competition.event_order.all,
       input_type: :multi_select
     )

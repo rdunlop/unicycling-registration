@@ -16,7 +16,7 @@ describe Admin::RegFeesController do
   describe "POST change the reg fee" do
     before do
       @rp1 = FactoryBot.create(:registration_cost, start_date: Date.new(2010, 1, 1), end_date: Date.new(2012, 1, 1))
-      @rp2 = FactoryBot.create(:registration_cost, start_date: Date.new(2012, 1, 2), end_date: Date.new(2020, 2, 2))
+      @rp2 = FactoryBot.create(:registration_cost, start_date: Date.new(2012, 1, 2), end_date: 2.years.from_now)
       @reg = FactoryBot.create(:competitor)
     end
 

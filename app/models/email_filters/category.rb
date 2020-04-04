@@ -8,7 +8,7 @@ class EmailFilters::Category
   def self.config
     EmailFilters::SelectType.new(
       filter: "category",
-      description: "Users who are assigned to any competition in this category",
+      description: "Users+Registrants who are assigned to any competition in this category",
       possible_arguments: ::Category.all
     )
   end

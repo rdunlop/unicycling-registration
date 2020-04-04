@@ -31,7 +31,7 @@
       %fieldset.admin_payment.is--hidden
         = simple_form_for @payment, url: admin_complete_payment_path(@payment), method: :post do |f|
           -# Should make this only appear when clicked, and should outline it to make it a group.
-          = f.input :note
+          = f.input :note, maxlength: 255
           = f.submit "Mark as Paid (admin function)", class: "button warning"
       %br
 

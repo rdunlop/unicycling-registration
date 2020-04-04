@@ -8,7 +8,7 @@ class EmailFilters::NonConfirmedOrganizationMembers
   def self.config
     EmailFilters::BooleanType.new(
       filter: "non_confirmed_organization_members",
-      description: "User Accounts with Registrants who are not Unicycling-Organization-Members"
+      description: "User+Registrants Accounts with Registrants who are not Unicycling-Organization-Members"
     )
   end
 

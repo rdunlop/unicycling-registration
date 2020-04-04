@@ -8,11 +8,13 @@
 %table.sortable
   %thead
     %tr
+      %th= Registrant.human_attribute_name(:bib_number)
       %th Registrant
       %th Item
   %tbody
     - @refund.refund_details.each do |detail|
       %tr
+        %td= detail.registrant.bib_number
         %td= detail.registrant
         %td= detail
 = link_to t('back'), user_payments_path(current_user)
