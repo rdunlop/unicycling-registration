@@ -41,13 +41,17 @@ class FeedbacksController < ApplicationController
   def captcha_valid?
     return true unless recaptcha_required?
 
-    verify_recaptcha
+    verify_recaptcha(action: "feedback", minimum_score: minimum_score)
   end
 
   def recaptcha_required?
     Rails.application.secrets.recaptcha_private_key.present? && !signed_in?
   end
   helper_method :recaptcha_required?
+
+  def minimum_score
+    Rails.application.secrets.recaptcha_minimum_score.presence || 0.5
+  end
 
   def feedback_params
     params.require(:feedback).permit(:entered_email, :subject, :message)

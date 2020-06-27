@@ -20,7 +20,7 @@
   - if recaptcha_required?
     .row
       .small-12.columns
-        = recaptcha_tags
+        = recaptcha_v3(action: "feedback")
   .row
     .small-12.columns
       = f.button :submit, t(".submit"), :class => "focus_button"
