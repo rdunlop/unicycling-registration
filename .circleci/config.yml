@@ -85,6 +85,8 @@ jobs:
       - attach_workspace:
           at: ~/tmp
 
+      - tablexi/wait_for_other_builds
+
       - run: bundle exec cap stage deploy
 
   release_prod:
