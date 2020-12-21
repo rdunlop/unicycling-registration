@@ -31,7 +31,7 @@ describe Importers::Parsers::Wave do
     it "returns a good error code" do
       parser = described_class.new(bad_wave_data_file)
       expect(parser).not_to be_valid_file
-      expect(parser.errors).to eq(["Unable to read file. Is it it plain-text file? (Unclosed quoted field on line 2.)"])
+      expect(parser.errors).to eq(["Unable to read file. Is it it plain-text file? (Any value after quoted field isn't allowed in line 2.)"])
     end
   end
 end
