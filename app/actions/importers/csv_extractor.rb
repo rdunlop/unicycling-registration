@@ -22,7 +22,7 @@ class Importers::CsvExtractor
 
     begin
       return clean_result(attempt_parse(upload_file, "bom|UTF-8"))
-    rescue ParseError
+    rescue ParseError, CSV::MalformedCSVError
       # If it fails to parse the file as UTF-8, try again
       begin
         return clean_result(attempt_parse(upload_file, "ISO-8859-1"))
