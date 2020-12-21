@@ -126,13 +126,18 @@ workflows:
           filters:
             branches:
               only:
-                - develop
+                - master
+      - approve-prod-push:
+          type: approval
+          requires:
+            - release_stage
+          filters:
+            branches:
+              only:
+                - master
       - release_prod:
           requires:
-            - rspec
-            - tablexi/rubocop
-            - tablexi/bundle_audit
-            - tablexi/check_db_schema
+            - approve-prod-push
           filters:
             branches:
               only:
