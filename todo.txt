@@ -1,3 +1,12 @@
+There is interest that we have a way to ask ppl to provide a judge for each event that they are competing in.
+
+E.g. if you are in a freestyle judge event, you must provide a freestyle judge
+
+
+-------------------
+
+
+
 Currently working on:
 - Import Results into the Preliminary-Results tables
 Next:
