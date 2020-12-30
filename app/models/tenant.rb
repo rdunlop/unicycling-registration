@@ -36,7 +36,11 @@ class Tenant < ApplicationRecord
 
   def base_url
     raw_url = tenant_aliases.primary.first.try(:to_s) || permanent_url
-    "https://#{raw_url}"
+    if Rails.configuration.force_ssl
+      "https://#{raw_url}"
+    else
+      "http://#{raw_url}"
+    end
   end
 
   def permanent_url

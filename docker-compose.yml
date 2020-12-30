@@ -23,7 +23,7 @@ services:
 
   sidekiq:
     build: .
-    command: bundle exec sidekiq --config config/sidekiq.yml --logfile log/sidekiq.log
+    command: bash -c "bundle && bundle exec sidekiq --config config/sidekiq.yml > log/sidekiq.log"
     depends_on:
       - db
       - redis
@@ -32,7 +32,7 @@ services:
       - .dockerenv/services
     volumes:
       - .:/app:cached
-      - gem_cache:/gems
+      - gem_cache_sidekiq:/gems
 
   db:
     image: postgres:9.4.12
@@ -56,4 +56,5 @@ volumes:
   db-data:
     driver: local
   gem_cache: {}
+  gem_cache_sidekiq: {}
   redis: {}
