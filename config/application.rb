@@ -90,6 +90,9 @@ module Workspace
     # This e-mail will receive informational e-mails about the server
     config.server_admin_email = ENV["SERVER_ADMIN_EMAIL"]
 
+    # This email is the "From" address for our emails sent by this system
+    config.mail_full_email = ENV["MAIL_FULL_EMAIL"]
+
     # code used to create new convention instances
     config.instance_creation_code = ENV["INSTANCE_CREATION_CODE"]
 
