@@ -95,5 +95,7 @@ module Workspace
 
     config.recaptcha_public_key = ENV["RECAPTCHA_PUBLIC_KEY"]
     config.recaptcha_private_key = ENV["RECAPTCHA_PRIVATE_KEY"]
+
+    config.google_analytics_tracking_id = ENV["GOOGLE_ANALYTICS_TRACKING_ID"]
   end
 end

@@ -54,6 +54,7 @@ end
 
 Rails.configuration.domain = "localhost.dev"
 Rails.configuration.mail_full_email = "from@example.com"
+Rails.configuration.mail_skip_confirmation = true
 Rails.configuration.secret_key_base = "somesecretstringisreallylongenoughtobesecurecheckpassing"
 Rails.configuration.error_emails = ["robin+e@dunlopweb.com"]
 Rails.configuration.server_admin_email = "robin+admin@dunlopweb.com"
