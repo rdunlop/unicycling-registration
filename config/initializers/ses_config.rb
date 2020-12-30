@@ -1,7 +1,7 @@
 Aws.config.update(
-  region: Rails.application.secrets.aws_region,
+  region: Rails.configuration.aws_region,
   credentials: Aws::Credentials.new(
-    Rails.application.secrets.aws_access_key,
-    Rails.application.secrets.aws_secret_access_key
+    Rails.configuration.aws_access_key,
+    Rails.configuration.aws_secret_access_key
   )
 )

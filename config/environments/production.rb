@@ -39,7 +39,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  if Rails.application.secrets.ssl_enabled
+  if Rails.configuration.ssl_enabled
     config.force_ssl = true
     config.to_prepare { Devise::SessionsController.force_ssl }
     config.to_prepare { Devise::PasswordsController.force_ssl }
@@ -59,7 +59,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  if Rails.application.secrets.redis
+  if Rails.configuration.redis_host
     config.cache_store = :redis_store, Redis.cache_configuration
   end
 

@@ -1,12 +1,12 @@
 CarrierWave.configure do |config|
-  if Rails.application.secrets.aws_access_key
+  if Rails.configuration.aws_access_key
     config.storage = :aws
     config.aws_credentials = {
-      access_key_id: Rails.application.secrets.aws_access_key,
-      secret_access_key: Rails.application.secrets.aws_secret_access_key,
-      region: Rails.application.secrets.aws_region
+      access_key_id: Rails.configuration.aws_access_key,
+      secret_access_key: Rails.configuration.aws_secret_access_key,
+      region: Rails.configuration.aws_region
     }
-    config.aws_bucket = Rails.application.secrets.aws_bucket
+    config.aws_bucket = Rails.configuration.aws_bucket
     config.aws_acl = 'private'
 
     config.aws_attributes = {

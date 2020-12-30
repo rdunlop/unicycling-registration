@@ -24,7 +24,7 @@ class TenantsController < ApplicationController
 
   def create
     @new_tenant = Tenant.new(tenant_params)
-    if params[:code] == Rails.application.secrets.instance_creation_code
+    if params[:code] == Rails.configuration.instance_creation_code
       if @new_tenant.save
         TenantCreationJob.perform_later(@new_tenant.id)
 

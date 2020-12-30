@@ -12,12 +12,14 @@ describe Devise::CustomRegistrationsController do
   }
 
   describe "confirmation e-mail" do
-    after do
-      Rails.application.secrets.mail_skip_confirmation = nil
+    around do |example|
+      value = Rails.configuration.mail_skip_confirmation
+      example.call
+      Rails.configuration.mail_skip_confirmation = value
     end
 
     it "doesn't send an e-mail when skip configured" do
-      Rails.application.secrets.mail_skip_confirmation = true
+      Rails.configuration.mail_skip_confirmation = true
       post :create, params: { user: valid_attributes }
       u = User.first
       expect(u.confirmed?).to eq(true)

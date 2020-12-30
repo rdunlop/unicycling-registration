@@ -40,7 +40,7 @@ class Tenant < ApplicationRecord
   end
 
   def permanent_url
-    "#{subdomain}.#{Rails.application.secrets.domain}"
+    "#{subdomain}.#{Rails.configuration.domain}"
   end
 
   def self.by_first_subdomain(hostname)

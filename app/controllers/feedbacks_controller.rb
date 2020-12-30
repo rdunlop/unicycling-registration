@@ -45,12 +45,12 @@ class FeedbacksController < ApplicationController
   end
 
   def recaptcha_required?
-    Rails.application.secrets.recaptcha_private_key.present? && !signed_in?
+    Rails.configuration.recaptcha_private_key.present? && !signed_in?
   end
   helper_method :recaptcha_required?
 
   def minimum_score
-    Rails.application.secrets.recaptcha_minimum_score.presence || 0.5
+    Rails.configuration.recaptcha_minimum_score.presence || 0.5
   end
 
   def feedback_params

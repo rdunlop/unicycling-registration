@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   private
 
   def ssl_required?
-    Rails.application.secrets.ssl_enabled
+    Rails.configuration.ssl_enabled
   end
 
   def configure_permitted_parameters
@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   # Is this domain marked as the Translations Domain
   # NOTE: This logic is duplicated in tolk.rb initializer
   def translation_domain?
-    @tenant.try(:subdomain) == Rails.application.secrets.translations_subdomain
+    @tenant.try(:subdomain) == Rails.configuration.translations_subdomain
   end
 
   # so that all routes have the locale specified

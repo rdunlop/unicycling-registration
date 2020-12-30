@@ -48,5 +48,54 @@ module Workspace
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]
     config.usa_wildapricot_account_id = ENV["USA_WILDAPRICOT_ACCOUNT_ID"]
     config.usa_wildapricot_api_key = ENV["USA_WILDAPRICOT_API_KEY"]
+
+    config.domain = ENV["DOMAIN"]
+    # Forces SSL connections
+    config.ssl_enabled = ENV["SSL_ENABLED"] == "true"
+
+    config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
+    # For use by S3, SES, and storage of SSL Cert data
+    config.aws_bucket = ENV["AWS_BUCKET"]
+    config.aws_access_key = ENV["AWS_ACCESS_KEY"]
+    config.aws_secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
+    config.aws_region = ENV["AWS_REGION"]
+
+    config.redis_host = ENV["REDIS_HOST"]
+    config.redis_port = ENV["REDIS_PORT"]
+    # db: 0 # if you have sidekiq for different rails-databases running against the same redis, increment this for each
+    config.redis_db = ENV["REDIS_DB"]
+
+    # where to send users who want to do translations of the registration system
+    config.translation_website_url = ENV["TRANSLATION_WEBSITE_URL"]
+    # subdomain to match to indicate that we are on the "translation" subdomain.
+    # all users on this subdomain are ALWAYS "translator" users.
+    # TODO: this also causes emails to be sent whenever someone applies translations through Tolk
+    config.translations_subdomain = ENV["TRANSLATIONS_SUBDOMAIN"]
+
+    # If you want to allow user accounts to be created WITHOUT requiring e-mail
+    # confirmation, set the following variable, or "Authorize the laptop":
+    config.mail_skip_confirmation = ENV["mail_skip_confirmation"] == "true"
+
+    # NOTE: In development, ALL E-MAIL will be sent to the ERROR_EMAIL address,
+    #  but in production it will flow as expected.
+    config.error_emails = ENV.fetch("ERROR_EMAILS", "").split(",")
+
+    # Token for sending exception reports to rollbar for further investigation
+    config.rollbar_access_token = ENV["ROLLBAR_ACCESS_TOKEN"]
+
+    # this e-mail will receive a CC of every payment confirmation sent
+    config.payment_notice_email = ENV["PAYMENT_NOTICE_EMAIL"]
+
+    # This e-mail will receive informational e-mails about the server
+    config.server_admin_email = ENV["SERVER_ADMIN_EMAIL"]
+
+    # code used to create new convention instances
+    config.instance_creation_code = ENV["INSTANCE_CREATION_CODE"]
+
+    config.recaptcha_public_key = ENV["RECAPTCHA_PUBLIC_KEY"]
+    config.recaptcha_private_key = ENV["RECAPTCHA_PRIVATE_KEY"]
+
+    config.google_analytics_tracking_id = ENV["GOOGLE_ANALYTICS_TRACKING_ID"]
   end
 end

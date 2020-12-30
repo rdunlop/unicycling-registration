@@ -19,7 +19,7 @@ Workspace::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
-  if Rails.application.secrets.redis
+  if Rails.configuration.redis_host
     config.cache_store = :redis_store, Redis.cache_configuration
   end
 

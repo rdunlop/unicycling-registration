@@ -1,0 +1,4 @@
+DATABASE_HOST=db
+POSTGRES_USER=ubuntu
+POSTGRES_PASSWORD=password
+POSTGRES_DB=app_development

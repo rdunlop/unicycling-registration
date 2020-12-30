@@ -10,15 +10,18 @@ executors:
       - image: circleci/ruby:2.6.6-node
         environment:
           RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: ubuntu
           # Bundle paths are necessary so that the gems are installed within the workspace
           # otherwise, they are installed in /usr/local
           BUNDLE_PATH: ~/tmp/vendor/bundle
           BUNDLE_APP_CONFIG: ~/tmp/vendor/bundle
+          DATABASE_HOST: localhost
+          POSTGRES_USER: ubuntu
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: app_development
+
       - image: circleci/postgres:9.4.12-alpine
         environment:
-          POSTGRES_USER: robindunlop
+          POSTGRES_USER: ubuntu
           POSTGRES_PASSWORD: password
 jobs:
   build:
@@ -39,9 +42,6 @@ jobs:
           # they were in when they were stored.
           paths:
             - ~/tmp/vendor/bundle
-
-      - run: cp config/secrets.yml.template config/secrets.yml
-      - run: cp config/database.yml.template config/database.yml
 
       # Store the application code, configuration, and gems in a workspace
       - persist_to_workspace:
