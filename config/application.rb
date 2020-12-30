@@ -53,7 +53,7 @@ module Workspace
     # Forces SSL connections
     config.ssl_enabled = ENV["SSL_ENABLED"] == "true"
 
-    config.secret_key_base = ENV.fetch("SECRET_KEY_BASE")
+    config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
     # For use by S3, SES, and storage of SSL Cert data
     config.aws_bucket = ENV["AWS_BUCKET"]
