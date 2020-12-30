@@ -1,4 +1,4 @@
-DOMAIN=blahrg.com
+DOMAIN=local.com:3000
 SSL_ENABLED=false
 SECRET_KEY_BASE=XXXX
 
@@ -14,7 +14,7 @@ REDIS_DB=2
 TRANSLATION_WEBSITE_URL="http://translation.regtest.unicycling-software.com"
 TRANSLATIONS_SUBDOMAIN=
 
-MAIL_SKIP_CONFIRMATION=false
+MAIL_SKIP_CONFIRMATION=true
 ERROR_EMAILS='robin@dunlopweb.com'
 ROLLBAR_ACCESS_TOKEN=
 PAYMENT_NOTICE_EMAIL="robin+payment@dunlopweb.com"

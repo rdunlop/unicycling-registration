@@ -2,9 +2,7 @@ Registration Site
 =================
 
 [![Circle CI](https://circleci.com/gh/rdunlop/unicycling-registration.svg?style=svg)](https://circleci.com/gh/rdunlop/unicycling-registration)
-[![Dependency Status](https://gemnasium.com/rdunlop/unicycling-registration.png)](https://gemnasium.com/rdunlop/unicycling-registration)
 [![Code Climate](https://codeclimate.com/github/rdunlop/unicycling-registration.png)](https://codeclimate.com/github/rdunlop/unicycling-registration)
-[![Test Coverage](https://codeclimate.com/github/rdunlop/unicycling-registration/badges/coverage.svg)](https://codeclimate.com/github/rdunlop/unicycling-registration/coverage)
 
 Welcome to the Unicycling Registration Application.
 ==================================================
@@ -174,12 +172,6 @@ The following is used to configure the outgoing e-mail system.
 Specify a real email account, with username and password.
 The "Full E-mail" will be the e-mail address in the "From" line.
 
-    MAIL_SERVER=smtp.gmail.com
-    MAIL_PORT=587
-    MAIL_DOMAIN=dunlopweb.com
-    MAIL_USERNAME=robin@dunlopweb.com
-    MAIL_PASSWORD=something
-
     MAIL_FULL_EMAIL=robin@dunlopweb.com
     or, if you want it to have a name as well as an e-mail:
     MAIL_FULL_EMAIL="NAUCC 2013 <unicycling@dunlopweb.com>"
@@ -192,18 +184,16 @@ The following e-mail will receive a CC of every payment confirmation sent
 
 The following e-mail(s) will receive all error messages, "feedback", and other low-level messages
 
-    ERROR_EMAIL=robin+nauccerrors@dunlopweb.com
-    ERROR_EMAIL2=bob+nauccerrors@dunlopweb.com
-
+    ERROR_EMAILS=robin+nauccerrors@dunlopweb.com
 
 The `domain` setting is used to build the links in the e-mails, set it to the hostname of the deployed application
 
-    domain: regtest.unicycling-software.com
+    DOAMIN=regtest.unicycling-software.com
 
 If you want to allow user accounts to be created WITHOUT requiring e-mail
 confirmation, set the following variable, or "Authorize the laptop":
 
-    mail_skip_confirmation: true
+    MAIL_SKIP_CONFIRMATION=true
 
 Paypal Account
 --------------
@@ -258,7 +248,7 @@ Google Analytics is a service for tracking the way that users interact with the 
 Adding a google Analytics token enables us to track the flow of users. This setting is
 optional.
 
-    google_analytics_tracking_id=<token>
+    GOOGLE_ANALYTICS_TRACKING_ID=<token>
 
 NewRelic Account
 ----------------
@@ -281,6 +271,7 @@ unless they are current IUF members.
 To configure the system to be able to offer this, set the following setting in the `.env.local` file.
 
     IUF_MEMBERSHIP_API_URL
+    IUF_MEMBERSHIP_URL
 
 USA Membership Integration
 --------------------------
@@ -390,48 +381,34 @@ To do this:
 1. Create the database schema with `docker-compose exec app bundle exec rake db:create db:schema:load`
 1. Add an entry to your /etc/hosts file `sudo vi /etc/hosts`: `127.0.0.1 www.local.com`
 1. open http://www.local.com:3000/new
-1. Create a new database
+1. Create a new database by using the "creation access code" of "Unplanned Dismount". Specify the subdomain as "test"
+1. Add an entry to your /etc/hosts file `sudo vi /etc/hosts`: `127.0.0.1 test.local.com`
+1. open http://test.local.com:3000, and then you can "Sign Up" in order to create a new user account.
+1. From the "My Account" page, you can use the "admin upgrade code" to make yourself into an admin.
+1. From the "User Management" page, you can grant yourself many more roles, allowing access to most of the remaining administrative tools. (Only Super-Admin users have access to more power)
 
-To seed the database (optional):
-1. Fill in your AWS credentials in `.env.local`
-1. Attach to the instance with `docker-compose exec app bash`, and run `bundle exec rake db:seed` to create seed data.
+Docker rails console
+====================
 
+To access a rails console:
+- `docker-compose run app bash`
+- `bundle exec rails c`
+- `Apartment::Tenant.switch!(<tenant name>)`
+
+Super-Admin User:
+=================
+
+To upgrade yourself to a super-admin, you must use the rails console:
+```
+bundle exec rails c # open rails console
+Apartment::Tenant.switch!(<subdomain>) # Switch to correct tenant
+user = User.find_by(email: <my email>) # find the user
+user.add_role(:super_admin) # upgrade user with super-admin for this tenant
+```
 
 Setup the database
 ==================
-    Make any necessary adjustments for your local environment to `.env.local` (see .dockerenv/database for defaults)
-
-Start the local server
-----------------------
-
-Create a local .env file. This file will contain some base settings.
-
-    cd workspace
-    $ echo "PORT=9292" > .env
-    $ echo "RACK_ENV=development" >> .env
-    $ echo "WEB_CONCURRENCY=1" >> .env
-
-Each of the settings in the settings.yml file will need to be
-configured. Some of these settings should be configured differently:
-
-Start the server:
-
-    $ foreman start (this will not return)
-
-SERVER RUNNING
---------------
-
-* When the server is running, you can access it at http://localhost:9292
-
-Email-Service
--------------
-
-* The server /may/ need an outgoing e-mail account in order to function nicely.
-
-To Stop the server
-------------------
-
-* Press Ctrl-C on the Server console
+    If you are not using the standard-docker-environment for your database, make any necessary adjustments for your local environment to `.env.local` (see .dockerenv/database for defaults)
 
 If making changes to the logic
 ==============================
@@ -663,4 +640,3 @@ Misc:
 -----
 * RailsAdminHistory: Supporting the railsAdmin console
 * Roles: supporting Admin/Superadmin roles
-

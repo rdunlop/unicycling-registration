@@ -75,7 +75,7 @@ module Workspace
 
     # If you want to allow user accounts to be created WITHOUT requiring e-mail
     # confirmation, set the following variable, or "Authorize the laptop":
-    config.mail_skip_confirmation = ENV["mail_skip_confirmation"] == "true"
+    config.mail_skip_confirmation = ENV["MAIL_SKIP_CONFIRMATION"] == "true"
 
     # NOTE: In development, ALL E-MAIL will be sent to the ERROR_EMAIL address,
     #  but in production it will flow as expected.

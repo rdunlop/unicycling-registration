@@ -12,17 +12,6 @@ Rails.application.config.action_mailer.default_url_options[:host] = Rails.config
 unless Rails.env.test?
   if Rails.configuration.aws_access_key.present?
     ActionMailer::Base.delivery_method = :ses
-  else
-    ActionMailer::Base.smtp_settings = {
-      address: Rails.configuration.mail_server,
-      port: Rails.configuration.mail_port,
-      domain: Rails.configuration.mail_domain,
-      user_name: Rails.configuration.mail_username,
-      password: Rails.configuration.mail_password,
-      authentication: Rails.configuration.mail_authentication,
-      enable_starttls_auto: (Rails.configuration.mail_tls.to_s == 'true')
-    }
-    ActionMailer::Base.delivery_method = :smtp
   end
 end
 
