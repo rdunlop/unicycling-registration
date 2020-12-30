@@ -3,7 +3,7 @@ class Notifications < TenantAwareMailer
     @feedback = Feedback.find(feedback_id)
     mail to: EventConfiguration.singleton.contact_email.presence,
          reply_to: @feedback.reply_to_email,
-         cc: Rails.application.secrets.error_emails, subject: "Feedback: #{@feedback.subject}"
+         cc: Rails.configuration.error_emails, subject: "Feedback: #{@feedback.subject}"
   end
 
   def request_registrant_access(target_registrant, requesting_user)
@@ -39,13 +39,13 @@ class Notifications < TenantAwareMailer
 
     @convention_name = EventConfiguration.singleton.long_name
 
-    mail to: Rails.application.secrets.error_emails, subject: "Updated Registration Period"
+    mail to: Rails.configuration.error_emails, subject: "Updated Registration Period"
   end
 
   def missing_old_reg_items(bib_numbers)
     @bib_numbers = bib_numbers
 
-    mail to: Rails.application.secrets.error_emails, subject: "Registration Items Missing!"
+    mail to: Rails.configuration.error_emails, subject: "Registration Items Missing!"
   end
 
   def certificate_renewal_command_status(command, stdout_lines, stderr_lines, success)
@@ -54,18 +54,18 @@ class Notifications < TenantAwareMailer
     @stderr_lines = stderr_lines
     @success = success
 
-    mail to: Rails.application.secrets.server_admin_email, subject: "Certificates Renewed [#{Rails.env}]"
+    mail to: Rails.configuration.server_admin_email, subject: "Certificates Renewed [#{Rails.env}]"
   end
 
   def new_convention_created(convention_name, subdomain)
     @convention_name = convention_name
     @subdomain = subdomain
-    mail to: Rails.application.secrets.server_admin_email, subject: "New Convention Created #{convention_name}"
+    mail to: Rails.configuration.server_admin_email, subject: "New Convention Created #{convention_name}"
   end
 
   def old_password_used(user, subdomain)
     @email = user
     @subdomain = subdomain
-    mail to: Rails.application.secrets.server_admin_email, subject: "User used old password to log in"
+    mail to: Rails.configuration.server_admin_email, subject: "User used old password to log in"
   end
 end

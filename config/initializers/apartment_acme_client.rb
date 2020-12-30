@@ -13,12 +13,12 @@ ApartmentAcmeClient.domains_to_check = lambda do
 end
 
 # Also request a wildcard cert for the domain
-ApartmentAcmeClient.wildcard_domain = Rails.application.secrets.domain
+ApartmentAcmeClient.wildcard_domain = Rails.configuration.domain
 
 # The base domain, a domain which is always going to be accessible.
 # because we need a common domain to be used on each request.
 # if not defined, the first 'domain_to_check' which succeeds will be used
-ApartmentAcmeClient.common_name = Rails.application.secrets.domain
+ApartmentAcmeClient.common_name = Rails.configuration.domain
 
 # Directory where to store the challenge files, Must be accessible via the internet
 ApartmentAcmeClient.public_folder = "/home/ec2-user/unicycling-registration/current/public"
@@ -28,8 +28,8 @@ ApartmentAcmeClient.public_folder = "/home/ec2-user/unicycling-registration/curr
 ApartmentAcmeClient.certificate_storage_folder = "/home/ec2-user/unicycling-registration/current/public/system"
 
 # for s3 storage
-ApartmentAcmeClient.aws_region = Rails.application.secrets.aws_region
-ApartmentAcmeClient.aws_bucket = Rails.application.secrets.aws_bucket
+ApartmentAcmeClient.aws_region = Rails.configuration.aws_region
+ApartmentAcmeClient.aws_bucket = Rails.configuration.aws_bucket
 
 # For use in the nginx configuration
 ApartmentAcmeClient.socket_path = "/tmp/unicorn-unicycling-registration.socket"

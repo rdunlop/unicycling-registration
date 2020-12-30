@@ -40,7 +40,6 @@ jobs:
           paths:
             - ~/tmp/vendor/bundle
 
-      - run: cp config/secrets.yml.template config/secrets.yml
       - run: cp config/database.yml.template config/database.yml
 
       # Store the application code, configuration, and gems in a workspace

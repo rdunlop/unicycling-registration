@@ -13,6 +13,9 @@ services:
     volumes:
       - .:/app:cached
       - gem_cache:/gems
+    env_file:
+      - .dockerenv/database
+      - .dockerenv/services
     tty: true
     environment:
       - SKYLIGHT_DISABLE_DEV_WARNING=true
@@ -24,6 +27,9 @@ services:
     depends_on:
       - db
       - redis
+    env_file:
+      - .dockerenv/database
+      - .dockerenv/services
     volumes:
       - .:/app:cached
       - gem_cache:/gems
@@ -35,6 +41,8 @@ services:
       POSTGRES_USER: ubuntu
       POSTGRES_PASSWORD: password
       POSTGRES_DB: app_development
+    env_file:
+      - .dockerenv/database
     volumes:
       - db-data:/var/lib/postgresql/data
     logging:

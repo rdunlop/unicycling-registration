@@ -6,7 +6,7 @@
       %tr
         %th= f.label :subdomain
         %td= f.text_field :subdomain, placeholder: 'naucc2000'
-        %td What is the prefix you want for the domain? (&lt;subdomain&gt;.#{Rails.application.secrets.domain})
+        %td What is the prefix you want for the domain? (&lt;subdomain&gt;.#{Rails.configuration.domain})
       %tr
         %th= f.label :description
         %td= f.text_field :description, placeholder: "NAUCC 2000"

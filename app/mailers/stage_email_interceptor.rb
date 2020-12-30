@@ -15,7 +15,7 @@ class StageEmailInterceptor
 
     original_addresses = get_addresses
 
-    message.to = Rails.application.secrets.server_admin_email
+    message.to = Rails.configuration.server_admin_email
     message.cc = nil
     message.bcc = nil
 

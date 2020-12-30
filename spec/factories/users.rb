@@ -74,7 +74,7 @@ FactoryBot.define do
       after(:create) { |user| user.add_role :event_planner }
     end
 
-    after(:create) { |user| user.confirm if Rails.application.secrets.mail_skip_confirmation.nil? }
+    after(:create) { |user| user.confirm if Rails.configuration.mail_skip_confirmation.nil? }
 
     after(:create) { |user| user.user_conventions.create(subdomain: Tenant.first.subdomain) }
   end

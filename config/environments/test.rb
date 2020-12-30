@@ -52,10 +52,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 end
 
-Rails.application.secrets.domain = "localhost.dev"
-Rails.application.secrets.mail_full_email = "from@example.com"
-Rails.application.secrets.secret_key_base = "somesecretstringisreallylongenoughtobesecurecheckpassing"
-Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
-Rails.application.secrets.server_admin_email = "robin+admin@dunlopweb.com"
-Rails.application.secrets.ssl_enabled = false
-Rails.application.secrets.instance_creation_code = "this_is_the_code"
+Rails.configuration.domain = "localhost.dev"
+Rails.configuration.mail_full_email = "from@example.com"
+Rails.configuration.secret_key_base = "somesecretstringisreallylongenoughtobesecurecheckpassing"
+Rails.configuration.error_emails = ["robin+e@dunlopweb.com"]
+Rails.configuration.server_admin_email = "robin+admin@dunlopweb.com"
+Rails.configuration.ssl_enabled = false
+Rails.configuration.instance_creation_code = "this_is_the_code"

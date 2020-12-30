@@ -9,7 +9,7 @@ describe PaymentMailer do
     let(:mail) { described_class.ipn_received("something") }
 
     it "renders the headers" do
-      Rails.application.secrets.error_emails = ["robin+e@dunlopweb.com"]
+      Rails.configuration.error_emails = ["robin+e@dunlopweb.com"]
       expect(mail.subject).to eq("Ipn received")
       expect(mail.to).to eq(["robin+e@dunlopweb.com"])
       expect(mail.from).to eq(["from@example.com"])
@@ -42,7 +42,7 @@ describe PaymentMailer do
 
     before do
       payment.reload
-      Rails.application.secrets.payment_notice_email = "robin+p@dunlopweb.com"
+      Rails.configuration.payment_notice_email = "robin+p@dunlopweb.com"
       @mail = described_class.payment_completed(payment)
     end
 

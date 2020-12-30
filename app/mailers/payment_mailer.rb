@@ -3,7 +3,7 @@ class PaymentMailer < TenantAwareMailer
   def ipn_received(contents)
     @contents = contents
 
-    mail to: Rails.application.secrets.error_emails
+    mail to: Rails.configuration.error_emails
   end
 
   def configuration_error(configured_email, received_email)
@@ -11,7 +11,7 @@ class PaymentMailer < TenantAwareMailer
     @received_email = received_email
 
     mail(
-      to: [EventConfiguration.singleton.contact_email, Rails.application.secrets.error_emails],
+      to: [EventConfiguration.singleton.contact_email, Rails.configuration.error_emails],
       subject: "Paypal Mis-configuration"
     )
   end
@@ -21,14 +21,14 @@ class PaymentMailer < TenantAwareMailer
     @total_amount = payment.total_amount
     @event_name = EventConfiguration.singleton.long_name
 
-    mail to: payment.user.email, bcc: Rails.application.secrets.payment_notice_email
+    mail to: payment.user.email, bcc: Rails.configuration.payment_notice_email
   end
 
   def manual_payment_completed(payment, user)
     @payment_number = payment.id
     @event_name = EventConfiguration.singleton.long_name
 
-    mail to: user.email, bcc: Rails.application.secrets.payment_notice_email
+    mail to: user.email, bcc: Rails.configuration.payment_notice_email
   end
 
   def coupon_used(payment_detail)
@@ -36,13 +36,13 @@ class PaymentMailer < TenantAwareMailer
     @registrant = payment_detail.registrant
     @payment_id = payment_detail.payment_id
 
-    mail to: @coupon.inform_emails, bcc: Rails.application.secrets.payment_notice_email
+    mail to: @coupon.inform_emails, bcc: Rails.configuration.payment_notice_email
   end
 
   ######### ADMIN
   def missing_matching_expense_item(payment_id)
     @payment_id = payment_id
 
-    mail to: Rails.application.secrets.error_emails, subject: "Missing reg-item match"
+    mail to: Rails.configuration.error_emails, subject: "Missing reg-item match"
   end
 end
