@@ -385,7 +385,6 @@ Benefits:
 
 To do this:
 1. install docker (https://docs.docker.com/docker-for-mac/install/)
-1. run `./docker-setup.sh` to set up some files
 1. install `docker `and `docker-compose`.
 1. run `docker-compose up`
 1. Create the database schema with `docker-compose exec app bundle exec rake db:create db:schema:load`
@@ -400,8 +399,7 @@ To seed the database (optional):
 
 Setup the database
 ==================
-    Copy `config/database_template.yml` to `config/database.yml`  and make
-      any necessary adjustments for your local environment.
+    Make any necessary adjustments for your local environment to `.env.local` (see .dockerenv/database for defaults)
 
 Start the local server
 ----------------------
@@ -538,7 +536,7 @@ Amazon Server Setup
   - `\curl -sSL https://get.rvm.io | bash -s stable`
 - `cap stage deploy` (or `cap prod deploy`)
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
-- Copy the configuration files (eye.yml database.yml, newrelic.yml)
+- Copy the configuration files (eye.yml, newrelic.yml)
 - copy the robots.txt file (public/robots.txt)
 - install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
 - install PostgreSQL `sudo yum install postgresql94 postgresql94-devel`
