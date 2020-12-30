@@ -61,7 +61,6 @@ module Workspace
     config.aws_secret_access_key = ENV["AWS_SECRET_ACCESS_KEY"]
     config.aws_region = ENV["AWS_REGION"]
 
-
     config.redis_host = ENV["REDIS_HOST"]
     config.redis_port = ENV["REDIS_PORT"]
     # db: 0 # if you have sidekiq for different rails-databases running against the same redis, increment this for each
@@ -96,9 +95,5 @@ module Workspace
 
     config.recaptcha_public_key = ENV["RECAPTCHA_PUBLIC_KEY"]
     config.recaptcha_private_key = ENV["RECAPTCHA_PRIVATE_KEY"]
-
-
-
-
   end
 end

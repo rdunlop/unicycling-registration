@@ -21,7 +21,7 @@ class Redis
     config = {
       host: ::Rails.configuration.redis_host,
       port: ::Rails.configuration.redis_port,
-      db: ::Rails.configuration.redis_db,
+      db: ::Rails.configuration.redis_db
     }
 
     yield config
