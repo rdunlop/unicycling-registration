@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 3fe2f93ab2d0f5d9c2b84e085f627cf469db72a1
+  revision: 81b87138990a5f3bc860d4c6b8b08e9b625e4674
   specs:
-    globalize (5.2.0)
-      activemodel (>= 4.2, < 5.3)
-      activerecord (>= 4.2, < 5.3)
+    globalize (6.0.0.alpha.1)
+      activemodel (>= 4.2, < 7.0)
+      activerecord (>= 4.2, < 7.0)
       request_store (~> 1.0)
 
 GIT
@@ -312,7 +312,7 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     http_accept_language (2.1.1)
-    i18n (1.8.5)
+    i18n (1.8.7)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
     ice_nine (0.11.2)
