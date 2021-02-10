@@ -2,6 +2,10 @@
 %h4= t(".subheader")
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: "no_dirty_check" } ) do |f|
   = devise_error_messages!
+  - if f.object.errors.messages[:base]
+    %ul
+      - f.object.errors.messages[:base].each do |error|
+        %li= error
   .panel.row
     .row
       .small-3.columns.text-right
@@ -21,6 +25,9 @@
         = f.label :password_confirmation
       .small-9.columns
         = f.password_field :password_confirmation
+    .row
+      .small-12.columns.text-right
+        = hcaptcha_tags(theme: :light)
     .row
       %p= t(".confirmation_reminder")
     .row

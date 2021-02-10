@@ -46,6 +46,7 @@ gem 'aws-sdk-rails'
 gem 'dotenv-rails'
 gem 'eye-patch', require: false
 gem 'gaffe'
+gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'newrelic_rpm'
 gem 'order_as_specified'
