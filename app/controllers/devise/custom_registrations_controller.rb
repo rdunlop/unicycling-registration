@@ -2,6 +2,18 @@ class Devise::CustomRegistrationsController < Devise::RegistrationsController
   include LegacyPasswordClearer
 
   before_action :check_for_existing_user, only: [:create]
+  before_action :check_captcha, only: [:create]
+
+  def check_captcha
+    self.resource = build_resource(sign_up_params)
+
+    return if verify_hcaptcha(model: resource)
+
+    # This is the normal behavior of registration#create failure path
+    clean_up_passwords resource
+    set_minimum_password_length
+    respond_with resource
+  end
 
   def create
     if skip_user_creation_confirmation?
