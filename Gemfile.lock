@@ -581,7 +581,7 @@ GEM
     sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
-    spreadsheet (1.2.7)
+    spreadsheet (1.2.8)
       ruby-ole
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
