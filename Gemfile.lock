@@ -378,7 +378,7 @@ GEM
       rake
     mini_magick (4.11.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.5.1)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     monetize (1.9.4)
       money (~> 6.12)
@@ -399,7 +399,7 @@ GEM
       activerecord (>= 4.0.0)
       activesupport (>= 4.0.0)
     nio4r (2.5.5)
-    nokogiri (1.11.3)
+    nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     numerizer (0.1.1)
