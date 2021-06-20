@@ -87,7 +87,7 @@ describe RegistrantsController do
 
         assert_select "legend", text: "Registrations", count: 1
 
-        assert_select "a", text: "Robin Dunlop".to_s, count: 1
+        assert_select "a", text: "##{registrant.bib_number} - Robin Dunlop", count: 1
       end
     end
 
