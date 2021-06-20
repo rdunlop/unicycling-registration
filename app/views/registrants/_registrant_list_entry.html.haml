@@ -2,7 +2,7 @@
 - reg_class = registrant.registrant_type
 .row
   .small-3.columns
-    = link_to_if policy(registrant).update_any_data?, registrant.name, registrant_build_index_path(registrant), :class =>  "#{reg_class}_link"
+    = link_to_if policy(registrant).update_any_data?, registrant.with_id_to_s, registrant_build_index_path(registrant), :class =>  "#{reg_class}_link"
     %br
     = t(".#{reg_class}")
   .small-2.columns
