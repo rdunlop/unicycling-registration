@@ -132,6 +132,8 @@ class RegistrantPolicy < ApplicationPolicy
   private
 
   def registration_type_for_sale?(registrant_type)
+    return true if RegistrationCost.for_type(registrant_type).none?
+
     RegistrationCost.for_type(registrant_type).current_period.present?
   end
 
