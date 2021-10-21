@@ -235,7 +235,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
-    connection_pool (2.2.3)
+    connection_pool (2.2.5)
     consistency_fail (0.3.7)
     countries (3.1.0)
       i18n_data (~> 0.11.0)
@@ -430,8 +430,6 @@ GEM
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -482,7 +480,7 @@ GEM
       ffi (~> 1.0)
     recaptcha (5.8.1)
       json
-    redis (4.1.4)
+    redis (4.5.1)
     redis-actionpack (5.2.0)
       actionpack (>= 5, < 7)
       redis-rack (>= 2.1.0, < 3)
@@ -571,11 +569,10 @@ GEM
     sexp_processor (4.12.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
-    sidekiq (5.2.9)
-      connection_pool (~> 2.2, >= 2.2.2)
+    sidekiq (6.2.2)
+      connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 4.2)
+      redis (>= 4.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -734,7 +731,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   shoulda-matchers
-  sidekiq (< 6)
+  sidekiq (< 7)
   simple_form
   spreadsheet
   stripe
