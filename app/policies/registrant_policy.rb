@@ -1,7 +1,9 @@
 class RegistrantPolicy < ApplicationPolicy
   # create a new registrant
   def create?
-    (user_record? && !new_registration_closed?) || super_admin?
+    return true if super_admin?
+
+    user_record? && !new_registration_closed? && registration_type_for_sale?(record.registrant_type)
   end
 
   def create_from_previous?
@@ -128,6 +130,10 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   private
+
+  def registration_type_for_sale?(registrant_type)
+    RegistrationCost.for_type(registrant_type).current_period.present?
+  end
 
   def user_record?
     record.user == user

@@ -24,11 +24,13 @@
     %br
   %hr
 
-- if policy(@registrant).create? # until registration is closed
+- competitor_registrant = Registrant.new(user: @user, registrant_type: "competitor")
+- noncompetitor_registrant = Registrant.new(user: @user, registrant_type: "noncompetitor")
+- if policy(competitor_registrant).create? || policy(noncompetitor_registrant).create? # until registration is closed
   - if @config.additional_info?
     .sign_up_difference
       = link_to t(".whats_the_difference"), additional_information_url(@config, I18n.locale, "comp_noncomp"), class: "fancybox", title: t(".difference_tooltip")
-  = render "registrant_choices"
+  = render "registrant_choices", competitor_registrant: competitor_registrant, noncompetitor_registrant: noncompetitor_registrant
   = render "registrant_prices"
 - if @shared_registrants.count > 0
   %div
