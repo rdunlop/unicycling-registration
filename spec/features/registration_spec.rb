@@ -84,4 +84,26 @@ describe 'Logging in to the system' do
       expect(page).not_to have_content 'Events'
     end
   end
+
+  describe "when registering a non-competitor" do
+    before do
+      comp_reg_cost = RegistrationCost.for_type("competitor").first
+      comp_reg_cost.update(start_date: 2.years.ago, end_date: 1.year.ago)
+    end
+
+    context "when filling in registration" do
+      before do
+        click_link 'Create New Non-Competitor'
+      end
+
+      include_context "basic registrant data"
+
+      it "can save the record" do
+        within "#tabs-new-registrant" do
+          click_button 'Save & Continue'
+        end
+        expect(user.reload.registrants.count).to eq(1)
+      end
+    end
+  end
 end

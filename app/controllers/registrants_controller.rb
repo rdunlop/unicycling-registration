@@ -62,6 +62,7 @@ class RegistrantsController < ApplicationController
   def new
     @user = current_user
     @registrant = Registrant.new(user: @user)
+    @registrant.registrant_type = params[:registrant_type]
     authorize @registrant
     if params[:copy_from_previous].nil?
       if previous_registrants_for(current_user).any?
@@ -72,7 +73,6 @@ class RegistrantsController < ApplicationController
       end
     end
 
-    @registrant.registrant_type = params[:registrant_type]
     @copy_from_previous = params[:copy_from_previous] == "true"
     @previous_registrant_options = previous_registrants_for(@user)
   end
