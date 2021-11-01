@@ -1,0 +1,14 @@
+%h1 API Tokens
+
+%table
+  %thead
+    %tr
+      %th Description
+      %th Token
+      %th Created At
+  %tbody
+    - @tokens.each do |token|
+      %tr
+        %td= token.description
+        %td= token.token
+        %td= token.created_at

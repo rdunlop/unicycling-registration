@@ -44,6 +44,10 @@ class UserPolicy < ApplicationPolicy
     awards_admin? || super_admin?
   end
 
+  def manage_api_tokens?
+    convention_admin? || event_planner? || super_admin?
+  end
+
   # Can this user manage memberships in the Unicycling Body?
   def manage_memberships?
     config.organization_membership_config? && (membership_admin? || super_admin?)

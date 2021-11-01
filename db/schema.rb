@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_225808) do
+ActiveRecord::Schema.define(version: 2021_11_01_172424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 2020_04_03_225808) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name"], name: "index_age_group_types_on_name", unique: true
+  end
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.string "token"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "award_labels", id: :serial, force: :cascade do |t|
