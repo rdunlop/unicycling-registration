@@ -1,12 +1,8 @@
 require 'spec_helper'
 
 describe Api::CompetitionsController do
-  let(:token) { "HELLO" }
+  let(:token) { FactoryBot.create(:api_token).token }
   let(:json) { JSON.parse(response.body) }
-
-  # before do
-  #   allow(Rails.configuration).to receive(:api_token).and_return("ABC123")
-  # end
 
   def authenticate_with_token(token)
     ActionController::HttpAuthentication::Token.encode_credentials(token)

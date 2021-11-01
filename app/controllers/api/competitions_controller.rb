@@ -59,7 +59,7 @@ class Api::CompetitionsController < ApplicationController
   # Ensure that the shared-key is being used
   def authorize_api
     authenticate_with_http_token do |token, _options|
-      token == "HELLO" # TBD
+      ApiToken.find_by(token: token).any?
     end
   end
 
