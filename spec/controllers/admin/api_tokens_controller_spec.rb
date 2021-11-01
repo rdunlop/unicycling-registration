@@ -21,7 +21,7 @@ describe Admin::ApiTokensController do
         expect do
           post :create, params: { api_token: { description: "This is Robin's" } }
         end.to change { ApiToken.count }.to(2)
-        expect(response).to redirect_to(new_api_token_path)
+        expect(response).to redirect_to(api_tokens_path)
       end
     end
 
@@ -36,7 +36,7 @@ describe Admin::ApiTokensController do
   describe "#destroy" do
     it "deletes" do
       delete :destroy, params: { id: token.id }
-      expect(response).to be_successful
+      expect(response).to redirect_to(api_tokens_path)
     end
   end
 end

@@ -14,7 +14,6 @@ class Admin::ApiTokensController < ApplicationController
   # POST /admin/api_tokens
   def create
     @token = ApiToken.new(api_token_params)
-    binding.pry
     if @token.save
       flash[:notice] = "Token created"
       redirect_to api_tokens_path
