@@ -12,23 +12,23 @@ class Api::CompetitionsController < ApplicationController
   # https://registrationtest.regtest.unicycling-software.com/api/competitions
   def index
     competition_json = Competition.all.map do |competition|
-      competitor_list_pdf = if competition.num_competitors > 0
+      competitor_list_pdf = if competition.num_competitors.positive?
                               announcer_printing_competition_url(competition, format: :pdf)
                             end
 
       start_list_pdf = if competition.start_list? && competition.start_list_present?
-        start_list_printing_competition_url(competition, format: :pdf)
-      end
+                         start_list_printing_competition_url(competition, format: :pdf)
+                       end
 
       results_pdfs = if competition.published?
-        competition.competition_results.active.map do |result|
-          {
-            name: result.to_s,
-            pdf: public_result_url(result),
-            published_at: competition.published_at.iso8601,
-          }
-        end
-      end
+                       competition.competition_results.active.map do |result|
+                         {
+                           name: result.to_s,
+                           pdf: public_result_url(result),
+                           published_at: competition.published_at.iso8601
+                         }
+                       end
+                     end
 
       {
         url: api_competition_url(competition),
@@ -36,18 +36,13 @@ class Api::CompetitionsController < ApplicationController
         competitor_list_pdf: competitor_list_pdf,
         start_list_pdf: start_list_pdf,
         results: results_pdfs,
-        updated_at: competition.updated_at.iso8601,
+        updated_at: competition.updated_at.iso8601
       }
     end
 
     render json: {
       competitions: competition_json
     }
-  end
-
-  # GET /api/competitions/:id
-  # TBD
-  def show
   end
 
   private
@@ -59,13 +54,13 @@ class Api::CompetitionsController < ApplicationController
   # Ensure that the shared-key is being used
   def authorize_api
     authenticate_with_http_token do |token, _options|
-      ApiToken.find_by(token: token).any?
+      ApiToken.find_by(token: token).present?
     end
   end
 
   # Based on https://www.pluralsight.com/blog/tutorials/token-based-authentication-rails
   def render_unauthorized
-    self.headers["WWW-Authenticate"] = 'Token realm="Application"'
+    headers["WWW-Authenticate"] = 'Token realm="Application"'
     render json: { message: "Bad Credentials" }, status: :unauthorized
   end
 end

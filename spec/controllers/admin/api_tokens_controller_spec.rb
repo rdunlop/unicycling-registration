@@ -20,7 +20,7 @@ describe Admin::ApiTokensController do
       it "can resolve the feedback" do
         expect do
           post :create, params: { api_token: { description: "This is Robin's" } }
-        end.to change { ApiToken.count }.to(2)
+        end.to change(ApiToken, :count).to(2)
         expect(response).to redirect_to(api_tokens_path)
       end
     end
