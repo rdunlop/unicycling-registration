@@ -1,0 +1,11 @@
+%h1 New API Token
+
+%p
+  These tokens can be used to access the results api. The same data as is displayed through the UI is available through the API.
+
+= simple_form_for(@token, url: api_tokens_path, method: :post) do |f|
+  .row
+    .small-4.columns
+      = f.input :description
+
+  = f.submit class: "button"

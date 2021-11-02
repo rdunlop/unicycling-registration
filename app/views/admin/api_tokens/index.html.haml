@@ -1,0 +1,18 @@
+%h1 API Tokens
+
+%table
+  %thead
+    %tr
+      %th Description
+      %th Token
+      %th Created At
+  %tbody
+    - @tokens.each do |token|
+      %tr
+        %td= token.description
+        %td= token.token
+        %td= token.created_at
+
+%hr
+
+= link_to "New API Token", new_api_token_path

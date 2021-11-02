@@ -1,0 +1,17 @@
+%h1 API Results Access
+
+.row
+  .small-12.columns
+    Convention administrators have the ability to give out API Tokens. With this token, you can retrieve a JSON response which includes the published results
+
+%h2 How to use the API Token
+
+%p First, you need to translate your API Token into an authorization Token header
+%p
+  For example, if your API Token is "ABC123"
+  %pre
+    curl \
+    \-H "Authorization: Token ABC123" \
+    \-H "Content-Type: application/json" \
+    \--request GET \
+    #{api_competitions_url}

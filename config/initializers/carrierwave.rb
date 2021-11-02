@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  if Rails.configuration.aws_access_key
+  if Rails.configuration.aws_access_key.present?
     config.storage = :aws
     config.aws_credentials = {
       access_key_id: Rails.configuration.aws_access_key,

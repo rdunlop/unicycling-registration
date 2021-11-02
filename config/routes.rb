@@ -428,6 +428,7 @@ Rails.application.routes.draw do
           get :download_file
         end
       end
+      resources :api_tokens, except: %i[show update]
     end
 
     resources :registrants, only: %i[new show destroy] do
@@ -755,6 +756,10 @@ Rails.application.routes.draw do
     end
     resources :distance_attempts, only: [:destroy]
     resources :tie_break_adjustments, only: [:destroy]
+
+    namespace :api do
+      resources :competitions, only: [:index]
+    end
   end
 
   resources :admin_upgrades, only: %i[new create]
@@ -772,6 +777,7 @@ Rails.application.routes.draw do
         get :standard_skill
       end
     end
+    resource :api, only: :show
     concerns :competition_choosable
   end
 
