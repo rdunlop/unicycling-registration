@@ -31,7 +31,6 @@ class Api::CompetitionsController < ApplicationController
                      end
 
       {
-        url: api_competition_url(competition),
         name: [competition.award_title_name, competition.award_subtitle_name].compact.join(" - "),
         competitor_list_pdf: competitor_list_pdf,
         start_list_pdf: start_list_pdf,
