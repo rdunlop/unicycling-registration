@@ -98,6 +98,7 @@ module Workspace
 
     config.recaptcha_public_key = ENV["RECAPTCHA_PUBLIC_KEY"]
     config.recaptcha_private_key = ENV["RECAPTCHA_PRIVATE_KEY"]
+    config.recaptcha_minimum_score = ENV["RECAPTCHA_MINIMUM_SCORE"].presence
 
     config.google_analytics_tracking_id = ENV["GOOGLE_ANALYTICS_TRACKING_ID"]
 
