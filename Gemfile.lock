@@ -99,7 +99,7 @@ GEM
       rails (>= 4.1.0, < 6)
     arel (9.0.0)
     ast (2.4.0)
-    autoprefixer-rails (10.3.3.0)
+    autoprefixer-rails (10.4.0.0)
       execjs (~> 2)
     aws-eventstream (1.1.1)
     aws-partitions (1.469.0)
