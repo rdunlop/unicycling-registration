@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 3fe2f93ab2d0f5d9c2b84e085f627cf469db72a1
+  revision: 484ed7ffec8931bf694004fa6486ed5c2a4a12f8
   specs:
-    globalize (5.2.0)
-      activemodel (>= 4.2, < 5.3)
-      activerecord (>= 4.2, < 5.3)
+    globalize (6.0.1)
+      activemodel (>= 4.2, < 7.1)
+      activerecord (>= 4.2, < 7.1)
       request_store (~> 1.0)
 
 GIT
@@ -338,7 +338,7 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     http_accept_language (2.1.1)
-    i18n (1.8.10)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.11.0)
     ice_nine (0.11.2)
@@ -387,7 +387,7 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
-    minitest (5.14.4)
+    minitest (5.15.0)
     monetize (1.11.0)
       money (~> 6.12)
     money (6.16.0)
