@@ -6,3 +6,11 @@
   = f.file_field :medical_certificate
   - if f.object.medical_certificate.present?
     = link_to "Medical Certificate", f.object.medical_certificate_url
+
+  = link_to t('.questionnaire'), "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043486824", target: "_blank"
+  %br
+  = f.label :medical_questionnaire_filled_out
+  = f.check_box :medical_questionnaire_filled_out
+  %br
+  = f.label :medical_questionnaire_attest_all_no
+  = f.check_box :medical_questionnaire_attest_all_no
