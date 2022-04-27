@@ -149,7 +149,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bcrypt (3.1.16)
+    bcrypt (3.1.17)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
     bullet (6.1.5)
@@ -262,7 +262,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.10.0)
+    devise-i18n (1.10.2)
       devise (>= 4.8.0)
     diff-lcs (1.4.4)
     docile (1.1.5)
