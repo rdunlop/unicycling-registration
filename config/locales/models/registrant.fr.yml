@@ -9,6 +9,8 @@ fr:
         online_waiver_acceptance: Je confirme avoir lu et compris les Conditions
         online_waiver_signature: Signee
         wheel_size_id: Grandeur de roue par défaut pour l'athlétisme
+        medical_questionnaire_filled_out: J'ai rempli le questionnaire médical
+        medical_questionnaire_attest_all_no: J'ai répondu NON à l'ensemble des questions du questionnaire médical
     models:
       registrant:
         one: Participant

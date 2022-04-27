@@ -1,5 +1,12 @@
 %fieldset.data_block
   %legend= t(".header")
+  = t(".description")
+  %br
+  = t(".your_age", age: f.object.age)
+
+  - if f.object.age >= 18
+    .important_note_block= t(".adult_description")
+
   - if @config.medical_certificate_info_page.present?
     = render "/pages/embedded_page", page: @config.medical_certificate_info_page
   = f.label :medical_certificate
@@ -7,10 +14,14 @@
   - if f.object.medical_certificate.present?
     = link_to "Medical Certificate", f.object.medical_certificate_url
 
+  %hr
+
+  - if f.object.age < 18
+    .important_note_block= t(".minor_description")
   = link_to t('.questionnaire'), "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043486824", target: "_blank"
   %br
-  = f.label :medical_questionnaire_filled_out
   = f.check_box :medical_questionnaire_filled_out
+  = f.label :medical_questionnaire_filled_out
   %br
-  = f.label :medical_questionnaire_attest_all_no
   = f.check_box :medical_questionnaire_attest_all_no
+  = f.label :medical_questionnaire_attest_all_no
