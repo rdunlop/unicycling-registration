@@ -513,7 +513,7 @@ GEM
       redis (>= 4, < 5)
     regexp_parser (2.1.1)
     remotipart (1.4.4)
-    request_store (1.5.0)
+    request_store (1.5.1)
       rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
