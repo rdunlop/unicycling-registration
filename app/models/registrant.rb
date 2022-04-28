@@ -534,16 +534,20 @@ class Registrant < ApplicationRecord
   def medical_questionnaire_filled_out=(value)
     if ActiveModel::Type::Boolean.new.cast(value)
       self.medical_questionnaire_filled_out_at ||= Time.current
+    else
+      self.medical_questionnaire_filled_out_at = nil
     end
   end
 
   def medical_questionnaire_attest_all_no
-    self.medical_questionnaire_attest_all_no_at.present?
+    medical_questionnaire_attest_all_no_at.present?
   end
 
   def medical_questionnaire_attest_all_no=(value)
     if ActiveModel::Type::Boolean.new.cast(value)
       self.medical_questionnaire_attest_all_no_at ||= Time.current
+    else
+      self.medical_questionnaire_attest_all_no_at = nil
     end
   end
 
@@ -707,9 +711,8 @@ class Registrant < ApplicationRecord
 
   def set_medical_certificate_upload_date
     return unless changes.key?(:medical_certificate)
-    return unless self.medical_certificate.present?
+    return unless medical_certificate.present?
 
     self.medical_certificate_uploaded_at ||= Time.current
   end
 end
-

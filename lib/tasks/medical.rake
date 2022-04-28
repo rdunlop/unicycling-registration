@@ -6,7 +6,7 @@ task update_medical_cert_upload_timestamps: :environment do
       s3 = Aws::S3::Resource.new(region: "us-west-2")
 
       Registrant.all.find_each do |reg|
-        next unless reg.medical_certificate.present?
+        next if reg.medical_certificate.blank?
 
         path = reg.medical_certificate.path
         object = s3.bucket(ENV["AWS_BUCKET"]).object(path)
@@ -18,7 +18,6 @@ task update_medical_cert_upload_timestamps: :environment do
           puts "unable to find s3 object for #{reg.bib_number}"
         end
       end
-
     end
   end
 end
