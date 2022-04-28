@@ -711,7 +711,7 @@ class Registrant < ApplicationRecord
 
   def set_medical_certificate_upload_date
     return unless changes.key?(:medical_certificate)
-    return unless medical_certificate.present?
+    return if medical_certificate.blank?
 
     self.medical_certificate_uploaded_at ||= Time.current
   end
