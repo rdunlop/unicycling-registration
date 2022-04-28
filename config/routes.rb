@@ -429,6 +429,9 @@ Rails.application.routes.draw do
         end
       end
       resources :api_tokens, except: %i[show update]
+
+      resources :medical_certificates, only: [:index] do
+      end
     end
 
     resources :registrants, only: %i[new show destroy] do

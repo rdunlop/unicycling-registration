@@ -1,0 +1,39 @@
+%h1 Medical Certificate Review page
+
+%table.sortable
+  %thead
+    %tr
+      %th= Registrant.human_attribute_name(:bib_number)
+      %th= Registrant.model_name.human
+      %th= Registrant.human_attribute_name(:age)
+      %th= Registrant.human_attribute_name(:medical_certificate_url)
+      %th= Registrant.human_attribute_name(:medical_questionnaire_filled_out)
+      %th= Registrant.human_attribute_name(:medical_questionnaire_attest_all_no)
+      %th= Registrant.human_attribute_name(:email)
+      %th= User.human_attribute_name(:email)
+      %th= "Status"
+  %tbody
+    - @registrants.each do |registrant|
+      %tr
+        %td= registrant.bib_number
+        %td= registrant
+        %td= registrant.age
+        %td
+          - if registrant.medical_certificate.present?
+            = link_to "Medical Certificate", registrant.medical_certificate_url
+            = l registrant.medical_certificate_uploaded_at, format: :registration_date_format
+        %td= registrant.medical_questionnaire_filled_out ? "Yes" : "No"
+        %td= registrant.medical_questionnaire_attest_all_no ? "Yes" : "No"
+        %td= registrant.email
+        %td= registrant.user.email
+        %td
+          - if registrant.age >= 18
+            - if registrant.medical_certificate.present?
+              "Good"
+            - else
+              "Bad"
+          - else
+            - if registrant.medical_questionnaire_filled_out && registrant.medical_questionnaire_attest_all_no
+              "Good"
+            - else
+              "Bad"
