@@ -157,6 +157,7 @@ class Registrant < ApplicationRecord
   validates_associated :registrant_best_times, if: :past_step_2?
 
   mount_uploader :medical_certificate, PdfUploader
+  before_save :set_medical_certificate_upload_date
 
   # Expense items/LineItems
   validates_associated :registrant_expense_items
@@ -525,6 +526,40 @@ class Registrant < ApplicationRecord
     @has_event[event] ||= signed_up_events.where(event_id: event.id).any?
   end
 
+  ############ MEDICAL CERTIFICATE #############
+  def medical_questionnaire_filled_out
+    medical_questionnaire_filled_out_at.present?
+  end
+
+  def medical_questionnaire_filled_out=(value)
+    if ActiveModel::Type::Boolean.new.cast(value)
+      self.medical_questionnaire_filled_out_at ||= Time.current
+    else
+      self.medical_questionnaire_filled_out_at = nil
+    end
+  end
+
+  def medical_questionnaire_attest_all_no
+    medical_questionnaire_attest_all_no_at.present?
+  end
+
+  def medical_questionnaire_attest_all_no=(value)
+    if ActiveModel::Type::Boolean.new.cast(value)
+      self.medical_questionnaire_attest_all_no_at ||= Time.current
+    else
+      self.medical_questionnaire_attest_all_no_at = nil
+    end
+  end
+
+  # Return true if they have submitted the required questions/certificate
+  def medical_documentation_complete?
+    if age >= 18
+      medical_certificate.present?
+    else
+      medical_questionnaire_filled_out && medical_questionnaire_attest_all_no
+    end
+  end
+
   private
 
   # Internal: Set the bib number of this registrant
@@ -681,5 +716,12 @@ class Registrant < ApplicationRecord
 
     organization_config = EventConfiguration.singleton.organization_membership_config
     errors.add(:base, "Must have a current #{organization_config.title} membership")
+  end
+
+  def set_medical_certificate_upload_date
+    return unless changes.key?(:medical_certificate)
+    return if medical_certificate.blank?
+
+    self.medical_certificate_uploaded_at ||= Time.current
   end
 end

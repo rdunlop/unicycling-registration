@@ -1,0 +1,11 @@
+---
+fr:
+  registrants:
+    request_medical_certificate:
+      header: Documentation de Santé Obligatoire
+      questionnaire: "Questionnaire médical"
+      description: "Entre 2020 et 2022, la loi française a (légèrement) évolué. Les adultes (plus de 18 ans au début de la compétition) doivent soumettre un certificat médical. Les mineurs (moins de 18 ans) doivent répondre au questionnaire tel qu'indiqué ci-dessous."
+      your_age: "Au début de la question, vous aurez %{age} ans"
+      adult_description: "Vous avez 18 ans ou plus, veuillez s'il vous plaît soumettre un certificat médical."
+      minor_description: "Vous avez moins de 18 absn veuillez s'il vous plaît remplir le questionnaire médical et répondre aux deux questions ci-dessous."
+      if_not_all_no: "Si vous avez répondu OUI à au moins une question, veuillez s'il vous plaît soumettre un certificat médical."

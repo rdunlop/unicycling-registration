@@ -2,4 +2,11 @@
 en:
   registrants:
     request_medical_certificate:
-      header: Medical Certificate
+      header: Mandatory Health Documentation
+      questionnaire: Medical Questionnaire
+      description: Between 2020 and 2022,  the French law has (slightly) changed. Adults (over 18 at the start of the competition)
+        need the certificate submitted. Under 18s must fill a questionnaire as explained below.
+      your_age: At the beginning of the competition, you will be %{age} years old
+      adult_description: Because you are >= 18 years old, please submit a Medical Certificate
+      minor_description: Because you are < 18 years old, please fill out the questionnaire and answer the following 2 questions.
+      if_not_all_no: If you answered YES to at least one question, please, upload a medical certificate.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_172424) do
+ActiveRecord::Schema.define(version: 2022_04_26_020718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -987,6 +987,9 @@ ActiveRecord::Schema.define(version: 2021_11_01_172424) do
     t.boolean "rules_accepted", default: false, null: false
     t.boolean "online_waiver_acceptance", default: false, null: false
     t.string "medical_certificate"
+    t.datetime "medical_certificate_uploaded_at"
+    t.datetime "medical_questionnaire_filled_out_at"
+    t.datetime "medical_questionnaire_attest_all_no_at"
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true
     t.index ["deleted"], name: "index_registrants_deleted"
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type"
