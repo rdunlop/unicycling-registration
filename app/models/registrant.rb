@@ -551,6 +551,15 @@ class Registrant < ApplicationRecord
     end
   end
 
+  # Return true if they have submitted the required questions/certificate
+  def medical_documentation_complete?
+    if registrant.age >= 18
+      return registrant.medical_certificate.present?
+    else
+      return registrant.medical_questionnaire_filled_out && registrant.medical_questionnaire_attest_all_no
+    end
+  end
+
   private
 
   # Internal: Set the bib number of this registrant

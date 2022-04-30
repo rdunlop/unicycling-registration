@@ -27,13 +27,7 @@
         %td= registrant.email
         %td= registrant.user.email
         %td
-          - if registrant.age >= 18
-            - if registrant.medical_certificate.present?
-              "Good"
-            - else
-              "Bad"
+          - if registrant.medical_documentation_complete?
+            .medical_complete Good
           - else
-            - if registrant.medical_questionnaire_filled_out && registrant.medical_questionnaire_attest_all_no
-              "Good"
-            - else
-              "Bad"
+            .medical_incomplete Bad
