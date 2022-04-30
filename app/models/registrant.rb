@@ -553,10 +553,10 @@ class Registrant < ApplicationRecord
 
   # Return true if they have submitted the required questions/certificate
   def medical_documentation_complete?
-    if registrant.age >= 18
-      return registrant.medical_certificate.present?
+    if age >= 18
+      return medical_certificate.present?
     else
-      return registrant.medical_questionnaire_filled_out && registrant.medical_questionnaire_attest_all_no
+      return medical_questionnaire_filled_out && medical_questionnaire_attest_all_no
     end
   end
 
