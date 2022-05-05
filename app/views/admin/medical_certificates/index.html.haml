@@ -21,7 +21,8 @@
         %td
           - if registrant.medical_certificate.present?
             = link_to "Medical Certificate", registrant.medical_certificate_url
-            = l registrant.medical_certificate_uploaded_at, format: :registration_date_format
+            %br
+            = registrant.medical_certificate_uploaded_at.iso8601
         %td= registrant.medical_questionnaire_filled_out ? "Yes" : "No"
         %td= registrant.medical_questionnaire_attest_all_no ? "Yes" : "No"
         %td= registrant.email
