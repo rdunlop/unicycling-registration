@@ -234,6 +234,11 @@ class ExpenseItem < ApplicationRecord
     registrant_expense_items.includes(:registrant).joins(:registrant).where(registrants: { deleted: false }).free.select { |rei| rei.registrant.reg_paid? }
   end
 
+  # If the coupon is for the associated LodgingRoomOption
+  def valid_coupon?(coupon_line_item)
+    coupon_line_item == self
+  end
+
   private
 
   def paid_free_items

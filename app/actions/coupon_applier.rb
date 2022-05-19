@@ -29,7 +29,7 @@ class CouponApplier
   private
 
   def apply_coupon(payment_detail)
-    return unless coupon_code_applies_to_expense_item?(payment_detail.line_item)
+    return unless coupon_code_applies_to_line_item?(payment_detail.line_item)
     return unless coupon_code_applies_to_registrant_age?(payment_detail.registrant.age)
 
     if coupon_limit_reached?
@@ -45,8 +45,13 @@ class CouponApplier
     @coupon_code ||= CouponCode.find_by(code: coupon_code_string)
   end
 
-  def coupon_code_applies_to_expense_item?(expense_item)
-    coupon_code.coupon_code_expense_items.map(&:expense_item).include?(expense_item)
+  def coupon_code_applies_to_line_item?(line_item)
+    # Need to adjust this to allow the line_item to determine whether the coupon_code applies to it
+    # so that we can specify a coupon code which applies to a LodgingRoomOption, while the line_item is a
+    # LodgingPackage
+    coupon_code.coupon_code_expense_items.map(&:line_item).any? do |coupon_line_item|
+      line_item.valid_coupon?(coupon_line_item)
+    end
   end
 
   def coupon_code_applies_to_registrant_age?(age)

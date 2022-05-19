@@ -22,6 +22,7 @@ class LodgingRoomOption < ApplicationRecord
   belongs_to :lodging_room_type, inverse_of: :lodging_room_options
   has_many :lodging_days, dependent: :destroy
   has_many :lodging_packages, dependent: :restrict_with_exception
+  has_many :coupon_code_expense_items, dependent: :destroy
 
   acts_as_list scope: :lodging_room_type
   accepts_nested_attributes_for :lodging_days, allow_destroy: true

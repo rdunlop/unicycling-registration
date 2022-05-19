@@ -16,7 +16,9 @@
 
 class CouponCodeExpenseItem < ApplicationRecord
   belongs_to :coupon_code, inverse_of: :coupon_code_expense_items, touch: true
-  belongs_to :expense_item
+  belongs_to :line_item, polymorphic: true, inverse_of: :coupon_code_expense_items
 
-  validates :coupon_code, :expense_item, presence: true
+  validates :coupon_code, :line_item, presence: true
+
+  delegate :to_s, to: :line_item
 end
