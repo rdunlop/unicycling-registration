@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_26_020718) do
+ActiveRecord::Schema.define(version: 2022_05_19_040828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -284,11 +284,12 @@ ActiveRecord::Schema.define(version: 2022_04_26_020718) do
 
   create_table "coupon_code_expense_items", id: :serial, force: :cascade do |t|
     t.integer "coupon_code_id"
-    t.integer "expense_item_id"
+    t.integer "line_item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "line_item_type"
     t.index ["coupon_code_id"], name: "index_coupon_code_expense_items_on_coupon_code_id"
-    t.index ["expense_item_id"], name: "index_coupon_code_expense_items_on_expense_item_id"
+    t.index ["line_item_id", "line_item_type"], name: "coupon_code_line_item"
   end
 
   create_table "coupon_codes", id: :serial, force: :cascade do |t|

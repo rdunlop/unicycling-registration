@@ -90,6 +90,11 @@ class LodgingPackage < ApplicationRecord
     associated_entry&.updated_at
   end
 
+  # If the coupon is for the associated LodgingRoomOption
+  def valid_coupon?(coupon_line_item)
+    coupon_line_item == lodging_room_option
+  end
+
   private
 
   def associated_entry

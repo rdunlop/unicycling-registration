@@ -19,6 +19,6 @@
 FactoryBot.define do
   factory :coupon_code_expense_item do
     coupon_code # Factory Girl
-    expense_item # Factory Girl
+    association(:line_item, factory: :expense_item) # FactoryBot
   end
 end
