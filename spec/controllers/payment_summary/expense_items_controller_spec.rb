@@ -39,7 +39,7 @@ describe PaymentSummary::ExpenseItemsController do
     end
 
     context "with a coupon-code applied" do
-      let!(:expense_item_coupon_code) { FactoryBot.create(:coupon_code_expense_item, expense_item: expense_item) }
+      let!(:expense_item_coupon_code) { FactoryBot.create(:coupon_code_expense_item, line_item: expense_item) }
 
       it "displays the details" do
         get :details, params: { id: expense_item.to_param }

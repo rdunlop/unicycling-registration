@@ -9,7 +9,7 @@ describe CouponApplier do
   let(:expense_item) { FactoryBot.create(:expense_item) }
   let(:max_coupon_uses) { 0 }
   let(:coupon_code) { FactoryBot.create(:coupon_code, max_num_uses: max_coupon_uses) }
-  let!(:coupon_code_detail) { FactoryBot.create(:coupon_code_expense_item, coupon_code: coupon_code, expense_item: expense_item) }
+  let!(:coupon_code_detail) { FactoryBot.create(:coupon_code_expense_item, coupon_code: coupon_code, line_item: expense_item) }
   let(:coupon_code_string) { coupon_code.code }
   let(:payment) { FactoryBot.create(:payment, :completed) }
   let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, line_item: expense_item) }

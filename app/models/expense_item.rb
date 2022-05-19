@@ -34,7 +34,7 @@ class ExpenseItem < ApplicationRecord
   has_many :payment_details, as: :line_item, dependent: :restrict_with_exception
 
   has_many :registrant_expense_items, as: :line_item, inverse_of: :line_item, dependent: :restrict_with_exception
-  has_many :coupon_code_expense_items, dependent: :destroy
+  has_many :coupon_code_expense_items, as: :line_item, dependent: :destroy
 
   translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
