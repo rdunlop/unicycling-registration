@@ -4,7 +4,7 @@ class Admin::MedicalCertificatesController < ApplicationController
 
   # GET /admin/medical_certificates
   def index
-    @registrants = Registrant.all
+    @registrants = Registrant.active
   end
 
   private
