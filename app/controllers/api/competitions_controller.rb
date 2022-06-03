@@ -23,15 +23,18 @@ class Api::CompetitionsController < ApplicationController
       results_pdfs = if competition.published?
                        competition.competition_results.active.map do |result|
                          {
+                           id: result.id,
                            name: result.to_s,
                            pdf: public_result_url(result),
-                           published_at: competition.published_at.iso8601
+                           published_at: result.published_date.iso8601
                          }
                        end
                      end
 
       {
-        name: [competition.award_title_name, competition.award_subtitle_name].compact.join(" - "),
+        id: competition.id,
+        name: competition.award_title_name,
+        subtitle: competition.award_subtitle_name,
         competitor_list_pdf: competitor_list_pdf,
         start_list_pdf: start_list_pdf,
         results: results_pdfs,

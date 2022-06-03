@@ -20,7 +20,7 @@ FactoryBot.define do
     results_file { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
     system_managed { false }
     published { true }
-    published_date { Date.current }
+    published_date { DateTime.current }
     sequence(:name) { |n| "My new result#{n}" }
   end
 end
