@@ -66,6 +66,10 @@ FactoryBot.define do
       end
     end
 
+    trait :with_medical_certificate_pdf do
+      medical_certificate { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
+    end
+
     # old way
     factory :competitor do
       registrant_type { 'competitor' }
