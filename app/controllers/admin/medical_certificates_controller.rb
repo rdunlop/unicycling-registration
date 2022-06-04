@@ -4,7 +4,7 @@ class Admin::MedicalCertificatesController < ApplicationController
 
   # GET /admin/medical_certificates
   def index
-    @registrants = Registrant.active.includes(:contact_detail, :user)
+    @registrants = Registrant.competitor.active.includes(:contact_detail, :user)
   end
 
   private
