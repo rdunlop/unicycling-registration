@@ -156,7 +156,7 @@ class Registrant < ApplicationRecord
   validates_associated :contact_detail, if: :validated?
   validates_associated :registrant_best_times, if: :past_step_2?
 
-  mount_uploader :medical_certificate, PdfUploader
+  mount_uploader :medical_certificate, PdfOrImageUploader
   before_save :set_medical_certificate_upload_date
 
   # Expense items/LineItems
