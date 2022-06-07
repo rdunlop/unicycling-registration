@@ -335,7 +335,7 @@ GEM
     jaro_winkler (1.5.3)
     jc-validates_timeliness (3.1.1)
       timeliness (~> 0.3.7)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     jquery-datatables-rails (3.4.0)
       actionpack (>= 3.1)
       jquery-rails
