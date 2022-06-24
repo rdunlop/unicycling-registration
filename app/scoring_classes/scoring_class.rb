@@ -80,6 +80,13 @@ class ScoringClass
         judge_score_calculator: Freestyle_2017_JudgePointsCalculator.new,
         helper: ArtisticScoringClass_2017.new(competition)
       }
+    when "Artistic Freestyle IUF 2019"
+      {
+        calculator: ArtisticResultCalculator_2017.new, # Same rules as 2017 for these calculations
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: Freestyle_2019_JudgePointsCalculator.new,
+        helper: ArtisticScoringClass_2019.new(competition)
+      }
     when "Flatland"
       scoring_helper = FlatlandScoringClass.new(competition)
       {
