@@ -12,7 +12,7 @@
       %th{ rowspan: 2 } Performance [%]
       %th{ rowspan: 2 } Technical [%]
       - if dismount_judge_type
-        %th{ colspan: 2 } Dismounts [#]
+        %th{ colspan: 3 } Dismounts [#]
       %th.border-left{ rowspan: 2 } Total [%]
       %th{ rowspan: 2 } Place
     - if dismount_judge_type
@@ -29,6 +29,7 @@
           - dismounts = @competition.scoring_calculator.dismount_points_for_competitor(competitor, dismount_judge_type)
           %td= dismounts[:major_dismounts]
           %td= dismounts[:minor_dismounts]
+          %td= @competition.competitor_placing_points(competitor, dismount_judge_type, with_ineligible: true)
         %td.border-left= competitor.comparable_score_with_ineligible
         %td= competitor.overall_place
   %tfoot
@@ -37,6 +38,7 @@
       %td 100%
       %td 100%
       - if dismount_judge_type
+        %td -
         %td -
         %td -
       %td.border-left 100%
