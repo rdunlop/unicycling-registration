@@ -1,5 +1,6 @@
 // Locals: judges, judge_type, anonymous, competition
 - total_judge_columns = 5 + (judges.count * (judge_type.num_columns + num_total_columns(competition)))
+- judge_type_presenter = JudgeTypePresenter.new(judge_type)
 %tr
   %th.judge_type_header{ colspan: total_judge_columns }= judge_type
 %tr
@@ -14,19 +15,22 @@
       - else
         = judge.name
   %th{ rowspan: 2 }
-    Total
+    = judge_type_presenter.total_header_words[0]
     %br
-    Points
+    = judge_type_presenter.total_header_words[1]
   - if display_multiple_score_totals?(competition)
     %th{ rowspan: 2 }
-      Total
+      = judge_type_presenter.total_header_words[0]
       %br
-      Points*
+      = judge_type_presenter.total_header_words[1]
+      *
 %tr
   - judges.each do |judge|
     - judge_type.num_columns.times.each do |i|
       %th= i + 1
     %th Total
-    %th Points
+    %th= judge_type_presenter.total_header_words[1]
     - if display_multiple_score_totals?(competition)
-      %th Points*
+      %th
+        = judge_type_presenter.total_header_words[1]
+        *

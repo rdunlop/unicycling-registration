@@ -200,6 +200,51 @@ JudgeType.find_or_create_by(name: "Dismount", event_class: "Artistic Freestyle I
   )
 end
 
+JudgeType.find_or_create_by(name: "Performance", event_class: "Artistic Freestyle IUF 2019") do |judge_type|
+  judge_type.assign_attributes(
+    val_1_description: "Presence/Execution",
+    val_2_description: "Composition/Choreography",
+    val_3_description: "Interpretation of the Music/Timing",
+    val_4_description: "N/A",
+    val_5_description: "N/A",
+    val_1_max: 10,
+    val_2_max: 10,
+    val_3_max: 10,
+    val_4_max: 0,
+    val_5_max: 0
+  )
+end
+
+JudgeType.find_or_create_by(name: "Technical", event_class: "Artistic Freestyle IUF 2019") do |judge_type|
+  judge_type.assign_attributes(
+    val_1_description: "Quantity of Unicycling Skills & Transitions",
+    val_2_description: "Mastery and Quality of Execution",
+    val_3_description: "Difficulty and Duration",
+    val_4_description: "N/A",
+    val_5_description: "N/A",
+    val_1_max: 10,
+    val_2_max: 10,
+    val_3_max: 10,
+    val_4_max: 0,
+    val_5_max: 0
+  )
+end
+
+JudgeType.find_or_create_by(name: "Dismount", event_class: "Artistic Freestyle IUF 2019") do |judge_type|
+  judge_type.assign_attributes(
+    val_1_description: "Major",
+    val_2_description: "Minor",
+    val_3_description: "N/A",
+    val_4_description: "N/A",
+    val_5_description: "N/A",
+    val_1_max: 1000, # Unlimited
+    val_2_max: 1000, # Unlimited
+    val_3_max: 0,
+    val_4_max: 0,
+    val_5_max: 0
+  )
+end
+
 JudgeType.find_or_create_by(name: "Writing", event_class: "Standard Skill") do |judge_type|
   judge_type.assign_attributes(
     val_1_description: "n/a",

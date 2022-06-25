@@ -158,6 +158,7 @@ RSpec/FilePath:
     - 'spec/distance_attempt_managers/jump_limit/triple_fault_or_max_attempts_12_spec.rb'
     - 'spec/judge_points_calculators/freestyle_2015_judge_points_calculator_spec.rb'
     - 'spec/judge_points_calculators/freestyle_2017_judge_points_calculator_spec.rb'
+    - 'spec/judge_points_calculators/freestyle_2019_judge_points_calculator_spec.rb'
     - 'spec/lib/race_calculator_spec.rb'
 
 # Offense count: 2995
