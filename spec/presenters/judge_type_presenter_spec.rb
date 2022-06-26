@@ -16,7 +16,7 @@ describe JudgeTypePresenter do
       let(:judge_type) { FactoryBot.create(:judge_type, event_class: "Artistic Freestyle IUF 2019") }
 
       it "has total_header_words with Avg Perc" do
-        expect(presenter.total_header_words.join(" ")).to eq("Avg. Perc.")
+        expect(presenter.total_header_words.join(" ")).to eq("Avg. %")
       end
     end
   end

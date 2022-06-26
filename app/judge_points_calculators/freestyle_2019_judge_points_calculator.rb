@@ -16,7 +16,7 @@ class Freestyle_2019_JudgePointsCalculator # rubocop:disable Naming/ClassAndModu
   def calculate_score_total(score)
     calculator = case score.judge_type.name
                  when "Technical"
-                   ScoreWeightCalculator::Weighted.new([100.0 / 3, 100.0 / 3, 100.0 / 3])
+                   ScoreWeightCalculator::Equal.new
                  when "Performance"
                    ScoreWeightCalculator::Equal.new
                  when "Dismount"

@@ -11,7 +11,7 @@ class JudgeTypePresenter
   def total_header_words
     case judge_type.event_class
     when "Artistic Freestyle IUF 2019"
-      ["Avg.", "Perc."]
+      ["Avg.", "%"]
     else
       ["Total", "Points"]
     end
