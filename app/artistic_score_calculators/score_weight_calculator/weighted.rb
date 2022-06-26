@@ -13,6 +13,6 @@ class ScoreWeightCalculator::Weighted
 
       sum += score * score_weights[index]
     end
-    sum / 100.0
+    (sum / 100.0).round(4)
   end
 end
