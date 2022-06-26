@@ -18,7 +18,7 @@ describe Freestyle_2019_JudgePointsCalculator do
       let(:judge_type) { "Technical" }
 
       it "gives a weighted average to the scores" do
-        expect(subject.calculate_score_total(score)).to eq(8)
+        expect(subject.calculate_score_total(score)).to eq(24)
       end
     end
 
