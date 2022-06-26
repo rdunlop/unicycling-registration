@@ -19,6 +19,7 @@
       %tr
         %th Major
         %th Minor
+        %th [%]
   %tbody
     - @competition.results_list.each do |competitor|
       %tr
@@ -40,7 +41,7 @@
       - if dismount_judge_type
         %td -
         %td -
-        %td -
+        %td 100%
       %td.border-left 100%
       %td
 
