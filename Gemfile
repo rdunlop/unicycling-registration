@@ -48,7 +48,6 @@ gem 'eye-patch', require: false
 gem 'gaffe'
 gem 'hcaptcha'
 gem 'http_accept_language'
-gem 'newrelic_rpm'
 gem 'order_as_specified'
 gem 'paper_trail'
 gem 'rails_admin'
