@@ -173,6 +173,30 @@ class ImportResultsController < ApplicationController
     redirect_to display_csv_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time)
   end
 
+  def display_uni_timer
+    add_breadcrumb "Import UniTimer CSV"
+  end
+
+  # POST /users/#/competitions/#/import_results/import_uni_timer
+  def import_uni_timer
+    uploaded_file = UploadedFile.process_params(params, competition: @competition, user: @user)
+
+    if uploaded_file.nil?
+      flash[:alert] = "File Not found"
+    else
+      importer = Importers::UniTimerImporter.new(@competition, @user)
+      parser = Importers::Parsers::UniTimer.new(uploaded_file.original_file.file, @competition.results_displayer)
+
+      if importer.process(@is_start_time, parser)
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      end
+    end
+
+    redirect_to display_csv_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time)
+  end
+
   # DELETE /users/#/competitions/#/import_results/destroy_all
   def destroy_all
     @user.import_results.where(competition_id: @competition).destroy_all

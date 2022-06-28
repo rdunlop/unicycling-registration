@@ -82,7 +82,7 @@ class Competition < ApplicationRecord
   accepts_nested_attributes_for :competitors
 
   def self.data_recording_types
-    ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing", "Swiss Track"]
+    ["Two Data Per Line", "One Data Per Line", "Track E-Timer", "Externally Ranked", "Mass Start", "Chip-Timing", "Swiss Track", "UniTimer"]
   end
 
   validates :start_data_type, :end_data_type, inclusion: { in: data_recording_types, allow_nil: true }

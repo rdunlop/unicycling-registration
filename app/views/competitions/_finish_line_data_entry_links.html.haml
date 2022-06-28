@@ -41,6 +41,10 @@
     - if policy(competition).modify_result_data?
       %li= link_to "Import Swiss Data", user_competition_swiss_results_path(current_user, competition)
 
+  - when "UniTimer"
+    - if policy(competition).modify_result_data?
+      %li= link_to "Import UniTimer Data", display_csv_user_competition_import_results_path(current_user, competition)
+
   - if competition.imports_times? && policy(competition).modify_result_data?
     %li= link_to "Import CSV", display_csv_user_competition_import_results_path(current_user, competition, options)
 

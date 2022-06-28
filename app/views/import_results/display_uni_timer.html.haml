@@ -1,0 +1,34 @@
+%h1 Import Data from UniTimer CSV File
+%h2 Competition: #{@competition}
+%h3= start_finish_description(@is_start_time)
+
+-# NOTE: this whole page should be split so that it can be done for Start Times and Finish Times separately (without having to choose the checkbox)
+%p
+  This will import a file, which can then be approved before adding it to the official results.
+
+%h2 CSV Import Instructions
+
+Please import a Comma-Separated-File (Windows CSV Format) file with the following format:
+
+%ul
+  %li Column 1: ID
+  %li Column 2: minute-of-day
+  %li Column 3: second-of-minute
+  %li Column 4: millisecond-of-minute
+  %li Column 5 (optional): "FAULT"
+
+also, some lines could say "CLEAR_PREVIOUS" which will discard the previous result
+
+%b Include NO Header row
+
+= form_tag(import_uni_timer_user_competition_import_results_path(@user, @competition), {:method => :post, :multipart=>true}) do
+  = hidden_field_tag :is_start_times, @is_start_time
+  = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
+  .row
+    .small-12.medium-6.columns
+      = submit_tag "Import UniTimer CSV", class: "button"
+
+= render :partial => "imported_time_results"
+%br
+
+= link_to "Review Results", review_user_competition_import_results_path(@user, @competition, is_start_times: @is_start_time), class: "button"

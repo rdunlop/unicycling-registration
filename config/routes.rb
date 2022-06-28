@@ -548,6 +548,8 @@ Rails.application.routes.draw do
             post :import_csv
             get :display_chip
             post :import_chip
+            get :display_uni_timer
+            post :import_uni_timer
             delete :destroy_all
           end
         end
