@@ -54,7 +54,7 @@ class RegistrantPolicy < ApplicationPolicy
   def add_contact_details?
     # Temporary hack to allow uploading medical certificates after
     # registration is closed
-    return true if config.require_medical_certificate? && Date.current < Date.new(2022, 07, 26)
+    return true if config.require_medical_certificate? && Date.current < Date.new(2022, 7, 26)
 
     update?
   end
