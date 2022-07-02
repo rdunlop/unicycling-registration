@@ -12,7 +12,8 @@
   = f.label :medical_certificate
   = f.file_field :medical_certificate
   - if f.object.medical_certificate.present?
-    = link_to "Medical Certificate", f.object.medical_certificate_url
+    %b You have uploaded a Medical Certificate
+    = link_to "View Uploaded Medical Certificate", f.object.medical_certificate_url,  target: "_blank"
 
   %hr
 

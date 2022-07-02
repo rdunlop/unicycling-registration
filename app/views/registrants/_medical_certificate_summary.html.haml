@@ -1,0 +1,25 @@
+%div.medical_certificate
+  %p
+  %p
+    %b= Registrant.human_attribute_name(:medical_certificate_url)
+    %br
+    Medical Certificate:
+    - if registrant.medical_certificate.present?
+      Uploaded
+    - else
+      %b NOT
+      Uploaded
+  %p
+    %b=Registrant.human_attribute_name(:medical_questionnaire_filled_out)
+    %br
+    = registrant.medical_questionnaire_filled_out ? "Yes" : "No"
+  %p
+    %b= Registrant.human_attribute_name(:medical_questionnaire_attest_all_no)
+    %b
+    = registrant.medical_questionnaire_attest_all_no ? "Yes" : "No"
+  %p
+    %b All Complete?
+    - if registrant.medical_documentation_complete?
+      Good
+    - else
+      Bad

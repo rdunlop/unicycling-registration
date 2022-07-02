@@ -31,3 +31,5 @@
       = render :partial => "/registrants/contact_summary", locals: { :contact_detail => @registrant.contact_detail }
     - if @registrant.organization_membership
       = render partial: "/registrants/organization_membership", locals: { organization_membership: @registrant.organization_membership }
+    - if @config.require_medical_certificate? && @registrant.competitor?
+      = render partial: "/registrants/medical_certificate_summary", locals: { registrant: @registrant }
