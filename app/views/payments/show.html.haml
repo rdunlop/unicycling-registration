@@ -9,6 +9,9 @@
     %p= t(".offline_payment_instructions_description")
     = @config.offline_payment_description.try(:html_safe)
 
+- if current_user != @payment.user
+  .alert-box.callout.secondary.top_banner Send this URL to the user (#{@payment.user}) in order to ask them to pay for these items
+
 - unless @payment.completed_or_offline?
   .row
     = render partial: 'add_coupon'

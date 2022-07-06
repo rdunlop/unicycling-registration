@@ -48,6 +48,11 @@
           %th{ colspan: 2 }
           %th
 
+    %br
+    = check_box_tag(:assign_to_registrant_user, false)
+    = label_tag(:assign_to_registrant_user, "Assign this payment to the associated user (not to you)")
+    %br
+
     = submit_tag t(".submit"), :class => "payment_link"
 
 %div
