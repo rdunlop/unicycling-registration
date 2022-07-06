@@ -59,5 +59,27 @@ describe Admin::ManualPaymentsController do
         expect(response).to redirect_to(new_manual_payment_path)
       end
     end
+
+    context "when choosing to choose the user automatically" do
+      let(:registrant) { rei.registrant }
+
+      it "assigns the user to the related registrant's user" do
+        expect do
+          post :create, params: {
+            manual_payment: {
+              unpaid_details_attributes: {
+                "0" => {
+                  registrant_expense_item_id: rei.id,
+                  pay_for: "1"
+                }
+              }
+            },
+            assign_to_registrant_user: "1"
+          }
+        end.to change(Payment, :count).by(1)
+        p = Payment.last
+        expect(p.user).to eq(registrant.user)
+      end
+    end
   end
 end

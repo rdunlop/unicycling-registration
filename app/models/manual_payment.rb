@@ -11,6 +11,7 @@ class ManualPayment
   include ActiveModel::Validations
 
   attribute :user, User
+  attribute :assign_registrants_user, Boolean
   attribute :created_payment, Payment
   attribute :error_message, String
   validate :at_least_one_paid_element
@@ -32,6 +33,7 @@ class ManualPayment
   def initialize(params = {})
     @new_expense_items = []
     @error_message = nil
+    @assign_registrants_user = false
     params&.each do |name, value|
       send("#{name}=", value)
     end
@@ -68,7 +70,22 @@ class ManualPayment
     unpaid_details.each do |ud|
       build_payment_detail(payment, ud)
     end
-    payment.user = user
+    # Assign the user associated with the included payment_details to the payment,
+    # instead of assigning the current_user
+    if assign_registrants_user
+      proposed_user = nil
+      payment.payment_details.each do |pd|
+        if proposed_user.nil?
+          proposed_user = pd.registrant.user
+        end
+        if proposed_user != pd.registrant.user
+          payment.errors.add(:base, "Unable to assign payment when selecting multiple registrants from different users")
+        end
+        payment.user = proposed_user
+      end
+    else
+      payment.user = user
+    end
     payment
   end
 

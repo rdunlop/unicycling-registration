@@ -3,6 +3,10 @@
   %b= Payment.human_attribute_name(:payment_id)
   #{payment.id} - #{payment.invoice_id}
 
+%p
+  %b= User.model_name.human
+  = payment.user
+
 - if payment.completed
   %p
     %b= Payment.human_attribute_name(:transaction_id)
