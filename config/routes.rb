@@ -430,7 +430,7 @@ Rails.application.routes.draw do
       end
       resources :api_tokens, except: %i[show update]
 
-      resources :medical_certificates, only: [:index] do
+      resources :medical_certificates, only: [:index, :update] do
       end
     end
 
