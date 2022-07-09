@@ -12,6 +12,7 @@ en:
         medical_certificate_url: PDF Document showing Doctor's Note
         medical_questionnaire_filled_out: I have filled out the medical questionnaire
         medical_questionnaire_attest_all_no: I answered NO to all questions of the medical questionnaire
+        medical_certificate_manually_confirmed: Reviewed & Confirmed Medical Documents
     models:
       registrant:
         one: Registrant

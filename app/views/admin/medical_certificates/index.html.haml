@@ -12,6 +12,7 @@
       %th= Registrant.human_attribute_name(:email)
       %th= User.human_attribute_name(:email)
       %th= "Status"
+      %th= Registrant.human_attribute_name(:medical_certificate_manually_confirmed)
   %tbody
     - @registrants.each do |registrant|
       %tr
@@ -32,3 +33,9 @@
             .medical_complete Good
           - else
             .medical_incomplete Bad
+        %td
+          - if registrant.medical_certificate_manually_confirmed?
+            .medical_complete Reviewed
+          - else
+            .medical_incomplete Not yet Reviewed
+          = link_to "Reviewed Medical Documents", medical_certificate_path(registrant.id), method: :put

@@ -3,6 +3,10 @@ class AdminPermissionPolicy < ApplicationPolicy
     convention_admin? || competition_admin? || super_admin?
   end
 
+  def update?
+    index?
+  end
+
   def set_role?
     convention_admin? || competition_admin? || super_admin?
   end

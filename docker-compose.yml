@@ -35,7 +35,7 @@ services:
       - gem_cache_sidekiq:/gems
 
   db:
-    image: postgres:9.4.12
+    image: postgres:13.3
     restart: always
     environment:
       POSTGRES_USER: ubuntu
