@@ -102,7 +102,8 @@ class EmailsController < ApplicationController
       EmailFilters::Event,
       EmailFilters::SignedUpCategory,
       EmailFilters::ExpenseItem,
-      EmailFilters::Country
+      EmailFilters::Country,
+      EmailFilters::AllUserAllReg
     ]
     if config.organization_membership_config?
       list + [EmailFilters::NonConfirmedOrganizationMembers]
