@@ -1,2 +1,4 @@
 # We do not use the feature which is vulnerable:
 CVE-2016-7103
+# Ignore rails for now, so that we can release
+CVE-2022-32224
