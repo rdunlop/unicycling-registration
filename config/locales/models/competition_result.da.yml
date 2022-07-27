@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      competition_result:
+        one: Øvrig Resultat
+        other: Øvrige Resultater

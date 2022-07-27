@@ -13,4 +13,7 @@ da:
         tax: Afgifter
         total: Total
         total_cost: Total (Udregnet)
-    models: 
+    models:
+      expense_item:
+        one: Udgift Artikel
+        other: Udgift Artikler

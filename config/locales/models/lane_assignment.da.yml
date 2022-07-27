@@ -5,4 +5,7 @@ da:
       lane_assignment:
         heat: Heat
         lane: Bane
-    models: 
+    models:
+      lane_assignment:
+        one: Bane Tildeling
+        other: Bane Tildelinger

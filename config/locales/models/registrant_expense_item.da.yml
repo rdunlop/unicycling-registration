@@ -4,4 +4,7 @@ da:
     attributes:
       registrant_expense_item:
         tax: Afgifter
-    models: 
+    models:
+      registrant_expense_item:
+        one: Vare
+        other: Varer

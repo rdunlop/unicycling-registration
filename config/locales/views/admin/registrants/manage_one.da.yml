@@ -1,0 +1,7 @@
+---
+da:
+  admin:
+    registrants:
+      manage_one:
+        edit_summary: Redigér/opsummering
+        summary: Opsummering

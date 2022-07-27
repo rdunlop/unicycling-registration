@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      payment_detail_coupon_code:
+        one: Betalings Kuponkode
+        other: Betalings Kuponkoder

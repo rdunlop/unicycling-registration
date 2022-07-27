@@ -8,4 +8,7 @@ da:
         onsite: On-Site
         registrant_type: Tilmeldings-type
         start_date: Start Dato
-    models: 
+    models:
+      registration_cost:
+        one: Tilmeldings Udgift
+        other: Tilmeldings Udgifter

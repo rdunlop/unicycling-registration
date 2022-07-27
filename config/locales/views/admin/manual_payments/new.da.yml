@@ -1,0 +1,8 @@
+---
+da:
+  admin:
+    manual_payments:
+      new:
+        description: 'Vælg tilmeldte at justere betalinger for:'
+        header: Ny betaling
+        start_process: Næste skridt (vælg varer)

@@ -1,0 +1,72 @@
+---
+da:
+  admin:
+    permissions:
+      index:
+        add_new_permission: Tilføj ny tilladelse
+        different_users_different_roles: Tilmeldingssystemet er fordelt i forskellige
+          sektioner til brug af forskellige folk.
+        directors_permissions_html: For at give director-adgang til specifikke events,
+          brug venligst %{link} siden
+        event_planned_example: "For at se listen for deltagerne til hvert event, bør\r\ndu
+          aktivére \"Event Planner\" funktionen"
+        header: Bruger administration
+        other_roles_not_permitted_html: "Der er måske yderligere funktioner som du\r\n<u>ikke<u>
+          \r\nhar tilladelse til at se."
+        payment_admin_example: "For at se/administrere de modtagede betalinger (og
+          tilbagebetale),\r\naktivér \"Payment Admin\" funktionen"
+        role_allows_access: Hver funktion gør brugeren i stand til at se/bruge forskellige
+          sider af systemet.
+        role_description:
+          awards_admin: "I stand til at se resultat data\r\nI stand til at offentliggøre
+            resultater\r\nI stand til at markére konkurrencer som præmieuddelte"
+          competition_admin: "I stand til at oprette konkurrencer, og tilpasse konkurrence
+            opsætning\r\nI stand til at oprette/administrere Alders Grupper\r\nKan
+            indstille deltagere som ukvalificeret\r\nKan oprette director, data_entry_volunteer\r\nKan
+            nulstille bruger adgangskoder\r\nKan se alle Event tilmeldinger\r\nKan
+            administrere alle konkurrence deltagere (når konkurrencen er låst op)\r\nKan
+            låse/låse op for konkurrencer\r\nKan exportere resultater"
+          convention_admin: "I stand til at tilpasse Convention indstillinger i forhold
+            til tilmeldingsindstillinger\r\nKan indstille look-and-feel, event navn,
+            og Domain URL indstillinger.\r\nKan opsætte betalings udgifter\r\nKan
+            opsætte PayPal detaljerne\r\nKan opsætte tilbudte events\r\nKan opsætte
+            frivillig mulighederne\r\nKan nulstille brugeres adgangskoder\r\nKan oprette
+            'Autoriserede bærbarer' til brug på on-site registrering\r\nKan oprette
+            payment_admin, event_planner, og music_dj brugere"
+          director: "I stand til at tildele deltagere til konkurrenter\r\nKan oprette
+            dommere, frivillige\r\nKan nulstille bruger adgangskoder"
+          event_planner: "I stand til at se/vurdere event sign_ups.\r\nI stand til
+            at SEARCH & MODIFY enhver tilmeldt.\r\nI stand til at Bulk Import/Export
+            tilmeldings data (inklusiv event sign ups)\r\nI stand til at opdatere
+            bib nummer for tilmeldte.\r\nI stand til at tilføje/ændre valgte events
+            til enhver tid.\r\nI stand til at se/sende emails til alle tilmeldte.\r\nI
+            stand til at administrere Feedback modtaget af systemet."
+          export_payment_lists: I stand til at bruge Export menu til at downloade
+            Excel filer af tilmeldte som har betalt for overnatning.
+          late_registrant: "Har adgang til tilmeldingssystemet, selv efter tilmeldingsperioden
+            er forbi.\r\nI stand til at oprette nye deltagere, opdatere allerede eksisterende
+            deltagere, og lave betalinger.\r\nDu bør bruge dette sammen med SetRegFee
+            funktionen, for at specificere det afkrævede gebyr."
+          membership_admin: "I stand til at se USA Medlemsskab siden.\r\nI stand til
+            at opdatere USA Medlemsskab numre\r\nI stand til at indikére om en bruger
+            er up-to-date med USA medlemsskabsgebyrer."
+          music_dj: I stand til at se/downloade ethvert stykke musik fra Administrér
+            Musik siden
+          payment_admin: "I stand til at se modtagede betalinger.\r\nI stand til at
+            se total antal af varer betalt.\r\nI stand til at bestemme tilmeldings
+            gebyrer per bruger.\r\nI stand til at markére afkrydsede som modtagede.\r\nI
+            stand til at administrere Feedback modtaget af systemet."
+          super_admin: "I stand til at tildele funktioner til andre folk\r\nI stand
+            til at destruere betalingsinformation\r\nI stand til at konfigurere side-indstillinger,
+            event indstillinger"
+          translator: "Har adgang til oversættelses menuen. \r\nIndtaste nye oversættelser,
+            og anvende dem på siden"
+        role_descriptions: 'Funktion beskrivelser:'
+        roles_listed: "På denne side er alle funktionerne som du har tilladelse til
+          at se.\r\nDu kan tildele funktioner til andre brugere for at give dem adgang
+          til mere."
+        set_password: Bestem Bruger Adgangskode
+        users_with_permissions: 'Brugere med tilladelser:'
+        you_have_roles: 'Dine aktuelle funktioner:'
+        you_may_need_to_grant_yourself_roles: Du har måske brug for at give dig selv
+          andre funktioner for at få adgang til andet indhold i systemet.

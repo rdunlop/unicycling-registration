@@ -1,0 +1,13 @@
+---
+da:
+  admin:
+    manual_payments:
+      choose:
+        choose_items: Sæt kryds for at markére enhederne som betalt
+        chosen_and_unpaid_items: Valgte (men ikke betalte) varer
+        description: En email bliver sendt til den tilknyttede bruger når en betaling
+          er gennemført.
+        details_note: "(kun påkrævet ved nogle varer)"
+        header: Modtag betaling
+        mark_this_item: Vælg denne vare
+        submit: Opret betalingsoversigt

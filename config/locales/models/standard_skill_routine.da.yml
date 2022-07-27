@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      standard_skill_routine:
+        one: Standard Skill Rutine
+        other: Standard Skill Rutiner

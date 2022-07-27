@@ -27,8 +27,8 @@ it:
         noncompetitor_benefits: Agevolazioni per accompagnatore
         offline_payment: Fornire dettagli per il pagamento offline
         offline_payment_description: Dettagli per il pagamento offline
-        paypal_account: Account email PayPal
         payment_mode: Modalità Iscritto
+        paypal_account: Account email PayPal
         registrants_should_specify_default_wheel_size: Gli iscritti devono specificare
           la dimensione della ruota per difetto
         request_address: Indirizzo richiesto

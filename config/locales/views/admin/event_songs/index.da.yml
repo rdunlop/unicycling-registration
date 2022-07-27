@@ -4,4 +4,14 @@ da:
     event_songs:
       index:
         add_new_song: Tilføj en ny sang for en deltager
+        all_songs_together: Alle Sange på én Side
+        by_competition: Musik, Efter Konkurrence
+        by_competition_description: Brug følgende konkurrence sider til at tilføje
+          musik til deltagerne hver for sig, efter at rutiner/konkurrencer og deltagere
+          er blevet oprettet. Du kan downloade en ZIP-fil af alt musik til en konkurrence
+          med filerne opdelt i deltager-rækkefølge fra Konkurrence Musik Siderne.
+        by_event: Musik, Efter Event
+        by_event_description: Se musikken som er blevet uploadet for hver deltager/event
+        description: Se, download, og tildel musik til deltagere fra disse sider
+        header: Kontrollér Musik
         num_songs: "# Uploaded Sange"

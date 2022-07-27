@@ -23,6 +23,8 @@ fr:
           cette compétition concerne seulement des experts, alors ne cochez pas cette
           case, ils seront placé dans un seul groupe / résultat.\r\nVous DEVEZ aussi
           avoir une tranche d'âge spécifiée."
+        hide_max_laps_count: 'Ne montrez le # de tours que s''il est inférieur à celui
+          du leader'
         import_results_into_other_competition: A l'import de résultats, si l'inscrit
           n'est pas assigné à cette compétition, mais à une autre compétition du même
           événement, cela importera les résultats ici après approbation.
@@ -73,6 +75,8 @@ fr:
       event_configuration:
         accept_rules: Oblige l'ensemble des inscrits à accepter les règles jointes
           en PDF
+        add_expenses_end_date: Après cette date, vous ne pourrez pas ajouter de dépense
+          à votre inscription.
         age_calculation_base_date: L'âge des inscrit est calculé à partir de cette
           date.
         artistic_closed_date: Après cette date, les inscrits ne peuvent plus AJOUTER
@@ -114,6 +118,8 @@ fr:
           d'urgence
         request_responsible_adult: Oblige chaque mineur (moins de 18 ans) à saisir
           un adulte responsable
+        require_medical_certificate: Oblige chaque participants à uploader un certificat
+          médical, pour montrer que leur médecin leur a donné l'autorisation à participer.
         spectator_benefits: Apparaît sur la page d'accueil de l'inscription, décrit
           les bénéfices de l'inscription spectateur
         spectators: Les spectateurs n'ont pas de coût d'inscription, et peuvent acheter

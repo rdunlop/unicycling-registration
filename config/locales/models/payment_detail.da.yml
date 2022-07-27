@@ -4,4 +4,7 @@ da:
     attributes:
       payment_detail:
         details: Detaljer
-    models: 
+    models:
+      payment_details:
+        one: Detalje
+        other: Detaljer

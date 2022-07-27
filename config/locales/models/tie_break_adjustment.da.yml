@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      tie_break_adjustment:
+        one: Tie Break Justering
+        other: Tie Break Justeringer

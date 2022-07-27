@@ -12,5 +12,5 @@ da:
         price: Pris
     models:
       coupon_code:
-        one: Rabat kupon kode
-        other: Rabat kupon koder
+        one: Rabat Kuponkode
+        other: Rabat Kuponkoder

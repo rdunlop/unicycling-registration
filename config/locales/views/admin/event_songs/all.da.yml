@@ -4,3 +4,4 @@ da:
     event_songs:
       all:
         download: Download
+        header: Alle Sange

@@ -1,0 +1,15 @@
+---
+da:
+  admin:
+    reg_fees:
+      index:
+        automatic_increase: "Når perioden er bestemt vil den valgte tilmeldingsperiode
+          vil blive \"Låst\"\r\nfor deltageren, og vil ikke automatisk stige som datoerne
+          går."
+        can_lock_again: Du kan vælge at låse en deltagers betaling til en et andet
+          beløb efter at have "Låst" betalingsgebyret for deltageren, hvis det er
+          ønsket.
+        description: Denne form vil give dig tilladelse til at bestemme deltagergebyret
+          for denne deltager.
+        header: Lav Deltager Gebyr om
+        set_reg_fee: Bestem Deltager Gebyr

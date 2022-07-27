@@ -1,0 +1,10 @@
+---
+da:
+  admin:
+    manual_refunds:
+      new:
+        description: "Dette sender ikke penge tilbage, det\r\nændrer kun regnskabet
+          i tilmeldingssystemet."
+        header: Ny tilbagebetaling
+        select_registrants: 'Vælg tilmeldte at tilbagebetale til:'
+        start_process: Næste skridt (vælg varer)

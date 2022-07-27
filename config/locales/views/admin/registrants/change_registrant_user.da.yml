@@ -1,0 +1,7 @@
+---
+da:
+  admin:
+    registrants:
+      change_registrant_user:
+        change_associated_user: Lav Tilknyttet Bruger om
+        header: Lav Deltagers Bruger om

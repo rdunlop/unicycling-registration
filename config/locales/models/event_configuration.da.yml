@@ -24,6 +24,7 @@ da:
         max_registrants: Maks antal deltagere
         music_submission_end_date: Sidste frist for at uploade musik
         noncompetitor: Non-Competitor
+        noncompetitor_benefits: Non-Competitor Fordele
         offline_payment: Tillad offline betaling
         offline_payment_description: Detaljer for offline betaling
         payment_mode: Payment Mode
@@ -31,7 +32,9 @@ da:
         registrants_should_specify_default_wheel_size: Tilmeldte skal vælge standard
           hjul-størelse
         request_address: Bed om adresse
+        request_emergency_contact: Anmod Kontakt i Nødstilfælde
         request_responsible_adult: Bed om ansvarlig voksen
+        require_medical_certificate: Anmod om Sundhedsattest (Medical Certificate)
         rulebook_url: Regelbog PDF URL
         rules_file_name: Regl-Fil PDF
         short_name: Kort Navn
@@ -43,7 +46,10 @@ da:
         start_date: Første konkurence dag
         style_name: Website layout
         under_construction: Under opbygning
-    models: 
+    models:
+      event_configurations:
+        one: Event Opsætning
+        other: Event Opsætninger
   helpers:
     submit:
       event_configuration:

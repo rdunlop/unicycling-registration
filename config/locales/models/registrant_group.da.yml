@@ -4,4 +4,7 @@ da:
     attributes:
       registrant_group:
         name: Gruppe Navn
-    models: 
+    models:
+      registrant_group:
+        one: Deltagers Gruppe
+        other: Deltagers Grupper
