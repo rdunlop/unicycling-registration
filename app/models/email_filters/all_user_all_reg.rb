@@ -17,7 +17,7 @@ class EmailFilters::AllUserAllReg
   end
 
   def filtered_user_emails
-    users = User.this_tenant.confirmed
+    users = User.this_tenant.all_with_registrants.confirmed
     users.map(&:email).compact.uniq
   end
 

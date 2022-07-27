@@ -8,9 +8,9 @@ describe EmailFilters::AllUserAllReg do
       @user = FactoryBot.create(:user)
     end
 
-    it "lists email addresses of all users when confirmed_accounts selected and all registrants" do
+    it "lists email addresses of all users when confirmed_accounts (with registrants) selected and all registrants" do
       @filter = described_class.new
-      expect(@filter.filtered_user_emails).to match_array([@reg.user.email, @user.email])
+      expect(@filter.filtered_user_emails).to match_array([@reg.user.email])
       expect(@filter.filtered_registrant_emails).to match_array([@reg.email])
     end
   end
