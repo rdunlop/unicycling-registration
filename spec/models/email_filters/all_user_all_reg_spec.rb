@@ -13,5 +13,12 @@ describe EmailFilters::AllUserAllReg do
       expect(@filter.filtered_user_emails).to match_array([@reg.user.email])
       expect(@filter.filtered_registrant_emails).to match_array([@reg.email])
     end
+
+    it "does not include registrants which are deleted" do
+      @filter = described_class.new
+      deleted_reg = FactoryBot.create(:registrant, deleted: true)
+
+      expect(@filter.filtered_registrant_emails).not_to include(deleted_reg.email)
+    end
   end
 end
