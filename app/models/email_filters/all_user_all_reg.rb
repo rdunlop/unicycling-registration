@@ -22,7 +22,7 @@ class EmailFilters::AllUserAllReg
   end
 
   def filtered_registrant_emails
-    Registrant.all.map(&:email).compact.uniq
+    Registrant.not_deleted.map(&:email).compact.uniq
   end
 
   # object whose policy must respond to `:contact_registrants?`
