@@ -1,0 +1,13 @@
+---
+da:
+  admin:
+    manual_refunds:
+      choose:
+        choose_items: Sæt kryds ved de varer der skal markéres som tilbagebetalt
+        description: "Beskriv tilbagebetalingen. \r\nF.eks. \"Annulleret. Kommer ikke.\",
+          \"Tilbagebetaling. Organisator.\""
+        details_note: "(kun påkrævet til nogle varer)"
+        header: Opret tilbagebetaling
+        mark_this_item: Markér denne vare som tilbagebetalt
+        paid_items: Betalte varer
+        submit: Opret tilbagebetalingsoversigt

@@ -26,6 +26,7 @@ fr:
   note: Note
   organization_membership_types:
     french_federation: Fédération française (CNM)
+    iuf: UIF
     usa: USA
   pdf: "(pdf)"
   prices_increase_at_date: Les prix augmentent das %{end_date}
@@ -42,5 +43,6 @@ fr:
     expenses: Frais
     lodging: Logement
     music: Musique
+    set_organization_membership: Adhésion à la fédération
     set_wheel_sizes: Taille de la roue
   'yes': Oui

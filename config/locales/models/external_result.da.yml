@@ -5,4 +5,7 @@ da:
       external_result:
         details: Detaljer
         points: Point
-    models: 
+    models:
+      external_result:
+        one: Indtastet Point Resultat
+        other: Indtastet Point Resultater

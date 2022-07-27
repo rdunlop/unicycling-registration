@@ -5,4 +5,7 @@ da:
       distance_attempt:
         distance: Distance
         fault: Fejl
-    models: 
+    models:
+      distance_attempt:
+        one: Distance Forsøg
+        other: Distance Førsøg

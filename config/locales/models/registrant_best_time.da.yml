@@ -5,4 +5,7 @@ da:
       registrant_best_time:
         formatted_value: Beste tid
         source_location: Convention Navn
-    models: 
+    models:
+      registrant_best_time:
+        one: Deltagers Bedste Tid eller Distance
+        other: Deltagers Bedste Tider eller Distancer

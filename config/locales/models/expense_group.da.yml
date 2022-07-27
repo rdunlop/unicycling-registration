@@ -4,4 +4,7 @@ da:
     attributes:
       expense_group:
         group_name: Gruppe Navn
-    models: 
+    models:
+      expense_group:
+        one: Udgift Gruppe
+        other: Udgift Grupper

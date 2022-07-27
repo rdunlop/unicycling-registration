@@ -12,4 +12,7 @@ da:
         number_of_penalties: Straffe
         seconds: Sekunder
         thousands: Tusinder
-    models: 
+    models:
+      time_result:
+        one: Tid Resultat
+        other: Tid Resultater

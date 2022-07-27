@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      refund_detail:
+        one: Tilbagebetalings Detalje
+        other: Tilbagebetalings Detaljer

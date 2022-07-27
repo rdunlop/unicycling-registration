@@ -5,4 +5,7 @@ da:
       award_label:
         bib_number: ID
         place: Placering
-    models: 
+    models:
+      award_label:
+        one: Præmie Mærkat
+        other: Præmie Mærkater

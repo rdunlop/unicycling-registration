@@ -1,0 +1,7 @@
+---
+da:
+  activerecord:
+    models:
+      heat_lane_judge_note:
+        one: Dommer Note
+        other: Dommer Noter

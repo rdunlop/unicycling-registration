@@ -5,4 +5,7 @@ da:
       age_group_type:
         description: Beskrivelse
         name: Navn
-    models: 
+    models:
+      age_group_type:
+        one: Aldersgruppe Type
+        other: Aldersgruppe Typer

@@ -7,6 +7,8 @@ fr:
         french_behavior_description: Spécifié "Fédération Française" permettra de
           demander à l'utilisateur son numéro d'adhérent fédéral
         header: Paramètre d'adhésion à l'organisation
+        iuf_behavior_description: Choisir "IUF" obligera chaque inscrit à adhérer
+          à l'IUF avant de pouvoir terminer leur inscription.
         requests_membership_number: Ceci présente l'organisation monocycliste dont
           l'adhésion sera demandé à chaque inscrit
         should_be_members: Les inscrits doivent-ils être membres d'une organisation

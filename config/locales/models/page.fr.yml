@@ -8,6 +8,7 @@ fr:
         position: Position
         slug: Slug (url)
         title: Titre
+        visible: Visible
     models:
       page:
         one: Page

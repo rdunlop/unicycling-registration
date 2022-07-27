@@ -25,5 +25,5 @@ da:
         zip: Postnummer
     models:
       contact_detail:
-        one: Kontakt detalje
-        other: Kontakt deltajer
+        one: Kontakt Oplysning
+        other: Kontakt Oplysninger

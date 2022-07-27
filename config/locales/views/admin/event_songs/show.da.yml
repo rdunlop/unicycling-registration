@@ -3,4 +3,7 @@ da:
   admin:
     event_songs:
       show:
+        description_html: "Denne sider opremser alle sange som\r\n<b>ikke er<b>\r\ntildelt
+          en deltager endnu"
         download: Download
+        header: "%{event} Sange"

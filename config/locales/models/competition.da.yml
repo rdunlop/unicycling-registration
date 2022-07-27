@@ -8,6 +8,7 @@ da:
         combined_competition_id: Overall Champion Beregning
         end_data_type: Finish Line Data Entry
         has_experts: Beregn Expert placeringer
+        hide_max_laps_count: Skjul Max Omgange Antal
         import_results_into_other_competition: Importer resultater til anden konkurence
         name: Konrurence Navn
         num_members_per_competitor: Hold Størelse

@@ -3,6 +3,14 @@ da:
   admin:
     competition_songs:
       show:
+        assign: Tildel
+        assign_to_competitor: "Hver sang skal være tildelt en deltager så det er inkluderet
+          \r\ni zip-filen som kan downloades."
+        description: "Denne side opremser alle sange som er uploadet til\r\n%{event}
+          OG den tilmeldte er nævnt som deltager af konkurrencen."
         download: Download
         download_zip: Download Zip af sange
         header: "%{competition} Sange"
+        zip_description: "For at gøre det nemt for DJ'en at afspille\r\nmusikken til
+          en rutine, er filerne i ZIP'en navngivet sådan at\r\nde fremstår i deltager
+          rækkefølge."

@@ -6,11 +6,12 @@ da:
         bib_number: ID
         first_name: Fornavn
         last_name: Efternavn
+        medical_certificate_url: PDF Dokument med Lægens Attest
         online_waiver_acceptance: Jeg bekræfter at jeg har læst, forstået og acceptere
           betingelserne
         online_waiver_signature: Signatur
         wheel_size_id: Standard Track Racing Hjul Størelse
     models:
       registrant:
-        one: Tilmeldt
-        other: Tilmeldte
+        one: Deltager
+        other: Deltagere

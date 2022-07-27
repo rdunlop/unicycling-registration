@@ -1,0 +1,11 @@
+---
+da:
+  admin:
+    permissions:
+      display_acl:
+        current_access_key: Adgangsnøglen for i dag er
+        description: "Dette vil også tillade bærbaren at oprette brugere\r\nuden at
+          udløse e-mail bekræftelser."
+        header: Giv bærbar special tilladelser
+        instructions_html: "For at autorisere en bærbar, <u>på den bærbar</u> gå\r\ntil
+          %{url} og indtast adgangsnøglen"

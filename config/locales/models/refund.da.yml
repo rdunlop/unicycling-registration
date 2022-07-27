@@ -7,4 +7,7 @@ da:
         refund_date: Refunderings dato
         refund_id: Refunderings ID
         user_id: Refunderet Af
-    models: 
+    models:
+      refund:
+        one: Tilbagebetaling
+        other: Tilbagebetalinger

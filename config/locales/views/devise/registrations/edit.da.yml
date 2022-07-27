@@ -11,4 +11,5 @@ da:
           ændringen
         current_permissions: Nuværende tillaedser
         title: Min Konto
+        upgrade_to_admin_action: Opgrader min konto til en administrator-konto
         users_name: Brugernavn

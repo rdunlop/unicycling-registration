@@ -12,5 +12,5 @@ da:
         transaction_id: Transaktion ID
     models:
       registrant:
-        one: Tilmeldt
-        other: Tilmeldte
+        one: Deltager
+        other: Deltagere
