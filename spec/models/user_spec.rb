@@ -85,6 +85,11 @@ describe User do
         expect(described_class.all_with_registrants).to eq([@user])
       end
 
+      it "does not list users who only have deleted registrants" do
+        FactoryBot.create(:registrant, deleted: true)
+        expect(described_class.all_with_registrants).to eq([@user])
+      end
+
       it "lists those users in unpaid_reg_fees" do
         expect(described_class.unpaid_reg_fees).to eq([@user])
       end
