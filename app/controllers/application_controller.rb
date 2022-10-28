@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   include EventsHelper
-  include Pundit
+  include Pundit::Authorization
 
   protect_from_forgery
   before_action :set_paper_trail_whodunnit
