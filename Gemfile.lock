@@ -24,14 +24,6 @@ GIT
       rails (>= 5.0)
       safe_yaml (>= 0.8.6)
 
-GIT
-  remote: https://github.com/tmster/apartment-sidekiq.git
-  revision: 067313397b0e3c70387d0445559d8336141b6f1d
-  specs:
-    apartment-sidekiq (1.1.0)
-      apartment (~> 2.0)
-      sidekiq (>= 2.11)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,11 +80,6 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    apartment (2.2.1)
-      activerecord (>= 3.1.2, < 6.0)
-      parallel (>= 0.7.1)
-      public_suffix (>= 2)
-      rack (>= 1.3.6)
     apartment_acme_client (0.0.8)
       acme-client (~> 2.0.0)
       aws-sdk-route53 (~> 1)
@@ -498,6 +485,14 @@ GEM
       railties (>= 5.0)
     rolify (5.3.0)
     rollbar (3.3.2)
+    ros-apartment (2.3.0)
+      activerecord (>= 3.1.2, < 6.1)
+      parallel (>= 0.7.1)
+      public_suffix (>= 2)
+      rack (>= 1.3.6)
+    ros-apartment-sidekiq (1.2.0)
+      ros-apartment (>= 1.0)
+      sidekiq (>= 2.11)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -643,8 +638,6 @@ DEPENDENCIES
   acme-client
   acts_as_list
   annotate
-  apartment
-  apartment-sidekiq!
   apartment_acme_client
   autoprefixer-rails
   aws-sdk-rails
@@ -707,6 +700,8 @@ DEPENDENCIES
   request_store
   rolify
   rollbar
+  ros-apartment
+  ros-apartment-sidekiq
   rspec-instafail
   rspec-rails
   rspec_junit_formatter

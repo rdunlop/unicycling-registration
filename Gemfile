@@ -77,9 +77,8 @@ gem 'rails-i18n'
 gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
-gem 'apartment'
-gem 'apartment-sidekiq', github: "tmster/apartment-sidekiq" # apartment 2.0 support
-# https://github.com/influitive/apartment-sidekiq/pull/19
+gem 'ros-apartment', require: 'apartment'
+gem 'ros-apartment-sidekiq', require: 'apartment-sidekiq'
 
 # Model utils
 gem 'acts_as_list'
