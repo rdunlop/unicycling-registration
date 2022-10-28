@@ -77,8 +77,8 @@ gem 'rails-i18n'
 gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
-gem 'ros-apartment'
-gem 'ros-apartment-sidekiq'
+gem 'ros-apartment', require: 'apartment'
+gem 'ros-apartment-sidekiq', require: 'apartment-sidekiq'
 
 # Model utils
 gem 'acts_as_list'
