@@ -5,6 +5,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 gem 'rails', '~> 5.2'
+gem 'sprockets', '< 4' # Sprockets 4 pain is not worth it.
 
 # Authentication
 gem 'devise'
@@ -32,7 +33,7 @@ gem "jc-validates_timeliness"
 gem 'jquery-datatables-rails'
 gem 'jquery-datetimepicker-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '5.0.5' # upgrading to jquery-ui-rails 6.x requires updating the naming of various files, let's do this later
 gem 'money-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
@@ -50,7 +51,7 @@ gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'rails_admin'
+gem 'rails_admin', '< 3'
 gem 'rake'
 gem 'redis-namespace'
 gem 'redis-rails'
