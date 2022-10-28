@@ -468,7 +468,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    recaptcha (5.8.1)
+    recaptcha (5.9.0)
       json
     redis (4.8.0)
     redis-actionpack (5.3.0)
