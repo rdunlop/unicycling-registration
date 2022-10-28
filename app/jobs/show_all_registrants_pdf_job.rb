@@ -14,7 +14,7 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
     av.class_eval do
       include Rails.application.routes.url_helpers
       include ApplicationHelper
-      include Pundit
+      include Pundit::Authorization
 
       def url_options
         { locale: I18n.locale }.merge(super)
