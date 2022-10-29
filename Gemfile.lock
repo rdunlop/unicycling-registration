@@ -1,19 +1,12 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 3fe2f93ab2d0f5d9c2b84e085f627cf469db72a1
+  revision: 3c146abbba4200aed1bbdbf3e63d5729a9dd95a1
+  branch: main
   specs:
-    globalize (5.2.0)
-      activemodel (>= 4.2, < 5.3)
-      activerecord (>= 4.2, < 5.3)
+    globalize (6.2.1)
+      activemodel (>= 4.2, < 7.1)
+      activerecord (>= 4.2, < 7.1)
       request_store (~> 1.0)
-
-GIT
-  remote: https://github.com/rdunlop/fancybox2-rails.git
-  revision: 7e63203d9032846202e632771e817872471e9132
-  branch: rails5
-  specs:
-    fancybox2-rails (0.2.8)
-      railties (>= 3.1.0, < 6.0)
 
 GIT
   remote: https://github.com/rdunlop/tolk.git
@@ -25,6 +18,14 @@ GIT
       safe_yaml (>= 0.8.6)
       sassc
       sprockets-rails (~> 3.4)
+
+GIT
+  remote: https://github.com/sureswiftcapital/fancybox2-rails.git
+  revision: 785561ee26a8c3f5dfd50a0c2050011dcf959aa5
+  branch: rails6
+  specs:
+    fancybox2-rails (0.2.8)
+      railties (>= 3.1.0)
 
 GEM
   remote: https://rubygems.org/
