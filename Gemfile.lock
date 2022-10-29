@@ -17,12 +17,14 @@ GIT
 
 GIT
   remote: https://github.com/rdunlop/tolk.git
-  revision: 43e0d4617785321ef49728d368adfb164859cccb
+  revision: 8342a4ef228966541fb1815ce9eedeca481663f5
   branch: improve_import_export
   specs:
-    tolk (3.0.0)
+    tolk (4.2.0)
       rails (>= 5.0)
       safe_yaml (>= 0.8.6)
+      sassc
+      sprockets-rails (~> 3.4)
 
 GEM
   remote: https://rubygems.org/
