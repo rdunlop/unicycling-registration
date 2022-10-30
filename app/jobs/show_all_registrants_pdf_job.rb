@@ -2,6 +2,10 @@
 class ShowAllRegistrantsPdfJob < ApplicationJob
   def perform(report_id, order, offset, max, current_user)
     report = Report.find(report_id)
+
+    # Possibly useful for Ralis 6.1+:
+    # # Based on https://stackoverflow.com/questions/28332630/rails-render-view-from-outside-controller#answer-70027370
+
     # create an instance of ActionView, so we can use the render method outside of a controller
     av = ActionView::Base.new(ActionController::Base.view_paths, {})
 
