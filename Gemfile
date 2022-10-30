@@ -26,7 +26,7 @@ gem 'breadcrumbs_on_rails'
 gem 'cocoon' # for nested forms
 gem 'countries'
 gem 'country_select'
-gem 'fancybox2-rails', github: 'rdunlop/fancybox2-rails', branch: "rails5" # for rails 5 support
+gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rails6" # for rails 6 support
 gem 'foundation-rails'
 gem "haml-rails"
 gem "jc-validates_timeliness"
@@ -86,7 +86,7 @@ gem 'acts_as_list'
 gem 'carrierwave'
 gem 'carrierwave-aws', '1.5.0'
 gem 'carrierwave-i18n'
-gem 'globalize', github: 'globalize/globalize' # necessary for rails 5 support. Must be gem > 5.0.1
+gem 'globalize', github: 'globalize/globalize', branch: 'main'
 gem 'nilify_blanks'
 gem 'validates_email_format_of'
 gem 'virtus'
