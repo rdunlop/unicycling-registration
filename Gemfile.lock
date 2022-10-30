@@ -616,7 +616,7 @@ GEM
       kgio (~> 2.6)
       raindrops (~> 0.7)
     uniform_notifier (1.16.0)
-    validates_email_format_of (1.6.3)
+    validates_email_format_of (1.7.2)
       i18n
     virtus (1.0.5)
       axiom-types (~> 0.1)
