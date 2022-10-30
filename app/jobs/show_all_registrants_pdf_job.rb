@@ -3,8 +3,7 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
   def perform(report_id, order, offset, max, current_user)
     report = Report.find(report_id)
     # create an instance of ActionView, so we can use the render method outside of a controller
-    av = ActionView::Base.new
-    av.view_paths = ActionController::Base.view_paths
+    av = ActionView::Base.new(ActionController::Base.view_paths, {})
 
     # The following 2 lines, plus the passing of `@current_user` as a local,
     # allow Pundit to access the user which invoked this job

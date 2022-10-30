@@ -115,7 +115,7 @@ class Score < ApplicationRecord
   def validate_judge_score(score_number, max_score)
     if score_value(score_number) > max_score
       value_sym = score_symbol(score_number)
-      errors[value_sym] << "#{value_sym} must be <= #{max_score}"
+      errors.add(value_sym, "#{value_sym} must be <= #{max_score}")
     end
   end
 end
