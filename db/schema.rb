@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "category_translations", force: :cascade do |t|
     t.integer "category_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
@@ -331,8 +331,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "event_category_translations", force: :cascade do |t|
     t.integer "event_category_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.index ["event_category_id"], name: "index_event_category_translations_on_event_category_id"
     t.index ["locale"], name: "index_event_category_translations_on_locale"
@@ -341,8 +341,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "event_choice_translations", force: :cascade do |t|
     t.integer "event_choice_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "label"
     t.string "tooltip"
     t.index ["event_choice_id"], name: "index_event_choice_translations_on_event_choice_id"
@@ -365,8 +365,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "event_configuration_translations", force: :cascade do |t|
     t.integer "event_configuration_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "short_name"
     t.string "long_name"
     t.string "location"
@@ -450,8 +450,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "event_translations", force: :cascade do |t|
     t.integer "event_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.index ["event_id"], name: "index_event_translations_on_event_id"
     t.index ["locale"], name: "index_event_translations_on_locale"
@@ -489,8 +489,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "expense_group_translations", force: :cascade do |t|
     t.integer "expense_group_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "group_name"
     t.index ["expense_group_id"], name: "index_expense_group_translations_on_expense_group_id"
     t.index ["locale"], name: "index_expense_group_translations_on_locale"
@@ -512,8 +512,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "expense_item_translations", force: :cascade do |t|
     t.integer "expense_item_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "details_label"
     t.index ["expense_item_id"], name: "index_expense_item_translations_on_expense_item_id"
@@ -774,8 +774,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "page_translations", force: :cascade do |t|
     t.integer "page_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.text "body"
     t.index ["locale"], name: "index_page_translations_on_locale"
@@ -1032,8 +1032,8 @@ ActiveRecord::Schema.define(version: 2022_07_09_012335) do
   create_table "registration_period_translations", force: :cascade do |t|
     t.integer "registration_period_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.index ["locale"], name: "index_registration_period_translations_on_locale"
     t.index ["registration_period_id"], name: "index_43f042772e959a61bb6b1fedb770048039229050"
