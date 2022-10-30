@@ -472,7 +472,7 @@ class EventConfiguration < ApplicationRecord
   # if the stripe keys have changed, and are now both present
   # set a webhook
   def register_stripe_webhook_if_necessary
-    return unless previous_changes_include?(:stripe_secret_key)
+    return unless previous_changes.include?(:stripe_secret_key)
 
     # secret key was changed
 
@@ -488,7 +488,7 @@ class EventConfiguration < ApplicationRecord
   # If the stripe keys were both present, and we had a registered webhook
   # now unregister the webhook
   def unregister_stripe_webhook_if_necessary
-    return unless previous_changes_include?(:stripe_secret_key)
+    return unless previous_changes.include?(:stripe_secret_key)
 
     # secret key was changed
 

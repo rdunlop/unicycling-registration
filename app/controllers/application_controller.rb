@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
   before_action :skip_authorization, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  force_ssl if: :ssl_required?
-
   def raise_not_found!
     raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
   end
@@ -30,10 +28,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def ssl_required?
-    Rails.configuration.ssl_enabled
-  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
