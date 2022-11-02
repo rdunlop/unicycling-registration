@@ -19,7 +19,7 @@ executors:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: app_development
 
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/postgres:14
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_PASSWORD: password
