@@ -26,8 +26,6 @@ Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 require 'fileutils'
 FileUtils.mkdir_p Rails.root.join("tmp", "cache")
 
-ActiveRecord::Migration.maintain_test_schema!
-
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|

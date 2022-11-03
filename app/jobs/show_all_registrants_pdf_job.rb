@@ -2,16 +2,20 @@
 class ShowAllRegistrantsPdfJob < ApplicationJob
   def perform(report_id, order, offset, max, current_user)
     report = Report.find(report_id)
+
+    # Possibly useful for Ralis 6.1+:
+    # # Based on https://stackoverflow.com/questions/28332630/rails-render-view-from-outside-controller#answer-70027370
+
     # create an instance of ActionView, so we can use the render method outside of a controller
-    av = ActionView::Base.new
-    av.view_paths = ActionController::Base.view_paths
+    lookup_context = ActionView::LookupContext.new(ActionController::Base.view_paths)
+    context = ActionView::Base.with_empty_template_cache.new(lookup_context, {}, nil)
 
     # The following 2 lines, plus the passing of `@current_user` as a local,
     # allow Pundit to access the user which invoked this job
     @current_user = current_user
     ActionView::Base.send(:define_method, :current_user) { @current_user }
     # need these in case your view constructs any links or references any helper methods.
-    av.class_eval do
+    context.class_eval do
       include Rails.application.routes.url_helpers
       include ApplicationHelper
       include Pundit::Authorization
@@ -21,7 +25,7 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
       end
     end
 
-    av.load_config_object_and_i18n
+    context.load_config_object_and_i18n
 
     if order.present? && order == "id"
       @registrants = Registrant.active.reorder(:bib_number)
@@ -33,7 +37,8 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
       @registrants = @registrants.limit(max).offset(offset)
     end
 
-    pdf_html = av.render template: "admin/registrants/show_all.pdf.haml", layout: "layouts/pdf.html.haml", locals: { :@registrants => @registrants, :@config => EventConfiguration.singleton, :@current_user => current_user }
+    renderer = ActionView::Renderer.new(lookup_context)
+    pdf_html = renderer.render context, template: "admin/registrants/show_all.pdf.haml", layout: "layouts/pdf.html.haml", locals: { :@registrants => @registrants, :@config => EventConfiguration.singleton, :@current_user => current_user }
 
     # use wicked_pdf gem to create PDF from the doc HTML
     doc_pdf = WickedPdf.new.pdf_from_string(pdf_html, page_size: 'Letter')

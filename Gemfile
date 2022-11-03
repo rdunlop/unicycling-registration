@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0.0'
 gem 'sprockets', '< 4' # Sprockets 4 pain is not worth it.
 
 # Authentication
@@ -78,6 +78,7 @@ gem 'rails-i18n'
 gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
+gem 'pry-rails' # required for apartment console customization
 gem 'ros-apartment', require: 'apartment'
 gem 'ros-apartment-sidekiq', require: 'apartment-sidekiq'
 
