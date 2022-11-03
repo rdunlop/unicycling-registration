@@ -18,14 +18,14 @@ describe HeatExportsController do
   describe "GET download_competitor_list_ssv" do
     it "renders" do
       get :download_competitor_list_ssv, params: { competition_id: competition.id }
-      assert_equal "text/csv", @response.content_type
+      assert_equal "text/csv; charset=utf-8", @response.content_type
     end
   end
 
   describe "GET download_heat_tsv" do
     it "renders data" do
       get :download_heat_tsv, params: { competition_id: competition.id }
-      assert_equal "text/csv", @response.content_type
+      assert_equal "text/csv; charset=utf-8", @response.content_type
     end
   end
 end

@@ -17,7 +17,7 @@ describe Compete::TierAssignmentsController do
 
     it "downloads the csv" do
       get :show, params: { competition_id: competition.id, format: :csv }
-      expect(response.content_type.to_s).to eq("text/csv")
+      expect(response.content_type.to_s).to eq("text/csv; charset=utf-8")
     end
   end
 
