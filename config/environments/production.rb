@@ -55,9 +55,6 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   if Rails.configuration.ssl_enabled
     config.force_ssl = true
-    config.to_prepare { Devise::SessionsController.force_ssl }
-    config.to_prepare { Devise::PasswordsController.force_ssl }
-    config.to_prepare { Devise::RegistrationsController.force_ssl }
     config.action_mailer.default_url_options = { protocol: 'https' }
   end
 
