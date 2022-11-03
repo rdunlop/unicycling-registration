@@ -33,7 +33,7 @@ class RegistrantEventSignUp < ApplicationRecord
   has_paper_trail meta: { registrant_id: :registrant_id }
 
   belongs_to :registrant, inverse_of: :registrant_event_sign_ups, touch: true
-  belongs_to :event_category, touch: true
+  belongs_to :event_category, touch: true, optional: true
   belongs_to :event
 
   after_save :auto_create_competitor

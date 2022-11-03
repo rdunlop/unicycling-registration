@@ -18,7 +18,7 @@
 
 class LaneAssignment < ApplicationRecord
   belongs_to :competition
-  belongs_to :competitor, touch: true
+  belongs_to :competitor, touch: true, optional: true
   include CompetitorAutoCreation
 
   validates :competition, :competitor, :heat, :lane, presence: true

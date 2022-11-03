@@ -22,9 +22,9 @@
 
 class StandardSkillEntry < ApplicationRecord
   has_many :standard_skill_routine_entries, dependent: :destroy
-  belongs_to :skill_before, class_name: "StandardSkillEntryTransition"
-  belongs_to :skill_after, class_name: "StandardSkillEntryTransition"
-  belongs_to :additional_description, class_name: "StandardSkillEntryAdditionalDescription"
+  belongs_to :skill_before, class_name: "StandardSkillEntryTransition", optional: true
+  belongs_to :skill_after, class_name: "StandardSkillEntryTransition", optional: true
+  belongs_to :additional_description, class_name: "StandardSkillEntryAdditionalDescription", optional: true
 
   validates :number, :points, :description, presence: true
   validates :letter, presence: true, uniqueness: { scope: :number } # not allowed to have the same number/letter pair twice

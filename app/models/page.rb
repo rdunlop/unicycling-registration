@@ -27,7 +27,7 @@ class Page < ApplicationRecord
   translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
-  belongs_to :parent_page, class_name: "Page"
+  belongs_to :parent_page, class_name: "Page", optional: true
   has_many :children, class_name: "Page", foreign_key: "parent_page_id"
   has_many :images, class_name: "PageImage", dependent: :destroy
 

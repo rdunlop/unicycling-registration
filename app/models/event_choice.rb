@@ -22,8 +22,8 @@ class EventChoice < ApplicationRecord
   belongs_to :event, touch: true, inverse_of: :event_choices, counter_cache: true
 
   has_many :registrant_choices, dependent: :destroy
-  belongs_to :optional_if_event_choice, class_name: "EventChoice"
-  belongs_to :required_if_event_choice, class_name: "EventChoice"
+  belongs_to :optional_if_event_choice, class_name: "EventChoice", optional: true
+  belongs_to :required_if_event_choice, class_name: "EventChoice", optional: true
 
   validates :label, :cell_type, :event, presence: true
 

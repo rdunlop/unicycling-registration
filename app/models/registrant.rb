@@ -88,7 +88,7 @@ class Registrant < ApplicationRecord
   has_many :competition_wheel_sizes, dependent: :destroy
   has_many :results, through: :competitors
 
-  belongs_to :default_wheel_size, class_name: "WheelSize", foreign_key: :wheel_size_id
+  belongs_to :default_wheel_size, class_name: "WheelSize", foreign_key: :wheel_size_id, optional: true
   belongs_to :user
 
   accepts_nested_attributes_for :contact_detail

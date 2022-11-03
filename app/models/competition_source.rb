@@ -21,9 +21,9 @@
 #
 
 class CompetitionSource < ApplicationRecord
-  belongs_to :event_category, inverse_of: :competition_sources
+  belongs_to :event_category, inverse_of: :competition_sources, optional: true
   belongs_to :target_competition, class_name: "Competition", inverse_of: :competition_sources
-  belongs_to :competition
+  belongs_to :competition, optional: true
 
   def self.gender_filters
     ["Both", "Male", "Female"]

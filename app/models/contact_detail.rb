@@ -38,7 +38,7 @@
 #
 
 class ContactDetail < ApplicationRecord
-  belongs_to :registrant, inverse_of: :contact_detail, touch: true
+  belongs_to :registrant, inverse_of: :contact_detail, touch: true, optional: true
 
   # address block
   with_options if: -> { EventConfiguration.singleton.request_address? } do

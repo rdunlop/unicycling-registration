@@ -20,7 +20,7 @@
 class RegistrantGroupMember < ApplicationRecord
   belongs_to :registrant_group, inverse_of: :registrant_group_members
   belongs_to :registrant
-  belongs_to :additional_details, polymorphic: true
+  belongs_to :additional_details, polymorphic: true, optional: true
 
   validates :registrant, presence: true
   validates :registrant_id, uniqueness: { scope: [:registrant_group_id] }
