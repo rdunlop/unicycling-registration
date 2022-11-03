@@ -45,8 +45,8 @@ class Competition < ApplicationRecord
 
   resourcify
 
-  belongs_to :base_age_group_type, class_name: "AgeGroupType"
-  belongs_to :age_group_type, inverse_of: :competitions
+  belongs_to :base_age_group_type, class_name: "AgeGroupType", optional: true
+  belongs_to :age_group_type, inverse_of: :competitions, optional: true
   belongs_to :event, inverse_of: :competitions
 
   with_options dependent: :destroy do
@@ -63,7 +63,7 @@ class Competition < ApplicationRecord
     has_many :uploaded_files
   end
 
-  belongs_to :combined_competition
+  belongs_to :combined_competition, optional: true
 
   with_options through: :competitors do
     has_many :registrants

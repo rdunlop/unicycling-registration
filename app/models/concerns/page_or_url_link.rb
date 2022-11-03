@@ -5,7 +5,7 @@ module PageOrUrlLink
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :info_page, class_name: "Page"
+    belongs_to :info_page, class_name: "Page", optional: true
 
     validate :only_one_info_type
   end

@@ -1,6 +1,13 @@
 require_relative 'boot'
 
-require 'rails/all'
+require 'rails'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'action_cable/engine'
+require 'sprockets/railtie'
 require File.expand_path('../config/initializers/redis', __dir__)
 require "apartment/custom_console"
 
@@ -10,6 +17,8 @@ Bundler.require(*Rails.groups)
 
 module Workspace
   class Application < Rails::Application
+    config.load_defaults 5.0
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

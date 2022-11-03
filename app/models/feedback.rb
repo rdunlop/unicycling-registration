@@ -16,8 +16,8 @@
 #
 
 class Feedback < ApplicationRecord
-  belongs_to :user
-  belongs_to :resolved_by, class_name: "User"
+  belongs_to :user, optional: true
+  belongs_to :resolved_by, class_name: "User", optional: true
 
   validates :status, inclusion: { in: %w[new resolved] }
 

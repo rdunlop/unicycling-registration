@@ -56,7 +56,7 @@ class Competitor < ApplicationRecord
   has_many :active_members, -> { merge(Member.active) }, class_name: "Member"
 
   belongs_to :competition, touch: true, inverse_of: :competitors
-  belongs_to :age_group_entry
+  belongs_to :age_group_entry, optional: true
 
   acts_as_list scope: :competition
 

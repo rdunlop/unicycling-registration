@@ -28,7 +28,7 @@ class Song < ApplicationRecord
   belongs_to :registrant, touch: true
   belongs_to :event
   belongs_to :user
-  belongs_to :competitor
+  belongs_to :competitor, optional: true
 
   validates :registrant, :user, :event, :description, presence: true
   validates :competitor_id, uniqueness: { message: "Cannot assign more than 1 song to the same competitor for this competition" }, allow_nil: true

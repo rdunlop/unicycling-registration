@@ -103,9 +103,9 @@ class EventConfiguration < ApplicationRecord
   validates :volunteer_option, inclusion: { in: VOLUNTEER_OPTIONS }
   validates :volunteer_option_page_id, presence: true, if: -> { volunteer_option == "info_page" }
   validates :volunteer_option_page_id, absence: true, unless: -> { volunteer_option == "info_page" }
-  belongs_to :volunteer_option_page, class_name: "Page"
+  belongs_to :volunteer_option_page, class_name: "Page", optional: true
 
-  belongs_to :medical_certificate_info_page, class_name: "Page"
+  belongs_to :medical_certificate_info_page, class_name: "Page", optional: true
 
   validates :representation_type, inclusion: { in: RepresentationType::TYPES }
 
@@ -144,7 +144,7 @@ class EventConfiguration < ApplicationRecord
 
   mount_uploader :rules_file_name, PdfUploader
 
-  belongs_to :comp_noncomp_page, class_name: "Page"
+  belongs_to :comp_noncomp_page, class_name: "Page", optional: true
 
   after_initialize :init
 

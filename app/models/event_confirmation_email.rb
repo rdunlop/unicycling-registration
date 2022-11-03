@@ -13,7 +13,7 @@
 #
 
 class EventConfirmationEmail < ApplicationRecord
-  belongs_to :sent_by, class_name: "User"
+  belongs_to :sent_by, class_name: "User", optional: true
 
   validates :sent_by, presence: true, if: :sent_at
   validates :subject, :body, presence: true

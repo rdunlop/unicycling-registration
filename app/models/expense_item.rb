@@ -39,7 +39,7 @@ class ExpenseItem < ApplicationRecord
   translates :name, :details_label, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
-  belongs_to :cost_element, polymorphic: true, inverse_of: :expense_item
+  belongs_to :cost_element, polymorphic: true, inverse_of: :expense_item, optional: true
   belongs_to :expense_group, inverse_of: :expense_items
   validate :must_be_free, if: :exactly_one_in_group_required?
   validates :expense_group_id, uniqueness: {
