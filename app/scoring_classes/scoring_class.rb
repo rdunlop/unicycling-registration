@@ -68,24 +68,24 @@ class ScoringClass
       }
     when "Artistic Freestyle IUF 2015"
       {
-        calculator: ArtisticResultCalculator_2015.new,
+        calculator: ArtisticResultCalculator2015.new,
         exporter: EnteredDataExporter::Score.new(competition),
-        judge_score_calculator: Freestyle_2015_JudgePointsCalculator.new,
-        helper: ArtisticScoringClass_2015.new(competition)
+        judge_score_calculator: Freestyle2015JudgePointsCalculator.new,
+        helper: ArtisticScoringClass2015.new(competition)
       }
     when "Artistic Freestyle IUF 2017"
       {
-        calculator: ArtisticResultCalculator_2017.new,
+        calculator: ArtisticResultCalculator2017.new,
         exporter: EnteredDataExporter::Score.new(competition),
-        judge_score_calculator: Freestyle_2017_JudgePointsCalculator.new,
-        helper: ArtisticScoringClass_2017.new(competition)
+        judge_score_calculator: Freestyle2017JudgePointsCalculator.new,
+        helper: ArtisticScoringClass2017.new(competition)
       }
     when "Artistic Freestyle IUF 2019"
       {
-        calculator: ArtisticResultCalculator_2017.new, # Same rules as 2017 for these calculations
+        calculator: ArtisticResultCalculator2017.new, # Same rules as 2017 for these calculations
         exporter: EnteredDataExporter::Score.new(competition),
-        judge_score_calculator: Freestyle_2019_JudgePointsCalculator.new,
-        helper: ArtisticScoringClass_2019.new(competition)
+        judge_score_calculator: Freestyle2019JudgePointsCalculator.new,
+        helper: ArtisticScoringClass2019.new(competition)
       }
     when "Flatland"
       scoring_helper = FlatlandScoringClass.new(competition)
@@ -96,9 +96,9 @@ class ScoringClass
         helper: scoring_helper
       }
     when "Flatland IUF 2017"
-      scoring_helper = FlatlandScoringClass_2017.new(competition)
+      scoring_helper = FlatlandScoringClass2017.new(competition)
       {
-        calculator: FlatlandResultCalculator_2017.new,
+        calculator: FlatlandResultCalculator2017.new,
         exporter: EnteredDataExporter::Score.new(competition),
         judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
         helper: scoring_helper
@@ -129,7 +129,7 @@ class ScoringClass
     when "High/Long Preliminary IUF 2015"
       high_long_type(DistanceAttemptPreliminaryManager)
     when "High/Long Final IUF 2015"
-      high_long_type(DistanceAttemptFinal_2015_Manager)
+      high_long_type(DistanceAttemptFinal2015Manager)
     when "High/Long Preliminary IUF 2017"
       high_long_type(DistanceAttemptPreliminary2017Manager)
     when "Overall Champion"

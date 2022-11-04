@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Freestyle_2019_JudgePointsCalculator do
+describe Freestyle2019JudgePointsCalculator do
   let(:subject) { described_class.new }
 
   describe "#calculate_score_total" do

@@ -1,4 +1,4 @@
-class ArtisticScoringClass_2019 < BaseScoringClass # rubocop:disable Naming/ClassAndModuleCamelCase
+class ArtisticScoringClass2019 < BaseScoringClass # rubocop:disable Naming/ClassAndModuleCamelCase
   def scoring_description
     "Using the Freestyle scoring rules, multiple Performance, Technical, and Dismount judges
     will score each competitor, and then the resulting points (converted to percentages, and summed) will be used to
