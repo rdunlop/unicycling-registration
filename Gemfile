@@ -51,7 +51,7 @@ gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'rails_admin', '< 3'
+gem 'rails_admin', '< 4'
 gem 'rake'
 gem 'redis-namespace'
 gem 'redis-rails'
@@ -59,6 +59,7 @@ gem 'redis-store'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
+gem 'sassc-rails' # needed by rails_admin
 gem 'sidekiq', '< 7' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'unicorn', require: false
