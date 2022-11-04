@@ -59,6 +59,7 @@ gem 'redis-store'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
+gem 'sassc-rails' # needed by rails_admin
 gem 'sidekiq', '< 7' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'unicorn', require: false

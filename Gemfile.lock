@@ -736,6 +736,7 @@ DEPENDENCIES
   rubocop-rspec
   rubyzip
   sass-rails
+  sassc-rails
   select2-rails
   shoulda-matchers
   sidekiq (< 7)
