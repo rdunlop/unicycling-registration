@@ -20,6 +20,8 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  config.server_timing = true
+
   if Rails.configuration.ssl_enabled
     config.force_ssl = true
     config.to_prepare { Devise::SessionsController.force_ssl }
