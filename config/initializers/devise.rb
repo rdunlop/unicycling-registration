@@ -1,13 +1,16 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+Rails.application.config.to_prepare do
+  Devise::Mailer.class_eval do
+    include SubdomainHelper
+  end
+end
+
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = Rails.configuration.mail_full_email
-  config.mailer.class_eval do
-    include SubdomainHelper
-  end
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"

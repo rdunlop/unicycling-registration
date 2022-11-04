@@ -33,5 +33,5 @@ end
 
 # force the mailer to always queue on the 'default' queue
 class ActionMailer::DeliveryJob
-  queue_as :default
+  # queue_as :default
 end
