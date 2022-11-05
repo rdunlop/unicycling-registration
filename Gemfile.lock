@@ -264,8 +264,6 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.6)
-    css_splitter (0.4.6)
-      sprockets (>= 2.0.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.0)
@@ -698,7 +696,6 @@ DEPENDENCIES
   consistency_fail
   countries
   country_select
-  css_splitter
   database_cleaner
   devise
   devise-i18n

@@ -65,10 +65,6 @@ gem 'stripe'
 gem 'unicorn', require: false
 gem 'whenever'
 
-# determined we are over IE8 CSS limits using
-# http://stackoverflow.com/questions/9906794/internet-explorers-css-rules-limits
-gem 'css_splitter' # support ie9 css rule limits
-
 # I18n Translation
 # use rdunlop branch which has:
 #  fixed the Pagination-Load issue
