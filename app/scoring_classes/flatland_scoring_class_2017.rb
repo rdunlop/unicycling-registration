@@ -1,4 +1,4 @@
-class FlatlandScoringClass2017 < BaseScoringClass # rubocop:disable Naming/ClassAndModuleCamelCase
+class FlatlandScoringClass2017 < BaseScoringClass
   def scoring_description
     "A variation of the Artistic Scoring Class, we calculate last-trick
     scores and follow the rulebook, As per the IUF 2017 Rulebook"

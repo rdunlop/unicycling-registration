@@ -69,14 +69,6 @@ Naming/AccessorMethodName:
     - 'app/helpers/application_helper.rb'
     - 'app/mailers/stage_email_interceptor.rb'
 
-# Offense count: 4
-Naming/ClassAndModuleCamelCase:
-  Exclude:
-    - 'app/comparable_result_calculators/artistic_result_calculator_2015.rb'
-    - 'app/distance_attempt_managers/distance_attempt_final_2015_manager.rb'
-    - 'app/judge_points_calculators/freestyle_2015_judge_points_calculator.rb'
-    - 'app/scoring_classes/artistic_scoring_class_2015.rb'
-
 # Offense count: 1
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: snake_case, camelCase
