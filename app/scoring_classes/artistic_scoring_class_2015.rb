@@ -1,4 +1,4 @@
-class ArtisticScoringClass_2015 < BaseScoringClass
+class ArtisticScoringClass2015 < BaseScoringClass
   def scoring_description
     "Using the Freestyle scoring rules, multiple Performance and Technical judges
     will score each competitor, and then the resulting points (converted to percentage of points) will be used to

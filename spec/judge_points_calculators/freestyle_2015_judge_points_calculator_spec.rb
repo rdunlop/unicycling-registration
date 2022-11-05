@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Freestyle_2015_JudgePointsCalculator do
+describe Freestyle2015JudgePointsCalculator do
   let(:subject) { described_class.new }
 
   describe "ties" do

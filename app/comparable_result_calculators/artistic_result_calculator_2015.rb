@@ -1,4 +1,4 @@
-class ArtisticResultCalculator_2015
+class ArtisticResultCalculator2015
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)
     competitor.scores.any?
