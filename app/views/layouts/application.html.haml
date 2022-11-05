@@ -5,7 +5,7 @@
     %title
       = @config.short_name
       = t(".registration")
-    = split_stylesheet_link_tag @config.style_name, media: "all"
+    = stylesheet_link_tag @config.style_name, media: "all"
 
     = javascript_include_tag "application", async: !Rails.env.development?
 
