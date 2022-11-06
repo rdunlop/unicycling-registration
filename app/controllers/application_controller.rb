@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
       disposition = "inline"
     end
 
-    layout_html = simple_pdf ? "simple_pdf.html.haml" : "pdf.html.haml"
+    layout_html = simple_pdf ? "simple_pdf" : "pdf"
 
     render pdf: view_name,
            page_size: "Letter",

@@ -38,7 +38,7 @@ class ShowAllRegistrantsPdfJob < ApplicationJob
     end
 
     renderer = ActionView::Renderer.new(lookup_context)
-    pdf_html = renderer.render context, template: "admin/registrants/show_all.pdf.haml", layout: "layouts/pdf.html.haml", locals: { :@registrants => @registrants, :@config => EventConfiguration.singleton, :@current_user => current_user }
+    pdf_html = renderer.render context, template: "admin/registrants/show_all", format: "pdf", layout: "layouts/pdf", locals: { :@registrants => @registrants, :@config => EventConfiguration.singleton, :@current_user => current_user }
 
     # use wicked_pdf gem to create PDF from the doc HTML
     doc_pdf = WickedPdf.new.pdf_from_string(pdf_html, page_size: 'Letter')
