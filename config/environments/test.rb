@@ -61,10 +61,7 @@ Rails.configuration.server_admin_email = "robin+admin@dunlopweb.com"
 Rails.configuration.ssl_enabled = false
 Rails.configuration.instance_creation_code = "this_is_the_code"
 
-if Rails::VERSION::MAJOR > 6
-  raise "Try removing this hack to see if spec/controllers/admin/registrant_summaries_controller_spec.rb now passes"
-end
-
+# Based on https://github.com/rails/rails/issues/40613#issuecomment-875835965
 module AlwaysCompile
   def compile!(_view)
     @compiled = false if Rails.env.test?

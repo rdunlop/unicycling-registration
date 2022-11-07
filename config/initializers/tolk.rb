@@ -1,13 +1,15 @@
 # Tolk config file. Generated on April 14, 2015 21:06
 # See github.com/tolk/tolk for more informations
 
-Tolk::ApplicationController.authenticator = proc {
-  unless user_signed_in? && Apartment::Tenant.current == Rails.configuration.translations_subdomain
-    # OLD: unless user_signed_in? && Pundit.policy(current_user, :translation).manage_all_sites_translations?
-    flash[:alert] = "You are not allowed"
-    redirect_to "/"
-  end
-}
+Rails.application.config.to_prepare do
+  Tolk::ApplicationController.authenticator = proc {
+    unless user_signed_in? && Apartment::Tenant.current == Rails.configuration.translations_subdomain
+      # OLD: unless user_signed_in? && Pundit.policy(current_user, :translation).manage_all_sites_translations?
+      flash[:alert] = "You are not allowed"
+      redirect_to "/"
+    end
+  }
+end
 
 Tolk.config do |config|
   config.dump_to_files = true

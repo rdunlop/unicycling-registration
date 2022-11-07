@@ -163,7 +163,7 @@ class Competitor < ApplicationRecord
       error += "Competitor is #{status}"
       if status == "withdrawn"
         if withdrawn_at.present?
-          error += " as of #{withdrawn_at.to_s(:short)}"
+          error += " as of #{withdrawn_at.to_fs(:short)}"
         end
       end
       error += "<br>"

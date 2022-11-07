@@ -10,7 +10,7 @@ class Admin::RegistrantsController < ApplicationController
     @registrants = Registrant.includes(:user, :contact_detail).order(:bib_number)
     respond_to do |format|
       format.html { render "manage_all" }
-      format.pdf { render pdf: "manage_all", template: "admin/registrants/manage_all.html.haml", formats: [:html], layout: "pdf.html" }
+      format.pdf { render pdf: "manage_all", template: "admin/registrants/manage_all", formats: [:html], layout: "pdf" }
     end
   end
 

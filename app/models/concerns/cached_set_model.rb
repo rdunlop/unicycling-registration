@@ -63,7 +63,7 @@ module CachedSetModel
     end
 
     def render_timestamp(time)
-      time.utc.to_s(:number)
+      time.utc.to_fs(:number)
     end
 
     def cache_set_key_base(element_value)
