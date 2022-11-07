@@ -44,7 +44,7 @@ module CachedModel
     end
 
     def render_timestamp(time)
-      time.utc.to_s(:number)
+      time.utc.to_fs(:number)
     end
 
     def cache_key_base

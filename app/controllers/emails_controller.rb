@@ -27,7 +27,7 @@ class EmailsController < ApplicationController
         registrant.first_name,
         registrant.last_name,
         registrant.contact_detail.try(:email),
-        registrant.created_at.to_s(:short)
+        registrant.created_at.to_fs(:short)
       ]
     end
 
