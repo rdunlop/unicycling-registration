@@ -15,18 +15,14 @@ unless Rails.env.test?
   end
 end
 
-if Rails.env.development? || Rails.env.naucc?
-  class OverrideMailRecipient
-    def self.delivering_email(mail)
-      mail.body = "DEVELOPMENT-OVERRIDE. Was being sent to #{mail.to} bcc: #{mail.bcc}\n" + mail.body.to_s
-      mail.to = Rails.configuration.error_emails
-      mail.cc = nil
-      mail.bcc = nil
-    end
+Rails.application.configure do
+  if Rails.env.development? || Rails.env.naucc?
+    config.action_mailer.interceptors = %w[OverrideMailRecipient]
   end
-  ActionMailer::Base.register_interceptor(OverrideMailRecipient)
 end
 
-if Rails.env.stage?
-  ActionMailer::Base.register_interceptor(StageEmailInterceptor)
+Rails.application.configure do
+  if Rails.env.stage?
+    config.action_mailer.interceptors = %w[StageEmailInterceptor]
+  end
 end
