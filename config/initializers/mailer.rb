@@ -30,8 +30,3 @@ end
 if Rails.env.stage?
   ActionMailer::Base.register_interceptor(StageEmailInterceptor)
 end
-
-# force the mailer to always queue on the 'default' queue
-class ActionMailer::DeliveryJob
-  # queue_as :default
-end
