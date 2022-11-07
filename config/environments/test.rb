@@ -60,3 +60,13 @@ Rails.configuration.error_emails = ["robin+e@dunlopweb.com"]
 Rails.configuration.server_admin_email = "robin+admin@dunlopweb.com"
 Rails.configuration.ssl_enabled = false
 Rails.configuration.instance_creation_code = "this_is_the_code"
+
+# Based on https://github.com/rails/rails/issues/40613#issuecomment-875835965
+module AlwaysCompile
+  def compile!(_view)
+    @compiled = false if Rails.env.test?
+    super
+  end
+end
+
+ActionView::Template.prepend(AlwaysCompile)
