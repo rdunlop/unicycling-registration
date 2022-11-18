@@ -1,12 +1,9 @@
 /home/ec2-user/unicycling-registration/current/log/*log {
     create 0644 ec2-user ec2-user
+    copytruncate
     daily
     rotate 30
     missingok
     notifempty
     compress
-    sharedscripts
-    postrotate
-        /etc/init.d/registration rotate
-    endscript
 }
