@@ -24,8 +24,6 @@ processes:
       pid_file: tmp/pids/unicorn.pid
       start_command: bundle exec unicorn -Dc config/unicorn/production.rb
       restart_command: "kill -USR2 {PID}"
-      user_commands:
-        rotate: "kill -USR1 {PID}" # Requires eye >= 0.6.4
       start_timeout: 40 seconds
       start_grace: 30 seconds
       restart_timeout: 40 seconds
@@ -53,8 +51,6 @@ processes:
     config:
       start_command: bundle exec sidekiq --daemon --config config/sidekiq.yml --logfile log/sidekiq.log
       stop_command: bundle exec sidekiqctl shutdown tmp/pids/sidekiq.pid
-      user_commands:
-        rotate: "kill -USR2 {PID}" # Requires eye >= 0.6.4
       stdall: log/sidekiq.log
       pid_file: tmp/pids/sidekiq.pid
       notify:
