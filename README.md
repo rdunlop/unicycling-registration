@@ -379,11 +379,9 @@ To do this:
 1. install `docker `and `docker-compose`.
 1. run `docker-compose up`
 1. Create the database schema with `docker-compose exec app bundle exec rake db:create db:schema:load`
-1. Add an entry to your /etc/hosts file `sudo vi /etc/hosts`: `127.0.0.1 www.local.com`
-1. open http://www.local.com:3000/new
+1. open http://www.lvh.me:3000/new
 1. Create a new database by using the "creation access code" of "Unplanned Dismount". Specify the subdomain as "test"
-1. Add an entry to your /etc/hosts file `sudo vi /etc/hosts`: `127.0.0.1 test.local.com`
-1. open http://test.local.com:3000, and then you can "Sign Up" in order to create a new user account.
+1. open http://test.lvh.me:3000, and then you can "Sign Up" in order to create a new user account.
 1. From the "My Account" page, you can use the "admin upgrade code" to make yourself into an admin.
 1. From the "User Management" page, you can grant yourself many more roles, allowing access to most of the remaining administrative tools. (Only Super-Admin users have access to more power)
 
