@@ -115,6 +115,7 @@ module Workspace
     config.recaptcha_minimum_score = ENV["RECAPTCHA_MINIMUM_SCORE"].presence
 
     config.google_analytics_tracking_id = ENV["GOOGLE_ANALYTICS_TRACKING_ID"]
+    config.google_analytics_4_tracking_id = ENV["GOOGLE_ANALYTICS_4_TRACKING_ID"]
 
     config.hcaptcha_site_key = ENV['HCAPTCHA_SITE_KEY']
     config.hcaptcha_secret = ENV['HCAPTCHA_SECRET']
