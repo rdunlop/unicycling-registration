@@ -660,7 +660,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    wicked (1.3.4)
+    wicked (2.0.0)
       railties (>= 3.0.7)
     wicked_pdf (2.6.3)
       activesupport
