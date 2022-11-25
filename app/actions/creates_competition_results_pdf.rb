@@ -11,7 +11,7 @@ class CreatesCompetitionResultsPdf
 
     renderer = PdfRenderer.new('printing/competitions/results',
                                layout: 'pdf',
-                               locals: { :@competition => @competition },
+                               instance_variables: { :competition => @competition },
                                pdf_options: { header: { center: header, line: header.present? } })
     renderer.raw_pdf
   end
@@ -21,7 +21,7 @@ class CreatesCompetitionResultsPdf
 
     renderer = PdfRenderer.new('printing/competitions/freestyle_summary',
                                layout: 'pdf',
-                               locals: { :@competition => @competition },
+                               instance_variables: { :competition => @competition },
                                pdf_options: { header: { center: header, line: header.present? } })
     renderer.raw_pdf
   end
