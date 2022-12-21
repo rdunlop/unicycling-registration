@@ -512,7 +512,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rolify (5.3.0)
-    rollbar (3.3.2)
+    rollbar (3.3.3)
     ros-apartment (2.11.0)
       activerecord (>= 5.0.0, < 7.1)
       parallel (< 2.0)
