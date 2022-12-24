@@ -61,6 +61,19 @@ class ExportPaymentsController < ApplicationController
     output_spreadsheet(headers, data, filename)
   end
 
+  # Each Registrant, and their amount owing, amount refunded
+  # For most registrants, this will be a single line, with only a payment
+  # for those with refunds, it will be a single line with both the payment and the refund
+  # for those with multiple payments, or multiple refunds, it will be multiple rows.
+  # PUT /export_payments/payments_by_registrant
+  def payments_by_registrant
+    filename = "#{@config.short_name} PaymentRefunds #{Date.current}"
+
+    exporter = Exporters::PaymentRefundExporter.new
+
+    output_spreadsheet(exporter.headers, exporter.rows, filename)
+  end
+
   private
 
   def authorize_payment_admin
