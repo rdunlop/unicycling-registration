@@ -142,6 +142,7 @@ Rails.application.routes.draw do
         get :list
         put :payments
         put :payment_details
+        put :payments_by_registrant
       end
     end
 
