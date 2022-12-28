@@ -13,6 +13,29 @@ describe Exporters::PaymentRefundExporter do
     end
   end
 
+  context "with an incomplete payment" do
+    let(:payment) { FactoryBot.create(:payment) }
+    let!(:pd) { FactoryBot.create(:payment_detail, payment: payment) }
+
+    it "lists the registrant with no data" do
+      data = exporter.rows
+      expect(data.count).to eq(1)
+      expect(data[0][2]).to be_nil
+      expect(data[0][5]).to be_nil
+    end
+  end
+
+  context "with a registrant without any payments" do
+    let!(:registrant) { FactoryBot.create(:registrant) }
+
+    it "lists the registrant without any other details" do
+      data = exporter.rows
+      expect(data.count).to eq(1)
+      expect(data[0][2]).to be_nil
+      expect(data[0][5]).to be_nil
+    end
+  end
+
   context "with a refunded item" do
     let(:now) { DateTime.current }
     let!(:payment) { FactoryBot.create(:payment, :completed) }
