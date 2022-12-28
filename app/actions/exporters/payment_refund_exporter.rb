@@ -31,32 +31,39 @@ class Exporters::PaymentRefundExporter
     end
 
     registrant.payments.completed.each do |payment|
-      rows << [
-        registrant.bib_number,
-        registrant.full_name,
-        payment.payment_details.sum(&:amount),
-        payment.payment_date.try(:iso8601),
-        "?",
-        amount_refunded(payment.payment_details),
-        refund_date(payment.payment_details)
-      ]
+      refunds = payment.payment_details.map(&:refund_detail).compact.map(&:refund).uniq
+
+      if refunds.any?
+        refunds.each do |refund|
+          rows << [
+            registrant.bib_number,
+            registrant.full_name,
+            payment.payment_details.sum(&:amount).to_s,
+            payment.completed_date.try(:iso8601),
+
+            refund.percentage,
+            amount_refunded(refund),
+            refund.refund_date.iso8601
+          ]
+        end
+      else
+        rows << [
+          registrant.bib_number,
+          registrant.full_name,
+          payment.payment_details.sum(&:amount).to_s,
+          payment.completed_date.try(:iso8601),
+
+          0,
+          0,
+          nil
+        ]
+      end
     end
 
     rows
   end
 
-  def amount_refunded(payment_details)
-    payment_details.refunded.sum(&:amount_refunded)
-  end
-
-  def refund_date(payment_details)
-    refunds = payment_details.refunded.map(&:refund_detail).map(&:refund).uniq
-    return if refunds.none?
-
-    if refunds.count.positive?
-      refunds.map(&:refund_date).map(&:iso8601).join(", ")
-    else
-      refunds.first.refund_date.try(:iso8601)
-    end
+  def amount_refunded(refund)
+    refund.refund_details.map(&:amount_refunded).sum.to_s
   end
 end
