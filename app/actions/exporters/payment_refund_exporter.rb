@@ -9,7 +9,7 @@ class Exporters::PaymentRefundExporter
 
   def rows
     data = []
-    Registrant.all.find_each do |registrant|
+    Registrant.active_or_incomplete.all.find_each do |registrant|
       reg_rows = registrant_rows(registrant)
       next if reg_rows.empty?
 
@@ -23,7 +23,14 @@ class Exporters::PaymentRefundExporter
 
   def registrant_rows(registrant)
     rows = []
-    registrant.payments.each do |payment|
+    if registrant.payments.completed.none?
+      return [[
+        registrant.bib_number,
+        registrant.full_name
+      ]]
+    end
+
+    registrant.payments.completed.each do |payment|
       rows << [
         registrant.bib_number,
         registrant.full_name,
