@@ -10,6 +10,7 @@ describe Exporters::PaymentRefundExporter do
     it "returns some data" do
       data = exporter.rows
       expect(data.count).to eq(1)
+      expect(data[0][3]).not_to be_nil
     end
   end
 
@@ -40,13 +41,15 @@ describe Exporters::PaymentRefundExporter do
     let(:now) { DateTime.current }
     let!(:payment) { FactoryBot.create(:payment, :completed) }
     let(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment) }
-    let!(:refund) { FactoryBot.create(:refund, refund_date: now) }
+    let!(:refund) { FactoryBot.create(:refund, refund_date: now, percentage: 90) }
     let!(:refund_detail) { FactoryBot.create(:refund_detail, payment_detail: payment_detail, refund: refund) }
 
     it "shows the refunded amount" do
       data = exporter.rows
       expect(data.count).to eq(1)
-      expect(data[0][5]).to eq(9.99.to_money)
+      expect(data[0][2]).to eq("9.99")
+      expect(data[0][4]).to eq(90)
+      expect(data[0][5]).to eq("8.99")
       expect(data[0][6]).to eq(now.iso8601)
     end
   end

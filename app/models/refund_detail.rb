@@ -36,6 +36,10 @@ class RefundDetail < ApplicationRecord
     payment_detail.update_attribute(:refunded, true) unless payment_detail.refunded?
   end
 
+  def amount_refunded
+    (percentage.to_f / 100) * payment_detail.amount
+  end
+
   def to_s
     payment_detail
   end
