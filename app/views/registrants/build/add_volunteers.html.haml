@@ -5,15 +5,15 @@
         = pluralize(@registrant.errors.count, "error")
         prohibited this registrant from being saved:
       %ul
-        - @registrant.errors.each do |attribute,error_message|
-          - next if attribute == :gender_male
-          - next if attribute == :gender_female
-          - next if "#{attribute}" == "registrant_event_sign_ups.signed_up"
-          - next if "#{attribute}" == "registrant_event_sign_ups.event_category_id"
-          - if "#{attribute}" == "registrant_event_sign_ups.base"
-            %li= error_message
+        - @registrant.errors.each do |error|
+          - next if error.attribute == :gender_male
+          - next if error.attribute == :gender_female
+          - next if "#{error.attribute}" == "registrant_event_sign_ups.signed_up"
+          - next if "#{error.attribute}" == "registrant_event_sign_ups.event_category_id"
+          - if "#{error.attribute}" == "registrant_event_sign_ups.base"
+            %li= error.message
           - else
-            %li= @registrant.errors.full_message(attribute, error_message )
+            %li= @registrant.errors.full_message(error.attribute, error.message )
 
   .data_block
     - case @config.volunteer_option
