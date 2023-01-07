@@ -5,10 +5,10 @@
         = pluralize(@registrant.errors.count, "error")
         prohibited this registrant from being saved:
       %ul
-        - @registrant.errors.each do |attribute,error_message|
-          - next if attribute == :gender_male
-          - next if attribute == :gender_female
-          %li= @registrant.errors.full_message(attribute, error_message )
+        - @registrant.errors.each do |error|
+          - next if error.attribute == :gender_male
+          - next if error.attribute == :gender_female
+          %li= @registrant.errors.full_message(error.attribute, error.message )
 
   .data_block
     = render partial: "/registrants/header_and_delete_button"
