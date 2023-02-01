@@ -30,9 +30,9 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.11)
+    acme-client (2.0.12)
       faraday (>= 1.0, < 3.0.0)
-      faraday-retry (~> 1.0)
+      faraday-retry (>= 1.0, < 3.0.0)
     actioncable (7.0.4.1)
       actionpack (= 7.0.4.1)
       activesupport (= 7.0.4.1)
@@ -306,11 +306,12 @@ GEM
       railties (>= 5.0.0)
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.6.0)
+    faraday (2.7.4)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.1)
-    faraday-retry (1.0.3)
+    faraday-net_http (3.0.2)
+    faraday-retry (2.0.0)
+      faraday (~> 2.0)
     ffi (1.15.5)
     foreman (0.87.2)
     foundation-rails (6.6.2.0)
