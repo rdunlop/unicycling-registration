@@ -426,7 +426,7 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     pdf-core (0.7.0)
-    pg (1.4.5)
+    pg (1.4.6)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
