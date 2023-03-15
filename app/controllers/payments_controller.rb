@@ -99,14 +99,23 @@ class PaymentsController < ApplicationController
 
       # This must be in the format of "12.34" (no commas)
       line_items << {
-        name: pd.to_s,
-        amount: pd.amount_cents,
-        currency: @config.currency_code,
+        price_data: {
+          currency: @config.currency_code,
+          product_data: {
+            name: pd.to_s
+          },
+          unit_amount: pd.amount_cents
+        },
         quantity: pd.count.to_s
       }
     end
 
     Stripe.api_key = @config.stripe_secret_key
+    # If we don't specify the version, we're at the
+    # whims of the associated stripe account configuration
+    Stripe.api_version = "2022-11-15"
+
+    # Reference: https://stripe.com/docs/api/checkout/sessions/create
     stripe_session = Stripe::Checkout::Session.create(
       client_reference_id: @payment.invoice_id,
       customer_email: @payment.user.email,
