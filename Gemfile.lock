@@ -669,7 +669,7 @@ GEM
       railties (>= 3.0.7)
     wicked_pdf (2.6.3)
       activesupport
-    wkhtmltopdf-binary (0.12.3.1)
+    wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.7)
@@ -772,7 +772,7 @@ DEPENDENCIES
   whenever
   wicked
   wicked_pdf
-  wkhtmltopdf-binary (= 0.12.3.1)
+  wkhtmltopdf-binary (= 0.12.6.6)
 
 RUBY VERSION
    ruby 2.7.6p219
