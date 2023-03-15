@@ -5,7 +5,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 gem 'rails', '~> 7.0.4'
-gem 'sprockets', '< 4' # Sprockets 4 pain is not worth it.
+gem 'sprockets', '< 5' # Sprockets 4 pain is not worth it.
 
 # Authentication
 gem 'devise'
