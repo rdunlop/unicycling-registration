@@ -2,6 +2,28 @@ class ExportRegistrantsController < ApplicationController
   before_action :authenticate_user!
   include ExcelOutputter
 
+  def download_payment_dates
+    authorize current_user, :manage_all_payments?
+
+    headers = ["Registrant ID", "Registration Creation Date", "Payment Completed Date"]
+
+    data = []
+
+    Registrant.active_or_incomplete.each do |registrant|
+      next if registrant.payments.where(completed: true).none?
+
+      data << [
+        registrant.bib_number,
+        registrant.created_at.to_date.to_s,
+        registrant.payments.where(completed: true).first.completed_date.to_date.to_s
+      ]
+    end
+
+    filename = "#{@config.short_name} Registrant Payment Dates #{Date.current}"
+
+    output_spreadsheet(headers, data, filename)
+  end
+
   def download_all
     authorize current_user, :manage_all_payments?
 

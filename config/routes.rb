@@ -100,6 +100,7 @@ Rails.application.routes.draw do
       get :download_payment_details_by_category
       get :download_all_payments, controller: "/export_registrants", action: "download_with_payment_details"
       get :download_all_registrants, controller: "/export_registrants", action: "download_all"
+      get :download_payment_dates, controller: "/export_registrants", action: "download_payment_dates"
       get :download_summaries, controller: "/export_registrants"
       get :download_events
       get :download_competitors_for_timers
