@@ -8,6 +8,16 @@ describe ExportRegistrantsController do
     sign_in @user
   end
 
+  describe "#download_payment_dates" do
+    let!(:payment) { FactoryBot.create(:payment, :completed) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, registrant: registrant, payment: payment) }
+
+    it "renders" do
+      get :download_payment_dates
+      expect(response).to be_successful
+    end
+  end
+
   describe "#download_all" do
     it "renders" do
       get :download_all
