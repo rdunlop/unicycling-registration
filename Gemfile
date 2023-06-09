@@ -29,7 +29,7 @@ gem 'country_select'
 gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rails6" # for rails 6 support
 gem 'foundation-rails'
 gem "haml-rails"
-gem "jc-validates_timeliness"
+gem "validates_timeliness", "7.0.0.beta2"
 gem 'jquery-datatables-rails'
 gem 'jquery-datetimepicker-rails'
 gem 'jquery-rails'
