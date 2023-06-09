@@ -119,5 +119,7 @@ module Workspace
 
     config.hcaptcha_site_key = ENV['HCAPTCHA_SITE_KEY']
     config.hcaptcha_secret = ENV['HCAPTCHA_SECRET']
+
+    config.super_admin_upgrade_code = ENV['SUPER_ADMIN_UPGRADE_CODE']
   end
 end
