@@ -28,5 +28,19 @@ describe AdminUpgradesController do
         expect(user.reload).to have_role(:convention_admin)
       end
     end
+
+    context "with super-admin code" do
+      around do |example|
+        old = Rails.configuration.super_admin_upgrade_code
+        Rails.configuration.super_admin_upgrade_code = "super"
+        example.call
+        Rails.configuration.super_admin_upgrade_code = old
+      end
+
+      it "upgrades user to super-admin" do
+        post :create, params: { access_code: "super" }
+        expect(user.reload).to have_role(:super_admin)
+      end
+    end
   end
 end
