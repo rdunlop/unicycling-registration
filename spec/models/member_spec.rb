@@ -39,7 +39,7 @@ describe Member do
     it "adds (alternate)" do
       member.alternate = true
 
-      expect(member.to_s).to eq(member.registrant.to_s + "(alternate)")
+      expect(member.to_s).to eq("#{member.registrant}(alternate)")
     end
 
     it "has normal to_s" do

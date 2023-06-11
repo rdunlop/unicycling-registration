@@ -7,7 +7,7 @@ describe Importers::Parsers::TwoAttemptCsv do
 
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
-  let(:test_file) { fixture_path + '/sample_muni_downhill_start_times.txt' }
+  let(:test_file) { "#{fixture_path}/sample_muni_downhill_start_times.txt" }
 
   it "Can read from file" do
     expect(importer.extract_file).to eq(

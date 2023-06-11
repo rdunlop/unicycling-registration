@@ -96,9 +96,9 @@ gem 'pg'
 
 # deployment
 gem 'capistrano', require: false
+gem 'capistrano3-unicorn', require: false
 gem 'capistrano-rails', require: false
 gem 'capistrano-rvm', require: false
-gem 'capistrano3-unicorn', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
@@ -110,8 +110,8 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'poltergeist'
-  gem 'rspec-rails'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
+  gem 'rspec-rails'
 
   gem "shoulda-matchers", require: false
 

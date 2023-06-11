@@ -96,7 +96,7 @@ class Registrants::BuildController < ApplicationController
       flash[:notice] = "Previous Registrant Copied Successfully, please review and continue"
       redirect_to wizard_path(steps.first, registrant_id: @registrant)
     else
-      flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
+      flash[:alert] = "Unable to create registrant: #{@registrant.errors.full_messages.join(', ')}"
       redirect_to new_registrant_path(registrant_type: @registrant.registrant_type, copy_from_previous: true)
     end
   end
@@ -113,7 +113,7 @@ class Registrants::BuildController < ApplicationController
       set_steps # reset steps to ensure we get the correct set of steps
       redirect_to wizard_path(steps.second, registrant_id: @registrant)
     else
-      flash[:alert] = "Unable to create registrant: " + @registrant.errors.full_messages.join(", ")
+      flash[:alert] = "Unable to create registrant: #{@registrant.errors.full_messages.join(', ')}"
       redirect_to new_registrant_path(registrant_type: @registrant.registrant_type, copy_from_previous: false)
     end
   end

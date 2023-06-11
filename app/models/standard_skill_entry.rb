@@ -32,11 +32,11 @@ class StandardSkillEntry < ApplicationRecord
   default_scope { order('number, letter') }
 
   def fullDescription
-    skill_number_and_letter + " - " + description
+    "#{skill_number_and_letter} - #{description}"
   end
 
   def skill_number_and_letter
-    number.to_s + "" + letter
+    "#{number}#{letter}"
   end
 
   def non_riding_skill

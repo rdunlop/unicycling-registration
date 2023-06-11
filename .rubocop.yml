@@ -89,6 +89,78 @@ Style/RedundantRegexpEscape:
 
 Style/SlicingWithRange:
   Enabled: true
+Lint/BinaryOperatorWithIdenticalOperands: # (new in 0.89)
+  Enabled: true
+Lint/DuplicateElsifCondition: # (new in 0.88)
+  Enabled: true
+Lint/DuplicateRequire: # (new in 0.90)
+  Enabled: true
+Lint/DuplicateRescueException: # (new in 0.89)
+  Enabled: true
+Lint/EmptyConditionalBody: # (new in 0.89)
+  Enabled: true
+Lint/EmptyFile: # (new in 0.90)
+  Enabled: true
+Lint/FloatComparison: # (new in 0.89)
+  Enabled: true
+Lint/MissingSuper: # (new in 0.89)
+  Enabled: true
+Lint/OutOfRangeRegexpRef: # (new in 0.89)
+  Enabled: true
+Lint/SelfAssignment: # (new in 0.89)
+  Enabled: true
+Lint/TopLevelReturnWithArgument: # (new in 0.89)
+  Enabled: true
+Lint/TrailingCommaInAttributeDeclaration: # (new in 0.90)
+  Enabled: true
+Lint/UnreachableLoop: # (new in 0.89)
+  Enabled: true
+Lint/UselessMethodDefinition: # (new in 0.90)
+  Enabled: true
+
+Style/AccessorGrouping: # (new in 0.87)
+  Enabled: false
+
+Style/ArrayCoercion: # (new in 0.88)
+  Enabled: true
+Style/BisectedAttrAccessor: # (new in 0.87)
+  Enabled: true
+Style/CaseLikeIf: # (new in 0.88)
+  Enabled: true
+
+Style/CombinableLoops: # (new in 0.90)
+  Enabled: false
+
+Style/ExplicitBlockArgument: # (new in 0.89)
+  Enabled: true
+Style/GlobalStdStream: # (new in 0.89)
+  Enabled: true
+
+Style/HashAsLastArrayItem: # (new in 0.88)
+  Enabled: false
+Style/HashLikeCase: # (new in 0.88)
+  Enabled: false
+
+Style/KeywordParametersOrder: # (new in 0.90)
+  Enabled: true
+
+Style/OptionalBooleanParameter: # (new in 0.89)
+  Enabled: false
+
+Style/RedundantAssignment: # (new in 0.87)
+  Enabled: true
+Style/RedundantFileExtensionInRequire: # (new in 0.88)
+  Enabled: true
+Style/RedundantSelfAssignment: # (new in 0.90)
+  Enabled: true
+Style/SingleArgumentDig: # (new in 0.89)
+  Enabled: true
+
+Style/SoleNestedConditional: # (new in 0.89)
+  Enabled: false
+
+Style/StringConcatenation: # (new in 0.89)
+  Enabled: true
 
 Rails/ApplicationRecord:
   Exclude:

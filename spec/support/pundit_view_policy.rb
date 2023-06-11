@@ -6,7 +6,7 @@ module PunditViewPolicy
       controller.singleton_class.class_eval do
         def policy(_instance)
           Class.new do
-            def method_missing(*_args, &_block) # rubocop:disable Style/MissingRespondToMissing
+            def method_missing(*_args, &_block) # rubocop:disable Lint/MissingSuper,Style/MissingRespondToMissing
               true
             end
           end.new

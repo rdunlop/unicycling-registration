@@ -271,7 +271,7 @@ describe Competitor do
     end
 
     it "displays the external id's for all members" do
-      expect(@comp.bib_number).to eq(@reg1.external_id.to_s + ", " + @reg2.external_id.to_s)
+      expect(@comp.bib_number).to eq("#{@reg1.external_id}, #{@reg2.external_id}")
     end
     it "displays the ages for all members (when they are the same)" do
       expect(@comp.age).to eq(@reg1.age)

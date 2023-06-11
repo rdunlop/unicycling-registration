@@ -39,7 +39,7 @@ describe EventCategory do
   end
 
   it "uses the event name in its name" do
-    expect(@ec.to_s).to eq(@ev.to_s + " - " + @ec.name)
+    expect(@ec.to_s).to eq("#{@ev} - #{@ec.name}")
   end
 
   it "can determine if an age is in range" do

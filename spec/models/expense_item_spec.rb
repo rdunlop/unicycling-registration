@@ -116,7 +116,7 @@ describe ExpenseItem do
   end
 
   it "has a decent description" do
-    expect(@item.to_s).to eq(@item.expense_group.to_s + " - " + @item.name)
+    expect(@item.to_s).to eq("#{@item.expense_group} - #{@item.name}")
   end
 
   it "has not reached the maximum" do

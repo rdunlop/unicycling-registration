@@ -63,6 +63,6 @@ class MusicZipCreator
     name += competitor_name
     name += "_"
     name += song_file_name
-    name.first(59) + ".mp3"
+    "#{name.first(59)}.mp3"
   end
 end

@@ -202,11 +202,11 @@ describe Registrant do
     end
 
     it "has a to_s" do
-      expect(@reg.to_s).to eq(@reg.first_name + " " + @reg.last_name)
+      expect(@reg.to_s).to eq("#{@reg.first_name} #{@reg.last_name}")
     end
 
     it "has a name field" do
-      expect(@reg.name).to eq(@reg.first_name + " " + @reg.last_name)
+      expect(@reg.name).to eq("#{@reg.first_name} #{@reg.last_name}")
     end
 
     it "bib_number is set to 1 as a competitor" do

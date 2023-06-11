@@ -100,7 +100,7 @@ class HeatExportsController < ApplicationController
   # returns a zip file containing all of the heat files together
   def download_all_heats_tsv
     zip_creator = CompetitionHeatTsvZipCreator.new(@competition)
-    filename = @competition.to_s.gsub(/[^0-9a-zA-Z]/, '') + '_heats.zip'
+    filename = "#{@competition.to_s.gsub(/[^0-9a-zA-Z]/, '')}_heats.zip"
     zip_creator.zip_file(filename) do |zip_file|
       send_data(zip_file, type: 'application/zip', filename: filename)
     end

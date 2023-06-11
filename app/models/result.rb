@@ -86,7 +86,7 @@ class Result < ApplicationRecord
     if competitor.active_members.size == 2
       partner = (competitor.registrants - [registrant]).first
 
-      res += " & " + partner.first_name + " " + partner.last_name
+      res += " & #{partner.first_name} #{partner.last_name}"
     end
     res
   end

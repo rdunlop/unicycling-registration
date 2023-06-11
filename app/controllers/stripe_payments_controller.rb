@@ -22,7 +22,7 @@ class StripePaymentsController < ApplicationController
     token = params[:stripeToken]
 
     if payment.completed
-      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: " + payment.invoice_id).deliver_later
+      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: #{payment.invoice_id}").deliver_later
     else
       charge = create_charge(token)
       if charge.captured

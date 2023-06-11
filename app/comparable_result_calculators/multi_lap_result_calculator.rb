@@ -14,7 +14,7 @@ class MultiLapResultCalculator
         return result
       end
 
-      result + " (" + ActionController::Base.helpers.pluralize(competitor.num_laps.to_i, "lap") + ")"
+      "#{result} (#{ActionController::Base.helpers.pluralize(competitor.num_laps.to_i, 'lap')})"
     end
   end
 

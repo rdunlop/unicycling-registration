@@ -64,6 +64,6 @@ class CompetitionHeatTsvZipCreator
     name += "_"
     name += "heat_"
     name += heat_number.to_s.rjust(3, "0")
-    name.first(59) + ".txt"
+    "#{name.first(59)}.txt"
   end
 end

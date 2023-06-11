@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Lif do
-  let(:test_file) { fixture_path + '/800m14.lif' }
+  let(:test_file) { "#{fixture_path}/800m14.lif" }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   let(:up) { described_class.new }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Wave do
-  let(:wave_data_file_name) { fixture_path + '/sample_wave_assignments.txt' }
+  let(:wave_data_file_name) { "#{fixture_path}/sample_wave_assignments.txt" }
   let(:wave_data_file) { Rack::Test::UploadedFile.new(wave_data_file_name, "text/plain") }
 
   it "extracts the file contents" do
@@ -25,7 +25,7 @@ describe Importers::Parsers::Wave do
   end
 
   context "with an invalid file type" do
-    let(:xls_wave_data_file_name) { fixture_path + '/invalid_sample_wave_assignments.xlsx' }
+    let(:xls_wave_data_file_name) { "#{fixture_path}/invalid_sample_wave_assignments.xlsx" }
     let(:bad_wave_data_file) { Rack::Test::UploadedFile.new(xls_wave_data_file_name, "text/plain") }
 
     it "returns a good error code" do

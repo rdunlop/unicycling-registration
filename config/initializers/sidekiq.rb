@@ -11,8 +11,6 @@ class MyClientMiddleware
 end
 
 class MyMiddleware
-  def initialize(options = nil); end
-
   def call(_worker, _msg, _queue)
     RequestStore.clear!
     yield

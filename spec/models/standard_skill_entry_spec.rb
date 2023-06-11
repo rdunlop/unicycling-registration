@@ -34,7 +34,7 @@ describe StandardSkillEntry do
 
   it "displays a full description" do
     std = FactoryBot.build(:standard_skill_entry)
-    expect(std.fullDescription).to eq(std.number.to_s + std.letter + " - riding - 8")
+    expect(std.fullDescription).to eq("#{std.number}#{std.letter} - riding - 8")
   end
   it "is a non_riding_skill if >= 100" do
     std = FactoryBot.build(:standard_skill_entry)

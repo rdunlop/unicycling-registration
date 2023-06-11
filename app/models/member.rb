@@ -67,7 +67,7 @@ class Member < ApplicationRecord
 
   def to_s
     if alternate
-      registrant.to_s + "(alternate)"
+      "#{registrant}(alternate)"
     else
       registrant.to_s
     end

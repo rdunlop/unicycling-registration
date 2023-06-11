@@ -13,11 +13,11 @@ class RegistrantPresenter
     description = details[:description]
 
     unless details[:category].nil?
-      description += " - Category: " + details[:category]
+      description += " - Category: #{details[:category]}"
     end
 
     unless details[:additional].nil?
-      description += " - " + details[:additional]
+      description += " - #{details[:additional]}"
     end
     description
   end
@@ -41,7 +41,7 @@ class RegistrantPresenter
     event.event_choices.each do |ec|
       my_val = registrant_choices.find_by(event_choice_id: ec.id)
       if my_val.present? && my_val.has_value?
-        results << ec.label + ": " + my_val.describe_value
+        results << "#{ec.label}: #{my_val.describe_value}"
       end
     end
 

@@ -54,7 +54,7 @@ class CompetitionSource < ApplicationRecord
   end
 
   def to_s
-    target_competition.to_s + " -> " + competition + event_category
+    "#{target_competition} -> #{competition}#{event_category}"
   end
 
   # XXX this needs cachnig somehow.
@@ -75,8 +75,8 @@ class CompetitionSource < ApplicationRecord
     if competition.present?
       competitors = competition.competitors
       competitors = competitors.select { |comp| comp.overall_place.to_i > 0 && comp.overall_place.to_i <= max_place } unless max_place.nil? # rubocop:disable Style/NumericPredicate
-      competitors = competitors.select { |comp| registrant_passes_filters(comp) }
-      competitors
+      competitors.select { |comp| registrant_passes_filters(comp) }
+
     else
       []
     end

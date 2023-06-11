@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Importers::Parsers::Chip do
   let(:importer) { described_class.new(sample_input, bib_number_column_number, time_column_number, number_of_decimal_places, lap_column_number) }
 
-  let(:test_file) { fixture_path + '/sample_chip_data.csv' }
+  let(:test_file) { "#{fixture_path}/sample_chip_data.csv" }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
   let(:bib_number_column_number) { 0 }
   let(:time_column_number) { 2 }

@@ -30,7 +30,7 @@ describe HeatReviewController do
 
   describe "POST import_lif" do
     describe "with valid params" do
-      let(:test_file_name) { fixture_path + "/test2.lif" }
+      let(:test_file_name) { "#{fixture_path}/test2.lif" }
       let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
 
       it "calls the creator" do

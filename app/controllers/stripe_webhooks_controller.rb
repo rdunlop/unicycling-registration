@@ -41,7 +41,7 @@ class StripeWebhooksController < ApplicationController
     end
 
     if payment.completed
-      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: " + payment.invoice_id).deliver_later
+      PaymentMailer.ipn_received("Stripe Payment already completed. Invoice ID: #{payment.invoice_id}").deliver_later
       return
     end
     payment_intent_id = checkout_session.payment_intent

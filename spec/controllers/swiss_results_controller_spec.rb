@@ -23,7 +23,7 @@ describe SwissResultsController do
 
   describe "POST import" do
     describe "with valid params" do
-      let(:test_file_name) { fixture_path + "/swiss_heat.tsv" }
+      let(:test_file_name) { "#{fixture_path}/swiss_heat.tsv" }
       let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
 
       it "calls the creator" do
