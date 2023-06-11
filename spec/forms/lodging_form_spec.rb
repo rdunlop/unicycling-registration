@@ -6,7 +6,7 @@ describe LodgingForm do
   let(:lodging_room_option) { FactoryBot.create(:lodging_room_option, lodging_room_type: lodging_room_type) }
   let(:form) { described_class.new(params) }
 
-  context "#save" do
+  describe "#save" do
     context "with a lodging type with multiple days" do
       let!(:lodging_day1) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }
       let!(:lodging_day2) { FactoryBot.create(:lodging_day, lodging_room_option: lodging_room_option) }

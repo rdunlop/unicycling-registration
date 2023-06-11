@@ -29,7 +29,7 @@ describe Score do
 
   describe "when the score is invalid" do
     before do
-      allow(subject).to receive(:invalid?).and_return(true)
+      allow(subject).to receive(:invalid?).and_return(true) # rubocop:disable RSpec/SubjectStub
     end
 
     it "says that it has a judge_place of 0" do

@@ -187,6 +187,15 @@ Style/FormatStringToken:
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/RepeatedExampleGroupDescription:
+  Enabled: false
+
+RSpec/StubbedMock: # (new in 1.44)
+  Enabled: true
+
 Rails/UnknownEnv:
   Environments:
     - production

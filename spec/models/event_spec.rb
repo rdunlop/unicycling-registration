@@ -47,7 +47,7 @@ describe Event do
     expect(@ev.to_s).to eq(@ev.name)
   end
 
-  context "#best_time_format" do
+  describe "#best_time_format" do
     it "requires a best_time_format" do
       @ev.best_time_format = nil
       expect(@ev).to be_invalid
