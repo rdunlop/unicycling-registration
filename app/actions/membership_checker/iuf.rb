@@ -46,7 +46,8 @@ module MembershipChecker
       [
         "first_name=#{first_name}",
         "last_name=#{last_name}",
-        "birthdate=#{birthdate.iso8601}"
+        "birthdate=#{birthdate.iso8601}",
+        "eventdate=#{EventConfiguration.singleton.estimated_end_date.iso8601}"
       ].join("&")
     end
 

@@ -49,4 +49,14 @@ describe MembershipChecker::Iuf do
       expect(subject.current_system_id).to be_nil
     end
   end
+
+  context "with an event configuration start date" do
+    before do
+      EventConfiguration.singleton.update(start_date: Date.new(2024, 7, 12))
+    end
+
+    it "has the correct request string" do
+      expect(subject.request_string).to eq("first_name=John&last_name=Smith&birthdate=2000-01-01&eventdate=2024-07-24")
+    end
+  end
 end
