@@ -2,6 +2,7 @@ require 'spec_helper'
 
 class Entry
   attr_accessor :minutes, :seconds, :thousands
+
   include HoursFacade
 end
 

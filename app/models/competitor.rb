@@ -229,7 +229,7 @@ class Competitor < ApplicationRecord
     return scoring_helper.competitor_dq_status_description(self) if disqualified?
 
     if place.nil? || place.zero?
-      return "-"
+      "-"
     else
       place
     end
@@ -246,7 +246,7 @@ class Competitor < ApplicationRecord
     return "DQ" if disqualified?
 
     if overall_place.nil? || overall_place.zero?
-      return "-"
+      "-"
     else
       overall_place
     end

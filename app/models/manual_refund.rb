@@ -72,7 +72,7 @@ class ManualRefund
   end
 
   def items_attributes=(params = {})
-    params.values.each do |detail|
+    params.each_value do |detail|
       @items << ManualRefundDetail.new(detail)
     end
   end

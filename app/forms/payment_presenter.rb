@@ -91,7 +91,7 @@ class PaymentPresenter
   end
 
   def paid_details_attributes=(params = {})
-    params.values.each do |detail|
+    params.each_value do |detail|
       @existing_payment_details << PaymentDetailPresenter.new(detail)
     end
   end
@@ -101,7 +101,7 @@ class PaymentPresenter
   end
 
   def unpaid_details_attributes=(params = {})
-    params.values.each do |detail|
+    params.each_value do |detail|
       @new_expense_items << PaymentDetailPresenter.new(detail)
     end
   end
@@ -116,7 +116,7 @@ class PaymentPresenter
   end
 
   def new_details_attributes=(params = {})
-    params.values.each do |detail|
+    params.each_value do |detail|
       @new_details << PaymentDetailPresenter.new(detail)
     end
   end

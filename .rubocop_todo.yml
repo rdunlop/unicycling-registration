@@ -13,7 +13,7 @@ Capybara/CurrentPathExpectation:
     - 'spec/features/registration_spec.rb'
 
 # Offense count: 2
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - 'config/unicorn/production.rb'
     - 'config/unicorn/stage.rb'
@@ -437,5 +437,5 @@ Style/WordArray:
 # Offense count: 5220
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
-Metrics/LineLength:
+Layout/LineLength:
   Max: 723

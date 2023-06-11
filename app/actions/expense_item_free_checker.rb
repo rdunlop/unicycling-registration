@@ -1,5 +1,6 @@
 class ExpenseItemFreeChecker
   attr_reader :registrant, :expense_item, :error_message
+
   delegate :paid_details, :registrant_expense_items, :registrant_type_model, to: :registrant
 
   def initialize(registrant, expense_item)

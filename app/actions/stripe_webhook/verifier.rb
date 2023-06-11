@@ -4,6 +4,7 @@ module StripeWebhook
   # verify that a received webhook is authentic
   class Verifier
     attr_reader :webhook_secret
+
     def initialize(webhook_secret:)
       @webhook_secret = webhook_secret
     end

@@ -72,8 +72,8 @@ class EventConfiguration < ApplicationRecord
   mount_uploader :logo_file, LogoUploader
 
   validates :short_name, :long_name, presence: true, if: :name_logo_applied?
-  validates :event_url, format: URI.regexp(%w[http https]), unless: -> { event_url.nil? }
-  validates :comp_noncomp_url, format: URI.regexp(%w[http https]), unless: -> { comp_noncomp_url.blank? }
+  validates :event_url, format: URI::DEFAULT_PARSER.make_regexp(%w[http https]), unless: -> { event_url.nil? }
+  validates :comp_noncomp_url, format: URI::DEFAULT_PARSER.make_regexp(%w[http https]), unless: -> { comp_noncomp_url.blank? }
   validates :enabled_locales, presence: true
   validates :time_zone, presence: true, inclusion: { in: ActiveSupport::TimeZone.send(:zones_map).keys }
   validate :only_one_info_type

@@ -145,7 +145,7 @@ class Result < ApplicationRecord
 
     if existing_result
       if existing_result.place == new_place && existing_result.status == status && existing_result.result_subtype == result_subtype
-        return
+        nil
       else
         existing_result.place = new_place
         existing_result.status = status

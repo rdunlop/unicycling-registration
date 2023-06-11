@@ -42,6 +42,7 @@ class Registrant < ApplicationRecord
 
   after_save :touch_members
   attr_accessor :skip_organization_membership_checking
+
   after_commit :update_organization_membership_status, if: proc { EventConfiguration.singleton.organization_membership_config.automated_checking? }
 
   has_paper_trail meta: { registrant_id: :id, user_id: :user_id }

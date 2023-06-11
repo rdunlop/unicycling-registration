@@ -18,10 +18,6 @@ inherit_from: .rubocop_todo.yml
 Rails/BulkChangeTable:
   Enabled: false
 
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
-  Enabled: true
-
 # I don't like the way that this re-indents certain conditionals
 Style/ConditionalAssignment:
   Enabled: false
@@ -29,7 +25,7 @@ Style/ConditionalAssignment:
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 
-Metrics/LineLength:
+Layout/LineLength:
   # I would like to support this, but it's quite violated currently
   # Max: 120
   Enabled: false
@@ -51,6 +47,48 @@ Rails/SkipsModelValidations:
 # I like my variable names just fine thanks.
 Naming/VariableNumber:
   Enabled: false
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
 
 Rails/ApplicationRecord:
   Exclude:
