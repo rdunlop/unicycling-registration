@@ -42,6 +42,7 @@ describe "registrants/build/add_events" do
           end
         end
       end
+
       describe "With existing selections" do
         before do
           @rc = FactoryBot.create(:registrant_choice, value: "1", event_choice: @ec1)
@@ -65,6 +66,7 @@ describe "registrants/build/add_events" do
             assert_select "label", text: @ec1.event.to_s
           end
         end
+
         it "renders as not-checked-off if value is '0'" do
           @rc.value = "0"
           @rc.save

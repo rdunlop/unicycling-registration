@@ -48,6 +48,7 @@ describe User do
   it "can sum the amount owing from all registrants" do
     expect(@user.total_owing).to eq(0.to_money)
   end
+
   describe "with an expense_item" do
     before do
       @rp = FactoryBot.create(:registration_cost, :competitor)
@@ -60,6 +61,7 @@ describe User do
       @comp = FactoryBot.create(:competitor, user: @user)
       expect(@user.total_owing).to eq(100.to_money)
     end
+
     it "calculates the cost of a noncompetitor" do
       @comp = FactoryBot.create(:noncompetitor, user: @user)
       expect(@user.total_owing).to eq(50.to_money)

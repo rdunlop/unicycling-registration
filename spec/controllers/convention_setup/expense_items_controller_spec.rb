@@ -68,6 +68,7 @@ describe ConventionSetup::ExpenseItemsController do
         post :create, params: { expense_item: valid_attributes, expense_group_id: expense_group.id }
         expect(response).to redirect_to(expense_group_expense_items_path(expense_group))
       end
+
       it "sets the maximum_per_registrant" do
         post :create, params: { expense_group_id: expense_group.id, expense_item: valid_attributes.merge(maximum_per_registrant: 1) }
         expect(ExpenseItem.last.maximum_per_registrant).to eq(1)

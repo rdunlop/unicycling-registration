@@ -84,6 +84,7 @@ describe Event do
 
     expect(@ev.event_choices).to eq([@ec2, @ec3, @ec4])
   end
+
   it "destroys associated event_choices upon destroy" do
     FactoryBot.create(:event_choice, event: @ev)
     expect do
@@ -127,12 +128,14 @@ describe Event do
     it "will know that it is selected" do
       expect(@ev.num_signed_up_registrants).to eq(1)
     end
+
     it "will not count entries which are not selected" do
       @ec.signed_up = false
       @ec.event_category = nil
       @ec.save
       expect(@ev.num_signed_up_registrants).to eq(0)
     end
+
     it "will not count if no one has selected the choice" do
       event = FactoryBot.create(:event)
       expect(event.num_signed_up_registrants).to eq(0)

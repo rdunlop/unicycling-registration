@@ -74,6 +74,7 @@ describe AgeGroupType do
       it "puts the rider on a 20\" wheel in the correct age group" do
         expect(@agt.age_group_entry_for(10, "Male", @ws20)).to eq(@age1)
       end
+
       it "puts the rider on a 24\" wheel in the correct age group" do
         expect(@agt.age_group_entry_for(10, "Male", @ws24)).to eq(@age1b)
       end

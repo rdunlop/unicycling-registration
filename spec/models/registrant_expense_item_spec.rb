@@ -37,10 +37,12 @@ describe RegistrantExpenseItem do
   it "can be created by factory" do
     expect(@rei.valid?).to eq(true)
   end
+
   it "must have registrant" do
     @rei.registrant_id = nil
     expect(@rei.valid?).to eq(false)
   end
+
   it "must have expense_item" do
     @rei.line_item_id = nil
     expect(@rei.valid?).to eq(false)
@@ -57,6 +59,7 @@ describe RegistrantExpenseItem do
       @rei.custom_cost = nil
       expect(@rei.valid?).to eq(false)
     end
+
     it "is acceptable if the custom_cost is set" do
       @rei.custom_cost = 1
       expect(@rei.valid?).to eq(true)
@@ -101,6 +104,7 @@ describe RegistrantExpenseItem do
     @rei = FactoryBot.create(:registrant_expense_item, registrant: @reg)
     expect(@rei.registrant).to eq(@reg)
   end
+
   it "must associate with the expense_item" do
     @item = FactoryBot.create(:expense_item)
     @rei = FactoryBot.create(:registrant_expense_item, line_item: @item)

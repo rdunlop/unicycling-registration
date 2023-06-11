@@ -84,17 +84,21 @@ describe ExpenseItem do
     @item.name = nil
     expect(@item.valid?).to eq(false)
   end
+
   it "by default has a normal cost" do
     expect(@item.has_custom_cost).to eq(false)
   end
+
   it "must have a cost" do
     @item.cost_cents = nil
     expect(@item.valid?).to eq(false)
   end
+
   it "must have a value for the has_details field" do
     @item.has_details = nil
     expect(@item.valid?).to eq(false)
   end
+
   it "has a default of no details" do
     item = described_class.new
     expect(item.has_details).to eq(false)
@@ -214,6 +218,7 @@ describe ExpenseItem do
       @re2 = FactoryBot.build(:expense_item, expense_group: @rg)
       expect(@re2.valid?).to eq(false)
     end
+
     describe "with a pre-existing registrant" do
       before do
         @reg = FactoryBot.create(:competitor)
@@ -226,6 +231,7 @@ describe ExpenseItem do
         expect(@reg.registrant_expense_items.count).to eq(1)
         expect(@reg.registrant_expense_items.first.line_item).to eq(@re)
       end
+
       it "does not create extra entries if the expense_item is updated" do
         expect(@reg.registrant_expense_items.count).to eq(0)
         @re = FactoryBot.create(:expense_item, expense_group: @rg)

@@ -15,6 +15,7 @@ describe PlaceCalculator do
       expect(@calc.place_next(10)).to eq(2)
       expect(@calc.place_next(100)).to eq(3)
     end
+
     it "places multiple times as ties" do
       expect(@calc.place_next(1)).to eq(1)
       expect(@calc.place_next(1)).to eq(1)

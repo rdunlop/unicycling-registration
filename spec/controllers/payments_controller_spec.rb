@@ -50,11 +50,13 @@ describe PaymentsController do
       payment.reload
       expect(payment.completed).to eq(true)
     end
+
     it "redirects to registrants page" do
       payment = FactoryBot.create(:payment, user: @user)
       post :fake_complete, params: { id: payment.to_param }
       expect(response).to redirect_to root_path
     end
+
     it "cannot change if config test_mode is disabled" do
       @config.update_attribute(:test_mode, false)
       payment = FactoryBot.create(:payment, user: @user)
@@ -260,6 +262,7 @@ describe PaymentsController do
         do_action
         expect(response).to redirect_to(Payment.last)
       end
+
       it "assigns the logged in user" do
         do_action
         expect(Payment.last.user).to eq(@user)

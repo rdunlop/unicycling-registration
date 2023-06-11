@@ -188,6 +188,7 @@ describe ScoresController do
         get :new, params: { judge_id: @judge, competitor_id: @comp.id }
         expect(response).to redirect_to(root_path)
       end
+
       it "denies access to update" do
         post :create, params: { judge_id: @judge, competitor_id: @comp.id }
         expect(response).to redirect_to(root_path)

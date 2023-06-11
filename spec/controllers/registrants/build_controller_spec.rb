@@ -259,6 +259,7 @@ describe Registrants::BuildController do
         put :update, params: { registrant_id: @reg.to_param, registrant: @attributes }
         expect(RegistrantChoice.count).to eq(1)
       end
+
       it "can update an existing registrant_choice" do
         put :update, params: { registrant_id: @reg.to_param, id: "add_events", registrant: @attributes }
         @attributes[:registrant_event_sign_ups_attributes][0][:id] = RegistrantEventSignUp.first.id
@@ -365,6 +366,7 @@ describe Registrants::BuildController do
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
         expect(response).to redirect_to(registrant_registrant_expense_items_path(Registrant.last))
       end
+
       it "redirects noncompetitors to the items" do
         registrant = FactoryBot.create(:noncompetitor, user: user)
         put :update, params: { registrant_id: registrant.to_param, id: "add_name", registrant: valid_attributes }
@@ -384,6 +386,7 @@ describe Registrants::BuildController do
         do_action
         expect(assigns(:registrant)).to eq(registrant)
       end
+
       it "loads the categories" do
         category1 = FactoryBot.create(:category)
         allow_any_instance_of(Registrant).to receive(:save).and_return(false)

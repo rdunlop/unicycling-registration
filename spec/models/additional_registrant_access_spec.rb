@@ -28,6 +28,7 @@ describe AdditionalRegistrantAccess do
   it "can be created from factorygirl" do
     expect(@ara.valid?).to eq(true)
   end
+
   it "must have a registrant" do
     @ara.registrant = nil
     expect(@ara.valid?).to eq(false)
@@ -82,6 +83,7 @@ describe AdditionalRegistrantAccess do
     it "has a Declined status" do
       expect(@ara.status).to eq("Declined")
     end
+
     it "even when also accepted" do
       @ara.accepted_readonly = true
       expect(@ara.status).to eq("Declined")

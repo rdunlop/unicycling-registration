@@ -108,6 +108,7 @@ describe EventChoice do
       @ec.multiple_values = "one"
       expect(@ec.values).to eq(["one"])
     end
+
     it "can parse 2 values" do
       @ec.multiple_values = "one, two"
       expect(@ec.values).to eq(["one", "two"])

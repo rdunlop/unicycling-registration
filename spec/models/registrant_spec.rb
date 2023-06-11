@@ -227,6 +227,7 @@ describe Registrant do
     it "has an owing cost of 0 by default" do
       expect(@reg.amount_owing).to eq(0.to_money)
     end
+
     it "always displays the expenses_total" do
       expect(@reg.expenses_total).to eq(0.to_money)
     end
@@ -276,9 +277,11 @@ describe Registrant do
       expect(@reg.registrant_expense_items).to eq([@rei])
       expect(@reg.expense_items).to eq([@item])
     end
+
     it "describes the expense_total as the sum" do
       expect(@reg.expenses_total).to eq(@item.cost)
     end
+
     it "lists the item as an owing_expense_item" do
       expect(@reg.owing_line_items).to eq([@item])
       expect(@reg.owing_registrant_expense_items.first).to eq(@rei)
@@ -301,9 +304,11 @@ describe Registrant do
       it "lists one remaining item as owing" do
         expect(@reg.owing_line_items).to eq([@item])
       end
+
       it "lists the item as paid for" do
         expect(@reg.paid_line_items).to eq([@item])
       end
+
       it "lists the item twice in the all_line_items" do
         expect(@reg.all_line_items).to eq([@item, @item])
       end
@@ -319,15 +324,19 @@ describe Registrant do
     it "can access its registrant choices" do
       expect(@reg.registrant_choices).to eq([@rc])
     end
+
     it "can access the event_choices" do
       expect(@reg.event_choices).to eq([@rc.event_choice])
     end
+
     it "can access the events" do
       expect(@reg.events).to eq([@rc.event_choice.event])
     end
+
     it "can access the categories" do
       expect(@reg.categories).to eq([@rc.event_choice.event.category])
     end
+
     it "Destroys the related registrant_choice upon destroy" do
       expect(RegistrantChoice.all.count).to eq(1)
       @reg.destroy
@@ -356,6 +365,7 @@ describe Registrant do
     it "lists as having standard skill" do
       expect(@reg.has_standard_skill?).to eq(true)
     end
+
     it "does not list if not selected" do
       @rc.signed_up = false
       @rc.save!
@@ -391,6 +401,7 @@ describe Registrant do
       it "returns nil as the registration_item" do
         expect(@comp.registrant_expense_items.count).to eq(0)
       end
+
       it "does not allow deleting the registrant" do
         @comp.deleted = true
         expect(@comp.valid?).to eq(false)
@@ -411,18 +422,23 @@ describe Registrant do
       it "has associated payment_details" do
         expect(@comp.payment_details).to eq([@payment_detail])
       end
+
       it "has an amount_paid" do
         expect(@comp.amount_paid).to eq(100.to_money)
       end
+
       it "owes 0" do
         expect(@comp.amount_owing).to eq(0.to_money)
       end
+
       it "lists the paid_line_items" do
         expect(@comp.paid_line_items).to eq([@payment_detail.line_item])
       end
+
       it "lists no items as an owing_expense_item" do
         expect(@comp.owing_line_items).to eq([])
       end
+
       it "knows that the registration_fee has been paid" do
         expect(@comp.reg_paid?).to eq(true)
       end
@@ -476,18 +492,23 @@ describe Registrant do
       it "has associated payment_details" do
         expect(@comp.payment_details).to eq([@payment_detail])
       end
+
       it "does not have an amount_paid" do
         expect(@comp.amount_paid).to eq(0.to_money)
       end
+
       it "owes 100" do
         expect(@comp.amount_owing).to eq(100.to_money)
       end
+
       it "lists the paid_line_items" do
         expect(@comp.paid_line_items).to eq([])
       end
+
       it "lists no items as an owing_expense_item" do
         expect(@comp.owing_line_items).to eq([@comp_exp])
       end
+
       it "knows that the registration_fee has NOT been paid" do
         expect(@comp.reg_paid?).to eq(false)
       end

@@ -57,6 +57,7 @@ describe Payment do
     it "has payment_details" do
       expect(@pay.payment_details).to eq([@pd])
     end
+
     it "can calcalate the payment total-amount" do
       @pd2 = FactoryBot.create(:payment_detail, payment: @pay, amount: 23.0)
       expect(@pay.total_amount == 80.49.to_money).to eq(true)
@@ -166,6 +167,7 @@ describe Payment do
     it "registrant owes for this item" do
       expect(@reg.owing_line_items).to eq([@rei.line_item])
     end
+
     describe "when the user has a free t-shirt and a paid t-shirt" do
       before do
         @rei_free = FactoryBot.create(:registrant_expense_item, registrant: @reg, line_item: @pd.line_item, free: true)
@@ -177,6 +179,7 @@ describe Payment do
         @pay.save
         expect(@reg.owing_registrant_expense_items).to eq([@rei_free])
       end
+
       it "markes the correct one as paid when we pay for the free one" do
         @pd.free = true
         @pd.save
@@ -213,6 +216,7 @@ describe Payment do
       it "registrant no longer owes" do
         expect(@reg.reload.owing_line_items).to eq([])
       end
+
       it "registrant has paid item" do
         expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
@@ -258,6 +262,7 @@ describe Payment do
       it "registrant no longer owes" do
         expect(@reg.reload.owing_line_items).to eq([])
       end
+
       it "registrant has paid item" do
         expect(@reg.paid_line_items).to eq([@pd.line_item])
       end
@@ -272,6 +277,7 @@ describe Payment do
       it "registrant no longer owes" do
         expect(@reg.owing_line_items).to eq([])
       end
+
       it "registrant has paid item" do
         expect(@reg.paid_line_items).to eq([@pd.line_item])
       end

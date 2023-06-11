@@ -51,6 +51,7 @@ describe CompetitionSetup::CompetitionsController do
           post :create, params: { event_id: @event.id, competition: valid_attributes }
         end.to change(Competition, :count).by(1)
       end
+
       it "can create a Female gender_filter competition" do
         @comp = FactoryBot.create(:competition)
         expect do

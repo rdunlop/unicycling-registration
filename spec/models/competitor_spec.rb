@@ -153,6 +153,7 @@ describe Competitor do
     comp.position = 1
     expect(comp.save).to eq(true)
   end
+
   it "modifies the other competitor's position" do
     competition = FactoryBot.create(:competition)
     reg1 = FactoryBot.create(:registrant)
@@ -175,12 +176,14 @@ describe Competitor do
     expect(comps[0].position).to eq(1)
     expect(comps[1].position).to eq(2)
   end
+
   it "has name/id from the registrant" do
     reg = @comp.registrants.first
 
     expect(@comp.name).to eq(reg.name)
     expect(@comp.bib_number).to eq(reg.external_id.to_s)
   end
+
   it "is elgiible" do
     expect(@comp.ineligible?).to eq(false)
   end
@@ -213,10 +216,12 @@ describe Competitor do
     expect(@comp.bib_number).to eq(reg.external_id.to_s)
     expect(@comp.name).to eq(reg.name)
   end
+
   it "allows setting the custom_name to nil" do
     @comp.custom_name = nil
     expect(@comp.valid?).to eq(true)
   end
+
   it "must have 3 competitors to allow a custom name" do
     @comp.custom_name = "Sargent Pepper"
     expect(@comp.valid?).to eq(false)
@@ -228,6 +233,7 @@ describe Competitor do
     expect(@comp.valid?).to eq(true)
     expect(@comp.name).to eq("Sargent Pepper")
   end
+
   it "setting the same position for another competitor should modify the original competitor" do
     c2 = FactoryBot.build(:event_competitor, competition: @comp.competition, position: @comp.position)
 
@@ -237,10 +243,12 @@ describe Competitor do
     comp_again = described_class.find(@comp.id)
     expect(comp_again.position).not_to eq(c2.position)
   end
+
   describe "when checking the export_id field" do
     it "returns the registrant when only one" do
       expect(@comp.export_id).to eq(@comp.registrants.first.external_id)
     end
+
     it "returns the first registrant when two registrants" do
       @comp.registrants << FactoryBot.create(:registrant)
       @comp.save!
@@ -273,6 +281,7 @@ describe Competitor do
     it "displays the external id's for all members" do
       expect(@comp.bib_number).to eq("#{@reg1.external_id}, #{@reg2.external_id}")
     end
+
     it "displays the ages for all members (when they are the same)" do
       expect(@comp.age).to eq(@reg1.age)
     end
@@ -292,6 +301,7 @@ describe Competitor do
 
       expect(@comp2.age).to eq(@reg3.age)
     end
+
     it "displays '(mixed)', if there are multiple members (even if they are the same gender)" do
       # this is so that the overall placing calculation works properly with mixed-gender groups
       expect(@comp.gender).to eq("(mixed)")
@@ -304,6 +314,7 @@ describe Competitor do
       expect(@comp.majority_country(["USA", "Canada", "Canada"])).to eq("Canada")
       expect(@comp.majority_country([nil, nil])).to eq(nil)
     end
+
     it "displays the source country" do
       expect(@comp.country).to eq(@reg1.country)
     end
@@ -362,15 +373,19 @@ describe Competitor do
     it "is able to access the reg via event" do
       expect(@competition.registrants).to eq([@reg])
     end
+
     it "is able to access the event via reg" do
       expect(@reg.competitions).to eq([@competition])
     end
+
     it "is able to access the competitors via competition" do
       expect(@competition.competitors).to eq([@cr])
     end
+
     it "is able to access the competitors via registrant" do
       expect(@reg.competitors).to eq([@cr])
     end
+
     it "is able to access the scores via competitor" do
       expect(@cr.scores).to eq([@score])
     end
@@ -476,6 +491,7 @@ describe Competitor do
 
       expect(@comp.reload.distance_attempts).to eq([da3, da2, da1])
     end
+
     it "returns the attempts in descending attempt order (if the same distance)" do
       da1 = FactoryBot.create(:distance_attempt, distance: 1, competitor: @comp, fault: true)
       da2 = FactoryBot.create(:distance_attempt, distance: 1, competitor: @comp, fault: false)
@@ -508,6 +524,7 @@ describe Competitor do
 
         expect(da.valid?).to eq(false)
       end
+
       it "returns the max successful distance" do
         expect(@comp.max_successful_distance).to eq(10)
       end
@@ -529,6 +546,7 @@ describe Competitor do
           expect(@comp.reload.no_more_jumps?).to eq(true)
           expect(@da2.valid?).to eq(true)
         end
+
         it "describes the status" do
           expect(@comp.reload.distance_attempt_status).to eq("Finished. Final Score 10cm")
         end

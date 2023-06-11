@@ -51,10 +51,12 @@ describe PaymentDetail do
     @pd.amount_cents = nil
     expect(@pd.valid?).to eq(false)
   end
+
   it "must have an item" do
     @pd.line_item = nil
     expect(@pd.valid?).to eq(false)
   end
+
   it "has additional description if it is refunded" do
     expect(@pd.refunded?).to eq(false)
     expect(@pd.to_s).to eq(@pd.line_item.to_s)

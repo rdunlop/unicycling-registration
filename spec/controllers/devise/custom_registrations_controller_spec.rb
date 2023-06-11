@@ -24,6 +24,7 @@ describe Devise::CustomRegistrationsController do
       u = User.first
       expect(u.confirmed?).to eq(true)
     end
+
     it "doesn't send an e-mail when the laptop is authorized" do
       allow_any_instance_of(described_class).to receive(:skip_user_creation_confirmation?).and_return true
       post :create, params: { user: valid_attributes }

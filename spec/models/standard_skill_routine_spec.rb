@@ -27,6 +27,7 @@ describe StandardSkillRoutine do
     )
     expect(@routine.valid?).to eq(true)
   end
+
   it "is not able to save more than 18 entries per user" do
     18.times do |_i|
       skill = FactoryBot.create(:standard_skill_entry)
@@ -104,6 +105,7 @@ describe StandardSkillRoutine do
 
     expect(ssre.errors.count).to eq(1)
   end
+
   it "is able to total up some scores" do
     skill1 = FactoryBot.create(:standard_skill_entry, points: 1.1)
     skill2 = FactoryBot.create(:standard_skill_entry, points: 2.2)

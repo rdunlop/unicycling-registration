@@ -96,6 +96,7 @@ describe CompetitorsController do
         post :create, params: { competitor: valid_attributes, competition_id: @ec.id }
         expect(response).to redirect_to(competition_competitors_path(@ec))
       end
+
       it "can create with custom external id and name" do
         reg1 = FactoryBot.create(:competitor)
         reg2 = FactoryBot.create(:competitor)
@@ -123,6 +124,7 @@ describe CompetitorsController do
           post :add_all, params: { competition_id: @ec.id }
         end.to change(Competitor, :count).by(2)
       end
+
       it "does not create any new competitors if we run it twice" do
         post :add_all, params: { competition_id: @ec.id }
 

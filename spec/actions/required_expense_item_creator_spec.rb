@@ -26,9 +26,11 @@ describe RequiredExpenseItemCreator do
       it "owes different cost" do
         expect(@noncomp.amount_owing).to eq(50.to_money)
       end
+
       it "retrieves the non-comp registration_item" do
         expect(@noncomp.registrant_expense_items.first.line_item).to eq(@noncomp_exp)
       end
+
       it "lists the item as an owing_line_item" do
         expect(@noncomp.owing_line_items).to eq([@noncomp_exp])
       end
@@ -42,6 +44,7 @@ describe RequiredExpenseItemCreator do
       it "retrieves the comp registration_item" do
         expect(@comp.registrant_expense_items.first.line_item).to eq(@comp_exp)
       end
+
       it "lists the item as an owing_expense_item" do
         expect(@comp.owing_registrant_expense_items.first.line_item).to eq(@comp_exp)
       end

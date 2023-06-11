@@ -44,6 +44,7 @@ describe OrganizationMembershipsController do
         put :toggle_confirm, params: { id: registrant.id }
         expect(registrant.reload.organization_membership).to be_manually_confirmed
       end
+
       it "can confirm with JS" do
         put :toggle_confirm, params: { id: registrant.id, format: :js }
         expect(registrant.reload.organization_membership).to be_manually_confirmed

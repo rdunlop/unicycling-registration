@@ -69,9 +69,11 @@ describe TimeResult do
     it "defaults to 0 minutes" do
       expect(subject.minutes).to eq(0)
     end
+
     it "defaults to 0 seconds" do
       expect(subject.seconds).to eq(0)
     end
+
     it "defaults to 0 thousands" do
       expect(subject.thousands).to eq(0)
     end

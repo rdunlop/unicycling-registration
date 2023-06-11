@@ -74,6 +74,7 @@ describe DistanceAttemptsController do
 
       assert_select "td", da.competitor.to_s
     end
+
     it "is not accessible to non-data_entry_volunteers" do
       sign_out @data_entry_volunteer_user
       @normal_user = FactoryBot.create(:user)

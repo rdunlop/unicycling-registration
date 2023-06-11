@@ -30,6 +30,7 @@ describe Category do
     cat = FactoryBot.create(:category)
     expect(cat.to_s).to eq(cat.name)
   end
+
   describe "with multiple categories" do
     before do
       @category2 = FactoryBot.create(:category)

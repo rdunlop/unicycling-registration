@@ -36,6 +36,7 @@ describe CompetitionSource do
     @cs.gender_filter = nil
     expect(@cs.valid?).to eq(false)
   end
+
   it "requires an target_competition" do
     @cs.target_competition = nil
     expect(@cs.valid?).to eq(false)
@@ -73,6 +74,7 @@ describe CompetitionSource do
 
       expect(@cs2.reload.signed_up_registrants.count).to eq(1)
     end
+
     it "doesn't choose a competitor with an overall_place worse than the required" do
       @competitor = FactoryBot.create(:event_competitor, competition: @source_competition)
       FactoryBot.create(:result, place: 3, result_type: "Overall", competitor: @competitor)

@@ -99,6 +99,7 @@ describe Score do
     expect(score.valid?).to eq(true)
     expect(score.total).to eq(10)
   end
+
   it "validates the bounds of the Values" do
     score = described_class.new
     score.val_1 = 1.0
@@ -111,6 +112,7 @@ describe Score do
     score.val_1 = 11.0
     expect(score.valid?).to eq(false)
   end
+
   describe "when the score is based on a judge with judge_type" do
     before do
       @jt = FactoryBot.create(:judge_type, val_1_max: 5, val_2_max: 6, val_3_max: 7, val_4_max: 20)
@@ -133,6 +135,7 @@ describe Score do
       score.val_1 = 5.0
       expect(score.valid?).to eq(true)
     end
+
     it "checks each column separately for max" do
       score = @score
       expect(score.valid?).to eq(true)

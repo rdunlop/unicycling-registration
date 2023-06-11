@@ -117,6 +117,7 @@ describe RegistrationCost do
       registration_cost.save!
       expect(described_class.for_type("competitor").last_online_period).to eq(comp_registration_cost2)
     end
+
     describe "with more registration periods" do
       let!(:comp_registration_cost0) { FactoryBot.create(:registration_cost, :competitor, start_date: Date.new(2010, 2, 3), end_date: Date.new(2010, 4, 4)) }
 
@@ -132,6 +133,7 @@ describe RegistrationCost do
       expect(noncomp_registration_cost1.current_period?(Date.new(2012, 1, 14))).to eq(true)
       expect(noncomp_registration_cost2.current_period?(Date.new(2012, 1, 14))).to eq(false)
     end
+
     it "can identify past periods" do
       expect(comp_registration_cost1.past_period?(Date.new(2012, 2, 20))).to eq(true)
       expect(comp_registration_cost2.past_period?(Date.new(2012, 2, 20))).to eq(false)
