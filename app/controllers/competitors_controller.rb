@@ -53,26 +53,24 @@ class CompetitorsController < ApplicationController
     authorize @competition.competitors.new
 
     respond_to do |format|
-      begin
-        raise "No Registrants selected" if params[:registrants].nil?
+      raise "No Registrants selected" if params[:registrants].nil?
 
-        regs = Registrant.find(params[:registrants])
-        if params[:commit] == Competitor.group_selection_text
-          @competition.create_competitor_from_registrants(regs, params[:group_name])
-          msg = "Created Group Competitor"
-        elsif params[:commit] == Competitor.not_qualified_text
-          @competition.create_competitors_from_registrants(regs, "not_qualified")
-          msg = "Non-Qualified Competitors created"
-        else
-          @competition.create_competitors_from_registrants(regs)
-          msg = "Created #{regs.count} Competitors"
-        end
-        format.html { redirect_to competition_competitors_path(@competition), notice: msg }
-      rescue Exception => e
-        index
-        flash.now[:alert] = "Error adding Registrants (0 added) #{e}"
-        format.html { render "index" }
+      regs = Registrant.find(params[:registrants])
+      if params[:commit] == Competitor.group_selection_text
+        @competition.create_competitor_from_registrants(regs, params[:group_name])
+        msg = "Created Group Competitor"
+      elsif params[:commit] == Competitor.not_qualified_text
+        @competition.create_competitors_from_registrants(regs, "not_qualified")
+        msg = "Non-Qualified Competitors created"
+      else
+        @competition.create_competitors_from_registrants(regs)
+        msg = "Created #{regs.count} Competitors"
       end
+      format.html { redirect_to competition_competitors_path(@competition), notice: msg }
+    rescue Exception => e
+      index
+      flash.now[:alert] = "Error adding Registrants (0 added) #{e}"
+      format.html { render "index" }
     end
   end
 
@@ -88,14 +86,12 @@ class CompetitorsController < ApplicationController
 
     @competitor = @competition.competitors.new # so that the form renders ok
     respond_to do |format|
-      begin
-        msg = @competition.create_competitors_from_registrants(Registrant.competitor)
-        format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
-      rescue Exception => e
-        new
-        flash.now[:alert] = "Error adding Registrants. #{e}"
-        format.html { render "new" }
-      end
+      msg = @competition.create_competitors_from_registrants(Registrant.competitor)
+      format.html { redirect_to new_competition_competitor_path(@competition), notice: msg }
+    rescue Exception => e
+      new
+      flash.now[:alert] = "Error adding Registrants. #{e}"
+      format.html { render "new" }
     end
   end
 

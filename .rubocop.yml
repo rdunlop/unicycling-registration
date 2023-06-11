@@ -3,7 +3,7 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   Exclude:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
