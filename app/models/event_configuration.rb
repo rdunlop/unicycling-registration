@@ -316,6 +316,11 @@ class EventConfiguration < ApplicationRecord
     age_calculation_base_date || start_date
   end
 
+  # Most unicons are 11-12 days long
+  def estimated_end_date
+    start_date + 12.days
+  end
+
   def registration_closed?
     return true if under_construction?
 
