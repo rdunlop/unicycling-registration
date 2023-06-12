@@ -100,7 +100,7 @@ class User < ApplicationRecord
   # List which roles each roles can add to other users
   def self.role_transfer_permissions
     {
-      super_admin: [*roles],
+      super_admin: Array(roles),
       convention_admin: %i[convention_admin payment_admin event_planner music_dj membership_admin export_payment_lists competition_admin],
       competition_admin: %i[competition_admin awards_admin],
       director: [],
@@ -140,7 +140,7 @@ class User < ApplicationRecord
   end
 
   def to_s_with_safe_email
-    name.presence || email.first(8) + "..."
+    name.presence || "#{email.first(8)}..."
   end
 
   def to_s_with_email

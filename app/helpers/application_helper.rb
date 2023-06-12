@@ -88,7 +88,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
       if Time.current > reg_cost.end_date
         I18n.t("prices_increase_soon")
       else
-        end_date = distance_of_time_in_words(Time.current, reg_cost.last_day) + " (" + (l reg_cost.last_day, format: :short) + ")"
+        end_date = "#{distance_of_time_in_words(Time.current, reg_cost.last_day)} (#{(l reg_cost.last_day, format: :short)})"
         I18n.t("prices_increase_at_date", end_date: end_date)
       end
     end
@@ -139,7 +139,7 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
   def new_locale_path(new_locale, existing_path = request.original_fullpath)
     current_locale_prefix = "/#{I18n.locale}/"
     if existing_path.starts_with?(current_locale_prefix)
-      "/#{new_locale}/" + existing_path[current_locale_prefix.length..-1]
+      "/#{new_locale}/" + existing_path[current_locale_prefix.length..]
     else
       root_path(locale: new_locale)
     end

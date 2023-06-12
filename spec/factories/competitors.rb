@@ -31,7 +31,7 @@
 require 'rspec/mocks/standalone'
 
 FactoryBot.define do
-  factory :event_competitor, class: Competitor do
+  factory :event_competitor, class: 'Competitor' do
     competition # FactoryBot
 
     transient do
@@ -55,7 +55,7 @@ FactoryBot.define do
     end
   end
 
-  factory :member, class: Member do
+  factory :member, class: 'Member' do
     registrant
     association :competitor, factory: :event_competitor
   end

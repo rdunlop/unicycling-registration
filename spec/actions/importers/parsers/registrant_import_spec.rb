@@ -50,7 +50,7 @@ describe Importers::Parsers::RegistrantImport do
     let!(:event) { FactoryBot.create(:event, name: "100m", best_time_format: "(m)m:ss.xx") }
     let!(:event_choice) { FactoryBot.create(:event_choice, event: event, cell_type: "text", label: "Team Name") }
 
-    let(:test_file) { fixture_path + '/registrants.csv' }
+    let(:test_file) { "#{fixture_path}/registrants.csv" }
     let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
     let(:importer) { described_class.new(sample_input) }
 

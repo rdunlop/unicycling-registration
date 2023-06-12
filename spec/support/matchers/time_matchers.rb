@@ -28,7 +28,7 @@ end
 module TimeMatcherHelpers
   def self.included(base)
     def format_time(time) # rubocop:disable Lint/NestedMethodDefinition
-      time.strftime("%Y-%m-%d %H:%M:%S.#{'%09d' % round_to(time).nsec} %z") # rubocop:disable Style/FormatString Style/FormatStringToken
+      time.strftime("%Y-%m-%d %H:%M:%S.#{'%09d' % round_to(time).nsec} %z") # rubocop:disable Style/FormatString,Style/FormatStringToken
     end
 
     base.match do |actual|

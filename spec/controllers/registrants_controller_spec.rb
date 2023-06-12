@@ -144,6 +144,7 @@ describe RegistrantsController do
       get :show, params: { id: registrant.to_param }
       expect(response).to redirect_to(root_path)
     end
+
     describe "as an event planner" do
       before do
         sign_in FactoryBot.create(:event_planner)

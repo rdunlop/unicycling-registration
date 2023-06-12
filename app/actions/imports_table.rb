@@ -1,5 +1,6 @@
 class ImportsTable
   attr_accessor :target_class
+
   def initialize(target_class)
     @target_class = target_class
   end
@@ -22,7 +23,7 @@ class ImportsTable
 
   def convert_hash(hash)
     new_hash = {}
-    hash.keys.each do |key|
+    hash.each_key do |key|
       case key.to_sym
       when :lookup_user_id_by_email
         user = User.this_tenant.find_by!(email: hash[key].downcase)

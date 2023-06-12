@@ -67,6 +67,7 @@ describe PaymentPresenter do
       @pay.add_registrant(@reg)
       expect(@pay.registrants).to eq([@reg])
     end
+
     it "includes the details in the payment_detail_presenter" do
       @pay.add_registrant(@reg)
       pdp = @pay.unpaid_details.first

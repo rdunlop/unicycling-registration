@@ -27,6 +27,7 @@ describe Song do
   it "must be valid by default" do
     expect(song.valid?).to eq(true)
   end
+
   it "must have an event" do
     song.event = nil
     expect(song.valid?).to eq(false)

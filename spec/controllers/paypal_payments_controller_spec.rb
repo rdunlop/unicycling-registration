@@ -57,12 +57,14 @@ describe PaypalPaymentsController do
           @payment.reload
           expect(@payment.completed).to eq(true)
         end
+
         it "sets the transaction number" do
           post :notification, params: attributes
           expect(response).to be_successful
           @payment.reload
           expect(@payment.transaction_id).to eq("12345")
         end
+
         it "sets the completed_date to today" do
           travel_to Time.current do # freeze time
             t = Time.current
@@ -72,6 +74,7 @@ describe PaypalPaymentsController do
             expect(@payment.completed_date.to_i).to eq(t.to_i)
           end
         end
+
         it "sets the payment_date to the received payment_date string" do
           post :notification, params: attributes
           expect(response).to be_successful
@@ -109,6 +112,7 @@ describe PaypalPaymentsController do
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1) # one for error notification
       end
+
       it "sends an e-mail to notify of payment receipt" do
         ActionMailer::Base.deliveries.clear
         post :notification, params: { mc_gross: "20.00", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }
@@ -116,6 +120,7 @@ describe PaypalPaymentsController do
         num_deliveries = ActionMailer::Base.deliveries.size
         expect(num_deliveries).to eq(1) # one for success
       end
+
       it "sends an e-mail to notify of payment error when mc_gross is empty" do
         ActionMailer::Base.deliveries.clear
         post :notification, params: { mc_gross: "", receiver_email: paypal_account, payment_status: "Completed", invoice: @payment.invoice_id }

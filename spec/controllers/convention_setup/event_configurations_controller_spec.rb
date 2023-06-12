@@ -98,11 +98,13 @@ describe ConventionSetup::EventConfigurationsController do
         post :test_mode_role, params: { role: "normal_user" }
         expect(response).to redirect_to(root_path)
       end
+
       it "changes my user to convention_admin" do
         post :test_mode_role, params: { role: "convention_admin" }
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(true)
       end
+
       it "cannot change if config test_mode is disabled" do
         event_configuration.update_attribute(:test_mode, false)
         post :test_mode_role, params: { role: "convention_admin" }

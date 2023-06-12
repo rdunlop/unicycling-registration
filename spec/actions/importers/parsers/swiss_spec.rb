@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Swiss do
-  context "#extract_file" do
-    let(:test_file) { fixture_path + '/swiss_heat.tsv' }
+  describe "#extract_file" do
+    let(:test_file) { "#{fixture_path}/swiss_heat.tsv" }
     let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
     let(:importer) { described_class.new(test_file) }

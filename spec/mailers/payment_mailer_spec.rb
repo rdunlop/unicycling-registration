@@ -56,6 +56,7 @@ describe PaymentMailer do
     it "assigns the total_amount" do
       expect(@mail.body).to match(/A payment for \$10.00 USD has been received/)
     end
+
     it "assigns the full-event-name to @event_name" do
       expect(@mail.body).to match(/NAUCC 2140 - Payment Received/)
     end

@@ -26,7 +26,7 @@ class Importers::TierUpdater < Importers::CompetitionDataImporter
       end
     rescue ActiveRecord::RecordInvalid, RuntimeError => e
       @errors << "Error #{e.message}"
-      return false
+      false
     end
   end
 end

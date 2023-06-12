@@ -33,6 +33,7 @@ describe RegistrantGroupPolicy do
     it "super_admin can access" do
       expect(subject).to permit(super_admin, registrant_group)
     end
+
     it "allows event-director" do
       expect(subject).to permit(event_director, registrant_group)
     end

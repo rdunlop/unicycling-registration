@@ -32,7 +32,7 @@ class EventCategory < ApplicationRecord
   acts_as_list scope: :event
 
   def to_s
-    event.to_s + " - " + name
+    "#{event} - #{name}"
   end
 
   def self.with_warnings

@@ -13,11 +13,11 @@ class RegistrantPresenter
     description = details[:description]
 
     unless details[:category].nil?
-      description += " - Category: " + details[:category]
+      description += " - Category: #{details[:category]}"
     end
 
     unless details[:additional].nil?
-      description += " - " + details[:additional]
+      description += " - #{details[:additional]}"
     end
     description
   end
@@ -28,7 +28,7 @@ class RegistrantPresenter
 
     resu = signed_up_events.detect { |sue| sue.event_id == event.id }
     # only add the Category if there are more than 1
-    results[:category] = (resu&.event_category_name)
+    results[:category] = resu&.event_category_name
 
     results[:additional] = describe_additional_selection(event)
 
@@ -41,7 +41,7 @@ class RegistrantPresenter
     event.event_choices.each do |ec|
       my_val = registrant_choices.find_by(event_choice_id: ec.id)
       if my_val.present? && my_val.has_value?
-        results << ec.label + ": " + my_val.describe_value
+        results << "#{ec.label}: #{my_val.describe_value}"
       end
     end
 

@@ -37,6 +37,7 @@ describe DistanceAttempt do
       @da.competitor_id = @comp.id
       expect(@da.valid?).to eq(true)
     end
+
     it "has a distance" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
@@ -45,6 +46,7 @@ describe DistanceAttempt do
       @da.distance = 1.0
       expect(@da.valid?).to eq(true)
     end
+
     it "has a positive distance" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
@@ -53,12 +55,14 @@ describe DistanceAttempt do
       @da.distance = -1.0
       expect(@da.valid?).to eq(false)
     end
+
     it "has a distance less than 1000" do
       @da.competitor_id = @comp.id
       @da.judge_id = @judge.id
       @da.distance = 1000
       expect(@da.valid?).to eq(false)
     end
+
     it "has a judge" do
       @da.competitor_id = @comp.id
       @da.distance = 100

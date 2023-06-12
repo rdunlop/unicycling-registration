@@ -51,6 +51,6 @@ class EventChoice < ApplicationRecord
   end
 
   def to_s
-    event.to_s + " - " + label
+    "#{event} - #{label}"
   end
 end

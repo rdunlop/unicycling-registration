@@ -46,22 +46,27 @@ describe BoundaryScore do
     it "scores 10 for perfect score" do
       expect(@bs.total).to eq(10)
     end
+
     it "scores 1 less for a major dismount" do
       @bs.major_dismount = 1
       expect(@bs.total).to eq(9)
     end
+
     it "scores .5 less for a minor dismount" do
       @bs.minor_dismount = 1
       expect(@bs.total).to eq(9.5)
     end
+
     it "scores .5 less for a major boundary" do
       @bs.major_boundary = 1
       expect(@bs.total).to eq(9.5)
     end
+
     it "scores .25 less for a minor boundary" do
       @bs.minor_boundary = 1
       expect(@bs.total).to eq(9.75)
     end
+
     it "scores a compound score for multiple different violations" do
       @bs.major_dismount = 3
       @bs.major_boundary = 2
@@ -80,22 +85,27 @@ describe BoundaryScore do
     it "scores 10 for perfect score" do
       expect(@bs.total).to eq(10)
     end
+
     it "scores 1 less for a major dismount" do
       @bs.major_dismount = 1
       expect(@bs.total).to eq(9)
     end
+
     it "scores .5 less for a minor dismount" do
       @bs.minor_dismount = 1
       expect(@bs.total).to eq(9.5)
     end
+
     it "scores .5 less for a major boundary" do
       @bs.major_boundary = 1
       expect(@bs.total).to eq(9.5)
     end
+
     it "scores .25 less for a minor boundary" do
       @bs.minor_boundary = 1
       expect(@bs.total).to eq(9.75)
     end
+
     it "scores a compound score for multiple different violations" do
       @bs.major_dismount = 3
       @bs.major_boundary = 2
@@ -114,22 +124,27 @@ describe BoundaryScore do
     it "scores 10 for perfect score" do
       expect(@bs.total).to eq(10)
     end
+
     it "scores 0.66 less for a major dismount" do
       @bs.major_dismount = 1
       expect(@bs.total).to eq(9.333333333333334)
     end
+
     it "scores .33 less for a minor dismount" do
       @bs.minor_dismount = 1
       expect(@bs.total).to eq(9.666666666666666)
     end
+
     it "scores .33 less for a major boundary" do
       @bs.major_boundary = 1
       expect(@bs.total).to eq(9.666666666666666)
     end
+
     it "scores .166 less for a minor boundary" do
       @bs.minor_boundary = 1
       expect(@bs.total).to eq(9.833333333333334)
     end
+
     it "scores a compound score for multiple different violations" do
       @bs.major_dismount = 3
       @bs.major_boundary = 2
@@ -148,22 +163,27 @@ describe BoundaryScore do
     it "scores 10 for perfect score" do
       expect(@bs.total).to eq(10)
     end
+
     it "scores .5 less for a major dismount" do
       @bs.major_dismount = 1
       expect(@bs.total).to eq(9.5)
     end
+
     it "scores .25 less for a major boundary" do
       @bs.major_boundary = 1
       expect(@bs.total).to eq(9.75)
     end
+
     it "scores .25 less for a minor dismount" do
       @bs.minor_dismount = 1
       expect(@bs.total).to eq(9.75)
     end
+
     it "scores .125 less for a minor boundary" do
       @bs.minor_boundary = 1
       expect(@bs.total).to eq(9.875)
     end
+
     it "scores a compound score for multiple different violations" do
       @bs.major_dismount = 3
       @bs.major_boundary = 2
@@ -182,22 +202,27 @@ describe BoundaryScore do
     it "scores 10 for perfect score" do
       expect(@bs.total).to eq(10)
     end
+
     it "scores .25 less for a major dismount" do
       @bs.major_dismount = 1
       expect(@bs.total).to eq(9.75)
     end
+
     it "scores .125 less for a major boundary" do
       @bs.major_boundary = 1
       expect(@bs.total).to eq(9.875)
     end
+
     it "scores .125 less for a minor dismount" do
       @bs.minor_dismount = 1
       expect(@bs.total).to eq(9.875)
     end
+
     it "scores .0625 less for a minor boundary" do
       @bs.minor_boundary = 1
       expect(@bs.total).to eq(9.9375)
     end
+
     it "scores a compound score for multiple different violations" do
       @bs.major_dismount = 3
       @bs.major_boundary = 2
@@ -216,22 +241,27 @@ describe BoundaryScore do
     it "scores 10 for perfect score" do
       expect(@bs.total).to eq(10)
     end
+
     it "scores .1 less for a major dismount" do
       @bs.major_dismount = 1
       expect(@bs.total).to eq(9.9)
     end
+
     it "scores .05 less for a major boundary" do
       @bs.major_boundary = 1
       expect(@bs.total).to eq(9.95)
     end
+
     it "scores .05 less for a minor dismount" do
       @bs.minor_dismount = 1
       expect(@bs.total).to eq(9.95)
     end
+
     it "scores .025 less for a minor boundary" do
       @bs.minor_boundary = 1
       expect(@bs.total).to eq(9.975)
     end
+
     it "scores a compound score for multiple different violations" do
       @bs.major_dismount = 3
       @bs.major_boundary = 2

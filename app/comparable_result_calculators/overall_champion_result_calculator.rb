@@ -3,6 +3,7 @@
 #
 class OverallChampionResultCalculator
   attr_accessor :combined_competition, :results_competition
+
   delegate :percentage_based_calculations?, :average_speed_calculation?, to: :combined_competition
 
   def initialize(combined_competition, results_competition = nil)
@@ -211,14 +212,14 @@ class OverallChampionResultCalculator
   def break_ties_by_num_firsts(gender, initial_scores)
     new_scores = {}
 
-    initial_scores.keys.each do |single_score|
+    initial_scores.each_key do |single_score|
       if initial_scores[single_score].length > 1
         tie_breakers_for_bib_numbers = {}
         initial_scores[single_score].each do |bib_number|
           tie_breakers_for_bib_numbers[bib_number] = num_firsts(gender, bib_number)
         end
         tie_broken_scores = adjust_ties_by_firsts(single_score, initial_scores[single_score], tie_breakers_for_bib_numbers)
-        tie_broken_scores.keys.each do |tie_score|
+        tie_broken_scores.each_key do |tie_score|
           new_scores[tie_score] = tie_broken_scores[tie_score]
         end
       else

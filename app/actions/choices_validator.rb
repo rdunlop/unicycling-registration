@@ -48,7 +48,7 @@ class ChoicesValidator
     primary_choice_selected.present? && primary_choice_selected.signed_up
   end
 
-  def valid_event_choice_registrant_choice(event_selected, event_choice, reg_choice)
+  def valid_event_choice_registrant_choice(event_selected, event_choice, reg_choice) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
     optional_if_event_choice = event_choice.optional_if_event_choice
     required_if_event_choice = event_choice.required_if_event_choice
 

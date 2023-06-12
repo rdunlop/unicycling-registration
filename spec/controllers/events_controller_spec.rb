@@ -60,6 +60,7 @@ describe EventsController do
       expect(response).to be_successful
       assert_select "td", event.event_categories.first.to_s
     end
+
     describe "With competitors and non-competitors" do
       before do
         @comp1 = FactoryBot.create(:competitor)
@@ -71,10 +72,12 @@ describe EventsController do
         get :summary
         assert_select "b.num_registrants", "3"
       end
+
       it "sets the number of competitors as @num_competitors" do
         get :summary
         assert_select ".num_competitors", "2"
       end
+
       it "sets the number of non_competitors as @num_noncompetitors" do
         get :summary
         assert_select ".num_noncompetitors", "1"

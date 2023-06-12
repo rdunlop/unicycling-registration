@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Importers::Parsers::ExternalResultCsv do
   let(:importer) { described_class.new(sample_input) }
 
-  let(:test_file) { fixture_path + '/external_results.csv' }
+  let(:test_file) { "#{fixture_path}/external_results.csv" }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   it "can process external result csv file" do

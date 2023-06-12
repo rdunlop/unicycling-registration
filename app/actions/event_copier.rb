@@ -34,7 +34,7 @@ class EventCopier
 
   private
 
-  def create_event(source_event)
+  def create_event(source_event) # rubocop:disable Metrics/AbcSize
     new_event = source_event.dup
     new_event.name = source_event.name
     new_event.category = Category.find_by(name: source_event.category.name)

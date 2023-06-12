@@ -44,7 +44,7 @@ class ManualPayment
   end
 
   def unpaid_details_attributes=(params = {})
-    params.values.each do |detail|
+    params.each_value do |detail|
       @new_expense_items << ManualPaymentDetail.new(detail)
     end
   end

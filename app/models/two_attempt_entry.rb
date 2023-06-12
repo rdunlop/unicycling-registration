@@ -40,6 +40,7 @@ class TwoAttemptEntry < ApplicationRecord
 
   class TwoAttemptEntryElement
     attr_accessor :minutes, :seconds, :thousands, :number_of_penalties, :status
+
     include HoursFacade
     include ActiveModel::Model
     validate :results_for_competition

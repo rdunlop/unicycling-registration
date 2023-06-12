@@ -292,6 +292,7 @@ describe EventConfiguration do
         expect(described_class.closed?).to eq(false)
       end
     end
+
     it "is open as long as the registration_period is current" do
       d = Date.new(2012, 11, 7)
       travel_to(d) do
@@ -317,6 +318,7 @@ describe EventConfiguration do
     @ev.update_attribute(:payment_mode, "enabled")
     expect(described_class.paypal_base_url).to eq("https://www.paypal.com")
   end
+
   it "returns the test paypal url when paypal mode is TEST" do
     @ev.update_attribute(:payment_mode, "test")
     expect(described_class.paypal_base_url).to eq("https://www.sandbox.paypal.com")

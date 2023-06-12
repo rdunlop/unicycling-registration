@@ -109,7 +109,7 @@ class Payment < ApplicationRecord
   end
 
   def paypal_post_url
-    EventConfiguration.paypal_base_url + "/cgi-bin/webscr"
+    "#{EventConfiguration.paypal_base_url}/cgi-bin/webscr"
   end
 
   def total_amount

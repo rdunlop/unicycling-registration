@@ -5,6 +5,7 @@ class Email
   include ActiveModel::Conversion
 
   attr_accessor :subject, :body
+
   validates :subject, :body, presence: true
 
   def initialize(attributes = {})

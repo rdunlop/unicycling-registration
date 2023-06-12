@@ -70,7 +70,7 @@ class Judge < ApplicationRecord
   end
 
   def to_s
-    name + " (" + judge_type.to_s + ")"
+    "#{name} (#{judge_type})"
   end
 
   def score_totals(with_ineligible: false)

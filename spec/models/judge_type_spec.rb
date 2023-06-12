@@ -55,6 +55,7 @@ describe JudgeType do
 
     expect(Judge.count).to eq(0)
   end
+
   it "requires limits to be specified" do
     jt = described_class.new
     jt.val_1_description = "Mistakes"
@@ -74,6 +75,7 @@ describe JudgeType do
     jt.val_1_max = 15
     expect(jt.valid?).to eq(true)
   end
+
   it "require event_class" do
     jt = FactoryBot.build(:judge_type)
     ec = jt.event_class
@@ -82,6 +84,7 @@ describe JudgeType do
     jt.event_class = ec
     expect(jt.valid?).to eq(true)
   end
+
   it "allows boundary_calculation_enabled" do
     jt = FactoryBot.build(:judge_type)
     jt.boundary_calculation_enabled = true

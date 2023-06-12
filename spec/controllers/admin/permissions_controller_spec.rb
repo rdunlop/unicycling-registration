@@ -25,6 +25,7 @@ describe Admin::PermissionsController do
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(true)
       end
+
       it "can change an admin back to a user" do
         admin = FactoryBot.create(:convention_admin_user)
         put :set_role, params: { user_id: admin.to_param, role_name: :convention_admin }

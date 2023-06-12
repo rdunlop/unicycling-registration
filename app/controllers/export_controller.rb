@@ -15,7 +15,7 @@ class ExportController < ApplicationController
 
   def download_competitors_for_timers
     exporter = Exporters::AllCompetitors.new
-    filename = @config.short_name.downcase.gsub(/[^0-9a-z]/, "_") + "_registrants.csv"
+    filename = "#{@config.short_name.downcase.gsub(/[^0-9a-z]/, '_')}_registrants.csv"
     output_csv(exporter.headers, exporter.rows, filename)
   end
 

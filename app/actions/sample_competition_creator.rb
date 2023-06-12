@@ -22,7 +22,7 @@ class SampleCompetitionCreator
       )
     when "Overall Champion"
       @errors = "This SampleData tool does not support Overall Champion Competitions"
-      return false
+      false
     else
       Competition.create!(
         name: name,

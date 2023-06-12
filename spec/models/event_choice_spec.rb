@@ -100,7 +100,7 @@ describe EventChoice do
   end
 
   it "has a to_s" do
-    expect(@ec.to_s).to eq(@ec.event.to_s + " - " + @ec.label)
+    expect(@ec.to_s).to eq("#{@ec.event} - #{@ec.label}")
   end
 
   describe "when parsing the multiple_values" do
@@ -108,6 +108,7 @@ describe EventChoice do
       @ec.multiple_values = "one"
       expect(@ec.values).to eq(["one"])
     end
+
     it "can parse 2 values" do
       @ec.multiple_values = "one, two"
       expect(@ec.values).to eq(["one", "two"])

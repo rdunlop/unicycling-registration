@@ -296,12 +296,12 @@ class AwardLabelsController < ApplicationController
 
   def lines_from_award_label(label)
     lines = ""
-    lines += label.line_1 + "\n" if label.line_1.present?
-    lines += label.line_2 + "\n" if label.line_2.present?
-    lines += label.line_3 + "\n" if label.line_3.present?
-    lines += label.line_4 + "\n" if label.line_4.present?
-    lines += label.line_5 + "\n" if label.line_5.present?
-    lines += "<b>" + label.line_6 + "</b>" + "\n" if label.line_6.present?
+    lines += "#{label.line_1}\n" if label.line_1.present?
+    lines += "#{label.line_2}\n" if label.line_2.present?
+    lines += "#{label.line_3}\n" if label.line_3.present?
+    lines += "#{label.line_4}\n" if label.line_4.present?
+    lines += "#{label.line_5}\n" if label.line_5.present?
+    lines += "<b>#{label.line_6}</b>\n" if label.line_6.present?
     lines
   end
 

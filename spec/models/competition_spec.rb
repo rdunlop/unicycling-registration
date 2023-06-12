@@ -72,23 +72,28 @@ describe Competition do
     @ec.name = nil
     expect(@ec.valid?).to eq(false)
   end
+
   describe "the scoring_class" do
     it "cannot be blank" do
       @ec.scoring_class = nil
       expect(@ec.valid?).to eq(false)
     end
+
     it "can be Freestyle" do
       @ec.scoring_class = "Freestyle"
       expect(@ec.valid?).to eq(true)
     end
+
     it "can be Flatland" do
       @ec.scoring_class = "Flatland"
       expect(@ec.valid?).to eq(true)
     end
+
     it "can be Street" do
       @ec.scoring_class = "Street"
       expect(@ec.valid?).to eq(true)
     end
+
     it "can be High/Long" do
       @ec.scoring_class = "High/Long"
       @ec.age_group_type = FactoryBot.build_stubbed(:age_group_type)

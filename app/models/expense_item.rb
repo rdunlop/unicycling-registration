@@ -170,7 +170,7 @@ class ExpenseItem < ApplicationRecord
     if cost_element.present?
       cost_element.to_s
     else
-      expense_group.to_s + " - " + name
+      "#{expense_group} - #{name}"
     end
   end
 

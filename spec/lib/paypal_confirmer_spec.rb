@@ -52,6 +52,7 @@ describe PaypalConfirmer do
     confirmer = described_class.new(params, {})
     expect(confirmer.order_number).to eq("10")
   end
+
   it "has the correct payment date" do
     params = {
       "payment_date" => "17:11:42 Jul 15, 2008 PDT"

@@ -155,7 +155,7 @@ describe RegistrantPolicy do
         end
 
         describe "for a competitor" do
-          it { expect(subject).not_to permit(user_context, FactoryBot.create(:noncompetitor)) }
+          it { expect(subject).not_to permit(user_context, FactoryBot.create(:competitor)) }
         end
       end
 

@@ -1,5 +1,6 @@
 class StandardDeviationPresenter
   attr_accessor :standard_deviation
+
   MAX_FROM_MEAN = 3.0
   MAX_COLOR_VALUE = 180
 

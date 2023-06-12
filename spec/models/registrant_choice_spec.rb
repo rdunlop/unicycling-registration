@@ -26,6 +26,7 @@ describe RegistrantChoice do
   it "is valid from FactoryBot" do
     expect(@rc.valid?).to eq(true)
   end
+
   it "requires an event_choice" do
     @rc.event_choice = nil
     expect(@rc.valid?).to eq(false)
@@ -85,6 +86,7 @@ describe RegistrantChoice do
       @rc.value = "hi"
       expect(@rc.has_value?).to eq(true)
     end
+
     it "has no value with blank" do
       @rc.value = ""
       expect(@rc.has_value?).to eq(false)

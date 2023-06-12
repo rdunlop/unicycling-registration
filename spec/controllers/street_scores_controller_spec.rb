@@ -30,6 +30,7 @@ describe StreetScoresController do
       get :index, params: { judge_id: @judge.id }
       expect(response).to be_successful
     end
+
     describe "when returning a list of scores" do
       before do
         @user_score2 = FactoryBot.create(:score, val_1: 6, judge: @judge, competitor: @comp2)
@@ -97,6 +98,7 @@ describe StreetScoresController do
       get :index, params: { judge_id: @judge }
       expect(response).to redirect_to(root_path)
     end
+
     it "denies access to destroy" do
       delete :destroy, params: { id: @user_score.to_param, judge_id: @judge }
       expect(response).to redirect_to(root_path)

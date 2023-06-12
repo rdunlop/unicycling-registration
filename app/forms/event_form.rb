@@ -6,10 +6,6 @@ class EventForm < SimpleDelegator
     self
   end
 
-  def valid?
-    super
-  end
-
   def assign_attributes(attributes = {})
     @cost = attributes.delete(:cost)
     super

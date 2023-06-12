@@ -71,6 +71,7 @@ describe HeatsController do
           do_action
           expect(flash[:alert]).to match(/Invalid number of lanes/)
         end
+
         it "doesn't change the number of lane assignments" do
           expect do
             do_action

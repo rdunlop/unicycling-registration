@@ -126,7 +126,7 @@ class CompetitionsController < ApplicationController
   def export
     authorize @competition
     exporter = @competition.exporter
-    filename = @competition.name.downcase.gsub(/[^0-9a-z]/, "_") + ".csv"
+    filename = "#{@competition.name.downcase.gsub(/[^0-9a-z]/, '_')}.csv"
     output_csv(exporter.headers, exporter.data, filename)
   end
 

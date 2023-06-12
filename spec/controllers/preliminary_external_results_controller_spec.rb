@@ -130,7 +130,7 @@ describe PreliminaryExternalResultsController do
   end
 
   describe "import_csv" do
-    let(:test_file_name) { fixture_path + '/external_results.csv' }
+    let(:test_file_name) { "#{fixture_path}/external_results.csv" }
     let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
 
     before do

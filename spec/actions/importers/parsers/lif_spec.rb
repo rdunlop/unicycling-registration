@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Importers::Parsers::Lif do
-  let(:test_file) { fixture_path + '/800m14.lif' }
+  let(:test_file) { "#{fixture_path}/800m14.lif" }
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   let(:up) { described_class.new }
@@ -65,6 +65,7 @@ describe Importers::Parsers::Lif do
     expect(hash[:thousands]).to eq(490)
     expect(hash[:disqualified]).to eq(false)
   end
+
   it "can convert an array of data into minutes, seconds, thousands, dq" do
     arr = [3, '', 7, '', '', '', "1:32.490", '', 12.142, '', '', '', '', '', '']
 

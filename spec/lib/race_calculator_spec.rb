@@ -133,6 +133,7 @@ describe OrderedResultCalculator do
         expect(@tr1.competitor.place).to eq(2)
         expect(@tr2.competitor.place).to eq(1)
       end
+
       describe "when the first competitor is ineligible" do
         before do
           @reg = @tr2.competitor.registrants.first
@@ -144,6 +145,7 @@ describe OrderedResultCalculator do
         it "places the faster competitor first" do
           expect(@tr2.reload.competitor.place).to eq(1)
         end
+
         it "places the slower competitor (eligible) as 1st also" do
           expect(@tr1.reload.competitor.place).to eq(1)
         end

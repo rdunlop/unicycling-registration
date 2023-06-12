@@ -7,10 +7,8 @@ module LanguageHelper
     t("language_name", locale: language)
   end
 
-  def cache_i18n(keys, options = {})
-    cache [:i18n, I18n.locale, *keys], options do
-      yield
-    end
+  def cache_i18n(keys, options = {}, &block)
+    cache [:i18n, I18n.locale, *keys], options, &block
   end
 
   # Clear any keys which were written by the `cache_i18n` function above

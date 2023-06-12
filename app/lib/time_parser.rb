@@ -27,7 +27,7 @@ class TimeParser
     index = seconds_and_hundreds.index(".")
     results[:seconds] = seconds_and_hundreds[0..(index - 1)].to_i
 
-    thous = seconds_and_hundreds[(index + 1)..-1]
+    thous = seconds_and_hundreds[(index + 1)..]
     if thous.length == 1
       results[:thousands] = thous.to_i * 100
     else

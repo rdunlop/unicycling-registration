@@ -3,6 +3,7 @@ module CompetitorAutoCreation
 
   included do
     attr_accessor :registrant_id
+
     before_validation :create_competitor_on_demand, on: :create
   end
 

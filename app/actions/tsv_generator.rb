@@ -7,13 +7,11 @@ class TsvGenerator
   end
 
   def generate
-    csv_string = CSV.generate(col_sep: "\t") do |csv|
+    CSV.generate(col_sep: "\t") do |csv|
       csv << exporter.headers if exporter.headers.present?
       exporter.rows.each do |row|
         csv << row
       end
     end
-
-    csv_string
   end
 end

@@ -3,7 +3,7 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   Exclude:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
@@ -18,10 +18,6 @@ inherit_from: .rubocop_todo.yml
 Rails/BulkChangeTable:
   Enabled: false
 
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
-  Enabled: true
-
 # I don't like the way that this re-indents certain conditionals
 Style/ConditionalAssignment:
   Enabled: false
@@ -29,7 +25,7 @@ Style/ConditionalAssignment:
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 
-Metrics/LineLength:
+Layout/LineLength:
   # I would like to support this, but it's quite violated currently
   # Max: 120
   Enabled: false
@@ -52,6 +48,135 @@ Rails/SkipsModelValidations:
 Naming/VariableNumber:
   Enabled: false
 
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+Lint/BinaryOperatorWithIdenticalOperands: # (new in 0.89)
+  Enabled: true
+Lint/DuplicateElsifCondition: # (new in 0.88)
+  Enabled: true
+Lint/DuplicateRequire: # (new in 0.90)
+  Enabled: true
+Lint/DuplicateRescueException: # (new in 0.89)
+  Enabled: true
+Lint/EmptyConditionalBody: # (new in 0.89)
+  Enabled: true
+Lint/EmptyFile: # (new in 0.90)
+  Enabled: true
+Lint/FloatComparison: # (new in 0.89)
+  Enabled: true
+Lint/MissingSuper: # (new in 0.89)
+  Enabled: true
+Lint/OutOfRangeRegexpRef: # (new in 0.89)
+  Enabled: true
+Lint/SelfAssignment: # (new in 0.89)
+  Enabled: true
+Lint/TopLevelReturnWithArgument: # (new in 0.89)
+  Enabled: true
+Lint/TrailingCommaInAttributeDeclaration: # (new in 0.90)
+  Enabled: true
+Lint/UnreachableLoop: # (new in 0.89)
+  Enabled: true
+Lint/UselessMethodDefinition: # (new in 0.90)
+  Enabled: true
+
+Style/AccessorGrouping: # (new in 0.87)
+  Enabled: false
+
+Style/ArrayCoercion: # (new in 0.88)
+  Enabled: true
+Style/BisectedAttrAccessor: # (new in 0.87)
+  Enabled: true
+Style/CaseLikeIf: # (new in 0.88)
+  Enabled: true
+
+Style/CombinableLoops: # (new in 0.90)
+  Enabled: false
+
+Style/ExplicitBlockArgument: # (new in 0.89)
+  Enabled: true
+Style/GlobalStdStream: # (new in 0.89)
+  Enabled: true
+
+Style/HashAsLastArrayItem: # (new in 0.88)
+  Enabled: false
+Style/HashLikeCase: # (new in 0.88)
+  Enabled: false
+
+Style/KeywordParametersOrder: # (new in 0.90)
+  Enabled: true
+
+Style/OptionalBooleanParameter: # (new in 0.89)
+  Enabled: false
+
+Style/RedundantAssignment: # (new in 0.87)
+  Enabled: true
+Style/RedundantFileExtensionInRequire: # (new in 0.88)
+  Enabled: true
+Style/RedundantSelfAssignment: # (new in 0.90)
+  Enabled: true
+Style/SingleArgumentDig: # (new in 0.89)
+  Enabled: true
+
+Style/SoleNestedConditional: # (new in 0.89)
+  Enabled: false
+
+Style/StringConcatenation: # (new in 0.89)
+  Enabled: true
+
+Layout/BeginEndAlignment: # (new in 0.91)
+  Enabled: true
+Lint/ConstantDefinitionInBlock: # (new in 0.91)
+  Enabled: true
+Lint/HashCompareByIdentity: # (new in 0.93)
+  Enabled: true
+Lint/IdentityComparison: # (new in 0.91)
+  Enabled: true
+Lint/RedundantSafeNavigation: # (new in 0.93)
+  Enabled: true
+Lint/UselessTimes: # (new in 0.91)
+  Enabled: true
+Style/ClassEqualityComparison: # (new in 0.93)
+  Enabled: true
+
 Rails/ApplicationRecord:
   Exclude:
     - "db/migrate/*"
@@ -61,6 +186,15 @@ Style/FormatStringToken:
 
 Rails/HasManyOrHasOneDependent:
   Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/RepeatedExampleGroupDescription:
+  Enabled: false
+
+RSpec/StubbedMock: # (new in 1.44)
+  Enabled: true
 
 Rails/UnknownEnv:
   Environments:

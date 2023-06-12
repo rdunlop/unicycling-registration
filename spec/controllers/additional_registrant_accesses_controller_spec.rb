@@ -49,6 +49,7 @@ describe AdditionalRegistrantAccessesController do
       get :invitations, params: { user_id: @user.id }
       assert_select "td", ada.user.to_s
     end
+
     it "doesn't show other people's invitations" do
       FactoryBot.create(:additional_registrant_access)
       get :invitations, params: { user_id: @user.id }
@@ -83,6 +84,7 @@ describe AdditionalRegistrantAccessesController do
         post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
         expect(response).to redirect_to(user_additional_registrant_accesses_path(@user))
       end
+
       it "creates an e-mail to the target registrants' user" do
         ActionMailer::Base.deliveries.clear
         post :create, params: { user_id: @user.id, additional_registrant_access: valid_attributes }
@@ -122,6 +124,7 @@ describe AdditionalRegistrantAccessesController do
           put :accept_readonly, params: { id: @additional_registrant_access.to_param }
         end.not_to change(@additional_registrant_access, :accepted_readonly)
       end
+
       it "redirects to the root if unauthorized" do
         put :accept_readonly, params: { id: @additional_registrant_access.to_param }
         expect(response).to redirect_to(root_path)
@@ -138,6 +141,7 @@ describe AdditionalRegistrantAccessesController do
             put :accept_readonly, params: { id: @additional_registrant_access.to_param }
           end.not_to change(@additional_registrant_access, :accepted_readonly)
         end
+
         it "creates an e-mail to the requesting user" do
           ActionMailer::Base.deliveries.clear
           put :accept_readonly, params: { id: @additional_registrant_access.to_param }
@@ -157,6 +161,7 @@ describe AdditionalRegistrantAccessesController do
       delete :decline, params: { id: additional_registrant_access.to_param }
       expect(additional_registrant_access.reload.declined).to eq(false)
     end
+
     it "decline the requested additional_registrant_access" do
       sign_out @user
       sign_in @reg.user
