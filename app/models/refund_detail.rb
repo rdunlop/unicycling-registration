@@ -24,7 +24,7 @@ class RefundDetail < ApplicationRecord
   after_save :mark_payment_detail_as_refunded
 
   delegate :percentage, to: :refund
-  delegate :registrant, to: :payment_detail
+  delegate :registrant, :to_s, to: :payment_detail
 
   def create_required_registrant_item
     reg = payment_detail.registrant
@@ -38,9 +38,5 @@ class RefundDetail < ApplicationRecord
 
   def amount_refunded
     (percentage.to_f / 100) * payment_detail.amount
-  end
-
-  def to_s
-    payment_detail.to_s
   end
 end
