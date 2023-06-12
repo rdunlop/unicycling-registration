@@ -41,6 +41,6 @@ class RefundDetail < ApplicationRecord
   end
 
   def to_s
-    payment_detail
+    payment_detail.to_s
   end
 end
