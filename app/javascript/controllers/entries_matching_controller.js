@@ -6,13 +6,17 @@ import { Controller } from "@hotwired/stimulus"
 // that users choose "matching" event_categories
 //
 // Inputs:
-// groups:
+// groups-value:
 //   - This indicates the event_category_id which must all be set together
 //   - e.g. [[1, 2, 3], [4, 5]] indicates ids 1,2,3 are a group, and 4,5 are a group
 // event_category_element:
 //   - This is a select element which must be monitored
 //   - If this element value changes, we check ALL other select elements, and if any of them have
 //     not-in-this-set values, we display an alert message, AND change the OTHER value
+// change-message-value:
+//   - This is a text message which will be presented when the javascript chooses to change a user's selection
+// clear-message-value:
+//   - This is a text message which will be presented when the javascript chooses to clear a user's selection
 //
 // Example usage:
 // <div data-controller="entries-matching" data-entries-matching-groups-value="[[1,2,3],[4,5]]">
@@ -37,12 +41,18 @@ export default class extends Controller {
 
   static targets = ["eventCategoryElement"]
   static values = {
-    groups: Array
+    groups: Array,
+    clearMessage: String,
+    changeMessage: String
   }
 
   connect() {
-    console.log("Connected EntriesMatchingController")
-    console.log(this.groupsValue)
+    if (this.clearMessageValue == '') {
+      this.clearMessageValue = "You must choose similar categories for your events. We have cleared one of your choices...please re-choose the appropriate category"
+    }
+    if (this.changeMessageValue == '') {
+      this.changeMessageValue = "You must compete in the same category in these events. We have updated your other event category to match"
+    }
   }
 
   // Does the current element belong to a group?
@@ -52,7 +62,6 @@ export default class extends Controller {
   // OR to blank
   // AND show an alert
   change(event) {
-    console.log("changeD")
     var target = event.target
 
     // check all elements to see if they need to change
@@ -66,7 +75,6 @@ export default class extends Controller {
       if (acceptableElementValues.length == 0) return // current selected value isn't in a grouping
       if (acceptableElementValues.includes(parseInt(entry.value))) return
       // the currently selected value is in this group
-      console.log("GROUP CONTAINS VALUE")
 
       var entryOptionValues = Array.from(entry.options).map(e => e.value);
 
@@ -75,11 +83,11 @@ export default class extends Controller {
       if (shouldSelect.length == 0) return
       if (shouldSelect.length == 1) {
         entry.value = shouldSelect[0]
-        alert("Changing value")
+        alert(this.changeMessageValue)
       }
       if (shouldSelect.length > 1) {
         entry.value = ''
-        alert("Clearing value")
+        alert(this.clearMessageValue)
       }
     })
   }
@@ -87,7 +95,6 @@ export default class extends Controller {
   // Each select element is automatically configured to trigger
   // the 'change' action if the value is changed
   eventCategoryElementTargetConnected(element) {
-    console.log("connecting target")
     element.dataset.action = "entries-matching#change"
   }
 }

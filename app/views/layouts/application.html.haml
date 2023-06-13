@@ -2,7 +2,7 @@
 %html{ lang: I18n.locale }
   %head
     = javascript_importmap_tags
-    = javascript_import_module_tag "controllers"
+    = yield(:importmap_modules)
     = render partial: "layouts/metatags"
     %title
       = @config.short_name

@@ -22,6 +22,7 @@ describe EventCategoryGroupingEntry do
 
     context "when there are multiple entries for the same grouping" do
       let!(:entry2) { FactoryBot.create(:event_category_grouping_entry, event_category_grouping: entry.event_category_grouping) }
+
       it "does not destroy the grouping" do
         expect do
           entry.destroy

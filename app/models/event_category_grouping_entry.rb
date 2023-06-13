@@ -2,7 +2,7 @@ class EventCategoryGroupingEntry < ApplicationRecord
   belongs_to :event_category_grouping
   belongs_to :event_category
 
-  validates :event_category_id, uniqueness: { scope: [ :event_category_grouping_id] }
+  validates :event_category_id, uniqueness: { scope: [:event_category_grouping_id] }
 
   # If being created with a 'nil' event_category_grouping, automatically creates one
   before_validation :create_event_category_grouping

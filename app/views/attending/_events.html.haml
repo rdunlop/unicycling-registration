@@ -1,6 +1,8 @@
 - @categories = categories
 - @registrant = registrant
-#tabs{ data: { controller: "entries-matching", entries_matching_groups_value: EventCategoryGrouping.all.map {|g| g.event_category_grouping_entries.map(&:event_category_id) } } }
+- content_for :importmap_modules do
+  = javascript_import_module_tag "controllers"
+#tabs{ data: { controller: "entries-matching", entries_matching_groups_value: EventCategoryGrouping.all.map {|g| g.event_category_grouping_entries.map(&:event_category_id) }, entries_matching_clear_message_value: t('.clear_selection_message'), entries_matching_change_message_value: t('.change_selection_message') } }
   %ul
     - @categories.each do |category|
       %li

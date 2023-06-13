@@ -29,6 +29,7 @@ gem 'country_select'
 gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rails6" # for rails 6 support
 gem 'foundation-rails'
 gem "haml-rails"
+gem 'importmap-rails'
 gem "jc-validates_timeliness"
 gem 'jquery-datatables-rails'
 gem 'jquery-datetimepicker-rails'
@@ -38,7 +39,6 @@ gem 'money-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
 gem 'simple_form'
-gem 'importmap-rails'
 gem 'stimulus-rails'
 gem 'tinymce-rails'
 
