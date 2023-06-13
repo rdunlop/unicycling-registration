@@ -1,4 +1,4 @@
-DOMAIN=local.com:3000
+DOMAIN=lvh.me:3000
 SSL_ENABLED=false
 SECRET_KEY_BASE=XXXX
 

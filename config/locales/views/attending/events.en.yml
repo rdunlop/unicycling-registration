@@ -3,3 +3,5 @@ en:
   attending:
     events:
       more_info: Competition Details
+      clear_selection_message: You must choose similar categories for your events. We have cleared one of your choices...please re-choose the appropriate category.
+      change_selection_message: You must compete in the same category in these events. We have updated your other event category to match.

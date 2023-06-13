@@ -340,6 +340,8 @@ Rails.application.routes.draw do
       resources :pages do
         resources :images, only: %i[index create destroy]
       end
+
+      resources :event_category_grouping_entries, except: %i[new edit update]
     end
     scope "convention_setup", module: "convention_setup" do
       resources :coupon_codes, except: [:show]

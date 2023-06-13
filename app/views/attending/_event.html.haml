@@ -14,7 +14,7 @@
 
     - if !(event.event_categories.size == 1)
       %td.event_choice
-        = resu.input :event_category_id, collection: form.event_categories, as: :select , disabled: form.inaccessible_event_categories, include_blank: true, label: t('.category')
+        = resu.input :event_category_id, collection: form.event_categories, as: :select , disabled: form.inaccessible_event_categories, include_blank: true, label: t('.category'), input_html: { data: { entries_matching_target: "eventCategoryElement" }}
 
   - # Padding before EventChoices
   - if category.max_number_of_event_choices != event.num_choices

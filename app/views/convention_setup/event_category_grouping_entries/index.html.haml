@@ -1,0 +1,26 @@
+%h1 Event Category Grouping Entries
+
+%p
+  By creating a group of Event Categories, the system will ensure that registrants choose all of the same group of event_categories.
+  %br
+  %b Example:
+  All "Beginner" or All "Advanced".
+
+%div
+%table
+  %thead
+    %tr
+      %th Group #
+      %th Entry
+      %th
+  %tbody
+    - @event_category_groupings.each do |event_category_grouping|
+      - event_category_grouping.event_category_grouping_entries.each do |ecge|
+        %tr
+          %td= event_category_grouping.id
+          %td= ecge.event_category
+          %td= link_to t("delete"), [:convention_setup, ecge], method: :delete, data: { confirm: t("are_you_sure") }
+
+%fieldset.form__fieldset
+  %h3= t(".new_event_category")
+  = render 'form'

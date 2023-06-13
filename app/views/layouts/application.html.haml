@@ -1,6 +1,8 @@
 !!! 5
 %html{ lang: I18n.locale }
   %head
+    = javascript_importmap_tags
+    = yield(:importmap_modules)
     = render partial: "layouts/metatags"
     %title
       = @config.short_name

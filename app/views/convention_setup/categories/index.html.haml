@@ -7,6 +7,8 @@
   %b= t("note")
   = t(".manage_events_note")
 
+%p
+  = link_to "Event Category Groupings", convention_setup_event_category_grouping_entries_path
 - if @categories.any?
   %h2= t(".existing_categories")
 
