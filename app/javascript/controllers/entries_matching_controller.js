@@ -55,29 +55,31 @@ export default class extends Controller {
     console.log("changeD")
     var target = event.target
 
-    // check each group to see if the currently selected value is in a group
-    this.groupsValue.forEach((group) => {
-      if (group.includes(parseInt(target.value))) {
-        // the currently selected value is in this group
-        console.log("GROUP CONTAINS VALUE")
+    // check all elements to see if they need to change
+    this.eventCategoryElementTargets.forEach((entry) => {
+      if (entry.value === '') return // isn't selected
+      if (entry == target) return // is self
 
-        // check all elements
-        // And find any which COULD select a value in this set
-        // But do not
-        this.eventCategoryElementTargets.forEach((entry) => {
-          if (entry.value === '') return // isn't selected
-          if (entry == target) return // is self
-          if (group.includes(parseInt(entry.value))) return // already in the same 'group'
+      // check each group to see if the currently selected value is in a group
+      var acceptableElementValues = this.groupsValue.filter( (group) => group.includes(parseInt(target.value))).flat()
 
-          var entryOptionValues = Array.from(entry.options).map(e => e.value);
+      if (acceptableElementValues.length == 0) return // current selected value isn't in a grouping
+      if (acceptableElementValues.includes(parseInt(entry.value))) return
+      // the currently selected value is in this group
+      console.log("GROUP CONTAINS VALUE")
 
-          // Does this element have a value which is in the target group?
-          var shouldSelect = entryOptionValues.filter( (optionValue) => group.includes(parseInt(optionValue)))
-          if (shouldSelect.length != 0) {
-            entry.value = shouldSelect[0]
-            alert("Changing value")
-          }
-        })
+      var entryOptionValues = Array.from(entry.options).map(e => e.value);
+
+      // Does this element have a value which is in the target group?
+      var shouldSelect = entryOptionValues.filter( (optionValue) => acceptableElementValues.includes(parseInt(optionValue)))
+      if (shouldSelect.length == 0) return
+      if (shouldSelect.length == 1) {
+        entry.value = shouldSelect[0]
+        alert("Changing value")
+      }
+      if (shouldSelect.length > 1) {
+        entry.value = ''
+        alert("Clearing value")
       }
     })
   }

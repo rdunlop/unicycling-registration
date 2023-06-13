@@ -1,6 +1,6 @@
 - @categories = categories
 - @registrant = registrant
-#tabs{ data: { controller: "entries-matching", entries_matching_groups_value: "[[2,5,8]]" } }
+#tabs{ data: { controller: "entries-matching", entries_matching_groups_value: EventCategoryGrouping.all.map {|g| g.event_category_grouping_entries.map(&:event_category_id) } } }
   %ul
     - @categories.each do |category|
       %li
