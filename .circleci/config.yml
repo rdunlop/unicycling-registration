@@ -126,7 +126,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - approve-prod-push:
           type: approval
           requires:
@@ -134,11 +134,11 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - release_prod:
           requires:
             - approve-prod-push
           filters:
             branches:
               only:
-                - master
+                - main

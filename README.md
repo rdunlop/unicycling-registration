@@ -1,7 +1,7 @@
 Registration Site
 =================
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/rdunlop/unicycling-registration/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/rdunlop/unicycling-registration/tree/master)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/rdunlop/unicycling-registration/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/rdunlop/unicycling-registration/tree/main)
 [![Code Climate](https://codeclimate.com/github/rdunlop/unicycling-registration.png)](https://codeclimate.com/github/rdunlop/unicycling-registration)
 
 Welcome to the Unicycling Registration Application.
