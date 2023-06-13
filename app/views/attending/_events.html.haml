@@ -1,6 +1,6 @@
 - @categories = categories
 - @registrant = registrant
-#tabs
+#tabs{ data: { controller: "entries-matching", entries_matching_groups_value: "[[2,5,8]]" } }
   %ul
     - @categories.each do |category|
       %li

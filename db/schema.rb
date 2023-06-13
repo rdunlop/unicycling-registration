@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_09_012335) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_175854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -325,6 +325,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_012335) do
     t.boolean "warning_on_registration_summary", default: false, null: false
     t.index ["event_id", "name"], name: "index_event_categories_on_event_id_and_name", unique: true
     t.index ["event_id", "position"], name: "index_event_categories_event_id"
+  end
+
+  create_table "event_category_grouping_entries", force: :cascade do |t|
+    t.bigint "event_category_grouping_id"
+    t.bigint "event_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_category_grouping_id"], name: "ecge_grouping"
+    t.index ["event_category_id"], name: "ecge_event_category"
+  end
+
+  create_table "event_category_groupings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_category_translations", force: :cascade do |t|

@@ -38,6 +38,8 @@ gem 'money-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
 gem 'simple_form'
+gem 'importmap-rails'
+gem 'stimulus-rails'
 gem 'tinymce-rails'
 
 # system utils
