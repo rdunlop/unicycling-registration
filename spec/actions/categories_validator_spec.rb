@@ -5,7 +5,7 @@ describe CategoriesValidator do
 
   describe "without any EventCategoryGroupings" do
     it "is valid" do
-      expect(registrant).to be_valid
+      expect(registrant.reload).to be_valid
     end
   end
 
@@ -43,7 +43,7 @@ describe CategoriesValidator do
       let!(:registrant_event_sign_up) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event_1, event_category: event_1_category_1) }
 
       it "is valid" do
-        expect(registrant).to be_valid
+        expect(registrant.reload).to be_valid
       end
     end
 
@@ -52,7 +52,7 @@ describe CategoriesValidator do
       let!(:registrant_event_sign_up2) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event_2, event_category: event_2_category_2) }
 
       it "is not valid" do
-        expect(registrant).not_to be_valid
+        expect(registrant.reload).not_to be_valid
       end
     end
 
@@ -61,7 +61,7 @@ describe CategoriesValidator do
       let!(:registrant_event_sign_up2) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event_2, event_category: event_2_category_3) }
 
       it "is not valid" do
-        expect(registrant).not_to be_valid
+        expect(registrant.reload).not_to be_valid
       end
     end
 
@@ -71,7 +71,7 @@ describe CategoriesValidator do
       let!(:registrant_event_sign_up3) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event_3, event_category: event_3_category_2) }
 
       it "is not valid" do
-        expect(registrant).not_to be_valid
+        expect(registrant.reload).not_to be_valid
       end
     end
 
@@ -81,7 +81,7 @@ describe CategoriesValidator do
       let!(:registrant_event_sign_up3) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event_3, event_category: event_3_category_2) }
 
       it "is valid" do
-        expect(registrant).to be_valid
+        expect(registrant.reload).to be_valid
       end
     end
 
@@ -91,7 +91,7 @@ describe CategoriesValidator do
       let!(:registrant_event_sign_up3) { FactoryBot.create(:registrant_event_sign_up, registrant: registrant, event: event_3, event_category: event_3_category_2) }
 
       it "is valid" do
-        expect(registrant).to be_valid
+        expect(registrant.reload).to be_valid
       end
     end
   end
