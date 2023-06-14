@@ -146,8 +146,9 @@ class Registrant < ApplicationRecord
     validate :check_default_wheel_size_for_age
   end
 
-  # events
+  # events & event_categories
   validate :choices_combination_valid, if: :past_step_2?
+  validate :categories_combination_valid, if: :past_step_2?
 
   # waiver
   validates :online_waiver_acceptance, acceptance: { accept: true }, if: :needs_waiver?
@@ -641,6 +642,10 @@ class Registrant < ApplicationRecord
   # ####################################
   def choices_combination_valid
     ChoicesValidator.new(self).validate
+  end
+
+  def categories_combination_valid
+    CategoriesValidator.new(self).validate
   end
 
   # Queue a job to query the IUF/USA db for membership information
