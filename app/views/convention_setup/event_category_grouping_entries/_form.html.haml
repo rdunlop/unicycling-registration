@@ -4,6 +4,6 @@
   - # If a BLANK is selected, we will create a new event_category_grouping
   = f.input :event_category_grouping_id, collection: @event_category_groupings, include_blank: true, hint: "If you don't select one, a new group will be created"
 
-  = f.input :event_category_id, collection: @event_categories, label_method: :to_s, include_blank: true
+  = f.input :event_category_id, collection: @event_categories, label_method: :to_s, include_blank: true, input_html: { class: "chosen-select" }
 
   = f.button :submit

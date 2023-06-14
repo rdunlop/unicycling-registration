@@ -8,7 +8,7 @@ class ConventionSetup::EventCategoryGroupingEntriesController < ConventionSetup:
   def index
     @event_category_grouping_entry = EventCategoryGroupingEntry.new
     @event_category_groupings = EventCategoryGrouping.all
-    @event_categories = EventCategory.all
+    @event_categories = EventCategory.all.sort_by(&:to_s)
   end
 
   # POST /event_category_grouping_entries

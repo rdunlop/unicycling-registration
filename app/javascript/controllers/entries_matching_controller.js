@@ -65,6 +65,7 @@ export default class extends Controller {
     var target = event.target
 
     // check all elements to see if they need to change
+    // THIS CODE mirror's what's in categories_validator.rb
     this.eventCategoryElementTargets.forEach((entry) => {
       if (entry.value === '') return // isn't selected
       if (entry == target) return // is self
