@@ -8,7 +8,7 @@ set :linked_files, %w[.env.local config/eye.yml public/robots.txt]
 
 # Default value for linked_dirs is []
 # .well-known is for letsencrypt
-set :linked_dirs, %w[bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known]
+set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps public/.well-known]
 
 namespace :deploy do
   task install_translations: [:set_rails_env] do

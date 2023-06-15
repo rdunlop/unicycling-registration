@@ -15,5 +15,7 @@ Rails.application.config.assets.precompile += %w[
   base_blue_purple.css base_blue_purple_split2.css
   base_purple_blue.css base_purple_blue_split2.css
   base_blue_pink.css base_blue_pink_split2.css
+  controllers/index.js
+  controllers/entries_matching_controller.js
 ]
 Rails.application.config.assets.precompile += %w[vendor/modernizr.js]
