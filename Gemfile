@@ -139,7 +139,6 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'coffee-rails'
 gem 'sass-rails'
 
 gem 'uglifier', '>= 1.0.3'
