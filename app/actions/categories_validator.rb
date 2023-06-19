@@ -20,7 +20,7 @@ class CategoriesValidator
     # Check Each category
     return if validate_categories(chosen_event_categories)
 
-    registrant.errors.add(:base, "This combination of Event Categories is not permitted #{chosen_event_categories.map(&:id)}")
+    registrant.errors.add(:base, "This combination of Event Categories is not permitted #{chosen_event_categories.map(&:name)}")
   end
 
   # Returns true if valid, false otherwise
