@@ -122,7 +122,7 @@ end
 
 group :development, :test do
   gem 'bundler-audit', require: false
-  gem 'rubocop', '0.93.1', require: false
+  gem 'rubocop', '1.54.0', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'teaspoon-jasmine'
