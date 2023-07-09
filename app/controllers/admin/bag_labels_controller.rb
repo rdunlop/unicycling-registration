@@ -11,7 +11,7 @@ class Admin::BagLabelsController < ApplicationController
 
     names = []
 
-    @registrants.find_each do |reg|
+    @registrants.each do |reg|
       record = "\n"
       record += "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name}\n"
       record += "#{reg.representation}\n"
