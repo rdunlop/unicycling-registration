@@ -7,7 +7,7 @@
 //    data: 'disable_wrapper' - the class of the area to disable when selected
 //    data: 'enable_wrapper' - the class of the area to enable when selected
 
-this.BlockEnablerByRadio = class BlockEnablerByRadio {
+class BlockEnablerByRadio {
 
   constructor(radio){
     this.radio = radio;

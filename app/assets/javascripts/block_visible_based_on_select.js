@@ -1,5 +1,3 @@
-var exports = exports != null ? exports : this;
-
 class BlockVisibleBasedOnSelect {
   constructor($select_element, $target_elements, hiddenClass) {
     this._toggleVisibility = this._toggleVisibility.bind(this);
@@ -42,4 +40,4 @@ class BlockVisibleBasedOnSelect {
 }
 
 
-exports.BlockVisibleBasedOnSelect = BlockVisibleBasedOnSelect;
+export { BlockVisibleBasedOnSelect };

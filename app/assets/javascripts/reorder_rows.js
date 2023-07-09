@@ -3,8 +3,6 @@
 // on each individual row, you should have an "item-id" data element, which holds
 // the value of the object's id.
 
-var exports = exports != null ? exports : this;
-
 const set_js_sortable = function() {
   const sortable_table = $('.js--sortable');
   if (sortable_table.length > 0) {
@@ -48,4 +46,4 @@ const set_js_sortable = function() {
 
 $(() => set_js_sortable());
 
-exports.set_js_sortable = set_js_sortable;
+export { set_js_sortable };

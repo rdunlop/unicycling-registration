@@ -7,7 +7,7 @@
 // target element:
 //    class: class matching the displayblock class
 
-this.EventChoiceCreationManager = class EventChoiceCreationManager {
+class EventChoiceCreationManager {
 
   constructor(form) {
     this.form = form;

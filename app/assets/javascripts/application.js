@@ -72,6 +72,7 @@ $(document).ready(function() {
 /* Generic sorting dataTable */
 $(document).ready(function() {
   $(".sortable").each(function() {
+    let search = false;
     if ($(this).hasClass('searchable')) {
        search = true;
     } else {

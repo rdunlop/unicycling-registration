@@ -1,4 +1,4 @@
-this.ChosenEnabler = class ChosenEnabler {
+class ChosenEnabler {
   constructor(selects) {
     this.selects = selects;
     this.selects.select2({
@@ -15,3 +15,5 @@ this.ChosenEnabler = class ChosenEnabler {
     });
   }
 };
+
+export { ChosenEnabler };

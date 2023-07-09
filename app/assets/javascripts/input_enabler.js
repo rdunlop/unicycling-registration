@@ -7,7 +7,7 @@
 // target element:
 //    class: class matching the targets class
 
-this.InputEnabler = class InputEnabler {
+class InputEnabler {
 
   constructor(checkbox){
     this.checkbox = checkbox;
