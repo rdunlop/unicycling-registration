@@ -7,7 +7,7 @@
 // target element:
 //    class: class matching the displayblock class
 
-this.BlockDisplayer = class BlockDisplayer {
+class BlockDisplayer {
 
   constructor(radioElements) {
     this.radioElements = radioElements;

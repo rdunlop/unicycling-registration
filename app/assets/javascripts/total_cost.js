@@ -6,7 +6,7 @@
 // source element:
 //    data: cost-element (set this attribute to true)
 
-this.TotalCostDisplayer = class TotalCostDisplayer {
+class TotalCostDisplayer {
 
   constructor(target){
     this.target = target;

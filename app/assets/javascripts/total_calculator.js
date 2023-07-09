@@ -7,7 +7,7 @@
 // totalDisplay:
 //    class: (js--total) - class of the field in which to write the total
 
-this.TotalCalculator = class TotalCalculator {
+class TotalCalculator {
 
   constructor(checkboxElement, totalDisplay) {
     this.checkboxElement = checkboxElement;
