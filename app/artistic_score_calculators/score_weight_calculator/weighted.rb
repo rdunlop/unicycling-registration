@@ -9,22 +9,16 @@ class ScoreWeightCalculator::Weighted
   end
 
   def total(raw_scores)
-    if score_ranges.any?
-      sum = 0
-      raw_scores.each_with_index do |score, index|
-        next if score_weights[index].nil?
+    sum = 0
+    raw_scores.each_with_index do |score, index|
+      next if score_weights[index].nil?
 
+      if score_ranges.any?
         sum += score * score_weights[index] / score_range[index]
-      end
-      (sum / 100.0).round(4)
-    else
-      sum = 0
-      raw_scores.each_with_index do |score, index|
-        next if score_weights[index].nil?
-
+      else
         sum += score * score_weights[index]
       end
-      (sum / 100.0).round(4)
     end
+    (sum / 100.0).round(4)
   end
 end
