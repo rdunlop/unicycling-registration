@@ -74,7 +74,7 @@ class Score < ApplicationRecord
   end
 
   def score_max(score_number)
-    send("val_#{score_number}_max".to_sym)
+    judge_type.send("val_#{score_number}_max".to_sym)
   end
 
   def score_value(score_number)

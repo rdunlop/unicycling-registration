@@ -14,7 +14,8 @@ class ScoreWeightCalculator::Weighted
       next if score_weights[index].nil?
 
       if score_ranges.any?
-        sum += score * score_weights[index] / score_range[index]
+        # multiply by 10 in order to make their ranges larger than 0-1, more like 0-10
+        sum += score * score_weights[index] / score_ranges[index] * 10
       else
         sum += score * score_weights[index]
       end
