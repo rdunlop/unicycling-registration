@@ -109,7 +109,7 @@ class ScoringClass
         # 2017 is on purpose here. The main difference is in the JudgePointsCalculator
         calculator: FlatlandResultCalculator2017.new,
         exporter: EnteredDataExporter::Score.new(competition),
-        judge_score_calculator: Freestyle2019JudgePointsCalculator.new,
+        judge_score_calculator: Flatland2019JudgePointsCalculator.new,
         helper: scoring_helper
       }
     when "Street"

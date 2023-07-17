@@ -73,8 +73,22 @@ class Score < ApplicationRecord
     "val_#{score_number}".to_sym
   end
 
+  def score_max(score_number)
+    send("val_#{score_number}_max".to_sym)
+  end
+
   def score_value(score_number)
     send(score_symbol(score_number))
+  end
+
+  def score_ranges
+    @max_ranges = []
+
+    judge_type.score_numbers.each do |score_number|
+      @max_ranges << score_max(score_number)
+    end
+
+    @max_ranges
   end
 
   def raw_scores

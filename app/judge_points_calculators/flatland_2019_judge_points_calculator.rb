@@ -14,7 +14,8 @@ class Flatland2019JudgePointsCalculator
   end
 
   def calculate_score_total(score)
-    calculator = ScoreWeightCalculator::Weighted.new([25, 23, 20, 18, 14])
+    calculator = ScoreWeightCalculator::Weighted.new([25, 23, 20, 18, 14], score_ranges: score.score_ranges)
+
     calculator.total(score.raw_scores)
   end
 end
