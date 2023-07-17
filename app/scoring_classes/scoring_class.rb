@@ -103,6 +103,15 @@ class ScoringClass
         judge_score_calculator: GenericPlacingPointsCalculator.new(lower_is_better: scoring_helper.lower_is_better),
         helper: scoring_helper
       }
+    when "Flatland IUF 2019"
+      scoring_helper = FlatlandScoringClass2019.new(competition)
+      {
+        # 2017 is on purpose here. The main difference is in the JudgePointsCalculator
+        calculator: FlatlandResultCalculator2017.new,
+        exporter: EnteredDataExporter::Score.new(competition),
+        judge_score_calculator: Freestyle2019JudgePointsCalculator.new,
+        helper: scoring_helper
+      }
     when "Street"
       scoring_helper = StreetScoringClass.new(competition)
       {
