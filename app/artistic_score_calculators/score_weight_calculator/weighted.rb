@@ -1,5 +1,5 @@
 class ScoreWeightCalculator::Weighted
-  attr_reader :score_weights
+  attr_reader :score_weights, :score_ranges
 
   # score_ranges define the max value for each passed in raw_score
   def initialize(score_weights, score_ranges: [])
