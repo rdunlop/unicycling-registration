@@ -32,10 +32,10 @@ gem "haml-rails"
 gem 'importmap-rails'
 gem "jc-validates_timeliness"
 gem 'jquery-datatables-rails'
-gem 'jquery-datetimepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '5.0.5' # upgrading to jquery-ui-rails 6.x requires updating the naming of various files, let's do this later
 gem 'money-rails'
+gem 'rails-assets-datetimepicker', source: 'https://rails-assets.org'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
 gem 'simple_form'

@@ -37,7 +37,7 @@
 //= require fancybox
 //= require cocoon
 //= require jquery.are-you-sure
-//= require jquery.datetimepicker
+//= require datetimepicker
 
 //= require attending
 //= require block_displayer
