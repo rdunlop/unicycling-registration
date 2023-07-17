@@ -1,3 +1,4 @@
+# NOTE: this is also used for Flatland 2019
 class FlatlandResultCalculator2017
   # describes whether the given competitor has any results associated
   def competitor_has_result?(competitor)

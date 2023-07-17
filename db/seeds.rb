@@ -65,6 +65,21 @@ JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland 
   )
 end
 
+JudgeType.find_or_create_by(name: "Flatland Judge Type", event_class: "Flatland IUF 2019") do |judge_type|
+  judge_type.assign_attributes(
+    val_1_description: "Difficulty",
+    val_2_description: "Consistency",
+    val_3_description: "Flow",
+    val_4_description: "Variety",
+    val_5_description: "Last Trick",
+    val_1_max: 10,
+    val_2_max: 10,
+    val_3_max: 10,
+    val_4_max: 10,
+    val_5_max: 5
+  )
+end
+
 JudgeType.find_or_create_by(name: "High/Long Judge Type", event_class: "High/Long") do |judge_type|
   judge_type.assign_attributes(
     val_1_description: "?",

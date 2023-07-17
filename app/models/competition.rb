@@ -99,6 +99,7 @@ class Competition < ApplicationRecord
       "High/Long Preliminary IUF 2017",
       "Flatland",
       "Flatland IUF 2017",
+      "Flatland IUF 2019",
       "Street",
       "Street Final",
       "Points Low to High",
