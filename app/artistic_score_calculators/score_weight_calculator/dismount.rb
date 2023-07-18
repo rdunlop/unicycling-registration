@@ -11,7 +11,7 @@ class ScoreWeightCalculator::Dismount
                  else
                    10 - (mistake_score(score) / Math.sqrt(group_size))
                  end
-    [calc_total, 0].max
+    [calc_total, 0].max.round(4)
   end
 
   #  1.0 * number of major dismounts + 0.5 * number of minor dismount

@@ -19,4 +19,19 @@ RSpec.describe ScoreWeightCalculator::Weighted do
       expect(subject.total(score)).to eq(6.3333)
     end
   end
+
+  describe "when the score ranges are inconsistent" do
+    let(:score_ranges) { [10, 10, 10, 10, 5] }
+    let(:subject) { described_class.new([25, 23, 20, 18, 14], score_ranges: score_ranges) }
+    let(:max_score) { [10, 10, 10, 10, 5] }
+    let(:min_score) { [0, 0, 0, 0, 0] }
+
+    it "gives 100% for max score" do
+      expect(subject.total(max_score)).to eq(100)
+    end
+
+    it "gives 0% for max score" do
+      expect(subject.total(min_score)).to eq(0)
+    end
+  end
 end

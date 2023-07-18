@@ -11,7 +11,7 @@ RSpec.describe ScoreWeightCalculator::Dismount do
 
       it "can calculate the mistakes and dismount scores" do
         expect(subject.mistake_score(score)).to eq(1.5)
-        expect(subject.total(score)).to be_within(0.1).of(9.525)
+        expect(subject.total(score)).to eq(9.5257)
       end
     end
   end
