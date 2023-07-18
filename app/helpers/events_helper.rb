@@ -33,7 +33,7 @@ module EventsHelper
       link_to judge_name, judge_distance_attempts_path(judge), options
     when 'Freestyle', "Artistic Freestyle IUF 2015", "Artistic Freestyle IUF 2017", "Artistic Freestyle IUF 2019"
       link_to judge_name, judge_scores_path(judge), options
-    when 'Flatland', 'Flatland IUF 2017'
+    when 'Flatland', 'Flatland IUF 2017', 'Flatland IUF 2019'
       link_to judge_name, judge_scores_path(judge), options
     when 'Street', 'Street Final'
       link_to judge_name, judge_street_scores_path(judge), options
