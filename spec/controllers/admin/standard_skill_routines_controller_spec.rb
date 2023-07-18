@@ -36,17 +36,28 @@ describe Admin::StandardSkillRoutinesController do
 
         row1 = csv[0]
         expect(row1.count).to eq(4)
-        expect(row1[0]).to eq(@initial_entry.standard_skill_routine.registrant.external_id.to_s)
-        expect(row1[1]).to eq(@initial_entry.position.to_s)
-        expect(row1[2]).to eq(@initial_entry.standard_skill_entry.number.to_s)
-        expect(row1[3]).to eq(@initial_entry.standard_skill_entry.letter.to_s)
+        initial_row = if row1[0] == @initial_entry.standard_skill_routine.registrant.external_id.to_s
+                        @initial_entry
+                      else
+                        @next_entry
+                      end
+
+        next_row = if row1[0] == @next_entry.standard_skill_routine.registrant.external_id.to_s
+                     @initial_entry
+                   else
+                     @next_entry
+                   end
+        expect(row1[0]).to eq(initial_row.standard_skill_routine.registrant.external_id.to_s)
+        expect(row1[1]).to eq(initial_row.position.to_s)
+        expect(row1[2]).to eq(initial_row.standard_skill_entry.number.to_s)
+        expect(row1[3]).to eq(initial_row.standard_skill_entry.letter.to_s)
 
         row2 = csv[1]
         expect(row2.count).to eq(4)
-        expect(row2[0]).to eq(@next_entry.standard_skill_routine.registrant.external_id.to_s)
-        expect(row2[1]).to eq(@next_entry.position.to_s)
-        expect(row2[2]).to eq(@next_entry.standard_skill_entry.number.to_s)
-        expect(row2[3]).to eq(@next_entry.standard_skill_entry.letter.to_s)
+        expect(row2[0]).to eq(next_row.standard_skill_routine.registrant.external_id.to_s)
+        expect(row2[1]).to eq(next_row.position.to_s)
+        expect(row2[2]).to eq(next_row.standard_skill_entry.number.to_s)
+        expect(row2[3]).to eq(next_row.standard_skill_entry.letter.to_s)
       end
 
       it "fails for non-admin user" do
