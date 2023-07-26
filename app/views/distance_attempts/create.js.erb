@@ -12,13 +12,13 @@
   var new_row = $("<%= escape_javascript(render partial: 'attempt', object: @distance_attempt, locals: {display_delete: true}) %>");
   new_row.prependTo(".recent_attempt_list tbody");
   new_row.effect("highlight", {}, 3000);
-  var value = $("#distance_attempt_distance").val();
-  $("form").trigger("reset");
-  $("#distance_attempt_distance").val(value);
-  $(".chosen-select").trigger("change");
-  $(".js--autoFocus").each(function() {
-    $(this).select2("open");
-  });
+  // var value = $("#distance_attempt_distance").val();
+  // $("form").trigger("reset");
+  // $("#distance_attempt_distance").val(value);
+  // $(".chosen-select").trigger("change");
+  // $(".js--autoFocus").each(function() {
+  //   $(this).select2("open");
+  // });
 
   $('#notice').empty();
   <%= render "load_competitor_details" %>
