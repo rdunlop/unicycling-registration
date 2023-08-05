@@ -25,7 +25,7 @@
     = form_for(@registrant, url: registrant_build_index_path(user_id: @user.id, registrant_id: "building")) do |f|
       = f.hidden_field :registrant_type
       = render partial: "shared/error_messages", object: @registrant
-      = render "registrantss/errors", registrant: @registrant
+      = render "registrants/build/errors", registrant: @registrant
 
       .row
         .small-12.columns

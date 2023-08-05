@@ -1,5 +1,5 @@
 = simple_form_for(@registrant, url: wizard_path, method: :put) do |f|
-  = render "registrants/errors", registrant: @registrant
+  = render "registrants/build/errors", registrant: @registrant
 
   .data_block
     - case @config.volunteer_option
