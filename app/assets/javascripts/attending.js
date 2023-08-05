@@ -4,7 +4,7 @@ $(document).ready(function() {
   var active_tab = el.data("active") || 0;
   $( "#tabs" )
     .show()
-    .tabs({ heightStyle: "auto", active: active_tab});
+    .tabs({ heightStyle: "content", active: active_tab});
 });
 
 $(document).on("click", ".primary_checkbox", function() {

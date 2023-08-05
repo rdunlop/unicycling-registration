@@ -71,12 +71,12 @@ class ChoicesValidator
     if event_selected && !reg_choice_chosen
       return true if event_choice.cell_type == "boolean"
 
-      @registrant.errors.add(:base, "#{event_choice} must be specified")
+      @registrant.errors.add(:base, "#{event_choice.event.category} - #{event_choice} must be specified")
       reg_choice&.errors&.add(:value, "")
       reg_choice&.errors&.add(:event_category_id, "")
       return false
     elsif !event_selected && reg_choice_chosen
-      @registrant.errors.add(:base, "#{event_choice} cannot be specified if the event isn't chosen")
+      @registrant.errors.add(:base, "#{event_choice.event.category} - #{event_choice} cannot be specified if the event isn't chosen")
       reg_choice&.errors&.add(:value, "")
       reg_choice&.errors&.add(:event_category_id, "")
       return false

@@ -3,6 +3,10 @@ class BestTimeFormatter::MinuteSecondFormatter
     "(m)m:ss.xx"
   end
 
+  def self.error_message
+    "must have minutes and seconds separated by ':', optionally followed by hundreds (xx)"
+  end
+
   def self.valid?(string)
     numbers = string.split(":")
     return false unless numbers.count == 2

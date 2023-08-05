@@ -3,6 +3,10 @@ class BestTimeFormatter::HourMinuteFormatter
     "h:mm"
   end
 
+  def self.error_message
+    "must have hours and minutes, separated by ':'"
+  end
+
   def self.valid?(string)
     numbers = string.split(":")
     return false unless numbers.count == 2
