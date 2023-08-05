@@ -1,5 +1,5 @@
 = form_for(@registrant, url: wizard_path, method: :put) do |f|
-  = render "errors", registrant: @registrant
+  = render "registrants/errors", registrant: @registrant
 
   .data_block
     = render partial: "/registrants/header_and_delete_button"
