@@ -14,14 +14,14 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.foundation
-//= require jquery-ui/sortable
-//= require jquery-ui/tabs
-//= require jquery-ui/tooltip
-//= require jquery-ui/effect-blind
-//= require jquery-ui/effect-drop
-//= require jquery-ui/effect-fade
-//= require jquery-ui/effect-highlight
-//= require jquery-ui/effect-slide
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/widgets/tabs
+//= require jquery-ui/widgets/tooltip
+//= require jquery-ui/effects/effect-blind
+//= require jquery-ui/effects/effect-drop
+//= require jquery-ui/effects/effect-fade
+//= require jquery-ui/effects/effect-highlight
+//= require jquery-ui/effects/effect-slide
 //= require foundation
 //= require select2
 //= require select2_locale_fr
@@ -136,7 +136,7 @@ var set_sortable = function() {
         },
         url: $('.drag_drop_sortable').data('target')});
     }
-  }).disableSelection();
+  });
 };
 $(document).ready(function(){
   set_sortable();
