@@ -15,7 +15,7 @@ class CategoriesValidator
     # EventCategory through Registrant#registrant_event_sign_up
 
     # THIS CODE mirrors what's in entries_matching_controller.js
-    chosen_event_categories = registrant.registrant_event_sign_ups.select(&:signed_up?).map(&:event_category)
+    chosen_event_categories = registrant.registrant_event_sign_ups.select(&:signed_up?).map(&:event_category).compact
 
     # Check Each category
     return if validate_categories(chosen_event_categories)

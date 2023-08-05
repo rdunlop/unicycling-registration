@@ -1,7 +1,9 @@
 $(() => $("[title]").filter(":not(.select2-selection__rendered)").tooltip({
   position: {
     at: "left bottom-10"
-  }
+  },
+  show: "false", // Necessary to fix https://github.com/jquery/jquery-ui/commit/2434dfd45d0805304e1db634d059feaa0bacf358
+  hide: "false"
 }));
 
 $(() => $("#show-option").tooltip({show: {

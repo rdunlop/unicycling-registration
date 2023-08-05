@@ -1,0 +1,16 @@
+-# arguments:
+-#   registrant
+- skip_errors = ["registrant_event_sign_ups.signed_up", "registrant_event_sign_ups.event_category_id", "gnder_male", "gender_female"]
+- filtered_errors = registrant.errors.reject { |error| skip_errors.include?(error.attribute.to_s) }
+- if filtered_errors.any?
+  #error_explanation
+    %h2
+      = pluralize(filtered_errors.count, "error")
+      prohibited this registrant from being saved:
+    %ul
+      - filtered_errors.each do |error|
+        - next if skip_errors.include?(error.attribute.to_s)
+        - if "#{error.attribute}" == "registrant_event_sign_ups.base"
+          %li= error.message
+        - else
+          %li= @registrant.errors.full_message(error.attribute, error.message )

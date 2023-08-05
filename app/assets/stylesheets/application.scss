@@ -30,6 +30,11 @@
  */
 @import "old_styles_list";
 
+// necessary to make the tabs look aligned to the contained table elements
+.ui-tabs .ui-tabs-nav {
+  padding-left: 1.4em;
+}
+
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
   min-width: 70px;
 }

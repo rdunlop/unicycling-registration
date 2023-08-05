@@ -5,6 +5,10 @@ class BestTimeFormatter::CentimeterFormatter
     "cm"
   end
 
+  def self.error_message
+    "Must be a number of centimeters between 0 and #{MAX_VALID_DISTANCE}"
+  end
+
   def self.valid?(string)
     return false unless string.to_i.to_s == string
 
