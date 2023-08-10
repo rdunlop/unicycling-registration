@@ -96,7 +96,7 @@ describe Registrants::BuildController do
         get :show, params: { registrant_id: registrant.to_param, id: "expenses" }
 
         assert_select "label", text: "What is your family?"
-        assert_select "input#registrant_expense_item_details", name: "registrant_expense_item[details]"
+        assert_select "textarea#registrant_expense_item_details", name: "registrant_expense_item[details]"
       end
     end
 
