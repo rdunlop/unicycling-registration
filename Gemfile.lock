@@ -362,7 +362,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.6.2)
+    json (2.6.3)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -502,8 +502,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    recaptcha (5.12.3)
-      json
+    recaptcha (5.15.0)
     redis (4.8.1)
     redis-actionpack (5.3.0)
       actionpack (>= 5, < 8)
