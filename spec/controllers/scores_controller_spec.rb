@@ -121,7 +121,7 @@ describe ScoresController do
       get :new, params: { judge_id: @judge.id, competitor_id: @comp.id }
 
       assert_select "h3", "Judge: #{@judge}"
-      assert_select "input[value=\"#{@signed_in_scores[0].val_1.to_s}\"]"
+      assert_select "input[value=\"#{@signed_in_scores[0].val_1}\"]"
       assert_select "td", text: @signed_in_scores[1].val_1.to_s, count: 1
     end
   end
