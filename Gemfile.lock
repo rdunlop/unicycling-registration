@@ -28,8 +28,15 @@ GIT
       railties (>= 3.1.0)
 
 GEM
-  remote: https://rubygems.org/
   remote: https://rails-assets.org/
+  specs:
+    rails-assets-datetimepicker (2.5.20)
+      rails-assets-jquery (>= 1.7.2)
+      rails-assets-jquery-mousewheel (>= 3.1.13)
+      rails-assets-php-date-formatter (>= 1.3.3)
+
+GEM
+  remote: https://rubygems.org/
   specs:
     acme-client (2.0.11)
       faraday (>= 1.0, < 3.0.0)
@@ -172,6 +179,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    base64 (0.1.1)
     bcrypt (3.1.17)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
@@ -317,8 +325,8 @@ GEM
       sprockets-es6 (>= 0.9.0)
     gaffe (1.2.0)
       rails (>= 4.0.0)
-    globalid (1.1.0)
-      activesupport (>= 5.0)
+    globalid (1.2.1)
+      activesupport (>= 6.1)
     haml (6.0.8)
       temple (>= 0.8.2)
       thor
@@ -370,6 +378,7 @@ GEM
     kaminari-core (1.2.2)
     kgio (2.11.4)
     kostya-sigar (2.0.10)
+    language_server-protocol (3.17.0.3)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -384,7 +393,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
-    minitest (5.19.0)
+    minitest (5.20.0)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -462,10 +471,6 @@ GEM
       activesupport (= 7.0.7.2)
       bundler (>= 1.15.0)
       railties (= 7.0.7.2)
-    rails-assets-datetimepicker (2.5.20)
-      rails-assets-jquery (>= 1.7.2)
-      rails-assets-jquery-mousewheel (>= 3.1.13)
-      rails-assets-php-date-formatter (>= 1.3.3)
     rails-assets-jquery (3.7.0)
     rails-assets-jquery-mousewheel (3.1.13)
       rails-assets-jquery (>= 1.2.2)
@@ -526,7 +531,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rolify (5.3.0)
     rollbar (3.4.0)
     ros-apartment (2.11.0)
@@ -562,23 +567,31 @@ GEM
     rspec-support (3.12.0)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (0.93.1)
+    rubocop (1.56.3)
+      base64 (~> 0.1.1)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
-      parser (>= 2.7.1.5)
+      parser (>= 3.2.2.3)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8)
-      rexml
-      rubocop-ast (>= 0.6.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 2.0)
+      unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
+    rubocop-capybara (2.18.0)
+      rubocop (~> 1.41)
+    rubocop-factory_bot (2.23.1)
+      rubocop (~> 1.33)
     rubocop-rails (2.2.1)
       rack (>= 1.1)
       rubocop (>= 0.72.0)
-    rubocop-rspec (1.44.1)
-      rubocop (~> 0.87)
-      rubocop-ast (>= 0.7.1)
+    rubocop-rspec (2.24.0)
+      rubocop (~> 1.33)
+      rubocop-capybara (~> 2.17)
+      rubocop-factory_bot (~> 2.22)
     ruby-ole (1.2.12.2)
     ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
@@ -662,7 +675,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.8.0)
+    unicode-display_width (2.4.2)
     unicode_utils (1.4.0)
     unicorn (6.1.0)
       kgio (~> 2.6)
@@ -766,7 +779,7 @@ DEPENDENCIES
   rspec-instafail
   rspec-rails
   rspec_junit_formatter
-  rubocop (= 0.93.1)
+  rubocop (= 1.56.3)
   rubocop-rails
   rubocop-rspec
   rubyzip
