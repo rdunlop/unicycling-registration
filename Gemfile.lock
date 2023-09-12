@@ -28,8 +28,15 @@ GIT
       railties (>= 3.1.0)
 
 GEM
-  remote: https://rubygems.org/
   remote: https://rails-assets.org/
+  specs:
+    rails-assets-datetimepicker (2.5.20)
+      rails-assets-jquery (>= 1.7.2)
+      rails-assets-jquery-mousewheel (>= 3.1.13)
+      rails-assets-php-date-formatter (>= 1.3.3)
+
+GEM
+  remote: https://rubygems.org/
   specs:
     acme-client (2.0.11)
       faraday (>= 1.0, < 3.0.0)
@@ -252,7 +259,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.2)
-    connection_pool (2.3.0)
+    connection_pool (2.4.1)
     consistency_fail (0.3.7)
     countries (3.1.0)
       i18n_data (~> 0.11.0)
@@ -462,10 +469,6 @@ GEM
       activesupport (= 7.0.7.2)
       bundler (>= 1.15.0)
       railties (= 7.0.7.2)
-    rails-assets-datetimepicker (2.5.20)
-      rails-assets-jquery (>= 1.7.2)
-      rails-assets-jquery-mousewheel (>= 3.1.13)
-      rails-assets-php-date-formatter (>= 1.3.3)
     rails-assets-jquery (3.7.0)
     rails-assets-jquery-mousewheel (3.1.13)
       rails-assets-jquery (>= 1.2.2)
@@ -509,6 +512,8 @@ GEM
     redis-activesupport (5.3.0)
       activesupport (>= 3, < 8)
       redis-store (>= 1.3, < 2)
+    redis-client (0.17.0)
+      connection_pool
     redis-namespace (1.11.0)
       redis (>= 4)
     redis-rack (2.1.4)
@@ -604,10 +609,11 @@ GEM
     select2-rails (4.0.13)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.5.7)
-      connection_pool (>= 2.2.5)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
+    sidekiq (7.1.3)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -774,7 +780,7 @@ DEPENDENCIES
   sassc-rails
   select2-rails
   shoulda-matchers
-  sidekiq (< 7)
+  sidekiq (< 8)
   simple_form
   spreadsheet
   sprockets (< 4)
