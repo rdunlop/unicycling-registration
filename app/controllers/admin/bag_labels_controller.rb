@@ -9,6 +9,8 @@ class Admin::BagLabelsController < ApplicationController
       @registrants = @registrants.includes(:expense_items)
     end
 
+    label_type = params[:label_type] || "Avery5160"
+
     names = []
 
     @registrants.each do |reg|
@@ -24,7 +26,7 @@ class Admin::BagLabelsController < ApplicationController
       names << record
     end
 
-    labels = Prawn::Labels.render(names, type: "Avery5160", shrink_to_fit: true) do |pdf, name|
+    labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       set_font(pdf)
 
       pdf.text name, align: :center, inline_format: true

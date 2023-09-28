@@ -2,13 +2,13 @@
 
 %p Print labels for applying to registration bags
 
-%p The label format is Avery 5160
-
 = form_tag url: bag_labels_path, method: :post do
   .row
-    .small-10.columns.right_aligned
+    .small-6.columns
+      = label_tag :label_type, "Label paper format"
+      = select_tag :label_type, options_for_select(["Avery5160", "L7161"])
+    .small-4.columns.right_aligned
       = label_tag :display_expenses, "Display Expenses On Label"
-    .small-2.columns
       = check_box_tag :display_expenses, false
   .row
     .small-12.columns
