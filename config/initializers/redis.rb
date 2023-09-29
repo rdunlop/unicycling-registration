@@ -12,8 +12,7 @@ class Redis
 
   def self.sidekiq_configuration
     configuration do |config|
-      # Provided by redis-namespace gem
-      config[:namespace] = 'SIDEKIQ'
+      config[:db] += 1
     end
   end
 
