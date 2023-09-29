@@ -78,7 +78,7 @@ module Workspace
     config.redis_host = ENV["REDIS_HOST"]
     config.redis_port = ENV["REDIS_PORT"]
     # db: 0 # if you have sidekiq for different rails-databases running against the same redis, increment this for each
-    config.redis_db = ENV["REDIS_DB"]
+    config.redis_db = ENV["REDIS_DB"].to_i
 
     # where to send users who want to do translations of the registration system
     config.translation_website_url = ENV["TRANSLATION_WEBSITE_URL"]
