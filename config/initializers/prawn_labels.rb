@@ -12,14 +12,14 @@ Prawn::Labels.types = {
   },
   "Avery5293" => {
     "paper_size" => "LETTER",
-    "top_margin" => 38.23,
+    "top_margin" => 38.23,  # 0.47 inch (DPI => ~.53 inch)
     "bottom_margin" => 38.23,
-    "left_margin" => 32.23,
+    "left_margin" => 32.23, # 0.44 inch (DPI => ~.447 inch)
     "right_margin" => 26.23,
     "columns" => 4,
     "rows" => 6,
-    "column_gutter" => 32.152,
-    "row_gutter" => 6.152
+    "column_gutter" => 32.152, # ~ 3/8 inch (0.375 inch) (DPI => ~.446 inch)
+    "row_gutter" => 6.152 # 1/16 inch
   },
   "Avery8293" => {
     "paper_size" => "LETTER",
@@ -50,7 +50,7 @@ Prawn::Labels.types = {
     "top_margin" => 36,      # 0.5 inch
     "bottom_margin" => 36,   # 0.5 inch
     "column_gutter" => 18, # 0.05 inch + 0.2 inch padding
-    "left_margin" => 41.4, # 0.475 inch + 0.1 inch padding
+    "left_margin" => 41.4, # 0.475 inch + 0.1 inch padding (0.1 inch => 7.2 DPI)
     "right_margin" => 41.4 # 0.475 inch + 0.1 inch padding
   },
   "LS3639" => {
@@ -63,5 +63,16 @@ Prawn::Labels.types = {
     "row_gutter" => 42.38,
     "left_margin" => 74.3, # 0.89 inch + 0.1 inch padding
     "right_margin" => 74.3 # 0.89 inch + 0.1 inch padding
+  },
+  "L7161" => {
+    "paper_size" => "A4",
+    "columns" => 3,
+    "rows" => 6,
+    "top_margin" => 25.6, # 0.31 inch => 22.32 DPI + 0.06 padding
+    "bottom_margin" => 25.6,
+    "column_gutter" => 16.2, # 1/8 inch + 0.1 inch padding (9 DPI + 7.2 DPI)
+    "row_gutter" => 4.5, # 1/16 inch
+    "left_margin" => 27.36, # 0.28 inch + 0.1 inch padding (20.16 DPI + 7.2 DPI)
+    "right_margin" => 27.36 #
   }
 }
