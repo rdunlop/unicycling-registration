@@ -49,8 +49,9 @@ processes:
         every: 20 seconds
         below: 700 megabytes
     config:
-      start_command: bundle exec sidekiq --daemon --config config/sidekiq.yml --logfile log/sidekiq.log
-      stop_command: bundle exec sidekiqctl shutdown tmp/pids/sidekiq.pid
+      daemonize: true
+      start_command: bundle exec sidekiq --config config/sidekiq.yml
+      stop_command: "kill -TERM {PID}"
       stdall: log/sidekiq.log
       pid_file: tmp/pids/sidekiq.pid
       notify:
