@@ -223,7 +223,7 @@ GEM
     carrierwave-aws (1.6.0)
       aws-sdk-s3 (~> 1.0)
       carrierwave (>= 2.0, < 4)
-    carrierwave-i18n (0.2.0)
+    carrierwave-i18n (0.3.0)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
