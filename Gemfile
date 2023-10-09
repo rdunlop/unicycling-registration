@@ -84,7 +84,7 @@ gem 'ros-apartment-sidekiq', require: 'apartment-sidekiq'
 # Model utils
 gem 'acts_as_list'
 gem 'carrierwave'
-gem 'carrierwave-aws', '1.5.0'
+gem 'carrierwave-aws', '1.6.0'
 gem 'carrierwave-i18n'
 gem 'globalize', github: 'globalize/globalize', branch: 'main'
 gem 'nilify_blanks'
