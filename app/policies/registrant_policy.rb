@@ -117,7 +117,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def undelete?
-    super_admin?
+    event_planner? || super_admin?
   end
 
   def really_destroy?
