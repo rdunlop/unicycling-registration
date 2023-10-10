@@ -61,18 +61,29 @@ Prawn::Labels.types = {
     "bottom_margin" => 84.6,
     "column_gutter" => 32.5,
     "row_gutter" => 42.38,
-    "left_margin" => 74.3, # 0.89 inch + 0.1 inch padding
+    "left_margin" => 74.3, # 0.89 inch + 0.1 inch padding => 64.08 DPI + 10.22 DPI (~1.4inch)
     "right_margin" => 74.3 # 0.89 inch + 0.1 inch padding
   },
   "L7161" => {
     "paper_size" => "A4",
     "columns" => 3,
     "rows" => 6,
-    "top_margin" => 25.6, # 0.31 inch => 22.32 DPI + 0.06 padding
+    "top_margin" => 25.6, # 0.31 inch + 0.06 inch padding => 22.32 DPI + 4.32 DPI
     "bottom_margin" => 25.6,
     "column_gutter" => 16.2, # 1/8 inch + 0.1 inch padding (9 DPI + 7.2 DPI)
     "row_gutter" => 4.5, # 1/16 inch
     "left_margin" => 27.36, # 0.28 inch + 0.1 inch padding (20.16 DPI + 7.2 DPI)
-    "right_margin" => 27.36 #
+    "right_margin" => 27.36
+  },
+  "L7651" => {
+    "paper_size" => "A4",
+    "columns" => 5,
+    "rows" => 13,
+    "top_margin" => 30.96, # 0.38 inch + 0.05 inch padding => 27.36 DPI + 3.6 DPI
+    "bottom_margin" => 30.96,
+    "column_gutter" => 16.2, # 1/8 inch + 0.1 inch padding (9 DPI + 7.2 DPI)
+    "row_gutter" => 4.5, # 1/16 inch
+    "left_margin" => 20.16, # 0.18 inch + 0.1 inch padding (12.96 DPI + 7.2 DPI)
+    "right_margin" => 20.16
   }
 }
