@@ -33,6 +33,9 @@
           .small-6.columns
             = label_tag :skip_positions, "Skip Positions"
             = number_field_tag :skip_positions, nil, {min: 0}
+          .small-6.columns
+            = label_tag :show_gridlines, "Show Gridlines"
+            = check_box_tag :show_gridlines
         .row
           .small-12.medium-4.columns
             Square Labels (3 columns, 10 rows)
