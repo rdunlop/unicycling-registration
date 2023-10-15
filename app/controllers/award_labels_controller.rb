@@ -208,12 +208,17 @@ class AwardLabelsController < ApplicationController
     # NOTE: The important part is the "shrink_to_fit" which means that any amount of text will work,
     #  and it will wrap lines as necessary, and then shrink the text.
     # NOTE: The `label_type` must match something in the config/initializers/prawn_labels.rb
-    labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
+    labels = Prawn::Labels.new(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       set_font(pdf)
       pdf.text name, align: :center, inline_format: true, valign: :center
     end
+    if params[:show_gridlines].present?
+      labels.document.go_to_page(1)
+      labels.document.grid.show_all
+    end
+    result = labels.document.render
 
-    send_data labels, filename: "labels-#{Time.current}.pdf", type: "application/pdf"
+    send_data result, filename: "labels-#{Time.current}.pdf", type: "application/pdf"
   end
 
   def announcer_sheet
