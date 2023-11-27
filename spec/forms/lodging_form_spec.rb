@@ -291,6 +291,18 @@ describe LodgingForm do
             expect(packages.first).to eq(package)
           end
         end
+
+        context "with a refunded paid element" do
+          let(:payment) { FactoryBot.create(:payment, :completed) }
+          let!(:refund) { FactoryBot.create(:refund_detail, payment_detail: payment_detail) }
+
+          it "returns an empty array" do
+            competitor.reload
+            packages = described_class.paid_for(competitor)
+
+            expect(packages.count).to eq(0)
+          end
+        end
       end
     end
   end
