@@ -1,4 +1,5 @@
 class BestTimesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_and_authorize_event_category
   before_action :add_breadcrumbs
 
