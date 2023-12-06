@@ -69,7 +69,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   if Rails.configuration.redis_host
-    config.cache_store = :redis_store, Redis.cache_configuration
+    config.cache_store = :redis_cache_store, Redis.cache_configuration
   end
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
