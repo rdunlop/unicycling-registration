@@ -20,7 +20,7 @@ Workspace::Application.configure do
   config.action_controller.perform_caching = true
 
   if Rails.configuration.redis_host
-    config.cache_store = :redis_store, Redis.cache_configuration
+    config.cache_store = :redis_cache_store, Redis.cache_configuration
   end
 
   # Don't care if the mailer can't send.
