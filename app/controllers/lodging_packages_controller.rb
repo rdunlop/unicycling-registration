@@ -1,4 +1,5 @@
 class LodgingPackagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_registrant
 
   # /:registrant_id/lodging_packages/:lodging_package_id
