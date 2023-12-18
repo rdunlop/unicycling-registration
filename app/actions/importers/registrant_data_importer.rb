@@ -62,7 +62,7 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   # Throws an exception if not valid
   def build_and_save_imported_result(registrant_hash, user)
     registrant = find_existing_registrant(registrant_hash)
-    registrant.gender = if registrant_hash[:gender] == "m"
+    registrant.registered_gender = if registrant_hash[:gender] == "m"
                           "Male"
                         else
                           "Female"
