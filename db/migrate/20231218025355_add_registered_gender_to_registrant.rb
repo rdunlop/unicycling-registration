@@ -6,6 +6,5 @@ class AddRegisteredGenderToRegistrant < ActiveRecord::Migration[7.0]
         execute "UPDATE registrants SET registered_gender = gender"
       end
     end
-
   end
 end
