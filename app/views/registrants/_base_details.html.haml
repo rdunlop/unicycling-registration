@@ -10,7 +10,28 @@
       .row
         = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true}, class: "small-4 columns"
   .competitor_show.noncompetitor_show.row
+    .small-2.columns
+      = t('.gender')
+    .small-10.columns
+      = f.radio_button :registered_gender, 'Male'
+      = f.label :gender_male, t('.male'), :class => "required"
+      = f.radio_button :registered_gender, 'Female'
+      = f.label :gender_female, t('.female'), :class => "required"
+      = f.radio_button :registered_gender, 'Other'
+      = f.label :gender_other, t('.other'), :class => "required"
+
+    -# If registered_gender is "Other", present a sub-selection
+    -# which allows selection of the competitive_gender
+    -#
+    -# If the registered_gender is Male or Female, the competitive_gender
+    -# Is always set to Male or Female respectively
+  .competitor_show.noncompetitor_show.row
     .small-12.columns
+      = t('.registered_gender_description')
+  .competitor_show.noncompetitor_show.row
+    .small-2.columns
+      = t('.competitive_gender')
+    .small-10.columns
       = f.radio_button :gender, 'Male'
       = f.label :gender_male, t('.male'), :class => "required"
       = f.radio_button :gender, 'Female'
