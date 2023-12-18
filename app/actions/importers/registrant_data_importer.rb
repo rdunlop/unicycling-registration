@@ -63,10 +63,10 @@ class Importers::RegistrantDataImporter < Importers::BaseImporter
   def build_and_save_imported_result(registrant_hash, user)
     registrant = find_existing_registrant(registrant_hash)
     registrant.registered_gender = if registrant_hash[:gender] == "m"
-                          "Male"
-                        else
-                          "Female"
-                        end
+                                     "Male"
+                                   else
+                                     "Female"
+                                   end
     registrant.user = user
     registrant.status = "base_details"
     registrant.save!
