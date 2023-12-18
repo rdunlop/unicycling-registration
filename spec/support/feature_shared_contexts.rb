@@ -119,7 +119,11 @@ shared_context 'basic registrant data' do
     select 'May',   from: 'registrant_birthday_2i'
     select '20',    from: 'registrant_birthday_3i'
     select '1982',  from: 'registrant_birthday_1i'
-    choose 'Male'
+
+    # Temporary, until we add JS to hide the 2nd 'Male' option.
+    # since there are 2 'Male' options initially
+    choose 'registrant_registered_gender_male'
+
     sleep 1 # needed or else the feature spec fails to register that the "Male" has been selected.
   end
 end
