@@ -12,11 +12,19 @@ class SampleData::RegistrantsController < SampleData::BaseController
     num_registrants = params[:number].to_i
     resu_errors = 0
     num_registrants.times do
+      registered_gender = ["Male", "Female", "Other"].sample
+      gender = if registered_gender == "Other"
+                 ["Male", "Female"].sample
+               else
+                 registered_gender
+               end
+
       registrant = Registrant.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         birthday: Faker::Date.between(from: 5.years.ago, to: 55.years.ago),
-        gender: ["Male", "Female"].sample,
+        gender: gender,
+        registered_gender: registered_gender,
         registrant_type: "competitor",
         ineligible: false,
         rules_accepted: true,
