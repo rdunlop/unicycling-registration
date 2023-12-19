@@ -88,7 +88,7 @@
         return;
       }
 
-      $fields = $form.find(settings.fieldSelector);
+      var $fields = $form.find(settings.fieldSelector);
 
       if (settings.addRemoveFieldsMarksDirty) {              
         // Check if field count has changed
@@ -100,6 +100,7 @@
       }
 
       // Brute force - check each field
+      var $field;
       var isDirty = false;
       $fields.each(function() {
         $field = $(this);
@@ -156,7 +157,7 @@
     if (!settings.silent && !window.aysUnloadSet) {
       window.aysUnloadSet = true;
       $(window).bind('beforeunload', function() {
-        $dirtyForms = $("form").filter('.' + settings.dirtyClass);
+        var $dirtyForms = $("form").filter('.' + settings.dirtyClass);
         if ($dirtyForms.length == 0) {
           return;
         }
