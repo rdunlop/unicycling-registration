@@ -8,12 +8,12 @@ $(function() {
       scrollInput: false,
       defaultDate: ''
     };
-    if ($(el).data("min-date").length > 0) {
+    if ($(el).data("min-date") !== undefined) {
       options["minDate"] = $(el).data("min-date")
       options["startDate"] = options["minDate"]
     }
 
-    if ($(el).data("max-date").length > 0) {
+    if ($(el).data("max-date") !== undefined) {
       options["maxDate"] = $(el).data("max-date")
     }
 
