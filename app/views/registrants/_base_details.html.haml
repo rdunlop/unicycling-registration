@@ -13,26 +13,32 @@
     .small-2.columns
       = t('.gender')
     .small-10.columns
-      = f.radio_button :registered_gender, 'Male'
-      = f.label :gender_male, t('.male'), :class => "required"
-      = f.radio_button :registered_gender, 'Female'
-      = f.label :gender_female, t('.female'), :class => "required"
-      = f.radio_button :registered_gender, 'Other'
-      = f.label :gender_other, t('.other'), :class => "required"
+      = f.radio_button :registered_gender, 'Male', class: "js--displayIfChecked"
+      = f.label :registered_gender_male, t('.male'), :class => "required"
+      = f.radio_button :registered_gender, 'Female', class: "js--displayIfChecked"
+      = f.label :registered_gender_female, t('.female'), :class => "required"
+      = f.radio_button :registered_gender, 'Other', class: "js--displayIfChecked", data: { displayblock: "competitive_gender" }
+      = f.label :registered_gender_other, t('.other'), :class => "required"
 
     -# If registered_gender is "Other", present a sub-selection
     -# which allows selection of the competitive_gender
     -#
     -# If the registered_gender is Male or Female, the competitive_gender
     -# Is always set to Male or Female respectively
-  .competitor_show.noncompetitor_show.row
-    .small-12.columns
-      = t('.registered_gender_description')
-  .competitor_show.noncompetitor_show.row
-    .small-2.columns
-      = t('.competitive_gender')
-    .small-10.columns
-      = f.radio_button :gender, 'Male'
-      = f.label :gender_male, t('.male'), :class => "required"
-      = f.radio_button :gender, 'Female'
-      = f.label :gender_female, t('.female'), :class => "required"
+  .competitive_gender
+    .competitor_show.noncompetitor_show.row
+      .small-12.columns
+        = t('.registered_gender_description_1')
+        %br
+        = t('.registered_gender_description_2')
+        %br
+        = t('.registered_gender_description_3')
+
+    .competitor_show.noncompetitor_show.row
+      .small-2.columns
+        = t('.competitive_gender')
+      .small-10.columns
+        = f.radio_button :gender, 'Male'
+        = f.label :gender_male, t('.male'), :class => "required"
+        = f.radio_button :gender, 'Female'
+        = f.label :gender_female, t('.female'), :class => "required"

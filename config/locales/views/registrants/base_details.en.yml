@@ -10,11 +10,11 @@ en:
       required_fields: Required fields
       gender: Gender
       competitive_gender: Competitive Gender
-      registered_gender_description: We are committed to making our unicycling events inclusive events for all unicyclists.
+      registered_gender_description_1: We are committed to making our unicycling events inclusive events for all unicyclists.
         We seek to provide events free from discrimination of any type. We recognize that meeting this goal may take some changes.
 
-        As a first step, we have added a third gender category to registration ("Other"). You can now select Male, Female, or Other.
+      registered_gender_description_2: As a first step, we have added a third gender category to registration ("Other"). You can now select Male, Female, or Other.
 
-        However, we are constrained by the current IUF Rulebook regarding competition gender divisions.
+      registered_gender_description_3: However, we are constrained by the current IUF Rulebook regarding competition gender divisions.
         So when choosing "Other", participants need to select a gender to compete with.
         You may select whichever gender you want to compete as.
