@@ -131,9 +131,16 @@ class Registrant < ApplicationRecord
   validates :first_name, :last_name, :sorted_last_name, presence: true
   validates :user, presence: true
 
+  # Whenever possible, we should use competitive_gender
+  # instead of gender, to make it clear and extensible for future
+  # rule/ranking changes
+  alias_attribute :competitive_gender, :gender
+
   # necessary for comp/non-comp only (not spectators):
   with_options if: :comp_noncomp_past_step_1? do
+    before_validation :set_gender_from_registered_gender
     validates :birthday, :gender, presence: true
+    validates :registered_gender, inclusion: { in: %w[Male Female Other], message: "%{value} must be either 'Male', 'Female', or 'Other'" }
     validates :gender, inclusion: { in: %w[Male Female], message: "%{value} must be either 'Male' or 'Female'" }
     validate  :gender_present
     before_validation :set_age
@@ -678,7 +685,19 @@ class Registrant < ApplicationRecord
     end
   end
 
+  def set_gender_from_registered_gender
+    if registered_gender == 'Male' || registered_gender == 'Female'
+      self.gender = registered_gender
+    end
+  end
+
   def gender_present
+    if registered_gender.blank?
+      errors.add(:registered_gender_male, "") # Cause the label to be highlighted
+      errors.add(:registered_gender_female, "") # Cause the label to be highlighted
+      errors.add(:registered_gender_other, "") # Cause the label to be highlighted
+      return # don't check/highlight gender if registered_gender is blank
+    end
     if gender.blank?
       errors.add(:gender_male, "") # Cause the label to be highlighted
       errors.add(:gender_female, "") # Cause the label to be highlighted

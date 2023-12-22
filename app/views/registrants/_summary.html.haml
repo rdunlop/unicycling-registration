@@ -10,8 +10,11 @@
       = @registrant.middle_initial
       = @registrant.last_name
     %p.competitor_show.noncompetitor_show
-      %b= t(".gender")
-      = @registrant.gender
+      %b= t(".registered_gender")
+      = @registrant.registered_gender
+      - if @registrant.registered_gender != @registrant.competitive_gender
+        %b= t(".competitive_gender")
+        = @registrant.competitive_gender
 
       %b= t(".birthday")
       = @registrant.birthday.try(:strftime, "%d-%b-%Y")

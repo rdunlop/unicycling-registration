@@ -5,7 +5,8 @@ en:
       age: Age
       birthday: Birthday
       default_wheel_size: Default Track Racing Wheel Size
-      gender: Gender
+      competitive_gender: Competitive Gender
+      registered_gender: Gender
       name: Name
       registration_summary: Registration Summary
       user_account_email: User Account Email

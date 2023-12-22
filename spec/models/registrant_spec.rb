@@ -176,8 +176,8 @@ describe Registrant do
       expect(@reg.valid?).to eq(false)
     end
 
-    it "requires gender" do
-      @reg.gender = nil
+    it "requires registered_gender" do
+      @reg.registered_gender = nil
       expect(@reg.valid?).to eq(false)
     end
 
@@ -186,13 +186,13 @@ describe Registrant do
     end
 
     it "has either Male or Female gender" do
-      @reg.gender = "Male"
+      @reg.registered_gender = "Male"
       expect(@reg.valid?).to eq(true)
 
-      @reg.gender = "Female"
+      @reg.registered_gender = "Female"
       expect(@reg.valid?).to eq(true)
 
-      @reg.gender = "Other"
+      @reg.registered_gender = "None"
       expect(@reg.valid?).to eq(false)
     end
 

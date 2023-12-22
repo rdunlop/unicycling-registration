@@ -5,7 +5,7 @@ de:
       age: Alter
       birthday: Geburtstag
       default_wheel_size: Standard Radgröße für Bahnrennen
-      gender: Geschlecht
+      registered_gender: Geschlecht
       name: Name
       registration_summary: Anmelde Zusammenfassung
       user_account_email: Benutzer Email

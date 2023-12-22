@@ -171,7 +171,7 @@ class Registrants::BuildController < ApplicationController
   end
 
   def attributes
-    [:first_name, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
+    [:first_name, :registered_gender, :gender, :last_name, :middle_initial, :birthday, :registrant_type, :volunteer,
      :online_waiver_signature, :online_waiver_acceptance, :wheel_size_id, :rules_accepted,
      :medical_certificate, :medical_questionnaire_filled_out, :medical_questionnaire_attest_all_no,
      volunteer_opportunity_ids: [],
