@@ -122,7 +122,8 @@ shared_context 'basic registrant data' do
 
     # Temporary, until we add JS to hide the 2nd 'Male' option.
     # since there are 2 'Male' options initially
-    choose 'registrant_registered_gender_male'
+    # choose 'registrant_registered_gender_male'
+    choose 'Male'
 
     sleep 1 # needed or else the feature spec fails to register that the "Male" has been selected.
   end

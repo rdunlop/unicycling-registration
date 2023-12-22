@@ -5,7 +5,7 @@ fr:
       age: Âge
       birthday: Date de naissance
       default_wheel_size: Default Wheel Size
-      gender: Sexe
+      registered_gender: Sexe
       name: Nom
       registration_summary: Résumé de l’inscription
       user_account_email: E-mail d'utilisateur
