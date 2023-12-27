@@ -4,9 +4,9 @@
   %div.row
     = render :partial => "/registrants/name", :locals => {:f => f }
   .competitor_show.noncompetitor_show.row
-    .small-3.columns
+    .small-2.columns
       = f.label :birthday, t(".birthday"), :class => "required inline"
-    .small-9.columns
+    .small-10.columns
       .row
         = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true}, class: "small-4 columns"
   .competitor_show.noncompetitor_show.row
