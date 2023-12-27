@@ -2,7 +2,7 @@
 = simple_form_for(registrant_best_time, url: event_category_best_time_path(event_category, registrant.id), method: :put, remote: true) do |f|
   = f.hidden_field :id
   = f.input :source_location
-  = f.input :formatted_value, placeholder: registrant_best_time.hint
+  = f.input :formatted_value, hint: "Format: #{registrant_best_time.hint}"
   = f.submit "Update", class: "button", data: { disable_with: false }
 
 - if registrant_best_time.persisted?

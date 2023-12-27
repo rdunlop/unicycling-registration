@@ -1,6 +1,6 @@
-.small-4.columns
-  = f.label :last_name, t(".name"), :class => "required"
-.small-4.columns
-  = f.text_field :last_name, :placeholder => t(".last_name"), :size => 15, :autofocus => "true"
-.small-4.columns
-  = f.text_field :first_name, :placeholder => t(".first_name"), :size => 12
+.small-2.columns
+  %b= t(".name")
+.small-5.columns
+  = f.input :last_name, autofocus: true
+.small-5.columns
+  = f.input :first_name

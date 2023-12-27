@@ -1,8 +1,8 @@
 .small-2.columns.inline
-  = f.label :first_name, t('.name'), :class => "required"
+  = t('.name')
 .small-4.columns
-  = f.text_field :first_name, :placeholder => t(".first_name"), :size => 12, :autofocus => "true"
+  = f.input :first_name, size: 12, autofocus: true
 .small-2.column
-  = f.text_field :middle_initial, :size => 1
+  = f.input :middle_initial
 .small-4.columns
-  = f.text_field :last_name, :placeholder => t(".last_name"), :size => 15
+  = f.input :last_name
