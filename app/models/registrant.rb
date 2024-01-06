@@ -137,12 +137,14 @@ class Registrant < ApplicationRecord
   alias_attribute :competitive_gender, :gender
 
   # necessary for comp/non-comp only (not spectators):
+  PRONOUNS_SHE_HER = "She/her".freeze
+  PRONOUNS_THEY_THEM = "They/them".freeze
+  PRONOUNS_HE_HIM = "He/him".freeze
+  PRONOUNS_OTHER = "Other (please specify)".freeze
   with_options if: :comp_noncomp_past_step_1? do
-    before_validation :set_gender_from_registered_gender
     validates :birthday, :gender, presence: true
-    validates :registered_gender, inclusion: { in: %w[Male Female Other], message: "%{value} must be either 'Male', 'Female', or 'Other'" }
+    validates :pronouns, inclusion: { in: [PRONOUNS_SHE_HER, PRONOUNS_THEY_THEM, PRONOUNS_HE_HIM, PRONOUNS_OTHER], message: "%{value} must be chosen" }
     validates :gender, inclusion: { in: %w[Male Female], message: "%{value} must be either 'Male' or 'Female'" }
-    validate  :gender_present
     before_validation :set_age
     validates :age, presence: true
   end
@@ -338,6 +340,12 @@ class Registrant < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def pronouns_display
+    return pronouns unless pronouns == PRONOUNS_OTHER
+
+    other_pronoun.presence || "N/A"
   end
 
   def email
@@ -682,25 +690,6 @@ class Registrant < ApplicationRecord
       if all_line_items.none? { |line_item| line_item.try(:expense_group) == expense_group }
         errors.add(:base, "You must choose an item from #{expense_group}")
       end
-    end
-  end
-
-  def set_gender_from_registered_gender
-    if registered_gender == 'Male' || registered_gender == 'Female'
-      self.gender = registered_gender
-    end
-  end
-
-  def gender_present
-    if registered_gender.blank?
-      errors.add(:registered_gender_male, "") # Cause the label to be highlighted
-      errors.add(:registered_gender_female, "") # Cause the label to be highlighted
-      errors.add(:registered_gender_other, "") # Cause the label to be highlighted
-      return # don't check/highlight gender if registered_gender is blank
-    end
-    if gender.blank?
-      errors.add(:gender_male, "") # Cause the label to be highlighted
-      errors.add(:gender_female, "") # Cause the label to be highlighted
     end
   end
 

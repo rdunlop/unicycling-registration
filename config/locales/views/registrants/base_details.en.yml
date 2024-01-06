@@ -6,15 +6,15 @@ en:
       birthday: Birthday
       female: Female
       male: Male
-      other: Other
+      pronouns: Pronouns
+      pronoun_he_him: He/him
+      pronoun_they_them: They/them
+      pronoun_she_her: She/her
+      pronoun_other: Other (please specify)
       required_fields: Required fields
-      gender: Gender
       competitive_gender: Competitive Gender
-      registered_gender_description_1: We are committed to making our unicycling events inclusive events for all unicyclists.
-        We seek to provide events free from discrimination of any type. We recognize that meeting this goal may take some changes.
+      registered_gender_description_1: Please note that at this time Unicon has  only two competition categories, separated by gender (Male and Female), as per the current IUF Rulebook.
 
-      registered_gender_description_2: As a first step, we have added a third gender category to registration ("Other"). You can now select Male, Female, or Other.
+      registered_gender_description_2: We are committed to making unicycle events inclusive for all unicyclists, and will be looking into alternative solutions for future Competitions and Unicons. If you don't identify as either gender, you may select a category as per your preferences.
 
-      registered_gender_description_3: However, we are constrained by the current IUF Rulebook regarding competition gender divisions.
-        So when choosing "Other", participants need to select a gender to compete with.
-        You may select whichever gender you want to compete as.
+      registered_gender_description_3: For questions about competition categories and the rules surrounding them; please reach out to us through the "Contact Us" below.

@@ -1,5 +1,7 @@
 .required= t(".required_fields")
-%fieldset.data_block
+- content_for :importmap_modules do
+  = javascript_import_module_tag "controllers"
+%fieldset.data_block{ data: { controller: "pronouns-gender", pronouns_gender_gender_element_name_value: "registrant[gender]" } }
   %legend= t(".base_details")
   %div.row
     = render :partial => "/registrants/name", :locals => {:f => f }
@@ -11,34 +13,37 @@
         = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true}, class: "small-4 columns"
   .competitor_show.noncompetitor_show.row
     .small-2.columns
-      = t('.gender')
+      = t('.pronouns')
     .small-10.columns
-      = f.radio_button :registered_gender, 'Male', class: "js--displayIfChecked"
-      = f.label :registered_gender_male, t('.male'), :class => "required"
-      = f.radio_button :registered_gender, 'Female', class: "js--displayIfChecked"
-      = f.label :registered_gender_female, t('.female'), :class => "required"
-      = f.radio_button :registered_gender, 'Other', class: "js--displayIfChecked", data: { displayblock: "competitive_gender" }
-      = f.label :registered_gender_other, t('.other'), :class => "required"
+      = f.radio_button :pronouns, Registrant::PRONOUNS_SHE_HER, class: "js--displayIfChecked", data: { pronouns_gender_target: "pronounElement", pronouns_gender_value: "Female" }
+      = f.label :pronouns_sheher, t('.pronoun_she_her'), :class => "required"
+      = f.radio_button :pronouns, Registrant::PRONOUNS_THEY_THEM, class: "js--displayIfChecked", data: { pronouns_gender_target: "pronounElement" }
+      = f.label :pronouns_theythem, t('.pronoun_they_them'), :class => "required"
+      = f.radio_button :pronouns, Registrant::PRONOUNS_HE_HIM, class: "js--displayIfChecked", data: { pronouns_gender_target: "pronounElement", pronouns_gender_value: "Male" }
+      = f.label :pronouns_hehim, t('.pronoun_he_him'), :class => "required"
+      = f.radio_button :pronouns, Registrant::PRONOUNS_OTHER, class: "js--displayIfChecked", data: { displayblock: "other_pronoun",pronouns_gender_target: "pronounElement" }
+      = f.label :pronouns_other_please_specify, t('.pronoun_other'), :class => "required"
+      -# If pronouns is "Other", present a sub-selection
+      -# which allows inputting pronouns
+      .other_pronoun
+        = f.input :other_pronoun
 
-    -# If registered_gender is "Other", present a sub-selection
-    -# which allows selection of the competitive_gender
     -#
-    -# If the registered_gender is Male or Female, the competitive_gender
-    -# Is always set to Male or Female respectively
-  .competitive_gender
-    .competitor_show.noncompetitor_show.row
-      .small-12.columns
-        = t('.registered_gender_description_1')
-        %br
-        = t('.registered_gender_description_2')
-        %br
-        = t('.registered_gender_description_3')
-
-    .competitor_show.noncompetitor_show.row
-      .small-2.columns
-        = t('.competitive_gender')
-      .small-10.columns
-        = f.radio_button :gender, 'Male'
-        = f.label :gender_male, t('.male'), :class => "required"
-        = f.radio_button :gender, 'Female'
-        = f.label :gender_female, t('.female'), :class => "required"
+    -# If the pronouns is she/her or he/him, the competitive_gender
+    -# can be auto-selected (if not currently selected)
+  .competitor_show.noncompetitor_show.row
+    .small-2.columns
+      = t('.competitive_gender')
+    .small-10.columns
+      -# NOTE: the "name" of this element is tied to the PronounGender JS controller (see above line #2)
+      = f.radio_button :gender, 'Female'
+      = f.label :gender_female, t('.female'), :class => "required"
+      = f.radio_button :gender, 'Male'
+      = f.label :gender_male, t('.male'), :class => "required"
+  .competitor_show.noncompetitor_show.row
+    .small-12.columns
+      = t('.registered_gender_description_1')
+      %br
+      = t('.registered_gender_description_2')
+      %br
+      = t('.registered_gender_description_3')

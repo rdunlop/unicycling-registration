@@ -43,7 +43,7 @@ FactoryBot.define do
     last_name { "LastMyString" }
     birthday { 18.years.ago }
     gender { "Male" }
-    registered_gender { "Male" }
+    pronouns { Registrant::PRONOUNS_HE_HIM }
     user # FactoryBot
     registrant_type { 'competitor' }
     ineligible { false }

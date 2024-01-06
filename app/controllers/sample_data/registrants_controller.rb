@@ -12,11 +12,14 @@ class SampleData::RegistrantsController < SampleData::BaseController
     num_registrants = params[:number].to_i
     resu_errors = 0
     num_registrants.times do
-      registered_gender = ["Male", "Female", "Other"].sample
-      gender = if registered_gender == "Other"
+      pronouns = [Registrant::PRONOUNS_SHE_HER, Registrant::PRONOUNS_THEY_THEM, Registrant::PRONOUNS_HE_HIM, Registrant::PRONOUNS_OTHER].sample
+      gender = case pronouns
+               when Registrant::PRONOUNS_HE_HIM
+                 "Male"
+               when Registrant::PRONOUNS_SHE_HER
+                 "Female"
+               when Registrant::PRONOUNS_OTHER, "They/them"
                  ["Male", "Female"].sample
-               else
-                 registered_gender
                end
 
       registrant = Registrant.create!(
@@ -24,7 +27,7 @@ class SampleData::RegistrantsController < SampleData::BaseController
         last_name: Faker::Name.last_name,
         birthday: Faker::Date.between(from: 5.years.ago, to: 55.years.ago),
         gender: gender,
-        registered_gender: registered_gender,
+        pronouns: pronouns,
         registrant_type: "competitor",
         ineligible: false,
         rules_accepted: true,

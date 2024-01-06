@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_025355) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_06_164152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1004,7 +1004,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_025355) do
     t.datetime "medical_questionnaire_filled_out_at", precision: nil
     t.datetime "medical_questionnaire_attest_all_no_at", precision: nil
     t.boolean "medical_certificate_manually_confirmed", default: false, null: false
-    t.string "registered_gender"
+    t.string "pronouns"
+    t.string "other_pronoun"
     t.index ["bib_number"], name: "index_registrants_on_bib_number", unique: true
     t.index ["deleted"], name: "index_registrants_deleted"
     t.index ["registrant_type"], name: "index_registrants_on_registrant_type"
