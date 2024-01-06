@@ -9,17 +9,18 @@
       = @registrant.first_name
       = @registrant.middle_initial
       = @registrant.last_name
-    %p.competitor_show.noncompetitor_show
-      %b= t(".registered_gender")
-      = @registrant.registered_gender
-      - if @registrant.registered_gender != @registrant.competitive_gender
+    .competitor_show.noncompetitor_show
+      %p.competitor_show.noncompetitor_show
+        %b= t(".pronouns")
+        = @registrant.pronouns_display
+      %p
         %b= t(".competitive_gender")
         = @registrant.competitive_gender
-
-      %b= t(".birthday")
-      = @registrant.birthday.try(:strftime, "%d-%b-%Y")
-      %b= t(".age")
-      = @registrant.age
+      %p
+        %b= t(".birthday")
+        = @registrant.birthday.try(:strftime, "%d-%b-%Y")
+        %b= t(".age")
+        = @registrant.age
     - if @config.volunteer?
       %p
         %b= t(".volunteer")

@@ -176,8 +176,8 @@ describe Registrant do
       expect(@reg.valid?).to eq(false)
     end
 
-    it "requires registered_gender" do
-      @reg.registered_gender = nil
+    it "requires pronouns" do
+      @reg.pronouns = nil
       expect(@reg.valid?).to eq(false)
     end
 
@@ -185,14 +185,11 @@ describe Registrant do
       expect(@reg.paid_line_items).to eq([])
     end
 
-    it "has either Male or Female gender" do
-      @reg.registered_gender = "Male"
+    it "has valid pronouns" do
+      @reg.pronouns = Registrant::PRONOUNS_HE_HIM
       expect(@reg.valid?).to eq(true)
 
-      @reg.registered_gender = "Female"
-      expect(@reg.valid?).to eq(true)
-
-      @reg.registered_gender = "None"
+      @reg.pronouns = "WHAT?"
       expect(@reg.valid?).to eq(false)
     end
 

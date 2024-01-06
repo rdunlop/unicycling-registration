@@ -37,7 +37,8 @@ class RegistrantCopier
         middle_initial: previous_reg.middle_initial,
         last_name: previous_reg.last_name,
         birthday: previous_reg.birthday,
-        registered_gender: previous_reg.registered_gender,
+        pronouns: previous_reg.pronouns,
+        other_pronoun: previous_reg.other_pronoun,
         competitive_gender: previous_reg.competitive_gender
       }
     end

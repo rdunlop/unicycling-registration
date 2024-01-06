@@ -18,7 +18,7 @@ describe Registrants::BuildController do
     {
       first_name: "Robin",
       last_name: "Dunlop",
-      registered_gender: "Male",
+      pronouns: Registrant::PRONOUNS_HE_HIM,
       user_id: user.id,
       birthday: Date.new(1982, 1, 19),
       contact_detail_attributes: {
@@ -186,7 +186,7 @@ describe Registrants::BuildController do
           "birthday(2i)" => "1",
           "birthday(3i)" => "13",
           "birthday(1i)" => "1995",
-          registered_gender: "Male"
+          pronouns: Registrant::PRONOUNS_HE_HIM
         }
       end
 
@@ -310,7 +310,7 @@ describe Registrants::BuildController do
       {
         first_name: "Robin",
         last_name: "Dunlop",
-        registered_gender: "Male",
+        pronouns: Registrant::PRONOUNS_HE_HIM,
         birthday: Date.new(1982, 1, 19)
       }
     end
