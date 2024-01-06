@@ -14,13 +14,13 @@ class SampleData::RegistrantsController < SampleData::BaseController
     num_registrants.times do
       pronouns = [Registrant::PRONOUNS_SHE_HER, Registrant::PRONOUNS_THEY_THEM, Registrant::PRONOUNS_HE_HIM, Registrant::PRONOUNS_OTHER].sample
       gender = case pronouns
-      when Registrant::PRONOUNS_HE_HIM
-        "Male"
-      when Registrant::PRONOUNS_SHE_HER
-        "Female"
-      when Registrant::PRONOUNS_OTHER, "They/them"
-        ["Male", "Female"].sample
-      end
+               when Registrant::PRONOUNS_HE_HIM
+                 "Male"
+               when Registrant::PRONOUNS_SHE_HER
+                 "Female"
+               when Registrant::PRONOUNS_OTHER, "They/them"
+                 ["Male", "Female"].sample
+               end
 
       registrant = Registrant.create!(
         first_name: Faker::Name.first_name,

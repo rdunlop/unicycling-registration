@@ -52,6 +52,7 @@ describe RegistrantsController do
       first_name: "Robin",
       last_name: "Dunlop",
       pronouns: Registrant::PRONOUNS_HE_HIM,
+      gender: "Male",
       user_id: @user.id,
       birthday: Date.new(1982, 1, 19),
       contact_detail_attributes: {
