@@ -5,6 +5,6 @@ class AddSystemManagedToExpenseGroup < ActiveRecord::Migration[4.2]
   end
 
   def down
-    drop_column :expense_groups, :system_managed
+    remove_column :expense_groups, :system_managed
   end
 end
