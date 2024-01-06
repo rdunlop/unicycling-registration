@@ -5,19 +5,6 @@ import { Controller } from "@hotwired/stimulus"
 // On the Registrant Base Details page, this auto-selects the Competitive Gender
 // based on the pronouns selected. But only if there isn't a competitive gender selected
 //
-// Inputs:
-// groups-value:
-//   - This indicates the event_category_id which must all be set together
-//   - e.g. [[1, 2, 3], [4, 5]] indicates ids 1,2,3 are a group, and 4,5 are a group
-// event_category_element:
-//   - This is a select element which must be monitored
-//   - If this element value changes, we check ALL other select elements, and if any of them have
-//     not-in-this-set values, we display an alert message, AND change the OTHER value
-// change-message-value:
-//   - This is a text message which will be presented when the javascript chooses to change a user's selection
-// clear-message-value:
-//   - This is a text message which will be presented when the javascript chooses to clear a user's selection
-//
 // Example usage:
 // <div data-controller="pronouns-gender" data-pronouns-gender-gender-element-name-value="gender-input">
 //   <input type='radio' data-pronouns-gender-target='pronounElement' data-pronouns-gender-value='Female'>She/her
@@ -35,12 +22,10 @@ export default class extends Controller {
 
   static values = { genderElementName: String }
 
-  // Does the current element belong to a group?
-  // If so, check to see if any eventCategoryElement
-  // is selected to the OTHER values in that group
-  // IF they are, change their selection to the correct group value
-  // OR to blank
-  // AND show an alert
+  // If the user has selected a pronoun
+  // And no gender is currently selected
+  // and the selected pronoun has a gender_value
+  // auto-select the gender radio button
   change(event) {
     var target = event.target
 
