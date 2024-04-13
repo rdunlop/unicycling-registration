@@ -33,7 +33,7 @@ gem 'importmap-rails'
 gem "jc-validates_timeliness"
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '6.0.1'
 gem 'money-rails'
 gem 'rails-assets-datetimepicker', source: 'https://rails-assets.org'
 gem 'recaptcha', require: 'recaptcha/rails'
