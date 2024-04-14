@@ -1,2 +1,7 @@
 # We do not use the feature which is vulnerable:
 CVE-2016-7103
+# jquery-ui related error that I cannot fix right now (need to adjust the way that we bring in that library)
+CVE-2022-31160
+CVE-2021-41184
+CVE-2021-41183
+CVE-2021-41182
