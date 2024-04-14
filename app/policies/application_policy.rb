@@ -64,6 +64,8 @@ class ApplicationPolicy
       super_admin?
     when :edit
       super_admin?
+    when :update
+      super_admin?
     when :destroy
       super_admin?
     when :export
