@@ -158,7 +158,8 @@ class ConventionSetup::EventConfigurationsController < ConventionSetup::BaseConv
                                                 :iuf,
                                                 :test_mode, :usa,
                                                 :display_confirmed_events,
-                                                :add_event_end_date)
+                                                :add_event_end_date,
+                                                :imported_registrants)
   end
 
   def name_logo_params

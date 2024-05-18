@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_06_164152) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_18_023415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -448,6 +448,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_164152) do
     t.integer "volunteer_option_page_id"
     t.datetime "add_expenses_end_date", precision: nil
     t.string "stripe_webhook_secret"
+    t.boolean "imported_registrants", default: false, null: false
   end
 
   create_table "event_confirmation_emails", force: :cascade do |t|
@@ -637,6 +638,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_164152) do
     t.index ["user_id"], name: "index_imported_results_user_id"
   end
 
+  create_table "imported_registrants", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.date "birthday"
+    t.string "gender"
+    t.boolean "deleted", default: false, null: false
+    t.integer "bib_number", null: false
+    t.integer "age"
+    t.boolean "ineligible", default: false, null: false
+    t.string "sorted_last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bib_number"], name: "index_imported_registrants_on_bib_number", unique: true
+    t.index ["deleted"], name: "index_imported_registrants_on_deleted"
+  end
+
   create_table "judge_types", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "val_1_description"
@@ -760,6 +777,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_164152) do
     t.datetime "updated_at", precision: nil
     t.boolean "dropped_from_registration", default: false, null: false
     t.boolean "alternate", default: false, null: false
+    t.string "registrant_type"
     t.index ["competitor_id"], name: "index_members_competitor_id"
     t.index ["registrant_id"], name: "index_members_registrant_id"
   end

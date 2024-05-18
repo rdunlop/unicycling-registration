@@ -108,7 +108,6 @@ group :test do
   gem 'capybara'
   gem 'codeclimate_circle_ci_coverage'
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'rspec_junit_formatter' # per circleCI https://circleci.com/docs/test-metadata
   gem 'rspec-rails'
@@ -120,6 +119,7 @@ end
 
 group :development, :test do
   gem 'bundler-audit', require: false
+  gem 'factory_bot_rails'
   gem 'rubocop', '0.93.1', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false

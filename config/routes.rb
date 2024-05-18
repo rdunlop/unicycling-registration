@@ -354,6 +354,7 @@ Rails.application.routes.draw do
 
     scope module: "competition_setup" do
       resources :directors, only: %i[index create destroy]
+      resources :imported_registrants, only: %i[index create destroy]
     end
 
     get '/onsite_registration', to: 'onsite_registration#index'

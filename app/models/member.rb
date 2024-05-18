@@ -20,7 +20,7 @@ class Member < ApplicationRecord
   include CachedSetModel
 
   belongs_to :competitor, inverse_of: :members
-  belongs_to :registrant
+  belongs_to :registrant, polymorphic: true
 
   validates :registrant, presence: true
   validate :registrant_once_per_competition
