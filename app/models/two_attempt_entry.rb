@@ -86,7 +86,7 @@ class TwoAttemptEntry < ApplicationRecord
   delegate :find_competitor_with_bib_number, to: :competition
 
   def registrant_name
-    Registrant.find_by(bib_number: bib_number)
+    AvailableRegistrants.find_by(bib_number: bib_number)
   end
 
   # import the result in the results table, raise an exception on failure

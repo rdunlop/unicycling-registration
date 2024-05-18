@@ -485,6 +485,15 @@ class Competitor < ApplicationRecord
     res.join(", ")
   end
 
+  def original_event_category
+    return if EventConfiguration.singleton.imported_registrants?
+    event_category = nil
+    registrant = active_members.first&.registrant
+    return nil unless registrant
+
+    registrant.registrant_event_sign_ups.where({:event_id => competition.event.id}).try(:first).try(:event_category)
+  end
+
   def num_laps
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/num_laps") do
       finish_time_results.first.try(:number_of_laps) || 0

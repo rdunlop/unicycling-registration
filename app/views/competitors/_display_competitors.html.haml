@@ -27,10 +27,6 @@
     - @competitors.find_each(batch_size: 100) do |competitor|
       - next if competitor.new_record?
       %tr{:class => competitor.status == "active" ? "active" : "not_active", id: "row#{competitor.id}" }
-        - event_category = nil
-        - registrant = competitor.active_members.first&.registrant
-        - if registrant
-          - event_category = registrant.registrant_event_sign_ups.where({:event_id => @competition.event.id}).try(:first).try(:event_category)
         %td= competitor.bib_number
         %td= competitor.detailed_name
         - if display_group_size
@@ -41,7 +37,7 @@
         %td= competitor.age_group_entry_description
         - if @competition.event.accepts_music_uploads?
           %td= competitor.has_music?
-        %td= event_category
+        %td= competitor.original_event_category
         %td{ class: competitor.warning_class }= competitor.member_warnings
         %td
           = link_to t("edit"), edit_competitor_path(competitor)

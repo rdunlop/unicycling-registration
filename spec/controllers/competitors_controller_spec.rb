@@ -74,6 +74,23 @@ describe CompetitorsController do
   end
 
   describe "POST create" do
+    context "when using imported Registrants" do
+      before do
+        EventConfiguration.singleton.update(imported_registrants: true)
+      end
+
+      it "can save a member with an imported_registrant" do
+        @reg2 = FactoryBot.create(:imported_registrant)
+        @reg3 = FactoryBot.create(:imported_registrant)
+        expect do
+          post :create, params: { competitor: valid_attributes.merge(
+            members_attributes: { "0" => { registrant_id: @reg2.id, registrant_type: "ImportedRegistrant" },
+                                  "1" => { registrant_id: @reg3.id, registrant_type: "ImportedRegistrant" } }
+          ), competition_id: @ec.id }
+        end.to change(Member, :count).by(2)
+      end
+    end
+
     describe "with valid params" do
       it "creates a new Competitor" do
         expect do

@@ -7,7 +7,7 @@ class FindCompetitorForCompetition
   end
 
   def registrant
-    @registrant ||= Registrant.find_by(bib_number: bib_number) if bib_number
+    @registrant ||= AvailableRegistrants.find_by(bib_number: bib_number) if bib_number
   end
 
   def competitor

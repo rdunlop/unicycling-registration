@@ -5,11 +5,11 @@ module FindsMatchingCompetitor
   end
 
   def matching_registrant
-    @maching_registrant ||= Registrant.find_by(bib_number: bib_number) if bib_number
+    @matching_registrant ||= FindCompetitorForCompetition.new(bib_number, nil).registrant if bib_number
   end
 
   def matching_competitor
-    @matching_competitor ||= matching_registrant.competitors.active.find_by(competition: competition) if matching_registrant
+    @matching_competitor ||= FindCompetitorForCompetition.new(bib_number, competition).competitor
   end
 
   def competitor_exists?

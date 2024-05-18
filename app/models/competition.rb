@@ -260,6 +260,7 @@ class Competition < ApplicationRecord
 
   def find_competitor_with_bib_number(bib_number)
     competitors.each do |competitor|
+      next if competitor.new_record?
       if competitor.member_has_bib_number?(bib_number)
         return competitor
       end

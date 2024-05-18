@@ -25,8 +25,12 @@ class Importers::ExternalResultImporter < Importers::CompetitionDataImporter
 
   # from CSV to import_result
   def build_and_save_imported_result(row_hash, user, competition)
+    competitor_finder = FindCompetitorForCompetition.new(row_hash[:bib_number], competition)
+    competitor = competitor_finder.competitor
+    raise ActiveRecord::RecordNotFound if competitor.nil?
+
     result = ExternalResult.preliminary.create(
-      competitor: CompetitorFinder.new(competition).find_by(bib_number: row_hash[:bib_number]),
+      competitor: competitor,
       points: row_hash[:points],
       details: row_hash[:details],
       status: row_hash[:status],

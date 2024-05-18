@@ -17,6 +17,10 @@ class RepresentationType
   end
 
   def to_s
-    @object.public_send(self.class.column)
+    if EventConfiguration.singleton.imported_registrants
+      nil
+    else
+      @object.public_send(self.class.column)
+    end
   end
 end
