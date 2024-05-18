@@ -50,7 +50,10 @@ module FormHelper
   end
 
   def all_registrant_competitors(form)
-    form.select :registrant_id, Registrant.select_box_options, { include_blank: true }, { class: 'chosen-select' }
+    content_tag :div do
+      concat(form.select :registrant_id, Registrant.select_box_options, { include_blank: true }, { class: 'chosen-select' })
+      concat(form.hidden_field :registrant_type, value: AvailableRegistrants.type)
+    end
   end
 
   def no_form_all_registrants(selected: nil, additional_classes: nil)

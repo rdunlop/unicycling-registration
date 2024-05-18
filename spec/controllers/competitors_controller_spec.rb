@@ -86,8 +86,8 @@ describe CompetitorsController do
         @reg3 = FactoryBot.create(:competitor) # registrant
         expect do
           post :create, params: { competitor: valid_attributes.merge(
-            members_attributes: { "0" => { registrant_id: @reg2.id },
-                                  "1" => { registrant_id: @reg3.id } }
+            members_attributes: { "0" => { registrant_id: @reg2.id, registrant_type: "Registrant" },
+                                  "1" => { registrant_id: @reg3.id, registrant_type: "Registrant" } }
           ), competition_id: @ec.id }
         end.to change(Member, :count).by(2)
       end
@@ -104,9 +104,9 @@ describe CompetitorsController do
         expect do
           post :create, params: { competitor: valid_attributes.merge(
             members_attributes:
-              { "0" => { registrant_id: reg1.id },
-                "1" => { registrant_id: reg2.id },
-                "2" => { registrant_id: reg3.id } }, custom_name: 'Robin Rocks!'
+              { "0" => { registrant_id: reg1.id, registrant_type: "Registrant" },
+                "1" => { registrant_id: reg2.id, registrant_type: "Registrant" },
+                "2" => { registrant_id: reg3.id, registrant_type: "Registrant" } }, custom_name: 'Robin Rocks!'
           ), competition_id: @ec.id }
         end.to change(Competitor, :count).by(1)
       end
