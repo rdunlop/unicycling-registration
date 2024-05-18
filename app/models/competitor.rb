@@ -277,7 +277,7 @@ class Competitor < ApplicationRecord
   delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where(registrants: { bib_number: bib_number }).count.positive?
+    members.any? { |member| member.bib_number.to_s == bib_number.to_s }
   end
 
   def team_name
