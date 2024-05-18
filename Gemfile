@@ -30,7 +30,7 @@ gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rail
 gem 'foundation-rails'
 gem "haml-rails"
 gem 'importmap-rails'
-gem "jc-validates_timeliness"
+gem "validates_timeliness", "7.0.0.beta2" # for Ruby 3 support
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '6.0.1'
