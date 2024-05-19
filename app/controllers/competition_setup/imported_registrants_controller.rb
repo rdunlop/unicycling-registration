@@ -1,7 +1,7 @@
 class CompetitionSetup::ImportedRegistrantsController < CompetitionSetup::BaseCompetitionSetupController
   before_action :authenticate_user!
   before_action :authorize_imported_registrant_management
-  before_action :load_imported_registrants, only: [:index, :create]
+  before_action :load_imported_registrants, only: %i[index create]
 
   def index
     @new_imported_registrant = ImportedRegistrant.new
@@ -41,6 +41,6 @@ class CompetitionSetup::ImportedRegistrantsController < CompetitionSetup::BaseCo
 
   def imported_registrant_params
     params.require(:imported_registrant).permit(:bib_number,
-      :first_name, :last_name)
+                                                :first_name, :last_name, :age, :birthday)
   end
 end

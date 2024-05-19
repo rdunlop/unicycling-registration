@@ -355,7 +355,8 @@ class Competition < ApplicationRecord
 
   def registrant_age_group_data
     # IMPORTANT: Does not work for ImportedRegistrants
-    return [] if registrants.first.class == ImportedRegistrant
+    return [] if registrants.first.instance_of?(ImportedRegistrant)
+
     registrants.reorder(nil).select(:age, :gender, :wheel_size_id).group(:age, :gender, :wheel_size_id).count(:age).map do |element, count|
       {
         age: element[0],

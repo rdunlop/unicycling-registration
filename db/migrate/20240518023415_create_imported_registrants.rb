@@ -28,5 +28,4 @@ class CreateImportedRegistrants < ActiveRecord::Migration[7.0]
 
     execute "DELETE FROM members where registrant_type != 'Registrant'"
   end
-
 end

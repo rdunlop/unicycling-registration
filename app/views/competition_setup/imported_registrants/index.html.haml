@@ -31,5 +31,13 @@
       = f.input :first_name
     .small-12.medium-4.columns
       = f.input :last_name
+  .row
+    .small-12.medium-4.columns
+      Can specify either age or birthday
+    .small-12.medium-4.columns
+      = f.input :age
+    .small-12.medium-4.columns
+      = f.input :birthday
+  .row
     .small-12.medium-4.columns.text-left
       = f.submit "Create new Registrant", :class => "focus_button"

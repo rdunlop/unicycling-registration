@@ -487,11 +487,11 @@ class Competitor < ApplicationRecord
 
   def original_event_category
     return if EventConfiguration.singleton.imported_registrants?
-    event_category = nil
+
     registrant = active_members.first&.registrant
     return nil unless registrant
 
-    registrant.registrant_event_sign_ups.where({:event_id => competition.event.id}).try(:first).try(:event_category)
+    registrant.registrant_event_sign_ups.where({ event_id: competition.event.id }).try(:first).try(:event_category)
   end
 
   def num_laps

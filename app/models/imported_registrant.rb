@@ -2,7 +2,7 @@ class ImportedRegistrant < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :bib_number, presence: true, uniqueness: true
 
-  has_many :members, dependent: :destroy
+  has_many :members, as: :registrant, dependent: :destroy
   has_many :competitors, through: :members
 
   before_validation :set_sorted_last_name

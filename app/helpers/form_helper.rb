@@ -51,8 +51,8 @@ module FormHelper
 
   def all_registrant_competitors(form)
     content_tag :div do
-      concat(form.select :registrant_id, AvailableRegistrants.select_box_options, { include_blank: true }, { class: 'chosen-select' })
-      concat(form.hidden_field :registrant_type, value: AvailableRegistrants.type)
+      concat(form.select(:registrant_id, AvailableRegistrants.select_box_options, { include_blank: true }, { class: 'chosen-select' }))
+      concat(form.hidden_field(:registrant_type, value: AvailableRegistrants.type))
     end
   end
 
