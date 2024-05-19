@@ -1,13 +1,24 @@
 # This is a point-of-indirection to allow for the system
 # to handle either Registrant, or ImportedRegistrant records
 class AvailableRegistrants
-  # TODO: This should be extracted into a form helper?
-  def self.select_box_options
+  def self.all
     if EventConfiguration.singleton.imported_registrants?
-      ImportedRegistrant.all.map { |reg| [reg.with_id_to_s, reg.id] }
+      ImportedRegistrant.all
     else
-      Registrant.active.competitor.map { |reg| [reg.with_id_to_s, reg.id] }
+      Registrant.active.competitor
     end
+  end
+
+  def self.select_box_options
+    all.map { |reg| [reg.with_id_to_s, reg.id] }
+  end
+
+  def self.all_select_box_options
+    if EventConfiguration.singleton.imported_registrants?
+      ImportedRegistrant.all
+    else
+      Registrant.started
+    end.map { |reg| [reg.with_id_to_s, reg.id] }
   end
 
   def self.type

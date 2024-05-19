@@ -8,6 +8,7 @@ class CreateImportedRegistrants < ActiveRecord::Migration[7.0]
       t.boolean "deleted", default: false, null: false
       t.integer "bib_number", null: false
       t.integer "age"
+      t.string "club"
       t.boolean "ineligible", default: false, null: false
       t.string "sorted_last_name"
       t.timestamps
@@ -27,5 +28,7 @@ class CreateImportedRegistrants < ActiveRecord::Migration[7.0]
     remove_column :event_configurations, :imported_registrants
 
     execute "DELETE FROM members where registrant_type != 'Registrant'"
+
+    remove_column :members, :registrant_type
   end
 end

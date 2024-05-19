@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_18_023415) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_19_022031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -646,6 +646,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_18_023415) do
     t.boolean "deleted", default: false, null: false
     t.integer "bib_number", null: false
     t.integer "age"
+    t.string "club"
     t.boolean "ineligible", default: false, null: false
     t.string "sorted_last_name"
     t.datetime "created_at", null: false
@@ -1294,7 +1295,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_18_023415) do
   end
 
   create_table "uploaded_files", id: :serial, force: :cascade do |t|
-    t.integer "competition_id", null: false
+    t.integer "competition_id"
     t.integer "user_id", null: false
     t.string "original_file", null: false
     t.string "filename", null: false

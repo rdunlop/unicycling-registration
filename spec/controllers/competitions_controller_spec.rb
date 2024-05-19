@@ -179,7 +179,7 @@ describe CompetitionsController do
 
     it "creates a competitor for the competition" do
       expect do
-        post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }
+        post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, registrant_type: "Registrant", format: :js }
       end.to change(Competitor, :count).by(1)
     end
 
@@ -191,7 +191,7 @@ describe CompetitionsController do
 
       it "changes the competitor status" do
         expect do
-          post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, format: :js }
+          post :create_last_minute_competitor, params: { id: competition.id, registrant_id: new_registrant.id, registrant_type: "Registrant", format: :js }
         end.to change { @withdrawn_competitor.reload.status }.to("active")
       end
     end

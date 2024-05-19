@@ -20,7 +20,7 @@
 class UploadedFile < ApplicationRecord
   mount_uploader :original_file, ImportedFileUploader
 
-  belongs_to :user, optional: true
+  belongs_to :user
   belongs_to :competition, optional: true
   validates :filename, presence: true
 
@@ -29,15 +29,20 @@ class UploadedFile < ApplicationRecord
   # 'file' -> Store the file and pass back a reference to the new stored file
   # or
   # 'uploaded_file_id' -> read the stored file
-  def self.process_params(params, competition:, user:)
+  def self.process_params(params, user:, competition: nil)
     if params[:file].present?
-      uploaded_file = competition.uploaded_files.new(user: user)
+      uploaded_file = UploadedFile.new(user: user)
+      uploaded_file.competition = competition if competition.present?
       uploaded_file.original_file = params[:file]
       uploaded_file.filename = params[:file].original_filename
       uploaded_file.save!
       uploaded_file
     elsif params[:uploaded_file_id].present?
-      competition.uploaded_files.find(params[:uploaded_file_id])
+      if competition.present?
+        competition.uploaded_files.find(params[:uploaded_file_id])
+      else
+        UploadedFile.find(params[:uploaded_file_id])
+      end
     end
   end
 

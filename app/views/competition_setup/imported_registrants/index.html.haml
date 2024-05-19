@@ -1,6 +1,6 @@
 %h1 Imported Registrants
 
-%p Allows upload of a list of regisrtants, for use in the competition-portion of the application
+%p Allows upload of a list of registrants, for use in the competition-portion of the application
 
 %table.sortable
   %thead
@@ -10,6 +10,7 @@
       %th Last Name
       %th Birthdate
       %th Age
+      %th Club
       %td Action
   %tbody
     - @imported_registrants.each do |registrant|
@@ -17,9 +18,40 @@
         %td= registrant.bib_number
         %td= registrant.first_name
         %td= registrant.last_name
-        %td
-        %td
+        %td= registrant.birthday.try(:strftime, "%d-%b-%Y")
+        %td= registrant.age
+        %td= registrant.club
         %td= link_to t("delete"), imported_registrant_path(registrant), method: :delete,  data: {confirm: t("are_you_sure") }
+
+
+%h2 Import Registrants
+
+%b Step 1 Download Sample CSV Spreadsheet
+%br
+
+%p
+  You will need a spreadsheet with the Registrant ID, name, birthday, club, etc (with a header row).
+  To make it easier for you, we provide a
+  = link_to "Draft Registrants CSV", imported_registrants_path(format: :csv), class: "button tiny"
+  file.
+  %br
+  %b Note
+  Each row must contain a valid Registrant ID, First Name, Last Name.
+
+  = form_tag upload_imported_registrants_path, method: :post, multipart: true do
+    // Extracted from shared/upload_file_for_competition, and then modified
+    .row
+      .small-6.columns
+        = label_tag :file, "Source File"
+      .small-6.columns
+        = file_field_tag :file
+    .row
+      .small-6.columns
+        = label_tag :uploaded_file_id, "Previously Uploaded File"
+      .small-6.columns
+        = select_tag :uploaded_file_id, options_from_collection_for_select(UploadedFile.where(competition: nil).ordered, "id", "to_s_with_date"), include_blank: true, class: "chosen-select"
+
+    = submit_tag "Upload Registrants", class: "button"
 
 %h2 Create new Imported Registrant
 = simple_form_for(@new_imported_registrant) do |f|
@@ -37,7 +69,11 @@
     .small-12.medium-4.columns
       = f.input :age
     .small-12.medium-4.columns
-      = f.input :birthday
+      = f.label :birthday
+      = f.date_select :birthday, {:start_year => 1920, :end_year => Time.now.year, :include_blank => true}, class: "small-4 columns"
+  .row
+    .small-12.medium-4.columns
+      = f.input :club
   .row
     .small-12.medium-4.columns.text-left
       = f.submit "Create new Registrant", :class => "focus_button"

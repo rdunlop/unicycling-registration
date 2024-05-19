@@ -79,7 +79,7 @@
     .row
       .small-4.columns
         = label_tag :registrant_id, "Single Registrant"
-        = select_tag :registrant_id, options_for_select(Registrant.select_box_options), {:include_blank => true, class: 'chosen-select'}
+        = select_tag :registrant_id, options_for_select(AvailableRegistrants.select_box_options), {:include_blank => true, class: 'chosen-select'}
       .small-4.columns
         = label_tag :registrant_group_id, "Registrant Group"
         = select_tag :registrant_group_id, options_from_collection_for_select(RegistrantGroup.order(:name), "id", "to_s"), :include_blank => true

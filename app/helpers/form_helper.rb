@@ -16,7 +16,7 @@ module FormHelper
 
   def eligible_registrants(competition)
     if @config.can_create_competitors_at_lane_assignment? # rubocop:disable Rails/HelperInstanceVariable
-      Registrant.active.competitor
+      AvailableRegistrants.all
     else
       competition.registrants.sort_by(&:bib_number)
     end
@@ -41,8 +41,11 @@ module FormHelper
 
   # The form element which is used to create a new competitor, if one shows up last minute for a competition
   def non_signed_up_registrant_select_box(competition)
-    registrants = Registrant.active.competitor - competition.competitors.active.flat_map(&:registrants)
-    select_tag :registrant_id, options_from_collection_for_select(registrants, "id", "with_id_to_s"), include_blank: true, class: 'chosen-select'
+    registrants = AvailableRegistrants.all - competition.competitors.active.flat_map(&:registrants)
+    content_tag :div do
+      concat(select_tag(:registrant_id, options_from_collection_for_select(registrants, "id", "with_id_to_s"), include_blank: true, class: 'chosen-select'))
+      concat(hidden_field_tag(:registrant_type, AvailableRegistrants.type))
+    end
   end
 
   def no_form_competitor_select_box(competition, options = {})
@@ -57,7 +60,7 @@ module FormHelper
   end
 
   def no_form_all_registrants(selected: nil, additional_classes: nil)
-    select_tag :registrant_id, options_for_select(Registrant.all_select_box_options, selected), include_blank: true, class: "chosen-select #{additional_classes}"
+    select_tag :registrant_id, options_for_select(AvailableRegistrants.all_select_box_options, selected), include_blank: true, class: "chosen-select #{additional_classes}"
   end
 
   def wizard_progress_bar(allow_navigation = false)
