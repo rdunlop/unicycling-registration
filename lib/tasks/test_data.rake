@@ -48,7 +48,7 @@ end
 
 def create_competition(event, competition_name, event_cat_names, source_competition = nil)
   comp = Competition.find_by(name: competition_name)
-  FactoryBot.create(:competition, event: event, name: competition_name, scoring_class: "Shortest Time", start_data_type: "Track E-Timer", end_data_type: "Track E-Timer") if comp.nil?
+  FactoryBot.create(:timed_competition, event: event, name: competition_name, start_data_type: "Track E-Timer", end_data_type: "Track E-Timer") if comp.nil?
 
   event_cat_names.each do |ecat_name|
     ecat = event.event_categories.find_by(name: ecat_name)

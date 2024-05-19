@@ -54,9 +54,4 @@ FactoryBot.define do
       allow(competitor).to receive(:members).and_return([FactoryBot.build_stubbed(:member, competitor: competitor)])
     end
   end
-
-  factory :member, class: 'Member' do
-    registrant
-    association :competitor, factory: :event_competitor
-  end
 end

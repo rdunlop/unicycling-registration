@@ -66,7 +66,6 @@ class Competition < ApplicationRecord
   belongs_to :combined_competition, optional: true
 
   with_options through: :competitors do
-    has_many :registrants
     has_many :results
     has_many :distance_attempts
     has_many :time_results
@@ -243,7 +242,7 @@ class Competition < ApplicationRecord
 
   def num_assigned_registrants
     Rails.cache.fetch("/competition/#{id}-#{updated_at}/num_assigned_registrants") do
-      registrants.count
+      competitors.map(&:registrants).flatten.count
     end
   end
 
@@ -261,6 +260,7 @@ class Competition < ApplicationRecord
 
   def find_competitor_with_bib_number(bib_number)
     competitors.each do |competitor|
+      next if competitor.new_record?
       if competitor.member_has_bib_number?(bib_number)
         return competitor
       end
@@ -349,7 +349,14 @@ class Competition < ApplicationRecord
 
   delegate :mixed_gender_age_groups?, to: :age_group_type, allow_nil: true
 
+  def registrants
+    competitors.map(&:registrants).flatten
+  end
+
   def registrant_age_group_data
+    # IMPORTANT: Does not work for ImportedRegistrants
+    return [] if registrants.first.instance_of?(ImportedRegistrant)
+
     registrants.reorder(nil).select(:age, :gender, :wheel_size_id).group(:age, :gender, :wheel_size_id).count(:age).map do |element, count|
       {
         age: element[0],

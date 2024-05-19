@@ -38,6 +38,7 @@ class Registrant < ApplicationRecord
   include Eligibility
   include Representable
   include CachedModel
+  include CalculatedAge
   extend OrderAsSpecified
 
   after_save :touch_members
@@ -221,16 +222,6 @@ class Registrant < ApplicationRecord
     members.each do |mem|
       mem.touch
     end
-  end
-
-  # TODO: This should be extracted into a form helper?
-  def self.select_box_options
-    active.competitor.map { |reg| [reg.with_id_to_s, reg.id] }
-  end
-
-  # TODO: This should be extracted into a form helper?
-  def self.all_select_box_options
-    started.map { |reg| [reg.with_id_to_s, reg.id] }
   end
 
   # ##########################################################
@@ -591,12 +582,7 @@ class Registrant < ApplicationRecord
   end
 
   def set_age
-    start_date = EventConfiguration.singleton.effective_age_calculation_base_date
-    if start_date.nil? || birthday.nil?
-      self.age = 99
-    else
-      self.age = age_at_event_date(start_date)
-    end
+    self.age = determined_age
   end
 
   # is the current status past the desired status
@@ -673,14 +659,6 @@ class Registrant < ApplicationRecord
 
   def set_access_code
     self.access_code ||= SecureRandom.hex(4)
-  end
-
-  def age_at_event_date(event_date)
-    if (birthday.month < event_date.month) || (birthday.month == event_date.month && birthday.day <= event_date.day)
-      event_date.year - birthday.year
-    else
-      (event_date.year - 1) - birthday.year
-    end
   end
 
   def has_necessary_items?

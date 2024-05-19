@@ -28,7 +28,7 @@
         - else
           %td= comp.try(:overall_place)
         %td= result[:bib_number]
-        %td= Registrant.find_by(:bib_number => result[:bib_number])
+        %td= AvailableRegistrants.find_by(bib_number: result[:bib_number])
         - results.combined_competition.combined_competition_entries.each do |entry|
           - matching_comp = result[:results][entry.abbreviation]
           - if matching_comp

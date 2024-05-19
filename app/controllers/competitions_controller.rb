@@ -233,7 +233,7 @@ class CompetitionsController < ApplicationController
 
   # POST /competitions/1/last_minute_competitor
   def create_last_minute_competitor
-    registrant = Registrant.find(params[:registrant_id])
+    registrant = params[:registrant_type].constantize.find(params[:registrant_id])
 
     @competitor = @competition.find_competitor_with_bib_number(registrant.bib_number)
     if @competitor.present?

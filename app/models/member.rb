@@ -20,7 +20,7 @@ class Member < ApplicationRecord
   include CachedSetModel
 
   belongs_to :competitor, inverse_of: :members
-  belongs_to :registrant
+  belongs_to :registrant, polymorphic: true
 
   validates :registrant, presence: true
   validate :registrant_once_per_competition
@@ -73,6 +73,7 @@ class Member < ApplicationRecord
     end
   end
 
+  delegate :bib_number, to: :registrant
   delegate :club, :state, :country, :ineligible?, :gender, :external_id, :age, to: :registrant
 
   private
@@ -95,7 +96,7 @@ class Member < ApplicationRecord
     comp = competitor.reload
     return if comp.nil?
 
-    lowest_bib_number = comp.active_members.includes(:registrant).minimum("registrants.bib_number")
+    lowest_bib_number = comp.active_members.map(&:bib_number).min
     competitor.update_attribute(:lowest_member_bib_number, lowest_bib_number) if lowest_bib_number
   end
 

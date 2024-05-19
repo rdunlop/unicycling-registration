@@ -52,7 +52,6 @@ class Competitor < ApplicationRecord
   has_one :music_file, class_name: "Song", foreign_key: "competitor_id", dependent: :nullify
   has_many :start_time_results, -> { merge(TimeResult.start_times) }, class_name: "TimeResult"
   has_many :finish_time_results, -> { merge(TimeResult.finish_times) }, class_name: "TimeResult"
-  has_many :registrants, through: :members
   has_many :active_members, -> { merge(Member.active) }, class_name: "Member"
 
   belongs_to :competition, touch: true, inverse_of: :competitors
@@ -179,6 +178,10 @@ class Competitor < ApplicationRecord
     error.html_safe # rubocop:disable Rails/OutputSafety
   end
 
+  def registrants
+    members.map(&:registrant)
+  end
+
   def best_time
     registrants.first.best_time(event)
   end
@@ -274,7 +277,7 @@ class Competitor < ApplicationRecord
   delegate :event, to: :competition
 
   def member_has_bib_number?(bib_number)
-    members.includes(:registrant).where(registrants: { bib_number: bib_number }).count.positive?
+    members.any? { |member| member.bib_number.to_s == bib_number.to_s }
   end
 
   def team_name
@@ -480,6 +483,15 @@ class Competitor < ApplicationRecord
     res << "#{riding_crank_size}mm" if riding_crank_size
     res << notes if notes.present?
     res.join(", ")
+  end
+
+  def original_event_category
+    return if EventConfiguration.singleton.imported_registrants?
+
+    registrant = active_members.first&.registrant
+    return nil unless registrant
+
+    registrant.registrant_event_sign_ups.where({ event_id: competition.event.id }).try(:first).try(:event_category)
   end
 
   def num_laps

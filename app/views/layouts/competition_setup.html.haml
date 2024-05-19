@@ -3,6 +3,8 @@
     %h3= t(".competition_setup")
 
     %ul.sideNav__list
+      - if @config.imported_registrants?
+        %li= link_to t(".manage_imported_registrants"), imported_registrants_path
       %li= link_to t(".manage_directors"), directors_path
       %li= link_to t(".manage_age_groups"), age_group_types_path
       %li= link_to t(".manage_competitions"), competition_setup_path

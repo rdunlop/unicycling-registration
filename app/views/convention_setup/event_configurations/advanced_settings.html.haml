@@ -26,6 +26,9 @@
     = f.input :add_event_end_date, as: :date_picker
     .description
       After this date, only Drop or modify of registration is allowed for ALL events.
-
+    %h3 Imported Registrants Mode
+    = f.input :imported_registrants
+    .description
+      Enables the ability to import a list of registrants, and use that list for creating competitors.
     %hr
     = f.button :submit

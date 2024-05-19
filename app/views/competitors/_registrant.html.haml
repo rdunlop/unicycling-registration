@@ -1,5 +1,6 @@
+// This code might not be in use anymore
 - fields_for :registrants do |reg|
   .field
     = reg.label :registrant_id
     %br
-    = reg.select(:registrant_id, Registrant.select_box_options)
+    = reg.select(:registrant_id, AvailableRegistrants.select_box_options)

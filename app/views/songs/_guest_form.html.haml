@@ -2,7 +2,7 @@
   = render partial: "shared/error_messages", object: @song
   .field
     = f.label :registrant_id
-    = f.select :registrant_id, Registrant.select_box_options, {include_blank: true}, class: "chosen-select"
+    = f.select :registrant_id, AvailableRegistrants.select_box_options, {include_blank: true}, class: "chosen-select"
     = f.label :event
     = f.collection_select :event_id, Event.music_uploadable, :id, :name
     = f.label :description

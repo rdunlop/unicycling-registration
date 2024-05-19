@@ -46,4 +46,17 @@ describe Member do
       expect(member.to_s).to eq(member.registrant.to_s)
     end
   end
+
+  context "when using imported Registrants" do
+    before do
+      EventConfiguration.singleton.update(imported_registrants: true)
+    end
+
+    it "can save a member with an imported_registrant" do
+      imported_registrant = FactoryBot.create(:imported_registrant)
+      member = FactoryBot.build(:member, registrant: imported_registrant)
+
+      member.save!
+    end
+  end
 end
