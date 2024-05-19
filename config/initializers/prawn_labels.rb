@@ -51,7 +51,8 @@ Prawn::Labels.types = {
     "bottom_margin" => 36,   # 0.5 inch
     "column_gutter" => 18, # 0.05 inch + 0.2 inch padding
     "left_margin" => 41.4, # 0.475 inch + 0.1 inch padding (0.1 inch => 7.2 DPI)
-    "right_margin" => 41.4 # 0.475 inch + 0.1 inch padding
+    "right_margin" => 41.4, # 0.475 inch + 0.1 inch padding
+    "row_gutter" => 0.0
   },
   "LS3639" => {
     "paper_size" => "A4",
