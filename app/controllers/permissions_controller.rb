@@ -29,6 +29,8 @@ class PermissionsController < ApplicationController
     end
   end
 
+  def volunteer; end
+
   private
 
   def create_guest_user(registrant_id)
@@ -36,10 +38,8 @@ class PermissionsController < ApplicationController
     user = reg.additional_registrant_accesses.map(&:user).find(&:guest?)
     return user if user
 
-    user ||= User.this_tenant.create(name: "guest", guest: true, confirmed_at: Time.current, email: "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com")
-    user.save!(validate: false)
-    user_convention = user.user_conventions.build(subdomain: Apartment::Tenant.current)
-    user_convention.save
+    guc = GuestUserCreator.new
+    user = guc.create_single_registrant_user
     access = user.additional_registrant_accesses.build(accepted_readwrite: true, registrant: reg)
     access.save!
     user

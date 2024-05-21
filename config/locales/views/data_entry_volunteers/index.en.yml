@@ -11,7 +11,11 @@ en:
       description_3: |
         You can also set the user's "name" here, so that you don't have to remember
         their e-mail address.
+      assign_existing_user_access: Assign Existing User Additional Access
+      assign_new_user_access: Assign New User Additional Access
       assign_access: Assign Additional Access
+      create_user_and_assign_access: Create User and Assign Additional Access
+      new_user_note: This will create a new user with random email. They can login via "Volunteer Login"
       note: Assigning Access also confirms unconfirmed e-mail accounts so that they can immediately log in.
       users_with_access: Users with Additional Access
 

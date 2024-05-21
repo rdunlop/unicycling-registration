@@ -2,6 +2,10 @@
   %br
   = link_to t(".use_access_code"), code_permissions_path, class: "access_code_link"
   %br
+- if User.with_role(:data_entry_volunteer).any?
+  %br
+  = link_to t(".volunteer"), volunteer_permissions_path, class: "access_code_link"
+  %br
 %h2= t(".action")
 = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: "no_dirty_check" } ) do |f|
   .panel.row

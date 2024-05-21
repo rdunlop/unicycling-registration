@@ -6,7 +6,7 @@
     %li= t(".description_2")
     %li= t(".description_3")
 
-%h3= t(".assign_access")
+%h3= t(".assign_existing_user_access")
 = simple_form_for [@competition, @data_entry_volunteer] do |f|
   = render partial: "/shared/error_messages", object: @data_entry_volunteer
   .row
@@ -24,6 +24,18 @@
   = t(".note")
 
 %hr
+%h3= t(".assign_new_user_access")
+= t(".new_user_note")
+= form_tag(user_competition_data_entry_volunteers_path, { method: :post}) do
+  .row
+    .small-12.medium-4.columns
+      = label_tag :name, User.human_attribute_name(:name)
+      = text_field_tag :name
+    .small-12.medium-4.columns
+      = label_tag :password, User.human_attribute_name(:password)
+      = text_field_tag :password
+    .small-12.medium-4.columns
+      = submit_tag t(".create_user_and_assign_access"), class: "button"
 
 %h3= t(".users_with_access")
 %table.sortable
@@ -37,4 +49,4 @@
         %th
           = user
         %td= user.email
-        %td= link_to "Delete", competition_data_entry_volunteer_path(@competition, user.id), method: :delete, data: { confirm: t("are_you_sure") }
+        %td= link_to "Delete Permission", competition_data_entry_volunteer_path(@competition, user.id), method: :delete, data: { confirm: t("are_you_sure") }

@@ -5,3 +5,4 @@ en:
       new:
         action: Log in to Unicycling Registration
         use_access_code: Use an access code
+        volunteer: Volunteer Login

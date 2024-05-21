@@ -174,8 +174,10 @@ class User < ApplicationRecord
   # Internal: Prevent confirmation from being required for staging
   # server users
   # This overrides the devise:confirmable method to ensure no users require confirmation
-  def confirmation_required?
-    !Rails.env.stage?
+  if Rails.env.stage?
+    def confirmation_required?
+      false
+    end
   end
 
   # Allow user to sign in with a legacy_password
