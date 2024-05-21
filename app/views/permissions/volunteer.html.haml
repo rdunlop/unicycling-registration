@@ -1,0 +1,19 @@
+%h1 Volunteer Login
+
+%p Judges and other volunteers can login here
+
+= simple_form_for(User.new, url: user_session_path, html: { class: "no_dirty_check" } ) do |f|
+  .panel.row
+    .row
+      .small-3.columns.text-right.inline
+        = f.label :email
+      .small-9.columns
+
+        = f.select :email, User.with_role(:data_entry_volunteer).reorder(:name).map{|u| [u, u.email]}, {:include_blank => true}, class: "chosen-select"
+    .row
+      .small-3.columns.text-right.inline
+        = f.label :password
+      .small-9.columns
+        = f.password_field :password
+    .row
+      .small-12.columns= f.button :submit, "Log In", :class => "focus_button"
