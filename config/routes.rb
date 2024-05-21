@@ -75,6 +75,7 @@ Rails.application.routes.draw do
         get :display_acl, controller: "admin/permissions"
         get :code, controller: "permissions"
         post :use_code, controller: "permissions"
+        get :volunteer, controller: "permissions"
       end
     end
 
@@ -671,7 +672,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :data_entry_volunteers, only: %i[index create destroy], param: :user_id
+      resources :data_entry_volunteers, only: %i[index create destroy], param: :user_id do
+        collection do
+          post :user
+        end
+      end
       resources :volunteers, only: %i[index destroy] do
         collection do
           post ":volunteer_type", action: :create, as: :create
