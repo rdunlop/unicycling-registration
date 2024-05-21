@@ -36,5 +36,12 @@ describe PermissionsController do
         end.not_to change(User, :count)
       end
     end
+
+    describe "can view volunteer sign-in page" do
+      it "shows the page" do
+        get :volunteer
+        expect(response).to be_successful
+      end
+    end
   end
 end
