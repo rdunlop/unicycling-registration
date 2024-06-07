@@ -30,7 +30,7 @@ class EmailFilters::Country
 
   def registrants
     Registrant.includes(:contact_detail).select do |registrant|
-      registrant.country == selected_country
+      registrant.country_code == arguments
     end
   end
 
