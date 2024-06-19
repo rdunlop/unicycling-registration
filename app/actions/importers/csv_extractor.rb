@@ -21,12 +21,16 @@ class Importers::CsvExtractor
     end
 
     begin
-      return clean_result(attempt_parse(upload_file, "UTF-8"))
+      return clean_result(attempt_parse(upload_file, "bom|UTF-8"))
     rescue ParseError, CSV::MalformedCSVError
       # If it fails to parse the file as UTF-8, try again
       begin
-        return clean_result(attempt_parse(upload_file, "ISO-8859-1"))
-      rescue ParseError # rubocop:disable Lint/SuppressedException
+        return clean_result(attempt_parse(upload_file, "UTF-8"))
+      rescue ParseError, CSV::MalformedCSVError
+        begin
+          return clean_result(attempt_parse(upload_file, "ISO-8859-1"))
+        rescue ParseError # rubocop:disable Lint/SuppressedException
+        end
       end
     end
 
