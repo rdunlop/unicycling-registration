@@ -8,7 +8,7 @@ describe EmailFilters::SingleRegistrant do
     end
 
     it "can create a list" do
-      @filter = described_class.new(reg_1.id)
+      @filter = described_class.new(@reg_1.id)
       expect(@filter.filtered_user_emails).to match_array([@reg_1.user.email])
       expect(@filter.filtered_registrant_emails).to match_array([@reg_1.email])
     end
