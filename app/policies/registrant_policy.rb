@@ -133,6 +133,10 @@ class RegistrantPolicy < ApplicationPolicy
     record.competitor?
   end
 
+  def contact_registrants?
+    event_planner? || super_admin?
+  end
+
   private
 
   def registration_type_for_sale?(registrant_type)
