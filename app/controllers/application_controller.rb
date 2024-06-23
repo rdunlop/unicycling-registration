@@ -86,7 +86,6 @@ class ApplicationController < ActionController::Base
 
     render pdf: view_name,
            page_size: "Letter",
-           print_media_type: true,
            margin: { top: 15, bottom: 10, left: 7, right: 7 },
            show_as_html: params[:debug].present?,
            header: { center: header, line: header.present? },
