@@ -3,7 +3,7 @@
 
   - wave_times = @competition.wave_times
 
-  - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
+  - competitors = @competition.competitors.preload(:members => [:registrant => [:contact_detail]]).active
 
   // Artistic
   - if @competition.compete_in_order?

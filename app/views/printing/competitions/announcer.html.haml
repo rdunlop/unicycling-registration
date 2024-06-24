@@ -14,7 +14,7 @@
         %th= RepresentationType.description
 
     %tbody
-      - competitors = @competition.competitors.includes(:members => [:registrant => [:contact_detail]]).active
+      - competitors = @competition.competitors.preload(:members => [:registrant => [:contact_detail]]).active
       - competitors = competitors.reorder("competitors.lowest_member_bib_number")
       - competitors.each do |comp|
         -# Why is this cached with i18n?
