@@ -26,6 +26,10 @@ class ImportedRegistrant < ApplicationRecord
     "Male"
   end
 
+  def wheel_size_id
+    nil
+  end
+
   private
 
   def set_age

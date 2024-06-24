@@ -354,16 +354,18 @@ class Competition < ApplicationRecord
   end
 
   def registrant_age_group_data
-    # IMPORTANT: Does not work for ImportedRegistrants
-    return [] if registrants.first.instance_of?(ImportedRegistrant)
-
-    registrants.reorder(nil).select(:age, :gender, :wheel_size_id).group(:age, :gender, :wheel_size_id).count(:age).map do |element, count|
+    # acting upon an Array, not an ActiveRecord association
+    registrant_data = registrants.map do |registrant|
       {
-        age: element[0],
-        gender: element[1],
-        wheel_size_id: element[2],
-        count: count
+        age: registrant.age,
+        gender: registrant.gender,
+        wheel_size_id: registrant.wheel_size_id
       }
+    end
+
+    registrant_data.tally.map do |elements, count|
+      elements[:count] = count
+      elements
     end
   end
 
