@@ -7,10 +7,16 @@ class Admin::RegistrantSummariesController < ApplicationController
 
   # POST /registrant_summaries
   def create
-    report = Report.create!(report_type: "registration_summary")
-    ShowAllRegistrantsPdfJob.perform_later(report.id, params[:order], params[:offset], params[:limit], current_user)
+    if params[:offset].present? != params[:limit].present?
+      # one, or the other, is set, but not neither, and not both
+      flash[:alert] = "Must specify BOTH limit and offset, or neither"
+    else
+      report = Report.create!(report_type: "registration_summary")
+      ShowAllRegistrantsPdfJob.perform_later(report.id, params[:order], params[:offset], params[:limit], current_user)
+      flash[:notice] = "Report Generation started. Check back in a few minutes"
+    end
 
-    redirect_to reports_path, notice: "Report Generation started. Check back in a few minutes"
+    redirect_to reports_path
   end
 
   private
