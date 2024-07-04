@@ -3,8 +3,6 @@ class LodgingRoomOptionPolicy < ApplicationPolicy
     event_planner? || super_admin?
   end
 
-  private
-
   class Scope < Scope
     def resolve
       scope.none
