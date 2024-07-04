@@ -102,6 +102,7 @@ class EmailsController < ApplicationController
       EmailFilters::Event,
       EmailFilters::SignedUpCategory,
       EmailFilters::ExpenseItem,
+      EmailFilters::PaidLodging,
       EmailFilters::Country,
       EmailFilters::AllUserAllReg,
       EmailFilters::GeneralVolunteer,
