@@ -7,3 +7,5 @@ CVE-2022-31160
 CVE-2021-41184
 CVE-2021-41183
 CVE-2021-41182
+# for Rails-admin (which is restricted for admin users):
+CVE-2024-39308
