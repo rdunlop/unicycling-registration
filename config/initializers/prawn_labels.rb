@@ -1,3 +1,9 @@
+# THIS ASSUMES A 72 PPI resolution
+# Thus, a full inch is 72 Points
+#
+# 0.1 INCH = 7.2 Pts
+# 1 INCH = 25.4 mm
+# 1 mm = 2.835 Pts
 Prawn::Labels.types = {
   "Spanish4716" => {
     "paper_size" => "A4",
@@ -86,5 +92,16 @@ Prawn::Labels.types = {
     "row_gutter" => 1, # 1/7 inch
     "left_margin" => 14.18, # 5 mm + 0 padding => 14.1732 DPI
     "right_margin" => 14.18
+  },
+  "Avery8167" => {
+    "paper_size" => "LETTER",
+    "columns" => 4,
+    "rows" => 20,
+    "top_margin" => 36, # 0.5" + 0 padding => 36 Pts
+    "bottom_margin" => 36,
+    "column_gutter" => 23.47, # 0.326" => 22.32 Pts
+    "row_gutter" => 1, # 1/7 inch
+    "left_margin" => 21.6, # 8 mm + 0 padding => 14.1732 DPI
+    "right_margin" => 21.6
   }
 }

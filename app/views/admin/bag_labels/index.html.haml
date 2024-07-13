@@ -6,7 +6,7 @@
   .row
     .small-6.columns
       = label_tag :label_type, "Label paper format"
-      = select_tag :label_type, options_for_select(["Avery5160", "L7161"])
+      = select_tag :label_type, options_for_select(["Avery8167", "Avery5160", "L7161"])
     .small-4.columns.right_aligned
       = label_tag :display_expenses, "Display Expenses On Label"
       = check_box_tag :display_expenses, false
