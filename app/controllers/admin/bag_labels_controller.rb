@@ -29,7 +29,7 @@ class Admin::BagLabelsController < ApplicationController
     labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       set_font(pdf)
 
-      pdf.text name, align: :center, inline_format: true
+      pdf.text name, align: :center, inline_format: true, fallback_fonts: ["IPA"]
     end
 
     send_data labels, filename: "bag-labels-#{Date.current}.pdf", type: "application/pdf"
