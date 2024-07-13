@@ -13,17 +13,20 @@ class Admin::BagLabelsController < ApplicationController
 
     names = []
 
+    label_per_registrant = (params[:num_per_reg].presence || 1).to_i
     @registrants.each do |reg|
-      record = "\n"
-      record += "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name}\n"
-      record += "#{reg.representation}\n"
-      record += reg.registrant_type.capitalize.to_s
+      label_per_registrant.times do
+        record = "\n"
+        record += "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name}\n"
+        record += "#{reg.representation}\n"
+        record += reg.registrant_type.capitalize.to_s
 
-      if params[:display_expenses]
-        reg_summary = reg.expense_items.map(&:name).join(", ")
-        record += "\n<b>Items:</b> #{reg_summary}" if reg_summary.present?
+        if params[:display_expenses]
+          reg_summary = reg.expense_items.map(&:name).join(", ")
+          record += "\n<b>Items:</b> #{reg_summary}" if reg_summary.present?
+        end
+        names << record
       end
-      names << record
     end
 
     labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
