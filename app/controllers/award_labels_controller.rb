@@ -210,7 +210,7 @@ class AwardLabelsController < ApplicationController
     # NOTE: The `label_type` must match something in the config/initializers/prawn_labels.rb
     labels = Prawn::Labels.new(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       set_font(pdf)
-      pdf.text name, align: :center, inline_format: true, valign: :center
+      pdf.text name, align: :center, inline_format: true, valign: :center, fallback_fonts: ["IPA"]
     end
     if params[:show_gridlines].present?
       labels.document.go_to_page(1)
