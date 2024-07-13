@@ -369,6 +369,8 @@ Docker Development Environment
 
 We recommend running development within a docker environment.
 
+We recommend using OrbStack for the docker environment, instead of using Docker-for-mac
+
 Benefits:
 - All daemons, processes are running at all times (easier to develop features)
 - runs with caching, which helps show some problems earlier (`touch tmp/caching-dev.txt` to enable)
