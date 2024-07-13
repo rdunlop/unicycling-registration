@@ -16,9 +16,9 @@ class Admin::BagLabelsController < ApplicationController
     label_per_registrant = (params[:num_per_reg].presence || 1).to_i
     @registrants.each do |reg|
       label_per_registrant.times do
-        record = "\n"
+        record = ""
         record += "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name}\n"
-        record += "#{reg.representation}\n"
+        record += "#{reg.representation}\n" if params[:show_country]
         record += reg.registrant_type.capitalize.to_s
 
         if params[:display_expenses]
