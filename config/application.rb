@@ -121,5 +121,7 @@ module Workspace
     config.hcaptcha_secret = ENV['HCAPTCHA_SECRET']
 
     config.super_admin_upgrade_code = ENV['SUPER_ADMIN_UPGRADE_CODE']
+
+    config.individual_email_sending = ENV['INDIVIDUAL_EMAIL_SENDING'] == "true"
   end
 end
