@@ -105,8 +105,7 @@ class ApplicationController < ActionController::Base
                                bold_italic: Rails.root.join("app", "assets", "fonts", "OpenSans-BoldItalic.ttf")
                              },
                              "IPA" => {
-                               normal:  Rails.root.join("app", "assets", "fonts", "ipag.ttf"),
-                               italic: Rails.root.join("app", "assets", "fonts", "OpenSans-Italic.ttf"),
+                               normal: Rails.root.join("app", "assets", "fonts", "ipag.ttf")
                              })
     pdf.font "OpenSans"
   end
