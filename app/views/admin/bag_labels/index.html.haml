@@ -10,9 +10,12 @@
     .small-2.columns
       = label_tag :num_per_reg, "Labels per Registrant"
       = number_field_tag :num_per_reg, 1, {min: 1}
-    .small-4.columns.right_aligned
+    .small-2.columns.right_aligned
       = label_tag :display_expenses, "Display Expenses On Label"
       = check_box_tag :display_expenses, false
+    .small-2.columns.right_aligned
+      = label_tag :show_country, "Show Country on Label"
+      = check_box_tag :show_country, false
   .row
     .small-12.columns
       = submit_tag "Create PDF", class: "button", data: { disable_with: false }
