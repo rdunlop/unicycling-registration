@@ -46,11 +46,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def publish?
-    awards_admin? || super_admin?
+    director?(record.event) || awards_admin? || super_admin?
   end
 
   def unpublish?
-    awards_admin? || super_admin?
+    director?(record.event) || awards_admin? || super_admin?
   end
 
   def award?
