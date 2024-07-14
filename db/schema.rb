@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_19_022031) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_14_024543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -757,6 +757,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_19_022031) do
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "visible", default: true, null: false
     t.index ["visible"], name: "index_lodgings_on_visible"
+  end
+
+  create_table "mail_opt_outs", force: :cascade do |t|
+    t.string "opt_out_code", null: false
+    t.boolean "opted_out", default: false, null: false
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_mail_opt_outs_on_email", unique: true
+    t.index ["opt_out_code"], name: "index_mail_opt_outs_on_opt_out_code", unique: true
   end
 
   create_table "mass_emails", id: :serial, force: :cascade do |t|

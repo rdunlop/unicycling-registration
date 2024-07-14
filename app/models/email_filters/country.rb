@@ -1,10 +1,4 @@
-class EmailFilters::Country
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::Country < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "country",

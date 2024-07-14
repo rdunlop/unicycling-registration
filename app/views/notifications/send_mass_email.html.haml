@@ -1,1 +1,6 @@
 = raw @body
+
+- if @opt_out_code.present?
+  %hr
+  To stop additional emails like this
+  = link_to "Unsubscribe", unsubscribe_url(code: @opt_out_code)

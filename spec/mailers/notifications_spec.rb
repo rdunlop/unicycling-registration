@@ -29,7 +29,7 @@ describe Notifications do
 
   describe "send_mass_email" do
     let(:mail) do
-      described_class.send_mass_email("subejct", "Body", ["a@b.com"])
+      described_class.send_mass_email("subejct", "Body", ["a@b.com"], "abc123")
     end
 
     it "sets the reply-to address" do

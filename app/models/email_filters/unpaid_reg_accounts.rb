@@ -1,10 +1,4 @@
-class EmailFilters::UnpaidRegAccounts
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::UnpaidRegAccounts < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::BooleanType.new(
       filter: "unpaid_reg_accounts",

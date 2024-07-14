@@ -1,10 +1,4 @@
-class EmailFilters::ConfirmedAccounts
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::ConfirmedAccounts < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::BooleanType.new(
       filter: "confirmed_accounts",

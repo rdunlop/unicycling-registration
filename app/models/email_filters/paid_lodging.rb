@@ -1,11 +1,5 @@
 # Allows selecting the LodgingRoomOption to send emails to
-class EmailFilters::PaidLodging
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::PaidLodging < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "lodging_room_option",

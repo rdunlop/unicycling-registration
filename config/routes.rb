@@ -798,6 +798,8 @@ Rails.application.routes.draw do
     concerns :competition_choosable
   end
 
+  get "/unsubscribe", to: "subscriptions#unsubscribe", as: "unsubscribe"
+
   resources :styles, only: :index
   get "/new", to: redirect("/tenants")
 

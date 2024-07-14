@@ -28,14 +28,15 @@ class MassEmail < ApplicationRecord
       addresses.each_slice(10).with_index do |addresses, index|
         # wait a few second for set of emails to prevent hitting SES Rate limit
         addresses.each do |address|
-          Notifications.send_mass_email(subject, body, [address]).deliver_later(wait: index.seconds * 3)
+          opt_out_code = MailOptOut.create_if_not_present(address).opt_out_code
+          Notifications.send_mass_email(subject, body, [address], opt_out_code).deliver_later(wait: index.seconds * 3)
         end
       end
     else
       # Send emails in groups of 40
       addresses.each_slice(40).with_index do |addresses, index|
         # wait a few second for each email to prevent hitting SES Rate limit
-        Notifications.send_mass_email(subject, body, addresses).deliver_later(wait: index.seconds * 3)
+        Notifications.send_mass_email(subject, body, addresses, nil).deliver_later(wait: index.seconds * 3)
       end
     end
   end

@@ -1,10 +1,4 @@
-class EmailFilters::ExpenseItem
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::ExpenseItem < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "expense_item",

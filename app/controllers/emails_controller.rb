@@ -66,7 +66,7 @@ class EmailsController < ApplicationController
       mass_email = MassEmail.new
       mass_email.subject = @email_form.subject
       mass_email.body = @email_form.body
-      email_addresses = (@filter.filtered_user_emails + @filter.filtered_registrant_emails).uniq.compact
+      email_addresses = (@filter.user_emails + @filter.registrant_emails).uniq.compact
       mass_email.email_addresses = email_addresses
       mass_email.email_addresses_description = @filter.detailed_description
       mass_email.sent_by = current_user

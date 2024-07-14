@@ -1,10 +1,4 @@
-class EmailFilters::GeneralVolunteer
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::GeneralVolunteer < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::BooleanType.new(
       filter: "general_volunteer",

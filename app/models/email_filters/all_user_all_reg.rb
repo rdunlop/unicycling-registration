@@ -1,10 +1,4 @@
-class EmailFilters::AllUserAllReg
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::AllUserAllReg < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::BooleanType.new(
       filter: "all_user_all_reg",
