@@ -1,3 +1,23 @@
+module Prawn
+  class Labels
+    # modify the shrink_text function
+    # because it was shrinking too much when it needed to shrink
+    def shrink_text(record)
+      linecount = (split_lines = record.split("\n")).length
+
+      # 30 is estimated max character length per line.
+      split_lines.each { |line| linecount += line.length / 30 }
+
+      # -10 accounts for the overflow margins
+      rowheight = @document.grid.row_height - 5
+
+      # divide the rowheight by the number of lines
+      # but only allow maximum font_size 12
+      @document.font_size = [(rowheight / linecount), 12].min
+    end
+  end
+end
+
 class Admin::BagLabelsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_access
@@ -16,10 +36,9 @@ class Admin::BagLabelsController < ApplicationController
     label_per_registrant = (params[:num_per_reg].presence || 1).to_i
     @registrants.each do |reg|
       label_per_registrant.times do
-        record = ""
-        record += "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name}\n"
-        record += "#{reg.representation}\n" if params[:show_country]
-        record += reg.registrant_type.capitalize.to_s
+        record = "<b>##{reg.bib_number}</b> #{reg.last_name}, #{reg.first_name}"
+        record += "\n#{reg.representation}" if params[:show_country]
+        record += "\n#{reg.registrant_type.capitalize}"
 
         if params[:display_expenses]
           reg_summary = reg.expense_items.map(&:name).join(", ")
