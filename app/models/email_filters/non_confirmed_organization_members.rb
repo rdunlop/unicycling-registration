@@ -1,10 +1,4 @@
-class EmailFilters::NonConfirmedOrganizationMembers
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::NonConfirmedOrganizationMembers < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::BooleanType.new(
       filter: "non_confirmed_organization_members",

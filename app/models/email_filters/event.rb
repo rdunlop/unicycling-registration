@@ -1,10 +1,4 @@
-class EmailFilters::Event
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::Event < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "event",

@@ -1,10 +1,4 @@
-class EmailFilters::SingleRegistrant
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::SingleRegistrant < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "registrants",

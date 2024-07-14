@@ -1,10 +1,4 @@
-class EmailFilters::Competitions
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::Competitions < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "competition",

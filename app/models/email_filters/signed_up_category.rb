@@ -1,10 +1,4 @@
-class EmailFilters::SignedUpCategory
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::SignedUpCategory < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::SelectType.new(
       filter: "signed_up_category",

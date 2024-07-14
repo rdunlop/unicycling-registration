@@ -12,18 +12,18 @@ At the bottom of this page, you can use the system to send e-mails, if you wish.
     %tr
       %th
         Filtered User E-mail addresses
-        (#{@filter.filtered_user_emails.count})
+        (#{@filter.user_emails.count})
       %th
         Filtered Registration E-mail Addresses
-        (#{@filter.filtered_registrant_emails.count})
+        (#{@filter.registrant_emails.count})
   %tbody
     %tr
       %td
-        - @filter.filtered_user_emails.each do |email|
+        - @filter.user_emails.each do |email|
           = email
           %br
       %td
-        - @filter.filtered_registrant_emails.each do |email|
+        - @filter.registrant_emails.each do |email|
           = email
           %br
 

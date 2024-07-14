@@ -1,10 +1,4 @@
-class EmailFilters::IncompleteRegistrants
-  attr_reader :arguments
-
-  def initialize(arguments = nil)
-    @arguments = arguments
-  end
-
+class EmailFilters::IncompleteRegistrants < EmailFilters::BaseEmailFilter
   def self.config
     EmailFilters::BooleanType.new(
       filter: "incomplete_registrants",
