@@ -1,4 +1,5 @@
 = raw strip_tags(@body)
 
-To stop additional emails like this go to
-= unsubscribe_url(code: @opt_out_code)
+- if @opt_out_code.present?
+  To stop additional emails like this go to
+  = unsubscribe_url(code: @opt_out_code)
