@@ -134,7 +134,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def contact_registrants?
-    event_planner? || super_admin?
+    director? || event_planner? || super_admin?
   end
 
   private

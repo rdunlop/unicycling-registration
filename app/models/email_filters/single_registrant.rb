@@ -25,7 +25,7 @@ class EmailFilters::SingleRegistrant < EmailFilters::BaseEmailFilter
 
   # object whose policy must respond to `:contact_registrants?`
   def authorization_object
-    nil
+    registrant
   end
 
   def valid?
