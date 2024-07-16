@@ -30,6 +30,8 @@ class TimeParser
     thous = seconds_and_hundreds[(index + 1)..]
     if thous.length == 1
       results[:thousands] = thous.to_i * 100
+    elsif thous.length == 2 # allows input from timer as hundreds
+      results[:thousands] = thous.to_i * 10
     else
       results[:thousands] = thous.to_i
     end
