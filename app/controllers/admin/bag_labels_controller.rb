@@ -24,7 +24,7 @@ class Admin::BagLabelsController < ApplicationController
   def index; end
 
   def create
-    @registrants = Registrant.includes(:contact_detail).reorder(:sorted_last_name, :first_name).active.all
+    @registrants = Registrant.includes(:contact_detail).reorder(:bib_number).active.all
     if params[:display_expenses]
       @registrants = @registrants.includes(:expense_items)
     end
@@ -51,7 +51,7 @@ class Admin::BagLabelsController < ApplicationController
     labels = Prawn::Labels.render(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       set_font(pdf)
 
-      pdf.text name, align: :center, inline_format: true, fallback_fonts: ["IPA"]
+      pdf.text name, align: :center, inline_format: true, valign: :center, fallback_fonts: ["IPA"]
     end
 
     send_data labels, filename: "bag-labels-#{Date.current}.pdf", type: "application/pdf"
