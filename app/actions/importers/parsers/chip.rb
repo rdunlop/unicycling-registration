@@ -79,7 +79,9 @@ class Importers::Parsers::Chip < Importers::Parsers::Base
       # TimeParser will do this when it finds only a single "thousands" point.
       imported_time
     when 2
-      imported_time * 10
+      # We should multiply "* 10", but we don't, because
+      # TimeParser will do this when it finds only two "thousands" point.
+      imported_time
     when 3
       imported_time * 1
     when 4
