@@ -15,7 +15,7 @@ module FormHelper
   end
 
   def eligible_registrants(competition)
-    if @config.can_create_competitors_at_lane_assignment? # rubocop:disable Rails/HelperInstanceVariable
+    if competition.allow_competitor_creation_during_import_approval?
       AvailableRegistrants.all
     else
       competition.registrants.sort_by(&:bib_number)

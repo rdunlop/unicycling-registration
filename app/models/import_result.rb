@@ -76,7 +76,7 @@ class ImportResult < ApplicationRecord
         end
       end
     end
-    if competitor.nil? && EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
+    if competitor.nil? && competition.allow_competitor_creation_during_import_approval?
       # still no competitor, create one in the current event
       registrant = matching_registrant
       target_competition.create_competitor_from_registrants([registrant], nil)

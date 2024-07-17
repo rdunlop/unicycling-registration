@@ -71,7 +71,7 @@ class CompetitionSetup::CompetitionsController < ApplicationController
                                         :penalty_seconds, :automatic_competitor_creation, :combined_competition_id,
                                         :sign_in_list_enabled, :time_entry_columns,
                                         :import_results_into_other_competition,
-                                        :hide_max_laps_count,
+                                        :hide_max_laps_count, :allow_competitor_creation_during_import_approval,
                                         :score_ineligible_competitors, :results_header,
                                         competition_sources_attributes: %i[id event_category_id gender_filter min_age max_age competition_id max_place _destroy])
   end

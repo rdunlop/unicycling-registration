@@ -369,6 +369,12 @@ class Competition < ApplicationRecord
     end
   end
 
+  def allow_competitor_creation_during_import_approval?
+    return true if EventConfiguration.singleton.can_create_competitors_at_lane_assignment?
+
+    allow_competitor_creation_during_import_approval
+  end
+
   # returns all of the results together, ignoring age-group data
   def results_list
     res = competitors.active.to_a
