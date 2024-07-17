@@ -5,7 +5,8 @@ describe TimeResultCalculator do
   let(:finish_times) { [2000] }
   let(:competition_start_time) { 0 }
   let(:lower_is_better) { true }
-  let(:calculator) { described_class.new(start_times, finish_times, competition_start_time, lower_is_better) }
+  let(:data_entry_format) { OpenStruct.new(thousands?: true, hundreds?: false, tens?: false, lower_is_better?: lower_is_better) }
+  let(:calculator) { described_class.new(start_times, finish_times, competition_start_time, data_entry_format: data_entry_format) }
 
   describe "with only a finish time" do
     it "returns the finish time" do

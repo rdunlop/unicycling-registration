@@ -508,7 +508,7 @@ class Competitor < ApplicationRecord
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/#{TimeResult.cache_key_for_set(id)}/best_time_in_thousands") do
       start_times = start_time_results.select(&:active?).map(&:full_time_in_thousands)
       finish_times = finish_time_results.select(&:active?).map(&:full_time_in_thousands)
-      TimeResultCalculator.new(start_times, finish_times, competition_start_time, lower_is_better).best_time_in_thousands
+      TimeResultCalculator.new(start_times, finish_times, competition_start_time, data_entry_format: competition.data_entry_format).best_time_in_thousands
     end
   end
 

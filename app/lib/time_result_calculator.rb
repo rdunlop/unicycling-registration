@@ -1,13 +1,13 @@
 # Given a set of time_results, and a competition_start_time,
 # determine the best time
 class TimeResultCalculator
-  attr_accessor :start_times, :finish_times, :competition_start_time, :lower_is_better
+  attr_accessor :start_times, :finish_times, :competition_start_time, :data_entry_format
 
-  def initialize(start_times, finish_times, competition_start_time, lower_is_better)
+  def initialize(start_times, finish_times, competition_start_time, data_entry_format:)
     @start_times = start_times
     @finish_times = finish_times
     @competition_start_time = competition_start_time
-    @lower_is_better = lower_is_better
+    @data_entry_format = data_entry_format
   end
 
   # If start_times are provided, find the last start time which begins before each finish time
@@ -31,7 +31,8 @@ class TimeResultCalculator
   # finding a start_time, or using the overall competition_start_time
   def adjusted_time(finish_time)
     start_time = matching_start_time(finish_time) || competition_start_time_in_thousands
-    finish_time - start_time
+    total_time_in_thousands = finish_time - start_time
+    TimeRounder.new(total_time_in_thousands, data_entry_format: data_entry_format).rounded_thousands
   end
 
   # return nil if there are no matching start times
@@ -44,7 +45,7 @@ class TimeResultCalculator
   end
 
   def better_time(time_1, time_2)
-    if lower_is_better
+    if data_entry_format.lower_is_better?
       if time_1 < time_2
         time_1
       else
