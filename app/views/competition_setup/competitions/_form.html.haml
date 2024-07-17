@@ -7,6 +7,9 @@
 / LanesQ:
 / Show for Shortest Time
 
+/ hide_max_laps_count
+/ Show for Timed Multi-Lap
+
 / CompetitionSources:
 / Hide for Overall Champion
 
@@ -53,6 +56,10 @@
 
   .js--blockVisibleTarget{ data: { show: ["Shortest Time"] } }
     = f.input :uses_lane_assignments
+    %hr
+
+  .js--blockVisibleTarget{ data: { show: ["Timed Multi-Lap"] } }
+    = f.input :hide_max_laps_count
     %hr
 
   %h3 Competition Sources
