@@ -100,7 +100,7 @@ describe Competitor do
     describe "with higher_is_better" do
       before do
         Rails.cache.clear
-        allow(@comp).to receive(:lower_is_better).and_return(false)
+        allow(competition).to receive(:scoring_class).and_return "Longest Time"
       end
 
       it "has the correct best_time_in_thousands" do
