@@ -30,7 +30,7 @@ class CompetitorPolicy < ApplicationPolicy
   def create?
     return false unless record.competition.unlocked?
 
-    director_or_competition_admin?(user, record.competition) || config.can_create_competitors_at_lane_assignment?
+    director_or_competition_admin?(user, record.competition) || record.competition.allow_competitor_creation_during_import_approval?
   end
 
   def update?

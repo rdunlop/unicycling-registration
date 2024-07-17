@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_14_024543) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_17_225306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -206,6 +206,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_14_024543) do
     t.boolean "score_ineligible_competitors", default: false, null: false
     t.string "results_header"
     t.boolean "hide_max_laps_count", default: false, null: false
+    t.boolean "allow_competitor_creation_during_import_approval", default: false, null: false
     t.index ["base_age_group_type_id"], name: "index_competitions_on_base_age_group_type_id"
     t.index ["combined_competition_id"], name: "index_competitions_on_combined_competition_id", unique: true
     t.index ["event_id"], name: "index_competitions_event_id"

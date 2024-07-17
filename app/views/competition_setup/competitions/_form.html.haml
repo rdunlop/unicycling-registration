@@ -93,6 +93,10 @@
   = f.check_box :automatic_competitor_creation, disabled: "disabled"
   %p DISABLED automatic creation because I think that it's more trouble than it's worth
 
+  %br
+  = f.label :allow_competitor_creation_during_import_approval
+  = f.check_box :allow_competitor_creation_during_import_approval
+
   %p Selecting this option will automatically create a competitor whenever a registrant signs up for any source-event.
 
   .js--blockVisibleTarget{ data: { show: ["Overall Champion"] } }
