@@ -98,7 +98,7 @@ class ImportResult < ApplicationRecord
   def set_zeros
     return if competition.nil?
 
-    self.thousands = 0 unless competition.data_entry_format.thousands? || competition.data_entry_format.hundreds?
+    self.thousands = 0 unless competition.data_entry_format.thousands? || competition.data_entry_format.hundreds? || competition.data_entry_format.tens?
   end
 
   # determines that the import_result has enough information

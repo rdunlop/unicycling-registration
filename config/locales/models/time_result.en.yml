@@ -9,6 +9,7 @@ en:
         facade_minutes: Minutes
         seconds: Seconds
         facade_hundreds: Hundreds
+        facade_tens: Tens
         thousands: Thousands
         number_of_penalties: "Penalties"
         number_of_laps: "# Laps"

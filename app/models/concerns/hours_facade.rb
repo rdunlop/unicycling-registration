@@ -2,6 +2,7 @@ module HoursFacade
   PERMITTED_PARAMS = %i[
     facade_hours
     facade_minutes
+    facade_tens
     facade_hundreds
     seconds
     minutes
@@ -38,6 +39,16 @@ module HoursFacade
     return nil if thousands.blank?
 
     thousands / 10
+  end
+
+  def facade_tens=(new_tens)
+    self.thousands = new_tens.to_i * 100
+  end
+
+  def facade_tens
+    return nil if thousands.blank?
+
+    thousands / 100
   end
 
   private
