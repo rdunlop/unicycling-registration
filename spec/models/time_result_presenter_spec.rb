@@ -55,7 +55,7 @@ describe TimeResultPresenter do
     end
 
     context "when set to hundreds precision" do
-      let(:entry_format) { OpenStruct.new(hours?: false, thousands?: false, hundreds?: true) }
+      let(:entry_format) { OpenStruct.new(hours?: false, thousands?: false, hundreds?: true, lower_is_better?: true) }
       let(:result) { described_class.new(minutes, seconds, thousands, data_entry_format: entry_format) }
 
       context "with 0 thousands" do
@@ -80,6 +80,36 @@ describe TimeResultPresenter do
 
         it "should print the hours, for multi-hour events" do
           expect(result.full_time).to eq("3:20:16.00")
+        end
+      end
+    end
+
+    context "when set to tens precision" do
+      let(:entry_format) { OpenStruct.new(hours?: false, thousands?: false, hundreds?: false, tens?: true, lower_is_better?: true) }
+      let(:result) { described_class.new(minutes, seconds, thousands, data_entry_format: entry_format) }
+
+      context "with 0 thousands" do
+        let(:thousands) { 0 }
+
+        it "should print the tens even if they are 0" do
+          expect(result.full_time).to eq("19:16.0")
+        end
+      end
+
+      context "with 100 thousands" do
+        let(:thousands) { 100 }
+
+        it "should always print tens, if the result is tens" do
+          expect(result.full_time).to eq("19:16.1")
+        end
+      end
+
+      context "with multi-hours of data" do
+        let(:minutes) { 200 }
+        let(:thousands) { 0 }
+
+        it "should print the hours, for multi-hour events" do
+          expect(result.full_time).to eq("3:20:16.0")
         end
       end
     end

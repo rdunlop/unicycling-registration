@@ -131,7 +131,7 @@ class Competition < ApplicationRecord
   validates :combined_competition, absence: true, unless: proc { |f| f.scoring_class == "Overall Champion" }
   validates :results_header, length: { maximum: 100 }
 
-  TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "hours_minutes_seconds"].freeze
+  TIME_ENTRY_COLUMN_TYPES = ["minutes_seconds_thousands", "minutes_seconds_hundreds", "minutes_seconds_tens", "hours_minutes_seconds"].freeze
   validates :time_entry_columns, inclusion: { in: TIME_ENTRY_COLUMN_TYPES }, allow_nil: true
 
   scope :event_order, -> { includes(:event).order("events.name") }
@@ -150,13 +150,13 @@ class Competition < ApplicationRecord
   def data_entry_format
     case time_entry_columns
     when "minutes_seconds_thousands"
-      OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+      OpenStruct.new(hours?: false, thousands?: true, hundreds?: false, tens?: false, lower_is_better?: scoring_helper.lower_is_better)
     when "minutes_seconds_hundreds"
-      OpenStruct.new(hours?: false, thousands?: false, hundreds?: true)
+      OpenStruct.new(hours?: false, thousands?: false, hundreds?: true, tens?: false, lower_is_better?: scoring_helper.lower_is_better)
     when "hours_minutes_seconds"
-      OpenStruct.new(hours?: true, thousands?: false, hundreds?: false)
+      OpenStruct.new(hours?: true, thousands?: false, hundreds?: false, tens?: false, lower_is_better?: scoring_helper.lower_is_better)
     else
-      OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+      OpenStruct.new(hours?: false, thousands?: true, hundreds?: false, tens?: false, lower_is_better?: scoring_helper.lower_is_better)
     end
   end
 

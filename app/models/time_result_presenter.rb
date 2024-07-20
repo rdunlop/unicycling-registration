@@ -1,6 +1,7 @@
 class TimeResultPresenter
   attr_accessor :minutes, :seconds, :thousands
-  attr_reader :display_hours, :display_thousands, :display_hundreds
+  attr_reader :display_hours, :display_thousands, :display_hundreds, :display_tens
+  attr_reader :data_entry_format
 
   def self.from_thousands(time_in_thousands, data_entry_format: nil)
     thousands = time_in_thousands % 1000
@@ -15,11 +16,13 @@ class TimeResultPresenter
     @seconds = seconds.to_i
     @thousands = thousands.to_i
     if data_entry_format.nil?
-      data_entry_format = OpenStruct.new(hours?: false, thousands?: true, hundreds?: false)
+      data_entry_format = OpenStruct.new(hours?: false, thousands?: true, hundreds?: false, tens?: false, lower_is_better?: true)
     end
+    @data_entry_format = data_entry_format
     @display_hours = data_entry_format.hours?
     @display_hundreds = data_entry_format.hundreds?
     @display_thousands = data_entry_format.thousands?
+    @display_tens = data_entry_format.tens?
   end
 
   def full_time
@@ -30,13 +33,19 @@ class TimeResultPresenter
 
   private
 
+  def rounded_thousands
+    TimeRounder.new(thousands, data_entry_format: data_entry_format).rounded_thousands
+  end
+
   # convert thousands into a string format: ".XXX" or ".XX" or ""
   # we display the precision based on the competition configuration
   def thousands_string
     if display_thousands
-      ".#{pad(thousands, 3)}"
+      ".#{pad(rounded_thousands, 3)}"
     elsif display_hundreds
-      ".#{pad((thousands / 10.0).round, 2)}"
+      ".#{pad((rounded_thousands / 10.0).round, 2)}"
+    elsif display_tens
+      ".#{pad((rounded_thousands / 100.0).round, 1)}"
     else
       ""
     end
