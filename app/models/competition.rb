@@ -149,6 +149,8 @@ class Competition < ApplicationRecord
   # Not yet fully tested/working, see ImportResult:104
   def data_entry_format
     case time_entry_columns
+    when "minutes_seconds_tens"
+      OpenStruct.new(hours?: false, thousands?: false, hundreds?: false, tens?: true, lower_is_better?: scoring_helper.lower_is_better)
     when "minutes_seconds_thousands"
       OpenStruct.new(hours?: false, thousands?: true, hundreds?: false, tens?: false, lower_is_better?: scoring_helper.lower_is_better)
     when "minutes_seconds_hundreds"

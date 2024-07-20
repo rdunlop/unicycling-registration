@@ -62,10 +62,11 @@ class ResultDisplayer::TimeResult
       results << [:minutes, { min: 0 }]
     end
     results << [:seconds, { min: 0 }]
-    if @competition.data_entry_format.hundreds?
+    if @competition.data_entry_format.tens?
+      results << [:facade_tens, { min: 0 }]
+    elsif @competition.data_entry_format.hundreds?
       results << [:facade_hundreds, { min: 0 }]
-    end
-    if @competition.data_entry_format.thousands?
+    elsif @competition.data_entry_format.thousands?
       results << [:thousands, { min: 0 }]
     end
 
