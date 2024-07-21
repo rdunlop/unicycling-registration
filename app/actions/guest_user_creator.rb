@@ -3,7 +3,7 @@
 #
 # For use by judges, or other reasons
 class GuestUserCreator
-  attr_reader :user
+  attr_reader :user, :errors
 
   def initialize; end
 
@@ -19,7 +19,8 @@ class GuestUserCreator
   end
 
   # Create user for use as a judge
-  #
+  # Return true on success,
+  # on error, store errors in 'def errors'
   def create_data_entry_volunteer(name:, password:)
     email = "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com"
     user = User.this_tenant.create(name: name, guest: true, confirmed_at: Time.current, email: email)
@@ -31,5 +32,8 @@ class GuestUserCreator
     user.update!(password: password)
     user.add_role(:data_entry_volunteer)
     @user = user
+  rescue StandardError
+    @errors = user.errors.full_messages.join(", ")
+    false
   end
 end

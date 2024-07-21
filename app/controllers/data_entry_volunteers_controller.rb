@@ -21,10 +21,10 @@ class DataEntryVolunteersController < ApplicationController
   # POST /competitions/#/data_entry_volunteers/user
   def user
     guc = GuestUserCreator.new
-    guc.create_data_entry_volunteer(name: params[:name], password: params[:password])
-    if guc.user.persisted?
+    if guc.create_data_entry_volunteer(name: params[:name], password: params[:password])
       flash[:notice] = 'Additional UDA User was successfully created.'
     else
+      flash[:alert] = guc.errors
       index
     end
     respond_with(guc.user, location: competition_data_entry_volunteers_path(@competition), action: "index")

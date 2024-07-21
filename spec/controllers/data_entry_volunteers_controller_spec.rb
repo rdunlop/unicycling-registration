@@ -41,6 +41,29 @@ describe DataEntryVolunteersController do
     end
   end
 
+  describe "POST user" do
+    let(:name) { "robin" }
+
+    describe "with invalid params" do
+      let(:password) { "abc" } # too short
+
+      it "creates a new Volunteer" do
+        post :user, params: { name: name, password: password, competition_id: @ec.id }
+        expect(flash[:alert]).to match(/Password is too short/)
+      end
+    end
+
+    describe "with valid params" do
+      let(:password) { "abc123456" }
+
+      it "creates a new Volunteer" do
+        expect do
+          post :user, params: { name: name, password: password, competition_id: @ec.id }
+        end.to change(User.where(guest: true), :count).by(1)
+      end
+    end
+  end
+
   describe "missing a name" do
     it "doesn't create the volunteer" do
       expect do
