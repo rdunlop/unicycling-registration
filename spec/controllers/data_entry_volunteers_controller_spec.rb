@@ -43,8 +43,10 @@ describe DataEntryVolunteersController do
 
   describe "POST user" do
     let(:name) { "robin" }
+
     describe "with invalid params" do
       let(:password) { "abc" } # too short
+
       it "creates a new Volunteer" do
         post :user, params: { name: name, password: password, competition_id: @ec.id }
         expect(flash[:alert]).to match(/Password is too short/)
@@ -53,6 +55,7 @@ describe DataEntryVolunteersController do
 
     describe "with valid params" do
       let(:password) { "abc123456" }
+
       it "creates a new Volunteer" do
         expect do
           post :user, params: { name: name, password: password, competition_id: @ec.id }

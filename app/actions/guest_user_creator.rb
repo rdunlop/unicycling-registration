@@ -22,20 +22,18 @@ class GuestUserCreator
   # Return true on success,
   # on error, store errors in 'def errors'
   def create_data_entry_volunteer(name:, password:)
-    begin
-      email = "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com"
-      user = User.this_tenant.create(name: name, guest: true, confirmed_at: Time.current, email: email)
-      user.save!(validate: false)
-      user_convention = user.user_conventions.build(subdomain: Apartment::Tenant.current)
-      user_convention.save
+    email = "robin+guest#{Time.now.to_i}#{rand(99)}@dunlopweb.com"
+    user = User.this_tenant.create(name: name, guest: true, confirmed_at: Time.current, email: email)
+    user.save!(validate: false)
+    user_convention = user.user_conventions.build(subdomain: Apartment::Tenant.current)
+    user_convention.save
 
-      user.update!(name: name)
-      user.update!(password: password)
-      user.add_role(:data_entry_volunteer)
-      @user = user
-    rescue
-      @errors = user.errors.full_messages.join(", ")
-      false
-    end
+    user.update!(name: name)
+    user.update!(password: password)
+    user.add_role(:data_entry_volunteer)
+    @user = user
+  rescue StandardError
+    @errors = user.errors.full_messages.join(", ")
+    false
   end
 end
