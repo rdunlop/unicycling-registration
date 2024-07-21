@@ -386,7 +386,7 @@ class Competitor < ApplicationRecord
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/gender") do
       # all teams should compete against each other, regardless of gender
       if competition.mixed_gender_age_groups?
-        "(n/a)"
+        "(mixed)"
       else
         if members.empty?
           "(No registrants)"
