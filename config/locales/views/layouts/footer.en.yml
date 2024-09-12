@@ -3,6 +3,7 @@ en:
   layouts:
     footer:
       developed_by: Developed by Robin Dunlop
+      code: Source Code
       privacy_policy: Privacy Policy
       contact_us: Contact Us
       help: Help
