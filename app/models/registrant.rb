@@ -184,6 +184,8 @@ class Registrant < ApplicationRecord
   scope :started, -> { where.not(status: "blank").active_or_incomplete }
   scope :not_deleted, -> { where(deleted: false) }
 
+  self.ignored_columns += [:paid]
+
   def validated?
     status == "active"
   end
