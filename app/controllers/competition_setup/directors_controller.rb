@@ -21,7 +21,7 @@ class CompetitionSetup::DirectorsController < CompetitionSetup::BaseCompetitionS
     event = Event.find(params[:event_id])
     user.remove_role(:director, event)
 
-    redirect_to directors_path(event), notice: 'Removed Director'
+    redirect_to directors_path, notice: 'Removed Director'
   end
 
   private
