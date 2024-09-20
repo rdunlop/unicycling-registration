@@ -46,7 +46,7 @@ class RegistrationCost < ApplicationRecord
   end
 
   def self.last_online_period
-    where(onsite: false).last
+    reorder(:end_date).where(onsite: false).last
   end
 
   def self.all_registration_expense_items

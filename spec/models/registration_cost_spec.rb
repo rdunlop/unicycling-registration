@@ -51,6 +51,16 @@ describe RegistrationCost do
     expect(described_class.last_online_period).to eq(registration_cost)
   end
 
+  context "when the last online registration period starts before another period" do
+    let(:base_date) { Date.new(2012, 11, 3) }
+    let!(:outside_registration_cost) { FactoryBot.create(:registration_cost, :competitor, start_date: base_date, end_date: base_date + 7) }
+    let!(:other_registration_cost) { FactoryBot.create(:registration_cost, :competitor, start_date: base_date + 1, end_date: base_date + 6) }
+
+    it "still finds the last online period" do
+      expect(described_class.last_online_period).to eq(outside_registration_cost)
+    end
+  end
+
   describe "with associated expense_items" do
     it "removes the expense item on RegistrationCost deletion" do
       registration_cost.save!
