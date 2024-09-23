@@ -12,7 +12,7 @@ class PaymentPolicy < ApplicationPolicy
   end
 
   def new?
-    !registration_closed? || super_admin?
+    !registration_closed? || super_admin? # should we prevent this when comp is closed, but noncomp is not?
   end
 
   %i[create advanced_stripe complete pay_offline apply_coupon].each do |meth|
@@ -39,7 +39,9 @@ class PaymentPolicy < ApplicationPolicy
   private
 
   def manage?
-    (user_record? && (!registration_closed? || payment_admin?)) || super_admin?
+    return true if super_admin?
+
+    user_record? && (!registration_closed? || payment_admin?) # should we prevent this when comp is closed, but noncomp is not?
   end
 
   def user_record?

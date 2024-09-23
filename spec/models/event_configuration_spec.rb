@@ -212,27 +212,31 @@ describe EventConfiguration do
   it "is open if no periods are defined" do
     @ev.update_attribute(:event_sign_up_closed_date, nil)
     @ev.save
-    expect(described_class.closed?).to eq(false)
+    expect(described_class.singleton.competitor_registration_closed?).to eq(false)
+    expect(described_class.singleton.noncompetitor_registration_closed?).to eq(false)
   end
 
   it "is closed if the event_closed_date is defined, and in the past" do
     ev = described_class.new(under_construction: false)
     ev.event_sign_up_closed_date = Date.new(2013, 5, 1)
     travel_to(Date.new(2013, 5, 4)) do
-      expect(ev).to be_registration_closed
+      expect(ev).to be_competitor_registration_closed
+      expect(ev).to be_noncompetitor_registration_closed
     end
 
     travel_to(Date.new(2013, 5, 1)) do
-      expect(ev).not_to be_registration_closed
+      expect(ev).not_to be_competitor_registration_closed
+      expect(ev).not_to be_noncompetitor_registration_closed
     end
   end
 
   it "is closed if it is under construction" do
     @ev.under_construction = true
-    expect(@ev).to be_registration_closed
+    expect(@ev).to be_competitor_registration_closed
+    expect(@ev).to be_noncompetitor_registration_closed
   end
 
-  describe "#new_registration_closed" do
+  describe "#new_registration_closed_for_limit?" do
     let(:ev) { described_class.new(under_construction: false) }
 
     before do
@@ -241,8 +245,8 @@ describe EventConfiguration do
 
     it "is closed if registration_closed?" do
       travel_to(Date.new(2013, 5, 4)) do
-        expect(ev).to be_registration_closed
-        expect(ev).to be_new_registration_closed
+        expect(ev).to be_competitor_registration_closed
+        expect(ev).to be_new_registration_closed_for_limit
       end
     end
 
@@ -250,12 +254,12 @@ describe EventConfiguration do
       FactoryBot.create(:competitor)
 
       travel_to(Date.new(2013, 5, 1)) do
-        expect(ev).not_to be_registration_closed
+        expect(ev).not_to be_competitor_registration_closed
         ev.max_registrants = 1
-        expect(ev).to be_new_registration_closed
+        expect(ev).to be_new_registration_closed_for_limit
 
         FactoryBot.create(:competitor)
-        expect(ev).to be_new_registration_closed
+        expect(ev).to be_new_registration_closed_for_limit
       end
     end
   end
@@ -289,7 +293,7 @@ describe EventConfiguration do
 
     it "is open on the last day of registration" do
       travel_to(Date.new(2012, 11, 7)) do
-        expect(described_class.closed?).to eq(false)
+        expect(described_class.singleton.competitor_registration_closed?).to eq(false)
       end
     end
 
@@ -297,19 +301,19 @@ describe EventConfiguration do
       d = Date.new(2012, 11, 7)
       travel_to(d) do
         expect(@rp.current_period?(d)).to eq(true)
-        expect(described_class.closed?).to eq(false)
+        expect(described_class.singleton.competitor_registration_closed?).to eq(false)
       end
 
       e = Date.new(2012, 11, 8)
       travel_to(e) do
         expect(@rp.current_period?(e)).to eq(true)
-        expect(described_class.closed?).to eq(false)
+        expect(described_class.singleton.competitor_registration_closed?).to eq(false)
       end
 
       f = Date.new(2012, 11, 9)
       travel_to(f) do
         expect(@rp.current_period?(f)).to eq(false)
-        expect(described_class.closed?).to eq(true)
+        expect(described_class.singleton.competitor_registration_closed?).to eq(true)
       end
     end
   end

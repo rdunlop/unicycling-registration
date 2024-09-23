@@ -271,35 +271,41 @@ class EventConfiguration < ApplicationRecord
     end
   end
 
-  def self.closed?
-    singleton.registration_closed?
-  end
-
   def self.under_construction?
     singleton.under_construction?
   end
 
-  def registration_closed_date
-    reg_cost_closed_date = RegistrationCost.last_online_period.try(:end_date).try(:+, 1.day)
+  # the latest online registration date (independent of comp/non-comp)
+  # type is nil, "competitor" or "noncompetitor"
+  def registration_closed_date(type = nil)
+    reg_cost_closed_date = if type.present?
+                             RegistrationCost.for_type(type)
+                           else
+                             RegistrationCost
+                           end.last_online_period.try(:end_date).try(:+, 1.day)
     reg_cost_closed_date || event_sign_up_closed_date.try(:+, 1.day)
   end
 
+  # competitors only
   def effective_standard_skill_closed_date
-    standard_skill_closed_date || registration_closed_date
+    standard_skill_closed_date || registration_closed_date("competitor")
   end
 
+  # competitors only
   def effective_artistic_closed_date
-    artistic_closed_date || registration_closed_date
+    artistic_closed_date || registration_closed_date("competitor")
   end
 
+  # competitors only
   def effective_music_submission_end_date
-    music_submission_end_date || registration_closed_date
+    music_submission_end_date || registration_closed_date("competitor")
   end
 
   def effective_event_sign_up_closed_date
-    event_sign_up_closed_date || registration_closed_date
+    event_sign_up_closed_date || registration_closed_date("competitor")
   end
 
+  # comp and non-comp
   def effective_lodging_closed_date
     lodging_end_date || registration_closed_date
   end
@@ -321,15 +327,21 @@ class EventConfiguration < ApplicationRecord
     start_date + 12.days
   end
 
-  def registration_closed?
+  def competitor_registration_closed?
     return true if under_construction?
 
     # allow 1 day of grace to registration_closed_date
-    is_date_in_the_past?(registration_closed_date)
+    is_date_in_the_past?(registration_closed_date("competitor"))
   end
 
-  def new_registration_closed?
-    return true if registration_closed?
+  def noncompetitor_registration_closed?
+    return true if under_construction?
+
+    # allow 1 day of grace to registration_closed_date
+    is_date_in_the_past?(registration_closed_date("noncompetitor"))
+  end
+
+  def new_registration_closed_for_limit?
     return false if max_registrants.zero?
 
     Registrant.not_deleted.count >= max_registrants

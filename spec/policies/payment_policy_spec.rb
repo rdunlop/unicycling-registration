@@ -5,7 +5,7 @@ describe PaymentPolicy do
 
   let(:user) { FactoryBot.create(:user) }
   let(:my_payment) { FactoryBot.build(:payment, user: user) }
-  let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, authorized_laptop?) }
+  let(:user_context) { UserContext.new(user, config, reg_closed?, reg_closed?, reg_closed?, authorized_laptop?) }
   let(:reg_closed?) { false }
   let(:authorized_laptop?) { false }
 

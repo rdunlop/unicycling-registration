@@ -44,8 +44,9 @@ class ApplicationController < ActionController::Base
     @pundit_user ||= UserContext.new(
       current_user,
       EventConfiguration.singleton,
-      EventConfiguration.closed?,
-      EventConfiguration.singleton.new_registration_closed?,
+      EventConfiguration.singleton.competitor_registration_closed?,
+      EventConfiguration.singleton.noncompetitor_registration_closed?,
+      EventConfiguration.singleton.new_registration_closed_for_limit?,
       allow_reg_modifications?,
       translation_domain?
     )
