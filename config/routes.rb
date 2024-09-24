@@ -798,6 +798,8 @@ Rails.application.routes.draw do
     concerns :competition_choosable
   end
 
+  get "/opt_outs", to: "subscriptions#index", as: "opt_outs"
+  post "/subscriptions/:id", to: "subscriptions#subscribe", as: "subscribe"
   get "/unsubscribe", to: "subscriptions#unsubscribe", as: "unsubscribe"
 
   resources :styles, only: :index

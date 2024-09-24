@@ -1,0 +1,16 @@
+%h1 Opted Out Email Addresses
+
+%table
+  %thead
+    %tr
+      %td Email
+      %td Opted Out
+      %td Actions
+  %tbody
+    - @opt_outs.each do |opt_out|
+      %tr
+        %td= opt_out.email
+        %td= opt_out.updated_at.to_fs(:short)
+        %td
+          - if policy(opt_out).subscribe?
+            = link_to "Opt In", subscribe_path(opt_out), method: :post, data:  { confirm: "Opt #{opt_out.email} back in?" }
