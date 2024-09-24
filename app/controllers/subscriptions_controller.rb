@@ -18,7 +18,7 @@ class SubscriptionsController < ApplicationController
     end
 
     opt_out.update(opted_out: false)
-    flash[:alert] = "Updated Opt out status"
+    flash[:notice] = "Updated Opt out status"
     redirect_back(fallback_location: opt_outs_path)
   end
 
