@@ -1,0 +1,6 @@
+---
+en:
+  registrants:
+    reg_closed_for_limit_banner:
+      online_registration_is_closed: Online Registration is now closed
+      max_registrants_limit_reached: The maximum number of registrants has been reached
