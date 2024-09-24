@@ -6,7 +6,8 @@ describe Registrants::BuildController do
   before do
     sign_in user
 
-    allow_any_instance_of(EventConfiguration).to receive(:registration_closed?).and_return(false)
+    allow_any_instance_of(EventConfiguration).to receive(:competitor_registration_closed?).and_return(false)
+    allow_any_instance_of(EventConfiguration).to receive(:noncompetitor_registration_closed?).and_return(false)
     allow_any_instance_of(EventConfiguration).to receive(:organization_membership_config?).and_return(true)
     allow_any_instance_of(EventConfiguration).to receive(:organization_membership_config).and_return(Organization::Usa.new)
   end
