@@ -1,5 +1,4 @@
 class MailOptOutPolicy < ApplicationPolicy
-
   def index?
     event_planner? || super_admin?
   end

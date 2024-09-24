@@ -10,6 +10,7 @@ class SubscriptionsController < ApplicationController
   # POST /subscribe/123
   def subscribe
     opt_out = MailOptOut.find(params[:id])
+    authorize opt_out
 
     unless opt_out.opted_out
       render plain: "Error: User not opted out."
