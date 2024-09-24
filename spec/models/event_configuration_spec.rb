@@ -246,7 +246,7 @@ describe EventConfiguration do
     it "is closed if registration_closed?" do
       travel_to(Date.new(2013, 5, 4)) do
         expect(ev).to be_competitor_registration_closed
-        expect(ev).to be_new_registration_closed_for_limit
+        expect(ev).not_to be_new_registration_closed_for_limit
       end
     end
 

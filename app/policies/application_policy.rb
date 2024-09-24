@@ -152,7 +152,7 @@ class ApplicationPolicy
   end
 
   # Allows to modify your own records as long as you're a `late_registrant` or registration is still open
-  def registration_closed?(competitor_type)
+  def registration_closed?(competitor_type = nil)
     reg_closed = case competitor_type
                  when "competitor"
                    comp_reg_closed
@@ -167,9 +167,9 @@ class ApplicationPolicy
 
   # Are new registrations allowed?
   def new_registration_closed?(competitor_type)
-    return false if reg_closed_for_limit
+    return true if registration_closed?(competitor_type)
 
-    registration_closed?(competitor_type)
+    reg_closed_for_limit
   end
 
   def scope

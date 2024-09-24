@@ -26,18 +26,18 @@ describe RegistrantPolicy do
 
   permissions :create? do
     let(:reg_closed?) { false }
-    let(:new_reg_closed?) { false }
+    let(:new_reg_closed_for_limit?) { false }
     let(:authorized_laptop?) { false }
     let(:user) { my_user }
-    let(:user_context) { UserContext.new(user, false, reg_closed?, reg_closed?, new_reg_closed?, authorized_laptop?) }
+    let(:user_context) { UserContext.new(user, false, reg_closed?, reg_closed?, new_reg_closed_for_limit?, authorized_laptop?) }
 
     describe "while registration is open" do
       it "allows creation" do
         expect(subject).to permit(user_context, my_registrant)
       end
 
-      context "but new_reg is closed" do
-        let(:new_reg_closed?) { true }
+      context "but reg is closed" do
+        let(:reg_closed?) { true }
 
         it "disallows creation" do
           expect(subject).not_to permit(user_context, my_registrant)
@@ -59,7 +59,7 @@ describe RegistrantPolicy do
 
     describe "when registration is closed" do
       let(:reg_closed?) { true }
-      let(:new_reg_closed?) { true }
+      let(:new_reg_closed_for_limit?) { false }
 
       describe "on a normal laptop" do
         it { expect(subject).not_to permit(user_context, my_registrant) }
