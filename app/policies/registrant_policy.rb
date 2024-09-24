@@ -3,7 +3,7 @@ class RegistrantPolicy < ApplicationPolicy
   def create?
     return true if super_admin?
 
-    user_record? && !new_registration_closed? && registration_type_for_sale?(record.registrant_type)
+    user_record? && !new_registration_closed?(record.registrant_type) && registration_type_for_sale?(record.registrant_type)
   end
 
   def create_from_previous?
@@ -35,7 +35,7 @@ class RegistrantPolicy < ApplicationPolicy
     return false unless record.competitor?
     return true if event_planner? || super_admin?
 
-    my_record? && (!config.event_sign_up_closed? || !registration_closed?)
+    my_record? && (!config.event_sign_up_closed? || !registration_closed?(record.registrant_type))
     # change this to allow add_events when registration is closed, but events date is open
     # !config.event_sign_up_closed?
     # BUT, still allow viewing of the events page after events have closed, but registration is open?
@@ -92,7 +92,7 @@ class RegistrantPolicy < ApplicationPolicy
   def update?
     return true if event_planner? || super_admin?
 
-    my_record? && !registration_closed?
+    my_record? && !registration_closed?(record.registrant_type)
   end
 
   def my_record?
@@ -109,7 +109,7 @@ class RegistrantPolicy < ApplicationPolicy
   end
 
   def destroy?
-    (user_record? && !registration_closed?) || event_planner? || super_admin?
+    (user_record? && !registration_closed?(record.registrant_type)) || event_planner? || super_admin?
   end
 
   def waiver?
@@ -152,18 +152,4 @@ class RegistrantPolicy < ApplicationPolicy
   def shared_editable_record?
     user.editable_registrants.include?(record)
   end
-
-  # class Scope < Scope
-  #   def resolve
-  #     if payment_admin?
-  #       scope.all
-  #     end
-
-  #     if registration_closed?
-  #       scope.none
-  #     else
-  #       scope.where(user_id: user.id)
-  #     end
-  #   end
-  # end
 end

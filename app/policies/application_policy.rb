@@ -1,13 +1,14 @@
 class ApplicationPolicy
-  attr_reader :user, :record, :reg_closed, :new_reg_closed, :authorized_laptop, :translation_domain
+  attr_reader :user, :record, :comp_reg_closed, :noncomp_reg_closed, :reg_closed_for_limit, :authorized_laptop, :translation_domain
   attr_reader :config
 
   def initialize(user_context, record)
     if user_context.is_a?(UserContext)
       @user = user_context.user
       @config = user_context.config
-      @reg_closed = user_context.reg_closed
-      @new_reg_closed = user_context.new_reg_closed
+      @comp_reg_closed = user_context.comp_reg_closed
+      @noncomp_reg_closed = user_context.noncomp_reg_closed
+      @reg_closed_for_limit = user_context.reg_closed_for_limit
       @authorized_laptop = user_context.authorized_laptop
       @translation_domain = user_context.translation_domain
     else
@@ -15,8 +16,9 @@ class ApplicationPolicy
       # in the actual system, we will always encapsulate the user in a UserContext object
       @user = user_context
       @config = OpenStruct.new(music_submission_ended?: true, wheel_size_configuration_max_age: 10)
-      @reg_closed = false
-      @new_reg_closed = false
+      @comp_reg_closed = false
+      @noncomp_reg_closed = false
+      @reg_closed_for_limit = false
       @authorized_laptop = false
     end
 
@@ -150,13 +152,24 @@ class ApplicationPolicy
   end
 
   # Allows to modify your own records as long as you're a `late_registrant` or registration is still open
-  def registration_closed?
+  def registration_closed?(competitor_type = nil)
+    reg_closed = case competitor_type
+                 when "competitor"
+                   comp_reg_closed
+                 when "noncompetitor"
+                   noncomp_reg_closed
+                 else
+                   comp_reg_closed && noncomp_reg_closed
+                 end
+
     reg_closed && !authorized_laptop && !late_registrant?
   end
 
-  # are new registrations allowed
-  def new_registration_closed?
-    new_reg_closed && !authorized_laptop && !late_registrant?
+  # Are new registrations allowed?
+  def new_registration_closed?(competitor_type)
+    return true if registration_closed?(competitor_type)
+
+    reg_closed_for_limit
   end
 
   def scope

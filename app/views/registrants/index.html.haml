@@ -5,7 +5,7 @@
 
 - if EventConfiguration.under_construction?
   = render "reg_under_construction"
-- elsif EventConfiguration.closed?
+- elsif EventConfiguration.singleton.competitor_registration_closed? && EventConfiguration.singleton.noncompetitor_registration_closed?
   = render "reg_closed_banner"
 
 = render :partial => "registrants_list", :locals => {:shared_list => @shared_registrants, :my_registrants_list => @my_registrants}
