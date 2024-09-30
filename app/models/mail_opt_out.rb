@@ -18,6 +18,14 @@ class MailOptOut < ApplicationRecord
     create(email: email.downcase)
   end
 
+  def related_accounts
+    User.where(email: email.downcase)
+  end
+
+  def related_registrants
+    Registrant.joins(:contact_detail).merge(ContactDetail.where(email: email.downcase))
+  end
+
   private
 
   def set_opt_out_code
