@@ -5,6 +5,8 @@
     %tr
       %td Email
       %td Opted Out
+      %td Related Account (if any)
+      %td Related Registrants (if any)
       %td Actions
   %tbody
     - @opt_outs.each do |opt_out|
@@ -12,5 +14,17 @@
         %td= opt_out.email
         %td= opt_out.updated_at.to_fs(:short)
         %td
+          - opt_out.related_accounts.each do |account|
+            = account.name
+            %br
+            - account.registrants.each do |registrant|
+              = link_to registrant.with_id_to_s, registrant_path(registrant)
+              %br
+            %hr
+        %td
+          - opt_out.related_registrants.each do |registrant|
+            = link_to registrant.with_id_to_s, registrant_path(registrant)
+            %br
+        %td
           - if policy(opt_out).subscribe?
-            = link_to "Opt In", subscribe_path(opt_out), method: :post, data:  { confirm: "Opt #{opt_out.email} back in?" }
+            = link_to "Opt In", subscribe_path(opt_out), class: "button", method: :post, data:  { confirm: "Opt #{opt_out.email} back in?" }
