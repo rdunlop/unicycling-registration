@@ -508,23 +508,32 @@ Amazon Server Setup
 - Create a new "Small" instance, be sure to attach the correct SSH key.
 - Add the new server's address to the config/deploy/stage.rb (or production.rb)
 - SSH into that instance, and update packages `sudo yum update`
+- Update the version of gpg2 via `sudo dnf swap gnupg2-minimal gnupg2-full`
+- Install git `sudo yum install git`
 - install rvm
-  - `gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  - `gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB`
   - `\curl -sSL https://get.rvm.io | bash -s stable`
+- MUST logout and login in order to initialize `rvm`
+- install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
+- install PostgreSQL `sudo yum install postgresql15`
+- install bundler `gem install bundler`
+- Set up the RAILS_ENV `echo "export RAILS_ENV=production" >> ~/.bash_profile`
+- install a JavaScript runtime
+  - Install nvm (node version manager) `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+  - MUST logout and login in order to initialize `nvm`
+  - Install new version of nodejs `nvm install 14`
+
+******* DONE UP TO HERE (+installed nginx) ** (NOTE: with Ruby 3.1.6 installed)
+
+- install japanese language pack for pdf rendering `yum install ipa-gothic-fonts.noarch`
 - `cap stage deploy` (or `cap prod deploy`)
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
 - Copy the configuration files (eye.yml)
 - copy the robots.txt file (public/robots.txt)
-- install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
-- install PostgreSQL `sudo yum install postgresql94 postgresql94-devel`
-- install bundler `gem install bundler`
-- Set up the RAILS_ENV `echo "export RAILS_ENV=production" >> ~/.bash_profile`
-- install a JavaScript runtime
-  - See http://stackoverflow.com/questions/27350634/how-to-yum-install-node-js-on-amazon-linux#answer-32664598
-  - e.g. `curl https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz > node.tgz`
-  - `tar xvf node.tgz`
-  - echo 'export PATH="$PATH:/home/ec2-user/node-v4.2.4-linux-x64/bin"' >> ~/.bashrc
+
 - Install a redis-server on the server:
+ - NEW: https://serverfault.com/questions/1127483/how-to-install-and-configure-redis-server-on-amazon-linux-2023-al2023
+ ....check that it restarts on reboot (see following gist)
   - See https://gist.github.com/four43/e00d01ca084c5972f229
   - `./install-redis.sh`
 - KNOWN ISSUE: unable to write to /etc/nginx/conf.d files. (worked around using `chmod o+w /etc/nginx/conf.d/`)

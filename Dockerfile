@@ -1,4 +1,4 @@
-FROM ruby:2.7.6
+FROM ruby:3.1.6
 
 # Install NodeJS based on https://github.com/nodesource/distributions#installation-instructions
 RUN apt-get update
