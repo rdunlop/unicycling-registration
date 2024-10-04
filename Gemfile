@@ -15,6 +15,7 @@ gem 'rolify'
 
 # Output reports
 gem 'prawn'
+gem 'matrix'
 gem 'prawn-labels'
 gem 'spreadsheet'
 # ttfunk 1.8.0 has issues with embedded japanese fonts for BagLabels and Award Labels

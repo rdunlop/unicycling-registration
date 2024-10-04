@@ -731,6 +731,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails (= 6.0.1)
   kaminari
+  matrix
   money-rails
   nilify_blanks
   order_as_specified
