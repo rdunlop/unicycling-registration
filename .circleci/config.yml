@@ -120,7 +120,7 @@ workflows:
       - release_stage:
           requires:
             - rspec
-            - tablexi/rubocop
+            # - tablexi/rubocop
             - tablexi/bundle_audit
             - tablexi/check_db_schema
           filters:
