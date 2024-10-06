@@ -515,21 +515,22 @@ Amazon Server Setup
   - `\curl -sSL https://get.rvm.io | bash -s stable`
 - MUST logout and login in order to initialize `rvm`
 - install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
-- install PostgreSQL `sudo yum install postgresql15`
+- install PostgreSQL `sudo yum install postgresql15`, and developer tools `suod yum install postgresql-devel`
 - install bundler `gem install bundler`
+- Install crontab support `sudo yum install cronie`
 - Set up the RAILS_ENV `echo "export RAILS_ENV=production" >> ~/.bash_profile`
 - install a JavaScript runtime
   - Install nvm (node version manager) `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
   - MUST logout and login in order to initialize `nvm`
   - Install new version of nodejs `nvm install 14`
 
-******* DONE UP TO HERE (+installed nginx) ** (NOTE: with Ruby 3.1.6 installed)
-
 - install japanese language pack for pdf rendering `yum install ipa-gothic-fonts.noarch`
 - `cap stage deploy` (or `cap prod deploy`)
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
 - Copy the configuration files (eye.yml)
 - copy the robots.txt file (public/robots.txt)
+
+******* DONE UP TO HERE (+installed nginx) ** (NOTE: with Ruby 3.1.6 installed)
 
 - Install a redis-server on the server:
  - NEW: https://serverfault.com/questions/1127483/how-to-install-and-configure-redis-server-on-amazon-linux-2023-al2023
