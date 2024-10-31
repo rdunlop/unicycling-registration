@@ -52,12 +52,12 @@ gem 'acme-client'
 gem 'apartment_acme_client'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
-gem 'eye-patch', require: false
 gem 'gaffe'
 gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
+gem 'puma', '< 6'
 gem 'rails_admin', '< 4'
 gem 'rake'
 gem 'redis'
@@ -67,7 +67,6 @@ gem 'rubyzip'
 gem 'sassc-rails' # needed by rails_admin
 gem 'sidekiq', '< 8' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
-gem 'unicorn', require: false
 gem 'whenever'
 
 # I18n Translation
@@ -101,9 +100,9 @@ gem 'pg'
 
 # deployment
 gem 'capistrano', require: false
-gem 'capistrano3-unicorn', require: false
 gem 'capistrano-rails', require: false
 gem 'capistrano-rvm', require: false
+gem 'capistrano3-puma', '5.2.0', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'

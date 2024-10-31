@@ -529,9 +529,16 @@ Amazon Server Setup
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
 - Copy the configuration files (eye.yml)
 - copy the robots.txt file (public/robots.txt)
+- install monit
+  `sudo yum install pam-devel`
+  ```
+  curl https://mmonit.com/monit/dist/monit-5.34.2.tar.gz --output monit-5.32.2.tar.gz
+  cd monit-5.34.2
+  ./configure
+  make && sudo make install
+  ```
 
 ******* DONE UP TO HERE (+installed nginx) ** (NOTE: with Ruby 3.1.6 installed)
-
 - Install a redis-server on the server:
  - NEW: https://serverfault.com/questions/1127483/how-to-install-and-configure-redis-server-on-amazon-linux-2023-al2023
  ....check that it restarts on reboot (see following gist)
