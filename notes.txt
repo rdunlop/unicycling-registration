@@ -1,3 +1,9 @@
+Notes from Unicon 2024:
+Unicycling Registration Software
+- Entering basketball 1st, 2nd, and 3rd placements required extra fields that seemed useless. Would benefit from an update here.
+- Personal access to more data in UDA. Some directors should have more access if they are expected to aid other directors
+- In general easier access to updating data in UDA would be helpful
+
 
 Notes from May 24,2014 with Connie:
 
