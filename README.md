@@ -550,10 +550,20 @@ Redis Configuration:
 - Redis says: "WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect."
 - Read http://redis.io/topics/admin ...perhaps disable huge pages?
 
+PDF Rendering
+- Install wkhtmltopdf via https://github.com/amazonlinux/amazon-linux-2023/issues/570#issuecomment-2197205794:
+- `sudo dnf install -y https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox-0.12.6.1-3.almalinux9.$(uname -m).rpm`
+- wicked_pdf.rb initializer
+
+- [future] need to switch from wicked_pdf to https://github.com/Studiosity/grover ?
+https://registrationtest.regtest.unicycling-software.com/en/registrants/1.pdf
+
 *** HERE **
 Need to configure systemctl memory limits (similar to what we had for eye)
 see https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html#MemoryHigh=bytes
 change `/home/ec2-user/.config/systemd/user/sidekiq.service`
+
+
 
 SSL Certificates
 ----------------
