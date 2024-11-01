@@ -22,8 +22,7 @@ gem 'spreadsheet'
 # https://github.com/prawnpdf/ttfunk/issues/102
 gem 'ttfunk', '1.7.0'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '0.12.3.1'
-# newer versions of wkhtmltopdf seem to have shrunken fonts on Mac OS X
+gem 'wkhtmltopdf-binary', '0.12.6.8'
 
 # Front-end
 gem "autoprefixer-rails"
