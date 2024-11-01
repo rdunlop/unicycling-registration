@@ -461,7 +461,7 @@ class Competitor < ApplicationRecord
     return false unless has_result?
     return false if search_gender != gender
 
-    overall_place.to_i > 0 && overall_place.to_i <= 10 # rubocop:disable Style/NumericPredicate
+    overall_place.to_i > 0 && overall_place.to_i <= 10
   end
 
   def self.single_selection_text
