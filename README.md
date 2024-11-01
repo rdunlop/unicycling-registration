@@ -529,38 +529,31 @@ Amazon Server Setup
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
 - Copy the configuration files (eye.yml)
 - copy the robots.txt file (public/robots.txt)
-- install monit
-  `sudo yum install pam-devel`
-  ```
-  curl https://mmonit.com/monit/dist/monit-5.34.2.tar.gz --output monit-5.32.2.tar.gz
-  cd monit-5.34.2
-  ./configure
-  make && sudo make install
-  ```
 
-******* DONE UP TO HERE (+installed nginx) ** (NOTE: with Ruby 3.1.6 installed)
 - Install a redis-server on the server:
- - NEW: https://serverfault.com/questions/1127483/how-to-install-and-configure-redis-server-on-amazon-linux-2023-al2023
- ....check that it restarts on reboot (see following gist)
-  - See https://gist.github.com/four43/e00d01ca084c5972f229
-  - `./install-redis.sh`
+  - See https://gist.github.com/avtaniket/990df8fcc46bb4a64d30fdc070eda3b7
+  - `sudo yum install redis6`
+  - `sudo systemctl start redis6`
+  - `sudo systemctl enable redis6`
 - KNOWN ISSUE: unable to write to /etc/nginx/conf.d files. (worked around using `chmod o+w /etc/nginx/conf.d/`)
 - install and configure nginx
   - `sudo yum install nginx`
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user` (`chown ec2-user /etc/nginx/nginx.conf`)
   - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake update_nginx_config`
-  - `sudo service nginx start`
+  - `sudo systemctl start nginx`
+  - `sudo systemctl enable nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
-- Set up the server to automatically start eye on restart
-  + Copy the `server_config/registration` file to `/etc/init.d/registration`
-  + run `chkconfig registration on`
-- Set up nginx to start automatically `sudo chkconfig nginx on`
 
 Redis Configuration:
 - Adjust the redis.conf file so that it has a maxmemory of 256000000, and a eviction policy of volatile-lru.
 - Redis says: "WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect."
 - Read http://redis.io/topics/admin ...perhaps disable huge pages?
+
+*** HERE **
+Need to configure systemctl memory limits (similar to what we had for eye)
+see https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html#MemoryHigh=bytes
+change `/home/ec2-user/.config/systemd/user/sidekiq.service`
 
 SSL Certificates
 ----------------

@@ -9,6 +9,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails/migrations'
 require 'capistrano/rails/assets'
 require "capistrano/scm/git"
+require 'capistrano/sidekiq'
 install_plugin Capistrano::SCM::Git
 
 require "whenever/capistrano"
@@ -22,3 +23,6 @@ require 'capistrano/puma'
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Systemd
 install_plugin Capistrano::Puma::Nginx # if you want to upload a nginx site template
+
+install_plugin Capistrano::Sidekiq  # Default sidekiq tasks
+install_plugin Capistrano::Sidekiq::Systemd

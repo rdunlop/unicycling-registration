@@ -102,6 +102,7 @@ gem 'pg'
 gem 'capistrano', require: false
 gem 'capistrano-rails', require: false
 gem 'capistrano-rvm', require: false
+gem 'capistrano-sidekiq', require: false
 gem 'capistrano3-puma', '5.2.0', require: false
 
 group :naucc, :development, :caching do
