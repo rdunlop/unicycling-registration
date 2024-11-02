@@ -1,9 +1,10 @@
+set :eye_env, -> { { rails_env: fetch(:rails_env) } }
 set :application, 'unicycling-registration'
 set :repo_url, 'git@github.com:rdunlop/unicycling-registration.git'
 set :stages, %w[prod]
 
 # Default value for :linked_files is []
-set :linked_files, %w[.env.local public/robots.txt]
+set :linked_files, %w[.env.local config/eye.rb public/robots.txt]
 
 # Default value for linked_dirs is []
 # .well-known is for letsencrypt
@@ -51,8 +52,9 @@ set :rollbar_token, ENV["ROLLBAR_ACCESS_TOKEN"]
 set :rollbar_env, proc { fetch :rails_env }
 set :rollbar_role, proc { :app }
 
-# PUMA Settings
-set :puma_init_active_record, true
-set :puma_role, :web
-set :nginx_downstream_uses_ssl, true
-set :puma_monit_conf_dir, -> { '/etc/monit.d/unicycling-registration.conf' }
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'unicorn:restart'
+  end
+end

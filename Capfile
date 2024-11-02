@@ -19,10 +19,7 @@ Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
 require "rollbar/capistrano3"
 
-require 'capistrano/puma'
-install_plugin Capistrano::Puma
-install_plugin Capistrano::Puma::Systemd
-install_plugin Capistrano::Puma::Nginx # if you want to upload a nginx site template
+require 'capistrano3/unicorn'
 
 install_plugin Capistrano::Sidekiq  # Default sidekiq tasks
 install_plugin Capistrano::Sidekiq::Systemd

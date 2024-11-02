@@ -1,0 +1,58 @@
+name: Unicycling Registration
+
+config:
+  logger: /home/ec2-user/unicycling-registration/current/log/eye.log
+
+application:
+  working_dir: /home/ec2-user/unicycling-registration/current
+  stop_on_delete: true
+
+notifications:
+  - name: crash
+    type: aws_sdk
+    level: error
+    contact: robin@dunlopweb.com
+    config:
+      from: from@example.com
+      region: ~ # necessary for aws-sdk gem
+      access_key_id: ~
+      secret_access_key: ~
+
+processes:
+  - name: unicorn
+    config:
+      pid_file: tmp/pids/unicorn.pid
+      start_command: bundle exec unicorn -Dc config/unicorn/production.rb
+      restart_command: "kill -USR2 {PID}"
+      start_timeout: 40 seconds
+      start_grace: 30 seconds
+      restart_timeout: 40 seconds
+      restart_grace: 30 seconds
+      stdout: log/unicorn.stdout.log
+      stderr: log/unicorn.stderr.log
+      monitor_children:
+        stop_command: "kill -QUIT {PID}"
+        checks:
+          - name: memory
+            config:
+              times: 3
+              every: 20 seconds
+              below: 400 megabytes
+      notify:
+        crash: error
+
+  - name: sidekiq
+    checks:
+    - name: memory
+      config:
+        times: 3
+        every: 20 seconds
+        below: 700 megabytes
+    config:
+      daemonize: true
+      start_command: bundle exec sidekiq --config config/sidekiq.yml
+      stop_command: "kill -TERM {PID}"
+      stdall: log/sidekiq.log
+      pid_file: tmp/pids/sidekiq.pid
+      notify:
+        crash: error
