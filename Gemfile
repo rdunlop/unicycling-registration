@@ -103,8 +103,6 @@ gem 'pg'
 gem 'capistrano', require: false
 gem 'capistrano-rails', require: false
 gem 'capistrano-rvm', require: false
-gem 'capistrano-sidekiq', require: false
-gem 'capistrano3-unicorn', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
