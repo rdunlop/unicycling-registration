@@ -559,14 +559,6 @@ PDF Rendering
 - [future] need to switch from wicked_pdf to https://github.com/Studiosity/grover ?
 https://registrationtest.regtest.unicycling-software.com/en/registrants/1.pdf
 
-*** HERE **
-Need to configure systemctl memory limits (similar to what we had for eye)
-see https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html#MemoryHigh=bytes
-change `/home/ec2-user/.config/systemd/user/sidekiq.service`
-
-Use Monit for process monitoring? (https://github.com/seuros/capistrano-puma/compare/v5.2.0...master#diff-7c26850a7e5c5a24b976aa681d5edb9b921a50d6fa3dc7e9b02fc4ed5b758d0a)
-or God (http://godrb.com/)
-
 
 SSL Certificates
 ----------------

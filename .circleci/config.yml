@@ -127,7 +127,6 @@ workflows:
             branches:
               only:
                 - main
-                - update_ruby_3_1
       - approve-prod-push:
           type: approval
           requires:

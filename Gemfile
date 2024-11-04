@@ -57,7 +57,6 @@ gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'puma', '< 6'
 gem 'rails_admin', '< 4'
 gem 'rake'
 gem 'redis'
@@ -67,7 +66,7 @@ gem 'rubyzip'
 gem 'sassc-rails' # needed by rails_admin
 gem 'sidekiq', '< 8' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
-gem 'unicorn'
+gem 'unicorn', require: false
 gem 'whenever'
 
 # I18n Translation
