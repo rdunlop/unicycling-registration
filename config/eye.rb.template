@@ -1,0 +1,66 @@
+# Example: how to run sidekiq daemon
+
+WORKING_DIR = "/home/ec2-user/unicycling-registration/current"
+LOG = "/home/ec2-user/unicycling-registration/current/log/eye.log"
+RAILS_ENV = "stage"
+
+# Unicorn
+RUBY = `which ruby`
+
+def unicorn_process(proxy, name)
+  proxy.process('unicorn') do
+    pid_file 'tmp/pids/unicorn.pid'
+    start_command "#{RUBY} ./bin/unicorn -Dc ./config/unicorn/#{RAILS_ENV}.rb"
+    stdall 'log/unicorn.log'
+
+    # stop signals:
+    # http://unicorn.bogomips.org/SIGNALS.html
+    stop_signals [:TERM, 10.seconds]
+
+    # soft restart
+    restart_command 'kill -USR2 {PID}'
+
+    # check :cpu, every: 30, below: 80, times: 3
+    # check :memory, every: 20, below: 400.megabytes, times: 3
+
+    start_timeout 30.seconds
+    restart_grace 30.seconds
+
+    monitor_children do
+      stop_command 'kill -QUIT {PID}'
+      # check :cpu, every: 30, below: 80, times: 3
+      check :memory, every: 20, below: 400.megabytes, times: 3
+    end
+  end
+end
+
+# Sidekiq:
+
+def sidekiq_process(proxy, name)
+  rails_env = proxy.env['RAILS_ENV']
+
+  proxy.process(name) do
+    start_command "bin/sidekiq --config ./config/sidekiq.yml"
+    pid_file "tmp/pids/#{name}.pid"
+    stdall "log/#{name}.log"
+    daemonize true
+    stop_signals [:USR1, 0, :TERM, 10.seconds, :KILL]
+
+    # check :cpu, every: 30, below: 100, times: 5
+    check :memory, every: 20, below: 700.megabytes, times: 3
+  end
+end
+
+Eye.application :sidekiq_test do
+  stop_on_delete true
+
+  working_dir WORKING_DIR
+  env 'RAILS_ENV' => RAILS_ENV
+
+  sidekiq_process self, :sidekiq
+
+  # unicorn requires to be `ruby` in path (for soft restart)
+  env 'PATH' => "#{File.dirname(RUBY)}:#{ENV['PATH']}"
+
+  unicorn_process self, :unicorn
+end

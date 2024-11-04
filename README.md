@@ -508,42 +508,57 @@ Amazon Server Setup
 - Create a new "Small" instance, be sure to attach the correct SSH key.
 - Add the new server's address to the config/deploy/stage.rb (or production.rb)
 - SSH into that instance, and update packages `sudo yum update`
+- Update the version of gpg2 via `sudo dnf swap gnupg2-minimal gnupg2-full`
+- Install git `sudo yum install git`
 - install rvm
-  - `gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  - `gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB`
   - `\curl -sSL https://get.rvm.io | bash -s stable`
+- MUST logout and login in order to initialize `rvm`
+- install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
+- install PostgreSQL `sudo yum install postgresql15`, and developer tools `suod yum install postgresql-devel`
+- install bundler `gem install bundler`
+- Install crontab support `sudo yum install cronie`
+- Set up the RAILS_ENV `echo "export RAILS_ENV=production" >> ~/.bash_profile`
+- install a JavaScript runtime
+  - Install nvm (node version manager) `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+  - MUST logout and login in order to initialize `nvm`
+  - Install new version of nodejs `nvm install 14`
+
+- install japanese language pack for pdf rendering `yum install ipa-gothic-fonts.noarch`
 - `cap stage deploy` (or `cap prod deploy`)
   - NOTE: this will fail because the configuration files aren't present...but it will create the necessary directory structure
 - Copy the configuration files (eye.yml)
 - copy the robots.txt file (public/robots.txt)
-- install the correct ruby version `rvm install ruby-2.2.3` (check Gemfile for the correct ruby version)
-- install PostgreSQL `sudo yum install postgresql94 postgresql94-devel`
-- install bundler `gem install bundler`
-- Set up the RAILS_ENV `echo "export RAILS_ENV=production" >> ~/.bash_profile`
-- install a JavaScript runtime
-  - See http://stackoverflow.com/questions/27350634/how-to-yum-install-node-js-on-amazon-linux#answer-32664598
-  - e.g. `curl https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz > node.tgz`
-  - `tar xvf node.tgz`
-  - echo 'export PATH="$PATH:/home/ec2-user/node-v4.2.4-linux-x64/bin"' >> ~/.bashrc
+
 - Install a redis-server on the server:
-  - See https://gist.github.com/four43/e00d01ca084c5972f229
-  - `./install-redis.sh`
+  - See https://gist.github.com/avtaniket/990df8fcc46bb4a64d30fdc070eda3b7
+  - `sudo yum install redis6`
+  - `sudo systemctl start redis6`
+  - `sudo systemctl enable redis6`
 - KNOWN ISSUE: unable to write to /etc/nginx/conf.d files. (worked around using `chmod o+w /etc/nginx/conf.d/`)
 - install and configure nginx
   - `sudo yum install nginx`
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user` (`chown ec2-user /etc/nginx/nginx.conf`)
   - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake update_nginx_config`
-  - `sudo service nginx start`
+  - update the `/usr/lib/systemd/system/nginx.service` file with `PrivateTmp=false` or else the `/tmp/unicorn-unicycling-registration.socket` will not be visible to nginx
+  - `sudo systemctl start nginx`
+  - `sudo systemctl enable nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
-- Set up the server to automatically start eye on restart
-  + Copy the `server_config/registration` file to `/etc/init.d/registration`
-  + run `chkconfig registration on`
-- Set up nginx to start automatically `sudo chkconfig nginx on`
 
 Redis Configuration:
 - Adjust the redis.conf file so that it has a maxmemory of 256000000, and a eviction policy of volatile-lru.
 - Redis says: "WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect."
 - Read http://redis.io/topics/admin ...perhaps disable huge pages?
+
+PDF Rendering
+- Install wkhtmltopdf via https://github.com/amazonlinux/amazon-linux-2023/issues/570#issuecomment-2197205794:
+- `sudo dnf install -y https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox-0.12.6.1-3.almalinux9.$(uname -m).rpm`
+- wicked_pdf.rb initializer
+
+- [future] need to switch from wicked_pdf to https://github.com/Studiosity/grover ?
+https://registrationtest.regtest.unicycling-software.com/en/registrants/1.pdf
+
 
 SSL Certificates
 ----------------

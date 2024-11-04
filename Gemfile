@@ -15,14 +15,14 @@ gem 'rolify'
 
 # Output reports
 gem 'prawn'
+gem 'matrix'
 gem 'prawn-labels'
 gem 'spreadsheet'
 # ttfunk 1.8.0 has issues with embedded japanese fonts for BagLabels and Award Labels
 # https://github.com/prawnpdf/ttfunk/issues/102
 gem 'ttfunk', '1.7.0'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '0.12.3.1'
-# newer versions of wkhtmltopdf seem to have shrunken fonts on Mac OS X
+gem 'wkhtmltopdf-binary', '0.12.6.8'
 
 # Front-end
 gem "autoprefixer-rails"
@@ -51,7 +51,7 @@ gem 'acme-client'
 gem 'apartment_acme_client'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
-gem 'eye-patch', require: false
+gem 'eye'
 gem 'gaffe'
 gem 'hcaptcha'
 gem 'http_accept_language'
@@ -100,7 +100,6 @@ gem 'pg'
 
 # deployment
 gem 'capistrano', require: false
-gem 'capistrano3-unicorn', require: false
 gem 'capistrano-rails', require: false
 gem 'capistrano-rvm', require: false
 
@@ -124,7 +123,7 @@ end
 group :development, :test do
   gem 'bundler-audit', require: false
   gem 'factory_bot_rails'
-  gem 'rubocop', '0.93.1', require: false
+  gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'teaspoon-jasmine'

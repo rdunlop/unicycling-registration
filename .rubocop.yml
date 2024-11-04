@@ -3,13 +3,16 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.1
   Exclude:
     - ".bundle/**/*" # Auto-generated
     - "bin/**/*" # Auto-generated
     - "db/schema.rb" # Auto-generated
     - "vendor/**/*" # CI uses this directory for gems
     - "node_modules/**/*"
+    - 'apartment_acme_client_orig/**/*'
+    - 'apartment_acme_client/**/*'
+
 Rails:
   Enabled: true
 
