@@ -52,7 +52,6 @@ set :rollbar_token, ENV["ROLLBAR_ACCESS_TOKEN"]
 set :rollbar_env, proc { fetch :rails_env }
 set :rollbar_role, proc { :app }
 
-
 # EYE (and via eye, sidekiq and unicorn)
 set :eye_config, -> { "config/eye.rb" }
 set :eye_bin, -> { :eye }

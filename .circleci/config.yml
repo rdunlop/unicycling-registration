@@ -119,11 +119,10 @@ workflows:
             - build
       - release_stage:
           requires:
-            - build
-            # - rspec
-            # - tablexi/rubocop
-            # - tablexi/bundle_audit
-            # - tablexi/check_db_schema
+            - rspec
+            - tablexi/rubocop
+            - tablexi/bundle_audit
+            - tablexi/check_db_schema
           filters:
             branches:
               only:
