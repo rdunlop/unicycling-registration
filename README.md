@@ -541,6 +541,7 @@ Amazon Server Setup
   - set the `/etc/nginx/nginx.conf` to be `user ec2-user` (`chown ec2-user /etc/nginx/nginx.conf`)
   - update the tmp folder permissions `chown -R ec2-user /var/lib/nginx`
   - create a new nginx `registration.conf` using the rake command `sudo rake update_nginx_config`
+  - update the `/usr/lib/systemd/system/nginx.service` file with `PrivateTmp=false` or else the `/tmp/unicorn-unicycling-registration.socket` will not be visible to nginx
   - `sudo systemctl start nginx`
   - `sudo systemctl enable nginx`
 - At this point, point your DNS to this server, so that all requests go through this server
