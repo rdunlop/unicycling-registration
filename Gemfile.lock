@@ -595,7 +595,7 @@ GEM
       sprockets-rails
       tilt
     select2-rails (4.0.13)
-    shoulda-matchers (5.3.0)
+    shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
     sidekiq (7.2.4)
       concurrent-ruby (< 2)
