@@ -621,6 +621,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    simpleidn (0.2.3)
     sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
@@ -677,8 +678,9 @@ GEM
       raindrops (~> 0.7)
     uniform_notifier (1.16.0)
     uri (0.13.1)
-    validates_email_format_of (1.6.3)
-      i18n
+    validates_email_format_of (1.8.2)
+      i18n (>= 0.8.0)
+      simpleidn
     validates_timeliness (7.0.0.beta2)
       activemodel (>= 7.0.0, < 8)
       timeliness (>= 0.3.10, < 1)
