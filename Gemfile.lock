@@ -195,7 +195,7 @@ GEM
     bcrypt (3.1.19)
     breadcrumbs_on_rails (3.0.1)
     builder (3.3.0)
-    bullet (7.1.4)
+    bullet (7.2.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     bundler-audit (0.9.2)
