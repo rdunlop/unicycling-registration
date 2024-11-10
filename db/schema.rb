@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_17_225306) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_154540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1360,11 +1360,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_17_225306) do
     t.integer "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
-    t.text "object"
     t.datetime "created_at", precision: nil
-    t.text "object_changes"
     t.integer "registrant_id"
     t.integer "user_id"
+    t.json "object"
+    t.json "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
