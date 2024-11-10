@@ -6,7 +6,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash # Installs the node re
 RUN apt-get install --yes nodejs # Actually install NODEJS
 RUN apt-get install --yes fonts-ipafont-gothic
 RUN mkdir /app
-RUN gem update bundler -v 2.5.23 # install newer bundler version
+RUN gem install bundler -v 2.5.23 # install newer bundler version
 
 WORKDIR /app
 ENV BUNDLE_PATH /gems
