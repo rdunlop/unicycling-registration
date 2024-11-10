@@ -11,6 +11,9 @@ ISO3166::Data.register(
   common_name: 'Basque Country',
   languages_official: %w[es],
   postal_code: true,
+  translations: {
+    'en' => "EU"
+  },
   subdivisions: {
     "A" => {
       name: 'Álava'
