@@ -38,7 +38,7 @@ class RegistrationCost < ApplicationRecord
   after_save :clear_cache
   after_destroy :clear_cache
 
-  alias_method :to_s, :name
+  alias :to_s, :name
 
   # ##################### Class-level ##############
   def self.for_type(registrant_type)
