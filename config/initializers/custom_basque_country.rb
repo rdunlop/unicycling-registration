@@ -7,7 +7,8 @@ ISO3166::Data.register(
     {{postalcode}} {{city}}
     {{region}}
     {{country}}",
-  name: 'Basque Country',
+  iso_short_name: 'Basque Country',
+  common_name: 'Basque Country',
   languages_official: %w[es],
   postal_code: true,
   subdivisions: {

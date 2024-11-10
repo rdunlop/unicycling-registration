@@ -3,7 +3,7 @@ class EmailFilters::Country < EmailFilters::BaseEmailFilter
     EmailFilters::SelectType.new(
       filter: "country",
       description: "Users+Registrants who have select that they are representing the given country",
-      possible_arguments: ISO3166::Country.all.sort_by(&:name),
+      possible_arguments: ISO3166::Country.all.sort_by(&:common_name),
       custom_show_argument: proc { |element| [element.to_s, element.alpha2] },
       custom_policy: proc { |user| Pundit.policy(user, User).contact_registrants? }
     )
