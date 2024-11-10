@@ -67,6 +67,7 @@ gem 'sassc-rails' # needed by rails_admin
 gem 'sidekiq', '< 8' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'unicorn', require: false
+gem 'webrick'
 gem 'whenever'
 
 # I18n Translation
