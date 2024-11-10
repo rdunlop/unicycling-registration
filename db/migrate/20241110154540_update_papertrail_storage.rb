@@ -1,5 +1,5 @@
 class UpdatePapertrailStorage < ActiveRecord::Migration[7.0]
-  def change
+  def up
     add_column :versions, :new_object, :json
     add_column :versions, :new_object_changes, :json
 
@@ -23,5 +23,9 @@ class UpdatePapertrailStorage < ActiveRecord::Migration[7.0]
     # Rename new columns to correct(expected) names
     rename_column :versions, :new_object, :object
     rename_column :versions, :new_object_changes, :object_changes
+  end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
   end
 end
