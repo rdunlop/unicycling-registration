@@ -60,7 +60,7 @@ class LodgingPackage < ApplicationRecord
 
   def has_details?; end
 
-  alias :cost, :total_cost
+  alias cost total_cost
 
   def tax
     0
