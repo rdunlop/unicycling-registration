@@ -41,6 +41,6 @@ class EmailFilters::Country < EmailFilters::BaseEmailFilter
   private
 
   def selected_country
-    ISO3166::Country[arguments].name if arguments.present?
+    ISO3166::Country[arguments].common_name if arguments.present?
   end
 end
