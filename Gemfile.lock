@@ -10,14 +10,15 @@ GIT
 
 GIT
   remote: https://github.com/rails-on-services/apartment.git
-  revision: 1de1f1bbaef8e158592c323d5a1cfba51877135a
+  revision: ec5a9bc7aef2ba65d7c3d369ca08aa916e56f880
   branch: development
   specs:
-    ros-apartment (2.11.0)
-      activerecord (>= 6.1.0, < 7.2)
+    ros-apartment (3.1.0)
+      activerecord (>= 6.1.0, < 8.1)
+      activesupport (>= 6.1.0, < 8.1)
       parallel (< 2.0)
-      public_suffix (>= 2.0.5, < 6.0)
-      rack (>= 1.3.6, < 3.0)
+      public_suffix (>= 2.0.5, <= 6.0.1)
+      rack (>= 1.3.6, < 4.0)
 
 GIT
   remote: https://github.com/rdunlop/tolk.git
@@ -468,7 +469,7 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
-    public_suffix (5.1.1)
+    public_suffix (6.0.1)
     pundit (2.4.0)
       activesupport (>= 3.0.0)
     racc (1.8.1)
