@@ -9,17 +9,6 @@ GIT
       request_store (~> 1.0)
 
 GIT
-  remote: https://github.com/rails-on-services/apartment.git
-  revision: 1de1f1bbaef8e158592c323d5a1cfba51877135a
-  branch: development
-  specs:
-    ros-apartment (2.11.0)
-      activerecord (>= 6.1.0, < 7.2)
-      parallel (< 2.0)
-      public_suffix (>= 2.0.5, < 6.0)
-      rack (>= 1.3.6, < 3.0)
-
-GIT
   remote: https://github.com/rdunlop/tolk.git
   revision: 8342a4ef228966541fb1815ce9eedeca481663f5
   branch: improve_import_export
@@ -535,6 +524,11 @@ GEM
       railties (>= 5.2)
     rolify (6.0.1)
     rollbar (3.6.0)
+    ros-apartment (3.1.0)
+      activerecord (>= 6.1.0, < 7.2)
+      parallel (< 2.0)
+      public_suffix (>= 2.0.5, < 6.0)
+      rack (>= 1.3.6, < 4.0)
     ros-apartment-sidekiq (1.2.0)
       ros-apartment (>= 1.0)
       sidekiq (>= 2.11)
@@ -769,7 +763,7 @@ DEPENDENCIES
   request_store
   rolify
   rollbar
-  ros-apartment!
+  ros-apartment
   ros-apartment-sidekiq
   rspec-instafail
   rspec-rails

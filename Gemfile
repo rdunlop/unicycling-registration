@@ -81,7 +81,7 @@ gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
 gem 'pry-rails' # required for apartment console customization
-gem 'ros-apartment', require: 'apartment', github: 'rails-on-services/apartment', branch: 'development' # github version until version > 2.11.0 is released with Rails 7.1 support
+gem 'ros-apartment', require: 'apartment'
 gem 'ros-apartment-sidekiq', require: 'apartment-sidekiq'
 
 # Model utils
