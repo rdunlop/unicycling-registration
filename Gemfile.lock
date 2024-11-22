@@ -683,7 +683,8 @@ GEM
     timers (4.3.5)
     tinymce-rails (5.8.2)
       railties (>= 3.1.1)
-    ttfunk (1.7.0)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -817,7 +818,7 @@ DEPENDENCIES
   teaspoon-jasmine
   tinymce-rails
   tolk!
-  ttfunk (= 1.7.0)
+  ttfunk (= 1.8.0)
   uglifier (>= 1.0.3)
   unicorn
   validates_email_format_of
