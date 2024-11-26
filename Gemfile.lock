@@ -1,11 +1,11 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
+  revision: 93f48bd9d6ec3ea8fc32e588e7e82bca18128411
   branch: main
   specs:
     globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
+      activemodel (>= 7.0, < 7.2)
+      activerecord (>= 7.0, < 7.2)
       request_store (~> 1.0)
 
 GIT
@@ -416,7 +416,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    minitest (5.25.1)
+    minitest (5.25.2)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -426,7 +426,7 @@ GEM
       monetize (~> 1.9)
       money (~> 6.13)
       railties (>= 3.0)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     nested_form (0.3.2)
     net-http (0.4.1)
       uri
