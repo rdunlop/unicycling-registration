@@ -416,7 +416,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    minitest (5.25.1)
+    minitest (5.25.2)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -426,7 +426,7 @@ GEM
       monetize (~> 1.9)
       money (~> 6.13)
       railties (>= 3.0)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     nested_form (0.3.2)
     net-http (0.4.1)
       uri
@@ -678,7 +678,7 @@ GEM
     thor (1.3.2)
     thread_safe (0.3.6)
     tilt (2.0.11)
-    timeliness (0.4.5)
+    timeliness (0.5.0)
     timeout (0.4.2)
     timers (4.3.5)
     tinymce-rails (5.8.2)
@@ -701,7 +701,7 @@ GEM
     validates_email_format_of (1.8.2)
       i18n (>= 0.8.0)
       simpleidn
-    validates_timeliness (7.0.0.beta2)
+    validates_timeliness (7.0.0)
       activemodel (>= 7.0.0, < 8)
       timeliness (>= 0.3.10, < 1)
     virtus (1.0.5)
@@ -821,7 +821,7 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   validates_email_format_of
-  validates_timeliness (= 7.0.0.beta2)
+  validates_timeliness (= 7.0.0)
   virtus
   watchr
   webrick
