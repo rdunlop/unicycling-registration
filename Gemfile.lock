@@ -1,11 +1,11 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
+  revision: 2205b1eadeaec69d0b7ae0a4ab7fdb5b1ebcded1
   branch: main
   specs:
     globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
+      activemodel (>= 7.0, < 8.1)
+      activerecord (>= 7.0, < 8.1)
       request_store (~> 1.0)
 
 GIT
@@ -401,7 +401,7 @@ GEM
     kgio (2.11.4)
     kostya-sigar (2.0.11)
     language_server-protocol (3.17.0.3)
-    logger (1.6.1)
+    logger (1.6.2)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -416,7 +416,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    minitest (5.25.1)
+    minitest (5.25.4)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -426,7 +426,7 @@ GEM
       monetize (~> 1.9)
       money (~> 6.13)
       railties (>= 3.0)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     nested_form (0.3.2)
     net-http (0.4.1)
       uri
@@ -627,7 +627,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    securerandom (0.3.2)
+    securerandom (0.4.0)
     select2-rails (4.0.13)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
