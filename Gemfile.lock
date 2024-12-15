@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
+  revision: 16fa278e56e5e0303fd7ff14935dad421b83d1a4
   branch: main
   specs:
     globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
+      activemodel (>= 7.0, < 8.1)
+      activerecord (>= 7.0, < 8.1)
+      activesupport (>= 7.0, < 8.1)
       request_store (~> 1.0)
 
 GIT
@@ -401,7 +402,7 @@ GEM
     kgio (2.11.4)
     kostya-sigar (2.0.11)
     language_server-protocol (3.17.0.3)
-    logger (1.6.2)
+    logger (1.6.3)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
