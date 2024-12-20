@@ -56,7 +56,7 @@ class WelcomeController < ApplicationController
   def check_acceptable_format
     if ["txt", "png"].include?(params[:format])
       params[:format] = nil
-      raise ActiveRecord::RecordNotFound.new
+      raise ActiveRecord::RecordNotFound
     end
   end
 end
