@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
+  revision: 0d2d5a3809a47e0f6115622e48453832d68e4c08
   branch: main
   specs:
-    globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
+    globalize (7.0.0)
+      activemodel (>= 7.0, < 8.1)
+      activerecord (>= 7.0, < 8.1)
+      activesupport (>= 7.0, < 8.1)
       request_store (~> 1.0)
 
 GIT
@@ -401,7 +402,7 @@ GEM
     kgio (2.11.4)
     kostya-sigar (2.0.11)
     language_server-protocol (3.17.0.3)
-    logger (1.6.3)
+    logger (1.6.4)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -628,7 +629,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    securerandom (0.4.0)
+    securerandom (0.4.1)
     select2-rails (4.0.13)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
@@ -680,7 +681,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.11)
     timeliness (0.4.5)
-    timeout (0.4.2)
+    timeout (0.4.3)
     timers (4.3.5)
     tinymce-rails (5.8.2)
       railties (>= 3.1.1)
