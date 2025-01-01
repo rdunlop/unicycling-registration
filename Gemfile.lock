@@ -679,7 +679,7 @@ GEM
     thor (1.3.2)
     thread_safe (0.3.6)
     tilt (2.0.11)
-    timeliness (0.4.5)
+    timeliness (0.5.0)
     timeout (0.4.2)
     timers (4.3.5)
     tinymce-rails (5.8.2)
@@ -702,7 +702,7 @@ GEM
     validates_email_format_of (1.8.2)
       i18n (>= 0.8.0)
       simpleidn
-    validates_timeliness (7.0.0.beta2)
+    validates_timeliness (7.1.0)
       activemodel (>= 7.0.0, < 8)
       timeliness (>= 0.3.10, < 1)
     virtus (1.0.5)
@@ -822,7 +822,7 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   validates_email_format_of
-  validates_timeliness (= 7.0.0.beta2)
+  validates_timeliness (= 7.1.0)
   virtus
   watchr
   webrick
