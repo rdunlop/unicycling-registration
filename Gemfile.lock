@@ -284,7 +284,7 @@ GEM
     concurrent-ruby (1.3.4)
     connection_pool (2.5.0)
     consistency_fail (0.3.7)
-    countries (7.0.0)
+    countries (7.1.1)
       unaccent (~> 0.3)
     country_select (10.0.1)
       countries (> 5.0, < 8.0)
