@@ -286,7 +286,7 @@ GEM
     consistency_fail (0.3.7)
     countries (7.0.0)
       unaccent (~> 0.3)
-    country_select (10.0.0)
+    country_select (10.0.1)
       countries (> 5.0, < 8.0)
     crass (1.0.6)
     csv (3.3.0)
