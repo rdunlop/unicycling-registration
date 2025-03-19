@@ -42,7 +42,7 @@ GEM
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.20)
+    acme-client (2.0.21)
       base64 (~> 0.2.0)
       faraday (>= 1.0, < 3.0.0)
       faraday-retry (>= 1.0, < 3.0.0)
