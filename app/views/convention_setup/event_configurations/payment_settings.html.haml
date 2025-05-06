@@ -43,7 +43,14 @@
     %p Only specify Either Paypal OR Stripe
     = f.input :paypal_account
     = f.input :stripe_public_key
-    = f.input :stripe_secret_key
+    - if @event_configuration.stripe_secret_key.present?
+      %b Stripe Secret Key is saved.
+      %br
+      = check_box_tag :replace_stripe_secret_key, nil, false, class: "js--inputEnable", data: { targets: "js--stripeSecretKey" }
+      = label_tag :replace_stripe_secret_key, "Replace Stripe Secret Key?"
+      = f.input :stripe_secret_key, input_html: { value: nil, class: 'js--stripeSecretKey' }
+    - else
+      = f.input :stripe_secret_key
     %hr
     = f.input :currency_code, collection: EventConfiguration.currency_codes
     = f.input :payment_mode, collection: EventConfiguration.payment_modes, include_blank: false
