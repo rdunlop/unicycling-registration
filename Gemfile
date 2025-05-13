@@ -36,7 +36,7 @@ gem "haml-rails"
 gem 'importmap-rails'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '6.0.1'
+gem 'jquery-ui-rails', '8.0.0'
 gem 'money-rails'
 gem 'rails-assets-datetimepicker', '2.5.20', source: 'https://rails-assets.org'
 gem 'recaptcha', require: 'recaptcha/rails'
