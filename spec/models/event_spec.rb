@@ -98,6 +98,13 @@ describe Event do
     end.to change(EventCategory, :count).by(-1)
   end
 
+  it "destroys associated best times upon destroy" do
+    FactoryBot.create(:registrant_best_time, event: @ev)
+    expect do
+      @ev.destroy
+    end.to change(RegistrantBestTime, :count).by(-1)
+  end
+
   it "creates an associated event_category automatically" do
     expect(@ev.event_categories.count).to eq(1)
     @category = @ev.event_categories.first

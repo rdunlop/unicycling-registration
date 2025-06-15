@@ -31,6 +31,7 @@ class Event < ApplicationRecord
     has_many :event_categories, -> { order "event_categories.position" }
     has_many :registrant_event_sign_ups
     has_many :competitions, -> { order "competitions.name" }
+    has_many :registrant_best_times
   end
 
   has_many :competitors, through: :competitions
