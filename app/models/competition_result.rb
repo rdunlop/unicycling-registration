@@ -39,7 +39,7 @@ class CompetitionResult < ApplicationRecord
   end
 
   def published_date_to_s
-    published_date&.to_formatted_s(:short)
+    published_date&.to_formatted_s(:rfc822)
   end
 
   def to_s
