@@ -32,11 +32,8 @@
       - Competition.includes(:published_age_group_entries).order(:scheduled_completion_at).all.each do |competition|
         - cache_i18n [competition] do
           %tr
-            // %td= competition.end_time_to_s
             %td= competition.award_title_name
             %td= competition.award_subtitle_name
-            // competition_presenter = CompetitionPresenter.new(competition)
-            //%td{ class: competition_presenter.status_code}= competition_presenter.status
             %td
               - if competition.num_competitors > 0
                 = link_to "Competitor List", announcer_printing_competition_path(competition)

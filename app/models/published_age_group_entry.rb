@@ -23,7 +23,7 @@ class PublishedAgeGroupEntry < ApplicationRecord
   delegate :to_s, to: :age_group_entry
 
   def published_formatted
-    published_at.to_formatted_s(:short)
+    published_at.to_formatted_s(:rfc822)
   end
 
   private

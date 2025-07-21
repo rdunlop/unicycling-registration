@@ -12,7 +12,7 @@ class CreatesCompetitionResultsPdf
     renderer = PdfRenderer.new('printing/competitions/results',
                                layout: 'pdf',
                                instance_variables: { competition: @competition },
-                               pdf_options: { header: { center: header, line: header.present? } })
+                               pdf_options: { header: { center: header, line: header.present? }, footer: default_footer })
     renderer.raw_pdf
   end
 
@@ -56,5 +56,17 @@ class CreatesCompetitionResultsPdf
 
   def sanitize(name)
     name.strip.gsub(/[^0-9A-Za-z.\-]/, '_')
+  end
+
+  def default_footer
+    {
+      font_size: 10,
+      left: Time.current.to_formatted_s(:rfc822),
+      center: config.short_name,
+      right: 'Page [page] of [topage]' }
+  end
+
+  def config
+    EventConfiguration.singleton
   end
 end
