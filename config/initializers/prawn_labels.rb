@@ -29,14 +29,25 @@ Prawn::Labels.types = {
   },
   "Avery5293padded" => {
     "paper_size" => "LETTER",
-    "top_margin" => 38.23,  # 0.47 inch (DPI => ~.53 inch)
-    "bottom_margin" => 38.23,
-    "left_margin" => 38.23, # 0.44 inch (DPI => ~.447 inch)
-    "right_margin" => 32.23,
+    "top_margin" => 45.23,  # 0.47 inch (DPI => ~.53 inch)
+    "bottom_margin" => 42.23,
+    "left_margin" => 35.23, # 0.44 inch (DPI => ~.447 inch)
+    "right_margin" => 38.23,
     "columns" => 4,
     "rows" => 6,
-    "column_gutter" => 38.152, # ~ 3/8 inch (0.375 inch) (DPI => ~.446 inch)
-    "row_gutter" => 6.152 # 1/16 inch
+    "column_gutter" => 48.152, # ~ 3/8 inch (0.375 inch) (DPI => ~.446 inch)
+    "row_gutter" => 12.152 # 1/16 inch
+  },
+  "Avery5293smallsquare" => {
+    "paper_size" => "LETTER",
+    "top_margin" => 55.23,  # 0.47 inch (DPI => ~.53 inch)
+    "bottom_margin" => 55.23,
+    "left_margin" => 50.23, # 0.44 inch (DPI => ~.447 inch)
+    "right_margin" => 55.23,
+    "columns" => 4,
+    "rows" => 6,
+    "column_gutter" => 65.152, # ~ 3/8 inch (0.375 inch) (DPI => ~.446 inch)
+    "row_gutter" => 32.152 # 1/16 inch
   },
   "Avery8293" => {
     "paper_size" => "LETTER",
