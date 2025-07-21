@@ -63,7 +63,8 @@ class CreatesCompetitionResultsPdf
       font_size: 10,
       left: Time.current.to_formatted_s(:rfc822),
       center: config.short_name,
-      right: 'Page [page] of [topage]' }
+      right: 'Page [page] of [topage]'
+    }
   end
 
   def config
