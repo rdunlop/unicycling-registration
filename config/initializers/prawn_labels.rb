@@ -27,6 +27,17 @@ Prawn::Labels.types = {
     "column_gutter" => 32.152, # ~ 3/8 inch (0.375 inch) (DPI => ~.446 inch)
     "row_gutter" => 6.152 # 1/16 inch
   },
+  "Avery5293padded" => {
+    "paper_size" => "LETTER",
+    "top_margin" => 38.23,  # 0.47 inch (DPI => ~.53 inch)
+    "bottom_margin" => 38.23,
+    "left_margin" => 38.23, # 0.44 inch (DPI => ~.447 inch)
+    "right_margin" => 32.23,
+    "columns" => 4,
+    "rows" => 6,
+    "column_gutter" => 38.152, # ~ 3/8 inch (0.375 inch) (DPI => ~.446 inch)
+    "row_gutter" => 6.152 # 1/16 inch
+  },
   "Avery8293" => {
     "paper_size" => "LETTER",
     "top_margin" => 65.23,
