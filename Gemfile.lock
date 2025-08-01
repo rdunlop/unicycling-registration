@@ -655,9 +655,10 @@ GEM
     simpleidn (0.2.3)
     spreadsheet (1.3.0)
       ruby-ole
-    sprockets (3.7.2)
+    sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      logger
+      rack (>= 2.2.4, < 4)
     sprockets-es6 (0.9.2)
       babel-source (>= 5.8.11)
       babel-transpiler
@@ -821,7 +822,7 @@ DEPENDENCIES
   sidekiq (< 8)
   simple_form
   spreadsheet
-  sprockets (< 4)
+  sprockets (< 5)
   stimulus-rails
   stripe
   teaspoon-jasmine
