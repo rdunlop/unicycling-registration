@@ -637,7 +637,7 @@ GEM
       tilt
     securerandom (0.4.1)
     select2-rails (4.0.13)
-    shoulda-matchers (6.4.0)
+    shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
     sidekiq (7.3.9)
       base64
