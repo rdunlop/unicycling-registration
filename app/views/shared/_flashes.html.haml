@@ -2,3 +2,9 @@
   %p.notice_flash= notice
 - unless alert.blank?
   %p.alert_flash= alert
+- if user_signed_in?
+  - MissingAgeGroupEntryWarning.active.each do |magew|
+    - if policy(magew).show?
+      %p.alert_flash
+        = magew
+        = "(#{time_ago_in_words(magew.created_at)})"

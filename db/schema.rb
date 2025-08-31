@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_10_154540) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_31_161101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -792,6 +792,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_10_154540) do
     t.string "registrant_type"
     t.index ["competitor_id"], name: "index_members_competitor_id"
     t.index ["registrant_id"], name: "index_members_registrant_id"
+  end
+
+  create_table "missing_age_group_entry_warnings", force: :cascade do |t|
+    t.bigint "competition_id"
+    t.bigint "competitor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "cmagew_competition"
+    t.index ["competitor_id"], name: "cmagew_competitor"
   end
 
   create_table "organization_memberships", force: :cascade do |t|
