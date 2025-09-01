@@ -195,7 +195,7 @@ class ApplicationPolicy
     end
 
     def super_admin?
-      @user && @user.has_role?(:super_admin)
+      @user&.has_role?(:super_admin)
     end
   end
 end
