@@ -1,23 +1,3 @@
-module Prawn
-  class Labels
-    # modify the shrink_text function
-    # because it was shrinking too much when it needed to shrink
-    def shrink_text(record)
-      linecount = (split_lines = record.split("\n")).length
-
-      # 30 is estimated max character length per line.
-      split_lines.each { |line| linecount += line.length / 30 }
-
-      # -10 accounts for the overflow margins
-      rowheight = @document.grid.row_height - 5
-
-      # divide the rowheight by the number of lines
-      # but only allow maximum font_size 12
-      @document.font_size = [(rowheight / linecount), 12].min
-    end
-  end
-end
-
 class Admin::BagLabelsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_access
