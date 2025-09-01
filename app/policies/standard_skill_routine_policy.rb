@@ -69,7 +69,11 @@ class StandardSkillRoutinePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.none
+      if super_admin?
+        scope
+      else
+        scope.none
+      end
     end
   end
 end

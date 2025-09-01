@@ -169,9 +169,13 @@ class CompetitionPolicy < ApplicationPolicy
     track_data_importer?(record) || data_recording_volunteer?(record) || director?(record.event) || super_admin?
   end
 
-  class Scope < Scope
+  class Scope < ApplicationPolicy::Scope
     def resolve
-      scope.none
+      if super_admin?
+        scope
+      else
+        scope.none
+      end
     end
   end
 end

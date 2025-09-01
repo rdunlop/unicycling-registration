@@ -48,9 +48,9 @@ class PaymentPolicy < ApplicationPolicy
     record.user == user
   end
 
-  class Scope < Scope
+  class Scope < ApplicationPolicy::Scope
     def resolve
-      if user.has_role?(:payment_admin) || user.has_role?(:super_admin)
+      if user.has_role?(:payment_admin) || super_admin?
         scope.all
       else
         scope.where(user_id: user.id)

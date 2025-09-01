@@ -193,5 +193,9 @@ class ApplicationPolicy
     def resolve
       scope.all
     end
+
+    def super_admin?
+      @user&.has_role?(:super_admin)
+    end
   end
 end
