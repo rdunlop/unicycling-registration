@@ -7,7 +7,6 @@ class MissingAgeGroupEntryWarning < ApplicationRecord
 
   scope :recent, -> { where("created_at > ?", 2.minutes.ago) }
 
-
   # Return the most recent entry for each competition
   def self.active
     where("created_at > ?", 1.week.ago)
@@ -22,6 +21,6 @@ class MissingAgeGroupEntryWarning < ApplicationRecord
   def self.create_if_needed(competition, competitor)
     return if MissingAgeGroupEntryWarning.recent.where(competition: competition).any?
 
-    MissingAgeGroupEntryWarning.create(competition:, competitor: )
+    MissingAgeGroupEntryWarning.create(competition:, competitor:)
   end
 end

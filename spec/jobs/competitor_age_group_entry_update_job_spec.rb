@@ -15,7 +15,7 @@ RSpec.describe CompetitorAgeGroupEntryUpdateJob do
       it "sets the age group entry" do
         competitor.update_column(:age_group_entry_id, nil) # Clear out the id
         job.perform_now
-        expect(competitor.age_group_entry).not_to be_nil
+        expect(competitor.reload.age_group_entry).not_to be_nil
       end
     end
 
