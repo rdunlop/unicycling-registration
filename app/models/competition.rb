@@ -61,6 +61,7 @@ class Competition < ApplicationRecord
     has_many :heat_lane_results, inverse_of: :competition
     has_many :lane_assignments
     has_many :uploaded_files
+    has_many :missing_age_group_entry_warnings
   end
 
   belongs_to :combined_competition, optional: true

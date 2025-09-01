@@ -43,6 +43,7 @@ class Competitor < ApplicationRecord
     has_many :time_results
     has_one :external_result
     has_many :results, inverse_of: :competitor
+    has_many :missing_age_group_entry_warnings
   end
 
   # these are here to allow eager loading/performance optimization

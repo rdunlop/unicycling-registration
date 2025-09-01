@@ -13,7 +13,10 @@ class CompetitorAgeGroupEntryUpdateJob < ApplicationJob
     end
 
     if new_age_group_entry_id.nil?
-      Rollbar.error("Unable to find suitable age group entry for competitor #{competitor_id} in #{Apartment::Tenant.current}")
+      if MissingAgeGroupEntryWarning.create_if_needed(competition, competitor)
+        # only log to rollbar if needed to create
+        Rollbar.error("Unable to find suitable age group entry for competitor #{competitor_id} in #{Apartment::Tenant.current}")
+      end
     end
 
     return if competitor.age_group_entry_id == new_age_group_entry_id
