@@ -3,8 +3,11 @@
 - unless alert.blank?
   %p.alert_flash= alert
 - if user_signed_in?
+  - if MissingAgeGroupEntryWarning.active.any?
+    %p Note: The following "age group entry" alerts will appear for 10 minutes after they have been detected, then they disappear.
   - MissingAgeGroupEntryWarning.active.each do |magew|
     - if policy(magew).show?
       %p.alert_flash
         = magew
-        = "(#{time_ago_in_words(magew.created_at)})"
+        = "(noticed #{time_ago_in_words(magew.created_at)} ago)"
+      %br

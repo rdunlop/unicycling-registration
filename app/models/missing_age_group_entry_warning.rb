@@ -7,9 +7,9 @@ class MissingAgeGroupEntryWarning < ApplicationRecord
 
   scope :recent, -> { where("created_at > ?", 2.minutes.ago) }
 
-  # Return the most recent entry for each competition
+  # Entries are considered active for 10 minutes
   def self.active
-    where("created_at > ?", 1.week.ago)
+    where("created_at > ?", 10.minutes.ago)
   end
 
   def to_s
