@@ -37,9 +37,13 @@ class JudgePolicy < ApplicationPolicy
     record.user == user
   end
 
-  class Scope < Scope
+  class Scope < ApplicationPolicy::Scope
     def resolve
-      scope.none
+      if super_admin?
+        scope
+      else
+        scope.none
+      end
     end
   end
 end
