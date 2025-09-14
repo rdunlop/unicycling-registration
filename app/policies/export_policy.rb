@@ -26,6 +26,10 @@ class ExportPolicy < ApplicationPolicy
     event_planner? || super_admin?
   end
 
+  def download_competition_sign_ups?
+    download_events?
+  end
+
   def download_payment_details?
     user.has_role?(:export_payment_lists) || super_admin?
   end

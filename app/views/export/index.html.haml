@@ -35,3 +35,7 @@
 - if policy(:export).download_registrants?
   = link_to "Download Registrants and Event Sign ups", export_download_registrants_path(format: :xls)
   %br
+
+- if policy(:export).download_competition_sign_ups?
+  = link_to 'Download Competition Sign Up Info', export_download_competition_sign_ups_path(:format => :xls)
+  %br
