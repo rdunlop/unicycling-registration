@@ -10,11 +10,20 @@ class Exporters::CompetitionSignUpsExporter
   end
 
   def competition_titles
-    competitions.map { |competition| competition.to_s }
+    competitions.map do |competition|
+      "#{competition.event.category} #{competition.event} #{competition}"
+    end
   end
 
   def competitions
-    @competitions ||= Competition.all
+    return @competitions if defined?(@competitions)
+
+    @competitions = []
+    # This causes us to add the events in event-order
+    Event.all.each do |event|
+      @competitions += event.competitions.to_a # add each entry individually
+    end
+    @competitions
   end
 
   def rows
@@ -30,7 +39,7 @@ class Exporters::CompetitionSignUpsExporter
             break
           end
         end
-        # rc = reg.registrant_event_sign_ups.where({:event_category_id => ec.id}).first
+
         if rc.nil?
           reg_sign_up_data += [nil]
         else
@@ -43,5 +52,4 @@ class Exporters::CompetitionSignUpsExporter
 
     competitor_data
   end
-
 end

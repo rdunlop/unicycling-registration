@@ -10,7 +10,7 @@ describe Exporters::CompetitionSignUpsExporter do
 
   it "sets the headers" do
     headers = exporter.headers
-    expect(headers).to eq(base_headers << @comp.to_s)
+    expect(headers).to eq(base_headers << "#{@comp.event.category} #{@comp.event} #{@comp}")
   end
 
   describe "with a registrant" do
@@ -20,18 +20,6 @@ describe Exporters::CompetitionSignUpsExporter do
     it "sets the rows" do
       data = exporter.rows
       expect(data[0]).to eq([reg.registrant_type, reg.age, reg.gender, reg.club, reg.country, @comp.to_s])
-    end
-
-    xdescribe "with a registration choice for the event" do
-      before do
-        @ecat = @ev.event_categories.first
-        @rc = FactoryBot.create(:registrant_event_sign_up, registrant: reg, event_category: @ecat, event: @ev, signed_up: true)
-      end
-
-      it "has a value in the event-signed-up target column" do
-        data = exporter.rows
-        expect(data[0][base_headers.count]).to eq(true)
-      end
     end
   end
 end

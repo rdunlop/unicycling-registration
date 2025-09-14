@@ -26,6 +26,13 @@ class ExportController < ApplicationController
     output_spreadsheet(headers, data, "download_events_#{Date.current}")
   end
 
+  def download_competition_sign_ups
+    exporter = Exporters::CompetitionSignUpsExporter.new
+    headers = exporter.headers
+    data = exporter.rows
+    output_spreadsheet(headers, data, "#{@config.short_name}_download_competition_sign_ups_#{Date.current}")
+  end
+
   def download_payment_details
     ei = ExpenseItem.find(params[:data][:expense_item_id])
     exporter = Exporters::PaymentDetailsExporter.new(ei)
