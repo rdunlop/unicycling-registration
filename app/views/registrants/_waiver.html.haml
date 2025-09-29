@@ -6,4 +6,4 @@
         %b= t(".headline")
         %br
         = t(".parent_guardian_blurb")
-      = link_to t(".print_legal_waiver"), @config.waiver_file_name_url, { class: "print_waiver_link", target: "_blank" }
+      = link_to t(".print_legal_waiver"), legal_waivers_path, { class: "print_waiver_link", target: "_blank" }
