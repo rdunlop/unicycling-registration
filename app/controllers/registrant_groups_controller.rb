@@ -63,13 +63,7 @@ class RegistrantGroupsController < ApplicationController
     @new_registrant_group_member = RegistrantGroupMember.new(registrant_group: @registrant_group)
     @new_registrant_group_leader = RegistrantGroupLeader.new(registrant_group: @registrant_group)
 
-    if params[:show_all_registrants]
-      @show_all_registrants = true
-      @new_member_registrants = Registrant.active.competitor
-    else
-      @show_all_registrants = false
-      @new_member_registrants = current_user.registrants
-    end
+    @new_member_registrants = Registrant.active.competitor
   end
 
   # PUT /registrant_groups/1
