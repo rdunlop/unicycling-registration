@@ -14,6 +14,28 @@ var select_all_competitors = function(check_on) {
   });
   return false;
 };
+// Select the members of this group
+// name the comptetitor
+// click "create competitor from group"
+$(document).on("click", ".reg_group_create", function(e) {
+  const el = $(e.target);
+  const ids = el.data("registrant-ids");
+  const group_name = el.data("groupName");
+  select_all_competitors(false);
+  select_group_competitors(ids, false);
+  enter_group_name(group_name);
+  submit_form("reg_create_form");
+});
+
+var enter_group_name = function(new_group_name) {
+  $("#group_name").each((_, el) => {
+    el.value = new_group_name;
+  });
+}
+
+var submit_form = function(form_class) {
+  $("form." + form_class).submit();
+}
 
 $(document).on("click", ".reg_group_select", function(e) {
   const el = $(e.target);
@@ -22,7 +44,7 @@ $(document).on("click", ".reg_group_select", function(e) {
   select_group_competitors(ids);
 });
 
-var select_group_competitors = function(reg_ids) {
+var select_group_competitors = function(reg_ids, show_alert = true) {
   let count = 0;
   $(".registrant_checkbox").each(function() {
     const el = $(this);
@@ -32,7 +54,9 @@ var select_group_competitors = function(reg_ids) {
       count += 1;
     }
   });
-  alert("selected " + count + " members");
+  if (show_alert) {
+    alert("selected " + count + " members");
+  }
   return false;
 };
 

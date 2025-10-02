@@ -19,19 +19,24 @@
       %tr
         %th Group name
         %th # Members
+        %th # Members already Competitors
         %th Action
     %tbody
+      - competition_registrants = @competition.competitors.map{|c| c.registrants}.flatten
       - group_types.each do |group_type|
         - group_type.registrant_groups.each do |group|
           %tr
             %td= group
             %td= group.registrant_group_members.count
+            %td= (group.registrants & competition_registrants).count
             %td
               - ids = group.registrant_group_member_registrant_ids
               = link_to "Select members", "#", class: "reg_group_select", data: { registrant_ids: ids }
+              %br
+              = link_to "Create Competitor from members", "#", class: "reg_group_create", data: { registrant_ids: ids, group_name: group.name }
 
 - if @remaining_registrants.any?
-  = form_tag(add_competition_competitors_path(@competition), {:method => :post}) do
+  = form_tag(add_competition_competitors_path(@competition), class: "reg_create_form", :method => :post) do
     %a#competitor_select_all{:href => "#"}> All
     \/
     %a#competitor_unselect_all{:href => "#"} None
