@@ -24,7 +24,7 @@ $(document).on("click", ".reg_group_create", function(e) {
   select_all_competitors(false);
   select_group_competitors(ids, false);
   enter_group_name(group_name);
-  submit_form("reg_create_form");
+  submit_form("reg_create_form_submit");
 });
 
 var enter_group_name = function(new_group_name) {
@@ -33,8 +33,8 @@ var enter_group_name = function(new_group_name) {
   });
 }
 
-var submit_form = function(form_class) {
-  $("form." + form_class).submit();
+var submit_form = function(form_submit_class) {
+  $("." + form_submit_class).first().click()
 }
 
 $(document).on("click", ".reg_group_select", function(e) {
