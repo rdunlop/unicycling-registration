@@ -55,6 +55,26 @@ describe Importers::Parsers::Lif do
     expect(hash[:disqualified]).to eq(true)
   end
 
+  it "can convert a French AB into data" do
+    arr = ['AB', 0, 4, 'Rosen', 'Matthew', 'Bloomington Jefferson', '', '', '', '', '', '18:47:30.471', 'M', '', '', '', '']
+
+    hash = up.convert_lif_to_hash(arr)
+    expect(hash[:minutes]).to eq(0)
+    expect(hash[:seconds]).to eq(0)
+    expect(hash[:thousands]).to eq(0)
+    expect(hash[:disqualified]).to eq(true)
+  end
+
+  it "can convert a French NP into data" do
+    arr = ['NP', 0, 4, 'Rosen', 'Matthew', 'Bloomington Jefferson', '', '', '', '', '', '18:47:30.471', 'M', '', '', '', '']
+
+    hash = up.convert_lif_to_hash(arr)
+    expect(hash[:minutes]).to eq(0)
+    expect(hash[:seconds]).to eq(0)
+    expect(hash[:thousands]).to eq(0)
+    expect(hash[:disqualified]).to eq(true)
+  end
+
   it "can convert an array of data into minutes, seconds, thousands, dq" do
     arr = [3, '', 7, '', '', '', "32.490", '', 12.142, '', '', '', '', '', '']
 
