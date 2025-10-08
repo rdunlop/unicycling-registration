@@ -14,6 +14,16 @@ class LocalResource
     end
   end
 
+  def files
+    @files ||= Array(ios).map do |input_io|
+      Tempfile.new(tmp_filename, tmp_folder, encoding: encoding).tap do |f|
+        input_io.rewind
+        f.write(input_io.read)
+        f.close
+      end
+    end
+  end
+
   def io
     @io ||= uri.open
   end

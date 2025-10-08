@@ -708,6 +708,14 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :multiple_heat_review, only: %i[index] do
+        collection do
+          post :approve_results
+          post :import_lif_files
+          delete :destroy
+        end
+      end
+
       resources :heat_review, param: :heat, only: %i[index show destroy] do
         member do
           post :approve_heat

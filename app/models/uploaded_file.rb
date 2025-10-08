@@ -46,6 +46,20 @@ class UploadedFile < ApplicationRecord
     end
   end
 
+  def self.process_params_multiple(params, user:, competition: nil)
+    if params[:files].present?
+      params[:files].map do |file|
+        p file
+        uploaded_file = UploadedFile.new(user: user)
+        uploaded_file.competition = competition if competition.present?
+        uploaded_file.original_file = file
+        uploaded_file.filename = file.original_filename
+        uploaded_file.save!
+        uploaded_file
+      end
+    end
+  end
+
   def to_s_with_date
     "#{created_at.to_formatted_s(:short)} - #{filename} (#{user})"
   end

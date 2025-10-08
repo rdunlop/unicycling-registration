@@ -1,0 +1,45 @@
+%h1
+  Review Data for #{@competition}
+
+.row
+  .small-12.columns
+    = render "multiple_time_results_details"
+  .small-12.columns
+    = render "multiple_summary"
+%hr
+.row
+  .small-12.medium-6.large-4.columns
+    = render "multiple_lane_assignments_details"
+  .small-12.medium-6.large-4.columns
+    = render "multiple_heat_lane_results_summary"
+    - if @heat_lane_results.any?
+      .row
+        .small-6.columns
+          = link_to "Delete The Imported Resuls without Approving", competition_multiple_heat_review_index_path(@competition), method: :delete, data: { confirm: "Deleting, Are you sure?" }, class: "button alert small"
+        .small-6.columns
+          = link_to "Import these Results", approve_results_competition_multiple_heat_review_index_path(@competition), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
+
+    - else
+      = render "multiple_lif_import_form"
+
+    %br
+
+  .small-12.medium-6.large-4.columns
+    = render "multiple_heat_lane_judge_results_summary"
+
+%hr
+
+.row
+  .small-12.columns
+    = render "multiple_heat_lane_judge_results_details"
+  .small-12.columns
+    = render "multiple_heat_lane_results_details"
+
+%hr
+%hr
+%h3 Calculate Age Group Places
+= render "competitions/set_age_group_places"
+
+= render "competitions/publish_age_group_entries"
+
+= link_to "Back to Heat Chooser", competition_multiple_heat_review_index_path(@competition)
