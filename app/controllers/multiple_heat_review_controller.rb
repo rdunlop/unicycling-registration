@@ -40,10 +40,9 @@ class MultipleHeatReviewController < ApplicationController
 
       # Extracting the heat from the filename
       match_data = /(\d+).lif$/.match(file.filename)
-      if match_data == nil
+      if match_data.nil?
         flash[:alert] = "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."
-        redirect_to competition_multiple_heat_review_index_path(@competition)
-        return
+        break
       end
       heat = match_data.captures[0]
 
