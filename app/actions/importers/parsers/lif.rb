@@ -29,7 +29,9 @@ class Importers::Parsers::Lif < Importers::Parsers::Base
 
     full_time = arr[6].to_s
     # TODO: Extract this into a StatusTranslation
-    if full_time == "DQ" || arr[0] == "DQ" || arr[0] == "DNS" || arr[0] == "DNF"
+    # "NP" stands for "Non-Partant" (DNS) in French
+    # "AB" stands for "Absent" (not there) in French
+    if full_time == "DQ" || arr[0].in?(%w[DQ DNS DNF NP AB])
       results[:disqualified] = true
       results[:minutes] = 0
       results[:seconds] = 0
