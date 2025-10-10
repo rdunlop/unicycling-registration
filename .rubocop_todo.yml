@@ -106,6 +106,7 @@ Lint/RescueException:
     - 'app/actions/competition_state_machine.rb'
     - 'app/controllers/competitors_controller.rb'
     - 'app/controllers/heat_review_controller.rb'
+    - 'app/controllers/multiple_heat_review_controller.rb'
     - 'app/controllers/import_results_controller.rb'
     - 'app/controllers/payment_adjustments_controller.rb'
     - 'app/controllers/two_attempt_entries_controller.rb'

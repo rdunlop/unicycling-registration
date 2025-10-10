@@ -16,7 +16,7 @@ describe MultipleHeatReviewController do
     before { get :index, params: { competition_id: @competition.id } }
 
     it do
-      header = "Review Data for " + @competition.name
+      header = "Review Data for #{@competition.name}"
       assert_select "h1", text: header
     end
   end

@@ -49,7 +49,6 @@ class UploadedFile < ApplicationRecord
   def self.process_params_multiple(params, user:, competition: nil)
     if params[:files].present?
       params[:files].map do |file|
-        p file
         uploaded_file = UploadedFile.new(user: user)
         uploaded_file.competition = competition if competition.present?
         uploaded_file.original_file = file
