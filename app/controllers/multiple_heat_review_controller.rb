@@ -34,6 +34,8 @@ class MultipleHeatReviewController < ApplicationController
       return
     end
 
+    num_rows_processed = 0
+    errors = []
     uploaded_files.each do |file|
       parser = Importers::Parsers::Lif.new(file.original_file.file)
       importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
@@ -41,17 +43,26 @@ class MultipleHeatReviewController < ApplicationController
       # Extracting the heat from the filename
       match_data = /(\d+).lif$/.match(file.filename)
       if match_data.nil?
-        flash[:alert] = "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."
+        errors.push([file.original_file.filename, "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."])
         break
       end
       heat = match_data.captures[0]
 
       if importer.process(heat, parser)
-        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+        num_rows_processed += importer.num_rows_processed
       else
-        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+        errors.push([file.original_file.filename, importer.errors])
       end
     end
+
+    unless num_rows_processed == 0
+      flash[:notice] = "Successfully imported #{num_rows_processed} rows"
+    end
+    unless errors.empty?
+      errors = errors.map { |error| "File '#{error[0]}': #{error[1]}" }.join("; ")
+      flash[:alert] = "Error importing rows. Errors: #{errors}."
+    end
+
     redirect_to competition_multiple_heat_review_index_path(@competition)
   end
 
