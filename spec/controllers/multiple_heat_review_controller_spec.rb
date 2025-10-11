@@ -28,6 +28,7 @@ describe MultipleHeatReviewController do
 
       it "calls the creator" do
         allow_any_instance_of(Importers::HeatLaneLifImporter).to receive(:process).and_return(true)
+        allow_any_instance_of(Importers::HeatLaneLifImporter).to receive(:num_rows_processed).and_return(1)
         post :import_lif_files, params: { competition_id: @competition.id, files: [test_file] }
 
         expect(flash[:notice]).to match(/Successfully imported/)
