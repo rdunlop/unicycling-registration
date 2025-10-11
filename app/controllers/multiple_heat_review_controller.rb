@@ -41,17 +41,17 @@ class MultipleHeatReviewController < ApplicationController
       importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
 
       # Extracting the heat from the filename
-      match_data = /(\d+).lif$/.match(file.filename)
-      if match_data.nil?
-        errors.push([file.original_file.filename, "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."])
+      filename = file.original_file.filename
+      heat = Importers::HeatFromFilenameExtractor.extract_heat(filename)
+      if heat.nil?
+        errors.push([filename, "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."])
         break
       end
-      heat = match_data.captures[0]
 
       if importer.process(heat, parser)
         num_rows_processed += importer.num_rows_processed
       else
-        errors.push([file.original_file.filename, importer.errors])
+        errors.push([filename, importer.errors])
       end
     end
 
