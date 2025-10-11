@@ -104,41 +104,8 @@ class MultipleHeatReviewController < ApplicationController
     authorize @competition, :create_preliminary_result?
   end
 
-  def import_result_params
-    params.require(:import_result).permit(:bib_number, :status, :minutes, :raw_data,
-                                          :number_of_penalties, :seconds, :thousands, :points, :details, :is_start_time)
-  end
-
-  def load_user
-    @user = User.this_tenant.find(params[:user_id])
-  end
-
   def load_competition
     @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_import_result
-    @import_result = ImportResult.find(params[:id])
-    @competition = @import_result.competition
-  end
-
-  def load_import_results
-    @import_results = @user.import_results.where(competition_id: @competition).includes(:competition)
-  end
-
-  def load_results_for_competition
-    @import_results = ImportResult.where(competition_id: @competition)
-  end
-
-  def filter_import_results_by_start_times
-    @is_start_time = params[:is_start_times] || false
-    @import_results = @import_results.where(is_start_time: @is_start_time)
-  end
-
-  def load_new_import_result
-    @import_result = ImportResult.new(import_result_params)
-    @import_result.user = @user
-    @import_result.competition = @competition
   end
 
   def set_breadcrumbs
