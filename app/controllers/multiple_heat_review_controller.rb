@@ -34,24 +34,35 @@ class MultipleHeatReviewController < ApplicationController
       return
     end
 
+    num_rows_processed = 0
+    errors = []
     uploaded_files.each do |file|
       parser = Importers::Parsers::Lif.new(file.original_file.file)
       importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
 
       # Extracting the heat from the filename
-      match_data = /(\d+).lif$/.match(file.filename)
-      if match_data.nil?
-        flash[:alert] = "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."
+      filename = file.original_file.filename
+      heat = Importers::HeatFromFilenameExtractor.extract_heat(filename)
+      if heat.nil?
+        errors.push([filename, "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."])
         break
       end
-      heat = match_data.captures[0]
 
       if importer.process(heat, parser)
-        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+        num_rows_processed += importer.num_rows_processed
       else
-        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+        errors.push([filename, importer.errors])
       end
     end
+
+    unless num_rows_processed == 0
+      flash[:notice] = "Successfully imported #{num_rows_processed} rows"
+    end
+    unless errors.empty?
+      errors = errors.map { |error| "File '#{error[0]}': #{error[1]}" }.join("; ")
+      flash[:alert] = "Error importing rows. Errors: #{errors}."
+    end
+
     redirect_to competition_multiple_heat_review_index_path(@competition)
   end
 
@@ -93,41 +104,8 @@ class MultipleHeatReviewController < ApplicationController
     authorize @competition, :create_preliminary_result?
   end
 
-  def import_result_params
-    params.require(:import_result).permit(:bib_number, :status, :minutes, :raw_data,
-                                          :number_of_penalties, :seconds, :thousands, :points, :details, :is_start_time)
-  end
-
-  def load_user
-    @user = User.this_tenant.find(params[:user_id])
-  end
-
   def load_competition
     @competition = Competition.find(params[:competition_id])
-  end
-
-  def load_import_result
-    @import_result = ImportResult.find(params[:id])
-    @competition = @import_result.competition
-  end
-
-  def load_import_results
-    @import_results = @user.import_results.where(competition_id: @competition).includes(:competition)
-  end
-
-  def load_results_for_competition
-    @import_results = ImportResult.where(competition_id: @competition)
-  end
-
-  def filter_import_results_by_start_times
-    @is_start_time = params[:is_start_times] || false
-    @import_results = @import_results.where(is_start_time: @is_start_time)
-  end
-
-  def load_new_import_result
-    @import_result = ImportResult.new(import_result_params)
-    @import_result.user = @user
-    @import_result.competition = @competition
   end
 
   def set_breadcrumbs
