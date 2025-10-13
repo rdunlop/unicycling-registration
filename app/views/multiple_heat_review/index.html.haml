@@ -19,8 +19,7 @@
         .small-6.columns
           = link_to "Import these Results", approve_results_competition_multiple_heat_review_index_path(@competition), method: :post, data: {:confirm => "Are you Sure?" }, class: "button success"
 
-    - else
-      = render "multiple_lif_import_form"
+    = render "multiple_lif_import_form"
 
     %br
 
