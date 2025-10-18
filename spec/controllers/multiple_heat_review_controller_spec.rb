@@ -47,6 +47,28 @@ describe MultipleHeatReviewController do
         end
       end
     end
+
+    describe "with incorrectly named files (< 10)" do
+      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain", original_filename: "test.lif") }
+
+      it "sets the flash" do
+        post :import_lif_files, params: { competition_id: @competition.id, files: [test_file] }
+
+        expect(flash[:alert]).to eq("Error importing rows. The following file(s) do not finish with '{dd}.lif' ('{dd}' being any integer): test.lif.")
+      end
+    end
+
+    describe "with incorrectly named files (> 10)" do
+      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_files) { 10.times.map { |i| Rack::Test::UploadedFile.new(test_file_name, "text/plain", original_filename: "#{i}-test.lif") } }
+
+      it "sets the flash" do
+        post :import_lif_files, params: { competition_id: @competition.id, files: test_files }
+
+        expect(flash[:alert]).to eq("Error importing rows. 10 files do not finish with '{dd}.lif' ('{dd}' being any integer).")
+      end
+    end
   end
 
   describe "POST approve_results" do
