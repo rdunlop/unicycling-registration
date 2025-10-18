@@ -27,10 +27,10 @@
 = form_tag(directors_path, :method => "post") do |f|
   .row
     .small-12.medium-4.columns
-      = label_tag :user_id, User.model_name.human
-      = select_tag :user_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s_with_email"), include_blank: true, class: "chosen-select"
+      = label_tag :users_id, User.model_name.human
+      = select_tag :users_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s_with_email"), multiple: true, include_blank: true, class: "chosen-select"
     .small-12.medium-4.columns
-      = label_tag :event_id, Event.model_name.human
-      = select_tag :event_id, options_from_collection_for_select(@events, "id", "to_s"), include_blank: true, class: "chosen-select"
+      = label_tag :events_id, Event.model_name.human
+      = select_tag :events_id, options_from_collection_for_select(@events, "id", "to_s"), multiple: true, include_blank: true, class: "chosen-select"
     .small-12.medium-4.columns.text-left
       = submit_tag t(".add_director"), :class => "focus_button"
