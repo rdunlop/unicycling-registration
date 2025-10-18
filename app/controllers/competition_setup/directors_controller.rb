@@ -8,11 +8,15 @@ class CompetitionSetup::DirectorsController < CompetitionSetup::BaseCompetitionS
 
   # POST /directors/
   def create
-    user = User.this_tenant.find(params[:user_id])
-    event = Event.find(params[:event_id])
-    user.add_role(:director, event)
+    params[:users_id].each do |user_id|
+      user = User.this_tenant.find(user_id)
+      params[:events_id].each do |event_id|
+        event = Event.find(event_id)
+        user.add_role(:director, event)
+      end
+    end
 
-    redirect_to directors_path, notice: 'Created Director'
+    redirect_to directors_path, notice: 'Created Director(s)'
   end
 
   # DELETE /directors/:id/

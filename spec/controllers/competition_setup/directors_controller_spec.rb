@@ -17,9 +17,9 @@ describe CompetitionSetup::DirectorsController do
   end
 
   describe "POST create" do
-    it "assigns the requested user as director" do
+    it "assigns the requested users as directors" do
       user = FactoryBot.create(:user)
-      post :create, params: { user_id: user.id, event_id: @event.id }
+      post :create, params: { users_id: [user.id], events_id: [@event.id] }
       expect(user.reload.roles.count).to eq(1)
     end
   end
