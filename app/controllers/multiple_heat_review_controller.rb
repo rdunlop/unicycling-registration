@@ -34,6 +34,25 @@ class MultipleHeatReviewController < ApplicationController
       return
     end
 
+    mismatching_names = []
+    uploaded_files.each do |file|
+      heat = Importers::HeatFromFilenameExtractor.extract_heat(file.filename)
+      if heat.nil?
+        mismatching_names << file.filename
+      end
+    end
+
+    unless mismatching_names.empty?
+      error_message = if mismatching_names.length < 10
+                        "Error importing rows. The following file(s) do not finish with '{dd}.lif' ('{dd}' being any integer): #{mismatching_names.join(', ')}."
+                      else
+                        "Error importing rows. #{mismatching_names.length} files do not finish with '{dd}.lif' ('{dd}' being any integer)."
+                      end
+      flash[:alert] = error_message
+      redirect_to competition_multiple_heat_review_index_path(@competition)
+      return
+    end
+
     num_rows_processed = 0
     errors = []
     uploaded_files.each do |file|
@@ -43,10 +62,6 @@ class MultipleHeatReviewController < ApplicationController
       # Extracting the heat from the filename
       filename = file.original_file.filename
       heat = Importers::HeatFromFilenameExtractor.extract_heat(filename)
-      if heat.nil?
-        errors.push([filename, "Error importing rows. Filename '#{file.filename}' does not finish with '{dd}.lif' ('{dd}' being any integer)."])
-        break
-      end
 
       if importer.process(heat, parser)
         num_rows_processed += importer.num_rows_processed
