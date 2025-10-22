@@ -44,9 +44,9 @@ class MultipleHeatReviewController < ApplicationController
 
     unless mismatching_names.empty?
       error_message = if mismatching_names.length < 10
-                        "Error importing rows. The following file(s) do not finish with '{dd}.lif' ('{dd}' being any integer): #{mismatching_names.join(', ')}."
+                        "Error importing rows. The following file(s) do not finish with the heat number, followed by a common extension (lif, csv, txt) - e.g.: '100m-01.lif': #{mismatching_names.join(', ')}."
                       else
-                        "Error importing rows. #{mismatching_names.length} files do not finish with '{dd}.lif' ('{dd}' being any integer)."
+                        "Error importing rows. #{mismatching_names.length} files do not finish with the heat number, followed by a common extension (lif, csv, txt). E.g.: '100m-01.lif'"
                       end
       flash[:alert] = error_message
       redirect_to competition_multiple_heat_review_index_path(@competition)
