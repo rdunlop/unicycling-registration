@@ -41,14 +41,29 @@ class HeatReviewController < ApplicationController
       return
     end
 
-    parser = Importers::Parsers::Lif.new(uploaded_file.original_file.file)
-    importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
+    import_lif_from_local_path(uploaded_file.original_file.file)
+    redirect_to competition_heat_review_path(@competition, @heat)
+  end
 
-    if importer.process(@heat, parser)
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
-    else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+  def import_lif_from_url
+    file_url = params[:file_url]
+    if file_url.blank?
+      flash[:alert] = "Please specify a file URL"
+      redirect_to competition_heat_review_path(@competition, @heat)
+      return
     end
+
+    begin
+      tempfile = Down.download(file_url)
+    rescue StandardError
+      flash[:alert] = "Error importing file. Does it exist at specified location '#{file_url}'?"
+      redirect_to competition_heat_review_path(@competition, @heat)
+      return
+    end
+
+    import_lif_from_local_path(tempfile.path)
+    FileUtils.remove(tempfile)
+
     redirect_to competition_heat_review_path(@competition, @heat)
   end
 
@@ -133,5 +148,16 @@ class HeatReviewController < ApplicationController
 
   def set_breadcrumbs
     add_to_competition_breadcrumb(@competition)
+  end
+
+  def import_lif_from_local_path(path)
+    parser = Importers::Parsers::Lif.new(path)
+    importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
+
+    if importer.process(@heat, parser)
+      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+    else
+      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+    end
   end
 end

@@ -721,6 +721,7 @@ Rails.application.routes.draw do
         member do
           post :approve_heat
           post :import_lif
+          post :import_lif_from_url
         end
       end
       resources :distance_attempts, only: [] do
