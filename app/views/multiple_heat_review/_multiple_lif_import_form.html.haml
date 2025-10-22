@@ -2,6 +2,6 @@
 = form_tag(import_lif_files_competition_multiple_heat_review_index_path(@competition), {:method => :post, :multipart=>true}) do
   = render partial: "shared/upload_files_for_competition", locals: { competition: @competition }
   .row
-    %p Filenames should end with "1.lif", "2.lif", ..., matching the heat represented by each file.
+    %p Filenames should end with the heat number, followed by the a common extension (lif, csv, txt). E.g.: '100m-01.lif'.
   .row
     = submit_tag "Load LIF Data", class: "button"
