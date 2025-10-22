@@ -3,8 +3,9 @@ require 'spec_helper'
 describe Importers::HeatFromFilenameExtractor do
   it "can extract heat from filename" do
     names = ['100m 01.lif', '100m 01.csv', '100m 01.txt']
-    for name in names
-      heat = described_class.extract_heat(names)
+    names.each do |name|
+      p name
+      heat = described_class.extract_heat(name)
       expect(heat).to eq(1)
     end
   end
