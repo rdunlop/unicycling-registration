@@ -55,7 +55,7 @@ describe MultipleHeatReviewController do
       it "sets the flash" do
         post :import_lif_files, params: { competition_id: @competition.id, files: [test_file] }
 
-        expect(flash[:alert]).to eq("Error importing rows. The following file(s) do not finish with '{dd}.lif' ('{dd}' being any integer): test.lif.")
+        expect(flash[:alert]).to eq("Error importing rows. The following file(s) do not finish with the heat number, followed by a common extension (lif, csv, txt) - e.g.: '100m-01.lif': test.lif.")
       end
     end
 
@@ -66,7 +66,7 @@ describe MultipleHeatReviewController do
       it "sets the flash" do
         post :import_lif_files, params: { competition_id: @competition.id, files: test_files }
 
-        expect(flash[:alert]).to eq("Error importing rows. 10 files do not finish with '{dd}.lif' ('{dd}' being any integer).")
+        expect(flash[:alert]).to eq("Error importing rows. 10 files do not finish with the heat number, followed by a common extension (lif, csv, txt). E.g.: '100m-01.lif'")
       end
     end
   end
