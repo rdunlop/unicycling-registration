@@ -2,5 +2,10 @@
 = form_tag(import_lif_competition_heat_review_path(@competition, @heat), {:method => :post, :multipart=>true}) do
   = render partial: "shared/upload_file_for_competition", locals: { competition: @competition }
   .row
-    .small-6.columns
-      = submit_tag "Load LIF Data", class: "button"
+    = submit_tag "Load LIF Data", class: "button"
+
+= form_tag(import_lif_from_url_competition_heat_review_path(@competition, @heat), {:method => :post}) do
+  .row
+    = text_field_tag :file_url
+  .row
+    = submit_tag "Import from an URL", class: "button"

@@ -315,6 +315,8 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    down (5.4.2)
+      addressable (~> 2.8)
     drb (2.2.3)
     equalizer (0.0.11)
     erb (4.0.4)
@@ -772,6 +774,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dotenv-rails
+  down
   eye
   factory_bot_rails
   faker

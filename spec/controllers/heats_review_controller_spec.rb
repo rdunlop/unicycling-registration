@@ -55,6 +55,47 @@ describe HeatReviewController do
     end
   end
 
+  describe "POST import_lif_from_url" do
+    describe "with valid params" do
+      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+
+      it "calls the creator" do
+        # Create a mock to avoid fetching a real file
+        file_url = "https://example.com/heat-01.lif"
+        test_file = []
+        test_file.define_singleton_method(:path) do
+          :test_file_name
+        end
+        allow(Down).to receive(:download).with(file_url).and_return(test_file)
+        allow(FileUtils).to receive(:remove).with(test_file).and_return(nil)
+
+        allow_any_instance_of(Importers::HeatLaneLifImporter).to receive(:process).and_return(true)
+        post :import_lif_from_url, params: { heat: 1, competition_id: @competition.id, file_url: file_url }
+
+        expect(flash[:notice]).to match(/Successfully imported/)
+      end
+    end
+
+    describe "with invalid params" do
+      describe "when the file URL is missing" do
+        it "returns an error" do
+          post :import_lif_from_url, params: { heat: 1, competition_id: @competition.id, file_url: nil }
+          assert_match(/Please specify a file URL/, flash[:alert])
+        end
+      end
+
+      describe "when the file does not exist" do
+        it "returns an error" do
+          file_url = "https://path-to-a-non-existing-file.uda.com"
+          allow(Down).to receive(:download).with(file_url).and_throw(StandardError)
+
+          post :import_lif_from_url, params: { heat: 1, competition_id: @competition.id, file_url: file_url }
+          assert_match(/Error importing file. Does it exist at specified location/, flash[:alert])
+        end
+      end
+    end
+  end
+
   describe "POST approve_heat" do
     describe "with valid params" do
       let(:test_file) { "stubbed" }

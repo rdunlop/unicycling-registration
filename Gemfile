@@ -99,6 +99,8 @@ gem 'faker' # to support 'sample_data'
 
 gem 'pg'
 
+gem 'down'  # to download external files
+
 # deployment
 gem 'capistrano', require: false
 gem 'capistrano-rails', require: false
