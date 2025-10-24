@@ -598,7 +598,7 @@ In order to have the production logs backed up in a rotating basis, install the 
 Comments on the database schema
 ===============================
 
-**Note** This is out-of-date
+**Note**: This is out-of-date. 
 
 The Base Schema (used for all other data)
 -----------------------------------------
