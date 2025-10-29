@@ -1,4 +1,7 @@
 class Importers::Parsers::Lif < Importers::Parsers::Base
+  class MissingTimeError < StandardError
+  end
+
   def extract_file
     data = Importers::CsvExtractor.new(file).extract_csv
     data.drop(1) # drop header row
@@ -36,6 +39,8 @@ class Importers::Parsers::Lif < Importers::Parsers::Base
       results[:minutes] = 0
       results[:seconds] = 0
       results[:thousands] = 0
+    elsif full_time == ""
+      raise MissingTimeError
     else
       results[:disqualified] = false
 

@@ -52,6 +52,16 @@ describe HeatReviewController do
           assert_match(/Please specify a file/, flash[:alert])
         end
       end
+
+      describe "when the time is missing" do
+        it "returns an error" do
+          test_file_name = "#{fixture_path}/no_time 01.lif"
+          test_file = Rack::Test::UploadedFile.new(test_file_name)
+          post :import_lif, params: { heat: 1, competition_id: @competition.id, file: test_file }
+
+          expect(flash[:alert]).to match(/Error importing rows. Invalid time for at least a result./)
+        end
+      end
     end
   end
 

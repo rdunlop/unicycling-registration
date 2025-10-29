@@ -96,4 +96,10 @@ describe Importers::Parsers::Lif do
     expect(hash[:thousands]).to eq(490)
     expect(hash[:disqualified]).to eq(false)
   end
+
+  it "raises an exception when the time is missing" do
+    arr = [3, '', 7, '', '', '', '', '', 12.142, '', '', '', '', '', '']
+
+    expect { up.convert_lif_to_hash(arr) }.to raise_error(Importers::Parsers::Lif::MissingTimeError)
+  end
 end
