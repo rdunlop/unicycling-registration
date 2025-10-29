@@ -38,12 +38,22 @@ describe MultipleHeatReviewController do
     describe "with invalid params" do
       describe "when the file is missing" do
         def do_action
-          post :import_lif_files, params: { competition_id: @competition.id, file: nil }
+          post :import_lif_files, params: { competition_id: @competition.id, files: nil }
         end
 
         it "returns an error" do
           do_action
           assert_match(/Please specify at least a file/, flash[:alert])
+        end
+      end
+
+      describe "when the time is missing" do
+        it "returns an error" do
+          test_file_name = "#{fixture_path}/no_time 01.lif"
+          test_file = Rack::Test::UploadedFile.new(test_file_name)
+          post :import_lif_files, params: { heat: 1, competition_id: @competition.id, files: [test_file] }
+
+          expect(flash[:alert]).to match(/Invalid time for at least a result./)
         end
       end
     end

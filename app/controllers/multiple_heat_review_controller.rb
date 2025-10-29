@@ -56,7 +56,7 @@ class MultipleHeatReviewController < ApplicationController
           errors.push([filename, importer.errors])
         end
       rescue Importers::Parsers::Lif::MissingTimeError
-        errors.push([filename, "Invalid time for at least a result."])
+        errors.push([filename, "Invalid time for at least a result"])
       end
     end
 
