@@ -154,10 +154,15 @@ class HeatReviewController < ApplicationController
     parser = Importers::Parsers::Lif.new(path)
     importer = Importers::HeatLaneLifImporter.new(@competition, current_user)
 
-    if importer.process(@heat, parser)
-      flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
-    else
-      flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+    begin
+      processing_result = importer.process(@heat, parser)
+      if processing_result
+        flash[:notice] = "Successfully imported #{importer.num_rows_processed} rows"
+      else
+        flash[:alert] = "Error importing rows. Errors: #{importer.errors}."
+      end
+    rescue Importers::Parsers::Lif::MissingTimeError
+      flash[:alert] = "Error importing rows. Invalid time for at least a result."
     end
   end
 end

@@ -34,22 +34,7 @@ class MultipleHeatReviewController < ApplicationController
       return
     end
 
-    mismatching_names = []
-    uploaded_files.each do |file|
-      heat = Importers::HeatFromFilenameExtractor.extract_heat(file.filename)
-      if heat.nil?
-        mismatching_names << file.filename
-      end
-    end
-
-    unless mismatching_names.empty?
-      error_message = if mismatching_names.length < 10
-                        "Error importing rows. The following file(s) do not finish with the heat number, followed by a common extension (lif, csv, txt) - e.g.: '100m-01.lif': #{mismatching_names.join(', ')}."
-                      else
-                        "Error importing rows. #{mismatching_names.length} files do not finish with the heat number, followed by a common extension (lif, csv, txt). E.g.: '100m-01.lif'"
-                      end
-      flash[:alert] = error_message
-      redirect_to competition_multiple_heat_review_index_path(@competition)
+    unless check_file_names(uploaded_files)
       return
     end
 
@@ -63,10 +48,15 @@ class MultipleHeatReviewController < ApplicationController
       filename = file.original_file.filename
       heat = Importers::HeatFromFilenameExtractor.extract_heat(filename)
 
-      if importer.process(heat, parser)
-        num_rows_processed += importer.num_rows_processed
-      else
-        errors.push([filename, importer.errors])
+      begin
+        processing_result = importer.process(heat, parser)
+        if processing_result
+          num_rows_processed += importer.num_rows_processed
+        else
+          errors.push([filename, importer.errors])
+        end
+      rescue Importers::Parsers::Lif::MissingTimeError
+        errors.push([filename, "Invalid time for at least a result."])
       end
     end
 
@@ -125,5 +115,28 @@ class MultipleHeatReviewController < ApplicationController
 
   def set_breadcrumbs
     add_to_competition_breadcrumb(@competition)
+  end
+
+  def check_file_names(files)
+    mismatching_names = []
+    files.each do |file|
+      heat = Importers::HeatFromFilenameExtractor.extract_heat(file.filename)
+      if heat.nil?
+        mismatching_names << file.filename
+      end
+    end
+
+    unless mismatching_names.empty?
+      error_message = if mismatching_names.length < 10
+                        "Error importing rows. The following file(s) do not finish with the heat number, followed by a common extension (lif, csv, txt) - e.g.: '100m-01.lif': #{mismatching_names.join(', ')}."
+                      else
+                        "Error importing rows. #{mismatching_names.length} files do not finish with the heat number, followed by a common extension (lif, csv, txt). E.g.: '100m-01.lif'"
+                      end
+      flash[:alert] = error_message
+      redirect_to competition_multiple_heat_review_index_path(@competition)
+      return false
+    end
+
+    true
   end
 end
