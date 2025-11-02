@@ -107,9 +107,8 @@ describe AgeGroupEntry do
           age: 15,
           count: 5,
           ineligible: false
-        },
+        }
       ]
-
     end
 
     it "can determine the smallest neighbour when first entry" do
@@ -162,7 +161,7 @@ describe AgeGroupEntry do
           age: 15,
           count: 5,
           ineligible: false
-        },
+        }
       ]
     end
 
