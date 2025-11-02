@@ -1,0 +1,7 @@
+---
+en:
+  admin:
+    permissions:
+      role_updated: Role updated
+      role_not_found: Role not found (%{role})
+      user_already_has_role: User '%{user}' already has role '%{role}'

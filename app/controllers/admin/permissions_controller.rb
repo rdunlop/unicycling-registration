@@ -9,15 +9,29 @@ class Admin::PermissionsController < ApplicationController
   def set_role
     @user = User.this_tenant.find(params[:user_id])
     role = params[:role_name]
-    if current_user.roles_accessible.include?(role.to_sym)
+    if check_role_access(role)
       if @user.has_role? role
         @user.remove_role role
       else
         @user.add_role role
       end
-      flash[:notice] = "Role updated"
-    else
-      flash[:alert] = "Role not found (#{role})"
+      flash[:notice] = I18n.t("admin.permissions.role_updated")
+    end
+
+    redirect_to permissions_path
+  end
+
+  def add_role
+    @user = User.this_tenant.find(params[:user_id])
+    role = params[:role_name]
+
+    if check_role_access(role)
+      if @user.has_role? role
+        flash[:alert] = I18n.t("admin.permissions.user_already_has_role", user: @user, role: role)
+      else
+        @user.add_role role
+        flash[:notice] = I18n.t("admin.permissions.role_updated")
+      end
     end
 
     redirect_to permissions_path
@@ -42,5 +56,14 @@ class Admin::PermissionsController < ApplicationController
 
   def authorize_permission
     authorize :admin_permission
+  end
+
+  def check_role_access(role)
+    unless current_user.roles_accessible.include?(role.to_sym)
+      flash[:alert] = I18n.t("admin.permissions.role_not_found", role: role)
+      return false
+    end
+
+    true
   end
 end

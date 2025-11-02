@@ -49,7 +49,7 @@
   .l--column
     %fieldset.form__fieldset
       %h3= t(".add_new_permission")
-      = form_tag(set_role_permissions_path, { :method => :put}) do
+      = form_tag(add_role_permissions_path, { :method => :put}) do
         = label_tag :user_id, User.model_name.human
         = select_tag :user_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s_with_email"), include_blank: true , class: "chosen-select"
         %br

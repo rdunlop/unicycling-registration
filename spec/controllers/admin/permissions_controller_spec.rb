@@ -47,6 +47,40 @@ describe Admin::PermissionsController do
     end
   end
 
+  describe "PUT add_role" do
+    describe "with a normal user" do
+      before do
+        @user = FactoryBot.create(:user)
+      end
+
+      it "can make a user an admin" do
+        put :add_role, params: { user_id: @user.to_param, role_name: :convention_admin }
+        expect(response).to redirect_to(permissions_path)
+        @user.reload
+        expect(@user.has_role?(:convention_admin)).to eq(true)
+      end
+
+      it "can't change an admin back to a user" do
+        admin = FactoryBot.create(:convention_admin_user)
+        put :add_role, params: { user_id: admin.to_param, role_name: :convention_admin }
+        expect(response).to redirect_to(permissions_path)
+        admin.reload
+        expect(admin.has_role?(:convention_admin)).to eq(true)
+      end
+
+      it "is not possible as a normal admin user" do
+        user = FactoryBot.create(:user)
+        sign_out @super_user
+        sign_in user
+
+        put :add_role, params: { user_id: @user.to_param, role_name: :convention_admin }
+        expect(response).to redirect_to(root_path)
+        @user.reload
+        expect(@user.has_role?(:convention_admin)).to eq(false)
+      end
+    end
+  end
+
   describe "PUT set_password" do
     let(:user) { FactoryBot.create(:user) }
     let(:new_password) { "New Password" }

@@ -11,6 +11,10 @@ class AdminPermissionPolicy < ApplicationPolicy
     convention_admin? || competition_admin? || super_admin?
   end
 
+  def add_role?
+    convention_admin? || competition_admin? || super_admin?
+  end
+
   def set_password?
     convention_admin? || competition_admin? || super_admin?
   end
