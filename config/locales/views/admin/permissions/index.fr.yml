@@ -69,3 +69,6 @@ fr:
         you_have_roles: 'Vos rôles actuels sont :'
         you_may_need_to_grant_yourself_roles: Vous devrez peut-être vous assigner
           d'autres rôles pour accéder à d'autres parties du système
+        role_updated: Rôle mis à jour
+        role_not_found: Rôle introuvable (%{role})
+        user_already_has_role: L'utilisateur "%{user}" possède déjà le rôle "%{role}"

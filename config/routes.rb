@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       collection do
         get :directors
         put :set_role
+        put :add_role
         put :set_password
 
         get :acl, controller: "permissions"

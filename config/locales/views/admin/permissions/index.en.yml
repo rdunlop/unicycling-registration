@@ -93,3 +93,6 @@ en:
             Able to access the registration system even after the registration period has closed.
             Able to Create new registrants, update existing registrants, and make payments.
             You should use this along with the SetRegFee function, to specify the fee they are to be charged.
+          role_updated: Role updated
+          role_not_found: Role not found (%{role})
+          user_already_has_role: User '%{user}' already has role '%{role}'
