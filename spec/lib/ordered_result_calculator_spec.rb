@@ -118,7 +118,7 @@ describe OrderedResultCalculator do
       @calc = described_class.new(@competition)
 
       number_of_results_to_create = 1000
-      start_time = Time.now
+      start_time = Time.zone.now
 
       # Let's create our objects and then batch insert them to improve performances
       competitors = FactoryBot.build_list(:event_competitor, number_of_results_to_create, competition: @competition).map do |competitor|
@@ -138,7 +138,7 @@ describe OrderedResultCalculator do
           withdrawn_at: competitor.withdrawn_at,
           tier_number: competitor.tier_number,
           tier_description: competitor.tier_description,
-          age_group_entry_id: competitor.age_group_entry_id,
+          age_group_entry_id: competitor.age_group_entry_id
         }
       end
       saved_competitors = Competitor.insert_all(competitors)
@@ -152,20 +152,20 @@ describe OrderedResultCalculator do
           entered_by_id: i,
           entered_at: result.entered_at,
           status: result.status,
-          preliminary: result.preliminary,
+          preliminary: result.preliminary
         }
       end
       ExternalResult.insert_all(results)
 
-      end_time = Time.now
+      end_time = Time.zone.now
       p "Init duration: #{end_time - start_time}"
     end
 
     it "takes less than 10 seconds" do
-      start_time = Time.now
+      start_time = Time.zone.now
       @calc = described_class.new(@competition)
       recalc
-      end_time = Time.now
+      end_time = Time.zone.now
 
       total_duration = end_time - start_time
       p "Total duration: #{total_duration}"
