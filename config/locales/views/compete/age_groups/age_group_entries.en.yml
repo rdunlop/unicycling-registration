@@ -1,0 +1,8 @@
+---
+en:
+  compete:
+    age_groups:
+      age_group_entries:
+        entry: Entry
+        number_of_registrants: |
+          # of registrants

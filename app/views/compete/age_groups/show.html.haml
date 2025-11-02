@@ -1,46 +1,43 @@
-%h1 #{@competition} Age Group Management
+%h1= t(".title", competition: @competition)
 
-%p
-  In total, there are #{@competition.competitors.active.count} competitors. This page will show how these competitors fit into the various age group entries. From this page, you can combine age group entries as per the rulebook
+%p= t(".headline", competitors_count: @competition.competitors.active.count)
 
 - age_group_data = @competition.registrant_age_group_data
 
-.js--hiddenToggleMenu.button.secondary Show Registrant Sign up breakdown
+.js--hiddenToggleMenu.button.secondary= t(".show_registrant_sign_up_breakdown")
 .js--hiddenToggle.is--hidden
   .row
     .small-12.medium-6.columns
-      %h3 Male
+      %h3= t(".male")
       = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Male" }
 
     .small-12.medium-6.columns
-      %h3 Female
+      %h3= t(".female")
       = render "registrant_age_group_entries", entries: age_group_data.select { |element| element[:gender] == "Female" }
 
 - if @age_group_type.competitions.size > 1
   .callout.warning
-    %h2 Age Group is in use by multiple competitions
-    %p
-      Be aware that this age group (#{@age_group_type}) is being used by the following competitions:
-      = @age_group_type.competitions.join(", ")
-    = link_to "Duplicate the #{@age_group_type} age group so that it is independent", duplicate_type_competition_age_groups_path(@competition), method: :post, data: { confirm: "Create a new age group?" }
+    %h2= t(".age_group_in_use_in_multiple_competitions")
+    %p= t(".be_aware_age_group_in_use_in_multiple_competitions", age_group_type: @age_group_type, competitions: @age_group_type.competitions.join(", "))
+    = link_to t(".duplicate_the_age_group", age_group_type: @age_group_type), duplicate_type_competition_age_groups_path(@competition), method: :post, data: { confirm: t(".create_a_new_age_group") }
 
 .row
   .small-12.medium-6.columns
     - if @competition.base_age_group_type.present?
-      %h2 Base Age Group: #{@competition.base_age_group_type}
+      %h2= t(".base_age_group", base_age_group_type: @competition.base_age_group_type)
 
       = render "age_group_entries", age_group_type: @competition.base_age_group_type, competition: @competition, age_group_data: age_group_data
 
   .small-12.medium-6.columns
-    %h2 Current Age Group #{@age_group_type}
+    %h2= t(".current_age_group", age_group: @age_group_type)
 
     %table
       %thead
         %tr
-          %th Entry
-          %th # Registrants
-          %th # Ineligible Registrants
-          %th Action
+          %th= t(".entry")
+          %th= t(".eligible_registrants")
+          %th= t(".ineligible_registrants")
+          %th= t(".action")
       %tbody
         - @age_group_type.age_group_entries.each do |ag_entry|
           - competitors_in_age_group = @competition.competitors.active.where(age_group_entry: ag_entry)
@@ -52,4 +49,4 @@
               - if ag_entry.number_eligible_matching_registrant(age_group_data) < 6
                 - smallest_neighbour = ag_entry.smallest_neighbour(age_group_data)
                 - if smallest_neighbour
-                  = link_to "Combine with #{smallest_neighbour}", combine_competition_age_groups_path(age_group_entry_ids: [ag_entry.id, smallest_neighbour.id]), method: :put, data: { confirm: "Are you sure?"}
+                  = link_to t(".combine_with", smallest_neighbour: smallest_neighbour), combine_competition_age_groups_path(age_group_entry_ids: [ag_entry.id, smallest_neighbour.id]), method: :put, data: { confirm: t(".are_you_sure")}

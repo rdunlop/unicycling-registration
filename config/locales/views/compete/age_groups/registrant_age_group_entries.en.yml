@@ -1,0 +1,9 @@
+---
+en:
+  compete:
+    age_groups:
+      registrant_age_group_entries:
+        age_group: Age Group
+        wheel_size: Wheel Size
+        number_of_registrants: |
+          # of registrants
