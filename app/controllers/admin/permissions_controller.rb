@@ -15,7 +15,7 @@ class Admin::PermissionsController < ApplicationController
       else
         @user.add_role role
       end
-      flash[:notice] = I18n.t("admin.permissions.index.role_updated")
+      flash[:notice] = I18n.t("admin.permissions.role_updated")
     end
 
     redirect_to permissions_path
@@ -27,10 +27,10 @@ class Admin::PermissionsController < ApplicationController
 
     if check_role_access(role)
       if @user.has_role? role
-        flash[:alert] = I18n.t("admin.permissions.index.user_already_has_role", user: @user, role: role)
+        flash[:alert] = I18n.t("admin.permissions.user_already_has_role", user: @user, role: role)
       else
         @user.add_role role
-        flash[:notice] = I18n.t("admin.permissions.index.role_updated")
+        flash[:notice] = I18n.t("admin.permissions.role_updated")
       end
     end
 
@@ -60,7 +60,7 @@ class Admin::PermissionsController < ApplicationController
 
   def check_role_access(role)
     unless current_user.roles_accessible.include?(role.to_sym)
-      flash[:alert] = I18n.t("admin.permissions.index.role_not_found", role: role)
+      flash[:alert] = I18n.t("admin.permissions.role_not_found", role: role)
       return false
     end
 

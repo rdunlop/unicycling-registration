@@ -1,0 +1,7 @@
+---
+fr:
+  admin:
+    permissions:
+      role_updated: Rôle mis à jour
+      role_not_found: Rôle introuvable (%{role})
+      user_already_has_role: L'utilisateur "%{user}" possède déjà le rôle "%{role}"
