@@ -129,7 +129,15 @@ class Result < ApplicationRecord
     end
   end
 
-  def self.create_new!(competitor, new_place, result_type, result_subtype = nil)
+  def self.create_new_results!(placed_competitors, result_type, result_subtype = nil)
+    results = placed_competitors.compact.map do |placed_competitor|
+      create_new_hashed_result(placed_competitor[:competitor], placed_competitor[:new_place], result_type, result_subtype)
+    end
+
+    Result.insert_all(results.compact)
+  end
+
+  private_class_method def self.create_new_hashed_result(competitor, new_place, result_type, result_subtype = nil)
     if new_place == "DQ"
       new_place = 0
       status = "DQ"
@@ -150,11 +158,27 @@ class Result < ApplicationRecord
         existing_result.place = new_place
         existing_result.status = status
         existing_result.result_subtype = result_subtype
-        existing_result.save!
+        {
+          id: existing_result.id,
+          competitor_id: existing_result.competitor.id,
+          result_type: existing_result.result_type,
+          result_subtype: result_subtype,
+          created_at: existing_result.created_at,
+          place: new_place,
+          status: status,
+          updated_at: Time.current
+        }
       end
     else
-      result = Result.new(competitor: competitor, place: new_place, result_type: result_type, result_subtype: result_subtype, status: status)
-      result.save!
+      {
+        competitor_id: competitor.id,
+        place: new_place,
+        result_type: result_type,
+        result_subtype: result_subtype,
+        status: status,
+        created_at: Time.current,
+        updated_at: Time.current
+      }
     end
   end
 end
