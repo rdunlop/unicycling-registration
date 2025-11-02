@@ -1,0 +1,28 @@
+---
+en:
+  compete:
+    age_groups:
+      show:
+        title: |
+          %{competition} Age Group Management
+        headline: In total, there are %{competitors_count} competitors. This page will show how these competitors fit into the various age group entries. From this page, you can combine age group entries as per the rulebook.
+        show_registrant_sign_up_breakdown: Show Registrant Sign up breakdown
+        male: Male
+        female: Female
+        age_group_in_use_in_multiple_competitions: Age Group is in use by multiple competitions
+        be_aware_age_group_in_use_in_multiple_competitions: |
+          Be aware that this age group (%{age_group_type}) is being used by the following competitions: %{competitions}
+        duplicate_the_age_group: Duplicate the %{age_group_type} age group so that it is independent
+        create_a_new_age_group: Create a new age group?
+        base_age_group: |
+          Base Age Group: %{base_age_group_type}
+        current_age_group: |
+          Current Age Group: %{age_group}
+        entry: Entry
+        eligible_registrants: |
+          # Eligible Registrants
+        ineligible_registrants: |
+          # Ineligible Registrants
+        action: Action
+        combine_with: Combine with %{smallest_neighbour}
+        are_you_sure: Are you sure?

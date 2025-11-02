@@ -1,0 +1,9 @@
+---
+fr:
+  compete:
+    age_groups:
+      registrant_age_group_entries:
+        age_group: Groupe d'âge
+        wheel_size: Taille de roue
+        number_of_registrants: |
+          # d'inscrits

@@ -1,0 +1,28 @@
+---
+fr:
+  compete:
+    age_groups:
+      show:
+        title: |
+          Gestion des catégories d'âge pour la compétition "%{competition}"
+        headline: Au total, il y a %{competitors_count} compétiteurs. Cette page indique le nombre de personnes dans chaque catégorie d'âge. Elle permet également de combiner ces catégories selon le règlement international.
+        show_registrant_sign_up_breakdown: Afficher la répartition des inscrits
+        male: Homme
+        female: Femme
+        age_group_in_use_in_multiple_competitions: Ce groupe est utilisé par plusieurs compétitions
+        be_aware_age_group_in_use_in_multiple_competitions: |
+          Attention: ce groupe de catégorie d'âge (%{age_group_type}) est utilisé par les compétitions suivantes : %{competitions}
+        duplicate_the_age_group: Dupliquer le groupe "%{age_group_type}" pour le rendre indépendant
+        create_a_new_age_group: Créer un nouveau groupe ?
+        base_age_group: |
+          Groupe de base : %{base_age_group_type}
+        current_age_group: |
+          Groupe actuel : %{age_group}
+        entry: Élément
+        eligible_registrants: |
+          # d'inscrits éligibles
+        ineligible_registrants: |
+          # d'inscrits inéligibles
+        action: Action
+        combine_with: Combiner avec %{smallest_neighbour}
+        are_you_sure: Êtes-vous sûr ?

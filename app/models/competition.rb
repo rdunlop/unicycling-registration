@@ -362,7 +362,8 @@ class Competition < ApplicationRecord
       {
         age: registrant.age,
         gender: registrant.gender,
-        wheel_size_id: registrant.wheel_size_id
+        wheel_size_id: registrant.wheel_size_id,
+        ineligible: registrant.ineligible
       }
     end
 

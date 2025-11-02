@@ -1,9 +1,9 @@
 %table
   %thead
     %tr
-      %th Age Group
-      %th Wheel Size
-      %th Number of registrants
+      %th= t(".age_group")
+      %th= t(".wheel_size")
+      %th= t(".number_of_registrants")
   %tbody
     - entries.sort_by{|el| el[:age]}.each do |element|
       %tr

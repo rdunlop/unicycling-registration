@@ -36,8 +36,27 @@ class AgeGroupEntry < ApplicationRecord
   def number_matching_registrant(registrant_data)
     matching_entries = registrant_data.select do |element|
       element[:gender] == gender &&
-        start_age <= element[:age] &&
-        element[:age] <= end_age
+        age_between(element[:age], start_age, end_age)
+    end
+
+    matching_entries.sum { |element| element[:count] }
+  end
+
+  def number_ineligible_matching_registrant(registrant_data)
+    matching_entries = registrant_data.select do |element|
+      element[:gender] == gender &&
+        age_between(element[:age], start_age, end_age) &&
+        element[:ineligible]
+    end
+
+    matching_entries.sum { |element| element[:count] }
+  end
+
+  def number_eligible_matching_registrant(registrant_data)
+    matching_entries = registrant_data.select do |element|
+      element[:gender] == gender &&
+        age_between(element[:age], start_age, end_age) &&
+        !element[:ineligible]
     end
 
     matching_entries.sum { |element| element[:count] }
@@ -57,7 +76,7 @@ class AgeGroupEntry < ApplicationRecord
       return earlier_neighbour
     end
 
-    if earlier_neighbour.number_matching_registrant(registrant_data) < next_neighbour.number_matching_registrant(registrant_data)
+    if earlier_neighbour.number_eligible_matching_registrant(registrant_data) < next_neighbour.number_eligible_matching_registrant(registrant_data)
       earlier_neighbour
     else
       next_neighbour
@@ -78,5 +97,11 @@ class AgeGroupEntry < ApplicationRecord
 
   def to_s
     [short_description, wheel_size_name].compact.join(", ")
+  end
+
+  private
+
+  def age_between(age, start_age, end_age)
+    start_age <= age && age <= end_age
   end
 end

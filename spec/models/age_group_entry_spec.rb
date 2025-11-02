@@ -70,19 +70,126 @@ describe AgeGroupEntry do
   end
 
   describe "#smallest_neighbour" do
-    let!(:age_group_type) { FactoryBot.create(:age_group_type) }
-    let!(:age_group_entry_1) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
-    let!(:age_group_entry_2) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type) }
+    let!(:female_age_group_type) { FactoryBot.create(:age_group_type) }
+    let!(:age_group_entry_1) { FactoryBot.create(:age_group_entry, age_group_type: female_age_group_type, start_age: 10, end_age: 20, gender: 'Female') }
+    let!(:age_group_entry_2) { FactoryBot.create(:age_group_entry, age_group_type: female_age_group_type, start_age: 21, end_age: 30, gender: 'Female') }
+    let!(:age_group_entry_3) { FactoryBot.create(:age_group_entry, age_group_type: female_age_group_type, start_age: 31, end_age: 40, gender: 'Female') }
+    let!(:male_age_group_type) { FactoryBot.create(:age_group_type) }
+    let!(:age_group_entry_4) { FactoryBot.create(:age_group_entry, age_group_type: male_age_group_type, start_age: 10, end_age: 20, gender: 'Male') }
     let(:registrant_data) do
-      {
-        gender: 'male',
-        age: 10
-      }
+      [
+        {
+          gender: 'Female',
+          age: 10,
+          count: 2,
+          ineligible: false
+        },
+        {
+          gender: 'Female',
+          age: 10,
+          count: 4,
+          ineligible: true
+        },
+        {
+          gender: 'Female',
+          age: 21,
+          count: 1,
+          ineligible: false
+        },
+        {
+          gender: 'Female',
+          age: 31,
+          count: 10,
+          ineligible: true
+        },
+        {
+          gender: 'Male',
+          age: 15,
+          count: 5,
+          ineligible: false
+        }
+      ]
     end
 
-    it "can determine the smallest neighbour" do
+    it "can determine the smallest neighbour when first entry" do
       expect(age_group_entry_1.smallest_neighbour(registrant_data)).not_to be_nil
       expect(age_group_entry_1.smallest_neighbour(registrant_data)).to eq(age_group_entry_2)
+    end
+
+    it "can determine the smallest neighbour when last entry" do
+      expect(age_group_entry_3.smallest_neighbour(registrant_data)).not_to be_nil
+      expect(age_group_entry_3.smallest_neighbour(registrant_data)).to eq(age_group_entry_2)
+    end
+
+    it "can't determine the smallest neighbour when only entry" do
+      expect(age_group_entry_4.smallest_neighbour(registrant_data)).to be_nil
+    end
+
+    it "can determine the smallest neighbour excluding ineligible registrants" do
+      expect(age_group_entry_2.smallest_neighbour(registrant_data)).not_to be_nil
+      # There are 10 people in age_group_entry_3, but they are ineligible so we don't count them
+      expect(age_group_entry_2.smallest_neighbour(registrant_data)).to eq(age_group_entry_3)
+    end
+  end
+
+  describe "Number matching registrant" do
+    let!(:age_group_type) { FactoryBot.create(:age_group_type) }
+    let!(:age_group_entry_1) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type, start_age: 10, end_age: 20, gender: 'Male') }
+    let!(:age_group_entry_2) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type, start_age: 21, end_age: 30, gender: 'Male') }
+    let(:registrant_data) do
+      [
+        {
+          gender: 'Male',
+          age: 10,
+          count: 2,
+          ineligible: false
+        },
+        {
+          gender: 'Male',
+          age: 10,
+          count: 4,
+          ineligible: true
+        },
+        {
+          gender: 'Male',
+          age: 21,
+          count: 1,
+          ineligible: false
+        },
+        {
+          gender: 'Female',
+          age: 15,
+          count: 5,
+          ineligible: false
+        }
+      ]
+    end
+
+    describe "without eligibility restriction" do
+      it "includes only registrants matching the criteria" do
+        result = age_group_entry_1.number_matching_registrant(registrant_data)
+
+        expect(result).not_to be_nil
+        expect(result).to eq(6)
+      end
+    end
+
+    describe "including only eligible registrants" do
+      it "includes only registrants matching the criteria" do
+        result = age_group_entry_1.number_eligible_matching_registrant(registrant_data)
+
+        expect(result).not_to be_nil
+        expect(result).to eq(2)
+      end
+    end
+
+    describe "including only ineligible registrants" do
+      it "includes only registrants matching the criteria" do
+        result = age_group_entry_1.number_ineligible_matching_registrant(registrant_data)
+
+        expect(result).not_to be_nil
+        expect(result).to eq(4)
+      end
     end
   end
 end
