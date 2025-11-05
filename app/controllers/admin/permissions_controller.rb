@@ -10,14 +10,14 @@ class Admin::PermissionsController < ApplicationController
     params[:users_id].each do |user_id|
       @user = User.this_tenant.find(user_id)
       params[:roles_names].each do |role|
-        if check_role_access(role)
-          if @user.has_role? role
-            @user.remove_role role
-          else
-            @user.add_role role
-          end
-          flash[:notice] = I18n.t("admin.permissions.role_updated")
+        next unless check_role_access(role)
+
+        if @user.has_role? role
+          @user.remove_role role
+        else
+          @user.add_role role
         end
+        flash[:notice] = I18n.t("admin.permissions.role_updated")
       end
     end
 
@@ -28,14 +28,13 @@ class Admin::PermissionsController < ApplicationController
     params[:users_id].each do |user_id|
       @user = User.this_tenant.find(user_id)
       params[:roles_names].each do |role|
+        next unless check_role_access(role)
 
-        if check_role_access(role)
-          if @user.has_role? role
-            flash[:alert] = I18n.t("admin.permissions.user_already_has_role", user: @user, role: role.to_s.humanize)
-          else
-            @user.add_role role
-            flash[:notice] = I18n.t("admin.permissions.role_updated")
-          end
+        if @user.has_role? role
+          flash[:alert] = I18n.t("admin.permissions.user_already_has_role", user: @user, role: role.to_s.humanize)
+        else
+          @user.add_role role
+          flash[:notice] = I18n.t("admin.permissions.role_updated")
         end
       end
     end

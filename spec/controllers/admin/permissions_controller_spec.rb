@@ -47,7 +47,7 @@ describe Admin::PermissionsController do
       end
 
       it "can add multiples roles to multiples users at once" do
-        put :set_role, params: { users_id: [@user2.to_param, @user.to_param], roles_names: [:payment_admin, :music_dj] }
+        put :set_role, params: { users_id: [@user2.to_param, @user.to_param], roles_names: %i[payment_admin music_dj] }
         expect(response).to redirect_to(permissions_path)
         @user.reload
         expect(@user.has_role?(:payment_admin)).to eq(true)
@@ -92,7 +92,7 @@ describe Admin::PermissionsController do
       end
 
       it "can add multiples roles to multiples users at once" do
-        put :add_role, params: { users_id: [@user2.to_param, @user.to_param], roles_names: [:payment_admin, :music_dj] }
+        put :add_role, params: { users_id: [@user2.to_param, @user.to_param], roles_names: %i[payment_admin music_dj] }
         expect(response).to redirect_to(permissions_path)
         @user.reload
         expect(@user.has_role?(:payment_admin)).to eq(true)
@@ -120,7 +120,7 @@ describe Admin::PermissionsController do
       end
 
       it "can remove multiple roles from an user" do
-        delete :remove_roles, params: { user_id: @user.to_param, roles: [:payment_admin, :music_dj] }
+        delete :remove_roles, params: { user_id: @user.to_param, roles: %i[payment_admin music_dj] }
         expect(response).to redirect_to(permissions_path)
         expect(@user.has_role?(:payment_admin)).to eq(false)
         expect(@user.has_role?(:music_dj)).to eq(false)
