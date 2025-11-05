@@ -4,6 +4,8 @@ fr:
     permissions:
       index:
         add_new_permission: Ajouter une nouvelle permission
+        add_selected_permissions: Ajouter les permissions selectionnées
+        remove_all_permissions: Supprimer toutes les permissions
         different_users_different_roles: Le système d'inscription est séparé en différentes
           sections pour utilisation par différentes personnes
         directors_permissions_html: Pour donner l'accès "directeur" pour certains

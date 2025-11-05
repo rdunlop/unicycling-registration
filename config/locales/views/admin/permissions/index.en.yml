@@ -28,6 +28,8 @@ en:
         users_with_permissions: |
           Users with permissions:
         add_new_permission: Add new permission
+        add_selected_permissions: Add selected permissions
+        remove_all_permissions: Remove all permissions
         set_password: Set User Password
         role_descriptions: "Role Descriptions:"
         role_description:

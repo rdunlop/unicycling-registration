@@ -19,6 +19,11 @@ class AdminPermissionPolicy < ApplicationPolicy
     convention_admin? || competition_admin? || super_admin?
   end
 
+  def remove_roles?
+    convention_admin? || competition_admin? || super_admin?
+  end
+
+
   # display the current access control code
   def display_acl?
     convention_admin? || super_admin?
