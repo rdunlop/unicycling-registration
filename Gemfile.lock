@@ -566,7 +566,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rolify (6.0.1)
-    rollbar (3.6.2)
+    rollbar (3.7.0)
     ros-apartment (3.2.0)
       activerecord (>= 6.1.0, < 8.1)
       activesupport (>= 6.1.0, < 8.1)
