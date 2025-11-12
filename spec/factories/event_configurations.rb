@@ -94,12 +94,12 @@ FactoryBot.define do
     end
 
     trait :with_waiver_pdf do
-      waiver_file_name { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
+      waiver_file_name { Rack::Test::UploadedFile.new(file_fixture('sample.pdf'), "application/pdf") }
       waiver { "print" }
     end
 
     trait :with_custom_rules_pdf do
-      rules_file_name { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
+      rules_file_name { Rack::Test::UploadedFile.new(file_fixture('sample.pdf'), "application/pdf") }
       accept_rules { true }
     end
   end

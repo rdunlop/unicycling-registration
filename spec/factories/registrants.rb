@@ -68,7 +68,7 @@ FactoryBot.define do
     end
 
     trait :with_medical_certificate_pdf do
-      medical_certificate { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
+      medical_certificate { Rack::Test::UploadedFile.new(file_fixture('sample.pdf'), "application/pdf") }
     end
 
     # old way

@@ -29,7 +29,7 @@ describe CompetitionResultsController do
   end
 
   describe "POST create" do
-    let(:result_file) { "#{fixture_path}/sample.pdf" }
+    let(:result_file) { file_fixture("sample.pdf") }
     let(:test_data_file) { Rack::Test::UploadedFile.new(result_file, "application/pdf") }
 
     it "creates a result" do

@@ -17,7 +17,7 @@ FactoryBot.define do
   factory :competition_result do
     competition # FactoryBot
 
-    results_file { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', "sample.pdf"), "application/pdf") }
+    results_file { Rack::Test::UploadedFile.new(file_fixture('sample.pdf'), "application/pdf") }
     system_managed { false }
     published { true }
     published_date { DateTime.current }

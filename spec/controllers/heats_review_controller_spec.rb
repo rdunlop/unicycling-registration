@@ -30,7 +30,7 @@ describe HeatReviewController do
 
   describe "POST import_lif" do
     describe "with valid params" do
-      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_file_name) { file_fixture("test2.lif") }
       let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
 
       it "calls the creator" do
@@ -55,7 +55,7 @@ describe HeatReviewController do
 
       describe "when the time is missing" do
         it "returns an error" do
-          test_file_name = "#{fixture_path}/no_time 01.lif"
+          test_file_name = file_fixture("no_time 01.lif")
           test_file = Rack::Test::UploadedFile.new(test_file_name)
           post :import_lif, params: { heat: 1, competition_id: @competition.id, file: test_file }
 
@@ -67,7 +67,7 @@ describe HeatReviewController do
 
   describe "POST import_lif_from_url" do
     describe "with valid params" do
-      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_file_name) { file_fixture("test2.lif") }
 
       it "calls the creator" do
         # Create a mock to avoid fetching a real file
