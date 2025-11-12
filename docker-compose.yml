@@ -1,6 +1,5 @@
 # To start all docker containers run: `docker-compose up`
 #
-version: '3'
 services:
   app:
     build: .

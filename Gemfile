@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '~> 7.1.5'
+gem 'rails', '~> 7.2'
 gem 'sprockets', '< 4' # Sprockets 4 pain is not worth it.
 
 # Authentication
@@ -36,7 +36,7 @@ gem "haml-rails"
 gem 'importmap-rails'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '6.0.1'
+gem 'jquery-ui-rails'
 gem 'money-rails'
 gem 'rails-assets-datetimepicker', '2.5.20', source: 'https://rails-assets.org'
 gem 'recaptcha', require: 'recaptcha/rails'
@@ -89,7 +89,7 @@ gem 'acts_as_list'
 gem 'carrierwave'
 gem 'carrierwave-aws', '1.6.0'
 gem 'carrierwave-i18n'
-gem 'globalize', github: 'globalize/globalize', branch: 'main'
+gem 'globalize', "~> 7.0"
 gem 'nilify_blanks'
 gem 'validates_email_format_of'
 gem 'virtus'
