@@ -23,7 +23,7 @@ fr:
           awards_admin: "Peut voir les données de résultats\r\nPeut publier les résultats\r\nPeut
             marquer les compétitions comme récompensées"
           competition_admin: "Peut créer des compétitions, et modifier des configurations
-            de compétitions\r\nPeut créer / modifier les groupes d'âges\r\nPeut noter
+            de compétitionsr\nPeut créer / modifier les groupes d'âges\r\nPeut noter
             un inscrit comme inéligible\r\nPeut créer un directeur, et un secrétaire
             d'épreuve\r\nPeut réinitialiser les mots de passe utilisateur\r\nPeut
             voir toutes les inscriptions à des événements\r\nPeut gérer tous les compétiteurs
@@ -37,7 +37,7 @@ fr:
             utilisateur\r\nPeut créer des \"Ordinateurs autorisés\" pour l'inscription
             sur place\r\nPeut créer des utilisateurs payment_admin, event_planner,
             et music_dj"
-          director: "Peut associés des inscrits et des compétiteurs\r\nPeut créer
+          director: "Peut associer des inscrits et des compétiteurs\r\nPeut créer
             des juges, des bénévoles\r\nPeut réinitialiser les mots de passe utilisateur"
           event_planner: "Peut voir les inscriptions aux épreuves\r\nPeut chercher
             et modifier n'importe quel inscription\r\nPeut ajouter / modifier des
@@ -69,5 +69,6 @@ fr:
         set_password: Changer le mot de passe utilisateur
         users_with_permissions: 'Utilisateurs avec permissions :'
         you_have_roles: 'Vos rôles actuels sont :'
+        warn_modify_your_account: "Cette ligne concerne le compte actuellement connecté. Si vous supprimez le rôle Convention admin, vous perdrez l'accès à cette page"
         you_may_need_to_grant_yourself_roles: Vous devrez peut-être vous assigner
           d'autres rôles pour accéder à d'autres parties du système

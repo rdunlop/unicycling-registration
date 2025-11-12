@@ -49,14 +49,14 @@
         %td
           = submit_tag t(".add_selected_permissions"), class: "button", form: "add_permissions_form"
     - User.this_tenant.with_any_role(*@available_roles).each do |user|
-      %tr
-        %th= user.id == current_user.id ? "#{user.to_s_with_email} (you)" : user.to_s_with_email
+      %tr{id: (user.id == current_user.id ? 'current_user_row' : nil)}
+        %th{title: (user.id == current_user.id ? t(".warn_modify_your_account") : nil)}
+          = user.to_s_with_email
         - @available_roles.each do |role|
           %td{:title => t(".role_description.#{role}")}
-            = check_box_tag 'role_name', true, checked: user.has_role?(role), disabled: true
-            = link_to user.has_role?(role) ? "remove" : "add", set_role_permissions_path(roles_names: [role], users_id: [user.id]), method: :put
+            = link_to (check_box_tag 'role_name', checked: user.has_role?(role)), set_role_permissions_path(roles_names: [role], users_id: [user.id]), method: :put
         %td
-          = button_to t(".remove_all_permissions"), remove_roles_permissions_path(user_id: user.id, roles: @available_roles), method: :delete, class: "button", disabled: user.id == current_user.id
+          = button_to t(".remove_all_permissions"), remove_roles_permissions_path(user_id: user.id, roles: @available_roles), method: :delete, class: "button", disabled: user.id == current_user.id, title: user.id == current_user.id ? t(".warn_modify_your_account") : nil
 
 
 .l--2up
