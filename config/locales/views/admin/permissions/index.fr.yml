@@ -23,7 +23,7 @@ fr:
           awards_admin: "Peut voir les données de résultats\r\nPeut publier les résultats\r\nPeut
             marquer les compétitions comme récompensées"
           competition_admin: "Peut créer des compétitions, et modifier des configurations
-            de compétitionsr\nPeut créer / modifier les groupes d'âges\r\nPeut noter
+            de compétitions\r\nPeut créer / modifier les groupes d'âges\r\nPeut noter
             un inscrit comme inéligible\r\nPeut créer un directeur, et un secrétaire
             d'épreuve\r\nPeut réinitialiser les mots de passe utilisateur\r\nPeut
             voir toutes les inscriptions à des événements\r\nPeut gérer tous les compétiteurs
