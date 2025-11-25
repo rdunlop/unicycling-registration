@@ -32,6 +32,11 @@ gem 'countries'
 gem 'country_select'
 gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rails6" # for rails 6 support
 gem 'foundation-rails'
+# to prevent use of unsupported sassc-rails
+# cf https://github.com/foundation/foundation-rails/pull/790
+gem 'dartsass-sprockets'
+gem 'sass-embedded'
+
 gem "haml-rails"
 gem 'importmap-rails'
 gem 'jquery-datatables-rails'
@@ -63,7 +68,6 @@ gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
-gem 'sassc-rails' # needed by rails_admin
 gem 'sidekiq', '< 8' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'unicorn', require: false
