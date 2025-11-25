@@ -1,3 +1,5 @@
+@use "07_dev_tools" as dev_tools;
+
 .pricing_options {
   display: block;
   text-align: center;
@@ -24,10 +26,10 @@
     }
   }
   .recommended {
-    border: $recommended-color thick solid;
+    border: dev_tools.$recommended-color thick solid;
 
     .recommended_title {
-      background-color: $recommended-color;
+      background-color: dev_tools.$recommended-color;
       margin: 0;
     }
   }

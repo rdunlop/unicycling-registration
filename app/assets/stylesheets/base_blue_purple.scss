@@ -11,24 +11,24 @@
 // Spectator: Green
 
 // Import default colors
-@import "new_styles/default_hue_variables";
+@use "new_styles/default_hue_variables";
 
 // Overwrite colors
 // using HSL values (as per http://demosthenes.info/blog/61/An-Easy-Guide-To-HSL-Color-In-CSS3)
 
-$comp_hue: 219;
-$noncomp_hue: 271;
-$spec_hue: 180;
+default_hue_variables.$comp_hue: 219;
+default_hue_variables.$noncomp_hue: 271;
+default_hue_variables.$spec_hue: 180;
 
-$focus_hue: 217;
-$nonfocus_hue: 217;
+default_hue_variables.$focus_hue: 217;
+default_hue_variables.$nonfocus_hue: 217;
 
 // Import default styles
-@import "new_styles/default_colors";
+@use "new_styles/default_colors";
 
-$reg_current_period_color: red;
-$reg_current_period_bg_color: white;
-$reg_closes_color: black;
+default_colors.$reg_current_period_color: red;
+default_colors.$reg_current_period_bg_color: white;
+default_colors.$reg_closes_color: black;
 
 // Import all other styles
-@import "new_styles_list";
+@use "new_styles_list";
