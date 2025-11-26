@@ -9,14 +9,6 @@ GIT
       sassc
       sprockets-rails (~> 3.4)
 
-GIT
-  remote: https://github.com/sureswiftcapital/fancybox2-rails.git
-  revision: 785561ee26a8c3f5dfd50a0c2050011dcf959aa5
-  branch: rails6
-  specs:
-    fancybox2-rails (0.2.8)
-      railties (>= 3.1.0)
-
 GEM
   remote: https://rails-assets.org/
   specs:
@@ -116,8 +108,8 @@ GEM
     acts_as_list (1.2.6)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
+    addressable (2.8.8)
+      public_suffix (>= 2.0.2, < 8.0)
     airbrussh (1.5.3)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (3.2.0)
@@ -182,7 +174,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (2.1.1)
+    capistrano-bundler (2.2.0)
       capistrano (~> 3.1)
     capistrano-rails (1.7.0)
       capistrano (~> 3.1)
@@ -236,8 +228,8 @@ GEM
     chronic (0.10.2)
     cliver (0.3.2)
     cocoon (1.2.15)
-    codeclimate-test-reporter (1.0.9)
-      simplecov (<= 0.13)
+    codeclimate-test-reporter (1.0.7)
+      simplecov
     codeclimate_circle_ci_coverage (0.2.2)
       codeclimate-test-reporter (>= 1.0, < 2)
       simplecov (~> 0.11)
@@ -245,7 +237,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.3.5)
-    connection_pool (2.5.4)
+    connection_pool (2.5.5)
     consistency_fail (0.3.7)
     countries (8.0.4)
       unaccent (~> 0.3)
@@ -278,7 +270,7 @@ GEM
       devise (>= 4.9.0)
       rails-i18n
     diff-lcs (1.6.2)
-    docile (1.1.5)
+    docile (1.4.1)
     dotenv (3.1.8)
     dotenv-rails (3.1.8)
       dotenv (= 3.1.8)
@@ -302,6 +294,8 @@ GEM
       railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
+    fancybox2-rails (0.2.7)
+      railties (>= 3.1.0)
     faraday (2.14.0)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -471,7 +465,7 @@ GEM
     psych (5.2.6)
       date
       stringio
-    public_suffix (6.0.1)
+    public_suffix (6.0.2)
     pundit (2.5.2)
       activesupport (>= 3.0.0)
     racc (1.8.1)
@@ -546,11 +540,11 @@ GEM
       railties (>= 7.0)
     rolify (6.0.1)
     rollbar (3.7.0)
-    ros-apartment (3.2.0)
-      activerecord (>= 6.1.0, < 8.1)
-      activesupport (>= 6.1.0, < 8.1)
+    ros-apartment (3.3.0)
+      activerecord (>= 6.1.0, < 8.2)
+      activesupport (>= 6.1.0, < 8.2)
       parallel (< 2.0)
-      public_suffix (>= 2.0.5, <= 6.0.1)
+      public_suffix (>= 2.0.5, < 7)
       rack (>= 1.3.6, < 4.0)
     ros-apartment-sidekiq (1.2.0)
       ros-apartment (>= 1.0)
@@ -638,11 +632,12 @@ GEM
     simple_form (5.4.0)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
-    simplecov (0.13.0)
-      docile (~> 1.1.0)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.2)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.2)
+    simplecov_json_formatter (0.1.4)
     simpleidn (0.2.3)
     spreadsheet (1.3.4)
       bigdecimal
@@ -770,7 +765,7 @@ DEPENDENCIES
   eye
   factory_bot_rails
   faker
-  fancybox2-rails!
+  fancybox2-rails
   foreman
   foundation-rails
   gaffe
@@ -798,7 +793,7 @@ DEPENDENCIES
   rails (~> 7.2)
   rails-assets-datetimepicker (= 2.5.20)!
   rails-i18n
-  rails_admin (< 4)
+  rails_admin (~> 3.0)
   rake
   recaptcha
   redis

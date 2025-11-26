@@ -1,8 +1,11 @@
+@use "default_colors";
+@import "foundation";
+
 .external_link,
 .external_link:visited {
-  color: $external_link_color;
+  color: default_colors.$external_link_color;
   &:hover {
-    color: $external_link_color_hover;
+    color: default_colors.$external_link_color_hover;
   }
 }
 

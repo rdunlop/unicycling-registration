@@ -30,7 +30,7 @@ gem 'breadcrumbs_on_rails'
 gem 'cocoon' # for nested forms
 gem 'countries'
 gem 'country_select'
-gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rails6" # for rails 6 support
+gem 'fancybox2-rails'
 gem 'foundation-rails'
 # to prevent use of unsupported sassc-rails
 # cf https://github.com/foundation/foundation-rails/pull/790
@@ -62,7 +62,7 @@ gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'rails_admin', '< 4'
+gem 'rails_admin', '~> 3.0'
 gem 'rake'
 gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
