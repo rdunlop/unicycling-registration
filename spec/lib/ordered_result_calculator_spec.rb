@@ -112,4 +112,65 @@ describe OrderedResultCalculator do
       expect(@tr4.reload.competitor.place).to eq(1)
     end
   end
+
+  describe "when lots of competitors" do
+    before do
+      @calc = described_class.new(@competition)
+
+      number_of_results_to_create = 1000
+      start_time = Time.zone.now
+
+      # Let's create our objects and then batch insert them to improve performances
+      competitors = FactoryBot.build_list(:event_competitor, number_of_results_to_create, competition: @competition).map do |competitor|
+        {
+          competition_id: competitor.competition_id,
+          position: competitor.position,
+          custom_name: competitor.custom_name,
+          created_at: competitor.created_at,
+          updated_at: competitor.updated_at,
+          status: competitor.status,
+          lowest_member_bib_number: competitor.lowest_member_bib_number,
+          geared: competitor.geared,
+          riding_wheel_size: competitor.riding_wheel_size,
+          notes: competitor.notes,
+          wave: competitor.wave,
+          riding_crank_size: competitor.riding_crank_size,
+          withdrawn_at: competitor.withdrawn_at,
+          tier_number: competitor.tier_number,
+          tier_description: competitor.tier_description,
+          age_group_entry_id: competitor.age_group_entry_id
+        }
+      end
+      saved_competitors = Competitor.insert_all(competitors)
+      results = FactoryBot.build_list(:external_result, number_of_results_to_create).map.with_index do |result, i|
+        {
+          competitor_id: saved_competitors.rows[i][0],
+          details: result.details,
+          points: i,
+          created_at: result.created_at,
+          updated_at: result.updated_at,
+          entered_by_id: i,
+          entered_at: result.entered_at,
+          status: result.status,
+          preliminary: result.preliminary
+        }
+      end
+      ExternalResult.insert_all(results)
+
+      end_time = Time.zone.now
+      p "Init duration: #{end_time - start_time}"
+    end
+
+    it "takes less than 10 seconds" do
+      start_time = Time.zone.now
+      @calc = described_class.new(@competition)
+      recalc
+      end_time = Time.zone.now
+
+      total_duration = end_time - start_time
+      p "Total duration: #{total_duration}"
+
+      expect(total_duration).to be <= 10
+    end
+  end
 end
