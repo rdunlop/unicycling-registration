@@ -702,7 +702,7 @@ GEM
     timeliness (0.4.5)
     timeout (0.4.4)
     timers (4.3.5)
-    tinymce-rails (5.8.2)
+    tinymce-rails (8.2.2)
       railties (>= 3.1.1)
     tsort (0.2.0)
     ttfunk (1.8.0)
