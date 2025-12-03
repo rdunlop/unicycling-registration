@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# see https://github.com/countries/countries/issues/937
+
 describe Exporters::RegistrantExporter do
   describe "#headers" do
     let(:headers) { described_class.new.headers }
@@ -55,7 +57,7 @@ describe Exporters::RegistrantExporter do
         registrant.bib_number.to_s,
         registrant.first_name,
         registrant.last_name,
-        "United States of America",
+        "United States of America (the)",
         "20/04/1998",
         "m"
       ]
@@ -73,7 +75,7 @@ describe Exporters::RegistrantExporter do
           registrant.bib_number.to_s,
           registrant.first_name,
           registrant.last_name,
-          "United States of America",
+          "United States of America (the)",
           "",
           ""
         ]

@@ -21,7 +21,7 @@ class CompetitionHeatTsvZipCreator
       Zip::OutputStream.open(temp_file) { |_zos| }
 
       # Add files to the zip file as usual
-      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
+      Zip::File.open(temp_file.path, create: true) do |zip|
         competition.heat_numbers.each do |heat_number|
           heat_file = Tempfile.new("temp_#{heat_number}", Rails.root.join('tmp')).tap do |f|
             f.write(heat_data_csv(heat_number))
