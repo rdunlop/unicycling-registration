@@ -54,7 +54,7 @@
           = user.to_s_with_email
         - @available_roles.each do |role|
           %td{:title => t(".role_description.#{role}")}
-            = link_to (check_box_tag 'role_name', checked: user.has_role?(role)), set_role_permissions_path(roles_names: [role], users_id: [user.id]), method: :put
+            = link_to (check_box_tag 'role_name', checked: user.has_role?(role)), set_role_permissions_path(role_name: role, user_id: user.id), method: :put
         %td
           = button_to t(".remove_all_permissions"), remove_roles_permissions_path(user_id: user.id, roles: @available_roles), method: :delete, class: "button", disabled: user.id == current_user.id, title: user.id == current_user.id ? t(".warn_modify_your_account") : nil
 

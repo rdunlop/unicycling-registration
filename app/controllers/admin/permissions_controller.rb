@@ -7,18 +7,15 @@ class Admin::PermissionsController < ApplicationController
   end
 
   def set_role
-    params[:users_id].each do |user_id|
-      @user = User.this_tenant.find(user_id)
-      params[:roles_names].each do |role|
-        next unless check_role_access(role)
-
-        if @user.has_role? role
-          @user.remove_role role
-        else
-          @user.add_role role
-        end
-        flash[:notice] = I18n.t("admin.permissions.role_updated")
+    @user = User.this_tenant.find(params[:user_id])
+    role = params[:role_name]
+    if check_role_access(role)
+      if @user.has_role? role
+        @user.remove_role role
+      else
+        @user.add_role role
       end
+      flash[:notice] = I18n.t("admin.permissions.role_updated")
     end
 
     redirect_to permissions_path

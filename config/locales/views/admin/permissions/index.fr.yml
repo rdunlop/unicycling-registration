@@ -69,6 +69,6 @@ fr:
         set_password: Changer le mot de passe utilisateur
         users_with_permissions: 'Utilisateurs avec permissions :'
         you_have_roles: 'Vos rôles actuels sont :'
-        warn_modify_your_account: "Cette ligne concerne le compte actuellement connecté. Si vous supprimez le rôle Convention admin, vous perdrez l'accès à cette page"
+        warn_modify_your_account: "Cette ligne concerne le compte actuellement connecté. Attention en supprimant des rôles ici, vous pourriez perdre l'accès à cette page"
         you_may_need_to_grant_yourself_roles: Vous devrez peut-être vous assigner
           d'autres rôles pour accéder à d'autres parties du système
