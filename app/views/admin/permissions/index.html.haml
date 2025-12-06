@@ -43,16 +43,16 @@
         = select_tag :users_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s_with_email"), multiple: true, class: "chosen-select", form: "add_permissions_form"
       - @available_roles.each do |role|
         %td{:title => t(".role_description.#{role}")}
-          = check_box_tag 'roles_names[]', role, form: "add_permissions_form"
+          = check_box_tag 'roles_names[]', role, id: nil, form: "add_permissions_form"
       %td
         = submit_tag t(".add_selected_permissions"), class: "button", form: "add_permissions_form"
     - User.this_tenant.with_any_role(*@available_roles).each do |user|
-      %tr{id: (user.id == current_user.id ? 'current_user_row' : nil)}
+      %tr{class: user.id == current_user.id ? 'current_user_row' : nil}
         %th{title: (user.id == current_user.id ? t(".warn_modify_your_account") : nil)}
           = user.to_s_with_email
         - @available_roles.each do |role|
           %td{:title => t(".role_description.#{role}")}
-            = link_to (check_box_tag 'role_name', checked: user.has_role?(role)), set_role_permissions_path(role_name: role, user_id: user.id), method: :put
+            = link_to (check_box_tag 'role_name', id: nil, checked: user.has_role?(role)), set_role_permissions_path(role_name: role, user_id: user.id), method: :put
         %td
           = button_to t(".remove_all_permissions"), remove_roles_permissions_path(user_id: user.id, roles: @available_roles), method: :delete, class: "button", disabled: user.id == current_user.id, title: user.id == current_user.id ? t(".warn_modify_your_account") : nil
 
