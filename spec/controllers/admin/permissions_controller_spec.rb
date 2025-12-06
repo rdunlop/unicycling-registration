@@ -51,10 +51,11 @@ describe Admin::PermissionsController do
     describe "with a normal user" do
       before do
         @user = FactoryBot.create(:user)
+        @user2 = FactoryBot.create(:user)
       end
 
       it "can make a user an admin" do
-        put :add_role, params: { user_id: @user.to_param, role_name: :convention_admin }
+        put :add_role, params: { users_id: [@user.to_param], roles_names: [:convention_admin] }
         expect(response).to redirect_to(permissions_path)
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(true)
@@ -62,7 +63,7 @@ describe Admin::PermissionsController do
 
       it "can't change an admin back to a user" do
         admin = FactoryBot.create(:convention_admin_user)
-        put :add_role, params: { user_id: admin.to_param, role_name: :convention_admin }
+        put :add_role, params: { users_id: [admin.to_param], roles_names: [:convention_admin] }
         expect(response).to redirect_to(permissions_path)
         admin.reload
         expect(admin.has_role?(:convention_admin)).to eq(true)
@@ -73,10 +74,56 @@ describe Admin::PermissionsController do
         sign_out @super_user
         sign_in user
 
-        put :add_role, params: { user_id: @user.to_param, role_name: :convention_admin }
+        put :add_role, params: { users_id: [@user.to_param], roles_names: [:convention_admin] }
         expect(response).to redirect_to(root_path)
         @user.reload
         expect(@user.has_role?(:convention_admin)).to eq(false)
+      end
+
+      it "can add multiples roles to multiples users at once" do
+        put :add_role, params: { users_id: [@user2.to_param, @user.to_param], roles_names: %i[payment_admin music_dj] }
+        expect(response).to redirect_to(permissions_path)
+        @user.reload
+        expect(@user.has_role?(:payment_admin)).to eq(true)
+        expect(@user.has_role?(:music_dj)).to eq(true)
+        expect(@user2.has_role?(:payment_admin)).to eq(true)
+        expect(@user2.has_role?(:music_dj)).to eq(true)
+      end
+    end
+  end
+
+  describe "DELETE remove_roles" do
+    describe "with a normal user" do
+      before do
+        @user = FactoryBot.create(:user)
+        @user.add_role :convention_admin
+        @user.add_role :payment_admin
+        @user.add_role :music_dj
+      end
+
+      it "can remove a role from an user" do
+        delete :remove_roles, params: { user_id: @user.to_param, roles: [:convention_admin] }
+        expect(response).to redirect_to(permissions_path)
+        @user.reload
+        expect(@user.has_role?(:convention_admin)).to eq(false)
+      end
+
+      it "can remove multiple roles from an user" do
+        delete :remove_roles, params: { user_id: @user.to_param, roles: %i[payment_admin music_dj] }
+        expect(response).to redirect_to(permissions_path)
+        expect(@user.has_role?(:payment_admin)).to eq(false)
+        expect(@user.has_role?(:music_dj)).to eq(false)
+      end
+
+      it "is not possible as a normal admin user" do
+        user = FactoryBot.create(:user)
+        sign_out @super_user
+        sign_in user
+
+        put :remove_roles, params: { user_id: @user.to_param, role_name: %i[convention_admin] }
+        expect(response).to redirect_to(root_path)
+        @user.reload
+        expect(@user.has_role?(:convention_admin)).to eq(true)
       end
     end
   end

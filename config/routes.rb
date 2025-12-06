@@ -69,6 +69,7 @@ Rails.application.routes.draw do
         get :directors
         put :set_role
         put :add_role
+        delete :remove_roles
         put :set_password
 
         get :acl, controller: "permissions"

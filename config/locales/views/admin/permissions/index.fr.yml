@@ -4,6 +4,8 @@ fr:
     permissions:
       index:
         add_new_permission: Ajouter une nouvelle permission
+        add_selected_permissions: Ajouter les permissions selectionnées
+        remove_all_permissions: Supprimer toutes les permissions
         different_users_different_roles: Le système d'inscription est séparé en différentes
           sections pour utilisation par différentes personnes
         directors_permissions_html: Pour donner l'accès "directeur" pour certains
@@ -35,7 +37,7 @@ fr:
             utilisateur\r\nPeut créer des \"Ordinateurs autorisés\" pour l'inscription
             sur place\r\nPeut créer des utilisateurs payment_admin, event_planner,
             et music_dj"
-          director: "Peut associés des inscrits et des compétiteurs\r\nPeut créer
+          director: "Peut associer des inscrits et des compétiteurs\r\nPeut créer
             des juges, des bénévoles\r\nPeut réinitialiser les mots de passe utilisateur"
           event_planner: "Peut voir les inscriptions aux épreuves\r\nPeut chercher
             et modifier n'importe quel inscription\r\nPeut ajouter / modifier des
@@ -67,5 +69,6 @@ fr:
         set_password: Changer le mot de passe utilisateur
         users_with_permissions: 'Utilisateurs avec permissions :'
         you_have_roles: 'Vos rôles actuels sont :'
+        warn_modify_your_account: "Cette ligne concerne le compte actuellement connecté. Attention en supprimant des rôles ici, vous pourriez perdre l'accès à cette page"
         you_may_need_to_grant_yourself_roles: Vous devrez peut-être vous assigner
           d'autres rôles pour accéder à d'autres parties du système
