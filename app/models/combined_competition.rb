@@ -41,6 +41,6 @@ class CombinedCompetition < ApplicationRecord
   end
 
   def requires_per_place_points?
-    calculation_mode == 'default' || calculation_mode == 'percentage'
+    ['default', 'percentage'].include?(calculation_mode)
   end
 end
