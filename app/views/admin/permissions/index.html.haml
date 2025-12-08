@@ -34,30 +34,33 @@
     %tr
       %th= User.model_name.human
       - @available_roles.each do |role|
-        %th= role.to_s.humanize
+        %th{:title => t(".role_description.#{role}")}
+          = role.to_s.humanize
+      %th
   %tbody
+    %tr
+      %th
+        = select_tag :users_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s_with_email"), multiple: true, class: "chosen-select", form: "add_permissions_form"
+      - @available_roles.each do |role|
+        %td{:title => t(".role_description.#{role}")}
+          = check_box_tag 'roles_names[]', role, id: nil, form: "add_permissions_form"
+      %td
+        = submit_tag t(".add_selected_permissions"), class: "button", form: "add_permissions_form"
     - User.this_tenant.with_any_role(*@available_roles).each do |user|
-      %tr
-        %th= user.to_s_with_email
+      %tr{class: user.id == current_user.id ? 'current_user_row' : nil}
+        %th{title: (user.id == current_user.id ? t(".warn_modify_your_account") : nil)}
+          = user.to_s_with_email
         - @available_roles.each do |role|
-          %td
-            = user.has_role?(role)
-            - if user.has_role?(role)
-              = link_to "X", set_role_permissions_path(role_name: role, user_id: user.id), method: :put, data: { confirm: t("are_you_sure") }
+          %td{:title => t(".role_description.#{role}")}
+            = link_to (check_box_tag 'role_name', id: nil, checked: user.has_role?(role)), set_role_permissions_path(role_name: role, user_id: user.id), method: :put
+        %td
+          = button_to t(".remove_all_permissions"), remove_roles_permissions_path(user_id: user.id, roles: @available_roles), method: :delete, class: "button", disabled: user.id == current_user.id, title: user.id == current_user.id ? t(".warn_modify_your_account") : nil
+
+
+= form_tag(add_role_permissions_path, { :method => :put, :id => "add_permissions_form"})
+</form>
 
 .l--2up
-  .l--column
-    %fieldset.form__fieldset
-      %h3= t(".add_new_permission")
-      = form_tag(add_role_permissions_path, { :method => :put}) do
-        = label_tag :user_id, User.model_name.human
-        = select_tag :user_id, options_from_collection_for_select(User.this_tenant.all, "id", "to_s_with_email"), include_blank: true , class: "chosen-select"
-        %br
-        = label_tag :role_name, Role.model_name.human
-        = select_tag :role_name, options_for_select(@available_roles), include_blank: true
-        %br
-        = submit_tag t(".add_new_permission"), class: "button"
-
   .l--column
     - if policy(:admin_permission).set_password?
       %fieldset.form__fieldset
