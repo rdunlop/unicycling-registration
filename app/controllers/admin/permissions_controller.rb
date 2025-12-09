@@ -22,16 +22,30 @@ class Admin::PermissionsController < ApplicationController
   end
 
   def add_role
-    @user = User.this_tenant.find(params[:user_id])
-    role = params[:role_name]
+    params[:users_id].each do |user_id|
+      @user = User.this_tenant.find(user_id)
+      params[:roles_names].each do |role|
+        next unless check_role_access(role)
 
-    if check_role_access(role)
-      if @user.has_role? role
-        flash[:alert] = I18n.t("admin.permissions.user_already_has_role", user: @user, role: role)
-      else
-        @user.add_role role
-        flash[:notice] = I18n.t("admin.permissions.role_updated")
+        if @user.has_role? role
+          flash[:alert] = I18n.t("admin.permissions.user_already_has_role", user: @user, role: role.to_s.humanize)
+        else
+          @user.add_role role
+          flash[:notice] = I18n.t("admin.permissions.role_updated")
+        end
       end
+    end
+
+    redirect_to permissions_path
+  end
+
+  def remove_roles
+    @user = User.this_tenant.find(params[:user_id])
+    params[:roles].each do |role|
+      if check_role_access(role)
+        @user.remove_role role
+      end
+      flash[:notice] = I18n.t("admin.permissions.role_updated")
     end
 
     redirect_to permissions_path

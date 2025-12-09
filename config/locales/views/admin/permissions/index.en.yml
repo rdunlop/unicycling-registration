@@ -6,6 +6,7 @@ en:
         different_users_different_roles: |
           The Registration System is separated into many different sections for use by many different people.
         you_have_roles: "You currently have the role(s) of:"
+        warn_modify_your_account: "This line concern the account you are currently using. Be careful with what role you remove here, you may lose access to this page"
         role_allows_access: "Each role enables the user to see/use different parts of the system."
         you_may_need_to_grant_yourself_roles: |
           You may need to assign yourself other roles in order to gaint access
@@ -28,6 +29,8 @@ en:
         users_with_permissions: |
           Users with permissions:
         add_new_permission: Add new permission
+        add_selected_permissions: Add selected permissions
+        remove_all_permissions: Remove all permissions
         set_password: Set User Password
         role_descriptions: "Role Descriptions:"
         role_description:
