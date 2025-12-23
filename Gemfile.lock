@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
+  revision: b3bfed831b5ff91d71f14ee8ea5ee8b95e3e5564
   branch: main
   specs:
-    globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
+    globalize (7.1.0)
+      activemodel (>= 7.0, < 8.2)
+      activerecord (>= 7.0, < 8.2)
+      activesupport (>= 7.0, < 8.2)
       request_store (~> 1.0)
 
 GIT
@@ -284,7 +285,7 @@ GEM
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    concurrent-ruby (1.3.5)
+    concurrent-ruby (1.3.6)
     connection_pool (2.5.5)
     consistency_fail (0.3.7)
     countries (7.1.1)
@@ -369,7 +370,7 @@ GEM
     hcaptcha (7.1.0)
       json
     http_accept_language (2.1.1)
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     image_processing (1.12.2)
@@ -427,7 +428,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.26.2)
+    minitest (5.27.0)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -700,7 +701,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.6.1)
     timeliness (0.4.5)
-    timeout (0.4.4)
+    timeout (0.6.0)
     timers (4.3.5)
     tinymce-rails (5.8.2)
       railties (>= 3.1.1)
