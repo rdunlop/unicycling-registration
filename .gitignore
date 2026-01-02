@@ -35,5 +35,3 @@ dump.rdb
 
 # Test results files ?
 public/testing
-
-app/assets/builds/
