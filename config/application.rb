@@ -58,6 +58,10 @@ module Workspace
 
     config.tinymce.install = :compile
 
+    # don't print warning/deprecated from deps
+    config.sass.quiet_deps = true
+    # config.sass.silence_deprecations = ['import']
+
     config.iuf_membership_url = ENV["IUF_MEMBERSHIP_URL"]
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]
     config.usa_wildapricot_account_id = ENV["USA_WILDAPRICOT_ACCOUNT_ID"]

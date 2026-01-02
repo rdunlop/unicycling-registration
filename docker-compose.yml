@@ -48,7 +48,7 @@ services:
       driver: none
 
   redis:
-    image: redis
+    image: redis:8.4
     volumes:
       - redis:/data
 volumes:
