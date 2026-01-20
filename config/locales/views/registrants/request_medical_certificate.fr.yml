@@ -4,10 +4,7 @@ fr:
     request_medical_certificate:
       adult_description: Vous avez 18 ans ou plus, veuillez s'il vous plaît soumettre
         un certificat médical.
-      description: Entre 2020 et 2022, la loi française a (légèrement) évolué. Les
-        adultes (plus de 18 ans au début de la compétition) doivent soumettre un certificat
-        médical. Les mineurs (moins de 18 ans) doivent répondre au questionnaire tel
-        qu'indiqué ci-dessous.
+      description: Tous compétiteurs doivent soumettre un certificat médical.
       header: Documentation de Santé Obligatoire
       if_not_all_no: Si vous avez répondu OUI à au moins une question, veuillez s'il
         vous plaît soumettre un certificat médical.
