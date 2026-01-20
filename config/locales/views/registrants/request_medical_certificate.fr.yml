@@ -2,13 +2,5 @@
 fr:
   registrants:
     request_medical_certificate:
-      adult_description: Vous avez 18 ans ou plus, veuillez s'il vous plaît soumettre
-        un certificat médical.
       description: Tous compétiteurs doivent soumettre un certificat médical.
       header: Documentation de Santé Obligatoire
-      if_not_all_no: Si vous avez répondu OUI à au moins une question, veuillez s'il
-        vous plaît soumettre un certificat médical.
-      minor_description: Vous avez moins de 18 absn veuillez s'il vous plaît remplir
-        le questionnaire médical et répondre aux deux questions ci-dessous.
-      questionnaire: Questionnaire médical
-      your_age: Au début de la compétition, vous aurez %{age} ans
