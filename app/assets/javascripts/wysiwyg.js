@@ -2,6 +2,7 @@
 
 /* Don't have access to jquery */
 tinymce.init({
+  license_key: 'gpl',
   selector: ".full_tinymce",
   plugins: "advlist autolink lists link image charmap print preview hr anchor pagebreak " +
     "searchreplace wordcount visualblocks visualchars code fullscreen " +
