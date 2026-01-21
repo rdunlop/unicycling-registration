@@ -564,7 +564,7 @@ GEM
     recaptcha (5.21.1)
     redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-client (0.25.1)
+    redis-client (0.26.2)
       connection_pool
     regexp_parser (2.10.0)
     reline (0.6.3)
@@ -654,12 +654,12 @@ GEM
     select2-rails (4.0.13)
     shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.3.9)
+    sidekiq (7.3.10)
       base64
-      connection_pool (>= 2.3.0)
+      connection_pool (>= 2.3.0, < 3)
       logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
+      rack (>= 2.2.4, < 3.3)
+      redis-client (>= 0.23.0, < 1)
     simple_form (5.4.0)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
