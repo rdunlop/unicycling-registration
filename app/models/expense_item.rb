@@ -154,9 +154,7 @@ class ExpenseItem < ApplicationRecord
   # (and soon to be RegistrationCost)
   # inform that element that it should create necessary RegistrantExpenseItems
   def create_cost_item_registrant_items
-    if cost_element.present?
-      cost_element.create_for_all_registrants
-    end
+    cost_element.presence&.create_for_all_registrants
   end
 
   def check_for_payment_details

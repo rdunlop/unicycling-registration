@@ -122,7 +122,7 @@ describe TwoAttemptEntriesController do
     let(:import) { FactoryBot.create(:two_attempt_entry, competition: competition, bib_number: reg.bib_number) }
 
     describe "with valid params" do
-      let(:test_file_name) { "#{fixture_path}/swiss_heat.tsv" }
+      let(:test_file_name) { file_fixture("swiss_heat.tsv") }
       let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
 
       it "calls the creator" do

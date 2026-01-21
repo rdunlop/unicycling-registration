@@ -7,7 +7,7 @@ executors:
     # install/cache everything relative to that location
     working_directory: ~/tmp
     docker:
-      - image: cimg/ruby:3.1.6-node
+      - image: cimg/ruby:3.2.8-node
         environment:
           RAILS_ENV: test
           # Bundle paths are necessary so that the gems are installed within the workspace

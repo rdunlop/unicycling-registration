@@ -28,7 +28,7 @@
 
 
  */
-@import "old_styles_list";
+@use "old_styles_list";
 
 // necessary to make the tabs look aligned to the contained table elements
 .ui-tabs .ui-tabs-nav {

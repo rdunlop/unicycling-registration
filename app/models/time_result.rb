@@ -73,7 +73,7 @@ class TimeResult < ApplicationRecord
   end
 
   def disqualified?
-    status == "DQ" || status == "DNF"
+    ["DQ", "DNF"].include?(status)
   end
 
   def active?

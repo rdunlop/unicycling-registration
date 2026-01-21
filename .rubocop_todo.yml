@@ -198,7 +198,7 @@ Naming/MethodName:
 # ForbiddenPrefixes: is_, has_, have_
 # AllowedMethods: is_a?
 # MethodDefinitionMacros: define_method, define_singleton_method
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Exclude:
     - 'app/distance_attempt_managers/distance_attempt_manager.rb'
     - 'app/models/combined_competition_entry.rb'

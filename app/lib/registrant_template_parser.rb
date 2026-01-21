@@ -52,7 +52,7 @@ class RegistrantTemplateParser
         next unless registrant.has_event?(event)
 
         details = registrant.describe_event_hash(event)
-        output += (details[:description]).to_s
+        output += details[:description].to_s
         output += " - #{details[:category]}" if details[:category].present?
         output += " #{details[:additional]}"
         output += "\n"

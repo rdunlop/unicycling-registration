@@ -57,7 +57,7 @@ class Registrants::BuildController < ApplicationController
       @registrant.status = "events" if @registrant.status == "base_details"
     when :add_volunteers # rubocop:disable Lint/EmptyWhen
     when :add_contact_details
-      @registrant.status = "contact_details" if @registrant.status == "events" || @registrant.status == "base_details"
+      @registrant.status = "contact_details" if ["events", "base_details"].include?(@registrant.status)
     end
     @registrant.status = 'active' if step == steps.last
 

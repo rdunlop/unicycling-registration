@@ -48,7 +48,7 @@ class AwardLabel < ApplicationRecord
     self.line_1 = competition.award_title_name
     # category_name
     self.line_2 =
-      if competition.num_members_per_competitor == "Two" || competition.num_members_per_competitor == "Three or more"
+      if ["Two", "Three or more"].include?(competition.num_members_per_competitor)
         "Expert"
       else
         "Expert #{gender}"

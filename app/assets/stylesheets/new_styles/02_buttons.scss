@@ -1,16 +1,17 @@
+@use "default_colors";
 @import "foundation";
 
 // -----------------------------------------
 /* Competitor */
 // -----------------------------------------
 .competitor {
-  background-color: $competitor;
+  background-color: default_colors.$competitor;
 }
 .competitor:hover {
-  background-color: $competitor_hover;
+  background-color: default_colors.$competitor_hover;
 }
 .competitor:active {
-  background-color: $competitor_active;
+  background-color: default_colors.$competitor_active;
 }
 
 // -----------------------------------------
@@ -18,13 +19,13 @@
 // -----------------------------------------
 
 .noncompetitor {
-  background-color: $noncompetitor;
+  background-color: default_colors.$noncompetitor;
 }
 .noncompetitor:hover {
-  background-color: $noncompetitor_hover;
+  background-color: default_colors.$noncompetitor_hover;
 }
 .noncompetitor:active {
-  background-color: $noncompetitor_active;
+  background-color: default_colors.$noncompetitor_active;
 }
 
 // -----------------------------------------
@@ -32,25 +33,25 @@
 // -----------------------------------------
 
 .spectator {
-  background-color: $spectator;
+  background-color: default_colors.$spectator;
 }
 .spectator:hover {
-  background-color: $spectator_hover;
+  background-color: default_colors.$spectator_hover;
 }
 .spectator:active {
-  background-color: $spectator_active;
+  background-color: default_colors.$spectator_active;
 }
 
 // -----------------------------------------
 /* Focus Buttons */
 // -----------------------------------------
 .focus_button:visited {
-  background-color: $focus;
+  background-color: default_colors.$focus;
   color: white;
 }
 
 .focus_button {
-  @include button($background: $focus, $background-hover: $focus_hover); //(220px);
+  @include button($background: default_colors.$focus, $background-hover: default_colors.$focus_hover); //(220px);
   margin: 10px;
   color: white;
 
@@ -60,31 +61,31 @@
   }
 
   &:active {
-    background-color: $focus_active;
+    background-color: default_colors.$focus_active;
     border-color: #205f3c;
   }
 }
 
 .nonfocus_button:visited {
   background-color: white;
-  color: $nonfocus;
+  color: default_colors.$nonfocus;
 }
 
 .nonfocus_button {
   @include button($background: white, $background-hover: white);
   margin: 10px;
-  color: $nonfocus;
-  border: 1px solid $nonfocus;
+  color: default_colors.$nonfocus;
+  border: 1px solid default_colors.$nonfocus;
 
   &:hover {
-    color: $nonfocus_hover;
-    border: 1px solid $nonfocus_hover;
+    color: default_colors.$nonfocus_hover;
+    border: 1px solid default_colors.$nonfocus_hover;
   }
 
   &:active {
-    color: $nonfocus_active;
+    color: default_colors.$nonfocus_active;
     background-color: white;
-    border: 1px solid $nonfocus_active;
+    border: 1px solid default_colors.$nonfocus_active;
   }
 }
 
@@ -108,26 +109,26 @@
 }
 
 .competitor_button {
-  @include button($background: $competitor, $background-hover: $competitor_hover);
+  @include button($background: default_colors.$competitor, $background-hover: default_colors.$competitor_hover);
 
   &:active {
-    background-color: $competitor_active;
+    background-color: default_colors.$competitor_active;
   }
 }
 
 .noncompetitor_button {
-  @include button($background: $noncompetitor, $background-hover: $noncompetitor_hover);
+  @include button($background: default_colors.$noncompetitor, $background-hover: default_colors.$noncompetitor_hover);
 
   &:active {
-    background-color: $noncompetitor_active;
+    background-color: default_colors.$noncompetitor_active;
   }
 }
 
 .spectator_button {
-  @include button($background: $spectator, $background-hover: $spectator_hover);
+  @include button($background: default_colors.$spectator, $background-hover: default_colors.$spectator_hover);
 
   &:active {
-    background-color: $spectator_active;
+    background-color: default_colors.$spectator_active;
   }
 }
 
@@ -147,23 +148,23 @@
 }
 
 .competitor_link {
-  color: $competitor;
+  color: default_colors.$competitor;
 }
 .competitor_link:visited {
-  color: $competitor;
+  color: default_colors.$competitor;
 }
 .competitor_link:hover {
-  color: $competitor_hover;
+  color: default_colors.$competitor_hover;
 }
 
 .noncompetitor_link {
-  color: $noncompetitor;
+  color: default_colors.$noncompetitor;
 }
 .noncompetitor_link:hover {
-  color: $noncompetitor_hover;
+  color: default_colors.$noncompetitor_hover;
 }
 .noncompetitor_link:visited {
-  color: $noncompetitor;
+  color: default_colors.$noncompetitor;
 }
 
 .incomplete, .incomplete:hover {
@@ -194,30 +195,30 @@
 .free_item {
   @extend %small_button;
   color: white;
-  background-color: $free_item;
+  background-color: default_colors.$free_item;
 
   &:hover {
-    background-color: $free_item_hover;
+    background-color: default_colors.$free_item_hover;
   }
   &:active {
-    background-color: $free_item_active;
+    background-color: default_colors.$free_item_active;
   }
 }
 
 .delete {
   @extend %small_button;
-  color: $delete_item;
+  color: default_colors.$delete_item;
   background-color: white;
   border: 1px solid;
 
   &:hover {
-    background-color: $delete_item_hover;
-    border-color: $delete_item_hover;
+    background-color: default_colors.$delete_item_hover;
+    border-color: default_colors.$delete_item_hover;
     color: white;
   }
   &:active {
-    background-color: $delete_item_active;
-    border-color: $delete_item_active;
+    background-color: default_colors.$delete_item_active;
+    border-color: default_colors.$delete_item_active;
     color:white;
   }
 }
@@ -225,13 +226,13 @@
 .cost_item {
   @extend %small_button;
   color: white;
-  background-color: $cost_item;
+  background-color: default_colors.$cost_item;
 
   &:hover {
-    background-color: $cost_item_hover;
+    background-color: default_colors.$cost_item_hover;
   }
   &:active {
-    background-color: $cost_item_active;
+    background-color: default_colors.$cost_item_active;
   }
 }
 
@@ -266,25 +267,25 @@
 }
 
 .payment_link {
-  @include button($background: $payment, $background-hover: $payment_hover); //(150px);
+  @include button($background: default_colors.$payment, $background-hover: default_colors.$payment_hover); //(150px);
   color:white;
   &:visited {
     color: white;
   }
 
   &:active {
-    background-color: $payment_active;
+    background-color: default_colors.$payment_active;
   }
 }
 
 .print_waiver_link {
-  @include button($background: $payment, $background-hover: $payment_hover); //(150px);
+  @include button($background: default_colors.$payment, $background-hover: default_colors.$payment_hover); //(150px);
   color:white;
   &:visited {
     color: white;
   }
 
   &:active {
-    background-color: $payment_active;
+    background-color: default_colors.$payment_active;
   }
 }

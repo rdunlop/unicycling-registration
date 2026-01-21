@@ -187,7 +187,7 @@ class EventConfiguration < ApplicationRecord
   end
 
   def online_payment?
-    payment_mode == "test" || payment_mode == "enabled"
+    ["test", "enabled"].include?(payment_mode)
   end
 
   def can_only_drop_or_modify_events?

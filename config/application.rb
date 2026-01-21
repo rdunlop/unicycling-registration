@@ -1,14 +1,14 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails'
-require 'active_job/railtie'
-require 'active_record/railtie'
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_view/railtie'
-require 'action_cable/engine'
-require 'sprockets/railtie'
-require File.expand_path('../config/initializers/redis', __dir__)
+require "rails"
+require "active_job/railtie"
+require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+require "action_cable/engine"
+require "sprockets/railtie"
+require File.expand_path("../config/initializers/redis", __dir__)
 require "apartment/custom_console"
 
 # Require the gems listed in Gemfile, including any gems
@@ -57,6 +57,10 @@ module Workspace
     end
 
     config.tinymce.install = :compile
+
+    # don't print warning/deprecated from deps
+    config.sass.quiet_deps = true
+    # config.sass.silence_deprecations = ['import']
 
     config.iuf_membership_url = ENV["IUF_MEMBERSHIP_URL"]
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]

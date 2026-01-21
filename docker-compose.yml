@@ -1,6 +1,5 @@
 # To start all docker containers run: `docker-compose up`
 #
-version: '3'
 services:
   app:
     build: .
@@ -49,7 +48,7 @@ services:
       driver: none
 
   redis:
-    image: redis
+    image: redis:8.4
     volumes:
       - redis:/data
 volumes:

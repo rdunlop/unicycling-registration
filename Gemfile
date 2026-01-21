@@ -4,8 +4,8 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '~> 7.1.6'
-gem 'sprockets', '< 4' # Sprockets 4 pain is not worth it.
+gem 'rails', '~> 7.2'
+gem 'sprockets', '~> 4.2'
 
 # Authentication
 gem 'devise'
@@ -30,13 +30,18 @@ gem 'breadcrumbs_on_rails'
 gem 'cocoon' # for nested forms
 gem 'countries'
 gem 'country_select'
-gem 'fancybox2-rails', github: 'sureswiftcapital/fancybox2-rails', branch: "rails6" # for rails 6 support
+gem 'fancybox2-rails'
 gem 'foundation-rails'
+# to prevent use of unsupported sassc-rails
+# cf https://github.com/foundation/foundation-rails/pull/790
+gem 'dartsass-sprockets'
+gem 'sass-embedded'
+
 gem "haml-rails"
 gem 'importmap-rails'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '6.0.1'
+gem 'jquery-ui-rails'
 gem 'money-rails'
 gem 'rails-assets-datetimepicker', '2.5.20', source: 'https://rails-assets.org'
 gem 'recaptcha', require: 'recaptcha/rails'
@@ -57,14 +62,13 @@ gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'rails_admin', '< 4'
+gem 'rails_admin', '~> 3.0'
 gem 'rake'
 gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
-gem 'sassc-rails' # needed by rails_admin
-gem 'sidekiq', '< 8' # as per sidekiq recommendations, always lock like this
+gem 'sidekiq', '~> 8.1' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'unicorn', require: false
 gem 'webrick'
@@ -89,7 +93,7 @@ gem 'acts_as_list'
 gem 'carrierwave'
 gem 'carrierwave-aws', '1.6.0'
 gem 'carrierwave-i18n'
-gem 'globalize', github: 'globalize/globalize', branch: 'main'
+gem 'globalize', "~> 7.0"
 gem 'nilify_blanks'
 gem 'validates_email_format_of'
 gem 'virtus'

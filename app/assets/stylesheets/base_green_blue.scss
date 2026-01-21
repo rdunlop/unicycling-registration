@@ -10,17 +10,17 @@
 // Competitors are green
 
 // Import default colors
-@import "new_styles/default_hue_variables";
+@use "new_styles/default_hue_variables";
 // Import default styles
-@import "new_styles/default_colors";
+@use "new_styles/default_colors";
 
-$background: rgb(18, 172, 80);
+default_colors.$background: rgb(18, 172, 80);
 $backgroundgrad: rgb(76, 214, 115);
-$backgroundhover: rgb(85, 209, 105);
+default_colors.$backgroundhover: rgb(85, 209, 105);
 $backgroundhovergrad: rgb(34, 233, 66);
-$submenudivider: rgb(18, 172, 80);
-$text: rgb(0, 0, 0);
-$texthover: rgb(255, 255, 255);
+default_colors.$submenudivider: rgb(18, 172, 80);
+default_colors.$text: rgb(0, 0, 0);
+default_colors.$texthover: rgb(255, 255, 255);
 
 // Import all other styles
-@import "new_styles_list";
+@use "new_styles_list";

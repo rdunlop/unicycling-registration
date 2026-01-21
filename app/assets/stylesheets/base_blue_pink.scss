@@ -10,7 +10,7 @@
 //  on-hover: Pink
 
 // Import default colors
-@import "new_styles/default_hue_variables";
+@use "new_styles/default_hue_variables";
 
 // Overwrite colors
 $unicon-pink: rgb(219, 71, 128);
@@ -18,26 +18,26 @@ $unicon-pink-active: rgb(240, 80, 128);
 $unicon-blue: rgb(36, 130, 181);
 
 // Import default styles
-@import "new_styles/default_colors";
+@use "new_styles/default_colors";
 
-$competitor: $unicon-blue;
-$noncompetitor: $unicon-blue;
-$competitor_hover: $unicon-pink;
-$noncompetitor_hover: $unicon-pink;
-$competitor_active: $unicon-pink-active;
-$noncompetitor_active: $unicon-pink-active;
+default_colors.$competitor: $unicon-blue;
+default_colors.$noncompetitor: $unicon-blue;
+default_colors.$competitor_hover: $unicon-pink;
+default_colors.$noncompetitor_hover: $unicon-pink;
+default_colors.$competitor_active: $unicon-pink-active;
+default_colors.$noncompetitor_active: $unicon-pink-active;
 
-$focus: $unicon-blue;
-$focus_hover: $unicon-pink;
-$focus_active: $unicon-pink-active;
+default_colors.$focus: $unicon-blue;
+default_colors.$focus_hover: $unicon-pink;
+default_colors.$focus_active: $unicon-pink-active;
 
-$nonfocus: #266DA5;
-$nonfocus_hover: #3487C9;
-$nonfocus_active: #5555ff;
+default_colors.$nonfocus: #266DA5;
+default_colors.$nonfocus_hover: #3487C9;
+default_colors.$nonfocus_active: #5555ff;
 
-$reg_current_period_color: $unicon-pink;
-$reg_current_period_bg_color: #fff;
+default_colors.$reg_current_period_color: $unicon-pink;
+default_colors.$reg_current_period_bg_color: #fff;
 
-$external_link_color_hover: $unicon-pink;
+default_colors.$external_link_color_hover: $unicon-pink;
 
-@import "new_styles_list";
+@use "new_styles_list";

@@ -1,3 +1,5 @@
+@use "default_hue_variables";
+
 // All hue variables come from 'default_hue_variables' file
 
 // Breadcrumb
@@ -16,25 +18,25 @@ $texthover: rgb(255, 255, 255) ; // !default
 // $noncomp_hue: 206;
 // $spec_hue: 180;
 
-$competitor: hsl($comp_hue, 80%, 45%) ; // !default
-$competitor_hover: hsl($comp_hue, 80%, 65%) ; // !default
-$competitor_active: hsl($comp_hue, 80%, 40%) ; // !default
+$competitor: hsl(default_hue_variables.$comp_hue, 80%, 45%) ; // !default
+$competitor_hover: hsl(default_hue_variables.$comp_hue, 80%, 65%) ; // !default
+$competitor_active: hsl(default_hue_variables.$comp_hue, 80%, 40%) ; // !default
 
-$noncompetitor: hsl($noncomp_hue, 80%, 45%) ; // !default
-$noncompetitor_hover: hsl($noncomp_hue, 80%, 65%) ; // !default
-$noncompetitor_active: hsl($noncomp_hue, 80%, 40%) ; // !default
+$noncompetitor: hsl(default_hue_variables.$noncomp_hue, 80%, 45%) ; // !default
+$noncompetitor_hover: hsl(default_hue_variables.$noncomp_hue, 80%, 65%) ; // !default
+$noncompetitor_active: hsl(default_hue_variables.$noncomp_hue, 80%, 40%) ; // !default
 
-$spectator: hsl($spec_hue, 80%, 45%) ; // !default
-$spectator_hover: hsl($spec_hue, 80%, 65%) ; // !default
-$spectator_active: hsl($spec_hue, 80%, 40%) ; // !default
+$spectator: hsl(default_hue_variables.$spec_hue, 80%, 45%) ; // !default
+$spectator_hover: hsl(default_hue_variables.$spec_hue, 80%, 65%) ; // !default
+$spectator_active: hsl(default_hue_variables.$spec_hue, 80%, 40%) ; // !default
 
 
 // Payment buttons
 // $red_hue: 0;
 
-$payment: hsl($red_hue, 50%, 50%) ; // !default
-$payment_hover: hsl($red_hue, 85%, 50%) ; // !default
-$payment_active: hsl($red_hue, 30%, 50%) ; // !default
+$payment: hsl(default_hue_variables.$red_hue, 50%, 50%) ; // !default
+$payment_hover: hsl(default_hue_variables.$red_hue, 85%, 50%) ; // !default
+$payment_active: hsl(default_hue_variables.$red_hue, 30%, 50%) ; // !default
 
 // Color of the recommended-competitor-type
 $recommended-color: lightblue ; // !default
@@ -43,13 +45,13 @@ $recommended-color: lightblue ; // !default
 // $focus_hue: $comp_hue;
 // $nonfocus_hue: $noncomp_hue;
 
-$focus: hsl($focus_hue, 80%, 45%) ; // !default
-$focus_hover: hsl($focus_hue, 80%, 65%) ; // !default
-$focus_active: hsl($focus_hue, 80%, 40%) ; // !default
+$focus: hsl(default_hue_variables.$focus_hue, 80%, 45%) ; // !default
+$focus_hover: hsl(default_hue_variables.$focus_hue, 80%, 65%) ; // !default
+$focus_active: hsl(default_hue_variables.$focus_hue, 80%, 40%) ; // !default
 
-$nonfocus: hsl($focus_hue, 80%, 45%) ; // !default
-$nonfocus_hover: hsl($focus_hue, 80%, 65%) ; // !default
-$nonfocus_active: hsl($focus_hue, 80%, 40%) ; // !default
+$nonfocus: hsl(default_hue_variables.$focus_hue, 80%, 45%) ; // !default
+$nonfocus_hover: hsl(default_hue_variables.$focus_hue, 80%, 65%) ; // !default
+$nonfocus_active: hsl(default_hue_variables.$focus_hue, 80%, 40%) ; // !default
 
 // Registration Periods
 $reg_current_period_color: black ; // !default

@@ -25,10 +25,7 @@ class EventForm < SimpleDelegator
           end
         end
       else
-        if expense_item.present?
-          # destroy it
-          expense_item.destroy
-        end
+        expense_item.presence&.destroy
       end
 
       super

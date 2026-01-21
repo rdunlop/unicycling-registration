@@ -1,23 +1,23 @@
 /*
  * This is a manifest file for all of common/*
  */
-@import "common/additional_registrant_accesses";
-@import "common/attending";
-@import "common/award_labels";
-@import "common/combined_competitions";
-@import "common/competitions";
-@import "common/competitors";
-@import "common/distance_attempts";
-@import "common/event_configurations";
-@import "common/events";
-@import "common/import_results";
-@import "common/judges";
-@import "common/lane_assignment";
-@import "common/payments";
-@import "common/printing";
-@import "common/scores";
-@import "common/time_results";
-@import "common/two_attempt_entry";
-@import "common/welcome";
-@import "common/admin/payments";
-@import "common/admin/permissions";
+@use "common/additional_registrant_accesses";
+@use "common/attending";
+@use "common/award_labels";
+@use "common/combined_competitions";
+@use "common/competitions";
+@use "common/competitors";
+@use "common/distance_attempts";
+@use "common/event_configurations";
+@use "common/events";
+@use "common/import_results";
+@use "common/judges";
+@use "common/lane_assignment";
+@use "common/payments";
+@use "common/printing";
+@use "common/scores";
+@use "common/time_results";
+@use "common/two_attempt_entry";
+@use "common/welcome";
+@use "common/admin/payments" as payments2;
+@use "common/admin/permissions";
