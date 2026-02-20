@@ -25,6 +25,7 @@ executors:
           POSTGRES_PASSWORD: password
 jobs:
   build:
+    resource_class: large
     executor: my_executor
     steps:
       - checkout
@@ -34,7 +35,7 @@ jobs:
       - restore_cache:
           key: badges-gemfile-cache-{{ checksum "Gemfile.lock" }}
       - run: bundle config set without 'development'
-      - run: bundle install --jobs=2 --retry=3
+      - run: bundle install --jobs=4 --retry=3
 
       - save_cache:
           key: badges-gemfile-cache-{{ checksum "Gemfile.lock" }}
