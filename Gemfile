@@ -89,7 +89,7 @@ gem 'acts_as_list'
 gem 'carrierwave'
 gem 'carrierwave-aws', '1.6.0'
 gem 'carrierwave-i18n'
-gem 'globalize', github: 'globalize/globalize', branch: 'main'
+gem 'globalize', "~> 7.0"
 gem 'nilify_blanks'
 gem 'validates_email_format_of'
 gem 'virtus'
