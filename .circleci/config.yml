@@ -33,7 +33,8 @@ jobs:
       # Restore the bundle of gems
       - restore_cache:
           key: badges-gemfile-cache-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --without=development --jobs=4 --retry=3
+      - run: bundle config set without 'development'
+      - run: bundle install --jobs=4 --retry=3
 
       - save_cache:
           key: badges-gemfile-cache-{{ checksum "Gemfile.lock" }}
