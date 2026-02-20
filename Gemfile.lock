@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
+  revision: 86fd1ba78fd413100bdfb362ba2b4a93210d8d2d
   branch: main
   specs:
-    globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
+    globalize (7.1.1)
+      activemodel (>= 7.0, < 8.2)
+      activerecord (>= 7.0, < 8.2)
+      activesupport (>= 7.0, < 8.2)
       request_store (~> 1.0)
 
 GIT
@@ -705,7 +706,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.6.1)
     timeliness (0.4.5)
-    timeout (0.4.4)
+    timeout (0.6.0)
     timers (4.3.5)
     tinymce-rails (6.8.6.1)
       railties (>= 3.1.1)
