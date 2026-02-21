@@ -1,14 +1,4 @@
 GIT
-  remote: https://github.com/globalize/globalize.git
-  revision: 278b9f95feef3838d434226c8a3836cb4e7880ec
-  branch: main
-  specs:
-    globalize (6.3.0)
-      activemodel (>= 4.2, < 7.2)
-      activerecord (>= 4.2, < 7.2)
-      request_store (~> 1.0)
-
-GIT
   remote: https://github.com/rdunlop/tolk.git
   revision: 8342a4ef228966541fb1815ce9eedeca481663f5
   branch: improve_import_export
@@ -288,7 +278,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.3.6)
-    connection_pool (2.5.5)
+    connection_pool (3.0.2)
     consistency_fail (0.3.7)
     countries (7.1.1)
       unaccent (~> 0.3)
@@ -360,6 +350,11 @@ GEM
       rails (>= 4.0.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    globalize (7.1.1)
+      activemodel (>= 7.0, < 8.2)
+      activerecord (>= 7.0, < 8.2)
+      activesupport (>= 7.0, < 8.2)
+      request_store (~> 1.0)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -431,7 +426,8 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.27.0)
+    minitest (6.0.1)
+      prism (~> 1.5)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -706,7 +702,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.6.1)
     timeliness (0.4.5)
-    timeout (0.4.4)
+    timeout (0.6.0)
     timers (4.3.5)
     tsort (0.2.0)
     ttfunk (1.8.0)
@@ -793,7 +789,7 @@ DEPENDENCIES
   foreman
   foundation-rails
   gaffe
-  globalize!
+  globalize (~> 7.0)
   haml-rails
   hcaptcha
   http_accept_language
