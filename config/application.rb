@@ -56,7 +56,7 @@ module Workspace
       g.helper false
     end
 
-    config.tinymce.install = :compile
+    config.tinymce.install = :copy
 
     config.iuf_membership_url = ENV["IUF_MEMBERSHIP_URL"]
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]
