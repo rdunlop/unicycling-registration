@@ -829,6 +829,6 @@ Rails.application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  fallback_options = Rails.env.development? ? { unmatched_route: /(?!.*rails\/mailers).*/ } : {}
-  get '*unmatched_route', fallback_options.merge(to: 'application#raise_not_found!')
+  Rails.env.development? ? { unmatched_route: /(?!.*rails\/mailers).*/ } : {}
+  # get '*unmatched_route', fallback_options.merge(to: 'application#raise_not_found!')
 end

@@ -66,6 +66,7 @@ class EventConfiguration < ApplicationRecord
 
   translates :short_name, :long_name, :location, :dates_description, fallbacks_for_empty_translations: true
   translates :competitor_benefits, :noncompetitor_benefits, :spectator_benefits, fallbacks_for_empty_translations: true
+  has_rich_text :offline_payment_description
   translates :offline_payment_description, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations
 
