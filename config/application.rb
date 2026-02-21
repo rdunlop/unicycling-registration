@@ -1,13 +1,6 @@
 require_relative 'boot'
 
-require 'rails'
-require 'active_job/railtie'
-require 'active_record/railtie'
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_view/railtie'
-require 'action_cable/engine'
-require 'sprockets/railtie'
+require 'rails/all'
 require File.expand_path('../config/initializers/redis', __dir__)
 require "apartment/custom_console"
 
@@ -55,8 +48,6 @@ module Workspace
       g.routing_specs false
       g.helper false
     end
-
-    config.tinymce.install = :copy
 
     config.iuf_membership_url = ENV["IUF_MEMBERSHIP_URL"]
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]

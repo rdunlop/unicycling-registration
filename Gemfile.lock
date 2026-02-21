@@ -708,8 +708,6 @@ GEM
     timeliness (0.4.5)
     timeout (0.4.4)
     timers (4.3.5)
-    tinymce-rails (6.8.6.1)
-      railties (>= 3.1.1)
     tsort (0.2.0)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
@@ -846,7 +844,6 @@ DEPENDENCIES
   stimulus-rails
   stripe
   teaspoon-jasmine
-  tinymce-rails (~> 6.0)
   tolk!
   ttfunk (= 1.8.0)
   uglifier (>= 1.0.3)
