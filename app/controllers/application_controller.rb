@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :set_paper_trail_whodunnit
   before_action :load_config_object_and_i18n
+
+  around_action :instrument_cache, if: -> { Rails.configuration.cache_instrumentation_enabled }
   before_action :set_locale
   before_action :load_tenant
 
@@ -109,6 +111,15 @@ class ApplicationController < ActionController::Base
                                normal: Rails.root.join("app", "assets", "fonts", "ipag.ttf")
                              })
     pdf.font "OpenSans"
+  end
+
+  def instrument_cache
+    _result, cache_stats = CacheInstrumentation.measure("#{controller_name}##{action_name}") do
+      yield
+    end
+    if cache_stats[:total_ops] > 50
+      Rails.logger.warn("[CacheInstrumentation] HIGH CACHE USE #{controller_name}##{action_name}: #{cache_stats.to_json}")
+    end
   end
 
   def user_not_authorized

@@ -114,5 +114,7 @@ module Workspace
     config.super_admin_upgrade_code = ENV['SUPER_ADMIN_UPGRADE_CODE']
 
     config.individual_email_sending = ENV['INDIVIDUAL_EMAIL_SENDING'] == "true"
+
+    config.cache_instrumentation_enabled = ENV["CACHE_INSTRUMENTATION"].present?
   end
 end
