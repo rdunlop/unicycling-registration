@@ -704,8 +704,6 @@ GEM
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     unaccent (0.4.0)
     unicode-display_width (2.6.0)
     unicorn (6.1.0)
@@ -727,7 +725,6 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
-    watchr (0.7)
     webrick (1.9.2)
     websocket-driver (0.8.0)
       base64
@@ -822,7 +819,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubyzip
-  sass-rails
   sassc-rails
   select2-rails
   shoulda-matchers
@@ -835,12 +831,10 @@ DEPENDENCIES
   teaspoon-jasmine
   tolk!
   ttfunk (= 1.8.0)
-  uglifier (>= 1.0.3)
   unicorn
   validates_email_format_of
   validates_timeliness (= 7.0.0.beta2)
   virtus
-  watchr
   webrick
   whenever
   wicked
