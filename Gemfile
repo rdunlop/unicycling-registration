@@ -48,6 +48,7 @@ gem "validates_timeliness", "7.0.0.beta2" # for Ruby 3 support
 # system utils
 gem 'acme-client'
 gem 'apartment_acme_client'
+gem 'aws-actionmailer-ses'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
 gem 'eye'
