@@ -57,6 +57,7 @@ gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
 gem 'rails_admin', '< 4'
+gem 'rack', '< 3' # unicorn is not compatible with rack 3
 gem 'rake'
 gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
