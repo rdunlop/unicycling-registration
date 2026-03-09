@@ -5,7 +5,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 gem 'rails', '~> 7.2.0'
-gem 'sprockets', '< 4' # Sprockets 4 pain is not worth it.
+gem 'sprockets', '~> 4.0'
 
 # Authentication
 gem 'devise'
@@ -36,7 +36,7 @@ gem "haml-rails"
 gem 'importmap-rails'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '6.0.1'
+gem 'jquery-ui-rails', '~> 7.0'
 gem 'money-rails'
 gem 'rails-assets-datetimepicker', '2.5.20', source: 'https://rails-assets.org'
 gem 'recaptcha', require: 'recaptcha/rails'
@@ -137,14 +137,7 @@ group :unicon, :naucc, :development, :test, :cucumber, :caching do
   # gem 'brakeman'
   gem 'foreman'
   gem 'pry'
-  gem 'watchr'
 end
-
-# Gems used only for assets and not required
-# in production environments by default.
-gem 'sass-rails'
-
-gem 'uglifier', '>= 1.0.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
