@@ -40,12 +40,12 @@ module CacheInstrumentation
     end
 
     result = yield
-  ensure
-    subscribers.each { |s| ActiveSupport::Notifications.unsubscribe(s) }
 
     summary = tracker.summary
     Rails.logger.info("[CacheInstrumentation] #{label}: #{summary.to_json}")
 
-    return result, summary
+    [result, summary]
+  ensure
+    subscribers.each { |s| ActiveSupport::Notifications.unsubscribe(s) }
   end
 end

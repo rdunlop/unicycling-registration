@@ -113,10 +113,8 @@ class ApplicationController < ActionController::Base
     pdf.font "OpenSans"
   end
 
-  def instrument_cache
-    _result, cache_stats = CacheInstrumentation.measure("#{controller_name}##{action_name}") do
-      yield
-    end
+  def instrument_cache(&block)
+    _result, cache_stats = CacheInstrumentation.measure("#{controller_name}##{action_name}", &block)
     if cache_stats[:total_ops] > 50
       Rails.logger.warn("[CacheInstrumentation] HIGH CACHE USE #{controller_name}##{action_name}: #{cache_stats.to_json}")
     end
