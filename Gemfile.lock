@@ -667,10 +667,6 @@ GEM
       railties (>= 6.0.0)
     stringio (3.2.0)
     stripe (8.5.0)
-    teaspoon (1.2.2)
-      railties (>= 3.2.5)
-    teaspoon-jasmine (2.9.1)
-      teaspoon (>= 1.0.0)
     temple (0.10.4)
     thor (1.5.0)
     thread_safe (0.3.6)
@@ -812,7 +808,6 @@ DEPENDENCIES
   sprockets (~> 4.0)
   stimulus-rails
   stripe
-  teaspoon-jasmine
   tolk!
   ttfunk (= 1.8.0)
   unicorn
