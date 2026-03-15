@@ -2,6 +2,7 @@ class Avo::Resources::Registrant < Avo::BaseResource
   self.model_class = ::Registrant
   self.title = :full_name
   self.includes = []
+  self.find_record_method = -> { query.find_by!(bib_number: id) }
   self.search = {
     query: -> { query.where("first_name ILIKE :q OR last_name ILIKE :q", q: "%#{params[:q]}%") }
   }
