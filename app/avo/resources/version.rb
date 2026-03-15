@@ -5,11 +5,11 @@ class Avo::Resources::Version < Avo::BaseResource
   self.default_sort_column = :created_at
   self.default_sort_direction = :desc
   self.search = {
-    query: -> {
+    query: lambda {
       q = params[:q].to_s.strip
       if q =~ /\A(\w+)\s+#?(\d+)\z/
         # "User 1" or "User #1" → match type AND id
-        query.where(item_type: $1, item_id: $2.to_i)
+        query.where(item_type: ::Regexp.last_match(1), item_id: ::Regexp.last_match(2).to_i)
       elsif q =~ /\A\d+\z/
         # plain number → match item_id
         query.where(item_id: q.to_i)
