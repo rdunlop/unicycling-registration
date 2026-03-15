@@ -41,6 +41,10 @@ module Workspace
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
     config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess]
 
+    # Required for Avo's search/select-all serialization to work correctly
+    # https://docs.avohq.io/3.0/select-all.html#serialization-known-issues
+    config.active_record.marshalling_format_version = 7.1
+
     config.action_dispatch.rescue_responses['Errors::TenantNotFound'] = :not_found
 
     config.generators do |g|
