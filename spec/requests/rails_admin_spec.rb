@@ -8,7 +8,7 @@ RSpec.describe "/admin", type: :request do
     before { login(user) }
 
     it "can browse" do
-      get "/admin"
+      get "/admin/resources/competitions"
       expect(response).to be_successful
     end
   end
