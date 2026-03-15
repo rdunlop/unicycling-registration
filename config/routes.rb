@@ -818,7 +818,7 @@ Rails.application.routes.draw do
   resources :styles, only: :index
   get "/new", to: redirect("/tenants")
 
-  mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
+  mount Avo::Engine, at: "/admin"
 
   get '/:locale' => 'welcome#index' # to match /en  to send to /en/welcome
   root to: 'welcome#index'
