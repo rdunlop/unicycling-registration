@@ -15,9 +15,6 @@ def puma_process(proxy, _name)
     # stop signals:
     stop_signals [:TERM, 30.seconds, :KILL]
 
-    # hot restart (required when using preload_app!)
-    restart_command 'kill -USR2 {PID}'
-
     start_timeout 30.seconds
     restart_grace 30.seconds
 
