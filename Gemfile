@@ -58,7 +58,7 @@ gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
 gem 'avo'
-gem 'rack', '< 3' # unicorn is not compatible with rack 3
+gem 'puma'
 gem 'rake'
 gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
@@ -67,7 +67,6 @@ gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
 gem 'sidekiq', '~> 7.3.0' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
-gem 'unicorn', require: false
 gem 'webrick'
 gem 'whenever'
 

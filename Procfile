@@ -1,4 +1,2 @@
-web: bundle exec unicorn -p $PORT
-caching: bundle exec unicorn -p $PORT -E caching
-naucc: bundle exec unicorn -p $PORT -E naucc
+web: bundle exec puma -p $PORT
 sidekiq: bundle exec sidekiq
