@@ -19,17 +19,17 @@ notifications:
       secret_access_key: ~
 
 processes:
-  - name: unicorn
+  - name: puma
     config:
-      pid_file: tmp/pids/unicorn.pid
-      start_command: bundle exec unicorn -Dc config/unicorn/production.rb
+      pid_file: tmp/pids/puma.pid
+      start_command: bundle exec puma -C config/puma.rb -e production
       restart_command: "kill -USR2 {PID}"
       start_timeout: 40 seconds
       start_grace: 30 seconds
       restart_timeout: 40 seconds
       restart_grace: 30 seconds
-      stdout: log/unicorn.stdout.log
-      stderr: log/unicorn.stderr.log
+      stdout: log/puma.stdout.log
+      stderr: log/puma.stderr.log
       monitor_children:
         stop_command: "kill -QUIT {PID}"
         checks:
