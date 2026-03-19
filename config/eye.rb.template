@@ -11,6 +11,7 @@ def puma_process(proxy, _name)
     pid_file 'tmp/pids/puma.pid'
     start_command "bundle exec puma -C ./config/puma.rb -e #{RAILS_ENV}"
     stdall 'log/puma.log'
+    daemonize true
 
     # stop signals:
     stop_signals [:TERM, 30.seconds, :KILL]
