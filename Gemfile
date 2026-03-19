@@ -65,7 +65,7 @@ gem 'request_store' # Supports EventConfiguration.singleton
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
-gem 'sidekiq', '~> 7.3.0' # as per sidekiq recommendations, always lock like this
+gem 'sidekiq', '~> 8.1.1' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'webrick'
 gem 'whenever'
