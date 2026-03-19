@@ -11,12 +11,10 @@ def puma_process(proxy, _name)
     pid_file 'tmp/pids/puma.pid'
     start_command "bundle exec puma -C ./config/puma.rb -e #{RAILS_ENV}"
     stdall 'log/puma.log'
+    daemonize true
 
     # stop signals:
     stop_signals [:TERM, 30.seconds, :KILL]
-
-    # hot restart (required when using preload_app!)
-    restart_command 'kill -USR2 {PID}'
 
     start_timeout 30.seconds
     restart_grace 30.seconds
