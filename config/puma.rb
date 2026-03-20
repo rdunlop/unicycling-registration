@@ -1,4 +1,5 @@
 workers Integer(ENV.fetch("WEB_CONCURRENCY", 3))
+threads 1, 1
 worker_timeout 250
 preload_app!
 
