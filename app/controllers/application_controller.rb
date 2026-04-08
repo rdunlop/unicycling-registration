@@ -6,13 +6,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :set_paper_trail_whodunnit
   before_action :load_config_object_and_i18n
+
+  around_action :instrument_cache, if: -> { Rails.configuration.cache_instrumentation_enabled }
   before_action :set_locale
   before_action :load_tenant
 
-  before_action :set_home_breadcrumb, unless: :rails_admin_controller?
+  before_action :set_home_breadcrumb, unless: :admin_controller?
 
   # after_action :verify_authorized, :except => :index
-  after_action :verify_authorized, unless: %i[devise_controller? rails_admin_controller?]
+  after_action :verify_authorized, unless: %i[devise_controller? admin_controller?]
 
   before_action :skip_authorization, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -33,10 +35,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
-  # a true rails_admin_controller? method was removed from rails_admin:
-  # https://github.com/sferik/rails_admin/issues/2268
-  def rails_admin_controller?
-    (self.class.to_s =~ /RailsAdmin::/) == 0
+  def admin_controller?
+    self.class.to_s.start_with?("Avo::")
   end
 
   # Override the default pundit_user so that we can pass additional state to the policies
@@ -111,9 +111,16 @@ class ApplicationController < ActionController::Base
     pdf.font "OpenSans"
   end
 
+  def instrument_cache(&block)
+    _result, cache_stats = CacheInstrumentation.measure("#{controller_name}##{action_name}", &block)
+    if cache_stats[:total_ops] > 50
+      Rails.logger.warn("[CacheInstrumentation] HIGH CACHE USE #{controller_name}##{action_name}: #{cache_stats.to_json}")
+    end
+  end
+
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
-    if rails_admin_controller?
+    if admin_controller?
       redirect_back(fallback_location: "/")
     else
       redirect_back(fallback_location: root_path)

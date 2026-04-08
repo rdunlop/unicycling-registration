@@ -20,7 +20,7 @@ class Translations::EventConfigurationsController < Admin::TranslationsControlle
   def translation_attributes
     params.require(:event_configuration).permit(translations_attributes: %i[
                                                   id locale short_name long_name location dates_description
-                                                  competitor_benefits noncompetitor_benefits spectator_benefits
+                                                  competitor_benefits noncompetitor_benefits spectator_benefits offline_payment_description
                                                 ])
   end
 end

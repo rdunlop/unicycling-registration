@@ -818,7 +818,7 @@ Rails.application.routes.draw do
   resources :styles, only: :index
   get "/new", to: redirect("/tenants")
 
-  mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
+  mount Avo::Engine, at: "/admin"
 
   get '/:locale' => 'welcome#index' # to match /en  to send to /en/welcome
   root to: 'welcome#index'
@@ -829,6 +829,6 @@ Rails.application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  fallback_options = Rails.env.development? ? { unmatched_route: /(?!.*rails\/mailers).*/ } : {}
-  get '*unmatched_route', fallback_options.merge(to: 'application#raise_not_found!')
+  Rails.env.development? ? { unmatched_route: /(?!.*rails\/mailers).*/ } : {}
+  # get '*unmatched_route', fallback_options.merge(to: 'application#raise_not_found!')
 end

@@ -22,7 +22,7 @@ describe Compete::WaveAssignmentsController do
   end
 
   describe "PUT update" do
-    let(:wave_data_file_name) { "#{fixture_path}/sample_wave_assignments.txt" }
+    let(:wave_data_file_name) { file_fixture("sample_wave_assignments.txt") }
     let(:wave_data_file) { Rack::Test::UploadedFile.new(wave_data_file_name, "text/plain") }
     let!(:competitor1) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 101) }
     let!(:competitor2) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 102) }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Importers::Parsers::TwoAttemptSlalom do
-  let(:iuf_two_attempt_data_file_name) { "#{fixture_path}/sample_iuf_two_attempt.txt" }
+  let(:iuf_two_attempt_data_file_name) { file_fixture("sample_iuf_two_attempt.txt") }
   let(:iuf_two_attempt_data_file) { Rack::Test::UploadedFile.new(iuf_two_attempt_data_file_name, "text/plain") }
 
   it "extracts the file contents" do
