@@ -32,7 +32,7 @@ GEM
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.28)
+    acme-client (2.0.31)
       base64 (~> 0.2)
       faraday (>= 1.0, < 3.0.0)
       faraday-retry (>= 1.0, < 3.0.0)
@@ -327,7 +327,7 @@ GEM
       logger
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
-    faraday-retry (2.3.2)
+    faraday-retry (2.4.0)
       faraday (~> 2.0)
     ffi (1.16.3)
     foreman (0.90.0)
@@ -387,7 +387,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (7.0.0)
       railties (>= 3.2.16)
-    json (2.18.1)
+    json (2.19.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
