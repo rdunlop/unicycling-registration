@@ -22,7 +22,7 @@ describe Compete::TierAssignmentsController do
   end
 
   describe "PUT update" do
-    let(:tier_data_file_name) { "#{fixture_path}/sample_tier_assignments.txt" }
+    let(:tier_data_file_name) { file_fixture("sample_tier_assignments.txt") }
     let(:tier_data_file) { Rack::Test::UploadedFile.new(tier_data_file_name, "text/plain") }
     let!(:competitor1) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 101) }
     let!(:competitor2) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 102) }

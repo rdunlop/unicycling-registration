@@ -110,9 +110,12 @@ class CompetitionsController < ApplicationController
   def set_places
     authorize @competition
 
-    @competition.place_all
+    _result, cache_stats = CacheInstrumentation.measure("set_places(competition=#{@competition.id})") do
+      @competition.place_all
+    end
     Result.update_last_calc_places_time(@competition)
-    redirect_to result_competition_path(@competition), notice: "All Places updated"
+    redirect_to result_competition_path(@competition),
+                notice: "All Places updated (#{cache_stats[:total_ops]} cache ops in #{cache_stats[:total_duration_ms]}ms)"
   end
 
   def result

@@ -59,8 +59,7 @@ At the bottom of this page, you can use the system to send e-mails, if you wish.
     = f.label :subject
     = f.text_field :subject
     %br
-    = render "shared/wysiwyg"
-    = f.input :body, as: :text, input_html: { class: "full_tinymce" }
+    = f.rich_text_area :body
     %br
     = f.button :submit, "Send Email", class: "focus_button"
   %hr

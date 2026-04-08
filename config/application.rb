@@ -1,13 +1,6 @@
 require_relative 'boot'
 
-require 'rails'
-require 'active_job/railtie'
-require 'active_record/railtie'
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_view/railtie'
-require 'action_cable/engine'
-require 'sprockets/railtie'
+require 'rails/all'
 require File.expand_path('../config/initializers/redis', __dir__)
 require "apartment/custom_console"
 
@@ -48,6 +41,10 @@ module Workspace
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
     config.active_record.yaml_column_permitted_classes = [Symbol, ActiveSupport::HashWithIndifferentAccess]
 
+    # Required for Avo's search/select-all serialization to work correctly
+    # https://docs.avohq.io/3.0/select-all.html#serialization-known-issues
+    config.active_record.marshalling_format_version = 7.1
+
     config.action_dispatch.rescue_responses['Errors::TenantNotFound'] = :not_found
 
     config.generators do |g|
@@ -55,8 +52,6 @@ module Workspace
       g.routing_specs false
       g.helper false
     end
-
-    config.tinymce.install = :compile
 
     config.iuf_membership_url = ENV["IUF_MEMBERSHIP_URL"]
     config.iuf_membership_api_url = ENV["IUF_MEMBERSHIP_API_URL"]
@@ -123,5 +118,7 @@ module Workspace
     config.super_admin_upgrade_code = ENV['SUPER_ADMIN_UPGRADE_CODE']
 
     config.individual_email_sending = ENV['INDIVIDUAL_EMAIL_SENDING'] == "true"
+
+    config.cache_instrumentation_enabled = ENV["CACHE_INSTRUMENTATION"].present?
   end
 end

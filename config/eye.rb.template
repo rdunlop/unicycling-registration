@@ -4,31 +4,23 @@ WORKING_DIR = "/home/ec2-user/unicycling-registration/current"
 LOG = "/home/ec2-user/unicycling-registration/current/log/eye.log"
 RAILS_ENV = "stage"
 
-# Unicorn
-RUBY = `which ruby`
+# Puma
 
-def unicorn_process(proxy, name)
-  proxy.process('unicorn') do
-    pid_file 'tmp/pids/unicorn.pid'
-    start_command "#{RUBY} ./bin/unicorn -Dc ./config/unicorn/#{RAILS_ENV}.rb"
-    stdall 'log/unicorn.log'
+def puma_process(proxy, _name)
+  proxy.process('puma') do
+    pid_file 'tmp/pids/puma.pid'
+    start_command "bundle exec puma -C ./config/puma.rb -e #{RAILS_ENV}"
+    stdall 'log/puma.log'
+    daemonize true
 
     # stop signals:
-    # http://unicorn.bogomips.org/SIGNALS.html
-    stop_signals [:TERM, 10.seconds]
-
-    # soft restart
-    restart_command 'kill -USR2 {PID}'
-
-    # check :cpu, every: 30, below: 80, times: 3
-    # check :memory, every: 20, below: 400.megabytes, times: 3
+    stop_signals [:TERM, 30.seconds, :KILL]
 
     start_timeout 30.seconds
     restart_grace 30.seconds
 
     monitor_children do
       stop_command 'kill -QUIT {PID}'
-      # check :cpu, every: 30, below: 80, times: 3
       check :memory, every: 20, below: 400.megabytes, times: 3
     end
   end
@@ -58,9 +50,5 @@ Eye.application :sidekiq_test do
   env 'RAILS_ENV' => RAILS_ENV
 
   sidekiq_process self, :sidekiq
-
-  # unicorn requires to be `ruby` in path (for soft restart)
-  env 'PATH' => "#{File.dirname(RUBY)}:#{ENV['PATH']}"
-
-  unicorn_process self, :unicorn
+  puma_process self, :puma
 end

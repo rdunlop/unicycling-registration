@@ -11,8 +11,7 @@
     .small-4.columns.last= f.input :visible
   .row
     .small-12.columns
-      = render "shared/wysiwyg"
-      = f.input :body, as: :text, input_html: { class: "full_tinymce" }
+      = f.rich_text_area :body
 
   .row
     .small-12.columns

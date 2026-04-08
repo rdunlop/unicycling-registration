@@ -21,7 +21,7 @@ class MusicZipCreator
       Zip::OutputStream.open(temp_file) { |_zos| }
 
       # Add files to the zip file as usual
-      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
+      Zip::File.open(temp_file.path, create: true) do |zip|
         competition.competitors.each do |competitor|
           if competitor.has_music?
             file = LocalResource.new(URI.parse(competitor.music_file.song_file_name_url)).file

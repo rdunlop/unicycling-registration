@@ -55,7 +55,6 @@
     = f.input :currency_code, collection: EventConfiguration.currency_codes
     = f.input :payment_mode, collection: EventConfiguration.payment_modes, include_blank: false
     = f.input :offline_payment
-    = render "shared/wysiwyg"
-    = f.input :offline_payment_description, as: :text, input_html: { class: "tinymce" }
+    = f.rich_text_area :offline_payment_description
 
     = f.button :submit

@@ -4,6 +4,7 @@
     = javascript_importmap_tags
     = yield(:importmap_modules)
     = render partial: "layouts/metatags"
+    = javascript_include_tag "trix"
     %title
       = @config.short_name
       = t(".registration")
@@ -40,6 +41,3 @@
           = render "shared/flashes"
           = content_for?(:content) ? yield(:content) : yield
       = render partial: "layouts/footer"
-  - if content_for?(:wysiwyg)
-    = yield(:wysiwyg)
-    = tinymce

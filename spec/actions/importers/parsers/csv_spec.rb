@@ -8,7 +8,7 @@ describe Importers::Parsers::Csv do
   let(:sample_input) { Rack::Test::UploadedFile.new(test_file, "text/plain") }
 
   describe "when importing CSV data" do
-    let(:test_file) { "#{fixture_path}/sample_time_results_bib_101.txt" }
+    let(:test_file) { file_fixture("sample_time_results_bib_101.txt") }
 
     it "reads the line" do
       expect(importer.extract_file).to eq([["101", "0", "1", "2", "300"]])
@@ -55,7 +55,7 @@ describe Importers::Parsers::Csv do
   end
 
   describe "when importing dq-results" do
-    let(:test_file) { "#{fixture_path}/sample_time_results_bib_101_dq.txt" }
+    let(:test_file) { file_fixture("sample_time_results_bib_101_dq.txt") }
 
     it "reads the line" do
       expect(importer.extract_file).to eq([["101", "DQ", "0", "0", "0"]])

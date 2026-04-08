@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Importers::CsvExtractor do
   it "can extract csv for normal race results" do
-    sample_file = "#{fixture_path}/sample_time_results_bib_101.txt"
+    sample_file = file_fixture("sample_time_results_bib_101.txt")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
@@ -12,7 +12,7 @@ describe Importers::CsvExtractor do
   end
 
   it "can extract CSV for a file with BOM encoding" do
-    sample_file = "#{fixture_path}/with_bom.csv"
+    sample_file = file_fixture("with_bom.csv")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
@@ -23,7 +23,7 @@ describe Importers::CsvExtractor do
   end
 
   it "can extract csv for lif race results" do
-    sample_file = "#{fixture_path}/800m14.lif"
+    sample_file = file_fixture("800m14.lif")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
@@ -33,7 +33,7 @@ describe Importers::CsvExtractor do
   end
 
   it "can extract csv for lif race results (exact)" do
-    sample_file = "#{fixture_path}/test2.lif"
+    sample_file = file_fixture("test2.lif")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
@@ -43,7 +43,7 @@ describe Importers::CsvExtractor do
   end
 
   it "can extract data for timing guys" do
-    sample_file = "#{fixture_path}/sample_chip_data.csv"
+    sample_file = file_fixture("sample_chip_data.csv")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input, separator: ";")
@@ -54,7 +54,7 @@ describe Importers::CsvExtractor do
   end
 
   it "can extract data for swiss data" do
-    sample_file = "#{fixture_path}/swiss_heat_with_dq.tsv"
+    sample_file = file_fixture("swiss_heat_with_dq.tsv")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input, separator: "\t")
@@ -65,7 +65,7 @@ describe Importers::CsvExtractor do
   end
 
   it "can handle files with extra newlines" do
-    sample_file = "#{fixture_path}/sample_time_results_bib_101_extra_lines.txt"
+    sample_file = file_fixture("sample_time_results_bib_101_extra_lines.txt")
     sample_input = Rack::Test::UploadedFile.new(sample_file, "text/plain")
 
     subject = described_class.new(sample_input)
