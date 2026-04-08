@@ -7,11 +7,8 @@
       %th= Registrant.model_name.human
       %th= Registrant.human_attribute_name(:age)
       %th= Registrant.human_attribute_name(:medical_certificate_url)
-      %th= Registrant.human_attribute_name(:medical_questionnaire_filled_out)
-      %th= Registrant.human_attribute_name(:medical_questionnaire_attest_all_no)
       %th= Registrant.human_attribute_name(:email)
       %th= User.human_attribute_name(:email)
-      %th= "Status"
       %th= Registrant.human_attribute_name(:medical_certificate_manually_confirmed)
   %tbody
     - @registrants.each do |registrant|
@@ -24,15 +21,8 @@
             = link_to "Medical Certificate", registrant.medical_certificate_url
             %br
             = registrant.medical_certificate_uploaded_at.iso8601
-        %td= registrant.medical_questionnaire_filled_out ? "Yes" : "No"
-        %td= registrant.medical_questionnaire_attest_all_no ? "Yes" : "No"
         %td= registrant.email
         %td= registrant.user.email
-        %td
-          - if registrant.medical_documentation_complete?
-            .medical_complete Good
-          - else
-            .medical_incomplete Bad
         %td
           - if registrant.medical_certificate_manually_confirmed?
             .medical_complete Reviewed

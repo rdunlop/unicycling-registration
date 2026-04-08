@@ -1,7 +1,7 @@
 %h2= t(".header")
 %h4= t(".subheader")
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { class: "no_dirty_check" } ) do |f|
-  = devise_error_messages!
+  = render "devise/shared/error_messages", resource: resource
   - if f.object.errors.messages[:base]
     %ul
       - f.object.errors.messages[:base].each do |error|

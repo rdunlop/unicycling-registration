@@ -2,10 +2,6 @@
   %legend= t(".header")
   = t(".description")
   %br
-  = t(".your_age", age: f.object.age)
-
-  - if f.object.age >= 18
-    .important_note_block= t(".adult_description")
 
   - if @config.medical_certificate_info_page.present?
     = render "/pages/embedded_page", page: @config.medical_certificate_info_page
@@ -14,17 +10,3 @@
   - if f.object.medical_certificate.present?
     %b You have uploaded a Medical Certificate
     = link_to "View Uploaded Medical Certificate", f.object.medical_certificate_url,  target: "_blank"
-
-  %hr
-
-  - if f.object.age < 18
-    .important_note_block= t(".minor_description")
-  = link_to t('.questionnaire'), "https://www.unicon20.fr/questionnaire-under-18/", target: "_blank"
-  %br
-  = f.check_box :medical_questionnaire_filled_out
-  = f.label :medical_questionnaire_filled_out
-  %br
-  = f.check_box :medical_questionnaire_attest_all_no
-  = f.label :medical_questionnaire_attest_all_no
-  %br
-  = t(".if_not_all_no")

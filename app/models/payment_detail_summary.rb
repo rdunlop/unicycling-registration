@@ -38,7 +38,7 @@ class PaymentDetailSummary
   end
 
   def amount_cents
-    (amount.to_i * 100).round
+    (amount.to_f * 100).round
   end
 
   def ==(other)

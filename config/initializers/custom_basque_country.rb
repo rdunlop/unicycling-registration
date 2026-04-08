@@ -12,7 +12,7 @@ ISO3166::Data.register(
   languages_official: %w[es],
   postal_code: true,
   translations: {
-    'en' => "EU"
+    'en' => "Basque Country"
   },
   subdivisions: {
     "A" => {

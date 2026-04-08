@@ -23,7 +23,7 @@ describe MultipleHeatReviewController do
 
   describe "POST import_lif_files" do
     describe "with valid params" do
-      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_file_name) { file_fixture("test2.lif") }
       let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain") }
 
       it "calls the creator" do
@@ -49,7 +49,7 @@ describe MultipleHeatReviewController do
 
       describe "when the time is missing" do
         it "returns an error" do
-          test_file_name = "#{fixture_path}/no_time 01.lif"
+          test_file_name = file_fixture("no_time 01.lif")
           test_file = Rack::Test::UploadedFile.new(test_file_name)
           post :import_lif_files, params: { heat: 1, competition_id: @competition.id, files: [test_file] }
 
@@ -59,7 +59,7 @@ describe MultipleHeatReviewController do
     end
 
     describe "with incorrectly named files (< 10)" do
-      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_file_name) { file_fixture("test2.lif") }
       let(:test_file) { Rack::Test::UploadedFile.new(test_file_name, "text/plain", original_filename: "test.lif") }
 
       it "sets the flash" do
@@ -70,7 +70,7 @@ describe MultipleHeatReviewController do
     end
 
     describe "with incorrectly named files (> 10)" do
-      let(:test_file_name) { "#{fixture_path}/test2.lif" }
+      let(:test_file_name) { file_fixture("test2.lif") }
       let(:test_files) { 10.times.map { |i| Rack::Test::UploadedFile.new(test_file_name, "text/plain", original_filename: "#{i}-test.lif") } }
 
       it "sets the flash" do

@@ -14,7 +14,7 @@
 
 %div
   %b Body
-  = raw(@email.body)
+  = @email.body.html_safe
 
 %div
   %b Addresses
