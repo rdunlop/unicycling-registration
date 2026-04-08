@@ -129,7 +129,7 @@ GEM
     ast (2.4.2)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
-    avo (3.30.3)
+    avo (3.30.4)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -451,7 +451,7 @@ GEM
       activerecord (>= 4.0.0)
       activesupport (>= 4.0.0)
     nio4r (2.7.5)
-    nokogiri (1.19.1)
+    nokogiri (1.19.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     order_as_specified (1.7)
