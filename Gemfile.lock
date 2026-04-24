@@ -114,7 +114,7 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
-    addressable (2.8.9)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     airbrussh (1.6.0)
       sshkit (>= 1.6.1, != 1.7.0)
