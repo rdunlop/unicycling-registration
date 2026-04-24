@@ -9,6 +9,7 @@
 #  updated_at                :datetime
 #  dropped_from_registration :boolean          default(FALSE), not null
 #  alternate                 :boolean          default(FALSE), not null
+#  registrant_type           :string
 #
 # Indexes
 #

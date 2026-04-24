@@ -9,6 +9,8 @@
 #  position       :integer
 #  parent_page_id :integer
 #  visible        :boolean          default(TRUE), not null
+#  title          :string
+#  body           :text
 #
 # Indexes
 #

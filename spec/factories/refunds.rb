@@ -8,7 +8,7 @@
 #  note        :string
 #  created_at  :datetime
 #  updated_at  :datetime
-#  percentage  :integer          default(100)
+#  percentage  :decimal(8, 5)    default(100.0)
 #
 # Indexes
 #

@@ -12,6 +12,8 @@
 #  optional                    :boolean          default(FALSE), not null
 #  optional_if_event_choice_id :integer
 #  required_if_event_choice_id :integer
+#  label                       :string
+#  tooltip                     :string
 #
 # Indexes
 #

@@ -8,6 +8,7 @@
 #  updated_at   :datetime
 #  info_url     :string
 #  info_page_id :integer
+#  name         :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot

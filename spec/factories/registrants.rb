@@ -2,29 +2,35 @@
 #
 # Table name: registrants
 #
-#  id                       :integer          not null, primary key
-#  first_name               :string
-#  middle_initial           :string
-#  last_name                :string
-#  birthday                 :date
-#  gender                   :string
-#  created_at               :datetime
-#  updated_at               :datetime
-#  user_id                  :integer
-#  deleted                  :boolean          default(FALSE), not null
-#  bib_number               :integer          not null
-#  wheel_size_id            :integer
-#  age                      :integer
-#  ineligible               :boolean          default(FALSE), not null
-#  volunteer                :boolean          default(FALSE), not null
-#  online_waiver_signature  :string
-#  access_code              :string
-#  sorted_last_name         :string
-#  status                   :string           default("active"), not null
-#  registrant_type          :string           default("competitor")
-#  rules_accepted           :boolean          default(FALSE), not null
-#  online_waiver_acceptance :boolean          default(FALSE), not null
-#  medical_certificate      :string
+#  id                                     :integer          not null, primary key
+#  first_name                             :string
+#  middle_initial                         :string
+#  last_name                              :string
+#  birthday                               :date
+#  gender                                 :string
+#  created_at                             :datetime
+#  updated_at                             :datetime
+#  user_id                                :integer
+#  deleted                                :boolean          default(FALSE), not null
+#  bib_number                             :integer          not null
+#  wheel_size_id                          :integer
+#  age                                    :integer
+#  ineligible                             :boolean          default(FALSE), not null
+#  volunteer                              :boolean          default(FALSE), not null
+#  online_waiver_signature                :string
+#  access_code                            :string
+#  sorted_last_name                       :string
+#  status                                 :string           default("active"), not null
+#  registrant_type                        :string           default("competitor")
+#  rules_accepted                         :boolean          default(FALSE), not null
+#  online_waiver_acceptance               :boolean          default(FALSE), not null
+#  medical_certificate                    :string
+#  medical_certificate_uploaded_at        :datetime
+#  medical_questionnaire_filled_out_at    :datetime
+#  medical_questionnaire_attest_all_no_at :datetime
+#  medical_certificate_manually_confirmed :boolean          default(FALSE), not null
+#  pronouns                               :string
+#  other_pronoun                          :string
 #
 # Indexes
 #

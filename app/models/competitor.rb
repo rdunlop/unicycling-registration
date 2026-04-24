@@ -68,7 +68,7 @@ class Competitor < ApplicationRecord
   validates :tier_number, presence: true
   validates :tier_number, numericality: { greater_than_or_equal_to: 1, less_than: 10 }
 
-  enum status: %i[active not_qualified dns withdrawn dnf]
+  enum :status, %i[active not_qualified dns withdrawn dnf]
   after_save :touch_members
   after_commit :update_age_group_entry, on: %i[create update]
   after_touch :update_age_group_entry

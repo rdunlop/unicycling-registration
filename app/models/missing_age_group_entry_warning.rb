@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: missing_age_group_entry_warnings
+#
+#  id             :bigint           not null, primary key
+#  competition_id :bigint
+#  competitor_id  :bigint
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+# Indexes
+#
+#  cmagew_competition  (competition_id)
+#  cmagew_competitor   (competitor_id)
+#
 class MissingAgeGroupEntryWarning < ApplicationRecord
   validates :competition, presence: true
   validates :competitor, presence: true

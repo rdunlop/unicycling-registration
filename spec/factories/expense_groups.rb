@@ -13,6 +13,7 @@
 #  registration_items     :boolean          default(FALSE), not null
 #  info_page_id           :integer
 #  system_managed         :boolean          default(FALSE), not null
+#  group_name             :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot
