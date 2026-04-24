@@ -3,7 +3,7 @@
 # Table name: uploaded_files
 #
 #  id             :integer          not null, primary key
-#  competition_id :integer          not null
+#  competition_id :integer
 #  user_id        :integer          not null
 #  original_file  :string           not null
 #  filename       :string           not null

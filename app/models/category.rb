@@ -8,6 +8,7 @@
 #  updated_at   :datetime
 #  info_url     :string
 #  info_page_id :integer
+#  name         :string
 #
 
 class Category < ApplicationRecord

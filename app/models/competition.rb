@@ -2,35 +2,36 @@
 #
 # Table name: competitions
 #
-#  id                                    :integer          not null, primary key
-#  event_id                              :integer
-#  name                                  :string
-#  created_at                            :datetime
-#  updated_at                            :datetime
-#  age_group_type_id                     :integer
-#  has_experts                           :boolean          default(FALSE), not null
-#  scoring_class                         :string
-#  start_data_type                       :string
-#  end_data_type                         :string
-#  uses_lane_assignments                 :boolean          default(FALSE), not null
-#  scheduled_completion_at               :datetime
-#  awarded                               :boolean          default(FALSE), not null
-#  award_title_name                      :string
-#  award_subtitle_name                   :string
-#  num_members_per_competitor            :string
-#  automatic_competitor_creation         :boolean          default(FALSE), not null
-#  combined_competition_id               :integer
-#  order_finalized                       :boolean          default(FALSE), not null
-#  penalty_seconds                       :integer
-#  locked_at                             :datetime
-#  published_at                          :datetime
-#  sign_in_list_enabled                  :boolean          default(FALSE), not null
-#  time_entry_columns                    :string           default("minutes_seconds_thousands")
-#  import_results_into_other_competition :boolean          default(FALSE), not null
-#  base_age_group_type_id                :integer
-#  score_ineligible_competitors          :boolean          default(FALSE), not null
-#  results_header                        :string
-#  hide_max_laps_count                   :boolean          default(FALSE), not null
+#  id                                               :integer          not null, primary key
+#  event_id                                         :integer
+#  name                                             :string
+#  created_at                                       :datetime
+#  updated_at                                       :datetime
+#  age_group_type_id                                :integer
+#  has_experts                                      :boolean          default(FALSE), not null
+#  scoring_class                                    :string
+#  start_data_type                                  :string
+#  end_data_type                                    :string
+#  uses_lane_assignments                            :boolean          default(FALSE), not null
+#  scheduled_completion_at                          :datetime
+#  awarded                                          :boolean          default(FALSE), not null
+#  award_title_name                                 :string
+#  award_subtitle_name                              :string
+#  num_members_per_competitor                       :string
+#  automatic_competitor_creation                    :boolean          default(FALSE), not null
+#  combined_competition_id                          :integer
+#  order_finalized                                  :boolean          default(FALSE), not null
+#  penalty_seconds                                  :integer
+#  locked_at                                        :datetime
+#  published_at                                     :datetime
+#  sign_in_list_enabled                             :boolean          default(FALSE), not null
+#  time_entry_columns                               :string           default("minutes_seconds_thousands")
+#  import_results_into_other_competition            :boolean          default(FALSE), not null
+#  base_age_group_type_id                           :integer
+#  score_ineligible_competitors                     :boolean          default(FALSE), not null
+#  results_header                                   :string
+#  hide_max_laps_count                              :boolean          default(FALSE), not null
+#  allow_competitor_creation_during_import_approval :boolean          default(FALSE), not null
 #
 # Indexes
 #

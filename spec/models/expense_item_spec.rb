@@ -13,8 +13,10 @@
 #  maximum_per_registrant :integer          default(0)
 #  cost_cents             :integer
 #  tax_cents              :integer          default(0), not null
-#  cost_element_id        :integer
 #  cost_element_type      :string
+#  cost_element_id        :integer
+#  name                   :string
+#  details_label          :string
 #
 # Indexes
 #

@@ -127,9 +127,9 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     airbrussh (1.6.0)
       sshkit (>= 1.6.1, != 1.7.0)
-    annotate (2.6.5)
-      activerecord (>= 2.3.0)
-      rake (>= 0.8.7)
+    annotaterb (4.22.0)
+      activerecord (>= 6.0.0)
+      activesupport (>= 6.0.0)
     ast (2.4.2)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
@@ -753,7 +753,7 @@ PLATFORMS
 DEPENDENCIES
   acme-client
   acts_as_list
-  annotate
+  annotaterb
   apartment_acme_client!
   autoprefixer-rails
   avo

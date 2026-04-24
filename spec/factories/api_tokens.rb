@@ -5,3 +5,14 @@ FactoryBot.define do
     sequence(:token) { |n| "token-value-#{n}" }
   end
 end
+
+# == Schema Information
+#
+# Table name: api_tokens
+#
+#  id          :bigint           not null, primary key
+#  token       :string
+#  description :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#

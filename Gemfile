@@ -133,7 +133,7 @@ group :development, :test do
 end
 
 group :unicon, :naucc, :development, :test, :cucumber, :caching do
-  gem 'annotate'
+  gem 'annotaterb'
   gem 'bullet'
   # gem 'brakeman'
   gem 'foreman'

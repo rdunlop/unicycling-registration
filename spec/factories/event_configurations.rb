@@ -57,6 +57,16 @@
 #  medical_certificate_info_page_id              :integer
 #  volunteer_option_page_id                      :integer
 #  add_expenses_end_date                         :datetime
+#  stripe_webhook_secret                         :string
+#  imported_registrants                          :boolean          default(FALSE), not null
+#  short_name                                    :string
+#  long_name                                     :string
+#  location                                      :string
+#  dates_description                             :string
+#  competitor_benefits                           :text
+#  noncompetitor_benefits                        :text
+#  spectator_benefits                            :text
+#  offline_payment_description                   :text
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_bot
