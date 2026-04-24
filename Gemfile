@@ -4,7 +4,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem 'rails', '7.2.3.1'
+gem 'rails', '~> 8.0.0'
 gem 'sprockets', '~> 4.0'
 
 # Authentication
@@ -43,11 +43,11 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'select2-rails'
 gem 'simple_form'
 gem 'stimulus-rails'
-gem "validates_timeliness", "7.0.0.beta2" # for Ruby 3 support
+gem "validates_timeliness"
 
 # system utils
 gem 'acme-client'
-gem 'apartment_acme_client'
+gem 'apartment_acme_client', github: 'rdunlop/apartment_acme_client', branch: 'allow_rails_8'
 gem 'aws-actionmailer-ses'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
