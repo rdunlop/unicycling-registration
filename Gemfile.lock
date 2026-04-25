@@ -1,15 +1,4 @@
 GIT
-  remote: https://github.com/rdunlop/apartment_acme_client.git
-  revision: 35ca20794af01aea0f9a793c6a052cbb35811802
-  branch: allow_rails_8
-  specs:
-    apartment_acme_client (0.0.10)
-      acme-client (~> 2.0.0)
-      aws-sdk-route53 (~> 1)
-      aws-sdk-s3 (~> 1)
-      rails (>= 4.1.0, < 9)
-
-GIT
   remote: https://github.com/rdunlop/tolk.git
   revision: 8342a4ef228966541fb1815ce9eedeca481663f5
   branch: improve_import_export
@@ -130,6 +119,11 @@ GEM
     annotaterb (4.22.0)
       activerecord (>= 6.0.0)
       activesupport (>= 6.0.0)
+    apartment_acme_client (0.0.11)
+      acme-client (~> 2.0.0)
+      aws-sdk-route53 (~> 1)
+      aws-sdk-s3 (~> 1)
+      rails (>= 4.1.0, < 9)
     ast (2.4.2)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
@@ -155,8 +149,8 @@ GEM
       aws-sdk-ses (~> 1, >= 1.50.0)
       aws-sdk-sesv2 (~> 1, >= 1.34.0)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1233.0)
-    aws-sdk-core (3.244.0)
+    aws-partitions (1.1241.0)
+    aws-sdk-core (3.246.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
@@ -164,8 +158,8 @@ GEM
       bigdecimal
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-kms (1.118.0)
-      aws-sdk-core (~> 3, >= 3.239.1)
+    aws-sdk-kms (1.123.0)
+      aws-sdk-core (~> 3, >= 3.244.0)
       aws-sigv4 (~> 1.5)
     aws-sdk-rails (5.1.0)
       aws-sdk-core (~> 3)
@@ -173,8 +167,8 @@ GEM
     aws-sdk-route53 (1.132.0)
       aws-sdk-core (~> 3, >= 3.244.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.208.0)
-      aws-sdk-core (~> 3, >= 3.234.0)
+    aws-sdk-s3 (1.220.0)
+      aws-sdk-core (~> 3, >= 3.244.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
     aws-sdk-ses (1.97.0)
@@ -390,7 +384,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (7.0.0)
       railties (>= 3.2.16)
-    json (2.19.2)
+    json (2.19.4)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -754,7 +748,7 @@ DEPENDENCIES
   acme-client
   acts_as_list
   annotaterb
-  apartment_acme_client!
+  apartment_acme_client
   autoprefixer-rails
   avo
   aws-actionmailer-ses
