@@ -21,6 +21,10 @@ class ExportPolicy < ApplicationPolicy
     user.has_role?(:race_official, :any) || competition_admin? || super_admin?
   end
 
+  def download_competitors?
+    user.has_role?(:race_official, :any) || competition_admin? || super_admin?
+  end
+
   # This link is on the Registration Overview page
   def download_events?
     event_planner? || super_admin?

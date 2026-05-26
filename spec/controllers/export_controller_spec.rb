@@ -17,6 +17,19 @@ describe ExportController do
     end
   end
 
+  describe "GET download_competitors" do
+    let(:competition) { FactoryBot.create(:competition) }
+
+    before do
+      EventConfiguration.singleton.update(short_name: "this is the event")
+    end
+
+    it "can download the file" do
+      get :download_competitors, params: { competition_id: competition.id }
+      expect(response).to be_successful
+    end
+  end
+
   describe "GET download_events" do
     it "without any events or registrants, only prints the headers" do
       get :download_events, format: 'xls'
