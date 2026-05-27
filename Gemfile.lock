@@ -724,7 +724,7 @@ GEM
     validates_timeliness (8.0.0)
       activemodel (>= 8.0.0, < 9)
       timeliness (>= 0.3.10, < 1)
-    view_component (4.8.0)
+    view_component (4.11.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
