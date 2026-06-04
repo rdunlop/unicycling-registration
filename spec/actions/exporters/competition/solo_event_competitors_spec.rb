@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Exporters::CompetitorsOfEventExporter do
+describe Exporters::Competition::SoloEventCompetitors do
   describe "#headers" do
     let!(:competition) { FactoryBot.create(:competition) }
     let(:headers) { described_class.new(competition).headers }
     let(:expected_headers) do
-      ["Id", "Last Name", "First Name", "Age Group"]
+      ["ID", "LastName", "FirstName", "Country", "Gender", "Age Group"]
     end
 
     it "describes the competitors headers" do
@@ -25,8 +25,8 @@ describe Exporters::CompetitorsOfEventExporter do
     end
     let!(:competition) { FactoryBot.create(:competition, age_group_type: age_group_type) }
     let!(:registrant) { FactoryBot.create(:competitor, birthday: Date.new(1998, 4, 20), gender: "Male") }
-    let!(:event_competitor) { Competitor.create!(competition: competition) }
-    let!(:member) { FactoryBot.create(:member, competitor: event_competitor, registrant: registrant) }
+    let!(:competitor) { Competitor.create!(competition: competition) }
+    let!(:member) { FactoryBot.create(:member, competitor: competitor, registrant: registrant) }
 
     let(:rows) { described_class.new(competition).rows }
 
@@ -35,6 +35,8 @@ describe Exporters::CompetitorsOfEventExporter do
         registrant.bib_number,
         registrant.last_name,
         registrant.first_name,
+        registrant.country,
+        registrant.gender,
         "Senior Male"
       ]
     end

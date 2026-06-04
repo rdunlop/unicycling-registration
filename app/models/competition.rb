@@ -484,6 +484,10 @@ class Competition < ApplicationRecord
     @distance_attempt_manager ||= ScoringClass.for(event_class, self)[:distance_attempt_manager]
   end
 
+  def team_event?
+    num_members_per_competitor != 'One'
+  end
+
   # ###########################
   # SCORE CALC-using functions
   # ###########################

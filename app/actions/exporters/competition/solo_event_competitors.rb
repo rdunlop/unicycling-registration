@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Exporters::CompetitorsOfEventExporter
+class Exporters::Competition::SoloEventCompetitors
   attr_reader :competition
 
   def initialize(competition)
@@ -8,7 +8,7 @@ class Exporters::CompetitorsOfEventExporter
   end
 
   def headers
-    ["Id", "Last Name", "First Name", "Age Group"]
+    ["ID", "LastName", "FirstName", "Country", "Gender", "Age Group"]
   end
 
   def rows
@@ -18,7 +18,9 @@ class Exporters::CompetitorsOfEventExporter
         registrant.bib_number,
         ActiveSupport::Inflector.transliterate(registrant.last_name),
         ActiveSupport::Inflector.transliterate(registrant.first_name),
-        competitor&.age_group_entry_description
+        competitor.country,
+        competitor.gender,
+        competitor.age_group_entry_description
       ]
     end
   end
