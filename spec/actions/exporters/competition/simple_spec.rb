@@ -82,5 +82,4 @@ describe Exporters::Competition::Simple do
       expect(rows.first).to eq(expected_row)
     end
   end
-
 end
