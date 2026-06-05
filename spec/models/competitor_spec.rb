@@ -250,8 +250,8 @@ describe Competitor do
     end
 
     it "returns the first registrant when two registrants" do
-      @comp.registrants << FactoryBot.create(:registrant)
-      @comp.save!
+      FactoryBot.create(:member, competitor: @comp)
+      expect(@comp.registrants.count).to eq(2)
       expect(@comp.registrants.map(&:external_id)).to include(@comp.export_id)
     end
   end
@@ -612,6 +612,61 @@ describe Competitor do
     end
 
     it "is ineligible itself" do
+      expect(@comp).to be_ineligible
+    end
+  end
+
+  describe "with an eligible registrant and an ineligible registrant" do
+    before do
+      FactoryBot.create(:member, registrant: FactoryBot.create(:registrant, ineligible: true), competitor: @comp)
+    end
+
+    it "is eligible if score whatever the proportion of ineligible members" do
+      competition = @comp.reload.competition
+      competition.rule_for_ineligible_competitors = 0
+      competition.save!
+      expect(@comp).not_to be_ineligible
+    end
+
+    it "is ineligible if score only if no ineligible member" do
+      competition = @comp.reload.competition
+      competition.rule_for_ineligible_competitors = 100
+      competition.save!
+      expect(@comp).to be_ineligible
+    end
+
+    it "is eligible if score if at least half the team is eligible" do
+      competition = @comp.reload.competition
+      competition.rule_for_ineligible_competitors = 50
+      competition.save!
+      expect(@comp).not_to be_ineligible
+    end
+  end
+
+  describe "with an eligible registrant and two ineligible registrants" do
+    before do
+      FactoryBot.create(:member, registrant: FactoryBot.create(:registrant, ineligible: true), competitor: @comp)
+      FactoryBot.create(:member, registrant: FactoryBot.create(:registrant, ineligible: true), competitor: @comp)
+    end
+
+    it "is eligible if score whatever the proportion of ineligible members" do
+      competition = @comp.reload.competition
+      competition.rule_for_ineligible_competitors = 0
+      competition.save!
+      expect(@comp).not_to be_ineligible
+    end
+
+    it "is ineligible if score only if no ineligible member" do
+      competition = @comp.reload.competition
+      competition.rule_for_ineligible_competitors = 100
+      competition.save!
+      expect(@comp).to be_ineligible
+    end
+
+    it "is ineligible if score if at least half the team is eligible" do
+      competition = @comp.reload.competition
+      competition.rule_for_ineligible_competitors = 50
+      competition.save!
       expect(@comp).to be_ineligible
     end
   end

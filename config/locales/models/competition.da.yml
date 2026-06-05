@@ -15,6 +15,10 @@ da:
         penalty_seconds: Secunder pr. Straf
         scheduled_completion_at: Planlagt tidspunkt for afslutning
         scoring_class: Scoring Type
+        rule_for_ineligible_competitors: Udelukkelse af deltagere
+        always_score: Bedøm de deltagere, der ikke er kvalificerede, som om de var kvalificerede
+        never_score: Giv aldrig point til deltagere, der ikke er kvalificerede
+        score_if_at_least_half_eligible: Der gives point, hvis mindst halvdelen af medlemmerne er valgbare
         start_data_type: Start Line Data Entry
         uses_lane_assignments: Konkurer i baner/heats
     models:

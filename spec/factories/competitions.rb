@@ -28,10 +28,10 @@
 #  time_entry_columns                               :string           default("minutes_seconds_thousands")
 #  import_results_into_other_competition            :boolean          default(FALSE), not null
 #  base_age_group_type_id                           :integer
-#  score_ineligible_competitors                     :boolean          default(FALSE), not null
 #  results_header                                   :string
 #  hide_max_laps_count                              :boolean          default(FALSE), not null
 #  allow_competitor_creation_during_import_approval :boolean          default(FALSE), not null
+#  rule_for_ineligible_competitors                  :integer          default(100), not null
 #
 # Indexes
 #

@@ -14,6 +14,10 @@ es:
         penalty_seconds: Segundos por penalización
         scheduled_completion_at: Tiempo de finalización Programado
         scoring_class: Tipo de puntuación
+        rule_for_ineligible_competitors: Inelegibilidad de los participantes
+        always_score: Puntuar a los participantes no admisibles como si fueran admisibles
+        never_score: Nunca puntúes a participantes que no cumplan los requisitos
+        score_if_at_least_half_eligible: Se puntúa si al menos la mitad de los miembros cumplen los requisitos
         start_data_type: Entrada de datos de la Linea de Salida
         uses_lane_assignments: Compite en Carriles / Series
     models:
