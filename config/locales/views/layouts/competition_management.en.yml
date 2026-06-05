@@ -3,3 +3,4 @@ en:
   layouts:
     competition_management:
       registration_system_access_notice: This Browser has access to the Registration System
+      download_competitors: Download competitors in CSV

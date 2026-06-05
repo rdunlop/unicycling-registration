@@ -19,6 +19,15 @@ class ExportController < ApplicationController
     output_csv(exporter.headers, exporter.rows, filename)
   end
 
+  def download_competitors
+    competition = Competition.find(params[:competition_id])
+    exporter = Exporters::Competition::Simple.new(competition)
+    tenant_short_name = @config.short_name.downcase.gsub(/[^0-9a-z]/, '_')
+    competition_name = competition.to_s.downcase.gsub(/[^0-9a-z]/, '_')
+    filename = "#{tenant_short_name}_#{competition_name}_competitors.csv"
+    output_csv(exporter.headers, exporter.rows, filename)
+  end
+
   def download_events
     exporter = Exporters::EventsExporter.new
     headers = exporter.headers

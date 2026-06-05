@@ -617,6 +617,8 @@ Rails.application.routes.draw do
       resources :competitions, only: %i[edit update destroy]
     end
     resources :competitions, only: [:show] do
+      get 'export/download_competitors', to: 'export#download_competitors', as: :export_download_competitors
+
       member do
         get :set_sort
         put :toggle_final_sort
