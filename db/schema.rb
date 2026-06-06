@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_21_022913) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_05_112734) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -237,8 +237,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_022913) do
     t.integer "penalty_seconds"
     t.datetime "published_at", precision: nil
     t.string "results_header"
+    t.integer "rule_for_ineligible_competitors", default: 100, null: false
     t.datetime "scheduled_completion_at", precision: nil
-    t.boolean "score_ineligible_competitors", default: false, null: false
     t.string "scoring_class"
     t.boolean "sign_in_list_enabled", default: false, null: false
     t.string "start_data_type"

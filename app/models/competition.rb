@@ -28,10 +28,10 @@
 #  time_entry_columns                               :string           default("minutes_seconds_thousands")
 #  import_results_into_other_competition            :boolean          default(FALSE), not null
 #  base_age_group_type_id                           :integer
-#  score_ineligible_competitors                     :boolean          default(FALSE), not null
 #  results_header                                   :string
 #  hide_max_laps_count                              :boolean          default(FALSE), not null
 #  allow_competitor_creation_during_import_approval :boolean          default(FALSE), not null
+#  rule_for_ineligible_competitors                  :integer          default(100), not null
 #
 # Indexes
 #
@@ -144,6 +144,15 @@ class Competition < ApplicationRecord
             :can_eliminate_judges?, :freestyle_summary?,
             :result_description, :compete_in_order?, :scoring_description,
             :example_result, :imports_times?, :imports_points?, :results_path, :scoring_path, to: :scoring_helper
+
+  def self.rules_for_ineligible_competitors
+    [
+      [I18n.t("activerecord.attributes.competition.never_score"), 100],
+      [I18n.t("activerecord.attributes.competition.always_score"), 0],
+      [I18n.t("activerecord.attributes.competition.score_if_at_least_half_eligible"), 50]
+    ]
+  end
+  validates :rule_for_ineligible_competitors, presence: true, comparison: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
   after_commit :update_age_group_if_necessary, on: %i[create update]
 
@@ -508,6 +517,11 @@ class Competition < ApplicationRecord
     best_attempts_for_each_competitor = competitors.map(&:max_successful_distance_attempt).compact
 
     best_attempts_for_each_competitor.sort { |a, b| b.distance <=> a.distance }
+  end
+
+  # Backwards-compatibility hack
+  def score_ineligible_competitors?
+    rule_for_ineligible_competitors == 0
   end
 
   private

@@ -16,6 +16,10 @@ fr:
         penalty_seconds: Secondes par pénalités
         scheduled_completion_at: Heure de fin prévue
         scoring_class: Type de score
+        rule_for_ineligible_competitors: Inéligibilité des compétiteurs
+        always_score: Classer les compétiteurs inéligibles comme s'ils étaient éligibles
+        never_score: Ne jamais classer les compétiteurs inéligibles
+        score_if_at_least_half_eligible: Classer les équipes si au moins la moitié des membres sont éligibles
         start_data_type: Donnée de départ
         uses_lane_assignments: Sera attribué à la ligne/vague
     models:

@@ -15,6 +15,10 @@ nl:
         penalty_seconds: Secondes per strafpunt
         scheduled_completion_at: Geplande competietijd
         scoring_class: Score type
+        rule_for_ineligible_competitors: Uitsluiting van deelnemers
+        always_score: Beoordeel deelnemers die niet in aanmerking komen alsof ze dat wel doen
+        never_score: Geef nooit punten aan deelnemers die niet in aanmerking komen
+        score_if_at_least_half_eligible: Er wordt gescoord als ten minste de helft van de leden in aanmerking komt
         start_data_type: Manier van ingeven van de startdata
         uses_lane_assignments: Competitie in heats of banen
     models:

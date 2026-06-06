@@ -418,15 +418,15 @@ class Competitor < ApplicationRecord
     Rails.cache.fetch("/competitor/#{id}-#{updated_at}/ineligible") do
       return true unless active?
 
-      if members.empty?
+      # If no member or always score, whatever the competitor ineligibility is
+      rule_for_ineligible_competitors = competition.rule_for_ineligible_competitors
+      if members.empty? || rule_for_ineligible_competitors == 0
         false
       else
-        eligibles = members.map(&:ineligible?)
-        if eligibles.uniq.count > 1
-          true # includes both eligible status AND ineligible status
-        else
-          eligibles.first
-        end
+        # If the percentage of ineligible members is greater than `rule_for_ineligible_competitors`,
+        # then the competitor is considered as ineligible
+        percentage = 100.0 * members.filter(&:ineligible?).count.to_f / members.count
+        percentage > (100 - rule_for_ineligible_competitors)
       end
     end
   end

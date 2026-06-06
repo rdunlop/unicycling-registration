@@ -15,6 +15,10 @@ de:
         penalty_seconds: Sekunden pro Strafe
         scheduled_completion_at: Geplante Vervollständigungszeit
         scoring_class: Wertungstyp
+        rule_for_ineligible_competitors: Ungeeignete Teilnehmer
+        always_score: Ungeeignete Teilnehmer so bewerten, als wären sie geeignet
+        never_score: Ungeeignete Teilnehmer niemals werten
+        score_if_at_least_half_eligible: Werten, wenn mindestens die Hälfte der Mitglieder geeignet ist
         start_data_type: Starliniendaten Eingabe
         uses_lane_assignments: Teilnahme in Reihen / Läufen
     models: 

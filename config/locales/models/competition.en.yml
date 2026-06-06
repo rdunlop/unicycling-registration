@@ -6,6 +6,10 @@ en:
         name: Competition Name
         scheduled_completion_at: Scheduled Completion Time
         scoring_class: Scoring Type
+        rule_for_ineligible_competitors: Competitors Ineligibility
+        always_score: Score ineligible competitors as if they were eligible
+        never_score: Never score ineligible competitors
+        score_if_at_least_half_eligible: Score if at least half of the members are eligible
         num_members_per_competitor: Team Size
         penalty_seconds: Seconds per Penalty
         uses_lane_assignments: Compete in Lanes/Heats

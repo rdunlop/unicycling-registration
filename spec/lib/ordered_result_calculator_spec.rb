@@ -96,6 +96,55 @@ describe OrderedResultCalculator do
         expect(@tr3.competitor.place).to eq(2)
       end
     end
+
+    describe "with a 'Always Score' ineligibility policy" do
+      describe "with an ineligible registrant in first place" do
+        before do
+          @competition.rule_for_ineligible_competitors = 0
+          @competition.save!
+          r = @tr1.competitor.reload.members.first.registrant
+          r.ineligible = true
+          r.save!
+          @tr1.reload
+        end
+
+        it "sets the competitor places to same order as the points" do
+          recalc
+          @tr2.reload
+          @tr3.reload
+
+          expect(@tr1.competitor.place).to eq(1)
+          expect(@tr2.competitor.place).to eq(2)
+          expect(@tr3.competitor.place).to eq(3)
+          expect(@tr4.competitor.place).to eq(4)
+        end
+      end
+    end
+
+    describe "with a 'Score if at least half the team is eligible' ineligibility policy" do
+      describe "with an ineligible team in first place" do
+        before do
+          @competition.rule_for_ineligible_competitors = 50
+          @competition.save!
+          r = @tr1.competitor.reload.members.first.registrant
+          r.ineligible = true
+          r.save!
+          FactoryBot.create(:member, competitor: @tr1.competitor, registrant: FactoryBot.create(:registrant, ineligible: true))
+          @tr1.reload
+        end
+
+        it "places the first 2 competitors as first" do
+          recalc
+          @tr2.reload
+          @tr3.reload
+
+          expect(@tr1.competitor.place).to eq(1)
+          expect(@tr2.competitor.place).to eq(1)
+          expect(@tr3.competitor.place).to eq(2)
+          expect(@tr4.competitor.place).to eq(3)
+        end
+      end
+    end
   end
 
   describe "when calculating the placing of higher-points-is-better races" do

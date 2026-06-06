@@ -14,6 +14,10 @@ it:
         penalty_seconds: Secondi di penalità
         scheduled_completion_at: Orario finale previsto
         scoring_class: Punteggio di categoria
+        rule_for_ineligible_competitors: Inammissibilità dei concorrenti
+        always_score: Valutare i concorrenti non ammessi come se fossero ammessi
+        never_score: Non assegnare mai punti a concorrenti non ammessi
+        score_if_at_least_half_eligible: Si ottiene un punto se almeno la metà dei membri soddisfa i requisiti
         start_data_type: Immissione dati della partenza
         uses_lane_assignments: Gara in corsie/in batterie
     models:
