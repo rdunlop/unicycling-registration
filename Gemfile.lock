@@ -499,7 +499,7 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (8.0.1)
+    puma (8.0.2)
       nio4r (~> 2.0)
     pundit (2.5.2)
       activesupport (>= 3.0.0)
@@ -569,7 +569,7 @@ GEM
       railties (>= 7.0)
     rolify (6.0.1)
     rollbar (3.8.0)
-    ros-apartment (3.4.3)
+    ros-apartment (3.4.4)
       activerecord (>= 7.0.0, < 8.2)
       activesupport (>= 7.0.0, < 8.2)
       parallel (< 2.0)
@@ -627,7 +627,7 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
-    rubyzip (3.3.0)
+    rubyzip (3.3.1)
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
