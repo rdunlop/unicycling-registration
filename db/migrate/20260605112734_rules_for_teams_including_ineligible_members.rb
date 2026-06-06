@@ -12,17 +12,8 @@ class RulesForTeamsIncludingIneligibleMembers < ActiveRecord::Migration[8.1]
   def down
     add_column :competitions, :score_ineligible_competitors, :boolean, null: false, default: false
     execute <<-SQL
-        UPDATE competitions c1
-        SET score_ineligible_competitors = (
-            SELECT
-                -- If 0% of members have to be eligible to score => score ineligible competitors
-                CASE WHEN c2.rule_for_ineligible_competitors = 0 THEN true
-                -- Otherwise => don't score ineligible competitors
-                    ELSE false
-                END
-            FROM competitions c2
-            WHERE c1.id = c2.id
-        )
+        UPDATE competitions
+        SET score_ineligible_competitors = (rule_for_ineligible_competitors = 0)
     SQL
     remove_column :competitions, :rule_for_ineligible_competitors, :integer, null: false
   end
