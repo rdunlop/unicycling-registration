@@ -31,6 +31,6 @@ FactoryBot.define do
     points { 50 }
     minutes { 45 }
     seconds { 42 }
-    details { "50 pts (45m 42s)"}
+    details { "50 pts (45m 42s)" }
   end
 end

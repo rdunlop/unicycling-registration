@@ -38,8 +38,7 @@ describe TrialsResultsController do
       "status" => "active",
       "points" => 50,
       "minutes" => 45,
-      "seconds" => 42
-    }
+      "seconds" => 42 }
   end
 
   describe "GET index" do

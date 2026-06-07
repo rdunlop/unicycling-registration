@@ -31,7 +31,7 @@ class TrialsResult < ApplicationRecord
   validates :competitor_id, uniqueness: true
   validates :status, inclusion: { in: TrialsResult.status_values }
 
-  belongs_to :entered_by, class_name: 'User', foreign_key: :entered_by_id
+  belongs_to :entered_by, class_name: 'User', inverse_of: false
 
   validates :points, presence: true
   validates :minutes, presence: true, numericality: { greater_than_or_equal_to: 0 }
