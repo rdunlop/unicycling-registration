@@ -45,7 +45,7 @@ describe TrialsResultsController do
     it "shows all trials_results" do
       FactoryBot.create(:trials_result, competitor: @competitor)
       get :index, params: { competition_id: @competition.id }
-      assert_select "h1", "New Entered Trials Result"
+      assert_select "h1", "Enter New Trials Result"
 
       assert_select "form", action: competition_trials_results_path(@competition), method: "post" do
         assert_select "select#trials_result_competitor_id", name: "trials_result[competitor_id]"
@@ -67,8 +67,8 @@ describe TrialsResultsController do
       assert_select "form", action: trials_result_path(trials_result), method: "put" do
         assert_select "select#trials_result_competitor_id", name: "trials_result[competitor_id]"
         assert_select "input#trials_result_points", name: "trials_result[points]"
-        assert_select "input#trials_result_minutes", name: "trials_result[points]"
-        assert_select "input#trials_result_seconds", name: "trials_result[points]"
+        assert_select "input#trials_result_minutes", name: "trials_result[minutes]"
+        assert_select "input#trials_result_seconds", name: "trials_result[seconds]"
         assert_select "input#trials_result_details", name: "trials_result[details]"
         assert_select "select#trials_result_status", name: "trials_result[status]"
       end
@@ -94,7 +94,7 @@ describe TrialsResultsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(TrialsResult).to receive(:save).and_return(false)
         post :create, params: { trials_result: { "competitor_id" => "invalid value" }, competition_id: @competition.id }
-        assert_select "h1", "New Entered Trials Result"
+        assert_select "h1", "Enter New Trials Result"
       end
     end
   end
