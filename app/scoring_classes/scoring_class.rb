@@ -151,6 +151,12 @@ class ScoringClass
         calculator: StandardSkillResultCalculator.new,
         helper: StandardSkillScoringClass.new(competition)
       }
+    when "Trials"
+      {
+        calculator: TrialsResultCalculator.new,
+        exporter: EnteredDataExporter::PointsTime.new(competition),
+        helper: PointsTimeScoringClass.new(competition, false)
+      }
     else
       {
         calculator: nil,

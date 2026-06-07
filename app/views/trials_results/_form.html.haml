@@ -1,0 +1,29 @@
+= simple_form_for(@trials_result.new_record? ? [@competition, @trials_result] : @trials_result) do |f|
+  - if @trials_result.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@trials_result.errors.count, "error")
+        prohibited this trials_result from being saved:
+      %ul
+        - @trials_result.errors.full_messages.each do |msg|
+          %li= msg
+
+  %table
+    %thead
+      %tr
+        %th= f.label :competitor_id
+        %th= f.label :points
+        %th= f.label :minutes
+        %th= f.label :seconds
+        %th= f.label :details
+        %th= f.label :status
+    %tbody
+      %tr
+        %td.ui-widget
+          = competitor_select_box(f, @competition)
+        %td= f.number_field :points, input_html: {min: 0, :step => 0.001 }
+        %td= f.number_field :minutes, input_html: {min: 0}
+        %td= f.number_field :seconds, input_html: {min: 0, max: 59}
+        %td= f.text_field :details
+        %td= f.select :status, TrialsResult.status_values, include_blank: false
+        %td= f.button :submit

@@ -1,0 +1,32 @@
+%h1 Listing Entered-Trials Results for #{@competition}
+%table.sortable
+  %thead
+    %tr
+      %th Competitor
+      %th= TrialsResult.human_attribute_name(:points)
+      %th= TrialsResult.human_attribute_name(:minutes)
+      %th= TrialsResult.human_attribute_name(:seconds)
+      %th= TrialsResult.human_attribute_name(:details)
+      %th ID
+      %th Name
+      %th Age Group
+      %th Place
+      %th Overall Place
+      %th
+      %th
+  %tbody
+    - @competition.trials_results.active.each do |trials_result|
+      - next unless trials_result.persisted?
+      %tr
+        %td= trials_result.competitor
+        %td= trials_result.points
+        %td= trials_result.minutes
+        %td= trials_result.seconds
+        %td= trials_result.details
+        %td= trials_result.competitor.bib_number
+        %td= trials_result.competitor
+        %td= trials_result.competitor.age_group_entry_description
+        %td= trials_result.competitor.place_formatted
+        %td= trials_result.competitor.overall_place_formatted
+        %td= link_to t("edit"), edit_trials_result_path(trials_result)
+        %td= link_to t("delete"), trials_result, method: :delete, data: { confirm: t("are_you_sure") }

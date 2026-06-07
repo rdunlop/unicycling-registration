@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_05_112734) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_06_162953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1330,6 +1330,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_05_112734) do
     t.text "text"
     t.datetime "updated_at", precision: nil
     t.index ["phrase_id", "locale_id"], name: "index_tolk_translations_on_phrase_id_and_locale_id", unique: true
+  end
+
+  create_table "trials_results", force: :cascade do |t|
+    t.integer "competitor_id", null: false
+    t.datetime "created_at", null: false
+    t.string "details"
+    t.datetime "entered_at", null: false
+    t.integer "entered_by_id", null: false
+    t.integer "minutes", null: false
+    t.integer "points", null: false
+    t.boolean "preliminary", null: false
+    t.integer "seconds", null: false
+    t.string "status", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competitor_id"], name: "index_trials_results_on_competitor_id", unique: true
   end
 
   create_table "two_attempt_entries", id: :serial, force: :cascade do |t|

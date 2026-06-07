@@ -1,0 +1,23 @@
+%h1 Trials Competitions
+
+%p
+  Trials competitions use points as a primary ranking system, and time as a tie-breaker.
+
+%h2 Data Entry
+
+// FIXME: add screenshots
+
+%h3 Manual Entry
+= image_tag "screenshots/external_points_form.png", class: "screenshot"
+
+OR
+%h3 Upload CSV of Results
+= image_tag "screenshots/external_points_import.png", class: "screenshot"
+
+%hr
+
+- if @event.present?
+  %p
+    - params = { "competition[scoring_class]" => "Trials", "competition[num_members_per_competitor]" => "One" }
+    = link_to "Click here", new_event_competition_path(@event, params), class: "button"
+    to continue setting up your "Trials" Competition.
