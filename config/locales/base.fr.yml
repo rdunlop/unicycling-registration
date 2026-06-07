@@ -1,5 +1,6 @@
 ---
 fr:
+  age_group: Groupe d’âge
   are_you_sure: Êtes-vous certain?
   back: Retour
   breadcrumbs:
@@ -17,10 +18,14 @@ fr:
     - :month
     - :year
   delete: Supprimer
+  details: Détails
   edit: Modifier
   example: Exemple
+  id: ID
   language_name: Français
   membership_number: Numéro d'adhérent
+  minutes: Minutes
+  name: Nom
   'no': Non
   noncompetitor: Non-compétiteur
   note: Note
@@ -28,11 +33,16 @@ fr:
     french_federation: Fédération française (CNM)
     iuf: UIF
     usa: USA
+  overall_place: Classement général
   pdf: "(pdf)"
-  prices_increase_at_date: Les prix augmentent das %{end_date}
-  prices_increase_soon: Les prix augmentent en moins d'un jour
+  place: Classement
+  points: Points
+  prices_increase_at_date: Les prix augmentent dans %{end_date}
+  prices_increase_soon: Les prix augmentent dans moins d'un jour
+  seconds: Secondes
   show: Montrer
   spectator: Spectateur
+  status: Statut
   validations:
     duplicate: Doit être unique
   wizard:

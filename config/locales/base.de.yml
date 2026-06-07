@@ -1,5 +1,6 @@
 ---
 de:
+  age_group: Altersklasse
   are_you_sure: Bist du sicher?
   back: Zurück
   breadcrumbs:
@@ -17,21 +18,30 @@ de:
     - :day
     - :year
   delete: Enfernen
+  details: Details
   edit: Bearbeiten
   example: Beispiel
+  id: ID
   language_name: Deutsch
   membership_number: Mitglieds Nummer
+  minutes: Minuten
+  name: Name
   'no': Nein
   noncompetitor: Begleiter
   note: Anmerkung
   organization_membership_types:
     french_federation: French Federation
     usa: USA
+  overall_place: Gesamtplatzierung
   pdf: "(pdf)"
+  place: Platzierung
+  points: Punkte
   prices_increase_at_date: Der Preis steigt in %{end_date}
   prices_increase_soon: Der Preis steigt in weniger als einem Tag
+  seconds: Sekunden
   show: Anzeigen
   spectator: Zuschauer
+  status: Status
   validations:
     duplicate: Muss einmalig sein
   wizard:

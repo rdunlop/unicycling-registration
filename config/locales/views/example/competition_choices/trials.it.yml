@@ -1,0 +1,10 @@
+---
+it:
+  example:
+    competition_choices:
+      trials:
+        trials_competition: Competizioni di trial
+        description: Le competizioni di trial utilizzano i punti come sistema di classifica principale e il tempo come spareggio.
+        data_entry: Inserimento dati
+        manual_entry: Inserimento manuale
+        click_here: Clicca qui

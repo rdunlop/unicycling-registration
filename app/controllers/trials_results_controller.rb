@@ -11,7 +11,7 @@ class TrialsResultsController < ApplicationController
   # GET /competitions/#/trials_results
   def index
     authorize @competition, :view_result_data?
-    add_breadcrumb "Trials Results"
+    add_breadcrumb I18n.t("controllers.trials_results.results")
 
     @trials_result = TrialsResult.new
     @trials_results = @competition.trials_results.active
@@ -29,7 +29,7 @@ class TrialsResultsController < ApplicationController
       @trials_result.entered_by = current_user
       @trials_result.entered_at = Time.current
       if @trials_result.save
-        format.html { redirect_to competition_trials_results_path(@competition), notice: 'Trials result was successfully created.' }
+        format.html { redirect_to competition_trials_results_path(@competition), notice: I18n.t("controllers.trials_results.successful_creation") }
         format.json { render json: @trials_result, status: :created, location: @trials_result }
       else
         @trials_results = @competition.trials_results.active
@@ -42,7 +42,7 @@ class TrialsResultsController < ApplicationController
   # GET /trials_results/1/edit
   def edit
     add_to_competition_breadcrumb(@competition)
-    add_breadcrumb "Edit Result"
+    add_breadcrumb I18n.t("controllers.trials_results.edit_result")
   end
 
   # PUT /trials_results/1
@@ -50,7 +50,7 @@ class TrialsResultsController < ApplicationController
   def update
     respond_to do |format|
       if @trials_result.update(trials_result_params)
-        format.html { redirect_to competition_trials_results_path(@trials_result.competition), notice: 'Trials result was successfully updated.' }
+        format.html { redirect_to competition_trials_results_path(@trials_result.competition), notice: I18n.t("controllers.trials_results.successful_update") }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

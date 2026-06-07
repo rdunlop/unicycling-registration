@@ -1,0 +1,5 @@
+---
+en:
+  trials_results:
+    results:
+      listing_results: Listing Entered-Trials Results for %{competition}

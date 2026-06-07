@@ -1,0 +1,10 @@
+---
+da:
+  example:
+    competition_choices:
+      trials:
+        trials_competition: Trial-konkurrencer
+        description: Trial-konkurrencer bruger point som det primære rangeringssystem og tid som afgørelse ved pointlighed.
+        data_entry: Dataindtastning
+        manual_entry: Manuel indtastning
+        click_here: Klik her

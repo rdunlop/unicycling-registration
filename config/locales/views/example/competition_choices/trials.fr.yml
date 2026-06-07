@@ -1,0 +1,10 @@
+---
+fr:
+  example:
+    competition_choices:
+      trials:
+        trials_competition: Compétitions de trial
+        description: Les compétitions de trial utilisent les points comme système de classement principal, et le temps comme critère de départage.
+        data_entry: Saisie de données
+        manual_entry: Saisie manuelle
+        click_here: Cliquez ici

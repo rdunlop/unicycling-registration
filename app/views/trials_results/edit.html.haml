@@ -1,3 +1,3 @@
-%h1 Editing Trials result
+%h1= t(".editing_trials_result")
 = render 'form'
-= link_to 'Back', competition_trials_results_path(@competition)
+= link_to t('back'), competition_trials_results_path(@competition)

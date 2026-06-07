@@ -1,0 +1,7 @@
+---
+en:
+  trials_results:
+    index:
+      delete_all: Delete All
+      delete_all_confirmation: This will delete ALL Trials Data for this competition. Are you sure?
+      enter_new_result: Enter New Trials Result

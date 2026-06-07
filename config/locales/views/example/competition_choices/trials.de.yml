@@ -1,0 +1,10 @@
+---
+de:
+  example:
+    competition_choices:
+      trials:
+        trials_competition: Trial-Wettkämpfe
+        description: Bei Trial-Wettkämpfen dienen die Punkte als primäres Wertungssystem und die Zeit als Entscheidung bei Gleichstand.
+        data_entry: Dateneingabe
+        manual_entry: Manuelle Eingabe
+        click_here: Klicke hier

@@ -1,0 +1,7 @@
+---
+da:
+  trials_results:
+    index:
+      delete_all: Slet alle
+      delete_all_confirmation: Dette vil slette ALLE trial-data for denne konkurrence. Er du sikker?
+      enter_new_result: Indtast nyt trial-resultat

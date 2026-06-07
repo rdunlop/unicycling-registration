@@ -1,0 +1,7 @@
+---
+de:
+  trials_results:
+    index:
+      delete_all: Alle löschen
+      delete_all_confirmation: Dadurch werden ALLE Trial-Daten dieses Wettkampfs gelöscht. Bist du sicher?
+      enter_new_result: Neues Trial-Ergebnis eingeben
