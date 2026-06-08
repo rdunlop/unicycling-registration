@@ -327,7 +327,7 @@ class AwardLabelsController < ApplicationController
     previous_bib_number = 0
     names = []
     labels.each do |label|
-      if separate_registrants && (previous_bib_number != 0 && label.bib_number != previous_bib_number)
+      if separate_registrants && previous_bib_number != 0 && label.bib_number != previous_bib_number
         # add 3 blanks
         names << ""
         names << ""
