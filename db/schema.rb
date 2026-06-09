@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_05_112734) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_09_023608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -1255,6 +1255,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_05_112734) do
   end
 
   create_table "tenant_aliases", id: :serial, force: :cascade do |t|
+    t.string "acm_cert_status"
+    t.string "acm_certificate_arn"
+    t.string "acm_dns_validation_cname_name"
+    t.string "acm_dns_validation_cname_value"
     t.datetime "created_at", precision: nil
     t.boolean "primary_domain", default: false, null: false
     t.integer "tenant_id", null: false

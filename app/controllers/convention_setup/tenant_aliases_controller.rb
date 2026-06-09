@@ -26,6 +26,7 @@ class ConventionSetup::TenantAliasesController < ConventionSetup::BaseConvention
   def create
     @tenant_alias = @tenant.tenant_aliases.build(tenant_alias_params)
     if @tenant_alias.save
+      RequestAcmCertificateJob.perform_later(@tenant_alias.id)
       flash[:notice] = "Created Alias"
       redirect_to tenant_aliases_path
     else

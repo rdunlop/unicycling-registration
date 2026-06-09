@@ -24,3 +24,12 @@ en:
         must_save_warning: |
           Before you can activate the alias, you must "Save Record" it.
         alias_is_primary_domain: This Alias is now the primary domain.
+        acm_cert_header: SSL Certificate (AWS ACM)
+        acm_cert_issued: "✓ SSL certificate issued and active in AWS Certificate Manager."
+        acm_cert_failed: "SSL certificate request failed. Please contact support or retry via the admin panel."
+        acm_cert_pending: SSL certificate request is pending. AWS Certificate Manager is waiting for you to add a DNS validation record.
+        acm_cname_instructions: "Add the following CNAME record to your domain's DNS settings to validate the SSL certificate:"
+        acm_cname_name_header: CNAME Name
+        acm_cname_value_header: CNAME Value
+        acm_cname_not_ready: DNS validation record is being generated — please refresh this page in a few minutes.
+        acm_cert_not_requested: No SSL certificate has been requested yet. If you just saved this domain, a request will be made automatically within a few minutes.
