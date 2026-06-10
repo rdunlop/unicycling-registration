@@ -17,9 +17,6 @@ COPY .ruby-version Gemfile Gemfile.lock ./
 RUN bundle config set without 'development test cucumber' \
  && bundle install --jobs=4 --retry=3
 
-COPY package.json ./
-RUN npm install
-
 COPY . .
 
 RUN bundle exec rails assets:precompile
