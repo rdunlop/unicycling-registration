@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   tablexi: tablexi/standard@0.0.7
+
 executors:
   my_executor:
     # The working directory is important, so that we
@@ -81,6 +82,25 @@ jobs:
       - store_test_results:
           path: test_results
 
+  build_and_push_docker:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - run:
+          name: Login to ECR
+          command: |
+            aws ecr get-login-password --region $AWS_DEFAULT_REGION | \
+              docker login --username AWS --password-stdin \
+              $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - run:
+          name: Build and push Docker image
+          command: |
+            ECR_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/unicycling-registration
+            docker build -f Dockerfile.production -t $ECR_URL:$CIRCLE_SHA1 -t $ECR_URL:latest .
+            docker push $ECR_URL:$CIRCLE_SHA1
+            docker push $ECR_URL:latest
+
   release_stage:
     executor: my_executor
     steps:
@@ -125,6 +145,16 @@ workflows:
           executor: my_executor
           requires:
             - build
+      - build_and_push_docker:
+          requires:
+            - rspec
+            - tablexi/rubocop
+            - tablexi/bundle_audit
+            - tablexi/check_db_schema
+          filters:
+            branches:
+              only:
+                - main
       - release_stage:
           requires:
             - rspec
