@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   tablexi: tablexi/standard@0.0.7
+  aws-ecr: circleci/aws-ecr@9
+
 executors:
   my_executor:
     # The working directory is important, so that we
@@ -81,6 +83,18 @@ jobs:
       - store_test_results:
           path: test_results
 
+  build_and_push_docker:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - aws-ecr/build_and_push_image:
+          dockerfile: Dockerfile.production
+          repo: unicycling-registration
+          tag: "$CIRCLE_SHA1,latest"
+          region: "${AWS_DEFAULT_REGION}"
+          registry-id: AWS_ACCOUNT_ID
+
   release_stage:
     executor: my_executor
     steps:
@@ -125,6 +139,16 @@ workflows:
           executor: my_executor
           requires:
             - build
+      - build_and_push_docker:
+          requires:
+            - rspec
+            - tablexi/rubocop
+            - tablexi/bundle_audit
+            - tablexi/check_db_schema
+          filters:
+            branches:
+              only:
+                - main
       - release_stage:
           requires:
             - rspec

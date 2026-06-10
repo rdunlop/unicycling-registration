@@ -1,0 +1,8 @@
+node_modules
+public/assets
+tmp
+log
+spec
+.git
+.circleci
+coverage
