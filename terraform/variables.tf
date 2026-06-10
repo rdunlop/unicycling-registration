@@ -49,3 +49,8 @@ variable "wildcard_domain" {
   default     = null
   description = "What is the wildcard domain (*.regtest.unicycling-software.com) pointing to the ALB. Enable to route all tenant subdomains through the ALB."
 }
+
+variable "iam_user_name" {
+  type        = string
+  description = "Name of the existing IAM user the app runs as (uniregtest for staging, uniregistration for prod)"
+}

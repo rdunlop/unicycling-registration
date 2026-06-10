@@ -1,4 +1,5 @@
 environment         = "prod"
+iam_user_name       = "uniregistration"
 domain              = "reg.unicycling-software.com"
 subject_alt_names   = ["*.reg.unicycling-software.com"]
 wildcard_domain     = "*.reg.unicycling-software.com"

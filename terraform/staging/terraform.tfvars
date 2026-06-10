@@ -1,4 +1,5 @@
 environment         = "staging"
+iam_user_name       = "uniregtest"
 domain              = "regtest.unicycling-software.com"
 subject_alt_names   = ["*.regtest.unicycling-software.com"]
 wildcard_domain     = "*.regtest.unicycling-software.com"
