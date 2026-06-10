@@ -42,7 +42,6 @@ COPY --from=builder /app/config.ru .
 COPY --from=builder /app/db ./db
 COPY --from=builder /app/lib ./lib
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/vendor ./vendor
 COPY --from=builder /app/Gemfile .
 COPY --from=builder /app/Gemfile.lock .
 COPY --from=builder /app/Rakefile .
