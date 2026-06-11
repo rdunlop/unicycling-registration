@@ -28,16 +28,29 @@ resource "aws_ecr_lifecycle_policy" "app" {
   repository = aws_ecr_repository.app.name
 
   policy = jsonencode({
-    rules = [{
-      rulePriority = 1
-      description  = "Keep last 20 images"
-      selection = {
-        tagStatus   = "any"
-        countType   = "imageCountMoreThan"
-        countNumber = 20
-      }
-      action = { type = "expire" }
-    }]
+    rules = [
+      {
+        rulePriority = 10
+        description  = "Keep last 5 prod deployments (rollback buffer)"
+        selection = {
+          tagStatus     = "tagged"
+          tagPrefixList = ["prod-"]
+          countType     = "imageCountMoreThan"
+          countNumber   = 5
+        }
+        action = { type = "expire" }
+      },
+      {
+        rulePriority = 20
+        description  = "Keep last 10 images (current staging + recent undeployed builds)"
+        selection = {
+          tagStatus   = "any"
+          countType   = "imageCountMoreThan"
+          countNumber = 10
+        }
+        action = { type = "expire" }
+      },
+    ]
   })
 }
 
@@ -55,9 +68,8 @@ resource "aws_iam_access_key" "circleci" {
   user = aws_iam_user.circleci.name
 }
 
-resource "aws_iam_user_policy" "circleci_ecr" {
-  name = "ecr-push"
-  user = aws_iam_user.circleci.name
+resource "aws_iam_policy" "circleci" {
+  name = "circleci-unicycling-registration"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -81,8 +93,59 @@ resource "aws_iam_user_policy" "circleci_ecr" {
         ]
         Resource = aws_ecr_repository.app.arn
       },
+      {
+        Sid      = "EC2DescribeSGs"
+        Effect   = "Allow"
+        Action   = "ec2:DescribeSecurityGroups"
+        Resource = "*"
+      },
+      {
+        Sid    = "ECSTaskDefs"
+        Effect = "Allow"
+        Action = [
+          "ecs:DescribeTaskDefinition",
+          "ecs:RegisterTaskDefinition",
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "ECSRunTask"
+        Effect = "Allow"
+        Action = "ecs:RunTask"
+        Resource = [
+          "arn:aws:ecs:us-west-2:*:task-definition/unicycling-registration-*:*",
+          "arn:aws:ecs:us-west-2:*:cluster/unicycling-registration-*",
+        ]
+      },
+      {
+        Sid    = "ECSInspect"
+        Effect = "Allow"
+        Action = [
+          "ecs:DescribeTasks",
+          "ecs:DescribeServices",
+          "ecs:WaitUntilTasksStopped",
+        ]
+        Resource = "*"
+      },
+      {
+        Sid      = "ECSUpdateService"
+        Effect   = "Allow"
+        Action   = "ecs:UpdateService"
+        Resource = "arn:aws:ecs:us-west-2:*:service/unicycling-registration-*/*"
+      },
+      {
+        Sid      = "PassECSRoles"
+        Effect   = "Allow"
+        Action   = "iam:PassRole"
+        Resource = "arn:aws:iam::*:role/unicycling-registration-*-ecs-*"
+      },
     ]
   })
+}
+
+resource "aws_iam_user_policy_attachment" "circleci" {
+  user       = aws_iam_user.circleci.name
+  policy_arn = aws_iam_policy.circleci.arn
 }
 
 output "circleci_access_key_id" {

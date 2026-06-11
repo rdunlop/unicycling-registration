@@ -1,18 +1,26 @@
 class Redis
   def self.cache_configuration
-    configuration do |config|
-      # Can be far out because it's main purpose is to mark it as evictable
-      # by Redis's volatile-lru setting.
-      # http://redis.io/topics/lru-cache
-      config[:expires_in] = 1.year
-      # Provided by redis-namespace gem
-      config[:namespace] = -> { "CACHE_#{Apartment::Tenant.current}" }
+    if ENV["REDIS_CACHE_URL"]
+      # ECS: dedicated cache sidecar (redis://127.0.0.1:6379/1 set by task definition)
+      { url: ENV["REDIS_CACHE_URL"], expires_in: 1.year, namespace: -> { "CACHE_#{Apartment::Tenant.current}" } }
+    else
+      # EC2: legacy host/port/db config
+      configuration do |config|
+        config[:expires_in] = 1.year
+        config[:namespace] = -> { "CACHE_#{Apartment::Tenant.current}" }
+      end
     end
   end
 
   def self.sidekiq_configuration
-    configuration do |config|
-      config[:db] += 1
+    if ENV["REDIS_URL"]
+      # ECS: ElastiCache via URL (shared across all containers)
+      { url: ENV["REDIS_URL"] }
+    else
+      # EC2: legacy host/port/db config; sidekiq uses db+1 to avoid colliding with cache
+      configuration do |config|
+        config[:db] += 1
+      end
     end
   end
 

@@ -1,5 +1,13 @@
 environment         = "staging"
 iam_user_name       = "uniregtest"
+rails_env           = "stage"
+ecs_traffic_weight  = 0
+image_tag           = "4246e544b974801240704881994dc3134c2c864e"
+
+ecr_repository_url = "197931692346.dkr.ecr.us-west-2.amazonaws.com/unicycling-registration"
+elasticache_security_group_id = "sg-e4640f81"
+rds_security_group_id = "sg-d51560b0"
+
 domain              = "regtest.unicycling-software.com"
 subject_alt_names   = ["*.regtest.unicycling-software.com"]
 wildcard_domain     = "*.regtest.unicycling-software.com"

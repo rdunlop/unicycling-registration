@@ -1,5 +1,13 @@
 environment         = "prod"
 iam_user_name       = "uniregistration"
+rails_env           = "production"
+ecs_traffic_weight  = 0
+image_tag           = "4246e544b974801240704881994dc3134c2c864e"
+
+ecr_repository_url = "197931692346.dkr.ecr.us-west-2.amazonaws.com/unicycling-registration"
+elasticache_security_group_id = "sg-e4640f81"
+rds_security_group_id = "sg-d51560b0"
+
 domain              = "reg.unicycling-software.com"
 subject_alt_names   = ["*.reg.unicycling-software.com"]
 wildcard_domain     = "*.reg.unicycling-software.com"

@@ -17,3 +17,23 @@ output "https_listener_arn" {
   description = "ARN of the HTTPS ALB listener — set as ALB_LISTENER_ARN in SSM/env so the Rails app can attach per-tenant ACM certs at runtime"
   value       = aws_lb_listener.https.arn
 }
+
+output "ecs_cluster_name" {
+  description = "ECS cluster name"
+  value       = aws_ecs_cluster.app.name
+}
+
+output "ecs_web_service_name" {
+  description = "ECS web service name"
+  value       = aws_ecs_service.web.name
+}
+
+output "ecs_sidekiq_service_name" {
+  description = "ECS sidekiq service name"
+  value       = aws_ecs_service.sidekiq.name
+}
+
+output "ecs_target_group_arn" {
+  description = "ARN of the ECS ALB target group"
+  value       = aws_lb_target_group.ecs.arn
+}
