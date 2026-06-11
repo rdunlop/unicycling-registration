@@ -54,6 +54,29 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+# ECS target group — ip type required for Fargate awsvpc networking.
+resource "aws_lb_target_group" "ecs" {
+  name        = "unicycling-reg-${var.environment}-ecs"
+  port        = 3000
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      = var.vpc_id
+
+  health_check {
+    path                = "/"
+    healthy_threshold   = 2
+    unhealthy_threshold = 3
+    interval            = 30
+    timeout             = 10
+    matcher             = "200-399"
+  }
+
+  tags = {
+    Name        = "unicycling-reg-${var.environment}-ecs"
+    Environment = var.environment
+  }
+}
+
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.app.arn
   port              = 443
@@ -61,8 +84,19 @@ resource "aws_lb_listener" "https" {
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
   certificate_arn   = aws_acm_certificate_validation.app.certificate_arn
 
+  # Weighted split between EC2 and ECS. Set ecs_traffic_weight=0 to keep all
+  # traffic on EC2, or raise it gradually during cutover (Phase 8/11).
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
+    type = "forward"
+    forward {
+      target_group {
+        arn    = aws_lb_target_group.app.arn
+        weight = 100 - var.ecs_traffic_weight
+      }
+      target_group {
+        arn    = aws_lb_target_group.ecs.arn
+        weight = var.ecs_traffic_weight
+      }
+    }
   }
 }

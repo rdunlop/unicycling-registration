@@ -54,3 +54,39 @@ variable "iam_user_name" {
   type        = string
   description = "Name of the existing IAM user the app runs as (uniregtest for staging, uniregistration for prod)"
 }
+
+variable "rails_env" {
+  type        = string
+  description = "RAILS_ENV value inside the container (stage for staging, production for prod)"
+}
+
+variable "elasticache_security_group_id" {
+  type        = string
+  description = "Security group ID attached to the ElastiCache instance; ECS tasks will be granted port 6379 ingress"
+}
+
+variable "rds_security_group_id" {
+  type        = string
+  description = "Security group ID attached to the shared RDS instance; ECS tasks will be granted port 5432 ingress"
+}
+
+variable "ecr_repository_url" {
+  type        = string
+  description = "ECR repository URL without tag — from terraform/global output ecr_repository_url"
+}
+
+variable "image_tag" {
+  type        = string
+  description = "Image tag to deploy (git SHA from CircleCI, or 'latest' for initial apply)"
+}
+
+variable "ecs_traffic_weight" {
+  type        = number
+  default     = 0
+  description = "Percentage of ALB traffic sent to ECS (0–100). EC2 receives the remainder. Start at 0, raise gradually during cutover."
+
+  validation {
+    condition     = var.ecs_traffic_weight >= 0 && var.ecs_traffic_weight <= 100
+    error_message = "ecs_traffic_weight must be between 0 and 100."
+  }
+}

@@ -31,7 +31,11 @@ RUN apt-get update -qq \
 RUN useradd -m -u 1000 app
 
 WORKDIR /app
-ENV BUNDLE_PATH=/gems RAILS_ENV=production RAILS_LOG_TO_STDOUT=1
+
+ENV BUNDLE_PATH=/gems \
+    RAILS_ENV=production \
+    RAILS_LOG_TO_STDOUT=1 \
+    BUNDLE_WITHOUT=development:test:cucumber
 
 COPY --from=builder /gems /gems
 
@@ -44,6 +48,7 @@ COPY --from=builder /app/lib ./lib
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/Gemfile .
 COPY --from=builder /app/Gemfile.lock .
+COPY --from=builder /app/.ruby-version .
 COPY --from=builder /app/Rakefile .
 COPY --from=builder /app/docker-entrypoint.sh .
 
