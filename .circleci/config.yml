@@ -294,12 +294,20 @@ workflows:
             branches:
               only:
                 - main
-      - release_stage:
+      - approve-stage-cap:
+          type: approval
           requires:
             - rspec
             - tablexi/rubocop
             - tablexi/bundle_audit
             - tablexi/check_db_schema
+          filters:
+            branches:
+              only:
+                - main
+      - release_stage:
+          requires:
+            - approve-stage-cap
           filters:
             branches:
               only:
@@ -322,10 +330,17 @@ workflows:
             branches:
               only:
                 - main
-      - approve-prod-push:
+      - approve-prod-cap:
           type: approval
           requires:
             - release_stage
+          filters:
+            branches:
+              only:
+                - main
+      - approve-prod-push:
+          type: approval
+          requires:
             - deploy_staging
           filters:
             branches:
@@ -333,7 +348,7 @@ workflows:
                 - main
       - release_prod:
           requires:
-            - approve-prod-push
+            - approve-prod-cap
           filters:
             branches:
               only:
