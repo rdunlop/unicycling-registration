@@ -54,7 +54,7 @@ class ImportResult < ApplicationRecord
   before_validation :set_zeros
 
   def disqualified?
-    status == "DQ" || status == "DNF"
+    ["DQ", "DNF"].include?(status)
   end
 
   # import the result in the results table, raise an exception on failure
