@@ -64,6 +64,7 @@ gem 'puma'
 gem 'rake'
 gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
+gem 'lograge'
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
