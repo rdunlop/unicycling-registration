@@ -1,7 +1,7 @@
 environment         = "staging"
 iam_user_name       = "uniregtest"
 rails_env           = "stage"
-ecs_traffic_weight  = 0
+ecs_traffic_weight  = 100
 image_tag           = "6a51828fb823ca8ba235ebbd8dfdd239a00f9b91"
 
 ecr_repository_url = "197931692346.dkr.ecr.us-west-2.amazonaws.com/unicycling-registration"
