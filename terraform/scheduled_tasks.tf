@@ -26,7 +26,7 @@ resource "aws_iam_role_policy" "eventbridge_ecs" {
       {
         Effect   = "Allow"
         Action   = "ecs:RunTask"
-        Resource = "arn:aws:ecs:us-west-2:${data.aws_caller_identity.current.account_id}:task-definition/${aws_ecs_task_definition.web.family}"
+        Resource = "arn:aws:ecs:us-west-2:${data.aws_caller_identity.current.account_id}:task-definition/${aws_ecs_task_definition.web.family}:*"
         Condition = {
           ArnLike = { "ecs:cluster" = aws_ecs_cluster.app.arn }
         }
