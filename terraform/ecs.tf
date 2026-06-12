@@ -126,8 +126,8 @@ resource "aws_ecs_task_definition" "web" {
   family                   = "unicycling-registration-${var.environment}-web"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 512
-  memory                   = 1024
+  cpu                      = 1024
+  memory                   = 2048
   execution_role_arn       = aws_iam_role.ecs_execution.arn
   task_role_arn            = aws_iam_role.ecs_task.arn
 
@@ -163,8 +163,8 @@ resource "aws_ecs_task_definition" "sidekiq" {
   family                   = "unicycling-registration-${var.environment}-sidekiq"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 512
-  memory                   = 1024
+  cpu                      = 1024
+  memory                   = 2048
   execution_role_arn       = aws_iam_role.ecs_execution.arn
   task_role_arn            = aws_iam_role.ecs_task.arn
 
