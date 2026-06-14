@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: trials_results
+#
+#  id            :bigint           not null, primary key
+#  competitor_id :integer          not null
+#  points        :integer          not null
+#  minutes       :integer          not null
+#  seconds       :integer          not null
+#  details       :string
+#  entered_at    :datetime         not null
+#  entered_by_id :integer          not null
+#  status        :string           not null
+#  preliminary   :boolean          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+# Indexes
+#
+#  index_trials_results_on_competitor_id  (competitor_id) UNIQUE
+#
+
 require 'spec_helper'
 
 describe TrialsResult do
