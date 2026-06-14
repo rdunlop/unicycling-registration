@@ -43,7 +43,7 @@ GEM
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.31)
+    acme-client (2.0.32)
       base64 (~> 0.2)
       faraday (>= 1.0, < 3.0.0)
       faraday-retry (>= 1.0, < 3.0.0)
@@ -335,7 +335,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.4.3)
+    faraday-net_http (3.4.4)
       net-http (~> 0.5)
     faraday-retry (2.4.0)
       faraday (~> 2.0)
