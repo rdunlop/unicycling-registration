@@ -16,7 +16,7 @@ class TrialsResultCalculator
   def competitor_comparable_result(competitor, with_ineligible: nil) # rubocop:disable Lint/UnusedMethodArgument
     if competitor.has_result?
       # Assuming the time result is less than 11.5 days (1,000,000 seconds)
-      competitor.trials_result.points * 1_000_000 - competitor.trials_result.minutes * 60 - competitor.trials_result.seconds
+      (competitor.trials_result.points * 1_000_000) - (competitor.trials_result.minutes * 60) - competitor.trials_result.seconds
     else
       0
     end
