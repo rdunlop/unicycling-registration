@@ -21,8 +21,8 @@ class TrialsResultsController < ApplicationController
     end
   end
 
-  # POST /trials_results
-  # POST /trials_results.json
+  # POST /competitions/#/trials_results
+  # POST /competitions/#/trials_results.json
   def create
     respond_to do |format|
       @trials_result.preliminary = false
@@ -39,14 +39,14 @@ class TrialsResultsController < ApplicationController
     end
   end
 
-  # GET /trials_results/1/edit
+  # GET /competitions/#/trials_results/1/edit
   def edit
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb I18n.t("controllers.trials_results.edit_result")
   end
 
-  # PUT /trials_results/1
-  # PUT /trials_results/1.json
+  # PUT /competitions/#/trials_results/1
+  # PUT /competitions/#/trials_results/1.json
   def update
     respond_to do |format|
       if @trials_result.update(trials_result_params)
@@ -59,8 +59,8 @@ class TrialsResultsController < ApplicationController
     end
   end
 
-  # DELETE /trials_results/1
-  # DELETE /trials_results/1.json
+  # DELETE /competitions/#/trials_results/1
+  # DELETE /competitions/#/trials_results/1.json
   def destroy
     @trials_result.destroy
 
