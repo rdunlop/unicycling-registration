@@ -15,7 +15,6 @@
 #  volunteer_choices_reg_vol_opt_unique                 (registrant_id,volunteer_opportunity_id) UNIQUE
 #
 
-
 require 'spec_helper'
 
 describe VolunteerChoice do
