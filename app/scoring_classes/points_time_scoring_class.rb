@@ -1,16 +1,12 @@
 class PointsTimeScoringClass < BaseScoringClass
-  attr_accessor :lower_is_better
-  attr_accessor :lower_time_is_better
-
-  def initialize(competition, lower_points_is_better = true)
+  def initialize(competition)
     super(competition)
-    @lower_is_better = lower_points_is_better
   end
 
   def scoring_description
     "Externally scored competition results are entered, in which the points and time
     of competitors are entered, and a 'details' column, which is a description of the result
-    (for use on the awards/results sheets). #{lower_is_better ? 'Lower' : 'Higher'} points are better."
+    (for use on the awards/results sheets). Higher points are better, and lower time is better in case of a tie."
   end
 
   # describes how to label the results of this competition

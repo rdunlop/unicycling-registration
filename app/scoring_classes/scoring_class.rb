@@ -155,7 +155,7 @@ class ScoringClass
       {
         calculator: TrialsResultCalculator.new,
         exporter: EnteredDataExporter::PointsTime.new(competition),
-        helper: PointsTimeScoringClass.new(competition, false)
+        helper: PointsTimeScoringClass.new(competition)
       }
     else
       {
