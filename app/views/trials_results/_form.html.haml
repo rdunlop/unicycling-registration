@@ -21,7 +21,7 @@
       %tr
         %td.ui-widget
           = competitor_select_box(f, @competition)
-        %td= f.number_field :points, input_html: {min: 0, :step => 0.001 }
+        %td= f.number_field :points, input_html: {min: 0 }
         %td= f.number_field :minutes, input_html: {min: 0}
         %td= f.number_field :seconds, input_html: {min: 0, max: 59}
         %td= f.text_field :details
