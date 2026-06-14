@@ -9,7 +9,7 @@ class TrialsResultCalculator
     if competitor.has_result?
       return if competitor.trials_result.status == "DQ"
 
-      competitor.trials_result.try(:details)
+      competitor.trials_result.details
     end
   end
 
