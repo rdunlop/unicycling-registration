@@ -59,9 +59,6 @@ class TrialsResult < ApplicationRecord
     status == "DQ"
   end
 
-  def result
-    "#{points} (#{minutes}m #{seconds}s)"
-  end
 
   private
 
