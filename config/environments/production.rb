@@ -68,7 +68,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
-  if Rails.configuration.redis_host
+  if ENV["REDIS_CACHE_URL"] || Rails.configuration.redis_host
     config.cache_store = :redis_cache_store, Redis.cache_configuration
   end
 

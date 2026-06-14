@@ -224,6 +224,6 @@ class Payment < ApplicationRecord
 
   # has an offline payment now transitioned to completed?
   def offline_payment_now_completed?
-    offline_pending_before_last_save && (completed? && saved_change_to_completed?)
+    offline_pending_before_last_save && completed? && saved_change_to_completed?
   end
 end

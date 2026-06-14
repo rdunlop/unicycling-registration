@@ -1,0 +1,63 @@
+# ---- Stage 1: Builder ----
+FROM ruby:3.2.10 AS builder
+
+RUN apt-get update -qq \
+ && apt-get install -y --no-install-recommends build-essential libpq-dev curl \
+ && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+ && apt-get install -y nodejs \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+ENV BUNDLE_PATH=/gems \
+    RAILS_ENV=production \
+    SECRET_KEY_BASE=dummy-for-asset-compilation \
+    APARTMENT_DISABLE_INIT=1
+
+COPY .ruby-version Gemfile Gemfile.lock ./
+RUN bundle config set without 'development test cucumber' \
+ && bundle install --jobs=4 --retry=3
+
+COPY . .
+
+RUN bundle exec rails assets:precompile
+
+# ---- Stage 2: Runtime ----
+FROM ruby:3.2.10-slim
+
+RUN apt-get update -qq \
+ && apt-get install -y --no-install-recommends libpq5 libfontconfig1 libxrender1 \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m -u 1000 app
+
+WORKDIR /app
+
+ENV BUNDLE_PATH=/gems \
+    RAILS_ENV=production \
+    RAILS_LOG_TO_STDOUT=1 \
+    BUNDLE_WITHOUT=development:test:cucumber
+
+COPY --from=builder /gems /gems
+
+COPY --from=builder /app/app ./app
+COPY --from=builder /app/bin ./bin
+COPY --from=builder /app/config ./config
+COPY --from=builder /app/config.ru .
+COPY --from=builder /app/db ./db
+COPY --from=builder /app/lib ./lib
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/Gemfile .
+COPY --from=builder /app/Gemfile.lock .
+COPY --from=builder /app/.ruby-version .
+COPY --from=builder /app/Rakefile .
+COPY --from=builder /app/docker-entrypoint.sh .
+
+RUN mkdir -p tmp/pids log \
+ && chmod +x docker-entrypoint.sh \
+ && chown -R app:app /app /gems
+
+USER app
+
+EXPOSE 3000
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

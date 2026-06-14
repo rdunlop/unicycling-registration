@@ -43,3 +43,28 @@
           = t(".set_as_primary_domain")
   - else
     %p= t(".must_save_warning")
+
+- if @tenant_alias.persisted?
+  %hr
+  %h2= t(".acm_cert_header")
+  - if @tenant_alias.acm_cert_issued?
+    %p.success= t(".acm_cert_issued")
+  - elsif @tenant_alias.acm_cert_failed?
+    %p.alert= t(".acm_cert_failed")
+  - elsif @tenant_alias.acm_cert_pending?
+    %p= t(".acm_cert_pending")
+    - if @tenant_alias.acm_validation_configured?
+      %p= t(".acm_cname_instructions")
+      %table
+        %thead
+          %tr
+            %th= t(".acm_cname_name_header")
+            %th= t(".acm_cname_value_header")
+        %tbody
+          %tr
+            %td= @tenant_alias.acm_dns_validation_cname_name
+            %td= @tenant_alias.acm_dns_validation_cname_value
+    - else
+      %p= t(".acm_cname_not_ready")
+  - else
+    %p= t(".acm_cert_not_requested")

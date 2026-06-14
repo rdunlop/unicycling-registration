@@ -2,13 +2,17 @@
 #
 # Table name: public.tenant_aliases
 #
-#  id             :integer          not null, primary key
-#  tenant_id      :integer          not null
-#  website_alias  :string           not null
-#  primary_domain :boolean          default(FALSE), not null
-#  created_at     :datetime
-#  updated_at     :datetime
-#  verified       :boolean          default(FALSE), not null
+#  id                             :integer          not null, primary key
+#  tenant_id                      :integer          not null
+#  website_alias                  :string           not null
+#  primary_domain                 :boolean          default(FALSE), not null
+#  created_at                     :datetime
+#  updated_at                     :datetime
+#  verified                       :boolean          default(FALSE), not null
+#  acm_certificate_arn            :string
+#  acm_dns_validation_cname_name  :string
+#  acm_dns_validation_cname_value :string
+#  acm_cert_status                :string
 #
 # Indexes
 #

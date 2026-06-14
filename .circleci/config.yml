@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   tablexi: tablexi/standard@0.0.7
+
 executors:
   my_executor:
     # The working directory is important, so that we
@@ -81,6 +82,24 @@ jobs:
       - store_test_results:
           path: test_results
 
+  build_and_push_docker:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - run:
+          name: Login to ECR
+          command: |
+            aws ecr get-login-password --region $AWS_DEFAULT_REGION | \
+              docker login --username AWS --password-stdin \
+              $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - run:
+          name: Build and push Docker image
+          command: |
+            ECR_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/unicycling-registration
+            docker build -f Dockerfile.production -t $ECR_URL:$CIRCLE_SHA1 .
+            docker push $ECR_URL:$CIRCLE_SHA1
+
   release_stage:
     executor: my_executor
     steps:
@@ -90,7 +109,7 @@ jobs:
       - tablexi/wait_for_other_builds
 
       - run:
-          name: Deploy
+          name: Deploy (EC2 staging)
           no_output_timeout: 20m
           command: bundle exec cap stage deploy
 
@@ -101,9 +120,149 @@ jobs:
           at: ~/tmp
 
       - run:
-          name: Deploy
+          name: Deploy (EC2 prod)
           no_output_timeout: 20m
           command: bundle exec cap prod deploy
+
+  migrate_db:
+    parameters:
+      environment:
+        type: string
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - run:
+          name: Register task definition and run db:migrate (<< parameters.environment >>)
+          command: |
+            set -euo pipefail
+            ENVIRONMENT="<< parameters.environment >>"
+            ECR_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/unicycling-registration"
+            CLUSTER="unicycling-registration-${ENVIRONMENT}"
+            WEB_FAMILY="unicycling-registration-${ENVIRONMENT}-web"
+
+            SG_ID=$(aws ec2 describe-security-groups \
+              --filters "Name=group-name,Values=unicycling-registration-${ENVIRONMENT}-ecs-tasks" \
+              --query 'SecurityGroups[0].GroupId' \
+              --output text)
+
+            # Register a new web task definition revision with the new image.
+            # ECS container overrides don't support image changes; a revision is required.
+            TMPFILE=$(mktemp)
+            aws ecs describe-task-definition \
+              --task-definition "${WEB_FAMILY}" \
+              --query 'taskDefinition' \
+              --output json | \
+              jq --arg IMAGE "${ECR_URL}:${CIRCLE_SHA1}" \
+                'del(.taskDefinitionArn,.revision,.status,.requiresAttributes,.compatibilities,.registeredAt,.registeredBy) |
+                 .containerDefinitions[0].image = $IMAGE' > "$TMPFILE"
+
+            NEW_TD_ARN=$(aws ecs register-task-definition \
+              --cli-input-json "file://${TMPFILE}" \
+              --query 'taskDefinition.taskDefinitionArn' \
+              --output text)
+            rm -f "$TMPFILE"
+            echo "Registered ${NEW_TD_ARN}"
+
+            TASK_ARN=$(aws ecs run-task \
+              --cluster "${CLUSTER}" \
+              --task-definition "${NEW_TD_ARN}" \
+              --launch-type FARGATE \
+              --network-configuration "awsvpcConfiguration={subnets=[${ECS_SUBNET_ID}],securityGroups=[${SG_ID}],assignPublicIp=ENABLED}" \
+              --overrides '{"containerOverrides":[{"name":"web","command":["bundle","exec","rails","db:migrate"]}]}' \
+              --query 'tasks[0].taskArn' \
+              --output text)
+
+            echo "Waiting for task ${TASK_ARN} ..."
+            aws ecs wait tasks-stopped --cluster "${CLUSTER}" --tasks "${TASK_ARN}"
+
+            EXIT_CODE=$(aws ecs describe-tasks \
+              --cluster "${CLUSTER}" \
+              --tasks "${TASK_ARN}" \
+              --query 'tasks[0].containers[0].exitCode' \
+              --output text)
+
+            echo "Task exited with code: ${EXIT_CODE}"
+            [ "${EXIT_CODE}" = "0" ] || { echo "db:migrate failed"; exit 1; }
+
+  deploy_ecs:
+    parameters:
+      environment:
+        type: string
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - run:
+          name: Deploy to ECS (<< parameters.environment >>)
+          command: |
+            set -euo pipefail
+            ENVIRONMENT="<< parameters.environment >>"
+            ECR_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/unicycling-registration"
+            CLUSTER="unicycling-registration-${ENVIRONMENT}"
+            WEB_FAMILY="unicycling-registration-${ENVIRONMENT}-web"
+            SIDEKIQ_FAMILY="unicycling-registration-${ENVIRONMENT}-sidekiq"
+            WEB_SERVICE="unicycling-registration-${ENVIRONMENT}-web"
+            SIDEKIQ_SERVICE="unicycling-registration-${ENVIRONMENT}-sidekiq"
+
+            # migrate_db already registered a new web revision; fetch its ARN.
+            WEB_TD_ARN=$(aws ecs describe-task-definition \
+              --task-definition "${WEB_FAMILY}" \
+              --query 'taskDefinition.taskDefinitionArn' \
+              --output text)
+            echo "Web task definition: ${WEB_TD_ARN}"
+
+            # Register a matching sidekiq revision with the same new image.
+            TMPFILE=$(mktemp)
+            aws ecs describe-task-definition \
+              --task-definition "${SIDEKIQ_FAMILY}" \
+              --query 'taskDefinition' \
+              --output json | \
+              jq --arg IMAGE "${ECR_URL}:${CIRCLE_SHA1}" \
+                'del(.taskDefinitionArn,.revision,.status,.requiresAttributes,.compatibilities,.registeredAt,.registeredBy) |
+                 .containerDefinitions[0].image = $IMAGE' > "$TMPFILE"
+
+            SIDEKIQ_TD_ARN=$(aws ecs register-task-definition \
+              --cli-input-json "file://${TMPFILE}" \
+              --query 'taskDefinition.taskDefinitionArn' \
+              --output text)
+            rm -f "$TMPFILE"
+            echo "Sidekiq task definition: ${SIDEKIQ_TD_ARN}"
+
+            # Point both services at the new task definitions and trigger a rolling deploy.
+            aws ecs update-service \
+              --cluster "${CLUSTER}" \
+              --service "${WEB_SERVICE}" \
+              --task-definition "${WEB_TD_ARN}" \
+              --force-new-deployment \
+              --query 'service.serviceName' --output text
+
+            aws ecs update-service \
+              --cluster "${CLUSTER}" \
+              --service "${SIDEKIQ_SERVICE}" \
+              --task-definition "${SIDEKIQ_TD_ARN}" \
+              --force-new-deployment \
+              --query 'service.serviceName' --output text
+
+            echo "Waiting for services to stabilise..."
+            aws ecs wait services-stable \
+              --cluster "${CLUSTER}" \
+              --services "${WEB_SERVICE}" "${SIDEKIQ_SERVICE}"
+
+            # Tag the deployed image so the ECR lifecycle policy protects it from expiration.
+            # prod-<sha> tags are kept by the prod- lifecycle rule; staging images
+            # are always recent enough to be covered by the catch-all rule.
+            MANIFEST=$(aws ecr batch-get-image \
+              --repository-name unicycling-registration \
+              --image-ids imageTag="${CIRCLE_SHA1}" \
+              --query 'images[0].imageManifest' \
+              --output text)
+
+            aws ecr put-image \
+              --repository-name unicycling-registration \
+              --image-tag "${ENVIRONMENT}-${CIRCLE_SHA1}" \
+              --image-manifest "$MANIFEST"
+
+            echo "Tagged image as ${ENVIRONMENT}-${CIRCLE_SHA1}"
+            echo "Deploy complete."
 
 workflows:
   version: 2
@@ -125,7 +284,7 @@ workflows:
           executor: my_executor
           requires:
             - build
-      - release_stage:
+      - build_and_push_docker:
           requires:
             - rspec
             - tablexi/rubocop
@@ -135,7 +294,43 @@ workflows:
             branches:
               only:
                 - main
-      - approve-prod-push:
+      - approve-stage-cap:
+          type: approval
+          requires:
+            - rspec
+            - tablexi/rubocop
+            - tablexi/bundle_audit
+            - tablexi/check_db_schema
+          filters:
+            branches:
+              only:
+                - main
+      - release_stage:
+          requires:
+            - approve-stage-cap
+          filters:
+            branches:
+              only:
+                - main
+      - migrate_db:
+          name: migrate_staging
+          environment: staging
+          requires:
+            - build_and_push_docker
+          filters:
+            branches:
+              only:
+                - main
+      - deploy_ecs:
+          name: deploy_staging
+          environment: staging
+          requires:
+            - migrate_staging
+          filters:
+            branches:
+              only:
+                - main
+      - approve-prod-cap:
           type: approval
           requires:
             - release_stage
@@ -143,9 +338,35 @@ workflows:
             branches:
               only:
                 - main
+      - approve-prod-push:
+          type: approval
+          requires:
+            - deploy_staging
+          filters:
+            branches:
+              only:
+                - main
       - release_prod:
           requires:
+            - approve-prod-cap
+          filters:
+            branches:
+              only:
+                - main
+      - migrate_db:
+          name: migrate_prod
+          environment: prod
+          requires:
             - approve-prod-push
+          filters:
+            branches:
+              only:
+                - main
+      - deploy_ecs:
+          name: deploy_prod
+          environment: prod
+          requires:
+            - migrate_prod
           filters:
             branches:
               only:

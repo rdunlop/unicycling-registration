@@ -23,7 +23,7 @@ class CouponApplier
       self.error ||= "Coupon Code not applicable to this order"
     end
 
-    self.error.nil?
+    error.nil?
   end
 
   private

@@ -133,7 +133,7 @@ GEM
     annotaterb (4.22.0)
       activerecord (>= 6.0.0)
       activesupport (>= 6.0.0)
-    ast (2.4.2)
+    ast (2.4.3)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
     avo (3.32.0)
@@ -159,6 +159,9 @@ GEM
       aws-sdk-sesv2 (~> 1, >= 1.34.0)
     aws-eventstream (1.4.0)
     aws-partitions (1.1252.0)
+    aws-sdk-acm (1.105.0)
+      aws-sdk-core (~> 3, >= 3.248.0)
+      aws-sigv4 (~> 1.5)
     aws-sdk-core (3.248.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -167,6 +170,9 @@ GEM
       bigdecimal
       jmespath (~> 1, >= 1.6.1)
       logger
+    aws-sdk-elasticloadbalancingv2 (1.153.0)
+      aws-sdk-core (~> 3, >= 3.248.0)
+      aws-sigv4 (~> 1.5)
     aws-sdk-kms (1.118.0)
       aws-sdk-core (~> 3, >= 3.239.1)
       aws-sigv4 (~> 1.5)
@@ -275,7 +281,7 @@ GEM
     concurrent-ruby (1.3.6)
     connection_pool (2.5.5)
     consistency_fail (0.3.7)
-    countries (7.1.1)
+    countries (8.1.0)
       unaccent (~> 0.3)
     country_select (11.0.0)
       countries (> 6.0, < 9.0)
@@ -391,7 +397,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (7.0.0)
       railties (>= 3.2.16)
-    json (2.19.8)
+    json (2.19.9)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -405,8 +411,14 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     kostya-sigar (2.0.11)
-    language_server-protocol (3.17.0.3)
+    language_server-protocol (3.17.0.5)
+    lint_roller (1.1.0)
     logger (1.7.0)
+    lograge (0.14.0)
+      actionpack (>= 4)
+      activesupport (>= 4)
+      railties (>= 4)
+      request_store (~> 1.0)
     loofah (2.25.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -469,7 +481,7 @@ GEM
       activerecord (>= 7.1)
       request_store (~> 1.4)
     parallel (1.28.0)
-    parser (3.3.6.0)
+    parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
     pdf-core (0.9.0)
@@ -559,7 +571,7 @@ GEM
       redis-client (>= 0.22.0)
     redis-client (0.26.4)
       connection_pool
-    regexp_parser (2.10.0)
+    regexp_parser (2.12.0)
     reline (0.6.3)
       io-console (~> 0.5)
     request_store (1.7.0)
@@ -603,25 +615,29 @@ GEM
     rspec-support (3.13.7)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (1.68.0)
+    rubocop (1.87.0)
       json (~> 2.3)
-      language_server-protocol (>= 3.17.0)
-      parallel (~> 1.10)
+      language_server-protocol (~> 3.17.0.2)
+      lint_roller (~> 1.1.0)
+      parallel (>= 1.10)
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 2.4, < 3.0)
-      rubocop-ast (>= 1.32.2, < 2.0)
+      regexp_parser (>= 2.9.3, < 3.0)
+      rubocop-ast (>= 1.49.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.37.0)
-      parser (>= 3.3.1.0)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.49.1)
+      parser (>= 3.3.7.2)
+      prism (~> 1.7)
     rubocop-rails (2.28.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rspec (3.2.0)
-      rubocop (~> 1.61)
+    rubocop-rspec (3.10.2)
+      lint_roller (~> 1.1)
+      regexp_parser (>= 2.0)
+      rubocop (~> 1.86, >= 1.86.2)
     ruby-ole (1.2.13.1)
     ruby-progressbar (1.13.0)
     ruby-vips (2.3.0)
@@ -675,9 +691,9 @@ GEM
       babel-source (>= 5.8.11)
       babel-transpiler
       sprockets (>= 3.0.0)
-    sprockets-rails (3.4.2)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
+    sprockets-rails (3.5.2)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     sshkit (1.25.0)
       base64
@@ -714,7 +730,9 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unaccent (0.4.0)
-    unicode-display_width (2.6.0)
+    unicode-display_width (3.2.0)
+      unicode-emoji (~> 4.1)
+    unicode-emoji (4.2.0)
     uniform_notifier (1.18.0)
     uri (1.1.1)
     useragent (0.16.11)
@@ -763,6 +781,8 @@ DEPENDENCIES
   autoprefixer-rails
   avo
   aws-actionmailer-ses
+  aws-sdk-acm
+  aws-sdk-elasticloadbalancingv2
   aws-sdk-rails
   breadcrumbs_on_rails
   bullet
@@ -800,6 +820,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails (~> 7.0)
   kaminari
+  lograge
   matrix
   money-rails
   nilify_blanks
