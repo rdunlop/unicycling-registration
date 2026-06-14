@@ -48,12 +48,12 @@ describe TrialsResultsController do
       assert_select "h1", "Enter New Trials Result"
 
       assert_select "form", action: competition_trials_results_path(@competition), method: "post" do
-        assert_select "select#trials_result_competitor_id", name: "trials_result[competitor_id]"
-        assert_select "input#trials_result_points", name: "trials_result[points]"
-        assert_select "input#trials_result_minutes", name: "trials_result[points]"
-        assert_select "input#trials_result_seconds", name: "trials_result[points]"
-        assert_select "input#trials_result_details", name: "trials_result[details]"
-        assert_select "select#trials_result_status", name: "trials_result[status]"
+        assert_select "select#trials_result_competitor_id[name=?]", "trials_result[competitor_id]"
+        assert_select "input#trials_result_points[name=?]", "trials_result[points]"
+        assert_select "input#trials_result_minutes[name=?]", "trials_result[minutes]"
+        assert_select "input#trials_result_seconds[name=?]", "trials_result[seconds]"
+        assert_select "input#trials_result_details[name=?]", "trials_result[details]"
+        assert_select "select#trials_result_status[name=?]", "trials_result[status]"
       end
     end
   end
@@ -65,12 +65,12 @@ describe TrialsResultsController do
       assert_select "h1", "Editing Trials result"
 
       assert_select "form", action: trials_result_path(trials_result), method: "put" do
-        assert_select "select#trials_result_competitor_id", name: "trials_result[competitor_id]"
-        assert_select "input#trials_result_points", name: "trials_result[points]"
-        assert_select "input#trials_result_minutes", name: "trials_result[minutes]"
-        assert_select "input#trials_result_seconds", name: "trials_result[seconds]"
-        assert_select "input#trials_result_details", name: "trials_result[details]"
-        assert_select "select#trials_result_status", name: "trials_result[status]"
+        assert_select "select#trials_result_competitor_id[name=?]", "trials_result[competitor_id]"
+        assert_select "input#trials_result_points[name=?]", "trials_result[points]"
+        assert_select "input#trials_result_minutes[name=?]", "trials_result[minutes]"
+        assert_select "input#trials_result_seconds[name=?]", "trials_result[seconds]"
+        assert_select "input#trials_result_details[name=?]", "trials_result[details]"
+        assert_select "select#trials_result_status[name=?]", "trials_result[status]"
       end
     end
   end
