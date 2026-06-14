@@ -1,5 +1,6 @@
 ---
 es:
+  age_group: Grupo de edad
   are_you_sure: Estás seguro?
   back: Back
   breadcrumbs:
@@ -17,21 +18,30 @@ es:
     - :day
     - :year
   delete: Elimina
+  details: Detalles
   edit: Edita
   example: Ejemplo
+  id: ID
   language_name: Spanish
   membership_number: Número de membresía
+  minutes: Minutos
+  name: Nombre
   'no': 'No'
   noncompetitor: No competidor
   note: Nota
   organization_membership_types:
     french_federation: Federación Francesa
     usa: Estados Unidos
+  overall_place: Lugar general
   pdf: "(pdf)"
+  place: Lugar
+  points: Puntos
   prices_increase_at_date: Prices Increase in %{end_date}
   prices_increase_soon: Prices Increase in less than 1 day
+  seconds: Segundos
   show: 'Mostrar:'
   spectator: Espectador
+  status: Estado
   validations:
     duplicate: Debe ser único
   wizard:

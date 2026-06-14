@@ -42,6 +42,7 @@ class Competitor < ApplicationRecord
     has_one :tie_break_adjustment
     has_many :time_results
     has_one :external_result
+    has_one :trials_result
     has_many :results, inverse_of: :competitor
     has_many :missing_age_group_entry_warnings
   end

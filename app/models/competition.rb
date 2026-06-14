@@ -72,6 +72,7 @@ class Competition < ApplicationRecord
     has_many :distance_attempts
     has_many :time_results
     has_many :external_results
+    has_many :trials_results
   end
 
   with_options through: :judges do
@@ -110,7 +111,8 @@ class Competition < ApplicationRecord
       "Shortest Time",
       "Overall Champion",
       "Standard Skill",
-      "Shortest Time with Tiers"
+      "Shortest Time with Tiers",
+      "Trials"
     ]
   end
 

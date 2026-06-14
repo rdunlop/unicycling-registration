@@ -1,0 +1,10 @@
+---
+en:
+  example:
+    competition_choices:
+      trials:
+        trials_competition: Trials Competitions
+        description: Trials competitions use points as a primary ranking system, and time as a tie-breaker.
+        data_entry: Data Entry
+        manual_entry: Manual Entry
+        click_here: Click here

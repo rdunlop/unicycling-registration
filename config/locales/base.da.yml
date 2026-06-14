@@ -1,5 +1,6 @@
 ---
 da:
+  age_group: Aldersgruppe
   are_you_sure: Er du sikker?
   back: Tilbage
   breadcrumbs:
@@ -17,17 +18,26 @@ da:
     - :day
     - :year
   delete: Slet
+  details: Detaljer
   edit: Rediger
   example: Eksempel
+  id: ID
   language_name: Danish
   membership_number: Medlems nummer
+  minutes: Minutter
+  name: Navn
   'no': Nej
   note: Note
+  overall_place: Samlet placering
   pdf: "(pdf)"
+  place: Placering
+  points: Point
   prices_increase_at_date: Priserne stiger om %{end_date}
   prices_increase_soon: Priserne stiger om mindre end én dag
+  seconds: Sekunder
   show: Vis
   spectator: Tilskuer
+  status: Status
   validations:
     duplicate: Skal være unik
   wizard:

@@ -1,0 +1,8 @@
+---
+es:
+  controllers:
+    trials_results:
+      results: Resultados de trial
+      successful_creation: El resultado de trial se creó correctamente.
+      successful_update: El resultado de trial se actualizó correctamente.
+      edit_result: Editar resultado

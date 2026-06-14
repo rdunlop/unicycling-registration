@@ -32,6 +32,8 @@ class Example::CompetitionChoicesController < ApplicationController
 
   def street; end
 
+  def trials; end
+
   def overall_champion; end
 
   def custom; end

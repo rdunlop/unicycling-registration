@@ -1336,6 +1336,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_023608) do
     t.index ["phrase_id", "locale_id"], name: "index_tolk_translations_on_phrase_id_and_locale_id", unique: true
   end
 
+  create_table "trials_results", force: :cascade do |t|
+    t.integer "competitor_id", null: false
+    t.datetime "created_at", null: false
+    t.string "details"
+    t.datetime "entered_at", null: false
+    t.integer "entered_by_id", null: false
+    t.integer "minutes", null: false
+    t.integer "points", null: false
+    t.boolean "preliminary", null: false
+    t.integer "seconds", null: false
+    t.string "status", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competitor_id"], name: "index_trials_results_on_competitor_id", unique: true
+  end
+
   create_table "two_attempt_entries", id: :serial, force: :cascade do |t|
     t.integer "bib_number"
     t.integer "competition_id"

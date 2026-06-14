@@ -93,6 +93,11 @@ FactoryBot.define do
       age_group_type # factory Girl
     end
 
+    factory :trials_competition do
+      scoring_class { "Trials" }
+      age_group_type # factory Girl
+    end
+
     trait :standard_skill do
       scoring_class { "Standard Skill" }
     end

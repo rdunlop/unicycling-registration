@@ -1,5 +1,6 @@
 ---
 en:
+  age_group: Age Group
   are_you_sure: Are you sure?
   back: Back
   breadcrumbs:
@@ -17,16 +18,25 @@ en:
     - :day
     - :year
   delete: Delete
+  details: Details
   edit: Edit
   example: Example
+  id: ID
   language_name: English
+  minutes: Minutes
+  name: Name
   'no': 'No'
   note: Note
   noncompetitor: Non-Competitor
+  overall_place: Overall Place
+  place: Place
+  points: Points
   prices_increase_at_date: Prices Increase in %{end_date}
   prices_increase_soon: Prices Increase in less than 1 day
+  seconds: Seconds
   show: Show
   spectator: Spectator
+  status: Status
   organization_membership_types:
     usa: USA
     french_federation: French Federation

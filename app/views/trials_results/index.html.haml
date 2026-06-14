@@ -1,0 +1,6 @@
+= render :partial => "results"
+- if policy(@competition).destroy_all_results?
+  = link_to t(".delete_all"), destroy_all_results_competition_path(@competition), method: :delete, class: "button small alert", data: { confirm: t('.delete_all_confirmation') }
+%br
+%h1= t('.enter_new_result')
+= render 'form'

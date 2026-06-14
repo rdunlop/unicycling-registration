@@ -1,0 +1,32 @@
+%h1= t(".listing_results", competition: @competition)
+%table.sortable
+  %thead
+    %tr
+      %th= t("competitor")
+      %th= t("points")
+      %th= t("minutes")
+      %th= t("seconds")
+      %th= t("details")
+      %th= t("id")
+      %th= t("name")
+      %th= t("age_group")
+      %th= t("place")
+      %th= t("overall_place")
+      %th
+      %th
+  %tbody
+    - @competition.trials_results.active.each do |trials_result|
+      - next unless trials_result.persisted?
+      %tr
+        %td= trials_result.competitor
+        %td= trials_result.points
+        %td= trials_result.minutes
+        %td= trials_result.seconds
+        %td= trials_result.details
+        %td= trials_result.competitor.bib_number
+        %td= trials_result.competitor
+        %td= trials_result.competitor.age_group_entry_description
+        %td= trials_result.competitor.place_formatted
+        %td= trials_result.competitor.overall_place_formatted
+        %td= link_to t("edit"), edit_trials_result_path(trials_result)
+        %td= link_to t("delete"), trials_result, method: :delete, data: { confirm: t("are_you_sure") }
