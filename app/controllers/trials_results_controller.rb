@@ -39,14 +39,14 @@ class TrialsResultsController < ApplicationController
     end
   end
 
-  # GET /competitions/#/trials_results/1/edit
+  # GET /trials_results/1/edit
   def edit
     add_to_competition_breadcrumb(@competition)
     add_breadcrumb I18n.t("controllers.trials_results.edit_result")
   end
 
-  # PUT /competitions/#/trials_results/1
-  # PUT /competitions/#/trials_results/1.json
+  # PUT /trials_results/1
+  # PUT /trials_results/1.json
   def update
     respond_to do |format|
       if @trials_result.update(trials_result_params)
@@ -59,8 +59,8 @@ class TrialsResultsController < ApplicationController
     end
   end
 
-  # DELETE /competitions/#/trials_results/1
-  # DELETE /competitions/#/trials_results/1.json
+  # DELETE /trials_results/1
+  # DELETE /trials_results/1.json
   def destroy
     @trials_result.destroy
 
