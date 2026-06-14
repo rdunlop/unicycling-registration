@@ -59,7 +59,6 @@ class TrialsResult < ApplicationRecord
     status == "DQ"
   end
 
-
   private
 
   def set_details_if_empty

@@ -1,8 +1,4 @@
 class PointsTimeScoringClass < BaseScoringClass
-  def initialize(competition)
-    super(competition)
-  end
-
   def scoring_description
     "Externally scored competition results are entered, in which the points and time
     of competitors are entered, and a 'details' column, which is a description of the result
