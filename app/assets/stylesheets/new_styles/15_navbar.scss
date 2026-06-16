@@ -29,6 +29,23 @@ $height: 50px;
   color: white;
 }
 
+.top-bar-left {
+  display: flex;
+  align-items: center;
+}
+
+// Badge showing the current event's short name, so it's always
+// obvious which event you're registering for/managing.
+.nav-event-badge {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  white-space: nowrap;
+  padding: 0.4em 0.9em;
+  margin: 0.4em 0.75em;
+  border-radius: 4px;
+}
+
 .breadcrumbs {
   padding: 0.5em 1em;
 }
