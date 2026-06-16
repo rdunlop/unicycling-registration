@@ -13,6 +13,11 @@ variable "domain" {
   description = "Primary domain for the ACM certificate and Route53 A record (e.g. registration.unicycling-software.com)"
 }
 
+variable "registration_domain" {
+  type        = string
+  description = "Domain that the ALB actually serves (e.g. registrationtest.unicycling-software.com). var.domain is created as a CNAME pointing here."
+}
+
 variable "subject_alt_names" {
   type        = list(string)
   default     = []
