@@ -7,6 +7,7 @@
 %nav.top-bar#responsive-menu
   .top-bar-left
     %ul.menu.vertical.large-horizontal
+      %li.menu-text= @config.short_name
       = render "nav_bar/my_links"
   - if user_signed_in?
     .top-bar-right
