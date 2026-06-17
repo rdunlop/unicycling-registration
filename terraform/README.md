@@ -172,6 +172,3 @@ Once all traffic has moved from EC2 to ECS (Phase 11 of the ECS migration plan),
 update the target group to use ECS instead of the EC2 instance. At that point
 `ec2_instance_id` and `ec2_security_group_id` become irrelevant and can be removed
 from the Terraform config in favour of ECS-managed target group attachments.
-
-The `apartment_acme_client` gem and its Let's Encrypt cron jobs can be removed from
-the EC2 instances — ACM auto-renews all certificates.
