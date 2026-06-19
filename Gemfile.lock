@@ -1,4 +1,10 @@
 GIT
+  remote: https://github.com/prawnpdf/ttfunk.git
+  revision: fb8a699581ceb0ee0b67649198642ee0e6b9fc7d
+  specs:
+    ttfunk (1.8.0)
+
+GIT
   remote: https://github.com/rdunlop/apartment_acme_client.git
   revision: 35ca20794af01aea0f9a793c6a052cbb35811802
   branch: allow_rails_8
@@ -720,8 +726,6 @@ GEM
     timeout (0.6.1)
     timers (4.3.5)
     tsort (0.2.0)
-    ttfunk (1.8.0)
-      bigdecimal (~> 3.1)
     turbo-rails (2.0.23)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
@@ -863,7 +867,7 @@ DEPENDENCIES
   stripe
   teaspoon-jasmine
   tolk!
-  ttfunk (= 1.8.0)
+  ttfunk!
   validates_email_format_of
   validates_timeliness
   virtus
