@@ -95,6 +95,7 @@ locals {
     { name = "RAILS_MAX_THREADS",        value = "5" },
     { name = "DOMAIN",                   value = var.domain },
     { name = "SSL_ENABLED",              value = "false" },
+    { name = "ROBOTS_DISALLOW_ALL",      value = var.environment == "staging" ? "true" : "false" },
   ]
 
   # Web only: cache sidecar URL. Sidekiq uses ElastiCache (REDIS_URL from SSM) for all Redis.
