@@ -19,8 +19,9 @@ gem 'matrix'
 gem 'prawn-labels'
 gem 'spreadsheet'
 # ttfunk 1.8.0 has issues with embedded japanese fonts for BagLabels and Award Labels
+# Fix is in master branch but not yet released to RubyGems
 # https://github.com/prawnpdf/ttfunk/issues/102
-gem 'ttfunk', '1.8.0'
+gem 'ttfunk', github: 'prawnpdf/ttfunk'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.12.6.8'
 
