@@ -61,7 +61,7 @@ COPY --from=builder /app/docker-entrypoint.sh .
 
 RUN mkdir -p tmp/pids log \
  && chmod +x docker-entrypoint.sh \
- && chown -R app:app /app /gems
+ && chown -R app:app /app
 
 USER app
 
