@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "go_live":
+        "header": >-
+          正式發佈 / 上線
+        "set_costs_warning": >-
+          在任何使用者開始報名前，請務必確認已設定好「報名費」或「項目費用」。
+        "system_live": >-
+          系統目前處於：正式上線狀態
+        "system_under_construction": >-
+          系統目前處於：維護/建設中狀態
+        "under_construction_description": >-
+          將「維護中」設定為「否」，即可允許使用者開始報名。

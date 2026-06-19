@@ -1,0 +1,14 @@
+---
+"zh-TW":
+  "registrant_expense_items":
+    "expenses":
+      "cost": >-
+        費用
+      "items_not_guaranteed": >-
+        在收到您的款項前，系統無法保證保留這些項目。
+      "paid": >-
+        已付清
+      "registrants_expenses": >-
+        %{registrant} 的加購費用項目
+      "total": >-
+        總計

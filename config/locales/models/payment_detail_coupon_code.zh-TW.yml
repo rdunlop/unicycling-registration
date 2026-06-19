@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "payment_detail_coupon_code":
+        "one": >-
+          Payment Coupon Code
+        "other": >-
+          Payment Coupon Codes

@@ -1,0 +1,33 @@
+---
+"zh-TW":
+  "convention_setup":
+    "tenant_aliases":
+      "index":
+        "accessible_url_html": >-
+          此大會將始終可以透過 %{link} 存取
+        "alias_is_primary_domain": >-
+          此別名目前為主要網域。
+        "alias_verified": >-
+          別名已驗證
+        "base_dns_cname_html": >-
+          Set up a DNS CNAME record from "&lt;yoururl.yoursite.com&gt;." to
+        "create_other_dns_record": >-
+          若您希望報名系統顯示於不同的網路位址，您可以使用 DNS CNAME 紀錄來建立一個別名。
+        "current_url_html": >-
+          報名系統目前的設定位址為 %{link}
+        "delete_alias": >-
+          移除別名
+        "delete_current_primary_domain": >-
+          刪除目前的主要網域
+        "header": >-
+          網域設定
+        "must_save_warning": >-
+          在啟用別名之前，您必須先點擊「儲存紀錄」。
+        "primary_domain_description": >-
+          建立別名後，您可以將其設定為「主要網域」，這將使郵件中發送的所有連結都使用該網址，而非預設的 unicycling-software.com。
+        "set_as_primary_domain": >-
+          將別名設為主要網域
+        "submit": >-
+          儲存紀錄
+        "url_of_new_domain": >-
+          輸入新網域的 URL

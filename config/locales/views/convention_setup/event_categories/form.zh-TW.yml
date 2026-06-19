@@ -1,0 +1,7 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_categories":
+      "form":
+        "details": >-
+          若僅有一個比賽類別，使用者將不會看到選擇框。

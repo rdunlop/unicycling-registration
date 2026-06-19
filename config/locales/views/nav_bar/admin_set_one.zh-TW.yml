@@ -1,0 +1,26 @@
+---
+"zh-TW":
+  "nav_bar":
+    "admin_set_one":
+      "competition_overview": >-
+        競賽概況
+      "convention_setup": >-
+        大會設定
+      "data_entry": >-
+        數據輸入
+      "manage_awards": >-
+        製作與列印獎狀/獎項
+      "manage_music": >-
+        比賽音樂管理
+      "manage_payments": >-
+        款項管理
+      "manage_registrants": >-
+        報名者管理（編輯/列印）
+      "registration_overview": >-
+        報名統計概況
+      "search_by_id_button": >-
+        摘要查詢
+      "search_by_id_label": >-
+        報名編號 (Reg ID#)
+      "user_management": >-
+        使用者管理

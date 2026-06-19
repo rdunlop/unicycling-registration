@@ -1,0 +1,21 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "organization_membership":
+        "display_membership_pages": >-
+          顯示組織會員相關頁面
+        "french_behavior_description": >-
+          指定「法國聯合會」將引導使用者輸入其會員編號。
+        "header": >-
+          組織會員設定
+        "iuf_behavior_description": >-
+          指定「IUF」將要求報名者在完成報名與繳費前，必須具備 IUF 會員資格。
+        "requests_membership_number": >-
+          這將顯示單輪車組織會員資格要求，向每位報名者索取資訊
+        "should_be_members": >-
+          報名者是否必須為單輪車組織的會員？
+        "usa_behavior_description": >-
+          指定「USA」將透過 USA 資料庫核對報名者的身份。
+        "which_organization": >-
+          哪一個單輪車組織？

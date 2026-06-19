@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "result":
+        "one": >-
+          Result
+        "other": >-
+          Results

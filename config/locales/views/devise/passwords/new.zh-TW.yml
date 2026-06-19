@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "devise":
+    "passwords":
+      "new":
+        "action": >-
+          寄送重設密碼說明給我
+        "title": >-
+          忘記密碼？

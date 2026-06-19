@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "refund_detail":
+        "one": >-
+          Refund Detail
+        "other": >-
+          Refund Details

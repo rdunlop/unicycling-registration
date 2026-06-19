@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "song":
+        "description": >-
+          說明 / 描述
+        "song_file_name": >-
+          檔案名稱
+        "updated_at": >-
+          最後更新時間
+        "uploaded_by_guest": >-
+          訪客上傳？
+    "models":
+      "song":
+        "one": >-
+          Song
+        "other": >-
+          Songs

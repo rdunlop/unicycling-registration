@@ -1,0 +1,7 @@
+---
+"zh-TW":
+  "convention_setup":
+    "expense_groups":
+      "edit":
+        "header": >-
+          %{expense_group} - 費用群組詳情

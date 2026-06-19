@@ -1,0 +1,84 @@
+---
+"zh-TW":
+  "are_you_sure": >-
+    您確定嗎？
+  "back": >-
+    返回
+  "breadcrumbs":
+    "home": >-
+      首頁
+    "my_registrants": >-
+      我的報名者
+    "new_payment": >-
+      新增付款
+  "cancel": >-
+    取消
+  "competitor": >-
+    參賽選手
+  "date":
+    "formats":
+      "lodging_date_format": >-
+        %b %d, %Y
+      "registration_date_format": >-
+        %b %d, %Y
+    "order":
+    - :月
+    - :日
+    - :年
+  "delete": >-
+    刪除
+  "edit": >-
+    編輯
+  "example": >-
+    範例
+  "language_name": >-
+    繁體中文
+  "membership_number": >-
+    會員編號
+  "no": >-
+    否
+  "noncompetitor": >-
+    非參賽參加者
+  "note": >-
+    備註
+  "organization_membership_types":
+    "french_federation": >-
+      法國獨輪車聯盟 (CNM)
+    "iuf": >-
+      國際獨輪車聯盟 (IUF)
+    "usa": >-
+      美國獨輪車協會 (USA)
+  "pdf": >-
+    (PDF 檔)
+  "prices_increase_at_date": >-
+    價格將於 %{end_date} 調漲
+  "prices_increase_soon": >-
+    價格將在不到 1 天內調漲
+  "show": >-
+    顯示 / 查看
+  "spectator": >-
+    觀眾 / 觀賽者
+  "validations":
+    "duplicate": >-
+      必須是唯一的
+  "wizard":
+    "add_contact_details": >-
+      聯絡詳情
+    "add_events": >-
+      競賽項目
+    "add_name": >-
+      姓名
+    "add_volunteers": >-
+      志工
+    "expenses": >-
+      費用明細 / 其他開支
+    "lodging": >-
+      住宿
+    "music": >-
+      比賽音樂
+    "set_organization_membership": >-
+      組織會員資格
+    "set_wheel_sizes": >-
+      輪徑尺寸
+  "yes": >-
+    是

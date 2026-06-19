@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "registrants":
+    "registrant_total_owing":
+      "paid": >-
+        已付款
+      "pending": >-
+        待處理
+      "unpaid": >-
+        未付款 / 待繳費

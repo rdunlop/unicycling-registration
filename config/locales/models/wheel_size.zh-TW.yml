@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "wheel_size":
+        "one": >-
+          Wheel Size
+        "other": >-
+          Wheel Sizes

@@ -1,0 +1,31 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "registrant":
+        "bib_number": >-
+          號碼牌編號 (Bib Number)
+        "first_name": >-
+          名字
+        "last_name": >-
+          姓氏
+        "medical_certificate_manually_confirmed": >-
+          醫療文件已審核並確認
+        "medical_certificate_url": >-
+          醫師證明 PDF 文件
+        "medical_questionnaire_attest_all_no": >-
+          我對醫療問卷中的所有問題均回答「否」
+        "medical_questionnaire_filled_out": >-
+          我已填寫醫療問卷
+        "online_waiver_acceptance": >-
+          我確認已閱讀、理解並接受上述條款
+        "online_waiver_signature": >-
+          簽名
+        "wheel_size_id": >-
+          預設競速項目輪徑
+    "models":
+      "registrant":
+        "one": >-
+          Registrant
+        "other": >-
+          Registrants

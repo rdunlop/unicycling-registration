@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "admin":
+    "manual_payments":
+      "choose":
+        "choose_items": >-
+          勾選欲標記為「已付款」的項目
+        "chosen_and_unpaid_items": >-
+          已選購（但未付款）的項目
+        "description": >-
+          當付款完成後，系統將發送電子郵件通知相關的使用者帳號。
+        "details_note": >-
+          (僅部分項目需要填寫)
+        "header": >-
+          收取款項
+        "mark_this_item": >-
+          選擇此項目
+        "submit": >-
+          建立付款紀錄

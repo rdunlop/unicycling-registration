@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "expense_items":
+      "index":
+        "description": >-
+          為您想銷售的每一種 %{expense_group} 建立一個費用項目。例如：S 號 T-shirt...
+        "header": >-
+          列出 %{expense_group} 的所有費用項目
+        "new_expense_item": >-
+          新增費用項目

@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "competition_setup":
+    "event_configurations":
+      "edit":
+        "artistic_mode_description": >-
+          此選項決定在計分時是否剔除最高與最低的一個分數（小型賽事），或剔除每類裁判的一個最高與最低分（大型賽事）。
+        "artistic_scoring_mode": >-
+          花式計分模式
+        "description": >-
+          這些設定將影響此競賽中的所有項目。
+        "header": >-
+          全域競賽設定

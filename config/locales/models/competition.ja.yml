@@ -1,0 +1,9 @@
+---
+"ja":
+  "activerecord":
+    "attributes":
+      "competition":
+        "name": >-
+          競技名
+        "num_members_per_competitor": >-
+          チームサイズ

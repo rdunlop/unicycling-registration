@@ -1,0 +1,16 @@
+---
+"zh-TW":
+  "payments":
+    "show":
+      "complete_payment": >-
+        完成付款
+      "offline_payment_instructions": >-
+        線下付款說明
+      "offline_payment_instructions_description": >-
+        若要使用線下方式付款，請務必備妥「付款參考編號 #」並遵循以下說明：
+      "payment_reference": >-
+        付款參考編號 #%{payment_id}
+      "payment_summary": >-
+        付款摘要
+      "please_proceed_with_payment": >-
+        請繼續進行付款

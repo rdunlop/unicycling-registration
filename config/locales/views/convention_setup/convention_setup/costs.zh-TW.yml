@@ -1,0 +1,31 @@
+---
+"zh-TW":
+  "convention_setup":
+    "convention_setup":
+      "costs":
+        "charge_by_event": >-
+          按比賽項目收費
+        "charge_by_event_example": >-
+          (例如：個人花式 $5，大團體花式 $6。)
+        "charge_by_type": >-
+          按報名身分收費 (參賽者與非參賽者)
+        "charge_by_type_example": >-
+          （例如：早鳥參賽者 $50，後期報名參賽者 $100）
+        "costs_settings": >-
+          報名系統可以根據不同的設定對參賽者進行收費：
+        "discounts": >-
+          折扣 / 優惠
+        "header": >-
+          費用設定
+        "how_much_to_charge": >-
+          如何向報名者收費
+        "how_to_charge_registrants": >-
+          如何向報名者收費
+        "money_through_bank_transfer": >-
+          透過銀行轉帳收款
+        "money_through_paypal": >-
+          透過 PayPal 收款
+        "other_items_for_sale": >-
+          其他待售項目
+        "wire_bank_transfer": >-
+          電匯 / 銀行轉帳

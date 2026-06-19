@@ -1,0 +1,51 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "contact_detail":
+        "address": >-
+          聯絡地址
+        "birthplace": >-
+          出生地
+        "city": >-
+          城市
+        "club": >-
+          主要隊伍或俱樂部名稱
+        "club_contact": >-
+          主要隊伍或俱樂部聯絡人
+        "country": >-
+          國籍 / 國家
+        "country_representing": >-
+          代表國家
+        "country_residence": >-
+          居住國家
+        "email": >-
+          電子郵件
+        "emergency_name": >-
+          姓名
+        "emergency_other_phone": >-
+          其他電話
+        "emergency_primary_phone": >-
+          主要電話
+        "emergency_relationship": >-
+          關係
+        "italian_fiscal_code": >-
+          稅務代碼 (義大利籍參賽者必填)
+        "mobile": >-
+          行動電話
+        "phone": >-
+          電話
+        "responsible_adult_name": >-
+          負責成年人姓名
+        "responsible_adult_phone": >-
+          負責成年人主要電話
+        "state": >-
+          州 / 省 / 縣市
+        "zip": >-
+          郵遞區號
+    "models":
+      "contact_detail":
+        "one": >-
+          Contact Detail
+        "other": >-
+          Contact Details

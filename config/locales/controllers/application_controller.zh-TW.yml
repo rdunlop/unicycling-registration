@@ -1,0 +1,6 @@
+---
+"zh-TW":
+  "application":
+    "subdomain":
+      "welcome": >-
+        歡迎來到%{subdomain}

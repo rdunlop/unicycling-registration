@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "payment_detail":
+        "details": >-
+          詳情
+    "models":
+      "payment_details":
+        "one": >-
+          Detail
+        "other": >-
+          Details

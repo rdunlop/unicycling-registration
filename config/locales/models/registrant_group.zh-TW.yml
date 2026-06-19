@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "registrant_group":
+        "name": >-
+          團體名稱
+    "models":
+      "registrant_group":
+        "one": >-
+          Registrant Group
+        "other": >-
+          Registrant Groups

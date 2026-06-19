@@ -1,0 +1,23 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "event":
+        "accepts_wheel_size_override": >-
+          允許覆蓋輪徑限制
+        "artistic": >-
+          花式項目
+        "best_time_format": >-
+          最佳成績時間格式
+        "id": >-
+          編號 (ID)
+        "standard_skill": >-
+          標準技術 (Standard Skill)
+        "visible": >-
+          顯示 / 公開
+    "models":
+      "event":
+        "one": >-
+          Event
+        "other": >-
+          Events

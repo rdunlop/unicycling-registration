@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "coupon_codes":
+      "index":
+        "description": >-
+          建立優惠碼可為特定項目提供折扣（甚至是免費）。
+        "header": >-
+          優惠碼列表
+        "new_coupon_code": >-
+          新增優惠碼

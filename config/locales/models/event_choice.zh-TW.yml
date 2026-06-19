@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "event_choice":
+        "cell_type": >-
+          儲存格類型
+        "label": >-
+          標籤
+        "optional_if_event_choice_id": >-
+          選填 / 必填 (若選擇此選項)
+        "required_if_event_choice_id": >-
+          若選擇了此活動選項則為必填
+    "models":
+      "event_choice":
+        "one": >-
+          Event Choice
+        "other": >-
+          Event Choices

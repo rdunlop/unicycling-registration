@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "event_category":
+        "age_range_end": >-
+          年齡區間結束
+        "age_range_start": >-
+          年齡區間開始
+        "name": >-
+          姓名
+        "warning_on_registration_summary": >-
+          報名摘要上的警告訊息
+    "models":
+      "event_category":
+        "one": >-
+          Event Category
+        "other": >-
+          Event Categories

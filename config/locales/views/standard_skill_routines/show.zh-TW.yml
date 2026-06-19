@@ -1,0 +1,20 @@
+---
+"zh-TW":
+  "standard_skill_routines":
+    "show":
+      "add_new_entry": >-
+        新增標準動作項目
+      "download_my_routine": >-
+        下載我的動作表 PDF
+      "limit_description": "您的成套動作中最多可包含 18 個動作。\r\n若您的成套動作超過 12 個，則非騎乘類動作（編號 100
+        以上）最多僅能包含 12 個。\r\n所有動作的編號必須各不相同。"
+      "list_of_approved_skills_here": >-
+        核可動作清單請見此處
+      "see_list_of_skills_html": >-
+        您可以查看 %{link}
+      "skills_are_saved_automatically": >-
+        您的動作清單在每次修改時都會自動儲存。
+      "standard_skill_closed": >-
+        標準動作申報已關閉。期待與您見面。
+      "total": >-
+        總計

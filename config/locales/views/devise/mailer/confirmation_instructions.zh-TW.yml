@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "devise":
+    "mailer":
+      "confirmation_instructions":
+        "action": >-
+          確認我的帳號
+        "confirm_your_account_instructions": >-
+          您可以透過下方的連結確認您的帳號電子郵件：
+        "copy_paste_instructions": >-
+          若連結無法運作，請將網址複製並貼上到瀏覽器中。
+        "welcome_message": >-
+          歡迎 %{email} 使用單輪車報名系統！

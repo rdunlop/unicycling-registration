@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "organization_membership":
+        "member_number": >-
+          單輪車組織會員編號
+        "system_status": >-
+          會員資格狀態
+    "models":
+      "organization_membership":
+        "one": >-
+          Organization Membership
+        "other": >-
+          Organization Memberships

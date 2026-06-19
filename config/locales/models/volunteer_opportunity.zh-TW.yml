@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "volunteer_opportunity":
+        "description": >-
+          志工職位
+    "models":
+      "volunteer_opportunity":
+        "one": >-
+          Volunteer Opportunity
+        "other": >-
+          Volunteer Opportunities

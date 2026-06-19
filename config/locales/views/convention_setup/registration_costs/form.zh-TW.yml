@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "convention_setup":
+    "registration_costs":
+      "form":
+        "cost_header": >-
+          費用 / 價格
+        "header": >-
+          編輯 %{registration_cost} 報名費用
+        "last_minute_note": >-
+          由於許多人習慣在最後一刻才付款，價格將在截止日結束約 36 小時後自動調漲。這給了最後一刻報名者一點緩衝時間（同時也針對這些報名者收費）。
+        "registration_costs_increase_description_html": "傳統上，線上報名在大會開始前不久會關閉，現場報名僅限在大會控制的電腦上進行。\r\n這有利於協調報名包的列印、準備參賽者名單以及其他最後一刻的細節。\r\n將報名費用設定為「現場
+          (On-Site)」將使「線上報名已關閉」的橫幅在費用對照表中正確顯示。"

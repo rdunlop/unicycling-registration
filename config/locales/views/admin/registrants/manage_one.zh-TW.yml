@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "admin":
+    "registrants":
+      "manage_one":
+        "change_registrant_user": >-
+          變更此報名紀錄的所屬使用者
+        "edit_summary": >-
+          編輯 / 摘要
+        "full_registrant_list": >-
+          完整名單
+        "summary": >-
+          摘要 / 總覽

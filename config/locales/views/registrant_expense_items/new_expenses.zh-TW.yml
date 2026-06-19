@@ -1,0 +1,8 @@
+---
+"zh-TW":
+  "registrant_expense_items":
+    "new_expenses":
+      "add": >-
+        新增 %{group_name}
+      "info": >-
+        更多資訊

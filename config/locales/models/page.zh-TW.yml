@@ -1,0 +1,23 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "page":
+        "body": >-
+          頁面內容
+        "parent_page_id": >-
+          上層頁面
+        "position": >-
+          排序權重 / 位置
+        "slug": >-
+          網址代稱 (Slug)
+        "title": >-
+          標題
+        "visible": >-
+          是否公開顯示
+    "models":
+      "page":
+        "one": >-
+          Page
+        "other": >-
+          Pages

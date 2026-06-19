@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "registrant_best_time":
+        "formatted_value": >-
+          最佳成績或距離
+        "source_location": >-
+          大會名稱
+    "models":
+      "registrant_best_time":
+        "one": >-
+          Registrant Best Time or Distance
+        "other": >-
+          Registrant Best Times or Distances

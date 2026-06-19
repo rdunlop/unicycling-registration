@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "convention_setup":
+    "events":
+      "form":
+        "advanced_settings": >-
+          進階設定
+        "artistic_closed_date": >-
+          花式競技 (Artistic) 的截止日期為 %{artistic_closed_date}
+        "event_category_hint": >-
+          若只有一個類別，請填寫 'All'（註：進階選項可在「活動類別」中設定）。
+        "header": >-
+          編輯活動項目
+        "standard_skill_closed_date": >-
+          標準技術 (Standard Skill) 提交截止日期為 %{standard_skill_closed_date}
+        "standard_skill_enabled": >-
+          是否啟用標準技術提交系統？ %{enabled}
+        "wheel_size_override_only_when_default_wheel_size": >-
+          只有在報名問題中開啟「詢問預設輪徑」時，才允許使用者針對特定活動自訂輪徑（覆蓋預設值）。

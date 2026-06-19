@@ -1,0 +1,16 @@
+---
+"zh-TW":
+  "songs":
+    "index":
+      "add_songs_for_others": >-
+        為其他報名者新增音樂
+      "new_song": >-
+        新增音樂 (步驟 1)
+      "step_1": >-
+        步驟 1
+      "step_2": >-
+        步驟 2
+      "title": >-
+        %{name} 的音樂
+      "upload_file": >-
+        上傳音樂檔案

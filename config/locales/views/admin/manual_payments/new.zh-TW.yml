@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "admin":
+    "manual_payments":
+      "new":
+        "description": >-
+          選擇欲調整付款狀態的報名者：
+        "header": >-
+          新增付款
+        "start_process": >-
+          下一步 (選擇項目)

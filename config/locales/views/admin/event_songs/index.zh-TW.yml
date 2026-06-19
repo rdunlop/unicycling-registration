@@ -1,0 +1,23 @@
+---
+"zh-TW":
+  "admin":
+    "event_songs":
+      "index":
+        "add_new_song": >-
+          為報名者新增歌曲
+        "all_songs_together": >-
+          所有歌曲顯示於同一頁面
+        "by_competition": >-
+          音樂：按競賽項目分類
+        "by_competition_description": >-
+          當競賽項目與參賽者名單建立完成後，請使用下方的「競賽頁面」為參賽者分配音樂。在「競賽音樂頁面」中，您可以下載包含該項目所有音樂的 Zip 壓縮檔，且檔案將依照參賽者出場順序進行排序。
+        "by_event": >-
+          音樂：按活動項目分類
+        "by_event_description": >-
+          查看每位參賽者/每個活動項目已上傳的音樂。
+        "description": >-
+          從這些頁面查看、下載並為參賽者分配音樂。
+        "header": >-
+          管理競賽音樂
+        "num_songs": >-
+          已上傳歌曲數

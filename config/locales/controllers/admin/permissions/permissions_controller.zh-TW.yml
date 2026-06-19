@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "admin":
+    "permissions":
+      "role_not_found": >-
+        找不到角色 (%{role})
+      "role_updated": >-
+        角色已更新
+      "user_already_has_role": >-
+        使用者 '%{user}' 已擁有 '%{role}' 角色

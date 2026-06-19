@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "admin":
+    "event_songs":
+      "show":
+        "description_html": >-
+          本頁面列出了所有尚未分配給參賽者的歌曲。
+        "download": >-
+          下載
+        "header": >-
+          %{event} 比賽音樂

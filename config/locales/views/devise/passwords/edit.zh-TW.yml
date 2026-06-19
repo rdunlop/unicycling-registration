@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "devise":
+    "passwords":
+      "edit":
+        "action": >-
+          更改您的密碼
+        "password_confirmation_label": >-
+          確認新密碼
+        "password_label": >-
+          新密碼
+        "title": >-
+          更改我的密碼

@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "user":
+        "email": >-
+          使用者帳號電子郵件
+        "name": >-
+          姓名
+    "models":
+      "user":
+        "one": >-
+          User
+        "other": >-
+          Users

@@ -1,0 +1,25 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "payment":
+        "completed_date": >-
+          付款完成日期
+        "details": >-
+          詳情 (交易序號/備註)
+        "note": >-
+          備註
+        "offline_pending_date": >-
+          日期
+        "payment_id": >-
+          付款編號
+        "total": >-
+          總計
+        "transaction_id": >-
+          交易序號
+    "models":
+      "registrant":
+        "one": >-
+          Registrant
+        "other": >-
+          Registrants

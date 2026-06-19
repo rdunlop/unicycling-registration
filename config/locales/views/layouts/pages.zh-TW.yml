@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "layouts":
+    "pages":
+      "begin_registration_link": >-
+        開始報名 %{convention_name}
+      "manage_my_registrations": >-
+        管理我的報名資
+      "sign_in": >-
+        登入

@@ -1,0 +1,21 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "registration_cost":
+        "end_date": >-
+          截止日期
+        "name": >-
+          費率名稱
+        "onsite": >-
+          現場報名費率
+        "registrant_type": >-
+          報名者類型
+        "start_date": >-
+          開始日期
+    "models":
+      "registration_cost":
+        "one": >-
+          Registration Cost
+        "other": >-
+          Registration Costs
