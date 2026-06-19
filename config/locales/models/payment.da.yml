@@ -18,3 +18,8 @@
         "transaction_id": >-
           Transaktion ID
     "models":
+      "registrant":
+        "one": >-
+          Deltager
+        "other": >-
+          Deltagere

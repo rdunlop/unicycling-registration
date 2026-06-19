@@ -6,9 +6,32 @@
         Informations de base
       "birthday": >-
         Date de naissance
+      "competitive_gender": >-
+        Genre de compétition
       "female": >-
         Femme
       "male": >-
         Homme
+      "pronoun_he_him": >-
+        Il/lui
+      "pronoun_other": >-
+        Autre (précisez)
+      "pronouns": >-
+        Pronom
+      "pronoun_she_her": >-
+        Elle/elle
+      "pronoun_they_them": >-
+        Iel
+      "registered_gender_description_1": >-
+        Veuillez noter que pour le moment, l'Unicon comporte deux catégories de genre,
+        (Hommes et Femmes), comme cela est indiqué dans le règlement IUF.
+      "registered_gender_description_2": >-
+        Nous nous engageons à rendre les événements monocyclistes inclusifs, et examinons
+        des solutions alternatives pour des compétitions futures, notamment l'Unicon.
+        Si vous ne vous identifiez pas à l'un de ces genre, sélectionnez la catégorie
+        de votre choix.
+      "registered_gender_description_3": >-
+        Pour poser des questions à propos des catégories de compétition et du règlement
+        qui les entourent, contactez nous via le lien "Nous contacter" ci-dessous.
       "required_fields": >-
         Champs obligatoires

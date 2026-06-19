@@ -14,3 +14,8 @@
         "start_date": >-
           Start Dato
     "models":
+      "registration_cost":
+        "one": >-
+          Tilmeldings Udgift
+        "other": >-
+          Tilmeldings Udgifter

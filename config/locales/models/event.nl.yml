@@ -16,3 +16,8 @@
         "visible": >-
           Zichtbaar
     "models":
+      "event":
+        "one": >-
+          Onderdeel
+        "other": >-
+          Onderdelen

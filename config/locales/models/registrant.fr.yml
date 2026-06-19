@@ -9,6 +9,8 @@
           Prénom
         "last_name": >-
           Nom
+        "medical_certificate_manually_confirmed": >-
+          Documents médicaux vus et confirmés
         "medical_certificate_url": >-
           Document pdf montrant les notes du médecin
         "medical_questionnaire_attest_all_no": >-

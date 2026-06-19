@@ -12,3 +12,8 @@
         "user_id": >-
           Refunderet Af
     "models":
+      "refund":
+        "one": >-
+          Tilbagebetaling
+        "other": >-
+          Tilbagebetalinger

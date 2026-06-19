@@ -24,3 +24,8 @@
         "total_cost": >-
           Total (Udregnet)
     "models":
+      "expense_item":
+        "one": >-
+          Udgift Artikel
+        "other": >-
+          Udgift Artikler

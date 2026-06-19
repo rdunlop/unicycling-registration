@@ -10,3 +10,8 @@
         "use_age_group_places": >-
           Brug aldersgruppe placering
     "models":
+      "combined_competition":
+        "one": >-
+          Kombineret konkurrence
+        "other": >-
+          Kombinerede Konkurrencer

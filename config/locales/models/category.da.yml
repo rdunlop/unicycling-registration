@@ -6,3 +6,8 @@
         "name": >-
           Navn
     "models":
+      "category":
+        "one": >-
+          Kategori
+        "other": >-
+          Kategorier

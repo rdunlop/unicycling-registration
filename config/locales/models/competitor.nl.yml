@@ -12,3 +12,8 @@
         "name": >-
           Naam
     "models":
+      "competitor":
+        "one": >-
+          Deelnemer
+        "other": >-
+          Deelnemers

@@ -6,3 +6,8 @@
         "name": >-
           Gruppe Navn
     "models":
+      "registrant_group":
+        "one": >-
+          Deltagers Gruppe
+        "other": >-
+          Deltagers Grupper

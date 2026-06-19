@@ -6,3 +6,8 @@
         "name": >-
           Naam
     "models":
+      "category":
+        "one": >-
+          Categorieën
+        "other": >-
+          Categorieën

@@ -4,6 +4,12 @@
     "index":
       "assign_access": >-
         Attribuer des accès supplémentaires
+      "assign_existing_user_access": >-
+        Attribuer des accès supplémentaires à un utilisateur existant
+      "assign_new_user_access": >-
+        Attribuer des accès supplémentaires à un nouvel utilisateur
+      "create_user_and_assign_access": >-
+        Créer un utilisateur et lui attribuer des accès supplémentaires
       "description_1": >-
         En attribuant des accès supplémentaires à un utilisateur, leur compte deviendra
         sélectionable dans les listes de juge ou de secrétaire d'épreuve.
@@ -15,6 +21,9 @@
         à se souvenir de leur adresse email.
       "header": >-
         Accès supplémentaires
+      "new_user_note": >-
+        Ceci créera un nouvel utilisateur avec un email aléatoire. Iel pourra se connecter
+        via "Connexion bénévole"
       "note": >-
         Donner l'accès confirme également comptes dont l'email n'a pas été confirmé
         afin qu'il puisse se connecter.

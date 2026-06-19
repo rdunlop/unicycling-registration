@@ -8,3 +8,8 @@
         "subject": >-
           Emne
     "models":
+      "feedback":
+        "one": >-
+          Feedback
+        "other": >-
+          Feedback

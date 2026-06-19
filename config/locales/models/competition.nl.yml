@@ -38,3 +38,8 @@
         "uses_lane_assignments": >-
           Competitie in heats of banen
     "models":
+      "competition":
+        "one": >-
+          Wedstrijden
+        "other": >-
+          Wedstrijden

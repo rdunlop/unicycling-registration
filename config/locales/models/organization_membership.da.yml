@@ -8,3 +8,8 @@
         "system_status": >-
           Medlems status
     "models":
+      "organization_membership":
+        "one": >-
+          Organisation Medlemsskab
+        "other": >-
+          Organisation Medlemsskaber

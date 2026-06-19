@@ -16,3 +16,8 @@
         "visible": >-
           Synlig
     "models":
+      "page":
+        "one": >-
+          Side
+        "other": >-
+          Sider

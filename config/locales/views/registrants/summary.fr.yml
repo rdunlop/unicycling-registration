@@ -6,10 +6,14 @@
         Âge
       "birthday": >-
         Date de naissance
+      "competitive_gender": >-
+        Genre pour la compétition
       "default_wheel_size": >-
         Default Wheel Size
       "name": >-
         Nom
+      "pronouns": >-
+        Pronoms
       "registration_summary": >-
         Résumé de l’inscription
       "user_account_email": >-

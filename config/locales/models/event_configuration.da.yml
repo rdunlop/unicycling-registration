@@ -86,6 +86,11 @@
         "under_construction": >-
           Under opbygning
     "models":
+      "event_configurations":
+        "one": >-
+          Event Opsætning
+        "other": >-
+          Event Opsætninger
   "helpers":
     "submit":
       "event_configuration":

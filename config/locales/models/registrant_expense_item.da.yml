@@ -6,3 +6,8 @@
         "tax": >-
           Afgifter
     "models":
+      "registrant_expense_item":
+        "one": >-
+          Vare
+        "other": >-
+          Varer

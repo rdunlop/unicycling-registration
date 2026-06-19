@@ -18,3 +18,8 @@
         "price": >-
           Pris
     "models":
+      "coupon_code":
+        "one": >-
+          Rabat Kuponkode
+        "other": >-
+          Rabat Kuponkoder

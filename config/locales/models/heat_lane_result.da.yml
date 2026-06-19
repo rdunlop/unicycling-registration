@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      heat_lane_result:
-        one: Heat Bane Resultat
-        other: Heat Bane Resultater
+"da":
+  "activerecord":
+    "models":
+      "heat_lane_result":
+        "one": >-
+          Heat Bane Resultat
+        "other": >-
+          Heat Bane Resultater

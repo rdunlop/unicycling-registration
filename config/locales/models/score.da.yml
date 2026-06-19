@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      score:
-        one: Score
-        other: Score
+"da":
+  "activerecord":
+    "models":
+      "score":
+        "one": >-
+          Score
+        "other": >-
+          Score

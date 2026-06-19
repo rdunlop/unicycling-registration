@@ -86,3 +86,8 @@
         "waiver_file_name": >-
           Printbare regels PDF
     "models":
+      "event_configurations":
+        "one": >-
+          Wedstrijd configuratie
+        "other": >-
+          Wedstrijd configuraties

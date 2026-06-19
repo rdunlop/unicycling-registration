@@ -12,3 +12,8 @@
         "name": >-
           Navn
     "models":
+      "competitor":
+        "one": >-
+          Deltager
+        "other": >-
+          Deltagere

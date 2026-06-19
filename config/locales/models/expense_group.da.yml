@@ -6,3 +6,8 @@
         "group_name": >-
           Gruppe Navn
     "models":
+      "expense_group":
+        "one": >-
+          Udgift Gruppe
+        "other": >-
+          Udgift Grupper

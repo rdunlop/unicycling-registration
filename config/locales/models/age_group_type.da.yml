@@ -8,3 +8,8 @@
         "name": >-
           Navn
     "models":
+      "age_group_type":
+        "one": >-
+          Aldersgruppe Type
+        "other": >-
+          Aldersgruppe Typer

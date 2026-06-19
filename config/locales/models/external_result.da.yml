@@ -8,3 +8,8 @@
         "points": >-
           Point
     "models":
+      "external_result":
+        "one": >-
+          Indtastet Point Resultat
+        "other": >-
+          Indtastet Point Resultater

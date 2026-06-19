@@ -16,3 +16,8 @@
         "visible": >-
           Synlig
     "models":
+      "event":
+        "one": >-
+          Event
+        "other": >-
+          Events

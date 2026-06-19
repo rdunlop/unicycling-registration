@@ -10,3 +10,8 @@
         "use_age_group_places": >-
           Gebruik van rangschikking in leeftijdsgroep
     "models":
+      "combined_competition":
+        "one": >-
+          Gecombineerde wedstrijden
+        "other": >-
+          Gecombineerde wedstrijden

@@ -12,3 +12,8 @@
         "required_if_event_choice_id": >-
           Verplicht als deze eventkeuze is gekozen
     "models":
+      "event_choice":
+        "one": >-
+          Wedstrijd keuze
+        "other": >-
+          Wedstrijd keuzes

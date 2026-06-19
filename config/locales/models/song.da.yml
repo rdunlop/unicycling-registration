@@ -12,3 +12,8 @@
         "uploaded_by_guest": >-
           Gæst?
     "models":
+      "song":
+        "one": >-
+          Sang
+        "other": >-
+          Sange

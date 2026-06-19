@@ -6,3 +6,8 @@
         "group_name": >-
           Groepsnaam
     "models":
+      "expense_group":
+        "one": >-
+          Kosten groep
+        "other": >-
+          Kosten groepen
