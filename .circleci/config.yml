@@ -100,30 +100,6 @@ jobs:
             docker build -f Dockerfile.production -t $ECR_URL:$CIRCLE_SHA1 .
             docker push $ECR_URL:$CIRCLE_SHA1
 
-  release_stage:
-    executor: my_executor
-    steps:
-      - attach_workspace:
-          at: ~/tmp
-
-      - tablexi/wait_for_other_builds
-
-      - run:
-          name: Deploy (EC2 staging)
-          no_output_timeout: 20m
-          command: bundle exec cap stage deploy
-
-  release_prod:
-    executor: my_executor
-    steps:
-      - attach_workspace:
-          at: ~/tmp
-
-      - run:
-          name: Deploy (EC2 prod)
-          no_output_timeout: 20m
-          command: bundle exec cap prod deploy
-
   migrate_db:
     parameters:
       environment:
@@ -333,29 +309,6 @@ workflows:
           requires:
             - build
       - build_and_push_docker:
-          requires:
-            - rspec
-            - tablexi/rubocop
-            - tablexi/bundle_audit
-            - tablexi/check_db_schema
-          filters:
-            branches:
-              only:
-                - main
-      - approve-stage-cap:
-          type: approval
-          requires:
-            - rspec
-            - tablexi/rubocop
-            - tablexi/bundle_audit
-            - tablexi/check_db_schema
-          filters:
-            branches:
-              only:
-                - main
-      - release_stage:
-          requires:
-            - approve-stage-cap
           filters:
             branches:
               only:
@@ -387,28 +340,10 @@ workflows:
             branches:
               only:
                 - main
-      - approve-prod-cap:
-          type: approval
-          requires:
-            - rspec
-            - tablexi/rubocop
-            - tablexi/bundle_audit
-            - tablexi/check_db_schema
-          filters:
-            branches:
-              only:
-                - main
       - approve-prod-push:
           type: approval
           requires:
             - deploy_staging
-          filters:
-            branches:
-              only:
-                - main
-      - release_prod:
-          requires:
-            - approve-prod-cap
           filters:
             branches:
               only:
