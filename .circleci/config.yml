@@ -98,8 +98,13 @@ jobs:
           name: Build and push Docker image
           command: |
             ECR_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/unicycling-registration
-            docker build -f Dockerfile.production -t $ECR_URL:$CIRCLE_SHA1 .
+            docker pull $ECR_URL:latest || true
+            docker build --cache-from $ECR_URL:latest \
+              -f Dockerfile.production \
+              -t $ECR_URL:$CIRCLE_SHA1 \
+              -t $ECR_URL:latest .
             docker push $ECR_URL:$CIRCLE_SHA1
+            docker push $ECR_URL:latest
 
   migrate_db:
     parameters:
