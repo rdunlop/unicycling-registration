@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe "when testing the update function for registration costs", caching: true do
+describe "when testing the update function for registration costs" do
   let(:current_date) { Date.current }
 
   before do
+    FactoryBot.create(:event_configuration)
     @reg = FactoryBot.create(:competitor) # will have rp1
     @nc_reg = FactoryBot.create(:noncompetitor) # will have rp1
     ActionMailer::Base.deliveries.clear

@@ -27,3 +27,20 @@ describe VolunteerChoice do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: volunteer_choices
+#
+#  id                       :integer          not null, primary key
+#  registrant_id            :integer          not null
+#  volunteer_opportunity_id :integer          not null
+#  created_at               :datetime
+#  updated_at               :datetime
+#
+# Indexes
+#
+#  index_volunteer_choices_on_registrant_id             (registrant_id)
+#  index_volunteer_choices_on_volunteer_opportunity_id  (volunteer_opportunity_id)
+#  volunteer_choices_reg_vol_opt_unique                 (registrant_id,volunteer_opportunity_id) UNIQUE
+#

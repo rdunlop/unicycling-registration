@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_09_023608) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_19_025017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -463,6 +463,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_023608) do
     t.string "payment_mode", default: "disabled"
     t.string "paypal_account"
     t.boolean "registrants_should_specify_default_wheel_size", default: true, null: false
+    t.datetime "registration_period_last_checked_at"
     t.string "representation_type", default: "country", null: false
     t.boolean "request_address", default: true, null: false
     t.boolean "request_emergency_contact", default: true, null: false
