@@ -17,3 +17,8 @@
         "wheel_size_id": >-
           Standard Rennradgröße
     "models":
+      "registrant":
+        "one": >-
+          Angemeldeter
+        "other": >-
+          Angemeldeter

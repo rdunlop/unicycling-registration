@@ -2,6 +2,11 @@
 "it":
   "activerecord":
     "attributes":
+      "distance_attempt":
+        "distance": >-
+          Distanza
+        "fault": >-
+          Errore
     "models":
       "distance_attempt":
         "one": >-

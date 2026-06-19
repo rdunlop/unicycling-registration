@@ -17,3 +17,9 @@
           Naam
         "price": >-
           Prijs
+    "models":
+      "coupon_code":
+        "one": >-
+          Coupon Code
+        "other": >-
+          Coupon Codes

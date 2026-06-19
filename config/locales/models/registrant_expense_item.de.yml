@@ -6,3 +6,8 @@
         "tax": >-
           Steuern
     "models":
+      "registrant_expense_item":
+        "one": >-
+          Artikel
+        "other": >-
+          Artikel

@@ -15,3 +15,9 @@
           Firma
         "wheel_size_id": >-
           Tamaño Predeterminado de rueda para Pista de carreras
+    "models":
+      "registrant":
+        "one": >-
+          Solicitante de la inscripción
+        "other": >-
+          Solicitantes de la inscripción

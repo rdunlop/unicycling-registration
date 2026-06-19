@@ -37,3 +37,9 @@
           Entrada de datos de la Linea de Salida
         "uses_lane_assignments": >-
           Compite en Carriles / Series
+    "models":
+      "competition":
+        "one": >-
+          Competición
+        "other": >-
+          Competiciones

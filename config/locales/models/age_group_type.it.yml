@@ -2,6 +2,11 @@
 "it":
   "activerecord":
     "attributes":
+      "age_group_type":
+        "description": >-
+          Descrizione
+        "name": >-
+          Nome
     "models":
       "age_group_type":
         "one": >-

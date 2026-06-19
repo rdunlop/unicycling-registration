@@ -2,6 +2,11 @@
 "it":
   "activerecord":
     "attributes":
+      "external_result":
+        "details": >-
+          Dettagli
+        "points": >-
+          Punti
     "models":
       "external_result":
         "one": >-

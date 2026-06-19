@@ -44,3 +44,8 @@
         "zip": >-
           Postleitzahl
     "models":
+      "contact_detail":
+        "one": >-
+          Kontakt Detail
+        "other": >-
+          Kontakt Details

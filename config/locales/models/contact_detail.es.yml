@@ -43,3 +43,9 @@
           Estado
         "zip": >-
           Código postal
+    "models":
+      "contact_detail":
+        "one": >-
+          Detalle de contacto
+        "other": >-
+          Detalles de contacto

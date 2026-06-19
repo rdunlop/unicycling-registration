@@ -83,6 +83,7 @@
           En construcción
         "waiver_file_name": >-
           Archivo de Renuncia imprimible PDF
+    "models":
   "helpers":
     "submit":
       "event_configuration":

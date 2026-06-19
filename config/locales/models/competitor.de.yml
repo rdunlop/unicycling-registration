@@ -12,3 +12,8 @@
         "name": >-
           Name
     "models":
+      "competitor":
+        "one": >-
+          Wettkämpfer
+        "other": >-
+          Wettkämpfer

@@ -6,3 +6,8 @@
         "name": >-
           Name
     "models":
+      "category":
+        "one": >-
+          Kategorie
+        "other": >-
+          Kategorien

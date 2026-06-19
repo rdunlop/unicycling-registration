@@ -16,3 +16,8 @@
         "visible": >-
           Sichtbar
     "models":
+      "event":
+        "one": >-
+          Disziplin
+        "other": >-
+          Disziplinen

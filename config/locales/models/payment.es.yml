@@ -17,3 +17,9 @@
           Total
         "transaction_id": >-
           Código de Transacción
+    "models":
+      "registrant":
+        "one": >-
+          Solicitante de la inscripción
+        "other": >-
+          Solicitantes de la inscripción

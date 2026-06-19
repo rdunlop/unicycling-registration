@@ -2,6 +2,13 @@
 "it":
   "activerecord":
     "attributes":
+      "combined_competition_entry":
+        "abbreviation": >-
+          Abbreviazione
+        "base_points": >-
+          Punti di base
+        "tie_breaker": >-
+          Spareggio
     "models":
       "combined_competition_entry":
         "one": >-

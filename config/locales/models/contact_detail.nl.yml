@@ -43,3 +43,9 @@
           Provincie
         "zip": >-
           Postcode
+    "models":
+      "contact_detail":
+        "one": >-
+          Contact Details
+        "other": >-
+          Contact Details

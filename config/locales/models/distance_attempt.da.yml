@@ -8,3 +8,8 @@
         "fault": >-
           Fejl
     "models":
+      "distance_attempt":
+        "one": >-
+          Distance Forsøg
+        "other": >-
+          Distance Førsøg

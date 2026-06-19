@@ -1,7 +1,9 @@
 ---
-de:
-  activerecord:
-    models:
-      result:
-        one: Ergeniss
-        other: Ergebnisse
+"de":
+  "activerecord":
+    "models":
+      "result":
+        "one": >-
+          Ergeniss
+        "other": >-
+          Ergebnisse
