@@ -1,59 +1,102 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      event_configuration:
-        accept_rules: Accepte le règlement
-        age_calculation_base_date: Date de départ pour le calcul de l'âge
-        artistic_closed_date: Date limite d'acceptation des inscriptions catégorie
-          Artistique
-        artistic_score_elimination_mode_naucc: Petit groupe
-        competitor: Compétiteur
-        competitor_benefits: Avantages des compétiteurs
-        comp_noncomp_page_id: Page de description compétiteur vs. non-compétiteur
-        comp_noncomp_url: Explication comp / non-comp
-        contact_email: Email de contact de la convention
-        currency_code: Code de la monnaie
-        custom_waiver_text: Texte règlementaire sur mesure
-        dates_description: Descriptions des dates
-        enabled_locales: Langages disponibles
-        event_sign_up_closed_date: Dernier jour pour s'inscrire aux événements
-        event_url: Site principal
-        location: Lieu
-        logo_file: Logo
-        long_name: Nom complet
-        max_registrants: Nombre maximum d'inscrits au total
-        music_submission_end_date: Dernier jour pour uploader de la musique
-        noncompetitor: Non-compétiteur
-        noncompetitor_benefits: Avantages des Non-Compétiteurs
-        offline_payment: Configuration des détails sur le paiement hors ligne
-        offline_payment_description: Détails pour le paiement hors ligne
-        payment_mode: Mode Payment
-        paypal_account: Email du compte marchand PayPal
-        registrants_should_specify_default_wheel_size: Le compétiteur doit spécifier
-          sa taille de roue par défaut
-        request_address: Demander l'addresse
-        request_emergency_contact: Demander les contacts d'urgences
-        request_responsible_adult: Demander un adulte tuteur
-        require_medical_certificate: Certificat médical obligatoire
-        rulebook_url: URL du pdf des règles
-        rules_file_name: Fichier PDF de règlement
-        short_name: Nom écourté
-        spectator: Spectateur
-        spectator_benefits: Avantages des spectateurs
-        standard_skill: Activer le système de soumission de l'artistique technique
-        standard_skill_closed_date: Dernier jour pour soumettre un programme d'artistique
-          technique en ligne
-        start_date: Premier jour de compétition
-        style_name: Style de page web
-        under_construction: En construction
-        waiver_file_name: Décharge PDF à imprimer
-    models:
-      event_configurations:
-        one: Configuration d'événement
-        other: Configuration d'événements
-  helpers:
-    submit:
-      event_configuration:
-        create: Sauvegarder et continuer
-        update: Sauvegarder et continuer
+"fr":
+  "activerecord":
+    "attributes":
+      "event_configuration":
+        "accept_rules": >-
+          Accepte le règlement
+        "age_calculation_base_date": >-
+          Date de départ pour le calcul de l'âge
+        "artistic_closed_date": >-
+          Date limite d'acceptation des inscriptions catégorie Artistique
+        "artistic_score_elimination_mode_naucc": >-
+          Petit groupe
+        "competitor": >-
+          Compétiteur
+        "competitor_benefits": >-
+          Avantages des compétiteurs
+        "comp_noncomp_page_id": >-
+          Page de description compétiteur vs. non-compétiteur
+        "comp_noncomp_url": >-
+          Explication comp / non-comp
+        "contact_email": >-
+          Email de contact de la convention
+        "currency_code": >-
+          Code de la monnaie
+        "custom_waiver_text": >-
+          Texte règlementaire sur mesure
+        "dates_description": >-
+          Descriptions des dates
+        "enabled_locales": >-
+          Langages disponibles
+        "event_sign_up_closed_date": >-
+          Dernier jour pour s'inscrire aux événements
+        "event_url": >-
+          Site principal
+        "location": >-
+          Lieu
+        "logo_file": >-
+          Logo
+        "long_name": >-
+          Nom complet
+        "max_registrants": >-
+          Nombre maximum d'inscrits au total
+        "music_submission_end_date": >-
+          Dernier jour pour uploader de la musique
+        "noncompetitor": >-
+          Non-compétiteur
+        "noncompetitor_benefits": >-
+          Avantages des Non-Compétiteurs
+        "offline_payment": >-
+          Configuration des détails sur le paiement hors ligne
+        "offline_payment_description": >-
+          Détails pour le paiement hors ligne
+        "payment_mode": >-
+          Mode Payment
+        "paypal_account": >-
+          Email du compte marchand PayPal
+        "registrants_should_specify_default_wheel_size": >-
+          Le compétiteur doit spécifier sa taille de roue par défaut
+        "request_address": >-
+          Demander l'addresse
+        "request_emergency_contact": >-
+          Demander les contacts d'urgences
+        "request_responsible_adult": >-
+          Demander un adulte tuteur
+        "require_medical_certificate": >-
+          Certificat médical obligatoire
+        "rulebook_url": >-
+          URL du pdf des règles
+        "rules_file_name": >-
+          Fichier PDF de règlement
+        "short_name": >-
+          Nom écourté
+        "spectator": >-
+          Spectateur
+        "spectator_benefits": >-
+          Avantages des spectateurs
+        "standard_skill": >-
+          Activer le système de soumission de l'artistique technique
+        "standard_skill_closed_date": >-
+          Dernier jour pour soumettre un programme d'artistique technique en ligne
+        "start_date": >-
+          Premier jour de compétition
+        "style_name": >-
+          Style de page web
+        "under_construction": >-
+          En construction
+        "waiver_file_name": >-
+          Décharge PDF à imprimer
+    "models":
+      "event_configurations":
+        "one": >-
+          Configuration d'événement
+        "other": >-
+          Configuration d'événements
+  "helpers":
+    "submit":
+      "event_configuration":
+        "create": >-
+          Sauvegarder et continuer
+        "update": >-
+          Sauvegarder et continuer

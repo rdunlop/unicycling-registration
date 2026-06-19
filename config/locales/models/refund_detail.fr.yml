@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      refund_detail:
-        one: Détail de remboursement
-        other: Détails de remboursement
+"fr":
+  "activerecord":
+    "models":
+      "refund_detail":
+        "one": >-
+          Détail de remboursement
+        "other": >-
+          Détails de remboursement

@@ -1,28 +1,47 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      competition:
-        award_subtitle_name: Sous-titre du prix
-        award_title_name: Titre du prix
-        combined_competition_id: Calcul du champion global
-        end_data_type: Donnée de ligne d'arrivée
-        has_experts: Calculer les experts également
-        hide_max_laps_count: Cacher le nombre maximum de tours
-        import_results_into_other_competition: Importer les résultats dans une autre
-          compétitions
-        name: Nom de la compétition
-        num_members_per_competitor: Taille de l'équipe
-        penalty_seconds: Secondes par pénalités
-        scheduled_completion_at: Heure de fin prévue
-        scoring_class: Type de score
-        rule_for_ineligible_competitors: Inéligibilité des compétiteurs
-        always_score: Classer les compétiteurs inéligibles comme s'ils étaient éligibles
-        never_score: Ne jamais classer les compétiteurs inéligibles
-        score_if_at_least_half_eligible: Classer les équipes si au moins la moitié des membres sont éligibles
-        start_data_type: Donnée de départ
-        uses_lane_assignments: Sera attribué à la ligne/vague
-    models:
-      competition:
-        one: Compétition
-        other: Compétitions
+"fr":
+  "activerecord":
+    "attributes":
+      "competition":
+        "always_score": >-
+          Classer les compétiteurs inéligibles comme s'ils étaient éligibles
+        "award_subtitle_name": >-
+          Sous-titre du prix
+        "award_title_name": >-
+          Titre du prix
+        "combined_competition_id": >-
+          Calcul du champion global
+        "end_data_type": >-
+          Donnée de ligne d'arrivée
+        "has_experts": >-
+          Calculer les experts également
+        "hide_max_laps_count": >-
+          Cacher le nombre maximum de tours
+        "import_results_into_other_competition": >-
+          Importer les résultats dans une autre compétitions
+        "name": >-
+          Nom de la compétition
+        "never_score": >-
+          Ne jamais classer les compétiteurs inéligibles
+        "num_members_per_competitor": >-
+          Taille de l'équipe
+        "penalty_seconds": >-
+          Secondes par pénalités
+        "rule_for_ineligible_competitors": >-
+          Inéligibilité des compétiteurs
+        "scheduled_completion_at": >-
+          Heure de fin prévue
+        "score_if_at_least_half_eligible": >-
+          Classer les équipes si au moins la moitié des membres sont éligibles
+        "scoring_class": >-
+          Type de score
+        "start_data_type": >-
+          Donnée de départ
+        "uses_lane_assignments": >-
+          Sera attribué à la ligne/vague
+    "models":
+      "competition":
+        "one": >-
+          Compétition
+        "other": >-
+          Compétitions

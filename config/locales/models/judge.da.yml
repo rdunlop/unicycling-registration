@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      judge:
-        one: Dommer
-        other: Dommere
+"da":
+  "activerecord":
+    "models":
+      "judge":
+        "one": >-
+          Dommer
+        "other": >-
+          Dommere

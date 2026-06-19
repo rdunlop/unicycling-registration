@@ -1,11 +1,15 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      feedback:
-        message: Message
-        subject: Objet
-    models:
-      feedback:
-        one: Réaction
-        other: Réactions
+"fr":
+  "activerecord":
+    "attributes":
+      "feedback":
+        "message": >-
+          Message
+        "subject": >-
+          Objet
+    "models":
+      "feedback":
+        "one": >-
+          Réaction
+        "other": >-
+          Réactions

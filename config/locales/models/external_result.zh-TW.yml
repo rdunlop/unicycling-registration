@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "external_result":
+        "details": >-
+          細節 / 詳情
+        "points": >-
+          積分 / 分數
+    "models":
+      "external_result":
+        "one": >-
+          Entered Point Result
+        "other": >-
+          Entered Point Results

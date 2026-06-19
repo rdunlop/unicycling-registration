@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    new:
-      new_registration: Nouvelle entrée de compétiteur
+"fr":
+  "registrants":
+    "new":
+      "new_registration": >-
+        Nouvelle entrée de compétiteur

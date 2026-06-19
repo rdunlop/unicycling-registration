@@ -1,7 +1,9 @@
 ---
-it:
-  activerecord:
-    models:
-      score:
-        one: Punto
-        other: Punti
+"it":
+  "activerecord":
+    "models":
+      "score":
+        "one": >-
+          Punto
+        "other": >-
+          Punti

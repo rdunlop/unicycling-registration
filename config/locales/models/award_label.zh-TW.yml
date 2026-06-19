@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "award_label":
+        "bib_number": >-
+          編號 / 選手號碼
+        "place": >-
+          名次
+    "models":
+      "award_label":
+        "one": >-
+          Award Label
+        "other": >-
+          Award Labels

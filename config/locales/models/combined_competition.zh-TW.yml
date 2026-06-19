@@ -1,0 +1,17 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "combined_competition":
+        "percentage_based_calculations": >-
+          按百分比計算
+        "tie_break_by_firsts": >-
+          以第一名次數平分決選
+        "use_age_group_places": >-
+          使用分齡組別名次
+    "models":
+      "combined_competition":
+        "one": >-
+          Combined Competition
+        "other": >-
+          Combined Competitions

@@ -1,9 +1,12 @@
 ---
-de:
-  activerecord:
-    attributes:
-      combined_competition_entry:
-        abbreviation: Abkürzung
-        base_points: Basis Punkte
-        tie_breaker: Stechen
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "combined_competition_entry":
+        "abbreviation": >-
+          Abkürzung
+        "base_points": >-
+          Basis Punkte
+        "tie_breaker": >-
+          Stechen
+    "models":

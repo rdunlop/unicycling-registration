@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "distance_attempt":
+        "distance": >-
+          距離
+        "fault": >-
+          犯規 / 失敗
+    "models":
+      "distance_attempt":
+        "one": >-
+          Distance Attempt
+        "other": >-
+          Distance Attempt

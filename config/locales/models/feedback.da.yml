@@ -1,11 +1,15 @@
 ---
-da:
-  activerecord:
-    attributes:
-      feedback:
-        message: Besked
-        subject: Emne
-    models:
-      feedback:
-        one: Feedback
-        other: Feedback
+"da":
+  "activerecord":
+    "attributes":
+      "feedback":
+        "message": >-
+          Besked
+        "subject": >-
+          Emne
+    "models":
+      "feedback":
+        "one": >-
+          Feedback
+        "other": >-
+          Feedback

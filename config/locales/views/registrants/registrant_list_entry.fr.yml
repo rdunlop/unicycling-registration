@@ -1,11 +1,18 @@
 ---
-fr:
-  registrants:
-    registrant_list_entry:
-      competitor: "(Compétiteur)"
-      edit: Réviser
-      incomplete: Incomplet
-      legal_waiver: Contrat  (%{first_name})
-      noncompetitor: "(Non-compétiteur)"
-      see_summary: Voir le résumé
-      spectator: "(Spectateur)"
+"fr":
+  "registrants":
+    "registrant_list_entry":
+      "competitor": >-
+        (Compétiteur)
+      "edit": >-
+        Réviser
+      "incomplete": >-
+        Incomplet
+      "legal_waiver": >-
+        Contrat  (%{first_name})
+      "noncompetitor": >-
+        (Non-compétiteur)
+      "see_summary": >-
+        Voir le résumé
+      "spectator": >-
+        (Spectateur)

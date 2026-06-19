@@ -1,0 +1,21 @@
+---
+"ja":
+  "activerecord":
+    "attributes":
+      "contact_detail":
+        "address": >-
+          住所
+        "birthplace": >-
+          出生地
+        "city": >-
+          市町村郡
+        "club": >-
+          チーム名
+        "club_contact": >-
+          チームのメールアドレス
+        "email": >-
+          メール
+        "emergency_name": >-
+          氏名
+        "emergency_relationship": >-
+          関係

@@ -1,9 +1,14 @@
 ---
-de:
-  payments:
-    summary:
-      cost: Kosten
-      payment_details: Zahlungs Details
-      registrant: Angemeldeter
-      tax: Steuer
-      total_cost: Gesammte Kosten
+"de":
+  "payments":
+    "summary":
+      "cost": >-
+        Kosten
+      "payment_details": >-
+        Zahlungs Details
+      "registrant": >-
+        Angemeldeter
+      "tax": >-
+        Steuer
+      "total_cost": >-
+        Gesammte Kosten

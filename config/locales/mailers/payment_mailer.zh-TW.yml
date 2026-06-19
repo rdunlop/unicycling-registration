@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "payment_mailer":
+    "manual_payment_completed":
+      "body": "%{event_name} - 已收到款項。\r\n\r\n我們已收到您的付款。\r\n\r\n請登入並選擇「我的付款紀錄」以查看完整詳情。\r\n\r\n付款編號
+        #%{payment_number} 已處理完成。"
+      "subject": >-
+        已收到款項
+    "payment_completed":
+      "body": "%{event_name} - 已收到款項。\r\n\r\n我們已收到一筆金額為 %{amount} 的付款。\r\n\r\n請登入並選擇「我的付款紀錄」以查看完整詳情。\r\n\r\n付款編號
+        #%{payment_number} 已處理完成。"
+      "subject": >-
+        付款已完成

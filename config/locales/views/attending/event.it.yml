@@ -1,13 +1,21 @@
 ---
-it:
-  attending:
-    event:
-      best_time: Miglior tempo
-      category: Categoria
-      drop_out_confirmation: Se si ritira, non può iscriverti nuovamente senza l'approvazione
-        di un admin. Continua?
-      drop_out_of_event: Ritirarsi
-      paid_for: Pagato per
-      paid_for_tooltip: Per annullare l'iscrizione all'evento contatti gli organizzatori.
-      upload_music: Carica il tuo brano?
-      upload_music_details: Carica la musica per questo vedo dalla pagina riassuntiva
+"it":
+  "attending":
+    "event":
+      "best_time": >-
+        Miglior tempo
+      "category": >-
+        Categoria
+      "drop_out_confirmation": >-
+        Se si ritira, non può iscriverti nuovamente senza l'approvazione di un admin.
+        Continua?
+      "drop_out_of_event": >-
+        Ritirarsi
+      "paid_for": >-
+        Pagato per
+      "paid_for_tooltip": >-
+        Per annullare l'iscrizione all'evento contatti gli organizzatori.
+      "upload_music": >-
+        Carica il tuo brano?
+      "upload_music_details": >-
+        Carica la musica per questo vedo dalla pagina riassuntiva

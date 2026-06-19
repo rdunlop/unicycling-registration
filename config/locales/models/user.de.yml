@@ -1,8 +1,10 @@
 ---
-de:
-  activerecord:
-    attributes:
-      user:
-        email: Benutzer Email
-        name: Name
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "user":
+        "email": >-
+          Benutzer Email
+        "name": >-
+          Name
+    "models":

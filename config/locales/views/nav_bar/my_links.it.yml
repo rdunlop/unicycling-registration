@@ -1,12 +1,20 @@
 ---
-it:
-  nav_bar:
-    my_links:
-      all_registrants: Tutti gli iscritti
-      log_in: Accedi
-      my_account: Il mio account
-      my_payments: I miei pagamenti
-      my_registrations: Le mie registrazioni
-      my_standard_skill_routines: Le mie routine Standard Skill
-      registrant_groups: Iscrivi gruppi
-      results: Gare/risultati
+"it":
+  "nav_bar":
+    "my_links":
+      "all_registrants": >-
+        Tutti gli iscritti
+      "log_in": >-
+        Accedi
+      "my_account": >-
+        Il mio account
+      "my_payments": >-
+        I miei pagamenti
+      "my_registrations": >-
+        Le mie registrazioni
+      "my_standard_skill_routines": >-
+        Le mie routine Standard Skill
+      "registrant_groups": >-
+        Iscrivi gruppi
+      "results": >-
+        Gare/risultati

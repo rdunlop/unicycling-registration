@@ -1,7 +1,10 @@
 ---
-it:
-  welcome:
-    confirm:
-      check_email: Verifica di aver ricevuto una email di conferma
-      confirm_header: Conferma la tua email
-      verify_account: Prima di poter accedere deve verificare il suo account
+"it":
+  "welcome":
+    "confirm":
+      "check_email": >-
+        Verifica di aver ricevuto una email di conferma
+      "confirm_header": >-
+        Conferma la tua email
+      "verify_account": >-
+        Prima di poter accedere deve verificare il suo account

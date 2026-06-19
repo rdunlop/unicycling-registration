@@ -1,0 +1,7 @@
+---
+"ja":
+  "activerecord":
+    "attributes":
+      "age_group_entry":
+        "gender": >-
+          性別

@@ -1,8 +1,12 @@
 ---
-de:
-  standard_skill_routines:
-    index:
-      header: Mein Standard Skill Ablauf
-      my_registrations: Meine Anmeldungen
-      signed_up_for_standard_skill: Für Standard-Skill angemeldet?
-      standard_skill_routine_created: Standard-Skill Kür aufgestellt?
+"de":
+  "standard_skill_routines":
+    "index":
+      "header": >-
+        Mein Standard Skill Ablauf
+      "my_registrations": >-
+        Meine Anmeldungen
+      "signed_up_for_standard_skill": >-
+        Für Standard-Skill angemeldet?
+      "standard_skill_routine_created": >-
+        Standard-Skill Kür aufgestellt?

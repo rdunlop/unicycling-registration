@@ -1,0 +1,26 @@
+---
+"zh-TW":
+  "data_entry_volunteers":
+    "index":
+      "assign_access": >-
+        指派額外存取權限
+      "assign_existing_user_access": >-
+        指派現有使用者額外存取權限
+      "assign_new_user_access": >-
+        指派新使用者額外存取權限
+      "create_user_and_assign_access": >-
+        建立使用者並指派額外存取權限
+      "description_1": >-
+        透過指派使用者「額外存取權限」，其帳號將可在裁判與資料輸入志工名單中被選取。
+      "description_2": >-
+        在此處新增使用者可允許其查看「資料輸入」選單，並使其能被指派為裁判或資料輸入志工。
+      "description_3": >-
+        您也可以在此設定使用者的「姓名」，這樣就無須記住其電子郵件地址
+      "header": >-
+        額外存取權限
+      "new_user_note": >-
+        這將建立一個帶有隨機電子郵件的新使用者。他們可以透過「志工登入」進入。
+      "note": >-
+        指派存取權同時也會確認未驗證的電子郵件，讓他們可以立即登入。
+      "users_with_access": >-
+        具備額外存取權的使用者

@@ -1,8 +1,11 @@
 ---
-de:
-  convention_setup:
-    expense_groups:
-      form:
-        competitor_auto_assign: Automatisch einem Wettkämpfer zuordnen?
-        group_options: Kostengruppe Optionen
-        noncompetitor_auto_assign: Automatisch einem Begleiter zuordnen?
+"de":
+  "convention_setup":
+    "expense_groups":
+      "form":
+        "competitor_auto_assign": >-
+          Automatisch einem Wettkämpfer zuordnen?
+        "group_options": >-
+          Kostengruppe Optionen
+        "noncompetitor_auto_assign": >-
+          Automatisch einem Begleiter zuordnen?

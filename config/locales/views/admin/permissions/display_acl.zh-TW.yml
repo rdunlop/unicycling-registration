@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "admin":
+    "permissions":
+      "display_acl":
+        "current_access_key": >-
+          今日的存取密鑰為
+        "description": >-
+          這將允許該電腦建立使用者帳號，且無需經過電子郵件驗證流程。
+        "header": >-
+          設定電腦現場特殊權限
+        "instructions_html": >-
+          若要授權某台筆記型電腦，請在該電腦上前往 %{url} 並輸入存取金鑰。

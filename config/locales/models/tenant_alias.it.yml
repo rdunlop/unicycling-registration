@@ -1,10 +1,13 @@
 ---
-it:
-  activerecord:
-    attributes:
-      tenant_alias:
-        website_alias: Sito web alias
-    models:
-      tenant_alias:
-        one: Titolare Alias
-        other: Titolari Alias
+"it":
+  "activerecord":
+    "attributes":
+      "tenant_alias":
+        "website_alias": >-
+          Sito web alias
+    "models":
+      "tenant_alias":
+        "one": >-
+          Titolare Alias
+        "other": >-
+          Titolari Alias

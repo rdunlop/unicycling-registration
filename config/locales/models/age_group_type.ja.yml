@@ -1,0 +1,9 @@
+---
+"ja":
+  "activerecord":
+    "attributes":
+      "age_group_type":
+        "description": >-
+          説明
+        "name": >-
+          氏名

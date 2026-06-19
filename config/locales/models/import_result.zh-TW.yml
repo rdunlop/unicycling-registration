@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "import_result":
+        "one": >-
+          Import Result
+        "other": >-
+          Import Results

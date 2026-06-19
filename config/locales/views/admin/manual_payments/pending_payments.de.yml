@@ -1,10 +1,13 @@
 ---
-de:
-  admin:
-    manual_payments:
-      pending_payments:
-        description: "Dieser Teilnehmer ist in den folgenden offenen Zahlungen gelistet.\r\nHast
+"de":
+  "admin":
+    "manual_payments":
+      "pending_payments":
+        "description": "Dieser Teilnehmer ist in den folgenden offenen Zahlungen gelistet.\r\nHast
           du eine dieser Zahlungen erhalten?"
-        header: offene Zahlungen
-        items: Artikel
-        mark_as_received: 'Markiere Zahlung #%{payment_number} als bezahlt'
+        "header": >-
+          offene Zahlungen
+        "items": >-
+          Artikel
+        "mark_as_received": >-
+          Markiere Zahlung #%{payment_number} als bezahlt

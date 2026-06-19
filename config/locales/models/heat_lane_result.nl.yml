@@ -1,7 +1,9 @@
 ---
-nl:
-  activerecord:
-    models:
-      heat_lane_result:
-        one: Heat baan resultaat
-        other: Heat baan resultaten
+"nl":
+  "activerecord":
+    "models":
+      "heat_lane_result":
+        "one": >-
+          Heat baan resultaat
+        "other": >-
+          Heat baan resultaten

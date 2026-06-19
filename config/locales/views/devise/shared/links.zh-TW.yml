@@ -1,0 +1,17 @@
+---
+"zh-TW":
+  "devise":
+    "shared":
+      "links":
+        "already_have_an_account": >-
+          已經有帳號了？
+        "forgot_your_password": >-
+          忘記密碼了嗎？
+        "log_in_here": >-
+          從這裡登入
+        "need_confirmation_instructions": >-
+          未收到確認信指示？
+        "new_user": >-
+          您是新使用者嗎？
+        "sign_up_here": >-
+          由此註冊

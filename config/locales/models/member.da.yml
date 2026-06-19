@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      member:
-        one: Medlem
-        other: Medlemmer
+"da":
+  "activerecord":
+    "models":
+      "member":
+        "one": >-
+          Medlem
+        "other": >-
+          Medlemmer

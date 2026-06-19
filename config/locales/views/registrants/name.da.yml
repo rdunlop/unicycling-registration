@@ -1,7 +1,10 @@
 ---
-da:
-  registrants:
-    name:
-      first_name: Først
-      last_name: Sidst
-      name: Navn
+"da":
+  "registrants":
+    "name":
+      "first_name": >-
+        Først
+      "last_name": >-
+        Sidst
+      "name": >-
+        Navn

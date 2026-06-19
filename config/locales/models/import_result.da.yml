@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      import_result:
-        one: Importér Resultat
-        other: Importér Resultater
+"da":
+  "activerecord":
+    "models":
+      "import_result":
+        "one": >-
+          Importér Resultat
+        "other": >-
+          Importér Resultater

@@ -1,10 +1,13 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      registrant_expense_item:
-        tax: Taxes
-    models:
-      registrant_expense_item:
-        one: Article
-        other: Articles
+"fr":
+  "activerecord":
+    "attributes":
+      "registrant_expense_item":
+        "tax": >-
+          Taxes
+    "models":
+      "registrant_expense_item":
+        "one": >-
+          Article
+        "other": >-
+          Articles

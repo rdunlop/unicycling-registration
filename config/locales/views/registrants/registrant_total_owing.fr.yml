@@ -1,7 +1,10 @@
 ---
-fr:
-  registrants:
-    registrant_total_owing:
-      paid: Payé
-      pending: En attente
-      unpaid: impayé
+"fr":
+  "registrants":
+    "registrant_total_owing":
+      "paid": >-
+        Payé
+      "pending": >-
+        En attente
+      "unpaid": >-
+        impayé

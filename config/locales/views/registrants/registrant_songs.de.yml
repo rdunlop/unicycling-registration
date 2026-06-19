@@ -1,8 +1,12 @@
 ---
-de:
-  registrants:
-    registrant_songs:
-      event: Wettbewerb
-      header: Deine Wettkampf Musik
-      instructions: Musik hochladen
-      song: Lied
+"de":
+  "registrants":
+    "registrant_songs":
+      "event": >-
+        Wettbewerb
+      "header": >-
+        Deine Wettkampf Musik
+      "instructions": >-
+        Musik hochladen
+      "song": >-
+        Lied

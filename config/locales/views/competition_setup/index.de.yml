@@ -1,11 +1,15 @@
 ---
-de:
-  competition_setup:
-    index:
-      directors: Direktoren
-      events_by_category: Disziplinen nach Kategorie
-      header: Wettkampf Setup
-      instructions: "Bitte lege Direktoren für jede Disziplin an. Du (oder der Direktor)
+"de":
+  "competition_setup":
+    "index":
+      "directors": >-
+        Direktoren
+      "events_by_category": >-
+        Disziplinen nach Kategorie
+      "header": >-
+        Wettkampf Setup
+      "instructions": "Bitte lege Direktoren für jede Disziplin an. Du (oder der Direktor)
         kann\r\nWettkämpfe für jede Disziplin anlegen, diese bestimmen wie die Daten\r\nSammlung
         für diese Disziplin erscheint."
-      new_competition: Neuen Wettkampf erstellen
+      "new_competition": >-
+        Neuen Wettkampf erstellen

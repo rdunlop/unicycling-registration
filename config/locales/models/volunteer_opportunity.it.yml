@@ -1,10 +1,13 @@
 ---
-it:
-  activerecord:
-    attributes:
-      volunteer_opportunity:
-        description: Ruolo di volontario
-    models:
-      volunteer_opportunity:
-        one: Opportunità per il volontario
-        other: Opportunità per il volontario
+"it":
+  "activerecord":
+    "attributes":
+      "volunteer_opportunity":
+        "description": >-
+          Ruolo di volontario
+    "models":
+      "volunteer_opportunity":
+        "one": >-
+          Opportunità per il volontario
+        "other": >-
+          Opportunità per il volontario

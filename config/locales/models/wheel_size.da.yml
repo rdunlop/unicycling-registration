@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      wheel_size:
-        one: Hjul størrelse
-        other: Hjul størrelser
+"da":
+  "activerecord":
+    "models":
+      "wheel_size":
+        "one": >-
+          Hjul størrelse
+        "other": >-
+          Hjul størrelser

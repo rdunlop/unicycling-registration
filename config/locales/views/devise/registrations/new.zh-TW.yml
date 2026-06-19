@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "devise":
+    "registrations":
+      "new":
+        "confirmation_reminder": >-
+          註冊後，您將收到一封確認郵件，您必須開啟該郵件以驗證您的電子郵件地址。
+        "header": >-
+          註冊單輪車報名系統帳號
+        "password_min_length": >-
+          (最少 6 個字元)
+        "sign_up": >-
+          註冊
+        "subheader": >-
+          此帳號將用於本系統中的所有單輪車大會。

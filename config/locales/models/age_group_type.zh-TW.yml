@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "age_group_type":
+        "description": >-
+          說明 / 描述
+        "name": >-
+          名稱
+    "models":
+      "age_group_type":
+        "one": >-
+          Age Group Type
+        "other": >-
+          Age Group Types

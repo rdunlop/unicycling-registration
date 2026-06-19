@@ -1,0 +1,21 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_choices":
+      "index":
+        "description": >-
+          「活動選項」是您向參賽者提出的額外問題，以便收集更多資訊。
+        "example_1": >-
+          是否使用齒輪車？
+        "example_2": >-
+          隊伍名稱
+        "example_3": >-
+          隊長姓名
+        "example_4": >-
+          雙人賽夥伴姓名
+        "existing_choices": >-
+          現有的 %{event} 活動選項
+        "header": >-
+          列出 %{event} 的活動選項
+        "new_event_choice": >-
+          新增活動選項

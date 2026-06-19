@@ -1,15 +1,23 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      page:
-        body: Contenus
-        parent_page_id: Page parente
-        position: Position
-        slug: Slug (url)
-        title: Titre
-        visible: Visible
-    models:
-      page:
-        one: Page
-        other: Pages
+"fr":
+  "activerecord":
+    "attributes":
+      "page":
+        "body": >-
+          Contenus
+        "parent_page_id": >-
+          Page parente
+        "position": >-
+          Position
+        "slug": >-
+          Slug (url)
+        "title": >-
+          Titre
+        "visible": >-
+          Visible
+    "models":
+      "page":
+        "one": >-
+          Page
+        "other": >-
+          Pages

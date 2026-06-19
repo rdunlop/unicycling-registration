@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "standard_skill_score":
+        "one": >-
+          Standard Skill Score
+        "other": >-
+          Standard Skill Scores

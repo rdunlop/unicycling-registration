@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "lodging_room_type":
+        "minimum_duration_days": >-
+          最少預訂天數限制
+    "models":
+      "lodging_room_type":
+        "one": >-
+          Lodging Room Type
+        "other": >-
+          Lodging Room Types

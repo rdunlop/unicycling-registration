@@ -1,10 +1,13 @@
 ---
-da:
-  activerecord:
-    attributes:
-      registrant_group:
-        name: Gruppe Navn
-    models:
-      registrant_group:
-        one: Deltagers Gruppe
-        other: Deltagers Grupper
+"da":
+  "activerecord":
+    "attributes":
+      "registrant_group":
+        "name": >-
+          Gruppe Navn
+    "models":
+      "registrant_group":
+        "one": >-
+          Deltagers Gruppe
+        "other": >-
+          Deltagers Grupper

@@ -1,10 +1,13 @@
 ---
-da:
-  activerecord:
-    attributes:
-      category:
-        name: Navn
-    models:
-      category:
-        one: Kategori
-        other: Kategorier
+"da":
+  "activerecord":
+    "attributes":
+      "category":
+        "name": >-
+          Navn
+    "models":
+      "category":
+        "one": >-
+          Kategori
+        "other": >-
+          Kategorier

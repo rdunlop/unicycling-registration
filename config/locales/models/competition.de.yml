@@ -1,24 +1,40 @@
 ---
-de:
-  activerecord:
-    attributes:
-      competition:
-        award_subtitle_name: Ehrungsuntertitel
-        award_title_name: Ehrungstitel
-        combined_competition_id: Gesamtsieger Berechnung
-        end_data_type: Ziellinien Dateneingabe
-        has_experts: Auch Expert berechnen
-        import_results_into_other_competition: Importiere die Ergebnisse in einen
-          anderen Wettkampf
-        name: Wettkampfname
-        num_members_per_competitor: Teamgröße
-        penalty_seconds: Sekunden pro Strafe
-        scheduled_completion_at: Geplante Vervollständigungszeit
-        scoring_class: Wertungstyp
-        rule_for_ineligible_competitors: Ungeeignete Teilnehmer
-        always_score: Ungeeignete Teilnehmer so bewerten, als wären sie geeignet
-        never_score: Ungeeignete Teilnehmer niemals werten
-        score_if_at_least_half_eligible: Werten, wenn mindestens die Hälfte der Mitglieder geeignet ist
-        start_data_type: Starliniendaten Eingabe
-        uses_lane_assignments: Teilnahme in Reihen / Läufen
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "competition":
+        "always_score": >-
+          Ungeeignete Teilnehmer so bewerten, als wären sie geeignet
+        "award_subtitle_name": >-
+          Ehrungsuntertitel
+        "award_title_name": >-
+          Ehrungstitel
+        "combined_competition_id": >-
+          Gesamtsieger Berechnung
+        "end_data_type": >-
+          Ziellinien Dateneingabe
+        "has_experts": >-
+          Auch Expert berechnen
+        "import_results_into_other_competition": >-
+          Importiere die Ergebnisse in einen anderen Wettkampf
+        "name": >-
+          Wettkampfname
+        "never_score": >-
+          Ungeeignete Teilnehmer niemals werten
+        "num_members_per_competitor": >-
+          Teamgröße
+        "penalty_seconds": >-
+          Sekunden pro Strafe
+        "rule_for_ineligible_competitors": >-
+          Ungeeignete Teilnehmer
+        "scheduled_completion_at": >-
+          Geplante Vervollständigungszeit
+        "score_if_at_least_half_eligible": >-
+          Werten, wenn mindestens die Hälfte der Mitglieder geeignet ist
+        "scoring_class": >-
+          Wertungstyp
+        "start_data_type": >-
+          Starliniendaten Eingabe
+        "uses_lane_assignments": >-
+          Teilnahme in Reihen / Läufen
+    "models":

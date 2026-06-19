@@ -1,8 +1,10 @@
 ---
-de:
-  activerecord:
-    attributes:
-      distance_attempt:
-        distance: Distanz
-        fault: Fehler
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "distance_attempt":
+        "distance": >-
+          Distanz
+        "fault": >-
+          Fehler
+    "models":

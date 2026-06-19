@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "feedback":
+        "message": >-
+          內容 / 訊息
+        "subject": >-
+          主旨
+    "models":
+      "feedback":
+        "one": >-
+          Feedback
+        "other": >-
+          Feedback

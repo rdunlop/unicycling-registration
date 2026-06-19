@@ -1,0 +1,6 @@
+---
+"zh-TW":
+  "devise":
+    "failure":
+      "invalid": >-
+        無效的 %{authentication_keys} 或密碼。舊帳號現在可使用目前的密碼登入。詳情請見「說明」。

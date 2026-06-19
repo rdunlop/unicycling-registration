@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "expense_groups":
+      "form":
+        "competitor_auto_assign": >-
+          是否自動分配給參賽者？
+        "group_options": >-
+          費用群組選項
+        "noncompetitor_auto_assign": >-
+          是否自動分配給非參賽者？

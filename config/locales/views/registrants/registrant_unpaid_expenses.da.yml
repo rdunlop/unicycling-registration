@@ -1,5 +1,6 @@
 ---
-da:
-  registrants:
-    registrant_unpaid_expenses:
-      delete: Slet
+"da":
+  "registrants":
+    "registrant_unpaid_expenses":
+      "delete": >-
+        Slet

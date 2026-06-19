@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_categories":
+      "index":
+        "allowed_age_range": >-
+          允許的年齡範圍
+        "header": >-
+          列出 %{event} 的比賽類別
+        "new_event_category": >-
+          新增活動類別

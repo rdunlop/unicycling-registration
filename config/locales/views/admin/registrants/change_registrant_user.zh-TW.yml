@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "admin":
+    "registrants":
+      "change_registrant_user":
+        "change_associated_user": >-
+          更改關聯使用者
+        "header": >-
+          更改報名者的關聯帳號

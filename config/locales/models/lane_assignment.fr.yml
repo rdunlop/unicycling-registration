@@ -1,11 +1,15 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      lane_assignment:
-        heat: Série
-        lane: Couloir
-    models:
-      lane_assignment:
-        one: Attribution de couloir
-        other: Attribution de couloirs
+"fr":
+  "activerecord":
+    "attributes":
+      "lane_assignment":
+        "heat": >-
+          Série
+        "lane": >-
+          Couloir
+    "models":
+      "lane_assignment":
+        "one": >-
+          Attribution de couloir
+        "other": >-
+          Attribution de couloirs

@@ -1,0 +1,17 @@
+---
+"zh-TW":
+  "convention_setup":
+    "categories":
+      "edit":
+        "description": >-
+          比賽項目被歸類在不同的「競賽類別」中。例如：球類運動、花式、山地獨輪 (Muni)。
+        "existing_categories": >-
+          現有類別
+        "header": >-
+          編輯競賽類別
+        "manage_events": >-
+          管理比賽項目
+        "manage_events_note": >-
+          建立類別後，請選擇「管理比賽項目」以在該類別下建立具體的比賽項目。
+        "new_category": >-
+          新增類別

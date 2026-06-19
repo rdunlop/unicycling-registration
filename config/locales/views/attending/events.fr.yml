@@ -1,5 +1,13 @@
 ---
-fr:
-  attending:
-    events:
-      more_info: Plus d’infos
+"fr":
+  "attending":
+    "events":
+      "change_selection_message": >-
+        Vous devez participer dans la même catégorie pour ces événements. Nous avons
+        mis à jour vos catégories dans d'autres événements pour correspondre.
+      "clear_selection_message": >-
+        Vous devez choisir des catégories similaire pour vos événements. Nous avons
+        réinitialisé l'un de vos choix... re-sélectionnez la catégorie appropriée
+        svp.
+      "more_info": >-
+        Plus d’infos

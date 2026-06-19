@@ -1,5 +1,6 @@
 ---
-da:
-  layouts:
-    application:
-      registration: Tilmelding
+"da":
+  "layouts":
+    "application":
+      "registration": >-
+        Tilmelding

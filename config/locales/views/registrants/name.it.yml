@@ -1,7 +1,10 @@
 ---
-it:
-  registrants:
-    name:
-      first_name: Primo
-      last_name: Ultimo
-      name: Nome
+"it":
+  "registrants":
+    "name":
+      "first_name": >-
+        Primo
+      "last_name": >-
+        Ultimo
+      "name": >-
+        Nome

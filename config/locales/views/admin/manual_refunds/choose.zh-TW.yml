@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "admin":
+    "manual_refunds":
+      "choose":
+        "choose_items": >-
+          勾選欲標記為「已退款」的項目
+        "description": >-
+          請描述退款原因。（範例：「已取消，不參加」、「主辦單位退款」）
+        "details_note": >-
+          （僅部分項目需要填寫）
+        "header": >-
+          建立退款
+        "mark_this_item": >-
+          將此項目標記為已退款
+        "paid_items": >-
+          已付款項目
+        "submit": >-
+          建立退款紀錄

@@ -1,5 +1,6 @@
 ---
-es:
-  layouts:
-    application:
-      registration: Inscripción
+"es":
+  "layouts":
+    "application":
+      "registration": >-
+        Inscripción

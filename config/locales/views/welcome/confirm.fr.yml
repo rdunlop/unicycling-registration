@@ -1,7 +1,10 @@
 ---
-fr:
-  welcome:
-    confirm:
-      check_email: Veuillez vérifiez vos courriel pour un message de confirmation
-      confirm_header: Confirmez votre e-mail
-      verify_account: Vous devez d'abord confirmer votre compte
+"fr":
+  "welcome":
+    "confirm":
+      "check_email": >-
+        Veuillez vérifiez vos courriel pour un message de confirmation
+      "confirm_header": >-
+        Confirmez votre e-mail
+      "verify_account": >-
+        Vous devez d'abord confirmer votre compte

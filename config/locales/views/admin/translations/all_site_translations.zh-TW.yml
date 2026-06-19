@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "admin":
+    "translations":
+      "all_site_translations":
+        "be_careful_warning": >-
+          在此進行翻譯時請務必謹慎，因為這不僅會影響您的獨輪車大會，還會影響系統中所有的獨輪車大會。
+        "performance_impact_warning": >-
+          請僅在您完成所有操作後才點擊「套用變更」及「清除翻譯快取」，因為這可能會影響系統效能。
+        "text_translation_system": >-
+          文字翻譯系統
+        "when_done_translating": >-
+          完成翻譯後，請務必點擊「文字翻譯系統」中的「套用變更」按鈕，以將修改應用到網站上。

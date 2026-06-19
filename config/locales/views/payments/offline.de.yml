@@ -1,5 +1,6 @@
 ---
-de:
-  payments:
-    offline:
-      title: Offline Zahlungs Möglichkeiten
+"de":
+  "payments":
+    "offline":
+      "title": >-
+        Offline Zahlungs Möglichkeiten

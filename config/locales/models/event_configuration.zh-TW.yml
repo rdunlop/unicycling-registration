@@ -1,0 +1,102 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "event_configuration":
+        "accept_rules": >-
+          必須同意比賽規則
+        "age_calculation_base_date": >-
+          年齡計算基準日
+        "artistic_closed_date": >-
+          花式項目最後報名期限
+        "artistic_score_elimination_mode_naucc": >-
+          小組 (Small Group)
+        "competitor": >-
+          參賽者
+        "competitor_benefits": >-
+          參賽者權益 / 福利
+        "comp_noncomp_page_id": >-
+          參賽與非參賽身分說明頁面
+        "comp_noncomp_url": >-
+          參賽與否之差異說明
+        "contact_email": >-
+          大會聯絡電子郵件
+        "currency_code": >-
+          幣別代碼 (例如: TWD, USD)
+        "custom_waiver_text": >-
+          自訂免責聲明文本
+        "dates_description": >-
+          活動日期說明
+        "enabled_locales": >-
+          已啟用的語言語系
+        "event_sign_up_closed_date": >-
+          比賽項目報名截止日
+        "event_url": >-
+          活動官方網站
+        "location": >-
+          地點
+        "logo_file": >-
+          標誌 (Logo) 檔案
+        "long_name": >-
+          大會完整名稱
+        "max_registrants": >-
+          總報名人數上限
+        "music_submission_end_date": >-
+          音樂檔案上傳截止日
+        "noncompetitor": >-
+          非參賽者
+        "noncompetitor_benefits": >-
+          非參賽者權益 / 福利
+        "offline_payment": >-
+          提供線下付款（如轉帳）資訊
+        "offline_payment_description": >-
+          線下付款（轉帳）詳細說明
+        "payment_mode": >-
+          支付模式
+        "paypal_account": >-
+          PayPal 商家帳號信箱
+        "registrants_should_specify_default_wheel_size": >-
+          報名者須指定預設輪徑
+        "request_address": >-
+          要求填寫地址
+        "request_emergency_contact": >-
+          要求填寫緊急聯絡人
+        "request_responsible_adult": >-
+          要求填寫現場負責成年人
+        "require_medical_certificate": >-
+          要求提供診斷證明 / 健康證明
+        "rulebook_url": >-
+          規則手冊 PDF 網址
+        "rules_file_name": >-
+          規則說明 PDF 檔案
+        "short_name": >-
+          大會簡稱
+        "spectator": >-
+          觀眾 / 觀賽者
+        "spectator_benefits": >-
+          觀眾權益 / 優惠
+        "standard_skill": >-
+          啟用標準動作申報系統
+        "standard_skill_closed_date": >-
+          標準動作表線上提交截止日
+        "start_date": >-
+          比賽首日 / 開賽日期
+        "style_name": >-
+          網頁樣式風格
+        "under_construction": >-
+          維護中 / 建設中
+        "waiver_file_name": >-
+          可列印的棄權與免責聲明書
+    "models":
+      "event_configurations":
+        "one": >-
+          Event Configuration
+        "other": >-
+          Event Configurations
+  "helpers":
+    "submit":
+      "event_configuration":
+        "create": >-
+          儲存並繼續
+        "update": >-
+          儲存並繼續

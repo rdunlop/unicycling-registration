@@ -1,0 +1,23 @@
+---
+"zh-TW":
+  "admin":
+    "translations":
+      "common_translations":
+        "access_not_enabled": >-
+          您目前沒有存取「通用翻譯」系統的權限。
+        "common_example_1": >-
+          導覽列標籤
+        "common_example_2": >-
+          自動化電子郵件內容
+        "common_example_3": >-
+          欄位名稱（例如：名字、電話號碼）
+        "common_translations": >-
+          通用翻譯
+        "common_translations_detail": >-
+          由於「通用翻譯」適用於所有大會，多數語言可能已翻譯完成。任何對這些文字的修改將立即套用到「所有」大會系統。
+        "examples_of_common_translations": >-
+          通用翻譯範例
+        "follow_the_directions": >-
+          遵循指引說明
+        "want_to_help": >-
+          若您願意協助翻譯該文本，請

@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    volunteer_choices:
-      header: Opportunité de bénévolat
+"fr":
+  "registrants":
+    "volunteer_choices":
+      "header": >-
+        Opportunité de bénévolat

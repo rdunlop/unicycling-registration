@@ -1,0 +1,22 @@
+---
+"zh-TW":
+  "convention_setup":
+    "categories":
+      "index":
+        "copy_from_previous":
+          "header": >-
+            從上一屆大會複製比賽項目與類別
+          "link": >-
+            選擇先前的大會並複製其比賽項目
+        "description": >-
+          活動按不同類別分組。例如：團隊運動、花式競技、Muni (越野)。
+        "existing_categories": >-
+          活動類別
+        "header": >-
+          現有類別
+        "manage_events": >-
+          管理活動項目
+        "manage_events_note": >-
+          建立類別後，請選擇「管理活動項目」以在該類別下建立具體項目。
+        "new_category": >-
+          新增類別

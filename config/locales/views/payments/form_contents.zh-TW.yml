@@ -1,0 +1,16 @@
+---
+"zh-TW":
+  "payments":
+    "form_contents":
+      "cost": >-
+        費用
+      "details": >-
+        詳情
+      "select_all": >-
+        全選
+      "start_payment": >-
+        開始付款
+      "total_cost": >-
+        總費用
+      "unselect_all": >-
+        取消全選

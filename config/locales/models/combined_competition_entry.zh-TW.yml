@@ -1,0 +1,17 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "combined_competition_entry":
+        "abbreviation": >-
+          縮寫
+        "base_points": >-
+          基礎積分
+        "tie_breaker": >-
+          平分決選規則
+    "models":
+      "combined_competition_entry":
+        "one": >-
+          Combined Competition Entry
+        "other": >-
+          Combined Competition Entries

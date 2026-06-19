@@ -1,11 +1,18 @@
 ---
-es:
-  registrants:
-    registrant_list_entry:
-      competitor: "(Participante)"
-      edit: Editar
-      incomplete: Incompleto
-      legal_waiver: Exención Legal (%{first_name})
-      noncompetitor: "(No competidor)"
-      see_summary: Ver resumen
-      spectator: Espectador
+"es":
+  "registrants":
+    "registrant_list_entry":
+      "competitor": >-
+        (Participante)
+      "edit": >-
+        Editar
+      "incomplete": >-
+        Incompleto
+      "legal_waiver": >-
+        Exención Legal (%{first_name})
+      "noncompetitor": >-
+        (No competidor)
+      "see_summary": >-
+        Ver resumen
+      "spectator": >-
+        Espectador

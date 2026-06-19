@@ -1,13 +1,19 @@
 ---
-it:
-  activerecord:
-    attributes:
-      standard_skill_entry:
-        description: Descrizione
-        letter: Lettera
-        number: Numero di Skill
-        points: Punti
-    models:
-      standard_skill_entry:
-        one: Valore Standard Skill
-        other: Valori Stantard Skill
+"it":
+  "activerecord":
+    "attributes":
+      "standard_skill_entry":
+        "description": >-
+          Descrizione
+        "letter": >-
+          Lettera
+        "number": >-
+          Numero di Skill
+        "points": >-
+          Punti
+    "models":
+      "standard_skill_entry":
+        "one": >-
+          Valore Standard Skill
+        "other": >-
+          Valori Stantard Skill

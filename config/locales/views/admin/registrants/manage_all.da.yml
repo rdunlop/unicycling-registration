@@ -1,10 +1,15 @@
 ---
-da:
-  admin:
-    registrants:
-      manage_all:
-        deleted_question: Slettet?
-        header: Administrér tilmeldte
-        summary: Opsummering
-        undelete: Genopret
-        undelete_confirmation: Genopret deltager?
+"da":
+  "admin":
+    "registrants":
+      "manage_all":
+        "deleted_question": >-
+          Slettet?
+        "header": >-
+          Administrér tilmeldte
+        "summary": >-
+          Opsummering
+        "undelete": >-
+          Genopret
+        "undelete_confirmation": >-
+          Genopret deltager?

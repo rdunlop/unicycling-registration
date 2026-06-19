@@ -1,8 +1,10 @@
 ---
-it:
-  volunteers:
-    index:
-      add_volunteer_description_html: "Se il volontario che ha bisogno non è elencato
+"it":
+  "volunteers":
+    "index":
+      "add_volunteer_description_html": "Se il volontario che ha bisogno non è elencato
         qui, \r\nlo dovrà aggiungere alla pagina %{link}"
-      header: Volontari
-      manage_additional_access: Gestione accesso supplementare
+      "header": >-
+        Volontari
+      "manage_additional_access": >-
+        Gestione accesso supplementare

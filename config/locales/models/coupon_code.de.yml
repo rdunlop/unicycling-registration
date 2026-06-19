@@ -1,16 +1,20 @@
 ---
-de:
-  activerecord:
-    attributes:
-      coupon_code:
-        code: Kode
-        description: Beschreibung
-        inform_emails: E-Mail um über jeden Coupon Gebrauch zu informieren
-        maximum_registrant_age: Maximales Teilnehmer Alter
-        max_num_uses: Maximale Anzahl der Verwendung
-        name: Name
-        price: Preis
-    models:
-      coupon_code:
-        one: Gutschein Code
-        other: Gutschein Codes
+"de":
+  "activerecord":
+    "attributes":
+      "coupon_code":
+        "code": >-
+          Kode
+        "description": >-
+          Beschreibung
+        "inform_emails": >-
+          E-Mail um über jeden Coupon Gebrauch zu informieren
+        "maximum_registrant_age": >-
+          Maximales Teilnehmer Alter
+        "max_num_uses": >-
+          Maximale Anzahl der Verwendung
+        "name": >-
+          Name
+        "price": >-
+          Preis
+    "models":

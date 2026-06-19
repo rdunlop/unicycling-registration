@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "heat_lane_result":
+        "one": >-
+          Heat Lane Result
+        "other": >-
+          Heat Lane Results

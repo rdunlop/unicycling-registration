@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      score:
-        one: Score
-        other: Scores
+"fr":
+  "activerecord":
+    "models":
+      "score":
+        "one": >-
+          Score
+        "other": >-
+          Scores

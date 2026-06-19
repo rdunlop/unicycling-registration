@@ -1,9 +1,12 @@
 ---
-es:
-  registrants:
-    build:
-      contact_detail:
-        emergency_contact:
-          attending: Dirección
-          emergency_contact: Contacto de emergencia
-          in_case_of_emergency: En caso de emergencia
+"es":
+  "registrants":
+    "build":
+      "contact_detail":
+        "emergency_contact":
+          "attending": >-
+            Dirección
+          "emergency_contact": >-
+            Contacto de emergencia
+          "in_case_of_emergency": >-
+            En caso de emergencia

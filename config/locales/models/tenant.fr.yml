@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      tenant:
-        one: Titulaire
-        other: Titulaires
+"fr":
+  "activerecord":
+    "models":
+      "tenant":
+        "one": >-
+          Titulaire
+        "other": >-
+          Titulaires

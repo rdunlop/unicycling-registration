@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "devise":
+    "confirmations":
+      "new":
+        "spam_reminder": >-
+          若您未收到確認電子郵件，請務必檢查您的垃圾郵件資料夾。
+        "title": >-
+          重新發送確認指示信

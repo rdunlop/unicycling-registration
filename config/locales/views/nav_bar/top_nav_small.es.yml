@@ -1,5 +1,6 @@
 ---
-es:
-  nav_bar:
-    top_nav_small:
-      sign_out: Cerrar la sesión
+"es":
+  "nav_bar":
+    "top_nav_small":
+      "sign_out": >-
+        Cerrar la sesión

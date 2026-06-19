@@ -1,9 +1,12 @@
 ---
-fr:
-  registrants:
-    build:
-      contact_detail:
-        emergency_contact:
-          attending: Présent à
-          emergency_contact: Coordonnées d’urgence
-          in_case_of_emergency: En cas d’urgence
+"fr":
+  "registrants":
+    "build":
+      "contact_detail":
+        "emergency_contact":
+          "attending": >-
+            Présent à
+          "emergency_contact": >-
+            Coordonnées d’urgence
+          "in_case_of_emergency": >-
+            En cas d’urgence

@@ -1,6 +1,7 @@
 ---
-es:
-  convention_setup:
-    event_choices:
-      edit:
-        header: Editando elección de evento
+"es":
+  "convention_setup":
+    "event_choices":
+      "edit":
+        "header": >-
+          Editando elección de evento

@@ -1,185 +1,248 @@
 ---
-de:
-  simple_form:
-    error_notification:
-      default_message: 'Bitte überprüfe die folgenden Probleme:'
-    hints:
-      category:
-        info_page_id: Wähle eine 'Seite' die diese Kategorie beschreibt. Dies wird
-          dem Teilnehmer die korekte Übersetzung der Seite anzeigen
-        info_url: Dieser Link erscheint auf der Kategorien Seite und kann als ein
-          Link zu zusätzlichen Informationen über die Wettbewerbe dieser Kategorie
-          verwendet werden.
-      competition:
-        award_subtitle_name: "Gib eine freiwillige Zeile Ehrungstext ein. HINWEIS:
+"de":
+  "simple_form":
+    "error_notification":
+      "default_message": >-
+        Bitte überprüfe die folgenden Probleme:
+    "hints":
+      "category":
+        "info_page_id": >-
+          Wähle eine 'Seite' die diese Kategorie beschreibt. Dies wird dem Teilnehmer
+          die korekte Übersetzung der Seite anzeigen
+        "info_url": >-
+          Dieser Link erscheint auf der Kategorien Seite und kann als ein Link zu
+          zusätzlichen Informationen über die Wettbewerbe dieser Kategorie verwendet
+          werden.
+      "competition":
+        "award_subtitle_name": "Gib eine freiwillige Zeile Ehrungstext ein. HINWEIS:
           Nur OHNE Altersgruppe erlaubt\r\nz.B. Anfänger Männlich"
-        award_title_name: "Text, der auf offiziellen Ergebnissen und Ehrungen erscheint\r\nz.B.
+        "award_title_name": "Text, der auf offiziellen Ergebnissen und Ehrungen erscheint\r\nz.B.
           Einzelkür"
-        combined_competition_id: "Dies sollte nur für die Gesamtwertung verfügbar
+        "combined_competition_id": "Dies sollte nur für die Gesamtwertung verfügbar
           sein und nicht für die einzenen Wettbewerbe, die einen Teil dieser darstellen.\r\n(d.h.
           nicht für 10k, nur für die \"Gesamtwertung Straßenrennen\")"
-        has_experts: "Wähle dies aus, wenn die hier eingegebenen Ergebnisse AUCH ohne
-          Altersgruppen geehrt werden sollen.\r\nWenn dieses Kästchen angehakt wird,
-          werden Expertergebnisse separat von den Altersgruppenergebnissen ausgewertet.\r\nSoll
+        "has_experts": "Wähle dies aus, wenn die hier eingegebenen Ergebnisse AUCH
+          ohne Altersgruppen geehrt werden sollen.\r\nWenn dieses Kästchen angehakt
+          wird, werden Expertergebnisse separat von den Altersgruppenergebnissen ausgewertet.\r\nSoll
           dieser Wettkampf NUR als Expert gewertet werden ist es nicht nötig dieses
           Kästchen anzuhaken, da alle Ergebnisse in einer Altersklasse / Ergebnisliste
           gelistet werden.\r\nEs MUSS eine Altersgruppe definiert werden."
-        num_members_per_competitor: Für die meisten Veranstaltungen ist dies "Eins"
-        penalty_seconds: Ist es möglich einen Teilnehmer mit "X" Sekunden für einen
-          Regelverstoß (wie vom Einrad abzusteigen) zu bestrafen?
-        scheduled_completion_at: Wird genutzt um die Ergebnisse in einer Administratorübersicht
-          anzufordern
-        scoring_class: Wähle das Berechnungssystem
-        sign_in_list_enabled: "Für manche Wettkämpfe (wie Bahnrennen) ist das Registrierungsformular
+        "num_members_per_competitor": >-
+          Für die meisten Veranstaltungen ist dies "Eins"
+        "penalty_seconds": >-
+          Ist es möglich einen Teilnehmer mit "X" Sekunden für einen Regelverstoß
+          (wie vom Einrad abzusteigen) zu bestrafen?
+        "scheduled_completion_at": >-
+          Wird genutzt um die Ergebnisse in einer Administratorübersicht anzufordern
+        "scoring_class": >-
+          Wähle das Berechnungssystem
+        "sign_in_list_enabled": "Für manche Wettkämpfe (wie Bahnrennen) ist das Registrierungsformular
           automatisch aktiviert. Verwende diese Option\r\nfalls du die Kurbellänge
           und andere Details für einen Wettbewerb angeben möchtest, die nicht automatisch\r\naktiviert
           sind."
-        uses_lane_assignments: Aktiviert das Werkzeug zur Generierung der Läufe
-      coupon_code:
-        expense_items: Zeige die kostenpflichtigen Artikel die durch diesen Gutscheincode
-          rabatiert werden.
-        inform_emails: Eine Komma separierte Liste von E-Mail Adressen die informiert
-          werden wenn jemand diesen Coupon verwendet
-        maximum_registrant_age: Kann auf Teilnehmer bis zu (einschließlich) diesem
-          Alter angewendet werden
-        price: Der Preis der berechnet wird wenn dieser Coupon verwendet wird
-      event:
-        accepts_music_uploads: Aktiviere diese Box wenn jeder Teilnehmer Musik für
-          seinen Wettkampf auswählen soll
-        accepts_wheel_size_override: Das aktivieren dieser Option ermöglicht es Kindern
-          unter 11 Jahren eine andere Radgröße auszuwählen.
-        artistic: Das aktivieren dieses Boolschen Ausdrucks wird automatisch alle
-          Änderungen nach dem Ablauf der Frist für den Bereich Artistik beschränken.
-        best_time_format: Möchtest du das der Teilnehmer ein "Bestes Ergebniss" für
-          diese Disziplin angibt. (Dies kann helfen um die Start Reihenfolge für einige
-          Wettkämpfe fest zu legen
-        cost: Gib die Anmeldegebühr für diese Disziplin an (optional).
-        standard_skill: Hake diese Box an, wenn die Wettkämpfer auch ihre Standard
-          Skill Abläufe hochladen sollen.
-      event_category:
-        warning_on_registration_summary: Jeder Teilnehmer der sich für diese Kategorie
-          anmeldet wird eine Warnung auf seinem Anmeldeformular sehen.
-      event_choice:
-        optional: Erlaubt dem Nutzer keine Daten in diesem Feld eintragen zu müssen
-        optional_if_event_choice_id: Wenn der Nutzer diese andere 'Wettbewerbs Auswahl'
-          gewählt hat ist dieses Feld optional. (z.B. "Team Name" ist optional wenn
-          "Pickup" gewählt wurde)
-        required_if_event_choice_id: Wenn der Nutzer diese andere 'Wettbewerbs Auswahl'
-          gewählt hat ist dieses Feld erforderlich. (z.B. "Team Farbe" wenn "ich mache
-          es nur aus Spass)
-        tooltip: Dies wird angezeigt wenn der Nutzer mit der Maus über dieses Feld
-          fährt
-      event_configuration:
-        accept_rules: Zwinge alle Teilnehmer die als PDF angehängten Regeln zu akzeptieren
-        age_calculation_base_date: Das Teilnehmer Alter wird basierend auf diesem
-          Datum berechnet
-        artistic_closed_date: Ab diesem Datum können normale Teilnehmer keine Wettbewerbe
-          mehr hinzufügen die als "Artistik" markiert sind. Bis zum Registrierungsschluss
-          können jedoch noch Wettbewerbe gelöscht werden.
-        competitor_benefits: Erscheint auf der Anmelde Startseite, beschreibt welche
-          Vorteile eine Teilnehmer Anmeldung bietet
-        comp_noncomp_url: Definiert einen Link der die Unterschiede zwischen den verschiedenen
-          angebotenen Anmelde Varianten erklärt
-        contact_email: Dies ist das Ziel für alle "Feedback" E-Mail auf der Hilfe
-          Seite.
-        dates_description: Diese Beschreibung erscheint auf der nicht-angemeldet Seite
-          und sollte die Daten der Veranstaltung beschreiben.
-        display_confirmed_events: Das aktivieren dieser Funktion zeigt die bestätigten
-          Wettbewerbe/unbestätigten Wettbewerbe auf der Zusammenfassungs Seite den
-          Teilnehmers an.
-        event_sign_up_closed_date: Nach diesem Datum können nur noch Administratoren
-          Wettbewerbe zu Teilnehmern nachmelden. (wärend sie diese immernoch entfernen
-          können)
-        event_url: Links vom Menü Bar Logo zu dieser URL
-        iuf: Das aktivieren dieser Funktion erlaubt IUF Mitgliedschafts Fragen.
-        lodging_end_date: Nach diesem Datum können NUR Administratoren Unterkünfte
-          zu einer Registrierung hinzufügen/entfernen. (obwohl bestehende Unterkünfte
-          immer noch gebucht werden können)
-        logo_file: Das Logo sollte 93x38 Pixel haben
-        max_award_place: Hier definierst du den maximalen Platz für den Ehrungen gedruckt
-          werden. (greift für ALtersklassen und Expert)
-        max_registrants: Benutzer werden nicht in der Lage sein eine neue Anmeldung
-          zu erzeugen sobald diese Anzahl an (bezahlten oder unbezahlten) Teilnehmern
-          erreicht ist. Setze 0 um diese Funktion zu deaktivieren.
-        music_submission_end_date: Der letzte Tag an dem die Zustellung von Musik
-          erlaubt ist
-        noncompetitor_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
-          die Vorteile einer Anmeldung als Begleiter
-        paypal_test: Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal
-          bekomen zu haben
-        registrants_should_specify_default_wheel_size: Müssen wir Teilnehmer die <=
-          10 Jahre alt sind nach ihrer standard Reifengröße fragen (üblicherweise
-          für Bahn Rennen)
-        request_address: Erfordert von jedem Teilnehmer die EIngabe einer Email Adresse
-        request_emergency_contact: Erfordert von jedem Teilnehmer die EIngabe eines
-          Notfall Kontakt
-        request_responsible_adult: Erfragt von jedem minderjährigen (unter 18) Teilnehmer
-          die Angabe eines verantwortlichen Erwachsenen
-        spectator_benefits: Erscheint auf der Anmeldungs Startseite und beschreibt
-          die Vorteile einer Anmeldung als Zuschauer
-        spectators: Zuschauer müssen keine Anmeldegebühr bezahlen und können Artikel
-          erwerben ohne für die Anmeldung bezahlen zu müssen
-        start_date: Das Alter der Teilnehmer wird auf dieses Datum berechnet. Dies
-          ist das Standard Datum das auf dem Kalender angezeigt wird wenn das System
-          konfiguriert wird
-        test_mode: Das aktivieren dieses Feldes erlaubt es jedem Nutzer Super User
-          zu werden und auch vorzutäuschen eine Zahlung vorgenommen zu haben.
-        usa: "Diese Funktion priorisiert die USA und Kanada in der Länder Auswahl
+        "uses_lane_assignments": >-
+          Aktiviert das Werkzeug zur Generierung der Läufe
+      "coupon_code":
+        "expense_items": >-
+          Zeige die kostenpflichtigen Artikel die durch diesen Gutscheincode rabatiert
+          werden.
+        "inform_emails": >-
+          Eine Komma separierte Liste von E-Mail Adressen die informiert werden wenn
+          jemand diesen Coupon verwendet
+        "maximum_registrant_age": >-
+          Kann auf Teilnehmer bis zu (einschließlich) diesem Alter angewendet werden
+        "price": >-
+          Der Preis der berechnet wird wenn dieser Coupon verwendet wird
+      "event":
+        "accepts_music_uploads": >-
+          Aktiviere diese Box wenn jeder Teilnehmer Musik für seinen Wettkampf auswählen
+          soll
+        "accepts_wheel_size_override": >-
+          Das aktivieren dieser Option ermöglicht es Kindern unter 11 Jahren eine
+          andere Radgröße auszuwählen.
+        "artistic": >-
+          Das aktivieren dieses Boolschen Ausdrucks wird automatisch alle Änderungen
+          nach dem Ablauf der Frist für den Bereich Artistik beschränken.
+        "best_time_format": >-
+          Möchtest du das der Teilnehmer ein "Bestes Ergebniss" für diese Disziplin
+          angibt. (Dies kann helfen um die Start Reihenfolge für einige Wettkämpfe
+          fest zu legen
+        "cost": >-
+          Gib die Anmeldegebühr für diese Disziplin an (optional).
+        "standard_skill": >-
+          Hake diese Box an, wenn die Wettkämpfer auch ihre Standard Skill Abläufe
+          hochladen sollen.
+      "event_category":
+        "warning_on_registration_summary": >-
+          Jeder Teilnehmer der sich für diese Kategorie anmeldet wird eine Warnung
+          auf seinem Anmeldeformular sehen.
+      "event_choice":
+        "optional": >-
+          Erlaubt dem Nutzer keine Daten in diesem Feld eintragen zu müssen
+        "optional_if_event_choice_id": >-
+          Wenn der Nutzer diese andere 'Wettbewerbs Auswahl' gewählt hat ist dieses
+          Feld optional. (z.B. "Team Name" ist optional wenn "Pickup" gewählt wurde)
+        "required_if_event_choice_id": >-
+          Wenn der Nutzer diese andere 'Wettbewerbs Auswahl' gewählt hat ist dieses
+          Feld erforderlich. (z.B. "Team Farbe" wenn "ich mache es nur aus Spass)
+        "tooltip": >-
+          Dies wird angezeigt wenn der Nutzer mit der Maus über dieses Feld fährt
+      "event_configuration":
+        "accept_rules": >-
+          Zwinge alle Teilnehmer die als PDF angehängten Regeln zu akzeptieren
+        "age_calculation_base_date": >-
+          Das Teilnehmer Alter wird basierend auf diesem Datum berechnet
+        "artistic_closed_date": >-
+          Ab diesem Datum können normale Teilnehmer keine Wettbewerbe mehr hinzufügen
+          die als "Artistik" markiert sind. Bis zum Registrierungsschluss können jedoch
+          noch Wettbewerbe gelöscht werden.
+        "competitor_benefits": >-
+          Erscheint auf der Anmelde Startseite, beschreibt welche Vorteile eine Teilnehmer
+          Anmeldung bietet
+        "comp_noncomp_url": >-
+          Definiert einen Link der die Unterschiede zwischen den verschiedenen angebotenen
+          Anmelde Varianten erklärt
+        "contact_email": >-
+          Dies ist das Ziel für alle "Feedback" E-Mail auf der Hilfe Seite.
+        "dates_description": >-
+          Diese Beschreibung erscheint auf der nicht-angemeldet Seite und sollte die
+          Daten der Veranstaltung beschreiben.
+        "display_confirmed_events": >-
+          Das aktivieren dieser Funktion zeigt die bestätigten Wettbewerbe/unbestätigten
+          Wettbewerbe auf der Zusammenfassungs Seite den Teilnehmers an.
+        "event_sign_up_closed_date": >-
+          Nach diesem Datum können nur noch Administratoren Wettbewerbe zu Teilnehmern
+          nachmelden. (wärend sie diese immernoch entfernen können)
+        "event_url": >-
+          Links vom Menü Bar Logo zu dieser URL
+        "iuf": >-
+          Das aktivieren dieser Funktion erlaubt IUF Mitgliedschafts Fragen.
+        "lodging_end_date": >-
+          Nach diesem Datum können NUR Administratoren Unterkünfte zu einer Registrierung
+          hinzufügen/entfernen. (obwohl bestehende Unterkünfte immer noch gebucht
+          werden können)
+        "logo_file": >-
+          Das Logo sollte 93x38 Pixel haben
+        "max_award_place": >-
+          Hier definierst du den maximalen Platz für den Ehrungen gedruckt werden.
+          (greift für ALtersklassen und Expert)
+        "max_registrants": >-
+          Benutzer werden nicht in der Lage sein eine neue Anmeldung zu erzeugen sobald
+          diese Anzahl an (bezahlten oder unbezahlten) Teilnehmern erreicht ist. Setze
+          0 um diese Funktion zu deaktivieren.
+        "music_submission_end_date": >-
+          Der letzte Tag an dem die Zustellung von Musik erlaubt ist
+        "noncompetitor_benefits": >-
+          Erscheint auf der Anmeldungs Startseite und beschreibt die Vorteile einer
+          Anmeldung als Begleiter
+        "paypal_test": >-
+          Erlaubt es vorzutäuschen eine Zahlungsbestätigung von Paypal bekomen zu
+          haben
+        "registrants_should_specify_default_wheel_size": >-
+          Müssen wir Teilnehmer die <= 10 Jahre alt sind nach ihrer standard Reifengröße
+          fragen (üblicherweise für Bahn Rennen)
+        "request_address": >-
+          Erfordert von jedem Teilnehmer die EIngabe einer Email Adresse
+        "request_emergency_contact": >-
+          Erfordert von jedem Teilnehmer die EIngabe eines Notfall Kontakt
+        "request_responsible_adult": >-
+          Erfragt von jedem minderjährigen (unter 18) Teilnehmer die Angabe eines
+          verantwortlichen Erwachsenen
+        "spectator_benefits": >-
+          Erscheint auf der Anmeldungs Startseite und beschreibt die Vorteile einer
+          Anmeldung als Zuschauer
+        "spectators": >-
+          Zuschauer müssen keine Anmeldegebühr bezahlen und können Artikel erwerben
+          ohne für die Anmeldung bezahlen zu müssen
+        "start_date": >-
+          Das Alter der Teilnehmer wird auf dieses Datum berechnet. Dies ist das Standard
+          Datum das auf dem Kalender angezeigt wird wenn das System konfiguriert wird
+        "test_mode": >-
+          Das aktivieren dieses Feldes erlaubt es jedem Nutzer Super User zu werden
+          und auch vorzutäuschen eine Zahlung vorgenommen zu haben.
+        "usa": "Diese Funktion priorisiert die USA und Kanada in der Länder Auswahl
           Box und zeigt die Bundesstaaten an.\r\nEbenfalls erlaubt sie die last-minute
           Anmeldung von Teilnehmern (durch die Dateneingabe)"
-      expense_group:
-        competitor_required: Ein Artikel dieser Ausgaben Gruppe WIRD dem Teilnehmer
-          zugewiesen werden (ES KANN NUR einen Artikel in der Gruppe geben und dieser
-          wird automatisch dem Teilnehmer zugewiesen)
-        info_url: Dieser Link erscheint auf der Ausgabe Seite. Es kann hilfreich sein
-          wenn die Ausgaben besondere Erklärungen erfodern oder um Bilder anzuzeigen
-        noncompetitor_required: Ein Artikel dieser Ausgaben Gruppe WIRD dem Teilnehmer
-          zugewiesen werden (ES KANN NUR einen Artikel in der Gruppe geben und dieser
-          wird automatisch dem Teilnehmer zugewiesen)
-      expense_item:
-        has_custom_cost: Erlaube dem Teilnehmer auszuwählen wieviel er für diesen
-          Artikel bezahlen möchte
-        has_details: Frage den Teilnehmer nach zusätzlichen Informationen wenn sie
-          diesen Artikel auswählen
-      page:
-        parent_page: "[Optional] Gruppiere diese Seite unter der vorigen Seite"
-        position: Ordne die Seiten unter einer einzelnen Über Seite an
-        slug: Der URL Text, verwende nur normale Buchstaben und keine Leerzeichen
-      payment:
-        note: "'Bitte beschreibe die Zahlungsmethode. Beispiele: Bar, Scheck #123'"
-      registrant_best_times:
-        source_location: Trage Name und Datum ein
-      registrant:
-        wheel_size_id: Verwendet um Altersklassen zu wählen soweit zutreffend. (Rennbahn,
-          Standard Wettkämpfe)
-      registration_cost:
-        end_date: Definiere den letzten Tag an dem dieser Preis gilt
-        start_date: Sezifiziere das Datum das vorherige "End Datum" folgt
-      volunteer_opportunity:
-        inform_emails: Wenn jemand sich für diese Helfer Position anmeldet wird eine
-          E-Mail an diese E-Mail Adresse gesendet
-      wave_time:
-        scheduled_time: Z.B. 02:00, 03:00
-    labels:
-      event:
-        accepts_music_uploads: Anfrage um Musik hoch zu laden
-    'no': Nein
-    options:
-      event_configuration:
-        waiver:
-          none: Keine Teilnahmebedingungen
-          online: Online Teilnahmebedingungen
-          print: Teilnahmebedingungen drucken
-    placeholders:
-      competitor_expense_item:
-        cost: z.B 12.00
-      coupon_code:
-        code: Code den der Benutzer eingeben muss
-      noncompetitor_expense_item:
-        cost: z.B. 12.00
-      volunteer_opportunity:
-        inform_emails: Komma separierte Liste von E-Mail Adressen
-    required:
-      mark: "*"
-      text: Erforderlich
-    'yes': Ja
+      "expense_group":
+        "competitor_required": >-
+          Ein Artikel dieser Ausgaben Gruppe WIRD dem Teilnehmer zugewiesen werden
+          (ES KANN NUR einen Artikel in der Gruppe geben und dieser wird automatisch
+          dem Teilnehmer zugewiesen)
+        "info_url": >-
+          Dieser Link erscheint auf der Ausgabe Seite. Es kann hilfreich sein wenn
+          die Ausgaben besondere Erklärungen erfodern oder um Bilder anzuzeigen
+        "noncompetitor_required": >-
+          Ein Artikel dieser Ausgaben Gruppe WIRD dem Teilnehmer zugewiesen werden
+          (ES KANN NUR einen Artikel in der Gruppe geben und dieser wird automatisch
+          dem Teilnehmer zugewiesen)
+      "expense_item":
+        "has_custom_cost": >-
+          Erlaube dem Teilnehmer auszuwählen wieviel er für diesen Artikel bezahlen
+          möchte
+        "has_details": >-
+          Frage den Teilnehmer nach zusätzlichen Informationen wenn sie diesen Artikel
+          auswählen
+      "page":
+        "parent_page": >-
+          [Optional] Gruppiere diese Seite unter der vorigen Seite
+        "position": >-
+          Ordne die Seiten unter einer einzelnen Über Seite an
+        "slug": >-
+          Der URL Text, verwende nur normale Buchstaben und keine Leerzeichen
+      "payment":
+        "note": >-
+          'Bitte beschreibe die Zahlungsmethode. Beispiele: Bar, Scheck #123'
+      "registrant_best_times":
+        "source_location": >-
+          Trage Name und Datum ein
+      "registrant":
+        "wheel_size_id": >-
+          Verwendet um Altersklassen zu wählen soweit zutreffend. (Rennbahn, Standard
+          Wettkämpfe)
+      "registration_cost":
+        "end_date": >-
+          Definiere den letzten Tag an dem dieser Preis gilt
+        "start_date": >-
+          Sezifiziere das Datum das vorherige "End Datum" folgt
+      "volunteer_opportunity":
+        "inform_emails": >-
+          Wenn jemand sich für diese Helfer Position anmeldet wird eine E-Mail an
+          diese E-Mail Adresse gesendet
+      "wave_time":
+        "scheduled_time": >-
+          Z.B. 02:00, 03:00
+    "labels":
+      "event":
+        "accepts_music_uploads": >-
+          Anfrage um Musik hoch zu laden
+    "no": >-
+      Nein
+    "options":
+      "event_configuration":
+        "waiver":
+          "none": >-
+            Keine Teilnahmebedingungen
+          "online": >-
+            Online Teilnahmebedingungen
+          "print": >-
+            Teilnahmebedingungen drucken
+    "placeholders":
+      "competitor_expense_item":
+        "cost": >-
+          z.B 12.00
+      "coupon_code":
+        "code": >-
+          Code den der Benutzer eingeben muss
+      "noncompetitor_expense_item":
+        "cost": >-
+          z.B. 12.00
+      "volunteer_opportunity":
+        "inform_emails": >-
+          Komma separierte Liste von E-Mail Adressen
+    "required":
+      "mark": >-
+        *
+      "text": >-
+        Erforderlich
+    "yes": >-
+      Ja

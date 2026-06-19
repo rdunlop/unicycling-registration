@@ -1,7 +1,10 @@
 ---
-es:
-  payments:
-    add_coupon:
-      coupon_code: Código de cupón
-      have_a_coupon: Tienes un cupón?
-      submit: Aplicar el código de cupón
+"es":
+  "payments":
+    "add_coupon":
+      "coupon_code": >-
+        Código de cupón
+      "have_a_coupon": >-
+        Tienes un cupón?
+      "submit": >-
+        Aplicar el código de cupón

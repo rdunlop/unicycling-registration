@@ -1,7 +1,8 @@
 ---
-es:
-  convention_setup:
-    event_categories:
-      form:
-        details: Si solo hay una categoría de evento, el usuario no será presentado
-          con un recuadro de selección.
+"es":
+  "convention_setup":
+    "event_categories":
+      "form":
+        "details": >-
+          Si solo hay una categoría de evento, el usuario no será presentado con un
+          recuadro de selección.

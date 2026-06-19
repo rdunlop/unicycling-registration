@@ -1,12 +1,20 @@
 ---
-de:
-  nav_bar:
-    my_links:
-      all_registrants: Alle Angemeldeten
-      log_in: Anmelden
-      my_account: Mein Konto
-      my_payments: Meine Zahlungen
-      my_registrations: Meine Anmeldungen
-      my_standard_skill_routines: Meine Standard Skill Routinen
-      registrant_groups: Anmelde Gruppen
-      results: Wettbewerbe/Ergebnisse
+"de":
+  "nav_bar":
+    "my_links":
+      "all_registrants": >-
+        Alle Angemeldeten
+      "log_in": >-
+        Anmelden
+      "my_account": >-
+        Mein Konto
+      "my_payments": >-
+        Meine Zahlungen
+      "my_registrations": >-
+        Meine Anmeldungen
+      "my_standard_skill_routines": >-
+        Meine Standard Skill Routinen
+      "registrant_groups": >-
+        Anmelde Gruppen
+      "results": >-
+        Wettbewerbe/Ergebnisse

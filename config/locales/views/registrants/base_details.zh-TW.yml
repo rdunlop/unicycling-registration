@@ -1,0 +1,32 @@
+---
+"zh-TW":
+  "registrants":
+    "base_details":
+      "base_details": >-
+        基本資料
+      "birthday": >-
+        出生日期
+      "competitive_gender": >-
+        參賽性別
+      "female": >-
+        女性
+      "male": >-
+        男性
+      "pronoun_he_him": >-
+        他 (He/him)
+      "pronoun_other": >-
+        其他 (請註明)
+      "pronouns": >-
+        性別代名詞 (Pronouns)
+      "pronoun_she_her": >-
+        她 (She/her)
+      "pronoun_they_them": >-
+        他們 (They/them)
+      "registered_gender_description_1": >-
+        請注意，根據目前的 IUF 規則手冊，Unicon 目前僅設有兩種競賽類別，依性別（男性和女性）區分。
+      "registered_gender_description_2": >-
+        我們致力於讓所有單輪車玩家都能參與活動，並將為未來的比賽與 Unicon 尋求替代方案。若您的性別認同不屬於上述兩者，您可以根據個人偏好選擇一個類別。
+      "registered_gender_description_3": >-
+        若對競賽類別及相關規則有任何疑問，請透過下方的「聯絡我們」與我們聯繫。
+      "required_fields": >-
+        必填欄位

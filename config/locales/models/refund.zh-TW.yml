@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "refund":
+        "details": >-
+          詳情 (備註)
+        "refund_date": >-
+          退款日期
+        "refund_id": >-
+          退款編號
+        "user_id": >-
+          退款執行人
+    "models":
+      "refund":
+        "one": >-
+          Refund
+        "other": >-
+          Refunds

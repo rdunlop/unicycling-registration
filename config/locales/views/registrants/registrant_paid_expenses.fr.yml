@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    registrant_paid_expenses:
-      paid: Payé
+"fr":
+  "registrants":
+    "registrant_paid_expenses":
+      "paid": >-
+        Payé

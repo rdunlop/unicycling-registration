@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "admin":
+    "competition_songs":
+      "show":
+        "assign": >-
+          分配 / 指派
+        "assign_to_competitor": >-
+          每首歌曲都必須分配給一名參賽者，才能被包含在下載的 Zip 壓縮檔中。
+        "description": >-
+          此頁面列出了所有為 %{event} 上傳，且報名者已列入參賽選手名單的歌曲。
+        "download": >-
+          下載
+        "download_zip": >-
+          下載音樂壓縮包 (Zip)
+        "header": >-
+          %{competition} 競賽音樂
+        "zip_description": >-
+          為了方便 DJ 播放競賽音樂，ZIP 壓縮檔中的檔案已重新命名，以便依照參賽者順序排列。

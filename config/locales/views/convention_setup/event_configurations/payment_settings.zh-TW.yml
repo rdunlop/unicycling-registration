@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "payment_settings":
+        "description": >-
+          若您希望透過 PayPal 收款，請在此輸入您的 PayPal 帳號信箱。
+        "header": >-
+          支付設定

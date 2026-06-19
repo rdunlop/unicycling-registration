@@ -1,7 +1,9 @@
 ---
-es:
-  devise:
-    passwords:
-      new:
-        action: Envíe me instrucciones para reiniciar la contraseña
-        title: Has olvidado tu contraseña?
+"es":
+  "devise":
+    "passwords":
+      "new":
+        "action": >-
+          Envíe me instrucciones para reiniciar la contraseña
+        "title": >-
+          Has olvidado tu contraseña?

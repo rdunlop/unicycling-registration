@@ -1,7 +1,10 @@
 ---
-fr:
-  standard_skill_routines:
-    form:
-      insert_at_position: Insérer à la position
-      insert_new: Insérer nouveau
-      skill: Figure
+"fr":
+  "standard_skill_routines":
+    "form":
+      "insert_at_position": >-
+        Insérer à la position
+      "insert_new": >-
+        Insérer nouveau
+      "skill": >-
+        Figure

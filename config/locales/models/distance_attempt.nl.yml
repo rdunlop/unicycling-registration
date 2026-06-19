@@ -1,11 +1,15 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      distance_attempt:
-        distance: Afstand
-        fault: Fout
-    models:
-      distance_attempt:
-        one: Afstands poging
-        other: Afstands pogingen
+"nl":
+  "activerecord":
+    "attributes":
+      "distance_attempt":
+        "distance": >-
+          Afstand
+        "fault": >-
+          Fout
+    "models":
+      "distance_attempt":
+        "one": >-
+          Afstands poging
+        "other": >-
+          Afstands pogingen

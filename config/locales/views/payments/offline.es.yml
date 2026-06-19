@@ -1,5 +1,6 @@
 ---
-es:
-  payments:
-    offline:
-      title: Opciones de pago fuera de línea
+"es":
+  "payments":
+    "offline":
+      "title": >-
+        Opciones de pago fuera de línea

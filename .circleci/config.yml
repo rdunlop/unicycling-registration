@@ -184,6 +184,54 @@ jobs:
             echo "Task exited with code: ${EXIT_CODE}"
             [ "${EXIT_CODE}" = "0" ] || { echo "db:migrate failed"; exit 1; }
 
+  sync_translations:
+    parameters:
+      environment:
+        type: string
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - run:
+          name: Run import_translations_from_yml (<< parameters.environment >>)
+          command: |
+            set -euo pipefail
+            ENVIRONMENT="<< parameters.environment >>"
+            CLUSTER="unicycling-registration-${ENVIRONMENT}"
+            WEB_FAMILY="unicycling-registration-${ENVIRONMENT}-web"
+
+            SG_ID=$(aws ec2 describe-security-groups \
+              --filters "Name=group-name,Values=unicycling-registration-${ENVIRONMENT}-ecs-tasks" \
+              --query 'SecurityGroups[0].GroupId' \
+              --output text)
+
+            # Use the task definition already registered by migrate_db
+            TD_ARN=$(aws ecs describe-task-definition \
+              --task-definition "${WEB_FAMILY}" \
+              --query 'taskDefinition.taskDefinitionArn' \
+              --output text)
+            echo "Using task definition: ${TD_ARN}"
+
+            TASK_ARN=$(aws ecs run-task \
+              --cluster "${CLUSTER}" \
+              --task-definition "${TD_ARN}" \
+              --launch-type FARGATE \
+              --network-configuration "awsvpcConfiguration={subnets=[${ECS_SUBNET_ID}],securityGroups=[${SG_ID}],assignPublicIp=ENABLED}" \
+              --overrides '{"containerOverrides":[{"name":"web","command":["bundle","exec","rake","import_translations_from_yml"]}]}' \
+              --query 'tasks[0].taskArn' \
+              --output text)
+
+            echo "Waiting for task ${TASK_ARN} ..."
+            aws ecs wait tasks-stopped --cluster "${CLUSTER}" --tasks "${TASK_ARN}"
+
+            EXIT_CODE=$(aws ecs describe-tasks \
+              --cluster "${CLUSTER}" \
+              --tasks "${TASK_ARN}" \
+              --query 'tasks[0].containers[0].exitCode' \
+              --output text)
+
+            echo "Task exited with code: ${EXIT_CODE}"
+            [ "${EXIT_CODE}" = "0" ] || { echo "import_translations_from_yml failed"; exit 1; }
+
   deploy_ecs:
     parameters:
       environment:
@@ -321,11 +369,20 @@ workflows:
             branches:
               only:
                 - main
+      - sync_translations:
+          name: sync_translations_staging
+          environment: staging
+          requires:
+            - migrate_staging
+          filters:
+            branches:
+              only:
+                - main
       - deploy_ecs:
           name: deploy_staging
           environment: staging
           requires:
-            - migrate_staging
+            - sync_translations_staging
           filters:
             branches:
               only:
@@ -365,11 +422,20 @@ workflows:
             branches:
               only:
                 - main
+      - sync_translations:
+          name: sync_translations_prod
+          environment: prod
+          requires:
+            - migrate_prod
+          filters:
+            branches:
+              only:
+                - main
       - deploy_ecs:
           name: deploy_prod
           environment: prod
           requires:
-            - migrate_prod
+            - sync_translations_prod
           filters:
             branches:
               only:

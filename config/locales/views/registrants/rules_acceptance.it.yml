@@ -1,6 +1,8 @@
 ---
-it:
-  registrants:
-    rules_acceptance:
-      header: Regole
-      rules_agreement: Accetto le regole
+"it":
+  "registrants":
+    "rules_acceptance":
+      "header": >-
+        Regole
+      "rules_agreement": >-
+        Accetto le regole

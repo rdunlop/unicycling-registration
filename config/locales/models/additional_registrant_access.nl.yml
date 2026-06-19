@@ -1,7 +1,9 @@
 ---
-nl:
-  activerecord:
-    models:
-      additional_registrant_access:
-        one: Extra registratie toegang
-        other: Extra registratie toegang
+"nl":
+  "activerecord":
+    "models":
+      "additional_registrant_access":
+        "one": >-
+          Extra registratie toegang
+        "other": >-
+          Extra registratie toegang

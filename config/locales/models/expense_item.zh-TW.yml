@@ -1,0 +1,31 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "expense_item":
+        "cost": >-
+          單價 / 成本
+        "details_label": >-
+          問題選項
+        "has_custom_cost": >-
+          捐款 / 自訂金額
+        "has_details": >-
+          詢問報名者相關問題
+        "maximum_available": >-
+          總銷售上限
+        "maximum_per_registrant": >-
+          每位報名者限購數量
+        "name": >-
+          名稱
+        "tax": >-
+          稅金
+        "total": >-
+          總金額 (系統計算)
+        "total_cost": >-
+          總計（系統計算）
+    "models":
+      "expense_item":
+        "one": >-
+          Expense Item
+        "other": >-
+          Expense Items

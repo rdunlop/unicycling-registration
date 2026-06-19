@@ -1,5 +1,6 @@
 ---
-fr:
-  layouts:
-    admin_headers:
-      registration_system_access_notice: Ce navigateur a accès au système d'inscription
+"fr":
+  "layouts":
+    "admin_headers":
+      "registration_system_access_notice": >-
+        Ce navigateur a accès au système d'inscription

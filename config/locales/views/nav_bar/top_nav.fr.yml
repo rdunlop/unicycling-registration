@@ -1,5 +1,6 @@
 ---
-fr:
-  nav_bar:
-    top_nav:
-      sign_out: Déconnexion
+"fr":
+  "nav_bar":
+    "top_nav":
+      "sign_out": >-
+        Déconnexion

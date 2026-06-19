@@ -1,6 +1,7 @@
 ---
-it:
-  convention_setup:
-    coupon_codes:
-      edit:
-        header: Modifica codice del tagliando
+"it":
+  "convention_setup":
+    "coupon_codes":
+      "edit":
+        "header": >-
+          Modifica codice del tagliando

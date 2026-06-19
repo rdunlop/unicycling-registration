@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      additional_registrant_access:
-        one: Yderligere Adgang for Tilmeldte
-        other: Yderligere Adgange for Tilmeldte
+"da":
+  "activerecord":
+    "models":
+      "additional_registrant_access":
+        "one": >-
+          Yderligere Adgang for Tilmeldte
+        "other": >-
+          Yderligere Adgange for Tilmeldte

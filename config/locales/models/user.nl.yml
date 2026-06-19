@@ -1,8 +1,10 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      user:
-        email: Deelnemers account email
-        name: Naam
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "user":
+        "email": >-
+          Deelnemers account email
+        "name": >-
+          Naam
+    "models":

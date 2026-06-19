@@ -1,0 +1,28 @@
+---
+"zh-TW":
+  "errors":
+    "messages":
+      "after": >-
+        必須晚於 %{restriction}
+      "before": >-
+        必須早於 %{restriction}
+      "invalid_date": >-
+        不是有效的日期格式
+      "invalid_datetime": >-
+        不是有效的日期時間格式
+      "invalid_time": >-
+        不是有效的時間格式
+      "is_at": >-
+        必須準確在 %{restriction}
+      "on_or_after": >-
+        必須等於或晚於 %{restriction}
+      "on_or_before": >-
+        必須等於或早於 %{restriction}
+  "validates_timeliness":
+    "error_value_formats":
+      "date": >-
+        %Y-%m-%d
+      "datetime": >-
+        %Y-%m-%d %H:%M:%S
+      "time": >-
+        %H:%M:%S

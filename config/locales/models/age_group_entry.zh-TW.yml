@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "age_group_entry":
+        "end_age": >-
+          截止年齡(該分組的最大年齡限制。)
+        "gender": >-
+          性別
+        "start_age": >-
+          起始年齡
+        "wheel_size": >-
+          限定輪徑 (選填)
+    "models":
+      "age_group_entry":
+        "one": >-
+          Age Group Entry
+        "other": >-
+          Age Group Entries

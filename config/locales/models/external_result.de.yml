@@ -1,8 +1,10 @@
 ---
-de:
-  activerecord:
-    attributes:
-      external_result:
-        details: Details
-        points: Punkte
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "external_result":
+        "details": >-
+          Details
+        "points": >-
+          Punkte
+    "models":

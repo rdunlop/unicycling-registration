@@ -1,10 +1,13 @@
 ---
-es:
-  competition_results:
-    index:
-      description: "Sube PDFs como \"Resultados adicionales\" para proveer información
+"es":
+  "competition_results":
+    "index":
+      "description": "Sube PDFs como \"Resultados adicionales\" para proveer información
         adicional. \r\nEjemplos: Resultados Round-Robin, Resultados Batallas, u otros
         resultados de apoyo."
-      published_immediately_warning: Estos archivos serán publicados inmediatamente.
-      upload_a_file: Sube un PEDF de archivo de resultado
-      upload_these_results: Sube esos resultados
+      "published_immediately_warning": >-
+        Estos archivos serán publicados inmediatamente.
+      "upload_a_file": >-
+        Sube un PEDF de archivo de resultado
+      "upload_these_results": >-
+        Sube esos resultados

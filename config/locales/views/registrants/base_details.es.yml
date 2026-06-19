@@ -1,9 +1,14 @@
 ---
-es:
-  registrants:
-    base_details:
-      base_details: Detalles Base
-      birthday: Fecha de nacimiento
-      female: Femenino
-      male: Masculino
-      required_fields: Campos requeridos
+"es":
+  "registrants":
+    "base_details":
+      "base_details": >-
+        Detalles Base
+      "birthday": >-
+        Fecha de nacimiento
+      "female": >-
+        Femenino
+      "male": >-
+        Masculino
+      "required_fields": >-
+        Campos requeridos

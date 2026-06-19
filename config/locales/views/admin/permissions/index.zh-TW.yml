@@ -1,0 +1,60 @@
+---
+"zh-TW":
+  "admin":
+    "permissions":
+      "index":
+        "add_new_permission": >-
+          新增權限
+        "add_selected_permissions": >-
+          新增所選權限
+        "different_users_different_roles": >-
+          報名系統分為多個不同部分，供不同職責的人員使用。
+        "directors_permissions_html": >-
+          若要授予特定活動項目的負責人權限，請使用 %{link} 頁面。
+        "event_planned_example": >-
+          若要查看各個活動的報名名單，應啟用「活動策劃 (Event Planner)」角色。
+        "header": >-
+          使用者管理
+        "other_roles_not_permitted_html": >-
+          可能還有其他您沒有權限查看的額外角色。
+        "payment_admin_example": >-
+          若要查看/管理收到的款項（及提供退款），應啟用「財務管理員 (Payment Admin)」角色。
+        "remove_all_permissions": >-
+          移除所有權限
+        "role_allows_access": >-
+          每個角色都允許使用者查看或使用系統的不同部分。
+        "role_description":
+          "awards_admin": "能夠查看數據結果\r\n能夠發佈比賽結果\r\n能夠將競賽項目標記為已頒獎"
+          "competition_admin": "能夠建立競賽項目並調整其配置\r\n能夠建立與管理年齡分組\r\n可將報名者設定為「不具參賽資格」\r\n可建立項目負責人
+            (Director) 與資料輸入志工帳號\r\n可重設使用者密碼\r\n可查看所有活動項目的報名情況\r\n可管理所有競賽的參賽選手（僅限競賽未鎖定時）\r\n可鎖定或解鎖競賽項目\r\n可匯出比賽結果"
+          "convention_admin": "能夠進行與報名相關的大會設定。\r\n能夠設定外觀樣式、大會名稱以及網域 (Domain URL) 設定。\r\n能夠設定付款費用\r\n能夠設定
+            PayPal 詳情\r\n能夠設定提供的活動項目\r\n能夠設定志工選項\r\n能夠重設使用者密碼\r\n能夠設定用於現場報名的「授權筆記型電腦」。\r\n能夠建立財務管理員、活動策劃以及音樂
+            DJ 等使用者帳號。"
+          "director": "能夠將報名者分配為參賽選手\r\n能夠建立裁判與志工帳號\r\n能夠重設使用者密碼"
+          "event_planner": "能夠查看/審核活動項目的報名情況。\r\n能夠搜尋並修改任何報名資料。\r\n能夠刪除/恢復報名資料。\r\n能夠大量匯入/匯出報名數據（包含活動報名情況）。\r\n能夠更新報名者的號碼牌編號
+            (Bib number)。\r\n能夠隨時新增/修改活動選項。\r\n能夠查看並向所有報名者發送電子郵件\r\n能夠管理系統收到的意見回饋"
+          "export_payment_lists": >-
+            能夠使用匯出選單下載已支付住宿費用的報名者 Excel 檔案。
+          "late_registrant": "即便報名期間已結束，仍能存取報名系統。\r\n能夠建立新報名者、更新現有報名資料並進行付款。\r\n您應該配合
+            SetRegFee 功能使用，以指定應向其收取的費用。"
+          "membership_admin": "能夠查看 USA 會員頁面。\r\n能夠更新 USA 會員編號。\r\n能夠標記使用者是否已繳納最新的
+            USA 會員費。"
+          "music_dj": >-
+            能夠從「管理音樂」頁面查看/下載任何音樂。
+          "payment_admin": "能夠查看所有已收到的款項\r\n能夠查看已付款項目的總數\r\n能夠為個別使用者設定報名費用\r\n能夠將支票狀態標記為已收訖\r\n能夠管理系統收到的意見回饋"
+          "super_admin": "能夠設定其他人的角色。\r\n能夠刪除付款資訊。\r\n能夠進行網站與活動設定。"
+          "translator": "能夠進入翻譯選單。\r\n輸入新翻譯並套用於網站。"
+        "role_descriptions": >-
+          角色說明：
+        "roles_listed": >-
+          本頁列出了所有您有權查看的角色。您可以指派角色給其他使用者，以授予他們更多權限。
+        "set_password": >-
+          設定使用者密碼
+        "users_with_permissions": >-
+          具備權限的使用者：
+        "warn_modify_your_account": >-
+          此列涉及您目前使用的帳號。移除權限時請務必小心，您可能會因此失去存取此頁面的權限。
+        "you_have_roles": >-
+          您目前擁有的角色身分為：
+        "you_may_need_to_grant_yourself_roles": >-
+          您可能需要為自己分配其他角色，以便獲得系統其他功能的存取權。

@@ -1,7 +1,8 @@
 ---
-es:
-  activerecord:
-    attributes:
-      registrant_group:
-        name: Nombre de grupo
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "registrant_group":
+        "name": >-
+          Nombre de grupo
+    "models":

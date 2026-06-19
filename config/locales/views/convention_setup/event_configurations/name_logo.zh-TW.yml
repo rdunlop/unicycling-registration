@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "name_logo":
+        "header": >-
+          名稱與標誌
+        "long_name_description": >-
+          完整名稱、地點與日期說明將顯示在主網頁的頁首。
+        "short_name_description": >-
+          簡稱將用於空間有限的地方（例如：多數 PDF 文件）。

@@ -1,6 +1,7 @@
 ---
-de:
-  convention_setup:
-    expense_groups:
-      edit:
-        header: "%{expense_group} - Ausgaben Gruppen Details"
+"de":
+  "convention_setup":
+    "expense_groups":
+      "edit":
+        "header": >-
+          %{expense_group} - Ausgaben Gruppen Details

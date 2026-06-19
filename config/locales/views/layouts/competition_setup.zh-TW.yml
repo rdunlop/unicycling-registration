@@ -1,0 +1,16 @@
+---
+"zh-TW":
+  "layouts":
+    "competition_setup":
+      "advanced": >-
+        進階設定
+      "competition_setup": >-
+        競賽項目設定
+      "manage_age_groups": >-
+        年齡組別類型
+      "manage_competitions": >-
+        管理競賽項目
+      "manage_directors": >-
+        管理項目負責人
+      "manage_imported_registrants": >-
+        管理匯入的報名者

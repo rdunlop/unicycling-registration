@@ -1,7 +1,10 @@
 ---
-de:
-  registrants:
-    name:
-      first_name: Vorname
-      last_name: Nachname
-      name: Name
+"de":
+  "registrants":
+    "name":
+      "first_name": >-
+        Vorname
+      "last_name": >-
+        Nachname
+      "name": >-
+        Name

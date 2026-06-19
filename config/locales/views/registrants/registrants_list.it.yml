@@ -1,5 +1,6 @@
 ---
-it:
-  registrants:
-    registrants_list:
-      registrations: Iscritti
+"it":
+  "registrants":
+    "registrants_list":
+      "registrations": >-
+        Iscritti

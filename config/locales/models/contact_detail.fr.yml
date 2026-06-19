@@ -1,29 +1,51 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      contact_detail:
-        address: Adresse
-        birthplace: Place de Naissance
-        city: Ville
-        club: Nom de l’équipe principale ou de l’association
-        club_contact: Nom du contact de l’équipe principale ou de l’association
-        country: Pays
-        country_representing: Pays représenté
-        country_residence: Pays de résidence
-        email: Courriel
-        emergency_name: Nom
-        emergency_other_phone: Autre numéro de téléphone
-        emergency_primary_phone: Numéro de téléphone principal
-        emergency_relationship: Lien
-        italian_fiscal_code: Code fiscal (Requis pour les participants Italiens)
-        mobile: Numéro de portable
-        phone: Numéro de téléphone
-        responsible_adult_name: Nom
-        responsible_adult_phone: Numéro de téléphone principal
-        state: Etat
-        zip: Code postal
-    models:
-      contact_detail:
-        one: Contact
-        other: Contact
+"fr":
+  "activerecord":
+    "attributes":
+      "contact_detail":
+        "address": >-
+          Adresse
+        "birthplace": >-
+          Place de Naissance
+        "city": >-
+          Ville
+        "club": >-
+          Nom de l’équipe principale ou de l’association
+        "club_contact": >-
+          Nom du contact de l’équipe principale ou de l’association
+        "country": >-
+          Pays
+        "country_representing": >-
+          Pays représenté
+        "country_residence": >-
+          Pays de résidence
+        "email": >-
+          Courriel
+        "emergency_name": >-
+          Nom
+        "emergency_other_phone": >-
+          Autre numéro de téléphone
+        "emergency_primary_phone": >-
+          Numéro de téléphone principal
+        "emergency_relationship": >-
+          Lien
+        "italian_fiscal_code": >-
+          Code fiscal (Requis pour les participants Italiens)
+        "mobile": >-
+          Numéro de portable
+        "phone": >-
+          Numéro de téléphone
+        "responsible_adult_name": >-
+          Nom
+        "responsible_adult_phone": >-
+          Numéro de téléphone principal
+        "state": >-
+          Etat
+        "zip": >-
+          Code postal
+    "models":
+      "contact_detail":
+        "one": >-
+          Contact
+        "other": >-
+          Contact

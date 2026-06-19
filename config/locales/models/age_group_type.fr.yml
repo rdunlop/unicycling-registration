@@ -1,11 +1,15 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      age_group_type:
-        description: Description
-        name: Nom
-    models:
-      age_group_type:
-        one: Type de groupe d'âge
-        other: Type de groupe d'âge
+"fr":
+  "activerecord":
+    "attributes":
+      "age_group_type":
+        "description": >-
+          Description
+        "name": >-
+          Nom
+    "models":
+      "age_group_type":
+        "one": >-
+          Type de groupe d'âge
+        "other": >-
+          Type de groupe d'âge

@@ -1,6 +1,7 @@
 ---
-es:
-  convention_setup:
-    volunteer_opportunities:
-      new:
-        header: Nuevo rol de voluntario
+"es":
+  "convention_setup":
+    "volunteer_opportunities":
+      "new":
+        "header": >-
+          Nuevo rol de voluntario

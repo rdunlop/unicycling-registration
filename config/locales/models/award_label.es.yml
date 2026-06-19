@@ -1,8 +1,10 @@
 ---
-es:
-  activerecord:
-    attributes:
-      award_label:
-        bib_number: Cuenta
-        place: Lugar
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "award_label":
+        "bib_number": >-
+          Cuenta
+        "place": >-
+          Lugar
+    "models":

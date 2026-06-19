@@ -1,7 +1,9 @@
 ---
-it:
-  activerecord:
-    models:
-      tenant:
-        one: Titolare
-        other: Titolari
+"it":
+  "activerecord":
+    "models":
+      "tenant":
+        "one": >-
+          Titolare
+        "other": >-
+          Titolari

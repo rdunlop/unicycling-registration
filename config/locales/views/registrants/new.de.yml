@@ -1,5 +1,6 @@
 ---
-de:
-  registrants:
-    new:
-      new_registration: Neue Anmeldung
+"de":
+  "registrants":
+    "new":
+      "new_registration": >-
+        Neue Anmeldung

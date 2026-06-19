@@ -1,7 +1,8 @@
 ---
-da:
-  activerecord:
-    attributes:
-      standard_skill_routine_entry:
-        position: Placering
-    models: 
+"da":
+  "activerecord":
+    "attributes":
+      "standard_skill_routine_entry":
+        "position": >-
+          Placering
+    "models":

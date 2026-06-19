@@ -1,15 +1,31 @@
 ---
-fr:
-  data_entry_volunteers:
-    index:
-      assign_access: Attribuer des accès supplémentaires
-      description_1: En attribuant des accès supplémentaires à un utilisateur, leur
-        compte deviendra sélectionable dans les listes de juge ou de secrétaire d'épreuve.
-      description_2: Ajouter un utilisateur ici leur permet de voir le menu de saisie
-        de données, et leur permet d'être désigné comme juge ou secrétaire d'épreuve.
-      description_3: Vous pouvez aussi utiliser le "nom" de l'utilisateur ici, afin
-        de ne pas avoir à se souvenir de leur adresse email.
-      header: Accès supplémentaires
-      note: Donner l'accès confirme également comptes dont l'email n'a pas été confirmé
+"fr":
+  "data_entry_volunteers":
+    "index":
+      "assign_access": >-
+        Attribuer des accès supplémentaires
+      "assign_existing_user_access": >-
+        Attribuer des accès supplémentaires à un utilisateur existant
+      "assign_new_user_access": >-
+        Attribuer des accès supplémentaires à un nouvel utilisateur
+      "create_user_and_assign_access": >-
+        Créer un utilisateur et lui attribuer des accès supplémentaires
+      "description_1": >-
+        En attribuant des accès supplémentaires à un utilisateur, leur compte deviendra
+        sélectionable dans les listes de juge ou de secrétaire d'épreuve.
+      "description_2": >-
+        Ajouter un utilisateur ici leur permet de voir le menu de saisie de données,
+        et leur permet d'être désigné comme juge ou secrétaire d'épreuve.
+      "description_3": >-
+        Vous pouvez aussi utiliser le "nom" de l'utilisateur ici, afin de ne pas avoir
+        à se souvenir de leur adresse email.
+      "header": >-
+        Accès supplémentaires
+      "new_user_note": >-
+        Ceci créera un nouvel utilisateur avec un email aléatoire. Iel pourra se connecter
+        via "Connexion bénévole"
+      "note": >-
+        Donner l'accès confirme également comptes dont l'email n'a pas été confirmé
         afin qu'il puisse se connecter.
-      users_with_access: Utilisateurs avec des accès supplémentaires
+      "users_with_access": >-
+        Utilisateurs avec des accès supplémentaires

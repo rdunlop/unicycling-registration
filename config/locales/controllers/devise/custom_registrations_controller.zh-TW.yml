@@ -1,0 +1,7 @@
+---
+"zh-TW":
+  "devise":
+    "custom_registrations":
+      "create":
+        "flash_error": >-
+          帳號已存在（可能來自之前的賽事），請於下方登入。

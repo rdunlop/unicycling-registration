@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "coupon_code_summaries":
+    "show":
+      "coupon_applied_to": >-
+        套用於：
+      "date_coupon_applied": >-
+        套用日期
+      "header": >-
+        %{coupon_code} 優惠代碼

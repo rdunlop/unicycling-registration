@@ -1,6 +1,8 @@
 ---
-de:
-  payments:
-    new:
-      select_the_items_to_pay_for: Wähle die Dinge die du zahlen möchtest
-      title: Neue Zahlung
+"de":
+  "payments":
+    "new":
+      "select_the_items_to_pay_for": >-
+        Wähle die Dinge die du zahlen möchtest
+      "title": >-
+        Neue Zahlung

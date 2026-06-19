@@ -1,7 +1,8 @@
 ---
-es:
-  layouts:
-    competition_management:
-      registration_system_access_notice: Este navegador tiene acceso al sistema de
-        registro
-      download_competitors: Descargar la lista de competidores en formato CSV
+"es":
+  "layouts":
+    "competition_management":
+      "download_competitors": >-
+        Descargar la lista de competidores en formato CSV
+      "registration_system_access_notice": >-
+        Este navegador tiene acceso al sistema de registro

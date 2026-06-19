@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "devise":
+    "sessions":
+      "new":
+        "action": >-
+          登入單輪車報名系統
+        "use_access_code": >-
+          使用存取碼登入
+        "volunteer": >-
+          志工登入

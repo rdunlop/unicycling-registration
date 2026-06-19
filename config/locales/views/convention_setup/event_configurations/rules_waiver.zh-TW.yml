@@ -1,0 +1,23 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "rules_waiver":
+        "current_iuf_rulebook_link": >-
+          只有在報名問題中開啟「詢問預設輪徑」時，才允許使用者針對特定活動覆蓋（修改）輪徑設定。
+        "description": >-
+          請指定您想提供給報名者的免責聲明（切結書）類型。
+        "header": >-
+          免責聲明與規則
+        "noncompetitor_description": >-
+          非參賽者無法報名活動項目。
+        "online_waiver_description": >-
+          線上：使用者必須在線上簽署免責聲明
+        "print_waiver_description": >-
+          列印：我們提供免責聲明供使用者列印並於現場簽署（可提前於網站下載，以便未成年人請家長簽署）。
+        "rulebook": >-
+          競賽規程
+        "rules": >-
+          規則
+        "sub_description": >-
+          可選擇性指定提供給報名者的額外規則（例如：針對此大會調整的 IUF 規程補充）。

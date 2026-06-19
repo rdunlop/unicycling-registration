@@ -1,6 +1,7 @@
 ---
-es:
-  registrants:
-    build:
-      contact_detail:
-        contact_information: Información de contacto
+"es":
+  "registrants":
+    "build":
+      "contact_detail":
+        "contact_information": >-
+          Información de contacto

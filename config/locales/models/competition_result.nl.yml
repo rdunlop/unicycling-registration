@@ -1,7 +1,9 @@
 ---
-nl:
-  activerecord:
-    models:
-      competition_result:
-        one: Extra resultaten
-        other: Extra resultaten
+"nl":
+  "activerecord":
+    "models":
+      "competition_result":
+        "one": >-
+          Extra resultaten
+        "other": >-
+          Extra resultaten

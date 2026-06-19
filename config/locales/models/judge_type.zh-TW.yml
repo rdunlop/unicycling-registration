@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "judge_type":
+        "one": >-
+          Judge Type
+        "other": >-
+          Judge Types

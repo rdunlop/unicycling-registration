@@ -1,7 +1,8 @@
 ---
-de:
-  activerecord:
-    attributes:
-      payment_detail:
-        details: Details
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "payment_detail":
+        "details": >-
+          Details
+    "models":

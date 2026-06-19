@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "standard_skill_entry":
+        "description": >-
+          動作描述
+        "letter": >-
+          子編號 (字母)
+        "number": >-
+          動作編號
+        "points": >-
+          難度分 / 積分
+    "models":
+      "standard_skill_entry":
+        "one": >-
+          Standard Skill Entry
+        "other": >-
+          Standard Skill Entries

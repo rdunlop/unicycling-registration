@@ -1,0 +1,36 @@
+---
+"zh-TW":
+  "welcome":
+    "help":
+      "frequently_asked_questions": >-
+        常見問題
+      "general_help": >-
+        若您在報名過程中遇到任何問題或疑問，請在下方提交回饋。
+      "header": >-
+        說明 / 協助
+      "i_cannot_login": >-
+        我無法登入
+      "login_help": >-
+        完成註冊後，請檢查您的電子郵件以獲取確認訊息。請檢查所有垃圾郵件過濾器。若找不到郵件，請選擇「重新傳送確認郵件」。
+      "password_account_details": >-
+        一旦您註冊了第一個獨輪車大會，您就可以使用相同的電子郵件/密碼登入未來的大會。更多詳情請參閱 %{link}。
+      "registration": >-
+        我要如何報名？
+      "registration_help": >-
+        登入後，選擇「建立新參賽者」或「建立新非參賽者」並填寫欄位。請支付報名費以確保完成報名程序。
+      "shared_password": >-
+        我每年都需要重新註冊嗎？
+      "sharing_link": >-
+        透過 %{link} 表單申請讀取您的隊伍報名資訊
+      "sharing_registration_details": >-
+        如何分享報名詳情
+      "sharing_registration_details_help": >-
+        身為隊長或俱樂部領導者，您可以申請存取權限，以便為其他成員支付報名費，並查看他們已報名的項目。
+      "subheader": >-
+        本網站用於 %{domain} 獨輪車大會報名
+      "this_link": >-
+        此連結
+      "translation_help": >-
+        我發現了翻譯遺漏或錯誤。請在此處的「回饋」提交詳細資訊，或申請成為翻譯員，協助完成更多語言翻譯。
+      "translations": >-
+        多語系翻譯

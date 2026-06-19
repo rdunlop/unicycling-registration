@@ -1,0 +1,39 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "competition":
+        "award_subtitle_name": >-
+          獎項副標題
+        "award_title_name": >-
+          獎項標題
+        "combined_competition_id": >-
+          總冠軍計算方式
+        "end_data_type": >-
+          終點數據輸入
+        "has_experts": >-
+          同時計算專家組評分
+        "hide_max_laps_count": >-
+          隱藏最大圈數統計
+        "import_results_into_other_competition": >-
+          匯入成績至其他比賽項目
+        "name": >-
+          比賽項目名稱
+        "num_members_per_competitor": >-
+          隊伍人數
+        "penalty_seconds": >-
+          每次違規扣秒數
+        "scheduled_completion_at": >-
+          預計完賽時間
+        "scoring_class": >-
+          計分方式類型
+        "start_data_type": >-
+          起點數據輸入
+        "uses_lane_assignments": >-
+          分道 / 分組賽
+    "models":
+      "competition":
+        "one": >-
+          Competition
+        "other": >-
+          Competitions

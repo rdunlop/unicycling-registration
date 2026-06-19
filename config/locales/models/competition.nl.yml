@@ -1,27 +1,45 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      competition:
-        award_subtitle_name: Medaille subtitel
-        award_title_name: Medaille titel
-        combined_competition_id: Berekening kampioen over alles heen
-        end_data_type: Input van de data na aankomst
-        has_experts: Bereken ook de experts
-        import_results_into_other_competition: Importeer de resultaten in een andere
-          competitie
-        name: Competitienaam
-        num_members_per_competitor: Grote van het team
-        penalty_seconds: Secondes per strafpunt
-        scheduled_completion_at: Geplande competietijd
-        scoring_class: Score type
-        rule_for_ineligible_competitors: Uitsluiting van deelnemers
-        always_score: Beoordeel deelnemers die niet in aanmerking komen alsof ze dat wel doen
-        never_score: Geef nooit punten aan deelnemers die niet in aanmerking komen
-        score_if_at_least_half_eligible: Er wordt gescoord als ten minste de helft van de leden in aanmerking komt
-        start_data_type: Manier van ingeven van de startdata
-        uses_lane_assignments: Competitie in heats of banen
-    models:
-      competition:
-        one: Wedstrijden
-        other: Wedstrijden
+"nl":
+  "activerecord":
+    "attributes":
+      "competition":
+        "always_score": >-
+          Beoordeel deelnemers die niet in aanmerking komen alsof ze dat wel doen
+        "award_subtitle_name": >-
+          Medaille subtitel
+        "award_title_name": >-
+          Medaille titel
+        "combined_competition_id": >-
+          Berekening kampioen over alles heen
+        "end_data_type": >-
+          Input van de data na aankomst
+        "has_experts": >-
+          Bereken ook de experts
+        "import_results_into_other_competition": >-
+          Importeer de resultaten in een andere competitie
+        "name": >-
+          Competitienaam
+        "never_score": >-
+          Geef nooit punten aan deelnemers die niet in aanmerking komen
+        "num_members_per_competitor": >-
+          Grote van het team
+        "penalty_seconds": >-
+          Secondes per strafpunt
+        "rule_for_ineligible_competitors": >-
+          Uitsluiting van deelnemers
+        "scheduled_completion_at": >-
+          Geplande competietijd
+        "score_if_at_least_half_eligible": >-
+          Er wordt gescoord als ten minste de helft van de leden in aanmerking komt
+        "scoring_class": >-
+          Score type
+        "start_data_type": >-
+          Manier van ingeven van de startdata
+        "uses_lane_assignments": >-
+          Competitie in heats of banen
+    "models":
+      "competition":
+        "one": >-
+          Wedstrijden
+        "other": >-
+          Wedstrijden

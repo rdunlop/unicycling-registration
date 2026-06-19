@@ -1,16 +1,24 @@
 ---
-fr:
-  convention_setup:
-    categories:
-      index:
-        copy_from_previous:
-          header: Copier les Evénements et Catégories à partir d'une rencontre précédente
-          link: Choisissez une rencontre précédente et copiez ses événements
-        description: 'Les événements sont groupés en différentes catégories d''événements.
-          Ex : Sports collectifs, Artistique, MUni'
-        existing_categories: Catégories existantes
-        header: Catégories d'événements
-        manage_events: Gérer les événement
-        manage_events_note: Quand vous avez créé une catégorie, choisissez "Gérer
-          les événements" pour créer des événements dans cette catégorie
-        new_category: Nouvelle catégorie
+"fr":
+  "convention_setup":
+    "categories":
+      "index":
+        "copy_from_previous":
+          "header": >-
+            Copier les Evénements et Catégories à partir d'une rencontre précédente
+          "link": >-
+            Choisissez une rencontre précédente et copiez ses événements
+        "description": >-
+          Les événements sont groupés en différentes catégories d'événements. Ex :
+          Sports collectifs, Artistique, MUni
+        "existing_categories": >-
+          Catégories existantes
+        "header": >-
+          Catégories d'événements
+        "manage_events": >-
+          Gérer les événement
+        "manage_events_note": >-
+          Quand vous avez créé une catégorie, choisissez "Gérer les événements" pour
+          créer des événements dans cette catégorie
+        "new_category": >-
+          Nouvelle catégorie

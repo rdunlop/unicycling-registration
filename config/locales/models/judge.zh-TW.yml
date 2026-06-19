@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "judge":
+        "one": >-
+          Judge
+        "other": >-
+          Judges
