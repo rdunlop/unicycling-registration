@@ -1,6 +1,7 @@
 ---
-es:
-  convention_setup:
-    expense_groups:
-      edit:
-        header: "%{expense_group} Detalles de costo grupal"
+"es":
+  "convention_setup":
+    "expense_groups":
+      "edit":
+        "header": >-
+          %{expense_group} Detalles de costo grupal

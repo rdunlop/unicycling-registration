@@ -1,7 +1,7 @@
 ---
-es:
-  activerecord:
-    attributes:
-      volunteer_opportunity:
-        description: Rol de voluntario
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "volunteer_opportunity":
+        "description": >-
+          Rol de voluntario

@@ -1,5 +1,6 @@
 ---
-it:
-  feedbacks:
-    new:
-      header: Contattaci
+"it":
+  "feedbacks":
+    "new":
+      "header": >-
+        Contattaci

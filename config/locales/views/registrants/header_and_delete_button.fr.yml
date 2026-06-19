@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    header_and_delete_button:
-      delete: Supprimer
+"fr":
+  "registrants":
+    "header_and_delete_button":
+      "delete": >-
+        Supprimer

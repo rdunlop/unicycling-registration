@@ -1,16 +1,20 @@
 ---
-de:
-  activerecord:
-    attributes:
-      payment:
-        completed_date: Kompletter Datensatz
-        details: Details
-        note: Hinweis
-        offline_pending_date: Datum
-        payment_id: Zahlungs ID
-        total: Total
-        transaction_id: Transaktions ID
-    models:
-      registrant:
-        one: Angemeldeter
-        other: Angemeldeter
+"de":
+  "activerecord":
+    "attributes":
+      "payment":
+        "completed_date": >-
+          Kompletter Datensatz
+        "details": >-
+          Details
+        "note": >-
+          Hinweis
+        "offline_pending_date": >-
+          Datum
+        "payment_id": >-
+          Zahlungs ID
+        "total": >-
+          Total
+        "transaction_id": >-
+          Transaktions ID
+    "models":

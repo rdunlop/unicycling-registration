@@ -1,10 +1,8 @@
 ---
-da:
-  activerecord:
-    attributes:
-      payment_detail:
-        details: Detaljer
-    models:
-      payment_details:
-        one: Detalje
-        other: Detaljer
+"da":
+  "activerecord":
+    "attributes":
+      "payment_detail":
+        "details": >-
+          Detaljer
+    "models":

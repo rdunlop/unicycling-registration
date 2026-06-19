@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      two_attempt_entry:
-        one: Saisie de deux tentatives
-        other: Saisies de deux tentatives
+"fr":
+  "activerecord":
+    "models":
+      "two_attempt_entry":
+        "one": >-
+          Saisie de deux tentatives
+        "other": >-
+          Saisies de deux tentatives

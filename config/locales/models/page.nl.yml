@@ -1,11 +1,15 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      page:
-        body: Inhoud
-        parent_page_id: Ouderlijke pagina
-        position: Positie
-        slug: URL
-        title: Titel
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "page":
+        "body": >-
+          Inhoud
+        "parent_page_id": >-
+          Ouderlijke pagina
+        "position": >-
+          Positie
+        "slug": >-
+          URL
+        "title": >-
+          Titel

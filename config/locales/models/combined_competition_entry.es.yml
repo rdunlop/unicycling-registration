@@ -1,9 +1,11 @@
 ---
-es:
-  activerecord:
-    attributes:
-      combined_competition_entry:
-        abbreviation: Abreviación
-        base_points: Puntos base
-        tie_breaker: Muerte Súbita
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "combined_competition_entry":
+        "abbreviation": >-
+          Abreviación
+        "base_points": >-
+          Puntos base
+        "tie_breaker": >-
+          Muerte Súbita

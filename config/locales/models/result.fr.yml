@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      result:
-        one: Résultat
-        other: Résultats
+"fr":
+  "activerecord":
+    "models":
+      "result":
+        "one": >-
+          Résultat
+        "other": >-
+          Résultats

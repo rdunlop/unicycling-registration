@@ -1,10 +1,13 @@
 ---
-it:
-  activerecord:
-    attributes:
-      registrant_group:
-        name: Nome del gruppo
-    models:
-      registrant_group:
-        one: Gruppo dell'iscritto
-        other: Gruppi dell'iscritto
+"it":
+  "activerecord":
+    "attributes":
+      "registrant_group":
+        "name": >-
+          Nome del gruppo
+    "models":
+      "registrant_group":
+        "one": >-
+          Gruppo dell'iscritto
+        "other": >-
+          Gruppi dell'iscritto

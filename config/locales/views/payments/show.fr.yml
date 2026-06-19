@@ -1,11 +1,17 @@
 ---
-fr:
-  payments:
-    show:
-      complete_payment: Payer
-      offline_payment_instructions: Instructions de paiement hors ligne
-      offline_payment_instructions_description: 'Afin de payer hors ligne, utilisez
-        le "Numéro # de référence du paiement" et suivez ces instructions'
-      payment_reference: 'Référence de paiement #%{payment_id}'
-      payment_summary: Résumé du paiement
-      please_proceed_with_payment: Veuillez procéder à votre paiement
+"fr":
+  "payments":
+    "show":
+      "complete_payment": >-
+        Payer
+      "offline_payment_instructions": >-
+        Instructions de paiement hors ligne
+      "offline_payment_instructions_description": >-
+        Afin de payer hors ligne, utilisez le "Numéro # de référence du paiement"
+        et suivez ces instructions
+      "payment_reference": >-
+        Référence de paiement #%{payment_id}
+      "payment_summary": >-
+        Résumé du paiement
+      "please_proceed_with_payment": >-
+        Veuillez procéder à votre paiement

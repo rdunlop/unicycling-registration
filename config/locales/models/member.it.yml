@@ -1,7 +1,9 @@
 ---
-it:
-  activerecord:
-    models:
-      member:
-        one: Membro
-        other: Membri
+"it":
+  "activerecord":
+    "models":
+      "member":
+        "one": >-
+          Membro
+        "other": >-
+          Membri

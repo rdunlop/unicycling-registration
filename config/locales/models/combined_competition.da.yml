@@ -1,12 +1,12 @@
 ---
-da:
-  activerecord:
-    attributes:
-      combined_competition:
-        percentage_based_calculations: Procent Baseret Udregning
-        tie_break_by_firsts: Tie Break By Firsts
-        use_age_group_places: Brug aldersgruppe placering
-    models:
-      combined_competition:
-        one: Kombineret konkurrence
-        other: Kombinerede Konkurrencer
+"da":
+  "activerecord":
+    "attributes":
+      "combined_competition":
+        "percentage_based_calculations": >-
+          Procent Baseret Udregning
+        "tie_break_by_firsts": >-
+          Tie Break By Firsts
+        "use_age_group_places": >-
+          Brug aldersgruppe placering
+    "models":

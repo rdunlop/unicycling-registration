@@ -1,6 +1,8 @@
 ---
-es:
-  registrants:
-    registrants_list:
-      registrations: Inscripciones
-      total_amount_owing: 'Monto Total Adeudado:'
+"es":
+  "registrants":
+    "registrants_list":
+      "registrations": >-
+        Inscripciones
+      "total_amount_owing": >-
+        Monto Total Adeudado:

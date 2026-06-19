@@ -1,5 +1,6 @@
 ---
-it:
-  registrants:
-    registrant_paid_expenses:
-      paid: Pagato
+"it":
+  "registrants":
+    "registrant_paid_expenses":
+      "paid": >-
+        Pagato

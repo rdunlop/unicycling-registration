@@ -1,16 +1,20 @@
 ---
-da:
-  activerecord:
-    attributes:
-      payment:
-        completed_date: Gennemført dato
-        details: Detaljer (txn/note)
-        note: Note
-        offline_pending_date: Dato
-        payment_id: Betalings ID
-        total: Total
-        transaction_id: Transaktion ID
-    models:
-      registrant:
-        one: Deltager
-        other: Deltagere
+"da":
+  "activerecord":
+    "attributes":
+      "payment":
+        "completed_date": >-
+          Gennemført dato
+        "details": >-
+          Detaljer (txn/note)
+        "note": >-
+          Note
+        "offline_pending_date": >-
+          Dato
+        "payment_id": >-
+          Betalings ID
+        "total": >-
+          Total
+        "transaction_id": >-
+          Transaktion ID
+    "models":

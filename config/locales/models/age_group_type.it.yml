@@ -1,11 +1,10 @@
 ---
-it:
-  activerecord:
-    attributes:
-      age_group_type:
-        description: Descrizione
-        name: Nome
-    models:
-      age_group_type:
-        one: Tipologia del gruppo d'età
-        other: Tipologie del gruppo d'età
+"it":
+  "activerecord":
+    "attributes":
+    "models":
+      "age_group_type":
+        "one": >-
+          Tipologia del gruppo d'età
+        "other": >-
+          Tipologie del gruppo d'età

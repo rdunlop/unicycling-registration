@@ -1,11 +1,10 @@
 ---
-it:
-  activerecord:
-    attributes:
-      award_label:
-        bib_number: ID
-        place: Piazzamento
-    models:
-      award_label:
-        one: Etichetta di riconoscimento
-        other: Etichette di riconoscimento
+"it":
+  "activerecord":
+    "attributes":
+    "models":
+      "award_label":
+        "one": >-
+          Etichetta di riconoscimento
+        "other": >-
+          Etichette di riconoscimento

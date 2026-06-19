@@ -1,5 +1,6 @@
 ---
-it:
-  layouts:
-    application:
-      registration: Registrazioni
+"it":
+  "layouts":
+    "application":
+      "registration": >-
+        Registrazioni

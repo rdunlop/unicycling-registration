@@ -1,5 +1,6 @@
 ---
-de:
-  standard_skill_entries:
-    index:
-      available_entries: Dies sind die verfügbaren Standard Skill Einträge
+"de":
+  "standard_skill_entries":
+    "index":
+      "available_entries": >-
+        Dies sind die verfügbaren Standard Skill Einträge

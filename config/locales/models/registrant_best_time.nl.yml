@@ -1,8 +1,9 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      registrant_best_time:
-        formatted_value: Beste tijd
-        source_location: Evenementsnaam
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "registrant_best_time":
+        "formatted_value": >-
+          Beste tijd
+        "source_location": >-
+          Evenementsnaam

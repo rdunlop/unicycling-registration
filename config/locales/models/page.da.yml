@@ -1,15 +1,18 @@
 ---
-da:
-  activerecord:
-    attributes:
-      page:
-        body: Indhold
-        parent_page_id: Forældre Side
-        position: Position
-        slug: Slug (url)
-        title: Tittel
-        visible: Synlig
-    models:
-      page:
-        one: Side
-        other: Sider
+"da":
+  "activerecord":
+    "attributes":
+      "page":
+        "body": >-
+          Indhold
+        "parent_page_id": >-
+          Forældre Side
+        "position": >-
+          Position
+        "slug": >-
+          Slug (url)
+        "title": >-
+          Tittel
+        "visible": >-
+          Synlig
+    "models":

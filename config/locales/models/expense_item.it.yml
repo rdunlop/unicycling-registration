@@ -1,19 +1,10 @@
 ---
-it:
-  activerecord:
-    attributes:
-      expense_item:
-        cost: Costo
-        details_label: Domanda
-        has_custom_cost: Donazione
-        has_details: Porre una domanda da parte dell'iscritto
-        maximum_available: Numero massimo totale da vedere
-        maximum_per_registrant: Numero massimo per iscritto
-        name: Nome
-        tax: Tassa
-        total: Totale
-        total_cost: Totale (calcolato)
-    models:
-      expense_item:
-        one: Voce della spesa
-        other: Voci della spesa
+"it":
+  "activerecord":
+    "attributes":
+    "models":
+      "expense_item":
+        "one": >-
+          Voce della spesa
+        "other": >-
+          Voci della spesa

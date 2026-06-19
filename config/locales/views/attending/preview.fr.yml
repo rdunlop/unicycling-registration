@@ -1,5 +1,6 @@
 ---
-fr:
-  attending:
-    preview:
-      header: Pré-visualisation des événements
+"fr":
+  "attending":
+    "preview":
+      "header": >-
+        Pré-visualisation des événements

@@ -1,11 +1,15 @@
 ---
-it:
-  activerecord:
-    attributes:
-      registrant_best_time:
-        formatted_value: Miglior tempo
-        source_location: Nome del raduno
-    models:
-      registrant_best_time:
-        one: Miglior tempo dell'iscritto
-        other: Migliori tempi dell'iscritto
+"it":
+  "activerecord":
+    "attributes":
+      "registrant_best_time":
+        "formatted_value": >-
+          Miglior tempo
+        "source_location": >-
+          Nome del raduno
+    "models":
+      "registrant_best_time":
+        "one": >-
+          Miglior tempo dell'iscritto
+        "other": >-
+          Migliori tempi dell'iscritto

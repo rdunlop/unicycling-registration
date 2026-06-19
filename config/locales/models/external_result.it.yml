@@ -1,11 +1,10 @@
 ---
-it:
-  activerecord:
-    attributes:
-      external_result:
-        details: Dettagli
-        points: Punti
-    models:
-      external_result:
-        one: Risultato del punteggio d'entrata
-        other: Risultati del punteggio d'entrata
+"it":
+  "activerecord":
+    "attributes":
+    "models":
+      "external_result":
+        "one": >-
+          Risultato del punteggio d'entrata
+        "other": >-
+          Risultati del punteggio d'entrata

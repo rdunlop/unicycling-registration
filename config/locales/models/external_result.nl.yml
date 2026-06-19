@@ -1,8 +1,9 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      external_result:
-        details: Details
-        points: Punten
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "external_result":
+        "details": >-
+          Details
+        "points": >-
+          Punten

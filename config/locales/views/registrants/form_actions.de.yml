@@ -1,5 +1,6 @@
 ---
-de:
-  registrants:
-    form_actions:
-      continue: Speichern und weiter
+"de":
+  "registrants":
+    "form_actions":
+      "continue": >-
+        Speichern und weiter

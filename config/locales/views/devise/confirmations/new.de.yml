@@ -1,8 +1,9 @@
 ---
-de:
-  devise:
-    confirmations:
-      new:
-        spam_reminder: Wenn du keine Bestätigungs E-Mail erhalten hast, überprüfe
-          deinen Spam Filter
-        title: Bestätigungs Instruktionen erneut senden
+"de":
+  "devise":
+    "confirmations":
+      "new":
+        "spam_reminder": >-
+          Wenn du keine Bestätigungs E-Mail erhalten hast, überprüfe deinen Spam Filter
+        "title": >-
+          Bestätigungs Instruktionen erneut senden

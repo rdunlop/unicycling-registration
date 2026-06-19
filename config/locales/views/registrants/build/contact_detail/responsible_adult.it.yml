@@ -1,10 +1,12 @@
 ---
-it:
-  registrants:
-    build:
-      contact_detail:
-        responsible_adult:
-          responsible_adult: Adulto responsabile
-          responsible_adult_detail: "(per iscritti con età minore a 18 anni)"
-          responsible_adult_tooltip: L'adulto responsabile sarà responsabile per il
-            minorenne iscritto.
+"it":
+  "registrants":
+    "build":
+      "contact_detail":
+        "responsible_adult":
+          "responsible_adult": >-
+            Adulto responsabile
+          "responsible_adult_detail": >-
+            (per iscritti con età minore a 18 anni)
+          "responsible_adult_tooltip": >-
+            L'adulto responsabile sarà responsabile per il minorenne iscritto.

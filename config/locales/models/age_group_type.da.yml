@@ -1,11 +1,10 @@
 ---
-da:
-  activerecord:
-    attributes:
-      age_group_type:
-        description: Beskrivelse
-        name: Navn
-    models:
-      age_group_type:
-        one: Aldersgruppe Type
-        other: Aldersgruppe Typer
+"da":
+  "activerecord":
+    "attributes":
+      "age_group_type":
+        "description": >-
+          Beskrivelse
+        "name": >-
+          Navn
+    "models":

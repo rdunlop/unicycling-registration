@@ -1,11 +1,15 @@
 ---
-es:
-  activerecord:
-    attributes:
-      page:
-        body: contenidos
-        parent_page_id: Página de adultos
-        position: Posición
-        slug: slug (url)
-        title: Título
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "page":
+        "body": >-
+          contenidos
+        "parent_page_id": >-
+          Página de adultos
+        "position": >-
+          Posición
+        "slug": >-
+          slug (url)
+        "title": >-
+          Título

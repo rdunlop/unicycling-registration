@@ -1,5 +1,6 @@
 ---
-es:
-  registrants:
-    header_and_delete_button:
-      delete: Borrar
+"es":
+  "registrants":
+    "header_and_delete_button":
+      "delete": >-
+        Borrar

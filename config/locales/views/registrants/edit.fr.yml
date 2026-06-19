@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    edit:
-      editing_registrant: Modifier une entrée de compétiteur
+"fr":
+  "registrants":
+    "edit":
+      "editing_registrant": >-
+        Modifier une entrée de compétiteur

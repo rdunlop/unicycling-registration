@@ -1,9 +1,14 @@
 ---
-es:
-  registrants:
-    registrant_choices:
-      create_new_competitor: Crear nuevo participante
-      create_new_noncompetitor: Crear nuevo No-Competidor
-      create_new_spectator: Crear nuevo espectador
-      recommended: Recomendado
-      registration: Inscripción
+"es":
+  "registrants":
+    "registrant_choices":
+      "create_new_competitor": >-
+        Crear nuevo participante
+      "create_new_noncompetitor": >-
+        Crear nuevo No-Competidor
+      "create_new_spectator": >-
+        Crear nuevo espectador
+      "recommended": >-
+        Recomendado
+      "registration": >-
+        Inscripción

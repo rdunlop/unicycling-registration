@@ -1,9 +1,12 @@
 ---
-de:
-  registrants:
-    build:
-      contact_detail:
-        emergency_contact:
-          attending: Teilnehmen
-          emergency_contact: Notfall Kontakt
-          in_case_of_emergency: In einem Notfall
+"de":
+  "registrants":
+    "build":
+      "contact_detail":
+        "emergency_contact":
+          "attending": >-
+            Teilnehmen
+          "emergency_contact": >-
+            Notfall Kontakt
+          "in_case_of_emergency": >-
+            In einem Notfall

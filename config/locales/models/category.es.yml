@@ -1,7 +1,7 @@
 ---
-es:
-  activerecord:
-    attributes:
-      category:
-        name: Nombre
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "category":
+        "name": >-
+          Nombre

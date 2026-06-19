@@ -1,7 +1,8 @@
 ---
-da:
-  devise:
-    custom_registrations:
-      create:
-        flash_error: En bruger eksistere i allerede i forvejen (formegentlig fra et
-          tidligere event) log venligst ind nedenfor
+"da":
+  "devise":
+    "custom_registrations":
+      "create":
+        "flash_error": >-
+          En bruger eksistere i allerede i forvejen (formegentlig fra et tidligere
+          event) log venligst ind nedenfor

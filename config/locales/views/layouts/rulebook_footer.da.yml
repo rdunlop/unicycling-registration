@@ -1,7 +1,10 @@
 ---
-da:
-  layouts:
-    rulebook_footer:
-      competition_rulebook: Konkurence Regelbog
-      header: Regler
-      rulebook_tooltip: Klik her for at få vist regelbogen der gælder ved denne konkurence
+"da":
+  "layouts":
+    "rulebook_footer":
+      "competition_rulebook": >-
+        Konkurence Regelbog
+      "header": >-
+        Regler
+      "rulebook_tooltip": >-
+        Klik her for at få vist regelbogen der gælder ved denne konkurence

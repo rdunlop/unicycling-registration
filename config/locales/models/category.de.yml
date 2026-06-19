@@ -1,10 +1,8 @@
 ---
-de:
-  activerecord:
-    attributes:
-      category:
-        name: Name
-    models:
-      category:
-        one: Kategorie
-        other: Kategorien
+"de":
+  "activerecord":
+    "attributes":
+      "category":
+        "name": >-
+          Name
+    "models":

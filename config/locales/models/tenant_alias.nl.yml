@@ -1,7 +1,7 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      tenant_alias:
-        website_alias: Website alias
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "tenant_alias":
+        "website_alias": >-
+          Website alias

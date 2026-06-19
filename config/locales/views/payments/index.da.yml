@@ -1,7 +1,10 @@
 ---
-da:
-  payments:
-    index:
-      my_payments: Mine Betaliner
-      persons_payments: "%{registrant}'s Betaliner"
-      show_details: Vis detaljer
+"da":
+  "payments":
+    "index":
+      "my_payments": >-
+        Mine Betaliner
+      "persons_payments": >-
+        %{registrant}'s Betaliner
+      "show_details": >-
+        Vis detaljer

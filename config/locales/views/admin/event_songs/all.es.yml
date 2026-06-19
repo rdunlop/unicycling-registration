@@ -1,7 +1,9 @@
 ---
-es:
-  admin:
-    event_songs:
-      all:
-        download: Descargar
-        header: Todas las canciones
+"es":
+  "admin":
+    "event_songs":
+      "all":
+        "download": >-
+          Descargar
+        "header": >-
+          Todas las canciones

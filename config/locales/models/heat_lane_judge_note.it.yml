@@ -1,7 +1,9 @@
 ---
-it:
-  activerecord:
-    models:
-      heat_lane_judge_note:
-        one: Annotazione giudice
-        other: Annotazioni giudice
+"it":
+  "activerecord":
+    "models":
+      "heat_lane_judge_note":
+        "one": >-
+          Annotazione giudice
+        "other": >-
+          Annotazioni giudice

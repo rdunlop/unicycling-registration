@@ -1,18 +1,29 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      time_result:
-        facade_hours: Heures
-        facade_hundreds: Centaines
-        facade_minutes: Minutes
-        hours: Heures
-        minutes: Minutes
-        number_of_laps: Tours
-        number_of_penalties: Sanctions
-        seconds: Secondes
-        thousands: Milliers
-    models:
-      time_result:
-        one: Résultat du chronomètre
-        other: Résultats du chronomètre
+"fr":
+  "activerecord":
+    "attributes":
+      "time_result":
+        "facade_hours": >-
+          Heures
+        "facade_hundreds": >-
+          Centaines
+        "facade_minutes": >-
+          Minutes
+        "hours": >-
+          Heures
+        "minutes": >-
+          Minutes
+        "number_of_laps": >-
+          Tours
+        "number_of_penalties": >-
+          Sanctions
+        "seconds": >-
+          Secondes
+        "thousands": >-
+          Milliers
+    "models":
+      "time_result":
+        "one": >-
+          Résultat du chronomètre
+        "other": >-
+          Résultats du chronomètre

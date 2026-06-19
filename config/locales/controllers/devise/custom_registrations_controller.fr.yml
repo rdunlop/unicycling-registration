@@ -1,7 +1,8 @@
 ---
-fr:
-  devise:
-    custom_registrations:
-      create:
-        flash_error: Un compte existe déjà (peut-être d'une rencontre précédente),
-          veuillez vous connectez ci-dessous
+"fr":
+  "devise":
+    "custom_registrations":
+      "create":
+        "flash_error": >-
+          Un compte existe déjà (peut-être d'une rencontre précédente), veuillez vous
+          connectez ci-dessous

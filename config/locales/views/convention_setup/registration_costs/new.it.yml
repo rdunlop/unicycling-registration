@@ -1,6 +1,7 @@
 ---
-it:
-  convention_setup:
-    registration_costs:
-      new:
-        header: Nuovo costo d'iscrizione
+"it":
+  "convention_setup":
+    "registration_costs":
+      "new":
+        "header": >-
+          Nuovo costo d'iscrizione

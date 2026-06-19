@@ -1,8 +1,12 @@
 ---
-es:
-  feedbacks:
-    form:
-      email: Tu correo electrónico
-      header: Retroalimentación
-      optional: Opcional
-      submit: Dar retroalimentación
+"es":
+  "feedbacks":
+    "form":
+      "email": >-
+        Tu correo electrónico
+      "header": >-
+        Retroalimentación
+      "optional": >-
+        Opcional
+      "submit": >-
+        Dar retroalimentación

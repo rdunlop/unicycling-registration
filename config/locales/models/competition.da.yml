@@ -1,27 +1,42 @@
 ---
-da:
-  activerecord:
-    attributes:
-      competition:
-        award_subtitle_name: Award Undertitel
-        award_title_name: Award Titel
-        combined_competition_id: Overall Champion Beregning
-        end_data_type: Finish Line Data Entry
-        has_experts: Beregn Expert placeringer
-        hide_max_laps_count: Skjul Max Omgange Antal
-        import_results_into_other_competition: Importer resultater til anden konkurence
-        name: Konrurence Navn
-        num_members_per_competitor: Hold Størelse
-        penalty_seconds: Secunder pr. Straf
-        scheduled_completion_at: Planlagt tidspunkt for afslutning
-        scoring_class: Scoring Type
-        rule_for_ineligible_competitors: Udelukkelse af deltagere
-        always_score: Bedøm de deltagere, der ikke er kvalificerede, som om de var kvalificerede
-        never_score: Giv aldrig point til deltagere, der ikke er kvalificerede
-        score_if_at_least_half_eligible: Der gives point, hvis mindst halvdelen af medlemmerne er valgbare
-        start_data_type: Start Line Data Entry
-        uses_lane_assignments: Konkurer i baner/heats
-    models:
-      competition:
-        one: Konkurrence
-        other: Konkurrencer
+"da":
+  "activerecord":
+    "attributes":
+      "competition":
+        "always_score": >-
+          Bedøm de deltagere, der ikke er kvalificerede, som om de var kvalificerede
+        "award_subtitle_name": >-
+          Award Undertitel
+        "award_title_name": >-
+          Award Titel
+        "combined_competition_id": >-
+          Overall Champion Beregning
+        "end_data_type": >-
+          Finish Line Data Entry
+        "has_experts": >-
+          Beregn Expert placeringer
+        "hide_max_laps_count": >-
+          Skjul Max Omgange Antal
+        "import_results_into_other_competition": >-
+          Importer resultater til anden konkurence
+        "name": >-
+          Konrurence Navn
+        "never_score": >-
+          Giv aldrig point til deltagere, der ikke er kvalificerede
+        "num_members_per_competitor": >-
+          Hold Størelse
+        "penalty_seconds": >-
+          Secunder pr. Straf
+        "rule_for_ineligible_competitors": >-
+          Udelukkelse af deltagere
+        "scheduled_completion_at": >-
+          Planlagt tidspunkt for afslutning
+        "score_if_at_least_half_eligible": >-
+          Der gives point, hvis mindst halvdelen af medlemmerne er valgbare
+        "scoring_class": >-
+          Scoring Type
+        "start_data_type": >-
+          Start Line Data Entry
+        "uses_lane_assignments": >-
+          Konkurer i baner/heats
+    "models":

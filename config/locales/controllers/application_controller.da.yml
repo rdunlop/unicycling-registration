@@ -1,5 +1,6 @@
 ---
-da:
-  application:
-    subdomain:
-      welcome: Velkommen til %{subdomain}
+"da":
+  "application":
+    "subdomain":
+      "welcome": >-
+        Velkommen til %{subdomain}

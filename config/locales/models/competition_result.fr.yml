@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      competition_result:
-        one: Résultat supplémentaire
-        other: Résultats supplémentaires
+"fr":
+  "activerecord":
+    "models":
+      "competition_result":
+        "one": >-
+          Résultat supplémentaire
+        "other": >-
+          Résultats supplémentaires

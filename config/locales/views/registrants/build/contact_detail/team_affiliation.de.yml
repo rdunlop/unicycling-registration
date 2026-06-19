@@ -1,7 +1,8 @@
 ---
-de:
-  registrants:
-    build:
-      contact_detail:
-        team_affiliation:
-          team_affiliation: Team Zugehörigkeit
+"de":
+  "registrants":
+    "build":
+      "contact_detail":
+        "team_affiliation":
+          "team_affiliation": >-
+            Team Zugehörigkeit

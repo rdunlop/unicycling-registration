@@ -1,30 +1,46 @@
 ---
-de:
-  activerecord:
-    attributes:
-      contact_detail:
-        address: Adresse
-        birthplace: Geburtsort
-        city: Stadt
-        club: Haupt Team oder Vereins Name
-        club_contact: Haupt Team oder Vereins Kontakt
-        country: Land
-        country_representing: Repräsentiertes Land
-        country_residence: Heimatland
-        email: E-Mail
-        emergency_name: Name
-        emergency_other_phone: Alternative Rufnummer
-        emergency_primary_phone: Haupt Rufnummer
-        emergency_relationship: Beziehung
-        italian_fiscal_code: Umsatzsteuer Ident Nummer (erforderlich für Italienische
-          Teilnehmer)
-        mobile: Mobiltelefonnummer
-        phone: Telefonnummer
-        responsible_adult_name: Name
-        responsible_adult_phone: Haupt Rufnummer
-        state: Bundesland
-        zip: Postleitzahl
-    models:
-      contact_detail:
-        one: Kontakt Detail
-        other: Kontakt Details
+"de":
+  "activerecord":
+    "attributes":
+      "contact_detail":
+        "address": >-
+          Adresse
+        "birthplace": >-
+          Geburtsort
+        "city": >-
+          Stadt
+        "club": >-
+          Haupt Team oder Vereins Name
+        "club_contact": >-
+          Haupt Team oder Vereins Kontakt
+        "country": >-
+          Land
+        "country_representing": >-
+          Repräsentiertes Land
+        "country_residence": >-
+          Heimatland
+        "email": >-
+          E-Mail
+        "emergency_name": >-
+          Name
+        "emergency_other_phone": >-
+          Alternative Rufnummer
+        "emergency_primary_phone": >-
+          Haupt Rufnummer
+        "emergency_relationship": >-
+          Beziehung
+        "italian_fiscal_code": >-
+          Umsatzsteuer Ident Nummer (erforderlich für Italienische Teilnehmer)
+        "mobile": >-
+          Mobiltelefonnummer
+        "phone": >-
+          Telefonnummer
+        "responsible_adult_name": >-
+          Name
+        "responsible_adult_phone": >-
+          Haupt Rufnummer
+        "state": >-
+          Bundesland
+        "zip": >-
+          Postleitzahl
+    "models":

@@ -1,8 +1,12 @@
 ---
-es:
-  registrants:
-    registrant_songs:
-      event: Evento
-      header: Tu música para la competition
-      instructions: Subir música
-      song: Canción
+"es":
+  "registrants":
+    "registrant_songs":
+      "event": >-
+        Evento
+      "header": >-
+        Tu música para la competition
+      "instructions": >-
+        Subir música
+      "song": >-
+        Canción

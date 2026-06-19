@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      wheel_size:
-        one: Taille de roue
-        other: Tailles de roues
+"fr":
+  "activerecord":
+    "models":
+      "wheel_size":
+        "one": >-
+          Taille de roue
+        "other": >-
+          Tailles de roues

@@ -1,9 +1,14 @@
 ---
-da:
-  registrant_expense_items:
-    expenses:
-      cost: Pris
-      items_not_guaranteed: Disse tilvalg er ikke garanteret før din betaling er modtaget
-      paid: Betalt
-      registrants_expenses: "%{registrant}'s Bekostninger"
-      total: Total
+"da":
+  "registrant_expense_items":
+    "expenses":
+      "cost": >-
+        Pris
+      "items_not_guaranteed": >-
+        Disse tilvalg er ikke garanteret før din betaling er modtaget
+      "paid": >-
+        Betalt
+      "registrants_expenses": >-
+        %{registrant}'s Bekostninger
+      "total": >-
+        Total

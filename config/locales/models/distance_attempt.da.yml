@@ -1,11 +1,10 @@
 ---
-da:
-  activerecord:
-    attributes:
-      distance_attempt:
-        distance: Distance
-        fault: Fejl
-    models:
-      distance_attempt:
-        one: Distance Forsøg
-        other: Distance Førsøg
+"da":
+  "activerecord":
+    "attributes":
+      "distance_attempt":
+        "distance": >-
+          Distance
+        "fault": >-
+          Fejl
+    "models":

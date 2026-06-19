@@ -1,13 +1,19 @@
 ---
-it:
-  activerecord:
-    attributes:
-      refund:
-        details: Dettagli (note)
-        refund_date: Data di rimborso
-        refund_id: Rimborso ID
-        user_id: Rimborsato da
-    models:
-      refund:
-        one: Rimborso
-        other: Rimborsi
+"it":
+  "activerecord":
+    "attributes":
+      "refund":
+        "details": >-
+          Dettagli (note)
+        "refund_date": >-
+          Data di rimborso
+        "refund_id": >-
+          Rimborso ID
+        "user_id": >-
+          Rimborsato da
+    "models":
+      "refund":
+        "one": >-
+          Rimborso
+        "other": >-
+          Rimborsi

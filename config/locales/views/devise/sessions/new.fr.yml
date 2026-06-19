@@ -1,7 +1,9 @@
 ---
-fr:
-  devise:
-    sessions:
-      new:
-        action: S'identifier
-        use_access_code: Utiliser un code d'accès
+"fr":
+  "devise":
+    "sessions":
+      "new":
+        "action": >-
+          S'identifier
+        "use_access_code": >-
+          Utiliser un code d'accès

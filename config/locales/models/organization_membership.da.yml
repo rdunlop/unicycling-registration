@@ -1,11 +1,10 @@
 ---
-da:
-  activerecord:
-    attributes:
-      organization_membership:
-        member_number: Unicykel organsition medlems nummer
-        system_status: Medlems status
-    models:
-      organization_membership:
-        one: Organisation Medlemsskab
-        other: Organisation Medlemsskaber
+"da":
+  "activerecord":
+    "attributes":
+      "organization_membership":
+        "member_number": >-
+          Unicykel organsition medlems nummer
+        "system_status": >-
+          Medlems status
+    "models":

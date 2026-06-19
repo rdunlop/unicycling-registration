@@ -1,8 +1,9 @@
 ---
-da:
-  devise:
-    confirmations:
-      new:
-        spam_reminder: Hvis du ikke har modtaget en bekræftelses e-mail, tjek venligst
-          dit spam-filter
-        title: Send bekræftigelses mail igen
+"da":
+  "devise":
+    "confirmations":
+      "new":
+        "spam_reminder": >-
+          Hvis du ikke har modtaget en bekræftelses e-mail, tjek venligst dit spam-filter
+        "title": >-
+          Send bekræftigelses mail igen

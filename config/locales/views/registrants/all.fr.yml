@@ -1,10 +1,16 @@
 ---
-fr:
-  registrants:
-    all:
-      all_registrants: Tous les participants
-      club: Club
-      country: Pays
-      id: Numéro d'identification
-      name: Nom
-      registrant_type: Type
+"fr":
+  "registrants":
+    "all":
+      "all_registrants": >-
+        Tous les participants
+      "club": >-
+        Club
+      "country": >-
+        Pays
+      "id": >-
+        Numéro d'identification
+      "name": >-
+        Nom
+      "registrant_type": >-
+        Type

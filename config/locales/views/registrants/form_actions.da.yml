@@ -1,5 +1,6 @@
 ---
-da:
-  registrants:
-    form_actions:
-      continue: Gem & Fortsæt
+"da":
+  "registrants":
+    "form_actions":
+      "continue": >-
+        Gem & Fortsæt

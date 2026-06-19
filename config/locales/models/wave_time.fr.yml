@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      wave_time:
-        one: Heure de vague de compétition
-        other: Heures de vague de compétition
+"fr":
+  "activerecord":
+    "models":
+      "wave_time":
+        "one": >-
+          Heure de vague de compétition
+        "other": >-
+          Heures de vague de compétition

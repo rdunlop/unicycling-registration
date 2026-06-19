@@ -1,13 +1,22 @@
 ---
-it:
-  layouts:
-    footer:
-      contact_us: Contattaci
-      developed_by: Sviluppato da Robin Dunlop
-      features: Caratteristiche
-      help: Aiuto
-      help_translate: Aiuta a tradurre
-      information_header: Informazioni
-      language_header: Lingua
-      organizers_header: Organizzatori
-      privacy_policy: Politica sulla privacy
+"it":
+  "layouts":
+    "footer":
+      "contact_us": >-
+        Contattaci
+      "developed_by": >-
+        Sviluppato da Robin Dunlop
+      "features": >-
+        Caratteristiche
+      "help": >-
+        Aiuto
+      "help_translate": >-
+        Aiuta a tradurre
+      "information_header": >-
+        Informazioni
+      "language_header": >-
+        Lingua
+      "organizers_header": >-
+        Organizzatori
+      "privacy_policy": >-
+        Politica sulla privacy

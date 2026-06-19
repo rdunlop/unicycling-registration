@@ -1,9 +1,14 @@
 ---
-fr:
-  registration_costs:
-    list:
-      competitor_registration_cost: Prix d’inscription – Compétiteur
-      from: Du
-      noncompetitor_registration_cost: Prix d’inscription – Non-compétiteur
-      online_registration_closes: Fermeture des inscriptions en ligne le
-      to: au
+"fr":
+  "registration_costs":
+    "list":
+      "competitor_registration_cost": >-
+        Prix d’inscription – Compétiteur
+      "from": >-
+        Du
+      "noncompetitor_registration_cost": >-
+        Prix d’inscription – Non-compétiteur
+      "online_registration_closes": >-
+        Fermeture des inscriptions en ligne le
+      "to": >-
+        au

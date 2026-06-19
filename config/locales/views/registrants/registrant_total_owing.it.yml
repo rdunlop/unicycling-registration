@@ -1,7 +1,10 @@
 ---
-it:
-  registrants:
-    registrant_total_owing:
-      paid: Pagato
-      pending: In sospeso
-      unpaid: Non pagato
+"it":
+  "registrants":
+    "registrant_total_owing":
+      "paid": >-
+        Pagato
+      "pending": >-
+        In sospeso
+      "unpaid": >-
+        Non pagato

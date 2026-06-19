@@ -1,5 +1,6 @@
 ---
-de:
-  layouts:
-    application:
-      registration: Anmeldung
+"de":
+  "layouts":
+    "application":
+      "registration": >-
+        Anmeldung

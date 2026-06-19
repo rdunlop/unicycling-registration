@@ -1,11 +1,9 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      lane_assignment:
-        heat: Heat
-        lane: Baan
-    models:
-      lane_assignment:
-        one: Baan toewijzing
-        other: Baan toewijzingen
+"nl":
+  "activerecord":
+    "attributes":
+      "lane_assignment":
+        "heat": >-
+          Heat
+        "lane": >-
+          Baan

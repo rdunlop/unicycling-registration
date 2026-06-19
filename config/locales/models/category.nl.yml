@@ -1,10 +1,7 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      category:
-        name: Naam
-    models:
-      category:
-        one: Categorieën
-        other: Categorieën
+"nl":
+  "activerecord":
+    "attributes":
+      "category":
+        "name": >-
+          Naam

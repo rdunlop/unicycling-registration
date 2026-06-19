@@ -1,12 +1,17 @@
 ---
-es:
-  activerecord:
-    attributes:
-      event:
-        accepts_wheel_size_override: Se aceptan eliminación por tamaño de rueda
-        artistic: Artístico
-        best_time_format: Formato de mejor tiempo
-        id: ID
-        standard_skill: Habilidad estandar
-        visible: Visible
-    models: 
+"es":
+  "activerecord":
+    "attributes":
+      "event":
+        "accepts_wheel_size_override": >-
+          Se aceptan eliminación por tamaño de rueda
+        "artistic": >-
+          Artístico
+        "best_time_format": >-
+          Formato de mejor tiempo
+        "id": >-
+          ID
+        "standard_skill": >-
+          Habilidad estandar
+        "visible": >-
+          Visible

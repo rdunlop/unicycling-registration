@@ -1,8 +1,11 @@
 ---
-de:
-  admin:
-    standard_skill_routines:
-      view_all:
-        header: Alle Standard Skill Routinen
-        pdfs: PDFs
-        standard_skill_routine_created: Standard Skill Ablauf erstellt?
+"de":
+  "admin":
+    "standard_skill_routines":
+      "view_all":
+        "header": >-
+          Alle Standard Skill Routinen
+        "pdfs": >-
+          PDFs
+        "standard_skill_routine_created": >-
+          Standard Skill Ablauf erstellt?

@@ -1,7 +1,9 @@
 ---
-da:
-  devise:
-    sessions:
-      new:
-        action: Log in i Unicycle Registration
-        use_access_code: Brug en access code
+"da":
+  "devise":
+    "sessions":
+      "new":
+        "action": >-
+          Log in i Unicycle Registration
+        "use_access_code": >-
+          Brug en access code
