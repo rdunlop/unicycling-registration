@@ -25,7 +25,8 @@ RUN bundle exec rails assets:precompile
 FROM ruby:3.2.10-slim
 
 RUN apt-get update -qq \
- && apt-get install -y --no-install-recommends libpq5 libfontconfig1 libxrender1 \
+ && apt-get install -y --no-install-recommends libpq5 libfontconfig1 libxrender1 wkhtmltopdf \
+ && ln -s /usr/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf \
  && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -u 1000 app
