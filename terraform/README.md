@@ -147,6 +147,64 @@ curl -I https://registration.unicycling-software.com
 
 ---
 
+## Scheduled tasks (nightly cron)
+
+`scheduled_tasks.tf` defines EventBridge rules that trigger one-off ECS Fargate tasks on a schedule (replacing the old `whenever`/cron setup on EC2).
+
+| Task | Schedule | Command |
+|------|----------|---------|
+| `update_registration_period` | Daily at midnight UTC | `bundle exec rake update_registration_period` |
+
+EventBridge launches a new ECS task using the latest active task definition; the task exits when the rake command finishes.
+
+### Checking whether a scheduled task ran successfully
+
+**1. Find the stopped ECS task** (EventBridge-launched tasks stop after the command finishes):
+
+```bash
+ENV=staging  # or: prod
+
+aws ecs list-tasks \
+  --cluster unicycling-registration-$ENV \
+  --desired-status STOPPED \
+  --region us-west-2
+```
+
+**2. Check the exit code and stop reason** (exit code `0` = success):
+
+```bash
+aws ecs describe-tasks \
+  --cluster unicycling-registration-$ENV \
+  --tasks <task-arn-from-above> \
+  --region us-west-2 \
+  --query "tasks[0].{stopCode:stopCode,stoppedReason:stoppedReason,exitCode:containers[0].exitCode,lastStatus:lastStatus}"
+```
+
+A `stopCode` of `EssentialContainerExited` with `exitCode: 0` is a clean run. Any other exit code or `TaskFailedToStart` indicates a failure.
+
+**3. Read the container logs from CloudWatch:**
+
+```bash
+# List recent log streams (newest first; the task ID is the stream prefix)
+aws logs describe-log-streams \
+  --log-group-name /ecs/unicycling-registration-$ENV-web \
+  --order-by LastEventTime \
+  --descending \
+  --limit 5 \
+  --region us-west-2
+
+# Fetch the log output for a specific stream
+aws logs get-log-events \
+  --log-group-name /ecs/unicycling-registration-$ENV-web \
+  --log-stream-name "web/<task-id>" \
+  --region us-west-2 \
+  --output text --query "events[].message"
+```
+
+Logs are retained for 30 days (`retention_in_days = 30` in `ecs.tf`).
+
+---
+
 ## After apply: set ALB_LISTENER_ARN in the app
 
 The Rails app (`PollAcmCertificateJob`) uses `ALB_LISTENER_ARN` to attach per-tenant
