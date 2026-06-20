@@ -47,8 +47,6 @@ gem 'stimulus-rails'
 gem "validates_timeliness"
 
 # system utils
-gem 'acme-client'
-gem 'apartment_acme_client', github: 'rdunlop/apartment_acme_client', branch: 'allow_rails_8'
 gem 'aws-actionmailer-ses'
 gem 'aws-sdk-acm'
 gem 'aws-sdk-elasticloadbalancingv2'

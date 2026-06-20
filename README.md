@@ -565,29 +565,8 @@ SSL Certificates
 
 **Note: This section is under construction **
 
-In order to provide a secure connection, we are using [letsencrypt.org](https://letsencrypt.org) to
-automatically create ssl certificates for the various domains which the server will run on. But, we are doing the validation/registration through the `acme-client` gem instead of using the lets-encrypt binary.
+In order to provide a secure connection, we are an AWS ALB to create ssl certificates for the various domains which the server will run on. When a custom domain is requested, we generate a DNS CNAME record, which needs be set on the target domain DNS records.
 
-Every night, we check all configured domains, and re-configure the nginx server to properly respond to any newly configured domain names. If we have a new domain name, we also request a new SSL certificate, enabling HTTPS for that domain.
-
-How the Encryption process works:
----------------------------------
-
-1. A list of domains which are served by this server is created.
-2. The list of all these domains is used to determine which ones are properly configured in DNS.
-3. We `authorize` each domain with LetsEncrypt
-4. A new SSL certificate is requested and installed
-5. Nginx is restarted to pick up the new certificate.
-6. An e-mail is sent to the ERROR_EMAILS list if any issues occur.
-
-Setting up crypto the first time:
----------------------------------
-
-1. `rake create_crypto_client` - Register an account with LetsEncrypt
-2. `rake renew_and_update_certificate` - Authorize/create certificates
-3. `rake update_nginx_config` - re-write the nginx file to point at the certificates
-
-At this point, the only thing necessary is to run `rake renew_and_update_certificate` on a regular basis, which will find new domains, authorize them, and get new SSL certs for them.
 
 Log Rotation settings:
 ----------------------

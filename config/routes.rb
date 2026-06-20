@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.has_role?(:super_admin) } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  mount ApartmentAcmeClient::Engine => '/aac'
 
   get '404', to: 'errors#not_found'
   get '415', to: 'errors#not_found'
