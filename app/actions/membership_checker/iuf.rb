@@ -33,33 +33,24 @@ module MembershipChecker
     def status
       return @status if @status
 
-      response = api_connection.post do |req|
-        req.body = request_string
-      end
+      uri = URI(api_url)
+      response = Net::HTTP.post_form(uri, request_params)
 
-      if response.success?
+      if response.is_a?(Net::HTTPSuccess)
         @status = JSON.parse(response.body)
       end
     end
 
-    def request_string
-      [
-        "first_name=#{first_name}",
-        "last_name=#{last_name}",
-        "birthdate=#{birthdate.iso8601}",
-        "eventdate=#{EventConfiguration.singleton.estimated_end_date.iso8601}"
-      ].join("&")
+    def request_params
+      {
+        "first_name" => first_name,
+        "last_name" => last_name,
+        "birthdate" => birthdate.iso8601,
+        "eventdate" => EventConfiguration.singleton.estimated_end_date.iso8601
+      }
     end
 
     private
-
-    def api_connection
-      Faraday.new(url: api_url) do |faraday|
-        faraday.request :url_encoded
-        faraday.response :logger
-        faraday.adapter  Faraday.default_adapter
-      end
-    end
 
     def api_url
       Rails.configuration.iuf_membership_api_url
