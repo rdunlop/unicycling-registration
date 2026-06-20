@@ -54,7 +54,6 @@ gem 'aws-sdk-acm'
 gem 'aws-sdk-elasticloadbalancingv2'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
-gem 'eye'
 gem 'gaffe'
 gem 'hcaptcha'
 gem 'http_accept_language'
@@ -72,7 +71,6 @@ gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
 gem 'sidekiq', '~> 7.3.0' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'webrick'
-gem 'whenever'
 
 # I18n Translation
 # use rdunlop branch which has:
@@ -104,11 +102,6 @@ gem 'faker' # to support 'sample_data'
 gem 'pg'
 
 gem 'down'  # to download external files
-
-# deployment
-gem 'capistrano', require: false
-gem 'capistrano-rails', require: false
-gem 'capistrano-rvm', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'
