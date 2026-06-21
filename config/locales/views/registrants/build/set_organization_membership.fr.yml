@@ -1,6 +1,7 @@
 ---
-fr:
-  registrants:
-    build:
-      set_organization_membership:
-        set_organization_membership: Définir l'organisation pour l'adhésion
+"fr":
+  "registrants":
+    "build":
+      "set_organization_membership":
+        "set_organization_membership": >-
+          Définir l'organisation pour l'adhésion

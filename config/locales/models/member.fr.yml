@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      member:
-        one: Membre
-        other: Membres
+"fr":
+  "activerecord":
+    "models":
+      "member":
+        "one": >-
+          Membre
+        "other": >-
+          Membres

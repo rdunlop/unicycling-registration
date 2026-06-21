@@ -1,8 +1,12 @@
 ---
-de:
-  feedbacks:
-    form:
-      email: Deine E-Mail Adresse
-      header: Feedback
-      optional: Optional
-      submit: Feedback senden
+"de":
+  "feedbacks":
+    "form":
+      "email": >-
+        Deine E-Mail Adresse
+      "header": >-
+        Feedback
+      "optional": >-
+        Optional
+      "submit": >-
+        Feedback senden

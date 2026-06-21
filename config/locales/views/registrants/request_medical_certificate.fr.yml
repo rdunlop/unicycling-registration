@@ -1,6 +1,8 @@
 ---
-fr:
-  registrants:
-    request_medical_certificate:
-      description: Tous compétiteurs doivent soumettre un certificat médical.
-      header: Documentation de Santé Obligatoire
+"fr":
+  "registrants":
+    "request_medical_certificate":
+      "description": >-
+        Tous compétiteurs doivent soumettre un certificat médical.
+      "header": >-
+        Documentation de Santé Obligatoire

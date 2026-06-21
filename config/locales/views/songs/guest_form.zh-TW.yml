@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "songs":
+    "guest_form":
+      "max_file_size": >-
+        檔案大小限制為 %{size_mb} MB
+      "note": >-
+        備註：
+      "upload": >-
+        上傳音樂

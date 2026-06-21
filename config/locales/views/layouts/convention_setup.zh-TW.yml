@@ -1,0 +1,38 @@
+---
+"zh-TW":
+  "layouts":
+    "convention_setup":
+      "convention_setup": >-
+        大會設定主頁
+      "costs": >-
+        費用配置
+      "custom_domain": >-
+        網域設定
+      "date_deadlines": >-
+        重要日期設定
+      "go_live": >-
+        正式發佈 / 上線
+      "information_pages": >-
+        資訊頁面管理
+      "items_for_sale": >-
+        商品銷售管理
+      "lodging_for_sale": >-
+        住宿銷售管理
+      "manage_translations": >-
+        翻譯大會設定內容
+      "name_and_logo": >-
+        大會名稱與標誌
+      "organization_membership": >-
+        組織會員資格
+      "payment_settings": >-
+        支付金流設定
+      "registrant_types": >-
+        提供之報名類型
+      "registration_costs": >-
+        報名費用時程
+      "registration_questions": >-
+        報名表單問題
+      "rules_and_waiver": >-
+        規則與免責聲明
+      "volunteer_settings": >-
+        志工服務設定

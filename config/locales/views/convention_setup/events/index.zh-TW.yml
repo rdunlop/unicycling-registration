@@ -1,0 +1,21 @@
+---
+"zh-TW":
+  "convention_setup":
+    "events":
+      "index":
+        "age_limits_option": >-
+          管理「活動類別」以指定年齡限制（例如：「0-10 歲」）。
+        "available_event_options": >-
+          活動項目建立後，您可以指定：
+        "description_html": "每個活動 (Event) 代表一個參賽者可以參加的項目。\r\n不同的競賽等級（如：青少年初學者、進階組、專業組）若限制參賽者只能從中選擇其一，則被視為「活動類別
+          (Event Categories)」。\r\n若參賽者可以同時參加「初級 X」和「高級 X」，則應將其設為獨立的活動項目。"
+        "event_categories_option": >-
+          額外的「活動類別」（例如：進階組、專業組）
+        "existing_events": >-
+          現有的 %{category} 活動項目
+        "header": >-
+          類別中的活動項目：%{category}
+        "more_questions_option": >-
+          新增「活動選項」以便在使用者報名項目時詢問更多問題。
+        "new_event": >-
+          新增活動項目

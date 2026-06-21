@@ -1,6 +1,8 @@
 ---
-de:
-  registrants:
-    registrants_list:
-      registrations: Angemeldete
-      total_amount_owing: Offenen Zahlungen
+"de":
+  "registrants":
+    "registrants_list":
+      "registrations": >-
+        Angemeldete
+      "total_amount_owing": >-
+        Offenen Zahlungen

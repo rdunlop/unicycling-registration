@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "admin":
+    "registrant_summaries":
+      "index":
+        "registrant_summaries_by_id": >-
+          所有報名者摘要 - 按編號排序 (PDF)
+        "registrant_summaries_by_last_name": >-
+          所有報名者摘要 - 按姓氏排序 (PDF)

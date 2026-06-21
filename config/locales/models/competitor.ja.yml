@@ -1,0 +1,11 @@
+---
+"ja":
+  "activerecord":
+    "attributes":
+      "competitor":
+        "age": >-
+          年齢
+        "bib_number": >-
+          ID
+        "gender": >-
+          性別

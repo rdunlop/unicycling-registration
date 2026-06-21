@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "member":
+        "one": >-
+          Member
+        "other": >-
+          Members

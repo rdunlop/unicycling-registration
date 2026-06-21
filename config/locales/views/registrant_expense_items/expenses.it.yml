@@ -1,10 +1,14 @@
 ---
-it:
-  registrant_expense_items:
-    expenses:
-      cost: Costo
-      items_not_guaranteed: Gli articoli non sono garantiti finché non viene ricevuto
-        il suo pagamento
-      paid: Pagato
-      registrants_expenses: Costi di %{registrant}
-      total: Totale
+"it":
+  "registrant_expense_items":
+    "expenses":
+      "cost": >-
+        Costo
+      "items_not_guaranteed": >-
+        Gli articoli non sono garantiti finché non viene ricevuto il suo pagamento
+      "paid": >-
+        Pagato
+      "registrants_expenses": >-
+        Costi di %{registrant}
+      "total": >-
+        Totale

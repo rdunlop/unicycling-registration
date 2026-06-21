@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "registrant_expense_item":
+        "tax": >-
+          稅金
+    "models":
+      "registrant_expense_item":
+        "one": >-
+          Item
+        "other": >-
+          Items

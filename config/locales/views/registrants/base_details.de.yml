@@ -1,9 +1,14 @@
 ---
-de:
-  registrants:
-    base_details:
-      base_details: Basis Details
-      birthday: Geburtstag
-      female: Weiblich
-      male: Männlich
-      required_fields: Erforderliche Felder
+"de":
+  "registrants":
+    "base_details":
+      "base_details": >-
+        Basis Details
+      "birthday": >-
+        Geburtstag
+      "female": >-
+        Weiblich
+      "male": >-
+        Männlich
+      "required_fields": >-
+        Erforderliche Felder

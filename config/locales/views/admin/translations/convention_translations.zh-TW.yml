@@ -1,0 +1,25 @@
+---
+"zh-TW":
+  "admin":
+    "translations":
+      "convention_translations":
+        "access_denied_html": >-
+          您沒有翻譯此網站的權限。
+        "access_enabled": >-
+          您沒有翻譯此網站的權限。
+        "assign_volunteers_html": >-
+          若要指派志工協助翻譯特定的大會資訊，請使用 %{link} 分配「翻譯員 (Translator)」角色。
+        "convention_translations_detail": >-
+          由於大會特定翻譯取決於大會配置時輸入的文字，因此每個大會群組都需要由志工進行翻譯。
+        "example_1": >-
+          商品名稱 (例如：S 號 T-Shirt)
+        "example_2": >-
+          比賽項目名稱 (例如：平地花式)
+        "example_3": >-
+          項目分組 (例如：青少年專家組)
+        "examples_of_convention_translations": >-
+          大會特定翻譯範例
+        "header": >-
+          特定大會專屬翻譯
+        "user_management": >-
+          使用者管理

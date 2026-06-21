@@ -1,5 +1,6 @@
 ---
-fr:
-  registrant_expense_items:
-    index:
-      continue: Continuer
+"fr":
+  "registrant_expense_items":
+    "index":
+      "continue": >-
+        Continuer

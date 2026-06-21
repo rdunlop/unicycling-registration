@@ -1,0 +1,204 @@
+---
+"zh-TW":
+  "simple_form":
+    "error_notification":
+      "default_message": >-
+        請檢查以下問題：
+    "hints":
+      "category":
+        "info_page_id": >-
+          請選擇一個描述此類別的「頁面」。系統將根據該頁面為使用者提供正確的翻譯。
+        "info_url": >-
+          此連結會顯示在類別頁面，可連結至該類別競賽項目的額外資訊。
+      "competition":
+        "award_subtitle_name": >-
+          輸入額外的獎項副標題（選填）。注意：僅適用於「不分年齡組」的項目（例如：新手男子組）。
+        "award_title_name": >-
+          顯示在正式成績單與獎狀上的文字（例如：個人花式）。
+        "combined_competition_id": >-
+          僅應針對「總排名賽事」啟用此選項，而非其子項目（例如：僅對「道路賽總冠軍」啟用，而非對 10K 賽事啟用）。
+        "has_experts": >-
+          若此項目的成績在分齡組之外，還需要產生「不分分齡組」的獎項，請勾選此項。勾選後系統將產生獨立於年齡組之外的「專家組獎項」。
+        "hide_max_laps_count": >-
+          僅在圈數少於領先者時顯示圈數差。
+        "import_results_into_other_competition": >-
+          匯入成績時，若報名者未被分配到此項目，但位於同一活動下的另一項目，經核准後將成績匯入該處。
+        "num_members_per_competitor": >-
+          大多數項目此處請填「1」。
+        "penalty_seconds": >-
+          是否允許針對犯規（如獨輪車落腳）對參賽者加罰「X」秒？
+        "scheduled_completion_at": >-
+          用於在管理員總覽中對成績進行排序。
+        "scoring_class": >-
+          請選擇計分計算系統。
+        "sign_in_list_enabled": >-
+          部分項目（如競速）會自動啟用簽到表。若您想為預設不含簽到表的項目輸入曲柄長度或其他細節，請使用此選項。
+        "uses_lane_assignments": >-
+          啟用分組/分道工具。
+      "coupon_code":
+        "expense_items": >-
+          請選擇此優惠碼可折抵的費用項目。
+        "inform_emails": >-
+          以逗號分隔的電子郵件列表；當有人使用此優惠券時，系統將通知這些信箱。
+        "maximum_registrant_age": >-
+          僅適用於此年齡（含）以下的報名者。
+        "price": >-
+          使用此優惠券後需支付的價格
+      "event":
+        "accepts_music_uploads": >-
+          若參賽者可為其比賽項目自選音樂，請勾選此項。
+        "accepts_wheel_size_override": >-
+          開啟此選項後，10 歲（含）以下的兒童可以額外指定不同的輪徑尺寸。
+        "artistic": >-
+          勾選此項後，在「花式項目截止日」過後，系統將自動禁止任何變更。
+        "best_time_format": >-
+          您是否要求使用者輸入此項目的「最佳成績」？（這對於決定某些比賽的起跑/出場順序非常有用）
+        "cost": >-
+          指定此競賽項目的報名費用（選填）。
+        "standard_skill": >-
+          若參賽者需同時上傳其「標準動作表 (Standard Skill Routines)」，請勾選此項。
+      "event_category":
+        "warning_on_registration_summary": >-
+          任何報名此類別的使用者，其報名表單上都會顯示警告訊息。
+      "event_choice":
+        "optional": >-
+          允許使用者不填寫此欄位（設為選填）。
+        "optional_if_event_choice_id": >-
+          若使用者已選擇了另一個指定的「活動選項」，則此欄位為選填。（例如：若選擇「自行報名」，則「團隊名稱」為選填）
+        "required_if_event_choice_id": >-
+          若使用者已選擇了另一個指定的「活動選項」，則此欄位為必填。（例如：若選擇「參加趣味賽」，則「團隊代表色」為必填）
+        "tooltip": >-
+          當使用者將滑鼠懸停在標籤上時，將顯示此提示。
+      "event_configuration":
+        "accept_rules": >-
+          強制要求所有報名者必須同意隨附的 PDF 規則。
+        "add_expenses_end_date": >-
+          此日期之後，您將無法在報名資料中增加額外的費用項目（例如加購商品）。
+        "age_calculation_base_date": >-
+          報名者的年齡將以此日期為基準進行計算（選填）。
+        "artistic_closed_date": >-
+          此日期之後，一般報名者無法再「新增」任何標記為「花式 (Artistic)」的項目。但在「項目報名截止日」前，仍可選擇取消（退出）這些項目。
+        "competitor_benefits": >-
+          顯示於報名首頁，用於說明「參賽者報名」包含的權益與福利。
+        "comp_noncomp_url": >-
+          請提供一個連結，用以解釋各種類型報名方案之間的差異。
+        "contact_email": >-
+          這是「幫助」頁面中所有「回饋」郵件的預設收件地址。
+        "dates_description": >-
+          此描述會顯示在未登入頁面，應包含大會舉辦的具體日期。
+        "display_confirmed_events": >-
+          啟用後，報名摘要頁面將會區分並顯示「已確認」與「未確認」的活動項目。
+        "event_sign_up_closed_date": >-
+          此日期之後，只有管理員可以為報名者新增項目（報名者本人仍可移除項目）。
+        "event_url": >-
+          設定點擊選單列 Logo 時導向的網址。
+        "iuf": >-
+          啟用後，系統將會詢問關於 IUF（國際單輪車聯盟）會員資格的問題。
+        "lodging_end_date": >-
+          在此日期之後，僅限管理員可以新增或移除報名資料中的住宿項目（但已加入清單中的住宿仍可進行付款購買）。
+        "logo_file": >-
+          標誌 (Logo) 尺寸應為 93px x 38px
+        "max_award_place": >-
+          設定欲列印獎狀的最末名次（同時適用於分齡組與專家組）。
+        "max_registrants": >-
+          當報名人數（含已付與未付款）達到此上限時，將無法新增報名。填寫 0 則不限制人數。
+        "music_submission_end_date": >-
+          允許上傳比賽音樂的最後日期。
+        "noncompetitor_benefits": >-
+          顯示於報名首頁，說明「非參賽參加者」報名包含的權益內容。
+        "paypal_test": >-
+          允許模擬接收來自 PayPal 的付款確認訊息。
+        "registrants_should_specify_default_wheel_size": >-
+          是否需詢問 10 歲（含）以下的報名者其預設輪徑（通常用於競速項目）
+        "request_address": >-
+          強制每位報名者輸入實體郵寄地址
+        "request_emergency_contact": >-
+          強制每位報名者輸入緊急聯絡人資訊。
+        "request_responsible_adult": >-
+          要求每位未成年（18 歲以下）報名者輸入負責成年人。
+        "require_medical_certificate": >-
+          要求每位報名者上傳醫生開立的健康證明，以確認其身體狀況適合參賽。
+        "spectator_benefits": >-
+          顯示於報名首頁，說明「觀眾報名」包含的權益內容。
+        "spectators": >-
+          觀眾不需支付「報名費」，且無需報名即可直接購買商品。
+        "start_date": >-
+          除非另有指定「年齡計算基準日」，否則報名者年齡將以此日期計算。此日期也是設定系統時日曆的預設日期。
+        "test_mode": >-
+          啟用此模式將允許任何使用者成為超級用戶，並能「模擬完成」付款流程。
+        "usa": >-
+          此選項會將美國與加拿大排在國家選擇欄的首位，並強制要求填寫州別。此外，它也允許數據登錄人員為參賽者進行最後一刻的現場報名。
+      "expense_group":
+        "competitor_required": >-
+          系統將自動為報名者指派此群組中的一個項目（該群組「只能」包含一個項目，且會自動加入報名者的帳單中）。
+        "info_url": >-
+          此連結會顯示在費用頁面，若費用需要進一步說明或展示照片時非常有用。
+        "noncompetitor_required": >-
+          系統將自動為報名者指派此群組中的一個項目（該群組「只能」包含一個項目，且會自動加入報名者的帳單中）。
+      "expense_item":
+        "has_custom_cost": >-
+          允許報名者自行決定此項目的支付金額。
+        "has_details": >-
+          在使用者購買此項目時詢問額外細節（例如尺寸或偏好）。
+      "page":
+        "parent_page": >-
+          [選填] 將此頁面歸類在特定的母頁面下。
+        "position": >-
+          在同一母頁面下對各子頁面進行排序。
+        "slug": >-
+          網址縮略名 (Slug)，請僅使用一般字元（不可包含空格）。
+      "payment":
+        "note": >-
+          描述付款方式。例如：現金、支票號碼 #123。
+      "registrant_best_times":
+        "source_location": >-
+          請輸入名稱與日期
+      "registrant":
+        "wheel_size_id": >-
+          用於決定適用的年齡組別（常見於競速或標準動作項目）。
+      "registration_cost":
+        "end_date": >-
+          指定此價格適用的最後日期。
+        "start_date": >-
+          請指定緊接在前一階段「截止日期」之後的日期。
+      "volunteer_opportunity":
+        "inform_emails": >-
+          當有人報名此志工職位時，系統將發送電子郵件通知這些信箱。
+      "wave_time":
+        "scheduled_time": >-
+          例如 02:00, 03:00
+    "labels":
+      "event":
+        "accepts_music_uploads": >-
+          要求上傳音樂
+    "no": >-
+      否
+    "options":
+      "event_configuration":
+        "waiver":
+          "none": >-
+            無免責聲明
+          "online": >-
+            線上免責聲明
+          "print": >-
+            紙本免責聲明
+    "placeholders":
+      "competitor_expense_item":
+        "cost": >-
+          例如：12.00
+      "coupon_code":
+        "code": >-
+          供使用者輸入的代碼
+      "noncompetitor_expense_item":
+        "cost": >-
+          供使用者輸入的代碼
+      "volunteer_opportunity":
+        "inform_emails": >-
+          請以半形逗號分隔多個電子郵件地址
+    "required":
+      "mark": >-
+        *
+      "text": >-
+        必填
+    "yes": >-
+      是

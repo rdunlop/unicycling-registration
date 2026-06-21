@@ -1,10 +1,15 @@
 ---
-es:
-  admin:
-    registrants:
-      manage_all:
-        deleted_question: Eliminado?
-        header: Maneja registrados
-        summary: Resumen
-        undelete: Deseliminar
-        undelete_confirmation: Deseliminar al registrado
+"es":
+  "admin":
+    "registrants":
+      "manage_all":
+        "deleted_question": >-
+          Eliminado?
+        "header": >-
+          Maneja registrados
+        "summary": >-
+          Resumen
+        "undelete": >-
+          Deseliminar
+        "undelete_confirmation": >-
+          Deseliminar al registrado

@@ -1,10 +1,16 @@
 ---
-es:
-  registrants:
-    registrant_events:
-      age_group: Grupo de edad
-      category: Categoría
-      confirmed_events: Eventos confirmados
-      event: Evento
-      events: Eventos
-      unconfirmed_events: Eventos no confirmados
+"es":
+  "registrants":
+    "registrant_events":
+      "age_group": >-
+        Grupo de edad
+      "category": >-
+        Categoría
+      "confirmed_events": >-
+        Eventos confirmados
+      "event": >-
+        Evento
+      "events": >-
+        Eventos
+      "unconfirmed_events": >-
+        Eventos no confirmados

@@ -1,8 +1,10 @@
 ---
-de:
-  activerecord:
-    attributes:
-      age_group_type:
-        description: Beschreibung
-        name: Name
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "age_group_type":
+        "description": >-
+          Beschreibung
+        "name": >-
+          Name
+    "models":

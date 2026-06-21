@@ -1,5 +1,6 @@
 ---
-es:
-  shared:
-    additional_rules_link:
-      the_rules: Las normas
+"es":
+  "shared":
+    "additional_rules_link":
+      "the_rules": >-
+        Las normas

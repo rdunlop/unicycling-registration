@@ -1,7 +1,9 @@
 ---
-nl:
-  activerecord:
-    models:
-      judge:
-        one: Jury
-        other: Jury
+"nl":
+  "activerecord":
+    "models":
+      "judge":
+        "one": >-
+          Jury
+        "other": >-
+          Jury

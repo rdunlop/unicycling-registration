@@ -1,8 +1,10 @@
 ---
-de:
-  convention_setup:
-    volunteer_opportunities:
-      index:
-        description: Bei der Anmeldung kann jeder Teilnehmer gefragt werden ob er
-          bei einer beliebigen Aufgabe helfen möchte
-        header: Helfer Möglichkeiten
+"de":
+  "convention_setup":
+    "volunteer_opportunities":
+      "index":
+        "description": >-
+          Bei der Anmeldung kann jeder Teilnehmer gefragt werden ob er bei einer beliebigen
+          Aufgabe helfen möchte
+        "header": >-
+          Helfer Möglichkeiten

@@ -1,6 +1,8 @@
 ---
-de:
-  registrants:
-    rules_acceptance:
-      header: Regeln
-      rules_agreement: Ich stimme diesen Regeln zu.
+"de":
+  "registrants":
+    "rules_acceptance":
+      "header": >-
+        Regeln
+      "rules_agreement": >-
+        Ich stimme diesen Regeln zu.

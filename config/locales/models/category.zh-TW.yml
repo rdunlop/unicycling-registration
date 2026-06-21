@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "category":
+        "name": >-
+          名稱
+    "models":
+      "category":
+        "one": >-
+          Category
+        "other": >-
+          Categories

@@ -1,0 +1,18 @@
+---
+"zh-TW":
+  "registrants":
+    "registrant_list_entry":
+      "competitor": >-
+        （參賽者）
+      "edit": >-
+        編輯
+      "incomplete": >-
+        未完成
+      "legal_waiver": >-
+        法律免責聲明 (%{first_name})
+      "noncompetitor": >-
+        （非參賽者）
+      "see_summary": >-
+        查看摘要
+      "spectator": >-
+        （觀眾）

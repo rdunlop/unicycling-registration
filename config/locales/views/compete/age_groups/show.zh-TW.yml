@@ -1,0 +1,39 @@
+---
+"zh-TW":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          操作
+        "age_group_in_use_in_multiple_competitions": >-
+          此年齡組別正被多個競賽項目使用中。
+        "are_you_sure": >-
+          您確定嗎？
+        "base_age_group": >-
+          基礎年齡組別：%{base_age_group_type}
+        "be_aware_age_group_in_use_in_multiple_competitions": >-
+          請注意，此年齡組別 (%{age_group_type}) 正被以下比賽項目使用：%{competitions}
+        "combine_with": >-
+          與 %{smallest_neighbour} 合併
+        "create_a_new_age_group": >-
+          建立新的年齡組別？
+        "current_age_group": >-
+          目前年齡組別：%{age_group}
+        "duplicate_the_age_group": >-
+          複製 %{age_group_type} 年齡組別，使其成為獨立設定
+        "eligible_registrants": >-
+          符合資格的報名人數
+        "entry": >-
+          參賽項目 / 項目
+        "female": >-
+          女性
+        "headline": >-
+          總共有 %{competitors_count} 名參賽者。此頁面顯示這些參賽者如何分佈在各年齡組別中。您可以根據規則手冊在此合併組別。
+        "ineligible_registrants": >-
+          不符合資格的報名人數
+        "male": >-
+          男性
+        "show_registrant_sign_up_breakdown": >-
+          顯示報名人數詳細分析
+        "title": >-
+          %{competition} 年齡組別管理

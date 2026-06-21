@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "competition_result":
+        "one": >-
+          Additional Result
+        "other": >-
+          Additional Results

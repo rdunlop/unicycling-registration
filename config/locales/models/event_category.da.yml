@@ -1,10 +1,14 @@
 ---
-da:
-  activerecord:
-    attributes:
-      event_category:
-        age_range_end: Maksimal alde
-        age_range_start: Minimum alder
-        name: Navn
-        warning_on_registration_summary: Advarsel på tilmeldings resumé
-    models: 
+"da":
+  "activerecord":
+    "attributes":
+      "event_category":
+        "age_range_end": >-
+          Maksimal alde
+        "age_range_start": >-
+          Minimum alder
+        "name": >-
+          Navn
+        "warning_on_registration_summary": >-
+          Advarsel på tilmeldings resumé
+    "models":

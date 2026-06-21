@@ -1,12 +1,18 @@
 ---
-de:
-  registrants:
-    summary:
-      age: Alter
-      birthday: Geburtstag
-      default_wheel_size: Standard Radgröße für Bahnrennen
-      registered_gender: Geschlecht
-      name: Name
-      registration_summary: Anmelde Zusammenfassung
-      user_account_email: Benutzer Email
-      volunteer: Freiwilliger Helfer
+"de":
+  "registrants":
+    "summary":
+      "age": >-
+        Alter
+      "birthday": >-
+        Geburtstag
+      "default_wheel_size": >-
+        Standard Radgröße für Bahnrennen
+      "name": >-
+        Name
+      "registration_summary": >-
+        Anmelde Zusammenfassung
+      "user_account_email": >-
+        Benutzer Email
+      "volunteer": >-
+        Freiwilliger Helfer

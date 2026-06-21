@@ -1,0 +1,31 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "time_result":
+        "facade_hours": >-
+          時
+        "facade_hundreds": >-
+          百分之一秒
+        "facade_minutes": >-
+          分
+        "facade_tens": >-
+          十分之一秒
+        "hours": >-
+          時
+        "minutes": >-
+          分
+        "number_of_laps": >-
+          圈數
+        "number_of_penalties": >-
+          罰秒 / 罰分
+        "seconds": >-
+          秒
+        "thousands": >-
+          毫秒 (1/1000秒)
+    "models":
+      "time_result":
+        "one": >-
+          Time Result
+        "other": >-
+          Time Results

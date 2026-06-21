@@ -50,6 +50,17 @@ describe MembershipChecker::Iuf do
     end
   end
 
+  describe "#api_connection" do
+    before do
+      allow(Rails.configuration).to receive(:iuf_membership_api_url).and_return("https://example.com/api")
+    end
+
+    it "returns a Faraday::Connection without raising NameError" do
+      expect { subject.send(:api_connection) }.not_to raise_error
+      expect(subject.send(:api_connection)).to be_a(Faraday::Connection)
+    end
+  end
+
   context "with an event configuration start date" do
     before do
       EventConfiguration.singleton.update(start_date: Date.new(2024, 7, 12))

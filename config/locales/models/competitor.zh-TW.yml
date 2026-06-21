@@ -1,0 +1,19 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "competitor":
+        "age": >-
+          年齡
+        "bib_number": >-
+          選手編號 / 號碼布編號
+        "gender": >-
+          性別
+        "name": >-
+          姓名
+    "models":
+      "competitor":
+        "one": >-
+          Competitor
+        "other": >-
+          Competitors

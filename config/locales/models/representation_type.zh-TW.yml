@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "representation_type":
+        "club": >-
+          俱樂部 / 協會
+        "country": >-
+          國籍 / 國家
+        "state": >-
+          州 / 省 / 縣市

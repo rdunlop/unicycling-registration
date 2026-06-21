@@ -1,0 +1,27 @@
+---
+"zh-TW":
+  "admin":
+    "translations":
+      "index":
+        "avaliable_in_multiple_languages": >-
+          報名與競賽系統支援多種語言。
+        "clear_translation_action": >-
+          清除翻譯快取
+        "clear_translation_cache": >-
+          進行翻譯變更後清除快取
+        "clear_translation_confirm": >-
+          您確定嗎？快取重建時會影響效能（請勿頻繁執行此操作）。
+        "clear_translation_description": >-
+          當您完成多個檔案的翻譯後（若為通用翻譯則需先「套用變更」），可能需要清除頁面快取，以確保所有頁面皆已刷新。
+        "common_translations_set": >-
+          所有大會通用的翻譯項目
+        "convention_available_in_languages_html": >-
+          %{convention} 大會支援以下語言：%{languages}
+        "convention_translation_set": >-
+          特定大會專屬翻譯
+        "header": >-
+          翻譯內容
+        "thank_you_for_volunteering_html": >-
+          感謝您自願協助翻譯內容。若有任何疑問或問題，請透過 %{link} 告知我們。
+        "two_sets_of_translations": >-
+          共有兩組不同的翻譯內容：

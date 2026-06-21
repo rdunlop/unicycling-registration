@@ -1,6 +1,8 @@
 ---
-fr:
-  registrants:
-    registrants_list:
-      registrations: Inscriptions
-      total_amount_owing: 'Montant total dû :'
+"fr":
+  "registrants":
+    "registrants_list":
+      "registrations": >-
+        Inscriptions
+      "total_amount_owing": >-
+        Montant total dû :

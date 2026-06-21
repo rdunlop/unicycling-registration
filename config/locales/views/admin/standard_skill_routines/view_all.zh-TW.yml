@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "admin":
+    "standard_skill_routines":
+      "view_all":
+        "header": >-
+          所有標準動作表 (Routines)
+        "pdfs": >-
+          PDF 檔案
+        "standard_skill_routine_created": >-
+          是否已建立標準動作表？

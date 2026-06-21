@@ -1,0 +1,14 @@
+---
+"zh-TW":
+  "registrants":
+    "contact_summary":
+      "emergency_contact_attending": >-
+        緊急聯絡人是否一同出席
+      "emergency_contact_name": >-
+        緊急聯絡人姓名
+      "emergency_contact_phone": >-
+        緊急聯絡人電話
+      "emergency_contact_relationship": >-
+        與緊急聯絡人之關係
+      "responsible_adult": >-
+        現場負責成年人 (家長/教練)

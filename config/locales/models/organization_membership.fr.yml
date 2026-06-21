@@ -1,11 +1,15 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      organization_membership:
-        member_number: Numéro d'adhérent de fédération
-        system_status: Statut de l'adhésion
-    models:
-      organization_membership:
-        one: Adhésion à la fédération
-        other: Adhésions à la fédération
+"fr":
+  "activerecord":
+    "attributes":
+      "organization_membership":
+        "member_number": >-
+          Numéro d'adhérent de fédération
+        "system_status": >-
+          Statut de l'adhésion
+    "models":
+      "organization_membership":
+        "one": >-
+          Adhésion à la fédération
+        "other": >-
+          Adhésions à la fédération

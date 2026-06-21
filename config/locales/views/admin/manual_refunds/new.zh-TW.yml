@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "admin":
+    "manual_refunds":
+      "new":
+        "description": >-
+          這「不會」實際退還任何金錢，僅會更改報名系統內部的會計紀錄。
+        "header": >-
+          新增退款
+        "select_registrants": >-
+          選擇要退款的報名者：
+        "start_process": >-
+          下一步（選擇項目）

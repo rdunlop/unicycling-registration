@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "expense_group":
+        "group_name": >-
+          費用群組名稱
+    "models":
+      "expense_group":
+        "one": >-
+          Expense Group
+        "other": >-
+          Expense Groups

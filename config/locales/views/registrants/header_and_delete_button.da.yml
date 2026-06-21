@@ -1,5 +1,6 @@
 ---
-da:
-  registrants:
-    header_and_delete_button:
-      delete: Slet
+"da":
+  "registrants":
+    "header_and_delete_button":
+      "delete": >-
+        Slet

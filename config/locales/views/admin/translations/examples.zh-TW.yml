@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "admin":
+    "translations":
+      "examples":
+        "example_should_become": >-
+          應更改為
+        "leave_some_untranslated": >-
+          某些部分應保持原樣（不需翻譯）：
+        "performance_impact_warning": >-
+          請務必在完成所有翻譯後再執行「套用變更」與「清除翻譯快取」，因為這會產生效能影響。
+        "text_translation_system": >-
+          文本翻譯系統
+        "when_done_translating": >-
+          翻譯完成後，請按下「文本翻譯系統」中的「套用變更」按鈕，以將更改應用至網站。

@@ -1,10 +1,13 @@
 ---
-it:
-  activerecord:
-    attributes:
-      standard_skill_routine_entry:
-        position: 'Posizione #'
-    models:
-      standard_skill_routine_entry:
-        one: Elemento routine Standard Skill
-        other: Elementi routines Standard Skill
+"it":
+  "activerecord":
+    "attributes":
+      "standard_skill_routine_entry":
+        "position": >-
+          Posizione #
+    "models":
+      "standard_skill_routine_entry":
+        "one": >-
+          Elemento routine Standard Skill
+        "other": >-
+          Elementi routines Standard Skill

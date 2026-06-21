@@ -1,8 +1,11 @@
 ---
-de:
-  convention_setup:
-    event_categories:
-      index:
-        allowed_age_range: Erlaubter Alters Bereich
-        header: Liste die Event Kategorien für %{event}
-        new_event_category: Neue Event Kategorie
+"de":
+  "convention_setup":
+    "event_categories":
+      "index":
+        "allowed_age_range": >-
+          Erlaubter Alters Bereich
+        "header": >-
+          Liste die Event Kategorien für %{event}
+        "new_event_category": >-
+          Neue Event Kategorie

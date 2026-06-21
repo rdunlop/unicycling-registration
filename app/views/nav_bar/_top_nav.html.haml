@@ -6,6 +6,7 @@
       Menu
 %nav.top-bar#responsive-menu
   .top-bar-left
+    .nav-event-badge= @config.short_name
     %ul.menu.vertical.large-horizontal
       = render "nav_bar/my_links"
   - if user_signed_in?

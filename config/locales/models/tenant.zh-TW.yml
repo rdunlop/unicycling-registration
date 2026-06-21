@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "tenant":
+        "one": >-
+          Tenant
+        "other": >-
+          Tenants

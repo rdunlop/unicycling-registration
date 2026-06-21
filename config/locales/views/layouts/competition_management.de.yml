@@ -1,7 +1,8 @@
 ---
-de:
-  layouts:
-    competition_management:
-      registration_system_access_notice: Dieser Browser hat Zugriff auf das Anmelde
-        System
-      download_competitors: Konkurrenten als CSV-Datei herunterladen
+"de":
+  "layouts":
+    "competition_management":
+      "download_competitors": >-
+        Konkurrenten als CSV-Datei herunterladen
+      "registration_system_access_notice": >-
+        Dieser Browser hat Zugriff auf das Anmelde System

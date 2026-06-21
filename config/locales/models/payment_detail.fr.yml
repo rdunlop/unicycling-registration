@@ -1,10 +1,13 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      payment_detail:
-        details: Détails
-    models:
-      payment_details:
-        one: Détail
-        other: Détails
+"fr":
+  "activerecord":
+    "attributes":
+      "payment_detail":
+        "details": >-
+          Détails
+    "models":
+      "payment_details":
+        "one": >-
+          Détail
+        "other": >-
+          Détails

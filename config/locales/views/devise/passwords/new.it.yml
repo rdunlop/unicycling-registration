@@ -1,7 +1,9 @@
 ---
-it:
-  devise:
-    passwords:
-      new:
-        action: Invia istruzioni per ripristinare la password
-        title: Hai dimenticato la password?
+"it":
+  "devise":
+    "passwords":
+      "new":
+        "action": >-
+          Invia istruzioni per ripristinare la password
+        "title": >-
+          Hai dimenticato la password?

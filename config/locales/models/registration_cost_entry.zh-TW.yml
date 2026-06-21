@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "registration_cost_entry":
+        "max_age": >-
+          最大年齡
+        "min_age": >-
+          最小年齡
+    "models":
+      "registration_cost_entry":
+        "one": >-
+          Registration Cost Entry
+        "other": >-
+          Registration Cost Entries

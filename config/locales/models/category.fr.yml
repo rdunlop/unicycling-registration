@@ -1,10 +1,13 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      category:
-        name: Nom
-    models:
-      category:
-        one: Catégorie
-        other: Catégories
+"fr":
+  "activerecord":
+    "attributes":
+      "category":
+        "name": >-
+          Nom
+    "models":
+      "category":
+        "one": >-
+          Catégorie
+        "other": >-
+          Catégories

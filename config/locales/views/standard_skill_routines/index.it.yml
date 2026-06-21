@@ -1,8 +1,12 @@
 ---
-it:
-  standard_skill_routines:
-    index:
-      header: La mia routine standard skill
-      my_registrations: Le mie registrazioni
-      signed_up_for_standard_skill: Si è iscritto per lo standard skill?
-      standard_skill_routine_created: È stata creata una routine standard skill?
+"it":
+  "standard_skill_routines":
+    "index":
+      "header": >-
+        La mia routine standard skill
+      "my_registrations": >-
+        Le mie registrazioni
+      "signed_up_for_standard_skill": >-
+        Si è iscritto per lo standard skill?
+      "standard_skill_routine_created": >-
+        È stata creata una routine standard skill?

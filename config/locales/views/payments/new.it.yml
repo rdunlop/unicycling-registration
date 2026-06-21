@@ -1,5 +1,6 @@
 ---
-it:
-  payments:
-    new:
-      title: nuovo pagamento
+"it":
+  "payments":
+    "new":
+      "title": >-
+        nuovo pagamento

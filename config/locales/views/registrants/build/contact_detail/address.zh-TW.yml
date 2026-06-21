@@ -1,0 +1,18 @@
+---
+"zh-TW":
+  "registrants":
+    "build":
+      "contact_detail":
+        "address":
+          "address": >-
+            住址
+          "copy_from_other_registrant": >-
+            複製 %{other_name} 的住址
+          "country_representing_description": >-
+            若您代表的參賽國家與居住地不同，請在此輸入。
+          "email_tooltip": >-
+            提供您的電子郵件地址以接收報名更新、賽程表及新活動資訊。
+          "state": >-
+            州
+          "state_province": >-
+            縣市 / 省份

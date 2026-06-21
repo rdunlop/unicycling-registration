@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      judge_type:
-        one: Dommer Type
-        other: Dommer Typer
+"da":
+  "activerecord":
+    "models":
+      "judge_type":
+        "one": >-
+          Dommer Type
+        "other": >-
+          Dommer Typer

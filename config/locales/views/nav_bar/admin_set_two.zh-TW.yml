@@ -1,0 +1,20 @@
+---
+"zh-TW":
+  "nav_bar":
+    "admin_set_two":
+      "manage_cache": >-
+        快取管理
+      "manage_memberships": >-
+        單輪車協會/聯合會會員管理
+      "manage_standard_skill_entries": >-
+        標準技術項目報名名單
+      "on_site_registration": >-
+        現場報名系統
+      "registrant_bag_labels": >-
+        報名物資袋標籤
+      "registrant_summaries": >-
+        所有報名者摘要一覽
+      "send_email_to_registrants": >-
+        寄送電子郵件給報名者
+      "translations": >-
+        語系翻譯管理

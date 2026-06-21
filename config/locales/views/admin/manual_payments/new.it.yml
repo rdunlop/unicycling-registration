@@ -1,8 +1,11 @@
 ---
-it:
-  admin:
-    manual_payments:
-      new:
-        description: 'Seleziona gli iscritti per sistemare i pagamenti per:'
-        header: Nuovo pagamento
-        start_process: Prossimo passo (scegli oggetto)
+"it":
+  "admin":
+    "manual_payments":
+      "new":
+        "description": >-
+          Seleziona gli iscritti per sistemare i pagamenti per:
+        "header": >-
+          Nuovo pagamento
+        "start_process": >-
+          Prossimo passo (scegli oggetto)

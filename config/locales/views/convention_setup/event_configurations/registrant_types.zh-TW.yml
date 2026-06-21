@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "registrant_types":
+        "current_num_registrants": >-
+          目前已有 %{num} 位報名者
+        "header": >-
+          報名者類型
+        "noncompetitor_description": >-
+          非參賽者無法報名活動項目。
+        "offered_types": >-
+          可選的報名類型
+        "subheader": >-
+          報名者類型

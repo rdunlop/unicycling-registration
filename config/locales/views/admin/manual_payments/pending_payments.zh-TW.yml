@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "admin":
+    "manual_payments":
+      "pending_payments":
+        "description": >-
+          此報名者有以下待處理的付款。您是否正在收取其中一筆款項？
+        "header": >-
+          待處理付款
+        "items": >-
+          項目
+        "mark_as_received": >-
+          將編號 #%{payment_number} 的款項標記為「已收到」

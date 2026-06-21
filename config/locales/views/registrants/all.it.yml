@@ -1,9 +1,14 @@
 ---
-it:
-  registrants:
-    all:
-      all_registrants: Tutti gli iscritti
-      club: Club
-      country: Nazione
-      id: ID
-      name: Nome
+"it":
+  "registrants":
+    "all":
+      "all_registrants": >-
+        Tutti gli iscritti
+      "club": >-
+        Club
+      "country": >-
+        Nazione
+      "id": >-
+        ID
+      "name": >-
+        Nome

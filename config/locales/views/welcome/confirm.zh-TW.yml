@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "welcome":
+    "confirm":
+      "check_email": >-
+        請檢查您的電子郵件以獲取確認訊息。
+      "confirm_header": >-
+        確認您的電子郵件
+      "verify_account": >-
+        您必須先驗證您的帳號才能登入。

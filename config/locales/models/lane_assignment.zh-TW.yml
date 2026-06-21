@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "lane_assignment":
+        "heat": >-
+          組別 / 梯次
+        "lane": >-
+          賽道
+    "models":
+      "lane_assignment":
+        "one": >-
+          Lane Assignment
+        "other": >-
+          Lane Assignments

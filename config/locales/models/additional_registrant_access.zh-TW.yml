@@ -1,0 +1,8 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "additional_registrant_access":
+        "one": >-
+          one/other: 額外報名存取權限
+        "other": ''

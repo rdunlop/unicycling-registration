@@ -1,8 +1,11 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      representation_type:
-        club: Club
-        country: Land
-        state: Provincie
+"nl":
+  "activerecord":
+    "attributes":
+      "representation_type":
+        "club": >-
+          Club
+        "country": >-
+          Land
+        "state": >-
+          Provincie

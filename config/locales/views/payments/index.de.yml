@@ -1,7 +1,10 @@
 ---
-de:
-  payments:
-    index:
-      my_payments: Meine Zahlungen
-      persons_payments: "%{registrant}'s Zahlungen"
-      show_details: Details anzeigen
+"de":
+  "payments":
+    "index":
+      "my_payments": >-
+        Meine Zahlungen
+      "persons_payments": >-
+        %{registrant}'s Zahlungen
+      "show_details": >-
+        Details anzeigen

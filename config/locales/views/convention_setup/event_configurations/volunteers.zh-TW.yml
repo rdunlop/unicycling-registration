@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "volunteers":
+        "description": >-
+          報名時，我們可以詢問報名者是否想擔任志工（一般性問卷）、詢問特定志工項目（例如：您想擔任田徑賽志工嗎？），或是完全不詢問。
+        "header": >-
+          志工設定
+        "next_step": >-
+          選擇「特定項目 (choice)」後，您可以在「志工機會」設定頁面中編輯選項。

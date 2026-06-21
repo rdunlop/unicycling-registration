@@ -22,7 +22,8 @@ class RegistrationCostUpdater
     old_period = RegistrationCost.for_type(registrant_type).current_period
 
     # update the last-run date, even if we aren't going to change periods
-    Rails.cache.write("/registration_cost/#{registrant_type}/last_update_run_date", date)
+    ec = EventConfiguration.singleton
+    ec.update_column(:registration_period_last_checked_at, date.to_time) if ec.persisted?
 
     if now_period == old_period
       return false
@@ -55,13 +56,9 @@ class RegistrationCostUpdater
   end
 
   def self.update_checked_recently?(date = Date.current)
-    update_type_recently?("competitor", date) || update_type_recently?("noncompetitor", date)
-  end
+    last_checked = EventConfiguration.singleton.registration_period_last_checked_at
+    return false if last_checked.nil?
 
-  def self.update_type_recently?(registrant_type, date)
-    last_update_date = Rails.cache.fetch("/registration_cost/#{registrant_type}/last_update_run_date")
-    return false if last_update_date.nil?
-
-    last_update_date + 2.days >= date
+    last_checked.to_date + 2.days >= date
   end
 end

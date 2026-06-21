@@ -1,5 +1,6 @@
 ---
-es:
-  application:
-    subdomain:
-      welcome: Bienvenido a  %{subdomain}
+"es":
+  "application":
+    "subdomain":
+      "welcome": >-
+        Bienvenido a  %{subdomain}

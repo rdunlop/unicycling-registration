@@ -1,6 +1,8 @@
 ---
-da:
-  payments:
-    new:
-      select_the_items_to_pay_for: Vælg de ting du vil betale for
-      title: Ny betaling
+"da":
+  "payments":
+    "new":
+      "select_the_items_to_pay_for": >-
+        Vælg de ting du vil betale for
+      "title": >-
+        Ny betaling

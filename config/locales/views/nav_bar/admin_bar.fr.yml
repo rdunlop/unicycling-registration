@@ -1,5 +1,6 @@
 ---
-fr:
-  nav_bar:
-    admin_bar:
-      advanced_admin_bar: Barre d'administration avancée
+"fr":
+  "nav_bar":
+    "admin_bar":
+      "advanced_admin_bar": >-
+        Barre d'administration avancée

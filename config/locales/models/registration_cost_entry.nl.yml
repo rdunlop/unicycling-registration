@@ -1,8 +1,10 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      registration_cost_entry:
-        max_age: Maximum leeftijd
-        min_age: Minimum leeftijd
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "registration_cost_entry":
+        "max_age": >-
+          Maximum leeftijd
+        "min_age": >-
+          Minimum leeftijd
+    "models":

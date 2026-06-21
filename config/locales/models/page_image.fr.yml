@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      page_image:
-        one: Image
-        other: Images
+"fr":
+  "activerecord":
+    "models":
+      "page_image":
+        "one": >-
+          Image
+        "other": >-
+          Images

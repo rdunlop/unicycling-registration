@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "convention_setup":
+    "event_configurations":
+      "registration_questions":
+        "contact_details_requested": >-
+          聯絡細節
+        "description": >-
+          若您想減少詢問報名者的問題，請使用此頁面。
+        "header": >-
+          報名時欲詢問的問題
+        "request_young_users_wheel_size": >-
+          詢問預設輪徑

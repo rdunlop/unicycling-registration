@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "activerecord":
+    "models":
+      "page_image":
+        "one": >-
+          Image
+        "other": >-
+          Images

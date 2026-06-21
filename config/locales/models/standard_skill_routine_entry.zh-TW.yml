@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "standard_skill_routine_entry":
+        "position": >-
+          順位編號
+    "models":
+      "standard_skill_routine_entry":
+        "one": >-
+          Standard Skill Routine Entry
+        "other": >-
+          Standard Skill Routine Entries

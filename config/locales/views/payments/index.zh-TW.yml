@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "payments":
+    "index":
+      "my_payments": >-
+        我的付款紀錄
+      "persons_payments": >-
+        %{registrant} 的付款紀錄
+      "show_details": >-
+        顯示詳情

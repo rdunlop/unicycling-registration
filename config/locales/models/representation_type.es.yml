@@ -1,8 +1,11 @@
 ---
-es:
-  activerecord:
-    attributes:
-      representation_type:
-        club: Equipo
-        country: País
-        state: estado
+"es":
+  "activerecord":
+    "attributes":
+      "representation_type":
+        "club": >-
+          Equipo
+        "country": >-
+          País
+        "state": >-
+          estado

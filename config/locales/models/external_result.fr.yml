@@ -1,11 +1,15 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      external_result:
-        details: Détails
-        points: Points
-    models:
-      external_result:
-        one: Résultat de point saisi
-        other: Résultats des points saisis
+"fr":
+  "activerecord":
+    "attributes":
+      "external_result":
+        "details": >-
+          Détails
+        "points": >-
+          Points
+    "models":
+      "external_result":
+        "one": >-
+          Résultat de point saisi
+        "other": >-
+          Résultats des points saisis

@@ -1,13 +1,19 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      competitor:
-        age: Age
-        bib_number: ID
-        gender: Sexe
-        name: Nom
-    models:
-      competitor:
-        one: Compétiteur
-        other: Compétiteurs
+"fr":
+  "activerecord":
+    "attributes":
+      "competitor":
+        "age": >-
+          Age
+        "bib_number": >-
+          ID
+        "gender": >-
+          Sexe
+        "name": >-
+          Nom
+    "models":
+      "competitor":
+        "one": >-
+          Compétiteur
+        "other": >-
+          Compétiteurs

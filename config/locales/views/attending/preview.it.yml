@@ -1,5 +1,6 @@
 ---
-it:
-  attending:
-    preview:
-      header: Anteprima eventi
+"it":
+  "attending":
+    "preview":
+      "header": >-
+        Anteprima eventi

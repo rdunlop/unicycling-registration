@@ -1,5 +1,6 @@
 ---
-fr:
-  payments:
-    offline:
-      title: Options de paiement hors ligne
+"fr":
+  "payments":
+    "offline":
+      "title": >-
+        Options de paiement hors ligne

@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    registrant_unpaid_expenses:
-      delete: Enlever
+"fr":
+  "registrants":
+    "registrant_unpaid_expenses":
+      "delete": >-
+        Enlever

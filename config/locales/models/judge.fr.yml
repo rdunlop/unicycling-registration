@@ -1,7 +1,9 @@
 ---
-fr:
-  activerecord:
-    models:
-      judge:
-        one: Juge
-        other: Juges
+"fr":
+  "activerecord":
+    "models":
+      "judge":
+        "one": >-
+          Juge
+        "other": >-
+          Juges

@@ -1,0 +1,25 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "coupon_code":
+        "code": >-
+          代碼
+        "description": >-
+          說明 / 描述
+        "inform_emails": >-
+          每次使用優惠券時通知的電子郵件
+        "maximum_registrant_age": >-
+          最高報名年齡限制
+        "max_num_uses": >-
+          最高使用次數限制
+        "name": >-
+          優惠券名稱
+        "price": >-
+          價格 / 折抵金額
+    "models":
+      "coupon_code":
+        "one": >-
+          Coupon Code
+        "other": >-
+          Coupon Codes

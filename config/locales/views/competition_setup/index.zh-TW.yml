@@ -1,0 +1,14 @@
+---
+"zh-TW":
+  "competition_setup":
+    "index":
+      "directors": >-
+        賽事總監
+      "events_by_category": >-
+        按類別顯示比賽項目
+      "header": >-
+        競賽配置 / 賽事設定
+      "instructions": >-
+        請為每個項目建立賽事總監。您（或總監）可以為每個項目建立具體的「比賽」，以決定該項目的數據收集方式。
+      "new_competition": >-
+        建立新比賽項目

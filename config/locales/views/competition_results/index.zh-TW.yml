@@ -1,0 +1,12 @@
+---
+"zh-TW":
+  "competition_results":
+    "index":
+      "description": >-
+        上傳 PDF 作為「附加成績」，以提供更多資訊。
+      "published_immediately_warning": >-
+        這些檔案將會立即在線上發布。
+      "upload_a_file": >-
+        上傳 PDF 成績檔案
+      "upload_these_results": >-
+        上傳這些成績

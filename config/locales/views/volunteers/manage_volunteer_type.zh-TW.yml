@@ -1,0 +1,17 @@
+---
+"zh-TW":
+  "volunteers":
+    "manage_volunteer_type":
+      "confirm_remove_volunteer": >-
+        移除此志工？
+      "create_role": >-
+        建立新角色：%{role}
+      "volunteer_role_descriptions":
+        "data_entry_volunteer": >-
+          可被指派為數據紀錄志工
+        "data_recording_volunteer": >-
+          可輸入起點/終點成績 (轉錄)
+        "race_official": >-
+          可於起點或終點判定取消資格 (DQ)；可下載電子計時器分組名單。
+        "track_data_importer": >-
+          可匯入電子計時數據；可調整比賽成績

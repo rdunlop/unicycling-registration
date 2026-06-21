@@ -1,8 +1,12 @@
 ---
-it:
-  layouts:
-    competition_setup:
-      advanced: Impostazioni avanzate
-      competition_setup: Impostazioni gare
-      manage_competitions: Gestione gare
-      manage_directors: Gestione direttori
+"it":
+  "layouts":
+    "competition_setup":
+      "advanced": >-
+        Impostazioni avanzate
+      "competition_setup": >-
+        Impostazioni gare
+      "manage_competitions": >-
+        Gestione gare
+      "manage_directors": >-
+        Gestione direttori

@@ -19,8 +19,9 @@ gem 'matrix'
 gem 'prawn-labels'
 gem 'spreadsheet'
 # ttfunk 1.8.0 has issues with embedded japanese fonts for BagLabels and Award Labels
+# Fix is in master branch but not yet released to RubyGems
 # https://github.com/prawnpdf/ttfunk/issues/102
-gem 'ttfunk', '1.8.0'
+gem 'ttfunk', github: 'prawnpdf/ttfunk'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.12.6.8'
 
@@ -46,20 +47,18 @@ gem 'stimulus-rails'
 gem "validates_timeliness"
 
 # system utils
-gem 'acme-client'
-gem 'apartment_acme_client', github: 'rdunlop/apartment_acme_client', branch: 'allow_rails_8'
 gem 'aws-actionmailer-ses'
 gem 'aws-sdk-acm'
 gem 'aws-sdk-elasticloadbalancingv2'
 gem 'aws-sdk-rails'
 gem 'dotenv-rails'
-gem 'eye'
 gem 'gaffe'
 gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
 gem 'avo'
+gem 'faraday'
 gem 'puma'
 gem 'rake'
 gem 'redis'
@@ -68,10 +67,9 @@ gem 'lograge'
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
-gem 'sidekiq', '~> 7.3.0' # as per sidekiq recommendations, always lock like this
+gem 'sidekiq', '~> 8.1.6' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'webrick'
-gem 'whenever'
 
 # I18n Translation
 # use rdunlop branch which has:
@@ -103,11 +101,6 @@ gem 'faker' # to support 'sample_data'
 gem 'pg'
 
 gem 'down'  # to download external files
-
-# deployment
-gem 'capistrano', require: false
-gem 'capistrano-rails', require: false
-gem 'capistrano-rvm', require: false
 
 group :naucc, :development, :caching do
   gem 'consistency_fail'

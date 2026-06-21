@@ -1,10 +1,13 @@
 ---
-da:
-  admin:
-    manual_payments:
-      pending_payments:
-        description: "Denne deltager er registreret i følgende afventende betalinger.\r\nModtager
+"da":
+  "admin":
+    "manual_payments":
+      "pending_payments":
+        "description": "Denne deltager er registreret i følgende afventende betalinger.\r\nModtager
           du en af disse betalinger?"
-        header: Afventende betalinger
-        items: Varer
-        mark_as_received: 'Markér betaling #%{payment_number} som modtaget'
+        "header": >-
+          Afventende betalinger
+        "items": >-
+          Varer
+        "mark_as_received": >-
+          Markér betaling #%{payment_number} som modtaget

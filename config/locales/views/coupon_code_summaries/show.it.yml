@@ -1,7 +1,10 @@
 ---
-it:
-  coupon_code_summaries:
-    show:
-      coupon_applied_to: 'Applicato ai:'
-      date_coupon_applied: Data applicata
-      header: "%{coupon_code} Codice tagliando"
+"it":
+  "coupon_code_summaries":
+    "show":
+      "coupon_applied_to": >-
+        Applicato ai:
+      "date_coupon_applied": >-
+        Data applicata
+      "header": >-
+        %{coupon_code} Codice tagliando

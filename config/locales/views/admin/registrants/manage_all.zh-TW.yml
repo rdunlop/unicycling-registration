@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "admin":
+    "registrants":
+      "manage_all":
+        "deleted_question": >-
+          已刪除？
+        "header": >-
+          管理報名者
+        "summary": >-
+          摘要 / 總覽
+        "undelete": >-
+          取消刪除
+        "undelete_confirmation": >-
+          確定要取消刪除此報名者？

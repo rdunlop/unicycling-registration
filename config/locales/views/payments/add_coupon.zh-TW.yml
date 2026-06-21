@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "payments":
+    "add_coupon":
+      "coupon_code": >-
+        優惠碼
+      "have_a_coupon": >-
+        擁有優惠碼嗎？
+      "submit": >-
+        套用優惠碼

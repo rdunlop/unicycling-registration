@@ -1,0 +1,28 @@
+---
+"zh-TW":
+  "layouts":
+    "footer":
+      "code": >-
+        原始碼
+      "contact_us": >-
+        聯絡我們
+      "developed_by": >-
+        由 Robin Dunlop 開發
+      "features": >-
+        系統功能
+      "handle_feedback": >-
+        處理已提交的回饋
+      "help": >-
+        說明中心
+      "help_translate": >-
+        協助翻譯
+      "information_header": >-
+        基本資訊
+      "language_header": >-
+        語系選擇
+      "organizers_header": >-
+        主辦單位專區
+      "privacy_policy": >-
+        隱私權政策
+      "upcoming_changes": >-
+        未來更新計畫

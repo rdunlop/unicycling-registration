@@ -1,7 +1,9 @@
 ---
-it:
-  activerecord:
-    models:
-      result:
-        one: Risultato
-        other: Risultati
+"it":
+  "activerecord":
+    "models":
+      "result":
+        "one": >-
+          Risultato
+        "other": >-
+          Risultati

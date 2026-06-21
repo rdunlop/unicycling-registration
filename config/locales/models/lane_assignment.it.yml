@@ -1,11 +1,15 @@
 ---
-it:
-  activerecord:
-    attributes:
-      lane_assignment:
-        heat: Batteria
-        lane: Corsia
-    models:
-      lane_assignment:
-        one: Corsia assegnata
-        other: Corsie assegnate
+"it":
+  "activerecord":
+    "attributes":
+      "lane_assignment":
+        "heat": >-
+          Batteria
+        "lane": >-
+          Corsia
+    "models":
+      "lane_assignment":
+        "one": >-
+          Corsia assegnata
+        "other": >-
+          Corsie assegnate

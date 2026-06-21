@@ -1,8 +1,9 @@
 ---
-it:
-  devise:
-    confirmations:
-      new:
-        spam_reminder: Se non ha ricevuto una email di conferma, controlli per favore
-          la sua SPAM.
-        title: Invia nuovamente e-mail di conferma
+"it":
+  "devise":
+    "confirmations":
+      "new":
+        "spam_reminder": >-
+          Se non ha ricevuto una email di conferma, controlli per favore la sua SPAM.
+        "title": >-
+          Invia nuovamente e-mail di conferma

@@ -1,16 +1,25 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      payment:
-        completed_date: Date de validation
-        details: Détails (trsctn/note)
-        note: Note
-        offline_pending_date: Date
-        payment_id: ID de paiement
-        total: Total
-        transaction_id: ID de transaction
-    models:
-      registrant:
-        one: Participant
-        other: Participants
+"fr":
+  "activerecord":
+    "attributes":
+      "payment":
+        "completed_date": >-
+          Date de validation
+        "details": >-
+          Détails (trsctn/note)
+        "note": >-
+          Note
+        "offline_pending_date": >-
+          Date
+        "payment_id": >-
+          ID de paiement
+        "total": >-
+          Total
+        "transaction_id": >-
+          ID de transaction
+    "models":
+      "registrant":
+        "one": >-
+          Participant
+        "other": >-
+          Participants

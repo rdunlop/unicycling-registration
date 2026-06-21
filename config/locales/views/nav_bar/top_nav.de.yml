@@ -1,5 +1,6 @@
 ---
-de:
-  nav_bar:
-    top_nav:
-      sign_out: Abmelden
+"de":
+  "nav_bar":
+    "top_nav":
+      "sign_out": >-
+        Abmelden

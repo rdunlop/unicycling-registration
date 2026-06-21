@@ -1,7 +1,10 @@
 ---
-it:
-  payments:
-    index:
-      my_payments: I miei pagamenti
-      persons_payments: Pagamenti di %{registrant}
-      show_details: Mostra dettagli
+"it":
+  "payments":
+    "index":
+      "my_payments": >-
+        I miei pagamenti
+      "persons_payments": >-
+        Pagamenti di %{registrant}
+      "show_details": >-
+        Mostra dettagli

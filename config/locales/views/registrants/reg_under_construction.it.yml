@@ -1,6 +1,6 @@
 ---
-it:
-  registrants:
-    reg_under_construction:
-      online_registration_is_under_construction: Le iscrizioni online sono in costruzione.
-        Torni più tardi.
+"it":
+  "registrants":
+    "reg_under_construction":
+      "online_registration_is_under_construction": >-
+        Le iscrizioni online sono in costruzione. Torni più tardi.

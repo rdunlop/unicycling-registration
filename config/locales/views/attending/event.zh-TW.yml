@@ -1,0 +1,20 @@
+---
+"zh-TW":
+  "attending":
+    "event":
+      "best_time": >-
+        個人最佳成績或距離
+      "category": >-
+        類別
+      "drop_out_confirmation": >-
+        若您選擇退出，未經管理員核准將無法重新報名。確定要繼續嗎？
+      "drop_out_of_event": >-
+        退出項目
+      "paid_for": >-
+        已付款項目
+      "paid_for_tooltip": >-
+        若欲退出此項目，請聯繫賽事主辦方。
+      "upload_music": >-
+        是否上傳您的音樂？
+      "upload_music_details": >-
+        請從「摘要」頁面為此項目上傳您的音樂。

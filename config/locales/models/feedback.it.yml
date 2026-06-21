@@ -1,8 +1,10 @@
 ---
-it:
-  activerecord:
-    attributes: 
-    models:
-      feedback:
-        one: Feedback
-        other: Feedback
+"it":
+  "activerecord":
+    "attributes":
+    "models":
+      "feedback":
+        "one": >-
+          Feedback
+        "other": >-
+          Feedback

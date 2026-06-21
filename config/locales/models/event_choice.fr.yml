@@ -1,13 +1,19 @@
 ---
-fr:
-  activerecord:
-    attributes:
-      event_choice:
-        cell_type: Type du champ
-        label: Etiquette
-        optional_if_event_choice_id: Optionnel si event_choice est choisi
-        required_if_event_choice_id: Requis si event_choice est choisi
-    models:
-      event_choice:
-        one: Choix d'événement
-        other: Choix d'événements
+"fr":
+  "activerecord":
+    "attributes":
+      "event_choice":
+        "cell_type": >-
+          Type du champ
+        "label": >-
+          Etiquette
+        "optional_if_event_choice_id": >-
+          Optionnel si event_choice est choisi
+        "required_if_event_choice_id": >-
+          Requis si event_choice est choisi
+    "models":
+      "event_choice":
+        "one": >-
+          Choix d'événement
+        "other": >-
+          Choix d'événements

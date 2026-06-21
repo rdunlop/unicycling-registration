@@ -1,0 +1,23 @@
+---
+"zh-TW":
+  "devise":
+    "registrations":
+      "edit":
+        "action": >-
+          更新資料
+        "blank_notice": >-
+          若不想修改請保留空白
+        "change_header": >-
+          修改電子郵件或密碼
+        "change_password": >-
+          修改密碼
+        "confirm_password_notice": >-
+          我們需要您目前的密碼來確認您的修改
+        "current_permissions": >-
+          目前權限
+        "title": >-
+          我的帳號
+        "upgrade_to_admin_action": >-
+          將我的帳號升級為管理員帳號
+        "users_name": >-
+          使用者姓名

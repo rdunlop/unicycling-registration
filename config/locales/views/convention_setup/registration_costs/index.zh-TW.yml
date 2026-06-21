@@ -1,0 +1,15 @@
+---
+"zh-TW":
+  "convention_setup":
+    "registration_costs":
+      "index":
+        "header": >-
+          報名費用設定
+        "new_registration_cost": >-
+          新增報名費用項目
+        "range_description": >-
+          每個報名費用項目將定義使用者在各個價格階段可進行報名的日期範圍。
+        "timezone_logic_description": >-
+          考量到使用者分散在不同時區，為確保公平，系統允許在報名期限結束後最多 1 整天內仍可以原始價格支付（視伺服器所在地而定）。
+        "timezone_logic_example": >-
+          若第一個報名階段截止日為 4 月 20 日，報名者在伺服器時間 4 月 22 日之前，仍可以初始價格付款（系統預留緩衝）。

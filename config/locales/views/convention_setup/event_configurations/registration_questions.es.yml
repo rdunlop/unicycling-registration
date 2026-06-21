@@ -1,10 +1,13 @@
 ---
-es:
-  convention_setup:
-    event_configurations:
-      registration_questions:
-        contact_details_requested: Detalles de contacto
-        description: Usa esta página si quieres preguntar a tu registrantes algunas
-          preguntas.
-        header: Preguntas que hacer durante un registro.
-        request_young_users_wheel_size: Solicitar medida de rueda por default
+"es":
+  "convention_setup":
+    "event_configurations":
+      "registration_questions":
+        "contact_details_requested": >-
+          Detalles de contacto
+        "description": >-
+          Usa esta página si quieres preguntar a tu registrantes algunas preguntas.
+        "header": >-
+          Preguntas que hacer durante un registro.
+        "request_young_users_wheel_size": >-
+          Solicitar medida de rueda por default

@@ -1,0 +1,9 @@
+---
+"zh-TW":
+  "convention_setup":
+    "volunteer_opportunities":
+      "index":
+        "description": >-
+          報名時，系統可以詢問使用者是否願意擔任任何志工職位。
+        "header": >-
+          志工服務機會

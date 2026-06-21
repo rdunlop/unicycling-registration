@@ -1,7 +1,8 @@
 ---
-de:
-  activerecord:
-    attributes:
-      tenant_alias:
-        website_alias: Webseiten Alias
-    models: 
+"de":
+  "activerecord":
+    "attributes":
+      "tenant_alias":
+        "website_alias": >-
+          Webseiten Alias
+    "models":

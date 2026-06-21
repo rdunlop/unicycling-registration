@@ -95,6 +95,7 @@ locals {
     { name = "RAILS_MAX_THREADS",        value = "5" },
     { name = "DOMAIN",                   value = var.domain },
     { name = "SSL_ENABLED",              value = "false" },
+    { name = "ROBOTS_DISALLOW_ALL",      value = var.environment == "staging" ? "true" : "false" },
   ]
 
   # Web only: cache sidecar URL. Sidekiq uses ElastiCache (REDIS_URL from SSM) for all Redis.
@@ -126,8 +127,8 @@ resource "aws_ecs_task_definition" "web" {
   family                   = "unicycling-registration-${var.environment}-web"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 1024
-  memory                   = 2048
+  cpu                      = 2048
+  memory                   = 4096
   execution_role_arn       = aws_iam_role.ecs_execution.arn
   task_role_arn            = aws_iam_role.ecs_task.arn
 

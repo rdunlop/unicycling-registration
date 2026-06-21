@@ -1,8 +1,10 @@
 ---
-fr:
-  convention_setup:
-    event_configurations:
-      payment_settings:
-        description: Si vous voulez recevoir des paiement via PayPal, saisissez l'e-mail
-          du compte correspondant ici.
-        header: Paramètres de paiement
+"fr":
+  "convention_setup":
+    "event_configurations":
+      "payment_settings":
+        "description": >-
+          Si vous voulez recevoir des paiement via PayPal, saisissez l'e-mail du compte
+          correspondant ici.
+        "header": >-
+          Paramètres de paiement

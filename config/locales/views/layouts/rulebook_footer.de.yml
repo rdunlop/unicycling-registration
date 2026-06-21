@@ -1,7 +1,10 @@
 ---
-de:
-  layouts:
-    rulebook_footer:
-      competition_rulebook: Wettkampf Regelwerk
-      header: Regeln
-      rulebook_tooltip: Klicke hier um zum Regelwerk für diesen Wettkampf zu gelangen!
+"de":
+  "layouts":
+    "rulebook_footer":
+      "competition_rulebook": >-
+        Wettkampf Regelwerk
+      "header": >-
+        Regeln
+      "rulebook_tooltip": >-
+        Klicke hier um zum Regelwerk für diesen Wettkampf zu gelangen!

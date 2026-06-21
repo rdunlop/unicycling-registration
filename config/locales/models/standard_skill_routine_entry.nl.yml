@@ -1,7 +1,8 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      standard_skill_routine_entry:
-        position: 'Positie #'
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "standard_skill_routine_entry":
+        "position": >-
+          Positie #
+    "models":

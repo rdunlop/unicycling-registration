@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "volunteers":
+    "index":
+      "add_volunteer_description_html": >-
+        若您需要的志工不在名單中，您需要在 %{link} 頁面新增該志工。
+      "header": >-
+        志工
+      "manage_additional_access": >-
+        管理額外權限

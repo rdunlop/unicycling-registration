@@ -1,0 +1,11 @@
+---
+"zh-TW":
+  "convention_setup":
+    "expense_groups":
+      "index":
+        "description": >-
+          若您想銷售商品（如 T-shirt、住宿等），請為該系列商品建立一個「費用群組」。
+        "header": >-
+          待售項目
+        "new_expense_group": >-
+          新增費用群組

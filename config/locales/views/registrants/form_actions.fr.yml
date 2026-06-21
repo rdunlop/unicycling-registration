@@ -1,5 +1,6 @@
 ---
-fr:
-  registrants:
-    form_actions:
-      continue: Sauver et Continuer
+"fr":
+  "registrants":
+    "form_actions":
+      "continue": >-
+        Sauver et Continuer

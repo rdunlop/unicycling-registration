@@ -1,8 +1,9 @@
 ---
-fr:
-  compete:
-    age_groups:
-      age_group_entries:
-        entry: Élément
-        number_of_registrants: |
+"fr":
+  "compete":
+    "age_groups":
+      "age_group_entries":
+        "entry": >-
+          Élément
+        "number_of_registrants": >-
           # d'inscrits

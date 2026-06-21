@@ -1,0 +1,21 @@
+---
+"zh-TW":
+  "convention_setup":
+    "pages":
+      "index":
+        "description": >-
+          建立公開的資訊頁面（無須登入即可查看）。
+        "header": >-
+          資訊頁面
+        "home_page": >-
+          若您建立一個縮略網址 (Slug) 為 home 的頁面，它將成為大會的預設首頁。
+        "new_page": >-
+          新增頁面
+        "pages_location_description": >-
+          這些頁面的連結將顯示在頂部選單列。
+        "pages_structure_description": >-
+          您可以建立階層式的頁面結構（頁面樹）。
+        "privacy_policy_page": >-
+          若您建立代稱為 privacy-policy 的頁面，它將顯示在頁尾。
+        "special_pages": >-
+          特殊頁面

@@ -1,0 +1,13 @@
+---
+"zh-TW":
+  "activerecord":
+    "attributes":
+      "tenant_alias":
+        "website_alias": >-
+          網站別名
+    "models":
+      "tenant_alias":
+        "one": >-
+          Tenant Alias
+        "other": >-
+          Tenants Aliases

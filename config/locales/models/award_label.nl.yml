@@ -1,8 +1,10 @@
 ---
-nl:
-  activerecord:
-    attributes:
-      award_label:
-        bib_number: ID
-        place: Plaats
-    models: 
+"nl":
+  "activerecord":
+    "attributes":
+      "award_label":
+        "bib_number": >-
+          ID
+        "place": >-
+          Plaats
+    "models":

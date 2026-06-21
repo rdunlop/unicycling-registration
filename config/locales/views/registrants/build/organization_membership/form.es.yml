@@ -1,8 +1,9 @@
 ---
-es:
-  registrants:
-    build:
-      organization_membership:
-        form:
-          organization_membership_number_tooltip: Se requiere una membresía a la %{organization_type}
-            para participar en %{convention_name}
+"es":
+  "registrants":
+    "build":
+      "organization_membership":
+        "form":
+          "organization_membership_number_tooltip": >-
+            Se requiere una membresía a la %{organization_type} para participar en
+            %{convention_name}

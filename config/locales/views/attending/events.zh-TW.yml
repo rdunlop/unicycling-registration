@@ -1,0 +1,10 @@
+---
+"zh-TW":
+  "attending":
+    "events":
+      "change_selection_message": >-
+        您在這些項目中必須參加相同的組別。我們已更新您的其他項目類別以保持一致。
+      "clear_selection_message": >-
+        您必須為您的項目選擇相似的類別。我們已清除您的其中一個選項...請重新選擇適當的類別。
+      "more_info": >-
+        競賽詳情

@@ -1,7 +1,9 @@
 ---
-da:
-  activerecord:
-    models:
-      page_image:
-        one: Billede
-        other: Billeder
+"da":
+  "activerecord":
+    "models":
+      "page_image":
+        "one": >-
+          Billede
+        "other": >-
+          Billeder
