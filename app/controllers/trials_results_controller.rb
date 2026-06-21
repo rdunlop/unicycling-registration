@@ -14,7 +14,7 @@ class TrialsResultsController < ApplicationController
     add_breadcrumb I18n.t("controllers.trials_results.results")
 
     @trials_result = TrialsResult.new
-    @trials_results = @competition.trials_results.active
+    @trials_results = @competition.trials_results
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,14 +25,13 @@ class TrialsResultsController < ApplicationController
   # POST /competitions/#/trials_results.json
   def create
     respond_to do |format|
-      @trials_result.preliminary = false
       @trials_result.entered_by = current_user
       @trials_result.entered_at = Time.current
       if @trials_result.save
         format.html { redirect_to competition_trials_results_path(@competition), notice: I18n.t("controllers.trials_results.successful_creation") }
         format.json { render json: @trials_result, status: :created, location: @trials_result }
       else
-        @trials_results = @competition.trials_results.active
+        @trials_results = @competition.trials_results
         format.html { render action: "index" }
         format.json { render json: @trials_result.errors, status: :unprocessable_entity }
       end

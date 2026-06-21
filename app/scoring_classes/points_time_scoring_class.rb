@@ -5,6 +5,10 @@ class PointsTimeScoringClass < BaseScoringClass
     (for use on the awards/results sheets). Higher points are better, and lower time is better in case of a tie."
   end
 
+  def lower_is_better
+    false
+  end
+
   # describes how to label the results of this competition
   def result_description
     "Score"

@@ -1345,7 +1345,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_025017) do
     t.integer "entered_by_id", null: false
     t.integer "minutes", null: false
     t.integer "points", null: false
-    t.boolean "preliminary", null: false
     t.integer "seconds", null: false
     t.string "status", null: false
     t.datetime "updated_at", null: false

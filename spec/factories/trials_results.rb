@@ -11,7 +11,6 @@
 #  entered_at    :datetime         not null
 #  entered_by_id :integer          not null
 #  status        :string           not null
-#  preliminary   :boolean          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

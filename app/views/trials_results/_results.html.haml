@@ -15,7 +15,7 @@
       %th
       %th
   %tbody
-    - @competition.trials_results.active.each do |trials_result|
+    - @competition.trials_results.each do |trials_result|
       - next unless trials_result.persisted?
       %tr
         %td= trials_result.competitor

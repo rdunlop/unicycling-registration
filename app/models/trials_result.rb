@@ -11,7 +11,6 @@
 #  entered_at    :datetime         not null
 #  entered_by_id :integer          not null
 #  status        :string           not null
-#  preliminary   :boolean          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -42,21 +41,12 @@ class TrialsResult < ApplicationRecord
     :competitor_id
   end
 
-  # "active" and "DQ" are considered active states
-  def self.active
-    where(preliminary: false)
-  end
-
-  def self.preliminary
-    where(preliminary: true)
+  def disqualified?
+    status == "DQ"
   end
 
   def active?
-    !preliminary?
-  end
-
-  def disqualified?
-    status == "DQ"
+    true
   end
 
   private

@@ -9,7 +9,6 @@ class CreateTrialsResults < ActiveRecord::Migration[8.1]
       t.datetime :entered_at, null: false
       t.integer :entered_by_id, null: false
       t.string :status, null: false
-      t.boolean :preliminary, null: false
 
       t.timestamps
     end
