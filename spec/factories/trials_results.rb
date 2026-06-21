@@ -26,7 +26,6 @@ FactoryBot.define do
     association :entered_by, factory: :user
     entered_at { Time.current }
     status { "active" }
-    preliminary { false }
     points { 50 }
     minutes { 45 }
     seconds { 42 }
