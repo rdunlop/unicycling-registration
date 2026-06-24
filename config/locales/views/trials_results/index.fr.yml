@@ -1,0 +1,7 @@
+---
+fr:
+  trials_results:
+    index:
+      delete_all: Tout supprimer
+      delete_all_confirmation: Cela supprimera TOUTES les données de trial de cette compétition. Êtes-vous sûr ?
+      enter_new_result: Saisir un nouveau résultat de trial

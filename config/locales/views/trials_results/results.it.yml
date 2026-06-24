@@ -1,0 +1,5 @@
+---
+it:
+  trials_results:
+    results:
+      listing_results: Elenco dei risultati di trial inseriti per %{competition}

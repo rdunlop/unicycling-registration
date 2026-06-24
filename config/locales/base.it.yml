@@ -1,5 +1,7 @@
 ---
 "it":
+  "age_group": >-
+    Gruppo d'età
   "are_you_sure": >-
     Sei sicuro?
   "back": >-
@@ -27,14 +29,22 @@
     - :year
   "delete": >-
     Elimina
+  "details": >-
+    Dettagli
   "edit": >-
     Modifica
   "example": >-
     Esempio
+  "id": >-
+    ID
   "language_name": >-
     Italian
   "membership_number": >-
     Numero d'adesione
+  "minutes": >-
+    Minuti
+  "name": >-
+    Nome
   "no": >-
     No
   "noncompetitor": >-
@@ -46,16 +56,26 @@
       Federazione francese
     "usa": >-
       USA
+  "overall_place": >-
+    Piazzamento generale
   "pdf": >-
     (pdf)
+  "place": >-
+    Piazzamento
+  "points": >-
+    Punti
   "prices_increase_at_date": >-
     Il prezzo aumenta il %{end_date}
   "prices_increase_soon": >-
     Il prezzo aumenta in meno di 1 giorno
+  "seconds": >-
+    Secondi
   "show": >-
     Mostrare
   "spectator": >-
     Spettatore
+  "status": >-
+    Stato
   "validations":
     "duplicate": >-
       Deve essere unico

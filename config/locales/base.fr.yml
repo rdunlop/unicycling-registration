@@ -1,5 +1,7 @@
 ---
 "fr":
+  "age_group": >-
+    Groupe d’âge
   "are_you_sure": >-
     Êtes-vous certain?
   "back": >-
@@ -27,14 +29,22 @@
     - :year
   "delete": >-
     Supprimer
+  "details": >-
+    Détails
   "edit": >-
     Modifier
   "example": >-
     Exemple
+  "id": >-
+    ID
   "language_name": >-
     Français
   "membership_number": >-
     Numéro d'adhérent
+  "minutes": >-
+    Minutes
+  "name": >-
+    Nom
   "no": >-
     Non
   "noncompetitor": >-
@@ -48,16 +58,26 @@
       UIF
     "usa": >-
       USA
+  "overall_place": >-
+    Classement général
   "pdf": >-
     (pdf)
+  "place": >-
+    Classement
+  "points": >-
+    Points
   "prices_increase_at_date": >-
     Les prix augmentent das %{end_date}
   "prices_increase_soon": >-
     Les prix augmentent en moins d'un jour
+  "seconds": >-
+    Secondes
   "show": >-
     Montrer
   "spectator": >-
     Spectateur
+  "status": >-
+    Statut
   "validations":
     "duplicate": >-
       Doit être unique

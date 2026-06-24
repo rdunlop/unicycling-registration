@@ -1,0 +1,8 @@
+---
+da:
+  controllers:
+    trials_results:
+      results: Trial-resultater
+      successful_creation: Trial-resultatet blev oprettet.
+      successful_update: Trial-resultatet blev opdateret.
+      edit_result: Rediger resultat

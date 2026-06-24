@@ -277,6 +277,7 @@ Rails.application.routes.draw do
           get :points
           get :flatland
           get :street
+          get :trials
           get :overall_champion
           get :custom
           get :download_file
@@ -739,6 +740,7 @@ Rails.application.routes.draw do
         end
       end
       resources :external_results, shallow: true, except: %i[new show]
+      resources :trials_results, shallow: true, except: %i[new show]
       resources :preliminary_external_results, shallow: true, except: %i[new show] do
         collection do
           get :review

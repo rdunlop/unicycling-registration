@@ -1,0 +1,10 @@
+---
+es:
+  example:
+    competition_choices:
+      trials:
+        trials_competition: Competiciones de trial
+        description: Las competiciones de trial utilizan los puntos como sistema de clasificación principal y el tiempo como criterio de desempate.
+        data_entry: Entrada de datos
+        manual_entry: Entrada manual
+        click_here: Haz clic aquí
