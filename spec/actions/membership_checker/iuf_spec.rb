@@ -50,14 +50,25 @@ describe MembershipChecker::Iuf do
     end
   end
 
-  describe "#api_connection" do
-    before do
-      allow(Rails.configuration).to receive(:iuf_membership_api_url).and_return("https://example.com/api")
+  describe "#status" do
+    # Regression: previously used Faraday (removed gem), which raised
+    # NameError: uninitialized constant MembershipChecker::Iuf::Faraday.
+    # Now uses Net::HTTP from stdlib.
+    let(:http_response) do
+      instance_double(Net::HTTPSuccess, is_a?: true, body: good_response.to_json).tap do |r|
+        allow(r).to receive(:is_a?).with(Net::HTTPSuccess).and_return(true)
+      end
     end
 
-    it "returns a Faraday::Connection without raising NameError" do
-      expect { subject.send(:api_connection) }.not_to raise_error
-      expect(subject.send(:api_connection)).to be_a(Faraday::Connection)
+    before do
+      allow(Rails.configuration).to receive(:iuf_membership_api_url).and_return("https://example.com/api")
+      allow(Net::HTTP).to receive(:post_form).and_return(http_response)
+      EventConfiguration.singleton.update(start_date: Date.new(2024, 7, 12))
+    end
+
+    it "returns the parsed response without raising NameError" do
+      expect { subject.status }.not_to raise_error
+      expect(subject.status).to eq(good_response)
     end
   end
 
@@ -66,8 +77,13 @@ describe MembershipChecker::Iuf do
       EventConfiguration.singleton.update(start_date: Date.new(2024, 7, 12))
     end
 
-    it "has the correct request string" do
-      expect(subject.request_string).to eq("first_name=John&last_name=Smith&birthdate=2000-01-01&eventdate=2024-07-24")
+    it "has the correct request params" do
+      expect(subject.request_params).to eq(
+        "first_name" => "John",
+        "last_name" => "Smith",
+        "birthdate" => "2000-01-01",
+        "eventdate" => "2024-07-24"
+      )
     end
   end
 end

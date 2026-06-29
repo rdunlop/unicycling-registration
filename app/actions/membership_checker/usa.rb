@@ -62,27 +62,19 @@ module MembershipChecker
       end
     end
 
-    def api_connection
-      Faraday.new(url: "https://api.wildapricot.org") do |faraday|
-        faraday.request :url_encoded
-        faraday.response :logger
-        faraday.adapter  Faraday.default_adapter
-      end
-    end
-
     def search_contacts(filter_string)
-      response = api_connection.get do |req|
-        req.headers["authorization"] = "Bearer #{token}"
-        req.url("/v2.1/accounts/#{account_id}/contacts")
-        req.params["$async"] = "false"
-        req.params["$top"] = "10"
-        req.params["$filter"] = filter_string
+      uri = URI("https://api.wildapricot.org/v2.1/accounts/#{account_id}/contacts")
+      uri.query = URI.encode_www_form("$async" => "false", "$top" => "10", "$filter" => filter_string)
+
+      response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        request = Net::HTTP::Get.new(uri)
+        request["Authorization"] = "Bearer #{token}"
+        http.request(request)
       end
 
-      if response.success?
+      if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)["Contacts"]
       else
-        # Unable to fetch from wildapricot
         []
       end
     end
@@ -137,19 +129,16 @@ module MembershipChecker
     def token
       return @token if @token
 
-      oauth_connection = Faraday.new(url: "https://oauth.wildapricot.org") do |faraday|
-        faraday.request :url_encoded
-        faraday.response :logger
-        faraday.adapter  Faraday.default_adapter
-      end
-      response = oauth_connection.post do |req|
-        req.url("/auth/token")
-        req.headers["Content-type"] = "Application/x-www-form-urlencoded"
-        req.headers["Authorization"] = basic_auth
-        req.body = "grant_type=client_credentials&scope=auto"
+      uri = URI("https://oauth.wildapricot.org/auth/token")
+      response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        request = Net::HTTP::Post.new(uri)
+        request["Content-Type"] = "application/x-www-form-urlencoded"
+        request["Authorization"] = basic_auth
+        request.body = "grant_type=client_credentials&scope=auto"
+        http.request(request)
       end
 
-      if response.success?
+      if response.is_a?(Net::HTTPSuccess)
         @token = JSON.parse(response.body)["access_token"]
       else
         raise "Unable to authorize with WildApricot"
@@ -157,7 +146,7 @@ module MembershipChecker
     end
 
     def basic_auth
-      "Basic #{Base64.encode64("APIKEY:#{api_key}")}"
+      "Basic #{Base64.strict_encode64("APIKEY:#{api_key}")}"
     end
 
     def account_id
