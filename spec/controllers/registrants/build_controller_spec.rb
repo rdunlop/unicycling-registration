@@ -92,7 +92,7 @@ describe Registrants::BuildController do
         let(:payment) { FactoryBot.create(:payment, :completed) }
         let!(:payment_detail) do
           FactoryBot.create(:payment_detail, registrant: registrant, payment: payment,
-                            line_item: lodging_package)
+                                             line_item: lodging_package)
         end
 
         it "renders without error" do
