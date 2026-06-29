@@ -68,6 +68,43 @@ describe Registrants::BuildController do
           assert_select "legend", text: "Add Lodging"
         end
       end
+
+      context "when the registrant has a selected (unpaid) lodging package" do
+        let(:lodging_package) { FactoryBot.create(:lodging_package) }
+        let!(:lodging_package_day) { FactoryBot.create(:lodging_package_day, lodging_package: lodging_package) }
+        let!(:rei) { FactoryBot.create(:registrant_expense_item, registrant: registrant, line_item: lodging_package) }
+
+        it "renders without error" do
+          get :show, params: { registrant_id: registrant.to_param, id: "lodging" }
+          expect(response).to be_successful
+        end
+
+        it "displays the selected lodging" do
+          get :show, params: { registrant_id: registrant.to_param, id: "lodging" }
+          expect(response.body).to include(lodging_package.location)
+        end
+      end
+
+      context "when the registrant has a paid lodging package" do
+        let(:registrant) { FactoryBot.create(:competitor, status: "active", user: user) }
+        let(:lodging_package) { FactoryBot.create(:lodging_package) }
+        let!(:lodging_package_day) { FactoryBot.create(:lodging_package_day, lodging_package: lodging_package) }
+        let(:payment) { FactoryBot.create(:payment, :completed) }
+        let!(:payment_detail) do
+          FactoryBot.create(:payment_detail, registrant: registrant, payment: payment,
+                                             line_item: lodging_package)
+        end
+
+        it "renders without error" do
+          get :show, params: { registrant_id: registrant.to_param, id: "lodging" }
+          expect(response).to be_successful
+        end
+
+        it "displays the paid lodging" do
+          get :show, params: { registrant_id: registrant.to_param, id: "lodging" }
+          expect(response.body).to include(lodging_package.location)
+        end
+      end
     end
 
     context "viewing the expenses page" do

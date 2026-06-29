@@ -1,4 +1,6 @@
-#{@registrant}'s chosen Lodging
+#{registrant}'s chosen Lodging
+- paid_lodging = LodgingForm.paid_for(registrant)
+- selected_lodging = LodgingForm.selected_for(registrant)
 %table
   %thead
     %tr
@@ -7,14 +9,14 @@
       %th Check-Out
       %th
   %tbody
-    - @paid_lodging.each do |lodging_package|
+    - paid_lodging.each do |lodging_package|
       %tr
         %td= lodging_package.location
         %td= lodging_package.check_in_day
         %td= lodging_package.check_out_day
         %td Paid
 
-    - @selected_lodging.each do |lodging_package|
+    - selected_lodging.each do |lodging_package|
       %tr
         %td= lodging_package.location
         %td= lodging_package.check_in_day

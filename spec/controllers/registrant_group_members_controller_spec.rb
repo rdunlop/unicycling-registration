@@ -41,6 +41,36 @@ describe RegistrantGroupMembersController do
         end.to change(RegistrantGroupMember, :count).by(1)
       end
     end
+
+    describe "when registrant_ids is nil (no selection made)" do
+      it "does not crash" do
+        expect do
+          post :create, params: { registrant_group_id: registrant_group.to_param }
+        end.not_to raise_error
+      end
+
+      it "creates no records" do
+        expect do
+          post :create, params: { registrant_group_id: registrant_group.to_param }
+        end.not_to change(RegistrantGroupMember, :count)
+      end
+    end
+
+    describe "when registrant_ids contains a blank entry (Rails hidden field)" do
+      let(:registrant) { FactoryBot.create(:competitor) }
+
+      it "does not crash" do
+        expect do
+          post :create, params: { registrant_ids: ["", registrant.id], registrant_group_id: registrant_group.to_param }
+        end.not_to raise_error
+      end
+
+      it "creates only the valid record" do
+        expect do
+          post :create, params: { registrant_ids: ["", registrant.id], registrant_group_id: registrant_group.to_param }
+        end.to change(RegistrantGroupMember, :count).by(1)
+      end
+    end
   end
 
   describe "DELETE destroy" do

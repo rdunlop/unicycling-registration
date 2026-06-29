@@ -40,9 +40,7 @@ class Registrants::BuildController < ApplicationController
     when :add_events
       skip_step unless @registrant.competitor?
     when :add_volunteers # rubocop:disable Lint/EmptyWhen
-    when :lodging
-      @selected_lodging = LodgingForm.selected_for(@registrant)
-      @paid_lodging = LodgingForm.paid_for(@registrant)
+    when :lodging # rubocop:disable Lint/EmptyWhen
     end
 
     render_wizard

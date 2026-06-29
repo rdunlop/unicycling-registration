@@ -54,11 +54,11 @@ class Tenant < ApplicationRecord
   private
 
   def trim_subdomain
-    self.subdomain = subdomain.strip
+    self.subdomain = subdomain&.strip
   end
 
   def lowercase_subdomain
-    self.subdomain = subdomain.downcase
+    self.subdomain = subdomain&.downcase
   end
 
   def subdomain_has_no_spaces
