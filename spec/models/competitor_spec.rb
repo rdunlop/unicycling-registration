@@ -11,7 +11,7 @@
 #  status                   :integer          default("active")
 #  lowest_member_bib_number :integer
 #  geared                   :boolean          default(FALSE), not null
-#  riding_wheel_size        :integer
+#  riding_wheel_size        :float
 #  notes                    :string
 #  wave                     :integer
 #  riding_crank_size        :integer

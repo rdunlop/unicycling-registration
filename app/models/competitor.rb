@@ -11,7 +11,7 @@
 #  status                   :integer          default("active")
 #  lowest_member_bib_number :integer
 #  geared                   :boolean          default(FALSE), not null
-#  riding_wheel_size        :integer
+#  riding_wheel_size        :float
 #  notes                    :string
 #  wave                     :integer
 #  riding_crank_size        :integer
@@ -68,6 +68,7 @@ class Competitor < ApplicationRecord
   validate :must_have_3_members_for_custom_name
   validates :tier_number, presence: true
   validates :tier_number, numericality: { greater_than_or_equal_to: 1, less_than: 10 }
+  validates :riding_wheel_size, numericality: { greater_than_or_equal_to: 8, less_than: 100, allow_nil: true }
 
   enum :status, %i[active not_qualified dns withdrawn dnf]
   after_save :touch_members
