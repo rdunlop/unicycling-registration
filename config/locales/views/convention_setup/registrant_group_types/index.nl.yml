@@ -1,0 +1,23 @@
+---
+nl:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Configuratie van types deelnemersgroep
+        description: >-
+          Door een type deelnemersgroep aan te maken, kunnen deelnemers groepen opgeven voor het onderdeel/item.
+        examples: >-
+          Voorbeelden:
+        example1: >-
+          Leden van 4x100 estafetteploeg
+        example2: >-
+          Kamergenoten voor overnachting
+        source_element: >-
+          Bronelement
+        created_at: >-
+          Aangemaakt op
+        actions: >-
+          Acties
+        new_registrant_group_type: >-
+          Nieuw type deelnemersgroep

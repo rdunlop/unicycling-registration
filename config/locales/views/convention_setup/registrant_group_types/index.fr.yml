@@ -1,0 +1,23 @@
+---
+fr:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Configuration des choix d'équipes
+        description: >-
+          Créer un choix d'équipe permets aux participant·es de spécifier des équipes pour l'événement/l'item
+        examples: >-
+          Exemples :
+        example1: >-
+          Membres du relais 4x100
+        example2: >-
+          Colocataires
+        source_element: >-
+          Élément source
+        created_at: >-
+          Créé à
+        actions: >-
+          Actions
+        new_registrant_group_type: >-
+          Nouveau choix d'équipe

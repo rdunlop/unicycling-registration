@@ -1,15 +1,15 @@
-%h1 Registrant Group Type - #{@registrant_group_type}
+%h1= t('.title', registrant_group_type: @registrant_group_type)
 .non_printable
-  = link_to "(pdf)", convention_setup_registrant_group_type_path(@registrant_group_type, format: :pdf)
+  = link_to "(" + t('.pdf') + ")", convention_setup_registrant_group_type_path(@registrant_group_type, format: :pdf)
 
-%h2 Groups
+%h2= t('.groups')
 
 %table
   %thead
     %tr
-      %th Group Name
-      %th Members
-      %th Size
+      %th= t('.group_name')
+      %th= t('.Members')
+      %th= t('.Size')
   %tbody
     - @registrant_group_type.registrant_groups.each do |group|
       %tr

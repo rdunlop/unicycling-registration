@@ -1,25 +1,24 @@
-%h1 #{@registrant_group_type} Groups
+%h1= t('.title', registrant_group_type: @registrant_group_type)
 
-%p
-  This page lists all of the configured groups for #{@registrant_group_type}
+%p= t('.description', registrant_group_type: @registrant_group_type)
 
-%p Please feel free to choose all of the members of your group.
+%p= t('.choose_the_members')
 
 - @registrants.each do |registrant|
   - reg_group = registrant_group_for(registrant, @registrant_group_type)
   - eligible_group = registrant_eligible_for?(registrant, @registrant_group_type)
   - if reg_group.present?
     %hr
-    %h3 #{registrant} is in the following registrant group
+    %h3= t('.in_the_following_registrant_group', registrant: registrant)
     = render "groups_table", registrant_groups: [reg_group]
   - elsif eligible_group
     .callout.alert
-      %b #{registrant} is not in any group, but should be in one
+      %b= t('.not_in_any_group', registrant: registrant)
 
 %hr
-%h3 All Groups
+%h3= t('.all_groups')
 = render "groups_table", registrant_groups: @all_registrant_groups
 
 .row
   .small-12.columns
-    = link_to "New Group", new_registrant_group_type_registrant_group_path(@registrant_group_type), class: "button"
+    = link_to t('.new_group', registrant_group_type: @registrant_group_type), new_registrant_group_type_registrant_group_path(@registrant_group_type), class: "button"

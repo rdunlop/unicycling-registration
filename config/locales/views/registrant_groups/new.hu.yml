@@ -1,0 +1,6 @@
+---
+hu:
+  registrant_groups:
+    new:
+      new_group: >-
+        Új %{registrant_group_type} nevezői csoport

@@ -1,0 +1,23 @@
+---
+de:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Konfiguration der Anmeldegruppen-Typen
+        description: >-
+          Das Erstellen eines Anmeldegruppen-Typs ermöglicht es Angemeldeten, Gruppen für die Disziplin/das Element anzugeben.
+        examples: >-
+          Beispiele:
+        example1: >-
+          4x100 Staffel-Teammitglieder
+        example2: >-
+          Zimmergenossen für die Unterkunft
+        source_element: >-
+          Quellelement
+        created_at: >-
+          Erstellt am
+        actions: >-
+          Aktionen
+        new_registrant_group_type: >-
+          Neuer Anmeldegruppen-Typ

@@ -1,0 +1,12 @@
+---
+ko:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        멤버 추가
+      member_label_tag: >-
+        멤버
+      add_member: >-
+        멤버 추가
+      note_html: >-
+        <b>참고</b> %{event}에 등록한 참가자만 여기에 나열됩니다.

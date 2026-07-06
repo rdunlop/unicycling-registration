@@ -1,0 +1,13 @@
+---
+da:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          Kildeelement
+        or: >-
+          Eller
+        notes: >-
+          Noter
+        max_members_per_group: >-
+          Maks. medlemmer pr. gruppe

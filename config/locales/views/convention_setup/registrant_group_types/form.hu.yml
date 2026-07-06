@@ -1,0 +1,13 @@
+---
+hu:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          Forráselem
+        or: >-
+          Vagy
+        notes: >-
+          Megjegyzések
+        max_members_per_group: >-
+          Maximális tagszám csoportonként

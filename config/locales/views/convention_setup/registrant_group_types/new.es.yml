@@ -1,0 +1,7 @@
+---
+es:
+  convention_setup:
+    registrant_group_types:
+      new:
+        title: >-
+          Nuevo tipo de grupo de participantes

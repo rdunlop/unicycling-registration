@@ -1,0 +1,6 @@
+---
+ko:
+  controllers:
+    registrant_group_types:
+      breadcrumb: >-
+        참가자 그룹 유형

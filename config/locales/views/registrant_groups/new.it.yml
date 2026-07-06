@@ -1,0 +1,6 @@
+---
+it:
+  registrant_groups:
+    new:
+      new_group: >-
+        Nuovo gruppo di iscritti %{registrant_group_type}

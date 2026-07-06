@@ -1,0 +1,18 @@
+---
+it:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            Il tipo di gruppo di iscritti è stato creato con successo.
+        update:
+          updated: >-
+            Il tipo di gruppo di iscritti è stato aggiornato con successo.
+        destroy:
+          removed: >-
+            Tipo di gruppo di iscritti rimosso
+          unable_to_remvoe: >-
+            Impossibile rimuovere il tipo di gruppo di iscritti. Rimuovi prima i gruppi
+        breadcrumb: >-
+          Tipi di gruppo di iscritti

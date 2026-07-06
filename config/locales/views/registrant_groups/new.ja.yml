@@ -1,0 +1,6 @@
+---
+ja:
+  registrant_groups:
+    new:
+      new_group: >-
+        新しい%{registrant_group_type}の登録者グループ

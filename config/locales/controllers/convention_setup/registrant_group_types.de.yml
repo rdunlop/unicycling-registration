@@ -1,0 +1,18 @@
+---
+de:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            Anmeldegruppen-Typ wurde erfolgreich erstellt.
+        update:
+          updated: >-
+            Anmeldegruppen-Typ wurde erfolgreich aktualisiert.
+        destroy:
+          removed: >-
+            Anmeldegruppen-Typ entfernt
+          unable_to_remvoe: >-
+            Anmeldegruppen-Typ kann nicht entfernt werden. Entferne zuerst die Gruppen
+        breadcrumb: >-
+          Anmeldegruppen-Typen

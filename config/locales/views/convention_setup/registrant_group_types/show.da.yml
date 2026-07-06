@@ -1,0 +1,17 @@
+---
+da:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          Deltagergruppetype - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          Grupper
+        group_name: >-
+          Gruppenavn
+        Members: >-
+          Medlemmer
+        Size: >-
+          Størrelse

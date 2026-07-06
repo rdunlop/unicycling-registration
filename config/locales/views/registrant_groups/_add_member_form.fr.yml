@@ -1,0 +1,12 @@
+---
+fr:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Ajouter des membres
+      member_label_tag: >-
+        Membre
+      add_member: >-
+        Ajouter ce membre
+      note_html: >-
+        <b>Note</b> Seules les personnes s'étant inscrites à la compétition "%{event}" sont listées ici.

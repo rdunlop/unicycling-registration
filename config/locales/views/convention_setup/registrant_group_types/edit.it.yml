@@ -1,0 +1,7 @@
+---
+it:
+  convention_setup:
+    registrant_group_types:
+      edit:
+        title: >-
+          Modifica tipo di gruppo di iscritti

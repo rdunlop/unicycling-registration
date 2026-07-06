@@ -1,0 +1,18 @@
+---
+en:
+  registrant_groups:
+    index:
+      title: >-
+        %{registrant_group_type} Groups
+      description: >-
+        This page lists all of the configured groups for %{registrant_group_type}.
+      choose_the_members: >-
+        Please feel free to choose all of the members of your group.
+      in_the_following_registrant_group: >-
+        %{registrant} is in the following registrant group
+      not_in_any_group: >-
+        %{registrant} is not in any group, but should be in one
+      all_groups: >-
+        All Groups
+      new_group: >-
+        New group

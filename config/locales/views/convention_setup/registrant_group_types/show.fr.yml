@@ -1,0 +1,17 @@
+---
+fr:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          Choix d'équipes - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          Équipes
+        group_name: >-
+          Nom de l'équipe
+        Members: >-
+          Membres
+        Size: >-
+          Taille

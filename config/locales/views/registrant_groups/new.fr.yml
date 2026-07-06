@@ -1,0 +1,6 @@
+---
+fr:
+  registrant_groups:
+    new:
+      new_group: >-
+        Nouvelle équipe pour la compétition "%{registrant_group_type}"

@@ -1,0 +1,30 @@
+---
+hu:
+  registrant_groups:
+    show:
+      group_name: >-
+        Név
+      edit_name: >-
+        Név szerkesztése
+      delete_group: >-
+        Csoport törlése
+      leaders: >-
+        Vezetők
+      group_members: >-
+        Csoport tagjai
+      remove_this_group_question: >-
+        Eltávolítja ezt a csoportot?
+      registrant_name: >-
+        Név
+      actions: >-
+        Műveletek
+      remove_from_group: >-
+        Eltávolítás a csoportból
+      promote_to_leader: >-
+        Előléptetés vezetővé
+      no_current_members: >-
+        Nincsenek jelenlegi tagok
+      group_leaders: >-
+        Csoport vezetői
+      remove: >-
+        Eltávolítás

@@ -1,0 +1,30 @@
+---
+fr:
+  registrant_groups:
+    show:
+      group_name: >-
+        Nom
+      edit_name: >-
+        Modifier le nom
+      delete_group: >-
+        Supprimer l'équipe
+      leaders: >-
+        Leaders
+      group_members: >-
+        Membres de l'équipe
+      remove_this_group_question: >-
+        Supprimer cette équipe ?
+      registrant_name: >-
+        Nom
+      actions: >-
+        Actions
+      remove_from_group: >-
+        Retirer de l'équipe
+      promote_to_leader: >-
+        Promouvoir en tant que leader
+      no_current_members: >-
+        Aucun membre
+      group_leaders: >-
+        Leaders de l'équipe
+      remove: >-
+        Retirer

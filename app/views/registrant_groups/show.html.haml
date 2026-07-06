@@ -1,27 +1,27 @@
 %h1 #{@registrant_group_type}
 
 %p
-  %b Name:
+  %b= t('.group_name')
   = @registrant_group.name
   - if policy(@registrant_group).edit?
-    = link_to "Edit Name", edit_registrant_group_path(@registrant_group)
+    = link_to t('.edit_name'), edit_registrant_group_path(@registrant_group)
   - if policy(@registrant_group).destroy?
     %br
-    = link_to "Delete Group", registrant_group_path(@registrant_group), method: :delete, data: { confirm: "Remove this group?" }
+    = link_to t('.delete_group'), registrant_group_path(@registrant_group), method: :delete, data: { confirm: t('.remove_this_group_question') }
 
 %p
-  %b Leaders:
+  %b= t('.leaders') + ':'
   = @registrant_group.registrant_group_leaders.join(", ")
 
-%h3 Group Members
+%h3= t('.group_members')
 
 - if @registrant_group.registrant_group_members.any?
   %table
     %thead
       %tr
-        %th Name
-        %th ID
-        %th Actions
+        %th= t('.registrant_name')
+        %th= t('.id')
+        %th= t('.actions')
     %tbody
       - @registrant_group.registrant_group_members.each do |member|
         %tr
@@ -29,12 +29,12 @@
           %td= member.registrant.bib_number
           %td
             - if policy(member).destroy?
-              = link_to "Remove from group", registrant_group_member_path(member), method: :delete, data: { confirm: "Remove this member from the group?" }
+              = link_to t('.remove_from_group'), registrant_group_member_path(member), method: :delete, data: { confirm: "Remove this member from the group?" }
               %br
             - if policy(member).promote?
-              = link_to "Promote to Leader", promote_registrant_group_member_path(member), method: :post, data: { confirm: "Promote this member to a leader?" }
+              = link_to t('.promote_to_leader'), promote_registrant_group_member_path(member), method: :post, data: { confirm: "Promote this member to a leader?" }
 - else
-  No Current Members
+  = t('.no_current_members')
 
 - if policy(@new_registrant_group_member).create?
   .row
@@ -42,20 +42,20 @@
       = render "add_member_form", registrant_group: @registrant_group, event: @registrant_group.registrant_group_type.source_element
 %hr
 
-%h3 Group Leaders
+%h3= t('.group_leaders')
 
 %table
   %thead
     %tr
-      %th Name
-      %th Actions
+      %th= t('.registrant_name')
+      %th= t('.actions')
   %tbody
     - @registrant_group_leaders.each do |leader|
       %tr
         %td= leader
         %td
           - if policy(leader).destroy?
-            = link_to "Remove", registrant_group_leader_path(leader), method: :delete, data: { confirm: "Remove Leader?" }
+            = link_to t('.remove'), registrant_group_leader_path(leader), method: :delete, data: { confirm: "Remove Leader?" }
 
 - if policy(@new_registrant_group_leader).create?
   .row
@@ -63,4 +63,4 @@
       = render "add_leader_form"
 
 %hr
-= link_to 'Back', registrant_group_type_registrant_groups_path(@registrant_group.registrant_group_type), class: "button secondary"
+= link_to t('back'), registrant_group_type_registrant_groups_path(@registrant_group.registrant_group_type), class: "button secondary"

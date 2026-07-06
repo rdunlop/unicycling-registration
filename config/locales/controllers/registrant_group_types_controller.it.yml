@@ -1,0 +1,6 @@
+---
+it:
+  controllers:
+    registrant_group_types:
+      breadcrumb: >-
+        Tipi di gruppo di iscritti

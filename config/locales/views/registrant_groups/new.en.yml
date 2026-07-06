@@ -1,0 +1,6 @@
+---
+en:
+  registrant_groups:
+    new:
+      new_group: >-
+        New %{registrant_group_type} Registrant Group

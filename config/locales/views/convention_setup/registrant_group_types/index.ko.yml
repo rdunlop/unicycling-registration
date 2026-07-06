@@ -1,0 +1,23 @@
+---
+ko:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          참가자 그룹 유형 설정
+        description: >-
+          참가자 그룹 유형을 생성하면 참가자가 종목/항목에 대한 그룹을 지정할 수 있습니다.
+        examples: >-
+          예시:
+        example1: >-
+          4x100 릴레이 팀 멤버
+        example2: >-
+          숙소 룸메이트
+        source_element: >-
+          소스 요소
+        created_at: >-
+          생성 일시
+        actions: >-
+          작업
+        new_registrant_group_type: >-
+          새 참가자 그룹 유형

@@ -1,0 +1,17 @@
+---
+ja:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          登録者グループの種類 - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          グループ
+        group_name: >-
+          グループ名
+        Members: >-
+          メンバー
+        Size: >-
+          人数

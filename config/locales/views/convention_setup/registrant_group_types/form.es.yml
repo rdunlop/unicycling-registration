@@ -1,0 +1,13 @@
+---
+es:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          Elemento de origen
+        or: >-
+          O
+        notes: >-
+          Notas
+        max_members_per_group: >-
+          Máximo de miembros por grupo

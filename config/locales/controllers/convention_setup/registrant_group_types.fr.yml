@@ -1,0 +1,18 @@
+---
+fr:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            Le choix d'équipes a été créé.
+        update:
+          updated: >-
+            Le choix d'équipes a correctement été mis à jour.
+        destroy:
+          removed: >-
+            Choix d'équipe supprimé
+          unable_to_remvoe: >-
+            Impossible de supprimer ce choix. Commencez par supprimer les équipes liées à ce choix.
+        breadcrumb: >-
+          Configuration des choix d'équipes

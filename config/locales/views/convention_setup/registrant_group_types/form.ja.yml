@@ -1,0 +1,13 @@
+---
+ja:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          ソース要素
+        or: >-
+          または
+        notes: >-
+          メモ
+        max_members_per_group: >-
+          グループあたりの最大メンバー数

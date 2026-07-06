@@ -4,10 +4,10 @@
     "attributes":
       "registrant_group":
         "name": >-
-          Nom de groupe
+          Nom de l'équipe
     "models":
       "registrant_group":
         "one": >-
-          Groupe d'inscrits
+          Équipe
         "other": >-
-          Groupes d'inscrits
+          Équipes

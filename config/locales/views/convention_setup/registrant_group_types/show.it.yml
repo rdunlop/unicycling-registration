@@ -1,0 +1,17 @@
+---
+it:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          Tipo di gruppo di iscritti - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          Gruppi
+        group_name: >-
+          Nome del gruppo
+        Members: >-
+          Membri
+        Size: >-
+          Dimensione

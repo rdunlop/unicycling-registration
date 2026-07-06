@@ -1,0 +1,18 @@
+---
+it:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          Gruppo creato
+        error_creating_group: >-
+          Errore durante la creazione del gruppo
+      show:
+        breadcrumb: >-
+          Gruppi di iscritti: %{registrant_group_type}
+      update:
+        updated: >-
+          Il gruppo di iscritti è stato aggiornato con successo.
+      destroy:
+        deleted: >-
+          Gruppo eliminato

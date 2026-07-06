@@ -1,0 +1,12 @@
+---
+nl:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Leden toevoegen
+      member_label_tag: >-
+        Lid
+      add_member: >-
+        Lid toevoegen
+      note_html: >-
+        <b>Let op</b> Alleen deelnemers die zich hebben ingeschreven voor %{event} worden hier vermeld.

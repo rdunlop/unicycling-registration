@@ -1,0 +1,12 @@
+---
+hu:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Tagok hozzáadása
+      member_label_tag: >-
+        Tag
+      add_member: >-
+        Tag hozzáadása
+      note_html: >-
+        <b>Megjegyzés</b> Csak azok a nevezők szerepelnek itt, akik jelentkeztek a következőre: %{event}.

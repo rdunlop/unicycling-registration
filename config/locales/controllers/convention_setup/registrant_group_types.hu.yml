@@ -1,0 +1,18 @@
+---
+hu:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            A nevezői csoport típusa sikeresen létrejött.
+        update:
+          updated: >-
+            A nevezői csoport típusa sikeresen frissült.
+        destroy:
+          removed: >-
+            Nevezői csoport típusa eltávolítva
+          unable_to_remvoe: >-
+            A nevezői csoport típusa nem távolítható el. Először távolítsa el a csoportokat
+        breadcrumb: >-
+          Nevezői csoport típusok

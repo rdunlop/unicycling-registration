@@ -1,0 +1,18 @@
+---
+ko:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          그룹이 생성되었습니다
+        error_creating_group: >-
+          그룹 생성 중 오류가 발생했습니다
+      show:
+        breadcrumb: >-
+          참가자 그룹: %{registrant_group_type}
+      update:
+        updated: >-
+          참가자 그룹이 성공적으로 업데이트되었습니다.
+      destroy:
+        deleted: >-
+          그룹이 삭제되었습니다

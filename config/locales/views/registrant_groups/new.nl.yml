@@ -1,0 +1,6 @@
+---
+nl:
+  registrant_groups:
+    new:
+      new_group: >-
+        Nieuwe deelnemersgroep voor %{registrant_group_type}

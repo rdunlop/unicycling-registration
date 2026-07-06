@@ -1,0 +1,18 @@
+---
+de:
+  registrant_groups:
+    index:
+      title: >-
+        Gruppen für %{registrant_group_type}
+      description: >-
+        Diese Seite listet alle konfigurierten Gruppen für %{registrant_group_type} auf.
+      choose_the_members: >-
+        Du kannst gerne alle Mitglieder deiner Gruppe auswählen.
+      in_the_following_registrant_group: >-
+        %{registrant} ist in der folgenden Anmeldegruppe
+      not_in_any_group: >-
+        %{registrant} ist in keiner Gruppe, sollte aber in einer sein
+      all_groups: >-
+        Alle Gruppen
+      new_group: >-
+        Neue Gruppe

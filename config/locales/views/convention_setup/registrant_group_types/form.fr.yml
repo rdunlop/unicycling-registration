@@ -1,0 +1,13 @@
+---
+fr:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          Élément source
+        or: >-
+          Ou
+        notes: >-
+          Notes
+        max_members_per_group: >-
+          Nombre maximal de personnes par équipe
