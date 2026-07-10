@@ -33,7 +33,7 @@ describe Compete::SignInsController do
 
     let!(:competitor1) { FactoryBot.create(:event_competitor, competition: competition, bib_number: 101) }
 
-    it "updates the sign_ins" do
+    it "updates the sign_ins with wave" do
       params = {
         competitors_attributes: {
           "0" => {
@@ -45,6 +45,76 @@ describe Compete::SignInsController do
       expect(competitor1.wave).to be_nil
       put :update, params: { competition_id: competition.id, competition: params }
       expect(competitor1.reload.wave).to eq(1)
+    end
+
+    it "updates the sign_ins with minimum wheel size" do
+      params = {
+        competitors_attributes: {
+          "0" => {
+            id: competitor1.id,
+            riding_wheel_size: 8
+          }
+        }
+      }
+      expect(competitor1.riding_wheel_size).to be_nil
+      put :update, params: { competition_id: competition.id, competition: params }
+      expect(competitor1.reload.riding_wheel_size).to eq(8)
+    end
+
+    it "updates the sign_ins with maximum wheel size" do
+      params = {
+        competitors_attributes: {
+          "0" => {
+            id: competitor1.id,
+            riding_wheel_size: 99.99
+          }
+        }
+      }
+      expect(competitor1.riding_wheel_size).to be_nil
+      put :update, params: { competition_id: competition.id, competition: params }
+      expect(competitor1.reload.riding_wheel_size).to eq(99.99)
+    end
+
+    it "updates the sign_ins with float wheel size" do
+      params = {
+        competitors_attributes: {
+          "0" => {
+            id: competitor1.id,
+            riding_wheel_size: 27.5
+          }
+        }
+      }
+      expect(competitor1.riding_wheel_size).to be_nil
+      put :update, params: { competition_id: competition.id, competition: params }
+      expect(competitor1.reload.riding_wheel_size).to eq(27.5)
+    end
+
+    it "fails to update the sign_ins with too small wheel size" do
+      params = {
+        competitors_attributes: {
+          "0" => {
+            id: competitor1.id,
+            riding_wheel_size: 7
+          }
+        }
+      }
+      expect(competitor1.riding_wheel_size).to be_nil
+      put :update, params: { competition_id: competition.id, competition: params }
+      expect(competitor1.reload.riding_wheel_size).to be_nil
+    end
+
+    it "fails to update the sign_ins with too big wheel size" do
+      params = {
+        competitors_attributes: {
+          "0" => {
+            id: competitor1.id,
+            riding_wheel_size: 101
+          }
+        }
+      }
+      expect(competitor1.riding_wheel_size).to be_nil
+      put :update, params: { competition_id: competition.id, competition: params }
+      expect(competitor1.reload.riding_wheel_size).to be_nil
     end
   end
 end

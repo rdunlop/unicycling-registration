@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_025017) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_04_122530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -260,7 +260,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_025017) do
     t.string "notes"
     t.integer "position"
     t.integer "riding_crank_size"
-    t.integer "riding_wheel_size"
+    t.float "riding_wheel_size"
     t.integer "status", default: 0
     t.string "tier_description"
     t.integer "tier_number", default: 1, null: false

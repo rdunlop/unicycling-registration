@@ -57,7 +57,7 @@
               %Th= comp_f.number_field :tier_number, class: "sign_in_heat"
               %Th= comp_f.text_field :tier_description, class: "sign_in_heat"
               %td= comp_f.check_box :geared
-              %td= comp_f.number_field :riding_wheel_size, class: "sign_in_wheel_size"
+              %td= comp_f.number_field :riding_wheel_size, step: 0.5, min: 8, max: 100, class: "sign_in_wheel_size"
               %td= comp_f.number_field :riding_crank_size, class: "sign_in_crank_size"
               %td= comp_f.text_field :notes, class: "sign_in_notes"
     = f.button :submit
