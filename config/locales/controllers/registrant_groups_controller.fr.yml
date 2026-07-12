@@ -1,0 +1,15 @@
+---
+fr:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          Équipe créée
+        error_creating_group: >-
+          La création de l'équipe a échoué
+      update:
+        updated: >-
+          L'équipe a correctement été mise à jour
+      destroy:
+        deleted: >-
+          L'équipe a été supprimée

@@ -1,0 +1,6 @@
+---
+da:
+  registrant_groups:
+    new:
+      new_group: >-
+        Ny %{registrant_group_type} deltagergruppe

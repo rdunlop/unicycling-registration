@@ -1,0 +1,15 @@
+---
+"ko":
+  "activerecord":
+    "attributes":
+      "registrant_group_type":
+        "notes": >-
+          메모
+        "max_members_per_group": >-
+          그룹당 최대 멤버 수
+    "models":
+      "registrant_group_type":
+        "one": >-
+          참가자 그룹 유형
+        "other": >-
+          참가자 그룹 유형

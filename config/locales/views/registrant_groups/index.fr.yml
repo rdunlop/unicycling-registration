@@ -1,0 +1,18 @@
+---
+fr:
+  registrant_groups:
+    index:
+      title: >-
+        Équipes pour "%{registrant_group_type}"
+      description: >-
+        Cette page liste toutes les équipes déjà créées pour "%{registrant_group_type}".
+      choose_the_members: >-
+        Choisissez tous les membres de votre équipe.
+      in_the_following_registrant_group: >-
+        %{registrant} est dans les équipes suivantes
+      not_in_any_group: >-
+        %{registrant} n'est dans aucune équipe, alors que ce devrait être le cas
+      all_groups: >-
+        Toutes les équipes
+      new_group: >-
+        Nouvelle équipe

@@ -1,0 +1,17 @@
+---
+ko:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          참가자 그룹 유형 - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          그룹
+        group_name: >-
+          그룹 이름
+        Members: >-
+          멤버
+        Size: >-
+          크기

@@ -1,0 +1,15 @@
+---
+da:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          Gruppe oprettet
+        error_creating_group: >-
+          Fejl ved oprettelse af gruppe
+      update:
+        updated: >-
+          Deltagergruppen blev opdateret.
+      destroy:
+        deleted: >-
+          Gruppe slettet

@@ -1,0 +1,18 @@
+---
+nl:
+  registrant_groups:
+    index:
+      title: >-
+        Groepen voor %{registrant_group_type}
+      description: >-
+        Deze pagina toont alle geconfigureerde groepen voor %{registrant_group_type}.
+      choose_the_members: >-
+        U kunt gerust alle leden van uw groep kiezen.
+      in_the_following_registrant_group: >-
+        %{registrant} zit in de volgende deelnemersgroep
+      not_in_any_group: >-
+        %{registrant} zit in geen enkele groep, maar zou er in een moeten zitten
+      all_groups: >-
+        Alle groepen
+      new_group: >-
+        Nieuwe groep

@@ -1,0 +1,16 @@
+---
+ko:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            참가자 그룹 유형이 성공적으로 생성되었습니다.
+        update:
+          updated: >-
+            참가자 그룹 유형이 성공적으로 업데이트되었습니다.
+        destroy:
+          removed: >-
+            참가자 그룹 유형이 삭제되었습니다
+          unable_to_remove: >-
+            참가자 그룹 유형을 삭제할 수 없습니다. 먼저 그룹을 삭제하세요

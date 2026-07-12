@@ -1,0 +1,19 @@
+---
+hu:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Nevezői csoport típusok beállítása
+        description: >-
+          A nevezői csoport típusának létrehozása lehetővé teszi a nevezők számára, hogy csoportokat adjanak meg a versenyszámhoz/tételhez.
+        examples: >-
+          Példák:
+        example1: >-
+          4x100 váltó csapattagok
+        example2: >-
+          Szállásbeli szobatársak
+        actions: >-
+          Műveletek
+        new_registrant_group_type: >-
+          Új nevezői csoport típusa

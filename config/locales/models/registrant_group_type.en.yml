@@ -1,0 +1,11 @@
+---
+en:
+  activerecord:
+    attributes:
+      registrant_group_type:
+        notes: Notes
+        max_members_per_group: Max members per group
+    models:
+      registrant_group_type:
+        one: Registrant Group Type
+        other: Registrant Group Types

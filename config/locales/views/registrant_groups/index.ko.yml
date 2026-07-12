@@ -1,0 +1,18 @@
+---
+ko:
+  registrant_groups:
+    index:
+      title: >-
+        %{registrant_group_type} 그룹
+      description: >-
+        이 페이지에는 %{registrant_group_type}에 대해 설정된 모든 그룹이 나열됩니다.
+      choose_the_members: >-
+        그룹의 모든 멤버를 자유롭게 선택하세요.
+      in_the_following_registrant_group: >-
+        %{registrant}은(는) 다음 참가자 그룹에 속해 있습니다
+      not_in_any_group: >-
+        %{registrant}은(는) 어떤 그룹에도 속해 있지 않지만, 그룹에 속해야 합니다
+      all_groups: >-
+        모든 그룹
+      new_group: >-
+        새 그룹

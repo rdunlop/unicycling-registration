@@ -1,0 +1,15 @@
+---
+hu:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          Csoport létrehozva
+        error_creating_group: >-
+          Hiba a csoport létrehozásakor
+      update:
+        updated: >-
+          A nevezői csoport sikeresen frissült.
+      destroy:
+        deleted: >-
+          Csoport törölve

@@ -49,7 +49,7 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
     @registrant_group_type.source_element = source_element
     authorize @registrant_group_type
     if @registrant_group_type.save
-      redirect_to [:convention_setup, @registrant_group_type], notice: 'Registrant group type was successfully created.'
+      redirect_to [:convention_setup, @registrant_group_type], notice: t('controllers.convention_setup.registrant_group_types.create.created')
     else
       render :new
     end
@@ -58,7 +58,7 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   # PUT /registrant_group_types/1
   def update
     if @registrant_group_type.update(registrant_group_type_params)
-      redirect_to [:convention_setup, @registrant_group_type], notice: 'Registrant group type was successfully updated.'
+      redirect_to [:convention_setup, @registrant_group_type], notice: t('controllers.convention_setup.registrant_group_types.update.updated')
     else
       render :show
     end
@@ -67,9 +67,9 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   # DELETE /registrant_group_types/1
   def destroy
     if @registrant_group_type.destroy
-      flash[:notice] = "Removed Registration Group Type"
+      flash[:notice] = t('controllers.convention_setup.registrant_group_types.destroy.removed')
     else
-      flash[:alert] = "Unable to remove registration group type. Remove groups first"
+      flash[:alert] = t('controllers.convention_setup.registrant_group_types.destroy.unable_to_remove')
     end
     redirect_to convention_setup_registrant_group_types_url
   end
@@ -97,6 +97,6 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   end
 
   def add_breadcrumbs
-    add_breadcrumb "Registrant Group Types", convention_setup_registrant_group_types_path
+    add_breadcrumb RegistrantGroupType.model_name.human(count: 2), convention_setup_registrant_group_types_path
   end
 end

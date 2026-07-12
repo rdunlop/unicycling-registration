@@ -1,0 +1,16 @@
+---
+ja:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            登録者グループの種類を正常に作成しました。
+        update:
+          updated: >-
+            登録者グループの種類を正常に更新しました。
+        destroy:
+          removed: >-
+            登録者グループの種類を削除しました
+          unable_to_remove: >-
+            登録者グループの種類を削除できません。先にグループを削除してください

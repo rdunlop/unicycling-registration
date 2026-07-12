@@ -1,0 +1,12 @@
+---
+ja:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        メンバーを追加
+      member_label_tag: >-
+        メンバー
+      add_member: >-
+        メンバーを追加
+      note_html: >-
+        <b>注意</b> %{event}に申し込んだ登録者のみがここに一覧表示されます。

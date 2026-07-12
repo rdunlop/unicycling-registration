@@ -1,0 +1,8 @@
+---
+hu:
+  events_which_require_multiple_registrants_to_compete: >-
+    Itt találhatók azok a versenyszámok, amelyeknél több nevezőnek kell együtt, csoportként versenyeznie. Kérjük, ezeken az oldalakon jelezze, hogy kivel fog versenyezni.
+  note_html: >-
+    <b>Megjegyzés</b> A versenyszám igazgatója rendelkezik a végső ellenőrzéssel az egyes csoportok tagsága felett. Ezek az oldalak csak a <i>kívánt</i> csoporttagságokat jelzik.
+  please_chose_event: >-
+    Kérjük, válasszon egy versenyszámot, hogy megkezdhesse a nevező(k) tagságának megadását.

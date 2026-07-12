@@ -1,0 +1,16 @@
+---
+da:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            Deltagergruppetypen blev oprettet.
+        update:
+          updated: >-
+            Deltagergruppetypen blev opdateret.
+        destroy:
+          removed: >-
+            Deltagergruppetype fjernet
+          unable_to_remove: >-
+            Deltagergruppetypen kan ikke fjernes. Fjern grupperne først

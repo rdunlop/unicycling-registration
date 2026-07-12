@@ -1,0 +1,17 @@
+---
+en:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          Registrant Group Type - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          Groups
+        group_name: >-
+          Group Name
+        Members: >-
+          Members
+        Size: >-
+          Size

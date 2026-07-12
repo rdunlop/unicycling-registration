@@ -1,0 +1,19 @@
+---
+da:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Konfiguration af deltagergruppetyper
+        description: >-
+          Ved at oprette en deltagergruppetype kan deltagere angive grupper for eventet/elementet.
+        examples: >-
+          Eksempler:
+        example1: >-
+          4x100 stafetholdsmedlemmer
+        example2: >-
+          Værelseskammerater
+        actions: >-
+          Handlinger
+        new_registrant_group_type: >-
+          Ny deltagergruppetype

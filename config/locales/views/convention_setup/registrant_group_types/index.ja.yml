@@ -1,0 +1,19 @@
+---
+ja:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          登録者グループの種類の設定
+        description: >-
+          登録者グループの種類を作成すると、登録者が種目や項目のグループを指定できるようになります。
+        examples: >-
+          例:
+        example1: >-
+          4x100リレーのチームメンバー
+        example2: >-
+          宿泊のルームメイト
+        actions: >-
+          操作
+        new_registrant_group_type: >-
+          新しい登録者グループの種類

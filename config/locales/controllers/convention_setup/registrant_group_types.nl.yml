@@ -1,0 +1,16 @@
+---
+nl:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            Type deelnemersgroep is succesvol aangemaakt.
+        update:
+          updated: >-
+            Type deelnemersgroep is succesvol bijgewerkt.
+        destroy:
+          removed: >-
+            Type deelnemersgroep verwijderd
+          unable_to_remove: >-
+            Kan type deelnemersgroep niet verwijderen. Verwijder eerst de groepen

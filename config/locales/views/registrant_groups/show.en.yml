@@ -1,0 +1,30 @@
+---
+en:
+  registrant_groups:
+    show:
+      group_name: >-
+        Name
+      edit_name: >-
+        Edit Name
+      delete_group: >-
+        Delete Group
+      leaders: >-
+        Leaders
+      group_members: >-
+        Group Members
+      remove_this_group_question: >-
+        Remove this group?
+      registrant_name: >-
+        Name
+      actions: >-
+        Actions
+      remove_from_group: >-
+        Remove from group
+      promote_to_leader: >-
+        Promote to Leader
+      no_current_members: >-
+        No Current Members
+      group_leaders: >-
+        Group Leaders
+      remove: >-
+        Remove

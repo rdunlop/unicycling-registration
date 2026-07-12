@@ -1,0 +1,6 @@
+---
+ko:
+  registrant_groups:
+    new:
+      new_group: >-
+        새 %{registrant_group_type} 참가자 그룹

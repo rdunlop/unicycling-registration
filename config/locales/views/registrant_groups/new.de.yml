@@ -1,0 +1,6 @@
+---
+de:
+  registrant_groups:
+    new:
+      new_group: >-
+        Neue %{registrant_group_type} Anmeldegruppe

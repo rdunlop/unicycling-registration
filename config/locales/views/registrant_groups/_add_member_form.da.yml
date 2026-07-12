@@ -1,0 +1,12 @@
+---
+da:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Tilføj medlemmer
+      member_label_tag: >-
+        Medlem
+      add_member: >-
+        Tilføj medlem
+      note_html: >-
+        <b>Bemærk</b> Kun deltagere, der har tilmeldt sig %{event}, er angivet her.

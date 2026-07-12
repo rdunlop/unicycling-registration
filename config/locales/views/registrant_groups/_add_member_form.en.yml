@@ -1,0 +1,12 @@
+---
+en:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Add Members
+      member_label_tag: >-
+        Member
+      add_member: >-
+        Add Member
+      note_html: >-
+        <b>Note</b> Only registrants who have signed up for %{event} are listed here.

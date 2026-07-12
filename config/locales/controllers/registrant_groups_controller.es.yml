@@ -1,0 +1,15 @@
+---
+es:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          Grupo creado
+        error_creating_group: >-
+          Error al crear el grupo
+      update:
+        updated: >-
+          El grupo de participantes se actualizó correctamente.
+      destroy:
+        deleted: >-
+          Grupo eliminado

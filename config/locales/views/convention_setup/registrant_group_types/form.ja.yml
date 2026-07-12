@@ -1,0 +1,9 @@
+---
+ja:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          ソース要素
+        or: >-
+          または

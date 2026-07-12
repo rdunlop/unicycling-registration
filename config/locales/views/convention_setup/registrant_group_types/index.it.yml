@@ -1,0 +1,19 @@
+---
+it:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Configurazione dei tipi di gruppo di iscritti
+        description: >-
+          La creazione di un tipo di gruppo di iscritti consente agli iscritti di specificare i gruppi per l'evento/elemento.
+        examples: >-
+          Esempi:
+        example1: >-
+          Membri della squadra staffetta 4x100
+        example2: >-
+          Compagni di stanza per l'alloggio
+        actions: >-
+          Azioni
+        new_registrant_group_type: >-
+          Nuovo tipo di gruppo di iscritti

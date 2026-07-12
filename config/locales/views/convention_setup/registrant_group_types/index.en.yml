@@ -1,0 +1,19 @@
+---
+en:
+  convention_setup:
+    registrant_group_types:
+      index:
+        title: >-
+          Registrant Group Types Configuration
+        description: >-
+          Creating a Registrant Group Type allows registrants to specify groups for the event/item.
+        examples: >-
+          Examples:
+        example1: >-
+          4x100 Relay Team Members
+        example2: >-
+          Lodging Roommates
+        actions: >-
+          Actions
+        new_registrant_group_type: >-
+          New Registrant Group Type

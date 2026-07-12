@@ -1,0 +1,18 @@
+---
+it:
+  registrant_groups:
+    index:
+      title: >-
+        Gruppi per %{registrant_group_type}
+      description: >-
+        Questa pagina elenca tutti i gruppi configurati per %{registrant_group_type}.
+      choose_the_members: >-
+        Sentiti libero di scegliere tutti i membri del tuo gruppo.
+      in_the_following_registrant_group: >-
+        %{registrant} fa parte del seguente gruppo di iscritti
+      not_in_any_group: >-
+        %{registrant} non fa parte di alcun gruppo, ma dovrebbe farne parte di uno
+      all_groups: >-
+        Tutti i gruppi
+      new_group: >-
+        Nuovo gruppo

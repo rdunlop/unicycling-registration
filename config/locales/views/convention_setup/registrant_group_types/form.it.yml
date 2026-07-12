@@ -1,0 +1,9 @@
+---
+it:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          Elemento di origine
+        or: >-
+          Oppure

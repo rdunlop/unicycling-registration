@@ -10,3 +10,5 @@
         Standard Skill Routine (export)
       "standard_skill_routines_view": >-
         Standard Skill Routine (Ansicht)
+      "registrant_groups": >-
+        Konfiguration der %{model}

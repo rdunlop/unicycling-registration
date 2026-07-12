@@ -1,0 +1,8 @@
+---
+es:
+  events_which_require_multiple_registrants_to_compete: >-
+    Aquí se enumeran los eventos que requieren que varios participantes compitan juntos como grupo. Usa estas páginas para indicar con quién competirás.
+  note_html: >-
+    <b>Nota</b> El director del evento tiene el control final sobre la composición de cada grupo. Estas páginas solo indican las composiciones de grupo <i>deseadas</i>.
+  please_chose_event: >-
+    Elige un evento para comenzar a especificar la composición de tu(s) participante(s).

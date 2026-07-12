@@ -1,0 +1,30 @@
+---
+nl:
+  registrant_groups:
+    show:
+      group_name: >-
+        Naam
+      edit_name: >-
+        Naam bewerken
+      delete_group: >-
+        Groep verwijderen
+      leaders: >-
+        Leiders
+      group_members: >-
+        Groepsleden
+      remove_this_group_question: >-
+        Deze groep verwijderen?
+      registrant_name: >-
+        Naam
+      actions: >-
+        Acties
+      remove_from_group: >-
+        Uit groep verwijderen
+      promote_to_leader: >-
+        Promoveren tot leider
+      no_current_members: >-
+        Geen huidige leden
+      group_leaders: >-
+        Groepsleiders
+      remove: >-
+        Verwijderen

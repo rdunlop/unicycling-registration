@@ -1,0 +1,18 @@
+---
+hu:
+  registrant_groups:
+    index:
+      title: >-
+        %{registrant_group_type} csoportjai
+      description: >-
+        Ez az oldal felsorolja a(z) %{registrant_group_type} összes beállított csoportját.
+      choose_the_members: >-
+        Nyugodtan válassza ki csoportja összes tagját.
+      in_the_following_registrant_group: >-
+        %{registrant} a következő nevezői csoportban van
+      not_in_any_group: >-
+        %{registrant} egyetlen csoportban sincs, de szerepelnie kellene egyben
+      all_groups: >-
+        Összes csoport
+      new_group: >-
+        Új csoport

@@ -41,10 +41,10 @@ class RegistrantGroupsController < ApplicationController
       new_leader = @registrant_group.registrant_group_leaders.build
       new_leader.user = current_user
       new_leader.save!
-      flash[:notice] = "Group created"
+      flash[:notice] = t('controllers.registrant_groups.create.created')
       redirect_to @registrant_group
     else
-      flash.now[:alert] = "Error creating group"
+      flash.now[:alert] = t('controllers.registrant_groups.create.error_creating_group')
       render :new
     end
   end
@@ -55,8 +55,8 @@ class RegistrantGroupsController < ApplicationController
   # GET /registrant_groups/1
   def show
     @registrant_group_type = @registrant_group.registrant_group_type
-    add_breadcrumb "Registrant Group Types", registrant_group_types_path
-    add_breadcrumb "Registrant Groups: #{@registrant_group_type}", registrant_group_type_registrant_groups_path(@registrant_group_type)
+    add_breadcrumb RegistrantGroupType.model_name.human(count: 2), registrant_group_types_path
+    add_breadcrumb "#{RegistrantGroup.model_name.human(count: 2)}: #{@registrant_group_type}", registrant_group_type_registrant_groups_path(@registrant_group_type)
     @registrant_group_members = @registrant_group.registrant_group_members
     @registrant_group_leaders = @registrant_group.registrant_group_leaders
 
@@ -69,7 +69,7 @@ class RegistrantGroupsController < ApplicationController
   # PUT /registrant_groups/1
   def update
     if @registrant_group.update(registrant_group_params)
-      redirect_to @registrant_group, notice: 'Registrant group was successfully updated.'
+      redirect_to @registrant_group, notice: t('controllers.registrant_groups.update.updated')
     else
       render :edit
     end
@@ -78,7 +78,7 @@ class RegistrantGroupsController < ApplicationController
   # DELETE /registrant_groups/1
   def destroy
     if @registrant_group.destroy
-      flash[:notice] = "Group deleted"
+      flash[:notice] = t('controllers.registrant_groups.destroy.deleted')
     end
 
     redirect_to registrant_group_type_registrant_groups_path(@registrant_group.registrant_group_type)

@@ -1,0 +1,9 @@
+---
+ko:
+  convention_setup:
+    registrant_group_types:
+      form:
+        source_element: >-
+          소스 요소
+        or: >-
+          또는

@@ -1,0 +1,15 @@
+---
+"hu":
+  "activerecord":
+    "attributes":
+      "registrant_group_type":
+        "notes": >-
+          Megjegyzések
+        "max_members_per_group": >-
+          Maximális tagszám csoportonként
+    "models":
+      "registrant_group_type":
+        "one": >-
+          Nevezői csoport típusa
+        "other": >-
+          Nevezői csoport típusok

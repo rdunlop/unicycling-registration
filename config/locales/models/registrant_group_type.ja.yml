@@ -1,0 +1,15 @@
+---
+"ja":
+  "activerecord":
+    "attributes":
+      "registrant_group_type":
+        "notes": >-
+          メモ
+        "max_members_per_group": >-
+          グループあたりの最大メンバー数
+    "models":
+      "registrant_group_type":
+        "one": >-
+          登録者グループの種類
+        "other": >-
+          登録者グループの種類

@@ -1,13 +1,12 @@
-%h2 Add Members
+%h2= t('.add_members')
 = simple_form_for(@new_registrant_group_member, url: registrant_group_registrant_group_members_path(registrant_group)) do |f|
   .field.row
     .small-12.medium-6.columns
-      = label_tag :registrant_ids, "Member"
+      = label_tag :registrant_ids, t('.member_label_tag')
       = select_tag :registrant_ids, options_from_collection_for_select(filter_registrants_for_signed_up_event(@new_member_registrants, event), "id", "with_id_to_s"),include_blank: true, multiple: true, class: 'chosen-select'
     .small-12.medium-6.columns
       .actions
-        = f.button :submit, "Add Member"
+        = f.button :submit, t('.add_member')
   %br
   %small
-    %b Note
-    Only registrants who have signed up for #{event} are listed here.
+    = t('.note_html', event: event)

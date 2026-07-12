@@ -1,0 +1,30 @@
+---
+ja:
+  registrant_groups:
+    show:
+      group_name: >-
+        名前
+      edit_name: >-
+        名前を編集
+      delete_group: >-
+        グループを削除
+      leaders: >-
+        リーダー
+      group_members: >-
+        グループのメンバー
+      remove_this_group_question: >-
+        このグループを削除しますか？
+      registrant_name: >-
+        名前
+      actions: >-
+        操作
+      remove_from_group: >-
+        グループから削除
+      promote_to_leader: >-
+        リーダーに昇格
+      no_current_members: >-
+        現在メンバーはいません
+      group_leaders: >-
+        グループのリーダー
+      remove: >-
+        削除

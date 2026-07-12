@@ -1,0 +1,16 @@
+---
+es:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            El tipo de grupo de participantes se creó correctamente.
+        update:
+          updated: >-
+            El tipo de grupo de participantes se actualizó correctamente.
+        destroy:
+          removed: >-
+            Tipo de grupo de participantes eliminado
+          unable_to_remove: >-
+            No se puede eliminar el tipo de grupo de participantes. Elimina primero los grupos

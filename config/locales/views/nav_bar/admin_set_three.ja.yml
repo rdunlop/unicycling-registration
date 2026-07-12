@@ -1,0 +1,6 @@
+---
+"ja":
+  "nav_bar":
+    "admin_set_three":
+      "registrant_groups": >-
+        %{model}の設定

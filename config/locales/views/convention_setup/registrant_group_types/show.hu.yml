@@ -1,0 +1,17 @@
+---
+hu:
+  convention_setup:
+    registrant_group_types:
+      show:
+        title: >-
+          Nevezői csoport típusa - %{registrant_group_type}
+        pdf: >-
+          pdf
+        groups: >-
+          Csoportok
+        group_name: >-
+          Csoport neve
+        Members: >-
+          Tagok
+        Size: >-
+          Méret

@@ -1,0 +1,18 @@
+---
+da:
+  registrant_groups:
+    index:
+      title: >-
+        Grupper for %{registrant_group_type}
+      description: >-
+        Denne side viser alle de konfigurerede grupper for %{registrant_group_type}.
+      choose_the_members: >-
+        Du er velkommen til at vælge alle medlemmerne af din gruppe.
+      in_the_following_registrant_group: >-
+        %{registrant} er i følgende deltagergruppe
+      not_in_any_group: >-
+        %{registrant} er ikke i nogen gruppe, men bør være i en
+      all_groups: >-
+        Alle grupper
+      new_group: >-
+        Ny gruppe

@@ -1,0 +1,18 @@
+---
+ja:
+  registrant_groups:
+    index:
+      title: >-
+        %{registrant_group_type}のグループ
+      description: >-
+        このページには%{registrant_group_type}に設定されたすべてのグループが一覧表示されます。
+      choose_the_members: >-
+        グループのすべてのメンバーを自由に選んでください。
+      in_the_following_registrant_group: >-
+        %{registrant}は次の登録者グループに所属しています
+      not_in_any_group: >-
+        %{registrant}はどのグループにも所属していませんが、いずれかに所属する必要があります
+      all_groups: >-
+        すべてのグループ
+      new_group: >-
+        新しいグループ

@@ -1,0 +1,12 @@
+---
+de:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Mitglieder hinzufügen
+      member_label_tag: >-
+        Mitglied
+      add_member: >-
+        Mitglied hinzufügen
+      note_html: >-
+        <b>Hinweis</b> Nur Angemeldete, die sich für %{event} angemeldet haben, sind hier aufgelistet.

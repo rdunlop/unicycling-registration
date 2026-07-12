@@ -1,0 +1,15 @@
+---
+nl:
+  controllers:
+    registrant_groups:
+      create:
+        created: >-
+          Groep aangemaakt
+        error_creating_group: >-
+          Fout bij het aanmaken van de groep
+      update:
+        updated: >-
+          Deelnemersgroep is succesvol bijgewerkt.
+      destroy:
+        deleted: >-
+          Groep verwijderd

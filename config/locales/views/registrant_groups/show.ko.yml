@@ -1,0 +1,30 @@
+---
+ko:
+  registrant_groups:
+    show:
+      group_name: >-
+        이름
+      edit_name: >-
+        이름 편집
+      delete_group: >-
+        그룹 삭제
+      leaders: >-
+        리더
+      group_members: >-
+        그룹 멤버
+      remove_this_group_question: >-
+        이 그룹을 삭제하시겠습니까?
+      registrant_name: >-
+        이름
+      actions: >-
+        작업
+      remove_from_group: >-
+        그룹에서 제거
+      promote_to_leader: >-
+        리더로 승격
+      no_current_members: >-
+        현재 멤버 없음
+      group_leaders: >-
+        그룹 리더
+      remove: >-
+        제거

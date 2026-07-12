@@ -1,0 +1,12 @@
+---
+it:
+  registrant_groups:
+    add_member_form:
+      add_members: >-
+        Aggiungi membri
+      member_label_tag: >-
+        Membro
+      add_member: >-
+        Aggiungi membro
+      note_html: >-
+        <b>Nota</b> Qui sono elencati solo gli iscritti che si sono registrati per %{event}.

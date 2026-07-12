@@ -1,0 +1,16 @@
+---
+en:
+  controllers:
+    convention_setup:
+      registrant_group_types:
+        create:
+          created: >-
+            Registrant group type was successfully created.
+        update:
+          updated: >-
+            Registrant group type was successfully updated.
+        destroy:
+          removed: >-
+            Removed Registration Group Type
+          unable_to_remove: >-
+            Unable to remove registration group type. Remove groups first
