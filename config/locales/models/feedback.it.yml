@@ -1,7 +1,6 @@
 ---
 "it":
   "activerecord":
-    "attributes":
     "models":
       "feedback":
         "one": >-
