@@ -1,7 +1,5 @@
 ---
 it:
-  registrant_group_types: >-
-    Tipi di gruppo di iscritti
   events_which_require_multiple_registrants_to_compete: >-
     Qui sono elencati gli eventi che richiedono la partecipazione congiunta di più iscritti come gruppo. Utilizza queste pagine per indicare con chi gareggerai.
   note_html: >-

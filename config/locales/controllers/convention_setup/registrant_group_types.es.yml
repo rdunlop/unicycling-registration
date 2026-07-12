@@ -12,7 +12,5 @@ es:
         destroy:
           removed: >-
             Tipo de grupo de participantes eliminado
-          unable_to_remvoe: >-
+          unable_to_remove: >-
             No se puede eliminar el tipo de grupo de participantes. Elimina primero los grupos
-        breadcrumb: >-
-          Tipos de grupo de participantes

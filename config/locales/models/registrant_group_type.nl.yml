@@ -1,0 +1,15 @@
+---
+"nl":
+  "activerecord":
+    "attributes":
+      "registrant_group_type":
+        "notes": >-
+          Notities
+        "max_members_per_group": >-
+          Maximaal aantal leden per groep
+    "models":
+      "registrant_group_type":
+        "one": >-
+          Type deelnemersgroep
+        "other": >-
+          Types deelnemersgroep

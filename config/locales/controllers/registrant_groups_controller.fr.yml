@@ -7,9 +7,6 @@ fr:
           Équipe créée
         error_creating_group: >-
           La création de l'équipe a échoué
-      show:
-        breadcrumb: >-
-          Équipes : %{registrant_group_type}
       update:
         updated: >-
           L'équipe a correctement été mise à jour

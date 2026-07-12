@@ -7,9 +7,6 @@ ja:
           グループを作成しました
         error_creating_group: >-
           グループの作成中にエラーが発生しました
-      show:
-        breadcrumb: >-
-          登録者グループ: %{registrant_group_type}
       update:
         updated: >-
           登録者グループを正常に更新しました。

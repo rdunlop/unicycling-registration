@@ -1,7 +1,5 @@
 ---
 ko:
-  registrant_group_types: >-
-    참가자 그룹 유형
   events_which_require_multiple_registrants_to_compete: >-
     그룹으로 함께 경쟁하기 위해 여러 참가자가 필요한 종목이 여기에 나열됩니다. 이 페이지를 사용하여 함께 경쟁할 사람을 지정하세요.
   note_html: >-

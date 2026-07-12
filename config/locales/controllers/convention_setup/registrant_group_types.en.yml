@@ -12,7 +12,5 @@ en:
         destroy:
           removed: >-
             Removed Registration Group Type
-          unable_to_remvoe: >-
+          unable_to_remove: >-
             Unable to remove registration group type. Remove groups first
-        breadcrumb: >-
-          Registrant Group Types

@@ -1,7 +1,5 @@
 ---
 ja:
-  registrant_group_types: >-
-    登録者グループの種類
   events_which_require_multiple_registrants_to_compete: >-
     複数の登録者がグループとして一緒に競技する必要がある種目がここに一覧表示されます。これらのページを使って、誰と一緒に競技するかを指定してください。
   note_html: >-

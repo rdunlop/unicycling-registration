@@ -7,9 +7,6 @@ es:
           Grupo creado
         error_creating_group: >-
           Error al crear el grupo
-      show:
-        breadcrumb: >-
-          Grupos de participantes: %{registrant_group_type}
       update:
         updated: >-
           El grupo de participantes se actualizó correctamente.

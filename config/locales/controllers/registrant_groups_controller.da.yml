@@ -7,9 +7,6 @@ da:
           Gruppe oprettet
         error_creating_group: >-
           Fejl ved oprettelse af gruppe
-      show:
-        breadcrumb: >-
-          Deltagergrupper: %{registrant_group_type}
       update:
         updated: >-
           Deltagergruppen blev opdateret.

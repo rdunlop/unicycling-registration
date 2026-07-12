@@ -11,4 +11,4 @@
       "standard_skill_routines_view": >-
         Rutinas de habilidad estandar (ver)
       "registrant_groups": >-
-        Configuración de grupos de participantes
+        Configuración de %{model}

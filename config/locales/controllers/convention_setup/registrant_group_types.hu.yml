@@ -12,7 +12,5 @@ hu:
         destroy:
           removed: >-
             Nevezői csoport típusa eltávolítva
-          unable_to_remvoe: >-
+          unable_to_remove: >-
             A nevezői csoport típusa nem távolítható el. Először távolítsa el a csoportokat
-        breadcrumb: >-
-          Nevezői csoport típusok

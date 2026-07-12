@@ -1,7 +1,5 @@
 ---
 da:
-  registrant_group_types: >-
-    Deltagergruppetyper
   events_which_require_multiple_registrants_to_compete: >-
     Events, der kræver, at flere deltagere konkurrerer sammen som en gruppe, er angivet her. Brug disse sider til at angive, hvem du vil konkurrere sammen med.
   note_html: >-

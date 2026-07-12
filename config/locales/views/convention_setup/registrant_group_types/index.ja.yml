@@ -13,10 +13,6 @@ ja:
           4x100リレーのチームメンバー
         example2: >-
           宿泊のルームメイト
-        source_element: >-
-          ソース要素
-        created_at: >-
-          作成日時
         actions: >-
           操作
         new_registrant_group_type: >-

@@ -55,8 +55,8 @@ class RegistrantGroupsController < ApplicationController
   # GET /registrant_groups/1
   def show
     @registrant_group_type = @registrant_group.registrant_group_type
-    add_breadcrumb I18n.t('controllers.registrant_group_types.breadcrumb'), registrant_group_types_path
-    add_breadcrumb I18n.t('controllers.registrant_groups.show.breadcrumb', registrant_group_type: @registrant_group_type), registrant_group_type_registrant_groups_path(@registrant_group_type)
+    add_breadcrumb RegistrantGroupType.model_name.human(count: 2), registrant_group_types_path
+    add_breadcrumb "#{RegistrantGroup.model_name.human(count: 2)}: #{@registrant_group_type}", registrant_group_type_registrant_groups_path(@registrant_group_type)
     @registrant_group_members = @registrant_group.registrant_group_members
     @registrant_group_leaders = @registrant_group.registrant_group_leaders
 

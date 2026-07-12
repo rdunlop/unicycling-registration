@@ -7,9 +7,6 @@ en:
           Group created
         error_creating_group: >-
           Error creating group
-      show:
-        breadcrumb: >-
-          Registrant Groups: %{registrant_group_type}
       update:
         updated: >-
           Registrant group was successfully updated.

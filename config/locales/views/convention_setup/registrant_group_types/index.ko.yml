@@ -13,10 +13,6 @@ ko:
           4x100 릴레이 팀 멤버
         example2: >-
           숙소 룸메이트
-        source_element: >-
-          소스 요소
-        created_at: >-
-          생성 일시
         actions: >-
           작업
         new_registrant_group_type: >-

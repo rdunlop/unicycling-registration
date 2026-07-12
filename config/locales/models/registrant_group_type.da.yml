@@ -1,0 +1,15 @@
+---
+"da":
+  "activerecord":
+    "attributes":
+      "registrant_group_type":
+        "notes": >-
+          Noter
+        "max_members_per_group": >-
+          Maks. medlemmer pr. gruppe
+    "models":
+      "registrant_group_type":
+        "one": >-
+          Deltagergruppetype
+        "other": >-
+          Deltagergruppetyper

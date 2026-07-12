@@ -29,6 +29,6 @@ class RegistrantGroupTypesController < ApplicationController
   end
 
   def add_breadcrumbs
-    add_breadcrumb I18n.t('controllers.registrant_group_types.breadcrumb'), registrant_group_types_path
+    add_breadcrumb RegistrantGroupType.model_name.human(count: 2), registrant_group_types_path
   end
 end

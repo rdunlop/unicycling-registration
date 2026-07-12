@@ -12,7 +12,5 @@ de:
         destroy:
           removed: >-
             Anmeldegruppen-Typ entfernt
-          unable_to_remvoe: >-
+          unable_to_remove: >-
             Anmeldegruppen-Typ kann nicht entfernt werden. Entferne zuerst die Gruppen
-        breadcrumb: >-
-          Anmeldegruppen-Typen

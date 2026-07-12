@@ -11,8 +11,8 @@
 %table
   %thead
     %tr
-      %th= t('.source_element')
-      %th= t('.created_at')
+      %th= RegistrantGroupType.human_attribute_name(:source_element)
+      %th= RegistrantGroupType.human_attribute_name(:created_at)
       %th= t('.actions')
   %tbody
     - @registrant_group_types.each do |reg_group_type|

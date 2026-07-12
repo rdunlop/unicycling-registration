@@ -69,7 +69,7 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
     if @registrant_group_type.destroy
       flash[:notice] = t('controllers.convention_setup.registrant_group_types.destroy.removed')
     else
-      flash[:alert] = t('controllers.convention_setup.registrant_group_types.destroy.unable_to_remvoe')
+      flash[:alert] = t('controllers.convention_setup.registrant_group_types.destroy.unable_to_remove')
     end
     redirect_to convention_setup_registrant_group_types_url
   end
@@ -97,6 +97,6 @@ class ConventionSetup::RegistrantGroupTypesController < ApplicationController
   end
 
   def add_breadcrumbs
-    add_breadcrumb t('controllers.convention_setup.registrant_group_types.breadcrumb'), convention_setup_registrant_group_types_path
+    add_breadcrumb RegistrantGroupType.model_name.human(count: 2), convention_setup_registrant_group_types_path
   end
 end

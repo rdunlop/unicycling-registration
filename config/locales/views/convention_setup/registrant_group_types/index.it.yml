@@ -13,10 +13,6 @@ it:
           Membri della squadra staffetta 4x100
         example2: >-
           Compagni di stanza per l'alloggio
-        source_element: >-
-          Elemento di origine
-        created_at: >-
-          Creato il
         actions: >-
           Azioni
         new_registrant_group_type: >-

@@ -3,4 +3,4 @@
   "nav_bar":
     "admin_set_three":
       "registrant_groups": >-
-        登録者グループの設定
+        %{model}の設定

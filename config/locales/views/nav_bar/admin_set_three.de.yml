@@ -6,9 +6,9 @@
         Kopiere Disziplinen von vorherigen Veranstaltungen
       "export_data": >-
         Daten exportieren
-      "registrant_groups": >-
-        Konfiguration der Anmeldegruppen
       "standard_skill_routines_export": >-
         Standard Skill Routine (export)
       "standard_skill_routines_view": >-
         Standard Skill Routine (Ansicht)
+      "registrant_groups": >-
+        Konfiguration der %{model}

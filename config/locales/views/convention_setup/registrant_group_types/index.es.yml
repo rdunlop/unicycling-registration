@@ -13,10 +13,6 @@ es:
           Miembros del equipo de relevos 4x100
         example2: >-
           Compañeros de habitación
-        source_element: >-
-          Elemento de origen
-        created_at: >-
-          Creado el
         actions: >-
           Acciones
         new_registrant_group_type: >-

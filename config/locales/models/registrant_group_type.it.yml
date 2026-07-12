@@ -1,0 +1,15 @@
+---
+"it":
+  "activerecord":
+    "attributes":
+      "registrant_group_type":
+        "notes": >-
+          Note
+        "max_members_per_group": >-
+          Numero massimo di membri per gruppo
+    "models":
+      "registrant_group_type":
+        "one": >-
+          Tipo di gruppo di iscritti
+        "other": >-
+          Tipi di gruppo di iscritti

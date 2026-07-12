@@ -12,7 +12,5 @@ da:
         destroy:
           removed: >-
             Deltagergruppetype fjernet
-          unable_to_remvoe: >-
+          unable_to_remove: >-
             Deltagergruppetypen kan ikke fjernes. Fjern grupperne først
-        breadcrumb: >-
-          Deltagergruppetyper
