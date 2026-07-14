@@ -35,4 +35,12 @@ class CustomLabelType < ApplicationRecord
   validates :column_gutter, presence: true
 
   belongs_to :created_by, class_name: "User", optional: true
+
+  def paper_size_value
+    if paper_size == "CUSTOM"
+      paper_size_custom.split(",").map(&:to_i)
+    else
+      paper_size
+    end
+  end
 end

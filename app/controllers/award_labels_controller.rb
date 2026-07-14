@@ -378,7 +378,7 @@ class AwardLabelsController < ApplicationController
     custom_types = {}
     CustomLabelType.all.each do |custom_label_type|
       custom_types[custom_label_type.name] = {
-        "paper_size" => custom_label_type.paper_size,
+        "paper_size" => custom_label_type.paper_size_value,
         "top_margin" => custom_label_type.top_margin,
         "bottom_margin" => custom_label_type.bottom_margin,
         "left_margin" => custom_label_type.left_margin,
