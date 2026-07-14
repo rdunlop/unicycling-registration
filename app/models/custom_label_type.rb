@@ -29,8 +29,7 @@ class CustomLabelType < ApplicationRecord
 
   validates :columns, :rows, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 20 }
 
-  validates :left_margin, :right_margin, :bottom_margin, :top_margin, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 120}
-
+  validates :left_margin, :right_margin, :bottom_margin, :top_margin, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 120 }
 
   validates :created_by_id, presence: true
   validates :column_gutter, presence: true

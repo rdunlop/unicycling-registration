@@ -14,8 +14,7 @@ class CustomLabelTypesController < ApplicationController
   end
 
   # GET /custom_label_types/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /custom_label_types
   def create

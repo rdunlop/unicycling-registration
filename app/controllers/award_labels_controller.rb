@@ -344,19 +344,20 @@ class AwardLabelsController < ApplicationController
 
   def load_label_definitions
     @built_in_labels = [
-      { name: "Avery5160padded", description: "Square Labels"},
+      { name: "Avery5160padded", description: "Square Labels" },
       { name: "Avery8293", description: "Round Labels" },
-      { name: "Avery5434", description: "Square Labels"},
+      { name: "Avery5434", description: "Square Labels" },
       { name: "Spanish4716", description: "Square Labels 4716 (A4 Paper)" },
       { name: "LS3639", description: "Round Korean Labels" },
       { name: "Avery5293", description: "Round Labels" },
-      { name: "Avery5293padded", description: "Round Labels Avery (slightly padded)"},
-      { name: "Avery5293smallsquare", description: "Round Labels Avery (heavily padded)"},
-      { name: "L7651", description: "Square Labels Avery"}
+      { name: "Avery5293padded", description: "Round Labels Avery (slightly padded)" },
+      { name: "Avery5293smallsquare", description: "Round Labels Avery (heavily padded)" },
+      { name: "L7651", description: "Square Labels Avery" }
     ]
     @built_in_labels.each do |bil|
       label_definition = Prawn::Labels.types[bil[:name]]
       next if label_definition.nil?
+
       bil[:columns] = label_definition["columns"]
       bil[:rows] = label_definition["rows"]
     end
@@ -385,7 +386,7 @@ class AwardLabelsController < ApplicationController
         "columns" => custom_label_type.columns,
         "rows" => custom_label_type.rows,
         "column_gutter" => custom_label_type.column_gutter,
-        "row_gutter" => custom_label_type.row_gutter,
+        "row_gutter" => custom_label_type.row_gutter
       }
     end
     Prawn::Labels.types = base_types.merge(custom_types)
