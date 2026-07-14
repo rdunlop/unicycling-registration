@@ -26,7 +26,7 @@ class AwardLabelsController < ApplicationController
   before_action :load_award_label, only: %i[edit update destroy]
 
   before_action :load_label_definitions, only: %i[index create]
-  before_action :set_label_types, only: [:normal_labels]
+  before_action :load_prawn_label_types, only: %i[index normal_labels]
   before_action :load_user, except: %i[edit update destroy]
 
   # GET /users/#/award_labels
@@ -343,23 +343,13 @@ class AwardLabelsController < ApplicationController
   end
 
   def load_label_definitions
-    @built_in_labels = [
-      { name: "Avery5160padded", description: "Square Labels" },
-      { name: "Avery8293", description: "Round Labels" },
-      { name: "Avery5434", description: "Square Labels" },
-      { name: "Spanish4716", description: "Square Labels 4716 (A4 Paper)" },
-      { name: "LS3639", description: "Round Korean Labels" },
-      { name: "Avery5293", description: "Round Labels" },
-      { name: "Avery5293padded", description: "Round Labels Avery (slightly padded)" },
-      { name: "Avery5293smallsquare", description: "Round Labels Avery (heavily padded)" },
-      { name: "L7651", description: "Square Labels Avery" }
-    ]
-    @built_in_labels.each do |bil|
-      label_definition = Prawn::Labels.types[bil[:name]]
-      next if label_definition.nil?
-
-      bil[:columns] = label_definition["columns"]
-      bil[:rows] = label_definition["rows"]
+    @built_in_labels = SystemLabelType.all.map do |system_label_type|
+      {
+        name: system_label_type.name,
+        description: system_label_type.description,
+        columns: system_label_type.columns,
+        rows: system_label_type.rows
+      }
     end
 
     @custom_label_types = CustomLabelType.all.map do |custom_label_type|
@@ -372,23 +362,8 @@ class AwardLabelsController < ApplicationController
     end
   end
 
-  # Load custom label types into prawn, for use
-  def set_label_types
-    base_types = Prawn::Labels.types
-    custom_types = {}
-    CustomLabelType.all.each do |custom_label_type|
-      custom_types[custom_label_type.name] = {
-        "paper_size" => custom_label_type.paper_size_value,
-        "top_margin" => custom_label_type.top_margin,
-        "bottom_margin" => custom_label_type.bottom_margin,
-        "left_margin" => custom_label_type.left_margin,
-        "right_margin" => custom_label_type.right_margin,
-        "columns" => custom_label_type.columns,
-        "rows" => custom_label_type.rows,
-        "column_gutter" => custom_label_type.column_gutter,
-        "row_gutter" => custom_label_type.row_gutter
-      }
-    end
-    Prawn::Labels.types = base_types.merge(custom_types)
+  # Load system + custom label types into prawn, for use when rendering PDFs
+  def load_prawn_label_types
+    LabelTypeRegistry.load_into_prawn!
   end
 end
