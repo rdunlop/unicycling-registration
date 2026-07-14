@@ -25,7 +25,7 @@ class AwardLabelsController < ApplicationController
   before_action :authenticate_ability
   before_action :load_award_label, only: %i[edit update destroy]
 
-  before_action :load_label_definitions, only: [:index]
+  before_action :load_label_definitions, only: %i[index create]
   before_action :set_label_types, only: [:normal_labels]
   before_action :load_user, except: %i[edit update destroy]
 

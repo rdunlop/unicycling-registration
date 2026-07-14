@@ -45,7 +45,6 @@
         .row
           - @built_in_labels.each do |h|
             = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
-          %hr
         %row
           %h4 Custom Label Types
           = link_to "Manage Custom Label Types", custom_label_types_path
@@ -54,7 +53,7 @@
           - @custom_label_types.each do |h|
             = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
   %hr
-  %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Options
+  %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Creation Options
 #advanced_labels.is--hidden
   %h2 Create Labels For a specific Registrant/Registrant-Group/Competition
   = form_tag(create_labels_user_award_labels_path(@user), {:method => :post}) do
