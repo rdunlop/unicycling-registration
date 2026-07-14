@@ -1,0 +1,42 @@
+
+%table
+  %thead
+    %tr
+      %th= CustomLabelType.human_attribute_name(:name)
+      %th= CustomLabelType.human_attribute_name(:paper_size)
+      %th= CustomLabelType.human_attribute_name(:paper_size_custom)
+      %th= CustomLabelType.human_attribute_name(:columns)
+      %th= CustomLabelType.human_attribute_name(:rows)
+      %th= CustomLabelType.human_attribute_name(:top_margin)
+      %th= CustomLabelType.human_attribute_name(:bottom_margin)
+      %th= CustomLabelType.human_attribute_name(:left_margin)
+      %th= CustomLabelType.human_attribute_name(:right_margin)
+      %th= CustomLabelType.human_attribute_name(:column_gutter)
+      %th= CustomLabelType.human_attribute_name(:row_gutter)
+      %th= CustomLabelType.human_attribute_name(:created_by_id)
+      %th= CustomLabelType.human_attribute_name(:description)
+      %th Created At
+      %th Updated At
+      %th
+      %th
+  %tbody
+    - @custom_label_types.each do |custom_label_type|
+      - next unless custom_label_type.persisted?
+      %tr
+        %td= custom_label_type.name
+        %td= custom_label_type.paper_size
+        %td= custom_label_type.paper_size_custom
+        %td= custom_label_type.columns
+        %td= custom_label_type.rows
+        %td= custom_label_type.top_margin
+        %td= custom_label_type.bottom_margin
+        %td= custom_label_type.left_margin
+        %td= custom_label_type.right_margin
+        %td= custom_label_type.column_gutter
+        %td= custom_label_type.row_gutter
+        %td= custom_label_type.created_by
+        %td= custom_label_type.description
+        %td= custom_label_type.created_at.to_fs(:short)
+        %td= custom_label_type.updated_at.to_fs(:short)
+        %td= link_to t("edit"), edit_custom_label_type_path(custom_label_type)
+        %td= link_to t("delete"), custom_label_type, method: :delete, data: { confirm: t("are_you_sure") }

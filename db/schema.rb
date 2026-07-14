@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_04_122530) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_14_023225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -340,6 +340,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_04_122530) do
     t.integer "price_cents"
     t.datetime "updated_at", precision: nil
     t.index ["code"], name: "index_coupon_codes_on_code", unique: true
+  end
+
+  create_table "custom_label_types", force: :cascade do |t|
+    t.float "bottom_margin", null: false
+    t.float "column_gutter", null: false
+    t.integer "columns", null: false
+    t.datetime "created_at", null: false
+    t.integer "created_by_id", null: false
+    t.string "description"
+    t.float "left_margin", null: false
+    t.string "name", null: false
+    t.string "paper_size", null: false
+    t.string "paper_size_custom"
+    t.float "right_margin", null: false
+    t.float "row_gutter", null: false
+    t.integer "rows", null: false
+    t.float "top_margin", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "distance_attempts", id: :serial, force: :cascade do |t|

@@ -1,0 +1,5 @@
+.small-12.medium-4.columns
+  = description
+  = "(#{columns} columns, #{rows} rows)"
+  %br
+  = submit_tag description, name: "label_type", value: name, :class => "button", data: { disable_with: false }

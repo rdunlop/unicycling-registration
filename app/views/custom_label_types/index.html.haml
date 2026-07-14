@@ -1,0 +1,16 @@
+%h1 Custom Label Types
+
+%p.left_aligned
+  When creating new Label Types, we recommend the following process:
+  %ol.left_aligned
+    %li Measure the label spacings, and convert to PTS (0.1 INCH = 7.2 Pts, 1 mm = 2.835 Pts)
+    %li Create a custom label
+    %li On Award Labels page, choose "Show Advanced Options" and "Show Gridlines" in order to print PDF with squares
+    %li Print frequent test pages (on plain paper) and compare them (hold them up to bright lights) to see their positioning.
+    %li Adjust custom label values until the squuares are mostly within the target label areas.
+
+= render "table"
+
+%hr
+
+= link_to "New", new_custom_label_type_path, class: "button"
