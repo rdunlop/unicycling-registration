@@ -1,0 +1,29 @@
+%h1 System Label Types
+
+%p.left_aligned
+  These are the built-in label types available to every convention. They are shared across all conventions (superadmin-only).
+
+%table
+  %thead
+    %tr
+      %th= SystemLabelType.human_attribute_name(:name)
+      %th= SystemLabelType.human_attribute_name(:description)
+      %th= SystemLabelType.human_attribute_name(:paper_size)
+      %th= SystemLabelType.human_attribute_name(:columns)
+      %th= SystemLabelType.human_attribute_name(:rows)
+      %th
+      %th
+  %tbody
+    - @system_label_types.each do |system_label_type|
+      %tr
+        %td= system_label_type.name
+        %td= system_label_type.description
+        %td= system_label_type.paper_size
+        %td= system_label_type.columns
+        %td= system_label_type.rows
+        %td= link_to t("edit"), edit_system_label_type_path(system_label_type)
+        %td= link_to t("delete"), system_label_type_path(system_label_type), method: :delete, data: { confirm: t("are_you_sure") }
+
+%hr
+
+= link_to "New", new_system_label_type_path, class: "button"

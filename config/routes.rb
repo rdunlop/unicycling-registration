@@ -238,6 +238,7 @@ Rails.application.routes.draw do
           delete :remove
         end
       end
+      resources :system_label_types
       # /convention_setup/migrate
       # /convention_setup/migrate/from/:tenant
       # /convention_setup/migrate/from/:tenant/events
