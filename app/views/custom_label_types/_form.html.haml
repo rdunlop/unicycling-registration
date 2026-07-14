@@ -1,0 +1,50 @@
+= simple_form_for(@custom_label_type) do |f|
+  - if @custom_label_type.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@custom_label_type.errors.count, "error")
+        prohibited this custom_label_type from being saved:
+      %ul
+        - @custom_label_type.errors.full_messages.each do |msg|
+          %li= msg
+  %div
+    .row
+      .columns
+        = f.input :name
+    .row
+      .columns
+        = f.input :description
+    .row
+      .small-3.columns
+        = f.input :paper_size, collection: CustomLabelType::PAPER_SIZES
+      .small-9.columns
+        = f.input :paper_size_custom
+    .row
+      .small-6.columns
+        = f.input :columns
+      .small-6.columns
+        = f.input :rows
+    .row
+      %p
+        %b NOTE
+        The following values (margin, gutter) must be specified in PTS values.
+        %ul
+          %li 0.1 Inch = 7.2 PTS,
+          %li 1mm = 2.835 PTS
+    .row
+      .small-3.columns
+        = f.input :top_margin
+      .small-3.columns
+        = f.input :bottom_margin
+      .small-3.columns
+        = f.input :left_margin
+      .small-3.columns
+        = f.input :right_margin
+    .row
+      .small-3.columns
+        = f.input :column_gutter
+      .small-3.columns
+        = f.input :row_gutter
+    .row
+      .small-3.columns
+        = f.button :submit

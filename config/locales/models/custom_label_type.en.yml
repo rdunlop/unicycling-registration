@@ -1,0 +1,32 @@
+---
+en:
+  activerecord:
+    attributes:
+      custom_label_type:
+        name: Name
+        description: Description
+        paper_size: Paper Size
+        paper_size_custom: Custom Paper Size (w,h)
+        columns: Columns
+        rows: Rows
+        top_margin: Top Margin
+        bottom_margin: Bottom Margin
+        left_margin: Left Margin
+        right_margin: Right Margin
+        column_gutter: Column Gutter
+        row_gutter: Row Gutter
+        created_by_id: Created By
+    models:
+      custom_label_type:
+        one: Custom Label Type
+        other: Custom Label Types
+  simple_form:
+      hints:
+        custom_label_type:
+          paper_size_custom: Must be specified in PTS (see below). Format "w,h". E.g. "288,432" (for 4inch x 6inch)
+          top_margin: In PTS
+          bottom_margin: In PTS
+          left_margin: In PTS
+          right_margin: In PTS
+          column_gutter: In PTS
+          row_gutter: In PTS

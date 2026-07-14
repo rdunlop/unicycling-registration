@@ -22,10 +22,14 @@
         = submit_tag "Create Labels (Generic) for Selected Competition", class: "button success"
   %hr
   %h2 Print Labels Sheet
+
   = link_to "Announcer Sheet (pdf)", announcer_sheet_user_award_labels_path(@user, format: :pdf)
   .row
     .small-12.columns
       = form_tag(normal_labels_user_award_labels_path(@user), {:method => :get}) do
+        .row
+          .small-12.columns
+            %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_square"} } Show Advanced Options
         .row#advanced_square.is--hidden
           .small-6.columns
             = label_tag :separate_registrants, "Separate each registrant with a row of blank labels"
@@ -37,45 +41,18 @@
             = label_tag :show_gridlines, "Show Gridlines"
             = check_box_tag :show_gridlines
         .row
-          .small-12.medium-4.columns
-            Square Labels (3 columns, 10 rows)
-            %br
-            = submit_tag "Square Labels Avery", name: "label_type", value: "Avery5160padded", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Round Labels (4 columns, 5 rows)
-            %br
-            = submit_tag "Round Labels Avery", name: "label_type", value: "Avery8293", :class => "button round", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Square Labels (2 columns, 5 rows)
-            %br
-            = submit_tag "Square Labels Avery", name: "label_type", value: "Avery5434", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Square Labels (5 columns, 13 rows)
-            %br
-            = submit_tag "Square Labels 4716 (A4 Paper)", name: "label_type", value: "Spanish4716", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Round Labels (4 columns, 5 rows)
-            %br
-            = submit_tag "Round Korean Labels", name: "label_type", value: "LS3639", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Round Labels (4 columns, 6 rows)
-            %br
-            = submit_tag "Round Labels Avery", name: "label_type", value: "Avery5293", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Round Labels (4 columns, 6 rows)
-            %br
-            = submit_tag "Round Labels Avery (slightly padded)", name: "label_type", value: "Avery5293padded", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Round Labels (4 columns, 6 rows)
-            %br
-            = submit_tag "Round Labels Avery (heavily padded)", name: "label_type", value: "Avery5293smallsquare", :class => "button", data: { disable_with: false }
-          .small-12.medium-4.columns
-            Square Labels (5 columns, 13 rows)
-            %br
-            = submit_tag "Square Labels Avery", name: "label_type", value: "L7651", :class => "button", data: { disable_with: false }
+          %h4 Standard Label Types
         .row
-          .small-12.columns
-            %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_square"} } Advanced Options
+          - @built_in_labels.each do |h|
+            = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
+          %hr
+        %row
+          %h4 Custom Label Types
+          = link_to "Manage Custom Label Types", custom_label_types_path
+          %br
+        %row
+          - @custom_label_types.each do |h|
+            = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
   %hr
   %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Options
 #advanced_labels.is--hidden
