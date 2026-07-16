@@ -49,6 +49,8 @@
           %h4 Custom Label Types
           = link_to "Manage Custom Label Types", custom_label_types_path
           %br
+          = link_to "Choose Label Types to Show", edit_label_type_settings_path
+          %br
         %row
           - @custom_label_types.each do |h|
             = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]

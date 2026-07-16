@@ -593,6 +593,7 @@ Rails.application.routes.draw do
       end
     end
     resources :custom_label_types
+    resource :label_type_settings, only: %i[edit update]
     resources :additional_registrant_accesses, only: [] do
       member do
         put :accept_readonly

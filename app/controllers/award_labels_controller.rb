@@ -360,6 +360,12 @@ class AwardLabelsController < ApplicationController
         rows: custom_label_type.rows
       }
     end
+
+    enabled = @config.enabled_label_types
+    if enabled.present?
+      @built_in_labels.select! { |bil| enabled.include?(bil[:name]) }
+      @custom_label_types.select! { |clt| enabled.include?(clt[:name]) }
+    end
   end
 
   # Load system + custom label types into prawn, for use when rendering PDFs
