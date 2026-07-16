@@ -214,10 +214,6 @@ class AwardLabelsController < ApplicationController
       set_font(pdf)
       pdf.text name, align: :center, inline_format: true, valign: :center, fallback_fonts: ["IPA"]
     end
-    if params[:show_gridlines].present?
-      labels.document.go_to_page(1)
-      labels.document.grid.show_all
-    end
     result = labels.document.render
 
     send_data result, filename: "labels-#{Time.current}.pdf", type: "application/pdf"

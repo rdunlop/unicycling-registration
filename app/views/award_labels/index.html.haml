@@ -37,9 +37,6 @@
           .small-6.columns
             = label_tag :skip_positions, "Skip Positions"
             = number_field_tag :skip_positions, nil, {min: 0}
-          .small-6.columns
-            = label_tag :show_gridlines, "Show Gridlines"
-            = check_box_tag :show_gridlines
         .row
           %h4 Standard Label Types
         .row
@@ -50,6 +47,8 @@
           = link_to "Manage Custom Label Types", custom_label_types_path
           %br
           = link_to "Choose Label Types to Show", edit_label_type_settings_path
+          %br
+          = link_to "Print Test Labels / Ruler", label_test_prints_path
           %br
         %row
           - @custom_label_types.each do |h|
