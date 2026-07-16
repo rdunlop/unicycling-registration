@@ -7,16 +7,24 @@ class LabelTestPrintsController < ApplicationController
   def index; end
 
   # Prints a sample sheet for the chosen label type, with gridlines always shown.
+  # Each cell shows a calibration fact about the label type (name, description,
+  # margins, gutters); once test_print_info_fields is exhausted, remaining
+  # cells are left blank rather than repeating.
   def print
-    if params[:label_type].blank?
-      redirect_to label_test_prints_path, alert: "Please choose a label type."
+    label_type = params[:label_type]
+    label_definition = Prawn::Labels.types[label_type]
+    if label_definition.blank?
+      redirect_to label_test_prints_path, alert: "Please choose a valid label type."
       return
     end
 
-    label_type = params[:label_type]
-    label_definition = Prawn::Labels.types[label_type]
-    count = label_definition ? (label_definition["columns"] * label_definition["rows"]) : 1
-    names = (1..count).map(&:to_s)
+    label_record = SystemLabelType.find_by(name: label_type) || CustomLabelType.find_by(name: label_type)
+    info_fields = label_record.test_print_info_fields
+    count = label_definition["columns"] * label_definition["rows"]
+    names = (0...count).map do |i|
+      header, value = info_fields[i]
+      header ? "<b>#{header}</b>\n#{value}" : ""
+    end
 
     labels = Prawn::Labels.new(names, type: label_type, shrink_to_fit: true) do |pdf, name|
       set_font(pdf)

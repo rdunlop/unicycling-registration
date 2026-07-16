@@ -24,6 +24,12 @@ describe LabelTestPrintsController do
       expect(response).to redirect_to(label_test_prints_path)
       expect(flash[:alert]).to be_present
     end
+
+    it "redirects with an alert when the label_type does not exist" do
+      get :print, params: { label_type: "NotARealLabelType" }
+      expect(response).to redirect_to(label_test_prints_path)
+      expect(flash[:alert]).to be_present
+    end
   end
 
   describe "GET ruler" do

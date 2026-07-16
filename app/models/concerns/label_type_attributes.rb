@@ -36,4 +36,22 @@ module LabelTypeAttributes
       "row_gutter" => row_gutter
     }
   end
+
+  # [header, value] pairs describing this label type, used to fill each cell
+  # of a test print with useful calibration info instead of a bare number.
+  def test_print_info_fields
+    [
+      ["Label Name", name],
+      ["Description", description],
+      ["Paper Size", paper_size == "CUSTOM" ? paper_size_custom : paper_size],
+      ["Columns", columns],
+      ["Rows", rows],
+      ["Top Margin", "#{top_margin}pts"],
+      ["Bottom Margin", "#{bottom_margin}pts"],
+      ["Left Margin", "#{left_margin}pts"],
+      ["Right Margin", "#{right_margin}pts"],
+      ["Column Gutter", "#{column_gutter}pts"],
+      ["Row Gutter", "#{row_gutter}pts"]
+    ]
+  end
 end
