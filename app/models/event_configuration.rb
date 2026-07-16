@@ -419,7 +419,8 @@ class EventConfiguration < ApplicationRecord
   end
 
   # Convert from stored string "Avery8293,MyCustomLabel" to ["Avery8293", "MyCustomLabel"]
-  # Blank means "no restriction" (show every label type on the Award Labels page).
+  # Blank means none are shown on the Award Labels page, until the convention
+  # explicitly chooses which label types it wants to use.
   def enabled_label_types
     self[:enabled_label_types].to_s.split(",")
   end

@@ -357,11 +357,11 @@ class AwardLabelsController < ApplicationController
       }
     end
 
+    # Nothing is shown until a convention explicitly chooses label types via
+    # LabelTypeSettingsController - keeps this page uncluttered by default.
     enabled = @config.enabled_label_types
-    if enabled.present?
-      @built_in_labels.select! { |bil| enabled.include?(bil[:name]) }
-      @custom_label_types.select! { |clt| enabled.include?(clt[:name]) }
-    end
+    @built_in_labels.select! { |bil| enabled.include?(bil[:name]) }
+    @custom_label_types.select! { |clt| enabled.include?(clt[:name]) }
   end
 
   # Load system + custom label types into prawn, for use when rendering PDFs

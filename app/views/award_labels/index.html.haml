@@ -44,16 +44,25 @@
           %br
           = link_to "Print Test Labels / Ruler", label_test_prints_path
           %br
-        .row
-          %h4 Standard Label Types
-        .row
-          - @built_in_labels.each do |h|
-            = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
-        %row
-          %h4 Custom Label Types
-        %row
-          - @custom_label_types.each do |h|
-            = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
+        - if @built_in_labels.empty? && @custom_label_types.empty?
+          .row
+            %p
+              No label types have been chosen for this convention yet.
+              = link_to "Choose Label Types to Show", edit_label_type_settings_path
+              to pick from the built-in options, or
+              = link_to "create a Custom Label Type", custom_label_types_path
+              of your own.
+        - else
+          .row
+            %h4 Standard Label Types
+          .row
+            - @built_in_labels.each do |h|
+              = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
+          %row
+            %h4 Custom Label Types
+          %row
+            - @custom_label_types.each do |h|
+              = render "label_sheet_button", name: h[:name], description: h[:description], rows: h[:rows], columns: h[:columns]
   %hr
   %a.js--toggle{ href: "#", data: { toggle_target: "#advanced_labels" } } Show Advanced Creation Options
 #advanced_labels.is--hidden
