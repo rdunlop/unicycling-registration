@@ -19,7 +19,6 @@
 
  *= require fancybox
  *= require jquery-ui/sortable
- *= require jquery-ui/tabs
  *= require select2
  *= require datetimepicker
  *= require dataTables/jquery.dataTables.foundation
@@ -30,13 +29,39 @@
  */
 @import "old_styles_list";
 
-// necessary to make the tabs look aligned to the contained table elements
-.ui-tabs .ui-tabs-nav {
+// Style Foundation tabs as classic tab buttons (matching the previous jQuery UI look)
+ul.tabs {
+  // necessary to make the tabs look aligned to the contained table elements
   padding-left: 1.4em;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #ccc;
 }
 
-.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
-  min-width: 70px;
+.tabs-title {
+  margin-right: 4px;
+
+  > a {
+    min-width: 70px;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    background-color: #f6f6f6;
+    color: #454545;
+  }
+
+  &.is-active > a {
+    background-color: #2e7bee;
+    color: #fff;
+  }
+}
+
+.tabs-content {
+  border: none;
+  background: transparent;
 }
 
 // Necessary in order to allow scrolling on small screens

@@ -1,12 +1,3 @@
-$(document).ready(function() {
-  // Hide the tabs until the page is ready to be styled.
-  var el = $("#tabs");
-  var active_tab = el.data("active") || 0;
-  $( "#tabs" )
-    .show()
-    .tabs({ heightStyle: "content", active: active_tab});
-});
-
 $(document).on("click", ".primary_checkbox", function() {
   el = $(this);
   if (!el.prop('checked')) {

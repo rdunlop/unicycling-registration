@@ -1,15 +1,10 @@
 // Events page
 
-// We use JS to unhide the tabs before styling them with jqueryui.
-#tabs {
-  display: none;
-}
-
 #tabs {
   margin: 20px 0;
 }
 
-.ui-tabs-nav a:hover{
+.tabs-title > a:hover {
   color:#fff;
   background-color:#999;
 }
