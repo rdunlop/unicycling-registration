@@ -23,7 +23,7 @@ const set_js_sortable = function() {
       stop(e, ui) {
         ui.item.removeClass('active-item-shadow');
         // highlight the row on drop to indicate an update
-        ui.item.children('td').effect('highlight', {}, 1000);
+        flashHighlight(ui.item);
       },
       update(e, ui) {
         const item_id = ui.item.data('item-id');

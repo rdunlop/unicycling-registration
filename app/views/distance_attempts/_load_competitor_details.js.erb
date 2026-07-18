@@ -3,4 +3,4 @@ old_data.empty();
 
 var new_data = $("<%= escape_javascript(render partial: 'competitor_details') %>");
 new_data.prependTo(old_data);
-new_data.effect("highlight", {}, 3000);
+flashHighlight(new_data);
