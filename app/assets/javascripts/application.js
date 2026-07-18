@@ -14,14 +14,7 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.foundation
-//= require jquery-ui/widgets/sortable
-//= require jquery-ui/widgets/tabs
-//= require jquery-ui/widgets/tooltip
-//= require jquery-ui/effects/effect-blind
-//= require jquery-ui/effects/effect-drop
-//= require jquery-ui/effects/effect-fade
-//= require jquery-ui/effects/effect-highlight
-//= require jquery-ui/effects/effect-slide
+//= require sortablejs
 //= require foundation
 //= require select2
 //= require select2_locale_fr
@@ -49,6 +42,7 @@
 //= require date_picker
 //= require event_choice_creation_manager
 //= require fancybox_enabler
+//= require flash_highlight
 //= require input_enabler
 //= require jquery.are-you-sure
 //= require jquery.placeholder
@@ -105,42 +99,51 @@ $(document).ready(function(e) {
 // Sorting the list
 
 var get_sortable_string = function() {
-  additional = "";
-  if ($('.drag_drop_sortable').data('additional')) {
-    additional = $("#" + $('.drag_drop_sortable').data('additional')).serialize();
+  var sortable = $('.drag_drop_sortable');
+
+  // matches jQuery UI's .sortable('serialize'): row id "age_group_entry_123" -> "age_group_entry[]=123"
+  var parts = sortable.find('tr[id]').map(function() {
+    var match = this.id.match(/^(.+)_(\d+)$/);
+    return match ? match[1] + '[]=' + match[2] : null;
+  }).get();
+
+  var additional = "";
+  if (sortable.data('additional')) {
+    additional = $("#" + sortable.data('additional')).serialize();
     if (additional !== "") {
       additional = "&" + additional;
     }
   }
 
-  return $('.drag_drop_sortable').sortable('serialize') + additional;
+  return parts.join('&') + additional;
 };
 
 var set_sortable = function() {
-  // jQuery UI Sortable
-  $('.drag_drop_sortable').sortable({
-    axis: 'y',
-    dropOnEmpty: false,
-    //handle: '.handle',
-    cursor: 'crosshair',
-    items: 'tr',
-    opacity: 0.4,
-    scroll: true,
-    update: function(){
-      $.ajax({
-        type: 'post',
-        data: get_sortable_string(),
-        dataType: 'script',
-        complete: function(request){
-          $('.drag_drop_sortable').effect('highlight');
-        },
-        url: $('.drag_drop_sortable').data('target')});
-    }
+  $('.drag_drop_sortable').each(function() {
+    Sortable.create(this, {
+      direction: 'vertical',
+      draggable: 'tr',
+      onEnd: function(evt){
+        if (evt.newIndex === evt.oldIndex) return; // order unchanged
+
+        $.ajax({
+          type: 'post',
+          data: get_sortable_string(),
+          dataType: 'script',
+          complete: function(request){
+            flashHighlight($('.drag_drop_sortable'));
+          },
+          url: $('.drag_drop_sortable').data('target')});
+      }
+    });
   });
 };
 $(document).ready(function(){
   set_sortable();
 });
+
+// called from .js.erb responses, which execute in global scope
+window.set_sortable = set_sortable;
 
 
 $(function() {

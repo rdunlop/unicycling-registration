@@ -1,15 +1,9 @@
-$(() => $("[title]").filter(":not(.select2-selection__rendered)").tooltip({
-  position: {
-    at: "left bottom-10"
-  },
-  show: "false", // Necessary to fix https://github.com/jquery/jquery-ui/commit/2434dfd45d0805304e1db634d059feaa0bacf358
-  hide: "false"
-}));
-
-$(() => $("#show-option").tooltip({show: {
-  effect: "slideDown",
-  delay: 250
-}
+$(() => $("[title]").filter(":not(.select2-selection__rendered)").each(function() {
+  new Foundation.Tooltip($(this), {
+    triggerClass: "", // don't add has-tip styling to the trigger element
+    position: "bottom",
+    alignment: "left"
+  });
 }));
 
 $(() => $(document).on("click", "#copy_address", function() {

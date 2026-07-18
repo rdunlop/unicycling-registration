@@ -12,7 +12,7 @@
         .small-6.columns
           = f.label :manual_member_number, organization_membership_label(@config)
         .small-6.columns
-          = f.text_field :manual_member_number, :size => 5, :class => "ui-tooltip",
+          = f.text_field :manual_member_number, :size => 5,
             title: t(".organization_membership_number_tooltip",
             organization_type: t("organization_membership_types.#{@config.organization_membership_type}"),
             convention_name: @config.short_name)

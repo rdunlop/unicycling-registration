@@ -4,5 +4,5 @@ td_cell = $("#best_time_<%= @registrant.id %>")
 td_cell.children().remove()
 td_cell.append(el)
 
-$("#best_time_<%= @registrant.id %>").effect("highlight", {color: "green"}, 3000);
+flashHighlight($("#best_time_<%= @registrant.id %>"), "green");
 $('#notice').html(""); // Clear the notices on success

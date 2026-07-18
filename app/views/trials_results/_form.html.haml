@@ -19,7 +19,7 @@
         %th= f.label :status, t('status')
     %tbody
       %tr
-        %td.ui-widget
+        %td
           = competitor_select_box(f, @competition)
         %td= f.number_field :points, input_html: {min: 0 }
         %td= f.number_field :minutes, input_html: {min: 0}

@@ -12,7 +12,7 @@
 <% else %>
   var new_row = $("<%= escape_javascript(render partial: 'imported_time_result', locals: {import_result: @import_result,  import_result_counter: nil }) %>")
   new_row.appendTo(".import_results");
-  new_row.effect("highlight", {}, 3000);
+  flashHighlight(new_row);
   $(".data_entry").trigger("reset");
   $(".chosen-select").trigger("change");
   $(".js--autoFocus").each(function() {

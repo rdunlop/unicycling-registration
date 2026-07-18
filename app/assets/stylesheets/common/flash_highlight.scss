@@ -1,0 +1,32 @@
+// Replacement for jQuery UI's .effect("highlight") (see flash_highlight.js).
+// The td selectors make the flash visible when applied to a tr or tbody.
+
+@keyframes flash-highlight {
+  from { background-color: #ffff99; }
+  to { background-color: transparent; }
+}
+
+@keyframes flash-highlight-green {
+  from { background-color: green; }
+  to { background-color: transparent; }
+}
+
+@keyframes flash-highlight-red {
+  from { background-color: red; }
+  to { background-color: transparent; }
+}
+
+.flash-highlight,
+.flash-highlight td {
+  animation: flash-highlight 3s ease-out;
+}
+
+.flash-highlight--green,
+.flash-highlight--green td {
+  animation: flash-highlight-green 3s ease-out;
+}
+
+.flash-highlight--red,
+.flash-highlight--red td {
+  animation: flash-highlight-red 3s ease-out;
+}

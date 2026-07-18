@@ -11,7 +11,7 @@
 <% else %>
   var new_row = $("<%= escape_javascript(render partial: 'lane_assignment', object: @lane_assignment) %>")
   new_row.appendTo(".lane_assignments");
-  new_row.effect("highlight", {}, 3000);
+  flashHighlight(new_row);
   $("form").trigger("reset");
   $(".chosen-select").trigger("change");
   $(".js--autoFocus").each(function() {

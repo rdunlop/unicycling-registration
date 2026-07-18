@@ -8,7 +8,7 @@
   $('#notice').html($("<div id=\"error_explanation\" />").append(errors));
 
 
-  $("#best_time_<%= @registrant_best_time.registrant_id %>").effect("highlight", {color: "red"}, 3000);
+  flashHighlight($("#best_time_<%= @registrant_best_time.registrant_id %>"), "red");
 <% else %>
   el = $($.trim('<%= escape_javascript(render partial: "/best_times/registrant_row", locals: { registrant: @registrant, event: @event, event_category: @event_category }) %>'))
 
@@ -16,6 +16,6 @@
   td_cell.children().remove()
   td_cell.append(el)
 
-  $("#best_time_<%= @registrant_best_time.registrant_id %>").effect("highlight", {color: "green"}, 3000);
+  flashHighlight($("#best_time_<%= @registrant_best_time.registrant_id %>"), "green");
   $('#notice').html(""); // Clear the notices on success
 <% end %>
