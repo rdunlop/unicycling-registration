@@ -14,6 +14,7 @@ gem 'pundit'
 gem 'rolify'
 
 # Output reports
+gem 'csv'
 gem 'prawn'
 gem 'matrix'
 gem 'prawn-labels'
