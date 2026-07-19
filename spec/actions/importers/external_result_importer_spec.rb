@@ -38,6 +38,6 @@ describe Importers::ExternalResultImporter do
       expect(importer.process(processor)).to be_falsy
     end.to change(ExternalResult, :count).by(0)
     expect(importer.num_rows_processed).to eq(0)
-    expect(importer.errors).to eq("Unable to find registrant ({:bib_number=>\"101\", :points=>\"1.2\", :details=>nil, :status=>\"active\"})")
+    expect(importer.errors).to eq("Unable to find registrant ({bib_number: \"101\", points: \"1.2\", details: nil, status: \"active\"})")
   end
 end
