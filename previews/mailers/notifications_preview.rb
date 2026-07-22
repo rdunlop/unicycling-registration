@@ -12,7 +12,7 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def send_mass_email
-    Notifications.send_mass_email(email.subject, email.body, addresses)
+    Notifications.send_mass_email(email.subject, email.body, addresses, "opt_out_code_123", reply_to_addresses)
   end
 
   ######### ADMIN
@@ -53,5 +53,9 @@ class NotificationsPreview < ActionMailer::Preview
 
   def addresses
     ["robin+test@dunlopeb.com", "robin+test2@dunlopweb.com"]
+  end
+
+  def reply_to_addresses
+    [EventConfiguration.singleton.contact_email, "organizer@example.com"]
   end
 end

@@ -22,6 +22,7 @@ end
 #  email_addresses_description :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  additional_reply_to_emails  :string
 #
 # Indexes
 #

@@ -24,3 +24,12 @@
   %b Address Description
   = @email.email_addresses_description
 
+%div
+  %b Reply-To: Contact Email
+  = EventConfiguration.singleton.contact_email
+
+- if @email.additional_reply_to_emails.present?
+  %div
+    %b Reply-To: Additional Emails
+    = @email.additional_reply_to_emails
+

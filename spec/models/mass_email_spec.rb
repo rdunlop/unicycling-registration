@@ -24,6 +24,31 @@ describe MassEmail do
       expect(ActionMailer::Base.deliveries.first.bcc).to include(user.email)
     end
   end
+
+  describe "#reply_to_addresses" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:email) { FactoryBot.create(:mass_email, sent_by: user) }
+
+    it "returns contact email when additional emails are blank" do
+      email.additional_reply_to_emails = nil
+      expect(email.reply_to_addresses).to eq([EventConfiguration.singleton.contact_email])
+    end
+
+    it "includes parsed additional addresses" do
+      email.additional_reply_to_emails = "extra1@example.com, extra2@example.com"
+      result = email.reply_to_addresses
+      expect(result).to include(EventConfiguration.singleton.contact_email)
+      expect(result).to include("extra1@example.com")
+      expect(result).to include("extra2@example.com")
+    end
+
+    it "deduplicates addresses" do
+      contact_email = EventConfiguration.singleton.contact_email
+      email.additional_reply_to_emails = "#{contact_email}, extra@example.com"
+      result = email.reply_to_addresses
+      expect(result.count(contact_email)).to eq(1)
+    end
+  end
 end
 
 # == Schema Information
@@ -39,6 +64,7 @@ end
 #  email_addresses_description :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  additional_reply_to_emails  :string
 #
 # Indexes
 #

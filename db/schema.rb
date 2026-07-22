@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_14_023225) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_21_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -463,6 +463,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_14_023225) do
     t.string "currency_code"
     t.text "custom_waiver_text"
     t.boolean "display_confirmed_events", default: false, null: false
+    t.string "enabled_label_types"
     t.string "enabled_locales", null: false
     t.date "event_sign_up_closed_date"
     t.string "event_url"
@@ -828,6 +829,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_14_023225) do
   end
 
   create_table "mass_emails", id: :serial, force: :cascade do |t|
+    t.string "additional_reply_to_emails"
     t.text "body"
     t.datetime "created_at", precision: nil, null: false
     t.text "email_addresses", array: true
@@ -1271,6 +1273,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_14_023225) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["competitor_id"], name: "index_standard_skill_scores_on_competitor_id"
     t.index ["judge_id", "competitor_id"], name: "index_standard_skill_scores_on_judge_id_and_competitor_id", unique: true
+  end
+
+  create_table "system_label_types", force: :cascade do |t|
+    t.float "bottom_margin", null: false
+    t.float "column_gutter", null: false
+    t.integer "columns", null: false
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.float "left_margin", null: false
+    t.string "name", null: false
+    t.string "paper_size", null: false
+    t.string "paper_size_custom"
+    t.float "right_margin", null: false
+    t.float "row_gutter", null: false
+    t.integer "rows", null: false
+    t.float "top_margin", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_system_label_types_on_name", unique: true
   end
 
   create_table "tenant_aliases", id: :serial, force: :cascade do |t|
