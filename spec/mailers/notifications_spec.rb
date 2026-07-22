@@ -29,11 +29,16 @@ describe Notifications do
 
   describe "send_mass_email" do
     let(:mail) do
-      described_class.send_mass_email("subejct", "Body", ["a@b.com"], "abc123")
+      described_class.send_mass_email("subejct", "Body", ["a@b.com"], "abc123", ["guy@convention.com"])
     end
 
     it "sets the reply-to address" do
       expect(mail.reply_to).to match(["guy@convention.com"])
+    end
+
+    it "sets multiple reply-to addresses" do
+      mail = described_class.send_mass_email("subejct", "Body", ["a@b.com"], "abc123", ["guy@convention.com", "extra@example.com"])
+      expect(mail.reply_to).to match(["guy@convention.com", "extra@example.com"])
     end
   end
 

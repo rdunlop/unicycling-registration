@@ -60,6 +60,7 @@
 #  stripe_webhook_secret                         :string
 #  imported_registrants                          :boolean          default(FALSE), not null
 #  registration_period_last_checked_at           :datetime
+#  enabled_label_types                           :string
 #  short_name                                    :string
 #  long_name                                     :string
 #  location                                      :string

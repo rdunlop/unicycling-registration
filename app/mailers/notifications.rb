@@ -19,11 +19,11 @@ class Notifications < TenantAwareMailer
     mail to: requesting_user.email, subject: 'Registration Access Granted'
   end
 
-  def send_mass_email(subject, body, addresses, opt_out_code)
+  def send_mass_email(subject, body, addresses, opt_out_code, reply_to_addresses)
     @body = body
     @opt_out_code = opt_out_code
 
-    mail bcc: addresses, subject: subject, reply_to: EventConfiguration.singleton.contact_email
+    mail bcc: addresses, subject: subject, reply_to: reply_to_addresses
   end
 
   def event_confirmation_email(to_addresses, reply_to, subject, body)

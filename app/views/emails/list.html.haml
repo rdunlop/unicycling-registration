@@ -50,7 +50,12 @@ At the bottom of this page, you can use the system to send e-mails, if you wish.
     = EventConfiguration.singleton.contact_email
     %br
     %b Reply-to:
-    = EventConfiguration.singleton.contact_email
+    %span{data: {"mass-email-reply-to-target": "display"}}= EventConfiguration.singleton.contact_email
+    %br
+    .mass-email-reply-to{data: {controller: "mass-email-reply-to", "mass-email-reply-to-contact-email-value": EventConfiguration.singleton.contact_email, "mass-email-reply-to-user-email-value": current_user.email}}
+      = f.input :include_my_email, as: :boolean, label: "Include my email in the reply-to list", input_html: {data: {"mass-email-reply-to-target": "checkbox", action: "change->mass-email-reply-to#update"}}
+      = f.label :additional_reply_to_emails, "Additional reply-to emails"
+      = f.text_field :additional_reply_to_emails, data: {"mass-email-reply-to-target": "additional", action: "input->mass-email-reply-to#update"}
     %br
     %b BCC:
     You +

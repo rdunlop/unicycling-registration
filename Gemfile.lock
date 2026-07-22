@@ -5,6 +5,16 @@ GIT
     ttfunk (1.8.0)
 
 GIT
+  remote: https://github.com/pry/pry.git
+  revision: 135640262879544c6bfecbf3e78511289bfe956c
+  branch: master
+  specs:
+    pry (0.16.0)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+      reline (>= 0.6.0)
+
+GIT
   remote: https://github.com/rdunlop/tolk.git
   revision: 8342a4ef228966541fb1815ce9eedeca481663f5
   branch: improve_import_export
@@ -429,10 +439,6 @@ GEM
     prism (1.9.0)
     prop_initializer (0.4.0)
       zeitwerk (>= 2.6.18)
-    pry (0.16.0)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
-      reline (>= 0.6.0)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
     public_suffix (6.0.2)
@@ -740,7 +746,7 @@ DEPENDENCIES
   poltergeist
   prawn
   prawn-labels
-  pry
+  pry!
   pry-rails
   puma
   pundit

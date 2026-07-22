@@ -81,6 +81,7 @@ gem 'tolk', github: 'rdunlop/tolk', branch: 'improve_import_export'
 
 # multi-tenancy
 gem 'pry-rails' # required for apartment console customization
+gem 'pry', github: 'pry/pry', branch: 'master' # Use master branch until > 0.16.0 fixes ruby 4 readline support
 gem 'ros-apartment', require: 'apartment'
 gem 'ros-apartment-sidekiq', require: 'apartment-sidekiq'
 
@@ -132,7 +133,6 @@ group :unicon, :naucc, :development, :test, :cucumber, :caching do
   gem 'bullet'
   # gem 'brakeman'
   gem 'foreman'
-  gem 'pry'
 end
 
 # To use ActiveModel has_secure_password
