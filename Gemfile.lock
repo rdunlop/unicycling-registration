@@ -767,6 +767,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  ruby-vips
   rubyzip
   sassc-rails
   select2-rails
@@ -789,7 +790,7 @@ DEPENDENCIES
   wkhtmltopdf-binary (= 0.12.6.8)
 
 RUBY VERSION
-   ruby 4.0.6p0
+  ruby 4.0.6p0
 
 BUNDLED WITH
-   2.5.23
+  4.0.16
