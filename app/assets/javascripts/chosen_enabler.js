@@ -15,5 +15,3 @@ class ChosenEnabler {
     });
   }
 };
-
-export { ChosenEnabler };
