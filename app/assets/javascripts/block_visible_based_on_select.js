@@ -38,6 +38,3 @@ class BlockVisibleBasedOnSelect {
     }
   }
 }
-
-
-export { BlockVisibleBasedOnSelect };
