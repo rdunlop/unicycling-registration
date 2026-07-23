@@ -1,15 +1,23 @@
 class Admin::BagLabelsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_access
+  before_action :load_label_definitions, only: [:index]
+  before_action :load_prawn_label_types, only: [:create]
+
   def index; end
 
   def create
+    if params[:label_type].blank?
+      redirect_to bag_labels_path, alert: "Please choose a label type."
+      return
+    end
+
     @registrants = Registrant.includes(:contact_detail).reorder(:bib_number).active.all
     if params[:display_expenses]
       @registrants = @registrants.includes(:expense_items)
     end
 
-    label_type = params[:label_type] || "Avery5160"
+    label_type = params[:label_type]
 
     names = []
 
@@ -41,5 +49,15 @@ class Admin::BagLabelsController < ApplicationController
 
   def authorize_access
     authorize current_user, :registrant_information?
+  end
+
+  def load_prawn_label_types
+    LabelTypeRegistry.load_into_prawn!
+  end
+
+  def load_label_definitions
+    @label_types = (SystemLabelType.order(:name) + CustomLabelType.order(:name)).map do |label_type|
+      { name: label_type.name, description: label_type.description }
+    end
   end
 end

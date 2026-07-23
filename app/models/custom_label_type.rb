@@ -22,25 +22,20 @@
 #  updated_at        :datetime         not null
 #
 class CustomLabelType < ApplicationRecord
-  validates :name, presence: true
-  PAPER_SIZES = ['A4', 'LETTER', 'CUSTOM'].freeze
-  validates :paper_size, inclusion: { in: PAPER_SIZES }
-  validates :paper_size_custom, presence: true, if: proc { |el| el.paper_size == 'CUSTOM' }
-
-  validates :columns, :rows, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 20 }
-
-  validates :left_margin, :right_margin, :bottom_margin, :top_margin, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 120 }
+  include LabelTypeAttributes
 
   validates :created_by_id, presence: true
-  validates :column_gutter, presence: true
+  validate :name_not_a_system_label_type
 
   belongs_to :created_by, class_name: "User", optional: true
 
-  def paper_size_value
-    if paper_size == "CUSTOM"
-      paper_size_custom.split(",").map(&:to_i)
-    else
-      paper_size
+  private
+
+  def name_not_a_system_label_type
+    return if name.blank?
+
+    if SystemLabelType.exists?(name: name)
+      errors.add(:name, "is already used by a system label type")
     end
   end
 end

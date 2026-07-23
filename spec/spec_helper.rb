@@ -70,6 +70,10 @@ RSpec.configure do |config|
     # Create the default tenant for our tests
     tenant = Tenant.create!(description: 'Test Tenant', subdomain: 'testing', admin_upgrade_code: "TEST_UPGRADE_CODE")
     Apartment::Tenant.create(tenant.subdomain)
+    # system_label_types is apartment-excluded/shared reference data; CI provisions
+    # its test DB via db:schema:load, which never runs data migrations, so it must
+    # be (re-)seeded here rather than relying on the SeedSystemLabelTypes migration.
+    SystemLabelType.seed_defaults!
   end
 
   config.before do

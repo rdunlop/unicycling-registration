@@ -1,0 +1,18 @@
+%h1 Choose Label Types to Show
+
+%p.left_aligned
+  Choose which label types should appear on the Award Labels page. Nothing is shown until you pick at least one here.
+
+%p.left_aligned
+  Don't see what you need?
+  = link_to "Create a Custom Label Type", custom_label_types_path
+
+= form_tag label_type_settings_path, method: :put do
+  .row
+    .columns
+      = select_tag "enabled_label_types[]", options_for_select(EventConfiguration.all_available_label_type_names, @config.enabled_label_types), multiple: true, size: 15
+  .row
+    .columns
+      = submit_tag "Save", class: "button"
+
+= link_to "Back", user_award_labels_path(current_user)

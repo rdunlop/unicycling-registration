@@ -30,6 +30,8 @@
       %li= link_to t('.go_live'), go_live_event_configuration_path
       - if policy(@config).advanced_settings?
         %li= link_to "Advanced Settings", advanced_settings_event_configuration_path
+      - if policy(SystemLabelType.new).index?
+        %li= link_to "System Label Types", system_label_types_path
       -#%li Access Settings
   #side_content
     = yield

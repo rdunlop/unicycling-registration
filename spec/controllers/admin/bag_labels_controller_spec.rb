@@ -15,8 +15,14 @@ describe Admin::BagLabelsController do
 
   describe "POST create" do
     it "renders" do
-      post :create
+      post :create, params: { label_type: "Avery8167" }
       expect(response).to be_successful
+    end
+
+    it "redirects with an alert when no label_type is chosen" do
+      post :create
+      expect(response).to redirect_to(bag_labels_path)
+      expect(flash[:alert]).to be_present
     end
   end
 end

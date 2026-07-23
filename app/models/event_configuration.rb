@@ -418,6 +418,21 @@ class EventConfiguration < ApplicationRecord
     %i[en fr de es it da]
   end
 
+  # Convert from stored string "Avery8293,MyCustomLabel" to ["Avery8293", "MyCustomLabel"]
+  # Blank means none are shown on the Award Labels page, until the convention
+  # explicitly chooses which label types it wants to use.
+  def enabled_label_types
+    self[:enabled_label_types].to_s.split(",")
+  end
+
+  def enabled_label_types=(values)
+    self[:enabled_label_types] = values.reject(&:blank?).join(",")
+  end
+
+  def self.all_available_label_type_names
+    (SystemLabelType.pluck(:name) + CustomLabelType.pluck(:name)).sort
+  end
+
   # Public: What is the maximum age that we should allow users to configure
   # their wheel size?
   def wheel_size_configuration_max_age

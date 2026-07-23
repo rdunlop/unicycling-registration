@@ -82,6 +82,19 @@ describe AwardLabelsController do
         assert_select "select#award_label_registrant_id", name: "award_label[registrant_id]"
       end
     end
+
+    it "shows no label types by default" do
+      get :index, params: { user_id: @admin_user }
+      assert_select "h4", text: "Standard Label Types", count: 0
+      assert_select "input[value=?]", "Avery8293", count: 0
+    end
+
+    it "shows only the chosen label types once configured" do
+      EventConfiguration.singleton.update!(enabled_label_types: ["Avery8293"])
+      get :index, params: { user_id: @admin_user }
+      assert_select "input[value=?]", "Avery8293", count: 1
+      assert_select "input[value=?]", "Spanish4716", count: 0
+    end
   end
 
   describe "GET edit" do

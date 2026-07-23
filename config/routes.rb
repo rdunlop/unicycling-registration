@@ -238,6 +238,7 @@ Rails.application.routes.draw do
           delete :remove
         end
       end
+      resources :system_label_types
       # /convention_setup/migrate
       # /convention_setup/migrate/from/:tenant
       # /convention_setup/migrate/from/:tenant/events
@@ -592,6 +593,13 @@ Rails.application.routes.draw do
       end
     end
     resources :custom_label_types
+    resource :label_type_settings, only: %i[edit update]
+    resources :label_test_prints, only: [:index] do
+      collection do
+        get :print
+        get :ruler
+      end
+    end
     resources :additional_registrant_accesses, only: [] do
       member do
         put :accept_readonly

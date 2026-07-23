@@ -1,0 +1,31 @@
+%h1 Print Test Labels
+
+%h2 Test Print a Label Type
+
+%p.left_aligned
+  Prints a sample sheet for the chosen label type, with gridlines always shown, so you can see the label cell boundaries.
+
+= form_tag print_label_test_prints_path, method: :get do
+  .row
+    .small-9.columns
+      = label_tag :label_type, "Label Type"
+      = select_tag :label_type, options_for_select((@built_in_labels + @custom_label_types).map { |lt| ["#{lt[:name]} (#{lt[:description]})", lt[:name]] }), prompt: "Choose a label type"
+    .small-3.columns
+      = submit_tag "Print Test PDF", class: "button", data: { disable_with: false }
+
+%hr
+
+%h2 Print a Ruler
+
+%p.left_aligned
+  Prints a blank page with a ruler (in Points/Pts — the same unit used when entering Custom Label Type margins/gutters), for measuring the tolerances needed around a label. Printed on its own page, so it doesn't collide with label content or gridlines.
+
+= form_tag ruler_label_test_prints_path, method: :get do
+  .row
+    .small-9.columns
+      = label_tag :paper_size, "Paper Size"
+      = select_tag :paper_size, options_for_select(LabelRuler::PAPER_SIZES, "LETTER")
+    .small-3.columns
+      = submit_tag "Print Ruler PDF", class: "button", data: { disable_with: false }
+
+= link_to "Back", user_award_labels_path(current_user)
