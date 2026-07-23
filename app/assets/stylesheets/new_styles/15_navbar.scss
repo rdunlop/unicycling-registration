@@ -58,16 +58,19 @@ $height: 50px;
 // Prevent FOUC: pre-hide elements before Foundation JS initializes them.
 // Foundation's responsive_toggle shows .title-bar on small/medium and hides it on large+,
 // and hides the .top-bar on small/medium until toggled. Without this, elements flash
-// before Foundation's JS runs.
+// before Foundation's JS runs. Using !important to override Foundation's inline styles.
 @media screen and (min-width: 1024px) {
   .title-bar[data-responsive-toggle] {
-    display: none;
+    display: none !important;
+  }
+  nav.top-bar[id] {
+    display: block !important;
   }
 }
 
 @media screen and (max-width: 1023px) {
   nav.top-bar[id] {
-    display: none;
+    display: none !important;
   }
 }
 
