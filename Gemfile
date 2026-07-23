@@ -62,6 +62,7 @@ gem 'puma'
 gem 'rake'
 gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
+gem 'ruby-vips' # Image processing for ActiveStorage (replaces ImageMagick)
 gem 'lograge'
 gem 'rollbar'
 gem 'rubyzip'
