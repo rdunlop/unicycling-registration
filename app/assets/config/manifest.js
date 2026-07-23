@@ -1,5 +1,6 @@
 //= link_tree ../images
 //= link_tree ../fonts
+//= link application.js
 //= link legacy_application.js
 //= link application.css
 //= link pdf.css
