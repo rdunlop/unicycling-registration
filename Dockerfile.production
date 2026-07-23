@@ -21,8 +21,8 @@ COPY . .
 
 RUN bundle exec rails assets:precompile
 
-# ---- Stage 2: Runtime ----
-FROM ruby:4.0.6-slim
+# ---- Stage 2: Production (base for both prod and dev) ----
+FROM ruby:4.0.6-slim AS production
 
 RUN apt-get update -qq \
 && apt-get install -y --no-install-recommends libpq5 libfontconfig1 libxrender1 \
@@ -68,3 +68,20 @@ USER app
 EXPOSE 3000
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+
+# ---- Stage 3: Development (extends production, adds dev tools) ----
+FROM production AS development
+
+USER root
+
+RUN apt-get update -qq \
+ && apt-get install -y --no-install-recommends \
+   build-essential libpq-dev \
+   postgresql-client \
+   vim git \
+ && rm -rf /var/lib/apt/lists/*
+
+ENV RAILS_ENV=development \
+    BUNDLE_WITHOUT=
+
+USER app

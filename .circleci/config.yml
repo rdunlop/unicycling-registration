@@ -101,6 +101,7 @@ jobs:
             docker pull $ECR_URL:latest || true
             docker build --cache-from $ECR_URL:latest \
               -f Dockerfile.production \
+              --target production \
               -t $ECR_URL:$CIRCLE_SHA1 \
               -t $ECR_URL:latest .
             docker push $ECR_URL:$CIRCLE_SHA1
