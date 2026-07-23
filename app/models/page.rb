@@ -34,12 +34,6 @@ class Page < ApplicationRecord
 
   accepts_nested_attributes_for :translations
 
-  def body
-    current = translation.body
-    return current if current.present?
-    translations.find_by(locale: I18n.default_locale.to_s)&.body
-  end
-
   def body=(content)
     translation.body = content
   end

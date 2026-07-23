@@ -86,12 +86,6 @@ class EventConfiguration < ApplicationRecord
 
   accepts_nested_attributes_for :translations
 
-  def offline_payment_description
-    current = translation.offline_payment_description
-    return current if current.present?
-    translations.find_by(locale: I18n.default_locale.to_s)&.offline_payment_description
-  end
-
   def offline_payment_description=(content)
     translation.offline_payment_description = content
   end
