@@ -86,9 +86,7 @@ class EventConfiguration < ApplicationRecord
 
   accepts_nested_attributes_for :translations
 
-  def offline_payment_description=(content)
-    translation.offline_payment_description = content
-  end
+  delegate :offline_payment_description=, to: :translation
 
   mount_uploader :logo_file, LogoUploader
 

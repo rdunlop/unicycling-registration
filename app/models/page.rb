@@ -34,9 +34,7 @@ class Page < ApplicationRecord
 
   accepts_nested_attributes_for :translations
 
-  def body=(content)
-    translation.body = content
-  end
+  delegate :body=, to: :translation
 
   belongs_to :parent_page, class_name: "Page", optional: true
   has_many :children, class_name: "Page", foreign_key: "parent_page_id"
