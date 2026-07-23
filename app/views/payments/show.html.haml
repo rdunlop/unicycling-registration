@@ -7,7 +7,7 @@
     %b= t(".payment_reference", payment_id: @payment.id)
     %hr
     %p= t(".offline_payment_instructions_description")
-    = @config.offline_payment_description.try(:html_safe)
+    = @config.offline_payment_description
 
 - if current_user != @payment.user
   .alert-box.callout.secondary.top_banner Send this URL to the user (#{@payment.user}) in order to ask them to pay for these items

@@ -26,9 +26,23 @@ class Page < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validates :title, :body, presence: true
 
-  has_rich_text :body
   translates :title, :body, fallbacks_for_empty_translations: true
+
+  class Translation
+    has_rich_text :body
+  end
+
   accepts_nested_attributes_for :translations
+
+  def body
+    current = translation.body
+    return current if current.present?
+    translations.find_by(locale: I18n.default_locale.to_s)&.body
+  end
+
+  def body=(content)
+    translation.body = content
+  end
 
   belongs_to :parent_page, class_name: "Page", optional: true
   has_many :children, class_name: "Page", foreign_key: "parent_page_id"
