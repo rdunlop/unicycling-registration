@@ -109,6 +109,8 @@ locals {
     name      = "redis-cache"
     image     = "redis:7-alpine"
     essential = false
+    cpu       = 128
+    memory    = 256
     command   = ["redis-server", "--bind", "127.0.0.1", "--maxmemory", "128mb", "--maxmemory-policy", "allkeys-lru"]
     logConfiguration = {
       logDriver = "awslogs"
