@@ -7,7 +7,7 @@
           = "Admin bar"
     %nav.top-bar#admin-bar-menu
       .top-bar-left
-        %ul.menu.vertical.large-horizontal
+        %ul.menu.vertical.medium-horizontal
           = render "nav_bar/admin_set_one"
 
 - cache_i18n ['admin_bar2', current_user, @config] do
@@ -19,7 +19,7 @@
           = "Admin bar 2"
     %nav.top-bar#admin-bar-menu2
       .top-bar-left
-        %ul.menu.vertical.large-horizontal
+        %ul.menu.vertical.medium-horizontal
           = render "nav_bar/admin_set_two"
 - cache_i18n ['admin_bar3', current_user, @config] do
   - if user_signed_in? && current_user.roles.any?
@@ -30,5 +30,5 @@
           = "Admin bar 3"
     %nav.top-bar#admin-bar-menu3
       .top-bar-left
-        %ul.menu.vertical.large-horizontal
+        %ul.menu.vertical.medium-horizontal
           = render "nav_bar/admin_set_three"
