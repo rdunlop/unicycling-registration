@@ -3,7 +3,7 @@
   %head
     = javascript_importmap_tags
     = render partial: "layouts/metatags"
-    = javascript_include_tag "legacy_application"
+    = javascript_include_tag "legacy_application", defer: true
     %title
       = @config.short_name
       = t(".registration")

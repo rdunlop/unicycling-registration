@@ -7,4 +7,7 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js", preload: true
 pin "@rails/activestorage", to: "activestorage.esm.js", preload: true
+
+# Migrations from legacy_application.js
+pin "jquery"
 pin "foundation"

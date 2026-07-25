@@ -2,5 +2,9 @@
 import "controllers"
 
 import "trix"
+import "jquery"
 import "foundation"
 import "@rails/actiontext"
+
+// Start the Foundation javascript code
+$(function(){ $(document).foundation(); });

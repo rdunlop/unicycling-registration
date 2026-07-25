@@ -3,7 +3,7 @@
   %head
     = javascript_importmap_tags
     = render partial: "layouts/metatags"
-    = javascript_include_tag "legacy_application"
+    = javascript_include_tag "legacy_application", defer: true
     %title Unicycling Registration
     = stylesheet_link_tag "base_purple_blue", :media => "all"
     = csrf_meta_tags
