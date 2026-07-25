@@ -2,4 +2,5 @@
 import "controllers"
 
 import "trix"
+import "foundation"
 import "@rails/actiontext"

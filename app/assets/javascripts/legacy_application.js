@@ -15,7 +15,6 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.foundation
 //= require sortablejs
-//= require foundation
 //= require select2
 //= require select2_locale_fr
 //= require select2_locale_de
