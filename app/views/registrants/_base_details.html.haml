@@ -1,6 +1,4 @@
 .required= t(".required_fields")
-- content_for :importmap_modules do
-  = javascript_import_module_tag "controllers"
 %fieldset.data_block{ data: { controller: "pronouns-gender", pronouns_gender_gender_element_name_value: "registrant[gender]" } }
   %legend= t(".base_details")
   %div.row
