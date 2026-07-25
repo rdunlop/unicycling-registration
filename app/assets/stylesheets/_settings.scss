@@ -323,7 +323,8 @@ $drilldown-transition: transform 0.15s linear;
 $drilldown-arrows: true;
 $drilldown-arrow-color: $primary-color;
 $drilldown-arrow-size: 6px;
-$drilldown-background: $white;
+$drilldown-background: $almost-black; // UDA Custom
+$drilldown-submenu-background: $almost-black; // UDA Custom
 
 // 17. Dropdown
 // ------------
