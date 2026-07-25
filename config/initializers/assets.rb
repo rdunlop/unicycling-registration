@@ -6,3 +6,7 @@ Rails.application.config.assets.version = '1.0'
 # found) but does not add individual files to the precompile list. Without this,
 # Stimulus controllers 404 in production/staging where config.assets.compile = false.
 Rails.application.config.assets.precompile += Dir.glob("app/javascript/controllers/**/*.js").map { |f| f.sub("app/javascript/", "") }
+
+# Similarly, gem-vendored assets resolved via importmap (jquery, foundation from
+# jquery-rails, foundation-rails gems) must be explicitly precompiled in production/staging.
+Rails.application.config.assets.precompile += %w[jquery.js foundation.js]
