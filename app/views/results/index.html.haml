@@ -31,4 +31,4 @@
         = render partial: "competitions_table", locals: { competitions: @competitions }
       - @categories.each do |category|
         .tabs-panel{ id: "tabs-#{category.id}" }
-          = render partial: "competitions_table", locals: { competitions: category.events.flat_map(&:competitions) }
+          = render partial: "competitions_table", locals: { competitions: @competitions.merge(category.events.flat_map(&:competitions)) }
