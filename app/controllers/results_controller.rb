@@ -32,6 +32,7 @@ class ResultsController < ApplicationController
       redirect_to results_registrant_path(registrant)
     else
       flash[:alert] = "Registrant not found"
+      index
       render :index
     end
   end
