@@ -21,6 +21,8 @@ class ResultsController < ApplicationController
 
   def index
     add_breadcrumb "Results"
+    @competitions = Competition.includes(:published_age_group_entries).order(:scheduled_completion_at)
+    @categories = Category.includes(events: [:competitions])
   end
 
   # GET /results/registrant?registrant_id=123

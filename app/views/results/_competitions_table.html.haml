@@ -1,0 +1,12 @@
+%table.sortable
+  %thead
+    %tr
+      %th Competition
+      %th
+      %th Competitor List
+      %th Start List
+      %th Results
+      %th Date Published
+  %tbody
+    - competitions.each do |competition|
+      = render partial: "competition_row", locals: { competition: competition }
