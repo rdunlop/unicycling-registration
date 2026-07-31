@@ -35,6 +35,22 @@ describe ResultsController do
   end
 
   describe "GET registrant" do
+    context "with a registrant selected" do
+      it "redirects to registrant result" do
+        get :registrant, params: { registrant_id: registrant.id }
+        expect(response).to redirect_to results_registrant_path(registrant)
+      end
+    end
+
+    context "with no registrant selected" do
+      it "shows page with error message" do
+        get :registrant
+        expect(response).to be_successful
+      end
+    end
+  end
+
+  describe "GET registrant" do
     it "renders" do
       get :registrant, params: { registrant_id: registrant.id }
       expect(response).to redirect_to(results_registrant_path(registrant))
