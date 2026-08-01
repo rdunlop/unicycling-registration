@@ -17,7 +17,7 @@ describe DirectorEmailsController do
     it "can send an e-mail" do
       FactoryBot.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: { subject: "Hello werld", body: "This is the body" } }
+      post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body" } }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
       expect(MassEmail.count).to eq(1)
@@ -31,7 +31,7 @@ describe DirectorEmailsController do
 
       it "sends to those directors" do
         ActionMailer::Base.deliveries.clear
-        post :create, params: { email: { subject: "Hello werld", body: "This is the body" } }
+        post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body" } }
         message = ActionMailer::Base.deliveries.first
         expect(message.bcc.count).to eq(3)
       end
