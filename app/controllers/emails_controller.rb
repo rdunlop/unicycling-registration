@@ -53,31 +53,24 @@ class EmailsController < ApplicationController
     check_auth(@filter.authorization_object)
 
     set_email_breadcrumb
-    @email_form = Email.new
+    @email_form = MassEmail.new(sent_by: current_user)
   end
 
   def create
     @filter = create_filter(params)
     check_auth(@filter.authorization_object)
 
-    @email_form = Email.new(params[:email])
+    @email_form = MassEmail.new(email_params)
+    @email_form.sent_by = current_user
+    @email_form.additional_reply_to_emails = @email_form.reply_to_emails_to_store(current_user)
+    email_addresses = (@filter.user_emails + @filter.registrant_emails).uniq.compact
+    @email_form.email_addresses = email_addresses
+    @email_form.email_addresses_description = @filter.detailed_description
+    @email_form.sent_at = Time.current
 
-    if @email_form.valid?
-      mass_email = MassEmail.new
-      mass_email.subject = @email_form.subject
-      mass_email.body = @email_form.body
-      mass_email.additional_reply_to_emails = @email_form.reply_to_emails_to_store(current_user)
-      email_addresses = (@filter.user_emails + @filter.registrant_emails).uniq.compact
-      mass_email.email_addresses = email_addresses
-      mass_email.email_addresses_description = @filter.detailed_description
-      mass_email.sent_by = current_user
-      mass_email.sent_at = Time.current
-      if mass_email.save
-        mass_email.send_emails
-        redirect_to emails_path, notice: 'Email sent successfully.'
-      else
-        redirect_to emails_path, alert: 'Unable to store Mass Email before sending. No e-mail was sent'
-      end
+    if @email_form.save
+      @email_form.send_emails
+      redirect_to emails_path, notice: 'Email sent successfully.'
     else
       set_email_breadcrumb
       render "list"
@@ -85,6 +78,10 @@ class EmailsController < ApplicationController
   end
 
   private
+
+  def email_params
+    params.require(:mass_email).permit(:subject, :body, :include_my_email, :additional_reply_to_emails)
+  end
 
   def create_filter(params)
     selected_filter = filters.find { |filter| filter.config.filter == params[:filter] }

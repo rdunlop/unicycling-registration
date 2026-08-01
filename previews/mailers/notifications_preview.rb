@@ -48,7 +48,9 @@ class NotificationsPreview < ActionMailer::Preview
   end
 
   def email
-    Email.new(body: "<p>This is a mass <b>\"e-mail\"</b> body</p>", subject: "I want to inform all of you")
+    email = MassEmail.new(subject: "I want to inform all of you")
+    email.body = ActionText::RichText.new(body: "<p>This is a mass <b>\"e-mail\"</b> body</p>")
+    email
   end
 
   def addresses

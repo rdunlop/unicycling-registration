@@ -20,8 +20,12 @@
 
 class MassEmail < ApplicationRecord
   belongs_to :sent_by, class_name: "User"
+  has_rich_text :body
+
+  attr_accessor :include_my_email
 
   validates :sent_by, presence: true
+  validates :subject, :body, presence: true
 
   def send_emails
     if Rails.configuration.individual_email_sending
@@ -40,6 +44,16 @@ class MassEmail < ApplicationRecord
         Notifications.send_mass_email(subject, body, addresses, nil, reply_to_addresses).deliver_later(wait: index.seconds * 3)
       end
     end
+  end
+
+  def include_my_email?
+    ActiveModel::Type::Boolean.new.cast(include_my_email)
+  end
+
+  def reply_to_emails_to_store(current_user)
+    addresses = parsed_additional_reply_to_emails
+    addresses << current_user.email if include_my_email?
+    addresses.uniq.join(", ")
   end
 
   def reply_to_addresses

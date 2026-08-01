@@ -24,7 +24,7 @@
     = f.text_field :subject
     %br
     = f.label :body
-    = f.text_area :body, {:cols => 100, :rows => 6 }
+    = f.rich_text_area :body
     %br
     = f.button :submit, "Send Email", class: "focus_button"
   %hr
