@@ -72,7 +72,7 @@ describe EmailsController do
     it "can send an e-mail" do
       FactoryBot.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }
+      post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(1)
       expect(MassEmail.count).to eq(1)
@@ -83,7 +83,7 @@ describe EmailsController do
     it "breaks apart large requests into multiple smaller requests" do
       FactoryBot.create_list(:user, 50)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }
+      post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body" }, filter: "confirmed_accounts", arguments: "" }
       num_deliveries = ActionMailer::Base.deliveries.size
       expect(num_deliveries).to eq(2)
 
@@ -97,7 +97,7 @@ describe EmailsController do
     it "includes user email in reply-to when checkbox is checked" do
       FactoryBot.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: { subject: "Hello werld", body: "This is the body", include_my_email: "1" }, filter: "confirmed_accounts", arguments: "" }
+      post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body", include_my_email: "1" }, filter: "confirmed_accounts", arguments: "" }
       message = ActionMailer::Base.deliveries.first
       expect(message.reply_to).to include(@user.email)
     end
@@ -105,7 +105,7 @@ describe EmailsController do
     it "includes additional reply-to emails" do
       FactoryBot.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: { subject: "Hello werld", body: "This is the body", additional_reply_to_emails: "extra@example.com" }, filter: "confirmed_accounts", arguments: "" }
+      post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body", additional_reply_to_emails: "extra@example.com" }, filter: "confirmed_accounts", arguments: "" }
       message = ActionMailer::Base.deliveries.first
       expect(message.reply_to).to include("extra@example.com")
     end
@@ -113,7 +113,7 @@ describe EmailsController do
     it "stores additional_reply_to_emails on the mass_email" do
       FactoryBot.create(:user)
       ActionMailer::Base.deliveries.clear
-      post :create, params: { email: { subject: "Hello werld", body: "This is the body", additional_reply_to_emails: "a@example.com, b@example.com" }, filter: "confirmed_accounts", arguments: "" }
+      post :create, params: { mass_email: { subject: "Hello werld", body: "This is the body", additional_reply_to_emails: "a@example.com, b@example.com" }, filter: "confirmed_accounts", arguments: "" }
       mass_email = MassEmail.last
       expect(mass_email.additional_reply_to_emails).to eq("a@example.com, b@example.com")
     end
