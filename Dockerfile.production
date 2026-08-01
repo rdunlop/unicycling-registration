@@ -1,5 +1,5 @@
 # Global ARGs for consistency across stages
-ARG RUNTIME_APT_PACKAGES="libpq5 libfontconfig1 libxrender1 libxext6 libjpeg62-turbo libssl3 curl libvips xfonts-75dpi xfonts-base fontconfig fonts-ipafont-gothic fonts-noto-core"
+ARG RUNTIME_APT_PACKAGES="libpq5 libfontconfig1 libxrender1 libxext6 libjpeg62-turbo libssl3 curl libvips xfonts-75dpi xfonts-base fontconfig fonts-ipafont-gothic fonts-noto-core mupdf mupdf-tools"
 ARG WKHTMLTOPDF_VERSION=0.12.6.1-3
 ARG NODE_MAJOR=20
 
