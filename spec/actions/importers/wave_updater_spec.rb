@@ -31,7 +31,7 @@ describe Importers::WaveUpdater do
       it "returns an error" do
         importer = described_class.new(competition, nil)
         expect(importer.process(processor)).to be_falsey
-        expect(importer.errors).to eq("Unable to find competitor 101")
+        expect(importer.errors).to eq("Unable to find competitor 101 at row 1")
       end
     end
   end
