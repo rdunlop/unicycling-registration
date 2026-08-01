@@ -51,6 +51,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.preview_paths << Rails.root.join('previews')
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -88,4 +90,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.hosts << "test.lvh.me"
+  config.hosts << "testing.lvh.me"
 end
