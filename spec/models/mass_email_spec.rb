@@ -5,24 +5,24 @@ describe MassEmail do
     let(:user) { FactoryBot.create(:user) }
 
     it "is valid with subject and body" do
-      email = MassEmail.new(subject: "Test", body: "Body", sent_by: user)
+      email = described_class.new(subject: "Test", body: "Body", sent_by: user)
       expect(email).to be_valid
     end
 
     it "requires subject" do
-      email = MassEmail.new(body: "Body", sent_by: user)
+      email = described_class.new(body: "Body", sent_by: user)
       expect(email).not_to be_valid
       expect(email.errors[:subject]).to be_present
     end
 
     it "requires body" do
-      email = MassEmail.new(subject: "Subject", sent_by: user)
+      email = described_class.new(subject: "Subject", sent_by: user)
       expect(email).not_to be_valid
       expect(email.errors[:body]).to be_present
     end
 
     it "requires sent_by" do
-      email = MassEmail.new(subject: "Subject", body: "Body")
+      email = described_class.new(subject: "Subject", body: "Body")
       expect(email).not_to be_valid
       expect(email.errors[:sent_by]).to be_present
     end
@@ -30,7 +30,7 @@ describe MassEmail do
 
   describe "#include_my_email?" do
     let(:user) { FactoryBot.create(:user) }
-    let(:email) { MassEmail.new(sent_by: user) }
+    let(:email) { described_class.new(sent_by: user) }
 
     it "is falsey when nil" do
       email.include_my_email = nil
@@ -55,7 +55,7 @@ describe MassEmail do
 
   describe "#reply_to_emails_to_store" do
     let(:user) { FactoryBot.create(:user, email: "sender@example.com") }
-    let(:email) { MassEmail.new(sent_by: user) }
+    let(:email) { described_class.new(sent_by: user) }
 
     it "returns empty string when nothing is set" do
       email.include_my_email = nil
