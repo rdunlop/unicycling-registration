@@ -75,17 +75,26 @@ class Judge < ApplicationRecord
 
   def score_totals(with_ineligible: false)
     if with_ineligible
+      competitors_to_score = competition.competitors.active.order(:position)
       Rails.cache.fetch("/judge/#{id}-#{updated_at}/ineligible_score_totals") do
-        active_scores.map(&:total).compact
+        build_all_score_totals_with_zeros(active_scores, competitors_to_score)
       end
     else
+      competitors_to_score = competition.competitors.active.order(:position).reject(&:ineligible?)
       Rails.cache.fetch("/judge/#{id}-#{updated_at}/score_totals") do
-        active_scores.reject { |score| score.competitor.ineligible? }.map(&:total).compact
+        build_all_score_totals_with_zeros(active_scores, competitors_to_score)
       end
     end
   end
 
   private
+
+  def build_all_score_totals_with_zeros(scores_to_use, competitors)
+    competitors.map do |competitor|
+      score = scores_to_use.find { |s| s.competitor_id == competitor.id }
+      score&.total || 0
+    end
+  end
 
   def active_scores
     if judge_type.event_class == "Standard Skill"
