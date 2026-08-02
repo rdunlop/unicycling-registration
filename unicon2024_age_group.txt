@@ -1,0 +1,43 @@
++Freestyle Individual - 2 extra Age groups 
++Freestyle Pairs - 6 extra age gorup sets
+++Freestyle Group Small Jr - Largest group is 5 ppl, so we have 3 extra EXPERT sets
+++Freestyle Group Small Sr - Largest group is 5 ppl, so we have 3 extra EXPERT sets
+-- Freestyle Group Large Jr - Largest group is 13 ppl, so we have 3 FEWER EXPERT sets (only 1 group, of 13)
+-- Freestyle Group Large Jr - Largest group is 28 ppl, so we have 13 FEWER EXPERT sets (TCUC 28, Danish 22)
+May want t ocnfirm that x-style director knows that ther's only 4 sets (Jr Exp, Sr Exp.)
++Muni DH Beginner - We have 9 age groups, so 2 extra sets
++Muni DH int - We have 9 age groups, so 1 extra sets, And then 2 sets of experts awards
++Muni UH - We have 9 age groups, so 2 extra sets, And then 2 sets of experts awards
++Muni XC Beg - We have 9 age groups, 1 extra set
+Muni XC Int - We have 9 age groups
+-Muni XC Elite - We have 9 age groups, so 2 FEWER age group, and 2 expert (fine)
+
+Muni Cyclocross NEEDS TO BE ALLOCATED TO AGE GROUPS.
+
++10k Std - we have 13 age groups, 2 extra sets
+10k Unlm. - we have 9 age groups
+Loop the Lake Std - we have 7 age groups.
+Loop the Lake Unl - we have 7 age groups.
+-Crit Standard - We have 7 age groups, so we have 2 FEWER
++Crit Unl - We have y6 age groups, so we have 1 extra
+++Basketball A - We have a team of size 10, so we have 2 extra Expert
++Basketball B - We have a team of size 7, so we have 3 extra Age Group
+++Hockey A - we have a team of size 8, so we have 2 extra expert
+Hockey A - we have a team of size 8, so we have 2 extra expert
+-Hockey B - we have a team of size 11, so we have 1 FEWER age group
+
+Track - Wheel Walk 10m - probably fine
+
+************************
+Track -Wheel Walk 30m - AGe GRoups not set yet
+************************
+
+High Jump Bar - 8 age groups
+High Jump Track - 8 age groups
+Long Jump Bar - 8 age groups
+Long Jump Track - 8 age groups
+
+-Speed Trials - 8 age groups, so we have 1 FEWER age group
+ -     What is speed Trials finals?
+Trials - 8 ager groups
+Trials Expert - 2 age groups

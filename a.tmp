@@ -1,0 +1,115 @@
+diff --git a/Gemfile b/Gemfile
+index f19f1269f..641b20281 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -66,7 +66,7 @@ gem 'ruby-vips' # Image processing for ActiveStorage (replaces ImageMagick)
+ gem 'lograge'
+ gem 'rollbar'
+ gem 'rubyzip'
+-gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
++gem 'sassc-embedded' # needed for SCSS compilation (tolk dep + sprockets)
+ gem 'sidekiq', '~> 8.1.6' # as per sidekiq recommendations, always lock like this
+ gem 'stripe'
+ gem 'webrick'
+diff --git a/Gemfile.lock b/Gemfile.lock
+index c0df55279..52ee63d71 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -239,7 +239,7 @@ GEM
+     coderay (1.1.3)
+     coercible (1.0.0)
+       descendants_tracker (~> 0.0.1)
+-    concurrent-ruby (1.3.7)
++    concurrent-ruby (1.3.8)
+     connection_pool (3.0.2)
+     consistency_fail (0.3.7)
+     countries (8.1.0)
+@@ -277,9 +277,9 @@ GEM
+       base64 (~> 0.3)
+     drb (2.2.3)
+     equalizer (0.0.11)
+-    erb (6.0.5)
++    erb (6.0.6)
+     erubi (1.13.1)
+-    execjs (2.10.0)
++    execjs (2.10.1)
+     factory_bot (6.5.5)
+       activesupport (>= 6.1.0)
+     factory_bot_rails (6.5.1)
+@@ -290,10 +290,10 @@ GEM
+     ffi (1.17.4)
+     foreman (0.90.0)
+       thor (~> 1.4)
+-    foundation-rails (6.6.2.0)
++    foundation-rails (6.9.0.0)
+       railties (>= 3.1.0)
+-      sass (>= 3.3.0)
+-      sprockets-es6 (>= 0.9.0)
++      sassc
++      sprockets-es6
+     gaffe (1.2.0)
+       rails (>= 4.0.0)
+     globalid (1.3.0)
+@@ -303,6 +303,12 @@ GEM
+       activerecord (>= 7.0, < 8.2)
+       activesupport (>= 7.0, < 8.2)
+       request_store (~> 1.0)
++    google-protobuf (4.35.1)
++      bigdecimal
++      rake (~> 13.3)
++    google-protobuf (4.35.1-x86_64-linux-gnu)
++      bigdecimal
++      rake (~> 13.3)
+     haml (7.2.0)
+       temple (>= 0.8.2)
+       thor
+@@ -490,9 +496,6 @@ GEM
+       zeitwerk (~> 2.6)
+     rainbow (3.1.1)
+     rake (13.4.2)
+-    rb-fsevent (0.11.2)
+-    rb-inotify (0.10.1)
+-      ffi (~> 1.0)
+     rbs (4.0.3)
+       logger
+       prism (>= 1.6.0)
+@@ -581,15 +584,17 @@ GEM
+       logger
+     rubyzip (3.3.1)
+     safe_yaml (1.0.5)
+-    sass (3.7.4)
+-      sass-listen (~> 4.0.0)
+-    sass-listen (4.0.0)
+-      rb-fsevent (~> 0.9, >= 0.9.4)
+-      rb-inotify (~> 0.9, >= 0.9.7)
++    sass-embedded (1.102.0)
++      google-protobuf (~> 4.31)
++      rake (>= 13)
++    sass-embedded (1.102.0-x86_64-linux-gnu)
++      google-protobuf (~> 4.31)
+     sass-rails (6.0.0)
+       sassc-rails (~> 2.1, >= 2.1.1)
+     sassc (2.4.0)
+       ffi (~> 1.9)
++    sassc-embedded (1.80.9)
++      sass-embedded (~> 1.80)
+     sassc-rails (2.1.2)
+       railties (>= 4.0.0)
+       sassc (>= 2.0)
+@@ -694,6 +699,7 @@ GEM
+ 
+ PLATFORMS
+   ruby
++  x86_64-linux
+ 
+ DEPENDENCIES
+   acts_as_list
+@@ -769,7 +775,7 @@ DEPENDENCIES
+   rubocop-rspec
+   ruby-vips
+   rubyzip
+-  sassc-rails
++  sassc-embedded
+   select2-rails
+   shoulda-matchers
+   sidekiq (~> 8.1.6)

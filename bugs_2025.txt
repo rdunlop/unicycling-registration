@@ -1,0 +1,18 @@
+https://naucc2025.reg.unicycling-software.com/en/payment_summary/expense_groups/1
+- Shows "Num Unpaid" for registration periods which have passed (this appears to be a caching issue).
+
+sHould have a banner which appears when an age group isn't assigned correctly.
+
+Why are there folks who have NOT paid for USA membership, but still managed to pay? (eg. Dale Grzych)
+
+
+Richard asks whether there's a way to email the judges (or ALL folks with extra priviledges) for freestyle.
+
+Award Labels->create by registrant/competitor (filter by competition/rank, etc), does not seem to work. And there are no specs
+
+
+assigning expert lane candidates should not assign to heat 0 if not entered
+
+don't add "1.0pts" when entering results manually...it's frustrating to have to delete them...make it optional
+
+When a wave/wave-start time is updated, the results are not updated. The cache should be busted when that happens

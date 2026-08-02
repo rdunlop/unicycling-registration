@@ -1,0 +1,3 @@
+TBD:
+- Set a elastic IP for regtest (and regtestnew)
+- Clean up the DNS records (remove naucc2015.unicycling-software.com, remove registration.unicycling-software.com), Update regtest.unicycling-software.com to match production

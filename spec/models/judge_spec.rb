@@ -160,5 +160,20 @@ describe Judge do
       expect(j1_totals.sum.round(1)).to eq(100.0)
       expect(j2_totals.sum.round(1)).to eq(100.0)
     end
+
+    it "averages all judges including those who didn't score each competitor" do
+      # The average placing_points across all judges and all competitors should sum to 100%
+      calc = ArtisticResultCalculator2017.new
+      judge_type = judge1.judge_type
+
+      avg_a = calc.total_points_for_judge_type(competitor_a, judge_type)
+      avg_b = calc.total_points_for_judge_type(competitor_b, judge_type)
+      avg_c = calc.total_points_for_judge_type(competitor_c, judge_type)
+      avg_d = calc.total_points_for_judge_type(competitor_d, judge_type)
+
+      # Sum should be 100% (or close to it accounting for rounding)
+      total = avg_a + avg_b + avg_c + avg_d
+      expect(total.round(1)).to eq(100.0)
+    end
   end
 end

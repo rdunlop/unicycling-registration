@@ -1,0 +1,17 @@
+How can someone sign up for a new competitor during the event? A "Authorized laptop" doesn't help, a "late registrant" doesn't help. It's because the on-site registrationcostupdater didn't run today because the checker only runs once a day at midnight....and didn't change "current_period" today. ???
+
+Patricia asks how to "flag" folks who are freestyle without having music?
+
+Reg check-in tomorrow
+
+FIXED The jquery-datetimepicker-rails gem isn't working, and is breaking the javascript on some pages.FY
+
+Connie complained that the "all registration sheets" PDF report took hours to run.
+
+The competition_sources drop-down is sorted strangely, doesn't give a useful sort order.
+
+
+High/Long is not working with Javascript due to weird is-it-dirty interactions. I disabled the form clearing code, and it seems to work better for judges
+
+
+UTF Heart character doesn't work when printing to PDF for labels. (Heart-Family basketball team)

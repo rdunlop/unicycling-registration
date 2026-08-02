@@ -1,0 +1,166 @@
+IUF Membership system thoughts
+
+High Priority Questions:
+- How does the system deal with "parents and children"? They would have multiple IUF members, but only a single e-mail address.
+- How does the system deal with "team captain and members"? They would have multiple IUF members, but only a single e-mail address.
+  - What if a child (or team member) tries to register with the IUF in the future? How to de-duplicate their record? Should we try to ensure that the name/DOB is unique? What would we do if it's not?
+- Does the IUF have a Stripe or Paypal account? (If not, we will need one to receive funds, right?)
+- What should the contact email address be for any questions/issues when dealing with IUF-membership questions?
+- Should we store any more REQUIRED data from users? (Country?)
+- Should we allow logging in with Google? with Facebook? With Emaill/password also as alternative?
+- Does the membership needs to be able to be paid by bank transfer (e.g. Manually marked as received)? Stripe? Paypal? (I would prefer Bank and Stripe be the initial 2 methods, or Bank and Paypal)
+
+Lower-priority questions:
+- How much explanation text should appear on the system to explain who/why we are asking for money/details? Should this text be modifiable by admins? Should it be translated?
+- an IUF membership is required for ALL Competitors, and ALL Non-Competitors right?
+- What should the URL of this application be? iuf-membership.unicycling-software.com (easy)? membership.unicycling.org (slightly more difficult)?
+- How should the system be interacted with? (see "Interaction" section below)
+
+Future Features:
+- Allow Admin to send e-mails
+- Allow someone to close their account?
+- Allow someone to opt-out of emails (granularity?)
+- Should an IUF membership be auto-renewal? (I think no)
+
+NOTE: an earlier version of this discussion can be found https://docs.google.com/document/d/1pVbns5e__QoR4Ke4WGT3MC3Kd3oFS9okp_AanM6DEmE/edit?usp=sharing ....but I think that our thinking on this topic has changed a little since this was written.
+
+=========================================
+Interaction: How should the process be integrated with the UDA registration system?
+
+When a user is registering a Competitor, before they can pay for their membership, they need to complete their "IUF membership Verification" step.
+
+This will be a separate Step on the registration flow, and will block them from proceeding to pay until this step is successful.
+
+------------------------------------
+1) Explanation about the IUF membership requirement:
+
+In order to register for UNICON, you need an IUF Membership.
+To create an IUF membership, you need to supply:
+- Email
+- First Name
+- Last Name
+- DOB
+
+and pay 15EUR for a 2-year membership.
+
+Options:
+1. [Create an IUF Membership]
+
+2. [Manually Enter your IUF Membership ID] (note: this ID must match your name in both systems)
+
+3. If you already have an IUF membership [Search for your IUF Membership ID]
+
+---------------------------
+2) If the user chooses "Create an IUF Membership", they are directed to the IUF membership site:
+
+"Sign up for an IUF Membership"
+- Sign up by logging in with Facebook
+- Sign up by logging in with Google
+- Sign up with email
+
+----------------------------
+3) Once signed in to the IUF membership system.
+
+Enter:
+- First Name
+- Last Name
+- DOB
+
+[Pay 15EUR] (brings up payment modal)
+
+[Close this window to return to the registration system]
+
+-------------------------------
+4) Upon returning to the registration system, it automatically checks to see if they're a current member.
+
+-------------------------------
+5) Manually enter IUF membership ID
+
+If the user chooses this, it shows a text input box, where they can enter an IUF ID, and it will check to see if this matches the user's name/DOB.
+
+---------------------------------
+
+=========================================
+
+Requirements:
+- Determine whether a given registrant is a "Current" member
+- Users:
+  - Log in/Sign-Up
+  - Show user an assigned IUF ID
+  - modify my details (first_name, last_name, password, DOB)
+  - Take Payments
+  - Privacy Policy
+  - Terms of Service
+  - Forgot Password feature
+- Admin:
+  - Show payments
+  - Show list of registrants
+  - Allow updating of user data
+  - Show papertrail of all changes for each User
+  - Management of administrators
+  - Managemnet of user accounts
+  - Send e-mail to members
+  - Able to mark that a membership has been paid by Bank transfer
+- SuperAdmin
+  - Management of Admin/SuperAdmin users
+  - Management of pricing
+  - [NO] Mnaagement of Stripe API Keys/Paypal keys.
+  - [NO] Management of Facebook Login Integration Keys?
+  - [NO] Management of Google Login Integration Keys?
+- API:
+  - Allow checking to see whether a given user is a member by passing name/DOB
+- Technical:
+  - https certificate
+  - need to be able to send email to do confirmations
+
+Data to be collected:
+- First name
+- Last Name
+- Alternative First Name (e.g. aka)
+- Alternative Last Name (e.g. Maiden Name)
+- Birthdate
+- Email address (must be confirmed)
+
+Data to be stored:
+- Payment:
+  - Date of payment
+  - Amount
+  - Currency
+  - Payment Token
+
+  =========================================
+Database Schema Design:
+
+User
+ - first_name
+ - alternate_first_name
+ - last_name
+ - alternate_last_name
+ - birthdate (date)
+ - email
+ (supporting the Devise login gem)
+ - unconfirmed_email
+ - confirmation_token
+ - confirmed_at
+ - confirmation_sent_at
+
+Identity
+ - provider (e.g. 'facebook', 'google')
+ - uid
+ - user_id
+
+Role (per the rolify gem)
+ - name
+ - resource_id
+ - resource_type
+
+UserRole
+ - user_id
+ - role_id
+
+Payment
+ - user_id
+ - source
+ - token
+
+Versions (per the papertrail gem)

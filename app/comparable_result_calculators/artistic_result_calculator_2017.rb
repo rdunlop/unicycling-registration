@@ -66,13 +66,20 @@ class ArtisticResultCalculator2017
   end
 
   def total_points_for_judge_type(competitor, judge_type, with_ineligible: false)
-    scores = competitor.scores.joins(:judge).where(judges: { judge_type_id: judge_type.id }).merge(Judge.active)
+    judges = competitor.competition.judges.where(judge_type: judge_type).merge(Judge.active)
 
-    active_scores = scores.map { |score| score.placing_points(with_ineligible: with_ineligible) }.compact
+    placing_points_by_judge = judges.map do |judge|
+      score = competitor.scores.find_by(judge: judge)
+      if score.present?
+        score.placing_points(with_ineligible: with_ineligible)
+      else
+        0
+      end
+    end
 
-    return 0 if active_scores.none?
+    return 0 if placing_points_by_judge.none?
 
-    (active_scores.sum / active_scores.count.to_f).round(2)
+    (placing_points_by_judge.sum / placing_points_by_judge.count.to_f).round(2)
   end
 
   def results_by_judge_type(competitor, with_ineligible: false)

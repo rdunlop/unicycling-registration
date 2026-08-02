@@ -1,0 +1,2 @@
+Need to upgrade/replace jc-validates_timeliness with validates_timlineness 7.0.0.beta2
+Need to update rubocop to a modern version.

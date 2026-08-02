@@ -1,0 +1,90 @@
+there's a bug: If an admin user goes to en/registrants/1081/build/set_organization_membership, and proceeds to the next step from there, the build_controller.rb will set the registrant's status to active (see "@registrant.status = 'active' if step == steps.last"). This is a problem if the registrant record hasn't completed the whole wizard yet, as they may not have entered contact information, or other details.
+
+-----
+
+I want to add i18n to a lot of pages, please plan a strategy for applying i18n to the pages. First, we will concentrate on non-admin-only (ie. normal user) pages.
+
+I think that some focus areas could be:
+- controller-set breadcrumbs
+- view-page hard-coded text (break this apart into multiple passes, perhaps starting with translating titles)
+- controller-set messages like success, error, status
+
+Ideally, I'd like to minimize the number of times we translate the same text, for example, in https://github.com/rdunlop/unicycling-registration/pull/3103, the "Registrant Group Type" text is translated multiple times. Ideally, we'll translate this only once, and then use that source everywhere. The same should be done for any other places that it makes sense. For example, writing "Edit Registrant Group Type" and "Edit Registrant" should (ideally) turn into "Edit", "Registrant" and "Registrant Group Type" translations, which are then applied everywhere. My concern with this would be if there is a language translation in which the "Edit" should come after the subject (like "Registrant Edit"), but I'm not sure if that's worth addressing for this application....that is probably too "flexible" for our needs.
+
+-----
+We have an issue which occurs sometimess when users are registering.
+The users proceed  through the wizard (app/controllers/registrants/build_controller.rb), and then they leave the wizard, but cannot continue through the wizard again because their record is invalid.
+
+The core problem here is that the registrant record has a "status" attribute, which is used by "past_step_1?", "past_step_2?" and other methods in app/models/registrant.rb in order to enable certain validations as they proceed.
+
+What happens is that sometimes their record becomes invalid, and they cannot reach the wizard page required to address the issue.
+
+Example scenarios:
+1) When new mandatory event choices are added after registrants have been created, then they may not be able to update their registration anymore with messages such as "[Event choice] should be filled in". If their status isn't "active", they cannot navigate to the "Events" page in order to address the issue.
+
+2) When they needs_organization_membership? (and thus their status is "active", but their organization membership value has changed) they get into this inconsistent state where they are "active", but their record isn't valid.
+
+
+Some ideas on how to address it:
+A) Make the "Save & Continue" button only do a partial update: instead of update the whole registrant, it should update the fields that are currently displayed. This would let users save their name before fixing the issue in the "Events" tab.
+
+B) When the user starts the wizard flow, if the record isn't valid, change their status back to the one which makes their record valid (and also move them forward to that point in the wizard?)
+
+C) When the user starts the wizard flow, if the record isn't valid, move them to the point in the wizard needed to address the invalid-ness. (determine this by temporarily changing their status, and validating the record?)
+
+D) Other?
+
+----------
+
+The Menu bar is getting way too cluttered.
+I'd like to reduce the clutter.
+Please plan on how we could improve the menu options? Make them fewer, or have some other way of grouping them, so that frequently used items are still readily available, but the number of shown items is reduced.
+NOTE: Because different roles see different menu item numbers, let's check on this for super_admin, as well as convention_admin and normal user roles.
+
+
+------------
+I'm getting a bunch of these exceptions regularly, I am 90% sure it's from bots scanning the app for vulnerabilities. What should I do to prevent them from being shown through rollbar (and subsequently through my email). I'd like to target them for ignoring, while casting a wide enough net to capture all bots/scanners, but not wide enough to capture valid user-caused errors. I suspect that all json-responses are probably ignorable. I have some json endpoints, but they either work, or don't work....there aren't any which I should have defined that I don't have defined.
+
+-------
+I  don't think that I have enough test coverage over the application. Specifically, I want to know which flows have 0 coverage, and I want to add specs for those flows.
+
+After/while doing this, I also want to expand the specs which deal with submitting forms without selecting requried fields. I believe that I have a number of forms which throw exceptions if I forget to fill out a field. I'd like to fix this, and show an error message instead.
+--------
+I'd like to investigate the idea of getting rid of the prawn-labels gem, the reason is that I believe that it may be unmaintained. I also believe that I'm not using very much capability from prawn-labels. What options should I consider? Should I depend on prawn directly? is there a different gem which would better suit my label-printing needs? Give me a survey of currently-maintained gems (2026) which could be used to meet my label printing needs.
+--------
+FABLE?
+
+The application depends upon jquery-ui-rails, which has a security warning, and I have to upgrade or replace that gem. What should I do? look at the gem contents, documentation, and my usage, and plan on how to replace it without losing functionality (similar/equivalent functionality is acceptable), and propose what the next steps should be
+I'm willing to entertain the idea of removing jquery-rails also, and depending directly on javascript only. I do have a few gems which seem to rely upon juqery though, like jquery-datatables-rails, rails-assets-datetimepicker (maybe?)
+
+--------
+FABLE?
+
+I'd like to explore the idea of replacing gem 'carrierwave', gem 'carrierwave-aws', '1.6.0', gem 'carrierwave-i18n' with activestorage directly. I have the activestore tables defined, but I don't seem to use them anywhere. Could i do this without losing functinoality?
+--------
+After a freestyle judge has created scores, it's essentially impossible to remove the judge and their scores. I think that we should add the ability to destroy the scores of an individual judge (perhaps only as super-admin?). But, another difficulty, is that we had a competitor which was marked "withdrawn" after having done some scoring....and so, they had "scores" associated with them. This caused the judge_policy.rb "record.scores.count.zero?" to be falsey, preventing us from being abel to delete the judge. I'm not sure what I should do here, I thinkt hat the record.scores.count.zero?" should be modified in order to prevent "withdrawn" competitors' scores from being counted.
+----------
+
+BUG:
+I've found competitions which are published, but not "Locked", this is a problem because in that state, the competition is "invalid" from an ActiveRecord perspective.
+I don't know the exact order of events which caused this to be the case. I'd like to prevent this from happening in the future.
+
+--------
+New Feature:
+I want to add two new features to the Mass Email system.
+First, we will need to add a new field to the mass_emails table, I think "additional_reply_to_emails".
+This will be a comma-separated list of emails that we also send as reply_to.
+
+Currently, when we send emails through Notification.send_mass_email, it sets the reply_to to `EventConfiguration.singleton.contact_email`. With this new change, we will also include "additonal_reply_to_emails" in the reply_to field when sending emails.
+
+The contents of the additional_reply_to_emails will be set via new UI elements on the `/emails/list` url page. This is
+in the emails_controller.
+
+I want to add 2 elements:
+1) A checkbox which says "Include my email in the reply-to list"
+2) A text input field which says "Additional reply-to emails".
+
+If either of these elements are used, I'd like to (using javascript) update the UI to show the additional reply-to email addresses on the UI.
+
+------
+I want to add caching to the build_and_push_docker so that it is faster if no gems have changed.

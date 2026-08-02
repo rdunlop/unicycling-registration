@@ -1,0 +1,38 @@
+Intsead of Points next to each judge, it should be "percentage",
+so if we have 24 pts, 21pts, 15pts = 60pts total, so that would be
+24/60 = 40%, etc.
+
+"Total Points" becomes "average Percentage", so 40% + 38% / 2 judges = 39%.
+
+
+Once the percentage average value for each competitor has
+been calculated.....ed percentages are added together according to their
+weighting to see the final results.
+
+So this means that (Perf% * .45) + (tech% *.45) + (dism% *.1) = some resulting "Score". higher is still better.
+
+Double-check, the abov "Score" should add up to 100 when all competitors are summed.
+
+
+----------
+Technical scoring should be out of 10
+
+----
+On the competitor-friendly Freestyle Judging Summary (https://registrationtest.regtest.unicycling-software.com/en/printing/competitions/26/freestyle_summary), can we somehow add/show the % of the dismount score?
+We already appear to have this value ,as the "Dismount" "Total Points" value on (https://registrationtest.regtest.unicycling-software.com/en/competitions/26/result)
+
+"Total %" sohuld be fine (no changes should be necessary)
+
+----
+
+-----
+For Patricia
+Technically, the Performance score system is not doing 33% for each category of scoring, but only summing the 3 up, and then converting into percentage. The result is the same.
+I think that the "Preformance" and "Technical" should do the same thing, whichever that should be.
+
+
+---------
+Recplaec Perc. with "%"
+Change "Total" to be like Performance, not like Technical.
+
+If possible, do not add the "%" column to the Dismount judge.

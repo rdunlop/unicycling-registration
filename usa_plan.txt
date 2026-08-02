@@ -1,0 +1,14 @@
+Plan:
+- Copy the old USA membership number to manual_member_number
+- Search for a WildApricot by:
+  - If a system_member_number is specified, search ONLY by that
+  - If no system_member_number is specified, Search by fname/lname/bday
+  - Then search for usa via manual_member_number (if specified)
+- When a match is found, store the WildApricot ID found as the "system_member_number"
+- If a member_number is set, search by that, instead of first_name/last_name/bday
+
+- Allow admin to modify the WildApricot ID, or clear it.
+- Display the system_member_number to the users (with notes about what it is)
+- Display manual_member_number to admin, if it is specified
+- Describe how to find the WildApricot User ID
+- Automatically search for the WildApricot record when. doing "copy from previous registration"
