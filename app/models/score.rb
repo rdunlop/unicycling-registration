@@ -65,7 +65,6 @@ class Score < ApplicationRecord
     return nil if !with_ineligible && competitor.ineligible?
 
     score_totals = judge.score_totals(with_ineligible: with_ineligible)
-
     judge_score_calculator.judged_points(score_totals, total)
   end
 
