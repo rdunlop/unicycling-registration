@@ -43,3 +43,41 @@ dump.rdb
 
 # Local dev artifacts
 /public/test
+
+# Local IDE/editor configs (do not commit)
+.vscode/
+.idea/
+
+# Local Claude Code settings
+.claude/
+
+# File storage (generated files)
+/storage/
+
+# Test/sample files
+*.csv
+test.lif
+francois_test*.csv
+iuf_membership.txt
+patricia_notes*.txt
+robin_notes.txt
+bugs_*.txt
+ruby_upgrade_needs.txt
+upgrade_q.txt
+usa_plan.txt
+unicon*.txt
+todo_*.txt
+todo_*
+a.tmp
+p.js
+
+# Temp notes/plans
+PROPSHAFT_MIGRATION_PLAN.md
+SECURITY_TODO.md
+TESTING_CACHING.md
+
+# Generated/temporary directories
+apartment_acme_client*
+app/javascript/vendor/
+script/
+vendor/javascript/
