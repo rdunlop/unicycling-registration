@@ -67,8 +67,10 @@ class ArtisticResultCalculator2017
 
   def total_points_for_judge_type(competitor, judge_type, with_ineligible: false)
     judges = competitor.competition.judges.where(judge_type: judge_type).merge(Judge.active)
+    # Only include judges who have scored at least one competitor
+    judges_with_scores = judges.select { |judge| judge.scores.any? }
 
-    placing_points_by_judge = judges.map do |judge|
+    placing_points_by_judge = judges_with_scores.map do |judge|
       score = competitor.scores.find_by(judge: judge)
       if score.present?
         score.placing_points(with_ineligible: with_ineligible)
