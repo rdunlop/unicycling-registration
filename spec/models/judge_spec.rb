@@ -175,5 +175,22 @@ describe Judge do
       total = avg_a + avg_b + avg_c + avg_d
       expect(total.round(1)).to eq(100.0)
     end
+
+    it "excludes judges with no scores from the average" do
+      # Create a third judge who has no scores at all
+      judge_type = judge1.judge_type
+      FactoryBot.create(:judge, competition: competition, judge_type: judge_type)
+
+      calc = ArtisticResultCalculator2017.new
+
+      # Get average for competitor_a (scored by judge1 and judge2 only, not judge3)
+      avg_a = calc.total_points_for_judge_type(competitor_a, judge_type)
+
+      # Should be average of judge1 and judge2, NOT including judge3's 0%
+      # Judge1: 50%, Judge2: 40% (from earlier setup in before block)
+      # Average should be (50 + 40) / 2 = 45%, NOT (50 + 40 + 0) / 3 = 30%
+      expect(avg_a).to be > 40
+      expect(avg_a).to be < 50
+    end
   end
 end
