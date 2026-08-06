@@ -260,7 +260,7 @@ class AwardLabelsController < ApplicationController
     value.presence || default
   end
 
-  def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place, member = nil)
+  def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place, member = nil) # rubocop:disable Metrics/ParameterLists
     n = 0
     competition = competitor.competition
     if age_groups
