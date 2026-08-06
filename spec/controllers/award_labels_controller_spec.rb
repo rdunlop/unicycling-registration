@@ -225,6 +225,7 @@ describe AwardLabelsController do
         end
 
         before do
+          EventConfiguration.singleton.update!(award_alternates: false)
           FactoryBot.create(:result, :overall, competitor: group_competitor)
         end
 

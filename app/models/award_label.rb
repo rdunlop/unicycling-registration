@@ -28,10 +28,12 @@ class AwardLabel < ApplicationRecord
   belongs_to :user
   belongs_to :registrant
 
-  def populate_from_competitor(competitor, registrant, expert = false)
+  def populate_from_competitor(competitor, registrant, expert = false, member = nil)
     result = find_result(competitor, expert)
 
-    self.line_1 = result.competitor_name(registrant)
+    competitor_name = result.competitor_name(registrant)
+    competitor_name += " (alternate)" if member&.alternate?
+    self.line_1 = competitor_name
     self.line_2 = result.competition_name
     self.line_3 = result.team_name
     self.line_4 = result.category_name

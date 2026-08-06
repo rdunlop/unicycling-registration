@@ -13,5 +13,5 @@
     = f.input :artistic_score_elimination_mode_naucc
 
     = f.input :max_award_place, input_html: { min: 0 }
-    = f.input :award_alternates
+    = f.input :award_alternates, hint: t(".award_alternates_hint")
   = f.button :submit
