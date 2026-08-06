@@ -248,6 +248,36 @@ describe AwardLabelsController do
           expect(award_labels.count).to eq(1)
         end
       end
+
+      context "when award_alternates is enabled" do
+        let!(:group_competitor) do
+          comp = FactoryBot.create(:event_competitor, competition: competition)
+          alternate_reg = FactoryBot.create(:registrant)
+          alternate_member = Member.new(competitor: comp, registrant: alternate_reg, alternate: true)
+          alternate_member.no_touch_cascade = true
+          alternate_member.save!
+          comp.reload
+          comp
+        end
+
+        before do
+          EventConfiguration.singleton.update!(award_alternates: true)
+          FactoryBot.create(:result, :overall, competitor: group_competitor)
+        end
+
+        it "creates award labels for alternates too" do
+          expect do
+            post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
+          end.to change(AwardLabel, :count).by(7)
+        end
+
+        it "creates an award label for the alternate member" do
+          post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
+          alternate_registrant = group_competitor.members.find_by(alternate: true).registrant
+          award_labels = AwardLabel.where(registrant: alternate_registrant)
+          expect(award_labels.count).to eq(1)
+        end
+      end
     end
 
     describe "POST create_labels" do

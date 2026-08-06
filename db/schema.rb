@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_01_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_083414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -456,6 +456,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_01_000001) do
     t.date "age_calculation_base_date"
     t.date "artistic_closed_date"
     t.boolean "artistic_score_elimination_mode_naucc", default: false, null: false
+    t.boolean "award_alternates", default: true, null: false
     t.integer "comp_noncomp_page_id"
     t.string "comp_noncomp_url"
     t.string "contact_email"
