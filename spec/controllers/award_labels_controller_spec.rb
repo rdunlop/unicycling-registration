@@ -214,7 +214,7 @@ describe AwardLabelsController do
         let!(:group_competitor) do
           comp = FactoryBot.create(:event_competitor, competition: competition)
           # Get the auto-created member (active by default)
-          active_member = comp.members.first
+          comp.members.first
           # Add an alternate member to the same group
           alternate_reg = FactoryBot.create(:registrant)
           alternate_member = Member.new(competitor: comp, registrant: alternate_reg, alternate: true)
