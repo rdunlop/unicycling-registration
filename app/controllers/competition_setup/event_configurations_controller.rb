@@ -32,7 +32,8 @@ class CompetitionSetup::EventConfigurationsController < CompetitionSetup::BaseCo
   def event_configuration_params
     params.require(:event_configuration).permit(
       :artistic_score_elimination_mode_naucc,
-      :max_award_place
+      :max_award_place,
+      :award_alternates
     )
   end
 end

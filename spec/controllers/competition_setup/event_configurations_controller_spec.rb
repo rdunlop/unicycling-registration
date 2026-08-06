@@ -21,7 +21,8 @@ describe CompetitionSetup::EventConfigurationsController do
     let(:ec_attributes) do
       {
         artistic_score_elimination_mode_naucc: "0",
-        max_award_place: "4"
+        max_award_place: "4",
+        award_alternates: "1"
       }
     end
 
@@ -30,6 +31,7 @@ describe CompetitionSetup::EventConfigurationsController do
       event_configuration = EventConfiguration.first
       expect(event_configuration.reload.max_award_place).to eq(4)
       expect(event_configuration.reload.artistic_score_elimination_mode_naucc).to be_falsey
+      expect(event_configuration.reload.award_alternates).to be_truthy
     end
   end
 end

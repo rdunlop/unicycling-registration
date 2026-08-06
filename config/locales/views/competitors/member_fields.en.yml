@@ -1,0 +1,6 @@
+en:
+  competitors:
+    member_fields:
+      alternate_hint: |
+        Alternates do not count toward group size for dismount scoring.
+        Alternates also do not receive awards.

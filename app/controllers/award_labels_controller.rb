@@ -84,8 +84,9 @@ class AwardLabelsController < ApplicationController
     max_place = @config.max_award_place
     n = 0
     competition.competitors.active.each do |competitor|
-      competitor.active_members.each do |member|
-        n += create_labels_for_competitor(competitor, member.registrant, @user, true, competition.has_experts?, min_place, max_place)
+      members = @config.award_alternates? ? competitor.members : competitor.active_members
+      members.each do |member|
+        n += create_labels_for_competitor(competitor, member.registrant, @user, true, competition.has_experts?, min_place, max_place, member)
       end
     end
     respond_to do |format|
@@ -259,18 +260,18 @@ class AwardLabelsController < ApplicationController
     value.presence || default
   end
 
-  def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place)
+  def create_labels_for_competitor(competitor, registrant, user, age_groups, experts, min_place, max_place, member = nil) # rubocop:disable Metrics/ParameterLists
     n = 0
     competition = competitor.competition
     if age_groups
-      if create_label(competitor, registrant, false, min_place, max_place, user)
+      if create_label(competitor, registrant, false, min_place, max_place, user, member)
         n += 1
       end
     end
 
     if experts
       if competition.has_experts?
-        if create_label(competitor, registrant, true, min_place, max_place, user)
+        if create_label(competitor, registrant, true, min_place, max_place, user, member)
           n += 1
         end
       end
@@ -279,7 +280,7 @@ class AwardLabelsController < ApplicationController
     n
   end
 
-  def create_label(competitor, registrant, experts, min_place, max_place, my_user)
+  def create_label(competitor, registrant, experts, min_place, max_place, my_user, member = nil)
     if experts || !competitor.competition.has_age_group_entry_results?
       place = competitor.overall_place
     else
@@ -292,7 +293,7 @@ class AwardLabelsController < ApplicationController
 
     aw_label = AwardLabel.new
     aw_label.user = my_user
-    aw_label.populate_from_competitor(competitor, registrant, experts)
+    aw_label.populate_from_competitor(competitor, registrant, experts, member)
 
     aw_label.save
   end
