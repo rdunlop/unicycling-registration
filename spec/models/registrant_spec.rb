@@ -598,4 +598,47 @@ describe Registrant do
       end
     end
   end
+
+  describe "results method" do
+    let(:competition) { FactoryBot.create(:competition, awarded: true) }
+    let(:registrant) { FactoryBot.create(:registrant) }
+
+    context "when registrant is an active member of a group competitor" do
+      let!(:competitor) do
+        comp = FactoryBot.create(:event_competitor, competition: competition)
+        # Replace auto-created member with our registrant as active
+        comp.members.destroy_all
+        FactoryBot.create(:member, competitor: comp, registrant: registrant, alternate: false)
+        FactoryBot.create(:result, :overall, competitor: comp)
+        comp.reload
+      end
+
+      it "includes results for the active member" do
+        results = registrant.results.awarded
+        expect(results.count).to be > 0
+        expect(results.first.competitor.members).to include(registrant.reload.members.first)
+      end
+    end
+
+    context "when registrant is an alternate member of a group competitor" do
+      let!(:competitor) do
+        comp = FactoryBot.create(:event_competitor, competition: competition)
+        # Replace auto-created member with an alternate
+        comp.members.destroy_all
+        FactoryBot.create(:member, competitor: comp, registrant: registrant, alternate: true)
+        FactoryBot.create(:result, :overall, competitor: comp)
+        comp.reload
+      end
+
+      it "includes results for the alternate member" do
+        results = registrant.results.awarded
+        expect(results.count).to be > 0
+      end
+
+      it "includes the result even though member is alternate" do
+        results = registrant.reload.results.awarded
+        expect(results.first.competitor.members.find_by(registrant: registrant).alternate).to eq(true)
+      end
+    end
+  end
 end

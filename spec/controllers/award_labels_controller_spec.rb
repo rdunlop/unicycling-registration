@@ -209,6 +209,45 @@ describe AwardLabelsController do
           post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
         end.to change(AwardLabel, :count).by(5)
       end
+
+      context "when a competitor has alternate members" do
+        let!(:group_competitor) do
+          comp = FactoryBot.create(:event_competitor, competition: competition)
+          # Get the auto-created member (active by default)
+          active_member = comp.members.first
+          # Add an alternate member to the same group
+          alternate_reg = FactoryBot.create(:registrant)
+          alternate_member = Member.new(competitor: comp, registrant: alternate_reg, alternate: true)
+          alternate_member.no_touch_cascade = true
+          alternate_member.save!
+          comp.reload
+          comp
+        end
+
+        before do
+          FactoryBot.create(:result, :overall, competitor: group_competitor)
+        end
+
+        it "creates award labels only for active members, not alternates" do
+          expect do
+            post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
+          end.to change(AwardLabel, :count).by(6) # 5 from single-member competitors + 1 from active_member only (not the alternate)
+        end
+
+        it "does not create award label for alternate member" do
+          post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
+          alternate_registrant = group_competitor.members.find_by(alternate: true).registrant
+          award_labels = AwardLabel.where(registrant: alternate_registrant)
+          expect(award_labels.count).to eq(0)
+        end
+
+        it "creates award label for active member" do
+          post :create_by_competition, params: { competition_id: competition.id, user_id: @admin_user.to_param }
+          active_registrant = group_competitor.members.find_by(alternate: false).registrant
+          award_labels = AwardLabel.where(registrant: active_registrant)
+          expect(award_labels.count).to eq(1)
+        end
+      end
     end
 
     describe "POST create_labels" do

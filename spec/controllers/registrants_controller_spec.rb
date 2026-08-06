@@ -220,4 +220,55 @@ describe RegistrantsController do
       expect(response).to be_successful
     end
   end
+
+  describe "GET results" do
+    let(:competition) { FactoryBot.create(:competition, :published, awarded: true) }
+    let(:registrant) { FactoryBot.create(:registrant) }
+
+    context "when registrant is an active member of a group" do
+      let!(:competitor) do
+        comp = FactoryBot.create(:event_competitor, competition: competition)
+        FactoryBot.create(:member, competitor: comp)
+        FactoryBot.create(:member, competitor: comp)
+        FactoryBot.create(:member, competitor: comp)
+        comp.update(custom_name: "CUSTOM GROUP") # needs at least 3 members
+        FactoryBot.create(:member, competitor: comp, registrant: registrant, alternate: false)
+        FactoryBot.create(:result, :overall, competitor: comp)
+        comp.reload
+      end
+
+      it "shows the results page" do
+        get :results, params: { id: registrant.to_param }
+        expect(response).to be_successful
+      end
+
+      it "includes the result for the active member" do
+        get :results, params: { id: registrant.to_param }
+        assert_select "td", text: "CUSTOM GROUP", count: 1
+      end
+    end
+
+    context "when registrant is an alternate member of a group" do
+      let!(:competitor) do
+        comp = FactoryBot.create(:event_competitor, competition: competition)
+        FactoryBot.create(:member, competitor: comp)
+        FactoryBot.create(:member, competitor: comp)
+        FactoryBot.create(:member, competitor: comp)
+        comp.update(custom_name: "CUSTOM GROUP") # needs at least 3 members
+        FactoryBot.create(:member, competitor: comp, registrant: registrant, alternate: true)
+        FactoryBot.create(:result, :overall, competitor: comp)
+        comp.reload
+      end
+
+      it "shows the results page" do
+        get :results, params: { id: registrant.to_param }
+        expect(response).to be_successful
+      end
+
+      it "includes the result for the alternate member" do
+        get :results, params: { id: registrant.to_param }
+        assert_select "td", text: "CUSTOM GROUP", count: 1
+      end
+    end
+  end
 end
