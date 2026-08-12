@@ -598,8 +598,8 @@ GEM
       tilt
     securerandom (0.4.1)
     select2-rails (4.0.13)
-    shoulda-matchers (7.0.1)
-      activesupport (>= 7.1)
+    shoulda-matchers (8.0.1)
+      activesupport (>= 7.2)
     sidekiq (8.1.6)
       connection_pool (>= 3.0.0)
       json (>= 2.16.0)
