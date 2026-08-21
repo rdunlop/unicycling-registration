@@ -67,7 +67,7 @@ gem 'lograge'
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
-gem 'sidekiq', '~> 8.1.6' # as per sidekiq recommendations, always lock like this
+gem 'sidekiq', '~> 8.1.7' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'webrick'
 

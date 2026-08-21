@@ -447,7 +447,7 @@ GEM
     pundit (2.5.2)
       activesupport (>= 3.0.0)
     racc (1.8.1)
-    rack (3.2.6)
+    rack (3.2.7)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -505,7 +505,7 @@ GEM
     recaptcha (5.21.2)
     redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-client (0.30.0)
+    redis-client (0.30.1)
       connection_pool
     regexp_parser (2.12.0)
     reline (0.6.3)
@@ -600,7 +600,7 @@ GEM
     select2-rails (4.0.13)
     shoulda-matchers (7.0.1)
       activesupport (>= 7.1)
-    sidekiq (8.1.6)
+    sidekiq (8.1.7)
       connection_pool (>= 3.0.0)
       json (>= 2.16.0)
       logger (>= 1.7.0)
@@ -772,7 +772,7 @@ DEPENDENCIES
   sassc-rails
   select2-rails
   shoulda-matchers
-  sidekiq (~> 8.1.6)
+  sidekiq (~> 8.1.7)
   simple_form
   spreadsheet
   sprockets (~> 4.0)
