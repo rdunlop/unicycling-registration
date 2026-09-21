@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: https://github.com/pry/pry.git
-  revision: 135640262879544c6bfecbf3e78511289bfe956c
+  revision: 0b3c7dcc7d974f82f74e5725ae81bdcfad533b7b
   branch: master
   specs:
     pry (0.16.0)
@@ -327,7 +327,7 @@ GEM
     inline_svg (1.10.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    io-console (0.8.2)
+    io-console (0.9.4)
     irb (1.18.0)
       pp (>= 0.6.0)
       prism (>= 1.3.0)
@@ -508,7 +508,7 @@ GEM
     redis-client (0.30.0)
       connection_pool
     regexp_parser (2.12.0)
-    reline (0.6.3)
+    reline (0.7.0)
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
