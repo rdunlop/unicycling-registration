@@ -24,7 +24,7 @@ gem 'spreadsheet'
 # https://github.com/prawnpdf/ttfunk/issues/102
 gem 'ttfunk', github: 'prawnpdf/ttfunk'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '0.12.6.8'
+gem 'wkhtmltopdf-binary', '0.12.6.10'
 
 # Front-end
 gem "autoprefixer-rails"
