@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: https://github.com/pry/pry.git
-  revision: 135640262879544c6bfecbf3e78511289bfe956c
+  revision: 0b3c7dcc7d974f82f74e5725ae81bdcfad533b7b
   branch: master
   specs:
     pry (0.16.0)
