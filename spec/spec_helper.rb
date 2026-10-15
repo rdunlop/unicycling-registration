@@ -16,6 +16,7 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require "pundit/rspec"
 require "shoulda/matchers"
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -96,10 +97,6 @@ RSpec.configure do |config|
     RequestStore.clear!
   end
 
-  config.before(:each, type: :view) do
-    assign(:config, EventConfiguration.new)
-  end
-
   # this is necessary so that spec path builders without locales don't
   # incorrectly specify positional arguments into the 'locale' argument
   config.before(:each, type: :feature) do
@@ -132,12 +129,6 @@ RSpec.configure do |config|
   require 'sidekiq/testing'
   config.before do
     Sidekiq::Worker.clear_all
-  end
-
-  # In order to cause .deliver_later to actually .deliver_now
-  config.before do
-    ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
-    ActiveJob::Base.queue_adapter.perform_enqueued_at_jobs = true
   end
 
   config.around do |example|
