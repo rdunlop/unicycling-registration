@@ -49,27 +49,6 @@ class AgeGroupEntry < ApplicationRecord
     "entry-#{id}"
   end
 
-  def smallest_neighbour(registrant_data)
-    entries = age_group_type.age_group_entries_by_age_gender.where(wheel_size_id: wheel_size_id, gender: gender)
-    current_index = entries.find_index self
-
-    earlier_neighbour = entries[current_index - 1]
-    next_neighbour = entries[current_index + 1]
-    if current_index.zero?
-      # first entry has no earlier neighbour
-      return next_neighbour
-    elsif current_index == entries.count - 1
-      # last entry has hon next neighbour
-      return earlier_neighbour
-    end
-
-    if earlier_neighbour.number_eligible_matching_registrant(registrant_data) < next_neighbour.number_eligible_matching_registrant(registrant_data)
-      earlier_neighbour
-    else
-      next_neighbour
-    end
-  end
-
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
   def as_json(options = {})
     options ||= {}
