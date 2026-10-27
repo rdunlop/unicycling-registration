@@ -19,9 +19,12 @@ describe Compete::AgeGroupsController do
 
       get :show, params: { competition_id: competition.id }
       expect(response).to be_successful
-      expect(response.body).to include("cannot be modified")
+      expect(response.body).to include("Rename", "cannot be modified")
       combination = competition.age_group_combinations.first
-      expect(response.body).to include(combination.to_s, "Separate")
+      assert_select ".js--inlineEdit" do
+        assert_select ".js--inlineEditDisplay", text: /#{Regexp.escape(combination.to_s)}/
+        assert_select "form.js--inlineEditForm.is--hidden input[name=name][value=?]", combination.short_description
+      end
     end
   end
 
@@ -38,6 +41,18 @@ describe Compete::AgeGroupsController do
         put :combine, params: { competition_id: competition.id, age_groups: [entry_1.to_age_group_param] }
       end.not_to change(AgeGroupCombination, :count)
       expect(flash[:alert]).to be_present
+    end
+  end
+
+  describe "PUT rename" do
+    it "renames the combination" do
+      AgeGroupCombiner.new(competition).combine(entry_1, entry_2)
+      combination = competition.age_group_combinations.first
+
+      put :rename, params: { competition_id: competition.id, age_group_combination_id: combination.id, name: "Juniors" }
+
+      expect(combination.reload.name).to eq("Juniors")
+      expect(response).to redirect_to(competition_age_groups_path(competition))
     end
   end
 

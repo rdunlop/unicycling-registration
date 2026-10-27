@@ -21,6 +21,8 @@ class AgeGroupCombiner
       combination = existing_combinations.first || competition.age_group_combinations.create!
 
       (existing_combinations - [combination]).each(&:destroy!)
+      # A custom name describes the previous age groups of the combination
+      combination.update!(name: nil)
       (age_group_entries - combination.age_group_entries.to_a).each do |age_group_entry|
         combination.age_group_combination_entries.create!(age_group_entry: age_group_entry)
       end
@@ -43,6 +45,22 @@ class AgeGroupCombiner
     end
 
     combination.destroy!
+    competition.reload
+
+    true
+  end
+
+  # Give the combination a custom name (a blank name restores the default name)
+  def rename(combination, name)
+    if published?(combination)
+      @error_message = "#{combination} results are published, unpublish them first"
+      return false
+    end
+
+    unless combination.update(name: name)
+      @error_message = combination.errors.full_messages.to_sentence
+      return false
+    end
     competition.reload
 
     true
