@@ -1,0 +1,47 @@
+---
+"da":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          Handling
+        "age_group_type_locked": >-
+          Så længe aldersgrupper er slået sammen, kan aldersgrupperne i %{age_group_type} ikke ændres, da andre konkurrencer kan afhænge af dem.
+        "are_you_sure": >-
+          Er du sikker?
+        "base_age_groups": >-
+          Basisaldersgrupper: %{age_group_type}
+        "cancel": >-
+          Afbryd
+        "combine_with": >-
+          Slå sammen med %{smallest_neighbour}
+        "custom_order": >-
+          Denne konkurrence har sin egen rækkefølge, som ignorerer rækkefølgen i %{age_group_type}.
+        "eligible_registrants": >-
+          Antal tilmeldte, der kan deltage
+        "entry": >-
+          Aldersgruppe
+        "female": >-
+          Kvinde
+        "headline": >-
+          I alt er der %{competitors_count} deltagere. Denne side viser, hvordan deltagerne fordeler sig på de forskellige aldersgrupper. Herfra kan du slå aldersgrupper sammen i henhold til reglerne.
+        "ineligible_registrants": >-
+          Antal tilmeldte, der ikke kan deltage
+        "male": >-
+          Mand
+        "name_hint": >-
+          Lad feltet være tomt for at bruge navnene på de sammenlagte aldersgrupper
+        "order_hint": >-
+          Træk og slip aldersgrupperne for at ordne dem i denne konkurrence (heats tildeles i denne rækkefølge).
+        "ranking_age_groups": >-
+          Aldersgrupper brugt til placering
+        "rename": >-
+          Omdøb
+        "reset_order": >-
+          Brug aldersgruppetypens rækkefølge
+        "separate": >-
+          Adskil
+        "show_registrant_sign_up_breakdown": >-
+          Vis fordelingen af tilmeldte
+        "title": >-
+          %{competition} – Administration af aldersgrupper

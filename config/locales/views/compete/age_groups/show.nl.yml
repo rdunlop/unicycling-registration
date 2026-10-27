@@ -1,0 +1,47 @@
+---
+"nl":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          Actie
+        "age_group_type_locked": >-
+          Zolang leeftijdscategorieën gecombineerd zijn, kunnen de leeftijdscategorieën van %{age_group_type} niet worden gewijzigd, omdat andere wedstrijden ervan afhankelijk kunnen zijn.
+        "are_you_sure": >-
+          Weet je het zeker?
+        "base_age_groups": >-
+          Basisleeftijdscategorieën: %{age_group_type}
+        "cancel": >-
+          Annuleren
+        "combine_with": >-
+          Combineren met %{smallest_neighbour}
+        "custom_order": >-
+          Deze wedstrijd heeft een eigen volgorde, die de volgorde van %{age_group_type} negeert.
+        "eligible_registrants": >-
+          Aantal deelnamegerechtigde inschrijvingen
+        "entry": >-
+          Leeftijdscategorie
+        "female": >-
+          Vrouw
+        "headline": >-
+          In totaal zijn er %{competitors_count} deelnemers. Deze pagina toont hoe deze deelnemers over de verschillende leeftijdscategorieën verdeeld zijn. Vanaf deze pagina kun je leeftijdscategorieën combineren volgens het reglement.
+        "ineligible_registrants": >-
+          Aantal niet-deelnamegerechtigde inschrijvingen
+        "male": >-
+          Man
+        "name_hint": >-
+          Leeg laten om de namen van de gecombineerde leeftijdscategorieën te gebruiken
+        "order_hint": >-
+          Sleep de leeftijdscategorieën om ze voor deze wedstrijd te ordenen (de heats worden in deze volgorde ingedeeld).
+        "ranking_age_groups": >-
+          Leeftijdscategorieën gebruikt voor het klassement
+        "rename": >-
+          Hernoemen
+        "reset_order": >-
+          De volgorde van het leeftijdscategorietype gebruiken
+        "separate": >-
+          Scheiden
+        "show_registrant_sign_up_breakdown": >-
+          Verdeling van de inschrijvingen tonen
+        "title": >-
+          %{competition} – Beheer van leeftijdscategorieën
