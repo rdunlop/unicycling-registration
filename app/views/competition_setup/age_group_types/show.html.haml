@@ -2,12 +2,18 @@
 
 = render "combinations_lock", age_group_type: @age_group_type
 
+- custom_order_competitions = @age_group_type.competitions.where(id: AgeGroupPosition.select(:competition_id))
+- if custom_order_competitions.any?
+  %p
+    These competitions have their own order, which ignores the order below:
+    = safe_join(custom_order_competitions.map { |competition| link_to(competition, competition_age_groups_path(competition)) }, ", ")
+
 - combined = @age_group_type.combined?
 - cache [@age_group_type, combined] do
   = render "order_warning"
 
   - if combined
-    %p The order cannot be changed while some age groups are combined.
+    %p The order cannot be changed while some age groups are combined: order each competition from its age groups page instead.
   %table{ class: ("js--sortable" unless combined), data: { target: update_row_order_age_group_entries_path } }
     %thead
       %tr

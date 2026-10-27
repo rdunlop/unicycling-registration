@@ -15,6 +15,9 @@ en:
         age_group_type_locked: While age groups are combined, the entries of %{age_group_type} cannot be modified, as other competitions may rely on them.
         rename: Rename
         cancel: Cancel
+        order_hint: Drag and drop the age groups to order them for this competition (heats are assigned in this order).
+        custom_order: This competition has its own order, which ignores the order of %{age_group_type}.
+        reset_order: Use the order of the age group type
         name_hint: Leave blank to use the names of the combined age groups
         entry: Entry
         eligible_registrants: |
