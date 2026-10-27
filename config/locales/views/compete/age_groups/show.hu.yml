@@ -1,0 +1,47 @@
+---
+"hu":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          Művelet
+        "age_group_type_locked": >-
+          Amíg vannak összevont korcsoportok, a(z) %{age_group_type} korcsoportjai nem módosíthatók, mert más versenyszámok is függhetnek tőlük.
+        "are_you_sure": >-
+          Biztos benne?
+        "base_age_groups": >-
+          Alap korcsoportok: %{age_group_type}
+        "cancel": >-
+          Mégse
+        "combine_with": >-
+          Összevonás ezzel: %{smallest_neighbour}
+        "custom_order": >-
+          Ennek a versenyszámnak saját sorrendje van, amely figyelmen kívül hagyja a(z) %{age_group_type} sorrendjét.
+        "eligible_registrants": >-
+          Indulásra jogosult jelentkezők száma
+        "entry": >-
+          Korcsoport
+        "female": >-
+          Nő
+        "headline": >-
+          Összesen %{competitors_count} versenyző van. Ez az oldal megmutatja, hogyan oszlanak meg a versenyzők a különböző korcsoportok között. Innen a szabálykönyv szerint összevonhatja a korcsoportokat.
+        "ineligible_registrants": >-
+          Indulásra nem jogosult jelentkezők száma
+        "male": >-
+          Férfi
+        "name_hint": >-
+          Hagyja üresen az összevont korcsoportok nevének használatához
+        "order_hint": >-
+          Húzza a korcsoportokat a versenyszám sorrendjének beállításához (a futamok ebben a sorrendben kerülnek kiosztásra).
+        "ranking_age_groups": >-
+          Rangsoroláshoz használt korcsoportok
+        "rename": >-
+          Átnevezés
+        "reset_order": >-
+          A korcsoporttípus sorrendjének használata
+        "separate": >-
+          Szétválasztás
+        "show_registrant_sign_up_breakdown": >-
+          A jelentkezések megoszlásának megjelenítése
+        "title": >-
+          %{competition} – Korcsoportok kezelése

@@ -1,0 +1,47 @@
+---
+"de":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          Aktion
+        "age_group_type_locked": >-
+          Solange Altersklassen zusammengelegt sind, können die Altersklassen von %{age_group_type} nicht geändert werden, da andere Wettbewerbe davon abhängen können.
+        "are_you_sure": >-
+          Bist du sicher?
+        "base_age_groups": >-
+          Basis-Altersklassen: %{age_group_type}
+        "cancel": >-
+          Abbrechen
+        "combine_with": >-
+          Mit %{smallest_neighbour} zusammenlegen
+        "custom_order": >-
+          Dieser Wettbewerb hat eine eigene Reihenfolge, welche die Reihenfolge von %{age_group_type} ignoriert.
+        "eligible_registrants": >-
+          Anzahl startberechtigter Anmeldungen
+        "entry": >-
+          Altersklasse
+        "female": >-
+          Weiblich
+        "headline": >-
+          Insgesamt gibt es %{competitors_count} Teilnehmer. Diese Seite zeigt, wie sich diese Teilnehmer auf die verschiedenen Altersklassen verteilen. Hier kannst du Altersklassen gemäß dem Regelwerk zusammenlegen.
+        "ineligible_registrants": >-
+          Anzahl nicht startberechtigter Anmeldungen
+        "male": >-
+          Männlich
+        "name_hint": >-
+          Leer lassen, um die Namen der zusammengelegten Altersklassen zu verwenden
+        "order_hint": >-
+          Ziehe die Altersklassen per Drag & Drop, um sie für diesen Wettbewerb zu ordnen (die Läufe werden in dieser Reihenfolge zugeteilt).
+        "ranking_age_groups": >-
+          Für die Wertung verwendete Altersklassen
+        "rename": >-
+          Umbenennen
+        "reset_order": >-
+          Reihenfolge der Altersklassen-Gruppe verwenden
+        "separate": >-
+          Trennen
+        "show_registrant_sign_up_breakdown": >-
+          Aufteilung der Anmeldungen anzeigen
+        "title": >-
+          %{competition} – Verwaltung der Altersklassen
