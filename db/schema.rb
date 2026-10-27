@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_083414) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -63,6 +63,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_083414) do
     t.index ["registrant_id", "user_id"], name: "ada_reg_user", unique: true
     t.index ["registrant_id"], name: "index_additional_registrant_accesses_registrant_id"
     t.index ["user_id"], name: "index_additional_registrant_accesses_user_id"
+  end
+
+  create_table "age_group_combination_entries", force: :cascade do |t|
+    t.bigint "age_group_combination_id", null: false
+    t.bigint "age_group_entry_id", null: false
+    t.bigint "competition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["age_group_combination_id"], name: "idx_on_age_group_combination_id_c99ab34446"
+    t.index ["age_group_entry_id"], name: "index_age_group_combination_entries_on_age_group_entry_id"
+    t.index ["competition_id", "age_group_entry_id"], name: "index_age_group_combination_entries_unique", unique: true
+  end
+
+  create_table "age_group_combinations", force: :cascade do |t|
+    t.bigint "competition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "index_age_group_combinations_on_competition_id"
   end
 
   create_table "age_group_entries", id: :serial, force: :cascade do |t|
@@ -948,13 +966,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_083414) do
   end
 
   create_table "published_age_group_entries", id: :serial, force: :cascade do |t|
+    t.bigint "age_group_combination_id"
     t.integer "age_group_entry_id"
     t.integer "competition_id"
     t.datetime "created_at", precision: nil
     t.datetime "published_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.index ["age_group_combination_id"], name: "index_published_age_group_entries_on_age_group_combination_id"
     t.index ["competition_id"], name: "index_published_age_group_entries_on_competition_id"
   end
+
+  add_check_constraint "published_age_group_entries", "(age_group_entry_id IS NULL) <> (age_group_combination_id IS NULL)", name: "published_age_group_entries_exactly_one_age_group", validate: false
 
   create_table "rails_admin_histories", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
@@ -1513,4 +1535,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_083414) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "age_group_combination_entries", "age_group_combinations"
+  add_foreign_key "age_group_combination_entries", "age_group_entries"
+  add_foreign_key "age_group_combination_entries", "competitions"
+  add_foreign_key "age_group_combinations", "competitions"
+  add_foreign_key "published_age_group_entries", "age_group_combinations"
 end

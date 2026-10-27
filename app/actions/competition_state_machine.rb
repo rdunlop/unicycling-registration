@@ -13,12 +13,13 @@ class CompetitionStateMachine
     competition.update_attribute(:locked_at, nil)
   end
 
-  def publish_age_group_entry(entry_id)
-    existing = competition.published_age_group_entries.where(age_group_entry_id: entry_id).first
+  # Toggles the publication of the given age group (AgeGroupEntry or AgeGroupCombination)
+  def publish_age_group(age_group)
+    existing = competition.published_age_group_entry_for(age_group)
     if existing
       existing.destroy
     else
-      entry = competition.published_age_group_entries.build(age_group_entry_id: entry_id)
+      entry = competition.published_age_group_entries.build(age_group: age_group)
       entry.save
     end
   end

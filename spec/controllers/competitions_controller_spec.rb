@@ -90,7 +90,7 @@ describe CompetitionsController do
 
     context "with valid params" do
       it "renders" do
-        post :set_age_group_places, params: { id: competition.id, age_group_entry_id: age_group_entry.id }
+        post :set_age_group_places, params: { id: competition.id, age_group: age_group_entry.to_age_group_param }
         expect(response).to redirect_to(competition_path(competition))
       end
     end
@@ -142,8 +142,19 @@ describe CompetitionsController do
 
     context "with valid params" do
       it "publishes the age group entry" do
-        post :publish_age_group_entry, params: { id: competition.id, age_group_entry: age_group_entry.id }
+        post :publish_age_group_entry, params: { id: competition.id, age_group: age_group_entry.to_age_group_param }
         expect(response).to redirect_to(competition_path(competition))
+        expect(competition.published_age_group_entry_for(age_group_entry)).to be_present
+      end
+
+      it "publishes an age group combination" do
+        other_entry = FactoryBot.create(:age_group_entry, age_group_type: age_group_type)
+        combination = competition.age_group_combinations.create!
+        combination.age_group_combination_entries.create!(age_group_entry: age_group_entry)
+        combination.age_group_combination_entries.create!(age_group_entry: other_entry)
+
+        post :publish_age_group_entry, params: { id: competition.id, age_group: combination.to_age_group_param }
+        expect(competition.published_age_group_entry_for(combination)).to be_present
       end
     end
 

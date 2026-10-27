@@ -2,7 +2,7 @@ class HeatsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_competition
   before_action :set_parent_breadcrumbs
-  before_action :load_age_group_entry, only: %i[sort set_sort]
+  before_action :load_age_group, only: %i[sort set_sort]
   before_action :authorize_competition
 
   respond_to :html
@@ -93,10 +93,10 @@ class HeatsController < ApplicationController
     end
   end
 
-  # GET /competitions/#/heats/:age_group_entry_id:/set_sort
+  # GET /competitions/#/heats/age_groups/:age_group_id/set_sort
   def set_sort
     add_breadcrumb "Set Heat/Lane assignment order"
-    @lane_assignments = @competition.lane_assignments.includes(:competitor).select { |lane_assignment| lane_assignment.competitor.age_group_entry == @age_group_entry }
+    @lane_assignments = @competition.lane_assignments.includes(:competitor).select { |lane_assignment| @age_group.includes_age_group_entry?(lane_assignment.competitor.age_group_entry) }
   end
 
   # DELETE /events/10/competitors/destroy_all
@@ -112,8 +112,8 @@ class HeatsController < ApplicationController
     authorize @competition, :heat_recording?
   end
 
-  def load_age_group_entry
-    @age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
+  def load_age_group
+    @age_group = @competition.find_age_group!(params[:age_group_id])
   end
 
   def set_parent_breadcrumbs

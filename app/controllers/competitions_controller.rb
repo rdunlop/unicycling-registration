@@ -97,12 +97,12 @@ class CompetitionsController < ApplicationController
   def set_age_group_places
     authorize @competition
 
-    if params[:age_group_entry_id].blank?
-      flash[:alert] = "You must specify an age group entry"
+    if params[:age_group].blank?
+      flash[:alert] = "You must specify an age group"
     else
-      age_group_entry = AgeGroupEntry.find(params[:age_group_entry_id])
-      @competition.place_age_group_entry(age_group_entry)
-      flash[:notice] = "All Places updated for #{age_group_entry}"
+      age_group = @competition.find_age_group!(params[:age_group])
+      @competition.place_age_group(age_group)
+      flash[:notice] = "All Places updated for #{age_group}"
     end
     redirect_back(fallback_location: competition_path(@competition))
   end
@@ -160,9 +160,9 @@ class CompetitionsController < ApplicationController
     authorize @competition
 
     publisher = CompetitionStateMachine.new(@competition)
-    entry = params[:age_group_entry]
+    age_group = @competition.find_age_group(params[:age_group])
 
-    if publisher.publish_age_group_entry(entry)
+    if age_group && publisher.publish_age_group(age_group)
       flash[:notice] = 'Published Competition Age Group Entry'
     else
       flash[:alert] = 'Unable to publish competition age group entry'
