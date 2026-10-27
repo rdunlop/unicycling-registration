@@ -670,8 +670,8 @@ Rails.application.routes.draw do
         resources :wave_times, except: %i[new show]
         resource :age_groups, only: [:show] do
           member do
-            post :duplicate_type
             put :combine
+            put :separate
           end
         end
       end
