@@ -1,0 +1,47 @@
+---
+"ja":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          操作
+        "age_group_type_locked": >-
+          年齢区分が統合されている間は、他の種目が依存している可能性があるため、%{age_group_type} の年齢区分を変更できません。
+        "are_you_sure": >-
+          よろしいですか？
+        "base_age_groups": >-
+          基本の年齢区分：%{age_group_type}
+        "cancel": >-
+          キャンセル
+        "combine_with": >-
+          %{smallest_neighbour} と統合
+        "custom_order": >-
+          この種目には独自の順序があり、%{age_group_type} の順序は無視されます。
+        "eligible_registrants": >-
+          参加資格のある登録者数
+        "entry": >-
+          年齢区分
+        "female": >-
+          女性
+        "headline": >-
+          合計 %{competitors_count} 名の競技者がいます。このページでは、競技者が各年齢区分にどのように分布しているかを表示します。このページから、ルールブックに従って年齢区分を統合できます。
+        "ineligible_registrants": >-
+          参加資格のない登録者数
+        "male": >-
+          男性
+        "name_hint": >-
+          空欄にすると、統合された年齢区分の名前が使用されます
+        "order_hint": >-
+          年齢区分をドラッグ＆ドロップして、この種目での順序を設定します（ヒートはこの順序で割り当てられます）。
+        "ranking_age_groups": >-
+          順位付けに使用する年齢区分
+        "rename": >-
+          名前を変更
+        "reset_order": >-
+          年齢区分タイプの順序を使用
+        "separate": >-
+          分割
+        "show_registrant_sign_up_breakdown": >-
+          登録者の内訳を表示
+        "title": >-
+          %{competition} 年齢区分の管理
