@@ -94,6 +94,7 @@ RSpec.configure do |config|
 
   config.before do
     RequestStore.clear!
+    AgeGroupCombinationCache.reset
   end
 
   config.before(:each, type: :view) do
