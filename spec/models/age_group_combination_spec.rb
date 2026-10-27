@@ -22,6 +22,70 @@ describe AgeGroupCombination do
     expect(other_combination.age_group_combination_entries.build(age_group_entry: entry_1)).not_to be_valid
   end
 
+  describe "locking the age group type" do
+    it "is combined" do
+      expect(age_group_type).to be_combined
+      expect(age_group_type.age_group_combinations).to eq([combination])
+    end
+
+    it "prevents modifying a combined entry" do
+      expect(entry_2.update(start_age: 12)).to be(false)
+      expect(entry_2.errors[:base].first).to include("cannot be modified", "#{competition}: #{combination}")
+      expect(entry_2.reload.start_age).to eq(11)
+    end
+
+    it "prevents modifying an uncombined entry" do
+      expect(entry_3.update(short_description: "Seniors")).to be(false)
+    end
+
+    it "prevents adding an entry" do
+      new_entry = FactoryBot.build(:age_group_entry, age_group_type: age_group_type.reload, start_age: 31, end_age: 40)
+
+      expect(new_entry.save).to be(false)
+    end
+
+    it "prevents removing an entry" do
+      expect(entry_2.destroy).to be(false)
+      expect(AgeGroupEntry.exists?(entry_2.id)).to be(true)
+      expect(AgeGroupCombinationEntry.count).to eq(2)
+    end
+
+    it "prevents reordering the entries" do
+      expect(entry_3.update(position: 1)).to be(false)
+    end
+
+    it "reports a single error in the age group type form" do
+      result = age_group_type.reload.update(age_group_entries_attributes: [
+                                              { id: entry_2.id, start_age: 12 },
+                                              { id: entry_3.id, _destroy: "1" }
+                                            ])
+
+      expect(result).to be(false)
+      expect(age_group_type.errors.full_messages).to eq([age_group_type.combined_error])
+      expect(age_group_type.combined_error).to include("Separate these combinations, or duplicate this age group type")
+      expect(AgeGroupEntry.exists?(entry_3.id)).to be(true)
+    end
+
+    it "allows renaming the age group type" do
+      expect(age_group_type.reload.update(name: "Renamed")).to be(true)
+    end
+
+    it "is lifted once the combinations are separated" do
+      combination.destroy
+
+      expect(entry_2.reload.update(start_age: 12)).to be(true)
+    end
+
+    it "does not lock a duplicate of the age group type" do
+      duplicator = AgeGroupTypeDuplicator.new(age_group_type.reload)
+      duplicator.duplicate
+      duplicate = duplicator.new_age_group_type
+
+      expect(duplicate).not_to be_combined
+      expect(duplicate.age_group_entries.first.update(start_age: 1)).to be(true)
+    end
+  end
+
   it "is named after the combined entries" do
     expect(combination.short_description).to eq("#{entry_1.short_description} and #{entry_2.short_description}")
   end
