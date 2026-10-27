@@ -21,6 +21,7 @@
 #
 # The underlying AgeGroupEntries are never modified, so a combination
 # can be removed to restore the original age groups.
+# Conversely, the AgeGroupType of combined entries cannot be modified (see AgeGroupType#combined?).
 class AgeGroupCombination < ApplicationRecord
   include AgeGroupMatching
 
