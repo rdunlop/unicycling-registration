@@ -15,6 +15,8 @@
           取消
         "combine_with": >-
           與 %{smallest_neighbour} 合併
+        "custom_order": >-
+          此比賽項目使用自己的排序，不採用 %{age_group_type} 的排序。
         "eligible_registrants": >-
           符合資格的報名人數
         "entry": >-
@@ -29,10 +31,14 @@
           男性
         "name_hint": >-
           留白則使用合併組別的名稱
+        "order_hint": >-
+          拖放年齡組別以設定此比賽項目的排序（分組賽次依此順序分配）。
         "ranking_age_groups": >-
           用於排名的年齡組別
         "rename": >-
           重新命名
+        "reset_order": >-
+          使用年齡組別類型的排序
         "separate": >-
           分開
         "show_registrant_sign_up_breakdown": >-

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_140000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -97,6 +97,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_140000) do
     t.index ["age_group_type_id", "short_description"], name: "age_type_desc", unique: true
     t.index ["age_group_type_id"], name: "index_age_group_entries_age_group_type_id"
     t.index ["wheel_size_id"], name: "index_age_group_entries_wheel_size_id"
+  end
+
+  create_table "age_group_positions", force: :cascade do |t|
+    t.bigint "age_group_entry_id", null: false
+    t.bigint "competition_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "position", null: false
+    t.datetime "updated_at", null: false
+    t.index ["age_group_entry_id"], name: "index_age_group_positions_on_age_group_entry_id"
+    t.index ["competition_id", "age_group_entry_id"], name: "index_age_group_positions_unique", unique: true
   end
 
   create_table "age_group_types", id: :serial, force: :cascade do |t|
@@ -1540,5 +1550,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_140000) do
   add_foreign_key "age_group_combination_entries", "age_group_entries"
   add_foreign_key "age_group_combination_entries", "competitions"
   add_foreign_key "age_group_combinations", "competitions"
+  add_foreign_key "age_group_positions", "age_group_entries"
+  add_foreign_key "age_group_positions", "competitions"
   add_foreign_key "published_age_group_entries", "age_group_combinations"
 end
