@@ -41,6 +41,7 @@
 //= require event_choice_creation_manager
 //= require fancybox_enabler
 //= require flash_highlight
+//= require inline_editor
 //= require input_enabler
 //= require jquery.are-you-sure
 //= require jquery.placeholder

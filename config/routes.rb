@@ -672,6 +672,7 @@ Rails.application.routes.draw do
           member do
             put :combine
             put :separate
+            put :rename
           end
         end
       end

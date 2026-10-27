@@ -39,7 +39,19 @@
         - @competition.age_groups.each do |age_group|
           - eligible_registrants = age_group.number_eligible_matching_registrant(age_group_data)
           %tr
-            %td= age_group
+            %td
+              - if age_group.is_a?(AgeGroupCombination)
+                -# The full name is displayed, and replaced by the rename form when editing it
+                .js--inlineEdit
+                  .js--inlineEditDisplay
+                    = age_group
+                    = link_to "✎", "#", class: "js--inlineEditOpen", title: t(".rename"), aria: { label: t(".rename") }
+                  = form_tag rename_competition_age_groups_path(age_group_combination_id: age_group.id), method: :put, class: "js--inlineEditForm is--hidden" do
+                    = text_field_tag :name, age_group.short_description, placeholder: age_group.generated_name, id: "age_group_combination_#{age_group.id}_name", title: t(".name_hint")
+                    = submit_tag t(".rename"), class: "button tiny secondary"
+                    = link_to t(".cancel"), "#", class: "js--inlineEditCancel"
+              - else
+                = age_group
             %td= eligible_registrants
             %td= age_group.number_ineligible_matching_registrant(age_group_data)
             %td

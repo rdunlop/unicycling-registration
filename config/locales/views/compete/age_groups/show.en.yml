@@ -13,6 +13,9 @@ en:
           Base Age Groups: %{age_group_type}
         ranking_age_groups: Age Groups used for ranking
         age_group_type_locked: While age groups are combined, the entries of %{age_group_type} cannot be modified, as other competitions may rely on them.
+        rename: Rename
+        cancel: Cancel
+        name_hint: Leave blank to use the names of the combined age groups
         entry: Entry
         eligible_registrants: |
           # Eligible Registrants

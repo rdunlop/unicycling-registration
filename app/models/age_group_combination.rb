@@ -4,6 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  competition_id :bigint           not null
+#  name           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -29,6 +30,12 @@ class AgeGroupCombination < ApplicationRecord
   has_many :age_group_combination_entries, dependent: :destroy, inverse_of: :age_group_combination
   has_many :age_group_entries, through: :age_group_combination_entries
   has_many :published_age_group_entries, dependent: :destroy
+
+  normalizes :name, with: ->(name) { name.strip.presence }
+  # The rename form is pre-filled with the default name, which should not become a custom name
+  before_validation { self.name = nil if name.present? && name == generated_name }
+  validates :name, length: { maximum: 255 }
+  validate :distinct_from_other_age_groups, if: -> { name.present? }
 
   after_save :expire_cache
   after_touch :expire_cache
@@ -60,6 +67,10 @@ class AgeGroupCombination < ApplicationRecord
   end
 
   def short_description
+    name || generated_name
+  end
+
+  def generated_name
     sorted_age_group_entries.map(&:short_description).join(" and ")
   end
 
@@ -72,6 +83,14 @@ class AgeGroupCombination < ApplicationRecord
   end
 
   private
+
+  # Competitors are placed (and results are listed) by age group description,
+  # so two age groups of a competition with the same description would be ranked together
+  def distinct_from_other_age_groups
+    return unless competition.age_groups.any? { |age_group| age_group != self && age_group.to_s == to_s }
+
+    errors.add(:name, "is already used by another age group of this competition")
+  end
 
   def expire_cache
     AgeGroupCombinationCache.expire(competition_id)
