@@ -11,6 +11,8 @@
           您確定嗎？
         "base_age_groups": >-
           基礎年齡組別：%{age_group_type}
+        "cancel": >-
+          取消
         "combine_with": >-
           與 %{smallest_neighbour} 合併
         "eligible_registrants": >-
@@ -25,8 +27,12 @@
           不符合資格的報名人數
         "male": >-
           男性
+        "name_hint": >-
+          留白則使用合併組別的名稱
         "ranking_age_groups": >-
           用於排名的年齡組別
+        "rename": >-
+          重新命名
         "separate": >-
           分開
         "show_registrant_sign_up_breakdown": >-
