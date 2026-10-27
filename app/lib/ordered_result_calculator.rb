@@ -23,8 +23,8 @@ class OrderedResultCalculator
     @place_calculators[age_group_desc] ||= PlaceCalculator.new
   end
 
-  def update_age_group_entry_results(entry)
-    age_group_competitors = competitors.select { |c| c.age_group_entry == entry }
+  def update_age_group_results_for(age_group)
+    age_group_competitors = competitors.select { |c| age_group.includes_age_group_entry?(c.age_group_entry) }
     update_age_group_entry_results_with(age_group_competitors)
   end
 

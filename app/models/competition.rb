@@ -42,6 +42,7 @@
 
 class Competition < ApplicationRecord
   include CachedModel
+  include CompetitionAgeGroups
   include Slugify
 
   resourcify
@@ -405,8 +406,8 @@ class Competition < ApplicationRecord
     competitors_with_results.select { |comp| comp.gender == gender }.sort_by(&:sorting_overall_place)
   end
 
-  def results_list_for(ag_entry)
-    results = competitors.active.where(age_group_entry: ag_entry).select(&:has_result?)
+  def results_list_for(age_group)
+    results = competitors_in(age_group).active.select(&:has_result?)
     results.sort! { |a, b| a.sorting_place <=> b.sorting_place }
   end
 
@@ -466,8 +467,8 @@ class Competition < ApplicationRecord
     result_calculator.update_overall_results
   end
 
-  def place_age_group_entry(age_group_entry)
-    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_age_group_entry_results(age_group_entry)
+  def place_age_group(age_group)
+    OrderedResultCalculator.new(self, scoring_helper.lower_is_better).update_age_group_results_for(age_group)
   end
 
   # The ScoringCalculator is used to determine the numeric result

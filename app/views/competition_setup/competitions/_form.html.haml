@@ -43,7 +43,8 @@
 
   / Hidden because this feature is not yet in use
   / = f.input :base_age_group_type_id, collection: AgeGroupType.all, include_blank: true
-  = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true
+  - age_group_type_hint = "Changing the age group type removes the combined age groups of this competition." if @competition.persisted? && @competition.age_group_combinations.any?
+  = f.input :age_group_type_id, collection: AgeGroupType.all, include_blank: true, hint: age_group_type_hint
   = link_to "Manage Age Groups", age_group_types_path, target: "_blank"
 
   = f.input :num_members_per_competitor, collection: Competition.num_member_options, include_blank: true
