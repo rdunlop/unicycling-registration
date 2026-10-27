@@ -78,6 +78,14 @@ describe CompetitionSetup::AgeGroupTypesController do
       assert_select "table.js--sortable", count: 0
     end
 
+    it "lists the competitions with their own order" do
+      competition.reload.move_age_group(competition.age_group_combinations.first, 0)
+
+      get :show, params: { id: age_group_type.id }
+
+      assert_select "p a[href=?]", competition_age_groups_path(competition)
+    end
+
     it "does not modify the entries" do
       put :update, params: { id: age_group_type.id, age_group_type: { age_group_entries_attributes: { "0" => { id: entry_2.id, end_age: 25 } } } }
 
