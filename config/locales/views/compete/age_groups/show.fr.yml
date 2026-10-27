@@ -5,6 +5,9 @@
       "show":
         "action": >-
           Action
+        "age_group_type_locked": >-
+          Tant que des catégories sont combinées, les catégories de %{age_group_type}
+          ne peuvent pas être modifiées, car d'autres compétitions peuvent en dépendre.
         "are_you_sure": >-
           Êtes-vous sûr ?
         "base_age_groups": >-

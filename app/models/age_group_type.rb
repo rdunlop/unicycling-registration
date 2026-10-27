@@ -21,6 +21,7 @@ class AgeGroupType < ApplicationRecord
 
   accepts_nested_attributes_for :age_group_entries, allow_destroy: true
   validates_uniqueness :age_group_entries, attribute_name: :short_description
+  validate :entries_unchanged_while_combined
 
   after_commit :update_competitor_age_group_entries, on: %i[create update]
   after_touch :update_competitor_age_group_entries
@@ -37,6 +38,25 @@ class AgeGroupType < ApplicationRecord
         end
       end
     end
+  end
+
+  # The combinations, of any competition, of the entries of this age group type
+  def age_group_combinations
+    AgeGroupCombination.where(
+      id: AgeGroupCombinationEntry.joins(:age_group_entry).where(age_group_entries: { age_group_type_id: id }).select(:age_group_combination_id)
+    )
+  end
+
+  # Combinations rely on the entries, which therefore cannot be modified
+  def combined?
+    persisted? && age_group_combinations.exists?
+  end
+
+  def combined_error
+    combinations = age_group_combinations.includes(:competition, :age_group_entries).map { |combination| "#{combination.competition}: #{combination}" }
+
+    "#{self} cannot be modified while some of its age groups are combined (#{combinations.to_sentence}). " \
+      "Separate these combinations, or duplicate this age group type and modify the copy."
   end
 
   def mixed_gender_age_groups?
@@ -69,6 +89,15 @@ class AgeGroupType < ApplicationRecord
   end
 
   private
+
+  # Validated here (rather than only in AgeGroupEntry callbacks),
+  # so that the age group type form displays a single error instead of failing to save
+  def entries_unchanged_while_combined
+    return unless age_group_entries.any? { |entry| entry.marked_for_destruction? || entry.locked_changes? }
+    return unless combined?
+
+    errors.add(:base, combined_error)
+  end
 
   def update_competitor_age_group_entries
     competitions.includes(:competitors).find_each do |competition|
