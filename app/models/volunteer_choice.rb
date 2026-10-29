@@ -22,7 +22,7 @@ class VolunteerChoice < ApplicationRecord
   validates :registrant, :volunteer_opportunity, presence: true
   validates :registrant_id, uniqueness: { scope: [:volunteer_opportunity_id] }
 
-  after_create :send_email_to_admins
+  after_commit :send_email_to_admins, on: %i[create]
 
   delegate :to_s, to: :volunteer_opportunity
 
@@ -30,9 +30,7 @@ class VolunteerChoice < ApplicationRecord
 
   def send_email_to_admins
     if volunteer_opportunity.inform_emails.present?
-      # Wait a minute to deliver so that the VolunteerChoice has been created
-      # before attempting to e-mail
-      VolunteerMailer.new_volunteer(self).deliver_later(wait: 1.minute)
+      VolunteerMailer.new_volunteer(self).deliver_later
     end
   end
 end
