@@ -53,6 +53,13 @@ class ConventionSetup::ExpenseGroupsController < ConventionSetup::BaseConvention
       format.html { redirect_to expense_groups_url }
       format.json { head :no_content }
     end
+  rescue ActiveRecord::DeleteRestrictionError
+    flash[:alert] = "Cannot delete this expense group: one or more of its items have payments or registrations. Remove or hide those items instead."
+
+    respond_to do |format|
+      format.html { redirect_to expense_groups_url }
+      format.json { render json: { error: flash[:alert] }, status: :unprocessable_entity }
+    end
   end
 
   private

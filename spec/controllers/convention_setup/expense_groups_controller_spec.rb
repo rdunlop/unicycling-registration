@@ -135,5 +135,23 @@ describe ConventionSetup::ExpenseGroupsController do
       delete :destroy, params: { id: expense_group.to_param }
       expect(response).to redirect_to(expense_groups_url)
     end
+
+    context "when an item in the group has payment details" do
+      let!(:expense_group) { ExpenseGroup.create! valid_attributes }
+      let!(:expense_item) { FactoryBot.create(:expense_item, expense_group: expense_group) }
+      before { FactoryBot.create(:payment_detail, line_item: expense_item) }
+
+      it "does not destroy the expense_group" do
+        expect do
+          delete :destroy, params: { id: expense_group.to_param }
+        end.not_to change(ExpenseGroup, :count)
+      end
+
+      it "redirects to the expense_groups list with an alert" do
+        delete :destroy, params: { id: expense_group.to_param }
+        expect(response).to redirect_to(expense_groups_url)
+        expect(flash[:alert]).to be_present
+      end
+    end
   end
 end
