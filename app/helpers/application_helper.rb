@@ -22,10 +22,6 @@ module ApplicationHelper # rubocop:disable Metrics/ModuleLength
     set_fallbacks
   end
 
-  def set_i18n_available_locales
-    I18n.available_locales = current_config_available_locales
-  end
-
   def current_config_available_locales
     EventConfiguration.all_available_languages & @config.enabled_locales # rubocop:disable Rails/HelperInstanceVariable
   end

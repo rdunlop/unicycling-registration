@@ -25,6 +25,20 @@ describe WelcomeController do
     end
   end
 
+  describe "GET index with a locale which is not enabled for this convention" do
+    before { FactoryBot.create(:event_configuration, enabled_locales: %w[en fr]) }
+
+    it "ignores the locale and uses the default" do
+      expect { get :index, params: { locale: "es" } }.not_to raise_error
+      expect(I18n.locale).to eq(:en)
+    end
+
+    it "does not change the globally available locales" do
+      get :index, params: { locale: "fr" }
+      expect(I18n.available_locales).to eq(I18n.config.available_locales)
+    end
+  end
+
   describe "GET changelog" do
     it "returns http success" do
       get :changelog
