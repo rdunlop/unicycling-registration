@@ -81,3 +81,4 @@ apartment_acme_client*
 app/javascript/vendor/
 script/
 vendor/javascript/
+/public/testing
