@@ -4,8 +4,9 @@
 # Competitors are often loaded through other records (lane assignments, results...),
 # each with its own Competition instance: this avoids loading the combinations once per competitor.
 #
-# It is expired when combinations change in this process, and reset by the Rails executor
-# around each request and job. A long-lived process outside the executor
+# It is expired when combinations change in this process (the entries of combinations
+# cannot change, see AgeGroupType#combined?), and reset by the Rails executor around each request
+# and job. A long-lived process outside the executor
 # (e.g. a rails console) does not see changes made by other processes until
 # `AgeGroupCombinationCache.reset` (or Competition#reload) is called.
 class AgeGroupCombinationCache < ActiveSupport::CurrentAttributes

@@ -5,6 +5,8 @@
       "show":
         "action": >-
           操作
+        "age_group_type_locked": >-
+          在有合併的年齡組別期間，%{age_group_type} 的年齡組別無法修改，因為其他比賽項目可能依賴它們。
         "are_you_sure": >-
           您確定嗎？
         "base_age_groups": >-

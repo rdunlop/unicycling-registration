@@ -32,6 +32,10 @@ class AgeGroupEntry < ApplicationRecord
   belongs_to :wheel_size, optional: true
   has_many :age_group_combination_entries
 
+  # The age group type is shared by competitions, whose combinations rely on its entries
+  before_save :ensure_age_group_type_not_combined, if: :locked_changes?
+  before_destroy :ensure_age_group_type_not_combined
+
   acts_as_list scope: :age_group_type
 
   default_scope { order(:position) }
@@ -49,6 +53,12 @@ class AgeGroupEntry < ApplicationRecord
     "entry-#{id}"
   end
 
+  # Changes which are forbidden while the age group type is combined
+  # (including reordering)
+  def locked_changes?
+    new_record? || (changed - %w[updated_at]).any?
+  end
+
   # possibly replace this with override serializable hash (https://github.com/rails/rails/pull/2200)
   def as_json(options = {})
     options ||= {}
@@ -63,5 +73,14 @@ class AgeGroupEntry < ApplicationRecord
 
   def to_s
     [short_description, wheel_size_name].compact.join(", ")
+  end
+
+  private
+
+  def ensure_age_group_type_not_combined
+    return unless age_group_type&.combined?
+
+    errors.add(:base, age_group_type.combined_error)
+    throw :abort
   end
 end
