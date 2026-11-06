@@ -16,6 +16,8 @@
           Annuler
         "combine_with": >-
           Combiner avec %{smallest_neighbour}
+        "custom_order": >-
+          Cette compétition a son propre ordre, qui ignore l'ordre de %{age_group_type}.
         "eligible_registrants": >-
           # d'inscrits éligibles
         "entry": >-
@@ -32,10 +34,15 @@
           Homme
         "name_hint": >-
           Laisser vide pour utiliser les noms des catégories combinées
+        "order_hint": >-
+          Glissez-déposez les catégories pour les ordonner dans cette compétition
+          (les séries sont attribuées dans cet ordre).
         "ranking_age_groups": >-
           Catégories utilisées pour le classement
         "rename": >-
           Renommer
+        "reset_order": >-
+          Utiliser l'ordre du groupe de catégories
         "separate": >-
           Séparer
         "show_registrant_sign_up_breakdown": >-

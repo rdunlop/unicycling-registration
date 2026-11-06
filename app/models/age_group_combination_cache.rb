@@ -1,10 +1,10 @@
-# Per-request (and per-job) cache of the AgeGroupCombinations of each competition,
+# Per-request (and per-job) cache of the AgeGroupCombinations (and AgeGroupPositions) of each competition,
 # indexed by the id of their AgeGroupEntries.
 #
 # Competitors are often loaded through other records (lane assignments, results...),
 # each with its own Competition instance: this avoids loading the combinations once per competitor.
 #
-# It is expired when combinations change in this process (the entries of combinations
+# It is expired when combinations or positions change in this process (the entries of combinations
 # cannot change, see AgeGroupType#combined?), and reset by the Rails executor around each request
 # and job. A long-lived process outside the executor
 # (e.g. a rails console) does not see changes made by other processes until

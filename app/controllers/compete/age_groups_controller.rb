@@ -58,6 +58,20 @@ class Compete::AgeGroupsController < ApplicationController
     redirect_to competition_age_groups_path(@competition)
   end
 
+  # POST /competitions/1/age_groups/update_row_order?id=combination-1&row_order_position=0 (via AJAX)
+  def update_row_order
+    age_group = @competition.find_age_group!(params[:id])
+    @competition.move_age_group(age_group, params[:row_order_position].to_i)
+    head :ok
+  end
+
+  # PUT /competitions/1/age_groups/reset_order
+  def reset_order
+    @competition.reset_age_group_order
+    flash[:notice] = "Age groups ordered as #{@competition.age_group_type}"
+    redirect_to competition_age_groups_path(@competition)
+  end
+
   private
 
   def load_competition

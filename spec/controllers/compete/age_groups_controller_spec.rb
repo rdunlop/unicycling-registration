@@ -21,10 +21,31 @@ describe Compete::AgeGroupsController do
       expect(response).to be_successful
       expect(response.body).to include("Rename", "cannot be modified")
       combination = competition.age_group_combinations.first
-      assert_select ".js--inlineEdit" do
+      assert_select "tr.item[data-item-id=?] .js--inlineEdit", combination.to_age_group_param do
         assert_select ".js--inlineEditDisplay", text: /#{Regexp.escape(combination.to_s)}/
         assert_select "form.js--inlineEditForm.is--hidden input[name=name][value=?]", combination.short_description
       end
+      assert_select "table.js--sortable tr.item[data-item-id=?]", "combination-#{competition.age_group_combinations.first.id}"
+    end
+  end
+
+  describe "POST update_row_order" do
+    it "orders the age groups of the competition" do
+      post :update_row_order, params: { competition_id: competition.id, id: entry_2.to_age_group_param, row_order_position: 0 }, format: :json
+
+      expect(response).to be_successful
+      expect(competition.reload.age_groups).to eq([entry_2, entry_1])
+    end
+  end
+
+  describe "PUT reset_order" do
+    it "uses the age group type order again" do
+      competition.reload.move_age_group(entry_2, 0)
+
+      put :reset_order, params: { competition_id: competition.id }
+
+      expect(competition.reload).not_to be_custom_age_group_order
+      expect(response).to redirect_to(competition_age_groups_path(competition))
     end
   end
 
