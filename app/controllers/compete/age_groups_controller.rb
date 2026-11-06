@@ -45,6 +45,19 @@ class Compete::AgeGroupsController < ApplicationController
     redirect_to competition_age_groups_path(@competition)
   end
 
+  # PUT /competitions/1/age_groups/rename?age_group_combination_id=1&name=Juniors
+  def rename
+    combination = @competition.age_group_combinations.find(params[:age_group_combination_id])
+
+    combiner = AgeGroupCombiner.new(@competition)
+    if combiner.rename(combination, params[:name])
+      flash[:notice] = "Renamed to #{combination}"
+    else
+      flash[:alert] = combiner.error_message
+    end
+    redirect_to competition_age_groups_path(@competition)
+  end
+
   private
 
   def load_competition
