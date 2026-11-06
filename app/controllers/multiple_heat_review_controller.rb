@@ -64,8 +64,7 @@ class MultipleHeatReviewController < ApplicationController
       flash[:notice] = "Successfully imported #{num_rows_processed} rows"
     end
     unless errors.empty?
-      errors = errors.map { |error| "File '#{error[0]}': #{error[1]}" }.join("; ")
-      flash[:alert] = "Error importing rows. Errors: #{errors}."
+      flash[:alert] = "Error importing rows. Errors: #{summarize_import_errors(errors)}."
     end
 
     redirect_to competition_multiple_heat_review_index_path(@competition)
@@ -115,6 +114,20 @@ class MultipleHeatReviewController < ApplicationController
 
   def set_breadcrumbs
     add_to_competition_breadcrumb(@competition)
+  end
+
+  # The flash is stored in the cookie session, which overflows at 4KB.
+  # Report only the first few failures, each truncated, and count the rest.
+  MAX_REPORTED_IMPORT_ERRORS = 5
+  MAX_IMPORT_ERROR_LENGTH = 200
+
+  def summarize_import_errors(errors)
+    reported = errors.first(MAX_REPORTED_IMPORT_ERRORS).map do |filename, message|
+      "File '#{filename}': #{message}".truncate(MAX_IMPORT_ERROR_LENGTH)
+    end
+    hidden_count = errors.size - reported.size
+    reported << "and #{hidden_count} more" if hidden_count.positive?
+    reported.join("; ")
   end
 
   def check_file_names(files)
