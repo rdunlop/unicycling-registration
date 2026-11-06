@@ -135,7 +135,7 @@ GEM
     ast (2.4.3)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
-    avo (3.32.1)
+    avo (3.33.4)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -697,7 +697,7 @@ DEPENDENCIES
   acts_as_list
   annotaterb
   autoprefixer-rails
-  avo
+  avo (~> 3.33.2)
   aws-actionmailer-ses
   aws-sdk-acm
   aws-sdk-elasticloadbalancingv2
