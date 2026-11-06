@@ -19,6 +19,16 @@ require 'spec_helper'
 describe Tenant do
   let!(:tenant) { FactoryBot.create(:tenant, subdomain: "robin") }
 
+  context "without a hostname" do
+    it "returns nil for a nil host" do
+      expect(described_class.find_tenant_by_hostname(nil)).to be_nil
+    end
+
+    it "returns nil for a blank host" do
+      expect(described_class.find_tenant_by_hostname("")).to be_nil
+    end
+  end
+
   context "with tenant aliases" do
     let!(:alias1) { FactoryBot.create(:tenant_alias, website_alias: "reg.robinsite.com", tenant: tenant) }
     let!(:alias2) { FactoryBot.create(:tenant_alias, website_alias: "reg.nationals.com", tenant: tenant) }
