@@ -30,6 +30,12 @@ class Compete::WaveAssignmentsController < ApplicationController
     authorize @competition, :modify_result_data?
 
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
+    if uploaded_file.nil?
+      flash[:alert] = "Please choose a wave assignment file to upload"
+      redirect_back(fallback_location: competition_waves_path(@competition))
+      return
+    end
+
     parser = Importers::Parsers::Wave.new(uploaded_file.original_file.file)
     updater = Importers::WaveUpdater.new(@competition, current_user)
 
