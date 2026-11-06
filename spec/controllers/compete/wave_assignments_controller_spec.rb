@@ -37,5 +37,14 @@ describe Compete::WaveAssignmentsController do
       expect(competitor3.reload.wave).to eq(2)
       expect(competitor4.reload.wave).to eq(2)
     end
+
+    context "when no file is submitted" do
+      it "redirects back with an alert instead of raising" do
+        put :update, params: { competition_id: competition.id }
+
+        expect(response).to redirect_to(competition_waves_path(competition))
+        expect(flash[:alert]).to eq("Please choose a wave assignment file to upload")
+      end
+    end
   end
 end

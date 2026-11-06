@@ -5,7 +5,7 @@ ruby File.open(File.expand_path(".ruby-version", File.dirname(__FILE__))) { |f| 
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 gem 'rails', '~> 8.1.3'
-gem 'sprockets', '~> 4.0'
+gem 'sprockets', '~> 4.4'
 
 # Authentication
 gem 'devise'
@@ -57,7 +57,7 @@ gem 'hcaptcha'
 gem 'http_accept_language'
 gem 'order_as_specified'
 gem 'paper_trail'
-gem 'avo'
+gem 'avo', '~> 3.33.2'
 gem 'puma'
 gem 'rake'
 gem 'redis'
@@ -67,7 +67,7 @@ gem 'lograge'
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)
-gem 'sidekiq', '~> 8.1.6' # as per sidekiq recommendations, always lock like this
+gem 'sidekiq', '~> 8.1.7' # as per sidekiq recommendations, always lock like this
 gem 'stripe'
 gem 'webrick'
 

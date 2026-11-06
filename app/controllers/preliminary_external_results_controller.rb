@@ -85,6 +85,12 @@ class PreliminaryExternalResultsController < ApplicationController
   # POST /competitions/#/preliminary_external_results/import_csv
   def import_csv
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
+    if uploaded_file.nil?
+      flash[:alert] = "Please choose a CSV file to import"
+      redirect_to display_csv_competition_preliminary_external_results_path(@competition)
+      return
+    end
+
     parser = Importers::Parsers::ExternalResultCsv.new(uploaded_file.original_file.file)
     importer = Importers::ExternalResultImporter.new(@competition, current_user)
 

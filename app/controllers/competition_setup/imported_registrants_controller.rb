@@ -30,6 +30,11 @@ class CompetitionSetup::ImportedRegistrantsController < CompetitionSetup::BaseCo
   # POST /imported_registrants/upload
   def upload
     uploaded_file = UploadedFile.process_params(params, user: current_user)
+    if uploaded_file.nil?
+      flash[:alert] = "Please choose a file to upload"
+      redirect_back(fallback_location: imported_registrants_path)
+      return
+    end
 
     parser = Importers::Parsers::ImportedRegistrant.new(uploaded_file.original_file.file)
     updater = Importers::ImportedRegistrantsUpdater.new(current_user)
