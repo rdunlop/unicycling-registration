@@ -79,6 +79,28 @@ describe MultipleHeatReviewController do
         expect(flash[:alert]).to eq("Error importing rows. 10 files do not finish with the heat number, followed by a common extension (lif, csv, txt). E.g.: '100m-01.lif'")
       end
     end
+
+    describe "when many files fail to import" do
+      let(:test_file_name) { file_fixture("test2.lif") }
+      let(:test_files) do
+        12.times.map do |i|
+          Rack::Test::UploadedFile.new(test_file_name, "text/plain", original_filename: "50m-#{format('%02d', i + 1)}.lif")
+        end
+      end
+
+      before do
+        allow_any_instance_of(Importers::HeatLaneLifImporter).to receive(:process).and_return(false)
+        allow_any_instance_of(Importers::HeatLaneLifImporter).to receive(:errors).and_return("Unable to read file. #{'x' * 500}")
+      end
+
+      it "reports only the first few errors so the flash fits in the session cookie" do
+        post :import_lif_files, params: { competition_id: @competition.id, files: test_files }
+
+        expect(flash[:alert]).to start_with("Error importing rows. Errors: File '50m-01.lif'")
+        expect(flash[:alert]).to include("and 7 more")
+        expect(flash[:alert].bytesize).to be <= 1200
+      end
+    end
   end
 
   describe "POST approve_results" do
