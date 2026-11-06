@@ -27,6 +27,8 @@ class Tenant < ApplicationRecord
   accepts_nested_attributes_for :tenant_aliases, allow_destroy: true
 
   def self.find_tenant_by_hostname(hostname)
+    return nil if hostname.blank?
+
     TenantAlias.find_by(website_alias: hostname).try(:tenant) || by_first_subdomain(hostname)
   end
 
@@ -48,6 +50,8 @@ class Tenant < ApplicationRecord
   end
 
   def self.by_first_subdomain(hostname)
+    return nil if hostname.blank?
+
     find_by(subdomain: hostname.split('.')[0])
   end
 
