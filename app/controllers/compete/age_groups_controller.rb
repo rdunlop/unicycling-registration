@@ -18,31 +18,30 @@ class Compete::AgeGroupsController < ApplicationController
     end
   end
 
+  # PUT /competitions/1/age_groups/combine?age_groups[]=entry-1&age_groups[]=combination-2
   def combine
-    if params[:age_group_entry_ids].size < 2
-      flash[:alert] = "Must choose at least 2 age groups"
-    else
-      combiner = AgeGroupEntryCombiner.new(params[:age_group_entry_ids][0], params[:age_group_entry_ids][1])
+    first_age_group, second_age_group = Array(params[:age_groups]).first(2).map { |param| @competition.find_age_group(param) }
 
-      if combiner.combine
-        flash[:notice] = "Combined 2 entries"
-      else
-        flash[:alert] = combiner.error_message
-      end
+    combiner = AgeGroupCombiner.new(@competition)
+    if combiner.combine(first_age_group, second_age_group)
+      flash[:notice] = "Combined #{first_age_group} with #{second_age_group}"
+    else
+      flash[:alert] = combiner.error_message
     end
     redirect_to competition_age_groups_path(@competition)
   end
 
-  # create a duplicate of the selected age group type, and assign it to this competition
-  def duplicate_type
-    duplicator = AgeGroupTypeDuplicator.new(@competition.age_group_type)
+  # PUT /competitions/1/age_groups/separate?age_group_combination_id=1
+  def separate
+    combination = @competition.age_group_combinations.find(params[:age_group_combination_id])
+    separated_entries = combination.sorted_age_group_entries.map(&:to_s).to_sentence
 
-    if duplicator.duplicate && @competition.update(age_group_type: duplicator.new_age_group_type)
-      flash[:notice] = "Successfully duplicated age group"
+    combiner = AgeGroupCombiner.new(@competition)
+    if combiner.separate(combination)
+      flash[:notice] = "Separated #{separated_entries}"
     else
-      flash[:alert] = "Error duplicating age group"
+      flash[:alert] = combiner.error_message
     end
-
     redirect_to competition_age_groups_path(@competition)
   end
 
