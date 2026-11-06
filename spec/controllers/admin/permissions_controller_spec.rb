@@ -80,6 +80,13 @@ describe Admin::PermissionsController do
         expect(@user.has_role?(:convention_admin)).to eq(false)
       end
 
+      it "shows an alert instead of raising when no users are selected" do
+        put :add_role, params: { roles_names: [:payment_admin] }
+
+        expect(response).to redirect_to(permissions_path)
+        expect(flash[:alert]).to eq("Please select at least one user")
+      end
+
       it "can add multiples roles to multiples users at once" do
         put :add_role, params: { users_id: [@user2.to_param, @user.to_param], roles_names: %i[payment_admin music_dj] }
         expect(response).to redirect_to(permissions_path)

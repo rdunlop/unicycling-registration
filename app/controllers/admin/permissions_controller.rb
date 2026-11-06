@@ -22,6 +22,12 @@ class Admin::PermissionsController < ApplicationController
   end
 
   def add_role
+    if params[:users_id].blank?
+      flash[:alert] = "Please select at least one user"
+      redirect_to permissions_path
+      return
+    end
+
     params[:users_id].each do |user_id|
       @user = User.this_tenant.find(user_id)
       params[:roles_names].each do |role|
