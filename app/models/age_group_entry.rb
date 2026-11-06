@@ -21,6 +21,8 @@
 #
 
 class AgeGroupEntry < ApplicationRecord
+  include AgeGroupMatching
+
   validates :age_group_type, :short_description, :start_age, :end_age, presence: true
   validates :start_age, :end_age, numericality: { greater_than_or_equal_to: 0 }
   validates :short_description, uniqueness: { scope: :age_group_type_id }
@@ -28,38 +30,23 @@ class AgeGroupEntry < ApplicationRecord
 
   belongs_to :age_group_type, touch: true, inverse_of: :age_group_entries
   belongs_to :wheel_size, optional: true
+  has_many :age_group_combination_entries
 
   acts_as_list scope: :age_group_type
 
   default_scope { order(:position) }
 
-  def number_matching_registrant(registrant_data)
-    matching_entries = registrant_data.select do |element|
-      element[:gender] == gender &&
-        age_between(element[:age], start_age, end_age)
-    end
-
-    matching_entries.sum { |element| element[:count] }
+  # An uncombined entry is its own age group
+  def age_group_entry_ids
+    [id]
   end
 
-  def number_ineligible_matching_registrant(registrant_data)
-    matching_entries = registrant_data.select do |element|
-      element[:gender] == gender &&
-        age_between(element[:age], start_age, end_age) &&
-        element[:ineligible]
-    end
-
-    matching_entries.sum { |element| element[:count] }
+  def age_group_entries
+    [self]
   end
 
-  def number_eligible_matching_registrant(registrant_data)
-    matching_entries = registrant_data.select do |element|
-      element[:gender] == gender &&
-        age_between(element[:age], start_age, end_age) &&
-        !element[:ineligible]
-    end
-
-    matching_entries.sum { |element| element[:count] }
+  def to_age_group_param
+    "entry-#{id}"
   end
 
   def smallest_neighbour(registrant_data)
@@ -97,11 +84,5 @@ class AgeGroupEntry < ApplicationRecord
 
   def to_s
     [short_description, wheel_size_name].compact.join(", ")
-  end
-
-  private
-
-  def age_between(age, start_age, end_age)
-    start_age <= age && age <= end_age
   end
 end

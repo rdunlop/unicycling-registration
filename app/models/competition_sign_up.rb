@@ -17,7 +17,7 @@ class CompetitionSignUp
     end
 
     all_registrants.each do |reg|
-      calculated_ag = @agt.age_group_entry_for(reg.age, reg.gender, reg.wheel_size_id_for_event(competition.event)).to_s unless @agt.nil?
+      calculated_ag = competition.age_group_for(@agt.age_group_entry_for(reg.age, reg.gender, reg.wheel_size_id_for_event(competition.event))).to_s unless @agt.nil?
       calculated_ag = reg.gender if @agt.nil?
       next if calculated_ag.empty?
 
@@ -30,7 +30,7 @@ class CompetitionSignUp
   end
 
   def age_group_entries
-    return @agt.age_group_entries.map { |age| [age.to_s, age.gender] } unless @agt.nil?
+    return competition.age_groups.map { |age_group| [age_group.to_s, age_group.gender] } unless @agt.nil?
 
     [["Male", "Male"], ["Female", "Female"]]
   end

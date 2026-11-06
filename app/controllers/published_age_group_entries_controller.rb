@@ -24,9 +24,9 @@ class PublishedAgeGroupEntriesController < ApplicationController
 
   def show
     @published_age_group_entry = PublishedAgeGroupEntry.find(params[:id])
-    @ag_entry = @published_age_group_entry.age_group_entry
+    @age_group = @published_age_group_entry.age_group
 
-    name = "#{@competition} {@ag_entry}"
+    name = "#{@competition} #{@age_group}"
     attachment = false
 
     respond_to do |format|
@@ -37,7 +37,7 @@ class PublishedAgeGroupEntriesController < ApplicationController
 
   def preview
     authorize @competition, :publish_age_group_entry?
-    @ag_entry = AgeGroupEntry.find(params[:id])
+    @age_group = @competition.find_age_group!(params[:id])
 
     respond_to do |format|
       format.html { render :show }
