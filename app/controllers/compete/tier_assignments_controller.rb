@@ -30,6 +30,12 @@ class Compete::TierAssignmentsController < ApplicationController
     authorize @competition, :assign_tiers?
 
     uploaded_file = UploadedFile.process_params(params, competition: @competition, user: current_user)
+    if uploaded_file.nil?
+      flash[:alert] = "Please choose a tier file to upload"
+      redirect_back(fallback_location: competition_tier_assignments_path(@competition))
+      return
+    end
+
     parser = Importers::Parsers::Tier.new(uploaded_file.original_file.file)
     updater = Importers::TierUpdater.new(@competition, current_user)
 

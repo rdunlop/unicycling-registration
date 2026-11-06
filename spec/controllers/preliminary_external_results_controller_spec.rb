@@ -154,5 +154,16 @@ describe PreliminaryExternalResultsController do
       end.to change(ExternalResult, :count).by 4
       expect(ExternalResult.preliminary.count).to eq(4)
     end
+
+    context "when no file is submitted" do
+      it "redirects back with an alert instead of raising" do
+        expect do
+          post :import_csv, params: { competition_id: @competition.id }
+        end.not_to change(ExternalResult, :count)
+
+        expect(response).to redirect_to(display_csv_competition_preliminary_external_results_path(@competition))
+        expect(flash[:alert]).to eq("Please choose a CSV file to import")
+      end
+    end
   end
 end
