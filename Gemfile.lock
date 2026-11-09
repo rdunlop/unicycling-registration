@@ -402,9 +402,9 @@ GEM
       timeout
     net-smtp (0.5.1)
       net-protocol
-    nilify_blanks (1.4.0)
-      activerecord (>= 4.0.0)
-      activesupport (>= 4.0.0)
+    nilify_blanks (2.0.0)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     nio4r (2.7.5)
     nokogiri (1.19.7)
       mini_portile2 (~> 2.8.2)
