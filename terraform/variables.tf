@@ -82,7 +82,7 @@ variable "ecr_repository_url" {
 
 variable "image_tag" {
   type        = string
-  description = "Image tag to deploy (git SHA from CircleCI, or 'latest' for initial apply)"
+  description = "Image tag to deploy. Not set in tfvars: bin/tf supplies the tag of the image currently running in ECS (or IMAGE_TAG)."
 }
 
 variable "ecs_traffic_weight" {
