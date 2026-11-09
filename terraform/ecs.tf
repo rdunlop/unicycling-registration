@@ -131,8 +131,9 @@ resource "aws_ecs_task_definition" "web" {
   family                   = "unicycling-registration-${var.environment}-web"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 2048
-  memory                   = 4096
+  # Staging is half the size of prod (CPU and memory).
+  cpu                      = var.environment == "staging" ? 1024 : 2048
+  memory                   = var.environment == "staging" ? 2048 : 4096
   execution_role_arn       = aws_iam_role.ecs_execution.arn
   task_role_arn            = aws_iam_role.ecs_task.arn
 
@@ -168,8 +169,9 @@ resource "aws_ecs_task_definition" "sidekiq" {
   family                   = "unicycling-registration-${var.environment}-sidekiq"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 1024
-  memory                   = 2048
+  # Staging is half the size of prod (CPU and memory).
+  cpu                      = var.environment == "staging" ? 512 : 1024
+  memory                   = var.environment == "staging" ? 1024 : 2048
   execution_role_arn       = aws_iam_role.ecs_execution.arn
   task_role_arn            = aws_iam_role.ecs_task.arn
 
