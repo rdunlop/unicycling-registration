@@ -1,9 +1,11 @@
 resource "aws_ecs_cluster" "app" {
   name = "unicycling-registration-${var.environment}"
 
+  # Staging only: Container Insights standard metrics cost ~$70/mo across the
+  # account. Prod stays enabled until a decision is made about it.
   setting {
     name  = "containerInsights"
-    value = "enabled"
+    value = var.environment == "staging" ? "disabled" : "enabled"
   }
 
   tags = {
