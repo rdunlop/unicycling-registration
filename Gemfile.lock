@@ -6,10 +6,10 @@ GIT
 
 GIT
   remote: https://github.com/pry/pry.git
-  revision: 135640262879544c6bfecbf3e78511289bfe956c
+  revision: 0c7a4123c8ddc34a7f7b50f602e0c5cba21b9716
   branch: master
   specs:
-    pry (0.16.0)
+    pry (0.16.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
       reline (>= 0.6.0)
