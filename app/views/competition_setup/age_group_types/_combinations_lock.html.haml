@@ -1,0 +1,12 @@
+- combinations = age_group_type.age_group_combinations.includes(:competition, :age_group_entries)
+- if combinations.any?
+  .callout.warning
+    %h3 Combined age groups
+    %p
+      The entries of #{age_group_type} cannot be modified while some of them are combined.
+      Separate these combinations, or duplicate this age group type and modify the copy.
+    %ul
+      - combinations.group_by(&:competition).each do |competition, competition_combinations|
+        %li
+          = link_to competition, competition_age_groups_path(competition)
+          = ": #{competition_combinations.map(&:to_s).to_sentence}"

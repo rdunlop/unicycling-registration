@@ -19,6 +19,7 @@ describe Compete::AgeGroupsController do
 
       get :show, params: { competition_id: competition.id }
       expect(response).to be_successful
+      expect(response.body).to include("cannot be modified")
       combination = competition.age_group_combinations.first
       expect(response.body).to include(combination.to_s, "Separate")
     end

@@ -25,6 +25,8 @@
 
   .small-12.medium-6.columns
     %h2= t(".ranking_age_groups")
+    - if @competition.age_group_combinations.any?
+      %p= t(".age_group_type_locked", age_group_type: @age_group_type)
 
     %table
       %thead
