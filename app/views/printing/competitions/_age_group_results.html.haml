@@ -1,4 +1,4 @@
-- # age_group_entry
+- # age_group
 - # competition
 - place_function = :place_formatted
 - # description
@@ -6,10 +6,10 @@
 - # competitors
 - # place_function
 
-- competitors = competition.results_list_for(age_group_entry)
+- competitors = competition.results_list_for(age_group)
 - return if competitors.size == 0
 .nobreak
-  %h2.age_group_description= age_group_entry
+  %h2.age_group_description= age_group
   %div{:style => "clear: both"}
   %hr
   - if competitors.count == 0

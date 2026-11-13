@@ -103,11 +103,11 @@ class AwardLabelsController < ApplicationController
 
     # Age Groups
     if competition.has_age_group_entry_results?
-      competition.age_group_entries.each do |age_group_entry|
+      competition.age_groups.each do |age_group|
         (min_place..max_place).each do |place|
           award_label = AwardLabel.new
           award_label.user = current_user
-          award_label.populate_generic_age_group_from_competition(competition, age_group_entry, place)
+          award_label.populate_generic_age_group_from_competition(competition, age_group, place)
           award_label.save!
           n += 1
         end

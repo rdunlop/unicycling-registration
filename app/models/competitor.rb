@@ -258,11 +258,15 @@ class Competitor < ApplicationRecord
     end
   end
 
+  # The age group this competitor is ranked in (AgeGroupEntry or AgeGroupCombination)
+  def age_group
+    competition.age_group_for(age_group_entry)
+  end
+
   def age_group_entry_description
     return unless members.any?
-    return if age_group_entry.nil?
 
-    age_group_entry.to_s
+    age_group&.to_s
   end
 
   def has_result?

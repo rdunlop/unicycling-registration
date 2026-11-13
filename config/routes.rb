@@ -682,8 +682,8 @@ Rails.application.routes.draw do
           # Track (LaneAssignments)
           delete :destroy_all
 
-          get "age_group_entries/:age_group_entry_id/set_sort", to: "heats#set_sort", as: "set_sort"
-          post "age_group_entries/:age_group_entry_id/set_sort", to: "heats#sort", as: "sort"
+          get "age_groups/:age_group_id/set_sort", to: "heats#set_sort", as: "set_sort"
+          post "age_groups/:age_group_id/set_sort", to: "heats#sort", as: "sort"
         end
       end
 

@@ -60,11 +60,11 @@ class AwardLabel < ApplicationRecord
     self.registrant = Registrant.first
   end
 
-  def populate_generic_age_group_from_competition(competition, age_group_entry, place)
+  def populate_generic_age_group_from_competition(competition, age_group, place)
     # competition_name
     self.line_1 = competition.award_title_name
     # category_name
-    self.line_2 = age_group_entry.try(:to_s) || competition.award_subtitle_name
+    self.line_2 = age_group.try(:to_s) || competition.award_subtitle_name
 
     self.place = place
     self.registrant = Registrant.first
