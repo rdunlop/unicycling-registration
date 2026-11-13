@@ -3,22 +3,58 @@
 # These are the entries of the competition's AgeGroupType, viewed through the
 # competition's AgeGroupCombinations: combined entries are ranked together,
 # without the AgeGroupType itself being modified.
+# Likewise, the competition may order its age groups itself (see AgeGroupPosition).
 module CompetitionAgeGroups
   extend ActiveSupport::Concern
 
   included do
     has_many :age_group_combinations, dependent: :destroy, inverse_of: :competition
+    has_many :age_group_positions, dependent: :delete_all
 
     validate :no_published_age_group_combinations, on: :update, if: :will_save_change_to_age_group_type_id?
     after_update :remove_age_group_combinations, if: :saved_change_to_age_group_type_id?
   end
 
-  # The age groups competitors are ranked in (and heats are ordered by), in age group type order:
+  # The age groups competitors are ranked in (and heats are ordered by):
   # each AgeGroupEntry, unless it is part of an AgeGroupCombination, in which case the combination.
+  #
+  # They are in the competition's own order if it has one (entries without a position last),
+  # in age group type order otherwise.
   def age_groups
     return [] if age_group_type.nil?
 
-    age_group_type.age_group_entries.map { |entry| age_group_for(entry) }.uniq
+    age_groups = age_group_type.age_group_entries.map { |entry| age_group_for(entry) }.uniq
+    return age_groups unless custom_age_group_order?
+
+    age_groups.each_with_index.sort_by { |age_group, index| [competition_position(age_group) || Float::INFINITY, index] }.map(&:first)
+  end
+
+  def custom_age_group_order?
+    age_group_cache[:positions_by_entry_id].any?
+  end
+
+  # Move the age group to the given (0-based) index of the competition's own order,
+  # the current order of the other age groups becoming the competition's own order
+  def move_age_group(age_group, index)
+    raise ArgumentError, "#{age_group} is not an age group of #{self}" unless age_groups.include?(age_group)
+
+    ordered_age_groups = age_groups - [age_group]
+    ordered_age_groups.insert(index.clamp(0, ordered_age_groups.size), age_group)
+
+    rows = ordered_age_groups.each_with_index.flat_map do |ordered_age_group, position|
+      ordered_age_group.age_group_entry_ids.map { |entry_id| { age_group_entry_id: entry_id, position: position + 1 } }
+    end
+    transaction do
+      age_group_positions.delete_all
+      age_group_positions.insert_all!(rows)
+    end
+    age_group_order_changed
+  end
+
+  # Use the age group type order again
+  def reset_age_group_order
+    age_group_positions.delete_all
+    age_group_order_changed
   end
 
   # The age group (AgeGroupEntry or AgeGroupCombination) a competitor in the given entry is ranked in
@@ -68,8 +104,21 @@ module CompetitionAgeGroups
         combination.age_group_entries.each { |entry| by_entry_id[entry.id] = combination }
       end
 
-      { combinations_by_entry_id: combinations_by_entry_id }
+      {
+        combinations_by_entry_id: combinations_by_entry_id,
+        positions_by_entry_id: age_group_positions.pluck(:age_group_entry_id, :position).to_h
+      }
     end
+  end
+
+  # A combination takes the place of its first entry
+  def competition_position(age_group)
+    age_group.age_group_entry_ids.filter_map { |entry_id| age_group_cache[:positions_by_entry_id][entry_id] }.min
+  end
+
+  def age_group_order_changed
+    AgeGroupCombinationCache.expire(id)
+    touch
   end
 
   # Changing the age group type removes the combinations, which would also remove their published results
@@ -79,8 +128,9 @@ module CompetitionAgeGroups
     errors.add(:age_group_type_id, "cannot be changed while combined age group results are published, unpublish them first")
   end
 
-  # Combinations are only meaningful for the entries of the previous age group type
+  # Combinations (and positions) are only meaningful for the entries of the previous age group type
   def remove_age_group_combinations
     age_group_combinations.destroy_all
+    age_group_positions.delete_all
   end
 end
