@@ -170,8 +170,8 @@ GEM
       jmespath (~> 1, >= 1.6.1)
       logger
       rexml (~> 3.4, >= 3.4.2)
-    aws-sdk-elasticloadbalancingv2 (1.153.0)
-      aws-sdk-core (~> 3, >= 3.248.0)
+    aws-sdk-elasticloadbalancingv2 (1.167.0)
+      aws-sdk-core (~> 3, >= 3.266.0)
       aws-sigv4 (~> 1.5)
     aws-sdk-kms (1.118.0)
       aws-sdk-core (~> 3, >= 3.239.1)
