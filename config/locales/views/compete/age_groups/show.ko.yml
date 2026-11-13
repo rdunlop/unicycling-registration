@@ -1,0 +1,47 @@
+---
+"ko":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          작업
+        "age_group_type_locked": >-
+          연령 그룹이 통합되어 있는 동안에는 다른 종목이 이에 의존할 수 있으므로 %{age_group_type}의 연령 그룹을 수정할 수 없습니다.
+        "are_you_sure": >-
+          확실합니까?
+        "base_age_groups": >-
+          기본 연령 그룹: %{age_group_type}
+        "cancel": >-
+          취소
+        "combine_with": >-
+          %{smallest_neighbour}와(과) 통합
+        "custom_order": >-
+          이 종목에는 자체 순서가 있으며, %{age_group_type}의 순서는 무시됩니다.
+        "eligible_registrants": >-
+          참가 자격이 있는 등록자 수
+        "entry": >-
+          연령 그룹
+        "female": >-
+          여성
+        "headline": >-
+          총 %{competitors_count}명의 참가자가 있습니다. 이 페이지는 참가자들이 각 연령 그룹에 어떻게 분포되어 있는지 보여줍니다. 이 페이지에서 규정에 따라 연령 그룹을 통합할 수 있습니다.
+        "ineligible_registrants": >-
+          참가 자격이 없는 등록자 수
+        "male": >-
+          남성
+        "name_hint": >-
+          비워 두면 통합된 연령 그룹의 이름이 사용됩니다
+        "order_hint": >-
+          연령 그룹을 끌어다 놓아 이 종목의 순서를 정하세요 (히트는 이 순서대로 배정됩니다).
+        "ranking_age_groups": >-
+          순위 산정에 사용되는 연령 그룹
+        "rename": >-
+          이름 변경
+        "reset_order": >-
+          연령 그룹 유형의 순서 사용
+        "separate": >-
+          분리
+        "show_registrant_sign_up_breakdown": >-
+          등록자 분포 보기
+        "title": >-
+          %{competition} 연령 그룹 관리

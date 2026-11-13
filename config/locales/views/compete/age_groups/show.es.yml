@@ -1,0 +1,47 @@
+---
+"es":
+  "compete":
+    "age_groups":
+      "show":
+        "action": >-
+          Acción
+        "age_group_type_locked": >-
+          Mientras haya grupos de edad combinados, los grupos de edad de %{age_group_type} no se pueden modificar, ya que otras competencias pueden depender de ellos.
+        "are_you_sure": >-
+          ¿Estás seguro?
+        "base_age_groups": >-
+          Grupos de edad base: %{age_group_type}
+        "cancel": >-
+          Cancelar
+        "combine_with": >-
+          Combinar con %{smallest_neighbour}
+        "custom_order": >-
+          Esta competencia tiene su propio orden, que ignora el orden de %{age_group_type}.
+        "eligible_registrants": >-
+          N.º de inscritos elegibles
+        "entry": >-
+          Grupo de edad
+        "female": >-
+          Femenino
+        "headline": >-
+          En total, hay %{competitors_count} competidores. Esta página muestra cómo se distribuyen estos competidores en los distintos grupos de edad. Desde esta página, puedes combinar grupos de edad según el reglamento.
+        "ineligible_registrants": >-
+          N.º de inscritos no elegibles
+        "male": >-
+          Masculino
+        "name_hint": >-
+          Dejar en blanco para usar los nombres de los grupos de edad combinados
+        "order_hint": >-
+          Arrastra y suelta los grupos de edad para ordenarlos en esta competencia (las series se asignan en este orden).
+        "ranking_age_groups": >-
+          Grupos de edad usados para la clasificación
+        "rename": >-
+          Renombrar
+        "reset_order": >-
+          Usar el orden del tipo de grupo de edad
+        "separate": >-
+          Separar
+        "show_registrant_sign_up_breakdown": >-
+          Mostrar el desglose de inscritos
+        "title": >-
+          %{competition} – Gestión de grupos de edad
