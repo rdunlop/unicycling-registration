@@ -86,8 +86,37 @@ describe AgeGroupCombination do
     end
   end
 
-  it "is named after the combined entries" do
-    expect(combination.short_description).to eq("#{entry_1.short_description} and #{entry_2.short_description}")
+  describe "naming" do
+    it "uses the names of the combined entries by default" do
+      expect(combination.short_description).to eq("#{entry_1.short_description} and #{entry_2.short_description}")
+    end
+
+    it "can have a custom name" do
+      combination.update!(name: "  Juniors  ")
+
+      expect(combination.name).to eq("Juniors")
+      expect(combination.to_s).to eq("Juniors")
+      expect(combination.generated_name).to eq("#{entry_1.short_description} and #{entry_2.short_description}")
+    end
+
+    it "restores the default name with a blank name" do
+      combination.update!(name: "Juniors")
+      combination.update!(name: " ")
+
+      expect(combination.name).to be_nil
+      expect(combination.short_description).to eq(combination.generated_name)
+    end
+
+    it "does not keep the default name as a custom name" do
+      combination.update!(name: combination.generated_name)
+
+      expect(combination.name).to be_nil
+    end
+
+    it "cannot have the name of another age group of the competition, as they would be ranked together" do
+      expect(combination.update(name: entry_3.short_description)).to be(false)
+      expect(combination.errors[:name]).to be_present
+    end
   end
 
   it "is unique per competition in the database" do
@@ -165,6 +194,7 @@ end
 #
 #  id             :bigint           not null, primary key
 #  competition_id :bigint           not null
+#  name           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
