@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # Load balancer health check. A bare Rack endpoint, so it skips controller
+  # callbacks and tenant-specific work. Request logging for this path is
+  # silenced by config.silence_healthcheck_path (config/environments/production.rb).
+  get '/healthcheck', to: proc { [200, { 'Content-Type' => 'text/plain' }, ['OK']] }
+
   mount Tolk::Engine => '/tolk', :as => 'tolk'
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.has_role?(:super_admin) } do
