@@ -6,4 +6,5 @@
 - Read the `bin/tf:` line it prints before reading a plan. It shows the environment, the backend, and the `image_tag` in use.
 - Do not put `image_tag` in `terraform/*/terraform.tfvars`. The wrapper uses the image that is running in ECS. Only set `IMAGE_TAG=<sha>` for an intentional rollback.
 - Normal deploys go through CI. Local `apply` is only for a break-glass fix, and the wrapper requires you to type the environment name first.
+- Claude must never run `terraform apply` or `terraform destroy`, including through `bin/tf`, `-auto-approve`, `-target`, or a saved plan. Robin runs apply himself. Claude can run `plan`, `validate`, `fmt` and `init`.
 - Do not commit Terraform state or plan files.
