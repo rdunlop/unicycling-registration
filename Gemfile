@@ -64,6 +64,7 @@ gem 'redis'
 gem 'request_store' # Supports EventConfiguration.singleton
 gem 'ruby-vips' # Image processing for ActiveStorage (replaces ImageMagick)
 gem 'lograge'
+gem 'rack-attack', '~> 6.8.0' # throttles abusive clients; see config/initializers/rack_attack.rb
 gem 'rollbar'
 gem 'rubyzip'
 gem 'sassc-rails' # needed for SCSS compilation (tolk dep + sprockets)

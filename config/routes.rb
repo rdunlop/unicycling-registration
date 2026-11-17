@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # ELB health check. Returns 200 when the app boots (Rails' built-in controller).
+  # Request logging for this path is silenced by config.silence_healthcheck_path
+  # (config/environments/production.rb).
+  get '/healthcheck', to: 'rails/health#show', as: :healthcheck
+
   mount Tolk::Engine => '/tolk', :as => 'tolk'
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.has_role?(:super_admin) } do
