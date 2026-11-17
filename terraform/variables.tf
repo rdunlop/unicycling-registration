@@ -29,16 +29,6 @@ variable "zone_id" {
   description = "Route53 hosted zone ID for unicycling-software.com"
 }
 
-variable "ec2_instance_id" {
-  type        = string
-  description = "ID of the existing EC2 instance to register in the ALB target group"
-}
-
-variable "ec2_security_group_id" {
-  type        = string
-  description = "ID of the existing EC2 security group; an ingress rule will be added allowing port 80 from the ALB"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID where the ALB will be created"
