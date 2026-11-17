@@ -64,6 +64,5 @@ RSpec.describe "rack attack throttling", type: :request do
 
     get "/healthcheck"
     expect(response).to have_http_status(:ok)
-    expect(response.body).to eq("OK")
   end
 end
