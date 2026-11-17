@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# bin/tf <staging|prod> <terraform args...>
+#
+# The supported way to run Terraform against this project. It:
+#   1. re-initializes the S3 backend for the chosen environment on every run,
+#      so staging and prod state cannot be mixed up;
+#   2. reads the image currently running in ECS and passes it as image_tag, so a
+#      plan never proposes rolling the app back to a stale tag from tfvars.
+#      Set IMAGE_TAG=<sha> to override (for example, to roll back);
+#   3. prints the environment, backend and image tag before anything runs;
+#   4. asks you to type the environment name before apply or destroy.
+set -euo pipefail
+
+APP=unicycling-registration
+REGION=us-west-2
+
+ENV_NAME="${1:-}"
+SUBCOMMAND="${2:-}"
+if [[ ! "$ENV_NAME" =~ ^(staging|prod)$ ]] || [ -z "$SUBCOMMAND" ]; then
+  echo "usage: bin/tf <staging|prod> <terraform command> [args...]" >&2
+  exit 2
+fi
+shift 2
+
+export AWS_PROFILE="${AWS_PROFILE:-unicycling}"
+export ASDF_TERRAFORM_VERSION="${ASDF_TERRAFORM_VERSION:-1.17.0}"
+
+TF_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$TF_DIR"
+
+if [ -n "${IMAGE_TAG:-}" ]; then
+  TAG="$IMAGE_TAG"
+  SOURCE="IMAGE_TAG override"
+else
+  TD_ARN=$(aws ecs describe-services \
+    --cluster "$APP-$ENV_NAME" --services "$APP-$ENV_NAME-web" \
+    --region "$REGION" --query 'services[0].taskDefinition' --output text)
+  IMAGE=$(aws ecs describe-task-definition \
+    --task-definition "$TD_ARN" --region "$REGION" \
+    --query 'taskDefinition.containerDefinitions[?name==`web`].image | [0]' --output text)
+  TAG="${IMAGE##*:}"
+  SOURCE="live ECS service $APP-$ENV_NAME-web"
+fi
+
+terraform init -input=false -reconfigure -backend-config="$ENV_NAME/backend.tfvars" >/dev/null
+
+echo "bin/tf: env=$ENV_NAME backend=$ENV_NAME/backend.tfvars image_tag=$TAG ($SOURCE)" >&2
+
+case "$SUBCOMMAND" in
+  apply|destroy)
+    read -r -p "Type '$ENV_NAME' to run terraform $SUBCOMMAND: " ANSWER < /dev/tty
+    if [ "$ANSWER" != "$ENV_NAME" ]; then
+      echo "aborted" >&2
+      exit 1
+    fi
+    ;;
+esac
+
+export TF_VAR_image_tag="$TAG"
+
+case "$SUBCOMMAND" in
+  plan|apply|destroy|refresh|import|console)
+    # A saved plan file cannot be combined with -var-file, so skip it in that case.
+    if [ $# -gt 0 ] && [ -f "$1" ]; then
+      exec terraform "$SUBCOMMAND" "$@"
+    fi
+    exec terraform "$SUBCOMMAND" -var-file="$ENV_NAME/terraform.tfvars" "$@"
+    ;;
+  *)
+    exec terraform "$SUBCOMMAND" "$@"
+    ;;
+esac
