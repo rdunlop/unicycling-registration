@@ -23,10 +23,12 @@ end
 # that test limits turn it on explicitly.
 Rack::Attack.enabled = !Rails.env.test?
 
-LOCALE_PREFIX = '(?:/(?:en|fr|de|hu|es|ja|ko|it|da|nl))?'.freeze
-
+# Routes accept an optional locale prefix (/en/users/password). The locales come
+# from I18n.available_locales (config/application.rb), read on each call so this
+# always matches the app's list.
 RACK_ATTACK_PATH = lambda do |req, path|
-  req.path.match?(/\A#{LOCALE_PREFIX}#{path}\z/)
+  locales = I18n.available_locales.map { |locale| Regexp.escape(locale.to_s) }.join('|')
+  req.path.match?(%r{\A(?:/(?:#{locales}))?#{path}\z})
 end
 
 # ELB health checks are never throttled. They are a fixed, small set of ALB

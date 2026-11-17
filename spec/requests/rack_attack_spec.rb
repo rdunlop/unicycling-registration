@@ -6,8 +6,13 @@ RSpec.describe "rack attack throttling", type: :request do
     original_store = Rack::Attack.cache.store
     Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
     Rack::Attack.enabled = true
+    # Rack::Attack counts in fixed windows keyed by Time.now. Freezing the clock
+    # keeps one example's requests in one window, so it can't straddle a
+    # minute boundary (slow password hashing makes that likely).
+    freeze_time
     example.run
   ensure
+    travel_back
     Rack::Attack.enabled = false
     Rack::Attack.cache.store = original_store
   end
@@ -19,6 +24,14 @@ RSpec.describe "rack attack throttling", type: :request do
     expect(response).not_to have_http_status(429)
 
     post "/users/sign_in", params: sign_in_params
+    expect(response).to have_http_status(429)
+  end
+
+  it "counts locale-prefixed paths towards the same limit" do
+    10.times { post "/en/users/sign_in", params: sign_in_params }
+    expect(response).not_to have_http_status(429)
+
+    post "/da/users/sign_in", params: sign_in_params
     expect(response).to have_http_status(429)
   end
 
