@@ -2,7 +2,7 @@
 # Pinned to a tag: bump the ref deliberately, then check the plan before applying.
 
 module "alb" {
-  source = "git::https://github.com/rdunlop/unicycling-infra.git//modules/alb-ingress?ref=v0.2.0"
+  source = "git::https://github.com/rdunlop/unicycling-infra.git//modules/alb-ingress?ref=v0.3.0"
 
   app_name              = "unicycling-registration"
   environment           = var.environment
@@ -17,6 +17,11 @@ module "alb" {
   legacy_ec2            = null
   ecs_target_group_name = "unicycling-reg-${var.environment}-ecs"
   ecs_traffic_weight    = var.ecs_traffic_weight
+
+  # Staging checks /healthcheck, which lets basic auth stay on for the site.
+  # Prod stays on "/" until its running image includes /healthcheck; flip it
+  # after the prod deploy, or prod targets fail their health checks.
+  ecs_health_check_path = var.environment == "staging" ? "/healthcheck" : "/"
 }
 
 module "ecs_app" {
@@ -69,7 +74,9 @@ module "ecs_app" {
     },
   ]
 
-  secret_names = [
+  # Staging only: HTTP basic auth gate. The SSM parameters must exist at
+  # /unicycling-registration/staging/ before this applies, or tasks won't start.
+  secret_names = concat([
     "SECRET_KEY_BASE",
     "DATABASE_HOST", "POSTGRES_USER", "POSTGRES_PASSWORD", "POSTGRES_DB",
     "REDIS_URL",
@@ -84,7 +91,7 @@ module "ecs_app" {
     "IUF_MEMBERSHIP_API_URL", "IUF_MEMBERSHIP_URL",
     "USA_WILDAPRICOT_ACCOUNT_ID", "USA_WILDAPRICOT_API_KEY",
     "ROLLBAR_ACCESS_TOKEN",
-  ]
+  ], var.environment == "staging" ? ["BASIC_AUTH_USERNAME", "BASIC_AUTH_PASSWORD"] : [])
 
   # Permissions for the app's own AWS calls. The ECS Exec permissions are added by the module.
   task_policy_statements = [
