@@ -1,6 +1,6 @@
 module LanguageHelper
   def languages
-    I18n.available_locales
+    current_config_available_locales
   end
 
   def long_language_name(language)
