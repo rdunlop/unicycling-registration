@@ -139,6 +139,7 @@ describe ConventionSetup::ExpenseGroupsController do
     context "when an item in the group has payment details" do
       let!(:expense_group) { ExpenseGroup.create! valid_attributes }
       let!(:expense_item) { FactoryBot.create(:expense_item, expense_group: expense_group) }
+
       before { FactoryBot.create(:payment_detail, line_item: expense_item) }
 
       it "does not destroy the expense_group" do
