@@ -33,6 +33,21 @@ describe Payment do
     expect(@pay.valid?).to eq(true)
   end
 
+  describe "#invoice_number" do
+    it "uses the event short_name and the payment id" do
+      FactoryBot.create(:event_configuration, short_name: "NAUCC 2026")
+      RequestStore.clear! # drop the EventConfiguration cached while creating @pay
+      expect(@pay.invoice_number).to eq("naucc-2026-#{@pay.id}")
+    end
+
+    it "falls back to the tenant subdomain when short_name is blank" do
+      FactoryBot.create(:event_configuration, short_name: nil)
+      RequestStore.clear!
+      allow(Apartment::Tenant).to receive(:current).and_return("mytenant")
+      expect(@pay.invoice_number).to eq("mytenant-#{@pay.id}")
+    end
+  end
+
   it "defaults completed to false" do
     p = described_class.new
     expect(p.completed).to eq(false)

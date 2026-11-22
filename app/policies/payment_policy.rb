@@ -7,6 +7,11 @@ class PaymentPolicy < ApplicationPolicy
     user_record? || payment_admin? || super_admin?
   end
 
+  # Invoices are only available for completed payments, to those who can view the payment
+  def invoice?
+    show? && record.completed?
+  end
+
   def create?
     user_record? || super_admin?
   end
