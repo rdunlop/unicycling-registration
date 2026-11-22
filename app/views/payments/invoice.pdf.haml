@@ -2,15 +2,15 @@
 - show_tax = @payment.payment_details.any? { |pd| !pd.tax.to_money.zero? }
 - convention_name = @config.long_name.presence || @config.short_name
 :css
-  body { font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #222; }
+  body { font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #222; }
   .invoice_header { width: 100%; margin-bottom: 20px; }
   .invoice_header td { vertical-align: top; }
-  .invoice_title { font-size: 28px; font-weight: bold; text-align: right; }
-  .paid_stamp { display: inline-block; border: 3px solid #1a7f37; color: #1a7f37; font-size: 20px; font-weight: bold; padding: 2px 14px; margin-top: 8px; }
+  .invoice_title { font-size: 36px; font-weight: bold; text-align: right; }
+  .paid_stamp { display: inline-block; border: 3px solid #1a7f37; color: #1a7f37; font-size: 26px; font-weight: bold; padding: 2px 14px; margin-top: 8px; }
   .invoice_items { width: 100%; border-collapse: collapse; margin-top: 20px; }
   .invoice_items th, .invoice_items td { border-bottom: 1px solid #ccc; padding: 6px; text-align: left; }
   .invoice_items .money { text-align: right; }
-  .invoice_items tfoot th { border-bottom: none; font-size: 14px; }
+  .invoice_items tfoot th { border-bottom: none; font-size: 18px; }
 %table.invoice_header
   %tr
     %td
@@ -29,8 +29,9 @@
 %p
   %b #{t('.bill_to')}:
   %br
-  = @payment.user
-  %br
+  - if @payment.user.name.present?
+    = @payment.user.name
+    %br
   = @payment.user.email
 - if @payment.transaction_id.present?
   %p
@@ -57,7 +58,7 @@
           - unless pd.details.blank?
             = "(#{pd.details})"
         - if show_tax
-          %td.money= print_item_cost_currency(pd.tax)
+          %td.money= print_formatted_currency(pd.tax)
         %td.money= print_item_cost_currency(pd.cost)
   %tfoot
     %tr

@@ -208,12 +208,6 @@ describe PaymentsController do
     let!(:payment) { FactoryBot.create(:payment, user: payment_user, completed: completed, completed_date: Time.zone.local(2026, 5, 4)) }
     let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount_cents: 1234) }
 
-    # The wkhtmltopdf binary bundled with the gem does not run in the dev/test container,
-    # so stub the PDF engine; the HTML that would be converted is covered by the debug view below.
-    before do
-      allow(WickedPdf).to receive(:new).and_return(instance_double(WickedPdf, pdf_from_string: "%PDF-1.4 stub"))
-    end
-
     it "downloads a PDF named after the invoice number" do
       get :invoice, params: { id: payment.to_param }
 
