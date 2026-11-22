@@ -182,6 +182,7 @@ Rails.application.routes.draw do
         post :admin_complete
         post :pay_offline
         post :apply_coupon
+        get :invoice, defaults: { format: "pdf" }
         post :stripe, controller: "stripe_payments"
         post :advanced_stripe
       end

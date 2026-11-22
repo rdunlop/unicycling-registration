@@ -1,0 +1,67 @@
+- # locals: @payment, @config
+- show_tax = @payment.payment_details.any? { |pd| !pd.tax.to_money.zero? }
+- convention_name = @config.long_name.presence || @config.short_name
+:css
+  body { font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #222; }
+  .invoice_header { width: 100%; margin-bottom: 20px; }
+  .invoice_header td { vertical-align: top; }
+  .invoice_title { font-size: 28px; font-weight: bold; text-align: right; }
+  .paid_stamp { display: inline-block; border: 3px solid #1a7f37; color: #1a7f37; font-size: 20px; font-weight: bold; padding: 2px 14px; margin-top: 8px; }
+  .invoice_items { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  .invoice_items th, .invoice_items td { border-bottom: 1px solid #ccc; padding: 6px; text-align: left; }
+  .invoice_items .money { text-align: right; }
+  .invoice_items tfoot th { border-bottom: none; font-size: 14px; }
+%table.invoice_header
+  %tr
+    %td
+      %h2= convention_name
+      %div= @config.location
+    %td.invoice_title
+      = t(".invoice")
+      %div
+        %span.paid_stamp= t(".paid")
+%p
+  %b #{t('.invoice_number')}:
+  = @payment.invoice_number
+  %br
+  %b #{t('.date')}:
+  = l(@payment.completed_date.to_date)
+%p
+  %b #{t('.bill_to')}:
+  %br
+  = @payment.user
+  %br
+  = @payment.user.email
+- if @payment.transaction_id.present?
+  %p
+    %b #{t('.transaction_id')}:
+    = @payment.transaction_id
+- if @payment.note.present?
+  %p
+    %b #{t('.note')}:
+    = @payment.note
+%table.invoice_items
+  %thead
+    %tr
+      %th= t(".registrant")
+      %th= t(".item")
+      - if show_tax
+        %th.money= t(".tax_included")
+      %th.money= t(".amount")
+  %tbody
+    - @payment.payment_details.each do |pd|
+      %tr
+        %td= pd.registrant.with_id_to_s
+        %td
+          = pd.to_s
+          - unless pd.details.blank?
+            = "(#{pd.details})"
+        - if show_tax
+          %td.money= print_item_cost_currency(pd.tax)
+        %td.money= print_item_cost_currency(pd.cost)
+  %tfoot
+    %tr
+      %th{ colspan: show_tax ? 3 : 2 }
+      %th.money
+        = t(".total")
+        = print_formatted_currency(@payment.total_amount)

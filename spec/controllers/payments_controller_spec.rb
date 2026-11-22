@@ -172,6 +172,85 @@ describe PaymentsController do
     end
   end
 
+  describe "GET invoice" do
+    let(:payment_user) { @user }
+    let(:completed) { true }
+    let!(:payment) { FactoryBot.create(:payment, user: payment_user, completed: completed, completed_date: Time.zone.local(2026, 5, 4)) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount_cents: 1234) }
+
+    # The wkhtmltopdf binary bundled with the gem does not run in the dev/test container,
+    # so stub the PDF engine; the HTML that would be converted is covered by the debug view below.
+    before do
+      allow(WickedPdf).to receive(:new).and_return(instance_double(WickedPdf, pdf_from_string: "%PDF-1.4 stub"))
+    end
+
+    it "downloads a PDF named after the invoice number" do
+      get :invoice, params: { id: payment.to_param }
+
+      expect(response).to be_successful
+      expect(response.media_type).to eq("application/pdf")
+      expect(response.headers["Content-Disposition"]).to include("attachment")
+      expect(response.headers["Content-Disposition"]).to include(payment.invoice_number)
+      expect(response.body).to start_with("%PDF")
+    end
+
+    context "with the HTML debug view" do
+      render_views
+
+      it "shows the invoice details" do
+        get :invoice, params: { id: payment.to_param, debug: 1 }
+
+        expect(response.body).to include(payment.invoice_number)
+        expect(response.body).to include("PAID")
+        expect(response.body).to include(payment_detail.registrant.with_id_to_s)
+        expect(response.body).to include("$12.34")
+        expect(response.body).to include(payment.transaction_id)
+        expect(response.body).not_to include("Tax Included")
+      end
+
+      it "shows a tax column when an item has tax" do
+        payment_detail.line_item.update!(tax_cents: 100)
+
+        get :invoice, params: { id: payment.to_param, debug: 1 }
+
+        expect(response.body).to include("Tax Included")
+      end
+    end
+
+    context "when the payment is not completed" do
+      let(:completed) { false }
+
+      it "does not provide an invoice" do
+        get :invoice, params: { id: payment.to_param }
+
+        expect(response).to redirect_to(root_path)
+        expect(response.body).not_to start_with("%PDF")
+      end
+    end
+
+    context "when the payment belongs to another user" do
+      let(:payment_user) { FactoryBot.create(:user) }
+
+      it "does not provide an invoice" do
+        get :invoice, params: { id: payment.to_param }
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "as a payment_admin viewing another user's payment" do
+      let(:payment_user) { FactoryBot.create(:user) }
+
+      before { sign_in FactoryBot.create(:payment_admin) }
+
+      it "downloads the PDF" do
+        get :invoice, params: { id: payment.to_param }
+
+        expect(response.media_type).to eq("application/pdf")
+      end
+    end
+  end
+
   describe "Complete a $0 payment" do
     it "sets the payment completed" do
       payment = FactoryBot.create(:payment, user: @user)
