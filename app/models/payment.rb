@@ -63,6 +63,14 @@ class Payment < ApplicationRecord
     nil
   end
 
+  # Human-readable invoice number: "<convention short name>-<payment id>".
+  # Falls back to the tenant subdomain when no short_name is configured.
+  # (Not to be confused with `invoice_id`, the random payment-processor reference.)
+  def invoice_number
+    prefix = EventConfiguration.singleton.short_name.presence || Apartment::Tenant.current
+    "#{prefix.to_s.parameterize}-#{id}"
+  end
+
   def complete(options = {})
     assign_attributes(options)
     self.completed_date = Time.current

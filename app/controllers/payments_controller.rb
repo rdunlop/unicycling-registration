@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_payments_breadcrumb
-  before_action :load_payment, only: %i[show advanced_stripe complete fake_complete admin_complete apply_coupon]
+  before_action :load_payment, only: %i[show invoice advanced_stripe complete fake_complete admin_complete apply_coupon]
 
   # GET /users/12/payments
   # or
@@ -71,6 +71,13 @@ class PaymentsController < ApplicationController
   def show
     authorize @payment
     add_breadcrumb t("new_payment", scope: "breadcrumbs")
+  end
+
+  # GET /payments/1/invoice (PDF download)
+  def invoice
+    authorize @payment
+
+    render_common_pdf @payment.invoice_number, "Portrait", true, simple_pdf: true
   end
 
   # GET /payments/new

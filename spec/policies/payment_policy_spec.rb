@@ -39,6 +39,31 @@ describe PaymentPolicy do
     end
   end
 
+  permissions :invoice? do
+    let(:config) { FactoryBot.create(:event_configuration) }
+    let(:completed_payment) { FactoryBot.build(:payment, :completed, user: user) }
+
+    it { expect(subject).to permit(user_context, completed_payment) }
+
+    it "denies an incomplete payment" do
+      expect(subject).not_to permit(user_context, my_payment)
+    end
+
+    describe "as a different user" do
+      let(:other_user) { FactoryBot.create(:user) }
+      let(:user_context) { UserContext.new(other_user, config, reg_closed?, reg_closed?, reg_closed?, authorized_laptop?) }
+
+      it { expect(subject).not_to permit(user_context, completed_payment) }
+    end
+
+    describe "as a payment_admin" do
+      let(:admin) { FactoryBot.create(:payment_admin) }
+      let(:user_context) { UserContext.new(admin, config, reg_closed?, reg_closed?, reg_closed?, authorized_laptop?) }
+
+      it { expect(subject).to permit(user_context, completed_payment) }
+    end
+  end
+
   permissions :fake_complete? do
     let(:test_mode) { false }
     let(:config) { FactoryBot.create(:event_configuration, test_mode: test_mode) }

@@ -16,6 +16,8 @@
         %td
           - if policy(payment).show?
             = link_to t(".show_details"), payment
+          - if policy(payment).invoice?
+            = link_to t(".download_invoice"), invoice_payment_path(payment)
 %br
 - unless @refunds.empty?
   %table.refunds

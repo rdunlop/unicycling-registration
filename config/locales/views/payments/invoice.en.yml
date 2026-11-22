@@ -1,0 +1,16 @@
+---
+en:
+  payments:
+    invoice:
+      invoice: Invoice
+      invoice_number: Invoice Number
+      paid: PAID
+      date: Date
+      bill_to: Bill To
+      registrant: Registrant
+      item: Item
+      tax_included: Tax Included
+      amount: Amount
+      total: Total
+      transaction_id: Transaction ID
+      note: Note

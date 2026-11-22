@@ -89,6 +89,20 @@ describe PaymentsController do
         assert_select "tr>td", text: @payment.transaction_id.to_s, count: 1
       end
 
+      it "links to the invoice for a completed payment" do
+        get :index, params: { user_id: @user.id }
+
+        assert_select "a[href=?]", invoice_payment_path(@payment), text: "Download Invoice"
+      end
+
+      it "doesn't link to an invoice for an offline-pending payment" do
+        pending_payment = FactoryBot.create(:payment, completed: false, offline_pending: true, user: @user, note: "OFFLINE")
+
+        get :index, params: { user_id: @user.id }
+
+        assert_select "a[href=?]", invoice_payment_path(pending_payment), count: 0
+      end
+
       it "doesn't list my payments which are not completed" do
         my_incomplete_payment = FactoryBot.create(:payment, completed: false, user: @user, note: "MY NOTE")
 
@@ -146,6 +160,22 @@ describe PaymentsController do
       end
     end
 
+    it "does not offer an invoice for an incomplete payment" do
+      get :show, params: { id: payment.to_param }
+
+      assert_select "a[href=?]", invoice_payment_path(payment), count: 0
+    end
+
+    context "with a completed payment" do
+      let!(:payment) { FactoryBot.create(:payment, :completed, user: @user) }
+
+      it "offers an invoice download" do
+        get :show, params: { id: payment.to_param }
+
+        assert_select "a[href=?]", invoice_payment_path(payment), text: "Download Invoice"
+      end
+    end
+
     context "with a payment_detail" do
       let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment) }
 
@@ -168,6 +198,79 @@ describe PaymentsController do
             assert_select "input[type=hidden][name=amount_1][value='1234.56']"
           end
         end
+      end
+    end
+  end
+
+  describe "GET invoice" do
+    let(:payment_user) { @user }
+    let(:completed) { true }
+    let!(:payment) { FactoryBot.create(:payment, user: payment_user, completed: completed, completed_date: Time.zone.local(2026, 5, 4)) }
+    let!(:payment_detail) { FactoryBot.create(:payment_detail, payment: payment, amount_cents: 1234) }
+
+    it "downloads a PDF named after the invoice number" do
+      get :invoice, params: { id: payment.to_param }
+
+      expect(response).to be_successful
+      expect(response.media_type).to eq("application/pdf")
+      expect(response.headers["Content-Disposition"]).to include("attachment")
+      expect(response.headers["Content-Disposition"]).to include(payment.invoice_number)
+      expect(response.body).to start_with("%PDF")
+    end
+
+    context "with the HTML debug view" do
+      render_views
+
+      it "shows the invoice details" do
+        get :invoice, params: { id: payment.to_param, debug: 1 }
+
+        expect(response.body).to include(payment.invoice_number)
+        expect(response.body).to include("PAID")
+        expect(response.body).to include(payment_detail.registrant.with_id_to_s)
+        expect(response.body).to include("$12.34")
+        expect(response.body).to include(payment.transaction_id)
+        expect(response.body).not_to include("Tax Included")
+      end
+
+      it "shows a tax column when an item has tax" do
+        payment_detail.line_item.update!(tax_cents: 100)
+
+        get :invoice, params: { id: payment.to_param, debug: 1 }
+
+        expect(response.body).to include("Tax Included")
+      end
+    end
+
+    context "when the payment is not completed" do
+      let(:completed) { false }
+
+      it "does not provide an invoice" do
+        get :invoice, params: { id: payment.to_param }
+
+        expect(response).to redirect_to(root_path)
+        expect(response.body).not_to start_with("%PDF")
+      end
+    end
+
+    context "when the payment belongs to another user" do
+      let(:payment_user) { FactoryBot.create(:user) }
+
+      it "does not provide an invoice" do
+        get :invoice, params: { id: payment.to_param }
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "as a payment_admin viewing another user's payment" do
+      let(:payment_user) { FactoryBot.create(:user) }
+
+      before { sign_in FactoryBot.create(:payment_admin) }
+
+      it "downloads the PDF" do
+        get :invoice, params: { id: payment.to_param }
+
+        expect(response.media_type).to eq("application/pdf")
       end
     end
   end
