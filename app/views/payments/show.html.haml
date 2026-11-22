@@ -1,6 +1,9 @@
 %h1= t(".payment_summary")
 = render :partial => "summary", :locals => {:payment => @payment }
 
+- if policy(@payment).invoice?
+  = link_to t(".download_invoice"), invoice_payment_path(@payment), class: "button"
+
 - if @config.offline_payment? && !@payment.completed?
   %fieldset
     %legend= t(".offline_payment_instructions")

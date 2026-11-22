@@ -89,6 +89,20 @@ describe PaymentsController do
         assert_select "tr>td", text: @payment.transaction_id.to_s, count: 1
       end
 
+      it "links to the invoice for a completed payment" do
+        get :index, params: { user_id: @user.id }
+
+        assert_select "a[href=?]", invoice_payment_path(@payment), text: "Download Invoice"
+      end
+
+      it "doesn't link to an invoice for an offline-pending payment" do
+        pending_payment = FactoryBot.create(:payment, completed: false, offline_pending: true, user: @user, note: "OFFLINE")
+
+        get :index, params: { user_id: @user.id }
+
+        assert_select "a[href=?]", invoice_payment_path(pending_payment), count: 0
+      end
+
       it "doesn't list my payments which are not completed" do
         my_incomplete_payment = FactoryBot.create(:payment, completed: false, user: @user, note: "MY NOTE")
 
@@ -143,6 +157,22 @@ describe PaymentsController do
         assert_select "input[type=hidden][name=upload][value='1']"
 
         assert_select "input[type=submit]"
+      end
+    end
+
+    it "does not offer an invoice for an incomplete payment" do
+      get :show, params: { id: payment.to_param }
+
+      assert_select "a[href=?]", invoice_payment_path(payment), count: 0
+    end
+
+    context "with a completed payment" do
+      let!(:payment) { FactoryBot.create(:payment, :completed, user: @user) }
+
+      it "offers an invoice download" do
+        get :show, params: { id: payment.to_param }
+
+        assert_select "a[href=?]", invoice_payment_path(payment), text: "Download Invoice"
       end
     end
 
