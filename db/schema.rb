@@ -974,9 +974,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_130000) do
     t.datetime "updated_at", precision: nil
     t.index ["age_group_combination_id"], name: "index_published_age_group_entries_on_age_group_combination_id"
     t.index ["competition_id"], name: "index_published_age_group_entries_on_competition_id"
+    t.check_constraint "(age_group_entry_id IS NULL) <> (age_group_combination_id IS NULL)", name: "published_age_group_entries_exactly_one_age_group"
   end
-
-  add_check_constraint "published_age_group_entries", "(age_group_entry_id IS NULL) <> (age_group_combination_id IS NULL)", name: "published_age_group_entries_exactly_one_age_group"
 
   create_table "rails_admin_histories", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
