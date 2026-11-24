@@ -17,10 +17,8 @@ class CreateAgeGroupCombinations < ActiveRecord::Migration[8.1]
 
     add_reference :published_age_group_entries, :age_group_combination, index: true, foreign_key: true
 
-    # Not validated, so that legacy rows do not block the migration
     add_check_constraint :published_age_group_entries,
                          "(age_group_entry_id IS NULL) <> (age_group_combination_id IS NULL)",
-                         name: "published_age_group_entries_exactly_one_age_group",
-                         validate: false
+                         name: "published_age_group_entries_exactly_one_age_group"
   end
 end
