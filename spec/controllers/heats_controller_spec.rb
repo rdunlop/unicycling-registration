@@ -90,6 +90,48 @@ describe HeatsController do
     end
   end
 
+  describe "with combined age groups" do
+    let!(:entry_1) { FactoryBot.create(:age_group_entry, age_group_type: @competition.age_group_type, start_age: 0, end_age: 10) }
+    let!(:entry_2) { FactoryBot.create(:age_group_entry, age_group_type: @competition.age_group_type, start_age: 11, end_age: 20) }
+    let(:other_competitor) { FactoryBot.create(:event_competitor, competition: @competition) }
+    let(:combination) { @competition.age_group_combinations.first }
+    let!(:lane_assignment) { FactoryBot.create(:lane_assignment, competitor: @competitor, competition: @competition, heat: 1, lane: 1) }
+    let!(:other_lane_assignment) { FactoryBot.create(:lane_assignment, competitor: other_competitor, competition: @competition, heat: 1, lane: 2) }
+
+    before do
+      @competitor.update_column(:age_group_entry_id, entry_1.id)
+      other_competitor.update_column(:age_group_entry_id, entry_2.id)
+      new_combination = @competition.age_group_combinations.create!
+      new_combination.age_group_combination_entries.create!(age_group_entry: entry_1)
+      new_combination.age_group_combination_entries.create!(age_group_entry: entry_2)
+    end
+
+    describe "GET set_sort" do
+      render_views
+
+      it "lists the lane assignments of every entry of the combination" do
+        get :set_sort, params: { competition_id: @competition.id, age_group_id: combination.to_age_group_param }
+
+        expect(response).to be_successful
+        expect(response.body).to include("age_group_entry_#{lane_assignment.id}", "age_group_entry_#{other_lane_assignment.id}")
+      end
+
+      it "does not find a combined entry on its own" do
+        expect do
+          get :set_sort, params: { competition_id: @competition.id, age_group_id: entry_1.to_age_group_param }
+        end.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    describe "POST sort" do
+      it "accepts the combination" do
+        post :sort, params: { competition_id: @competition.id, age_group_id: combination.to_age_group_param, age_group_entry: [lane_assignment.id, other_lane_assignment.id] }, format: :js
+
+        expect(response).to be_successful
+      end
+    end
+  end
+
   describe "#destroy_all" do
     before { FactoryBot.create(:lane_assignment, competitor: @competitor, competition: @competition) }
 

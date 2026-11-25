@@ -15,8 +15,8 @@ class HeatAssignmentCreator
   def perform
     current_heat = 1
     LaneAssignment.transaction do
-      @competition.age_group_entries.each do |ag_entry|
-        competitors = @competition.competitors.where(age_group_entry: ag_entry).includes(members: [registrant: :registrant_choices])
+      @competition.age_groups.each do |age_group|
+        competitors = @competition.competitors_in(age_group).includes(members: [registrant: :registrant_choices])
         sorted_competitors = competitors.sort { |a, b| compare(a.best_time, b.best_time) }
         heat_lane_list = create_heats_from(sorted_competitors.count, current_heat)
         current_heat = heat_lane_list.any? ? (heat_lane_list.last[:heat] + 1) : current_heat
