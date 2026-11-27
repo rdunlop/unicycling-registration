@@ -679,6 +679,8 @@ Rails.application.routes.draw do
             put :combine
             put :separate
             put :rename
+            post :update_row_order
+            put :reset_order
           end
         end
       end

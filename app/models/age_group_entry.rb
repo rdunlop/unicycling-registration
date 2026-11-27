@@ -31,6 +31,7 @@ class AgeGroupEntry < ApplicationRecord
   belongs_to :age_group_type, touch: true, inverse_of: :age_group_entries
   belongs_to :wheel_size, optional: true
   has_many :age_group_combination_entries
+  has_many :age_group_positions, dependent: :delete_all
 
   # The age group type is shared by competitions, whose combinations rely on its entries
   before_save :ensure_age_group_type_not_combined, if: :locked_changes?
@@ -54,7 +55,7 @@ class AgeGroupEntry < ApplicationRecord
   end
 
   # Changes which are forbidden while the age group type is combined
-  # (including reordering)
+  # (including reordering: competitions can be ordered individually instead)
   def locked_changes?
     new_record? || (changed - %w[updated_at]).any?
   end
