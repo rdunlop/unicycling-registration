@@ -1,9 +1,14 @@
-- cache [@age_group_type] do
-  %h1 Listing #{@age_group_type} Age Group Entries
+%h1 Listing #{@age_group_type} Age Group Entries
 
+= render "combinations_lock", age_group_type: @age_group_type
+
+- combined = @age_group_type.combined?
+- cache [@age_group_type, combined] do
   = render "order_warning"
 
-  %table.js--sortable{ data: { target: update_row_order_age_group_entries_path } }
+  - if combined
+    %p The order cannot be changed while some age groups are combined.
+  %table{ class: ("js--sortable" unless combined), data: { target: update_row_order_age_group_entries_path } }
     %thead
       %tr
         %th Description
