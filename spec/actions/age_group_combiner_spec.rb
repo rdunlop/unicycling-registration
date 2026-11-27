@@ -58,6 +58,16 @@ RSpec.describe AgeGroupCombiner do
       expect(combiner.error_message).to eq("Age Groups must be contiguous")
     end
 
+    it "resets the custom name of an extended combination" do
+      combiner.combine(entry_1, entry_2)
+      combination = competition.age_group_combinations.first
+      combination.update!(name: "Juniors")
+
+      combiner.combine(competition.age_groups.first, entry_3)
+
+      expect(combination.reload.name).to be_nil
+    end
+
     it "reports a concurrent combination instead of failing" do
       allow(AgeGroupCombinationEntry).to receive(:new).and_wrap_original do |original, *args, **kwargs|
         original.call(*args, **kwargs).tap { |entry| allow(entry).to receive(:save!).and_raise(ActiveRecord::RecordNotUnique) }
@@ -110,6 +120,30 @@ RSpec.describe AgeGroupCombiner do
 
       expect(combiner.separate(combination)).to be(false)
       expect(AgeGroupCombination.count).to eq(1)
+    end
+  end
+
+  describe "#rename" do
+    before { combiner.combine(entry_1, entry_2) }
+
+    let(:combination) { competition.age_group_combinations.first }
+
+    it "renames the combination" do
+      expect(combiner.rename(combination, "Juniors")).to be(true)
+      expect(competition.age_groups.first.to_s).to eq("Juniors")
+    end
+
+    it "reports an invalid name" do
+      expect(combiner.rename(combination, entry_3.short_description)).to be(false)
+      expect(combiner.error_message).to include("already used")
+    end
+
+    it "does not rename a published combination" do
+      competition.published_age_group_entries.create!(age_group: combination)
+
+      expect(combiner.rename(combination, "Juniors")).to be(false)
+      expect(combiner.error_message).to include("unpublish them first")
+      expect(combination.reload.name).to be_nil
     end
   end
 

@@ -12,6 +12,8 @@
           Êtes-vous sûr ?
         "base_age_groups": >-
           Catégories de base : %{age_group_type}
+        "cancel": >-
+          Annuler
         "combine_with": >-
           Combiner avec %{smallest_neighbour}
         "eligible_registrants": >-
@@ -28,8 +30,12 @@
           # d'inscrits inéligibles
         "male": >-
           Homme
+        "name_hint": >-
+          Laisser vide pour utiliser les noms des catégories combinées
         "ranking_age_groups": >-
           Catégories utilisées pour le classement
+        "rename": >-
+          Renommer
         "separate": >-
           Séparer
         "show_registrant_sign_up_breakdown": >-
