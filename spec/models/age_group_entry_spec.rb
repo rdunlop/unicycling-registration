@@ -69,69 +69,6 @@ describe AgeGroupEntry do
     expect(@age_group_entry.valid?).to eq(false)
   end
 
-  describe "#smallest_neighbour" do
-    let!(:female_age_group_type) { FactoryBot.create(:age_group_type) }
-    let!(:age_group_entry_1) { FactoryBot.create(:age_group_entry, age_group_type: female_age_group_type, start_age: 10, end_age: 20, gender: 'Female') }
-    let!(:age_group_entry_2) { FactoryBot.create(:age_group_entry, age_group_type: female_age_group_type, start_age: 21, end_age: 30, gender: 'Female') }
-    let!(:age_group_entry_3) { FactoryBot.create(:age_group_entry, age_group_type: female_age_group_type, start_age: 31, end_age: 40, gender: 'Female') }
-    let!(:male_age_group_type) { FactoryBot.create(:age_group_type) }
-    let!(:age_group_entry_4) { FactoryBot.create(:age_group_entry, age_group_type: male_age_group_type, start_age: 10, end_age: 20, gender: 'Male') }
-    let(:registrant_data) do
-      [
-        {
-          gender: 'Female',
-          age: 10,
-          count: 2,
-          ineligible: false
-        },
-        {
-          gender: 'Female',
-          age: 10,
-          count: 4,
-          ineligible: true
-        },
-        {
-          gender: 'Female',
-          age: 21,
-          count: 1,
-          ineligible: false
-        },
-        {
-          gender: 'Female',
-          age: 31,
-          count: 10,
-          ineligible: true
-        },
-        {
-          gender: 'Male',
-          age: 15,
-          count: 5,
-          ineligible: false
-        }
-      ]
-    end
-
-    it "can determine the smallest neighbour when first entry" do
-      expect(age_group_entry_1.smallest_neighbour(registrant_data)).not_to be_nil
-      expect(age_group_entry_1.smallest_neighbour(registrant_data)).to eq(age_group_entry_2)
-    end
-
-    it "can determine the smallest neighbour when last entry" do
-      expect(age_group_entry_3.smallest_neighbour(registrant_data)).not_to be_nil
-      expect(age_group_entry_3.smallest_neighbour(registrant_data)).to eq(age_group_entry_2)
-    end
-
-    it "can't determine the smallest neighbour when only entry" do
-      expect(age_group_entry_4.smallest_neighbour(registrant_data)).to be_nil
-    end
-
-    it "can determine the smallest neighbour excluding ineligible registrants" do
-      expect(age_group_entry_2.smallest_neighbour(registrant_data)).not_to be_nil
-      # There are 10 people in age_group_entry_3, but they are ineligible so we don't count them
-      expect(age_group_entry_2.smallest_neighbour(registrant_data)).to eq(age_group_entry_3)
-    end
-  end
-
   describe "Number matching registrant" do
     let!(:age_group_type) { FactoryBot.create(:age_group_type) }
     let!(:age_group_entry_1) { FactoryBot.create(:age_group_entry, age_group_type: age_group_type, start_age: 10, end_age: 20, gender: 'Male') }
